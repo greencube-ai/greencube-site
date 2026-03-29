@@ -20,8 +20,9 @@
         body{font-family:'Inter',sans-serif;background:#050505;color:#fafafa;-webkit-font-smoothing:antialiased;overflow-x:hidden}
         a{color:inherit;text-decoration:none}
         ::selection{background:#22c55e30;color:#fff}
+        html{scroll-behavior:smooth}
 
-        /* Noise texture */
+        /* Noise */
         body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
             background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
             pointer-events:none;z-index:0}
@@ -32,157 +33,204 @@
             background-size:64px 64px;opacity:0;animation:gridIn 2s ease 0.3s forwards}
         @keyframes gridIn{to{opacity:1}}
 
-        /* Top glow — dramatic + animated */
+        /* Glow */
         .glow{position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:1000px;height:600px;
             background:radial-gradient(ellipse,rgba(34,197,94,0.12) 0%,rgba(34,197,94,0.04) 40%,transparent 70%);
             pointer-events:none;z-index:0;opacity:0;animation:glowIn 1.5s ease 0.2s forwards}
         .glow::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;
-            background:radial-gradient(ellipse,rgba(34,197,94,0.08) 0%,transparent 70%);
-            animation:glowPulse 4s ease-in-out infinite}
+            background:radial-gradient(ellipse,rgba(34,197,94,0.08) 0%,transparent 70%);animation:glowPulse 4s ease-in-out infinite}
         @keyframes glowIn{to{opacity:1}}
         @keyframes glowPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
 
-        /* Floating particles */
+        /* Particles */
         .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:hidden}
-        .particle{position:absolute;background:#22c55e;border-radius:50%;
-            box-shadow:0 0 8px rgba(34,197,94,0.6),0 0 20px rgba(34,197,94,0.3)}
+        .particle{position:absolute;background:#22c55e;border-radius:50%;box-shadow:0 0 8px rgba(34,197,94,0.6),0 0 20px rgba(34,197,94,0.3)}
 
-        .page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 36px}
+        .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 36px}
+        .mono{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace}
 
-        /* Entrance animations */
+        /* Reveal */
         .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
         .reveal.visible{opacity:1;transform:translateY(0)}
 
         /* Nav */
-        nav{padding:28px 0;display:flex;justify-content:space-between;align-items:center;
-            opacity:0;animation:fadeDown 0.6s ease 0.1s forwards}
+        nav{padding:28px 0;display:flex;justify-content:space-between;align-items:center;opacity:0;animation:fadeDown 0.6s ease 0.1s forwards}
         @keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
         .nav-l{display:flex;align-items:center;gap:10px}
         .nav-l svg{width:20px;height:20px;opacity:0.5;transition:all 0.3s}
         .nav-l:hover svg{opacity:1;filter:drop-shadow(0 0 6px rgba(34,197,94,0.5))}
         .nav-l span{font-size:16px;font-weight:600;color:#52525b;transition:color 0.3s}
         .nav-l:hover span{color:#71717a}
-        .nav-r a{font-size:15px;color:#3f3f46;transition:all 0.2s;padding:6px 14px;border-radius:8px;border:1px solid transparent}
+        .nav-r{display:flex;gap:6px}
+        .nav-r a{font-size:14px;color:#3f3f46;transition:all 0.2s;padding:6px 14px;border-radius:8px;border:1px solid transparent}
         .nav-r a:hover{color:#22c55e;border-color:#22c55e20;background:rgba(34,197,94,0.05)}
 
+        /* Badge */
+        .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;
+            border:1px solid #1a1a1e;background:#0a0a0c;font-size:13px;color:#52525b;margin-bottom:20px;
+            opacity:0;animation:fadeUp 0.6s ease 0.2s forwards}
+        .badge-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulse 2s ease-in-out infinite}
+        @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
         /* Hero */
-        .hero{padding:54px 0 36px}
-        .hero h1{font-size:68px;font-weight:900;line-height:0.98;letter-spacing:-0.045em}
+        .hero{padding:40px 0 36px}
+        .hero h1{font-size:64px;font-weight:900;line-height:1;letter-spacing:-0.045em}
         .hero-line{display:block;opacity:0;transform:translateY(40px);animation:heroIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards}
         .hero-line:nth-child(1){animation-delay:0.3s}
         .hero-line:nth-child(2){animation-delay:0.5s}
-        .hero h1 .green{background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#22c55e 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:heroIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards,shimmer 4s ease-in-out 1.5s infinite}
+        .hero h1 .green{background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#22c55e 100%);background-size:200% auto;
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            animation:heroIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards,shimmer 4s ease-in-out 1.5s infinite}
         @keyframes heroIn{to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:200% center}}
-        .hero p{font-size:20px;color:#52525b;margin-top:20px;line-height:1.6;max-width:600px;
-            opacity:0;animation:fadeUp 0.8s ease 0.7s forwards}
+        .hero p{font-size:19px;color:#71717a;margin-top:20px;line-height:1.6;max-width:560px;opacity:0;animation:fadeUp 0.8s ease 0.7s forwards}
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Terminal blocks */
-        .terminal{padding:30px 0 0}
-        .t-label{font-size:13px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-weight:500}
-        .t-row{background:#0a0a0c;border:1px solid #161618;border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:6px;
-            transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
-        .t-row:hover{border-color:rgba(34,197,94,0.15);background:#0c0c0e;transform:translateX(4px);box-shadow:0 0 30px rgba(34,197,94,0.03)}
-        .t-row code{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:18px;color:#22c55e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .t-row button{background:none;border:1px solid #1c1c20;color:#3f3f46;padding:5px 14px;border-radius:7px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;flex-shrink:0;transition:all 0.2s;letter-spacing:0.02em}
-        .t-row button:hover{border-color:#22c55e;color:#22c55e;box-shadow:0 0 12px rgba(34,197,94,0.1)}
-        .t-hint{font-size:14px;color:#52525b;margin-bottom:20px}
+        /* Hero CTA row */
+        .hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.9s forwards}
+        .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;font-size:15px;font-weight:600;
+            background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;transition:all 0.3s;position:relative;overflow:hidden}
+        .btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s}
+        .btn-primary:hover::before{left:100%}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,197,94,0.3);color:#000}
+        .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;font-size:15px;font-weight:500;
+            border:1px solid #1c1c20;color:#71717a;transition:all 0.2s;background:transparent}
+        .btn-secondary:hover{border-color:#22c55e30;color:#a1a1aa;background:rgba(34,197,94,0.03)}
+        .btn-secondary svg{width:16px;height:16px}
 
-        /* Staggered terminal entrance */
-        .terminal .reveal:nth-child(1){transition-delay:0s}
-        .terminal .reveal:nth-child(2){transition-delay:0.08s}
-        .terminal .reveal:nth-child(3){transition-delay:0.16s}
-        .terminal .reveal:nth-child(4){transition-delay:0.24s}
-        .terminal .reveal:nth-child(5){transition-delay:0.32s}
-        .terminal .reveal:nth-child(6){transition-delay:0.40s}
-        .terminal .reveal:nth-child(7){transition-delay:0.48s}
-        .terminal .reveal:nth-child(8){transition-delay:0.56s}
+        /* Section label */
+        .section-label{font-size:12px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:16px;font-weight:600}
+        .section-title{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+        .section-desc{font-size:16px;color:#52525b;line-height:1.6;margin-bottom:28px;max-width:520px}
 
-        /* The key command — glowing border */
-        .t-key{border-color:rgba(34,197,94,0.12);background:rgba(34,197,94,0.02);position:relative}
-        .t-key::before{content:'';position:absolute;inset:-1px;border-radius:15px;padding:1px;
+        /* Divider */
+        .div{height:1px;margin:48px 0;background:linear-gradient(90deg,transparent 0%,#1a1a1e 30%,#1a1a1e 70%,transparent 100%);
+            transform:scaleX(0);transition:transform 1s cubic-bezier(0.16,1,0.3,1)}
+        .div.visible{transform:scaleX(1)}
+
+        /* How it works — 3 steps */
+        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .step{background:#0a0a0c;border:1px solid #141416;border-radius:16px;padding:24px;transition:all 0.3s;position:relative;overflow:hidden}
+        .step:hover{border-color:rgba(34,197,94,0.12);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+        .step-num{font-size:48px;font-weight:900;color:#0f0f11;position:absolute;top:-4px;right:12px;line-height:1;
+            -webkit-text-stroke:1px #1a1a1e}
+        .step-icon{font-size:24px;margin-bottom:12px;display:block}
+        .step h3{font-size:16px;font-weight:700;margin-bottom:6px;color:#e4e4e7}
+        .step p{font-size:14px;color:#52525b;line-height:1.5}
+        .step code{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:12px;color:#22c55e;
+            background:rgba(34,197,94,0.06);padding:2px 7px;border-radius:5px;border:1px solid rgba(34,197,94,0.1)}
+
+        /* Install block */
+        .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .install-card{background:#0a0a0c;border:1px solid #161618;border-radius:14px;padding:16px 18px;transition:all 0.3s;position:relative}
+        .install-card:hover{border-color:rgba(34,197,94,0.15);background:#0c0c0e}
+        .install-card.primary{border-color:rgba(34,197,94,0.12);background:rgba(34,197,94,0.02)}
+        .install-card.primary::before{content:'';position:absolute;inset:-1px;border-radius:15px;padding:1px;
             background:linear-gradient(135deg,rgba(34,197,94,0.2),rgba(34,197,94,0.03),rgba(34,197,94,0.2));
             -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
             -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;animation:borderPulse 3s ease-in-out infinite}
         @keyframes borderPulse{0%,100%{opacity:0.5}50%{opacity:1}}
+        .install-os{font-size:12px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+        .install-cmd{display:flex;align-items:center;justify-content:space-between;gap:10px}
+        .install-cmd code{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:13px;color:#22c55e;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .install-cmd button{background:none;border:1px solid #1c1c20;color:#3f3f46;padding:4px 12px;border-radius:6px;
+            font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;flex-shrink:0;transition:all 0.2s}
+        .install-cmd button:hover{border-color:#22c55e;color:#22c55e}
 
-        /* Divider — animated width */
-        .div{height:1px;margin:32px 0;background:linear-gradient(90deg,transparent 0%,#1a1a1e 30%,#1a1a1e 70%,transparent 100%);
-            transform:scaleX(0);transition:transform 1s cubic-bezier(0.16,1,0.3,1)}
-        .div.visible{transform:scaleX(1)}
-
-        /* Features */
-        .features{padding:6px 0}
-        .f-label{font-size:13px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;font-weight:500}
-        .f{padding:14px 0;display:flex;gap:14px;align-items:baseline;transition:all 0.3s}
-        .f+.f{border-top:1px solid #0e0e10}
-        .f:hover{opacity:1!important}
-        .features:hover .f{opacity:0.5}
-        .features:hover .f:hover{opacity:1}
-        .f-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px;transition:all 0.3s}
-        .f:hover .f-dot{transform:scale(1.8);box-shadow:0 0 12px currentColor}
-        .f strong{font-size:19px;color:#e4e4e7;font-weight:600}
-        .f span{font-size:19px;color:#52525b}
-
-        /* Staggered feature entrance */
-        .f.reveal:nth-child(2){transition-delay:0s}
-        .f.reveal:nth-child(3){transition-delay:0.08s}
-        .f.reveal:nth-child(4){transition-delay:0.12s}
-        .f.reveal:nth-child(5){transition-delay:0.16s}
-        .f.reveal:nth-child(6){transition-delay:0.20s}
-
-        /* Bottom */
-        .bottom{padding:36px 0 12px;text-align:center}
-        .bottom-meta{font-size:13px;color:#3f3f46;margin-bottom:18px;letter-spacing:0.03em}
-        .bottom-cta{display:inline-block;padding:16px 52px;border-radius:14px;font-size:18px;font-weight:700;
-            background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;transition:all 0.3s;position:relative;overflow:hidden}
-        .bottom-cta::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-            background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s}
-        .bottom-cta:hover::before{left:100%}
-        .bottom-cta:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(34,197,94,0.3),0 0 80px rgba(34,197,94,0.1);color:#000}
-        .bottom-cta:active{transform:translateY(0)}
-        .compat{font-size:13px;color:#3f3f46;margin-top:18px;letter-spacing:0.01em}
-
-        footer{padding:20px 0 40px;text-align:center;font-size:13px;color:#27272a}
+        /* Then add */
+        .then-block{margin-top:12px;background:#0a0a0c;border:1px solid #161618;border-radius:14px;padding:16px 18px}
+        .then-label{font-size:12px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:10px}
+        .then-block .install-cmd code{color:#a1a1aa}
+        .then-hint{font-size:13px;color:#3f3f46;margin-top:8px}
 
         /* Live demo */
-        .demo{margin:0;padding:20px 0;position:relative}
-        .demo-box{background:#08080a;border:1px solid #141416;border-radius:14px;padding:20px 24px;overflow:hidden;position:relative;
-            transition:border-color 0.3s}
+        .demo-box{background:#08080a;border:1px solid #141416;border-radius:14px;padding:20px 24px;overflow:hidden;position:relative;transition:border-color 0.3s}
         .demo-box:hover{border-color:#1a1a1e}
         .demo-box::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
             box-shadow:0 0 60px rgba(34,197,94,0.04),0 0 120px rgba(34,197,94,0.02)}
         .demo-bar{display:flex;gap:6px;margin-bottom:16px}
         .demo-bar i{width:8px;height:8px;border-radius:50%;background:#1c1c20;display:block}
-        .demo-lines{min-height:140px;position:relative}
+        .demo-lines{min-height:160px;position:relative}
         .demo-line{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:14px;line-height:2;white-space:nowrap;overflow:hidden;height:0;opacity:0}
         .demo-line.active{height:auto;opacity:1}
         .demo-line.done{opacity:0.35;transition:opacity 0.5s ease}
-        .dl-gray{color:#3f3f46}
-        .dl-green{color:#22c55e}
-        .dl-blue{color:#3b82f6}
-        .dl-yellow{color:#eab308}
-        .dl-purple{color:#a855f7}
-        .dl-cyan{color:#06b6d4}
+        .dl-gray{color:#3f3f46}.dl-green{color:#22c55e}.dl-blue{color:#3b82f6}
+        .dl-yellow{color:#eab308}.dl-purple{color:#a855f7}.dl-cyan{color:#06b6d4}
         .demo-cursor{display:inline-block;width:2px;height:14px;background:#22c55e;vertical-align:middle;margin-left:1px;animation:blink 0.8s step-end infinite}
         @keyframes blink{50%{opacity:0}}
-        .demo-label{font-size:13px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-weight:500}
 
-        /* Smooth scroll */
-        html{scroll-behavior:smooth}
+        /* Growth timeline */
+        .timeline{position:relative;padding-left:28px}
+        .timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;
+            background:linear-gradient(to bottom,#22c55e40,#3b82f640,#a855f740)}
+        .tl-item{position:relative;padding:0 0 32px}
+        .tl-item:last-child{padding-bottom:0}
+        .tl-dot{position:absolute;left:-24px;top:6px;width:10px;height:10px;border-radius:50%;border:2px solid;background:#050505}
+        .tl-day{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+        .tl-text{font-size:15px;color:#71717a;line-height:1.6}
+        .tl-text strong{color:#e4e4e7;font-weight:600}
 
-        @media(max-width:480px){
-            .hero h1{font-size:42px}
-            .hero{padding:30px 0 22px}
-            .t-row code{font-size:12px}
+        /* Feature cards grid */
+        .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .feat-card{background:#0a0a0c;border:1px solid #141416;border-radius:14px;padding:20px;transition:all 0.3s;position:relative}
+        .feat-card:hover{border-color:rgba(34,197,94,0.1);transform:translateY(-2px)}
+        .feat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px}
+        .feat-card h3{font-size:16px;font-weight:700;margin-bottom:4px;color:#e4e4e7}
+        .feat-card p{font-size:14px;color:#52525b;line-height:1.5}
+
+        /* Works with marquee */
+        .marquee-wrap{overflow:hidden;padding:12px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+        .marquee{display:flex;gap:24px;animation:scroll 20s linear infinite;width:max-content}
+        .marquee-item{font-size:14px;color:#3f3f46;font-weight:500;white-space:nowrap;padding:8px 18px;
+            border:1px solid #141416;border-radius:8px;background:#0a0a0c;transition:all 0.3s;flex-shrink:0}
+        .marquee-item:hover{border-color:#22c55e20;color:#52525b}
+        @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* Stats row */
+        .stats{display:flex;justify-content:center;gap:32px;padding:20px 0;flex-wrap:wrap}
+        .stat{text-align:center}
+        .stat-num{font-size:28px;font-weight:800;color:#e4e4e7;letter-spacing:-0.02em}
+        .stat-label{font-size:12px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;font-weight:500}
+
+        /* Bottom CTA */
+        .bottom{padding:40px 0 12px;text-align:center}
+        .bottom-title{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+        .bottom-desc{font-size:15px;color:#52525b;margin-bottom:24px}
+        .bottom-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 44px;border-radius:14px;font-size:17px;font-weight:700;
+            background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;transition:all 0.3s;position:relative;overflow:hidden}
+        .bottom-cta::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s}
+        .bottom-cta:hover::before{left:100%}
+        .bottom-cta:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(34,197,94,0.3),0 0 80px rgba(34,197,94,0.1);color:#000}
+        .bottom-meta{font-size:13px;color:#3f3f46;margin-top:16px}
+
+        footer{padding:24px 0 40px;text-align:center;font-size:13px;color:#27272a}
+
+        /* Stagger children */
+        .stagger>.reveal:nth-child(1){transition-delay:0s}
+        .stagger>.reveal:nth-child(2){transition-delay:0.06s}
+        .stagger>.reveal:nth-child(3){transition-delay:0.12s}
+        .stagger>.reveal:nth-child(4){transition-delay:0.18s}
+        .stagger>.reveal:nth-child(5){transition-delay:0.24s}
+        .stagger>.reveal:nth-child(6){transition-delay:0.30s}
+
+        @media(max-width:640px){
+            .hero h1{font-size:40px}
+            .hero{padding:28px 0 24px}
             .page{padding:0 20px}
             .hero p{font-size:16px}
-            .f strong,.f span{font-size:15px}
-            .t-row{padding:12px 14px}
+            .steps{grid-template-columns:1fr}
+            .install-grid{grid-template-columns:1fr}
+            .feat-grid{grid-template-columns:1fr}
+            .stats{gap:20px}
+            .stat-num{font-size:22px}
             .bottom-cta{padding:12px 32px;font-size:15px}
             .demo-line{font-size:11px}
             .demo-box{padding:16px 18px}
+            .section-title{font-size:26px}
+            .btn-primary,.btn-secondary{padding:10px 20px;font-size:14px}
         }
     </style>
 </head>
@@ -194,68 +242,229 @@
 
 <div class="page">
 
+    <!-- Nav -->
     <nav>
         <div class="nav-l">
             <svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="48" ry="48" fill="none" stroke="#22C55E" stroke-width="40"/></svg>
             <span>GreenCube</span>
         </div>
-        <div class="nav-r"><a href="https://github.com/greencube-ai/greencube">GitHub</a></div>
+        <div class="nav-r">
+            <a href="#install">Install</a>
+            <a href="https://github.com/greencube-ai/greencube">GitHub</a>
+        </div>
     </nav>
 
+    <!-- Hero -->
     <div class="hero">
+        <div class="badge"><span class="badge-dot"></span> open source &middot; MIT license</div>
         <h1><span class="hero-line">your agent</span><span class="hero-line green">learns from every task</span></h1>
-        <p>one install. one line. your agent remembers what worked, learns from mistakes, and gets smarter every session.</p>
+        <p>GreenCube runs silently behind your agent. It remembers what worked, learns from mistakes, and gets better with every single session. No changes to your code.</p>
+        <div class="hero-actions">
+            <a href="#install" class="btn-primary">Get started</a>
+            <a href="https://github.com/greencube-ai/greencube" class="btn-secondary">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                Star on GitHub
+            </a>
+        </div>
     </div>
 
-    <div class="terminal">
-        <div class="t-label reveal">install</div>
-        <div class="t-row t-key reveal">
-            <code>curl -fsSL https://greencube.world/install.sh | bash</code>
-            <button onclick="c(this,'curl -fsSL https://greencube.world/install.sh | bash')">copy</button>
-        </div>
-        <div class="t-hint reveal">macOS / linux</div>
+    <div class="div reveal"></div>
 
-        <div class="t-row t-key reveal">
-            <code>powershell -c "irm https://greencube.world/install.ps1 | iex"</code>
-            <button onclick="c(this,'powershell -c &quot;irm https://greencube.world/install.ps1 | iex&quot;')">copy</button>
-        </div>
-        <div class="t-hint reveal">windows</div>
+    <!-- How it works -->
+    <section class="reveal">
+        <div class="section-label">How it works</div>
+        <div class="section-title">Three steps. Two minutes.</div>
+        <div class="section-desc">No config files. No API keys. No code changes. Just install, point, and go.</div>
+    </section>
 
-        <div class="t-label reveal" style="margin-top:20px">then add one line</div>
-        <div class="t-row reveal">
+    <div class="steps stagger">
+        <div class="step reveal">
+            <span class="step-num">1</span>
+            <span class="step-icon">&#9889;</span>
+            <h3>Install GreenCube</h3>
+            <p>One command. Downloads and installs the app for your OS automatically.</p>
+        </div>
+        <div class="step reveal">
+            <span class="step-num">2</span>
+            <span class="step-icon">&#128268;</span>
+            <h3>Point your agent</h3>
+            <p>Set one env variable: <code>OPENAI_API_BASE</code>. Your agent talks through GreenCube now.</p>
+        </div>
+        <div class="step reveal">
+            <span class="step-num">3</span>
+            <span class="step-icon">&#127793;</span>
+            <h3>Watch it grow</h3>
+            <p>Every task teaches it something. Memories build up. Skills sharpen. It becomes yours.</p>
+        </div>
+    </div>
+
+    <div class="div reveal"></div>
+
+    <!-- Install -->
+    <section id="install" class="reveal">
+        <div class="section-label">Quick start</div>
+        <div class="section-title">Install in one line</div>
+    </section>
+
+    <div class="install-grid stagger">
+        <div class="install-card primary reveal">
+            <div class="install-os">macOS / Linux</div>
+            <div class="install-cmd">
+                <code>curl -fsSL https://greencube.world/install.sh | bash</code>
+                <button onclick="c(this,'curl -fsSL https://greencube.world/install.sh | bash')">copy</button>
+            </div>
+        </div>
+        <div class="install-card primary reveal">
+            <div class="install-os">Windows</div>
+            <div class="install-cmd">
+                <code>powershell -c "irm https://greencube.world/install.ps1 | iex"</code>
+                <button onclick="c(this,'powershell -c &quot;irm https://greencube.world/install.ps1 | iex&quot;')">copy</button>
+            </div>
+        </div>
+    </div>
+    <div class="then-block reveal">
+        <div class="then-label">then add one line before running your agent</div>
+        <div class="install-cmd">
             <code>export OPENAI_API_BASE=http://localhost:9000/v1</code>
             <button onclick="c(this,'export OPENAI_API_BASE=http://localhost:9000/v1')">copy</button>
         </div>
-        <div class="t-hint reveal">run your agent normally. thats it.</div>
+        <div class="then-hint">that's it. run your agent normally.</div>
     </div>
 
     <div class="div reveal"></div>
 
-    <div class="demo reveal">
-        <div class="demo-label">what happens silently</div>
-        <div class="demo-box">
-            <div class="demo-bar"><i></i><i></i><i></i></div>
-            <div class="demo-lines" id="demo"></div>
+    <!-- What happens silently -->
+    <section class="reveal">
+        <div class="section-label">Under the hood</div>
+        <div class="section-title">What happens silently</div>
+        <div class="section-desc">Every time your agent completes a task, GreenCube does this in the background:</div>
+    </section>
+
+    <div class="demo-box reveal">
+        <div class="demo-bar"><i></i><i></i><i></i></div>
+        <div class="demo-lines" id="demo"></div>
+    </div>
+
+    <div class="div reveal"></div>
+
+    <!-- Growth timeline -->
+    <section class="reveal">
+        <div class="section-label">Over time</div>
+        <div class="section-title">It actually gets better</div>
+        <div class="section-desc">This isn't a gimmick. The more your agent works, the more it learns. Here's what changes:</div>
+    </section>
+
+    <div class="timeline stagger">
+        <div class="tl-item reveal">
+            <div class="tl-dot" style="border-color:#22c55e"></div>
+            <div class="tl-day" style="color:#22c55e">Day 1</div>
+            <div class="tl-text">Your agent works normally but GreenCube starts <strong>watching and extracting facts</strong> from every task. It learns your codebase, your patterns, your preferences.</div>
+        </div>
+        <div class="tl-item reveal">
+            <div class="tl-dot" style="border-color:#3b82f6"></div>
+            <div class="tl-day" style="color:#3b82f6">Day 7</div>
+            <div class="tl-text"><strong>Memories accumulate.</strong> Your agent stops making the same mistakes. It remembers that you prefer async patterns, that the auth module is fragile, that tests should use factories.</div>
+        </div>
+        <div class="tl-item reveal">
+            <div class="tl-dot" style="border-color:#a855f7"></div>
+            <div class="tl-day" style="color:#a855f7">Day 30</div>
+            <div class="tl-text"><strong>It's a different agent.</strong> Competence scores are calibrated. It knows what it's good at and what it isn't. Idle thoughts surface patterns you didn't even notice.</div>
         </div>
     </div>
 
     <div class="div reveal"></div>
 
-    <div class="features">
-        <div class="f-label reveal">what your agent gets</div>
-        <div class="f reveal"><div class="f-dot" style="background:#22c55e"></div><div><strong>remembers</strong> <span>— facts persist across sessions, injected automatically</span></div></div>
-        <div class="f reveal"><div class="f-dot" style="background:#3b82f6"></div><div><strong>learns</strong> <span>— extracts knowledge from every task without you doing anything</span></div></div>
-        <div class="f reveal"><div class="f-dot" style="background:#eab308"></div><div><strong>self-checks</strong> <span>— reviews its own output, admits when its wrong</span></div></div>
-        <div class="f reveal"><div class="f-dot" style="background:#a855f7"></div><div><strong>tracks competence</strong> <span>— knows python is 91% and css is 43%</span></div></div>
-        <div class="f reveal"><div class="f-dot" style="background:#06b6d4"></div><div><strong>adapts to you</strong> <span>— changes behavior based on learned preferences</span></div></div>
+    <!-- Features -->
+    <section class="reveal">
+        <div class="section-label">Capabilities</div>
+        <div class="section-title">What your agent gets</div>
+    </section>
+
+    <div class="feat-grid stagger">
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(34,197,94,0.08);color:#22c55e">&#128200;</div>
+            <h3>Persistent memory</h3>
+            <p>Facts extracted from every task, stored in SQLite, injected into future context automatically.</p>
+        </div>
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(59,130,246,0.08);color:#3b82f6">&#128161;</div>
+            <h3>Self-reflection</h3>
+            <p>After every task, the agent reviews its own output. It admits mistakes and extracts lessons.</p>
+        </div>
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(234,179,8,0.08);color:#eab308">&#127919;</div>
+            <h3>Competence tracking</h3>
+            <p>Knows Python is 91% and CSS is 43%. Routes decisions based on actual measured skill.</p>
+        </div>
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(168,85,247,0.08);color:#a855f7">&#128064;</div>
+            <h3>Idle thoughts</h3>
+            <p>Between tasks, it notices patterns. "3 API calls failed this week" — insights you'd miss.</p>
+        </div>
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(6,182,212,0.08);color:#06b6d4">&#128736;</div>
+            <h3>Tool use</h3>
+            <p>File system, shell, code execution — all sandboxed. Your agent can actually do things.</p>
+        </div>
+        <div class="feat-card reveal">
+            <div class="feat-icon" style="background:rgba(244,63,94,0.08);color:#f43f5e">&#128274;</div>
+            <h3>Local & private</h3>
+            <p>Everything runs on your machine. No cloud. No telemetry. Your data stays yours.</p>
+        </div>
     </div>
 
     <div class="div reveal"></div>
 
+    <!-- Works with -->
+    <section class="reveal">
+        <div class="section-label">Compatible with</div>
+        <div class="section-title">Works with everything</div>
+        <div class="section-desc">Anything that speaks the OpenAI API. Zero integration work.</div>
+    </section>
+
+    <div class="marquee-wrap reveal">
+        <div class="marquee">
+            <span class="marquee-item">OpenClaw</span>
+            <span class="marquee-item">LangChain</span>
+            <span class="marquee-item">CrewAI</span>
+            <span class="marquee-item">AutoGen</span>
+            <span class="marquee-item">LlamaIndex</span>
+            <span class="marquee-item">Semantic Kernel</span>
+            <span class="marquee-item">OpenAI SDK</span>
+            <span class="marquee-item">Any OpenAI-compatible client</span>
+            <span class="marquee-item">OpenClaw</span>
+            <span class="marquee-item">LangChain</span>
+            <span class="marquee-item">CrewAI</span>
+            <span class="marquee-item">AutoGen</span>
+            <span class="marquee-item">LlamaIndex</span>
+            <span class="marquee-item">Semantic Kernel</span>
+            <span class="marquee-item">OpenAI SDK</span>
+            <span class="marquee-item">Any OpenAI-compatible client</span>
+        </div>
+    </div>
+
+    <div class="div reveal"></div>
+
+    <!-- Stats -->
+    <div class="stats reveal">
+        <div class="stat"><div class="stat-num">143</div><div class="stat-label">Tests</div></div>
+        <div class="stat"><div class="stat-num">45</div><div class="stat-label">Modules</div></div>
+        <div class="stat"><div class="stat-num">Rust</div><div class="stat-label">Backend</div></div>
+        <div class="stat"><div class="stat-num">React</div><div class="stat-label">Frontend</div></div>
+        <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">License</div></div>
+    </div>
+
+    <div class="div reveal"></div>
+
+    <!-- Bottom CTA -->
     <div class="bottom reveal">
-        <div class="bottom-meta">143 tests · 45 modules · rust · MIT license</div>
-        <a href="https://github.com/greencube-ai/greencube" class="bottom-cta">GitHub</a>
-        <div class="compat">openclaw · langchain · crewai · anything openai compatible</div>
+        <div class="bottom-title">Give your agent a brain.</div>
+        <div class="bottom-desc">Free, open source, runs locally. Takes two minutes.</div>
+        <a href="https://github.com/greencube-ai/greencube" class="bottom-cta">
+            <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            View on GitHub
+        </a>
+        <div class="bottom-meta">free forever &middot; no account needed &middot; no telemetry</div>
     </div>
 
     <footer class="reveal">greencube.world</footer>
@@ -266,13 +475,12 @@
 function c(b,t){navigator.clipboard.writeText(t);b.textContent='copied';b.style.color='#22c55e';b.style.borderColor='#22c55e';setTimeout(()=>{b.textContent='copy';b.style.color='';b.style.borderColor=''},1500)}
 
 // Scroll reveal
-const revealObserver=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target)}})
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// Floating particles
-// Particles that actually float around
+// Particles
 const particles=[];
 function initParticles(){
   const container=document.getElementById('particles');
@@ -284,16 +492,9 @@ function initParticles(){
     el.style.width=el.style.height=size+'px';
     el.style.opacity=[0.08,0.15,0.25,0.4,0.6,0.75][Math.floor(Math.random()*6)];
     container.appendChild(el);
-    particles.push({
-      el,
-      x:Math.random()*window.innerWidth,
-      y:Math.random()*window.innerHeight,
-      vx:(Math.random()-0.5)*0.4,
-      vy:(Math.random()-0.5)*0.3-0.15,
-      drift:Math.random()*Math.PI*2,
-      driftSpeed:0.003+Math.random()*0.008,
-      driftAmp:20+Math.random()*40
-    });
+    particles.push({el,x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+      vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.3-0.15,
+      drift:Math.random()*Math.PI*2,driftSpeed:0.003+Math.random()*0.008});
   }
 }
 function animateParticles(){
@@ -308,61 +509,35 @@ function animateParticles(){
   }
   requestAnimationFrame(animateParticles);
 }
-initParticles();
-animateParticles();
+initParticles();animateParticles();
 
 // Demo typewriter
 const demoLines=[
   {text:'$ agent completes task...',cls:'dl-gray',speed:30},
-  {text:'  [reflection] 3 facts extracted',cls:'dl-green',speed:20},
-  {text:'  [self-verify] quality: good',cls:'dl-yellow',speed:20},
-  {text:'  [competence] python 84% \u2192 87%',cls:'dl-purple',speed:20},
-  {text:'  [knowledge] "user prefers async patterns"',cls:'dl-blue',speed:18},
-  {text:'  [idle thought] noticed 2 failed API calls this week',cls:'dl-cyan',speed:16},
+  {text:'  [greencube] intercepted response',cls:'dl-green',speed:18},
+  {text:'  [reflection] 3 facts extracted, 1 lesson learned',cls:'dl-green',speed:16},
+  {text:'  [self-verify] quality: good, confidence: 0.87',cls:'dl-yellow',speed:16},
+  {text:'  [competence] python 84% \u2192 87%, testing 71% \u2192 73%',cls:'dl-purple',speed:14},
+  {text:'  [memory] stored: "user prefers pytest over unittest"',cls:'dl-blue',speed:14},
+  {text:'  [idle] pattern: 3 similar errors in auth module this week',cls:'dl-cyan',speed:12},
 ];
-
 function typeLine(el,text,speed){
-  return new Promise(r=>{
-    let i=0;
-    const cursor=document.createElement('span');
-    cursor.className='demo-cursor';
-    el.appendChild(cursor);
-    const iv=setInterval(()=>{
-      if(i<text.length){
-        el.insertBefore(document.createTextNode(text[i]),cursor);
-        i++;
-      }else{
-        clearInterval(iv);
-        r(cursor);
-      }
-    },speed);
-  });
+  return new Promise(r=>{let i=0;const cursor=document.createElement('span');cursor.className='demo-cursor';el.appendChild(cursor);
+    const iv=setInterval(()=>{if(i<text.length){el.insertBefore(document.createTextNode(text[i]),cursor);i++}else{clearInterval(iv);r(cursor)}},speed)})
 }
-
 async function runDemo(){
-  const box=document.getElementById('demo');
-  box.innerHTML='';
-  const els=[];
+  const box=document.getElementById('demo');box.innerHTML='';const els=[];
   for(let i=0;i<demoLines.length;i++){
-    const {text,cls,speed}=demoLines[i];
-    const div=document.createElement('div');
-    div.className='demo-line '+cls+' active';
-    box.appendChild(div);
-    els.push(div);
-    if(i>=3)els[i-3].classList.add('done');
-    const cursor=await typeLine(div,text,speed);
-    await new Promise(r=>setTimeout(r,300));
+    const{text,cls,speed}=demoLines[i];const div=document.createElement('div');div.className='demo-line '+cls+' active';
+    box.appendChild(div);els.push(div);if(i>=4)els[i-4].classList.add('done');
+    const cursor=await typeLine(div,text,speed);await new Promise(r=>setTimeout(r,250));
     if(i<demoLines.length-1)cursor.remove();
   }
   await new Promise(r=>setTimeout(r,2500));
   els.forEach(el=>{el.style.transition='opacity 0.6s';el.style.opacity='0'});
-  await new Promise(r=>setTimeout(r,800));
-  runDemo();
+  await new Promise(r=>setTimeout(r,800));runDemo();
 }
-
-const demoObs=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){runDemo();demoObs.disconnect()}
-},{threshold:0.2});
+const demoObs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){runDemo();demoObs.disconnect()}},{threshold:0.2});
 demoObs.observe(document.getElementById('demo'));
 </script>
 </body>
