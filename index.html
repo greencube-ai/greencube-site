@@ -101,19 +101,21 @@
         /* Live demo */
         .demo{margin:0;padding:20px 0;position:relative}
         .demo-box{background:#08080a;border:1px solid #141416;border-radius:14px;padding:20px 24px;overflow:hidden;position:relative}
+        .demo-box::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+            box-shadow:0 0 60px rgba(34,197,94,0.03),0 0 120px rgba(34,197,94,0.015)}
         .demo-bar{display:flex;gap:6px;margin-bottom:16px}
         .demo-bar i{width:8px;height:8px;border-radius:50%;background:#1c1c20;display:block}
         .demo-lines{min-height:140px;position:relative}
-        .demo-line{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:14px;line-height:2;opacity:0;transform:translateY(6px);white-space:nowrap;overflow:hidden}
-        .demo-line.show{opacity:1;transform:translateY(0);transition:all 0.4s ease}
-        .demo-line.fade{opacity:0.3;transition:opacity 0.6s ease}
+        .demo-line{font-family:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;font-size:14px;line-height:2;white-space:nowrap;overflow:hidden;height:0;opacity:0}
+        .demo-line.active{height:auto;opacity:1}
+        .demo-line.done{opacity:0.35;transition:opacity 0.5s ease}
         .dl-gray{color:#3f3f46}
         .dl-green{color:#22c55e}
         .dl-blue{color:#3b82f6}
         .dl-yellow{color:#eab308}
         .dl-purple{color:#a855f7}
         .dl-cyan{color:#06b6d4}
-        .demo-cursor{display:inline-block;width:2px;height:14px;background:#22c55e;vertical-align:middle;margin-left:2px;animation:blink 1s step-end infinite}
+        .demo-cursor{display:inline-block;width:2px;height:14px;background:#22c55e;vertical-align:middle;margin-left:1px;animation:blink 0.8s step-end infinite}
         @keyframes blink{50%{opacity:0}}
         .demo-label{font-size:13px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-weight:500}
 
@@ -179,14 +181,7 @@
         <div class="demo-label">what happens silently</div>
         <div class="demo-box">
             <div class="demo-bar"><i></i><i></i><i></i></div>
-            <div class="demo-lines" id="demo">
-                <div class="demo-line dl-gray" data-d="0">$ agent completes task...</div>
-                <div class="demo-line dl-green" data-d="800">  [reflection] 3 facts extracted</div>
-                <div class="demo-line dl-yellow" data-d="1600">  [self-verify] quality: good</div>
-                <div class="demo-line dl-purple" data-d="2400">  [competence] python 84% → 87%</div>
-                <div class="demo-line dl-blue" data-d="3200">  [knowledge] "user prefers async patterns"</div>
-                <div class="demo-line dl-cyan" data-d="4000">  [idle thought] noticed 2 failed API calls this week<span class="demo-cursor"></span></div>
-            </div>
+            <div class="demo-lines" id="demo"></div>
         </div>
     </div>
 
@@ -216,32 +211,68 @@
 <script>
 function c(b,t){navigator.clipboard.writeText(t);b.textContent='copied';setTimeout(()=>b.textContent='copy',1500)}
 
-// Demo animation
-function runDemo(){
-    const lines=document.querySelectorAll('.demo-line');
-    lines.forEach(l=>{l.classList.remove('show','fade')});
-    lines.forEach((line,i)=>{
-        const delay=parseInt(line.dataset.d);
-        setTimeout(()=>{
-            line.classList.add('show');
-            // Fade previous lines slightly as new ones appear
-            lines.forEach((prev,j)=>{if(j<i-2)prev.classList.add('fade')});
-        },delay);
-    });
-    // Reset and loop
-    setTimeout(()=>{
-        lines.forEach(l=>{l.style.transition='opacity 0.8s';l.style.opacity='0'});
-        setTimeout(()=>{
-            lines.forEach(l=>{l.style.transition='';l.style.opacity='';l.classList.remove('show','fade')});
-            runDemo();
-        },1000);
-    },7000);
+const demoLines=[
+  {text:'$ agent completes task...',cls:'dl-gray',speed:30},
+  {text:'  [reflection] 3 facts extracted',cls:'dl-green',speed:20},
+  {text:'  [self-verify] quality: good',cls:'dl-yellow',speed:20},
+  {text:'  [competence] python 84% → 87%',cls:'dl-purple',speed:20},
+  {text:'  [knowledge] "user prefers async patterns"',cls:'dl-blue',speed:18},
+  {text:'  [idle thought] noticed 2 failed API calls this week',cls:'dl-cyan',speed:16},
+];
+
+function typeLine(el,text,speed){
+  return new Promise(r=>{
+    let i=0;
+    const cursor=document.createElement('span');
+    cursor.className='demo-cursor';
+    el.appendChild(cursor);
+    const iv=setInterval(()=>{
+      if(i<text.length){
+        el.insertBefore(document.createTextNode(text[i]),cursor);
+        i++;
+      }else{
+        clearInterval(iv);
+        r(cursor);
+      }
+    },speed);
+  });
 }
 
-// Start when visible
-const obs=new IntersectionObserver((entries)=>{
-    if(entries[0].isIntersecting){runDemo();obs.disconnect()}
-},{threshold:0.3});
+async function runDemo(){
+  const box=document.getElementById('demo');
+  box.innerHTML='';
+  const els=[];
+
+  for(let i=0;i<demoLines.length;i++){
+    const {text,cls,speed}=demoLines[i];
+    const div=document.createElement('div');
+    div.className='demo-line '+cls+' active';
+    box.appendChild(div);
+    els.push(div);
+
+    // Fade lines that are 3+ behind
+    if(i>=3)els[i-3].classList.add('done');
+
+    const cursor=await typeLine(div,text,speed);
+    // Pause after line finishes
+    await new Promise(r=>setTimeout(r,300));
+    // Remove cursor before next line (keep on last)
+    if(i<demoLines.length-1)cursor.remove();
+  }
+
+  // Hold the final state
+  await new Promise(r=>setTimeout(r,2500));
+
+  // Fade out everything
+  els.forEach(el=>{el.style.transition='opacity 0.6s';el.style.opacity='0'});
+  await new Promise(r=>setTimeout(r,800));
+
+  runDemo();
+}
+
+const obs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){runDemo();obs.disconnect()}
+},{threshold:0.2});
 obs.observe(document.getElementById('demo'));
 </script>
 </body>
