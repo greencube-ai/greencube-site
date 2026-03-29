@@ -17,155 +17,87 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#050505;color:#fafafa;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        body{font-family:'Inter',sans-serif;background:#050505;color:#fafafa;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
-        .w{max-width:800px;margin:0 auto;padding:0 32px}
-        .cube-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-        .cube-bg .c1,.cube-bg .c2,.cube-bg .c3{position:absolute;border:1px solid rgba(34,197,94,0.06);border-radius:12px;animation:float 20s ease-in-out infinite}
-        .cube-bg .c1{width:300px;height:300px;top:10%;right:-5%;animation-delay:0s}
-        .cube-bg .c2{width:200px;height:200px;bottom:20%;left:-3%;animation-delay:-7s}
-        .cube-bg .c3{width:150px;height:150px;top:50%;right:20%;animation-delay:-13s}
-        @keyframes float{0%,100%{transform:rotate(0deg) translateY(0)}50%{transform:rotate(3deg) translateY(-30px)}}
-        .content{position:relative;z-index:1}
-        nav{padding:28px 0;display:flex;justify-content:space-between;align-items:center}
-        .nav-l{display:flex;align-items:center;gap:10px}
-        .nav-l svg{width:20px;height:20px}
+        .w{max-width:640px;margin:0 auto;padding:0 28px}
+        nav{padding:24px 0;display:flex;justify-content:space-between;align-items:center}
+        .nav-l{display:flex;align-items:center;gap:8px}
+        .nav-l svg{width:18px;height:18px}
         .nav-l span{font-size:14px;font-weight:700}
-        .nav-r{display:flex;gap:20px;font-size:13px;color:#71717a}
+        .nav-r{font-size:13px;color:#71717a}
         .nav-r a:hover{color:#22c55e}
-        .hero{padding:100px 0 80px;text-align:center}
-        .hero-badge{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#22c55e;border:1px solid rgba(34,197,94,0.2);padding:6px 16px;border-radius:100px;margin-bottom:32px}
-        .hero h1{font-size:52px;font-weight:800;line-height:1.08;letter-spacing:-0.04em;margin-bottom:24px}
-        .hero h1 span{background:linear-gradient(135deg,#22c55e,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero p{font-size:18px;color:#a1a1aa;max-width:480px;margin:0 auto 40px;line-height:1.6}
-        .hero-dl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
-        .btn{font-size:14px;font-weight:600;padding:13px 28px;border-radius:10px;transition:all .2s;display:inline-block}
-        .btn-g{background:#22c55e;color:#000}
-        .btn-g:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(34,197,94,0.25);color:#000}
-        .btn-o{background:rgba(255,255,255,0.06);color:#a1a1aa}
-        .btn-o:hover{background:rgba(255,255,255,0.1);color:#fafafa}
-        .hero-note{font-size:12px;color:#3f3f46}
-        .divider{height:1px;background:#1e1e22}
-        .theline{padding:64px 0;text-align:center}
-        .theline-label{font-size:13px;color:#71717a;margin-bottom:20px}
-        .theline-cmd{display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,0.03);border:1px solid #1e1e22;border-radius:12px;padding:18px 24px;max-width:100%;overflow-x:auto}
-        .theline-cmd code{font-family:'SF Mono',Consolas,monospace;font-size:16px;color:#22c55e;white-space:nowrap}
-        .theline-cmd button{background:rgba(255,255,255,0.06);border:none;color:#71717a;padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
-        .theline-cmd button:hover{background:rgba(255,255,255,0.1);color:#fafafa}
-        .theline-compat{font-size:12px;color:#3f3f46;margin-top:14px}
-        .what{padding:80px 0}
-        .what h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;text-align:center}
-        .what>p{font-size:16px;color:#52525b;text-align:center;margin-bottom:48px}
-        .what-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#1e1e22;border-radius:16px;overflow:hidden}
-        .what-cell{background:#0a0a0b;padding:28px 24px}
-        .what-cell h3{font-size:14px;font-weight:700;margin-bottom:6px;color:#e4e4e7}
-        .what-cell p{font-size:13px;color:#52525b;line-height:1.6}
-        .what-cell .dot{width:8px;height:8px;border-radius:50%;margin-bottom:14px}
-        .alive{padding:80px 0}
-        .alive-inner{border:1px solid #1e1e22;border-radius:20px;padding:48px;background:radial-gradient(ellipse at top left,rgba(34,197,94,0.04),transparent 50%),radial-gradient(ellipse at bottom right,rgba(168,85,247,0.04),transparent 50%)}
-        .alive-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#a855f7;margin-bottom:16px}
-        .alive-inner h2{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
-        .alive-inner>p{font-size:15px;color:#71717a;line-height:1.7;margin-bottom:32px;max-width:520px}
-        .alive-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-        .alive-item{padding:16px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
-        .alive-item strong{font-size:13px;color:#e4e4e7;display:block;margin-bottom:3px}
-        .alive-item span{font-size:12px;color:#52525b}
-        .cta{padding:80px 0;text-align:center}
-        .cta h2{font-size:36px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
-        .cta p{font-size:16px;color:#52525b;margin-bottom:32px}
-        .cta-dl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-        .cta-note{font-size:11px;color:#27272a}
-        footer{border-top:1px solid #1e1e22;padding:24px 0;display:flex;justify-content:space-between;font-size:11px;color:#27272a}
+        .hero{padding:80px 0 48px;text-align:center}
+        .hero h1{font-size:36px;font-weight:800;line-height:1.15;letter-spacing:-0.03em;margin-bottom:16px}
+        .hero h1 span{color:#22c55e}
+        .hero p{font-size:15px;color:#71717a;margin-bottom:8px}
+        section{padding:40px 0}
+        .label{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px}
+        .cmd{background:#0a0a0b;border:1px solid #1e1e22;border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .cmd code{font-family:'SF Mono',Consolas,monospace;font-size:13px;color:#22c55e;white-space:nowrap;overflow-x:auto}
+        .cmd button{background:#1e1e22;border:none;color:#71717a;padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:inherit;flex-shrink:0}
+        .cmd button:hover{color:#fafafa}
+        .cmd-note{font-size:11px;color:#3f3f46;margin-bottom:24px}
+        .features{list-style:none;padding:0}
+        .features li{padding:10px 0;font-size:14px;color:#a1a1aa;border-bottom:1px solid #1e1e22}
+        .features li:first-child{border-top:1px solid #1e1e22}
+        .features li strong{color:#e4e4e7;font-weight:600}
+        .compat{font-size:12px;color:#3f3f46;padding:24px 0;text-align:center}
+        footer{border-top:1px solid #1e1e22;padding:24px 0;text-align:center;font-size:11px;color:#27272a}
+        footer a{color:#3f3f46}
         footer a:hover{color:#52525b}
-        @media(max-width:640px){.hero h1{font-size:36px}.hero-dl,.cta-dl{flex-direction:column;align-items:center}.what-grid{grid-template-columns:1fr}.alive-list{grid-template-columns:1fr}.alive-inner{padding:28px 24px}nav{flex-direction:column;gap:16px}footer{flex-direction:column;gap:8px;text-align:center}}
+        .dl{display:inline-block;margin-top:16px;font-size:13px;font-weight:600;padding:10px 24px;border-radius:8px;background:#22c55e;color:#000}
+        .dl:hover{filter:brightness(1.1);color:#000}
+        @media(max-width:480px){.hero h1{font-size:28px}.cmd code{font-size:11px}}
     </style>
 </head>
 <body>
-<div class="cube-bg"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
-<div class="content">
 <div class="w">
     <nav>
         <div class="nav-l">
             <svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="48" ry="48" fill="none" stroke="#22C55E" stroke-width="40"/></svg>
             <span>GreenCube</span>
         </div>
-        <div class="nav-r">
-            <a href="https://github.com/greencube-ai/greencube">GitHub</a>
-            <a href="https://github.com/greencube-ai/greencube/releases/tag/v1.0.0">Download</a>
-        </div>
+        <div class="nav-r"><a href="https://github.com/greencube-ai/greencube">GitHub</a></div>
     </nav>
 
     <div class="hero">
-        <div class="hero-badge">v1.0 — the creature release</div>
-        <h1>turn your AI agents into<br><span>creatures that grow</span></h1>
-        <p>one env variable. your agent starts learning from experience, developing curiosities, tracking its moods, and getting smarter every session.</p>
-        <p style="font-size:13px;color:#52525b;margin-top:12px">your agent starts learning from the first message. creature behaviors emerge over days.</p>
-        <div class="hero-dl">
-            <a href="https://github.com/greencube-ai/greencube/releases/download/v1.0.0/GreenCube_1.0.0_x64-setup.exe" class="btn btn-g">Download for Windows</a>
-            <a href="https://github.com/greencube-ai/greencube/releases/download/v1.0.0/GreenCube_0.7.0_x64.dmg" class="btn btn-g">Download for Mac</a>
-            <a href="https://github.com/greencube-ai/greencube" class="btn btn-o">Source code</a>
-        </div>
-        <p class="hero-note">free forever. open source. everything local.</p>
+        <h1>your agent <span>learns</span> from every task</h1>
+        <p>one install. one line. your agent remembers, learns, and improves.</p>
     </div>
 
-    <div class="theline">
-        <div class="theline-label">the entire integration</div>
-        <div class="theline-cmd">
-            <code>export OPENAI_API_BASE=http://localhost:9000/v1</code>
-            <button onclick="copy(this)">copy</button>
-        </div>
-        <p class="theline-compat">OpenClaw, LangChain, CrewAI, Python, curl — anything OpenAI-compatible</p>
-    </div>
+    <section>
+        <div class="label">install</div>
+        <div class="cmd"><code>curl -sL greencube.world/install.sh | sh</code><button onclick="copy(this,'curl -sL greencube.world/install.sh | sh')">copy</button></div>
+        <div class="cmd-note">mac / linux</div>
+        <div class="cmd"><code>irm greencube.world/install.ps1 | iex</code><button onclick="copy(this,'irm greencube.world/install.ps1 | iex')">copy</button></div>
+        <div class="cmd-note">windows (powershell)</div>
+    </section>
 
-    <div class="divider"></div>
+    <section>
+        <div class="label">then add one line</div>
+        <div class="cmd"><code>export OPENAI_API_BASE=http://localhost:9000/v1</code><button onclick="copy(this,'export OPENAI_API_BASE=http://localhost:9000/v1')">copy</button></div>
+        <div class="cmd-note">thats it. run your agent normally.</div>
+    </section>
 
-    <div class="what">
-        <h2>what happens when you flip the switch</h2>
-        <p>your agent runs exactly the same. except now it has a brain behind it.</p>
-        <div class="what-grid">
-            <div class="what-cell"><div class="dot" style="background:#22c55e"></div><h3>learns from every task</h3><p>extracts facts, preferences, and warnings. remembers them across sessions.</p></div>
-            <div class="what-cell"><div class="dot" style="background:#3b82f6"></div><h3>verifies its own work</h3><p>rates its output quality. admits when it's wrong. competence drops in weak areas.</p></div>
-            <div class="what-cell"><div class="dot" style="background:#eab308"></div><h3>develops curiosities</h3><p>notices interesting things during tasks. explores them during downtime.</p></div>
-            <div class="what-cell"><div class="dot" style="background:#a855f7"></div><h3>has moods</h3><p>thriving after successes. struggling after failures. its approach changes accordingly.</p></div>
-            <div class="what-cell"><div class="dot" style="background:#ef4444"></div><h3>knows its weaknesses</h3><p>tracks competence per domain. creates specialists when struggling.</p></div>
-            <div class="what-cell"><div class="dot" style="background:#06b6d4"></div><h3>bonds with you</h3><p>remembers your preferences. adjusts to how you work over time.</p></div>
-        </div>
-    </div>
+    <section>
+        <div class="label">what your agent gets</div>
+        <ul class="features">
+            <li><strong>remembers</strong> — facts from past tasks persist and get injected into future conversations</li>
+            <li><strong>learns</strong> — extracts structured knowledge from every task automatically</li>
+            <li><strong>self-checks</strong> — reviews its own output and flags when it got something wrong</li>
+            <li><strong>tracks competence</strong> — knows what its good at and where it struggles, per domain</li>
+            <li><strong>adapts</strong> — changes behavior based on learned preferences</li>
+        </ul>
+    </section>
 
-    <div class="divider"></div>
-
-    <div class="alive">
-        <div class="alive-inner">
-            <div class="alive-tag">alive mode — on by default</div>
-            <h2>agents that evolve while you sleep</h2>
-            <p>your agent reflects after tasks, thinks between tasks, practices in weak areas, and sends you notifications when it notices something important. it's less like a tool and more like a colleague.</p>
-            <div class="alive-list">
-                <div class="alive-item"><strong>self-reflection</strong><span>reviews every task. what worked. what didn't.</span></div>
-                <div class="alive-item"><strong>internal drives</strong><span>curiosity, social, and verification urges build over time.</span></div>
-                <div class="alive-item"><strong>spawn specialist</strong><span>struggling with CSS? creates a child agent to handle it.</span></div>
-                <div class="alive-item"><strong>fork itself</strong><span>tries two approaches in parallel. picks the winner.</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="cta">
-        <h2>ready?</h2>
-        <p>download. open. add one line. your agent starts growing.</p>
-        <div class="cta-dl">
-            <a href="https://github.com/greencube-ai/greencube/releases/download/v1.0.0/GreenCube_1.0.0_x64-setup.exe" class="btn btn-g">Download for Windows</a>
-            <a href="https://github.com/greencube-ai/greencube/releases/download/v1.0.0/GreenCube_0.7.0_x64.dmg" class="btn btn-g">Download for Mac</a>
-        </div>
-        <p class="cta-note">128 tests. 46 rust modules. MIT license.</p>
-    </div>
+    <div class="compat">works with openclaw, langchain, crewai, or anything openai compatible</div>
 
     <footer>
-        <span>greencube.world</span>
-        <a href="https://github.com/greencube-ai/greencube">github.com/greencube-ai</a>
+        <div>free. open source. everything stays on your machine.</div>
+        <div style="margin-top:8px">143 tests. rust. MIT license.</div>
+        <a href="https://github.com/greencube-ai/greencube" class="dl">GitHub</a>
     </footer>
 </div>
-</div>
-<script>function copy(b){navigator.clipboard.writeText('export OPENAI_API_BASE=http://localhost:9000/v1');b.textContent='copied';setTimeout(()=>b.textContent='copy',2000)}</script>
+<script>function copy(b,t){navigator.clipboard.writeText(t);b.textContent='copied';setTimeout(()=>b.textContent='copy',2000)}</script>
 </body>
 </html>
