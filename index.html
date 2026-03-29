@@ -17,87 +17,154 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#050505;color:#fafafa;-webkit-font-smoothing:antialiased}
+        body{font-family:'Inter',sans-serif;background:#050505;color:#fafafa;-webkit-font-smoothing:antialiased;overflow-x:hidden}
         a{color:inherit;text-decoration:none}
-        .w{max-width:640px;margin:0 auto;padding:0 28px}
-        nav{padding:24px 0;display:flex;justify-content:space-between;align-items:center}
-        .nav-l{display:flex;align-items:center;gap:8px}
-        .nav-l svg{width:18px;height:18px}
-        .nav-l span{font-size:14px;font-weight:700}
-        .nav-r{font-size:13px;color:#71717a}
+
+        /* Ambient glow */
+        .glow{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(34,197,94,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+        .page{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 24px}
+
+        /* Nav */
+        nav{padding:28px 0;display:flex;justify-content:space-between;align-items:center;opacity:0.7}
+        nav:hover{opacity:1;transition:opacity 0.3s}
+        .nav-l{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:0.01em}
+        .nav-l svg{width:16px;height:16px}
+        .nav-r{font-size:12px;color:#52525b}
+        .nav-r a{margin-left:16px}
         .nav-r a:hover{color:#22c55e}
-        .hero{padding:80px 0 48px;text-align:center}
-        .hero h1{font-size:36px;font-weight:800;line-height:1.15;letter-spacing:-0.03em;margin-bottom:16px}
-        .hero h1 span{color:#22c55e}
-        .hero p{font-size:15px;color:#71717a;margin-bottom:8px}
-        section{padding:40px 0}
-        .label{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px}
-        .cmd{background:#0a0a0b;border:1px solid #1e1e22;border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-        .cmd code{font-family:'SF Mono',Consolas,monospace;font-size:13px;color:#22c55e;white-space:nowrap;overflow-x:auto}
-        .cmd button{background:#1e1e22;border:none;color:#71717a;padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:inherit;flex-shrink:0}
-        .cmd button:hover{color:#fafafa}
-        .cmd-note{font-size:11px;color:#3f3f46;margin-bottom:24px}
-        .features{list-style:none;padding:0}
-        .features li{padding:10px 0;font-size:14px;color:#a1a1aa;border-bottom:1px solid #1e1e22}
-        .features li:first-child{border-top:1px solid #1e1e22}
-        .features li strong{color:#e4e4e7;font-weight:600}
-        .compat{font-size:12px;color:#3f3f46;padding:24px 0;text-align:center}
-        footer{border-top:1px solid #1e1e22;padding:24px 0;text-align:center;font-size:11px;color:#27272a}
-        footer a{color:#3f3f46}
-        footer a:hover{color:#52525b}
-        .dl{display:inline-block;margin-top:16px;font-size:13px;font-weight:600;padding:10px 24px;border-radius:8px;background:#22c55e;color:#000}
-        .dl:hover{filter:brightness(1.1);color:#000}
-        @media(max-width:480px){.hero h1{font-size:28px}.cmd code{font-size:11px}}
+
+        /* Hero */
+        .hero{padding:100px 0 64px}
+        .hero h1{font-size:44px;font-weight:800;line-height:1.1;letter-spacing:-0.04em}
+        .hero h1 span{background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#22c55e 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+        @keyframes shimmer{to{background-position:200% center}}
+        .hero p{font-size:16px;color:#52525b;margin-top:20px;line-height:1.7}
+
+        /* Install */
+        .install{padding:48px 0}
+        .install-label{font-size:10px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px}
+        .cmd-group{margin-bottom:20px}
+        .cmd{background:rgba(34,197,94,0.03);border:1px solid #1a1a1e;border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:border-color 0.2s}
+        .cmd:hover{border-color:#22c55e40}
+        .cmd code{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:13px;color:#22c55e}
+        .cmd button{background:none;border:1px solid #1e1e22;color:#3f3f46;padding:4px 12px;border-radius:6px;font-size:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+        .cmd button:hover{border-color:#22c55e;color:#22c55e}
+        .cmd-sub{font-size:10px;color:#27272a;margin-top:6px;padding-left:2px}
+
+        /* Divider */
+        .div{height:1px;background:linear-gradient(90deg,transparent,#1e1e22 30%,#1e1e22 70%,transparent);margin:8px 0}
+
+        /* Connect */
+        .connect{padding:48px 0}
+        .connect-label{font-size:10px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px}
+        .connect .cmd{background:rgba(34,197,94,0.05);border-color:#22c55e30}
+        .connect-sub{font-size:12px;color:#3f3f46;margin-top:10px}
+
+        /* Features */
+        .features{padding:48px 0}
+        .features h2{font-size:13px;color:#3f3f46;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:24px}
+        .feat{padding:16px 0;border-bottom:1px solid #111113}
+        .feat:first-of-type{border-top:1px solid #111113}
+        .feat strong{color:#e4e4e7;font-size:14px;font-weight:600}
+        .feat span{color:#3f3f46;font-size:14px}
+        .feat p{color:#52525b;font-size:13px;margin-top:4px;line-height:1.6}
+
+        /* Compat */
+        .compat{padding:32px 0;text-align:center;font-size:12px;color:#27272a;letter-spacing:0.02em}
+
+        /* CTA */
+        .cta{padding:48px 0;text-align:center}
+        .cta p{font-size:14px;color:#3f3f46;margin-bottom:20px}
+        .cta-btn{display:inline-block;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;background:#22c55e;color:#000;transition:all 0.2s}
+        .cta-btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(34,197,94,0.3);color:#000}
+
+        /* Footer */
+        footer{padding:32px 0 48px;text-align:center;font-size:11px;color:#1e1e22}
+        footer a{color:#27272a}
+        footer a:hover{color:#3f3f46}
+
+        @media(max-width:480px){
+            .hero h1{font-size:32px}
+            .hero{padding:60px 0 40px}
+            .cmd code{font-size:11px}
+        }
     </style>
 </head>
 <body>
-<div class="w">
+
+<div class="glow"></div>
+
+<div class="page">
+
     <nav>
         <div class="nav-l">
             <svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="48" ry="48" fill="none" stroke="#22C55E" stroke-width="40"/></svg>
-            <span>GreenCube</span>
+            GreenCube
         </div>
-        <div class="nav-r"><a href="https://github.com/greencube-ai/greencube">GitHub</a></div>
+        <div class="nav-r">
+            <a href="https://github.com/greencube-ai/greencube">source</a>
+        </div>
     </nav>
 
     <div class="hero">
-        <h1>your agent <span>learns</span> from every task</h1>
-        <p>one install. one line. your agent remembers, learns, and improves.</p>
+        <h1>your agent<br><span>learns from every task</span></h1>
+        <p>one install. one line. your agent remembers what worked, learns from mistakes, and gets smarter every session. everything stays on your machine.</p>
     </div>
 
-    <section>
-        <div class="label">install</div>
-        <div class="cmd"><code>curl -sL greencube.world/install.sh | sh</code><button onclick="copy(this,'curl -sL greencube.world/install.sh | sh')">copy</button></div>
-        <div class="cmd-note">mac / linux</div>
-        <div class="cmd"><code>irm greencube.world/install.ps1 | iex</code><button onclick="copy(this,'irm greencube.world/install.ps1 | iex')">copy</button></div>
-        <div class="cmd-note">windows (powershell)</div>
-    </section>
+    <div class="install">
+        <div class="install-label">install</div>
+        <div class="cmd-group">
+            <div class="cmd">
+                <code>curl -sL greencube.world/install.sh | sh</code>
+                <button onclick="c(this,'curl -sL greencube.world/install.sh | sh')">copy</button>
+            </div>
+            <div class="cmd-sub">mac / linux</div>
+        </div>
+        <div class="cmd-group">
+            <div class="cmd">
+                <code>irm greencube.world/install.ps1 | iex</code>
+                <button onclick="c(this,'irm greencube.world/install.ps1 | iex')">copy</button>
+            </div>
+            <div class="cmd-sub">windows powershell</div>
+        </div>
+    </div>
 
-    <section>
-        <div class="label">then add one line</div>
-        <div class="cmd"><code>export OPENAI_API_BASE=http://localhost:9000/v1</code><button onclick="copy(this,'export OPENAI_API_BASE=http://localhost:9000/v1')">copy</button></div>
-        <div class="cmd-note">thats it. run your agent normally.</div>
-    </section>
+    <div class="div"></div>
 
-    <section>
-        <div class="label">what your agent gets</div>
-        <ul class="features">
-            <li><strong>remembers</strong> — facts from past tasks persist and get injected into future conversations</li>
-            <li><strong>learns</strong> — extracts structured knowledge from every task automatically</li>
-            <li><strong>self-checks</strong> — reviews its own output and flags when it got something wrong</li>
-            <li><strong>tracks competence</strong> — knows what its good at and where it struggles, per domain</li>
-            <li><strong>adapts</strong> — changes behavior based on learned preferences</li>
-        </ul>
-    </section>
+    <div class="connect">
+        <div class="connect-label">then add one line</div>
+        <div class="cmd">
+            <code>export OPENAI_API_BASE=http://localhost:9000/v1</code>
+            <button onclick="c(this,'export OPENAI_API_BASE=http://localhost:9000/v1')">copy</button>
+        </div>
+        <div class="connect-sub">run your agent normally. thats it.</div>
+    </div>
 
-    <div class="compat">works with openclaw, langchain, crewai, or anything openai compatible</div>
+    <div class="div"></div>
+
+    <div class="features">
+        <h2>what your agent gets</h2>
+        <div class="feat"><strong>remembers</strong> <span>across sessions</span><p>facts from past tasks persist and get injected into future conversations automatically.</p></div>
+        <div class="feat"><strong>learns</strong> <span>from every task</span><p>extracts structured knowledge without you doing anything. warnings, preferences, facts.</p></div>
+        <div class="feat"><strong>self-checks</strong> <span>its own work</span><p>reviews output quality after each task. admits when it got something wrong.</p></div>
+        <div class="feat"><strong>tracks competence</strong> <span>per domain</span><p>knows its python is at 91% and its css is at 43%. adjusts behavior accordingly.</p></div>
+        <div class="feat"><strong>adapts to you</strong> <span>over time</span><p>learns your preferences and changes how it responds. you like short answers? it gives short answers.</p></div>
+    </div>
+
+    <div class="compat">openclaw · langchain · crewai · anything openai compatible</div>
+
+    <div class="cta">
+        <p>free forever. open source. 143 tests. rust.</p>
+        <a href="https://github.com/greencube-ai/greencube" class="cta-btn">view on github</a>
+    </div>
 
     <footer>
-        <div>free. open source. everything stays on your machine.</div>
-        <div style="margin-top:8px">143 tests. rust. MIT license.</div>
-        <a href="https://github.com/greencube-ai/greencube" class="dl">GitHub</a>
+        <a href="https://github.com/greencube-ai/greencube">greencube.world</a>
     </footer>
+
 </div>
-<script>function copy(b,t){navigator.clipboard.writeText(t);b.textContent='copied';setTimeout(()=>b.textContent='copy',2000)}</script>
+
+<script>function c(b,t){navigator.clipboard.writeText(t);b.textContent='copied';setTimeout(()=>b.textContent='copy',2000)}</script>
 </body>
 </html>
