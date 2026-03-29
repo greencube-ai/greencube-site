@@ -44,8 +44,9 @@
 
         /* Floating particles */
         .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-        .particle{position:absolute;width:2px;height:2px;background:#22c55e;border-radius:50%;opacity:0}
-        @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(0);opacity:0}}
+        .particle{position:absolute;background:#22c55e;border-radius:50%;opacity:0;
+            box-shadow:0 0 6px rgba(34,197,94,0.4),0 0 12px rgba(34,197,94,0.2)}
+        @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}15%{opacity:var(--p-opacity,0.4)}85%{opacity:var(--p-opacity,0.4)}100%{transform:translateY(-10vh) scale(0);opacity:0}}
 
         .page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 36px}
 
@@ -274,16 +275,18 @@ document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
 // Floating particles
 function spawnParticles(){
   const container=document.getElementById('particles');
-  const count=window.innerWidth<480?8:15;
+  const count=window.innerWidth<480?12:25;
   for(let i=0;i<count;i++){
     const p=document.createElement('div');
     p.className='particle';
     p.style.left=Math.random()*100+'%';
-    p.style.width=p.style.height=(1+Math.random()*2)+'px';
-    const dur=8+Math.random()*12;
+    const size=2+Math.random()*3;
+    p.style.width=p.style.height=size+'px';
+    const dur=6+Math.random()*10;
     const delay=Math.random()*dur;
+    const opacity=0.3+Math.random()*0.4;
+    p.style.setProperty('--p-opacity',opacity);
     p.style.animation=`float ${dur}s linear ${delay}s infinite`;
-    p.style.opacity=0.15+Math.random()*0.25;
     container.appendChild(p);
   }
 }
