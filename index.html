@@ -276,13 +276,13 @@ document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
 const particles=[];
 function initParticles(){
   const container=document.getElementById('particles');
-  const count=window.innerWidth<480?15:30;
+  const count=window.innerWidth<480?20:40;
   for(let i=0;i<count;i++){
     const el=document.createElement('div');
     el.className='particle';
     const size=2+Math.random()*4;
     el.style.width=el.style.height=size+'px';
-    el.style.opacity=0.2+Math.random()*0.5;
+    el.style.opacity=[0.08,0.15,0.25,0.4,0.6,0.75][Math.floor(Math.random()*6)];
     container.appendChild(el);
     particles.push({
       el,
