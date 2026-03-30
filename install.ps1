@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host ""
 Write-Host "   GREENCUBE" -ForegroundColor Green
-Write-Host "   your agent learns from every task" -ForegroundColor DarkGray
+Write-Host "   your agent stops repeating mistakes" -ForegroundColor DarkGray
 Write-Host ""
 
 $repo = "greencube-ai/greencube"
@@ -22,7 +22,6 @@ $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
 $asset = $release.assets | Where-Object { $_.name -match "setup" -and $_.name -match $arch -and $_.name -match "\.exe$" } | Select-Object -First 1
 
 if (-not $asset) {
-    # Fallback: try any .exe
     $asset = $release.assets | Where-Object { $_.name -match "\.exe$" } | Select-Object -First 1
 }
 
@@ -41,15 +40,24 @@ Write-Host "running installer..."
 Start-Process -Wait $installer
 Remove-Item $installer -Force -ErrorAction SilentlyContinue
 
+# Create gc.bat shortcut
+$gcPath = "$env:USERPROFILE\gc.bat"
+'@echo off' | Out-File -FilePath $gcPath -Encoding ascii
+'curl -s localhost:9000/b' | Out-File -FilePath $gcPath -Encoding ascii -Append
+
+# Add user profile to PATH if not already there
+$userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+if ($userPath -notlike "*$env:USERPROFILE*") {
+    [Environment]::SetEnvironmentVariable("PATH", "$userPath;$env:USERPROFILE", "User")
+}
+
 Write-Host ""
 Write-Host "done." -ForegroundColor Green -NoNewline
 Write-Host " open GreenCube from your Start menu."
 Write-Host ""
-Write-Host "then add this before running your agent:" -ForegroundColor DarkGray
+Write-Host "  type " -NoNewline
+Write-Host "gc" -ForegroundColor Green -NoNewline
+Write-Host " anytime to see what your agent learned."
 Write-Host ""
-Write-Host '  $env:OPENAI_API_BASE = "http://localhost:9000/v1"' -ForegroundColor Green
+Write-Host "  (open a new terminal for the gc command to work)" -ForegroundColor DarkGray
 Write-Host ""
-Write-Host "  or in cmd:" -ForegroundColor DarkGray
-Write-Host '  set OPENAI_API_BASE=http://localhost:9000/v1' -ForegroundColor Green
-Write-Host ""
-Write-Host "that's it. your agent now learns from every task."
