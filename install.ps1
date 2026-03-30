@@ -1,5 +1,3 @@
-$ErrorActionPreference = "Stop"
-
 Write-Host ""
 Write-Host "   GREENCUBE" -ForegroundColor Green
 Write-Host "   your agent stops repeating mistakes" -ForegroundColor DarkGray
@@ -34,30 +32,43 @@ $url = $asset.browser_download_url
 $installer = "$env:TEMP\GreenCube-setup.exe"
 
 Write-Host "downloading GreenCube $version for Windows ($arch)..."
-Invoke-WebRequest -Uri $url -OutFile $installer -UseBasicParsing
+try {
+    Invoke-WebRequest -Uri $url -OutFile $installer -UseBasicParsing
+} catch {
+    Write-Host "error: download failed." -ForegroundColor Red
+    exit 1
+}
 
-Write-Host "running installer..."
-Start-Process -Wait $installer
+Write-Host "installing..."
+$proc = Start-Process -FilePath $installer -PassThru -Wait
+$proc.WaitForExit()
 Remove-Item $installer -Force -ErrorAction SilentlyContinue
 
-# Create gc.bat shortcut
-$gcPath = "$env:USERPROFILE\gc.bat"
-'@echo off' | Out-File -FilePath $gcPath -Encoding ascii
-'curl -s localhost:9000/b' | Out-File -FilePath $gcPath -Encoding ascii -Append
+# Create gc.bat
+try {
+    $gcPath = "$env:USERPROFILE\gc.bat"
+    Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII
 
-# Add user profile to PATH if not already there
-$userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-if ($userPath -notlike "*$env:USERPROFILE*") {
-    [Environment]::SetEnvironmentVariable("PATH", "$userPath;$env:USERPROFILE", "User")
+    # Add to PATH if needed
+    $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+    if ($userPath -and ($userPath -notlike "*$env:USERPROFILE*")) {
+        [Environment]::SetEnvironmentVariable("PATH", "$userPath;$env:USERPROFILE", "User")
+    } elseif (-not $userPath) {
+        [Environment]::SetEnvironmentVariable("PATH", "$env:USERPROFILE", "User")
+    }
+} catch {
+    Write-Host "  (could not create gc shortcut — you can still use: curl localhost:9000/brain)" -ForegroundColor DarkGray
 }
 
 Write-Host ""
-Write-Host "done." -ForegroundColor Green -NoNewline
-Write-Host " open GreenCube from your Start menu."
+Write-Host "  installed." -ForegroundColor Green
 Write-Host ""
-Write-Host "  type " -NoNewline
+Write-Host "  next steps:" -ForegroundColor White
+Write-Host "  1. open a new terminal" -ForegroundColor DarkGray
+Write-Host "  2. run " -ForegroundColor DarkGray -NoNewline
+Write-Host "greencube" -ForegroundColor Green
+Write-Host "  3. pick your provider, enter your key" -ForegroundColor DarkGray
+Write-Host "  4. type " -ForegroundColor DarkGray -NoNewline
 Write-Host "gc" -ForegroundColor Green -NoNewline
-Write-Host " anytime to see what your agent learned."
-Write-Host ""
-Write-Host "  (open a new terminal for the gc command to work)" -ForegroundColor DarkGray
+Write-Host " to see what your agent learned" -ForegroundColor DarkGray
 Write-Host ""
