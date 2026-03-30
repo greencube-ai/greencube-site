@@ -157,7 +157,7 @@
         .demo-line.active{height:auto;opacity:1}
         .demo-line.done{opacity:0.35;transition:opacity 0.5s ease}
         .dl-gray{color:#3f3f46}.dl-green{color:#22c55e}.dl-blue{color:#3b82f6}
-        .dl-yellow{color:#eab308}.dl-purple{color:#a855f7}.dl-cyan{color:#06b6d4}
+        .dl-yellow{color:#eab308}.dl-purple{color:#a855f7}.dl-cyan{color:#06b6d4}.dl-red{color:#ef4444}
         .demo-cursor{display:inline-block;width:2px;height:14px;background:#22c55e;vertical-align:middle;margin-left:1px;animation:blink 0.8s step-end infinite}
         @keyframes blink{50%{opacity:0}}
 
@@ -535,7 +535,8 @@ const demoLines=[
   {text:'recent:',cls:'dl-cyan',speed:14},
   {text:'  2min ago   learned 3 facts about database indexing',cls:'dl-cyan',speed:8},
   {text:'  8min ago   self-check: good',cls:'dl-cyan',speed:8},
-  {text:'  15min ago  noticed: auth errors recurring',cls:'dl-cyan',speed:8},
+  {text:'  15min ago  prevented 3 mistakes from past feedback',cls:'dl-red',speed:8},
+  {text:'  1hr ago    noticed: auth errors recurring',cls:'dl-cyan',speed:8},
 ];
 function typeLine(el,text,speed){
   return new Promise(r=>{let i=0;const cursor=document.createElement('span');cursor.className='demo-cursor';el.appendChild(cursor);
