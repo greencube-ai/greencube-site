@@ -11,7 +11,7 @@ echo ""
 echo -e "${GREEN}${BOLD}   ╔═╗╦═╗╔═╗╔═╗╔╗╔╔═╗╦ ╦╔╗ ╔═╗${RESET}"
 echo -e "${GREEN}${BOLD}   ║ ╦╠╦╝║╣ ║╣ ║║║║  ║ ║╠╩╗║╣ ${RESET}"
 echo -e "${GREEN}${BOLD}   ╚═╝╩╚═╚═╝╚═╝╝╚╝╚═╝╚═╝╚═╝╚═╝${RESET}"
-echo -e "${DIM}   your agent learns from every task${RESET}"
+echo -e "${DIM}   your agent stops repeating mistakes${RESET}"
 echo ""
 
 REPO="greencube-ai/greencube"
@@ -28,6 +28,25 @@ get_latest_version() {
 fail() {
   echo -e "\n${BOLD}error:${RESET} $1" >&2
   exit 1
+}
+
+# Add gc alias to shell config
+add_alias() {
+  local ALIAS_LINE='alias gc="curl -s localhost:9000/b"'
+  for rc in "$HOME/.bashrc" "$HOME/.zshrc"; do
+    if [ -f "$rc" ]; then
+      if ! grep -q 'alias gc=' "$rc" 2>/dev/null; then
+        echo "" >> "$rc"
+        echo "# GreenCube — check your agent's brain" >> "$rc"
+        echo "$ALIAS_LINE" >> "$rc"
+      fi
+    fi
+  done
+  # Also add to .zshrc if zsh exists but file doesn't yet
+  if command -v zsh &>/dev/null && [ ! -f "$HOME/.zshrc" ]; then
+    echo "# GreenCube — check your agent's brain" > "$HOME/.zshrc"
+    echo "$ALIAS_LINE" >> "$HOME/.zshrc"
+  fi
 }
 
 # --- macOS ---
@@ -48,14 +67,15 @@ if [ "$OS" = "Darwin" ]; then
   echo "opening installer..."
   open /tmp/GreenCube.dmg
 
+  add_alias
+
   echo ""
   echo -e "${GREEN}${BOLD}done.${RESET} drag GreenCube to Applications, then launch it."
   echo ""
-  echo -e "then add this line before running your agent:"
+  echo -e "  type ${GREEN}${BOLD}gc${RESET} anytime to see what your agent learned."
   echo ""
-  echo -e "  ${GREEN}export OPENAI_API_BASE=http://localhost:9000/v1${RESET}"
+  echo -e "${DIM}  (restart your terminal or run: source ~/.zshrc)${RESET}"
   echo ""
-  echo -e "${DIM}that's it. your agent now learns from every task.${RESET}"
 
 # --- Linux ---
 elif [ "$OS" = "Linux" ]; then
@@ -82,14 +102,15 @@ elif [ "$OS" = "Linux" ]; then
   fi
   rm -f /tmp/greencube.deb
 
+  add_alias
+
   echo ""
   echo -e "${GREEN}${BOLD}done.${RESET} launch GreenCube from your app menu or run ${BOLD}greencube${RESET}."
   echo ""
-  echo -e "then add this line before running your agent:"
+  echo -e "  type ${GREEN}${BOLD}gc${RESET} anytime to see what your agent learned."
   echo ""
-  echo -e "  ${GREEN}export OPENAI_API_BASE=http://localhost:9000/v1${RESET}"
+  echo -e "${DIM}  (restart your terminal or run: source ~/.bashrc)${RESET}"
   echo ""
-  echo -e "${DIM}that's it. your agent now learns from every task.${RESET}"
 
 # --- Windows (git bash / WSL / MSYS) ---
 else
