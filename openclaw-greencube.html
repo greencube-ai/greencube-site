@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give your OpenClaw agent persistent memory with GreenCube</title>
+    <meta name="description" content="Add persistent memory, self-reflection, and competence tracking to your OpenClaw agent. 5 minutes to set up. Your agent remembers everything and never repeats mistakes.">
+    <meta property="og:title" content="OpenClaw + GreenCube: persistent agent memory">
+    <meta property="og:description" content="Add persistent memory to your OpenClaw agent in 5 minutes.">
+    <meta property="og:url" content="https://greencube.world/openclaw-greencube">
+    <link rel="canonical" href="https://greencube.world/openclaw-greencube">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%2322C55E' stroke-width='3'/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#050505;color:#e4e4e7;-webkit-font-smoothing:antialiased;line-height:1.7}
+        a{color:#22c55e;text-decoration:none}
+        a:hover{text-decoration:underline}
+        ::selection{background:#22c55e30;color:#fff}
+        .page{max-width:640px;margin:0 auto;padding:48px 24px 80px}
+        nav{margin-bottom:48px;display:flex;align-items:center;gap:8px}
+        nav svg{width:14px;height:14px;opacity:0.5}
+        nav a{font-size:13px;color:#71717a}
+        nav a:hover{color:#22c55e;text-decoration:none}
+        h1{font-size:36px;font-weight:800;color:#fafafa;letter-spacing:-0.03em;line-height:1.15;margin-bottom:24px}
+        h2{font-size:22px;font-weight:700;color:#fafafa;letter-spacing:-0.02em;margin:36px 0 12px}
+        p{font-size:16px;color:#a1a1aa;margin-bottom:16px}
+        .step{padding:20px 0;border-bottom:1px solid #0e0e10}
+        .step-num{display:inline-block;width:24px;height:24px;border-radius:50%;background:#22c55e15;color:#22c55e;font-size:12px;font-weight:700;text-align:center;line-height:24px;margin-right:8px}
+        .step strong{color:#fafafa}
+        code{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:14px;color:#22c55e;background:#0a0a0c;padding:2px 6px;border-radius:4px}
+        pre{background:#08080a;border:1px solid #141416;border-radius:10px;padding:16px;overflow-x:auto;margin:12px 0;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:13px;color:#22c55e;line-height:1.5}
+        .inline-path{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:13px;color:#71717a;background:#0a0a0c;padding:2px 6px;border-radius:4px}
+        .feat{padding:8px 0;display:flex;gap:10px;align-items:baseline}
+        .feat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:7px}
+        .feat strong{color:#e4e4e7;font-size:15px}
+        .feat span{color:#71717a;font-size:15px}
+        .cta{display:inline-block;margin-top:24px;padding:10px 24px;background:#22c55e;color:#000;font-weight:700;border-radius:8px;font-size:14px}
+        .cta:hover{text-decoration:none;opacity:0.9}
+        footer{margin-top:48px;padding-top:24px;border-top:1px solid #1a1a1e;font-size:13px;color:#71717a}
+        footer a{color:#71717a}
+    </style>
+</head>
+<body>
+<div class="page">
+    <nav>
+        <svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="48" ry="48" fill="none" stroke="#22C55E" stroke-width="40"/></svg>
+        <a href="/">GreenCube</a>
+    </nav>
+
+    <h1>Give your OpenClaw agent persistent memory</h1>
+
+    <p>OpenClaw is a powerful agent framework, but every session starts from zero. Your agent forgets the codebase knowledge it built up, the mistakes it learned to avoid, and the preferences you expressed. GreenCube fixes this by sitting between OpenClaw and your LLM provider as a transparent proxy that remembers everything.</p>
+
+    <p>Setup takes 5 minutes. No code changes to your agents.</p>
+
+    <h2>Setup</h2>
+
+    <div class="step">
+        <p><span class="step-num">1</span> <strong>Install GreenCube</strong></p>
+        <pre>curl -fsSL https://greencube.world/install.sh | bash</pre>
+        <p style="font-size:14px;color:#52525b">Windows: <code>irm greencube.world/install.ps1 | iex</code></p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-num">2</span> <strong>Open your OpenClaw config</strong></p>
+        <p>Edit <span class="inline-path">~/.openclaw/openclaw.json</span> and add GreenCube as a provider:</p>
+        <pre>{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "greencube": {
+        "baseUrl": "http://localhost:9000/v1",
+        "apiKey": "your-openai-key-here",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "gpt-4o",
+            "name": "gpt-4o",
+            "reasoning": false,
+            "input": ["text"],
+            "contextWindow": 128000,
+            "maxTokens": 16384
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "greencube/gpt-4o"
+      },
+      "models": {
+        "greencube/gpt-4o": {
+          "alias": "gpt-4o"
+        }
+      }
+    }
+  }
+}</pre>
+        <p style="font-size:14px;color:#52525b">Replace <code>your-openai-key-here</code> with your actual API key. Change the model if you use something other than gpt-4o.</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-num">3</span> <strong>Restart OpenClaw</strong></p>
+        <pre>openclaw daemon restart</pre>
+        <p style="font-size:14px;color:#52525b">Every request now routes through GreenCube before reaching OpenAI. Responses come back unchanged — your agents don't know anything is different.</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-num">4</span> <strong>Check what your agent learned</strong></p>
+        <pre>curl localhost:9000/brain</pre>
+        <p style="font-size:14px;color:#52525b">After a few tasks, you'll see facts it extracted, domains it tracks competence in, and a log of everything it noticed. Run this anytime.</p>
+    </div>
+
+    <h2>What your OpenClaw agent gets</h2>
+
+    <div class="feat"><div class="feat-dot" style="background:#22c55e"></div><div><strong>Persistent memory</strong> <span>— facts from past sessions get injected into future tasks automatically</span></div></div>
+    <div class="feat"><div class="feat-dot" style="background:#3b82f6"></div><div><strong>Self-reflection</strong> <span>— after each task, the agent extracts what it learned and stores it</span></div></div>
+    <div class="feat"><div class="feat-dot" style="background:#eab308"></div><div><strong>Self-verification</strong> <span>— the agent reviews its own output and flags quality issues</span></div></div>
+    <div class="feat"><div class="feat-dot" style="background:#a855f7"></div><div><strong>Competence tracking</strong> <span>— knows it's 87% on Python and 43% on CSS, adjusts caution accordingly</span></div></div>
+    <div class="feat"><div class="feat-dot" style="background:#ef4444"></div><div><strong>Mistake prevention</strong> <span>— catches known error patterns before they reach you, retries automatically</span></div></div>
+    <div class="feat"><div class="feat-dot" style="background:#06b6d4"></div><div><strong>Memory decay</strong> <span>— useful knowledge gets reinforced, noise fades over time</span></div></div>
+
+    <h2>How it works</h2>
+
+    <p>GreenCube runs a local proxy on localhost:9000. When OpenClaw sends a request to <code>greencube/gpt-4o</code>, GreenCube receives it, injects relevant knowledge from past tasks, forwards it to OpenAI, then analyzes the response in the background. Knowledge extraction, self-verification, and competence tracking all happen asynchronously — the response time is unchanged.</p>
+
+    <p>Everything runs on your machine. No cloud storage. No telemetry. Your API key goes directly to OpenAI, just routed through a local process first. GreenCube is free, open source, and MIT licensed.</p>
+
+    <a href="/" class="cta">Get GreenCube</a>
+
+    <div style="margin-top:32px;font-size:14px;color:#52525b">
+        <p>Related: <a href="/what-are-persistent-agents">What are persistent agents?</a> · <a href="/ai-agent-memory">AI agent memory solutions compared</a> · <a href="/agent-stops-repeating-mistakes">Stop agents repeating mistakes</a></p>
+    </div>
+
+    <footer>
+        <a href="https://github.com/greencube-ai/greencube">GitHub</a> · <a href="/">greencube.world</a> · built by Hector Gras
+    </footer>
+</div>
+</body>
+</html>
