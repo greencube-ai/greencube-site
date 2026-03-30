@@ -338,9 +338,9 @@
 
     <!-- What happens silently -->
     <section class="reveal">
-        <div class="section-label">Under the hood</div>
-        <div class="section-title">What happens silently</div>
-        <div class="section-desc">Every time your agent completes a task, GreenCube does this in the background:</div>
+        <div class="section-label">One command</div>
+        <div class="section-title">See your agent's brain</div>
+        <div class="section-desc">Your agent works. GreenCube learns. Check anytime:</div>
     </section>
 
     <div class="demo-box reveal">
@@ -516,13 +516,26 @@ initParticles();animateParticles();
 
 // Demo typewriter
 const demoLines=[
-  {text:'$ agent completes task...',cls:'dl-gray',speed:30},
-  {text:'  [greencube] intercepted response',cls:'dl-green',speed:18},
-  {text:'  [reflection] 3 facts extracted, 1 lesson learned',cls:'dl-green',speed:16},
-  {text:'  [self-verify] quality: good, confidence: 0.87',cls:'dl-yellow',speed:16},
-  {text:'  [competence] python 84% \u2192 87%, testing 71% \u2192 73%',cls:'dl-purple',speed:14},
-  {text:'  [memory] stored: "user prefers pytest over unittest"',cls:'dl-blue',speed:14},
-  {text:'  [idle] pattern: 3 similar errors in auth module this week',cls:'dl-cyan',speed:12},
+  {text:'$ curl localhost:9000/brain',cls:'dl-gray',speed:25},
+  {text:'',cls:'dl-gray',speed:0},
+  {text:'--- greencube agent: Dev ---',cls:'dl-green',speed:14},
+  {text:'mood: confident | 47 tasks | 84% success',cls:'dl-green',speed:12},
+  {text:'---',cls:'dl-gray',speed:30},
+  {text:'what i know (12 facts):',cls:'dl-blue',speed:14},
+  {text:'  \u00b7 Stripe API needs Bearer auth',cls:'dl-blue',speed:10},
+  {text:'  \u00b7 user prefers short answers',cls:'dl-blue',speed:10},
+  {text:'  \u00b7 pytest over unittest',cls:'dl-blue',speed:10},
+  {text:'  \u00b7 auth module is fragile \u2014 handle errors',cls:'dl-blue',speed:10},
+  {text:'---',cls:'dl-gray',speed:30},
+  {text:'what im good at:',cls:'dl-purple',speed:14},
+  {text:'  python   \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591 87%',cls:'dl-purple',speed:8},
+  {text:'  api      \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591 71%',cls:'dl-purple',speed:8},
+  {text:'  css      \u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591 43%',cls:'dl-yellow',speed:8},
+  {text:'---',cls:'dl-gray',speed:30},
+  {text:'recent:',cls:'dl-cyan',speed:14},
+  {text:'  2min ago   learned 3 facts about database indexing',cls:'dl-cyan',speed:8},
+  {text:'  8min ago   self-check: good',cls:'dl-cyan',speed:8},
+  {text:'  15min ago  noticed: auth errors recurring',cls:'dl-cyan',speed:8},
 ];
 function typeLine(el,text,speed){
   return new Promise(r=>{let i=0;const cursor=document.createElement('span');cursor.className='demo-cursor';el.appendChild(cursor);
@@ -532,11 +545,12 @@ async function runDemo(){
   const box=document.getElementById('demo');box.innerHTML='';const els=[];
   for(let i=0;i<demoLines.length;i++){
     const{text,cls,speed}=demoLines[i];const div=document.createElement('div');div.className='demo-line '+cls+' active';
-    box.appendChild(div);els.push(div);if(i>=4)els[i-4].classList.add('done');
-    const cursor=await typeLine(div,text,speed);await new Promise(r=>setTimeout(r,250));
+    box.appendChild(div);els.push(div);
+    if(text===''){await new Promise(r=>setTimeout(r,300));continue;}
+    const cursor=await typeLine(div,text,speed);await new Promise(r=>setTimeout(r,120));
     if(i<demoLines.length-1)cursor.remove();
   }
-  await new Promise(r=>setTimeout(r,2500));
+  await new Promise(r=>setTimeout(r,4000));
   els.forEach(el=>{el.style.transition='opacity 0.6s';el.style.opacity='0'});
   await new Promise(r=>setTimeout(r,800));runDemo();
 }
