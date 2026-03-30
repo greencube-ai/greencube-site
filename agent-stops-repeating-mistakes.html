@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to stop your AI agent from repeating the same mistakes</title>
+    <meta name="description" content="Your AI agent keeps making the same mistakes because it forgets everything between sessions. GreenCube fixes that with persistent memory and self-correction.">
+    <meta property="og:title" content="How to stop your AI agent from repeating mistakes">
+    <meta property="og:description" content="Your AI agent keeps making the same mistakes because it forgets everything between sessions.">
+    <meta property="og:url" content="https://greencube.world/agent-stops-repeating-mistakes">
+    <link rel="canonical" href="https://greencube.world/agent-stops-repeating-mistakes">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%2322C55E' stroke-width='3'/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#050505;color:#e4e4e7;-webkit-font-smoothing:antialiased;line-height:1.7}
+        a{color:#22c55e;text-decoration:none}
+        a:hover{text-decoration:underline}
+        ::selection{background:#22c55e30;color:#fff}
+        .page{max-width:640px;margin:0 auto;padding:48px 24px 80px}
+        nav{margin-bottom:48px;display:flex;align-items:center;gap:8px}
+        nav svg{width:14px;height:14px;opacity:0.5}
+        nav a{font-size:13px;color:#71717a}
+        nav a:hover{color:#22c55e;text-decoration:none}
+        h1{font-size:36px;font-weight:800;color:#fafafa;letter-spacing:-0.03em;line-height:1.15;margin-bottom:24px}
+        h2{font-size:22px;font-weight:700;color:#fafafa;letter-spacing:-0.02em;margin:36px 0 12px}
+        p{font-size:16px;color:#a1a1aa;margin-bottom:16px}
+        code{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:14px;color:#22c55e;background:#0a0a0c;padding:2px 6px;border-radius:4px}
+        .step{padding:16px 0;border-bottom:1px solid #0e0e10}
+        .step-num{display:inline-block;width:24px;height:24px;border-radius:50%;background:#22c55e15;color:#22c55e;font-size:12px;font-weight:700;text-align:center;line-height:24px;margin-right:8px}
+        .step strong{color:#fafafa}
+        .cta{display:inline-block;margin-top:24px;padding:10px 24px;background:#22c55e;color:#000;font-weight:700;border-radius:8px;font-size:14px}
+        .cta:hover{text-decoration:none;opacity:0.9}
+        footer{margin-top:48px;padding-top:24px;border-top:1px solid #1a1a1e;font-size:13px;color:#71717a}
+        footer a{color:#71717a}
+    </style>
+</head>
+<body>
+<div class="page">
+    <nav>
+        <svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="48" ry="48" fill="none" stroke="#22C55E" stroke-width="40"/></svg>
+        <a href="/">GreenCube</a>
+    </nav>
+
+    <h1>How to stop your AI agent from repeating the same mistakes</h1>
+
+    <p>You give your agent a task. It produces a bad answer. You correct it. Tomorrow, you give it a similar task. It makes the exact same mistake. This cycle repeats forever because the agent has no memory of what went wrong.</p>
+
+    <p>This isn't a model quality problem. GPT-4, Claude, Gemini — they all do this. The issue is architectural. Every session starts fresh. The correction you gave yesterday doesn't exist in today's context window.</p>
+
+    <h2>Why agents repeat errors</h2>
+
+    <p>Three reasons. First, no session memory. The agent literally doesn't know it made a mistake last time. Your correction lived in a previous conversation that's now gone.</p>
+
+    <p>Second, no self-awareness. The agent doesn't track its own performance. It doesn't know that it has a 43% success rate on CSS tasks or that it consistently mishandles authentication errors. Without that data, it can't adjust its behavior.</p>
+
+    <p>Third, no feedback loop. Even when you correct an agent, that correction goes nowhere. It doesn't get stored, categorized, or injected into future prompts. The information exists for one conversation and then vanishes.</p>
+
+    <h2>How self-correction works</h2>
+
+    <p>GreenCube adds three layers that work together to prevent repeated mistakes:</p>
+
+    <div class="step">
+        <p><span class="step-num">1</span> <strong>Self-verification.</strong> After every task, the agent reviews its own output and rates it as "good" or "needs improvement." If it rates itself poorly, that failure gets recorded with the specific reason — not just "bad" but "incomplete error handling in the auth middleware."</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-num">2</span> <strong>Correction memory.</strong> When you give a thumbs-down, GreenCube stores it as a "correction" knowledge entry. This isn't a chat log — it's a structured record: "User disapproved this approach. Avoid it." These corrections persist forever and get injected as "Mistakes to avoid" in every future task.</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-num">3</span> <strong>Real-time mistake prevention.</strong> Before returning any response, GreenCube checks it against stored corrections. If the response matches a known mistake pattern — same keywords, same approach that was previously flagged — it injects a warning and makes the agent retry. The user never sees the bad version.</p>
+    </div>
+
+    <h2>What this looks like in practice</h2>
+
+    <p>Day 1: Your agent writes a database query with no error handling. You thumbs-down it. GreenCube stores: "User disapproved — missing error handling in database queries."</p>
+
+    <p>Day 3: Your agent starts to write another database query without error handling. GreenCube catches it mid-response, injects the correction, and the agent rewrites with proper error handling before you ever see the first version.</p>
+
+    <p>Day 10: The agent's competence tracker shows 91% success on database tasks. It learned. Not because someone fine-tuned the model, but because the system remembered what went wrong and prevented it from happening again.</p>
+
+    <p>One line to set up:</p>
+
+    <p><code>export OPENAI_API_BASE=http://localhost:9000/v1</code></p>
+
+    <p>No code changes. No fine-tuning. No prompt engineering. Your agent just stops repeating mistakes.</p>
+
+    <a href="/" class="cta">Try GreenCube</a>
+
+    <footer>
+        <a href="https://github.com/greencube-ai/greencube">GitHub</a> · <a href="/">greencube.world</a> · built by Hector Gras
+    </footer>
+</div>
+</body>
+</html>
