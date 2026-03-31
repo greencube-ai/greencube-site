@@ -44,31 +44,64 @@ $proc = Start-Process -FilePath $installer -PassThru -Wait
 $proc.WaitForExit()
 Remove-Item $installer -Force -ErrorAction SilentlyContinue
 
-# Create gc.bat
-try {
-    $gcPath = "$env:USERPROFILE\gc.bat"
-    Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII
+# Create gc.bat in WindowsApps (always in PATH on Windows 10/11)
+$gcCreated = $false
+$gcLocations = @(
+    "$env:LOCALAPPDATA\Microsoft\WindowsApps",
+    "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps",
+    "$env:USERPROFILE"
+)
 
-    # Add to PATH if needed
-    $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-    if ($userPath -and ($userPath -notlike "*$env:USERPROFILE*")) {
-        [Environment]::SetEnvironmentVariable("PATH", "$userPath;$env:USERPROFILE", "User")
-    } elseif (-not $userPath) {
-        [Environment]::SetEnvironmentVariable("PATH", "$env:USERPROFILE", "User")
+foreach ($loc in $gcLocations) {
+    if (Test-Path $loc) {
+        try {
+            $gcPath = Join-Path $loc "gc.bat"
+            Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII -Force
+            $gcCreated = $true
+            break
+        } catch {
+            continue
+        }
     }
-} catch {
-    Write-Host "  (could not create gc shortcut — you can still use: curl localhost:9000/brain)" -ForegroundColor DarkGray
+}
+
+# Fallback: also try creating in the GreenCube install directory and adding to PATH
+if (-not $gcCreated) {
+    try {
+        $gcDir = "$env:LOCALAPPDATA\GreenCube"
+        if (Test-Path $gcDir) {
+            $gcPath = Join-Path $gcDir "gc.bat"
+            Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII -Force
+            $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+            if ($userPath -notlike "*$gcDir*") {
+                [Environment]::SetEnvironmentVariable("PATH", "$userPath;$gcDir", "User")
+            }
+            $gcCreated = $true
+        }
+    } catch {}
 }
 
 Write-Host ""
 Write-Host "  installed." -ForegroundColor Green
 Write-Host ""
-Write-Host "  next steps:" -ForegroundColor White
-Write-Host "  1. open a new terminal" -ForegroundColor DarkGray
-Write-Host "  2. run " -ForegroundColor DarkGray -NoNewline
-Write-Host "greencube" -ForegroundColor Green
-Write-Host "  3. pick your provider, enter your key" -ForegroundColor DarkGray
-Write-Host "  4. type " -ForegroundColor DarkGray -NoNewline
-Write-Host "gc" -ForegroundColor Green -NoNewline
-Write-Host " to see what your agent learned" -ForegroundColor DarkGray
+if ($gcCreated) {
+    Write-Host "  next steps:" -ForegroundColor White
+    Write-Host "  1. open a " -ForegroundColor DarkGray -NoNewline
+    Write-Host "new terminal" -ForegroundColor White
+    Write-Host "  2. run " -ForegroundColor DarkGray -NoNewline
+    Write-Host "greencube" -ForegroundColor Green -NoNewline
+    Write-Host " to set up your provider" -ForegroundColor DarkGray
+    Write-Host "  3. type " -ForegroundColor DarkGray -NoNewline
+    Write-Host "gc" -ForegroundColor Green -NoNewline
+    Write-Host " to see what your agent learned" -ForegroundColor DarkGray
+} else {
+    Write-Host "  next steps:" -ForegroundColor White
+    Write-Host "  1. open a new terminal" -ForegroundColor DarkGray
+    Write-Host "  2. run " -ForegroundColor DarkGray -NoNewline
+    Write-Host "greencube" -ForegroundColor Green -NoNewline
+    Write-Host " to set up your provider" -ForegroundColor DarkGray
+    Write-Host "  3. type " -ForegroundColor DarkGray -NoNewline
+    Write-Host "curl -s localhost:9000/brain" -ForegroundColor Green -NoNewline
+    Write-Host " to check your agent" -ForegroundColor DarkGray
+}
 Write-Host ""
