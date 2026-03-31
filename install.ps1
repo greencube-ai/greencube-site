@@ -56,7 +56,8 @@ foreach ($loc in $gcLocations) {
     if (Test-Path $loc) {
         try {
             $gcPath = Join-Path $loc "gc.bat"
-            Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII -Force
+            $gcScript = "@echo off`r`nfor /L %%p in (9000,1,9010) do (`r`n  curl -s http://localhost:%%p/health >nul 2>&1 && curl -s http://localhost:%%p/b && exit /b`r`n)`r`necho GreenCube is not running. Open the app first."
+            Set-Content -Path $gcPath -Value $gcScript -Encoding ASCII -Force
             $gcCreated = $true
             break
         } catch {
@@ -71,7 +72,8 @@ if (-not $gcCreated) {
         $gcDir = "$env:LOCALAPPDATA\GreenCube"
         if (Test-Path $gcDir) {
             $gcPath = Join-Path $gcDir "gc.bat"
-            Set-Content -Path $gcPath -Value "@echo off`r`ncurl -s http://localhost:9000/b" -Encoding ASCII -Force
+            $gcScript = "@echo off`r`nfor /L %%p in (9000,1,9010) do (`r`n  curl -s http://localhost:%%p/health >nul 2>&1 && curl -s http://localhost:%%p/b && exit /b`r`n)`r`necho GreenCube is not running. Open the app first."
+            Set-Content -Path $gcPath -Value $gcScript -Encoding ASCII -Force
             $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
             if ($userPath -notlike "*$gcDir*") {
                 [Environment]::SetEnvironmentVariable("PATH", "$userPath;$gcDir", "User")
