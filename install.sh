@@ -32,7 +32,7 @@ fail() {
 
 # Add gc alias to shell config
 add_alias() {
-  local ALIAS_LINE='alias gc="curl -s localhost:9000/b"'
+  local ALIAS_LINE='gc() { for p in $(seq 9000 9010); do curl -s "localhost:$p/health" >/dev/null 2>&1 && curl -s "localhost:$p/b" && return; done; echo "GreenCube is not running. Open the app first."; }'
   for rc in "$HOME/.bashrc" "$HOME/.zshrc"; do
     if [ -f "$rc" ]; then
       if ! grep -q 'alias gc=' "$rc" 2>/dev/null; then
