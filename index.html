@@ -331,16 +331,16 @@
             <code>export OPENAI_API_BASE=http://localhost:9000/v1</code>
             <button onclick="c(this,'export OPENAI_API_BASE=http://localhost:9000/v1')">copy</button>
         </div>
-        <div class="then-hint">that's it. run your agent normally.</div>
+        <div class="then-hint">that's it. run your agent normally. type gc to check what it learned.</div>
     </div>
 
     <div class="div reveal"></div>
 
     <!-- What happens silently -->
     <section class="reveal">
-        <div class="section-label">One command</div>
-        <div class="section-title">See your agent's brain</div>
-        <div class="section-desc">Your agent works. GreenCube learns. Check anytime:</div>
+        <div class="section-label">Two keystrokes</div>
+        <div class="section-title">Type gc. See everything.</div>
+        <div class="section-desc">Your agent works. GreenCube learns. Type gc in any terminal to see what it knows.</div>
     </section>
 
     <div class="demo-box reveal">
@@ -525,27 +525,26 @@ initParticles();animateParticles();
 
 // Demo typewriter
 const demoLines=[
-  {text:'$ curl localhost:9000/brain',cls:'dl-gray',speed:25},
+  {text:'$ gc',cls:'dl-gray',speed:40},
   {text:'',cls:'dl-gray',speed:0},
-  {text:'--- greencube agent: Dev ---',cls:'dl-green',speed:14},
-  {text:'mood: confident | 47 tasks | 84% success',cls:'dl-green',speed:12},
-  {text:'---',cls:'dl-gray',speed:30},
-  {text:'what i know (12 facts):',cls:'dl-blue',speed:14},
-  {text:'  \u00b7 Stripe API needs Bearer auth',cls:'dl-blue',speed:10},
-  {text:'  \u00b7 user prefers short answers',cls:'dl-blue',speed:10},
-  {text:'  \u00b7 pytest over unittest',cls:'dl-blue',speed:10},
-  {text:'  \u00b7 auth module is fragile \u2014 handle errors',cls:'dl-blue',speed:10},
-  {text:'---',cls:'dl-gray',speed:30},
-  {text:'what im good at:',cls:'dl-purple',speed:14},
-  {text:'  python   \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 87%',cls:'dl-purple',speed:8},
-  {text:'  api      \u2588\u2588\u2588\u2588\u2588\u2588\u2588 71%',cls:'dl-purple',speed:8},
-  {text:'  css      \u2588\u2588\u2588\u2588 43%',cls:'dl-yellow',speed:8},
-  {text:'---',cls:'dl-gray',speed:30},
+  {text:'\ud83e\udde0 Dev | mood: confident | 47 tasks | 84% success',cls:'dl-green',speed:10},
+  {text:'learned:',cls:'dl-blue',speed:14},
+  {text:'  \u2022 Stripe API needs Bearer auth',cls:'dl-blue',speed:8},
+  {text:'  \u2022 user prefers short answers',cls:'dl-blue',speed:8},
+  {text:'  \u2022 pytest over unittest',cls:'dl-blue',speed:8},
+  {text:'  \u2022 auth module is fragile \u2014 handle errors',cls:'dl-blue',speed:8},
+  {text:'good at:',cls:'dl-purple',speed:14},
+  {text:'  \u2022 python       \u2588\u2588\u2588\u2588\u2588 87%',cls:'dl-purple',speed:6},
+  {text:'  \u2022 api          \u2588\u2588\u2588\u2588\u2591 71%',cls:'dl-purple',speed:6},
+  {text:'  \u2022 css          \u2588\u2588\u2591\u2591\u2591 43%',cls:'dl-yellow',speed:6},
+  {text:'improvements:',cls:'dl-green',speed:14},
+  {text:'  \u2022 3 mistakes prevented',cls:'dl-red',speed:8},
+  {text:'  \u2022 47 facts used in tasks',cls:'dl-green',speed:8},
   {text:'recent:',cls:'dl-cyan',speed:14},
-  {text:'  2min ago   learned 3 facts about database indexing',cls:'dl-cyan',speed:8},
-  {text:'  8min ago   self-check: good',cls:'dl-cyan',speed:8},
-  {text:'  15min ago  prevented 3 mistakes from past feedback',cls:'dl-red',speed:8},
-  {text:'  1hr ago    noticed: auth errors recurring',cls:'dl-cyan',speed:8},
+  {text:'  \u2713 2m ago   "fix the login auth bug..."',cls:'dl-cyan',speed:6},
+  {text:'  \u2713 15m ago  "add error handling to payments..."',cls:'dl-cyan',speed:6},
+  {text:'  \u2717 1h ago   "rewrite the CSS grid layout..."',cls:'dl-yellow',speed:6},
+  {text:'today: ~2400 tokens (~$0.024)',cls:'dl-gray',speed:8},
 ];
 function typeLine(el,text,speed){
   return new Promise(r=>{let i=0;const cursor=document.createElement('span');cursor.className='demo-cursor';el.appendChild(cursor);
