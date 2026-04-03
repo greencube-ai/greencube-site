@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenCube — turn any agent into a persistent agent</title>
+    <title>GreenCube — your agent stops repeating mistakes</title>
     <meta name="description" content="Turn your AI agents into creatures that learn. One env variable. Works with OpenClaw, LangChain, CrewAI. Free and open source.">
-    <meta property="og:title" content="GreenCube — turn any agent into a persistent agent">
+    <meta property="og:title" content="GreenCube — your agent stops repeating mistakes">
     <meta property="og:description" content="A free app that turns AI agents into creatures that learn, reflect, and grow.">
     <meta property="og:url" content="https://greencube.world">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GreenCube — turn any agent into a persistent agent">
+    <meta name="twitter:title" content="GreenCube — your agent stops repeating mistakes">
     <meta name="twitter:description" content="Turn your AI agents into creatures that learn. One env variable. Free and open source.">
     <link rel="canonical" href="https://greencube.world">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%2322C55E' stroke-width='3'/></svg>">
@@ -259,7 +259,8 @@
     <div class="hero">
         <div class="badge"><span class="badge-dot"></span> open source &middot; MIT license</div>
         <h1><span class="hero-line">your agent stops</span><span class="hero-line green">repeating mistakes</span></h1>
-        <p style="color:#d4d4d8;font-size:18px">GreenCube turns any AI agent into a <strong style="color:#fafafa">persistent agent</strong>. It remembers what worked, learns from failures, and <strong style="color:#fafafa">never makes the same mistake twice</strong>.</p>
+        <p style="color:#d4d4d8;font-size:18px">GreenCube sits between your agent and the LLM. It remembers what worked, learns from failures, and <strong style="color:#fafafa">never makes the same mistake twice</strong>.</p>
+        <p style="color:#71717a;font-size:13px;margin-top:8px">For developers using OpenAI, OpenClaw, Ollama, LM Studio, or any OpenAI-compatible API.</p>
         <div class="hero-actions">
             <a href="#install" class="btn-primary">Get started</a>
             <a href="https://github.com/greencube-ai/greencube" class="btn-secondary">
@@ -267,6 +268,12 @@
                 Star on GitHub
             </a>
         </div>
+    </div>
+
+    <!-- gc demo — right after hero, the proof -->
+    <div class="demo-box reveal" style="margin-top:24px">
+        <div class="demo-bar"><i></i><i></i><i></i></div>
+        <div class="demo-lines" id="demo-hero"></div>
     </div>
 
     <div class="div reveal"></div>
@@ -336,18 +343,6 @@
 
     <div class="div reveal"></div>
 
-    <!-- What happens silently -->
-    <section class="reveal">
-        <div class="section-label">Two keystrokes</div>
-        <div class="section-title">Type gc. See everything.</div>
-        <div class="section-desc">Your agent works. GreenCube learns. Type gc in any terminal to see what it knows.</div>
-    </section>
-
-    <div class="demo-box reveal">
-        <div class="demo-bar"><i></i><i></i><i></i></div>
-        <div class="demo-lines" id="demo"></div>
-    </div>
-
     <div class="div reveal"></div>
 
     <!-- Growth timeline -->
@@ -380,7 +375,7 @@
     <!-- Features -->
     <section class="reveal">
         <div class="section-label">Capabilities</div>
-        <div class="section-title">What persistent agents do</div>
+        <div class="section-title">What GreenCube does</div>
     </section>
 
     <div class="feat-grid stagger">
@@ -422,7 +417,8 @@
     <section class="reveal">
         <div class="section-label">Compatible with</div>
         <div class="section-title">Works with any OpenAI-compatible API</div>
-        <div class="section-desc">Supports OpenAI, Ollama, LM Studio, OpenRouter, and any tool that uses the OpenAI SDK format. Does not support Anthropic API or Azure OpenAI directly.</div>
+        <div class="section-desc">Supports OpenAI, Ollama, LM Studio, OpenRouter, and any tool that uses the OpenAI SDK format.</div>
+        <p style="font-size:13px;color:#a1a1aa;margin-top:8px">Works with Claude through OpenClaw or OpenRouter. Native Anthropic API support coming soon.</p>
     </section>
 
     <div class="marquee-wrap reveal">
@@ -448,13 +444,10 @@
 
     <div class="div reveal"></div>
 
-    <!-- Stats -->
-    <div class="stats reveal">
-        <div class="stat"><div class="stat-num">143</div><div class="stat-label">Tests</div></div>
-        <div class="stat"><div class="stat-num">45</div><div class="stat-label">Modules</div></div>
-        <div class="stat"><div class="stat-num">Rust</div><div class="stat-label">Backend</div></div>
-        <div class="stat"><div class="stat-num">React</div><div class="stat-label">Frontend</div></div>
-        <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">License</div></div>
+    <!-- Trust line -->
+    <div class="reveal" style="text-align:center;padding:20px 0">
+        <p style="font-size:15px;color:#a1a1aa">Free, open source, runs locally. No cloud. No telemetry. Your data stays yours.</p>
+        <p style="font-size:12px;color:#52525b;margin-top:6px">MIT license &middot; written in Rust</p>
     </div>
 
     <div class="div reveal"></div>
@@ -551,7 +544,7 @@ function typeLine(el,text,speed){
     const iv=setInterval(()=>{if(i<text.length){el.insertBefore(document.createTextNode(text[i]),cursor);i++}else{clearInterval(iv);r(cursor)}},speed)})
 }
 async function runDemo(){
-  const box=document.getElementById('demo');box.innerHTML='';const els=[];
+  const box=document.getElementById('demo-hero');box.innerHTML='';const els=[];
   for(let i=0;i<demoLines.length;i++){
     const{text,cls,speed}=demoLines[i];const div=document.createElement('div');div.className='demo-line '+cls+' active';
     box.appendChild(div);els.push(div);
@@ -564,7 +557,7 @@ async function runDemo(){
   await new Promise(r=>setTimeout(r,800));runDemo();
 }
 const demoObs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){runDemo();demoObs.disconnect()}},{threshold:0.2});
-demoObs.observe(document.getElementById('demo'));
+demoObs.observe(document.getElementById('demo-hero'));
 </script>
 </body>
 </html>
