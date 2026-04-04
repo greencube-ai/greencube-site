@@ -26,7 +26,7 @@
             background:radial-gradient(ellipse,rgba(34,197,94,0.09) 0%,rgba(34,197,94,0.02) 40%,transparent 70%);
             pointer-events:none;z-index:0;opacity:0;animation:fi 1.5s ease 0.2s forwards}
         .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-        .particle{position:absolute;background:#22c55e;border-radius:50%;opacity:0.2;box-shadow:0 0 6px rgba(34,197,94,0.3)}
+        .particle{position:absolute;background:#22c55e;border-radius:50%;opacity:0.2;box-shadow:0 0 6px rgba(34,197,94,0.3);will-change:transform;contain:layout style}
         @keyframes fi{to{opacity:1}}
 
         .rv{opacity:0;transform:translateY(20px);transition:all 0.6s cubic-bezier(0.16,1,0.3,1)}
@@ -193,7 +193,7 @@
     <!-- How it works -->
     <section class="rv">
         <div class="lb">How it works</div>
-        <div class="tt">A proxy that learns.</div>
+        <div class="tt">A proxy that grows.</div>
         <div class="st">Point your agent at GreenCube instead of OpenAI. Every request passes through. Every response teaches it something.</div>
     </section>
 
@@ -242,7 +242,7 @@
             <div class="tcmd"><code>gc</code><span>see your agent's brain</span></div>
             <div class="tcmd"><code>curl localhost:9000/status</code><span>one-line summary</span></div>
             <div class="tcmd"><code>curl localhost:9000/log</code><span>recent activity</span></div>
-            <div class="tcmd"><code>curl -X POST localhost:9000/feedback -d '{"rating":"down"}'</code><span>thumbs down a response</span></div>
+            <div class="tcmd"><code>curl -X POST localhost:9000/feedback -d '{"rating":"down"}'</code><span>thumbs-down a bad response. your agent won't make that mistake again.</span></div>
         </div>
     </div>
 
@@ -341,7 +341,7 @@ const ro=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.ta
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 const pts=[];
-function initP(){const c=document.getElementById('particles');const n=window.innerWidth<480?15:35;for(let i=0;i<n;i++){const e=document.createElement('div');e.className='particle';const s=1.5+Math.random()*2.5;e.style.width=e.style.height=s+'px';e.style.opacity=.12+Math.random()*.15;c.appendChild(e);pts.push({e,x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25})}}
+function initP(){const c=document.getElementById('particles');const n=window.innerWidth<480?8:20;for(let i=0;i<n;i++){const e=document.createElement('div');e.className='particle';const s=1.5+Math.random()*2.5;e.style.width=e.style.height=s+'px';e.style.opacity=.12+Math.random()*.15;c.appendChild(e);pts.push({e,x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25})}}
 function aniP(){for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=innerWidth;if(p.x>innerWidth)p.x=0;if(p.y<0)p.y=innerHeight;if(p.y>innerHeight)p.y=0;p.e.style.transform=`translate(${p.x}px,${p.y}px)`}requestAnimationFrame(aniP)}
 initP();aniP();
 
