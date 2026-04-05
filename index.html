@@ -182,7 +182,7 @@
 
     <div class="hero">
         <h1><span class="l1">your agent stops</span><span class="green">repeating mistakes</span></h1>
-        <p>GreenCube sits between your agent and the LLM. It remembers what worked, learns from failures, and <strong>stops repeating the same mistakes</strong>.</p>
+        <p>Infrastructure for AI agents to learn and grow. GreenCube sits between your agent and the LLM, tracks what works, and <strong>stops repeating mistakes</strong>.</p>
         <p class="hero-sub">For developers using OpenAI, OpenClaw, Ollama, LM Studio, or any OpenAI-compatible API.</p>
         <div class="hero-btns">
             <a href="#install" class="btn btn-g">Get started</a>
@@ -213,7 +213,7 @@
         <div class="arch-row">
             <span class="arch-arrow" style="color:#3b82f6">&darr;</span>
             <span class="arch-label">GreenCube intercepts it</span>
-            <span class="arch-desc">injects knowledge, mood, preferences</span>
+            <span class="arch-desc">injects knowledge, state, preferences</span>
         </div>
         <div class="arch-row">
             <span class="arch-arrow" style="color:#a855f7">&darr;</span>
@@ -280,12 +280,12 @@
         <div class="tl-i rv">
             <div class="tl-dot" style="border-color:#06b6d4;color:#06b6d4"></div>
             <div class="tl-d" style="color:#06b6d4">Day 7</div>
-            <div class="tl-t">It wrote a <strong>journal</strong>. It developed a <strong>curiosity</strong> about a gap in your codebase. It's been thinking between tasks on its own.</div>
+            <div class="tl-t">Daily <strong>audit entries</strong> show what changed. <strong>Gap detection</strong> flags areas the agent knows less about. Background reviews run when the agent is idle.</div>
         </div>
         <div class="tl-i rv">
             <div class="tl-dot" style="border-color:#ef4444;color:#ef4444"></div>
             <div class="tl-d" style="color:#ef4444">Day 10</div>
-            <div class="tl-t">If your agent keeps struggling with something, a <strong>specialist might spawn</strong>. A copy of itself that handles that domain. You didn't ask for it.</div>
+            <div class="tl-t">If your agent keeps struggling in one area, GreenCube <strong>spins up a focused sub-agent</strong> for that domain and routes matching tasks to it automatically.</div>
         </div>
     </div>
 
@@ -299,11 +299,11 @@
     </section>
 
     <div class="sys rv">
-        <div class="sys-c"><h4>Memory</h4><p>Facts persist across sessions. Decay scoring drops noise, keeps gold.</p></div>
-        <div class="sys-c"><h4>Self-verify</h4><p>Scores its own output 1-5. Admits mistakes. Learns from them.</p></div>
-        <div class="sys-c"><h4>Competence</h4><p>Per-domain tracking. Knows python 87%, css 43%.</p></div>
-        <div class="sys-c"><h4>Mistake prevention</h4><p>Catches known error patterns before you see them.</p></div>
-        <div class="sys-c"><h4>Spawning</h4><p>Creates specialist copies for weak domains when needed.</p></div>
+        <div class="sys-c"><h4>Memory</h4><p>Extracts facts from every task. Injects relevant ones into future requests. Decays unused entries over time.</p></div>
+        <div class="sys-c"><h4>Self-verification</h4><p>Scores every response 1-5 against the original request. Low scores drop competence and trigger retries.</p></div>
+        <div class="sys-c"><h4>Competence tracking</h4><p>Per-domain confidence from real outcomes. Knows python 87%, css 43%. Routes tasks based on actual success rates.</p></div>
+        <div class="sys-c"><h4>Mistake prevention</h4><p>Stores corrections from thumbs-down feedback. Catches matching patterns in future tasks before they fail.</p></div>
+        <div class="sys-c"><h4>Auto-routing</h4><p>When the agent keeps struggling in a domain, spins up a focused sub-agent for that domain. No user action required.</p></div>
     </div>
 
     <div class="sep"></div>
