@@ -3,509 +3,539 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GreenCube — AI that runs on your machine</title>
-  <meta name="description" content="GreenCube is a desktop app for chatting with state-of-the-art language models, running entirely on your hardware. No cloud. No data leaves your computer." />
+  <title>GreenCube — an assistant that lives on your computer</title>
+  <meta name="description" content="GreenCube runs state-of-the-art language models locally on your own hardware. Fully offline. Fully yours." />
   <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="GreenCube — AI that runs on your machine" />
-  <meta property="og:description" content="A desktop app for state-of-the-art language models, running entirely on your hardware." />
+  <meta property="og:title" content="GreenCube — an assistant that lives on your computer" />
+  <meta property="og:description" content="State-of-the-art language models, running on your own hardware. Fully offline. Fully yours." />
   <meta property="og:url" content="https://greencube.world" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GreenCube — AI that runs on your machine" />
-  <meta name="twitter:description" content="A desktop app for state-of-the-art language models, running entirely on your hardware." />
+  <meta name="twitter:title" content="GreenCube — an assistant that lives on your computer" />
+  <meta name="twitter:description" content="State-of-the-art language models, running on your own hardware." />
 
   <link rel="canonical" href="https://greencube.world" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ---------- tokens (mirroring src/styles/tokens.css) ---------- */
     :root {
-      --bg:        #F5F1E8;  /* cream — same as the app body */
-      --bg-soft:   #FBF8F0;  /* lighter cream for raised cards */
-      --bg-warm:   #F0ECE3;  /* darker cream for sidebar-ish surfaces */
-      --line:      #DDD8CE;  /* warm beige border */
+      --bg:        #F5F1E8;
+      --bg-soft:   #FBF8F0;
+      --bg-warm:   #F0ECE3;
+      --line:      #DDD8CE;
       --line-soft: #EAE3D3;
-      --hover:     #E8E1D2;
 
       --ink:       #1A1A1A;
       --ink-soft:  #555555;
-      --ink-muted: #8A8275;
+      --ink-mute:  #8A8275;
+      --ink-faint: #B8B0A0;
 
       --forest:    #1F3A2E;
       --moss:      #5B8A6E;
       --sage:      #9CB89E;
       --gold:      #C9A961;
-      --gold-soft: rgba(201, 169, 97, 0.18);
 
-      --serif:    'Fraunces', Georgia, 'Times New Roman', serif;
-      --sans:     'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --brand:    Georgia, 'Times New Roman', serif;
+      --serif:     'Fraunces', Georgia, 'Times New Roman', serif;
+      --sans:      'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-      --ease:     cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
-
-      --shadow-sm:  0 1px 2px rgba(31, 58, 46, 0.04), 0 0 0 1px rgba(221, 216, 206, 0.6);
-      --shadow-md:  0 8px 24px -8px rgba(31, 58, 46, 0.10), 0 1px 2px rgba(31, 58, 46, 0.04);
-      --shadow-lg:  0 24px 60px -16px rgba(31, 58, 46, 0.15), 0 2px 6px rgba(31, 58, 46, 0.04);
-      --glow-warm:  0 12px 40px -8px rgba(91, 138, 110, 0.35);
+      --ease:      cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* ---------- reset ---------- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-weight: 400;
-      line-height: 1.55;
+      font-variation-settings: "SOFT" 50, "opsz" 14;
+      line-height: 1.6;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
     a { color: inherit; text-decoration: none; }
     button, input { font-family: inherit; }
     img, svg { display: block; max-width: 100%; }
-    ::selection { background: var(--gold-soft); color: var(--forest); }
+    em { font-style: italic; }
+    ::selection { background: rgba(201, 169, 97, 0.28); color: var(--forest); }
 
-    /* ---------- ambient atmosphere ---------- */
-    /* a slow-drifting gradient mesh of soft moss + gold + sage,
-       blurred to feel like sunlight on linen. fixed so it parallaxes naturally. */
-    .ambience {
+    /* ---- ambient background: one quiet warm glow + paper grain ---- */
+    .ambient {
       position: fixed;
-      inset: -20%;
-      z-index: 0;
+      inset: 0;
       pointer-events: none;
-      filter: blur(80px) saturate(110%);
-      opacity: 0.65;
-      animation: drift 38s var(--ease-soft) infinite alternate;
-      will-change: transform;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 70% 0%, rgba(201, 169, 97, 0.18), transparent 55%),
+        radial-gradient(ellipse 80% 70% at 10% 110%, rgba(91, 138, 110, 0.16), transparent 55%);
     }
-    .ambience .blob {
-      position: absolute;
-      border-radius: 50%;
-      mix-blend-mode: multiply;
-    }
-    .ambience .b1 { top: -10%; left: 8%;  width: 540px; height: 540px; background: radial-gradient(circle, rgba(91, 138, 110, 0.55), transparent 65%); }
-    .ambience .b2 { top:  20%; right: -5%; width: 620px; height: 620px; background: radial-gradient(circle, rgba(201, 169, 97, 0.42), transparent 62%); }
-    .ambience .b3 { bottom: 5%; left: -8%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(156, 184, 158, 0.50), transparent 65%); }
-    .ambience .b4 { bottom: -10%; right: 18%; width: 480px; height: 480px; background: radial-gradient(circle, rgba(201, 169, 97, 0.30), transparent 60%); }
-    @keyframes drift {
-      0%   { transform: translate3d(0, 0, 0)        rotate(0deg); }
-      50%  { transform: translate3d(2%, -1.5%, 0)   rotate(3deg); }
-      100% { transform: translate3d(-1.5%, 2%, 0)   rotate(-2deg); }
-    }
-
-    /* paper-grain noise — same trick as Linear/Arc, very low opacity */
     .grain {
       position: fixed;
       inset: 0;
-      z-index: 1;
       pointer-events: none;
-      opacity: 0.04;
+      z-index: 1;
+      opacity: 0.045;
       mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ---------- layout ---------- */
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 32px;
+    /* ---- layout ---- */
+    main {
       position: relative;
       z-index: 2;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 32px;
     }
 
-    /* ---------- header ---------- */
+    /* ---- header: tiny, paged, like a letterhead ---- */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      padding: 18px 0;
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      background: rgba(245, 241, 232, 0);
-      border-bottom: 1px solid transparent;
-      transition: background 0.5s var(--ease), border-color 0.5s var(--ease);
-    }
-    header.scrolled {
-      background: rgba(245, 241, 232, 0.78);
-      border-bottom-color: var(--line);
-    }
-    header .nav {
+      position: relative;
+      z-index: 3;
+      padding: 32px 32px 0;
+      max-width: 880px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-mute);
     }
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-family: var(--brand);
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.005em;
+      gap: 11px;
       color: var(--forest);
+      font-family: var(--serif);
+      font-weight: 600;
+      font-variation-settings: "SOFT" 100, "opsz" 24;
+      font-size: 17px;
+      letter-spacing: -0.005em;
     }
-    .brand .mark {
-      width: 22px; height: 22px;
-      border: 2px solid var(--forest);
-      border-radius: 5px;
-      transition: transform 0.6s var(--ease);
+    .brand-mark {
+      width: 16px; height: 16px;
+      animation: cube-rotate 28s linear infinite;
+      transform-style: preserve-3d;
     }
-    .brand:hover .mark { transform: rotate(6deg); }
+    .brand-mark svg { width: 100%; height: 100%; overflow: visible; }
+    .brand-mark line, .brand-mark polygon {
+      stroke: var(--forest);
+      fill: none;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes cube-rotate {
+      0% { transform: rotateY(0deg) rotateX(20deg); }
+      100% { transform: rotateY(360deg) rotateX(20deg); }
+    }
+    .header-meta { font-variant-numeric: tabular-nums; }
 
-    .badge {
+    /* ---- shared: long-form prose ---- */
+    p, li { font-feature-settings: "kern", "liga", "calt"; }
+
+    /* ---- block: front-matter (date + status, like the top of a letter) ---- */
+    .front-matter {
+      padding: 96px 0 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-mute);
+    }
+    .front-matter .place {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink-soft);
+    }
+    .front-matter .pill {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 7px 14px 7px 11px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--ink-soft);
-      background: rgba(255, 255, 255, 0.55);
+      padding: 7px 13px 7px 11px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      letter-spacing: 0.02em;
-      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(4px);
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 12px;
     }
-    .badge .pulse {
+    .pill .dot {
       width: 7px; height: 7px;
-      border-radius: 50%;
       background: var(--moss);
-      box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.45);
+      border-radius: 50%;
       animation: pulse 2.6s var(--ease) infinite;
     }
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
+      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.45); }
       70% { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
       100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
     }
 
-    /* ---------- hero ---------- */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 0 100px;
-      position: relative;
+    /* ---- the opening line ---- */
+    .opening {
+      padding: 80px 0 60px;
     }
-    h1 {
+    .opening h1 {
       font-family: var(--serif);
-      font-weight: 600;
-      font-variation-settings: "SOFT" 80, "opsz" 144;
-      font-size: clamp(52px, 9vw, 120px);
-      line-height: 0.96;
-      letter-spacing: -0.035em;
-      color: var(--forest);
-      margin-bottom: 36px;
-      max-width: 14ch;
-    }
-    h1 em {
-      font-style: italic;
       font-weight: 500;
+      font-variation-settings: "SOFT" 100, "opsz" 144;
+      font-size: clamp(40px, 6.5vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--forest);
+      max-width: 16ch;
+    }
+    .opening h1 em {
+      font-style: italic;
+      font-weight: 400;
       color: var(--moss);
       font-variation-settings: "SOFT" 100, "opsz" 144;
     }
-    .lede {
-      font-size: clamp(17px, 1.45vw, 20px);
+    .opening .qualifier {
+      margin-top: 24px;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 22px);
       color: var(--ink-soft);
-      max-width: 580px;
-      margin-bottom: 48px;
-      line-height: 1.6;
+      max-width: 30ch;
     }
 
-    /* ---------- signup form ---------- */
-    .signup {
-      display: flex;
-      gap: 10px;
-      max-width: 520px;
-      flex-wrap: wrap;
-      align-items: center;
+    /* ---- thesis: a single declarative paragraph, big ---- */
+    .thesis {
+      padding: 100px 0;
+      border-top: 1px solid var(--line);
     }
-    .signup .field {
-      position: relative;
-      flex: 1 1 240px;
-      min-width: 0;
+    .thesis p {
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.35;
+      color: var(--ink);
+      max-width: 28ch;
+      font-weight: 400;
+      font-variation-settings: "SOFT" 60, "opsz" 36;
     }
-    .signup input[type=email] {
-      width: 100%;
-      height: 52px;
-      padding: 0 18px;
+    .thesis p .accent {
+      color: var(--forest);
+      font-weight: 500;
+    }
+    .thesis .signature {
+      margin-top: 36px;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-mute);
+      text-align: right;
+      max-width: 44ch;
+      margin-left: auto;
+    }
+
+    /* ---- belief blocks: split rhythm. left one turn, right the next. ---- */
+    .belief {
+      padding: 88px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .belief.flipped { grid-template-columns: 1fr 1fr; }
+    .belief.flipped .body { order: -1; text-align: right; }
+    .belief.flipped h3 { text-align: right; }
+
+    .belief h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-variation-settings: "SOFT" 90, "opsz" 144;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--forest);
+    }
+    .belief h3 em {
+      font-style: italic;
+      color: var(--moss);
+      font-weight: 400;
+    }
+    .belief p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 38ch;
+      font-variation-settings: "SOFT" 50, "opsz" 17;
+    }
+    .belief.flipped p { margin-left: auto; }
+
+    /* the recurring rotating wireframe cube — sits in the empty column */
+    .cube-aside {
+      width: 200px;
+      height: 200px;
+      margin: 8px auto 0;
+      animation: cube-rotate 36s linear infinite;
+      transform-style: preserve-3d;
+      opacity: 0.7;
+    }
+    .cube-aside svg { width: 100%; height: 100%; overflow: visible; }
+    .cube-aside line, .cube-aside polygon {
+      stroke: var(--moss);
+      fill: none;
+      stroke-width: 1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .cube-aside polygon {
+      fill: rgba(91, 138, 110, 0.04);
+    }
+
+    /* ---- specs: tabular footnote ---- */
+    .specs {
+      padding: 80px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .specs .label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 28px;
+    }
+    .specs dl {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 14px 32px;
+      max-width: 540px;
+      font-size: 16px;
+    }
+    .specs dt {
+      color: var(--ink-mute);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .specs dd {
+      color: var(--ink);
+      font-feature-settings: "tnum";
+    }
+
+    /* ---- steps: as a numbered ordered list, editorial ---- */
+    .steps {
+      padding: 96px 0;
+    }
+    .steps .label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 36px;
+    }
+    .steps ol {
+      list-style: none;
+      counter-reset: step;
+    }
+    .steps li {
+      counter-increment: step;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line-soft);
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 28px;
+      align-items: baseline;
+      transition: padding-left 0.5s var(--ease);
+    }
+    .steps li:hover { padding-left: 8px; }
+    .steps li:last-child { border-bottom: none; }
+    .steps li::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 30px;
+      color: var(--gold);
+      font-variation-settings: "opsz" 144;
+    }
+    .steps .step-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-variation-settings: "SOFT" 80, "opsz" 36;
+      font-size: clamp(20px, 2.4vw, 26px);
+      color: var(--forest);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .steps .step-detail {
+      color: var(--ink-soft);
       font-size: 15px;
+      line-height: 1.55;
+      max-width: 52ch;
+    }
+
+    /* ---- closing letter ---- */
+    .closing {
+      padding: 96px 0 32px;
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+    .closing p {
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--ink);
+      margin-bottom: 18px;
+      font-variation-settings: "SOFT" 50, "opsz" 18;
+    }
+    .closing p.aside {
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ---- waitlist: small, in-line, like a stamped envelope at the bottom of a letter ---- */
+    .waitlist {
+      padding: 24px 0 96px;
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+    .waitlist .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .waitlist input[type=email] {
+      flex: 1 1 220px;
+      min-width: 0;
+      height: 48px;
+      padding: 0 16px;
+      font-family: var(--sans);
+      font-size: 14px;
       color: var(--ink);
       background: var(--bg-soft);
       border: 1.5px solid var(--line);
-      border-radius: 12px;
+      border-radius: 10px;
       outline: none;
       transition: border-color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.3s var(--ease);
     }
-    .signup input[type=email]::placeholder { color: var(--ink-muted); }
-    .signup input[type=email]:hover { border-color: var(--sage); }
-    .signup input[type=email]:focus {
+    .waitlist input[type=email]::placeholder { color: var(--ink-faint); }
+    .waitlist input[type=email]:hover { border-color: var(--sage); }
+    .waitlist input[type=email]:focus {
       border-color: var(--moss);
       background: #fff;
       box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10);
     }
-    .signup button {
-      height: 52px;
-      padding: 0 26px;
-      font-size: 15px;
-      font-weight: 600;
+    .waitlist button {
+      height: 48px;
+      padding: 0 22px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
       color: #fff;
       background: var(--forest);
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.2s var(--ease), box-shadow 0.3s var(--ease), background 0.2s var(--ease);
+      transition: transform 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.3s var(--ease);
       white-space: nowrap;
     }
-    .signup button:hover {
+    .waitlist button:hover {
       transform: translateY(-1px);
       background: #2a4d3d;
-      box-shadow: var(--glow-warm);
+      box-shadow: 0 8px 28px -8px rgba(91, 138, 110, 0.4);
     }
-    .signup button:active { transform: translateY(0); }
-    .signup button:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
-    .signup .status {
-      width: 100%;
+    .waitlist button:active { transform: translateY(0); }
+    .waitlist button:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
+    .waitlist .status {
       min-height: 18px;
-      margin-top: 12px;
+      margin-top: 14px;
+      font-family: var(--sans);
       font-size: 13px;
       color: var(--moss);
     }
-    .signup .status.error { color: #B33A3A; }
-
-    /* ---------- sections ---------- */
-    section.block {
-      padding: 160px 0;
-      position: relative;
-    }
-    section.block::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: min(720px, 80%);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line) 30%, var(--line) 70%, transparent);
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--ink-muted);
-      margin-bottom: 28px;
-      font-weight: 500;
-    }
-    .eyebrow::before {
-      content: '';
-      width: 22px; height: 1px;
-      background: var(--gold);
-    }
-    h2 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-variation-settings: "SOFT" 80, "opsz" 144;
-      font-size: clamp(36px, 5.4vw, 64px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--forest);
-      margin-bottom: 80px;
-      max-width: 18ch;
-    }
-
-    /* ---------- features grid ---------- */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-    .feature {
-      position: relative;
-      padding: 44px 36px;
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
-      overflow: hidden;
-    }
-    .feature::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      background: radial-gradient(circle at top right, rgba(201, 169, 97, 0.08), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s var(--ease);
-      pointer-events: none;
-    }
-    .feature:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--sage);
-    }
-    .feature:hover::after { opacity: 1; }
-    .feature .num {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      margin-bottom: 24px;
-      padding: 4px 9px;
-      background: var(--gold-soft);
-      border-radius: 4px;
-    }
-    .feature h3 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-variation-settings: "SOFT" 100, "opsz" 144;
-      font-size: 28px;
-      line-height: 1.15;
-      letter-spacing: -0.018em;
-      color: var(--forest);
-      margin-bottom: 14px;
-    }
-    .feature p {
-      color: var(--ink-soft);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    /* ---------- how-it-works steps ---------- */
-    .steps {
-      position: relative;
-      padding-left: 56px;
-    }
-    .steps::before {
-      content: '';
-      position: absolute;
-      left: 21px;
-      top: 24px;
-      bottom: 24px;
-      width: 1.5px;
-      background: linear-gradient(to bottom, var(--sage), var(--gold) 50%, var(--sage));
-      opacity: 0.5;
-    }
-    .step {
-      position: relative;
-      padding: 28px 0 32px;
-    }
-    .step + .step { border-top: 1px solid var(--line-soft); }
-    .step .dot {
-      position: absolute;
-      left: -56px;
-      top: 32px;
-      width: 44px; height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-soft);
-      border: 1.5px solid var(--line);
-      border-radius: 50%;
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--forest);
-      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
-    }
-    .step:hover .dot {
-      border-color: var(--moss);
-      background: #fff;
-    }
-    .step h3 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-variation-settings: "SOFT" 80, "opsz" 144;
-      font-size: clamp(24px, 3vw, 32px);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--forest);
-      margin-bottom: 8px;
-    }
-    .step p {
-      color: var(--ink-soft);
-      font-size: 16px;
-      max-width: 56ch;
-    }
-
-    /* ---------- final CTA ---------- */
-    .final {
-      padding: 200px 0;
-      text-align: center;
-      position: relative;
-    }
-    .final::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(91, 138, 110, 0.08), transparent 60%);
-      pointer-events: none;
-    }
-    .final h2 { margin: 0 auto 28px; max-width: none; }
-    .final .lede { margin: 0 auto 48px; }
-    .final .signup { margin: 0 auto; justify-content: center; }
-
-    /* ---------- footer ---------- */
-    footer {
-      padding: 48px 0 56px;
-      border-top: 1px solid var(--line);
-      color: var(--ink-muted);
+    .waitlist .status.error { color: #B33A3A; }
+    .waitlist .small {
+      margin-top: 8px;
       font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mute);
     }
-    footer .row {
+
+    /* ---- signature ---- */
+    .signoff {
+      padding: 16px 0 80px;
+      text-align: right;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+
+    /* ---- footer: tiny, dated ---- */
+    footer {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 32px 56px;
+      border-top: 1px solid var(--line);
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink-mute);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
+      position: relative;
+      z-index: 2;
     }
-    footer a { color: var(--ink-muted); transition: color 0.2s var(--ease); }
+    footer a { transition: color 0.2s var(--ease); }
     footer a:hover { color: var(--forest); }
-    footer .links { display: flex; gap: 28px; }
+    footer .links { display: flex; gap: 24px; }
 
-    /* ---------- reveal-on-scroll ---------- */
+    /* ---- reveal-on-scroll ---- */
     .rv {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+      transform: translateY(20px);
+      transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
     }
     .rv.v {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* ---------- prefers-reduced-motion ---------- */
     @media (prefers-reduced-motion: reduce) {
       .rv { opacity: 1; transform: none; transition: none; }
-      .ambience { animation: none; }
-      .badge .pulse { animation: none; }
+      .brand-mark, .cube-aside { animation: none; }
+      .pill .dot { animation: none; }
       html { scroll-behavior: auto; }
     }
 
-    /* ---------- mobile ---------- */
+    /* ---- mobile ---- */
     @media (max-width: 720px) {
-      .wrap { padding: 0 22px; }
-      section.block { padding: 110px 0; }
-      .hero { padding: 110px 0 80px; }
-      h1 { margin-bottom: 28px; }
-      h2 { margin-bottom: 56px; }
-      .features { grid-template-columns: 1fr; }
-      .feature { padding: 32px 26px; }
-      .feature h3 { font-size: 24px; }
-      .steps { padding-left: 44px; }
-      .steps::before { left: 17px; }
-      .step .dot { left: -44px; width: 36px; height: 36px; font-size: 13px; }
-      .final { padding: 120px 0; }
-      footer .row { flex-direction: column; align-items: flex-start; }
+      header { padding: 20px 22px 0; }
+      main { padding: 0 22px; }
+      footer { padding: 24px 22px 40px; }
+      .front-matter { padding-top: 56px; }
+      .opening { padding: 56px 0 40px; }
+      .thesis { padding: 64px 0; }
+      .belief, .belief.flipped { grid-template-columns: 1fr; gap: 32px; padding: 56px 0; }
+      .belief.flipped .body { order: 0; text-align: left; }
+      .belief.flipped h3 { text-align: left; }
+      .belief.flipped p { margin-left: 0; }
+      .cube-aside { width: 140px; height: 140px; opacity: 0.5; }
+      .specs { padding: 56px 0; }
+      .specs dl { grid-template-columns: 1fr; gap: 4px 0; }
+      .specs dt { margin-top: 14px; }
+      .steps { padding: 64px 0; }
+      .steps li { grid-template-columns: 44px 1fr; gap: 18px; }
+      .closing, .waitlist { padding-left: 0; padding-right: 0; }
+      .closing { padding-top: 64px; }
     }
   </style>
 </head>
@@ -515,125 +545,175 @@
   <style>.rv { opacity: 1 !important; transform: none !important; }</style>
 </noscript>
 
-<div class="ambience" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="blob b4"></div>
-</div>
+<div class="ambient" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
-<header id="header">
-  <div class="wrap nav">
-    <a href="/" class="brand" aria-label="GreenCube home">
-      <span class="mark" aria-hidden="true"></span>
-      <span>GreenCube</span>
-    </a>
-    <span class="badge"><span class="pulse" aria-hidden="true"></span>Coming soon</span>
-  </div>
+<header>
+  <a href="/" class="brand" aria-label="GreenCube home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="-40 -40 80 80">
+        <!-- back face -->
+        <polygon points="-22,-22 22,-22 22,22 -22,22" opacity="0.4"/>
+        <!-- front face, slightly offset to fake 3D -->
+        <polygon points="-15,-30 30,-15 30,30 -15,30 -15,-30" />
+        <!-- connectors -->
+        <line x1="-22" y1="-22" x2="-15" y2="-30"/>
+        <line x1="22"  y1="-22" x2="30"  y2="-15"/>
+        <line x1="22"  y1="22"  x2="30"  y2="30"/>
+        <line x1="-22" y1="22"  x2="-15" y2="30"/>
+      </svg>
+    </span>
+    <span>GreenCube</span>
+  </a>
+  <span class="header-meta">No. 01 — Spring 2026</span>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <h1 class="rv">AI that runs on <em>your machine.</em></h1>
-    <p class="lede rv">A desktop app for state-of-the-art language models — running entirely on your hardware. No cloud. No accounts. No data leaving your computer.</p>
-    <form class="signup rv" id="hero-form" novalidate>
-      <div class="field">
-        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
-      </div>
-      <button type="submit">Get early access</button>
-      <div class="status" id="hero-status" role="status" aria-live="polite"></div>
-    </form>
-  </div>
-</section>
+<main>
 
-<section class="block">
-  <div class="wrap">
-    <div class="eyebrow rv">Why GreenCube</div>
-    <h2 class="rv">Built for the way computers should work.</h2>
-    <div class="features">
-      <article class="feature rv">
-        <div class="num">01</div>
-        <h3>Runs on your hardware.</h3>
-        <p>Open-weights language models execute directly on your CPU and GPU. No servers, no API keys, no monthly invoices.</p>
-      </article>
-      <article class="feature rv">
-        <div class="num">02</div>
-        <h3>Stays on your computer.</h3>
-        <p>Your conversations never touch the network. We can't read them. Nobody can.</p>
-      </article>
-      <article class="feature rv">
-        <div class="num">03</div>
-        <h3>Picks its own model.</h3>
-        <p>GreenCube reads your hardware and downloads the best open model that fits — automatically.</p>
-      </article>
-      <article class="feature rv">
-        <div class="num">04</div>
-        <h3>No quotas.</h3>
-        <p>Chat as long as you want. Run as long as you want. The only ceiling is your machine.</p>
-      </article>
+  <!-- 1. front matter — like the top of a letter -->
+  <section class="front-matter rv">
+    <span class="place">A note on what we are building.</span>
+    <span class="pill"><span class="dot" aria-hidden="true"></span>Coming soon</span>
+  </section>
+
+  <!-- 2. the opening line -->
+  <section class="opening">
+    <h1 class="rv">An assistant that lives on <em>your computer.</em></h1>
+    <p class="qualifier rv">Not on someone else's.</p>
+  </section>
+
+  <!-- 3. the thesis -->
+  <section class="thesis">
+    <p class="rv">
+      Right now, talking to AI means talking to a server somewhere far away &mdash;
+      logged, metered, and <span class="accent">never quite yours.</span>
+    </p>
+    <p class="signature rv">We don't think it has to be that way.</p>
+  </section>
+
+  <!-- 4. belief one: privacy -->
+  <section class="belief">
+    <h3 class="rv">Your conversations<br><em>belong to you.</em></h3>
+    <div class="body">
+      <p class="rv">
+        GreenCube is a desktop app. The model runs on your CPU and GPU, the messages
+        sit on your hard drive, and the network never has to be involved. We can't
+        read what you write to it. Nobody can.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="block">
-  <div class="wrap">
-    <div class="eyebrow rv">How it works</div>
-    <h2 class="rv">Three steps. That's the whole thing.</h2>
-    <div class="steps">
-      <div class="step rv">
-        <div class="dot" aria-hidden="true">01</div>
-        <h3>Download GreenCube.</h3>
-        <p>One installer for Windows. Mac and Linux are next.</p>
-      </div>
-      <div class="step rv">
-        <div class="dot" aria-hidden="true">02</div>
-        <h3>It picks your model.</h3>
-        <p>GreenCube checks your RAM and GPU, pulls the right open-weights model, and gets it ready.</p>
-      </div>
-      <div class="step rv">
-        <div class="dot" aria-hidden="true">03</div>
-        <h3>Open it. Chat.</h3>
-        <p>That's it. Code, write, think — all running locally, even with the network unplugged.</p>
+  <!-- 5. belief two: capability — flipped, with the cube as visual companion -->
+  <section class="belief flipped">
+    <h3 class="rv">Today's open models are<br><em>sharper than last year's secrets.</em></h3>
+    <div class="body">
+      <p class="rv">
+        The good news is the model is no longer the bottleneck. A 5.7&nbsp;GB file
+        running locally now matches what last year's frontier models did over the
+        wire &mdash; for code, for writing, for thinking out loud. You don't need
+        the cloud anymore. You just need the file.
+      </p>
+      <div class="cube-aside rv" aria-hidden="true">
+        <svg viewBox="-50 -50 100 100">
+          <polygon points="-30,-30 30,-30 30,30 -30,30" opacity="0.5"/>
+          <polygon points="-20,-40 40,-20 40,40 -20,40 -20,-40"/>
+          <line x1="-30" y1="-30" x2="-20" y2="-40"/>
+          <line x1="30"  y1="-30" x2="40"  y2="-20"/>
+          <line x1="30"  y1="30"  x2="40"  y2="40"/>
+          <line x1="-30" y1="30"  x2="-20" y2="40"/>
+        </svg>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="final">
-  <div class="wrap">
-    <h2 class="rv">Be early.</h2>
-    <p class="lede rv">We'll send a single email when GreenCube goes live. No newsletter, no marketing.</p>
-    <form class="signup rv" id="cta-form" novalidate>
-      <div class="field">
-        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
-      </div>
-      <button type="submit">Join the waitlist</button>
-      <div class="status" id="cta-status" role="status" aria-live="polite"></div>
+  <!-- 6. belief three: simplicity -->
+  <section class="belief">
+    <h3 class="rv">It picks the right model.<br><em>You just open it.</em></h3>
+    <div class="body">
+      <p class="rv">
+        On first launch GreenCube reads your hardware &mdash; how much RAM you have,
+        what GPU you're running &mdash; and downloads the best open model that
+        fits. No settings to tune. No tier to choose. Open the app. Start writing.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. the specs — almost a footnote -->
+  <section class="specs rv">
+    <div class="label">Particulars</div>
+    <dl>
+      <dt>Platform</dt><dd>Windows. macOS and Linux to follow.</dd>
+      <dt>Memory</dt><dd>8&nbsp;GB and up</dd>
+      <dt>Storage</dt><dd>About 6&nbsp;GB on disk</dd>
+      <dt>Network</dt><dd>Only to download the model. Then never again.</dd>
+      <dt>Models</dt><dd>Phi-4 Mini, Qwen3.5, Gemma 4 &mdash; all open weights</dd>
+    </dl>
+  </section>
+
+  <!-- 8. how it works -->
+  <section class="steps">
+    <div class="label rv">How it works</div>
+    <ol>
+      <li class="rv">
+        <div>
+          <span class="step-title">Download GreenCube.</span>
+          <span class="step-detail">One installer. About 60&nbsp;MB before any model is fetched.</span>
+        </div>
+      </li>
+      <li class="rv">
+        <div>
+          <span class="step-title">It picks your model.</span>
+          <span class="step-detail">Based on your RAM and GPU. The first launch pulls the file; after that you're offline forever if you want.</span>
+        </div>
+      </li>
+      <li class="rv">
+        <div>
+          <span class="step-title">Open it. Write.</span>
+          <span class="step-detail">Code, draft, think. No accounts, no quotas, no pings home.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 9. the closing letter -->
+  <section class="closing">
+    <p class="rv">
+      GreenCube is being built quietly, by a small team that thinks the future of
+      personal AI shouldn't be rented from anyone. We're getting close.
+    </p>
+    <p class="rv aside">
+      If that resonates, leave your email below. We'll send a single message when
+      it's ready. No newsletter, no marketing, no follow-up.
+    </p>
+  </section>
+
+  <!-- 10. the waitlist — small, inline, like signing the bottom of a letter -->
+  <section class="waitlist rv">
+    <form class="row" id="form" novalidate>
+      <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit">Be told when it's live</button>
     </form>
-  </div>
-</section>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <p class="small">One email. Then silence.</p>
+  </section>
+
+  <!-- 11. signoff -->
+  <section class="signoff rv">
+    &mdash; The GreenCube team
+  </section>
+
+</main>
 
 <footer>
-  <div class="wrap row">
-    <div>© 2026 GreenCube</div>
-    <nav class="links" aria-label="Footer">
-      <a href="mailto:team@greencube.world">Contact</a>
-      <a href="/privacy">Privacy</a>
-    </nav>
-  </div>
+  <div>© 2026 GreenCube</div>
+  <nav class="links" aria-label="Footer">
+    <a href="mailto:team@greencube.world">team@greencube.world</a>
+    <a href="/privacy">Privacy</a>
+  </nav>
 </footer>
 
 <script>
-  // Header backdrop on scroll.
-  (() => {
-    const h = document.getElementById('header');
-    const onScroll = () => h.classList.toggle('scrolled', window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  // Reveal-on-scroll with per-section stagger.
+  // Reveal-on-scroll with per-block stagger.
   (() => {
     const els = document.querySelectorAll('.rv');
     const io = new IntersectionObserver((entries) => {
@@ -644,43 +724,18 @@
         }
       }
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
     els.forEach((el) => {
       const section = el.closest('section, header, footer');
       const localIndex = section
         ? Array.prototype.indexOf.call(section.querySelectorAll('.rv'), el)
         : 0;
-      el.style.transitionDelay = Math.min(localIndex, 6) * 80 + 'ms';
+      el.style.transitionDelay = Math.min(localIndex, 5) * 110 + 'ms';
       io.observe(el);
     });
   })();
 
-  // Gentle parallax on the ambient gradient mesh — couple of pixels of movement
-  // per scroll, smoothed via requestAnimationFrame so it never jitters.
-  (() => {
-    const ambience = document.querySelector('.ambience');
-    if (!ambience || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let target = 0, current = 0, raf = 0;
-    const onScroll = () => {
-      target = window.scrollY * 0.04;
-      if (!raf) raf = requestAnimationFrame(loop);
-    };
-    const loop = () => {
-      current += (target - current) * 0.08;
-      ambience.style.setProperty('--py', current.toFixed(2) + 'px');
-      ambience.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
-      if (Math.abs(target - current) > 0.05) {
-        raf = requestAnimationFrame(loop);
-      } else {
-        raf = 0;
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-
-  // Waitlist form handler.
-  // No backend yet — submissions held in localStorage. Replace `submitToBackend`
-  // when wiring to Resend / Mailchimp / Formspark / your own /api/waitlist.
+  // Waitlist handler. Local-only for now — replace `submitToBackend` with a
+  // POST to your real waitlist endpoint when one exists.
   (() => {
     const STORAGE_KEY = 'greencube_waitlist';
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -694,50 +749,45 @@
       return { ok: true };
     }
 
-    function wire(formId, statusId) {
-      const form = document.getElementById(formId);
-      const status = document.getElementById(statusId);
-      if (!form) return;
-      const input = form.querySelector('input[type=email]');
-      const button = form.querySelector('button');
+    const form = document.getElementById('form');
+    const status = document.getElementById('status');
+    if (!form) return;
+    const input = form.querySelector('input[type=email]');
+    const button = form.querySelector('button');
 
-      form.addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        const email = (input.value || '').trim().toLowerCase();
-        status.classList.remove('error');
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const email = (input.value || '').trim().toLowerCase();
+      status.classList.remove('error');
 
-        if (!EMAIL_RE.test(email)) {
-          status.textContent = 'That email looks off — mind double-checking?';
-          status.classList.add('error');
-          input.focus();
-          return;
-        }
+      if (!EMAIL_RE.test(email)) {
+        status.textContent = 'That email looks off — mind double-checking?';
+        status.classList.add('error');
+        input.focus();
+        return;
+      }
 
-        button.disabled = true;
-        const prev = button.textContent;
-        button.textContent = 'Saving…';
-        try {
-          const res = await submitToBackend(email);
-          if (res && res.ok) {
-            status.textContent = "You're on the list. We'll email when it's live.";
-            input.value = '';
-          } else {
-            status.textContent = "Couldn't save that — try again in a moment.";
-            status.classList.add('error');
-            button.disabled = false;
-            button.textContent = prev;
-          }
-        } catch (_) {
+      button.disabled = true;
+      const prev = button.textContent;
+      button.textContent = 'Saving…';
+      try {
+        const res = await submitToBackend(email);
+        if (res && res.ok) {
+          status.textContent = "You're on the list. We'll write when it's live.";
+          input.value = '';
+        } else {
           status.textContent = "Couldn't save that — try again in a moment.";
           status.classList.add('error');
           button.disabled = false;
           button.textContent = prev;
         }
-      });
-    }
-
-    wire('hero-form', 'hero-status');
-    wire('cta-form', 'cta-status');
+      } catch (_) {
+        status.textContent = "Couldn't save that — try again in a moment.";
+        status.classList.add('error');
+        button.disabled = false;
+        button.textContent = prev;
+      }
+    });
   })();
 </script>
 
