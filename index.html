@@ -3,70 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>GreenCube — Specimen №01</title>
-  <meta name="description" content="GreenCube is a desktop app that runs state-of-the-art language models locally on your own hardware. Catalogued, curated, and coming soon." />
-  <meta name="theme-color" content="#0F2118" />
+  <title>GreenCube — your AI assistant, on your computer</title>
+  <meta name="description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
+  <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="GreenCube — Specimen №01" />
-  <meta property="og:description" content="An AI that lives where you do. Catalogued, curated, and coming soon." />
+  <meta property="og:title" content="GreenCube — your AI assistant, on your computer" />
+  <meta property="og:description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
   <meta property="og:url" content="https://greencube.world" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GreenCube — Specimen №01" />
-  <meta name="twitter:description" content="An AI that lives where you do." />
+  <meta name="twitter:title" content="GreenCube — your AI assistant, on your computer" />
+  <meta name="twitter:description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
 
   <link rel="canonical" href="https://greencube.world" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%23C9A961' stroke-width='3'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
   <!-- pre-paint: hide body until fonts load (kills FOUT stripes) -->
   <style>
-    html { background: #0F2118; }
+    html { background: #F5F1E8; }
     body { opacity: 0; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     body.fonts-ready { opacity: 1; }
   </style>
 
   <style>
-    /* =========================================================
-       tokens — borrowed from src/styles/tokens.css then extended
-       ========================================================= */
+    /* ============== tokens (mirrors src/styles/tokens.css) ============== */
     :root {
-      --paper:        #F5F1E8;       /* warm cream — body */
-      --paper-soft:   #FBF8F0;
-      --paper-warm:   #F0ECE3;
+      --paper:      #F5F1E8;
+      --paper-soft: #FBF8F0;
+      --paper-warm: #F0ECE3;
+
+      --night:      #15281F;
+      --night-2:    #0F2118;
+      --forest:     #1F3A2E;
+      --moss:       #5B8A6E;
+      --sage:       #9CB89E;
+      --gold:       #C9A961;
+      --gold-warm:  #D4B575;
+
       --ink:          #1A1A1A;
       --ink-soft:     #555555;
       --ink-mute:     #8A8275;
       --ink-faint:    #B8B0A0;
       --line:         #DDD8CE;
-
-      --night:        #0F2118;       /* deepest forest — cover */
-      --night-2:      #15281F;
-      --forest:       #1F3A2E;
-      --moss:         #5B8A6E;
-      --sage:         #9CB89E;
-      --gold:         #C9A961;
-      --gold-warm:    #D4B575;
-
       --on-dark:      #F5F1E8;
       --on-dark-soft: rgba(245, 241, 232, 0.66);
       --on-dark-mute: rgba(245, 241, 232, 0.40);
       --on-dark-line: rgba(245, 241, 232, 0.10);
 
-      --serif:        'Instrument Serif', 'Times New Roman', Georgia, serif;
-      --sans:         'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --mono:         'Geist Mono', ui-monospace, "SF Mono", Menlo, monospace;
+      --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-quint:   cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* =========================================================
-       reset + base
-       ========================================================= */
+    /* ============== reset + base ============== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
       -webkit-font-smoothing: antialiased;
@@ -88,45 +83,30 @@
     em { font-style: italic; }
     ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
 
-    /* =========================================================
-       grain — multiply blend, fixed
-       ========================================================= */
+    /* ============== fixed overlays ============== */
     .grain {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.06;
-      mix-blend-mode: multiply;
+      position: fixed; inset: 0;
+      z-index: 1; pointer-events: none;
+      opacity: 0.05; mix-blend-mode: multiply;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
-
-    /* =========================================================
-       scroll progress (gold thread)
-       ========================================================= */
     .progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 1.5px;
-      width: 0%;
+      position: fixed; top: 0; left: 0;
+      height: 1.5px; width: 0%;
       background: linear-gradient(90deg, var(--moss), var(--gold));
-      z-index: 200;
-      pointer-events: none;
-      transition: opacity 0.3s var(--ease-out);
+      z-index: 200; pointer-events: none;
     }
 
-    /* =========================================================
-       header — letterhead. Updates label by section.
-       ========================================================= */
+    /* ============== header ============== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 22px 32px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
       transition: background 0.5s var(--ease-out),
                   border-color 0.5s var(--ease-out),
                   backdrop-filter 0.5s var(--ease-out),
@@ -138,13 +118,11 @@
     header.scrolled {
       backdrop-filter: saturate(140%) blur(14px);
       -webkit-backdrop-filter: saturate(140%) blur(14px);
-      background: rgba(245, 241, 232, 0.72);
+      background: rgba(245, 241, 232, 0.78);
       border-bottom-color: var(--line);
       padding: 14px 32px;
     }
-    header.dark {
-      color: var(--on-dark);
-    }
+    header.dark { color: var(--on-dark); }
     header.dark.scrolled {
       background: rgba(15, 33, 24, 0.72);
       border-bottom-color: var(--on-dark-line);
@@ -160,56 +138,45 @@
     .brand .mark {
       width: 16px; height: 16px;
       border: 1.5px solid currentColor;
-      border-radius: 3px;
+      border-radius: 4px;
       animation: brand-spin 14s linear infinite;
     }
     @keyframes brand-spin {
       from { transform: rotate(0deg); }
       to   { transform: rotate(360deg); }
     }
-    .header-mid {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.7;
-      transition: opacity 0.5s var(--ease-out);
-      white-space: nowrap;
-    }
-    .header-end {
-      justify-self: end;
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 6px 12px 6px 10px;
+      padding: 7px 13px 7px 11px;
       border: 1px solid currentColor;
       border-radius: 999px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.7;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.78;
+      letter-spacing: 0.005em;
     }
-    .header-end .dot {
-      width: 6px; height: 6px;
-      background: var(--gold);
+    .pill .dot {
+      width: 7px; height: 7px;
+      background: var(--moss);
       border-radius: 50%;
       animation: pulse 2.6s var(--ease-out) infinite;
     }
+    header.dark .pill .dot { background: var(--gold); }
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0.5); }
-      70% { box-shadow: 0 0 0 8px rgba(201, 169, 97, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
+      70% { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
     }
 
-    /* =========================================================
-       layout primitives
-       ========================================================= */
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 36px; }
-    .narrow { max-width: 720px; margin: 0 auto; padding: 0 36px; }
+    /* ============== layout primitives ============== */
+    .wrap   { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 880px;  margin: 0 auto; padding: 0 32px; }
+
     .eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--ink-mute);
@@ -220,635 +187,476 @@
     .eyebrow::before {
       content: '';
       width: 22px; height: 1px;
-      background: currentColor;
-      opacity: 0.55;
+      background: var(--gold);
     }
     .dark-section .eyebrow { color: var(--on-dark-mute); }
 
-    /* =========================================================
-       I. cover — dark, the cube hatches, brand mark revealed
-       ========================================================= */
-    .cover {
+    /* ============== hero ============== */
+    .hero {
       position: relative;
       min-height: 100vh;
-      background: var(--night);
-      color: var(--on-dark);
-      display: grid;
-      grid-template-rows: 1fr auto;
+      padding: 180px 0 100px;
+      display: flex;
+      align-items: center;
       overflow: hidden;
     }
-    .cover::before {
+    .hero::before {
       content: '';
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(ellipse 60% 50% at 50% 38%, rgba(201,169,97,0.18), transparent 55%),
-        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(31,58,46,0.7), transparent 60%);
-      pointer-events: none;
+        radial-gradient(ellipse 70% 50% at 78% 18%, rgba(201, 169, 97, 0.24), transparent 55%),
+        radial-gradient(ellipse 80% 60% at 14% 95%, rgba(91, 138, 110, 0.18), transparent 55%);
     }
-    .cover-inner {
-      align-self: center;
-      padding: 140px 36px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 56px;
-      text-align: center;
-      position: relative;
-    }
-    .cover .specimen-line {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--on-dark-mute);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .cover .specimen-line .rule {
-      display: inline-block;
-      width: 36px; height: 1px;
-      background: var(--gold);
-      opacity: 0.7;
-    }
-
-    /* the hatching cube — CSS 3D, front face peels open at first paint */
-    .specimen {
-      width: clamp(160px, 22vw, 220px);
-      height: clamp(160px, 22vw, 220px);
-      position: relative;
-      perspective: 900px;
-    }
-    .specimen .cube {
-      width: 100%; height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: cube-drift 18s var(--ease-out) infinite alternate;
-      transform: rotateX(-22deg) rotateY(-18deg);
-    }
-    @keyframes cube-drift {
-      0%   { transform: rotateX(-22deg) rotateY(-18deg); }
-      100% { transform: rotateX(-12deg) rotateY(22deg); }
-    }
-    .specimen .face {
-      position: absolute;
-      inset: 0;
-      border: 1.5px solid var(--gold);
-      background: rgba(201, 169, 97, 0.04);
-      transition: opacity 0.6s var(--ease-out);
-    }
-    .specimen .f { transform: translateZ(calc(50% * 1)); }
-    .specimen .b { transform: rotateY(180deg) translateZ(calc(50% * 1)); }
-    .specimen .r { transform: rotateY(90deg)  translateZ(calc(50% * 1)); }
-    .specimen .l { transform: rotateY(-90deg) translateZ(calc(50% * 1)); }
-    .specimen .t { transform: rotateX(90deg)  translateZ(calc(50% * 1)); }
-    .specimen .d { transform: rotateX(-90deg) translateZ(calc(50% * 1)); }
-
-    /* the lid (front face) hatches open by rotating up at the top edge */
-    .specimen .lid {
-      transform-origin: 50% 0%;
-      transition: transform 1.6s cubic-bezier(0.7, 0, 0.2, 1),
-                  background 1.6s cubic-bezier(0.7, 0, 0.2, 1),
-                  border-color 1.6s cubic-bezier(0.7, 0, 0.2, 1);
-    }
-    .specimen.open .lid {
-      transform: rotateX(-110deg) translateZ(calc(50% * 1));
-      background: rgba(201, 169, 97, 0.08);
-    }
-
-    /* the brand mark — revealed inside the cube once the lid opens */
-    .specimen .core {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateZ(0px) scale(0.9);
-      transition: opacity 1s var(--ease-out) 0.6s, transform 1s var(--ease-out) 0.6s;
-    }
-    .specimen.open .core {
-      opacity: 1;
-      transform: translateZ(0px) scale(1);
-    }
-    .specimen .core .glyph {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 8em;
-      line-height: 1;
-      color: var(--gold);
-      text-shadow: 0 0 40px rgba(201, 169, 97, 0.55);
-    }
-
-    .cover h1 {
+    .hero h1 {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(40px, 6.6vw, 86px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--on-dark);
-      max-width: 18ch;
+      font-size: clamp(56px, 11vw, 156px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: var(--forest);
+      max-width: 14ch;
+      margin-bottom: 40px;
     }
-    .cover h1 .mark-non {
+    .hero h1 .non-italic {
       font-style: normal;
       font-family: var(--sans);
       font-weight: 500;
       letter-spacing: -0.02em;
-      font-size: 0.78em;
-      color: var(--gold);
-    }
-    .cover .meta {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--on-dark-mute);
-      max-width: 60ch;
-    }
-    .cover .meta .sep { color: var(--gold); margin: 0 8px; }
-
-    .cover-foot {
-      padding: 32px 36px 36px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--on-dark-mute);
-      position: relative;
-      z-index: 2;
-    }
-    .scroll-cue {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .scroll-cue .vline {
-      display: inline-block;
-      width: 1px; height: 22px;
-      background: var(--gold);
-      animation: vline-shift 2.4s var(--ease-out) infinite;
-      transform-origin: top;
-    }
-    @keyframes vline-shift {
-      0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
-      50%      { transform: scaleY(1);   opacity: 1; }
-    }
-
-    /* =========================================================
-       II. examination — the cube rotates while four blueprint
-       labels animate in around it
-       ========================================================= */
-    .exam {
-      position: relative;
-      background: var(--paper);
-      padding: 160px 0 200px;
-      overflow: hidden;
-    }
-    .exam::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 95% 0%, rgba(201,169,97,0.16), transparent 55%),
-        radial-gradient(ellipse 70% 60% at -5% 100%, rgba(91,138,110,0.12), transparent 60%);
-      pointer-events: none;
-    }
-    .exam .head {
-      max-width: 1180px;
-      margin: 0 auto 120px;
-      padding: 0 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .exam h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(40px, 5.4vw, 72px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--forest);
-      max-width: 22ch;
-    }
-    .exam h2 .accent { color: var(--gold); }
-
-    .stage {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 36px;
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .stage .object {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 460px;
-    }
-    .stage .object .specimen-2 {
-      width: 240px; height: 240px;
-      perspective: 1200px;
-    }
-    .stage .object .specimen-2 .cube {
-      width: 100%; height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: cube-tumble 18s linear infinite;
-    }
-    @keyframes cube-tumble {
-      0%   { transform: rotateX(-12deg) rotateY(0deg); }
-      50%  { transform: rotateX(12deg)  rotateY(180deg); }
-      100% { transform: rotateX(-12deg) rotateY(360deg); }
-    }
-    .stage .object .specimen-2 .face {
-      position: absolute;
-      inset: 0;
-      border: 1.2px solid var(--forest);
-      background: rgba(31, 58, 46, 0.025);
-    }
-    .stage .object .specimen-2 .f { transform: translateZ(120px); }
-    .stage .object .specimen-2 .b { transform: rotateY(180deg) translateZ(120px); }
-    .stage .object .specimen-2 .r { transform: rotateY(90deg)  translateZ(120px); }
-    .stage .object .specimen-2 .l { transform: rotateY(-90deg) translateZ(120px); }
-    .stage .object .specimen-2 .t { transform: rotateX(90deg)  translateZ(120px); }
-    .stage .object .specimen-2 .d { transform: rotateX(-90deg) translateZ(120px); }
-
-    .object-caption {
-      position: absolute;
-      bottom: 0; left: 0;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-mute);
-    }
-    .object-caption em { font-family: var(--serif); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--ink-soft); }
-
-    /* the labels: little diagrammatic pointers that draw in on scroll */
-    .labels {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-    .label {
-      position: relative;
-      display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 24px;
-      align-items: start;
-      padding: 8px 0;
-    }
-    .label .pointer {
-      position: relative;
-      height: 1px;
-      margin-top: 14px;
-      background: var(--gold);
-      opacity: 0.4;
-      transform-origin: 0 50%;
-      transform: scaleX(0);
-      transition: transform 1s var(--ease-out), opacity 0.6s var(--ease-out);
-    }
-    .label.shown .pointer { transform: scaleX(1); opacity: 0.8; }
-    .label .pointer::before {
-      content: '';
-      position: absolute;
-      right: -4px; top: -3px;
-      width: 7px; height: 7px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
-    .label .roman {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 22px;
-      line-height: 1;
-      color: var(--gold);
-      grid-row: 1 / span 2;
-      text-align: right;
-      padding-right: 4px;
-      opacity: 0;
-      transition: opacity 0.6s var(--ease-out) 0.25s;
-    }
-    .label.shown .roman { opacity: 1; }
-    .label .body {
-      grid-column: 2;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.7s var(--ease-out) 0.3s, transform 0.7s var(--ease-out) 0.3s;
-    }
-    .label.shown .body { opacity: 1; transform: translateY(0); }
-    .label .body .head-line {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(20px, 2vw, 26px);
-      line-height: 1.2;
-      letter-spacing: -0.015em;
-      color: var(--forest);
-      margin-bottom: 6px;
-    }
-    .label .body p {
-      font-size: 14.5px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-      max-width: 42ch;
-    }
-
-    /* =========================================================
-       III. field notes — drop caps, editorial
-       ========================================================= */
-    .notes {
-      background: var(--paper-warm);
-      padding: 180px 0;
-      position: relative;
-    }
-    .notes::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(91,138,110,0.10), transparent 60%);
-      pointer-events: none;
-    }
-    .notes .head {
-      max-width: 720px;
-      margin: 0 auto 72px;
-      padding: 0 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .notes h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(36px, 4.8vw, 60px);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      color: var(--forest);
-      max-width: 22ch;
-    }
-    .note-block {
-      max-width: 720px;
-      margin: 0 auto 72px;
-      padding: 0 36px;
-    }
-    .note-block:last-child { margin-bottom: 0; }
-    .note-block .note-head {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-    .note-block .note-title {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(24px, 2.6vw, 32px);
-      line-height: 1.15;
-      letter-spacing: -0.015em;
-      color: var(--forest);
-      margin-bottom: 24px;
-    }
-    .note-block .note-body {
-      font-size: 17px;
-      line-height: 1.75;
+      font-size: 0.84em;
       color: var(--ink);
     }
-    .note-block .note-body::first-letter {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 5.2em;
-      float: left;
-      line-height: 0.85;
-      padding: 8px 14px 0 0;
-      color: var(--gold);
+    .hero h1 em { color: var(--moss); }
+    .hero .lede {
+      font-size: clamp(18px, 1.5vw, 22px);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+    .hero .lede strong {
+      color: var(--forest);
+      font-weight: 500;
     }
 
-    /* =========================================================
-       IV. specifications — a printed catalog page
-       ========================================================= */
-    .specs {
-      background: var(--paper);
-      padding: 180px 0;
-      border-top: 1px solid var(--line);
-    }
-    .specs .head {
-      max-width: 880px;
-      margin: 0 auto 56px;
-      padding: 0 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .specs h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(36px, 4.4vw, 56px);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      color: var(--forest);
-    }
-    .specs-table {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 36px;
-      font-family: var(--mono);
-    }
-    .specs-row {
-      display: grid;
-      grid-template-columns: 220px 1fr auto;
-      gap: 32px;
-      padding: 20px 0;
-      border-top: 1px solid var(--line);
-      align-items: baseline;
-      transition: padding-left 0.5s var(--ease-out), background 0.5s var(--ease-out);
-    }
-    .specs-row:last-child { border-bottom: 1px solid var(--line); }
-    .specs-row:hover {
-      padding-left: 8px;
-      background: linear-gradient(90deg, rgba(201,169,97,0.06), transparent 60%);
-    }
-    .specs-key {
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-mute);
-    }
-    .specs-val {
-      font-family: var(--sans);
-      font-size: 17px;
-      color: var(--forest);
-      letter-spacing: -0.005em;
-    }
-    .specs-val em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 19px;
-    }
-    .specs-num {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    /* =========================================================
-       V. first viewing — waitlist as a register
-       ========================================================= */
-    .viewing {
-      background: var(--night);
-      color: var(--on-dark);
-      padding: 200px 0 220px;
-      position: relative;
-      overflow: hidden;
-    }
-    .viewing::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,169,97,0.18), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(31,58,46,0.7), transparent 60%);
-      pointer-events: none;
-    }
-    .viewing .head {
-      max-width: 720px;
-      margin: 0 auto 56px;
-      padding: 0 36px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-    .viewing h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(44px, 6vw, 80px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--on-dark);
-      max-width: 18ch;
-    }
-    .viewing h2 em { color: var(--gold); }
-    .viewing .lede {
-      max-width: 540px;
-      color: var(--on-dark-soft);
-      font-size: 17px;
-      line-height: 1.65;
-    }
-    .register {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 0 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 12px;
-    }
-    .register .row {
+    /* email signup */
+    .signup {
       display: flex;
       gap: 10px;
+      max-width: 540px;
       flex-wrap: wrap;
+      align-items: stretch;
     }
-    .register input[type=email] {
-      flex: 1 1 220px;
-      min-width: 0;
+    .signup .field { position: relative; flex: 1 1 240px; min-width: 0; }
+    .signup input[type=email] {
+      width: 100%;
       height: 56px;
-      padding: 0 18px;
+      padding: 0 20px;
       font-size: 15px;
       font-family: var(--sans);
-      color: var(--on-dark);
-      background: rgba(245, 241, 232, 0.05);
-      border: 1.5px solid rgba(245, 241, 232, 0.18);
-      border-radius: 12px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.66);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
       outline: none;
       transition: border-color 0.3s var(--ease-out),
                   background 0.3s var(--ease-out),
                   box-shadow 0.4s var(--ease-out);
     }
-    .register input[type=email]::placeholder { color: var(--on-dark-mute); }
-    .register input[type=email]:hover { border-color: var(--sage); }
-    .register input[type=email]:focus {
-      border-color: var(--gold);
-      background: rgba(245, 241, 232, 0.10);
-      box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.14);
+    .signup input[type=email]::placeholder { color: var(--ink-faint); }
+    .signup input[type=email]:hover { border-color: var(--sage); }
+    .signup input[type=email]:focus {
+      border-color: var(--moss);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10);
     }
-    .register button {
+    .signup button {
       height: 56px;
-      padding: 0 28px;
-      font-size: 14px;
-      font-family: var(--mono);
+      padding: 0 30px;
+      font-size: 15px;
       font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--night);
-      background: var(--gold);
+      letter-spacing: -0.005em;
+      color: #fff;
+      background: var(--forest);
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out), background 0.3s var(--ease-out);
+      transition: transform 0.3s var(--ease-out),
+                  background 0.3s var(--ease-out),
+                  box-shadow 0.4s var(--ease-out);
+      white-space: nowrap;
     }
-    .register button:hover {
+    .signup button::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: radial-gradient(circle, var(--moss), transparent 55%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s var(--ease-out), height 0.6s var(--ease-out);
+      pointer-events: none;
+    }
+    .signup button span { position: relative; z-index: 1; }
+    .signup button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 40px -12px rgba(201, 169, 97, 0.45);
-      background: var(--gold-warm);
+      box-shadow: 0 16px 40px -12px rgba(91, 138, 110, 0.55);
     }
-    .register button:active { transform: translateY(0); }
-    .register button:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
-    .register .status {
+    .signup button:hover::before { width: 240px; height: 240px; }
+    .signup button:active { transform: translateY(0); }
+    .signup button:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
+
+    .status {
+      width: 100%;
       min-height: 18px;
-      margin-top: 6px;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--moss);
     }
-    .register .status.error { color: #E07B7B; }
-    .register .small {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 14px;
-      color: var(--on-dark-mute);
-      text-align: center;
-      margin-top: 8px;
+    .status.error { color: #B33A3A; }
+
+    .scroll-cue {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .scroll-cue .line {
+      width: 36px; height: 1px;
+      background: var(--ink-mute);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-cue .line::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--forest);
+      transform: translateX(-100%);
+      animation: cue-slide 2.8s var(--ease-out) infinite;
+    }
+    @keyframes cue-slide {
+      0%   { transform: translateX(-100%); }
+      50%  { transform: translateX(0); }
+      100% { transform: translateX(110%); }
     }
 
-    /* =========================================================
-       footer (on dark, signed)
-       ========================================================= */
-    footer {
+    /* ============== marquee — capabilities scroll horizontally ============== */
+    .marquee {
+      position: relative;
+      padding: 100px 0 110px;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .marquee::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent, var(--paper) 80%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .marquee-row {
+      display: flex;
+      width: max-content;
+      gap: 56px;
+      align-items: center;
+      will-change: transform;
+    }
+    .marquee-row.left  { animation: m-left 48s linear infinite; }
+    .marquee-row.right { animation: m-right 56s linear infinite; margin-top: 28px; }
+    @keyframes m-left  {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes m-right {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 32px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(40px, 6vw, 84px);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: var(--forest);
+      white-space: nowrap;
+    }
+    .marquee-item .dot {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .marquee-row.right .marquee-item { color: var(--moss); }
+
+    /* ============== contrast — dark, big statement ============== */
+    .contrast {
+      position: relative;
       background: var(--night);
-      color: var(--on-dark-mute);
-      padding: 32px 32px 56px;
+      color: var(--on-dark);
+      padding: 200px 0;
+      overflow: hidden;
+    }
+    .contrast::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 20%, rgba(201, 169, 97, 0.18), transparent 55%),
+        radial-gradient(ellipse 70% 55% at 15% 90%, rgba(91, 138, 110, 0.20), transparent 55%);
+      pointer-events: none;
+    }
+    .contrast h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(44px, 7vw, 100px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin: 28px 0 36px;
+      color: var(--on-dark);
+    }
+    .contrast h2 em { color: var(--gold); }
+    .contrast h2 .non-italic {
+      font-style: normal;
+      font-family: var(--sans);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      font-size: 0.86em;
+    }
+    .contrast .lede {
+      font-size: clamp(17px, 1.4vw, 21px);
+      color: var(--on-dark-soft);
+      max-width: 56ch;
+      line-height: 1.65;
+    }
+
+    /* ============== memory — list of "...that you" lines, dark ============== */
+    .memory {
+      position: relative;
+      background: var(--night-2);
+      color: var(--on-dark);
+      padding: 180px 0 200px;
+      overflow: hidden;
+    }
+    .memory::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 80% 50%, rgba(201, 169, 97, 0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .memory .head {
+      max-width: 880px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .memory h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(40px, 6vw, 84px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      max-width: 14ch;
+      color: var(--on-dark);
+    }
+    .memory h2 em { color: var(--gold); }
+    .memory .grid {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .memo {
+      padding: 28px 0;
       border-top: 1px solid var(--on-dark-line);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(20px, 2.2vw, 28px);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--on-dark-soft);
+      transition: color 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+    }
+    .memo:hover { color: var(--gold); padding-left: 8px; }
+    .memo .dash {
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .memory .grid > .memo:nth-child(odd)  { padding-right: 32px; }
+    .memory .grid > .memo:nth-child(even) { padding-left:  32px; border-left: 1px solid var(--on-dark-line); }
+
+    /* ============== how it works — cream, three rows ============== */
+    .how {
+      position: relative;
+      padding: 200px 0;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .how::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 100%, rgba(91, 138, 110, 0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .how .head {
+      max-width: 1180px;
+      margin: 0 auto 100px;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .how h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--forest);
+      max-width: 18ch;
+    }
+    .how h2 em { color: var(--moss); }
+    .how-list {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .how-step {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+      transition: padding 0.5s var(--ease-out), background 0.5s var(--ease-out);
+    }
+    .how-step:last-child { border-bottom: 1px solid var(--line); }
+    .how-step:hover {
+      padding-left: 8px;
+      background: linear-gradient(90deg, rgba(201, 169, 97, 0.05), transparent 50%);
+    }
+    .how-step .num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(48px, 5vw, 64px);
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+    }
+    .how-step h3 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+    .how-step p {
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 56ch;
+    }
+    .how-step .arrow {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--ink-faint);
+      transition: transform 0.5s var(--ease-out), color 0.5s var(--ease-out);
+    }
+    .how-step:hover .arrow {
+      transform: translateX(8px);
+      color: var(--moss);
+    }
+
+    /* ============== final CTA — cream, calm closing ============== */
+    .final {
+      padding: 220px 0 160px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+    }
+    .final::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(201, 169, 97, 0.18), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 50% 95%, rgba(91, 138, 110, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+    .final h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+      margin-bottom: 24px;
+    }
+    .final p.lede {
+      font-size: clamp(17px, 1.45vw, 20px);
+      color: var(--ink-soft);
+      max-width: 540px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+    .final .signup { margin: 0 auto; justify-content: center; max-width: 540px; }
+    .final .small {
+      margin-top: 16px;
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink-mute);
+    }
+
+    /* ============== footer ============== */
+    footer {
+      padding: 56px 0 64px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-mute);
+      font-size: 13px;
       position: relative;
       z-index: 2;
     }
     footer .row {
       max-width: 1180px;
       margin: 0 auto;
+      padding: 0 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -856,79 +664,69 @@
       gap: 16px;
     }
     footer a { transition: color 0.3s var(--ease-out); }
-    footer a:hover { color: var(--gold); }
+    footer a:hover { color: var(--forest); }
     footer .links { display: flex; gap: 28px; }
 
-    /* =========================================================
-       reveal utility — used by GSAP
-       ========================================================= */
+    /* ============== reveal-on-scroll utility ============== */
     .rv {
       opacity: 0;
       transform: translateY(28px);
     }
-    .rv-mask { overflow: hidden; }
-    .rv-mask > * { transform: translateY(110%); display: block; }
+    .rv-mask { overflow: hidden; padding-bottom: 0.06em; }
+    .rv-mask > * {
+      display: block;
+      transform: translateY(110%);
+      will-change: transform;
+    }
 
-    /* =========================================================
-       reduced motion safety net
-       ========================================================= */
+    /* ============== reduced motion ============== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
+      .marquee-row.left, .marquee-row.right { animation: none; }
       .rv, .rv-mask > * { opacity: 1 !important; transform: none !important; }
-      .specimen .lid { transform: rotateX(-110deg) translateZ(50%) !important; }
-      .specimen .core { opacity: 1 !important; transform: scale(1) !important; }
-      .label { opacity: 1 !important; }
-      .label .pointer { transform: scaleX(1) !important; }
-      .label .body, .label .roman { opacity: 1 !important; transform: none !important; }
       html { scroll-behavior: auto; }
     }
 
-    /* =========================================================
-       mobile
-       ========================================================= */
-    @media (max-width: 820px) {
-      header { padding: 14px 22px; grid-template-columns: 1fr auto; gap: 12px; }
+    /* ============== mobile ============== */
+    @media (max-width: 760px) {
+      header { padding: 16px 22px; }
       header.scrolled { padding: 12px 22px; }
-      .header-mid { display: none; }
       .wrap, .narrow { padding: 0 22px; }
-      .cover-inner { padding: 120px 22px 30px; gap: 40px; }
-      .cover h1 { font-size: 12vw; max-width: 14ch; }
-      .cover-foot { padding: 24px 22px; }
-      .exam { padding: 120px 0 140px; }
-      .exam .head { padding: 0 22px; margin-bottom: 56px; }
-      .stage { grid-template-columns: 1fr; gap: 64px; padding: 0 22px; }
-      .stage .object { height: 280px; }
-      .stage .object .specimen-2 { width: 180px; height: 180px; }
-      .stage .object .specimen-2 .f { transform: translateZ(90px); }
-      .stage .object .specimen-2 .b { transform: rotateY(180deg) translateZ(90px); }
-      .stage .object .specimen-2 .r { transform: rotateY(90deg)  translateZ(90px); }
-      .stage .object .specimen-2 .l { transform: rotateY(-90deg) translateZ(90px); }
-      .stage .object .specimen-2 .t { transform: rotateX(90deg)  translateZ(90px); }
-      .stage .object .specimen-2 .d { transform: rotateX(-90deg) translateZ(90px); }
-      .object-caption { position: static; margin-top: 24px; text-align: center; }
-      .label { grid-template-columns: 32px 1fr; gap: 16px; }
-      .label .pointer { display: none; }
-      .label .roman { text-align: left; padding-right: 0; font-size: 18px; }
-      .notes { padding: 120px 0; }
-      .note-block { padding: 0 22px; margin-bottom: 56px; }
-      .note-block .note-body::first-letter { font-size: 4em; padding: 4px 10px 0 0; }
-      .specs { padding: 120px 0; }
-      .specs .head { padding: 0 22px; }
-      .specs-table { padding: 0 22px; }
-      .specs-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
-      .specs-num { display: none; }
-      .specs-row:hover { padding-left: 0; background: none; }
-      .viewing { padding: 130px 0 150px; }
-      .viewing .head, .register { padding: 0 22px; }
-      .register .row { gap: 12px; }
-      .register input[type=email], .register button { height: 52px; }
-      .register button { width: 100%; }
-      footer { padding: 28px 22px 40px; }
-      footer .row { flex-direction: column; align-items: flex-start; }
+      .hero { padding: 130px 0 80px; min-height: auto; }
+      .hero h1 { font-size: 14vw; max-width: 12ch; }
+      .scroll-cue { left: 22px; bottom: 24px; }
+      .marquee { padding: 70px 0; }
+      .marquee-row.right { margin-top: 18px; }
+      .marquee-item { font-size: 11vw; gap: 24px; }
+      .contrast, .how, .final { padding: 110px 0; }
+      .memory { padding: 110px 0; }
+      .memory .head { padding: 0 22px; margin-bottom: 56px; }
+      .memory .grid {
+        grid-template-columns: 1fr;
+        padding: 0 22px;
+      }
+      .memory .grid > .memo:nth-child(odd)  { padding-right: 0; }
+      .memory .grid > .memo:nth-child(even) {
+        padding-left: 0;
+        border-left: none;
+      }
+      .memo { padding: 22px 0; font-size: 19px; }
+      .how .head { padding: 0 22px; margin-bottom: 64px; }
+      .how-list { padding: 0 22px; }
+      .how-step { grid-template-columns: 56px 1fr; gap: 20px; padding: 28px 0; }
+      .how-step .arrow { display: none; }
+      .how-step .num { font-size: 40px; }
+      .signup { gap: 12px; }
+      .signup input[type=email], .signup button { height: 52px; }
+      .signup button { width: 100%; }
+      .final { padding: 130px 0 100px; }
+      .final h2 { font-size: 14vw; }
+      footer { padding: 40px 0 48px; }
+      footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
     }
   </style>
 </head>
@@ -937,166 +735,152 @@
 <div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
-<header id="header" class="dark">
+<header id="header">
   <a href="#top" class="brand" aria-label="GreenCube home">
     <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
-  <span class="header-mid" id="chapter">Specimen №01 · MMXXVI</span>
-  <span class="header-end"><span class="dot" aria-hidden="true"></span>Coming soon</span>
+  <span class="pill"><span class="dot" aria-hidden="true"></span>Coming soon</span>
 </header>
 
-<!-- I. cover : the cube hatches, brand mark revealed -->
-<section class="cover dark-section" id="top" data-chapter="Specimen №01 · MMXXVI">
-  <div class="cover-inner">
-    <div class="specimen-line"><span class="rule"></span>I · Specimen №01 · Spring MMXXVI<span class="rule"></span></div>
-
-    <div class="specimen" id="specimen">
-      <div class="cube">
-        <span class="face f lid"></span>
-        <span class="face b"></span>
-        <span class="face r"></span>
-        <span class="face l"></span>
-        <span class="face t"></span>
-        <span class="face d"></span>
-        <div class="core" aria-hidden="true">
-          <span class="glyph">G</span>
-        </div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1>
+      <span class="rv-mask"><span>An AI assistant.</span></span>
+      <span class="rv-mask"><span>All <em>yours.</em></span></span>
+    </h1>
+    <p class="lede rv">Build apps, write code, plan trips, debug, draft, think — with a free AI that runs on your computer and remembers everything you tell it. <strong>Like ChatGPT, but yours forever.</strong></p>
+    <form class="signup rv" id="hero-form" novalidate>
+      <div class="field">
+        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
       </div>
-    </div>
-
-    <h1 class="rv">An assistant that <span class="mark-non">lives where you do.</span></h1>
-    <p class="meta rv">A desktop app for state-of-the-art language models<span class="sep">·</span>running on your hardware<span class="sep">·</span>private by design</p>
+      <button type="submit"><span>Get early access</span></button>
+      <div class="status" id="hero-status" role="status" aria-live="polite"></div>
+    </form>
   </div>
-
-  <div class="cover-foot">
-    <span>greencube.world</span>
-    <span class="scroll-cue"><span>Continue</span><span class="vline" aria-hidden="true"></span></span>
+  <div class="scroll-cue" aria-hidden="true">
+    <span class="line"></span>
+    <span>Scroll</span>
   </div>
 </section>
 
-<!-- II. examination : object + four labels animate in around it -->
-<section class="exam" id="examination" data-chapter="II · Examination">
-  <div class="head">
-    <span class="eyebrow rv">II — Examination</span>
-    <h2 class="rv">A small object you can <span class="accent">hold in your machine.</span></h2>
+<!-- MARQUEE — what it does -->
+<section class="marquee" aria-label="What GreenCube can do">
+  <div class="marquee-row left" aria-hidden="true">
+    <!-- duplicated to make a seamless loop with translateX -50% -->
+    <div class="marquee-item"><span>Build a web app</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Refactor a codebase</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Read a research paper</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Plan a road trip</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Edit your photos</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Translate Spanish</span><span class="dot"></span></div>
+    <!-- copy 2 -->
+    <div class="marquee-item"><span>Build a web app</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Refactor a codebase</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Read a research paper</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Plan a road trip</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Edit your photos</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Translate Spanish</span><span class="dot"></span></div>
   </div>
+  <div class="marquee-row right" aria-hidden="true">
+    <div class="marquee-item"><span>Draft a contract</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Debug at 2 a.m.</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Help you think</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Fix your résumé</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Write a song</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Remember last Tuesday</span><span class="dot"></span></div>
+    <!-- copy 2 -->
+    <div class="marquee-item"><span>Draft a contract</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Debug at 2 a.m.</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Help you think</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Fix your résumé</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Write a song</span><span class="dot"></span></div>
+    <div class="marquee-item"><span>Remember last Tuesday</span><span class="dot"></span></div>
+  </div>
+</section>
 
-  <div class="stage">
-    <div class="object">
-      <div class="specimen-2" aria-hidden="true">
-        <div class="cube">
-          <span class="face f"></span><span class="face b"></span>
-          <span class="face r"></span><span class="face l"></span>
-          <span class="face t"></span><span class="face d"></span>
-        </div>
+<!-- CONTRAST — local, private, yours -->
+<section class="contrast dark-section" data-theme="dark">
+  <div class="narrow">
+    <span class="eyebrow rv">Local. Private. Free.</span>
+    <h2 class="rv">Not in the cloud. <em>On your computer.</em></h2>
+    <p class="lede rv">No server you're talking to. No accounts. No API keys. No subscription, ever. The model runs on your CPU and GPU; your conversations stay on your hard drive. Nothing leaks because nothing leaves.</p>
+  </div>
+</section>
+
+<!-- MEMORY — it remembers -->
+<section class="memory dark-section" data-theme="dark">
+  <div class="head">
+    <span class="eyebrow rv">Memory that doesn't expire</span>
+    <h2 class="rv">It actually <em>remembers.</em></h2>
+    <p class="lede rv" style="font-size:clamp(17px,1.4vw,21px); color:var(--on-dark-soft); max-width:54ch; line-height:1.65;">Cloud assistants reset every chat. GreenCube doesn't. It builds a picture of you over weeks and months — your projects, your tics, your taste — and it's all stored where only you can read it.</p>
+  </div>
+  <div class="grid">
+    <div class="memo rv"><span class="dash">—</span>that you prefer terse code comments.</div>
+    <div class="memo rv"><span class="dash">—</span>the half-finished novel from October.</div>
+    <div class="memo rv"><span class="dash">—</span>that you can't drink coffee after 4 p.m.</div>
+    <div class="memo rv"><span class="dash">—</span>the road-trip playlist you're building.</div>
+    <div class="memo rv"><span class="dash">—</span>your sister's birthday.</div>
+    <div class="memo rv"><span class="dash">—</span>the bug you were hunting last week.</div>
+    <div class="memo rv"><span class="dash">—</span>how you like your README headings.</div>
+    <div class="memo rv"><span class="dash">—</span>that you're learning Spanish, slowly.</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="head">
+    <span class="eyebrow rv">How it works</span>
+    <h2 class="rv">Three steps. <em>That's the whole thing.</em></h2>
+  </div>
+  <div class="how-list">
+    <div class="how-step rv">
+      <div class="num">01</div>
+      <div>
+        <h3>Download.</h3>
+        <p>One free desktop app for Windows. macOS and Linux to follow.</p>
       </div>
-      <div class="object-caption"><span>Fig.&nbsp;I</span>&nbsp;&nbsp;<em>Topology of a local mind</em></div>
+      <div class="arrow">→</div>
     </div>
-
-    <div class="labels">
-      <div class="label" data-i="1">
-        <div class="pointer"></div>
-        <span class="roman">i.</span>
-        <div class="body">
-          <div class="head-line">Open weights, ≈5.7&nbsp;GB.</div>
-          <p>Phi-4, Qwen 3.5, Gemma 4. A single file you actually own. No keys to revoke, no servers to wait on.</p>
-        </div>
+    <div class="how-step rv">
+      <div class="num">02</div>
+      <div>
+        <h3>It tunes itself.</h3>
+        <p>GreenCube reads your hardware on first launch and pulls the strongest open model that fits — no settings to guess at.</p>
       </div>
-
-      <div class="label" data-i="2">
-        <div class="pointer"></div>
-        <span class="roman">ii.</span>
-        <div class="body">
-          <div class="head-line">Lives in memory, not on a server.</div>
-          <p>The model loads onto your CPU and GPU. Conversations sit on your hard drive. Nothing to leak because nothing leaves.</p>
-        </div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="how-step rv">
+      <div class="num">03</div>
+      <div>
+        <h3>Start talking.</h3>
+        <p>Build, write, plan, debug. The longer you use it, the more it learns the way you work.</p>
       </div>
-
-      <div class="label" data-i="3">
-        <div class="pointer"></div>
-        <span class="roman">iii.</span>
-        <div class="body">
-          <div class="head-line">Reads your hardware. Picks the right model.</div>
-          <p>On first launch it measures your RAM and GPU and downloads the strongest open model that fits. No tier to pick. No settings to tune.</p>
-        </div>
-      </div>
-
-      <div class="label" data-i="4">
-        <div class="pointer"></div>
-        <span class="roman">iv.</span>
-        <div class="body">
-          <div class="head-line">No ledger. No quotas.</div>
-          <p>No accounts. No tokens metered. No analytics dialing home. Run it for an hour or for a week — the only ceiling is your machine.</p>
-        </div>
-      </div>
+      <div class="arrow">→</div>
     </div>
   </div>
 </section>
 
-<!-- III. field notes : two short philosophy paragraphs with drop caps -->
-<section class="notes" id="notes" data-chapter="III · Field notes">
-  <div class="head">
-    <span class="eyebrow rv">III — Field notes</span>
-    <h2 class="rv">Two small claims, on which the rest of this rests.</h2>
+<!-- FINAL CTA -->
+<section class="final" id="join">
+  <div class="narrow">
+    <h2 class="rv">Be early.</h2>
+    <p class="lede rv">We'll send a single email when GreenCube goes live. No newsletter, no marketing.</p>
+    <form class="signup rv" id="cta-form" novalidate>
+      <div class="field">
+        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
+      </div>
+      <button type="submit"><span>Join the waitlist</span></button>
+      <div class="status" id="cta-status" role="status" aria-live="polite"></div>
+    </form>
+    <p class="small rv">One email. That's all you'll hear.</p>
   </div>
-
-  <article class="note-block rv">
-    <div class="note-head">i. on where a thought lives</div>
-    <div class="note-title">A model on your machine is not a smaller version of a model in the cloud. It is a different kind of object entirely.</div>
-    <p class="note-body">It does not require a network. It does not log your prompts. It cannot be deprecated, paywalled, or quietly aligned away from you. The same file, on your disk, will still answer your question in five years — even if the company that trained it is gone. That is a strange and rare property, and it is worth caring about.</p>
-  </article>
-
-  <article class="note-block rv">
-    <div class="note-head">ii. on the question of who reads it</div>
-    <div class="note-title">"Private mode" is not the same thing as private.</div>
-    <p class="note-body">Every cloud assistant is, from a privacy standpoint, a stranger you've handed a stack of letters and asked to read aloud only to you. That arrangement is fine until it isn't. GreenCube takes the stranger out of the room. Your conversations stay where you wrote them — on the same hard drive that holds the rest of your life.</p>
-  </article>
-</section>
-
-<!-- IV. specifications : printed catalog table -->
-<section class="specs" id="specs" data-chapter="IV · Specifications">
-  <div class="head">
-    <span class="eyebrow rv">IV — Specifications</span>
-    <h2 class="rv">For the curious, the cautious, and the rest.</h2>
-  </div>
-
-  <div class="specs-table">
-    <div class="specs-row rv"><span class="specs-key">Class</span><span class="specs-val">Local language model, desktop application</span><span class="specs-num">a.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Year</span><span class="specs-val">MMXXVI</span><span class="specs-num">b.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Origin</span><span class="specs-val">Open-source weights · multiple authors</span><span class="specs-num">c.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Composition</span><span class="specs-val">≈9 billion parameters · Q4_K_M quantisation</span><span class="specs-num">d.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Substrate</span><span class="specs-val">Your CPU and GPU · Vulkan-accelerated</span><span class="specs-num">e.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Memory</span><span class="specs-val">8&nbsp;GB minimum, 16&nbsp;GB to thrive</span><span class="specs-num">f.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Footprint</span><span class="specs-val">≈6 GB on disk, including the model</span><span class="specs-num">g.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Network</span><span class="specs-val">Required once, to fetch the model. Then optional, forever.</span><span class="specs-num">h.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Subscription</span><span class="specs-val"><em>None.</em></span><span class="specs-num">i.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Quota</span><span class="specs-val"><em>None.</em></span><span class="specs-num">j.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Telemetry</span><span class="specs-val"><em>None.</em></span><span class="specs-num">k.</span></div>
-    <div class="specs-row rv"><span class="specs-key">Release</span><span class="specs-val">Spring MMXXVI · Windows first · macOS &amp; Linux to follow</span><span class="specs-num">l.</span></div>
-  </div>
-</section>
-
-<!-- V. first viewing : waitlist -->
-<section class="viewing dark-section" id="viewing" data-chapter="V · First viewing">
-  <div class="head">
-    <span class="eyebrow rv">V — First viewing</span>
-    <h2 class="rv">Be there when the <em>case opens.</em></h2>
-    <p class="lede rv">First viewings of GreenCube begin in spring. Leave an address and we'll send a single message — one — when the case is ready to open.</p>
-  </div>
-  <form class="register rv" id="form" novalidate>
-    <div class="row">
-      <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
-      <button type="submit"><span>Register</span></button>
-    </div>
-    <div class="status" id="status" role="status" aria-live="polite"></div>
-    <p class="small">A single message. No newsletter, no follow-up.</p>
-  </form>
 </section>
 
 <footer>
   <div class="row">
-    <span>© MMXXVI · GreenCube</span>
+    <div>© 2026 GreenCube</div>
     <nav class="links" aria-label="Footer">
       <a href="mailto:team@greencube.world">team@greencube.world</a>
       <a href="/privacy">Privacy</a>
@@ -1104,7 +888,7 @@
   </div>
 </footer>
 
-<!-- libs from CDN: GSAP + ScrollTrigger only. No Lenis. Native browser scroll. -->
+<!-- libs from CDN. GSAP + ScrollTrigger only. Native browser scroll. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
@@ -1113,10 +897,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
-  // -----------------------------------------------------------
-  // 1. Wait for fonts before doing anything visual. This kills
-  //    the first-paint stripes/jumps that come from font swaps.
-  // -----------------------------------------------------------
+  // 1. Wait for fonts so first paint doesn't show stripes from font-swap
   let started = false;
   const start = () => {
     if (started) return;
@@ -1125,66 +906,46 @@
     runIntro();
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
-  setTimeout(start, 1000); // safety net
+  setTimeout(start, 1100); // safety net
 
-  // -----------------------------------------------------------
-  // 2. The intro: cube hatches, brand glyph reveals, hero text
-  //    rises into place. ~1.5s, run once.
-  // -----------------------------------------------------------
+  // 2. Hero reveal: line-by-line clip-path mask, then subtitle + form fade up
   function runIntro() {
-    const specimen = document.getElementById('specimen');
-
     if (!window.gsap || reduced) {
-      // No-JS / reduced: just snap to the open state
-      specimen.classList.add('open');
+      document.querySelectorAll('.rv-mask > *').forEach(el => el.style.transform = 'translateY(0)');
       document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
       return;
     }
-
-    // Open the lid after a short beat. The CSS handles the lid rotate
-    // and the brand glyph fade-in.
-    gsap.delayedCall(0.35, () => specimen.classList.add('open'));
-
-    // Hero copy rises after the cube has cracked open.
-    const heroRv = document.querySelectorAll('.cover .rv');
-    gsap.to(heroRv, {
-      opacity: 1,
-      y: 0,
-      duration: 1.0,
-      ease: 'expo.out',
-      stagger: 0.10,
-      delay: 1.0,
-    });
+    const heroLines = document.querySelectorAll('.hero h1 .rv-mask > *');
+    const heroTail = [document.querySelector('.hero .lede'), document.querySelector('.hero .signup')];
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+    tl.to(heroLines, { y: 0, duration: 1.0, stagger: 0.10 })
+      .to(heroTail, { y: 0, opacity: 1, duration: 0.85, stagger: 0.08 }, '-=0.55');
   }
 
-  // -----------------------------------------------------------
-  // 3. Header: scrolled state + dark/light invert + chapter label
-  // -----------------------------------------------------------
+  // 3. Header scrolled-state + dark-section auto-invert
   const header = document.getElementById('header');
-  const chapter = document.getElementById('chapter');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 8);
   }, { passive: true });
 
   if (window.ScrollTrigger) {
-    document.querySelectorAll('section[data-chapter]').forEach(section => {
-      const isDark = section.classList.contains('dark-section');
+    document.querySelectorAll('[data-theme="dark"]').forEach(section => {
       ScrollTrigger.create({
         trigger: section,
         start: 'top 60px',
         end: 'bottom 60px',
-        onEnter:     () => { header.classList.toggle('dark', isDark); chapter.textContent = section.dataset.chapter; },
-        onEnterBack: () => { header.classList.toggle('dark', isDark); chapter.textContent = section.dataset.chapter; },
+        onEnter:     () => header.classList.add('dark'),
+        onLeave:     () => header.classList.remove('dark'),
+        onEnterBack: () => header.classList.add('dark'),
+        onLeaveBack: () => header.classList.remove('dark'),
       });
     });
   }
 
-  // -----------------------------------------------------------
-  // 4. Generic .rv reveal-on-scroll (excluding hero — handled above)
-  // -----------------------------------------------------------
+  // 4. Generic .rv reveal-on-scroll (skip hero — handled in intro)
   if (window.gsap && window.ScrollTrigger && !reduced) {
     document.querySelectorAll('.rv').forEach(el => {
-      if (el.closest('.cover')) return;
+      if (el.closest('.hero')) return;
       gsap.to(el, {
         opacity: 1, y: 0, duration: 0.95, ease: 'expo.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
@@ -1192,31 +953,25 @@
     });
   }
 
-  // -----------------------------------------------------------
-  // 5. The label diagram: each pointer draws in, then the body
-  //    fades. Triggered as the labels stage enters the viewport.
-  // -----------------------------------------------------------
-  if (window.ScrollTrigger && !reduced) {
-    const labels = document.querySelectorAll('.exam .label');
-    if (labels.length) {
+  // 5. Memory list — slight extra stagger when their grid enters
+  if (window.gsap && window.ScrollTrigger && !reduced) {
+    const memos = document.querySelectorAll('.memory .memo');
+    if (memos.length) {
       ScrollTrigger.create({
-        trigger: '.exam .stage',
-        start: 'top 70%',
+        trigger: '.memory .grid',
+        start: 'top 80%',
         once: true,
         onEnter: () => {
-          labels.forEach((l, i) => {
-            setTimeout(() => l.classList.add('shown'), i * 220);
+          memos.forEach((m, i) => {
+            // override generic reveal so we get a tighter stagger for this list
+            gsap.fromTo(m, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: i * 0.06, overwrite: true });
           });
         },
       });
     }
-  } else {
-    document.querySelectorAll('.exam .label').forEach(l => l.classList.add('shown'));
   }
 
-  // -----------------------------------------------------------
   // 6. Scroll progress thread
-  // -----------------------------------------------------------
   const progress = document.getElementById('progress');
   function updateProgress() {
     const h = document.documentElement;
@@ -1226,10 +981,7 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  // -----------------------------------------------------------
-  // 7. Waitlist handler. Local-only for now. Replace
-  //    submitToBackend with a fetch() to your endpoint.
-  // -----------------------------------------------------------
+  // 7. Waitlist form — same submitToBackend stub, ready for a real endpoint
   const STORAGE_KEY = 'greencube_waitlist';
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -1242,9 +994,10 @@
     return { ok: true };
   }
 
-  const form = document.getElementById('form');
-  if (form) {
-    const status = document.getElementById('status');
+  function wireForm(formId, statusId) {
+    const form = document.getElementById(formId);
+    const status = document.getElementById(statusId);
+    if (!form) return;
     const input = form.querySelector('input[type=email]');
     const button = form.querySelector('button');
     const buttonLabel = button.querySelector('span') || button;
@@ -1255,7 +1008,7 @@
       status.classList.remove('error');
 
       if (!EMAIL_RE.test(email)) {
-        status.textContent = 'check the address';
+        status.textContent = 'That email looks off — mind double-checking?';
         status.classList.add('error');
         input.focus();
         return;
@@ -1263,26 +1016,28 @@
 
       button.disabled = true;
       const prev = buttonLabel.textContent;
-      buttonLabel.textContent = 'Saving';
+      buttonLabel.textContent = 'Saving…';
       try {
         const res = await submitToBackend(email);
         if (res && res.ok) {
-          status.textContent = 'Registered. We will write.';
+          status.textContent = "You're on the list. We'll write when it's live.";
           input.value = '';
         } else {
-          status.textContent = 'Could not save — try again';
+          status.textContent = "Couldn't save that — try again in a moment.";
           status.classList.add('error');
           button.disabled = false;
           buttonLabel.textContent = prev;
         }
       } catch (_) {
-        status.textContent = 'Could not save — try again';
+        status.textContent = "Couldn't save that — try again in a moment.";
         status.classList.add('error');
         button.disabled = false;
         buttonLabel.textContent = prev;
       }
     });
   }
+  wireForm('hero-form', 'hero-status');
+  wireForm('cta-form', 'cta-status');
 })();
 </script>
 
