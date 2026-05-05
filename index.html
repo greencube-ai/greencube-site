@@ -3,871 +3,864 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>GreenCube — an assistant that lives on your computer</title>
-  <meta name="description" content="GreenCube runs state-of-the-art language models locally on your own hardware. Fully offline. Fully yours." />
-  <meta name="theme-color" content="#F5F1E8" />
+  <title>GreenCube — Specimen №01</title>
+  <meta name="description" content="GreenCube is a desktop app that runs state-of-the-art language models locally on your own hardware. Catalogued, curated, and coming soon." />
+  <meta name="theme-color" content="#0F2118" />
 
-  <meta property="og:title" content="GreenCube — an assistant that lives on your computer" />
-  <meta property="og:description" content="State-of-the-art language models, running on your own hardware. Fully offline. Fully yours." />
+  <meta property="og:title" content="GreenCube — Specimen №01" />
+  <meta property="og:description" content="An AI that lives where you do. Catalogued, curated, and coming soon." />
   <meta property="og:url" content="https://greencube.world" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GreenCube — an assistant that lives on your computer" />
-  <meta name="twitter:description" content="State-of-the-art language models, running on your own hardware." />
+  <meta name="twitter:title" content="GreenCube — Specimen №01" />
+  <meta name="twitter:description" content="An AI that lives where you do." />
 
   <link rel="canonical" href="https://greencube.world" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%23C9A961' stroke-width='3'/></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- inline pre-paint: hide body until fonts + JS are ready, kills FOUT stripes -->
+  <!-- pre-paint: hide body until fonts load (kills FOUT stripes) -->
   <style>
-    html { background: #F5F1E8; }
-    body { opacity: 0; transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+    html { background: #0F2118; }
+    body { opacity: 0; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     body.fonts-ready { opacity: 1; }
   </style>
 
   <style>
     /* =========================================================
-       tokens — pulled from src/styles/tokens.css so the site
-       and the desktop app share one design system
+       tokens — borrowed from src/styles/tokens.css then extended
        ========================================================= */
     :root {
-      --bg:           #F5F1E8;  /* cream — body of letter */
-      --bg-soft:      #FBF8F0;
-      --bg-warm:      #F0ECE3;
-      --bg-deep:      #1F3A2E;  /* forest — dark contrast sections */
-      --bg-deep-2:    #15281F;  /* a touch deeper than forest for the thesis */
-
-      --line:         #DDD8CE;
-      --line-dark:    rgba(245, 241, 232, 0.10);
-
+      --paper:        #F5F1E8;       /* warm cream — body */
+      --paper-soft:   #FBF8F0;
+      --paper-warm:   #F0ECE3;
       --ink:          #1A1A1A;
       --ink-soft:     #555555;
       --ink-mute:     #8A8275;
       --ink-faint:    #B8B0A0;
-      --ink-on-dark:  #F5F1E8;
-      --ink-on-dark-soft: rgba(245, 241, 232, 0.66);
-      --ink-on-dark-mute: rgba(245, 241, 232, 0.40);
+      --line:         #DDD8CE;
 
+      --night:        #0F2118;       /* deepest forest — cover */
+      --night-2:      #15281F;
       --forest:       #1F3A2E;
       --moss:         #5B8A6E;
       --sage:         #9CB89E;
       --gold:         #C9A961;
-      --gold-glow:    rgba(201, 169, 97, 0.45);
+      --gold-warm:    #D4B575;
 
-      --display:      'Instrument Serif', 'Times New Roman', serif;
-      --sans:         'Geist', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --on-dark:      #F5F1E8;
+      --on-dark-soft: rgba(245, 241, 232, 0.66);
+      --on-dark-mute: rgba(245, 241, 232, 0.40);
+      --on-dark-line: rgba(245, 241, 232, 0.10);
 
-      /* easing — taken from common animation libs (expo.out style) */
-      --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-out-quint:  cubic-bezier(0.22, 1, 0.36, 1);
-      --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+      --serif:        'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:         'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:         'Geist Mono', ui-monospace, "SF Mono", Menlo, monospace;
+
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-quint:   cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* =========================================================
-       reset
+       reset + base
        ========================================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
     }
-    html, body { background: var(--bg); }
     body {
-      color: var(--ink);
       font-family: var(--sans);
       font-weight: 400;
       line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
       overflow-x: hidden;
-      position: relative;
-      cursor: none;
     }
-    /* fallback cursor on touch / when JS off */
-    @media (hover: none), (pointer: coarse) { body { cursor: auto; } }
     a { color: inherit; text-decoration: none; }
-    button, input, textarea { font-family: inherit; cursor: none; }
-    @media (hover: none), (pointer: coarse) { button, input, textarea { cursor: auto; } }
+    button, input { font-family: inherit; }
     img, svg { display: block; max-width: 100%; }
     em { font-style: italic; }
-    ::selection { background: var(--gold-glow); color: var(--forest); }
+    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
 
     /* =========================================================
-       loading reveal — first paint
-       ========================================================= */
-    .loader {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg);
-      pointer-events: none;
-    }
-    .loader-text {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: clamp(40px, 7vw, 80px);
-      color: var(--forest);
-      letter-spacing: -0.015em;
-      overflow: hidden;
-      display: flex;
-      gap: 0.04em;
-    }
-    .loader-text span {
-      display: inline-block;
-      transform: translateY(110%);
-      will-change: transform;
-    }
-    .loader-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 1.5px;
-      width: 0%;
-      background: var(--forest);
-      transition: width 1.4s var(--ease-out-quint);
-    }
-
-    /* =========================================================
-       custom cursor — gold ring + dot, lerp-followed by JS
-       ========================================================= */
-    .cursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 32px; height: 32px;
-      border: 1.5px solid var(--forest);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 10000;
-      transition: width 0.3s var(--ease-out-expo),
-                  height 0.3s var(--ease-out-expo),
-                  border-color 0.3s var(--ease-out-expo),
-                  background 0.3s var(--ease-out-expo);
-      mix-blend-mode: difference;
-      opacity: 0;
-    }
-    .cursor.ready { opacity: 1; }
-    .cursor.hover { width: 56px; height: 56px; background: rgba(201,169,97,0.18); border-color: var(--gold); }
-    @media (hover: none), (pointer: coarse) { .cursor { display: none; } }
-
-    /* scroll progress bar */
-    .progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      width: 0%;
-      background: linear-gradient(90deg, var(--moss), var(--gold));
-      z-index: 999;
-      pointer-events: none;
-    }
-
-    /* =========================================================
-       grain — applied to body, multiply blend
+       grain — multiply blend, fixed
        ========================================================= */
     .grain {
       position: fixed;
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      opacity: 0.05;
+      opacity: 0.06;
       mix-blend-mode: multiply;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     /* =========================================================
-       header — minimal letterhead, becomes a subtle backdrop on scroll
+       scroll progress (gold thread)
+       ========================================================= */
+    .progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 1.5px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--moss), var(--gold));
+      z-index: 200;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease-out);
+    }
+
+    /* =========================================================
+       header — letterhead. Updates label by section.
        ========================================================= */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 22px 28px;
-      display: flex;
-      justify-content: space-between;
+      padding: 22px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      transition: background 0.5s var(--ease-out-expo),
-                  border-color 0.5s var(--ease-out-expo),
-                  backdrop-filter 0.5s var(--ease-out-expo),
-                  padding 0.5s var(--ease-out-expo);
+      gap: 24px;
+      transition: background 0.5s var(--ease-out),
+                  border-color 0.5s var(--ease-out),
+                  backdrop-filter 0.5s var(--ease-out),
+                  color 0.5s var(--ease-out),
+                  padding 0.5s var(--ease-out);
       border-bottom: 1px solid transparent;
+      color: var(--ink);
     }
     header.scrolled {
-      background: rgba(245, 241, 232, 0.78);
       backdrop-filter: saturate(140%) blur(14px);
       -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(245, 241, 232, 0.72);
       border-bottom-color: var(--line);
-      padding: 16px 28px;
+      padding: 14px 32px;
     }
     header.dark {
-      background: rgba(31, 58, 46, 0.72);
-      backdrop-filter: saturate(140%) blur(14px);
-      -webkit-backdrop-filter: saturate(140%) blur(14px);
-      border-bottom-color: var(--line-dark);
+      color: var(--on-dark);
     }
-    header.dark .brand,
-    header.dark .meta { color: var(--ink-on-dark); }
-    header.dark .brand-mark .face { border-color: var(--ink-on-dark); background: rgba(245,241,232,0.04); }
-    header.dark .pill { color: var(--ink-on-dark-soft); border-color: var(--line-dark); background: rgba(0,0,0,0.2); }
-
+    header.dark.scrolled {
+      background: rgba(15, 33, 24, 0.72);
+      border-bottom-color: var(--on-dark-line);
+    }
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
-      font-family: var(--display);
+      gap: 12px;
+      font-family: var(--serif);
       font-size: 22px;
       letter-spacing: -0.005em;
-      color: var(--forest);
-      transition: color 0.5s var(--ease-out-expo);
     }
-
-    /* CSS-3D wireframe cube — small (header) */
-    .brand-mark { display: inline-block; width: 18px; height: 18px; perspective: 100px; }
-    .brand-mark .cube {
-      width: 18px; height: 18px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: cube-spin-sm 12s linear infinite;
+    .brand .mark {
+      width: 16px; height: 16px;
+      border: 1.5px solid currentColor;
+      border-radius: 3px;
+      animation: brand-spin 14s linear infinite;
     }
-    .brand-mark .face {
-      position: absolute;
-      width: 18px; height: 18px;
-      border: 1.2px solid var(--forest);
-      background: rgba(31,58,46,0.025);
-      transition: border-color 0.5s var(--ease-out-expo),
-                  background 0.5s var(--ease-out-expo);
+    @keyframes brand-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
-    .brand-mark .f { transform: translateZ(9px); }
-    .brand-mark .b { transform: rotateY(180deg) translateZ(9px); }
-    .brand-mark .r { transform: rotateY(90deg)  translateZ(9px); }
-    .brand-mark .l { transform: rotateY(-90deg) translateZ(9px); }
-    .brand-mark .t { transform: rotateX(90deg)  translateZ(9px); }
-    .brand-mark .d { transform: rotateX(-90deg) translateZ(9px); }
-    @keyframes cube-spin-sm {
-      from { transform: rotateX(-22deg) rotateY(0deg); }
-      to   { transform: rotateX(-22deg) rotateY(360deg); }
+    .header-mid {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.5s var(--ease-out);
+      white-space: nowrap;
     }
-
-    .meta {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: 14px;
-      color: var(--ink-mute);
-      transition: color 0.5s var(--ease-out-expo);
-    }
-    .meta-m { display: none; }
-
-    .pill {
+    .header-end {
+      justify-self: end;
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 7px 13px 7px 11px;
-      border: 1px solid var(--line);
+      padding: 6px 12px 6px 10px;
+      border: 1px solid currentColor;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(4px);
-      color: var(--ink-soft);
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 500;
-      transition: color 0.5s var(--ease-out-expo),
-                  background 0.5s var(--ease-out-expo),
-                  border-color 0.5s var(--ease-out-expo);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
     }
-    .pill .dot {
-      width: 7px; height: 7px;
-      background: var(--moss);
+    .header-end .dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
       border-radius: 50%;
-      animation: dot-pulse 2.6s var(--ease-out-expo) infinite;
+      animation: pulse 2.6s var(--ease-out) infinite;
     }
-    @keyframes dot-pulse {
-      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
-      70% { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(201, 169, 97, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0); }
     }
 
     /* =========================================================
        layout primitives
        ========================================================= */
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
-    .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 36px; }
+    .narrow { max-width: 720px; margin: 0 auto; padding: 0 36px; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 22px; height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+    .dark-section .eyebrow { color: var(--on-dark-mute); }
 
     /* =========================================================
-       hero — cream with warm gradient wash + headline
+       I. cover — dark, the cube hatches, brand mark revealed
        ========================================================= */
-    .hero {
+    .cover {
       position: relative;
       min-height: 100vh;
-      padding: 180px 0 120px;
-      display: flex;
-      align-items: center;
+      background: var(--night);
+      color: var(--on-dark);
+      display: grid;
+      grid-template-rows: 1fr auto;
       overflow: hidden;
     }
-    .hero-glow {
+    .cover::before {
+      content: '';
       position: absolute;
       inset: 0;
-      pointer-events: none;
       background:
-        radial-gradient(ellipse 80% 50% at 78% 18%, rgba(201, 169, 97, 0.22), transparent 55%),
-        radial-gradient(ellipse 90% 60% at 12% 95%, rgba(91, 138, 110, 0.16), transparent 55%);
+        radial-gradient(ellipse 60% 50% at 50% 38%, rgba(201,169,97,0.18), transparent 55%),
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(31,58,46,0.7), transparent 60%);
+      pointer-events: none;
     }
-    .hero h1 {
-      font-family: var(--display);
+    .cover-inner {
+      align-self: center;
+      padding: 140px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      text-align: center;
+      position: relative;
+    }
+    .cover .specimen-line {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--on-dark-mute);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cover .specimen-line .rule {
+      display: inline-block;
+      width: 36px; height: 1px;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* the hatching cube — CSS 3D, front face peels open at first paint */
+    .specimen {
+      width: clamp(160px, 22vw, 220px);
+      height: clamp(160px, 22vw, 220px);
+      position: relative;
+      perspective: 900px;
+    }
+    .specimen .cube {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: cube-drift 18s var(--ease-out) infinite alternate;
+      transform: rotateX(-22deg) rotateY(-18deg);
+    }
+    @keyframes cube-drift {
+      0%   { transform: rotateX(-22deg) rotateY(-18deg); }
+      100% { transform: rotateX(-12deg) rotateY(22deg); }
+    }
+    .specimen .face {
+      position: absolute;
+      inset: 0;
+      border: 1.5px solid var(--gold);
+      background: rgba(201, 169, 97, 0.04);
+      transition: opacity 0.6s var(--ease-out);
+    }
+    .specimen .f { transform: translateZ(calc(50% * 1)); }
+    .specimen .b { transform: rotateY(180deg) translateZ(calc(50% * 1)); }
+    .specimen .r { transform: rotateY(90deg)  translateZ(calc(50% * 1)); }
+    .specimen .l { transform: rotateY(-90deg) translateZ(calc(50% * 1)); }
+    .specimen .t { transform: rotateX(90deg)  translateZ(calc(50% * 1)); }
+    .specimen .d { transform: rotateX(-90deg) translateZ(calc(50% * 1)); }
+
+    /* the lid (front face) hatches open by rotating up at the top edge */
+    .specimen .lid {
+      transform-origin: 50% 0%;
+      transition: transform 1.6s cubic-bezier(0.7, 0, 0.2, 1),
+                  background 1.6s cubic-bezier(0.7, 0, 0.2, 1),
+                  border-color 1.6s cubic-bezier(0.7, 0, 0.2, 1);
+    }
+    .specimen.open .lid {
+      transform: rotateX(-110deg) translateZ(calc(50% * 1));
+      background: rgba(201, 169, 97, 0.08);
+    }
+
+    /* the brand mark — revealed inside the cube once the lid opens */
+    .specimen .core {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateZ(0px) scale(0.9);
+      transition: opacity 1s var(--ease-out) 0.6s, transform 1s var(--ease-out) 0.6s;
+    }
+    .specimen.open .core {
+      opacity: 1;
+      transform: translateZ(0px) scale(1);
+    }
+    .specimen .core .glyph {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 8em;
+      line-height: 1;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(201, 169, 97, 0.55);
+    }
+
+    .cover h1 {
+      font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(56px, 11vw, 152px);
-      line-height: 0.96;
-      letter-spacing: -0.04em;
-      color: var(--forest);
-      max-width: 14ch;
-      margin-bottom: 40px;
+      font-size: clamp(40px, 6.6vw, 86px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--on-dark);
+      max-width: 18ch;
     }
-    .hero h1 .non-italic {
+    .cover h1 .mark-non {
       font-style: normal;
       font-family: var(--sans);
       font-weight: 500;
-      font-size: 0.85em;
       letter-spacing: -0.02em;
-      color: var(--ink);
+      font-size: 0.78em;
+      color: var(--gold);
     }
-    .hero .lede {
-      font-size: clamp(17px, 1.5vw, 21px);
-      line-height: 1.55;
-      color: var(--ink-soft);
-      max-width: 540px;
-      margin-bottom: 56px;
+    .cover .meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--on-dark-mute);
+      max-width: 60ch;
+    }
+    .cover .meta .sep { color: var(--gold); margin: 0 8px; }
+
+    .cover-foot {
+      padding: 32px 36px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--on-dark-mute);
+      position: relative;
+      z-index: 2;
+    }
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .scroll-cue .vline {
+      display: inline-block;
+      width: 1px; height: 22px;
+      background: var(--gold);
+      animation: vline-shift 2.4s var(--ease-out) infinite;
+      transform-origin: top;
+    }
+    @keyframes vline-shift {
+      0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+      50%      { transform: scaleY(1);   opacity: 1; }
     }
 
-    /* signup form — inline */
-    .signup {
-      display: flex;
-      gap: 10px;
-      max-width: 540px;
-      flex-wrap: wrap;
-      align-items: stretch;
-    }
-    .signup .field { position: relative; flex: 1 1 240px; min-width: 0; }
-    .signup input[type=email] {
-      width: 100%;
-      height: 56px;
-      padding: 0 20px;
-      font-size: 15px;
-      font-family: var(--sans);
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.66);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid var(--line);
-      border-radius: 14px;
-      outline: none;
-      transition: border-color 0.3s var(--ease-out-expo),
-                  background 0.3s var(--ease-out-expo),
-                  box-shadow 0.4s var(--ease-out-expo);
-    }
-    .signup input[type=email]::placeholder { color: var(--ink-faint); }
-    .signup input[type=email]:hover { border-color: var(--sage); }
-    .signup input[type=email]:focus {
-      border-color: var(--moss);
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10);
-    }
-    .signup button {
-      height: 56px;
-      padding: 0 30px;
-      font-size: 15px;
-      font-weight: 500;
-      font-family: var(--sans);
-      letter-spacing: -0.005em;
-      color: #fff;
-      background: var(--forest);
-      border: none;
-      border-radius: 14px;
-      cursor: none;
+    /* =========================================================
+       II. examination — the cube rotates while four blueprint
+       labels animate in around it
+       ========================================================= */
+    .exam {
       position: relative;
+      background: var(--paper);
+      padding: 160px 0 200px;
       overflow: hidden;
-      transition: transform 0.3s var(--ease-out-expo),
-                  background 0.3s var(--ease-out-expo),
-                  box-shadow 0.4s var(--ease-out-expo);
-      white-space: nowrap;
     }
-    .signup button::before {
+    .exam::before {
       content: '';
       position: absolute;
-      top: -50%; left: -50%;
-      width: 0; height: 0;
-      background: radial-gradient(circle, var(--moss), transparent 55%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s var(--ease-out-expo), height 0.6s var(--ease-out-expo);
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 95% 0%, rgba(201,169,97,0.16), transparent 55%),
+        radial-gradient(ellipse 70% 60% at -5% 100%, rgba(91,138,110,0.12), transparent 60%);
       pointer-events: none;
     }
-    .signup button span { position: relative; z-index: 1; }
-    .signup button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px -12px rgba(91, 138, 110, 0.55);
+    .exam .head {
+      max-width: 1180px;
+      margin: 0 auto 120px;
+      padding: 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
-    .signup button:hover::before { width: 240px; height: 240px; }
-    .signup button:active { transform: translateY(0); }
-    .signup button:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
-    @media (hover: none), (pointer: coarse) { .signup button { cursor: pointer; } .signup input[type=email] { cursor: text; } }
-
-    .status {
-      width: 100%;
-      min-height: 18px;
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--moss);
-      font-family: var(--sans);
+    .exam h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(40px, 5.4vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--forest);
+      max-width: 22ch;
     }
-    .status.error { color: #B33A3A; }
+    .exam h2 .accent { color: var(--gold); }
 
-    .scroll-cue {
-      position: absolute;
-      left: 32px;
-      bottom: 40px;
+    .stage {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 36px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .stage .object {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-family: var(--sans);
-      font-size: 12px;
+      justify-content: center;
+      height: 460px;
+    }
+    .stage .object .specimen-2 {
+      width: 240px; height: 240px;
+      perspective: 1200px;
+    }
+    .stage .object .specimen-2 .cube {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: cube-tumble 18s linear infinite;
+    }
+    @keyframes cube-tumble {
+      0%   { transform: rotateX(-12deg) rotateY(0deg); }
+      50%  { transform: rotateX(12deg)  rotateY(180deg); }
+      100% { transform: rotateX(-12deg) rotateY(360deg); }
+    }
+    .stage .object .specimen-2 .face {
+      position: absolute;
+      inset: 0;
+      border: 1.2px solid var(--forest);
+      background: rgba(31, 58, 46, 0.025);
+    }
+    .stage .object .specimen-2 .f { transform: translateZ(120px); }
+    .stage .object .specimen-2 .b { transform: rotateY(180deg) translateZ(120px); }
+    .stage .object .specimen-2 .r { transform: rotateY(90deg)  translateZ(120px); }
+    .stage .object .specimen-2 .l { transform: rotateY(-90deg) translateZ(120px); }
+    .stage .object .specimen-2 .t { transform: rotateX(90deg)  translateZ(120px); }
+    .stage .object .specimen-2 .d { transform: rotateX(-90deg) translateZ(120px); }
+
+    .object-caption {
+      position: absolute;
+      bottom: 0; left: 0;
+      font-family: var(--mono);
+      font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--ink-mute);
     }
-    .scroll-cue .line {
-      width: 36px;
-      height: 1px;
-      background: var(--ink-mute);
-      position: relative;
-      overflow: hidden;
-    }
-    .scroll-cue .line::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--forest);
-      transform: translateX(-100%);
-      animation: cue-slide 2.8s var(--ease-out-expo) infinite;
-    }
-    @keyframes cue-slide {
-      0%   { transform: translateX(-100%); }
-      50%  { transform: translateX(0); }
-      100% { transform: translateX(110%); }
-    }
+    .object-caption em { font-family: var(--serif); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--ink-soft); }
 
-    /* =========================================================
-       reveal-on-load: hero text comes in line by line via clip-path
-       (igloo-style mask reveal — handled by CSS class, GSAP just adds it)
-       ========================================================= */
-    .reveal-mask {
-      display: block;
-      overflow: hidden;
-      padding-bottom: 0.04em;
-    }
-    .reveal-mask > * {
-      display: block;
-      transform: translateY(110%);
-      will-change: transform;
-    }
-
-    /* =========================================================
-       contrast section — dark forest with gradient mesh
-       ========================================================= */
-    .contrast {
+    /* the labels: little diagrammatic pointers that draw in on scroll */
+    .labels {
       position: relative;
-      background: var(--bg-deep);
-      color: var(--ink-on-dark);
-      padding: 200px 0;
-      overflow: hidden;
-    }
-    .contrast::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201,169,97,0.18), transparent 50%),
-        radial-gradient(ellipse 70% 60% at 15% 85%, rgba(91,138,110,0.22), transparent 55%);
-      pointer-events: none;
-    }
-    .contrast h2 {
-      font-family: var(--display);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(40px, 6vw, 84px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      max-width: 18ch;
-      color: var(--ink-on-dark);
-    }
-    .contrast h2 .accent {
-      font-style: normal;
-      color: var(--gold);
-    }
-    .contrast .lede {
-      font-size: clamp(17px, 1.4vw, 20px);
-      color: var(--ink-on-dark-soft);
-      margin-top: 36px;
-      max-width: 52ch;
-      line-height: 1.65;
-    }
-    .contrast .label {
-      font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--ink-on-dark-mute);
-      margin-bottom: 36px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .contrast .label::before {
-      content: '';
-      width: 22px; height: 1px; background: var(--gold);
-    }
-
-    /* =========================================================
-       pinned thesis — 3 lines that swap as scroll progresses
-       ========================================================= */
-    .thesis-pin {
-      position: relative;
-      height: 300vh;
-      background: var(--bg-deep-2);
-      color: var(--ink-on-dark);
-    }
-    .thesis-pin .pin-target {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .thesis-pin::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,97,0.10), transparent 60%);
-      pointer-events: none;
-    }
-    .thesis-line {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: min(900px, 88%);
-      transform: translate(-50%, -50%);
-      font-family: var(--display);
-      font-size: clamp(36px, 5.2vw, 76px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      text-align: center;
-      opacity: 0;
-      will-change: opacity, transform;
-    }
-    .thesis-line em { font-style: italic; color: var(--gold); }
-
-    /* progress dots pinned to viewport bottom, not to the line stack */
-    .thesis-progress {
-      position: absolute;
-      bottom: 56px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 2;
-    }
-    .thesis-progress .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(245, 241, 232, 0.2);
-      transition: background 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
-    }
-    .thesis-progress .dot.active {
-      background: var(--gold);
-      transform: scale(1.4);
-    }
-
-    /* =========================================================
-       features — cream, glass cards, hover lift
-       ========================================================= */
-    .features {
-      position: relative;
-      padding: 200px 0;
-      overflow: hidden;
-    }
-    .features::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 50% 40% at 90% 5%, rgba(201,169,97,0.14), transparent 55%),
-        radial-gradient(ellipse 60% 50% at 5% 95%, rgba(91,138,110,0.10), transparent 55%);
-      pointer-events: none;
-    }
-    .features .label {
-      font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--ink-mute);
-      margin-bottom: 28px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .features .label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
-    .features h2 {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: clamp(40px, 5.6vw, 72px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--forest);
-      max-width: 18ch;
-      margin-bottom: 80px;
-    }
-    .features h2 em { font-style: italic; color: var(--moss); }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .feature {
-      position: relative;
-      padding: 48px 40px;
-      background: rgba(255, 255, 255, 0.42);
-      backdrop-filter: blur(14px) saturate(120%);
-      -webkit-backdrop-filter: blur(14px) saturate(120%);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      overflow: hidden;
-      transition: transform 0.6s var(--ease-out-expo),
-                  border-color 0.6s var(--ease-out-expo),
-                  box-shadow 0.6s var(--ease-out-expo),
-                  background 0.6s var(--ease-out-expo);
-    }
-    .feature::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.6s var(--ease-out-expo);
-    }
-    .feature::after {
-      content: '';
-      position: absolute;
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, rgba(201,169,97,0.18), transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.6s var(--ease-out-expo);
-      transform: translate(-50%, -50%);
-      left: var(--mx, 50%);
-      top: var(--my, 50%);
-    }
-    .feature:hover {
-      transform: translateY(-4px);
-      border-color: var(--sage);
-      background: rgba(255, 255, 255, 0.66);
-      box-shadow: 0 24px 60px -16px rgba(31, 58, 46, 0.14);
-    }
-    .feature:hover::before, .feature:hover::after { opacity: 1; }
-    .feature .icon {
-      width: 44px; height: 44px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--forest);
-      border-radius: 12px;
-      color: var(--bg);
-      transition: transform 0.6s var(--ease-spring);
-    }
-    .feature:hover .icon { transform: rotate(-8deg) scale(1.05); }
-    .feature h3 {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: clamp(24px, 2.6vw, 32px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--forest);
-      margin-bottom: 14px;
-    }
-    .feature h3 em { font-style: italic; color: var(--moss); }
-    .feature p {
-      color: var(--ink-soft);
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: 38ch;
-    }
-
-    /* =========================================================
-       how it works — dark forest, big italic numerals
-       ========================================================= */
-    .how {
-      background: var(--bg-deep);
-      color: var(--ink-on-dark);
-      padding: 200px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .how::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 80% 90%, rgba(201,169,97,0.14), transparent 55%);
-      pointer-events: none;
-    }
-    .how .label {
-      font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--ink-on-dark-mute);
-      margin-bottom: 36px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .how .label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
-    .how h2 {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: clamp(40px, 5.6vw, 72px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      max-width: 18ch;
-      margin-bottom: 100px;
-      color: var(--ink-on-dark);
-    }
-    .how h2 em { font-style: italic; color: var(--gold); }
-    .steps {
       display: flex;
       flex-direction: column;
+      gap: 28px;
     }
-    .step {
+    .label {
       position: relative;
       display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 40px;
-      align-items: baseline;
-      padding: 40px 0;
-      border-top: 1px solid var(--line-dark);
-      transition: padding 0.6s var(--ease-out-expo);
+      grid-template-columns: 88px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 8px 0;
     }
-    .step:last-child { border-bottom: 1px solid var(--line-dark); }
-    .step:hover { padding-left: 8px; }
-    .step .num {
-      font-family: var(--display);
+    .label .pointer {
+      position: relative;
+      height: 1px;
+      margin-top: 14px;
+      background: var(--gold);
+      opacity: 0.4;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      transition: transform 1s var(--ease-out), opacity 0.6s var(--ease-out);
+    }
+    .label.shown .pointer { transform: scaleX(1); opacity: 0.8; }
+    .label .pointer::before {
+      content: '';
+      position: absolute;
+      right: -4px; top: -3px;
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .label .roman {
+      font-family: var(--serif);
       font-style: italic;
-      font-size: clamp(56px, 7vw, 96px);
+      font-size: 22px;
       line-height: 1;
       color: var(--gold);
-      letter-spacing: -0.02em;
+      grid-row: 1 / span 2;
+      text-align: right;
+      padding-right: 4px;
+      opacity: 0;
+      transition: opacity 0.6s var(--ease-out) 0.25s;
     }
-    .step h3 {
-      font-family: var(--display);
+    .label.shown .roman { opacity: 1; }
+    .label .body {
+      grid-column: 2;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.7s var(--ease-out) 0.3s, transform 0.7s var(--ease-out) 0.3s;
+    }
+    .label.shown .body { opacity: 1; transform: translateY(0); }
+    .label .body .head-line {
+      font-family: var(--serif);
       font-style: italic;
-      font-weight: 400;
-      font-size: clamp(26px, 3vw, 38px);
+      font-size: clamp(20px, 2vw, 26px);
       line-height: 1.2;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.015em;
+      color: var(--forest);
       margin-bottom: 6px;
-      color: var(--ink-on-dark);
     }
-    .step p {
-      color: var(--ink-on-dark-soft);
-      font-size: 15px;
-      line-height: 1.55;
-      max-width: 56ch;
-    }
-    .step .arrow {
-      font-family: var(--display);
-      font-size: 24px;
-      color: var(--ink-on-dark-mute);
-      transition: transform 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
-    }
-    .step:hover .arrow {
-      transform: translateX(8px);
-      color: var(--gold);
+    .label .body p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 42ch;
     }
 
     /* =========================================================
-       final CTA — cream, calm, last beat
+       III. field notes — drop caps, editorial
        ========================================================= */
-    .final {
-      padding: 220px 0 160px;
-      text-align: center;
+    .notes {
+      background: var(--paper-warm);
+      padding: 180px 0;
       position: relative;
-      overflow: hidden;
     }
-    .final::before {
+    .notes::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(201,169,97,0.18), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 50% 95%, rgba(91,138,110,0.12), transparent 55%);
+      background: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(91,138,110,0.10), transparent 60%);
       pointer-events: none;
     }
-    .final h2 {
-      font-family: var(--display);
+    .notes .head {
+      max-width: 720px;
+      margin: 0 auto 72px;
+      padding: 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .notes h2 {
+      font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(48px, 7vw, 96px);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-size: clamp(36px, 4.8vw, 60px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--forest);
+      max-width: 22ch;
+    }
+    .note-block {
+      max-width: 720px;
+      margin: 0 auto 72px;
+      padding: 0 36px;
+    }
+    .note-block:last-child { margin-bottom: 0; }
+    .note-block .note-head {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .note-block .note-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(24px, 2.6vw, 32px);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
       color: var(--forest);
       margin-bottom: 24px;
     }
-    .final p.lede {
-      font-size: clamp(17px, 1.45vw, 20px);
-      color: var(--ink-soft);
-      max-width: 540px;
-      margin: 0 auto 56px;
-      line-height: 1.6;
+    .note-block .note-body {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink);
     }
-    .final .signup { margin: 0 auto; justify-content: center; }
-    .final .small {
-      margin-top: 14px;
+    .note-block .note-body::first-letter {
+      font-family: var(--serif);
       font-style: italic;
-      font-family: var(--display);
-      font-size: 15px;
-      color: var(--ink-mute);
+      font-size: 5.2em;
+      float: left;
+      line-height: 0.85;
+      padding: 8px 14px 0 0;
+      color: var(--gold);
     }
 
     /* =========================================================
-       footer
+       IV. specifications — a printed catalog page
+       ========================================================= */
+    .specs {
+      background: var(--paper);
+      padding: 180px 0;
+      border-top: 1px solid var(--line);
+    }
+    .specs .head {
+      max-width: 880px;
+      margin: 0 auto 56px;
+      padding: 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .specs h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(36px, 4.4vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--forest);
+    }
+    .specs-table {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 36px;
+      font-family: var(--mono);
+    }
+    .specs-row {
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      gap: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+      transition: padding-left 0.5s var(--ease-out), background 0.5s var(--ease-out);
+    }
+    .specs-row:last-child { border-bottom: 1px solid var(--line); }
+    .specs-row:hover {
+      padding-left: 8px;
+      background: linear-gradient(90deg, rgba(201,169,97,0.06), transparent 60%);
+    }
+    .specs-key {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .specs-val {
+      font-family: var(--sans);
+      font-size: 17px;
+      color: var(--forest);
+      letter-spacing: -0.005em;
+    }
+    .specs-val em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+    }
+    .specs-num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* =========================================================
+       V. first viewing — waitlist as a register
+       ========================================================= */
+    .viewing {
+      background: var(--night);
+      color: var(--on-dark);
+      padding: 200px 0 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    .viewing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,169,97,0.18), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(31,58,46,0.7), transparent 60%);
+      pointer-events: none;
+    }
+    .viewing .head {
+      max-width: 720px;
+      margin: 0 auto 56px;
+      padding: 0 36px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .viewing h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(44px, 6vw, 80px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--on-dark);
+      max-width: 18ch;
+    }
+    .viewing h2 em { color: var(--gold); }
+    .viewing .lede {
+      max-width: 540px;
+      color: var(--on-dark-soft);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .register {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .register .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .register input[type=email] {
+      flex: 1 1 220px;
+      min-width: 0;
+      height: 56px;
+      padding: 0 18px;
+      font-size: 15px;
+      font-family: var(--sans);
+      color: var(--on-dark);
+      background: rgba(245, 241, 232, 0.05);
+      border: 1.5px solid rgba(245, 241, 232, 0.18);
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.3s var(--ease-out),
+                  background 0.3s var(--ease-out),
+                  box-shadow 0.4s var(--ease-out);
+    }
+    .register input[type=email]::placeholder { color: var(--on-dark-mute); }
+    .register input[type=email]:hover { border-color: var(--sage); }
+    .register input[type=email]:focus {
+      border-color: var(--gold);
+      background: rgba(245, 241, 232, 0.10);
+      box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.14);
+    }
+    .register button {
+      height: 56px;
+      padding: 0 28px;
+      font-size: 14px;
+      font-family: var(--mono);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--night);
+      background: var(--gold);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out), background 0.3s var(--ease-out);
+    }
+    .register button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px -12px rgba(201, 169, 97, 0.45);
+      background: var(--gold-warm);
+    }
+    .register button:active { transform: translateY(0); }
+    .register button:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
+    .register .status {
+      min-height: 18px;
+      margin-top: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .register .status.error { color: #E07B7B; }
+    .register .small {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--on-dark-mute);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* =========================================================
+       footer (on dark, signed)
        ========================================================= */
     footer {
-      padding: 56px 0 64px;
-      border-top: 1px solid var(--line);
-      color: var(--ink-mute);
-      font-family: var(--sans);
-      font-size: 13px;
+      background: var(--night);
+      color: var(--on-dark-mute);
+      padding: 32px 32px 56px;
+      border-top: 1px solid var(--on-dark-line);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       position: relative;
       z-index: 2;
     }
     footer .row {
+      max-width: 1180px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
     }
-    footer a { transition: color 0.3s var(--ease-out-expo); }
-    footer a:hover { color: var(--forest); }
+    footer a { transition: color 0.3s var(--ease-out); }
+    footer a:hover { color: var(--gold); }
     footer .links { display: flex; gap: 28px; }
 
     /* =========================================================
-       reveal utility — used by GSAP for split-line text
+       reveal utility — used by GSAP
        ========================================================= */
     .rv {
       opacity: 0;
@@ -877,7 +870,7 @@
     .rv-mask > * { transform: translateY(110%); display: block; }
 
     /* =========================================================
-       reduced-motion safety net
+       reduced motion safety net
        ========================================================= */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -886,447 +879,343 @@
         transition-duration: 0.01ms !important;
       }
       .rv, .rv-mask > * { opacity: 1 !important; transform: none !important; }
-      .loader { display: none; }
+      .specimen .lid { transform: rotateX(-110deg) translateZ(50%) !important; }
+      .specimen .core { opacity: 1 !important; transform: scale(1) !important; }
+      .label { opacity: 1 !important; }
+      .label .pointer { transform: scaleX(1) !important; }
+      .label .body, .label .roman { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
     }
 
     /* =========================================================
        mobile
        ========================================================= */
-    @media (max-width: 760px) {
-      header { padding: 16px 22px; }
+    @media (max-width: 820px) {
+      header { padding: 14px 22px; grid-template-columns: 1fr auto; gap: 12px; }
       header.scrolled { padding: 12px 22px; }
-      .meta { display: none; }
-      .meta-m { display: none; }
-      .wrap, .wrap-narrow { padding: 0 22px; }
-      .hero { padding: 140px 0 80px; min-height: auto; }
-      .hero h1 { font-size: 14vw; max-width: 12ch; }
-      .scroll-cue { left: 22px; bottom: 24px; }
-      .contrast, .features, .how, .final { padding: 110px 0; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .feature { padding: 36px 28px; border-radius: 18px; }
-      .step { grid-template-columns: 80px 1fr; gap: 20px; padding: 28px 0; }
-      .step .arrow { display: none; }
-      .step .num { font-size: 48px; }
-      .thesis-pin { height: 320vh; }
-      .thesis-line { padding: 0 22px; }
-      .signup { gap: 12px; }
-      .signup input[type=email], .signup button { height: 52px; }
-      .signup button { width: 100%; }
-      .final { padding: 130px 0 100px; }
-      footer { padding: 40px 0 48px; }
+      .header-mid { display: none; }
+      .wrap, .narrow { padding: 0 22px; }
+      .cover-inner { padding: 120px 22px 30px; gap: 40px; }
+      .cover h1 { font-size: 12vw; max-width: 14ch; }
+      .cover-foot { padding: 24px 22px; }
+      .exam { padding: 120px 0 140px; }
+      .exam .head { padding: 0 22px; margin-bottom: 56px; }
+      .stage { grid-template-columns: 1fr; gap: 64px; padding: 0 22px; }
+      .stage .object { height: 280px; }
+      .stage .object .specimen-2 { width: 180px; height: 180px; }
+      .stage .object .specimen-2 .f { transform: translateZ(90px); }
+      .stage .object .specimen-2 .b { transform: rotateY(180deg) translateZ(90px); }
+      .stage .object .specimen-2 .r { transform: rotateY(90deg)  translateZ(90px); }
+      .stage .object .specimen-2 .l { transform: rotateY(-90deg) translateZ(90px); }
+      .stage .object .specimen-2 .t { transform: rotateX(90deg)  translateZ(90px); }
+      .stage .object .specimen-2 .d { transform: rotateX(-90deg) translateZ(90px); }
+      .object-caption { position: static; margin-top: 24px; text-align: center; }
+      .label { grid-template-columns: 32px 1fr; gap: 16px; }
+      .label .pointer { display: none; }
+      .label .roman { text-align: left; padding-right: 0; font-size: 18px; }
+      .notes { padding: 120px 0; }
+      .note-block { padding: 0 22px; margin-bottom: 56px; }
+      .note-block .note-body::first-letter { font-size: 4em; padding: 4px 10px 0 0; }
+      .specs { padding: 120px 0; }
+      .specs .head { padding: 0 22px; }
+      .specs-table { padding: 0 22px; }
+      .specs-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+      .specs-num { display: none; }
+      .specs-row:hover { padding-left: 0; background: none; }
+      .viewing { padding: 130px 0 150px; }
+      .viewing .head, .register { padding: 0 22px; }
+      .register .row { gap: 12px; }
+      .register input[type=email], .register button { height: 52px; }
+      .register button { width: 100%; }
+      footer { padding: 28px 22px 40px; }
       footer .row { flex-direction: column; align-items: flex-start; }
-      .cursor { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- loading screen -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-text">
-    <span>G</span><span>r</span><span>e</span><span>e</span><span>n</span><span>C</span><span>u</span><span>b</span><span>e</span>
-  </div>
-  <div class="loader-bar" id="loader-bar"></div>
-</div>
-
-<!-- custom cursor -->
-<div class="cursor" id="cursor" aria-hidden="true"></div>
-
-<!-- scroll progress -->
+<div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
-<!-- grain -->
-<div class="grain" aria-hidden="true"></div>
-
-<!-- header -->
-<header id="header">
-  <a href="#" class="brand interactive" aria-label="GreenCube home">
-    <span class="brand-mark" aria-hidden="true">
-      <span class="cube">
-        <span class="face f"></span><span class="face b"></span>
-        <span class="face r"></span><span class="face l"></span>
-        <span class="face t"></span><span class="face d"></span>
-      </span>
-    </span>
+<header id="header" class="dark">
+  <a href="#top" class="brand" aria-label="GreenCube home">
+    <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
-  <span class="pill"><span class="dot" aria-hidden="true"></span>Coming soon</span>
-  <span class="meta">No. 01 — Spring 2026</span>
+  <span class="header-mid" id="chapter">Specimen №01 · MMXXVI</span>
+  <span class="header-end"><span class="dot" aria-hidden="true"></span>Coming soon</span>
 </header>
 
-<!-- hero -->
-<section class="hero" id="hero">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <h1>
-      <span class="reveal-mask"><span>An assistant</span></span>
-      <span class="reveal-mask"><span>that lives on</span></span>
-      <span class="reveal-mask"><span class="non-italic">your computer.</span></span>
-    </h1>
-    <p class="lede rv">A desktop app that runs state-of-the-art language models entirely on your own hardware. No cloud. No accounts. No data leaving your computer.</p>
-    <form class="signup rv" id="hero-form" novalidate>
-      <div class="field">
-        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
+<!-- I. cover : the cube hatches, brand mark revealed -->
+<section class="cover dark-section" id="top" data-chapter="Specimen №01 · MMXXVI">
+  <div class="cover-inner">
+    <div class="specimen-line"><span class="rule"></span>I · Specimen №01 · Spring MMXXVI<span class="rule"></span></div>
+
+    <div class="specimen" id="specimen">
+      <div class="cube">
+        <span class="face f lid"></span>
+        <span class="face b"></span>
+        <span class="face r"></span>
+        <span class="face l"></span>
+        <span class="face t"></span>
+        <span class="face d"></span>
+        <div class="core" aria-hidden="true">
+          <span class="glyph">G</span>
+        </div>
       </div>
-      <button class="interactive" type="submit"><span>Get early access</span></button>
-      <div class="status" id="hero-status" role="status" aria-live="polite"></div>
-    </form>
-  </div>
-  <div class="scroll-cue" aria-hidden="true">
-    <span class="line"></span>
-    <span>Scroll</span>
-  </div>
-</section>
-
-<!-- contrast: the problem, dark -->
-<section class="contrast" data-theme="dark">
-  <div class="wrap-narrow">
-    <div class="label rv">The state of things</div>
-    <h2 class="rv">Right now, talking to AI means talking to a server <em class="accent">somewhere far away.</em></h2>
-    <p class="lede rv">Logged. Metered. Rate-limited. Read by whoever owns the network. Held together by API keys and monthly invoices. Useful — but never quite yours.</p>
-  </div>
-</section>
-
-<!-- pinned thesis: scroll through three statements -->
-<section class="thesis-pin" data-theme="dark" id="thesis">
-  <div class="pin-target">
-    <div class="thesis-line" data-i="0">It doesn't <em>have to be</em> that way.</div>
-    <div class="thesis-line" data-i="1">Open models now run on the laptop <em>you already own.</em></div>
-    <div class="thesis-line" data-i="2">A 5.7&nbsp;GB file. Your hardware. <em>That's the whole thing.</em></div>
-    <div class="thesis-progress" aria-hidden="true">
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </div>
+
+    <h1 class="rv">An assistant that <span class="mark-non">lives where you do.</span></h1>
+    <p class="meta rv">A desktop app for state-of-the-art language models<span class="sep">·</span>running on your hardware<span class="sep">·</span>private by design</p>
+  </div>
+
+  <div class="cover-foot">
+    <span>greencube.world</span>
+    <span class="scroll-cue"><span>Continue</span><span class="vline" aria-hidden="true"></span></span>
   </div>
 </section>
 
-<!-- features: cream, glass cards -->
-<section class="features" id="features">
-  <div class="wrap">
-    <div class="label rv">Why GreenCube</div>
-    <h2 class="rv">Built for the way computers <em>should work.</em></h2>
-    <div class="feature-grid">
-      <article class="feature interactive">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="6" width="18" height="13" rx="2"/>
-            <path d="M8 19v3M16 19v3M3 14h18"/>
-          </svg>
+<!-- II. examination : object + four labels animate in around it -->
+<section class="exam" id="examination" data-chapter="II · Examination">
+  <div class="head">
+    <span class="eyebrow rv">II — Examination</span>
+    <h2 class="rv">A small object you can <span class="accent">hold in your machine.</span></h2>
+  </div>
+
+  <div class="stage">
+    <div class="object">
+      <div class="specimen-2" aria-hidden="true">
+        <div class="cube">
+          <span class="face f"></span><span class="face b"></span>
+          <span class="face r"></span><span class="face l"></span>
+          <span class="face t"></span><span class="face d"></span>
         </div>
-        <h3>Runs on <em>your hardware.</em></h3>
-        <p>Open-weights language models execute directly on your CPU and GPU. No servers, no API keys, no monthly invoices.</p>
-      </article>
-      <article class="feature interactive">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="11" width="14" height="9" rx="2"/>
-            <path d="M8 11V8a4 4 0 1 1 8 0v3"/>
-          </svg>
-        </div>
-        <h3>Stays <em>on your computer.</em></h3>
-        <p>Conversations sit on your hard drive and never touch the network. We can't read what you write to it. Nobody can.</p>
-      </article>
-      <article class="feature interactive">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 7v5l3 2"/>
-          </svg>
-        </div>
-        <h3>Picks <em>its own model.</em></h3>
-        <p>GreenCube reads your hardware on first launch and downloads the best open model that fits — automatically.</p>
-      </article>
-      <article class="feature interactive">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 12h16M12 4v16"/>
-          </svg>
-        </div>
-        <h3>No <em>quotas.</em></h3>
-        <p>Chat as long as you want. Run as long as you want. The only ceiling is your machine.</p>
-      </article>
+      </div>
+      <div class="object-caption"><span>Fig.&nbsp;I</span>&nbsp;&nbsp;<em>Topology of a local mind</em></div>
     </div>
-  </div>
-</section>
 
-<!-- how it works: dark forest -->
-<section class="how" id="how" data-theme="dark">
-  <div class="wrap-narrow">
-    <div class="label rv">How it works</div>
-    <h2 class="rv">Three steps. <em>That's the whole thing.</em></h2>
-    <div class="steps">
-      <div class="step interactive rv">
-        <div class="num">01</div>
-        <div>
-          <h3>Download GreenCube.</h3>
-          <p>One installer. About 60&nbsp;MB before any model is fetched.</p>
+    <div class="labels">
+      <div class="label" data-i="1">
+        <div class="pointer"></div>
+        <span class="roman">i.</span>
+        <div class="body">
+          <div class="head-line">Open weights, ≈5.7&nbsp;GB.</div>
+          <p>Phi-4, Qwen 3.5, Gemma 4. A single file you actually own. No keys to revoke, no servers to wait on.</p>
         </div>
-        <div class="arrow">→</div>
       </div>
-      <div class="step interactive rv">
-        <div class="num">02</div>
-        <div>
-          <h3>It picks your model.</h3>
-          <p>Based on your RAM and GPU. The first launch pulls the file; after that you're offline forever if you want.</p>
+
+      <div class="label" data-i="2">
+        <div class="pointer"></div>
+        <span class="roman">ii.</span>
+        <div class="body">
+          <div class="head-line">Lives in memory, not on a server.</div>
+          <p>The model loads onto your CPU and GPU. Conversations sit on your hard drive. Nothing to leak because nothing leaves.</p>
         </div>
-        <div class="arrow">→</div>
       </div>
-      <div class="step interactive rv">
-        <div class="num">03</div>
-        <div>
-          <h3>Open it. Write.</h3>
-          <p>Code, draft, think. No accounts, no quotas, no pings home.</p>
+
+      <div class="label" data-i="3">
+        <div class="pointer"></div>
+        <span class="roman">iii.</span>
+        <div class="body">
+          <div class="head-line">Reads your hardware. Picks the right model.</div>
+          <p>On first launch it measures your RAM and GPU and downloads the strongest open model that fits. No tier to pick. No settings to tune.</p>
         </div>
-        <div class="arrow">→</div>
+      </div>
+
+      <div class="label" data-i="4">
+        <div class="pointer"></div>
+        <span class="roman">iv.</span>
+        <div class="body">
+          <div class="head-line">No ledger. No quotas.</div>
+          <p>No accounts. No tokens metered. No analytics dialing home. Run it for an hour or for a week — the only ceiling is your machine.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- final CTA: cream, calm closing -->
-<section class="final" id="join">
-  <div class="wrap-narrow">
-    <h2 class="rv">Be early.</h2>
-    <p class="lede rv">We'll send a single email when GreenCube goes live. No newsletter, no marketing.</p>
-    <form class="signup rv" id="cta-form" novalidate>
-      <div class="field">
-        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
-      </div>
-      <button class="interactive" type="submit"><span>Join the waitlist</span></button>
-      <div class="status" id="cta-status" role="status" aria-live="polite"></div>
-    </form>
-    <p class="small rv">One email. Then silence.</p>
+<!-- III. field notes : two short philosophy paragraphs with drop caps -->
+<section class="notes" id="notes" data-chapter="III · Field notes">
+  <div class="head">
+    <span class="eyebrow rv">III — Field notes</span>
+    <h2 class="rv">Two small claims, on which the rest of this rests.</h2>
   </div>
+
+  <article class="note-block rv">
+    <div class="note-head">i. on where a thought lives</div>
+    <div class="note-title">A model on your machine is not a smaller version of a model in the cloud. It is a different kind of object entirely.</div>
+    <p class="note-body">It does not require a network. It does not log your prompts. It cannot be deprecated, paywalled, or quietly aligned away from you. The same file, on your disk, will still answer your question in five years — even if the company that trained it is gone. That is a strange and rare property, and it is worth caring about.</p>
+  </article>
+
+  <article class="note-block rv">
+    <div class="note-head">ii. on the question of who reads it</div>
+    <div class="note-title">"Private mode" is not the same thing as private.</div>
+    <p class="note-body">Every cloud assistant is, from a privacy standpoint, a stranger you've handed a stack of letters and asked to read aloud only to you. That arrangement is fine until it isn't. GreenCube takes the stranger out of the room. Your conversations stay where you wrote them — on the same hard drive that holds the rest of your life.</p>
+  </article>
+</section>
+
+<!-- IV. specifications : printed catalog table -->
+<section class="specs" id="specs" data-chapter="IV · Specifications">
+  <div class="head">
+    <span class="eyebrow rv">IV — Specifications</span>
+    <h2 class="rv">For the curious, the cautious, and the rest.</h2>
+  </div>
+
+  <div class="specs-table">
+    <div class="specs-row rv"><span class="specs-key">Class</span><span class="specs-val">Local language model, desktop application</span><span class="specs-num">a.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Year</span><span class="specs-val">MMXXVI</span><span class="specs-num">b.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Origin</span><span class="specs-val">Open-source weights · multiple authors</span><span class="specs-num">c.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Composition</span><span class="specs-val">≈9 billion parameters · Q4_K_M quantisation</span><span class="specs-num">d.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Substrate</span><span class="specs-val">Your CPU and GPU · Vulkan-accelerated</span><span class="specs-num">e.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Memory</span><span class="specs-val">8&nbsp;GB minimum, 16&nbsp;GB to thrive</span><span class="specs-num">f.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Footprint</span><span class="specs-val">≈6 GB on disk, including the model</span><span class="specs-num">g.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Network</span><span class="specs-val">Required once, to fetch the model. Then optional, forever.</span><span class="specs-num">h.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Subscription</span><span class="specs-val"><em>None.</em></span><span class="specs-num">i.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Quota</span><span class="specs-val"><em>None.</em></span><span class="specs-num">j.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Telemetry</span><span class="specs-val"><em>None.</em></span><span class="specs-num">k.</span></div>
+    <div class="specs-row rv"><span class="specs-key">Release</span><span class="specs-val">Spring MMXXVI · Windows first · macOS &amp; Linux to follow</span><span class="specs-num">l.</span></div>
+  </div>
+</section>
+
+<!-- V. first viewing : waitlist -->
+<section class="viewing dark-section" id="viewing" data-chapter="V · First viewing">
+  <div class="head">
+    <span class="eyebrow rv">V — First viewing</span>
+    <h2 class="rv">Be there when the <em>case opens.</em></h2>
+    <p class="lede rv">First viewings of GreenCube begin in spring. Leave an address and we'll send a single message — one — when the case is ready to open.</p>
+  </div>
+  <form class="register rv" id="form" novalidate>
+    <div class="row">
+      <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit"><span>Register</span></button>
+    </div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <p class="small">A single message. No newsletter, no follow-up.</p>
+  </form>
 </section>
 
 <footer>
-  <div class="wrap row">
-    <div>© 2026 GreenCube</div>
+  <div class="row">
+    <span>© MMXXVI · GreenCube</span>
     <nav class="links" aria-label="Footer">
-      <a href="mailto:team@greencube.world" class="interactive">team@greencube.world</a>
-      <a href="/privacy" class="interactive">Privacy</a>
+      <a href="mailto:team@greencube.world">team@greencube.world</a>
+      <a href="/privacy">Privacy</a>
     </nav>
   </div>
 </footer>
 
-<!-- libs from CDN: Lenis (smooth scroll) + GSAP + ScrollTrigger -->
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<!-- libs from CDN: GSAP + ScrollTrigger only. No Lenis. Native browser scroll. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isCoarse = matchMedia('(hover: none), (pointer: coarse)').matches;
-
-  // -----------------------------------------------------------
-  // 1. Lenis smooth scroll → integrate with GSAP ticker so
-  //    ScrollTrigger reads the same scroll position.
-  // -----------------------------------------------------------
-  let lenis;
-  if (!reduced && window.Lenis) {
-    lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-    lenis.on('scroll', () => window.ScrollTrigger && ScrollTrigger.update());
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
   if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   // -----------------------------------------------------------
-  // 2. Loading reveal — wait for fonts before starting so we
-  //    don't run the timeline through a font swap (FOUT stripes).
-  //    GSAP timeline: letters spring up, bar fills, loader slides
-  //    off, hero text reveals from clip-path masks.
+  // 1. Wait for fonts before doing anything visual. This kills
+  //    the first-paint stripes/jumps that come from font swaps.
   // -----------------------------------------------------------
-  const loader = document.getElementById('loader');
-  const loaderBar = document.getElementById('loader-bar');
-  const heroLines = document.querySelectorAll('.hero h1 .reveal-mask > *');
-  const heroTail = [document.querySelector('.hero .lede'), document.querySelector('.hero .signup')];
-
-  function runLoader() {
-    document.body.classList.add('fonts-ready');
-    if (window.gsap && !reduced) {
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-      tl.to('.loader-text span', { y: 0, duration: 0.7, stagger: 0.03 }, 0.05)
-        .to(loaderBar, { width: '100%', duration: 0.85, ease: 'expo.inOut' }, 0)
-        .to(loader, {
-          yPercent: -100,
-          duration: 0.85,
-          ease: 'expo.inOut',
-          onComplete: () => loader.style.display = 'none',
-        }, '-=0.10')
-        .to(heroLines, { y: 0, duration: 1.0, stagger: 0.06 }, '-=0.55')
-        .to(heroTail, { y: 0, opacity: 1, duration: 0.85, stagger: 0.07 }, '-=0.45');
-    } else {
-      loader.style.display = 'none';
-      document.querySelectorAll('.reveal-mask > *').forEach(el => el.style.transform = 'translateY(0)');
-      document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
-    }
-  }
-
-  // Gate on fonts.ready so Instrument Serif + Geist are both available
-  // before the loader animation begins. Hard 1.2s timeout safety net so
-  // the page can't get stuck if Google Fonts is slow.
   let started = false;
-  const start = () => { if (started) return; started = true; runLoader(); };
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(start);
-  }
-  setTimeout(start, 1200);
+  const start = () => {
+    if (started) return;
+    started = true;
+    document.body.classList.add('fonts-ready');
+    runIntro();
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1000); // safety net
 
   // -----------------------------------------------------------
-  // 3. Header behaviour: scrolled state + dark-section auto-invert
-  //    (uses ScrollTrigger to flip header.dark when entering data-theme=dark)
+  // 2. The intro: cube hatches, brand glyph reveals, hero text
+  //    rises into place. ~1.5s, run once.
+  // -----------------------------------------------------------
+  function runIntro() {
+    const specimen = document.getElementById('specimen');
+
+    if (!window.gsap || reduced) {
+      // No-JS / reduced: just snap to the open state
+      specimen.classList.add('open');
+      document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+
+    // Open the lid after a short beat. The CSS handles the lid rotate
+    // and the brand glyph fade-in.
+    gsap.delayedCall(0.35, () => specimen.classList.add('open'));
+
+    // Hero copy rises after the cube has cracked open.
+    const heroRv = document.querySelectorAll('.cover .rv');
+    gsap.to(heroRv, {
+      opacity: 1,
+      y: 0,
+      duration: 1.0,
+      ease: 'expo.out',
+      stagger: 0.10,
+      delay: 1.0,
+    });
+  }
+
+  // -----------------------------------------------------------
+  // 3. Header: scrolled state + dark/light invert + chapter label
   // -----------------------------------------------------------
   const header = document.getElementById('header');
+  const chapter = document.getElementById('chapter');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 8);
   }, { passive: true });
 
   if (window.ScrollTrigger) {
-    document.querySelectorAll('[data-theme="dark"]').forEach(section => {
+    document.querySelectorAll('section[data-chapter]').forEach(section => {
+      const isDark = section.classList.contains('dark-section');
       ScrollTrigger.create({
         trigger: section,
         start: 'top 60px',
         end: 'bottom 60px',
-        onEnter:     () => header.classList.add('dark'),
-        onLeave:     () => header.classList.remove('dark'),
-        onEnterBack: () => header.classList.add('dark'),
-        onLeaveBack: () => header.classList.remove('dark'),
+        onEnter:     () => { header.classList.toggle('dark', isDark); chapter.textContent = section.dataset.chapter; },
+        onEnterBack: () => { header.classList.toggle('dark', isDark); chapter.textContent = section.dataset.chapter; },
       });
     });
   }
 
   // -----------------------------------------------------------
-  // 4. Generic reveal-on-scroll for `.rv` elements
+  // 4. Generic .rv reveal-on-scroll (excluding hero — handled above)
   // -----------------------------------------------------------
   if (window.gsap && window.ScrollTrigger && !reduced) {
     document.querySelectorAll('.rv').forEach(el => {
+      if (el.closest('.cover')) return;
       gsap.to(el, {
-        opacity: 1, y: 0, duration: 1.0, ease: 'expo.out',
+        opacity: 1, y: 0, duration: 0.95, ease: 'expo.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
       });
     });
   }
 
   // -----------------------------------------------------------
-  // 5. Pinned thesis: three lines crossfade as scroll progresses.
-  //    Direct CSS-property writes in onUpdate (NOT chained tweens
-  //    with overwrite:true — those jitter when scrolling fast).
-  //    Each line owns 1/N of the scroll range with a smooth ramp
-  //    at the in/out edges.
+  // 5. The label diagram: each pointer draws in, then the body
+  //    fades. Triggered as the labels stage enters the viewport.
   // -----------------------------------------------------------
-  if (window.gsap && window.ScrollTrigger && !reduced) {
-    const lines = Array.from(document.querySelectorAll('.thesis-line'));
-    const dots  = Array.from(document.querySelectorAll('.thesis-progress .dot'));
-    const N = lines.length;
-    const ramp = 0.12; // fraction of one slot used for fade-in / fade-out
-
-    // Show first line immediately (it's already on screen when section enters)
-    lines[0].style.opacity = '1';
-    lines[0].style.transform = 'translate(-50%, -50%)';
-    dots[0].classList.add('active');
-
-    function easeOut(x) { return 1 - Math.pow(1 - x, 3); }
-
-    ScrollTrigger.create({
-      trigger: '#thesis',
-      start: 'top top',
-      end: '+=200%',
-      pin: '.pin-target',
-      pinSpacing: true,
-      scrub: 0.6,
-      onUpdate: (self) => {
-        const p = self.progress;
-        const slot = 1 / N;
-
-        lines.forEach((line, i) => {
-          const start = i * slot;
-          const end   = start + slot;
-          let opacity = 0;
-          let yPx = 0;
-
-          if (p >= start && p <= end) {
-            // Inside this line's slot. Ramp in at the start, hold, ramp out at the end.
-            const local = (p - start) / slot;          // 0..1 within slot
-            if (local < ramp) {
-              const k = easeOut(local / ramp);
-              opacity = k;
-              yPx = (1 - k) * 28; // come up from below
-            } else if (local > 1 - ramp) {
-              const k = easeOut((1 - local) / ramp);
-              opacity = k;
-              yPx = -(1 - k) * 28; // exit upward
-            } else {
-              opacity = 1;
-              yPx = 0;
-            }
-          } else if (p < start) {
-            opacity = 0;
-            yPx = 28;
-          } else {
-            opacity = 0;
-            yPx = -28;
-          }
-
-          line.style.opacity = opacity.toFixed(3);
-          line.style.transform = `translate(-50%, calc(-50% + ${yPx.toFixed(1)}px))`;
-        });
-
-        const idx = Math.min(N - 1, Math.floor(p * N));
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      },
-    });
-  } else {
-    // Reduced motion / no GSAP — just stack the lines visibly.
-    document.querySelectorAll('.thesis-line').forEach(l => { l.style.opacity = 1; l.style.position = 'static'; l.style.transform = 'none'; l.style.marginBottom = '32px'; });
-  }
-
-  // -----------------------------------------------------------
-  // 6. Mouse-following highlight inside feature cards
-  // -----------------------------------------------------------
-  document.querySelectorAll('.feature').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
-  });
-
-  // -----------------------------------------------------------
-  // 7. Custom cursor (desktop only). Lerp toward target each frame
-  //    so it lags slightly behind — feels alive, not glued.
-  // -----------------------------------------------------------
-  if (!isCoarse && !reduced) {
-    const cursor = document.getElementById('cursor');
-    let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
-    let cx = tx, cy = ty;
-
-    window.addEventListener('mousemove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      if (!cursor.classList.contains('ready')) cursor.classList.add('ready');
-    });
-
-    function loop() {
-      cx += (tx - cx) * 0.20;
-      cy += (ty - cy) * 0.20;
-      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-      requestAnimationFrame(loop);
+  if (window.ScrollTrigger && !reduced) {
+    const labels = document.querySelectorAll('.exam .label');
+    if (labels.length) {
+      ScrollTrigger.create({
+        trigger: '.exam .stage',
+        start: 'top 70%',
+        once: true,
+        onEnter: () => {
+          labels.forEach((l, i) => {
+            setTimeout(() => l.classList.add('shown'), i * 220);
+          });
+        },
+      });
     }
-    loop();
-
-    // grow on interactive
-    document.querySelectorAll('.interactive, a, button, input, [role="button"]').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+  } else {
+    document.querySelectorAll('.exam .label').forEach(l => l.classList.add('shown'));
   }
 
   // -----------------------------------------------------------
-  // 8. Scroll progress bar
+  // 6. Scroll progress thread
   // -----------------------------------------------------------
   const progress = document.getElementById('progress');
   function updateProgress() {
@@ -1338,24 +1227,8 @@
   updateProgress();
 
   // -----------------------------------------------------------
-  // 9. Smooth anchor scrolling via Lenis
-  // -----------------------------------------------------------
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if (!id || id === '#') return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: -40, duration: 1.4 });
-      else target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  // -----------------------------------------------------------
-  // 10. Waitlist form handler. Local-only for now.
-  //     Replace `submitToBackend` with a fetch() to your endpoint
-  //     when one exists.
+  // 7. Waitlist handler. Local-only for now. Replace
+  //    submitToBackend with a fetch() to your endpoint.
   // -----------------------------------------------------------
   const STORAGE_KEY = 'greencube_waitlist';
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1369,10 +1242,9 @@
     return { ok: true };
   }
 
-  function wireForm(formId, statusId) {
-    const form = document.getElementById(formId);
-    const status = document.getElementById(statusId);
-    if (!form) return;
+  const form = document.getElementById('form');
+  if (form) {
+    const status = document.getElementById('status');
     const input = form.querySelector('input[type=email]');
     const button = form.querySelector('button');
     const buttonLabel = button.querySelector('span') || button;
@@ -1383,7 +1255,7 @@
       status.classList.remove('error');
 
       if (!EMAIL_RE.test(email)) {
-        status.textContent = 'That email looks off — mind double-checking?';
+        status.textContent = 'check the address';
         status.classList.add('error');
         input.focus();
         return;
@@ -1391,29 +1263,26 @@
 
       button.disabled = true;
       const prev = buttonLabel.textContent;
-      buttonLabel.textContent = 'Saving…';
+      buttonLabel.textContent = 'Saving';
       try {
         const res = await submitToBackend(email);
         if (res && res.ok) {
-          status.textContent = "You're on the list. We'll write when it's live.";
+          status.textContent = 'Registered. We will write.';
           input.value = '';
         } else {
-          status.textContent = "Couldn't save that — try again in a moment.";
+          status.textContent = 'Could not save — try again';
           status.classList.add('error');
           button.disabled = false;
           buttonLabel.textContent = prev;
         }
       } catch (_) {
-        status.textContent = "Couldn't save that — try again in a moment.";
+        status.textContent = 'Could not save — try again';
         status.classList.add('error');
         button.disabled = false;
         buttonLabel.textContent = prev;
       }
     });
   }
-
-  wireForm('hero-form', 'hero-status');
-  wireForm('cta-form', 'cta-status');
 })();
 </script>
 
