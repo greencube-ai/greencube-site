@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>GreenCube — your AI assistant, on your computer</title>
-  <meta name="description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
+  <title>GreenCube — an AI that lives where you live</title>
+  <meta name="description" content="A personal AI that runs entirely on your computer. Chat, code, write, plan — with memory that grows, agents that collaborate, and tools that act on your machine. Local. Private. Yours." />
   <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="GreenCube — your AI assistant, on your computer" />
-  <meta property="og:description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
+  <meta property="og:title" content="GreenCube — an AI that lives where you live" />
+  <meta property="og:description" content="A personal AI that runs entirely on your computer. Local, private, yours." />
   <meta property="og:url" content="https://greencube.world" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GreenCube — your AI assistant, on your computer" />
-  <meta name="twitter:description" content="A free AI assistant that builds, writes, plans, and remembers — running entirely on your own hardware." />
+  <meta name="twitter:title" content="GreenCube — an AI that lives where you live" />
+  <meta name="twitter:description" content="A personal AI that runs entirely on your computer. Local, private, yours." />
 
   <link rel="canonical" href="https://greencube.world" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- pre-paint: hide body until fonts load (kills FOUT stripes) -->
   <style>
+    /* pre-paint: hide body until fonts load */
     html { background: #F5F1E8; }
-    body { opacity: 0; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    body { opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     body.fonts-ready { opacity: 1; }
   </style>
 
@@ -56,6 +56,7 @@
 
       --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
       --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:  'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
 
       --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
       --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
@@ -79,7 +80,7 @@
     }
     a { color: inherit; text-decoration: none; }
     button, input { font-family: inherit; }
-    img, svg { display: block; max-width: 100%; }
+    img, svg, canvas { display: block; max-width: 100%; }
     em { font-style: italic; }
     ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
 
@@ -142,9 +143,23 @@
       animation: brand-spin 14s linear infinite;
     }
     @keyframes brand-spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      from { rotate: 0deg; }
+      to   { rotate: 360deg; }
     }
+    .header-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .header-nav a {
+      color: var(--ink-soft);
+      transition: color 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { color: var(--forest); }
+    header.dark .header-nav a { color: var(--on-dark-soft); }
+    header.dark .header-nav a:hover { color: var(--gold); }
     .pill {
       display: inline-flex;
       align-items: center;
@@ -165,13 +180,13 @@
     }
     header.dark .pill .dot { background: var(--gold); }
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
-      70% { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
+      70%  { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
       100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
     }
 
     /* ============== layout primitives ============== */
-    .wrap   { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .wrap   { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
     .narrow { max-width: 880px;  margin: 0 auto; padding: 0 32px; }
 
     .eyebrow {
@@ -195,10 +210,11 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      padding: 180px 0 100px;
+      padding: 180px 0 110px;
       display: flex;
       align-items: center;
       overflow: hidden;
+      zoom: 0.67;
     }
     .hero::before {
       content: '';
@@ -206,19 +222,33 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 50% at 78% 18%, rgba(201, 169, 97, 0.24), transparent 55%),
-        radial-gradient(ellipse 80% 60% at 14% 95%, rgba(91, 138, 110, 0.18), transparent 55%);
+        radial-gradient(ellipse 70% 50% at 78% 18%, rgba(201, 169, 97, 0.22), transparent 55%),
+        radial-gradient(ellipse 80% 60% at 14% 95%, rgba(91, 138, 110, 0.16), transparent 55%);
+      z-index: 0;
+    }
+    .hero-canvas {
+      position: absolute;
+      top: 8%;
+      right: 2%;
+      width: 40%;
+      height: 78%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
     }
     .hero h1 {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(56px, 11vw, 156px);
-      line-height: 0.96;
+      font-size: clamp(58px, 11vw, 168px);
+      line-height: 0.94;
       letter-spacing: -0.04em;
       color: var(--forest);
       max-width: 14ch;
-      margin-bottom: 40px;
+      margin-bottom: 44px;
     }
     .hero h1 .non-italic {
       font-style: normal;
@@ -230,10 +260,11 @@
     }
     .hero h1 em { color: var(--moss); }
     .hero .lede {
+      font-family: var(--sans);
       font-size: clamp(18px, 1.5vw, 22px);
       line-height: 1.55;
       color: var(--ink-soft);
-      max-width: 560px;
+      max-width: 540px;
       margin-bottom: 56px;
     }
     .hero .lede strong {
@@ -241,7 +272,7 @@
       font-weight: 500;
     }
 
-    /* email signup */
+    /* email signup — modular component, swappable for "Download" later */
     .signup {
       display: flex;
       gap: 10px;
@@ -257,8 +288,9 @@
       font-size: 15px;
       font-family: var(--sans);
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.66);
+      background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1.5px solid var(--line);
       border-radius: 14px;
       outline: none;
@@ -318,7 +350,14 @@
       font-size: 13px;
       color: var(--moss);
     }
-    .status.error { color: #B33A3A; }
+    .status.error { color: var(--red, #B33A3A); }
+    .signup-hint {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--ink-mute);
+    }
+    .signup-hint .sep { margin: 0 10px; opacity: 0.55; }
 
     .scroll-cue {
       position: absolute;
@@ -332,6 +371,7 @@
       letter-spacing: 0.20em;
       text-transform: uppercase;
       color: var(--ink-mute);
+      z-index: 2;
     }
     .scroll-cue .line {
       width: 36px; height: 1px;
@@ -353,319 +393,607 @@
       100% { transform: translateX(110%); }
     }
 
-    /* ============== marquee — capabilities scroll horizontally ============== */
-    .marquee {
+    /* ============== story — pinned scroll-driven cinematic ============== */
+    .story {
       position: relative;
-      padding: 100px 0 110px;
-      overflow: hidden;
+      background: var(--paper-warm);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      background: var(--paper);
     }
-    .marquee::before {
+    .story::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent, var(--paper) 80%);
       pointer-events: none;
-      z-index: 2;
+      background:
+        radial-gradient(ellipse 60% 60% at 25% 30%, rgba(91, 138, 110, 0.10), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201, 169, 97, 0.08), transparent 60%);
+      z-index: 0;
     }
-    .marquee-row {
+    .story-stage {
+      position: relative;
+      width: 100%;
+      height: 100vh;
       display: flex;
-      width: max-content;
-      gap: 56px;
+      flex-direction: column;
       align-items: center;
-      will-change: transform;
+      justify-content: flex-start;
+      gap: clamp(36px, 5.5vh, 72px);
+      padding: 13vh 20px 4vh;
+      overflow: hidden;
+      z-index: 1;
     }
-    .marquee-row.left  { animation: m-left 48s linear infinite; }
-    .marquee-row.right { animation: m-right 56s linear infinite; margin-top: 28px; }
-    @keyframes m-left  {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    @keyframes m-right {
-      from { transform: translateX(-50%); }
-      to   { transform: translateX(0); }
-    }
-    .marquee-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 32px;
+    .story-caption {
+      flex: 0 0 auto;
+      min-height: 1.6em;
       font-family: var(--serif);
       font-style: italic;
-      font-weight: 400;
-      font-size: clamp(40px, 6vw, 84px);
-      line-height: 1;
-      letter-spacing: -0.025em;
-      color: var(--forest);
-      white-space: nowrap;
+      font-size: clamp(22px, 2.4vw, 34px);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink-soft);
+      text-align: center;
+      max-width: 30ch;
+      opacity: 0;
+      pointer-events: none;
     }
-    .marquee-item .dot {
-      width: 8px; height: 8px;
-      background: var(--gold);
+    .story-caption em { color: var(--moss); }
+    .story-caption strong { color: var(--forest); font-weight: 500; }
+
+    /* laptop frame */
+    .laptop {
+      position: relative;
+      width: min(80vw, 1040px);
+      max-height: 70vh;
+      aspect-ratio: 3 / 2;
+      background: var(--forest);
+      border-radius: 14px;
+      padding: 11px 11px 14px;
+      box-shadow:
+        0 30px 80px -20px rgba(31, 58, 46, 0.45),
+        0 8px 24px -8px rgba(31, 58, 46, 0.20);
+      transform: scale(0.55);
+      opacity: 0;
+      will-change: transform, opacity;
+      flex: 0 0 auto;
+    }
+    .laptop::before {
+      content: '';
+      position: absolute;
+      top: 5px; left: 50%;
+      transform: translateX(-50%);
+      width: 6px; height: 6px;
       border-radius: 50%;
+      background: var(--ink-mute);
+      opacity: 0.55;
+    }
+    .laptop-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* layered scenes inside the screen */
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    /* shared app shell: sidebar + main */
+    .app-shell {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink);
+    }
+    .app-sidebar {
+      flex: 0 0 150px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 8px;
+      border-right: 1px solid var(--line);
+      background: var(--paper);
+      gap: 8px;
+    }
+    .app-newchat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 26px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-size: 11px;
+      cursor: default;
+    }
+    .app-newchat .plus { color: var(--forest); font-weight: 600; font-size: 13px; }
+    .app-tabs { display: flex; gap: 3px; margin: 4px 0 2px; }
+    .app-tab {
+      padding: 3px 6px;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      color: var(--ink-mute);
+    }
+    .app-tab.is-active { background: var(--paper-warm); color: var(--forest); }
+    .app-convo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .app-convo {
+      padding: 5px 8px;
+      font-size: 11px;
+      color: var(--ink-soft);
+      border-radius: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .app-convo.is-active { background: var(--paper-warm); color: var(--forest); }
+
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* HOME state */
+    .app-home {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      gap: 14px;
+    }
+    .app-create {
+      font-family: Georgia, var(--serif);
+      font-weight: 700;
+      font-size: 34px;
+      color: var(--forest);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .app-input-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+    .app-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+    }
+    .app-input::placeholder { color: var(--ink-faint); }
+    .app-input.is-focus { border-color: var(--moss); }
+    .app-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .app-pills button {
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 5px 12px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      cursor: default;
+    }
+
+    /* CHAT state */
+    .app-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .app-msgs {
+      flex: 1;
+      padding: 18px 18px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .msg { display: flex; max-width: 80%; }
+    .msg.user { align-self: flex-end; }
+    .msg.assistant { align-self: flex-start; }
+    .msg-bubble {
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .msg.user .msg-bubble { background: var(--forest); color: #fff; }
+    .msg.assistant .msg-bubble {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .msg.assistant .msg-bubble.thinking {
+      font-style: italic;
+      color: var(--ink-soft);
+      font-size: 11.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .think-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--moss);
+      animation: think-pulse 1.4s ease-in-out infinite;
+    }
+    .think-dot:nth-child(2) { animation-delay: 0.18s; }
+    .think-dot:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes think-pulse {
+      0%, 100% { opacity: 0.25; transform: scale(0.85); }
+      50%      { opacity: 1;    transform: scale(1.1); }
+    }
+    .app-input-row {
+      display: flex;
+      gap: 6px;
+      padding: 10px 18px 14px;
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .app-input-row .app-input { flex: 1; }
+    .app-send {
+      height: 38px;
+      padding: 0 14px;
+      background: var(--forest);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 12px;
+      cursor: default;
+    }
+
+    /* AGENTS state */
+    .scene-agents .app-main { padding: 8px; }
+    .agent-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      height: 100%;
+    }
+    .agent-panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .agent-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 1.1s var(--ease-out);
+    }
+    .agent-panel.is-active::before { width: 100%; }
+    .agent-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--forest);
+      letter-spacing: -0.01em;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--line);
+    }
+    .agent-head .cube-icon {
+      width: 11px; height: 11px;
+      border: 1.5px solid var(--forest);
+      border-radius: 2px;
+      flex-shrink: 0;
+      animation: brand-spin 12s linear infinite;
+    }
+    .agent-body {
+      flex: 1;
+      overflow: hidden;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    /* Planner — numbered list */
+    .plan-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .plan-item {
+      display: flex;
+      gap: 6px;
+      padding: 2px 0;
+      align-items: baseline;
+    }
+    .plan-item .num {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--moss);
+      font-size: 12px;
       flex-shrink: 0;
     }
-    .marquee-row.right .marquee-item { color: var(--moss); }
+    .plan-item .text { color: var(--ink); font-size: 10.5px; }
 
-    /* ============== contrast — dark, big statement ============== */
-    .contrast {
+    /* Researcher — browser tabs */
+    .tab-bar {
+      display: flex;
+      gap: 3px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .browser-tab {
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: 3px 3px 0 0;
+      padding: 2px 6px;
+      font-size: 9px;
+      white-space: nowrap;
+      color: var(--ink-soft);
+    }
+    .browser-tab.is-active { background: #fff; color: var(--forest); border-bottom-color: #fff; }
+    .browser-results {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 4px;
+    }
+    .browser-result { padding: 2px 0; font-size: 10px; line-height: 1.3; }
+    .browser-result .title { color: var(--moss); font-weight: 500; }
+    .browser-result .url { color: var(--ink-faint); font-size: 8.5px; letter-spacing: 0.02em; }
+
+    /* Engineer — terminal */
+    .term {
+      background: var(--night);
+      color: var(--on-dark);
+      border-radius: 3px;
+      padding: 6px 8px;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      line-height: 1.5;
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .term-line { white-space: pre; }
+    .term-line .prompt { color: var(--moss); margin-right: 4px; }
+    .term-line .out { color: var(--on-dark-soft); }
+    .term-line.curr::after {
+      content: '▋';
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--gold);
+      animation: caret-blink 0.9s step-end infinite;
+    }
+    @keyframes caret-blink { 50% { opacity: 0; } }
+
+    /* Operator — file tree */
+    .file-tree {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .file-line { display: flex; gap: 4px; align-items: center; }
+    .file-line .icon { color: var(--moss); flex-shrink: 0; width: 8px; }
+    .file-line.indent-1 { padding-left: 12px; }
+    .file-line.indent-2 { padding-left: 24px; }
+
+    /* RESULT — running todo app */
+    .scene-result .app-main { padding: 0; }
+    .todo-app {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 18px;
+      gap: 12px;
+    }
+    .todo-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 26px;
+      color: var(--forest);
+      letter-spacing: -0.015em;
+      margin-bottom: 2px;
+    }
+    .todo-subtitle {
+      font-size: 11px;
+      color: var(--ink-mute);
+      letter-spacing: 0.05em;
+      margin-top: -6px;
+    }
+    .todo-list {
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      list-style: none;
+    }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--ink);
+    }
+    .todo-item .check {
+      width: 14px; height: 14px;
+      border: 1.5px solid var(--moss);
+      border-radius: 3px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .todo-item.checked .check { background: var(--moss); }
+    .todo-item.checked .check::after {
+      content: '';
+      position: absolute;
+      top: 1px; left: 4px;
+      width: 4px; height: 7px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .todo-item.checked .label {
+      text-decoration: line-through;
+      color: var(--ink-faint);
+    }
+
+    /* mobile fallback for the story (no pin) */
+    @media (max-width: 760px) {
+      .story-stage { height: auto; padding: 80px 0; }
+      .laptop { width: 94vw; padding: 8px 8px 12px; border-radius: 12px; }
+      .app-sidebar { display: none; }
+      .app-create { font-size: 28px; }
+      .app-input { height: 38px; font-size: 12px; }
+      .app-pills button { font-size: 10px; padding: 4px 10px; }
+      .agent-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, minmax(120px, 1fr)); gap: 6px; }
+      .agent-head { font-size: 13px; padding-bottom: 6px; }
+      .agent-body { font-size: 10px; }
+      .plan-item .text, .browser-result .title { font-size: 10px; }
+      .term { font-size: 9px; }
+      .file-tree { font-size: 9px; }
+      .todo-title { font-size: 22px; }
+    }
+
+    /* ============== manifesto — dark band, stamped statements ============== */
+    .manifesto {
       position: relative;
       background: var(--night);
       color: var(--on-dark);
-      padding: 200px 0;
+      padding: 200px 0 220px;
       overflow: hidden;
-    }
-    .contrast::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 75% 20%, rgba(201, 169, 97, 0.18), transparent 55%),
-        radial-gradient(ellipse 70% 55% at 15% 90%, rgba(91, 138, 110, 0.20), transparent 55%);
-      pointer-events: none;
-    }
-    .contrast h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(44px, 7vw, 100px);
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      max-width: 16ch;
-      margin: 28px 0 36px;
-      color: var(--on-dark);
-    }
-    .contrast h2 em { color: var(--gold); }
-    .contrast h2 .non-italic {
-      font-style: normal;
-      font-family: var(--sans);
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      font-size: 0.86em;
-    }
-    .contrast .lede {
-      font-size: clamp(17px, 1.4vw, 21px);
-      color: var(--on-dark-soft);
-      max-width: 56ch;
-      line-height: 1.65;
-    }
-
-    /* ============== memory — list of "...that you" lines, dark ============== */
-    .memory {
-      position: relative;
-      background: var(--night-2);
-      color: var(--on-dark);
-      padding: 180px 0 200px;
-      overflow: hidden;
-    }
-    .memory::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 50% 60% at 80% 50%, rgba(201, 169, 97, 0.10), transparent 60%);
-      pointer-events: none;
-    }
-    .memory .head {
-      max-width: 880px;
-      margin: 0 auto 80px;
-      padding: 0 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .memory h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(40px, 6vw, 84px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      max-width: 14ch;
-      color: var(--on-dark);
-    }
-    .memory h2 em { color: var(--gold); }
-    .memory .grid {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 32px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-    .memo {
-      padding: 28px 0;
       border-top: 1px solid var(--on-dark-line);
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(20px, 2.2vw, 28px);
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-      color: var(--on-dark-soft);
-      transition: color 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+      border-bottom: 1px solid var(--on-dark-line);
     }
-    .memo:hover { color: var(--gold); padding-left: 8px; }
-    .memo .dash {
-      display: inline-block;
-      margin-right: 8px;
-      color: var(--gold);
-      font-style: normal;
-    }
-    .memory .grid > .memo:nth-child(odd)  { padding-right: 32px; }
-    .memory .grid > .memo:nth-child(even) { padding-left:  32px; border-left: 1px solid var(--on-dark-line); }
-
-    /* ============== how it works — cream, three rows ============== */
-    .how {
-      position: relative;
-      padding: 200px 0;
-      background: var(--paper);
-      overflow: hidden;
-    }
-    .how::before {
+    .manifesto::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 80% 100%, rgba(91, 138, 110, 0.10), transparent 60%);
       pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 22% 18%, rgba(201, 169, 97, 0.13), transparent 60%),
+        radial-gradient(ellipse 50% 60% at 82% 82%, rgba(91, 138, 110, 0.14), transparent 60%);
     }
-    .how .head {
+    .manifesto .head {
       max-width: 1180px;
-      margin: 0 auto 100px;
+      margin: 0 auto 140px;
       padding: 0 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .how h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(40px, 6vw, 80px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      color: var(--forest);
-      max-width: 18ch;
-    }
-    .how h2 em { color: var(--moss); }
-    .how-list {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-    .how-step {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 40px;
-      padding: 36px 0;
-      border-top: 1px solid var(--line);
-      align-items: baseline;
-      transition: padding 0.5s var(--ease-out), background 0.5s var(--ease-out);
-    }
-    .how-step:last-child { border-bottom: 1px solid var(--line); }
-    .how-step:hover {
-      padding-left: 8px;
-      background: linear-gradient(90deg, rgba(201, 169, 97, 0.05), transparent 50%);
-    }
-    .how-step .num {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(48px, 5vw, 64px);
-      line-height: 1;
-      color: var(--gold);
-      letter-spacing: -0.02em;
-    }
-    .how-step h3 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(26px, 3vw, 40px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--forest);
-      margin-bottom: 8px;
-    }
-    .how-step p {
-      color: var(--ink-soft);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 56ch;
-    }
-    .how-step .arrow {
-      font-family: var(--serif);
-      font-size: 28px;
-      color: var(--ink-faint);
-      transition: transform 0.5s var(--ease-out), color 0.5s var(--ease-out);
-    }
-    .how-step:hover .arrow {
-      transform: translateX(8px);
-      color: var(--moss);
-    }
-
-    /* ============== final CTA — cream, calm closing ============== */
-    .final {
-      padding: 220px 0 160px;
       text-align: center;
       position: relative;
-      overflow: hidden;
-      background: var(--paper);
+      z-index: 1;
     }
-    .final::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(201, 169, 97, 0.18), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 50% 95%, rgba(91, 138, 110, 0.12), transparent 55%);
-      pointer-events: none;
-    }
-    .final h2 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(56px, 8vw, 112px);
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      color: var(--forest);
-      margin-bottom: 24px;
-    }
-    .final p.lede {
-      font-size: clamp(17px, 1.45vw, 20px);
-      color: var(--ink-soft);
-      max-width: 540px;
-      margin: 0 auto 56px;
-      line-height: 1.6;
-    }
-    .final .signup { margin: 0 auto; justify-content: center; max-width: 540px; }
-    .final .small {
-      margin-top: 16px;
-      font-style: italic;
-      font-family: var(--serif);
-      font-size: 16px;
-      color: var(--ink-mute);
+    .manifesto .head .eyebrow {
+      justify-content: center;
+      color: var(--on-dark-mute);
     }
 
-    /* ============== footer ============== */
-    footer {
-      padding: 56px 0 64px;
-      border-top: 1px solid var(--line);
-      color: var(--ink-mute);
-      font-size: 13px;
-      position: relative;
-      z-index: 2;
-    }
-    footer .row {
-      max-width: 1180px;
+    .manifesto-lines {
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 32px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+      flex-direction: column;
+      gap: 130px;
+      position: relative;
+      z-index: 1;
+      list-style: none;
     }
-    footer a { transition: color 0.3s var(--ease-out); }
-    footer a:hover { color: var(--forest); }
-    footer .links { display: flex; gap: 28px; }
+    .manifesto-line {
+      position: relative;
+      text-align: center;
+      padding-bottom: 26px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(34px, 5.4vw, 84px);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: var(--on-dark);
+      max-width: 24ch;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      will-change: transform, opacity;
+    }
+    .manifesto-line .accent { color: var(--gold); font-style: normal; font-weight: 500; }
+    .manifesto-line::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 1px;
+      background: var(--gold);
+      width: 0;
+      transform: translateX(-50%);
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .manifesto-line.is-visible::after { width: 84px; }
+    .manifesto-line.is-final {
+      font-size: clamp(56px, 9vw, 156px);
+      max-width: 18ch;
+      letter-spacing: -0.035em;
+      line-height: 0.96;
+      padding-top: 32px;
+    }
+    .manifesto-line.is-final em { color: var(--gold); }
+    .manifesto-line.is-final.is-visible::after { width: 132px; height: 1.5px; }
+
+    @media (max-width: 760px) {
+      .manifesto { padding: 130px 0 150px; }
+      .manifesto .head { padding: 0 22px; margin-bottom: 90px; }
+      .manifesto-lines { padding: 0 22px; gap: 80px; }
+      .manifesto-line { font-size: 11vw; }
+      .manifesto-line.is-final { font-size: 17vw; }
+    }
 
     /* ============== reveal-on-scroll utility ============== */
     .rv {
@@ -679,6 +1007,61 @@
       will-change: transform;
     }
 
+    /* ============== footer — minimal closure after the manifesto ============== */
+    footer {
+      padding: 72px 0 56px;
+      color: var(--ink-mute);
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper);
+    }
+    footer .row {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    footer .brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    footer .footer-note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mute);
+      letter-spacing: -0.005em;
+    }
+    footer a { transition: color 0.3s var(--ease-out); }
+    footer a:hover { color: var(--forest); }
+    footer .links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    footer .cta-back {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    footer .cta-back:hover { color: var(--gold); }
+    footer .cta-back .arrow {
+      display: inline-block;
+      transition: transform 0.3s var(--ease-out);
+    }
+    footer .cta-back:hover .arrow { transform: translateY(-3px); }
+
     /* ============== reduced motion ============== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -686,45 +1069,29 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .marquee-row.left, .marquee-row.right { animation: none; }
       .rv, .rv-mask > * { opacity: 1 !important; transform: none !important; }
       html { scroll-behavior: auto; }
     }
 
     /* ============== mobile ============== */
+    @media (max-width: 900px) {
+      .hero-canvas {
+        width: 100%;
+        right: 0;
+        opacity: 0.32;
+      }
+    }
     @media (max-width: 760px) {
       header { padding: 16px 22px; }
       header.scrolled { padding: 12px 22px; }
+      .header-nav { display: none; }
       .wrap, .narrow { padding: 0 22px; }
-      .hero { padding: 130px 0 80px; min-height: auto; }
+      .hero { padding: 130px 0 90px; min-height: auto; }
       .hero h1 { font-size: 14vw; max-width: 12ch; }
       .scroll-cue { left: 22px; bottom: 24px; }
-      .marquee { padding: 70px 0; }
-      .marquee-row.right { margin-top: 18px; }
-      .marquee-item { font-size: 11vw; gap: 24px; }
-      .contrast, .how, .final { padding: 110px 0; }
-      .memory { padding: 110px 0; }
-      .memory .head { padding: 0 22px; margin-bottom: 56px; }
-      .memory .grid {
-        grid-template-columns: 1fr;
-        padding: 0 22px;
-      }
-      .memory .grid > .memo:nth-child(odd)  { padding-right: 0; }
-      .memory .grid > .memo:nth-child(even) {
-        padding-left: 0;
-        border-left: none;
-      }
-      .memo { padding: 22px 0; font-size: 19px; }
-      .how .head { padding: 0 22px; margin-bottom: 64px; }
-      .how-list { padding: 0 22px; }
-      .how-step { grid-template-columns: 56px 1fr; gap: 20px; padding: 28px 0; }
-      .how-step .arrow { display: none; }
-      .how-step .num { font-size: 40px; }
       .signup { gap: 12px; }
       .signup input[type=email], .signup button { height: 52px; }
       .signup button { width: 100%; }
-      .final { padding: 130px 0 100px; }
-      .final h2 { font-size: 14vw; }
       footer { padding: 40px 0 48px; }
       footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
     }
@@ -740,17 +1107,22 @@
     <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
-  <span class="pill"><span class="dot" aria-hidden="true"></span>Coming soon</span>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="how-it-works.html">How it works</a>
+  </nav>
+  <span class="pill"><span class="dot" aria-hidden="true"></span>Early access open</span>
 </header>
 
-<!-- HERO -->
+<!-- =========== HERO =========== -->
 <section class="hero" id="top">
+  <canvas class="hero-canvas" id="hero-cube" aria-hidden="true"></canvas>
   <div class="wrap">
     <h1>
-      <span class="rv-mask"><span>An AI assistant.</span></span>
-      <span class="rv-mask"><span>All <em>yours.</em></span></span>
+      <span class="rv-mask"><span>An AI that</span></span>
+      <span class="rv-mask"><span><em>lives</em> where</span></span>
+      <span class="rv-mask"><span>you live.</span></span>
     </h1>
-    <p class="lede rv">Build apps, write code, plan trips, debug, draft, think — with a free AI that runs on your computer and remembers everything you tell it. <strong>Like ChatGPT, but yours forever.</strong></p>
+    <p class="lede rv">Chat, code, write, plan, debug — with a personal AI that runs entirely on your machine. <strong>It remembers you. It uses your tools. It never phones home.</strong></p>
     <form class="signup rv" id="hero-form" novalidate>
       <div class="field">
         <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
@@ -758,6 +1130,7 @@
       <button type="submit"><span>Get early access</span></button>
       <div class="status" id="hero-status" role="status" aria-live="polite"></div>
     </form>
+    <div class="signup-hint rv">No subscription<span class="sep">·</span>No cloud<span class="sep">·</span>No data leaves your laptop</div>
   </div>
   <div class="scroll-cue" aria-hidden="true">
     <span class="line"></span>
@@ -765,150 +1138,236 @@
   </div>
 </section>
 
-<!-- MARQUEE — what it does -->
-<section class="marquee" aria-label="What GreenCube can do">
-  <div class="marquee-row left" aria-hidden="true">
-    <!-- duplicated to make a seamless loop with translateX -50% -->
-    <div class="marquee-item"><span>Build a web app</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Refactor a codebase</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Read a research paper</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Plan a road trip</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Edit your photos</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Translate Spanish</span><span class="dot"></span></div>
-    <!-- copy 2 -->
-    <div class="marquee-item"><span>Build a web app</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Refactor a codebase</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Read a research paper</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Plan a road trip</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Edit your photos</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Translate Spanish</span><span class="dot"></span></div>
-  </div>
-  <div class="marquee-row right" aria-hidden="true">
-    <div class="marquee-item"><span>Draft a contract</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Debug at 2 a.m.</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Help you think</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Fix your résumé</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Write a song</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Remember last Tuesday</span><span class="dot"></span></div>
-    <!-- copy 2 -->
-    <div class="marquee-item"><span>Draft a contract</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Debug at 2 a.m.</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Help you think</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Fix your résumé</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Write a song</span><span class="dot"></span></div>
-    <div class="marquee-item"><span>Remember last Tuesday</span><span class="dot"></span></div>
+<!-- =========== STORY — pinned cinematic, scroll-driven =========== -->
+<section class="story" id="story" aria-label="GreenCube building a real app, demonstrated">
+  <div class="story-stage" id="story-stage">
+    <div class="story-caption" id="story-caption"></div>
+    <div class="laptop" id="laptop">
+      <div class="laptop-screen" id="screen">
+
+        <!-- SCENE 1 — HOME (Create.) -->
+        <div class="scene" id="scene-home">
+          <div class="app-shell">
+            <aside class="app-sidebar">
+              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
+              <div class="app-tabs">
+                <span class="app-tab is-active">Chats</span>
+                <span class="app-tab">Memory</span>
+              </div>
+              <div class="app-convo-list"></div>
+            </aside>
+            <main class="app-main">
+              <div class="app-home">
+                <h1 class="app-create">Create.</h1>
+                <div class="app-input-wrap">
+                  <input class="app-input" id="prompt-input" type="text" readonly value="" placeholder="Ask GreenCube anything..." aria-label="Prompt"/>
+                </div>
+                <div class="app-pills">
+                  <button tabindex="-1">Organize my photos</button>
+                  <button tabindex="-1">Write a story</button>
+                  <button tabindex="-1">Help me code</button>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- SCENE 2 — CHAT (user msg + thinking) -->
+        <div class="scene" id="scene-chat">
+          <div class="app-shell">
+            <aside class="app-sidebar">
+              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
+              <div class="app-tabs">
+                <span class="app-tab is-active">Chats</span>
+                <span class="app-tab">Memory</span>
+              </div>
+              <div class="app-convo-list">
+                <div class="app-convo is-active">Build me a todo app…</div>
+              </div>
+            </aside>
+            <main class="app-main">
+              <div class="app-chat">
+                <div class="app-msgs">
+                  <div class="msg user"><div class="msg-bubble">Build me a todo app for tracking groceries.</div></div>
+                  <div class="msg assistant"><div class="msg-bubble thinking"><span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span> Thinking…</div></div>
+                </div>
+                <div class="app-input-row">
+                  <input class="app-input" type="text" readonly value="" placeholder="Ask GreenCube anything..." aria-hidden="true"/>
+                  <button class="app-send" tabindex="-1">Send</button>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- SCENE 3 — AGENTS (4 panels) -->
+        <div class="scene" id="scene-agents">
+          <div class="app-shell">
+            <aside class="app-sidebar">
+              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
+              <div class="app-tabs">
+                <span class="app-tab is-active">Chats</span>
+                <span class="app-tab">Memory</span>
+              </div>
+              <div class="app-convo-list">
+                <div class="app-convo is-active">Build me a todo app…</div>
+              </div>
+            </aside>
+            <main class="app-main">
+              <div class="agent-grid">
+                <div class="agent-panel" id="panel-planner">
+                  <div class="agent-head"><span class="cube-icon"></span>Planner</div>
+                  <div class="agent-body">
+                    <ol class="plan-list">
+                      <li class="plan-item"><span class="num">01</span><span class="text">Set up React + Vite</span></li>
+                      <li class="plan-item"><span class="num">02</span><span class="text">Design the Todo schema</span></li>
+                      <li class="plan-item"><span class="num">03</span><span class="text">Build the UI components</span></li>
+                      <li class="plan-item"><span class="num">04</span><span class="text">Persist with IndexedDB</span></li>
+                      <li class="plan-item"><span class="num">05</span><span class="text">Style with the cream theme</span></li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="agent-panel" id="panel-researcher">
+                  <div class="agent-head"><span class="cube-icon"></span>Researcher</div>
+                  <div class="agent-body">
+                    <div class="tab-bar">
+                      <span class="browser-tab is-active">react quickstart</span>
+                      <span class="browser-tab">indexeddb basics</span>
+                      <span class="browser-tab">checkbox a11y</span>
+                    </div>
+                    <div class="browser-results">
+                      <div class="browser-result"><div class="title">React docs — Quickstart</div><div class="url">react.dev/learn</div></div>
+                      <div class="browser-result"><div class="title">IndexedDB API reference</div><div class="url">developer.mozilla.org</div></div>
+                      <div class="browser-result"><div class="title">Accessible checkbox patterns</div><div class="url">w3.org/WAI</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="agent-panel" id="panel-engineer">
+                  <div class="agent-head"><span class="cube-icon"></span>Engineer</div>
+                  <div class="agent-body">
+                    <div class="term">
+                      <div class="term-line"><span class="prompt">$</span>npm create vite@latest todo-app -- --template react-ts</div>
+                      <div class="term-line"><span class="out">  ✓ Project scaffolded</span></div>
+                      <div class="term-line"><span class="prompt">$</span>cd todo-app && npm install</div>
+                      <div class="term-line"><span class="out">  added 240 packages in 12s</span></div>
+                      <div class="term-line"><span class="prompt">$</span>writing src/App.tsx…</div>
+                      <div class="term-line"><span class="out">  ✓ 86 lines</span></div>
+                      <div class="term-line curr"><span class="prompt">$</span>npm run dev</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="agent-panel" id="panel-operator">
+                  <div class="agent-head"><span class="cube-icon"></span>Operator</div>
+                  <div class="agent-body">
+                    <div class="file-tree">
+                      <div class="file-line"><span class="icon">▸</span><span>todo-app/</span></div>
+                      <div class="file-line indent-1"><span class="icon">·</span><span>package.json</span></div>
+                      <div class="file-line indent-1"><span class="icon">·</span><span>vite.config.ts</span></div>
+                      <div class="file-line indent-1"><span class="icon">▸</span><span>src/</span></div>
+                      <div class="file-line indent-2"><span class="icon">·</span><span>App.tsx</span></div>
+                      <div class="file-line indent-2"><span class="icon">·</span><span>Todo.tsx</span></div>
+                      <div class="file-line indent-2"><span class="icon">·</span><span>store.ts</span></div>
+                      <div class="file-line indent-2"><span class="icon">·</span><span>index.css</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- SCENE 4 — RESULT (running todo app) -->
+        <div class="scene" id="scene-result">
+          <div class="app-shell">
+            <aside class="app-sidebar">
+              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
+              <div class="app-tabs">
+                <span class="app-tab is-active">Chats</span>
+                <span class="app-tab">Memory</span>
+              </div>
+              <div class="app-convo-list">
+                <div class="app-convo is-active">Build me a todo app…</div>
+              </div>
+            </aside>
+            <main class="app-main">
+              <div class="todo-app">
+                <h2 class="todo-title">Groceries</h2>
+                <div class="todo-subtitle">5 items · running locally</div>
+                <ul class="todo-list">
+                  <li class="todo-item checked"><span class="check"></span><span class="label">Sourdough</span></li>
+                  <li class="todo-item checked"><span class="check"></span><span class="label">Olive oil</span></li>
+                  <li class="todo-item"><span class="check"></span><span class="label">Spinach</span></li>
+                  <li class="todo-item"><span class="check"></span><span class="label">Tomatoes</span></li>
+                  <li class="todo-item"><span class="check"></span><span class="label">Espresso beans</span></li>
+                </ul>
+              </div>
+            </main>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CONTRAST — local, private, yours -->
-<section class="contrast dark-section" data-theme="dark">
-  <div class="narrow">
-    <span class="eyebrow rv">Local. Private. Free.</span>
-    <h2 class="rv">Not in the cloud. <em>On your computer.</em></h2>
-    <p class="lede rv">No server you're talking to. No accounts. No API keys. No subscription, ever. The model runs on your CPU and GPU; your conversations stay on your hard drive. Nothing leaks because nothing leaves.</p>
-  </div>
-</section>
-
-<!-- MEMORY — it remembers -->
-<section class="memory dark-section" data-theme="dark">
+<!-- =========== MANIFESTO — dark band, stamped statements =========== -->
+<section class="manifesto" id="manifesto" data-theme="dark">
   <div class="head">
-    <span class="eyebrow rv">Memory that doesn't expire</span>
-    <h2 class="rv">It actually <em>remembers.</em></h2>
-    <p class="lede rv" style="font-size:clamp(17px,1.4vw,21px); color:var(--on-dark-soft); max-width:54ch; line-height:1.65;">Cloud assistants reset every chat. GreenCube doesn't. It builds a picture of you over weeks and months — your projects, your tics, your taste — and it's all stored where only you can read it.</p>
+    <span class="eyebrow rv">Why local</span>
   </div>
-  <div class="grid">
-    <div class="memo rv"><span class="dash">—</span>that you prefer terse code comments.</div>
-    <div class="memo rv"><span class="dash">—</span>the half-finished novel from October.</div>
-    <div class="memo rv"><span class="dash">—</span>that you can't drink coffee after 4 p.m.</div>
-    <div class="memo rv"><span class="dash">—</span>the road-trip playlist you're building.</div>
-    <div class="memo rv"><span class="dash">—</span>your sister's birthday.</div>
-    <div class="memo rv"><span class="dash">—</span>the bug you were hunting last week.</div>
-    <div class="memo rv"><span class="dash">—</span>how you like your README headings.</div>
-    <div class="memo rv"><span class="dash">—</span>that you're learning Spanish, slowly.</div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="head">
-    <span class="eyebrow rv">How it works</span>
-    <h2 class="rv">Three steps. <em>That's the whole thing.</em></h2>
-  </div>
-  <div class="how-list">
-    <div class="how-step rv">
-      <div class="num">01</div>
-      <div>
-        <h3>Download.</h3>
-        <p>One free desktop app for Windows. macOS and Linux to follow.</p>
-      </div>
-      <div class="arrow">→</div>
-    </div>
-    <div class="how-step rv">
-      <div class="num">02</div>
-      <div>
-        <h3>It tunes itself.</h3>
-        <p>GreenCube reads your hardware on first launch and pulls the strongest open model that fits — no settings to guess at.</p>
-      </div>
-      <div class="arrow">→</div>
-    </div>
-    <div class="how-step rv">
-      <div class="num">03</div>
-      <div>
-        <h3>Start talking.</h3>
-        <p>Build, write, plan, debug. The longer you use it, the more it learns the way you work.</p>
-      </div>
-      <div class="arrow">→</div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final" id="join">
-  <div class="narrow">
-    <h2 class="rv">Be early.</h2>
-    <p class="lede rv">We'll send a single email when GreenCube goes live. No newsletter, no marketing.</p>
-    <form class="signup rv" id="cta-form" novalidate>
-      <div class="field">
-        <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
-      </div>
-      <button type="submit"><span>Join the waitlist</span></button>
-      <div class="status" id="cta-status" role="status" aria-live="polite"></div>
-    </form>
-    <p class="small rv">One email. That's all you'll hear.</p>
-  </div>
+  <ul class="manifesto-lines">
+    <li class="manifesto-line">No subscriptions. No token limits. No daily caps.</li>
+    <li class="manifesto-line">Your conversations aren't training data.</li>
+    <li class="manifesto-line">Works on a plane. Works in a blackout. Works when the servers go down.</li>
+    <li class="manifesto-line">Every other AI assistant is rented.</li>
+    <li class="manifesto-line is-final">This one is <em>yours.</em></li>
+  </ul>
 </section>
 
 <footer>
   <div class="row">
-    <div>© 2026 GreenCube</div>
+    <div class="brand-info">
+      <div>© 2026 GreenCube</div>
+      <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
+    </div>
     <nav class="links" aria-label="Footer">
-      <a href="mailto:team@greencube.world">team@greencube.world</a>
+      <a href="#top" class="cta-back">Get early access <span class="arrow" aria-hidden="true">↑</span></a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:team@greencube.world">Contact</a>
       <a href="/privacy">Privacy</a>
     </nav>
   </div>
 </footer>
 
-<!-- libs from CDN. GSAP + ScrollTrigger only. Native browser scroll. -->
+<!-- libs -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
-  // 1. Wait for fonts so first paint doesn't show stripes from font-swap
+  // ---------- font gate ----------
   let started = false;
   const start = () => {
     if (started) return;
     started = true;
     document.body.classList.add('fonts-ready');
     runIntro();
+    initHeroCube();
+    initStory();
+    initManifesto();
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
-  setTimeout(start, 1100); // safety net
+  setTimeout(start, 1200);
 
-  // 2. Hero reveal: line-by-line clip-path mask, then subtitle + form fade up
+  // ---------- hero intro ----------
   function runIntro() {
     if (!window.gsap || reduced) {
       document.querySelectorAll('.rv-mask > *').forEach(el => el.style.transform = 'translateY(0)');
@@ -916,13 +1375,17 @@
       return;
     }
     const heroLines = document.querySelectorAll('.hero h1 .rv-mask > *');
-    const heroTail = [document.querySelector('.hero .lede'), document.querySelector('.hero .signup')];
+    const heroTail = [
+      document.querySelector('.hero .lede'),
+      document.querySelector('.hero .signup'),
+      document.querySelector('.hero .signup-hint'),
+    ];
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.to(heroLines, { y: 0, duration: 1.0, stagger: 0.10 })
+    tl.to(heroLines, { y: 0, duration: 1.05, stagger: 0.10 })
       .to(heroTail, { y: 0, opacity: 1, duration: 0.85, stagger: 0.08 }, '-=0.55');
   }
 
-  // 3. Header scrolled-state + dark-section auto-invert
+  // ---------- header dark-state on scroll ----------
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 8);
@@ -942,10 +1405,10 @@
     });
   }
 
-  // 4. Generic .rv reveal-on-scroll (skip hero — handled in intro)
+  // ---------- generic .rv reveal-on-scroll ----------
   if (window.gsap && window.ScrollTrigger && !reduced) {
     document.querySelectorAll('.rv').forEach(el => {
-      if (el.closest('.hero')) return;
+      if (el.closest('.hero')) return; // hero handled in intro
       gsap.to(el, {
         opacity: 1, y: 0, duration: 0.95, ease: 'expo.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
@@ -953,25 +1416,7 @@
     });
   }
 
-  // 5. Memory list — slight extra stagger when their grid enters
-  if (window.gsap && window.ScrollTrigger && !reduced) {
-    const memos = document.querySelectorAll('.memory .memo');
-    if (memos.length) {
-      ScrollTrigger.create({
-        trigger: '.memory .grid',
-        start: 'top 80%',
-        once: true,
-        onEnter: () => {
-          memos.forEach((m, i) => {
-            // override generic reveal so we get a tighter stagger for this list
-            gsap.fromTo(m, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: i * 0.06, overwrite: true });
-          });
-        },
-      });
-    }
-  }
-
-  // 6. Scroll progress thread
+  // ---------- scroll progress thread ----------
   const progress = document.getElementById('progress');
   function updateProgress() {
     const h = document.documentElement;
@@ -981,7 +1426,7 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  // 7. Waitlist form — same submitToBackend stub, ready for a real endpoint
+  // ---------- waitlist form (modular — swap submitToBackend for real endpoint later) ----------
   const STORAGE_KEY = 'greencube_waitlist';
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -1037,7 +1482,325 @@
     });
   }
   wireForm('hero-form', 'hero-status');
-  wireForm('cta-form', 'cta-status');
+
+  // ====================================================================
+  //  HERO CUBE — Three.js: wireframe forest cube + sage particle field
+  // ====================================================================
+  function initHeroCube() {
+    const canvas = document.getElementById('hero-cube');
+    if (!canvas || !window.THREE) return;
+    if (reduced) return;
+
+    const THREE = window.THREE;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    camera.position.set(0, 0, 6.2);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(dpr);
+
+    const FOREST = 0x1F3A2E;
+    const MOSS   = 0x5B8A6E;
+    const SAGE   = 0x9CB89E;
+    const GOLD   = 0xC9A961;
+
+    const cubeGroup = new THREE.Group();
+    const boxGeom = new THREE.BoxGeometry(1.952, 1.952, 1.952);
+    const edges = new THREE.EdgesGeometry(boxGeom);
+    const cubeLines = new THREE.LineSegments(
+      edges,
+      new THREE.LineBasicMaterial({ color: FOREST, transparent: true, opacity: 0.85 })
+    );
+    cubeGroup.add(cubeLines);
+
+    const innerSolid = new THREE.Mesh(
+      new THREE.BoxGeometry(1.928, 1.928, 1.928),
+      new THREE.MeshBasicMaterial({ color: MOSS, transparent: true, opacity: 0.045 })
+    );
+    cubeGroup.add(innerSolid);
+
+    const innerEdges = new THREE.EdgesGeometry(new THREE.BoxGeometry(0.976, 0.976, 0.976));
+    const innerLines = new THREE.LineSegments(
+      innerEdges,
+      new THREE.LineBasicMaterial({ color: MOSS, transparent: true, opacity: 0.55 })
+    );
+    cubeGroup.add(innerLines);
+
+    const cornerGeom = new THREE.BufferGeometry();
+    const cornerPositions = new Float32Array([
+      -0.976, -0.976, -0.976,   0.976, -0.976, -0.976,
+      -0.976,  0.976, -0.976,   0.976,  0.976, -0.976,
+      -0.976, -0.976,  0.976,   0.976, -0.976,  0.976,
+      -0.976,  0.976,  0.976,   0.976,  0.976,  0.976,
+    ]);
+    cornerGeom.setAttribute('position', new THREE.BufferAttribute(cornerPositions, 3));
+    const corners = new THREE.Points(
+      cornerGeom,
+      new THREE.PointsMaterial({ color: GOLD, size: 0.092, transparent: true, opacity: 0.9, sizeAttenuation: true })
+    );
+    cubeGroup.add(corners);
+
+    scene.add(cubeGroup);
+
+    const PARTICLE_COUNT = 220;
+    const pPositions = new Float32Array(PARTICLE_COUNT * 3);
+    const pSeeds = new Float32Array(PARTICLE_COUNT);
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      pPositions[i * 3]     = (Math.random() - 0.5) * 8;
+      pPositions[i * 3 + 1] = (Math.random() - 0.5) * 6;
+      pPositions[i * 3 + 2] = (Math.random() - 0.5) * 5;
+      pSeeds[i] = Math.random() * Math.PI * 2;
+    }
+    const pGeom = new THREE.BufferGeometry();
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+    const particles = new THREE.Points(
+      pGeom,
+      new THREE.PointsMaterial({ color: SAGE, size: 0.025, transparent: true, opacity: 0.55, sizeAttenuation: true })
+    );
+    scene.add(particles);
+
+    function resize() {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      if (w === 0 || h === 0) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.position.z = w < 700 ? 7.6 : 6.2;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let targetRotX = 0, targetRotY = 0, targetX = 0, targetY = 0;
+    window.addEventListener('mousemove', (e) => {
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      const ny = (e.clientY / window.innerHeight) * 2 - 1;
+      targetRotY = nx * 0.65;
+      targetRotX = ny * 0.42;
+      targetX   =  nx * 0.32;
+      targetY   = -ny * 0.20;
+    }, { passive: true });
+
+    let visible = true;
+    const io = new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+    }, { threshold: 0 });
+    io.observe(canvas);
+
+    let t0 = performance.now();
+    let baseRotX = 0, baseRotY = 0;
+    function animate(now) {
+      requestAnimationFrame(animate);
+      if (!visible) return;
+      const t = (now - t0) * 0.001;
+
+      baseRotY += 0.0022;
+      baseRotX += 0.0010;
+
+      const rotX = baseRotX + targetRotX;
+      const rotY = baseRotY + targetRotY;
+      cubeGroup.rotation.x += (rotX - cubeGroup.rotation.x) * 0.11;
+      cubeGroup.rotation.y += (rotY - cubeGroup.rotation.y) * 0.11;
+      cubeGroup.position.x += (targetX - cubeGroup.position.x) * 0.10;
+      cubeGroup.position.y += (targetY - cubeGroup.position.y) * 0.10;
+
+      const breath = 1 + Math.sin(t * 1.1) * 0.025;
+      cubeLines.scale.setScalar(breath);
+      innerSolid.scale.setScalar(breath);
+
+      innerLines.rotation.x = -cubeGroup.rotation.y * 0.7;
+      innerLines.rotation.y =  cubeGroup.rotation.x * 0.7;
+
+      corners.material.opacity = 0.7 + Math.sin(t * 1.4) * 0.20;
+
+      particles.rotation.y = t * 0.04;
+      particles.rotation.x = Math.sin(t * 0.18) * 0.08;
+      const arr = pGeom.attributes.position.array;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        arr[i * 3 + 1] += Math.sin(t + pSeeds[i]) * 0.0006;
+      }
+      pGeom.attributes.position.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  // ====================================================================
+  //  STORY — pinned cinematic. Whole thing is one big timeline scrubbed
+  //  by scroll, so the page looks "frozen" while the laptop story plays.
+  // ====================================================================
+  function initStory() {
+    const stage     = document.getElementById('story-stage');
+    const laptop    = document.getElementById('laptop');
+    const caption   = document.getElementById('story-caption');
+    const sceneHome    = document.getElementById('scene-home');
+    const sceneChat    = document.getElementById('scene-chat');
+    const sceneAgents  = document.getElementById('scene-agents');
+    const sceneResult  = document.getElementById('scene-result');
+    const promptInput  = document.getElementById('prompt-input');
+    if (!stage || !laptop) return;
+
+    const PROMPT = 'Build me a todo app for tracking groceries';
+
+    // mobile / no-gsap fallback — render the final scene as a static screenshot
+    if (!window.gsap || !window.ScrollTrigger || reduced || window.matchMedia('(max-width: 760px)').matches) {
+      laptop.style.opacity = 1;
+      laptop.style.transform = 'scale(1)';
+      sceneResult.style.opacity = 1;
+      sceneResult.style.position = 'absolute';
+      // also reveal plan items / file lines / etc. so nothing looks broken if the
+      // user lands here via direct link or with reduced motion.
+      document.querySelectorAll('.plan-item,.browser-tab,.browser-result,.term-line,.file-line,.todo-item')
+        .forEach(el => { el.style.opacity = 1; });
+      return;
+    }
+
+    // ---- initial state ----
+    gsap.set(sceneHome,   { opacity: 1 });
+    gsap.set(sceneChat,   { opacity: 0 });
+    gsap.set(sceneAgents, { opacity: 0 });
+    gsap.set(sceneResult, { opacity: 0 });
+    gsap.set('.plan-item',     { opacity: 0, y: 6 });
+    gsap.set('.browser-tab',   { opacity: 0, y: 4 });
+    gsap.set('.browser-result',{ opacity: 0, y: 6 });
+    gsap.set('.term-line',     { opacity: 0 });
+    gsap.set('.file-line',     { opacity: 0, x: -6 });
+    gsap.set('.todo-item',     { opacity: 0, y: 8 });
+    gsap.set(caption,          { opacity: 0 });
+
+    function setCap(html) { caption.innerHTML = html; }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.story',
+        start: 'top top',
+        end: '+=780%',
+        pin: '.story-stage',
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },
+      defaults: { ease: 'none' },
+    });
+
+    // Helper — every beat reuses the same fade-in / hold / fade-out timing so
+    // captions stay on screen long enough to read and align with the visual.
+    const FADE_IN = 0.7, HOLD = 1.6, FADE_OUT = 0.5;
+
+    // ---- 1. LAPTOP GROWS IN ----
+    tl.to(laptop, { opacity: 1, scale: 1, duration: 1.8 })
+      .add(() => setCap('Watch a real GreenCube task — <em>start to finish.</em>'))
+      .to(caption, { opacity: 1, duration: FADE_IN }, '-=0.5')
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // ---- 2. PROMPT TYPES IN ----
+    tl.add(() => setCap('You ask. <em>It builds.</em>'))
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to({ chars: 0 }, {
+        chars: PROMPT.length,
+        duration: 3.6,
+        ease: 'none',
+        onUpdate: function () {
+          const n = Math.floor(this.targets()[0].chars);
+          if (promptInput) promptInput.value = PROMPT.slice(0, n);
+        },
+      })
+      .to({}, { duration: 0.6 })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // ---- 3. SUBMIT → CHAT SCENE ----
+    tl.to(sceneHome, { opacity: 0, duration: 0.6 })
+      .to(sceneChat, { opacity: 1, duration: 0.6 }, '<')
+      .add(() => setCap('GreenCube reads it — and <em>splits into a team.</em>'))
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // ---- 4. AGENTS SCENE — panels activate one at a time ----
+    tl.to(sceneChat,   { opacity: 0, duration: 0.6 })
+      .to(sceneAgents, { opacity: 1, duration: 0.6 }, '<');
+
+    // 4a. Planner — fade caption in BEFORE the content animates so the user
+    //               reads "Planner" and THEN sees the planner's plan-items.
+    tl.add(() => {
+        document.getElementById('panel-planner').classList.add('is-active');
+        setCap('<em>Planner</em> — outlines the steps.');
+      })
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to('.plan-item', { opacity: 1, y: 0, duration: 1.6, stagger: 0.22 })
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // 4b. Researcher
+    tl.add(() => {
+        document.getElementById('panel-researcher').classList.add('is-active');
+        setCap('<em>Researcher</em> — pulls real references.');
+      })
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to('.browser-tab',    { opacity: 1, y: 0, duration: 0.6, stagger: 0.20 })
+      .to('.browser-result', { opacity: 1, y: 0, duration: 0.6, stagger: 0.20 })
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // 4c. Engineer
+    tl.add(() => {
+        document.getElementById('panel-engineer').classList.add('is-active');
+        setCap('<em>Engineer</em> — runs your terminal.');
+      })
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to('.term-line', { opacity: 1, duration: 0.45, stagger: 0.34 })
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // 4d. Operator
+    tl.add(() => {
+        document.getElementById('panel-operator').classList.add('is-active');
+        setCap('<em>Operator</em> — writes to your filesystem.');
+      })
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to('.file-line', { opacity: 1, x: 0, duration: 0.4, stagger: 0.18 })
+      .to({}, { duration: HOLD })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+
+    // ---- 5. RESULT SCENE ----
+    tl.to(sceneAgents, { opacity: 0, duration: 0.7 })
+      .to(sceneResult, { opacity: 1, duration: 0.7 }, '<')
+      .add(() => setCap('<em>Done.</em> Running locally — on <strong>your</strong> machine.'))
+      .to(caption, { opacity: 1, duration: FADE_IN })
+      .to('.todo-item', { opacity: 1, y: 0, duration: 0.55, stagger: 0.18 }, '<')
+      .to({}, { duration: 2.0 })
+      .to(caption, { opacity: 0, duration: FADE_OUT });
+  }
+
+  // ====================================================================
+  //  MANIFESTO — stamps each statement in as it scrolls into view
+  // ====================================================================
+  function initManifesto() {
+    const lines = document.querySelectorAll('.manifesto-line');
+    if (!lines.length) return;
+
+    if (!window.gsap || !window.ScrollTrigger || reduced) {
+      lines.forEach(l => {
+        l.style.opacity = 1;
+        l.style.transform = 'none';
+        l.classList.add('is-visible');
+      });
+      return;
+    }
+
+    lines.forEach((line) => {
+      gsap.timeline({
+        scrollTrigger: { trigger: line, start: 'top 78%', once: true },
+        defaults: { ease: 'expo.out' },
+      })
+        .to(line, { y: 0, scale: 1, opacity: 1, duration: 1.1 })
+        .add(() => line.classList.add('is-visible'), '-=0.45');
+    });
+  }
 })();
 </script>
 
