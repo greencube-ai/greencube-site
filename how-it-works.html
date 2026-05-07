@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>How it works — GreenCube</title>
+  <meta name="description" content="GreenCube has a memory that grows, agents that collaborate, and reaches into the apps already on your laptop. All running locally." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="How it works — GreenCube" />
+  <meta property="og:description" content="A memory that grows. Agents that collaborate. Tools you already own." />
+  <meta property="og:url" content="https://greencube.world/how-it-works" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://greencube.world/how-it-works" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    html { background: #F5F1E8; }
+    body { opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.fonts-ready { opacity: 1; }
+  </style>
+
+  <style>
+    /* ============== tokens ============== */
+    :root {
+      --paper:      #F5F1E8;
+      --paper-soft: #FBF8F0;
+      --paper-warm: #F0ECE3;
+
+      --night:      #15281F;
+      --night-2:    #0F2118;
+      --forest:     #1F3A2E;
+      --moss:       #5B8A6E;
+      --sage:       #9CB89E;
+      --gold:       #C9A961;
+
+      --ink:          #1A1A1A;
+      --ink-soft:     #555555;
+      --ink-mute:     #8A8275;
+      --ink-faint:    #B8B0A0;
+      --line:         #DDD8CE;
+      --on-dark:      #F5F1E8;
+      --on-dark-soft: rgba(245, 241, 232, 0.66);
+      --on-dark-mute: rgba(245, 241, 232, 0.40);
+      --on-dark-line: rgba(245, 241, 232, 0.10);
+
+      --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ============== reset + base ============== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    em { font-style: italic; }
+    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
+
+    /* ============== fixed overlays ============== */
+    .grain {
+      position: fixed; inset: 0;
+      z-index: 1; pointer-events: none;
+      opacity: 0.05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .progress {
+      position: fixed; top: 0; left: 0;
+      height: 1.5px; width: 0%;
+      background: linear-gradient(90deg, var(--moss), var(--gold));
+      z-index: 200; pointer-events: none;
+    }
+
+    /* ============== header ============== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.5s var(--ease-out),
+                  border-color 0.5s var(--ease-out),
+                  backdrop-filter 0.5s var(--ease-out),
+                  color 0.5s var(--ease-out),
+                  padding 0.5s var(--ease-out);
+      border-bottom: 1px solid transparent;
+      color: var(--ink);
+    }
+    header.scrolled {
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(245, 241, 232, 0.78);
+      border-bottom-color: var(--line);
+      padding: 14px 32px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--serif);
+      font-size: 22px;
+      letter-spacing: -0.005em;
+    }
+    .brand .mark {
+      width: 16px; height: 16px;
+      border: 1.5px solid currentColor;
+      border-radius: 4px;
+      animation: brand-spin 14s linear infinite;
+    }
+    @keyframes brand-spin {
+      from { rotate: 0deg; }
+      to   { rotate: 360deg; }
+    }
+    .header-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .header-nav a {
+      color: var(--ink-soft);
+      transition: color 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { color: var(--forest); }
+    .header-nav a.is-current { color: var(--forest); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 13px 7px 11px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.78;
+      letter-spacing: 0.005em;
+    }
+    .pill .dot {
+      width: 7px; height: 7px;
+      background: var(--moss);
+      border-radius: 50%;
+      animation: pulse 2.6s var(--ease-out) infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
+      70%  { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
+    }
+
+    /* ============== layout primitives ============== */
+    .wrap   { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 22px; height: 1px;
+      background: var(--gold);
+    }
+
+    /* ============== page intro ============== */
+    .page-intro {
+      position: relative;
+      padding: 200px 0 110px;
+      overflow: hidden;
+    }
+    .page-intro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 78% 18%, rgba(201, 169, 97, 0.18), transparent 55%),
+        radial-gradient(ellipse 80% 60% at 14% 95%, rgba(91, 138, 110, 0.12), transparent 55%);
+    }
+    .page-intro .wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .page-intro h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(48px, 8vw, 128px);
+      line-height: 0.96;
+      letter-spacing: -0.035em;
+      color: var(--forest);
+      max-width: 16ch;
+      margin: 22px 0 28px;
+    }
+    .page-intro h1 em { color: var(--moss); }
+    .page-intro .lede {
+      font-size: clamp(17px, 1.5vw, 22px);
+      color: var(--ink-soft);
+      max-width: 56ch;
+      line-height: 1.55;
+    }
+    .page-intro .lede strong { color: var(--forest); font-weight: 500; }
+
+    /* ============== memory — knowledge graph showpiece ============== */
+    .memory {
+      position: relative;
+      padding: 140px 0 180px;
+      background: var(--paper);
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .memory::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 28%, rgba(91, 138, 110, 0.10), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 18% 82%, rgba(201, 169, 97, 0.09), transparent 60%);
+    }
+    .memory .layout {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .memory h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 104px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+      max-width: 14ch;
+      margin: 22px 0 28px;
+    }
+    .memory h2 em { color: var(--moss); }
+    .memory .lede {
+      font-size: clamp(17px, 1.4vw, 20px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 50ch;
+      margin-bottom: 32px;
+    }
+    .memory .lede strong { color: var(--forest); font-weight: 500; }
+    .memory .privacy-note {
+      margin-top: 24px;
+      padding: 18px 22px;
+      border-left: 2px solid var(--gold);
+      background: rgba(201, 169, 97, 0.06);
+      border-radius: 0 8px 8px 0;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      max-width: 46ch;
+    }
+    .memory .privacy-note strong { color: var(--forest); font-weight: 500; }
+    .graph-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .graph-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow: visible;
+    }
+    .graph-svg:active { cursor: grabbing; }
+    .graph-svg .edge {
+      stroke: var(--sage);
+      stroke-width: 1;
+      stroke-opacity: 0.4;
+      transition: stroke 0.3s var(--ease-out),
+                  stroke-opacity 0.3s var(--ease-out),
+                  stroke-width 0.3s var(--ease-out);
+    }
+    .graph-svg .edge.is-active {
+      stroke: var(--moss);
+      stroke-opacity: 0.9;
+      stroke-width: 1.5;
+    }
+    .graph-svg .node-circle {
+      fill: var(--forest);
+      transition: fill 0.25s var(--ease-out), r 0.25s var(--ease-out);
+    }
+    .graph-svg .node-circle.is-neighbor { fill: var(--moss); }
+    .graph-svg .node-circle.is-hover    { fill: var(--gold); }
+    .graph-svg .node-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      fill: var(--ink-soft);
+      paint-order: stroke;
+      stroke: var(--paper);
+      stroke-width: 3.5;
+      stroke-linejoin: round;
+      pointer-events: none;
+      transition: fill 0.25s var(--ease-out), font-weight 0.25s var(--ease-out);
+    }
+    .graph-svg .node-label.is-hover {
+      fill: var(--forest);
+      font-weight: 500;
+    }
+    .graph-meta {
+      position: absolute;
+      top: -4px;
+      right: 0;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .graph-meta .count {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--forest);
+    }
+    .graph-meta .label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .graph-hint {
+      position: absolute;
+      bottom: -36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .graph-hint .sep { margin: 0 8px; opacity: 0.4; }
+
+    @media (max-width: 900px) {
+      .memory { padding: 100px 0 120px; }
+      .memory .layout {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        padding: 0 22px;
+      }
+      .memory .lede, .memory .privacy-note { max-width: none; }
+      .graph-wrap { max-width: 480px; }
+      .graph-svg .node-label { font-size: 10px; }
+    }
+
+    /* ============== team — cube splits into specialized agents ============== */
+    .team {
+      position: relative;
+      padding: 140px 0 180px;
+      background: var(--paper-soft);
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .team::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(91, 138, 110, 0.07), transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 100%, rgba(201, 169, 97, 0.08), transparent 70%);
+    }
+    .team .head {
+      max-width: 1240px;
+      margin: 0 auto 100px;
+      padding: 0 32px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .team .head .eyebrow { justify-content: center; }
+    .team h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 104px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+      margin: 22px auto 28px;
+      max-width: 16ch;
+    }
+    .team h2 em { color: var(--moss); }
+    .team .lede {
+      font-size: clamp(17px, 1.4vw, 20px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+    .split-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 460px;
+      z-index: 1;
+    }
+    .split-cubes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .cube-clone {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 88px; height: 88px;
+      border: 1.5px solid var(--forest);
+      border-radius: 6px;
+      box-sizing: border-box;
+      opacity: 0;
+      z-index: 2;
+      will-change: transform, opacity;
+    }
+    .cube-clone::before {
+      content: '';
+      position: absolute; inset: 12px;
+      border: 1px solid var(--moss);
+      border-radius: 3px;
+      opacity: 0.55;
+    }
+    .cube-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    .cube-label .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 24px;
+      color: var(--forest);
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .cube-label .desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-soft);
+      letter-spacing: -0.005em;
+      max-width: 22ch;
+      line-height: 1.5;
+      margin: 0 auto;
+      white-space: normal;
+    }
+    .split-pipe {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 1px;
+      background: var(--sage);
+      transform-origin: center;
+      opacity: 0;
+      z-index: 1;
+    }
+    .split-pipe::before,
+    .split-pipe::after {
+      content: '';
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      top: -2.5px;
+      box-shadow: 0 0 8px rgba(201, 169, 97, 0.55);
+      animation: packet-flow 5s linear infinite;
+    }
+    .split-pipe::after {
+      animation-delay: -2.5s;
+      background: var(--moss);
+      box-shadow: 0 0 8px rgba(91, 138, 110, 0.45);
+    }
+    @keyframes packet-flow {
+      0%   { left: -2%;  opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: 102%; opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .team { padding: 100px 0 120px; }
+      .team .head { margin-bottom: 80px; padding: 0 22px; }
+      .split-stage { height: 700px; padding: 0 22px; }
+      .cube-clone { width: 76px; height: 76px; }
+      .cube-label .name { font-size: 20px; }
+      .cube-label .desc { font-size: 12.5px; }
+    }
+
+    /* ============== tools — greencube reaches into your OS ============== */
+    .tools {
+      position: relative;
+      padding: 140px 0 180px;
+      background: var(--paper);
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .tools::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 25% 30%, rgba(91, 138, 110, 0.10), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201, 169, 97, 0.08), transparent 60%);
+    }
+    .tools .layout {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .tools h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 104px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+      max-width: 14ch;
+      margin: 22px 0 28px;
+    }
+    .tools h2 em { color: var(--moss); }
+    .tools .lede {
+      font-size: clamp(17px, 1.4vw, 20px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 50ch;
+      margin-bottom: 32px;
+    }
+    .tools .lede strong { color: var(--forest); font-weight: 500; }
+    .tools-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .tools-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .tools-svg .ring {
+      fill: none;
+      stroke: var(--ink-faint);
+      stroke-width: 0.6;
+      stroke-dasharray: 2 6;
+      opacity: 0.5;
+    }
+    .tools-svg .ring-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      fill: var(--ink-mute);
+      text-anchor: middle;
+    }
+    .tools-svg .center-cube {
+      fill: none;
+      stroke: var(--forest);
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+    }
+    .tools-svg .center-inner {
+      fill: none;
+      stroke: var(--moss);
+      stroke-width: 1;
+      opacity: 0.6;
+    }
+    .tools-svg .reach-line {
+      stroke: var(--sage);
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.55;
+    }
+    .tools-svg .tool-glow {
+      fill: var(--gold);
+      opacity: 0;
+    }
+    .tools-svg .tool-icon {
+      fill: none;
+      stroke: var(--forest);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+    .tools-svg .tool-label {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      fill: var(--ink-soft);
+      text-anchor: middle;
+    }
+    .tools-svg .packet {
+      fill: var(--gold);
+      filter: drop-shadow(0 0 4px rgba(201, 169, 97, 0.55));
+      opacity: 0;
+    }
+
+    @media (max-width: 900px) {
+      .tools { padding: 100px 0 120px; }
+      .tools .layout {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        padding: 0 22px;
+      }
+      .tools .lede { max-width: none; }
+      .tools-stage { max-width: 480px; }
+    }
+
+    /* ============== bottom CTA — back to homepage ============== */
+    .page-cta {
+      padding: 140px 0 100px;
+      text-align: center;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    .page-cta h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--forest);
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+    .page-cta h2 em { color: var(--moss); }
+    .page-cta .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--forest);
+      padding: 14px 28px;
+      border: 1.5px solid var(--forest);
+      border-radius: 14px;
+      transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+    }
+    .page-cta .cta-link:hover {
+      background: var(--forest);
+      color: var(--paper);
+    }
+
+    /* ============== reveal ============== */
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    /* ============== footer ============== */
+    footer {
+      padding: 72px 0 56px;
+      color: var(--ink-mute);
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    footer .row {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    footer .brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    footer .footer-note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mute);
+      letter-spacing: -0.005em;
+    }
+    footer a { transition: color 0.3s var(--ease-out); }
+    footer a:hover { color: var(--forest); }
+    footer .links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .rv { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 760px) {
+      header { padding: 16px 22px; }
+      header.scrolled { padding: 12px 22px; }
+      .header-nav { display: none; }
+      .wrap { padding: 0 22px; }
+      .page-intro { padding: 130px 0 80px; }
+      .page-intro h1 { font-size: 14vw; max-width: 12ch; }
+      footer { padding: 40px 0 48px; }
+      footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="index.html" class="brand" aria-label="GreenCube home">
+    <span class="mark" aria-hidden="true"></span>
+    <span>GreenCube</span>
+  </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html" class="is-current">How it works</a>
+  </nav>
+  <span class="pill"><span class="dot" aria-hidden="true"></span>Early access open</span>
+</header>
+
+<section class="page-intro" id="top">
+  <div class="wrap">
+    <span class="eyebrow rv">How it works</span>
+    <h1 class="rv">Three things that make GreenCube <em>different.</em></h1>
+    <p class="lede rv">A memory that grows with you, agents that work as a team when a task gets big, and reach into the apps already on your laptop. <strong>All running locally — no cloud, no telemetry.</strong></p>
+  </div>
+</section>
+
+<!-- =========== MEMORY =========== -->
+<section class="memory" id="memory">
+  <div class="layout">
+    <div class="copy">
+      <span class="eyebrow rv">Memory</span>
+      <h2 class="rv">It actually <em>remembers.</em></h2>
+      <p class="lede rv">Cloud assistants forget you between chats. GreenCube doesn't. It builds a knowledge graph of who you are over weeks and months — your projects, your tics, your taste, your people. <strong>The longer you use it, the sharper it gets.</strong></p>
+      <div class="privacy-note rv">
+        An AI that knows you should be one only <strong>you</strong> control. Your graph stays on your hard drive. One click — and it's gone forever.
+      </div>
+    </div>
+    <div class="graph-wrap rv" id="graph-wrap" aria-label="Live knowledge graph visualization">
+      <div class="graph-meta">
+        <span class="count" id="graph-count">30</span>
+        <span class="label">memories</span>
+      </div>
+      <div class="graph-hint">Hover<span class="sep">·</span>Drag<span class="sep">·</span>Watch it grow</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== TEAM =========== -->
+<section class="team" id="team">
+  <div class="head">
+    <span class="eyebrow rv">Team</span>
+    <h2 class="rv">One AI. <em>An entire team.</em></h2>
+    <p class="lede rv">When a task is complex, GreenCube spawns specialized agents that work together — like having a startup team inside your laptop. They share findings, hand off work, and ship results. All running locally. All free.</p>
+  </div>
+  <div class="split-stage" id="split-stage">
+    <div class="split-cubes">
+      <div class="split-pipe" id="split-pipe" aria-hidden="true"></div>
+      <div class="cube-clone" data-i="0" aria-hidden="true"></div>
+      <div class="cube-clone" data-i="1" aria-hidden="true"></div>
+      <div class="cube-clone" data-i="2" aria-hidden="true"></div>
+      <div class="cube-clone" data-i="3" aria-hidden="true"></div>
+      <div class="cube-label" data-i="0">
+        <span class="name">Researcher</span>
+        <span class="desc">Browses, reads papers, finds answers</span>
+      </div>
+      <div class="cube-label" data-i="1">
+        <span class="name">Engineer</span>
+        <span class="desc">Writes, debugs, ships code in your terminal</span>
+      </div>
+      <div class="cube-label" data-i="2">
+        <span class="name">Writer</span>
+        <span class="desc">Drafts docs, emails, prose in your voice</span>
+      </div>
+      <div class="cube-label" data-i="3">
+        <span class="name">Operator</span>
+        <span class="desc">Uses your apps, manages files, automates</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== TOOLS =========== -->
+<section class="tools" id="tools">
+  <div class="layout">
+    <div class="copy">
+      <span class="eyebrow rv">Tools</span>
+      <h2 class="rv">It doesn't just talk. <em>It does.</em></h2>
+      <p class="lede rv">Most AI assistants are trapped in a chat window. GreenCube lives in your operating system. It opens your terminal, browses the web, reads and edits your files, and uses the apps you already have. <strong>All locally — your machine, your data, your tools.</strong></p>
+    </div>
+    <div class="tools-stage rv" id="tools-stage" aria-label="GreenCube reaching out to tools on your machine">
+      <svg class="tools-svg" id="tools-svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <circle class="ring" cx="300" cy="300" r="252" />
+        <text class="ring-label" x="300" y="572">your machine</text>
+        <g class="reach-lines">
+          <line class="reach-line" data-i="0" x1="300" y1="300" x2="300" y2="90" />
+          <line class="reach-line" data-i="1" x1="300" y1="300" x2="500" y2="235" />
+          <line class="reach-line" data-i="2" x1="300" y1="300" x2="423" y2="470" />
+          <line class="reach-line" data-i="3" x1="300" y1="300" x2="177" y2="470" />
+          <line class="reach-line" data-i="4" x1="300" y1="300" x2="100" y2="235" />
+        </g>
+        <g class="center" transform="translate(300, 300)">
+          <rect class="center-cube" x="-22" y="-22" width="44" height="44" rx="5" />
+          <rect class="center-inner" x="-12" y="-12" width="24" height="24" rx="3" />
+        </g>
+        <g class="tool" data-i="0" transform="translate(300, 90)">
+          <circle class="tool-glow" r="22" />
+          <rect class="tool-icon" x="-13" y="-9" width="26" height="18" rx="2" />
+          <path class="tool-icon" d="M -7 -3 L -3 0 L -7 3" />
+          <path class="tool-icon" d="M 0 4 L 6 4" />
+          <text class="tool-label" y="36">Terminal</text>
+        </g>
+        <g class="tool" data-i="1" transform="translate(500, 235)">
+          <circle class="tool-glow" r="22" />
+          <circle class="tool-icon" cx="0" cy="0" r="13" />
+          <ellipse class="tool-icon" cx="0" cy="0" rx="13" ry="5.5" />
+          <line class="tool-icon" x1="0" y1="-13" x2="0" y2="13" />
+          <text class="tool-label" y="36">Browser</text>
+        </g>
+        <g class="tool" data-i="2" transform="translate(423, 470)">
+          <circle class="tool-glow" r="22" />
+          <path class="tool-icon" d="M -13 -8 L -5 -8 L -2 -5 L 13 -5 L 13 9 L -13 9 Z" />
+          <text class="tool-label" y="36">Files</text>
+        </g>
+        <g class="tool" data-i="3" transform="translate(177, 470)">
+          <circle class="tool-glow" r="22" />
+          <path class="tool-icon" d="M -10 -7 L -16 0 L -10 7" />
+          <path class="tool-icon" d="M 10 -7 L 16 0 L 10 7" />
+          <line class="tool-icon" x1="-3" y1="-7" x2="3" y2="7" />
+          <text class="tool-label" y="36">Editor</text>
+        </g>
+        <g class="tool" data-i="4" transform="translate(100, 235)">
+          <circle class="tool-glow" r="22" />
+          <rect class="tool-icon" x="-12" y="-9" width="24" height="18" rx="2" />
+          <line class="tool-icon" x1="-12" y1="-3" x2="12" y2="-3" />
+          <line class="tool-icon" x1="-7" y1="-13" x2="-7" y2="-7" />
+          <line class="tool-icon" x1="7"  y1="-13" x2="7"  y2="-7" />
+          <text class="tool-label" y="36">Calendar</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="page-cta">
+  <h2 class="rv">Ready to <em>see it work?</em></h2>
+  <a href="index.html" class="cta-link">Watch the demo →</a>
+</section>
+
+<footer>
+  <div class="row">
+    <div class="brand-info">
+      <div>© 2026 GreenCube</div>
+      <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
+    </div>
+    <nav class="links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:team@greencube.world">Contact</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- libs -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    document.body.classList.add('fonts-ready');
+    initMemoryGraph();
+    initTeamSplit();
+    initToolsReach();
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1200);
+
+  // header scrolled state
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  // generic .rv reveal-on-scroll
+  if (window.gsap && window.ScrollTrigger && !reduced) {
+    document.querySelectorAll('.rv').forEach(el => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.95, ease: 'expo.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      });
+    });
+  } else {
+    document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+  }
+
+  // scroll progress
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ============== MEMORY GRAPH ==============
+  function initMemoryGraph() {
+    if (!window.d3) return;
+    const wrap = document.getElementById('graph-wrap');
+    if (!wrap) return;
+
+    const W = 600, H = 600, PAD = 60;
+
+    const SEEDS = [
+      { id: 'greencube',          w: 9 },
+      { id: 'react project',      w: 8 },
+      { id: 'thesis draft',       w: 7 },
+      { id: 'obsidian vault',     w: 7 },
+      { id: 'research papers',    w: 7 },
+      { id: 'react hooks',        w: 7 },
+      { id: 'terse code style',   w: 6 },
+      { id: 'spanish lessons',    w: 6 },
+      { id: 'rust syntax',        w: 6 },
+      { id: 'git workflow',       w: 6 },
+      { id: 'vim bindings',       w: 6 },
+      { id: 'novel ch. 3',        w: 6 },
+      { id: 'road trip playlist', w: 5 },
+      { id: 'weekend reading',    w: 5 },
+      { id: 'running pace',       w: 5 },
+      { id: 'kafka talk',         w: 5 },
+      { id: 'design refs',        w: 5 },
+      { id: 'morning routine',    w: 5 },
+      { id: 'philly trip',        w: 5 },
+      { id: "sister's birthday",  w: 4 },
+      { id: 'no coffee after 4',  w: 4 },
+      { id: 'raycast shortcuts',  w: 4 },
+      { id: 'tax docs 2025',      w: 4 },
+      { id: "mom's number",       w: 4 },
+      { id: 'fav restaurant',     w: 4 },
+      { id: 'wedding gifts',      w: 4 },
+      { id: 'espresso recipe',    w: 4 },
+      { id: 'thursday standup',   w: 4 },
+      { id: 'fav typeface',       w: 4 },
+      { id: 'groceries',          w: 3 },
+    ];
+    const FUTURE = [
+      { id: 'tuesday gym',         w: 3 },
+      { id: 'new keyboard',        w: 4 },
+      { id: 'dentist apr 22',      w: 3 },
+      { id: 'D3 graph idea',       w: 5 },
+      { id: 'chinatown lunch',     w: 4 },
+      { id: 'rust borrow checker', w: 5 },
+      { id: 'tailwind config',     w: 5 },
+      { id: 'birthday card',       w: 3 },
+    ];
+
+    const nodes = SEEDS.map(s => ({ ...s }));
+    const links = [];
+    for (let i = 0; i < nodes.length; i++) {
+      const n = 1 + Math.floor(Math.random() * 2);
+      const used = new Set([i]);
+      for (let k = 0; k < n; k++) {
+        let j, tries = 0;
+        do { j = Math.floor(Math.random() * nodes.length); tries++; } while (used.has(j) && tries < 8);
+        if (used.has(j)) continue;
+        used.add(j);
+        links.push({ source: nodes[i], target: nodes[j] });
+      }
+    }
+
+    const svg = d3.select(wrap).insert('svg', '.graph-hint')
+      .attr('class', 'graph-svg')
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    const linkLayer = svg.append('g').attr('class', 'edges');
+    const nodeLayer = svg.append('g').attr('class', 'nodes');
+
+    const sim = d3.forceSimulation(nodes)
+      .force('link',    d3.forceLink(links).distance(72).strength(0.32))
+      .force('charge',  d3.forceManyBody().strength(-200))
+      .force('center',  d3.forceCenter(W / 2, H / 2))
+      .force('collide', d3.forceCollide().radius(d => 16 + d.w * 0.6))
+      .force('x',       d3.forceX(W / 2).strength(0.045))
+      .force('y',       d3.forceY(H / 2).strength(0.045))
+      .alphaDecay(0.018)
+      .on('tick', tick);
+    sim.stop();
+
+    function tick() {
+      nodes.forEach(n => {
+        n.x = Math.max(PAD, Math.min(W - PAD, n.x ?? W / 2));
+        n.y = Math.max(PAD, Math.min(H - PAD, n.y ?? H / 2));
+      });
+      linkLayer.selectAll('line')
+        .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+      nodeLayer.selectAll('g.node').attr('transform', d => `translate(${d.x},${d.y})`);
+    }
+
+    function neighborsOf(node) {
+      const set = new Set();
+      links.forEach(l => {
+        if (l.source === node) set.add(l.target);
+        else if (l.target === node) set.add(l.source);
+      });
+      return set;
+    }
+
+    function onEnter(event, d) {
+      const nbrs = neighborsOf(d);
+      nodeLayer.selectAll('circle.node-circle')
+        .classed('is-hover',    n => n === d)
+        .classed('is-neighbor', n => nbrs.has(n));
+      nodeLayer.selectAll('text.node-label')
+        .classed('is-hover',    n => n === d || nbrs.has(n));
+      linkLayer.selectAll('line.edge')
+        .classed('is-active',   l => l.source === d || l.target === d);
+    }
+    function onLeave() {
+      nodeLayer.selectAll('circle.node-circle').classed('is-hover', false).classed('is-neighbor', false);
+      nodeLayer.selectAll('text.node-label').classed('is-hover', false);
+      linkLayer.selectAll('line.edge').classed('is-active', false);
+    }
+
+    const drag = d3.drag()
+      .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; });
+
+    function render() {
+      const lk = linkLayer.selectAll('line').data(links, d => `${d.source.id}::${d.target.id}`);
+      lk.exit().remove();
+      lk.enter().append('line').attr('class', 'edge')
+        .attr('stroke-opacity', 0)
+        .transition().duration(900).attr('stroke-opacity', null);
+
+      const nd = nodeLayer.selectAll('g.node').data(nodes, d => d.id);
+      nd.exit().remove();
+      const enter = nd.enter().append('g').attr('class', 'node');
+      enter.append('circle').attr('class', 'node-circle').attr('r', 0)
+        .transition().duration(900).attr('r', d => 4 + d.w * 0.4);
+      enter.append('text').attr('class', 'node-label')
+        .attr('x', d => 8 + d.w * 0.4)
+        .attr('y', 4)
+        .text(d => d.id)
+        .style('opacity', 0)
+        .transition().delay(300).duration(700).style('opacity', null);
+
+      const all = nodeLayer.selectAll('g.node');
+      all.on('mouseenter', onEnter).on('mouseleave', onLeave);
+      all.call(drag);
+    }
+    render();
+
+    const countEl = document.getElementById('graph-count');
+    function updateCount() { if (countEl) countEl.textContent = nodes.length; }
+    updateCount();
+
+    let kicked = false, breathTimer = null, learnTimer = null, futureIdx = 0;
+    function kick() {
+      if (kicked) return;
+      kicked = true;
+      sim.alpha(1).restart();
+      breathTimer = setInterval(() => sim.alpha(0.06).restart(), 3800);
+      learnTimer = setInterval(() => {
+        if (futureIdx >= FUTURE.length) { clearInterval(learnTimer); return; }
+        const seed = FUTURE[futureIdx++];
+        const newNode = { ...seed,
+          x: W / 2 + (Math.random() - 0.5) * 60,
+          y: H / 2 + (Math.random() - 0.5) * 60,
+        };
+        const sorted = nodes
+          .map(n => ({ n, d: Math.hypot((n.x ?? W/2) - newNode.x, (n.y ?? H/2) - newNode.y) }))
+          .sort((a, b) => a.d - b.d);
+        nodes.push(newNode);
+        if (sorted[0]) links.push({ source: newNode, target: sorted[0].n });
+        if (sorted[1]) links.push({ source: newNode, target: sorted[1].n });
+        sim.nodes(nodes);
+        sim.force('link').links(links);
+        render();
+        sim.alpha(0.7).restart();
+        updateCount();
+      }, 6000);
+    }
+
+    if (window.ScrollTrigger) {
+      ScrollTrigger.create({ trigger: '.memory', start: 'top 80%', once: true, onEnter: kick });
+      ScrollTrigger.create({
+        trigger: '.memory',
+        start: 'top bottom',
+        end: 'bottom top',
+        onEnter:     () => { if (kicked) sim.alpha(0.1).restart(); },
+        onEnterBack: () => { if (kicked) sim.alpha(0.1).restart(); },
+        onLeave:     () => sim.stop(),
+        onLeaveBack: () => sim.stop(),
+      });
+    } else { kick(); }
+
+    // cursor magnet
+    const svgNode  = svg.node();
+    const REPEL_R  = 95;
+    const REPEL_R2 = REPEL_R * REPEL_R;
+    const REPEL_S  = 2.4;
+    let cursorX = -9999, cursorY = -9999;
+    let cursorIn = false;
+    function cursorRepelForce() {
+      let simNodes;
+      function force() {
+        if (!cursorIn) return;
+        for (const n of simNodes) {
+          const dx = (n.x ?? 0) - cursorX;
+          const dy = (n.y ?? 0) - cursorY;
+          const d2 = dx * dx + dy * dy;
+          if (d2 > REPEL_R2 || d2 < 1) continue;
+          const d = Math.sqrt(d2);
+          const t = 1 - d / REPEL_R;
+          const f = t * t * REPEL_S;
+          n.vx += (dx / d) * f;
+          n.vy += (dy / d) * f;
+        }
+      }
+      force.initialize = (n) => { simNodes = n; };
+      return force;
+    }
+    sim.force('cursor', cursorRepelForce());
+    wrap.addEventListener('mouseenter', () => {
+      cursorIn = true;
+      if (kicked) sim.alphaTarget(0.14).restart();
+    });
+    wrap.addEventListener('mouseleave', () => {
+      cursorIn = false;
+      cursorX = cursorY = -9999;
+      sim.alphaTarget(0);
+    });
+    wrap.addEventListener('mousemove', (e) => {
+      if (!cursorIn) return;
+      const rect = svgNode.getBoundingClientRect();
+      cursorX = ((e.clientX - rect.left) / rect.width)  * W;
+      cursorY = ((e.clientY - rect.top)  / rect.height) * H;
+    });
+  }
+
+  // ============== TEAM SPLIT ==============
+  function initTeamSplit() {
+    const stage  = document.getElementById('split-stage');
+    if (!stage) return;
+    const clones = stage.querySelectorAll('.cube-clone');
+    const labels = stage.querySelectorAll('.cube-label');
+    const pipe   = document.getElementById('split-pipe');
+    if (clones.length !== 4) return;
+
+    function positions() {
+      const w = stage.clientWidth;
+      const isMobile = w < 760;
+      if (isMobile) {
+        const dx = Math.min(120, w * 0.22);
+        const dy = 130;
+        return [
+          { x: -dx, y: -dy }, { x:  dx, y: -dy },
+          { x: -dx, y:  dy }, { x:  dx, y:  dy },
+        ];
+      }
+      const span = Math.min(w - 360, 880);
+      const step = span / 3;
+      return [
+        { x: -span / 2,        y: 0 },
+        { x: -span / 2 + step, y: 0 },
+        { x:  span / 2 - step, y: 0 },
+        { x:  span / 2,        y: 0 },
+      ];
+    }
+    let pos = positions();
+    function labelOffsetY(i, isMobile) { return isMobile ? 60 : 78; }
+
+    if (!window.gsap || reduced) {
+      pos.forEach((p, i) => {
+        const c = clones[i], l = labels[i];
+        c.style.transform = `translate(calc(-50% + ${p.x}px), calc(-50% + ${p.y}px)) scale(1)`;
+        c.style.opacity = 1;
+        const isMobile = stage.clientWidth < 760;
+        l.style.transform = `translate(calc(-50% + ${p.x}px), ${p.y + labelOffsetY(i, isMobile)}px)`;
+        l.style.opacity = 1;
+      });
+      return;
+    }
+
+    clones.forEach((c) => {
+      gsap.set(c, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.5, opacity: 0 });
+    });
+    labels.forEach((l) => {
+      gsap.set(l, { xPercent: -50, yPercent: 0, x: 0, y: 56, opacity: 0 });
+    });
+    gsap.set(pipe, { xPercent: -50, yPercent: -50, scaleX: 0, opacity: 0 });
+
+    function buildTimeline() {
+      pos = positions();
+      const isMobile = stage.clientWidth < 760;
+      if (!isMobile && pipe) {
+        gsap.set(pipe, { width: pos[3].x - pos[0].x, transformOrigin: 'center center' });
+      }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.split-stage',
+          start: 'center center',
+          end: '+=140%',
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+        defaults: { ease: 'none' },
+      });
+      tl.to({}, { duration: 1.4 });
+      tl.to(clones, { opacity: 1, scale: 0.85, duration: 1.4, stagger: 0.05 });
+      tl.to({}, { duration: 0.8 });
+      tl.to(clones, {
+        x: (i) => pos[i].x, y: (i) => pos[i].y, scale: 1,
+        duration: 2.0, stagger: 0.06,
+      });
+      tl.to(labels, {
+        x: (i) => pos[i].x, y: (i) => pos[i].y + labelOffsetY(i, isMobile),
+        opacity: 1, duration: 1.4, stagger: 0.06,
+      }, '<+=0.5');
+      if (!isMobile && pipe) {
+        tl.to(pipe, { scaleX: 1, opacity: 0.55, duration: 1.4 }, '<+=0.5');
+      }
+      tl.to({}, { duration: 0.8 });
+    }
+    buildTimeline();
+
+    let resizeT = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        pos = positions();
+        const isMobile = stage.clientWidth < 760;
+        if (!isMobile && pipe) gsap.set(pipe, { width: pos[3].x - pos[0].x });
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+      }, 200);
+    });
+  }
+
+  // ============== TOOLS REACH ==============
+  function initToolsReach() {
+    const svg = document.getElementById('tools-svg');
+    if (!svg) return;
+    const lines  = Array.from(svg.querySelectorAll('.reach-line'));
+    const tools  = Array.from(svg.querySelectorAll('.tool'));
+    const center = svg.querySelector('.center');
+    const ring   = svg.querySelector('.ring');
+    const ringLabel = svg.querySelector('.ring-label');
+    if (!lines.length || !tools.length) return;
+
+    const TOOL_POS = [
+      { x: 300, y: 90  },
+      { x: 500, y: 235 },
+      { x: 423, y: 470 },
+      { x: 177, y: 470 },
+      { x: 100, y: 235 },
+    ];
+    const CENTER = { x: 300, y: 300 };
+
+    if (!window.gsap || !window.ScrollTrigger || reduced) {
+      tools.forEach(t => { t.style.opacity = 1; });
+      return;
+    }
+
+    gsap.set([ring, ringLabel], { opacity: 0 });
+    gsap.set(center, { transformOrigin: '300px 300px', scale: 0.6, opacity: 0 });
+    lines.forEach(line => {
+      const len = line.getTotalLength();
+      gsap.set(line, { strokeDasharray: len, strokeDashoffset: len, opacity: 0.55 });
+    });
+    tools.forEach(t => {
+      gsap.set(t, { transformOrigin: 'center center', scale: 0.5, opacity: 0 });
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: '.tools', start: 'top 65%', once: true },
+      defaults: { ease: 'expo.out' },
+    });
+    tl
+      .to(ring, { opacity: 0.5, duration: 0.8 })
+      .to(ringLabel, { opacity: 1, duration: 0.5 }, '-=0.5')
+      .to(center, { scale: 1, opacity: 1, duration: 0.8 }, '-=0.3')
+      .to(lines, { strokeDashoffset: 0, duration: 0.85, stagger: 0.10, ease: 'power2.out' }, '-=0.2')
+      .to(tools, { scale: 1, opacity: 1, duration: 0.55, stagger: 0.10, ease: 'back.out(1.6)' }, '-=0.95');
+
+    let packetTimer = null, inView = false;
+    function firePacket(forcedIndex) {
+      if (!inView) return;
+      const i   = (typeof forcedIndex === 'number') ? forcedIndex : Math.floor(Math.random() * TOOL_POS.length);
+      const tgt = TOOL_POS[i];
+      const tool = tools[i];
+      const packet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      packet.setAttribute('class', 'packet');
+      packet.setAttribute('r', '3.5');
+      packet.setAttribute('cx', CENTER.x);
+      packet.setAttribute('cy', CENTER.y);
+      svg.appendChild(packet);
+      gsap.timeline({ onComplete: () => packet.remove() })
+        .to(packet, { opacity: 1, duration: 0.10 })
+        .to(packet, { attr: { cx: tgt.x, cy: tgt.y }, duration: 0.55, ease: 'power2.in' }, 0)
+        .to(tool, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.45)
+        .fromTo(tool.querySelector('.tool-glow'),
+          { opacity: 0 },
+          { opacity: 0.5, duration: 0.30, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.45)
+        .to(packet, { opacity: 0, duration: 0.20 }, 0.60);
+    }
+    function schedule() {
+      const delay = 800 + Math.random() * 1200;
+      packetTimer = setTimeout(() => {
+        firePacket();
+        if (Math.random() < 0.35) setTimeout(firePacket, 180 + Math.random() * 240);
+        schedule();
+      }, delay);
+    }
+    ScrollTrigger.create({
+      trigger: '.tools',
+      start: 'top bottom',
+      end: 'bottom top',
+      onEnter:     () => { inView = true; if (!packetTimer) schedule(); },
+      onEnterBack: () => { inView = true; if (!packetTimer) schedule(); },
+      onLeave:     () => { inView = false; clearTimeout(packetTimer); packetTimer = null; },
+      onLeaveBack: () => { inView = false; clearTimeout(packetTimer); packetTimer = null; },
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
