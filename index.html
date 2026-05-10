@@ -1365,22 +1365,21 @@
   </div>
 </footer>
 
-<!-- libs — `defer` so HTML parses without blocking on these CDN downloads -->
-<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<!-- libs — synchronous so the inline IIFE below can use them at parse time -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   // ---------- font gate ----------
   let started = false;
   const start = () => {
     if (started) return;
     started = true;
-    // Deferred CDN scripts have loaded by now — safe to register the plugin.
-    if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     document.body.classList.add('fonts-ready');
     runIntro();
     initHeroCube();
