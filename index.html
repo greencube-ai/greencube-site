@@ -527,13 +527,19 @@
     }
     .dchat-body {
       flex: 1;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       padding: 22px 22px 14px;
       display: flex;
       flex-direction: column;
       gap: 14px;
       position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.15) transparent;
     }
+    .dchat-body::-webkit-scrollbar { width: 7px; }
+    .dchat-body::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.18); border-radius: 4px; }
+    .dchat-body::-webkit-scrollbar-track { background: transparent; }
     .dchat-msg.user {
       align-self: flex-end;
       max-width: 85%;
@@ -650,7 +656,12 @@
       text-transform: none;
       opacity: 0.85;
     }
-    .mini-graph svg { width: 100%; height: calc(100% - 16px); display: block; }
+    .mini-graph svg {
+      width: 100%;
+      height: calc(100% - 18px);
+      display: block;
+      overflow: visible;
+    }
     .mini-graph .edge { stroke: rgba(91, 138, 110, 0.35); stroke-width: 0.8; fill: none; }
     .mini-graph .edge.sub { stroke: rgba(91, 138, 110, 0.22); stroke-dasharray: 2 2; }
     .mini-graph .node circle { fill: var(--paper); stroke: var(--moss); stroke-width: 1.2; transition: fill 0.4s; }
@@ -854,19 +865,36 @@
       overflow: hidden;
       background: var(--paper-soft);
       position: relative;
+      min-height: 0;
     }
+    /* shared scrollbar styling for any scroll surface inside a window */
+    .dwin-scroll {
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.18) transparent;
+    }
+    .dwin-scroll::-webkit-scrollbar { width: 8px; }
+    .dwin-scroll::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.20); border-radius: 4px; }
+    .dwin-scroll::-webkit-scrollbar-track { background: transparent; }
 
     /* Pages window */
     #win-pages { width: 58%; height: 70%; left: 19%; top: 10%; }
     .pages-doc {
-      padding: 28px 36px;
+      padding: 28px 36px 60px;
       font-family: Georgia, serif;
       font-size: 13px;
       color: var(--ink);
       height: 100%;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       background: #fff;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.18) transparent;
     }
+    .pages-doc::-webkit-scrollbar { width: 8px; }
+    .pages-doc::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.20); border-radius: 4px; }
+    .pages-doc::-webkit-scrollbar-track { background: transparent; }
     .pages-doc .doc-name {
       font-family: Georgia, serif;
       font-size: 28px;
@@ -968,11 +996,15 @@
       border-left: 1px solid var(--line);
       padding: 16px 18px;
       background: var(--paper-soft);
-      overflow: hidden;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.18) transparent;
     }
+    .maps-list::-webkit-scrollbar { width: 7px; }
+    .maps-list::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.18); border-radius: 4px; }
     .maps-list h4 {
       font-size: 11.5px;
       letter-spacing: 0.16em;
@@ -1017,6 +1049,13 @@
       overflow: hidden;
       padding: 10px 0;
     }
+    .mail-list {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.18) transparent;
+    }
+    .mail-list::-webkit-scrollbar { width: 7px; }
+    .mail-list::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.18); border-radius: 4px; }
     .mail-list h4 {
       font-size: 11.5px;
       letter-spacing: 0.16em;
@@ -1039,11 +1078,17 @@
     .mail-item .preview { font-size: 11.5px; color: var(--ink-mute); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .mail-compose {
       flex: 1;
-      padding: 16px 22px;
+      padding: 16px 22px 24px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      overflow-y: auto;
+      min-width: 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(31, 58, 46, 0.18) transparent;
     }
+    .mail-compose::-webkit-scrollbar { width: 8px; }
+    .mail-compose::-webkit-scrollbar-thumb { background: rgba(31, 58, 46, 0.20); border-radius: 4px; }
     .mail-field {
       display: flex;
       gap: 10px;
@@ -1518,60 +1563,54 @@
             <span>memory · 14 facts pulled</span>
             <span class="expand-hint" id="graph-hint">tap to expand ↗</span>
           </div>
-          <svg viewBox="0 0 280 200" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
             <!-- inner ring edges -->
             <g>
-              <line class="edge" x1="140" y1="100" x2="140" y2="38" />
-              <line class="edge" x1="140" y1="100" x2="218" y2="56" />
-              <line class="edge" x1="140" y1="100" x2="240" y2="100" />
-              <line class="edge" x1="140" y1="100" x2="218" y2="144" />
-              <line class="edge" x1="140" y1="100" x2="140" y2="166" />
-              <line class="edge" x1="140" y1="100" x2="62" y2="144" />
-              <line class="edge" x1="140" y1="100" x2="40" y2="100" />
-              <line class="edge" x1="140" y1="100" x2="62" y2="56" />
+              <line class="edge" x1="160" y1="100" x2="160" y2="48"/>
+              <line class="edge" x1="160" y1="100" x2="208" y2="64"/>
+              <line class="edge" x1="160" y1="100" x2="225" y2="100"/>
+              <line class="edge" x1="160" y1="100" x2="208" y2="136"/>
+              <line class="edge" x1="160" y1="100" x2="160" y2="152"/>
+              <line class="edge" x1="160" y1="100" x2="112" y2="136"/>
+              <line class="edge" x1="160" y1="100" x2="95" y2="100"/>
+              <line class="edge" x1="160" y1="100" x2="112" y2="64"/>
             </g>
-            <!-- sub-branches off "Work history" -->
+            <!-- sub-branches -->
             <g>
-              <line class="edge sub" x1="62" y1="56" x2="22" y2="34" />
-              <line class="edge sub" x1="62" y1="56" x2="22" y2="68" />
-              <line class="edge sub" x1="62" y1="56" x2="40" y2="20" />
-            </g>
-            <!-- sub-branches off "Madrid" -->
-            <g>
-              <line class="edge sub" x1="240" y1="100" x2="266" y2="80" />
-              <line class="edge sub" x1="240" y1="100" x2="266" y2="120" />
-            </g>
-            <!-- sub-branches off "Skills" -->
-            <g>
-              <line class="edge sub" x1="218" y1="56" x2="252" y2="36" />
-              <line class="edge sub" x1="218" y1="56" x2="248" y2="20" />
+              <line class="edge sub" x1="112" y1="64" x2="78" y2="46"/>
+              <line class="edge sub" x1="112" y1="64" x2="62" y2="76"/>
+              <line class="edge sub" x1="112" y1="64" x2="92" y2="28"/>
+              <line class="edge sub" x1="225" y1="100" x2="262" y2="80"/>
+              <line class="edge sub" x1="225" y1="100" x2="262" y2="118"/>
+              <line class="edge sub" x1="208" y1="64" x2="246" y2="46"/>
+              <line class="edge sub" x1="208" y1="64" x2="232" y2="28"/>
             </g>
 
             <!-- center -->
             <g class="node is-center" data-node="center">
-              <circle class="pulse" cx="140" cy="100" r="8" />
-              <circle cx="140" cy="100" r="11" />
-              <text x="140" y="103" text-anchor="middle">Alex</text>
+              <circle class="pulse" cx="160" cy="100" r="8"/>
+              <circle cx="160" cy="100" r="11"/>
+              <text x="160" y="103" text-anchor="middle">Alex</text>
             </g>
 
             <!-- ring 1 (inner) -->
-            <g class="node" data-node="contact"><circle cx="140" cy="38" r="5"/><text x="140" y="30" text-anchor="middle">Contact</text></g>
-            <g class="node" data-node="skills"><circle cx="218" cy="56" r="5"/><text x="226" y="52" text-anchor="start">Skills</text></g>
-            <g class="node" data-node="loc"><circle cx="240" cy="100" r="5"/><text x="248" y="103" text-anchor="start">Madrid, ES</text></g>
-            <g class="node" data-node="edu"><circle cx="218" cy="144" r="5"/><text x="226" y="148" text-anchor="start">Education</text></g>
-            <g class="node" data-node="tone"><circle cx="140" cy="166" r="5"/><text x="140" y="178" text-anchor="middle">Tone of voice</text></g>
-            <g class="node" data-node="resumes"><circle cx="62" cy="144" r="5"/><text x="54" y="148" text-anchor="end">Past resumes</text></g>
-            <g class="node" data-node="lang"><circle cx="40" cy="100" r="5"/><text x="32" y="103" text-anchor="end">Languages</text></g>
-            <g class="node" data-node="work"><circle cx="62" cy="56" r="5"/><text x="54" y="52" text-anchor="end">Work history</text></g>
+            <g class="node" data-node="contact"><circle cx="160" cy="48" r="5"/><text x="160" y="40" text-anchor="middle">Contact</text></g>
+            <g class="node" data-node="skills"><circle cx="208" cy="64" r="5"/><text x="216" y="60" text-anchor="start">Skills</text></g>
+            <g class="node" data-node="loc"><circle cx="225" cy="100" r="5"/><text x="233" y="103" text-anchor="start">Madrid, ES</text></g>
+            <g class="node" data-node="edu"><circle cx="208" cy="136" r="5"/><text x="216" y="140" text-anchor="start">Education</text></g>
+            <g class="node" data-node="tone"><circle cx="160" cy="152" r="5"/><text x="160" y="166" text-anchor="middle">Tone of voice</text></g>
+            <g class="node" data-node="resumes"><circle cx="112" cy="136" r="5"/><text x="104" y="140" text-anchor="end">Past resumes</text></g>
+            <g class="node" data-node="lang"><circle cx="95" cy="100" r="5"/><text x="87" y="103" text-anchor="end">Languages</text></g>
+            <g class="node" data-node="work"><circle cx="112" cy="64" r="5"/><text x="104" y="60" text-anchor="end">Work history</text></g>
 
             <!-- ring 2 (sub-branches) -->
-            <g class="node sub" data-node="bartomate"><circle cx="22" cy="34" r="3.4"/><text x="14" y="37" text-anchor="end">Bar Tomate</text></g>
-            <g class="node sub" data-node="tomacafe"><circle cx="22" cy="68" r="3.4"/><text x="14" y="71" text-anchor="end">Toma Café</text></g>
-            <g class="node sub" data-node="intern"><circle cx="40" cy="20" r="3.4"/><text x="38" y="14" text-anchor="end">Intern '22</text></g>
-            <g class="node sub" data-node="esmadrid"><circle cx="266" cy="80" r="3.4"/><text x="270" y="76" text-anchor="start">Atocha</text></g>
-            <g class="node sub" data-node="walking"><circle cx="266" cy="120" r="3.4"/><text x="270" y="124" text-anchor="start">walks ~10min</text></g>
-            <g class="node sub" data-node="customer"><circle cx="252" cy="36" r="3.4"/><text x="256" y="32" text-anchor="start">Customer svc</text></g>
-            <g class="node sub" data-node="bilingual"><circle cx="248" cy="20" r="3.4"/><text x="248" y="14" text-anchor="middle">EN / ES</text></g>
+            <g class="node sub" data-node="bartomate"><circle cx="78" cy="46" r="3.4"/><text x="72" y="49" text-anchor="end">Bar Tomate</text></g>
+            <g class="node sub" data-node="tomacafe"><circle cx="62" cy="76" r="3.4"/><text x="56" y="79" text-anchor="end">Toma Café</text></g>
+            <g class="node sub" data-node="intern"><circle cx="92" cy="28" r="3.4"/><text x="92" y="20" text-anchor="middle">Intern '22</text></g>
+            <g class="node sub" data-node="esmadrid"><circle cx="262" cy="80" r="3.4"/><text x="268" y="78" text-anchor="start">Atocha</text></g>
+            <g class="node sub" data-node="walking"><circle cx="262" cy="118" r="3.4"/><text x="268" y="122" text-anchor="start">10 min walk</text></g>
+            <g class="node sub" data-node="customer"><circle cx="246" cy="46" r="3.4"/><text x="252" y="44" text-anchor="start">Customer svc</text></g>
+            <g class="node sub" data-node="bilingual"><circle cx="232" cy="28" r="3.4"/><text x="232" y="20" text-anchor="middle">EN / ES</text></g>
           </svg>
         </div>
       </div>
