@@ -424,10 +424,11 @@
     /* the big container — looks like a real macOS window */
     .demo-frame {
       position: relative;
-      max-width: 1480px;
+      max-width: 1240px;
       margin: 0 auto;
-      width: calc(100% - 32px);
+      width: calc(100% - 64px);
       aspect-ratio: 16 / 10;
+      max-height: 78vh;
       background: var(--paper-soft);
       border-radius: 14px;
       border: 1px solid rgba(31, 58, 46, 0.10);
@@ -600,36 +601,81 @@
     }
     .agent-chip .glyph { font-size: 12px; }
 
-    /* mini memory graph overlay */
+    /* memory graph overlay — clickable to expand */
     .mini-graph {
       position: absolute;
       right: 14px;
       bottom: 14px;
-      width: 180px;
-      height: 130px;
-      background: rgba(245, 241, 232, 0.92);
+      width: 240px;
+      height: 180px;
+      background: rgba(245, 241, 232, 0.96);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 8px;
-      box-shadow: 0 12px 30px -10px rgba(31, 58, 46, 0.20);
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: 0 16px 40px -12px rgba(31, 58, 46, 0.30);
       opacity: 0;
       transform: translateY(8px) scale(0.96);
-      pointer-events: none;
       z-index: 4;
+      cursor: zoom-in;
+      transition: width 0.4s var(--ease-out),
+                  height 0.4s var(--ease-out),
+                  inset 0.4s var(--ease-out),
+                  right 0.4s var(--ease-out),
+                  bottom 0.4s var(--ease-out);
+    }
+    .mini-graph.is-expanded {
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      top: 14px;
+      width: auto;
+      height: auto;
+      cursor: zoom-out;
+      z-index: 8;
     }
     .mini-graph .label {
-      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 9.5px;
       letter-spacing: 0.10em;
       text-transform: uppercase;
       color: var(--ink-mute);
       margin-bottom: 4px;
     }
-    .mini-graph svg { width: 100%; height: calc(100% - 14px); }
-    .mini-graph .node circle { fill: var(--paper); stroke: var(--moss); stroke-width: 1.2; }
+    .mini-graph .label .expand-hint {
+      font-size: 9.5px;
+      color: var(--moss);
+      letter-spacing: 0.05em;
+      text-transform: none;
+      opacity: 0.85;
+    }
+    .mini-graph svg { width: 100%; height: calc(100% - 16px); display: block; }
+    .mini-graph .edge { stroke: rgba(91, 138, 110, 0.35); stroke-width: 0.8; fill: none; }
+    .mini-graph .edge.sub { stroke: rgba(91, 138, 110, 0.22); stroke-dasharray: 2 2; }
+    .mini-graph .node circle { fill: var(--paper); stroke: var(--moss); stroke-width: 1.2; transition: fill 0.4s; }
+    .mini-graph .node.is-center circle { fill: var(--forest); stroke: var(--forest); }
+    .mini-graph .node.is-center text { fill: #fff; font-weight: 600; }
     .mini-graph .node.is-active circle { fill: var(--moss); stroke: var(--forest); }
-    .mini-graph .node text { font-size: 6.5px; fill: var(--ink-soft); font-family: var(--sans); }
     .mini-graph .node.is-active text { fill: var(--forest); font-weight: 600; }
-    .mini-graph .edge { stroke: rgba(91, 138, 110, 0.40); stroke-width: 0.8; }
+    .mini-graph .node.sub circle { stroke-width: 0.8; r: 3.4; }
+    .mini-graph .node text {
+      font-size: 7px;
+      fill: var(--ink-soft);
+      font-family: var(--sans);
+      pointer-events: none;
+    }
+    .mini-graph.is-expanded .node text { font-size: 9px; }
+    .mini-graph.is-expanded .label { font-size: 11px; margin-bottom: 8px; }
+    .mini-graph .pulse {
+      stroke: var(--moss); fill: none; stroke-width: 1;
+      opacity: 0; transform-origin: center;
+    }
+    .mini-graph.is-active .pulse { animation: graph-pulse 2.4s var(--ease-out) infinite; }
+    @keyframes graph-pulse {
+      0%   { r: 8;  opacity: 0.5; }
+      100% { r: 22; opacity: 0; }
+    }
 
     .dchat-input-row {
       display: flex;
@@ -1096,7 +1142,8 @@
         inset 0 -1px 1px rgba(0, 0, 0, 0.10);
     }
     .dock-icon:hover { transform: translateY(-9px) scale(1.22); }
-    .dock-icon.is-active::after {
+    .dock-icon.is-active::after,
+    .dock-icon.is-open::after {
       content: '';
       position: absolute;
       bottom: -8px; left: 50%;
@@ -1183,517 +1230,6 @@
     }
     .desk-resume.is-visible { opacity: 1; transform: none; pointer-events: auto; }
     .desk-resume:hover { background: var(--forest); }
-
-    /* ============== story — pinned scroll-driven cinematic ============== */
-    .story {
-      position: relative;
-      background: var(--paper-warm);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .story::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 60% at 25% 30%, rgba(91, 138, 110, 0.10), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201, 169, 97, 0.08), transparent 60%);
-      z-index: 0;
-    }
-    .story-stage {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: clamp(36px, 5.5vh, 72px);
-      padding: 13vh 20px 4vh;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .story-caption {
-      flex: 0 0 auto;
-      min-height: 1.6em;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(22px, 2.4vw, 34px);
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-      color: var(--ink-soft);
-      text-align: center;
-      max-width: 30ch;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .story-caption em { color: var(--moss); }
-    .story-caption strong { color: var(--forest); font-weight: 500; }
-
-    /* laptop frame */
-    .laptop {
-      position: relative;
-      width: min(80vw, 1040px);
-      max-height: 70vh;
-      aspect-ratio: 3 / 2;
-      background: var(--forest);
-      border-radius: 14px;
-      padding: 11px 11px 14px;
-      box-shadow:
-        0 30px 80px -20px rgba(31, 58, 46, 0.45),
-        0 8px 24px -8px rgba(31, 58, 46, 0.20);
-      transform: scale(0.55);
-      opacity: 0;
-      will-change: transform, opacity;
-      flex: 0 0 auto;
-    }
-    .laptop::before {
-      content: '';
-      position: absolute;
-      top: 5px; left: 50%;
-      transform: translateX(-50%);
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--ink-mute);
-      opacity: 0.55;
-    }
-    .laptop-screen {
-      width: 100%;
-      height: 100%;
-      background: var(--paper);
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* layered scenes inside the screen */
-    .scene {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      opacity: 0;
-      will-change: opacity;
-    }
-
-    /* shared app shell: sidebar + main */
-    .app-shell {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      background: var(--paper);
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--ink);
-    }
-    .app-sidebar {
-      flex: 0 0 150px;
-      display: flex;
-      flex-direction: column;
-      padding: 10px 8px;
-      border-right: 1px solid var(--line);
-      background: var(--paper);
-      gap: 8px;
-    }
-    .app-newchat {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      height: 26px;
-      padding: 0 8px;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      background: transparent;
-      color: var(--ink-soft);
-      font-size: 11px;
-      cursor: default;
-    }
-    .app-newchat .plus { color: var(--forest); font-weight: 600; font-size: 13px; }
-    .app-tabs { display: flex; gap: 3px; margin: 4px 0 2px; }
-    .app-tab {
-      padding: 3px 6px;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: 3px;
-      color: var(--ink-mute);
-    }
-    .app-tab.is-active { background: var(--paper-warm); color: var(--forest); }
-    .app-convo-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 6px;
-    }
-    .app-convo {
-      padding: 5px 8px;
-      font-size: 11px;
-      color: var(--ink-soft);
-      border-radius: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .app-convo.is-active { background: var(--paper-warm); color: var(--forest); }
-
-    .app-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: var(--paper);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* HOME state */
-    .app-home {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      gap: 14px;
-    }
-    .app-create {
-      font-family: Georgia, var(--serif);
-      font-weight: 700;
-      font-size: 34px;
-      color: var(--forest);
-      letter-spacing: -0.01em;
-      margin-bottom: 2px;
-    }
-    .app-input-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 480px;
-    }
-    .app-input {
-      width: 100%;
-      height: 38px;
-      padding: 0 12px;
-      background: #fff;
-      border: 1.5px solid var(--line);
-      border-radius: 6px;
-      font-family: var(--sans);
-      font-size: 13px;
-      color: var(--ink);
-      outline: none;
-    }
-    .app-input::placeholder { color: var(--ink-faint); }
-    .app-input.is-focus { border-color: var(--moss); }
-    .app-pills {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .app-pills button {
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 5px 12px;
-      color: var(--ink-soft);
-      font-size: 11px;
-      cursor: default;
-    }
-
-    /* CHAT state */
-    .app-chat {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .app-msgs {
-      flex: 1;
-      padding: 18px 18px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow: hidden;
-    }
-    .msg { display: flex; max-width: 80%; }
-    .msg.user { align-self: flex-end; }
-    .msg.assistant { align-self: flex-start; }
-    .msg-bubble {
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 12.5px;
-      line-height: 1.4;
-    }
-    .msg.user .msg-bubble { background: var(--forest); color: #fff; }
-    .msg.assistant .msg-bubble {
-      background: #fff;
-      color: var(--ink);
-      border: 1px solid var(--line);
-    }
-    .msg.assistant .msg-bubble.thinking {
-      font-style: italic;
-      color: var(--ink-soft);
-      font-size: 11.5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .think-dot {
-      display: inline-block;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--moss);
-      animation: think-pulse 1.4s ease-in-out infinite;
-    }
-    .think-dot:nth-child(2) { animation-delay: 0.18s; }
-    .think-dot:nth-child(3) { animation-delay: 0.36s; }
-    @keyframes think-pulse {
-      0%, 100% { opacity: 0.25; transform: scale(0.85); }
-      50%      { opacity: 1;    transform: scale(1.1); }
-    }
-    .app-input-row {
-      display: flex;
-      gap: 6px;
-      padding: 10px 18px 14px;
-      border-top: 1px solid var(--line);
-      background: var(--paper);
-    }
-    .app-input-row .app-input { flex: 1; }
-    .app-send {
-      height: 38px;
-      padding: 0 14px;
-      background: var(--forest);
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 12px;
-      cursor: default;
-    }
-
-    /* AGENTS state */
-    .scene-agents .app-main { padding: 8px; }
-    .agent-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 8px;
-      height: 100%;
-    }
-    .agent-panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      overflow: hidden;
-      position: relative;
-    }
-    .agent-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--gold);
-      transition: width 1.1s var(--ease-out);
-    }
-    .agent-panel.is-active::before { width: 100%; }
-    .agent-head {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 14px;
-      color: var(--forest);
-      letter-spacing: -0.01em;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--line);
-    }
-    .agent-head .cube-icon {
-      width: 11px; height: 11px;
-      border: 1.5px solid var(--forest);
-      border-radius: 2px;
-      flex-shrink: 0;
-      animation: brand-spin 12s linear infinite;
-    }
-    .agent-body {
-      flex: 1;
-      overflow: hidden;
-      font-size: 10.5px;
-      line-height: 1.45;
-      color: var(--ink-soft);
-    }
-
-    /* Planner — numbered list */
-    .plan-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .plan-item {
-      display: flex;
-      gap: 6px;
-      padding: 2px 0;
-      align-items: baseline;
-    }
-    .plan-item .num {
-      font-family: var(--serif);
-      font-style: italic;
-      color: var(--moss);
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-    .plan-item .text { color: var(--ink); font-size: 10.5px; }
-
-    /* Researcher — browser tabs */
-    .tab-bar {
-      display: flex;
-      gap: 3px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-    }
-    .browser-tab {
-      background: var(--paper-warm);
-      border: 1px solid var(--line);
-      border-radius: 3px 3px 0 0;
-      padding: 2px 6px;
-      font-size: 9px;
-      white-space: nowrap;
-      color: var(--ink-soft);
-    }
-    .browser-tab.is-active { background: #fff; color: var(--forest); border-bottom-color: #fff; }
-    .browser-results {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding-top: 4px;
-    }
-    .browser-result { padding: 2px 0; font-size: 10px; line-height: 1.3; }
-    .browser-result .title { color: var(--moss); font-weight: 500; }
-    .browser-result .url { color: var(--ink-faint); font-size: 8.5px; letter-spacing: 0.02em; }
-
-    /* Engineer — terminal */
-    .term {
-      background: var(--night);
-      color: var(--on-dark);
-      border-radius: 3px;
-      padding: 6px 8px;
-      font-family: var(--mono);
-      font-size: 9.5px;
-      line-height: 1.5;
-      overflow: hidden;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-    .term-line { white-space: pre; }
-    .term-line .prompt { color: var(--moss); margin-right: 4px; }
-    .term-line .out { color: var(--on-dark-soft); }
-    .term-line.curr::after {
-      content: '▋';
-      display: inline-block;
-      margin-left: 2px;
-      color: var(--gold);
-      animation: caret-blink 0.9s step-end infinite;
-    }
-    @keyframes caret-blink { 50% { opacity: 0; } }
-
-    /* Operator — file tree */
-    .file-tree {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      line-height: 1.6;
-      color: var(--ink-soft);
-    }
-    .file-line { display: flex; gap: 4px; align-items: center; }
-    .file-line .icon { color: var(--moss); flex-shrink: 0; width: 8px; }
-    .file-line.indent-1 { padding-left: 12px; }
-    .file-line.indent-2 { padding-left: 24px; }
-
-    /* RESULT — running todo app */
-    .scene-result .app-main { padding: 0; }
-    .todo-app {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px 18px;
-      gap: 12px;
-    }
-    .todo-title {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 26px;
-      color: var(--forest);
-      letter-spacing: -0.015em;
-      margin-bottom: 2px;
-    }
-    .todo-subtitle {
-      font-size: 11px;
-      color: var(--ink-mute);
-      letter-spacing: 0.05em;
-      margin-top: -6px;
-    }
-    .todo-list {
-      width: 100%;
-      max-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      list-style: none;
-    }
-    .todo-item {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 12px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      font-size: 12px;
-      color: var(--ink);
-    }
-    .todo-item .check {
-      width: 14px; height: 14px;
-      border: 1.5px solid var(--moss);
-      border-radius: 3px;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .todo-item.checked .check { background: var(--moss); }
-    .todo-item.checked .check::after {
-      content: '';
-      position: absolute;
-      top: 1px; left: 4px;
-      width: 4px; height: 7px;
-      border: solid #fff;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-    .todo-item.checked .label {
-      text-decoration: line-through;
-      color: var(--ink-faint);
-    }
-
-    /* mobile fallback for the story (no pin) */
-    @media (max-width: 760px) {
-      .story-stage { height: auto; padding: 80px 0; }
-      .laptop { width: 94vw; padding: 8px 8px 12px; border-radius: 12px; }
-      .app-sidebar { display: none; }
-      .app-create { font-size: 28px; }
-      .app-input { height: 38px; font-size: 12px; }
-      .app-pills button { font-size: 10px; padding: 4px 10px; }
-      .agent-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, minmax(120px, 1fr)); gap: 6px; }
-      .agent-head { font-size: 13px; padding-bottom: 6px; }
-      .agent-body { font-size: 10px; }
-      .plan-item .text, .browser-result .title { font-size: 10px; }
-      .term { font-size: 9px; }
-      .file-tree { font-size: 9px; }
-      .todo-title { font-size: 22px; }
-    }
 
     /* ============== manifesto — dark band, stamped statements ============== */
     .manifesto {
@@ -1943,7 +1479,7 @@
         <input type="email" inputmode="email" autocomplete="email" placeholder="your@email.com" required aria-label="Email address" />
         <button type="submit" class="cta-pill cta-primary"><span>Get early access</span></button>
       </form>
-      <a href="#story" class="cta-pill cta-ghost">Watch demo <span class="arrow">→</span></a>
+      <a href="#demo" class="cta-pill cta-ghost">Watch demo <span class="arrow">→</span></a>
     </div>
     <div class="cta-status" id="hero-status" role="status" aria-live="polite"></div>
   </div>
@@ -1978,44 +1514,64 @@
       </div>
       <div class="dchat-body" id="dchat-body">
         <div class="mini-graph" id="mini-graph">
-          <div class="label">memory · pulling context</div>
-          <svg viewBox="0 0 180 110" preserveAspectRatio="xMidYMid meet">
+          <div class="label">
+            <span>memory · 14 facts pulled</span>
+            <span class="expand-hint" id="graph-hint">tap to expand ↗</span>
+          </div>
+          <svg viewBox="0 0 280 200" preserveAspectRatio="xMidYMid meet">
+            <!-- inner ring edges -->
             <g>
-              <line class="edge" x1="90" y1="55" x2="34" y2="22" />
-              <line class="edge" x1="90" y1="55" x2="150" y2="20" />
-              <line class="edge" x1="90" y1="55" x2="28" y2="80" />
-              <line class="edge" x1="90" y1="55" x2="156" y2="84" />
-              <line class="edge" x1="90" y1="55" x2="68" y2="98" />
-              <line class="edge" x1="90" y1="55" x2="120" y2="100" />
+              <line class="edge" x1="140" y1="100" x2="140" y2="38" />
+              <line class="edge" x1="140" y1="100" x2="218" y2="56" />
+              <line class="edge" x1="140" y1="100" x2="240" y2="100" />
+              <line class="edge" x1="140" y1="100" x2="218" y2="144" />
+              <line class="edge" x1="140" y1="100" x2="140" y2="166" />
+              <line class="edge" x1="140" y1="100" x2="62" y2="144" />
+              <line class="edge" x1="140" y1="100" x2="40" y2="100" />
+              <line class="edge" x1="140" y1="100" x2="62" y2="56" />
             </g>
-            <g class="node is-active" data-node="center">
-              <circle cx="90" cy="55" r="9" />
-              <text x="90" y="58" text-anchor="middle">you</text>
+            <!-- sub-branches off "Work history" -->
+            <g>
+              <line class="edge sub" x1="62" y1="56" x2="22" y2="34" />
+              <line class="edge sub" x1="62" y1="56" x2="22" y2="68" />
+              <line class="edge sub" x1="62" y1="56" x2="40" y2="20" />
             </g>
-            <g class="node" data-node="work">
-              <circle cx="34" cy="22" r="6" />
-              <text x="34" y="14" text-anchor="middle">Work history</text>
+            <!-- sub-branches off "Madrid" -->
+            <g>
+              <line class="edge sub" x1="240" y1="100" x2="266" y2="80" />
+              <line class="edge sub" x1="240" y1="100" x2="266" y2="120" />
             </g>
-            <g class="node" data-node="skills">
-              <circle cx="150" cy="20" r="6" />
-              <text x="150" y="13" text-anchor="middle">Skills</text>
+            <!-- sub-branches off "Skills" -->
+            <g>
+              <line class="edge sub" x1="218" y1="56" x2="252" y2="36" />
+              <line class="edge sub" x1="218" y1="56" x2="248" y2="20" />
             </g>
-            <g class="node" data-node="contact">
-              <circle cx="28" cy="80" r="6" />
-              <text x="28" y="95" text-anchor="middle">Contact</text>
+
+            <!-- center -->
+            <g class="node is-center" data-node="center">
+              <circle class="pulse" cx="140" cy="100" r="8" />
+              <circle cx="140" cy="100" r="11" />
+              <text x="140" y="103" text-anchor="middle">Alex</text>
             </g>
-            <g class="node" data-node="loc">
-              <circle cx="156" cy="84" r="6" />
-              <text x="156" y="99" text-anchor="middle">Madrid</text>
-            </g>
-            <g class="node" data-node="edu">
-              <circle cx="68" cy="98" r="5" />
-              <text x="58" y="108" text-anchor="end">Education</text>
-            </g>
-            <g class="node" data-node="tone">
-              <circle cx="120" cy="100" r="5" />
-              <text x="130" y="108" text-anchor="start">Tone</text>
-            </g>
+
+            <!-- ring 1 (inner) -->
+            <g class="node" data-node="contact"><circle cx="140" cy="38" r="5"/><text x="140" y="30" text-anchor="middle">Contact</text></g>
+            <g class="node" data-node="skills"><circle cx="218" cy="56" r="5"/><text x="226" y="52" text-anchor="start">Skills</text></g>
+            <g class="node" data-node="loc"><circle cx="240" cy="100" r="5"/><text x="248" y="103" text-anchor="start">Madrid, ES</text></g>
+            <g class="node" data-node="edu"><circle cx="218" cy="144" r="5"/><text x="226" y="148" text-anchor="start">Education</text></g>
+            <g class="node" data-node="tone"><circle cx="140" cy="166" r="5"/><text x="140" y="178" text-anchor="middle">Tone of voice</text></g>
+            <g class="node" data-node="resumes"><circle cx="62" cy="144" r="5"/><text x="54" y="148" text-anchor="end">Past resumes</text></g>
+            <g class="node" data-node="lang"><circle cx="40" cy="100" r="5"/><text x="32" y="103" text-anchor="end">Languages</text></g>
+            <g class="node" data-node="work"><circle cx="62" cy="56" r="5"/><text x="54" y="52" text-anchor="end">Work history</text></g>
+
+            <!-- ring 2 (sub-branches) -->
+            <g class="node sub" data-node="bartomate"><circle cx="22" cy="34" r="3.4"/><text x="14" y="37" text-anchor="end">Bar Tomate</text></g>
+            <g class="node sub" data-node="tomacafe"><circle cx="22" cy="68" r="3.4"/><text x="14" y="71" text-anchor="end">Toma Café</text></g>
+            <g class="node sub" data-node="intern"><circle cx="40" cy="20" r="3.4"/><text x="38" y="14" text-anchor="end">Intern '22</text></g>
+            <g class="node sub" data-node="esmadrid"><circle cx="266" cy="80" r="3.4"/><text x="270" y="76" text-anchor="start">Atocha</text></g>
+            <g class="node sub" data-node="walking"><circle cx="266" cy="120" r="3.4"/><text x="270" y="124" text-anchor="start">walks ~10min</text></g>
+            <g class="node sub" data-node="customer"><circle cx="252" cy="36" r="3.4"/><text x="256" y="32" text-anchor="start">Customer svc</text></g>
+            <g class="node sub" data-node="bilingual"><circle cx="248" cy="20" r="3.4"/><text x="248" y="14" text-anchor="middle">EN / ES</text></g>
           </svg>
         </div>
       </div>
@@ -2320,181 +1876,6 @@
   </div>
 </section>
 
-<!-- =========== STORY — pinned cinematic, scroll-driven =========== -->
-<section class="story" id="story" aria-label="GreenCube building a real app, demonstrated">
-  <div class="story-stage" id="story-stage">
-    <div class="story-caption" id="story-caption"></div>
-    <div class="laptop" id="laptop">
-      <div class="laptop-screen" id="screen">
-
-        <!-- SCENE 1 — HOME (Create.) -->
-        <div class="scene" id="scene-home">
-          <div class="app-shell">
-            <aside class="app-sidebar">
-              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
-              <div class="app-tabs">
-                <span class="app-tab is-active">Chats</span>
-                <span class="app-tab">Memory</span>
-              </div>
-              <div class="app-convo-list"></div>
-            </aside>
-            <main class="app-main">
-              <div class="app-home">
-                <h1 class="app-create">Create.</h1>
-                <div class="app-input-wrap">
-                  <input class="app-input" id="prompt-input" type="text" readonly value="" placeholder="Ask GreenCube anything..." aria-label="Prompt"/>
-                </div>
-                <div class="app-pills">
-                  <button tabindex="-1">Organize my photos</button>
-                  <button tabindex="-1">Write a story</button>
-                  <button tabindex="-1">Help me code</button>
-                </div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        <!-- SCENE 2 — CHAT (user msg + thinking) -->
-        <div class="scene" id="scene-chat">
-          <div class="app-shell">
-            <aside class="app-sidebar">
-              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
-              <div class="app-tabs">
-                <span class="app-tab is-active">Chats</span>
-                <span class="app-tab">Memory</span>
-              </div>
-              <div class="app-convo-list">
-                <div class="app-convo is-active">Build me a todo app…</div>
-              </div>
-            </aside>
-            <main class="app-main">
-              <div class="app-chat">
-                <div class="app-msgs">
-                  <div class="msg user"><div class="msg-bubble">Build me a todo app for tracking groceries.</div></div>
-                  <div class="msg assistant"><div class="msg-bubble thinking"><span class="think-dot"></span><span class="think-dot"></span><span class="think-dot"></span> Thinking…</div></div>
-                </div>
-                <div class="app-input-row">
-                  <input class="app-input" type="text" readonly value="" placeholder="Ask GreenCube anything..." aria-hidden="true"/>
-                  <button class="app-send" tabindex="-1">Send</button>
-                </div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        <!-- SCENE 3 — AGENTS (4 panels) -->
-        <div class="scene" id="scene-agents">
-          <div class="app-shell">
-            <aside class="app-sidebar">
-              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
-              <div class="app-tabs">
-                <span class="app-tab is-active">Chats</span>
-                <span class="app-tab">Memory</span>
-              </div>
-              <div class="app-convo-list">
-                <div class="app-convo is-active">Build me a todo app…</div>
-              </div>
-            </aside>
-            <main class="app-main">
-              <div class="agent-grid">
-                <div class="agent-panel" id="panel-planner">
-                  <div class="agent-head"><span class="cube-icon"></span>Planner</div>
-                  <div class="agent-body">
-                    <ol class="plan-list">
-                      <li class="plan-item"><span class="num">01</span><span class="text">Set up React + Vite</span></li>
-                      <li class="plan-item"><span class="num">02</span><span class="text">Design the Todo schema</span></li>
-                      <li class="plan-item"><span class="num">03</span><span class="text">Build the UI components</span></li>
-                      <li class="plan-item"><span class="num">04</span><span class="text">Persist with IndexedDB</span></li>
-                      <li class="plan-item"><span class="num">05</span><span class="text">Style with the cream theme</span></li>
-                    </ol>
-                  </div>
-                </div>
-
-                <div class="agent-panel" id="panel-researcher">
-                  <div class="agent-head"><span class="cube-icon"></span>Researcher</div>
-                  <div class="agent-body">
-                    <div class="tab-bar">
-                      <span class="browser-tab is-active">react quickstart</span>
-                      <span class="browser-tab">indexeddb basics</span>
-                      <span class="browser-tab">checkbox a11y</span>
-                    </div>
-                    <div class="browser-results">
-                      <div class="browser-result"><div class="title">React docs — Quickstart</div><div class="url">react.dev/learn</div></div>
-                      <div class="browser-result"><div class="title">IndexedDB API reference</div><div class="url">developer.mozilla.org</div></div>
-                      <div class="browser-result"><div class="title">Accessible checkbox patterns</div><div class="url">w3.org/WAI</div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="agent-panel" id="panel-engineer">
-                  <div class="agent-head"><span class="cube-icon"></span>Engineer</div>
-                  <div class="agent-body">
-                    <div class="term">
-                      <div class="term-line"><span class="prompt">$</span>npm create vite@latest todo-app -- --template react-ts</div>
-                      <div class="term-line"><span class="out">  ✓ Project scaffolded</span></div>
-                      <div class="term-line"><span class="prompt">$</span>cd todo-app && npm install</div>
-                      <div class="term-line"><span class="out">  added 240 packages in 12s</span></div>
-                      <div class="term-line"><span class="prompt">$</span>writing src/App.tsx…</div>
-                      <div class="term-line"><span class="out">  ✓ 86 lines</span></div>
-                      <div class="term-line curr"><span class="prompt">$</span>npm run dev</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="agent-panel" id="panel-operator">
-                  <div class="agent-head"><span class="cube-icon"></span>Operator</div>
-                  <div class="agent-body">
-                    <div class="file-tree">
-                      <div class="file-line"><span class="icon">▸</span><span>todo-app/</span></div>
-                      <div class="file-line indent-1"><span class="icon">·</span><span>package.json</span></div>
-                      <div class="file-line indent-1"><span class="icon">·</span><span>vite.config.ts</span></div>
-                      <div class="file-line indent-1"><span class="icon">▸</span><span>src/</span></div>
-                      <div class="file-line indent-2"><span class="icon">·</span><span>App.tsx</span></div>
-                      <div class="file-line indent-2"><span class="icon">·</span><span>Todo.tsx</span></div>
-                      <div class="file-line indent-2"><span class="icon">·</span><span>store.ts</span></div>
-                      <div class="file-line indent-2"><span class="icon">·</span><span>index.css</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </main>
-          </div>
-        </div>
-
-        <!-- SCENE 4 — RESULT (running todo app) -->
-        <div class="scene" id="scene-result">
-          <div class="app-shell">
-            <aside class="app-sidebar">
-              <button class="app-newchat" tabindex="-1"><span class="plus">＋</span> New chat</button>
-              <div class="app-tabs">
-                <span class="app-tab is-active">Chats</span>
-                <span class="app-tab">Memory</span>
-              </div>
-              <div class="app-convo-list">
-                <div class="app-convo is-active">Build me a todo app…</div>
-              </div>
-            </aside>
-            <main class="app-main">
-              <div class="todo-app">
-                <h2 class="todo-title">Groceries</h2>
-                <div class="todo-subtitle">5 items · running locally</div>
-                <ul class="todo-list">
-                  <li class="todo-item checked"><span class="check"></span><span class="label">Sourdough</span></li>
-                  <li class="todo-item checked"><span class="check"></span><span class="label">Olive oil</span></li>
-                  <li class="todo-item"><span class="check"></span><span class="label">Spinach</span></li>
-                  <li class="todo-item"><span class="check"></span><span class="label">Tomatoes</span></li>
-                  <li class="todo-item"><span class="check"></span><span class="label">Espresso beans</span></li>
-                </ul>
-              </div>
-            </main>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- =========== MANIFESTO — dark band, stamped statements =========== -->
 <section class="manifesto" id="manifesto" data-theme="dark">
   <div class="head">
@@ -2543,7 +1924,6 @@
     document.body.classList.add('fonts-ready');
     runIntro();
     initDemo();
-    initStory();
     initManifesto();
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
@@ -2694,6 +2074,16 @@
     const winMail   = document.getElementById('win-mail');
     const dock      = document.getElementById('desk-dock');
 
+    // ---- memory graph click-to-expand ----
+    if (miniGraph) {
+      const hint = miniGraph.querySelector('#graph-hint');
+      miniGraph.addEventListener('click', () => {
+        miniGraph.classList.toggle('is-expanded');
+        if (hint) hint.textContent = miniGraph.classList.contains('is-expanded')
+          ? 'tap to shrink ↘' : 'tap to expand ↗';
+      });
+    }
+
     // ---- live clock ----
     function tickClock() {
       const d = new Date();
@@ -2757,6 +2147,10 @@
       });
     });
 
+    function setDockOpen(app, isOpen) {
+      const icon = dock.querySelector('[data-app="' + app + '"]');
+      if (icon) icon.classList.toggle('is-open', isOpen);
+    }
     function openWindow(win) {
       const wasOpen = win.classList.contains('is-open');
       win.style.display = 'flex';
@@ -2767,33 +2161,74 @@
           { scale: 1, opacity: 1, y: 0, duration: 0.42, ease: 'expo.out' });
       }
       win.classList.add('is-open');
+      setDockOpen(win.dataset.app, true);
     }
     function closeWindow(win) {
-      if (window.gsap) {
-        gsap.to(win, {
-          scale: 0.92, opacity: 0, duration: 0.25, ease: 'power2.in',
-          onComplete: () => { win.style.display = 'none'; win.classList.remove('is-open'); }
-        });
-      } else {
+      const finish = () => {
         win.style.display = 'none';
-        win.classList.remove('is-open');
-      }
+        win.classList.remove('is-open', 'is-expanded');
+        setDockOpen(win.dataset.app, false);
+        if (window.gsap) gsap.set(win, { scale: 1, opacity: 1, y: 0 });
+      };
+      if (window.gsap) {
+        gsap.to(win, { scale: 0.92, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: finish });
+      } else { finish(); }
     }
     function minimizeWindow(win) {
-      if (window.gsap) {
-        gsap.to(win, {
-          scale: 0.1, opacity: 0, y: 200, duration: 0.45, ease: 'power2.in',
-          onComplete: () => {
-            win.style.display = 'none';
-            win.classList.remove('is-open');
-            gsap.set(win, { scale: 1, opacity: 1, y: 0 });
-          }
-        });
-      } else {
+      const finish = () => {
         win.style.display = 'none';
         win.classList.remove('is-open');
+        setDockOpen(win.dataset.app, false);
+        if (window.gsap) gsap.set(win, { scale: 1, opacity: 1, y: 0 });
+      };
+      if (window.gsap) {
+        gsap.to(win, { scale: 0.1, opacity: 0, y: 200, duration: 0.45, ease: 'power2.in', onComplete: finish });
+      } else { finish(); }
+    }
+    // ---- expand (green button) — toggle window to fill the desktop ----
+    function toggleExpand(win) {
+      if (win.classList.contains('is-expanded')) {
+        // restore
+        const prev = win._prevGeom;
+        if (prev) {
+          win.style.left   = prev.left;
+          win.style.top    = prev.top;
+          win.style.width  = prev.width;
+          win.style.height = prev.height;
+        }
+        win.classList.remove('is-expanded');
+      } else {
+        win._prevGeom = {
+          left: win.style.left || '',
+          top:  win.style.top  || '',
+          width: win.style.width || '',
+          height: win.style.height || '',
+        };
+        // fill desktop minus menu bar + dock area
+        const menuH = 28, dockH = 78;
+        const w = desktop.clientWidth, h = desktop.clientHeight;
+        win.style.left   = '8px';
+        win.style.top    = (menuH + 8) + 'px';
+        win.style.width  = (w - 16) + 'px';
+        win.style.height = (h - menuH - dockH - 16) + 'px';
+        win.classList.add('is-expanded');
+        bringToFront(win);
       }
     }
+    desktop.querySelectorAll('.t-green').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const win = e.currentTarget.closest('.dwin');
+        toggleExpand(win);
+      });
+    });
+    // double-click titlebar also expands (matches macOS)
+    desktop.querySelectorAll('[data-drag]').forEach(bar => {
+      bar.addEventListener('dblclick', (e) => {
+        if (e.target.closest('[data-action]') || e.target.closest('.traffic')) return;
+        const win = e.currentTarget.closest('.dwin');
+        toggleExpand(win);
+      });
+    });
 
     // ---- dock click → open app (user can play; demo keeps running) ----
     dock.querySelectorAll('.dock-icon').forEach(icon => {
@@ -2945,7 +2380,13 @@
       { id: 3, name: 'Verde Bistro', email: 'work@verdebistro.es' },
     ];
     function emailBody(name) {
-      return 'Hi ' + name + ' team — I live a few minutes from your restaurant in Madrid and would love to apply for any open server or front-of-house roles. Resume attached. Thanks for considering me. — Alex';
+      return 'Dear ' + name + ' team,\n\n' +
+             'My name is Alex Rivera. I am writing to express my interest in any open server or front-of-house position you may currently have.\n\n' +
+             'I live within a short walk of your restaurant and have spent the last two years working in Madrid hospitality — most recently as a server at Bar Tomate, and previously as a barista at Toma Café. I am bilingual in Spanish and English, comfortable on the floor during a full service, and used to working a register and managing inventory.\n\n' +
+             'My resume is attached for your review. I would welcome the chance to come in and meet the team.\n\n' +
+             'Thank you for your time and consideration.\n\n' +
+             'Best regards,\n' +
+             'Alex Rivera';
     }
 
     // ---- the run loop ----
@@ -2994,14 +2435,19 @@
       const a1 = appendAssistantHeader('GreenCube');
       const a1body = a1.querySelector('.body');
       a1body.innerHTML = '<em>Pulling from your memory…</em>';
+      // reset any lit nodes from a prior loop
+      miniGraph.querySelectorAll('.node.is-active').forEach(n => n.classList.remove('is-active'));
+      miniGraph.classList.add('is-active');
       gsap.to(miniGraph, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' });
       await sleep(900);
-      // light up two nodes
-      ['work','loc'].forEach((k, i) => {
+      // light up the relevant facts in waves
+      const lit = ['work','loc','skills','lang','bartomate','tomacafe','walking','bilingual','customer'];
+      lit.forEach((k, i) => {
         const n = miniGraph.querySelector('[data-node="'+k+'"]');
-        if (n) setTimeout(() => n.classList.add('is-active'), i * 280);
+        if (n) setTimeout(() => n.classList.add('is-active'), i * 220);
       });
-      await sleep(2400);
+      await sleep(3000);
+      miniGraph.classList.remove('is-active');
       gsap.to(miniGraph, { opacity: 0, y: 8, scale: 0.96, duration: 0.5, ease: 'power2.in' });
 
       // brief beat — give a single line of intent before the work starts
@@ -3184,154 +2630,6 @@
       });
     }, { threshold: 0.25 });
     io.observe(frame);
-  }
-
-  // ====================================================================
-  //  STORY — pinned cinematic. Whole thing is one big timeline scrubbed
-  //  by scroll, so the page looks "frozen" while the laptop story plays.
-  // ====================================================================
-  function initStory() {
-    const stage     = document.getElementById('story-stage');
-    const laptop    = document.getElementById('laptop');
-    const caption   = document.getElementById('story-caption');
-    const sceneHome    = document.getElementById('scene-home');
-    const sceneChat    = document.getElementById('scene-chat');
-    const sceneAgents  = document.getElementById('scene-agents');
-    const sceneResult  = document.getElementById('scene-result');
-    const promptInput  = document.getElementById('prompt-input');
-    if (!stage || !laptop) return;
-
-    const PROMPT = 'Build me a todo app for tracking groceries';
-
-    // mobile / no-gsap fallback — render the final scene as a static screenshot
-    if (!window.gsap || !window.ScrollTrigger || reduced || window.matchMedia('(max-width: 760px)').matches) {
-      laptop.style.opacity = 1;
-      laptop.style.transform = 'scale(1)';
-      sceneResult.style.opacity = 1;
-      sceneResult.style.position = 'absolute';
-      // also reveal plan items / file lines / etc. so nothing looks broken if the
-      // user lands here via direct link or with reduced motion.
-      document.querySelectorAll('.plan-item,.browser-tab,.browser-result,.term-line,.file-line,.todo-item')
-        .forEach(el => { el.style.opacity = 1; });
-      return;
-    }
-
-    // ---- initial state ----
-    gsap.set(sceneHome,   { opacity: 1 });
-    gsap.set(sceneChat,   { opacity: 0 });
-    gsap.set(sceneAgents, { opacity: 0 });
-    gsap.set(sceneResult, { opacity: 0 });
-    gsap.set('.plan-item',     { opacity: 0, y: 6 });
-    gsap.set('.browser-tab',   { opacity: 0, y: 4 });
-    gsap.set('.browser-result',{ opacity: 0, y: 6 });
-    gsap.set('.term-line',     { opacity: 0 });
-    gsap.set('.file-line',     { opacity: 0, x: -6 });
-    gsap.set('.todo-item',     { opacity: 0, y: 8 });
-    gsap.set(caption,          { opacity: 0 });
-
-    function setCap(html) { caption.innerHTML = html; }
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.story',
-        start: 'top top',
-        end: '+=780%',
-        pin: '.story-stage',
-        scrub: 0.8,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-      defaults: { ease: 'none' },
-    });
-
-    // Helper — every beat reuses the same fade-in / hold / fade-out timing so
-    // captions stay on screen long enough to read and align with the visual.
-    const FADE_IN = 0.7, HOLD = 1.6, FADE_OUT = 0.5;
-
-    // ---- 1. LAPTOP GROWS IN ----
-    tl.to(laptop, { opacity: 1, scale: 1, duration: 1.8 })
-      .add(() => setCap('Watch a real GreenCube task — <em>start to finish.</em>'))
-      .to(caption, { opacity: 1, duration: FADE_IN }, '-=0.5')
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // ---- 2. PROMPT TYPES IN ----
-    tl.add(() => setCap('You ask. <em>It builds.</em>'))
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to({ chars: 0 }, {
-        chars: PROMPT.length,
-        duration: 3.6,
-        ease: 'none',
-        onUpdate: function () {
-          const n = Math.floor(this.targets()[0].chars);
-          if (promptInput) promptInput.value = PROMPT.slice(0, n);
-        },
-      })
-      .to({}, { duration: 0.6 })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // ---- 3. SUBMIT → CHAT SCENE ----
-    tl.to(sceneHome, { opacity: 0, duration: 0.6 })
-      .to(sceneChat, { opacity: 1, duration: 0.6 }, '<')
-      .add(() => setCap('GreenCube reads it — and <em>splits into a team.</em>'))
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // ---- 4. AGENTS SCENE — panels activate one at a time ----
-    tl.to(sceneChat,   { opacity: 0, duration: 0.6 })
-      .to(sceneAgents, { opacity: 1, duration: 0.6 }, '<');
-
-    // 4a. Planner — fade caption in BEFORE the content animates so the user
-    //               reads "Planner" and THEN sees the planner's plan-items.
-    tl.add(() => {
-        document.getElementById('panel-planner').classList.add('is-active');
-        setCap('<em>Planner</em> — outlines the steps.');
-      })
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to('.plan-item', { opacity: 1, y: 0, duration: 1.6, stagger: 0.22 })
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // 4b. Researcher
-    tl.add(() => {
-        document.getElementById('panel-researcher').classList.add('is-active');
-        setCap('<em>Researcher</em> — pulls real references.');
-      })
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to('.browser-tab',    { opacity: 1, y: 0, duration: 0.6, stagger: 0.20 })
-      .to('.browser-result', { opacity: 1, y: 0, duration: 0.6, stagger: 0.20 })
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // 4c. Engineer
-    tl.add(() => {
-        document.getElementById('panel-engineer').classList.add('is-active');
-        setCap('<em>Engineer</em> — runs your terminal.');
-      })
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to('.term-line', { opacity: 1, duration: 0.45, stagger: 0.34 })
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // 4d. Operator
-    tl.add(() => {
-        document.getElementById('panel-operator').classList.add('is-active');
-        setCap('<em>Operator</em> — writes to your filesystem.');
-      })
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to('.file-line', { opacity: 1, x: 0, duration: 0.4, stagger: 0.18 })
-      .to({}, { duration: HOLD })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
-
-    // ---- 5. RESULT SCENE ----
-    tl.to(sceneAgents, { opacity: 0, duration: 0.7 })
-      .to(sceneResult, { opacity: 1, duration: 0.7 }, '<')
-      .add(() => setCap('<em>Done.</em> Running locally — on <strong>your</strong> machine.'))
-      .to(caption, { opacity: 1, duration: FADE_IN })
-      .to('.todo-item', { opacity: 1, y: 0, duration: 0.55, stagger: 0.18 }, '<')
-      .to({}, { duration: 2.0 })
-      .to(caption, { opacity: 0, duration: FADE_OUT });
   }
 
   // ====================================================================
