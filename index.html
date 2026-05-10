@@ -2115,13 +2115,13 @@
   updateProgress();
 
   // ---------- waitlist form ----------
-  // Posts to Formsubmit (free, no account). The endpoint forwards to the
-  // inbox baked into the URL. Switch the address below to team@greencube.app
-  // once that mailbox exists.
-  // First-ever submission triggers a one-time activation email to that
-  // inbox — open it and click the activation link, then real signups
-  // start arriving.
-  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/fathector7@gmail.com';
+  // Posts to our own /api/waitlist Vercel serverless function — same
+  // origin, no Cloudflare-routed third party (Formsubmit / Formspree are
+  // both on Cloudflare and were getting blocked in Spain by the LaLiga
+  // / Telefónica IP block during football windows). The function logs
+  // every signup to Vercel logs even if email delivery isn't wired yet,
+  // so leads are never lost.
+  const WAITLIST_ENDPOINT = '/api/waitlist';
   const STORAGE_KEY = 'greencube_waitlist';
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -2134,23 +2134,17 @@
     } catch (_) {}
 
     try {
-      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+      const res = await fetch(WAITLIST_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           email: email,
-          source: 'greencube.world hero',
           referrer: document.referrer || '(direct)',
-          _subject: 'GreenCube waitlist — ' + email,
-          _template: 'table',
-          _captcha: 'false',
         }),
       });
       if (!res.ok) return { ok: false };
       const json = await res.json().catch(() => ({}));
-      // Formsubmit returns { success: "true" } as a string, sometimes a bool
-      const success = json.success === true || json.success === 'true' || res.ok;
-      return { ok: !!success };
+      return { ok: !!json.ok };
     } catch (_) {
       return { ok: false };
     }
