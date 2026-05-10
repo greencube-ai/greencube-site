@@ -2114,17 +2114,46 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  // ---------- waitlist form (modular — swap submitToBackend for real endpoint later) ----------
+  // ---------- waitlist form ----------
+  // Posts to Formsubmit (free, no account). The endpoint forwards to the
+  // inbox baked into the URL. Switch the address below to team@greencube.app
+  // once that mailbox exists.
+  // First-ever submission triggers a one-time activation email to that
+  // inbox — open it and click the activation link, then real signups
+  // start arriving.
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/fathector7@gmail.com';
   const STORAGE_KEY = 'greencube_waitlist';
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   async function submitToBackend(email) {
+    // local mirror so a flaky network doesn't lose the signup
     try {
       const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       if (!list.includes(email)) list.push(email);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     } catch (_) {}
-    return { ok: true };
+
+    try {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: 'greencube.world hero',
+          referrer: document.referrer || '(direct)',
+          _subject: 'GreenCube waitlist — ' + email,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+      if (!res.ok) return { ok: false };
+      const json = await res.json().catch(() => ({}));
+      // Formsubmit returns { success: "true" } as a string, sometimes a bool
+      const success = json.success === true || json.success === 'true' || res.ok;
+      return { ok: !!success };
+    } catch (_) {
+      return { ok: false };
+    }
   }
 
   function wireForm(formId, statusId) {
