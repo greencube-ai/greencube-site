@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Why GreenCube — what makes it different</title>
-  <meta name="description" content="GreenCube has a memory that grows with you, agents that work as a team, and reach into the apps already on your laptop. All running locally — no cloud, no telemetry." />
+  <meta name="description" content="GreenCube is a personal AI that thinks and does. It remembers who you are and uses the apps already on your laptop to get the job done. All running locally — no cloud, no telemetry." />
   <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="Why GreenCube — what makes it different" />
-  <meta property="og:description" content="A memory that grows. Agents that collaborate. Tools you already own. All on your machine." />
+  <meta property="og:title" content="Why GreenCube — two things, one machine" />
+  <meta property="og:description" content="It thinks. It does. A memory that grows with you, and the hands to act on it. All on your machine." />
   <meta property="og:url" content="https://greencube.world/how-it-works" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -408,279 +408,141 @@
       .graph-svg .node-label { font-size: 10px; }
     }
 
-    /* ============== team — cube splits into specialized agents ============== */
-    .team {
+    /* ============== halves — "It thinks. It does." ============== */
+    .halves {
       position: relative;
-      padding: 140px 0 180px;
+      padding: 140px 0 160px;
       background: var(--paper-soft);
       overflow: hidden;
       border-top: 1px solid var(--line);
     }
-    .team::before {
+    .halves::before {
       content: '';
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(91, 138, 110, 0.07), transparent 70%),
-        radial-gradient(ellipse 40% 30% at 50% 100%, rgba(201, 169, 97, 0.08), transparent 70%);
+      background: radial-gradient(ellipse 70% 50% at 50% 14%, rgba(91, 138, 110, 0.10), transparent 60%);
     }
-    .team .head {
-      max-width: 1240px;
-      margin: 0 auto 100px;
+    .halves .head {
+      max-width: 760px;
+      margin: 0 auto 72px;
       padding: 0 32px;
       text-align: center;
       position: relative;
       z-index: 1;
     }
-    .team .head .eyebrow { justify-content: center; }
-    .team h2 {
+    .halves .head .eyebrow { justify-content: center; }
+    .halves h2 {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(48px, 7vw, 104px);
+      font-size: clamp(40px, 5.4vw, 76px);
       line-height: 1.0;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       color: var(--forest);
-      margin: 22px auto 28px;
-      max-width: 16ch;
+      margin: 18px 0 28px;
     }
-    .team h2 em { color: var(--moss); }
-    .team .lede {
-      font-size: clamp(17px, 1.4vw, 20px);
-      color: var(--ink-soft);
-      line-height: 1.6;
-      max-width: 56ch;
-      margin: 0 auto;
-    }
-    .split-stage {
-      position: relative;
-      width: 100%;
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 32px;
-      height: 460px;
-      z-index: 1;
-    }
-    .split-cubes {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .cube-clone {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 88px; height: 88px;
-      border: 1.5px solid var(--forest);
-      border-radius: 6px;
-      box-sizing: border-box;
-      opacity: 0;
-      z-index: 2;
-      will-change: transform, opacity;
-    }
-    .cube-clone::before {
-      content: '';
-      position: absolute; inset: 12px;
-      border: 1px solid var(--moss);
-      border-radius: 3px;
-      opacity: 0.55;
-    }
-    .cube-label {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      text-align: center;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      will-change: transform, opacity;
-    }
-    .cube-label .name {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 24px;
-      color: var(--forest);
-      letter-spacing: -0.01em;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .cube-label .desc {
+    .halves h2 em { color: var(--moss); }
+    .halves .lede {
       font-family: var(--sans);
-      font-size: 13px;
+      font-size: clamp(15px, 1.1vw, 18px);
+      line-height: 1.55;
       color: var(--ink-soft);
-      letter-spacing: -0.005em;
-      max-width: 22ch;
-      line-height: 1.5;
-      margin: 0 auto;
-      white-space: normal;
+      max-width: 60ch;
+      margin: 0 auto 14px;
     }
-    .split-pipe {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 1px;
-      background: var(--sage);
-      transform-origin: center;
-      opacity: 0;
-      z-index: 1;
-    }
-    .split-pipe::before,
-    .split-pipe::after {
-      content: '';
-      position: absolute;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      top: -2.5px;
-      box-shadow: 0 0 8px rgba(201, 169, 97, 0.55);
-      animation: packet-flow 5s linear infinite;
-    }
-    .split-pipe::after {
-      animation-delay: -2.5s;
-      background: var(--moss);
-      box-shadow: 0 0 8px rgba(91, 138, 110, 0.45);
-    }
-    @keyframes packet-flow {
-      0%   { left: -2%;  opacity: 0; }
-      8%   { opacity: 1; }
-      92%  { opacity: 1; }
-      100% { left: 102%; opacity: 0; }
-    }
+    .halves .lede strong { color: var(--forest); font-weight: 500; }
 
-    @media (max-width: 900px) {
-      .team { padding: 100px 0 120px; }
-      .team .head { margin-bottom: 80px; padding: 0 22px; }
-      .split-stage { height: 700px; padding: 0 22px; }
-      .cube-clone { width: 76px; height: 76px; }
-      .cube-label .name { font-size: 20px; }
-      .cube-label .desc { font-size: 12.5px; }
-    }
-
-    /* ============== tools — greencube reaches into your OS ============== */
-    .tools {
-      position: relative;
-      padding: 140px 0 180px;
-      background: var(--paper);
-      overflow: hidden;
-      border-top: 1px solid var(--line);
-    }
-    .tools::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 25% 30%, rgba(91, 138, 110, 0.10), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201, 169, 97, 0.08), transparent 60%);
-    }
-    .tools .layout {
-      max-width: 1240px;
+    .halves-grid {
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 32px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-      gap: 80px;
-      align-items: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       position: relative;
       z-index: 1;
     }
-    .tools h2 {
+    .half-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 40px 40px 36px;
+      box-shadow:
+        0 30px 70px -20px rgba(31, 58, 46, 0.18),
+        0 8px 22px -8px rgba(31, 58, 46, 0.08);
+    }
+    .half-icon {
+      width: 56px;
+      height: 56px;
+      color: var(--forest);
+      margin-bottom: 22px;
+    }
+    .half-icon svg { width: 100%; height: 100%; }
+    .half-label {
       font-family: var(--serif);
       font-style: italic;
-      font-weight: 400;
-      font-size: clamp(48px, 7vw, 104px);
-      line-height: 1.0;
-      letter-spacing: -0.03em;
+      font-size: 32px;
+      color: var(--moss);
+      letter-spacing: -0.02em;
+      margin-bottom: 22px;
+      line-height: 1;
+    }
+    .half-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .half-list li {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .half-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .half-list .step {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
       color: var(--forest);
-      max-width: 14ch;
-      margin: 22px 0 28px;
-    }
-    .tools h2 em { color: var(--moss); }
-    .tools .lede {
-      font-size: clamp(17px, 1.4vw, 20px);
-      color: var(--ink-soft);
-      line-height: 1.6;
-      max-width: 50ch;
-      margin-bottom: 32px;
-    }
-    .tools .lede strong { color: var(--forest); font-weight: 500; }
-    .tools-stage {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .tools-svg { width: 100%; height: 100%; display: block; overflow: visible; }
-    .tools-svg .ring {
-      fill: none;
-      stroke: var(--ink-faint);
-      stroke-width: 0.6;
-      stroke-dasharray: 2 6;
-      opacity: 0.5;
-    }
-    .tools-svg .ring-label {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      fill: var(--ink-mute);
-      text-anchor: middle;
-    }
-    .tools-svg .center-cube {
-      fill: none;
-      stroke: var(--forest);
-      stroke-width: 1.8;
-      stroke-linejoin: round;
-    }
-    .tools-svg .center-inner {
-      fill: none;
-      stroke: var(--moss);
-      stroke-width: 1;
-      opacity: 0.6;
-    }
-    .tools-svg .reach-line {
-      stroke: var(--sage);
-      stroke-width: 1;
-      fill: none;
-      opacity: 0.55;
-    }
-    .tools-svg .tool-glow {
-      fill: var(--gold);
-      opacity: 0;
-    }
-    .tools-svg .tool-icon {
-      fill: none;
-      stroke: var(--forest);
-      stroke-width: 1.5;
-      stroke-linejoin: round;
-      stroke-linecap: round;
-    }
-    .tools-svg .tool-label {
-      font-family: var(--sans);
-      font-size: 12.5px;
-      font-weight: 500;
       letter-spacing: -0.005em;
-      fill: var(--ink-soft);
-      text-anchor: middle;
     }
-    .tools-svg .packet {
-      fill: var(--gold);
-      filter: drop-shadow(0 0 4px rgba(201, 169, 97, 0.55));
-      opacity: 0;
+    .half-list .line {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
     }
 
-    @media (max-width: 900px) {
-      .tools { padding: 100px 0 120px; }
-      .tools .layout {
-        grid-template-columns: 1fr;
-        gap: 60px;
-        padding: 0 22px;
-      }
-      .tools .lede { max-width: none; }
-      .tools-stage { max-width: 480px; }
+    .halves-foot {
+      max-width: 720px;
+      margin: 56px auto 0;
+      padding: 0 32px;
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(15px, 1.15vw, 19px);
+      line-height: 1.5;
+      color: var(--ink-mute);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 760px) {
+      .halves { padding: 96px 0 110px; }
+      .halves .head { margin-bottom: 50px; padding: 0 22px; }
+      .halves-grid { grid-template-columns: 1fr; padding: 0 22px; gap: 22px; }
+      .half-card { padding: 32px 28px 28px; }
+      .half-icon { width: 48px; height: 48px; }
+      .half-label { font-size: 28px; }
+      .halves-foot { padding: 0 22px; margin-top: 40px; }
     }
 
     /* ============== bottom CTA — back to homepage ============== */
@@ -806,8 +668,7 @@
 <section class="page-intro" id="top">
   <div class="wrap">
     <span class="eyebrow rv">Why GreenCube</span>
-    <h1 class="rv">Three things, <em>one machine.</em></h1>
-    <p class="lede rv">A memory that grows with you. Agents that team up when a task gets big. Reach into the apps already on your laptop. <strong>All running locally — no cloud, no telemetry, nothing leaving your hard drive.</strong></p>
+    <h1 class="rv">Two things, <em>one machine.</em></h1>
   </div>
 </section>
 
@@ -817,7 +678,7 @@
     <div class="copy">
       <span class="eyebrow rv">Memory</span>
       <h2 class="rv">It actually <em>remembers.</em></h2>
-      <p class="lede rv">Cloud assistants forget you between chats. GreenCube doesn't. It builds a knowledge graph of who you are over weeks and months — your projects, your tics, your taste, your people. <strong>The longer you use it, the sharper it gets.</strong></p>
+      <p class="lede rv">Cloud assistants forget you between chats. GreenCube doesn't. It builds a knowledge graph of who you are over weeks and months — your projects, your quirks, your taste, your people. <strong>The longer you use it, the sharper it gets.</strong></p>
       <div class="privacy-note rv">
         An AI that knows you should be one only <strong>you</strong> control. Your graph stays on your hard drive. One click — and it's gone forever.
       </div>
@@ -832,100 +693,63 @@
   </div>
 </section>
 
-<!-- =========== TEAM =========== -->
-<section class="team" id="team">
+<!-- =========== HOW IT WORKS — two halves, one machine =========== -->
+<section class="halves" id="halves">
   <div class="head">
-    <span class="eyebrow rv">Team</span>
-    <h2 class="rv">One AI. <em>An entire team.</em></h2>
-    <p class="lede rv">When a task is complex, GreenCube spawns specialized agents that work together — like having a startup team inside your laptop. They share findings, hand off work, and ship results. All running locally. All free.</p>
+    <span class="eyebrow rv">How it works</span>
+    <h2 class="rv">It <em>thinks.</em> It <em>does.</em></h2>
+    <p class="lede rv">On the left, GreenCube thinks. It plans your task, breaks it into steps, and checks the work as it happens.</p>
+    <p class="lede rv">On the right, GreenCube does. It opens your apps. Clicks your buttons. Types into your documents. Sends your emails. Whatever needs to happen — it just does it, the same way you would.</p>
+    <p class="lede rv">One request from you. <strong>A computer that uses itself.</strong></p>
   </div>
-  <div class="split-stage" id="split-stage">
-    <div class="split-cubes">
-      <div class="split-pipe" id="split-pipe" aria-hidden="true"></div>
-      <div class="cube-clone" data-i="0" aria-hidden="true"></div>
-      <div class="cube-clone" data-i="1" aria-hidden="true"></div>
-      <div class="cube-clone" data-i="2" aria-hidden="true"></div>
-      <div class="cube-clone" data-i="3" aria-hidden="true"></div>
-      <div class="cube-label" data-i="0">
-        <span class="name">Researcher</span>
-        <span class="desc">Browses, reads papers, finds answers</span>
-      </div>
-      <div class="cube-label" data-i="1">
-        <span class="name">Engineer</span>
-        <span class="desc">Writes, debugs, ships code in your terminal</span>
-      </div>
-      <div class="cube-label" data-i="2">
-        <span class="name">Writer</span>
-        <span class="desc">Drafts docs, emails, prose in your voice</span>
-      </div>
-      <div class="cube-label" data-i="3">
-        <span class="name">Operator</span>
-        <span class="desc">Uses your apps, manages files, automates</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- =========== TOOLS =========== -->
-<section class="tools" id="tools">
-  <div class="layout">
-    <div class="copy">
-      <span class="eyebrow rv">Tools</span>
-      <h2 class="rv">It doesn't just talk. <em>It does.</em></h2>
-      <p class="lede rv">Most AI assistants are trapped in a chat window. GreenCube lives in your operating system. It opens your terminal, browses the web, reads and edits your files, and uses the apps you already have. <strong>All locally — your machine, your data, your tools.</strong></p>
+  <div class="halves-grid">
+    <div class="half-card rv" data-half="thinks">
+      <div class="half-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
+          <circle cx="20" cy="22" r="3"/>
+          <circle cx="44" cy="22" r="3"/>
+          <circle cx="14" cy="36" r="3"/>
+          <circle cx="32" cy="42" r="3"/>
+          <circle cx="50" cy="36" r="3"/>
+          <line x1="20" y1="22" x2="44" y2="22" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <line x1="20" y1="22" x2="14" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <line x1="44" y1="22" x2="50" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <line x1="14" y1="36" x2="32" y2="42" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <line x1="50" y1="36" x2="32" y2="42" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <line x1="20" y1="22" x2="32" y2="42" stroke="currentColor" stroke-width="1.2" opacity="0.30"/>
+          <line x1="44" y1="22" x2="32" y2="42" stroke="currentColor" stroke-width="1.2" opacity="0.30"/>
+        </svg>
+      </div>
+      <div class="half-label">Thinks</div>
+      <ul class="half-list">
+        <li><span class="step">Plans</span><span class="line">Breaks your request into steps.</span></li>
+        <li><span class="step">Decides</span><span class="line">Picks which app or tool fits.</span></li>
+        <li><span class="step">Checks</span><span class="line">Watches the work and catches mistakes.</span></li>
+      </ul>
     </div>
-    <div class="tools-stage rv" id="tools-stage" aria-label="GreenCube reaching out to tools on your machine">
-      <svg class="tools-svg" id="tools-svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <circle class="ring" cx="300" cy="300" r="252" />
-        <text class="ring-label" x="300" y="572">your machine</text>
-        <g class="reach-lines">
-          <line class="reach-line" data-i="0" x1="300" y1="300" x2="300" y2="90" />
-          <line class="reach-line" data-i="1" x1="300" y1="300" x2="500" y2="235" />
-          <line class="reach-line" data-i="2" x1="300" y1="300" x2="423" y2="470" />
-          <line class="reach-line" data-i="3" x1="300" y1="300" x2="177" y2="470" />
-          <line class="reach-line" data-i="4" x1="300" y1="300" x2="100" y2="235" />
-        </g>
-        <g class="center" transform="translate(300, 300)">
-          <rect class="center-cube" x="-22" y="-22" width="44" height="44" rx="5" />
-          <rect class="center-inner" x="-12" y="-12" width="24" height="24" rx="3" />
-        </g>
-        <g class="tool" data-i="0" transform="translate(300, 90)">
-          <circle class="tool-glow" r="22" />
-          <rect class="tool-icon" x="-13" y="-9" width="26" height="18" rx="2" />
-          <path class="tool-icon" d="M -7 -3 L -3 0 L -7 3" />
-          <path class="tool-icon" d="M 0 4 L 6 4" />
-          <text class="tool-label" y="36">Terminal</text>
-        </g>
-        <g class="tool" data-i="1" transform="translate(500, 235)">
-          <circle class="tool-glow" r="22" />
-          <circle class="tool-icon" cx="0" cy="0" r="13" />
-          <ellipse class="tool-icon" cx="0" cy="0" rx="13" ry="5.5" />
-          <line class="tool-icon" x1="0" y1="-13" x2="0" y2="13" />
-          <text class="tool-label" y="36">Browser</text>
-        </g>
-        <g class="tool" data-i="2" transform="translate(423, 470)">
-          <circle class="tool-glow" r="22" />
-          <path class="tool-icon" d="M -13 -8 L -5 -8 L -2 -5 L 13 -5 L 13 9 L -13 9 Z" />
-          <text class="tool-label" y="36">Files</text>
-        </g>
-        <g class="tool" data-i="3" transform="translate(177, 470)">
-          <circle class="tool-glow" r="22" />
-          <path class="tool-icon" d="M -10 -7 L -16 0 L -10 7" />
-          <path class="tool-icon" d="M 10 -7 L 16 0 L 10 7" />
-          <line class="tool-icon" x1="-3" y1="-7" x2="3" y2="7" />
-          <text class="tool-label" y="36">Editor</text>
-        </g>
-        <g class="tool" data-i="4" transform="translate(100, 235)">
-          <circle class="tool-glow" r="22" />
-          <rect class="tool-icon" x="-12" y="-9" width="24" height="18" rx="2" />
-          <line class="tool-icon" x1="-12" y1="-3" x2="12" y2="-3" />
-          <line class="tool-icon" x1="-7" y1="-13" x2="-7" y2="-7" />
-          <line class="tool-icon" x1="7"  y1="-13" x2="7"  y2="-7" />
-          <text class="tool-label" y="36">Calendar</text>
-        </g>
-      </svg>
+
+    <div class="half-card rv" data-half="does">
+      <div class="half-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.20"/>
+          <circle cx="32" cy="32" r="14" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.40"/>
+          <circle cx="32" cy="32" r="6" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.65"/>
+          <path d="M 23 21 L 23 43 L 29 38 L 33 47 L 36 46 L 32 37 L 41 37 Z"
+                fill="currentColor" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="half-label">Does</div>
+      <ul class="half-list">
+        <li><span class="step">Opens</span><span class="line">Apps, browsers, files — anything on your machine.</span></li>
+        <li><span class="step">Acts</span><span class="line">Clicks, types, drags, sends — all the small things.</span></li>
+        <li><span class="step">Delivers</span><span class="line">Finishes the task and hands it back to you.</span></li>
+      </ul>
     </div>
   </div>
+
+  <p class="halves-foot rv">Whatever needs to happen — research, writing, code, errands — both halves work together until it's done.</p>
 </section>
 
 <section class="page-cta">
@@ -964,8 +788,6 @@
     started = true;
     document.body.classList.add('fonts-ready');
     initMemoryGraph();
-    initTeamSplit();
-    initToolsReach();
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
   setTimeout(start, 1200);
@@ -1236,191 +1058,6 @@
     });
   }
 
-  // ============== TEAM SPLIT ==============
-  function initTeamSplit() {
-    const stage  = document.getElementById('split-stage');
-    if (!stage) return;
-    const clones = stage.querySelectorAll('.cube-clone');
-    const labels = stage.querySelectorAll('.cube-label');
-    const pipe   = document.getElementById('split-pipe');
-    if (clones.length !== 4) return;
-
-    function positions() {
-      const w = stage.clientWidth;
-      const isMobile = w < 760;
-      if (isMobile) {
-        const dx = Math.min(120, w * 0.22);
-        const dy = 130;
-        return [
-          { x: -dx, y: -dy }, { x:  dx, y: -dy },
-          { x: -dx, y:  dy }, { x:  dx, y:  dy },
-        ];
-      }
-      const span = Math.min(w - 360, 880);
-      const step = span / 3;
-      return [
-        { x: -span / 2,        y: 0 },
-        { x: -span / 2 + step, y: 0 },
-        { x:  span / 2 - step, y: 0 },
-        { x:  span / 2,        y: 0 },
-      ];
-    }
-    let pos = positions();
-    function labelOffsetY(i, isMobile) { return isMobile ? 60 : 78; }
-
-    if (!window.gsap || reduced) {
-      pos.forEach((p, i) => {
-        const c = clones[i], l = labels[i];
-        c.style.transform = `translate(calc(-50% + ${p.x}px), calc(-50% + ${p.y}px)) scale(1)`;
-        c.style.opacity = 1;
-        const isMobile = stage.clientWidth < 760;
-        l.style.transform = `translate(calc(-50% + ${p.x}px), ${p.y + labelOffsetY(i, isMobile)}px)`;
-        l.style.opacity = 1;
-      });
-      return;
-    }
-
-    clones.forEach((c) => {
-      gsap.set(c, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.5, opacity: 0 });
-    });
-    labels.forEach((l) => {
-      gsap.set(l, { xPercent: -50, yPercent: 0, x: 0, y: 56, opacity: 0 });
-    });
-    gsap.set(pipe, { xPercent: -50, yPercent: -50, scaleX: 0, opacity: 0 });
-
-    function buildTimeline() {
-      pos = positions();
-      const isMobile = stage.clientWidth < 760;
-      if (!isMobile && pipe) {
-        gsap.set(pipe, { width: pos[3].x - pos[0].x, transformOrigin: 'center center' });
-      }
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.split-stage',
-          start: 'center center',
-          end: '+=140%',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-        defaults: { ease: 'none' },
-      });
-      tl.to({}, { duration: 1.4 });
-      tl.to(clones, { opacity: 1, scale: 0.85, duration: 1.4, stagger: 0.05 });
-      tl.to({}, { duration: 0.8 });
-      tl.to(clones, {
-        x: (i) => pos[i].x, y: (i) => pos[i].y, scale: 1,
-        duration: 2.0, stagger: 0.06,
-      });
-      tl.to(labels, {
-        x: (i) => pos[i].x, y: (i) => pos[i].y + labelOffsetY(i, isMobile),
-        opacity: 1, duration: 1.4, stagger: 0.06,
-      }, '<+=0.5');
-      if (!isMobile && pipe) {
-        tl.to(pipe, { scaleX: 1, opacity: 0.55, duration: 1.4 }, '<+=0.5');
-      }
-      tl.to({}, { duration: 0.8 });
-    }
-    buildTimeline();
-
-    let resizeT = null;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeT);
-      resizeT = setTimeout(() => {
-        pos = positions();
-        const isMobile = stage.clientWidth < 760;
-        if (!isMobile && pipe) gsap.set(pipe, { width: pos[3].x - pos[0].x });
-        if (window.ScrollTrigger) ScrollTrigger.refresh();
-      }, 200);
-    });
-  }
-
-  // ============== TOOLS REACH ==============
-  function initToolsReach() {
-    const svg = document.getElementById('tools-svg');
-    if (!svg) return;
-    const lines  = Array.from(svg.querySelectorAll('.reach-line'));
-    const tools  = Array.from(svg.querySelectorAll('.tool'));
-    const center = svg.querySelector('.center');
-    const ring   = svg.querySelector('.ring');
-    const ringLabel = svg.querySelector('.ring-label');
-    if (!lines.length || !tools.length) return;
-
-    const TOOL_POS = [
-      { x: 300, y: 90  },
-      { x: 500, y: 235 },
-      { x: 423, y: 470 },
-      { x: 177, y: 470 },
-      { x: 100, y: 235 },
-    ];
-    const CENTER = { x: 300, y: 300 };
-
-    if (!window.gsap || !window.ScrollTrigger || reduced) {
-      tools.forEach(t => { t.style.opacity = 1; });
-      return;
-    }
-
-    gsap.set([ring, ringLabel], { opacity: 0 });
-    gsap.set(center, { transformOrigin: '300px 300px', scale: 0.6, opacity: 0 });
-    lines.forEach(line => {
-      const len = line.getTotalLength();
-      gsap.set(line, { strokeDasharray: len, strokeDashoffset: len, opacity: 0.55 });
-    });
-    tools.forEach(t => {
-      gsap.set(t, { transformOrigin: 'center center', scale: 0.5, opacity: 0 });
-    });
-
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: '.tools', start: 'top 65%', once: true },
-      defaults: { ease: 'expo.out' },
-    });
-    tl
-      .to(ring, { opacity: 0.5, duration: 0.8 })
-      .to(ringLabel, { opacity: 1, duration: 0.5 }, '-=0.5')
-      .to(center, { scale: 1, opacity: 1, duration: 0.8 }, '-=0.3')
-      .to(lines, { strokeDashoffset: 0, duration: 0.85, stagger: 0.10, ease: 'power2.out' }, '-=0.2')
-      .to(tools, { scale: 1, opacity: 1, duration: 0.55, stagger: 0.10, ease: 'back.out(1.6)' }, '-=0.95');
-
-    let packetTimer = null, inView = false;
-    function firePacket(forcedIndex) {
-      if (!inView) return;
-      const i   = (typeof forcedIndex === 'number') ? forcedIndex : Math.floor(Math.random() * TOOL_POS.length);
-      const tgt = TOOL_POS[i];
-      const tool = tools[i];
-      const packet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      packet.setAttribute('class', 'packet');
-      packet.setAttribute('r', '3.5');
-      packet.setAttribute('cx', CENTER.x);
-      packet.setAttribute('cy', CENTER.y);
-      svg.appendChild(packet);
-      gsap.timeline({ onComplete: () => packet.remove() })
-        .to(packet, { opacity: 1, duration: 0.10 })
-        .to(packet, { attr: { cx: tgt.x, cy: tgt.y }, duration: 0.55, ease: 'power2.in' }, 0)
-        .to(tool, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.45)
-        .fromTo(tool.querySelector('.tool-glow'),
-          { opacity: 0 },
-          { opacity: 0.5, duration: 0.30, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.45)
-        .to(packet, { opacity: 0, duration: 0.20 }, 0.60);
-    }
-    function schedule() {
-      const delay = 800 + Math.random() * 1200;
-      packetTimer = setTimeout(() => {
-        firePacket();
-        if (Math.random() < 0.35) setTimeout(firePacket, 180 + Math.random() * 240);
-        schedule();
-      }, delay);
-    }
-    ScrollTrigger.create({
-      trigger: '.tools',
-      start: 'top bottom',
-      end: 'bottom top',
-      onEnter:     () => { inView = true; if (!packetTimer) schedule(); },
-      onEnterBack: () => { inView = true; if (!packetTimer) schedule(); },
-      onLeave:     () => { inView = false; clearTimeout(packetTimer); packetTimer = null; },
-      onLeaveBack: () => { inView = false; clearTimeout(packetTimer); packetTimer = null; },
-    });
-  }
 })();
 </script>
 
