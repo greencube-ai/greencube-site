@@ -2178,6 +2178,8 @@
         if (res && res.ok) {
           status.textContent = "You're on the list. We'll write when it's live.";
           input.value = '';
+          buttonLabel.textContent = 'Saved ✓';
+          // button stays disabled — we don't want a double-submit
         } else {
           status.textContent = "Couldn't save that — try again in a moment.";
           status.classList.add('error');
