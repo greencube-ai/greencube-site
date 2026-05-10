@@ -424,9 +424,9 @@
     /* the big container — looks like a real macOS window */
     .demo-frame {
       position: relative;
-      max-width: 1320px;
+      max-width: 1480px;
       margin: 0 auto;
-      width: calc(100% - 64px);
+      width: calc(100% - 32px);
       aspect-ratio: 16 / 10;
       background: var(--paper-soft);
       border-radius: 14px;
@@ -491,7 +491,7 @@
       flex-direction: column;
       background: var(--paper-soft);
       font-family: var(--sans);
-      font-size: 13px;
+      font-size: 14px;
       color: var(--ink);
       min-width: 0;
       position: relative;
@@ -538,9 +538,9 @@
       max-width: 85%;
       background: var(--forest);
       color: #fff;
-      padding: 10px 14px;
-      border-radius: 16px 16px 4px 16px;
-      font-size: 13px;
+      padding: 11px 16px;
+      border-radius: 18px 18px 4px 18px;
+      font-size: 14.5px;
       line-height: 1.45;
       opacity: 0;
       transform: translateY(8px);
@@ -549,7 +549,7 @@
       align-self: flex-start;
       max-width: 95%;
       color: var(--ink);
-      font-size: 13.5px;
+      font-size: 15px;
       line-height: 1.55;
       opacity: 0;
     }
@@ -702,33 +702,36 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 30% 20%, #FFD8B5 0%, transparent 50%),
-        radial-gradient(ellipse 60% 70% at 80% 30%, #F5B79A 0%, transparent 55%),
-        radial-gradient(ellipse 90% 60% at 50% 90%, #E89F8A 0%, transparent 60%),
-        linear-gradient(160deg, #FCE3CB 0%, #E4A188 50%, #C7806E 100%);
+        radial-gradient(ellipse 70% 55% at 22% 18%, #6E4DC7 0%, transparent 55%),
+        radial-gradient(ellipse 90% 65% at 82% 28%, #3A4FCF 0%, transparent 60%),
+        radial-gradient(ellipse 85% 60% at 65% 92%, #FF7BA0 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 18% 95%, #B14EC2 0%, transparent 55%),
+        linear-gradient(165deg, #1B1340 0%, #2A1E5C 45%, #4A2A78 100%);
       z-index: 0;
     }
     .desk-wall::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255, 255, 255, 0.18), transparent 60%);
+      background:
+        radial-gradient(ellipse 120% 50% at 50% 0%, rgba(255, 255, 255, 0.10), transparent 60%),
+        radial-gradient(ellipse 80% 30% at 50% 100%, rgba(0, 0, 0, 0.18), transparent 60%);
     }
 
     /* menu bar */
     .desk-menubar {
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 26px;
-      padding: 0 14px;
+      height: 28px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       background: rgba(20, 16, 14, 0.32);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      color: rgba(255, 255, 255, 0.92);
-      font-size: 11.5px;
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 13px;
       font-weight: 500;
       z-index: 50;
       letter-spacing: -0.005em;
@@ -756,27 +759,25 @@
     /* windows */
     .dwin {
       position: absolute;
-      background: rgba(245, 241, 232, 0.96);
+      background: #F5F1E8;
       border-radius: 10px;
       box-shadow:
-        0 30px 80px -10px rgba(20, 14, 10, 0.45),
-        0 8px 22px -4px rgba(20, 14, 10, 0.20),
+        0 30px 80px -10px rgba(0, 0, 0, 0.45),
+        0 8px 22px -4px rgba(0, 0, 0, 0.20),
         inset 0 0 0 0.5px rgba(255, 255, 255, 0.4);
       overflow: hidden;
       display: none;
       flex-direction: column;
       z-index: 10;
-      backdrop-filter: blur(30px) saturate(160%);
-      -webkit-backdrop-filter: blur(30px) saturate(160%);
     }
     .dwin.is-open { display: flex; }
     .dwin.is-front { z-index: 30; }
     .dwin-titlebar {
-      height: 30px;
-      padding: 0 14px;
+      height: 34px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: rgba(245, 241, 232, 0.65);
       border-bottom: 1px solid rgba(31, 58, 46, 0.08);
       cursor: grab;
@@ -784,9 +785,9 @@
       flex-shrink: 0;
     }
     .dwin-titlebar:active { cursor: grabbing; }
-    .traffic { display: inline-flex; gap: 6px; align-items: center; }
+    .traffic { display: inline-flex; gap: 7px; align-items: center; }
     .traffic span {
-      width: 11px; height: 11px;
+      width: 12px; height: 12px;
       border-radius: 50%;
       cursor: pointer;
       border: 0.5px solid rgba(0,0,0,0.10);
@@ -797,7 +798,7 @@
     .dwin-title {
       flex: 1;
       text-align: center;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--ink-soft);
       letter-spacing: -0.005em;
@@ -810,11 +811,11 @@
     }
 
     /* Pages window */
-    #win-pages { width: 60%; height: 65%; left: 18%; top: 12%; }
+    #win-pages { width: 58%; height: 70%; left: 19%; top: 10%; }
     .pages-doc {
-      padding: 22px 28px;
+      padding: 28px 36px;
       font-family: Georgia, serif;
-      font-size: 11px;
+      font-size: 13px;
       color: var(--ink);
       height: 100%;
       overflow: hidden;
@@ -822,37 +823,36 @@
     }
     .pages-doc .doc-name {
       font-family: Georgia, serif;
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       color: var(--ink);
       letter-spacing: -0.01em;
     }
     .pages-doc .doc-contact {
-      font-size: 9.5px;
+      font-size: 11.5px;
       color: var(--ink-soft);
-      margin-top: 3px;
-      margin-bottom: 14px;
+      margin-top: 4px;
+      margin-bottom: 18px;
       letter-spacing: 0.02em;
     }
-    .pages-doc .doc-section {
-      margin-top: 12px;
-    }
+    .pages-doc .doc-section { margin-top: 14px; }
     .pages-doc .doc-section h3 {
-      font-size: 10px;
+      font-size: 11.5px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--forest);
       font-weight: 700;
       border-bottom: 1px solid var(--line);
-      padding-bottom: 3px;
-      margin-bottom: 6px;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
     }
     .pages-doc .doc-job {
-      margin-bottom: 6px;
-      font-size: 10.5px;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
     }
     .pages-doc .doc-job .role { font-weight: 700; }
-    .pages-doc .doc-job .meta { color: var(--ink-mute); font-size: 9.5px; }
+    .pages-doc .doc-job .meta { color: var(--ink-mute); font-size: 11px; }
     .pages-doc .typed::after {
       content: '▍';
       color: var(--moss);
@@ -862,21 +862,21 @@
     .pages-doc .typed.done::after { display: none; }
     .save-toast {
       position: absolute;
-      bottom: 14px;
+      bottom: 16px;
       left: 50%;
       transform: translateX(-50%) translateY(8px);
       background: rgba(31, 58, 46, 0.94);
       color: var(--paper);
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 12.5px;
       font-weight: 500;
       opacity: 0;
       pointer-events: none;
     }
 
     /* Maps window */
-    #win-maps { width: 60%; height: 65%; left: 18%; top: 12%; }
+    #win-maps { width: 60%; height: 68%; left: 18%; top: 11%; }
     .maps-body { display: flex; height: 100%; background: #fff; }
     .maps-canvas {
       flex: 1;
@@ -920,15 +920,15 @@
     .maps-list {
       width: 38%;
       border-left: 1px solid var(--line);
-      padding: 14px 16px;
+      padding: 16px 18px;
       background: var(--paper-soft);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     .maps-list h4 {
-      font-size: 10px;
+      font-size: 11.5px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--ink-mute);
@@ -936,10 +936,10 @@
       margin-bottom: 4px;
     }
     .maps-result {
-      padding: 8px 10px;
+      padding: 10px 12px;
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 9px;
       opacity: 0;
       transform: translateY(6px);
     }
@@ -947,22 +947,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 18px; height: 18px;
+      width: 20px; height: 20px;
       background: var(--forest);
       color: #fff;
       border-radius: 50%;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
-      margin-right: 6px;
+      margin-right: 7px;
       vertical-align: middle;
     }
-    .maps-result .name { font-size: 11.5px; font-weight: 600; color: var(--ink); }
-    .maps-result .dist { font-size: 10px; color: var(--ink-mute); margin-top: 2px; padding-left: 24px; }
-    .maps-result .email { font-size: 10px; color: var(--moss); margin-top: 1px; padding-left: 24px; }
+    .maps-result .name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .maps-result .dist { font-size: 11.5px; color: var(--ink-mute); margin-top: 3px; padding-left: 27px; }
+    .maps-result .email { font-size: 11.5px; color: var(--moss); margin-top: 2px; padding-left: 27px; }
     .maps-result.is-highlight { border-color: var(--moss); box-shadow: 0 0 0 3px rgba(91, 138, 110, 0.14); }
 
     /* Mail window */
-    #win-mail { width: 65%; height: 70%; left: 16%; top: 9%; }
+    #win-mail { width: 66%; height: 72%; left: 15%; top: 8%; }
     .mail-body { display: flex; height: 100%; background: #fff; }
     .mail-list {
       width: 36%;
@@ -972,15 +972,15 @@
       padding: 10px 0;
     }
     .mail-list h4 {
-      font-size: 10px;
+      font-size: 11.5px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--ink-mute);
       font-weight: 600;
-      padding: 0 14px 8px;
+      padding: 0 16px 10px;
     }
     .mail-item {
-      padding: 8px 14px;
+      padding: 10px 16px;
       border-left: 3px solid transparent;
       cursor: default;
       opacity: 0;
@@ -988,43 +988,43 @@
     }
     .mail-item.is-active { background: rgba(91, 138, 110, 0.10); border-left-color: var(--moss); }
     .mail-item.is-sent { opacity: 0.45; }
-    .mail-item .to { font-size: 10.5px; color: var(--ink-soft); }
-    .mail-item .subj { font-size: 11.5px; font-weight: 600; color: var(--ink); margin-top: 1px; }
-    .mail-item .preview { font-size: 10px; color: var(--ink-mute); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mail-item .to { font-size: 12px; color: var(--ink-soft); }
+    .mail-item .subj { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px; }
+    .mail-item .preview { font-size: 11.5px; color: var(--ink-mute); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .mail-compose {
       flex: 1;
-      padding: 14px 18px;
+      padding: 16px 22px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
     .mail-field {
       display: flex;
       gap: 10px;
-      font-size: 11px;
-      padding-bottom: 6px;
+      font-size: 12.5px;
+      padding-bottom: 7px;
       border-bottom: 1px solid var(--line);
     }
-    .mail-field .lbl { color: var(--ink-mute); width: 50px; }
+    .mail-field .lbl { color: var(--ink-mute); width: 60px; }
     .mail-field .val { color: var(--ink); flex: 1; }
     .mail-field .val.subj { font-weight: 600; }
     .mail-attach {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 4px 9px;
+      gap: 6px;
+      padding: 5px 11px;
       background: rgba(91, 138, 110, 0.10);
       border: 1px solid rgba(91, 138, 110, 0.25);
-      border-radius: 6px;
-      font-size: 10.5px;
+      border-radius: 7px;
+      font-size: 12px;
       color: var(--forest);
       align-self: flex-start;
       opacity: 0;
     }
-    .mail-attach::before { content: '📎'; font-size: 11px; }
+    .mail-attach::before { content: '📎'; font-size: 12px; }
     .mail-compose .mail-text {
-      font-size: 11px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.55;
       color: var(--ink);
       flex: 1;
       white-space: pre-wrap;
@@ -1037,68 +1037,74 @@
     .mail-compose .mail-text.typed.done::after { display: none; }
     .mail-send-btn {
       align-self: flex-end;
-      padding: 5px 14px;
+      padding: 6px 16px;
       background: var(--forest);
       color: #fff;
+      border: none;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 12.5px;
       font-weight: 500;
       transform: scale(1);
     }
     .mail-send-btn.flash { background: var(--moss); }
     .mail-counter {
       position: absolute;
-      bottom: 12px; right: 16px;
-      font-size: 10.5px;
+      bottom: 14px; right: 18px;
+      font-size: 12px;
       color: var(--ink-mute);
       background: var(--paper-soft);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
       border: 1px solid var(--line);
       opacity: 0;
     }
 
-    /* dock */
+    /* dock — macOS Sonoma proportions */
     .desk-dock {
       position: absolute;
-      bottom: 14px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
+      align-items: flex-end;
       gap: 6px;
-      padding: 6px 8px;
-      background: rgba(245, 241, 232, 0.32);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 16px;
-      box-shadow: 0 14px 30px -8px rgba(20, 14, 10, 0.30);
+      padding: 6px 10px 8px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(38px) saturate(180%);
+      -webkit-backdrop-filter: blur(38px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 40px -10px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.40);
       z-index: 40;
     }
     .dock-icon {
       position: relative;
-      width: 38px; height: 38px;
+      width: 48px; height: 48px;
       border: none;
-      border-radius: 9px;
+      /* macOS squircle ≈ 22.37% radius */
+      border-radius: 11px;
       cursor: default;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.18s var(--ease-out);
       color: #fff;
-      font-size: 18px;
+      box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.10);
     }
-    .dock-icon:hover { transform: translateY(-6px) scale(1.18); }
-    .dock-icon + .dock-icon:hover { transform: translateY(-6px) scale(1.18); }
+    .dock-icon:hover { transform: translateY(-9px) scale(1.22); }
     .dock-icon.is-active::after {
       content: '';
       position: absolute;
-      bottom: -7px; left: 50%;
+      bottom: -8px; left: 50%;
       transform: translateX(-50%);
-      width: 3px; height: 3px;
-      background: rgba(255, 255, 255, 0.85);
+      width: 4px; height: 4px;
+      background: rgba(255, 255, 255, 0.90);
       border-radius: 50%;
-      box-shadow: 0 0 4px rgba(255,255,255,0.6);
+      box-shadow: 0 0 6px rgba(255,255,255,0.7);
     }
     .dock-icon[data-app="finder"]    { background: linear-gradient(160deg, #6BB6FF 0%, #1E88E5 60%, #1565C0 100%); }
     .dock-icon[data-app="safari"]    { background: radial-gradient(circle at 50% 45%, #FFFFFF 6%, #BFE6F8 18%, #4FC3F7 60%, #1E88E5 100%); }
@@ -2182,64 +2188,121 @@
       <!-- Dock -->
       <div class="desk-dock" id="desk-dock">
         <button class="dock-icon" data-app="finder" tabindex="-1" aria-label="Finder">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M11 12 q1.4 -3 0 -6 q4 1.5 4 6 z" fill="#fff"/>
-            <circle cx="11" cy="17" r="1.6" fill="#1A1A1A"/>
-            <circle cx="21" cy="17" r="1.6" fill="#1A1A1A"/>
-            <path d="M10 22 Q 16 26 22 22" stroke="#1A1A1A" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="findL" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#3B82F6"/>
+              </linearGradient>
+              <linearGradient id="findR" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F2F4F6"/><stop offset="1" stop-color="#C7CDD3"/>
+              </linearGradient>
+            </defs>
+            <path d="M8 10 H 32 V 54 H 8 Z" fill="url(#findL)"/>
+            <path d="M32 10 H 56 V 54 H 32 Z" fill="url(#findR)"/>
+            <ellipse cx="22" cy="28" rx="2.4" ry="4.2" fill="#1B2840"/>
+            <ellipse cx="40" cy="28" rx="2.4" ry="4.2" fill="#1B2840"/>
+            <path d="M18 40 Q 32 50 46 40" stroke="#1B2840" stroke-width="2.6" fill="none" stroke-linecap="round"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="safari" tabindex="-1" aria-label="Safari">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <circle cx="16" cy="16" r="13" fill="#fff" stroke="#1565C0" stroke-width="0.8"/>
-            <path d="M16 7 L18.5 16 L16 25 L13.5 16 Z" fill="#FF3B30"/>
-            <path d="M16 7 L18.5 16 L13.5 16 Z" fill="#fff"/>
-            <circle cx="16" cy="16" r="1.4" fill="#fff" stroke="#1565C0" stroke-width="0.4"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <radialGradient id="safRim" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#fff"/><stop offset="0.78" stop-color="#fff"/>
+                <stop offset="0.82" stop-color="#9DD3F4"/><stop offset="1" stop-color="#1E88E5"/>
+              </radialGradient>
+            </defs>
+            <circle cx="32" cy="32" r="26" fill="url(#safRim)"/>
+            <circle cx="32" cy="32" r="20" fill="#E5F2FB"/>
+            <g stroke="#1E88E5" stroke-width="0.7" opacity="0.6">
+              <line x1="32" y1="6"  x2="32" y2="11"/>
+              <line x1="32" y1="58" x2="32" y2="53"/>
+              <line x1="6" y1="32"  x2="11" y2="32"/>
+              <line x1="58" y1="32" x2="53" y2="32"/>
+            </g>
+            <path d="M32 14 L36 32 L32 50 L28 32 Z" fill="#FF3B30"/>
+            <path d="M32 14 L36 32 L28 32 Z" fill="#fff"/>
+            <circle cx="32" cy="32" r="2" fill="#fff" stroke="#1E88E5" stroke-width="0.6"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="mail" tabindex="-1" aria-label="Mail">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect x="4" y="9" width="24" height="16" rx="2.5" fill="#fff"/>
-            <path d="M5 11 L16 19 L27 11" stroke="#1E6FE0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="mailBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#9DDDFF"/><stop offset="1" stop-color="#5BA0F0"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="16" width="52" height="34" rx="4" fill="url(#mailBg)"/>
+            <path d="M6 18 L32 38 L58 18" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 50 L26 32 M58 50 L38 32" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.55"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="pages" tabindex="-1" aria-label="Pages">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect x="8" y="4" width="16" height="24" rx="2" fill="#fff"/>
-            <line x1="11" y1="11" x2="21" y2="11" stroke="#D85E04" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="11" y1="15" x2="21" y2="15" stroke="#D85E04" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="11" y1="19" x2="21" y2="19" stroke="#D85E04" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="11" y1="23" x2="17" y2="23" stroke="#D85E04" stroke-width="1.4" stroke-linecap="round"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="pagesBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFD8A8"/><stop offset="1" stop-color="#fff"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 8 H 42 L 52 18 V 56 H 16 Z" fill="url(#pagesBg)" stroke="#E37016" stroke-width="0.6"/>
+            <path d="M42 8 V 18 H 52" fill="none" stroke="#E37016" stroke-width="0.8"/>
+            <line x1="22" y1="26" x2="46" y2="26" stroke="#E37016" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="34" x2="46" y2="34" stroke="#E37016" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="42" x2="46" y2="42" stroke="#E37016" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="50" x2="36" y2="50" stroke="#E37016" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="maps" tabindex="-1" aria-label="Maps">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M5 9 L12 6 L20 9 L27 6 L27 23 L20 26 L12 23 L5 26 Z" fill="#fff" stroke="#5895C8" stroke-width="0.6" stroke-linejoin="round"/>
-            <line x1="12" y1="6" x2="12" y2="23" stroke="#5895C8" stroke-width="0.6"/>
-            <line x1="20" y1="9" x2="20" y2="26" stroke="#5895C8" stroke-width="0.6"/>
-            <path d="M16 11 c -2.4 0 -4.2 1.8 -4.2 4.2 c 0 3 4.2 7 4.2 7 s 4.2 -4 4.2 -7 c 0 -2.4 -1.8 -4.2 -4.2 -4.2 z" fill="#FF3B30" stroke="#fff" stroke-width="0.8"/>
-            <circle cx="16" cy="15.2" r="1.4" fill="#fff"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="mapBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#E8F1F8"/><stop offset="1" stop-color="#B6CFE6"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="52" height="52" fill="url(#mapBg)"/>
+            <path d="M0 22 L 64 18" stroke="#fff" stroke-width="3" opacity="0.95"/>
+            <path d="M0 36 L 64 40" stroke="#fff" stroke-width="3" opacity="0.95"/>
+            <path d="M22 0 L 18 64" stroke="#fff" stroke-width="3" opacity="0.95"/>
+            <path d="M44 0 L 48 64" stroke="#fff" stroke-width="3" opacity="0.95"/>
+            <path d="M0 48 Q 32 56 64 48" stroke="#9CC6A8" stroke-width="4" fill="none" opacity="0.45"/>
+            <path d="M32 26 c -4.5 0 -8 3.5 -8 8 c 0 6 8 14 8 14 s 8 -8 8 -14 c 0 -4.5 -3.5 -8 -8 -8 z" fill="#FF3B30" stroke="#fff" stroke-width="1.4"/>
+            <circle cx="32" cy="34" r="3" fill="#fff"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="messages" tabindex="-1" aria-label="Messages">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M6 13 C 6 9 9 7 12 7 H 20 C 23 7 26 9 26 13 V 18 C 26 22 23 24 20 24 H 14 L 9 28 V 24 C 7 23 6 21 6 18 Z" fill="#fff"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="msgBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#A8F39A"/><stop offset="1" stop-color="#33B547"/>
+              </linearGradient>
+            </defs>
+            <path d="M14 14 C 14 9 19 6 25 6 H 39 C 46 6 50 11 50 18 V 32 C 50 39 45 42 38 42 H 26 L 14 52 V 42 C 14 39 13 36 13 32 V 19 C 13 16 13 14 14 14 Z"
+                  fill="url(#msgBg)"/>
+            <ellipse cx="32" cy="24" rx="13" ry="9" fill="rgba(255,255,255,0.18)"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="notes" tabindex="-1" aria-label="Notes">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M8 5 H 21 L 25 9 V 27 H 8 Z" fill="#fff"/>
-            <path d="M21 5 V 9 H 25" fill="none" stroke="#C9A961" stroke-width="0.8"/>
-            <line x1="11" y1="14" x2="21" y2="14" stroke="#B89A4C" stroke-width="1"/>
-            <line x1="11" y1="18" x2="21" y2="18" stroke="#B89A4C" stroke-width="1"/>
-            <line x1="11" y1="22" x2="18" y2="22" stroke="#B89A4C" stroke-width="1"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="6" y="6" width="52" height="14" fill="#FFE05F"/>
+            <rect x="6" y="20" width="52" height="38" fill="#FFF8DC"/>
+            <line x1="14" y1="30" x2="50" y2="30" stroke="#D4B548" stroke-width="1.2"/>
+            <line x1="14" y1="38" x2="50" y2="38" stroke="#D4B548" stroke-width="1.2"/>
+            <line x1="14" y1="46" x2="42" y2="46" stroke="#D4B548" stroke-width="1.2"/>
           </svg>
         </button>
         <button class="dock-icon is-active" data-app="greencube" tabindex="-1" aria-label="GreenCube">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect x="6" y="6" width="20" height="20" rx="3" fill="none" stroke="#fff" stroke-width="2"/>
-            <line x1="6" y1="11" x2="26" y2="11" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
-            <line x1="11" y1="6" x2="11" y2="26" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="gcBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9CB89E"/><stop offset="0.6" stop-color="#5B8A6E"/>
+                <stop offset="1" stop-color="#1F3A2E"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="64" height="64" fill="url(#gcBg)"/>
+            <g transform="translate(32 33)" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" fill="none">
+              <path d="M -16 -8 L 0 -16 L 16 -8 L 16 10 L 0 18 L -16 10 Z"/>
+              <path d="M -16 -8 L 0 0 L 16 -8 M 0 0 L 0 18"/>
+            </g>
           </svg>
         </button>
       </div>
