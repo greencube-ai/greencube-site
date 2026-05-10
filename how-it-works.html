@@ -138,16 +138,30 @@
     .header-nav {
       display: inline-flex;
       align-items: center;
-      gap: 22px;
-      font-size: 13px;
-      font-weight: 500;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
     }
     .header-nav a {
-      color: var(--ink-soft);
-      transition: color 0.3s var(--ease-out);
+      color: var(--forest);
+      letter-spacing: -0.005em;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: color 0.3s var(--ease-out),
+                  background 0.3s var(--ease-out),
+                  border-color 0.3s var(--ease-out);
     }
-    .header-nav a:hover { color: var(--forest); }
-    .header-nav a.is-current { color: var(--forest); }
+    .header-nav a:hover {
+      color: var(--paper);
+      background: var(--forest);
+      border-color: var(--forest);
+    }
+    .header-nav a.is-current {
+      background: var(--forest);
+      color: var(--paper);
+      border-color: var(--forest);
+    }
     .pill {
       display: inline-flex;
       align-items: center;
@@ -934,20 +948,20 @@
   </div>
 </footer>
 
-<!-- libs -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<!-- libs — `defer` so HTML parses without blocking on these CDN downloads -->
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   let started = false;
   const start = () => {
     if (started) return;
     started = true;
+    if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     document.body.classList.add('fonts-ready');
     initMemoryGraph();
     initTeamSplit();
