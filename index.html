@@ -380,6 +380,767 @@
     }
     .cta-status.error { color: #B33A3A; }
 
+    /* ============== demo — interactive split-screen centerpiece ============== */
+    .demo {
+      position: relative;
+      padding: 110px 0 130px;
+      background: var(--paper);
+      z-index: 2;
+    }
+    .demo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 35% at 50% 12%, rgba(201, 169, 97, 0.10), transparent 60%);
+    }
+    .demo-intro {
+      max-width: 880px;
+      margin: 0 auto 56px;
+      padding: 0 32px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .demo-headline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(40px, 5.6vw, 76px);
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: var(--forest);
+      margin-bottom: 18px;
+    }
+    .demo-headline em { color: var(--moss); }
+    .demo-subtext {
+      font-family: var(--sans);
+      font-size: clamp(15px, 1.1vw, 18px);
+      color: var(--ink-soft);
+      letter-spacing: -0.005em;
+    }
+
+    /* the big container */
+    .demo-frame {
+      position: relative;
+      max-width: 1320px;
+      margin: 0 auto;
+      width: calc(100% - 64px);
+      aspect-ratio: 16 / 10;
+      background: var(--paper-soft);
+      border-radius: 22px;
+      border: 1px solid rgba(31, 58, 46, 0.10);
+      box-shadow:
+        0 50px 120px -30px rgba(31, 58, 46, 0.30),
+        0 18px 40px -12px rgba(31, 58, 46, 0.14);
+      display: grid;
+      grid-template-columns: 40% 60%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .demo-frame::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 40%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(31, 58, 46, 0.12) 18%, rgba(31, 58, 46, 0.12) 82%, transparent 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* ===== LEFT — chat ===== */
+    .demo-chat {
+      display: flex;
+      flex-direction: column;
+      background: var(--paper-soft);
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink);
+      min-width: 0;
+      position: relative;
+    }
+    .dchat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .dchat-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--forest);
+    }
+    .dchat-mark {
+      width: 12px; height: 12px;
+      border: 1.5px solid var(--forest);
+      border-radius: 3px;
+    }
+    .dchat-newchat {
+      font-size: 12px;
+      color: var(--ink-mute);
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+    .dchat-body {
+      flex: 1;
+      overflow: hidden;
+      padding: 22px 22px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .dchat-msg.user {
+      align-self: flex-end;
+      max-width: 85%;
+      background: var(--forest);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 16px 16px 4px 16px;
+      font-size: 13px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .dchat-msg.assistant {
+      align-self: flex-start;
+      max-width: 95%;
+      color: var(--ink);
+      font-size: 13.5px;
+      line-height: 1.55;
+      opacity: 0;
+    }
+    .dchat-msg.assistant .meta {
+      color: var(--ink-mute);
+      font-size: 11.5px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dchat-msg.assistant .meta::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--moss);
+      border-radius: 50%;
+      animation: pulse 2.6s var(--ease-out) infinite;
+    }
+    .dchat-msg.assistant .body { color: var(--ink); }
+    .dchat-msg.assistant .body em { color: var(--moss); font-style: italic; }
+    .dchat-msg.assistant .agent-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .agent-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(91, 138, 110, 0.10);
+      border: 1px solid rgba(91, 138, 110, 0.25);
+      color: var(--forest);
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    .agent-chip .dot {
+      width: 5px; height: 5px;
+      background: var(--moss);
+      border-radius: 50%;
+      animation: pulse 1.8s var(--ease-out) infinite;
+    }
+    .agent-chip .glyph { font-size: 12px; }
+
+    /* mini memory graph overlay */
+    .mini-graph {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 180px;
+      height: 130px;
+      background: rgba(245, 241, 232, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 0 12px 30px -10px rgba(31, 58, 46, 0.20);
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .mini-graph .label {
+      font-size: 9px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 4px;
+    }
+    .mini-graph svg { width: 100%; height: calc(100% - 14px); }
+    .mini-graph .node circle { fill: var(--paper); stroke: var(--moss); stroke-width: 1.2; }
+    .mini-graph .node.is-active circle { fill: var(--moss); stroke: var(--forest); }
+    .mini-graph .node text { font-size: 6.5px; fill: var(--ink-soft); font-family: var(--sans); }
+    .mini-graph .node.is-active text { fill: var(--forest); font-weight: 600; }
+    .mini-graph .edge { stroke: rgba(91, 138, 110, 0.40); stroke-width: 0.8; }
+
+    .dchat-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px 18px;
+      flex-shrink: 0;
+    }
+    .dchat-input {
+      flex: 1;
+      position: relative;
+      height: 42px;
+      padding: 0 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .dchat-placeholder {
+      color: var(--ink-faint);
+      pointer-events: none;
+    }
+    .dchat-typing {
+      color: var(--ink);
+    }
+    .dchat-caret {
+      display: inline-block;
+      width: 1.5px;
+      height: 16px;
+      background: var(--forest);
+      margin-left: 1px;
+      vertical-align: middle;
+      opacity: 0;
+      animation: dchat-blink 1s steps(1) infinite;
+    }
+    .dchat-caret.is-on { opacity: 1; }
+    @keyframes dchat-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .dchat-send {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      flex-shrink: 0;
+      opacity: 0.45;
+      transition: opacity 0.3s var(--ease-out), transform 0.2s var(--ease-out);
+    }
+    .dchat-send.is-active { opacity: 1; }
+
+    /* ===== RIGHT — desktop ===== */
+    .demo-desktop {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      cursor: default;
+    }
+    .desk-wall {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 20%, #FFD8B5 0%, transparent 50%),
+        radial-gradient(ellipse 60% 70% at 80% 30%, #F5B79A 0%, transparent 55%),
+        radial-gradient(ellipse 90% 60% at 50% 90%, #E89F8A 0%, transparent 60%),
+        linear-gradient(160deg, #FCE3CB 0%, #E4A188 50%, #C7806E 100%);
+      z-index: 0;
+    }
+    .desk-wall::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255, 255, 255, 0.18), transparent 60%);
+    }
+
+    /* menu bar */
+    .desk-menubar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 26px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(20, 16, 14, 0.32);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 11.5px;
+      font-weight: 500;
+      z-index: 50;
+      letter-spacing: -0.005em;
+    }
+    .desk-menubar .apple-mark {
+      width: 11px; height: 13px;
+      background: currentColor;
+      mask: radial-gradient(circle at 70% 25%, transparent 22%, #000 23%) 0 0 / 100% 100%;
+      -webkit-mask: radial-gradient(circle at 70% 25%, transparent 22%, #000 23%) 0 0 / 100% 100%;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.92;
+    }
+    .desk-menubar .menu-app { font-weight: 700; }
+    .desk-menubar .menu-item { opacity: 0.82; font-weight: 500; }
+    .desk-menubar .menu-spacer { flex: 1; }
+    .desk-menubar .menu-cube {
+      width: 10px; height: 10px;
+      border: 1.3px solid #fff;
+      border-radius: 2px;
+      display: inline-block;
+      box-shadow: 0 0 6px rgba(156, 184, 158, 0.7);
+    }
+    .desk-menubar .menu-clock { font-variant-numeric: tabular-nums; }
+
+    /* windows */
+    .dwin {
+      position: absolute;
+      background: rgba(245, 241, 232, 0.96);
+      border-radius: 10px;
+      box-shadow:
+        0 30px 80px -10px rgba(20, 14, 10, 0.45),
+        0 8px 22px -4px rgba(20, 14, 10, 0.20),
+        inset 0 0 0 0.5px rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 10;
+      backdrop-filter: blur(30px) saturate(160%);
+      -webkit-backdrop-filter: blur(30px) saturate(160%);
+    }
+    .dwin.is-open { display: flex; }
+    .dwin.is-front { z-index: 30; }
+    .dwin-titlebar {
+      height: 30px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 241, 232, 0.65);
+      border-bottom: 1px solid rgba(31, 58, 46, 0.08);
+      cursor: grab;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .dwin-titlebar:active { cursor: grabbing; }
+    .traffic { display: inline-flex; gap: 6px; align-items: center; }
+    .traffic span {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 0.5px solid rgba(0,0,0,0.10);
+    }
+    .traffic .t-red    { background: #FF5F57; }
+    .traffic .t-yellow { background: #FEBC2E; }
+    .traffic .t-green  { background: #28C840; }
+    .dwin-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: -0.005em;
+    }
+    .dwin-body {
+      flex: 1;
+      overflow: hidden;
+      background: var(--paper-soft);
+      position: relative;
+    }
+
+    /* Pages window */
+    #win-pages { width: 60%; height: 65%; left: 18%; top: 12%; }
+    .pages-doc {
+      padding: 22px 28px;
+      font-family: Georgia, serif;
+      font-size: 11px;
+      color: var(--ink);
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
+    .pages-doc .doc-name {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .pages-doc .doc-contact {
+      font-size: 9.5px;
+      color: var(--ink-soft);
+      margin-top: 3px;
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+    .pages-doc .doc-section {
+      margin-top: 12px;
+    }
+    .pages-doc .doc-section h3 {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--forest);
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+    }
+    .pages-doc .doc-job {
+      margin-bottom: 6px;
+      font-size: 10.5px;
+    }
+    .pages-doc .doc-job .role { font-weight: 700; }
+    .pages-doc .doc-job .meta { color: var(--ink-mute); font-size: 9.5px; }
+    .pages-doc .typed::after {
+      content: '▍';
+      color: var(--moss);
+      animation: dchat-blink 0.9s steps(1) infinite;
+      margin-left: 1px;
+    }
+    .pages-doc .typed.done::after { display: none; }
+    .save-toast {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(31, 58, 46, 0.94);
+      color: var(--paper);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Maps window */
+    #win-maps { width: 60%; height: 65%; left: 18%; top: 12%; }
+    .maps-body { display: flex; height: 100%; background: #fff; }
+    .maps-canvas {
+      flex: 1;
+      position: relative;
+      background: linear-gradient(140deg, #EFE9DC 0%, #E2D9C2 100%);
+      overflow: hidden;
+    }
+    .maps-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .map-pin {
+      position: absolute;
+      width: 22px; height: 28px;
+      transform: translate(-50%, -100%) scale(0);
+      transform-origin: 50% 100%;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+    }
+    .map-pin.user {
+      width: 14px; height: 14px;
+      background: #4A90E2;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.25);
+    }
+    .map-pin .pin-shape {
+      width: 100%; height: 100%;
+      background: var(--forest);
+      border: 2px solid #fff;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-pin .pin-num {
+      transform: rotate(45deg);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .maps-list {
+      width: 38%;
+      border-left: 1px solid var(--line);
+      padding: 14px 16px;
+      background: var(--paper-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .maps-list h4 {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .maps-result {
+      padding: 8px 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .maps-result .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      background: var(--forest);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .maps-result .name { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+    .maps-result .dist { font-size: 10px; color: var(--ink-mute); margin-top: 2px; padding-left: 24px; }
+    .maps-result .email { font-size: 10px; color: var(--moss); margin-top: 1px; padding-left: 24px; }
+    .maps-result.is-highlight { border-color: var(--moss); box-shadow: 0 0 0 3px rgba(91, 138, 110, 0.14); }
+
+    /* Mail window */
+    #win-mail { width: 65%; height: 70%; left: 16%; top: 9%; }
+    .mail-body { display: flex; height: 100%; background: #fff; }
+    .mail-list {
+      width: 36%;
+      border-right: 1px solid var(--line);
+      background: var(--paper-soft);
+      overflow: hidden;
+      padding: 10px 0;
+    }
+    .mail-list h4 {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      font-weight: 600;
+      padding: 0 14px 8px;
+    }
+    .mail-item {
+      padding: 8px 14px;
+      border-left: 3px solid transparent;
+      cursor: default;
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+    .mail-item.is-active { background: rgba(91, 138, 110, 0.10); border-left-color: var(--moss); }
+    .mail-item.is-sent { opacity: 0.45; }
+    .mail-item .to { font-size: 10.5px; color: var(--ink-soft); }
+    .mail-item .subj { font-size: 11.5px; font-weight: 600; color: var(--ink); margin-top: 1px; }
+    .mail-item .preview { font-size: 10px; color: var(--ink-mute); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mail-compose {
+      flex: 1;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mail-field {
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    .mail-field .lbl { color: var(--ink-mute); width: 50px; }
+    .mail-field .val { color: var(--ink); flex: 1; }
+    .mail-field .val.subj { font-weight: 600; }
+    .mail-attach {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      background: rgba(91, 138, 110, 0.10);
+      border: 1px solid rgba(91, 138, 110, 0.25);
+      border-radius: 6px;
+      font-size: 10.5px;
+      color: var(--forest);
+      align-self: flex-start;
+      opacity: 0;
+    }
+    .mail-attach::before { content: '📎'; font-size: 11px; }
+    .mail-compose .mail-text {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--ink);
+      flex: 1;
+      white-space: pre-wrap;
+    }
+    .mail-compose .mail-text.typed::after {
+      content: '▍';
+      color: var(--moss);
+      animation: dchat-blink 0.9s steps(1) infinite;
+    }
+    .mail-compose .mail-text.typed.done::after { display: none; }
+    .mail-send-btn {
+      align-self: flex-end;
+      padding: 5px 14px;
+      background: var(--forest);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      transform: scale(1);
+    }
+    .mail-send-btn.flash { background: var(--moss); }
+    .mail-counter {
+      position: absolute;
+      bottom: 12px; right: 16px;
+      font-size: 10.5px;
+      color: var(--ink-mute);
+      background: var(--paper-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      opacity: 0;
+    }
+
+    /* dock */
+    .desk-dock {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      padding: 6px 8px;
+      background: rgba(245, 241, 232, 0.32);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 14px 30px -8px rgba(20, 14, 10, 0.30);
+      z-index: 40;
+    }
+    .dock-icon {
+      position: relative;
+      width: 38px; height: 38px;
+      border: none;
+      border-radius: 9px;
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s var(--ease-out);
+      color: #fff;
+      font-size: 18px;
+    }
+    .dock-icon:hover { transform: translateY(-6px) scale(1.18); }
+    .dock-icon + .dock-icon:hover { transform: translateY(-6px) scale(1.18); }
+    .dock-icon.is-active::after {
+      content: '';
+      position: absolute;
+      bottom: -7px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 3px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(255,255,255,0.6);
+    }
+    .dock-icon[data-app="finder"]    { background: linear-gradient(160deg, #5BA8E8, #3478BC); }
+    .dock-icon[data-app="safari"]    { background: radial-gradient(circle at 50% 50%, #FFFFFF 18%, #4FC3F7 70%, #1E88E5 100%); }
+    .dock-icon[data-app="mail"]      { background: linear-gradient(160deg, #6CC2FF, #2E80F0); }
+    .dock-icon[data-app="pages"]     { background: linear-gradient(160deg, #FFA94A, #E37016); }
+    .dock-icon[data-app="maps"]      { background: linear-gradient(160deg, #6FD08C, #2A9F4F); }
+    .dock-icon[data-app="messages"]  { background: linear-gradient(160deg, #5DDB6B, #2EAE3F); }
+    .dock-icon[data-app="notes"]     { background: linear-gradient(160deg, #FFEB7A, #E5C543); }
+    .dock-icon[data-app="greencube"] {
+      background: linear-gradient(160deg, var(--moss), var(--forest));
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.3) inset, 0 4px 14px rgba(31, 58, 46, 0.4);
+    }
+    .dock-icon[data-app="greencube"]::before {
+      content: '';
+      width: 18px; height: 18px;
+      border: 1.8px solid #fff;
+      border-radius: 4px;
+    }
+    .dock-icon .glyph {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.20);
+      letter-spacing: -0.04em;
+    }
+
+    /* agent cursor */
+    .gc-cursor {
+      position: absolute;
+      width: 22px; height: 22px;
+      pointer-events: none;
+      z-index: 80;
+      opacity: 0;
+      will-change: transform;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+    }
+    .gc-cursor svg { width: 100%; height: 100%; display: block; }
+    .gc-cursor.click::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 6px; height: 6px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(91, 138, 110, 0.8);
+      animation: gc-click-ripple 0.5s var(--ease-out);
+    }
+    @keyframes gc-click-ripple {
+      from { width: 6px; height: 6px; opacity: 1; }
+      to   { width: 30px; height: 30px; opacity: 0; }
+    }
+
+    /* user-control overlay (resume button when paused) */
+    .desk-resume {
+      position: absolute;
+      bottom: 70px; right: 18px;
+      padding: 8px 16px;
+      background: rgba(31, 58, 46, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--paper);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+      pointer-events: none;
+      z-index: 70;
+    }
+    .desk-resume.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+    .desk-resume:hover { background: var(--forest); }
+
     /* ============== story — pinned scroll-driven cinematic ============== */
     .story {
       position: relative;
@@ -1087,6 +1848,25 @@
         width: 100%;
         justify-content: center;
       }
+      .demo { padding: 70px 0 80px; }
+      .demo-intro { padding: 0 22px; margin-bottom: 36px; }
+      .demo-frame {
+        width: calc(100% - 28px);
+        aspect-ratio: auto;
+        height: 540px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 220px 1fr;
+        border-radius: 16px;
+      }
+      .demo-frame::after { display: none; }
+      .demo-chat { border-bottom: 1px solid var(--line); }
+      .dchat-body { padding: 14px 14px 8px; gap: 10px; }
+      .mini-graph { width: 130px; height: 96px; }
+      #win-pages, #win-maps, #win-mail {
+        width: 90%; height: 80%; left: 5%; top: 6%;
+      }
+      .desk-dock { padding: 4px 6px; gap: 4px; bottom: 8px; }
+      .dock-icon { width: 30px; height: 30px; font-size: 14px; }
       footer { padding: 40px 0 48px; }
       footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
     }
@@ -1123,6 +1903,255 @@
       <a href="#story" class="cta-pill cta-ghost">Watch demo <span class="arrow">→</span></a>
     </div>
     <div class="cta-status" id="hero-status" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- =========== DEMO — interactive split-screen centerpiece =========== -->
+<section class="demo" id="demo" aria-label="Live GreenCube demo">
+  <div class="demo-intro">
+    <h2 class="demo-headline rv">See it <em>work</em>.</h2>
+    <p class="demo-subtext rv">One request. GreenCube handles the rest.</p>
+  </div>
+  <div class="demo-frame rv" id="demo-frame">
+
+    <!-- LEFT — chat -->
+    <div class="demo-chat">
+      <div class="dchat-head">
+        <span class="dchat-brand"><span class="dchat-mark"></span>GreenCube</span>
+        <span class="dchat-newchat">＋ New chat</span>
+      </div>
+      <div class="dchat-body" id="dchat-body">
+        <div class="mini-graph" id="mini-graph">
+          <div class="label">memory · pulling context</div>
+          <svg viewBox="0 0 180 110" preserveAspectRatio="xMidYMid meet">
+            <g>
+              <line class="edge" x1="90" y1="55" x2="34" y2="22" />
+              <line class="edge" x1="90" y1="55" x2="150" y2="20" />
+              <line class="edge" x1="90" y1="55" x2="28" y2="80" />
+              <line class="edge" x1="90" y1="55" x2="156" y2="84" />
+              <line class="edge" x1="90" y1="55" x2="68" y2="98" />
+              <line class="edge" x1="90" y1="55" x2="120" y2="100" />
+            </g>
+            <g class="node is-active" data-node="center">
+              <circle cx="90" cy="55" r="9" />
+              <text x="90" y="58" text-anchor="middle">you</text>
+            </g>
+            <g class="node" data-node="work">
+              <circle cx="34" cy="22" r="6" />
+              <text x="34" y="14" text-anchor="middle">Work history</text>
+            </g>
+            <g class="node" data-node="skills">
+              <circle cx="150" cy="20" r="6" />
+              <text x="150" y="13" text-anchor="middle">Skills</text>
+            </g>
+            <g class="node" data-node="contact">
+              <circle cx="28" cy="80" r="6" />
+              <text x="28" y="95" text-anchor="middle">Contact</text>
+            </g>
+            <g class="node" data-node="loc">
+              <circle cx="156" cy="84" r="6" />
+              <text x="156" y="99" text-anchor="middle">Madrid</text>
+            </g>
+            <g class="node" data-node="edu">
+              <circle cx="68" cy="98" r="5" />
+              <text x="58" y="108" text-anchor="end">Education</text>
+            </g>
+            <g class="node" data-node="tone">
+              <circle cx="120" cy="100" r="5" />
+              <text x="130" y="108" text-anchor="start">Tone</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="dchat-input-row">
+        <div class="dchat-input" id="dchat-input">
+          <span class="dchat-placeholder" id="dchat-placeholder">Ask GreenCube anything...</span>
+          <span class="dchat-typing" id="dchat-typing"></span><span class="dchat-caret" id="dchat-caret"></span>
+        </div>
+        <button class="dchat-send" id="dchat-send" tabindex="-1" aria-label="Send">↑</button>
+      </div>
+    </div>
+
+    <!-- RIGHT — desktop -->
+    <div class="demo-desktop" id="demo-desktop">
+      <div class="desk-wall"></div>
+
+      <div class="desk-menubar">
+        <span class="apple-mark" aria-hidden="true"></span>
+        <span class="menu-app" id="menu-app">Finder</span>
+        <span class="menu-item">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">View</span>
+        <span class="menu-item">Window</span>
+        <span class="menu-item">Help</span>
+        <span class="menu-spacer"></span>
+        <span class="menu-cube" aria-hidden="true"></span>
+        <span class="menu-clock" id="menu-clock">9:41 AM</span>
+      </div>
+
+      <!-- Pages window -->
+      <div class="dwin" id="win-pages" data-app="pages" data-title="Pages — Resume.pages">
+        <div class="dwin-titlebar" data-drag>
+          <span class="traffic">
+            <span class="t-red"   data-action="close"></span>
+            <span class="t-yellow" data-action="min"></span>
+            <span class="t-green"></span>
+          </span>
+          <span class="dwin-title">Resume — Alex Rivera.pages</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="dwin-body">
+          <div class="pages-doc">
+            <div class="doc-name typed" id="doc-name"></div>
+            <div class="doc-contact typed" id="doc-contact"></div>
+            <div class="doc-section">
+              <h3>Experience</h3>
+              <div id="doc-exp"></div>
+            </div>
+            <div class="doc-section">
+              <h3>Education</h3>
+              <div class="doc-job typed" id="doc-edu"></div>
+            </div>
+            <div class="doc-section">
+              <h3>Skills</h3>
+              <div class="doc-job typed" id="doc-skills"></div>
+            </div>
+            <div class="save-toast" id="save-toast">✓ Saved as Resume.pdf</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maps window -->
+      <div class="dwin" id="win-maps" data-app="maps" data-title="Maps">
+        <div class="dwin-titlebar" data-drag>
+          <span class="traffic">
+            <span class="t-red"   data-action="close"></span>
+            <span class="t-yellow" data-action="min"></span>
+            <span class="t-green"></span>
+          </span>
+          <span class="dwin-title">Maps — Restaurants near you</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="dwin-body maps-body">
+          <div class="maps-canvas" id="maps-canvas">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="300" fill="#EFE9DC"/>
+              <!-- water/parks -->
+              <path d="M 0 220 Q 80 200 160 230 T 400 215 L 400 300 L 0 300 Z" fill="#C8DCC4" opacity="0.55"/>
+              <circle cx="320" cy="60" r="36" fill="#C8DCC4" opacity="0.7"/>
+              <!-- streets -->
+              <g stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.95">
+                <line x1="0" y1="120" x2="400" y2="135"/>
+                <line x1="0" y1="180" x2="400" y2="170"/>
+                <line x1="120" y1="0" x2="135" y2="300"/>
+                <line x1="260" y1="0" x2="245" y2="300"/>
+                <path d="M 30 60 Q 200 90 380 50"/>
+                <path d="M 80 250 Q 220 270 360 240"/>
+              </g>
+              <g stroke="#E8E0CC" stroke-width="2" fill="none">
+                <line x1="60" y1="0"  x2="60"  y2="300"/>
+                <line x1="200" y1="0" x2="200" y2="300"/>
+                <line x1="340" y1="0" x2="340" y2="300"/>
+                <line x1="0" y1="60"  x2="400" y2="55"/>
+                <line x1="0" y1="240" x2="400" y2="245"/>
+              </g>
+            </svg>
+            <div class="map-pin user" style="left:50%;top:55%"></div>
+            <div class="map-pin" id="map-pin-1" style="left:34%;top:36%">
+              <div class="pin-shape"><span class="pin-num">1</span></div>
+            </div>
+            <div class="map-pin" id="map-pin-2" style="left:68%;top:42%">
+              <div class="pin-shape"><span class="pin-num">2</span></div>
+            </div>
+            <div class="map-pin" id="map-pin-3" style="left:54%;top:74%">
+              <div class="pin-shape"><span class="pin-num">3</span></div>
+            </div>
+          </div>
+          <div class="maps-list">
+            <h4>3 nearby</h4>
+            <div class="maps-result" id="maps-r1">
+              <div><span class="num">1</span><span class="name">La Tradición</span></div>
+              <div class="dist">0.4 km · Calle de Atocha</div>
+              <div class="email">hiring@latradicion.es</div>
+            </div>
+            <div class="maps-result" id="maps-r2">
+              <div><span class="num">2</span><span class="name">Café Aurora</span></div>
+              <div class="dist">0.7 km · Plaza Mayor</div>
+              <div class="email">jobs@cafeaurora.com</div>
+            </div>
+            <div class="maps-result" id="maps-r3">
+              <div><span class="num">3</span><span class="name">Verde Bistro</span></div>
+              <div class="dist">1.1 km · Calle Huertas</div>
+              <div class="email">work@verdebistro.es</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mail window -->
+      <div class="dwin" id="win-mail" data-app="mail" data-title="Mail">
+        <div class="dwin-titlebar" data-drag>
+          <span class="traffic">
+            <span class="t-red"   data-action="close"></span>
+            <span class="t-yellow" data-action="min"></span>
+            <span class="t-green"></span>
+          </span>
+          <span class="dwin-title">Mail — Drafts (3)</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="dwin-body mail-body">
+          <div class="mail-list">
+            <h4>Drafts</h4>
+            <div class="mail-item" id="mail-i1">
+              <div class="to">hiring@latradicion.es</div>
+              <div class="subj">Application — server / front-of-house</div>
+              <div class="preview">Hi La Tradición team —</div>
+            </div>
+            <div class="mail-item" id="mail-i2">
+              <div class="to">jobs@cafeaurora.com</div>
+              <div class="subj">Application — server / front-of-house</div>
+              <div class="preview">Hi Café Aurora team —</div>
+            </div>
+            <div class="mail-item" id="mail-i3">
+              <div class="to">work@verdebistro.es</div>
+              <div class="subj">Application — server / front-of-house</div>
+              <div class="preview">Hi Verde Bistro team —</div>
+            </div>
+          </div>
+          <div class="mail-compose">
+            <div class="mail-field"><span class="lbl">To:</span><span class="val" id="mail-to">hiring@latradicion.es</span></div>
+            <div class="mail-field"><span class="lbl">Subject:</span><span class="val subj" id="mail-subj">Application — server / front-of-house</span></div>
+            <div class="mail-attach" id="mail-attach">Resume.pdf · 84 KB</div>
+            <div class="mail-text typed" id="mail-text"></div>
+            <button class="mail-send-btn" id="mail-send">Send</button>
+          </div>
+          <div class="mail-counter" id="mail-counter">3 of 3 sent</div>
+        </div>
+      </div>
+
+      <!-- Dock -->
+      <div class="desk-dock" id="desk-dock">
+        <button class="dock-icon" data-app="finder" tabindex="-1" aria-label="Finder"><span class="glyph">F</span></button>
+        <button class="dock-icon" data-app="safari" tabindex="-1" aria-label="Safari"><span class="glyph"></span></button>
+        <button class="dock-icon" data-app="mail" tabindex="-1" aria-label="Mail"><span class="glyph">M</span></button>
+        <button class="dock-icon" data-app="pages" tabindex="-1" aria-label="Pages"><span class="glyph">P</span></button>
+        <button class="dock-icon" data-app="maps" tabindex="-1" aria-label="Maps"><span class="glyph">⟟</span></button>
+        <button class="dock-icon" data-app="messages" tabindex="-1" aria-label="Messages"><span class="glyph">◴</span></button>
+        <button class="dock-icon" data-app="notes" tabindex="-1" aria-label="Notes"><span class="glyph">N</span></button>
+        <button class="dock-icon is-active" data-app="greencube" tabindex="-1" aria-label="GreenCube"></button>
+      </div>
+
+      <!-- Agent cursor -->
+      <div class="gc-cursor" id="gc-cursor" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 3 L3 18 L7.5 14 L10 19.5 L12.5 18.5 L10 13 L16 13 Z"
+                fill="#1F3A2E" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Resume button -->
+      <button class="desk-resume" id="desk-resume" tabindex="-1">▶ Resume demo</button>
+    </div>
   </div>
 </section>
 
@@ -1348,6 +2377,7 @@
     started = true;
     document.body.classList.add('fonts-ready');
     runIntro();
+    initDemo();
     initStory();
     initManifesto();
   };
@@ -1468,6 +2498,558 @@
     });
   }
   wireForm('hero-form', 'hero-status');
+
+  // ====================================================================
+  //  DEMO — interactive split-screen centerpiece.
+  //
+  //  Auto-plays a ~60s GSAP timeline showing GreenCube taking one user
+  //  request and using three apps (Pages, Maps, Mail) to fulfill it.
+  //  Pauses on user interaction with the desktop, restarts after idle.
+  //  Lazy-started + paused-when-offscreen via IntersectionObserver.
+  // ====================================================================
+  function initDemo() {
+    const frame   = document.getElementById('demo-frame');
+    const desktop = document.getElementById('demo-desktop');
+    if (!frame || !desktop) return;
+
+    // ---- chat refs ----
+    const chatBody    = document.getElementById('dchat-body');
+    const placeholder = document.getElementById('dchat-placeholder');
+    const typing      = document.getElementById('dchat-typing');
+    const caret       = document.getElementById('dchat-caret');
+    const sendBtn     = document.getElementById('dchat-send');
+    const miniGraph   = document.getElementById('mini-graph');
+
+    // ---- desktop refs ----
+    const cursor    = document.getElementById('gc-cursor');
+    const menuApp   = document.getElementById('menu-app');
+    const menuClock = document.getElementById('menu-clock');
+    const winPages  = document.getElementById('win-pages');
+    const winMaps   = document.getElementById('win-maps');
+    const winMail   = document.getElementById('win-mail');
+    const dock      = document.getElementById('desk-dock');
+    const resumeBtn = document.getElementById('desk-resume');
+
+    // ---- live clock ----
+    function tickClock() {
+      const d = new Date();
+      const h = d.getHours();
+      const m = String(d.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = ((h + 11) % 12) + 1;
+      menuClock.textContent = h12 + ':' + m + ' ' + ampm;
+    }
+    tickClock();
+    setInterval(tickClock, 30000);
+
+    // ---- window dragging ----
+    function makeDraggable(win) {
+      const bar = win.querySelector('[data-drag]');
+      if (!bar) return;
+      let startX, startY, baseX, baseY, dragging = false;
+      bar.addEventListener('mousedown', (e) => {
+        if (e.target.closest('[data-action]')) return;
+        bringToFront(win);
+        dragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const r = win.getBoundingClientRect();
+        const pr = desktop.getBoundingClientRect();
+        baseX = r.left - pr.left;
+        baseY = r.top - pr.top;
+        win.style.left = baseX + 'px';
+        win.style.top  = baseY + 'px';
+        win.style.right = 'auto';
+        win.style.bottom = 'auto';
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        win.style.left = (baseX + e.clientX - startX) + 'px';
+        win.style.top  = Math.max(28, baseY + e.clientY - startY) + 'px';
+      });
+      window.addEventListener('mouseup', () => { dragging = false; });
+    }
+    [winPages, winMaps, winMail].forEach(makeDraggable);
+
+    function bringToFront(win) {
+      [winPages, winMaps, winMail].forEach(w => w.classList.remove('is-front'));
+      win.classList.add('is-front');
+      menuApp.textContent = win.dataset.app === 'pages' ? 'Pages'
+                          : win.dataset.app === 'maps'  ? 'Maps'
+                          : win.dataset.app === 'mail'  ? 'Mail' : 'Finder';
+    }
+
+    // ---- traffic-light handlers ----
+    desktop.querySelectorAll('[data-action="close"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const win = e.currentTarget.closest('.dwin');
+        closeWindow(win);
+      });
+    });
+    desktop.querySelectorAll('[data-action="min"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const win = e.currentTarget.closest('.dwin');
+        minimizeWindow(win);
+      });
+    });
+
+    function openWindow(win) {
+      win.style.display = 'flex';
+      bringToFront(win);
+      if (window.gsap) {
+        gsap.fromTo(win,
+          { scale: 0.86, opacity: 0, y: 12 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.42, ease: 'expo.out' });
+      }
+      win.classList.add('is-open');
+    }
+    function closeWindow(win) {
+      if (window.gsap) {
+        gsap.to(win, {
+          scale: 0.92, opacity: 0, duration: 0.25, ease: 'power2.in',
+          onComplete: () => { win.style.display = 'none'; win.classList.remove('is-open'); }
+        });
+      } else {
+        win.style.display = 'none';
+        win.classList.remove('is-open');
+      }
+    }
+    function minimizeWindow(win) {
+      if (window.gsap) {
+        gsap.to(win, {
+          scale: 0.1, opacity: 0, y: 200, duration: 0.45, ease: 'power2.in',
+          onComplete: () => {
+            win.style.display = 'none';
+            win.classList.remove('is-open');
+            gsap.set(win, { scale: 1, opacity: 1, y: 0 });
+          }
+        });
+      } else {
+        win.style.display = 'none';
+        win.classList.remove('is-open');
+      }
+    }
+
+    // ---- dock click → open app ----
+    dock.querySelectorAll('.dock-icon').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const app = icon.dataset.app;
+        const map = { pages: winPages, maps: winMaps, mail: winMail };
+        const w = map[app];
+        if (w && !w.classList.contains('is-open')) openWindow(w);
+        else if (w) bringToFront(w);
+        userTookOver();
+      });
+    });
+
+    // ---- agent cursor helper ----
+    function moveCursorTo(targetEl, opts = {}) {
+      return new Promise(resolve => {
+        if (!targetEl || !window.gsap) return resolve();
+        const dr = desktop.getBoundingClientRect();
+        const tr = targetEl.getBoundingClientRect();
+        const x = tr.left - dr.left + tr.width / 2;
+        const y = tr.top  - dr.top  + tr.height / 2;
+        gsap.to(cursor, {
+          x: x - 11, y: y - 11,
+          duration: opts.duration || 0.85,
+          ease: 'power2.inOut',
+          onComplete: resolve
+        });
+      });
+    }
+    function clickPulse() {
+      cursor.classList.remove('click');
+      void cursor.offsetWidth;
+      cursor.classList.add('click');
+    }
+    function showCursor() { gsap.to(cursor, { opacity: 1, duration: 0.3 }); }
+    function hideCursor() { gsap.to(cursor, { opacity: 0, duration: 0.3 }); }
+
+    // ---- typing helpers ----
+    function typeInto(el, text, speed = 60) {
+      return new Promise(resolve => {
+        let i = 0;
+        el.textContent = '';
+        function step() {
+          if (i >= text.length) return resolve();
+          el.textContent += text[i++];
+          setTimeout(step, speed + Math.random() * 30);
+        }
+        step();
+      });
+    }
+
+    // ---- chat message helpers ----
+    function appendUserMsg(text) {
+      const div = document.createElement('div');
+      div.className = 'dchat-msg user';
+      div.textContent = text;
+      chatBody.appendChild(div);
+      gsap.to(div, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' });
+      return div;
+    }
+    function appendAssistantHeader(label) {
+      const wrap = document.createElement('div');
+      wrap.className = 'dchat-msg assistant';
+      wrap.innerHTML = '<div class="meta">' + label + '</div><div class="body"></div>';
+      chatBody.appendChild(wrap);
+      gsap.to(wrap, { opacity: 1, duration: 0.4, ease: 'expo.out' });
+      return wrap;
+    }
+    function appendChips(parent, chips) {
+      const row = document.createElement('div');
+      row.className = 'agent-row';
+      parent.appendChild(row);
+      chips.forEach((c, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'agent-chip';
+        chip.innerHTML = '<span class="dot"></span><span class="glyph">' + c.glyph + '</span>' + c.label;
+        row.appendChild(chip);
+        gsap.to(chip, {
+          opacity: 1, y: 0, duration: 0.45, delay: 0.15 + i * 0.18, ease: 'expo.out'
+        });
+      });
+    }
+
+    function clearChat() {
+      [...chatBody.querySelectorAll('.dchat-msg')].forEach(n => n.remove());
+      typing.textContent = '';
+      caret.classList.remove('is-on');
+      sendBtn.classList.remove('is-active');
+      placeholder.style.display = '';
+      miniGraph.style.opacity = 0;
+    }
+
+    function resetDesktop() {
+      [winPages, winMaps, winMail].forEach(w => {
+        gsap.set(w, { x: 0, y: 0, scale: 1, opacity: 1 });
+        w.style.display = 'none';
+        w.classList.remove('is-open', 'is-front');
+        // reset window content
+      });
+      // Pages content
+      ['doc-name','doc-contact','doc-edu','doc-skills'].forEach(id => {
+        const e = document.getElementById(id);
+        if (e) { e.textContent = ''; e.classList.remove('done'); e.classList.add('typed'); }
+      });
+      document.getElementById('doc-exp').innerHTML = '';
+      document.getElementById('save-toast').style.opacity = 0;
+      // Maps reset
+      ['map-pin-1','map-pin-2','map-pin-3'].forEach(id => {
+        gsap.set('#' + id, { scale: 0 });
+      });
+      ['maps-r1','maps-r2','maps-r3'].forEach(id => {
+        const e = document.getElementById(id);
+        gsap.set(e, { opacity: 0, y: 6 });
+        e.classList.remove('is-highlight');
+      });
+      // Mail reset
+      ['mail-i1','mail-i2','mail-i3'].forEach(id => {
+        const e = document.getElementById(id);
+        gsap.set(e, { opacity: 0, x: -6 });
+        e.classList.remove('is-active', 'is-sent');
+      });
+      const mt = document.getElementById('mail-text');
+      mt.textContent = '';
+      mt.classList.add('typed'); mt.classList.remove('done');
+      document.getElementById('mail-attach').style.opacity = 0;
+      document.getElementById('mail-counter').style.opacity = 0;
+      document.getElementById('mail-to').textContent = 'hiring@latradicion.es';
+      gsap.set(cursor, { x: desktop.clientWidth - 80, y: desktop.clientHeight - 80, opacity: 0 });
+    }
+
+    // ---- demo content ----
+    const PROMPT = 'make my resume and find nearest restaurants and send it to them';
+    const RESUME = {
+      name: 'Alex Rivera',
+      contact: 'alex.rivera@gmail.com  ·  +34 612 88 41 09  ·  Madrid, Spain',
+      jobs: [
+        { role: 'Server', company: 'Bar Tomate, Madrid', when: '2024 — present',
+          bullet: 'Lunch + dinner service, 60-cover dining room. Trained two new hires.' },
+        { role: 'Barista', company: 'Toma Café 2', when: '2023 — 2024',
+          bullet: 'Specialty coffee, morning rush. POS + inventory.' },
+        { role: 'Marketing intern', company: 'Local design studio', when: 'Summer 2022',
+          bullet: 'Social copy, light Photoshop, event support.' },
+      ],
+      edu: 'Universidad Complutense de Madrid — BA Communication (in progress)',
+      skills: 'Customer service · Spanish/English bilingual · POS systems · Microsoft Office · Calm under pressure'
+    };
+    const RESTAURANTS = [
+      { id: 1, name: 'La Tradición', email: 'hiring@latradicion.es' },
+      { id: 2, name: 'Café Aurora',  email: 'jobs@cafeaurora.com' },
+      { id: 3, name: 'Verde Bistro', email: 'work@verdebistro.es' },
+    ];
+    function emailBody(name) {
+      return 'Hi ' + name + ' team — I live a few minutes from your restaurant in Madrid and would love to apply for any open server or front-of-house roles. Resume attached. Thanks for considering me. — Alex';
+    }
+
+    // ---- the run loop ----
+    let aborted = false;
+    let running = false;
+    let idleTimer = null;
+
+    async function sleep(ms) {
+      return new Promise(resolve => {
+        const t = setTimeout(resolve, ms);
+        sleep._t = t;
+      });
+    }
+
+    async function runDemo() {
+      if (running) return;
+      running = true;
+      aborted = false;
+      clearChat();
+      resetDesktop();
+
+      // ===== Phase 1 — user types =====
+      caret.classList.add('is-on');
+      placeholder.style.display = 'none';
+      sendBtn.classList.remove('is-active');
+      let i = 0;
+      while (i < PROMPT.length) {
+        if (aborted) return cleanup();
+        typing.textContent += PROMPT[i++];
+        await sleep(45 + Math.random() * 40);
+      }
+      sendBtn.classList.add('is-active');
+      await sleep(450);
+      if (aborted) return cleanup();
+
+      // send → user bubble
+      const sent = typing.textContent;
+      typing.textContent = '';
+      placeholder.style.display = '';
+      caret.classList.remove('is-on');
+      sendBtn.classList.remove('is-active');
+      appendUserMsg(sent);
+      await sleep(700);
+
+      // ===== Phase 2 — memory pull =====
+      if (aborted) return cleanup();
+      const a1 = appendAssistantHeader('GreenCube');
+      const a1body = a1.querySelector('.body');
+      a1body.innerHTML = '<em>Pulling from your memory…</em>';
+      gsap.to(miniGraph, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' });
+      await sleep(900);
+      // light up two nodes
+      ['work','loc'].forEach((k, i) => {
+        const n = miniGraph.querySelector('[data-node="'+k+'"]');
+        if (n) setTimeout(() => n.classList.add('is-active'), i * 280);
+      });
+      await sleep(2400);
+      gsap.to(miniGraph, { opacity: 0, y: 8, scale: 0.96, duration: 0.5, ease: 'power2.in' });
+
+      // ===== Phase 3 — agents spawn =====
+      if (aborted) return cleanup();
+      const a2 = appendAssistantHeader('Spinning up your team');
+      const a2body = a2.querySelector('.body');
+      a2body.textContent = 'Four agents, each with a job:';
+      appendChips(a2body, [
+        { glyph: '◌', label: 'Planner' },
+        { glyph: '✎', label: 'Writer' },
+        { glyph: '◎', label: 'Researcher' },
+        { glyph: '➤', label: 'Operator' },
+      ]);
+      await sleep(2200);
+
+      // ===== Phase 4 — Pages / resume =====
+      if (aborted) return cleanup();
+      showCursor();
+      await moveCursorTo(dock.querySelector('[data-app="pages"]'));
+      clickPulse();
+      await sleep(220);
+      openWindow(winPages);
+      await sleep(700);
+      await moveCursorTo(winPages.querySelector('.pages-doc'), { duration: 0.6 });
+
+      // type the resume
+      await typeInto(document.getElementById('doc-name'), RESUME.name, 35);
+      document.getElementById('doc-name').classList.add('done');
+      if (aborted) return cleanup();
+      await typeInto(document.getElementById('doc-contact'), RESUME.contact, 14);
+      document.getElementById('doc-contact').classList.add('done');
+
+      const expHost = document.getElementById('doc-exp');
+      for (const job of RESUME.jobs) {
+        if (aborted) return cleanup();
+        const j = document.createElement('div');
+        j.className = 'doc-job typed';
+        expHost.appendChild(j);
+        await typeInto(j, job.role + ' — ' + job.company + '  ·  ' + job.when + '\n' + job.bullet, 9);
+        j.classList.add('done');
+      }
+      await typeInto(document.getElementById('doc-edu'), RESUME.edu, 12);
+      document.getElementById('doc-edu').classList.add('done');
+      await typeInto(document.getElementById('doc-skills'), RESUME.skills, 10);
+      document.getElementById('doc-skills').classList.add('done');
+
+      // save toast
+      const toast = document.getElementById('save-toast');
+      gsap.to(toast, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' });
+      await sleep(900);
+      gsap.to(toast, { opacity: 0, duration: 0.4 });
+      // minimize Pages
+      await sleep(400);
+      minimizeWindow(winPages);
+      await sleep(550);
+
+      // ===== Phase 5 — Maps =====
+      if (aborted) return cleanup();
+      await moveCursorTo(dock.querySelector('[data-app="maps"]'));
+      clickPulse();
+      await sleep(220);
+      openWindow(winMaps);
+      await sleep(800);
+
+      // pins drop
+      for (let p = 1; p <= 3; p++) {
+        gsap.to('#map-pin-' + p, { scale: 1, duration: 0.35, ease: 'back.out(2.6)' });
+        gsap.to('#maps-r' + p,   { opacity: 1, y: 0, duration: 0.35, delay: 0.1 });
+        await sleep(450);
+      }
+      // highlight email column
+      for (let p = 1; p <= 3; p++) {
+        const el = document.getElementById('maps-r' + p);
+        await moveCursorTo(el.querySelector('.email'), { duration: 0.55 });
+        el.classList.add('is-highlight');
+        await sleep(300);
+      }
+      await sleep(500);
+      minimizeWindow(winMaps);
+      await sleep(550);
+
+      // ===== Phase 6 — Mail =====
+      if (aborted) return cleanup();
+      await moveCursorTo(dock.querySelector('[data-app="mail"]'));
+      clickPulse();
+      await sleep(220);
+      openWindow(winMail);
+      await sleep(700);
+
+      // reveal three drafts
+      ['mail-i1','mail-i2','mail-i3'].forEach((id, i) => {
+        gsap.to('#' + id, { opacity: 1, x: 0, duration: 0.35, delay: i * 0.18 });
+      });
+      await sleep(800);
+
+      const mailTo   = document.getElementById('mail-to');
+      const mailText = document.getElementById('mail-text');
+      const attach   = document.getElementById('mail-attach');
+
+      for (let r = 0; r < RESTAURANTS.length; r++) {
+        if (aborted) return cleanup();
+        const rest = RESTAURANTS[r];
+        // mark this draft active
+        ['mail-i1','mail-i2','mail-i3'].forEach((id, i) => {
+          document.getElementById(id).classList.toggle('is-active', i === r);
+        });
+        mailTo.textContent = rest.email;
+        mailText.textContent = '';
+        mailText.classList.add('typed'); mailText.classList.remove('done');
+        gsap.to(attach, { opacity: 1, duration: 0.3 });
+
+        await typeInto(mailText, emailBody(rest.name), r === 0 ? 14 : 8);
+        mailText.classList.add('done');
+        await sleep(280);
+        // click send
+        const sb = document.getElementById('mail-send');
+        await moveCursorTo(sb, { duration: 0.5 });
+        clickPulse();
+        sb.classList.add('flash');
+        await sleep(220);
+        sb.classList.remove('flash');
+        // mark item sent
+        const item = document.getElementById('mail-i' + (r + 1));
+        item.classList.remove('is-active');
+        item.classList.add('is-sent');
+        await sleep(250);
+      }
+      // counter
+      const counter = document.getElementById('mail-counter');
+      counter.textContent = '3 of 3 sent';
+      gsap.to(counter, { opacity: 1, duration: 0.4 });
+      await sleep(1100);
+      hideCursor();
+
+      // ===== Phase 7 — done message in chat =====
+      if (aborted) return cleanup();
+      const a3 = appendAssistantHeader('Done');
+      a3.querySelector('.body').innerHTML = 'Resume sent to <em>3 restaurants</em> near you. A copy is in your Documents folder.';
+      await sleep(2400);
+
+      // ===== Phase 8 — reset =====
+      gsap.to(counter, { opacity: 0, duration: 0.4 });
+      [winPages, winMaps, winMail].forEach(w => {
+        if (w.classList.contains('is-open')) closeWindow(w);
+      });
+      await sleep(900);
+      running = false;
+      if (!aborted) {
+        // loop
+        await sleep(1500);
+        runDemo();
+      }
+    }
+
+    function cleanup() {
+      running = false;
+      hideCursor();
+    }
+
+    // ---- pause / resume on user interaction ----
+    let userActive = false;
+    function userTookOver() {
+      if (!running && !userActive) return;
+      userActive = true;
+      aborted = true;
+      hideCursor();
+      clearTimeout(sleep._t);
+      resumeBtn.classList.add('is-visible');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        // auto-restart after 10s of no further movement
+        userActive = false;
+        resumeBtn.classList.remove('is-visible');
+        runDemo();
+      }, 10000);
+    }
+    // Pause on click anywhere in the desktop. (mousemove pause was too eager
+    // and fought the Resume button — click is a clear user-intent signal.)
+    desktop.addEventListener('mousedown', (e) => {
+      if (e.target === cursor || cursor.contains(e.target)) return;
+      if (e.target === resumeBtn) return;
+      userTookOver();
+    });
+    resumeBtn.addEventListener('click', () => {
+      clearTimeout(idleTimer);
+      userActive = false;
+      resumeBtn.classList.remove('is-visible');
+      runDemo();
+    });
+
+    // ---- IntersectionObserver: lazy start + pause when offscreen ----
+    let started = false;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!started) {
+            started = true;
+            setTimeout(() => { if (!userActive) runDemo(); }, 600);
+          } else if (!running && !userActive) {
+            runDemo();
+          }
+        } else {
+          aborted = true;
+          running = false;
+          hideCursor();
+          clearTimeout(sleep._t);
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(frame);
+  }
 
   // ====================================================================
   //  STORY — pinned cinematic. Whole thing is one big timeline scrubbed
