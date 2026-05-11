@@ -1284,21 +1284,36 @@
     }
     .dock-icon {
       position: relative;
-      width: 48px; height: 48px;
+      width: 54px; height: 54px;
       border: none;
-      /* macOS squircle ≈ 22.37% radius */
-      border-radius: 11px;
+      /* squircle radius ≈ 22.37% */
+      border-radius: 12px;
       cursor: default;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.18s var(--ease-out);
       color: #fff;
+      overflow: hidden;
       box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.28),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.10);
+        0 6px 14px rgba(0, 0, 0, 0.34),
+        0 2px 4px rgba(0, 0, 0, 0.18),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.16),
+        inset 0 2px 4px rgba(255, 255, 255, 0.34);
     }
-    .dock-icon:hover { transform: translateY(-9px) scale(1.22); }
+    .dock-icon::after {
+      /* glossy top highlight — gives the icon a real surface */
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      border-radius: 12px 12px 50% 50% / 12px 12px 22px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .dock-icon.gc-tile::after { display: none; }
+    .dock-icon:hover { transform: translateY(-10px) scale(1.22); }
     .dock-icon.is-active::after,
     .dock-icon.is-open::after {
       content: '';
@@ -1325,19 +1340,14 @@
         0 4px 14px rgba(31, 58, 46, 0.4);
     }
     .dock-icon svg {
-      width: 70%;
-      height: 70%;
+      width: 100%;
+      height: 100%;
       display: block;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18));
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.20));
     }
-    .dock-icon::before {
-      content: '';
-      position: absolute;
-      inset: 1px;
-      border-radius: 8px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0) 50%);
-      pointer-events: none;
-    }
+    .dock-icon.gc-tile svg { filter: none; }
 
     /* agent cursor */
     .gc-cursor {
@@ -2016,91 +2026,95 @@
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="findL" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"   stop-color="#B7DCFF"/>
-                <stop offset="0.55" stop-color="#5BA8F0"/>
-                <stop offset="1"   stop-color="#2766B8"/>
+                <stop offset="0"    stop-color="#C7E4FF"/>
+                <stop offset="0.50" stop-color="#5BA8F0"/>
+                <stop offset="1"    stop-color="#13478F"/>
               </linearGradient>
               <linearGradient id="findR" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"   stop-color="#FAFBFD"/>
-                <stop offset="1"   stop-color="#BFC6CD"/>
+                <stop offset="0" stop-color="#FFFFFF"/>
+                <stop offset="1" stop-color="#A8B0B8"/>
               </linearGradient>
             </defs>
-            <path d="M4 8 H 32 V 56 H 4 Z" fill="url(#findL)"/>
-            <path d="M32 8 H 60 V 56 H 32 Z" fill="url(#findR)"/>
-            <ellipse cx="22" cy="28" rx="2.6" ry="4.6" fill="#0F1828"/>
-            <ellipse cx="42" cy="28" rx="2.6" ry="4.6" fill="#0F1828"/>
-            <path d="M18 40 Q 32 51 46 40" stroke="#0F1828" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-            <path d="M4 8 H 60" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+            <rect x="0" y="0" width="32" height="64" fill="url(#findL)"/>
+            <rect x="32" y="0" width="32" height="64" fill="url(#findR)"/>
+            <ellipse cx="20" cy="26" rx="3" ry="6" fill="#0B1422"/>
+            <ellipse cx="44" cy="26" rx="3" ry="6" fill="#0B1422"/>
+            <path d="M16 42 Q 32 56 48 42" stroke="#0B1422" stroke-width="3.2" fill="none" stroke-linecap="round"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="safari" tabindex="-1" aria-label="Safari">
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <radialGradient id="safRim" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0"    stop-color="#fff"/>
-                <stop offset="0.74" stop-color="#fff"/>
-                <stop offset="0.80" stop-color="#A3D4F0"/>
-                <stop offset="0.94" stop-color="#3F92D2"/>
-                <stop offset="1"    stop-color="#0E5BA3"/>
+                <stop offset="0"    stop-color="#FFFFFF"/>
+                <stop offset="0.55" stop-color="#FFFFFF"/>
+                <stop offset="0.66" stop-color="#9AC9E8"/>
+                <stop offset="0.88" stop-color="#1E70BC"/>
+                <stop offset="1"    stop-color="#0C3F76"/>
               </radialGradient>
               <linearGradient id="safFace" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#EAF4FB"/>
-                <stop offset="1" stop-color="#C7DEEF"/>
+                <stop offset="1" stop-color="#B5D0E5"/>
               </linearGradient>
             </defs>
-            <circle cx="32" cy="32" r="28" fill="url(#safRim)"/>
-            <circle cx="32" cy="32" r="22" fill="url(#safFace)"/>
-            <g stroke="#1E6FB0" stroke-width="0.9" stroke-linecap="round">
-              <line x1="32" y1="6"  x2="32" y2="12"/>
-              <line x1="32" y1="58" x2="32" y2="52"/>
-              <line x1="6"  y1="32" x2="12" y2="32"/>
-              <line x1="58" y1="32" x2="52" y2="32"/>
+            <circle cx="32" cy="32" r="32" fill="url(#safRim)"/>
+            <circle cx="32" cy="32" r="23" fill="url(#safFace)"/>
+            <g stroke="#0E5BA3" stroke-width="1.1" stroke-linecap="round">
+              <line x1="32" y1="3"  x2="32" y2="10"/>
+              <line x1="32" y1="61" x2="32" y2="54"/>
+              <line x1="3"  y1="32" x2="10" y2="32"/>
+              <line x1="61" y1="32" x2="54" y2="32"/>
             </g>
-            <g stroke="#1E6FB0" stroke-width="0.5" opacity="0.55">
-              <line x1="46" y1="11" x2="44" y2="14"/>
-              <line x1="53" y1="18" x2="50" y2="20"/>
-              <line x1="11" y1="46" x2="14" y2="44"/>
-              <line x1="18" y1="53" x2="20" y2="50"/>
-              <line x1="18" y1="11" x2="20" y2="14"/>
-              <line x1="11" y1="18" x2="14" y2="20"/>
-              <line x1="46" y1="53" x2="44" y2="50"/>
-              <line x1="53" y1="46" x2="50" y2="44"/>
+            <g stroke="#0E5BA3" stroke-width="0.7" opacity="0.6">
+              <line x1="46" y1="9"  x2="43" y2="13"/>
+              <line x1="55" y1="18" x2="51" y2="20"/>
+              <line x1="9"  y1="46" x2="13" y2="43"/>
+              <line x1="18" y1="55" x2="20" y2="51"/>
+              <line x1="18" y1="9"  x2="20" y2="13"/>
+              <line x1="9"  y1="18" x2="13" y2="20"/>
+              <line x1="46" y1="55" x2="43" y2="51"/>
+              <line x1="55" y1="46" x2="51" y2="44"/>
             </g>
-            <path d="M32 13 L37 32 L32 51 L27 32 Z" fill="#E13A2E"/>
-            <path d="M32 13 L37 32 L32 32 Z" fill="#FAFBFD"/>
-            <circle cx="32" cy="32" r="2.2" fill="#fff" stroke="#1E6FB0" stroke-width="0.7"/>
+            <path d="M32 10 L38 32 L32 54 L26 32 Z" fill="#E13A2E"/>
+            <path d="M32 10 L38 32 L32 32 Z" fill="#F5F8FA"/>
+            <circle cx="32" cy="32" r="2.4" fill="#fff" stroke="#0E5BA3" stroke-width="0.8"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="mail" tabindex="-1" aria-label="Mail">
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="mailBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"   stop-color="#BFE6FF"/>
-                <stop offset="0.45" stop-color="#67ADF5"/>
-                <stop offset="1"   stop-color="#1F6BDB"/>
+                <stop offset="0"    stop-color="#D6F0FF"/>
+                <stop offset="0.40" stop-color="#5DA9F5"/>
+                <stop offset="1"    stop-color="#0E4DAF"/>
               </linearGradient>
             </defs>
-            <rect x="4" y="14" width="56" height="36" rx="5" fill="url(#mailBg)"/>
-            <path d="M4 16 L32 38 L60 16" stroke="#fff" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-            <path d="M4 50 L24 32 M60 50 L40 32" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-            <rect x="4" y="14" width="56" height="3" fill="rgba(255,255,255,0.30)"/>
+            <rect x="0" y="0" width="64" height="64" fill="url(#mailBg)"/>
+            <rect x="6" y="14" width="52" height="36" rx="4" fill="rgba(255,255,255,0.95)"/>
+            <path d="M6 16 L32 38 L58 16" stroke="#1F6BDB" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M6 48 L24 32 M58 48 L40 32" stroke="rgba(31,107,219,0.50)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="pages" tabindex="-1" aria-label="Pages">
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
+              <linearGradient id="pagesBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFB964"/>
+                <stop offset="1" stop-color="#D85E04"/>
+              </linearGradient>
               <linearGradient id="pagesPaper" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFF1DC"/>
-                <stop offset="1" stop-color="#FFFAF0"/>
+                <stop offset="0" stop-color="#FFFFFF"/>
+                <stop offset="1" stop-color="#FFE9C7"/>
               </linearGradient>
               <linearGradient id="pagesFold" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#FFB964"/>
+                <stop offset="0" stop-color="#FFD78B"/>
                 <stop offset="1" stop-color="#E87B17"/>
               </linearGradient>
             </defs>
-            <path d="M14 6 H 42 L 54 18 V 58 H 14 Z" fill="url(#pagesPaper)" stroke="#D4691C" stroke-width="0.8" stroke-linejoin="round"/>
-            <path d="M42 6 V 18 H 54 Z" fill="url(#pagesFold)" stroke="#D4691C" stroke-width="0.6" stroke-linejoin="round"/>
-            <g stroke="#D4691C" stroke-width="1.8" stroke-linecap="round" opacity="0.85">
+            <rect x="0" y="0" width="64" height="64" fill="url(#pagesBg)"/>
+            <path d="M14 8 H 42 L 54 20 V 56 H 14 Z" fill="url(#pagesPaper)" stroke="#9C4B0F" stroke-width="0.8" stroke-linejoin="round"/>
+            <path d="M42 8 V 20 H 54 Z" fill="url(#pagesFold)" stroke="#9C4B0F" stroke-width="0.7" stroke-linejoin="round"/>
+            <g stroke="#D45E08" stroke-width="2" stroke-linecap="round" opacity="0.95">
               <line x1="20" y1="28" x2="46" y2="28"/>
               <line x1="20" y1="35" x2="46" y2="35"/>
               <line x1="20" y1="42" x2="46" y2="42"/>
@@ -2112,73 +2126,63 @@
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="mapBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#EFF4F7"/>
-                <stop offset="1" stop-color="#A8C5D9"/>
+                <stop offset="0" stop-color="#E2EEF7"/>
+                <stop offset="1" stop-color="#7BA3C2"/>
               </linearGradient>
             </defs>
-            <rect x="2" y="2" width="60" height="60" rx="4" fill="url(#mapBg)"/>
-            <path d="M2 16 L 62 12 L 62 16 L 2 20 Z" fill="#fff" opacity="0.92"/>
-            <path d="M2 38 L 62 42 L 62 46 L 2 42 Z" fill="#fff" opacity="0.92"/>
-            <path d="M18 2 L 14 62 L 18 62 L 22 2 Z" fill="#fff" opacity="0.92"/>
-            <path d="M46 2 L 50 62 L 46 62 L 42 2 Z" fill="#fff" opacity="0.92"/>
-            <path d="M2 54 Q 32 60 62 54 L 62 62 L 2 62 Z" fill="#9CC6A8" opacity="0.55"/>
-            <ellipse cx="50" cy="14" rx="8" ry="5" fill="#9CC6A8" opacity="0.55"/>
-            <path d="M32 24 c -5 0 -9 4 -9 9 c 0 7 9 17 9 17 s 9 -10 9 -17 c 0 -5 -4 -9 -9 -9 z"
-                  fill="#E13A2E" stroke="#fff" stroke-width="1.6"/>
-            <circle cx="32" cy="33" r="3.2" fill="#fff"/>
+            <rect x="0" y="0" width="64" height="64" fill="url(#mapBg)"/>
+            <path d="M0 16 L 64 12 L 64 16 L 0 20 Z" fill="#fff" opacity="0.95"/>
+            <path d="M0 38 L 64 42 L 64 46 L 0 42 Z" fill="#fff" opacity="0.95"/>
+            <path d="M18 0 L 14 64 L 18 64 L 22 0 Z" fill="#fff" opacity="0.95"/>
+            <path d="M46 0 L 50 64 L 46 64 L 42 0 Z" fill="#fff" opacity="0.95"/>
+            <path d="M0 54 Q 32 60 64 54 L 64 64 L 0 64 Z" fill="#9CC6A8" opacity="0.55"/>
+            <ellipse cx="52" cy="10" rx="10" ry="6" fill="#9CC6A8" opacity="0.55"/>
+            <path d="M32 22 c -5.5 0 -10 4.5 -10 10 c 0 8 10 18 10 18 s 10 -10 10 -18 c 0 -5.5 -4.5 -10 -10 -10 z"
+                  fill="#E13A2E" stroke="#fff" stroke-width="2"/>
+            <circle cx="32" cy="32" r="3.6" fill="#fff"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="messages" tabindex="-1" aria-label="Messages">
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="msgBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"   stop-color="#BFF5B0"/>
-                <stop offset="0.45" stop-color="#5BD865"/>
-                <stop offset="1"   stop-color="#1E9A2A"/>
+                <stop offset="0"    stop-color="#A5F592"/>
+                <stop offset="0.45" stop-color="#3FD24A"/>
+                <stop offset="1"    stop-color="#0E821A"/>
               </linearGradient>
             </defs>
-            <path d="M11 12 C 11 7 16 4 22 4 H 42 C 49 4 53 9 53 17 V 31 C 53 39 47 43 39 43 H 26 L 12 56 L 14 44 C 12 42 11 38 11 33 V 17 Z"
-                  fill="url(#msgBg)"/>
-            <ellipse cx="32" cy="22" rx="16" ry="9" fill="rgba(255,255,255,0.22)"/>
+            <rect x="0" y="0" width="64" height="64" fill="url(#msgBg)"/>
+            <path d="M11 14 C 11 9 16 6 22 6 H 42 C 49 6 53 11 53 19 V 31 C 53 39 47 43 39 43 H 26 L 12 56 L 14 44 C 12 42 11 38 11 33 V 19 Z"
+                  fill="#fff" opacity="0.96"/>
           </svg>
         </button>
         <button class="dock-icon" data-app="notes" tabindex="-1" aria-label="Notes">
           <svg viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="notesTop" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFEC73"/>
-                <stop offset="1" stop-color="#FCD43D"/>
+                <stop offset="0" stop-color="#FFEA66"/>
+                <stop offset="1" stop-color="#F5C634"/>
               </linearGradient>
               <linearGradient id="notesBody" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFFEF2"/>
-                <stop offset="1" stop-color="#F5EFD2"/>
+                <stop offset="0" stop-color="#FFFEF5"/>
+                <stop offset="1" stop-color="#F0E8C5"/>
               </linearGradient>
             </defs>
-            <rect x="4" y="4" width="56" height="56" rx="5" fill="url(#notesBody)"/>
-            <rect x="4" y="4" width="56" height="14" rx="5" fill="url(#notesTop)"/>
-            <rect x="4" y="13" width="56" height="5" fill="url(#notesTop)"/>
-            <g stroke="#C7A53A" stroke-width="1.3" stroke-linecap="round" opacity="0.75">
-              <line x1="13" y1="28" x2="51" y2="28"/>
-              <line x1="13" y1="36" x2="51" y2="36"/>
-              <line x1="13" y1="44" x2="51" y2="44"/>
-              <line x1="13" y1="52" x2="42" y2="52"/>
+            <rect x="0" y="0" width="64" height="64" fill="url(#notesBody)"/>
+            <rect x="0" y="0" width="64" height="18" fill="url(#notesTop)"/>
+            <g stroke="#C8A234" stroke-width="1.4" stroke-linecap="round" opacity="0.85">
+              <line x1="12" y1="28" x2="52" y2="28"/>
+              <line x1="12" y1="36" x2="52" y2="36"/>
+              <line x1="12" y1="44" x2="52" y2="44"/>
+              <line x1="12" y1="52" x2="42" y2="52"/>
             </g>
           </svg>
         </button>
-        <button class="dock-icon is-active" data-app="greencube" tabindex="-1" aria-label="GreenCube">
+        <button class="dock-icon is-active gc-tile" data-app="greencube" tabindex="-1" aria-label="GreenCube">
           <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="gcBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0"   stop-color="#B5CEB6"/>
-                <stop offset="0.55" stop-color="#5B8A6E"/>
-                <stop offset="1"   stop-color="#1F3A2E"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#gcBg)"/>
-            <g transform="translate(32 34)" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" fill="none">
-              <path d="M -18 -9 L 0 -18 L 18 -9 L 18 11 L 0 20 L -18 11 Z"/>
-              <path d="M -18 -9 L 0 0 L 18 -9 M 0 0 L 0 20"/>
-            </g>
+            <rect x="0" y="0" width="64" height="64" fill="#F5F1E8"/>
+            <rect x="14" y="14" width="36" height="36" rx="7"
+                  fill="none" stroke="#2BAB35" stroke-width="4.6" stroke-linejoin="round"/>
           </svg>
         </button>
       </div>
