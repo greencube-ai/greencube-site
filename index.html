@@ -1009,26 +1009,25 @@
       background: var(--line);
       margin: 0 4px;
     }
+    .pages-toolbar .ptb-font,
+    .pages-toolbar .ptb-size {
+      color: var(--ink-soft);
+      height: 24px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
     .pages-toolbar .ptb-font {
       font-family: Georgia, serif;
       font-size: 12px;
-      color: var(--ink-soft);
       padding: 0 10px;
-      height: 24px;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      display: inline-flex;
-      align-items: center;
     }
     .pages-toolbar .ptb-size {
       font-size: 11.5px;
-      color: var(--ink-soft);
-      padding: 0 8px;
-      height: 24px;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      display: inline-flex;
-      align-items: center;
+      padding: 0 10px;
       font-variant-numeric: tabular-nums;
     }
     .pages-toolbar .ptb-spacer { flex: 1; }
@@ -2822,10 +2821,54 @@
       });
     });
 
+    // ---- scroll any scrollable ancestor so a target stays visible ----
+    function findScroller(el) {
+      let p = el && el.parentElement;
+      while (p) {
+        const s = getComputedStyle(p);
+        if ((s.overflowY === 'auto' || s.overflowY === 'scroll') && p.scrollHeight > p.clientHeight + 1) {
+          return p;
+        }
+        p = p.parentElement;
+      }
+      return null;
+    }
+    function scrollIntoSafe(el, opts) {
+      opts = opts || {};
+      const container = findScroller(el);
+      if (!container) return Promise.resolve();
+      const padding = opts.padding != null ? opts.padding : 14;
+      const cr = container.getBoundingClientRect();
+      const tr = el.getBoundingClientRect();
+      let delta = 0;
+      if (tr.top < cr.top + padding) {
+        delta = tr.top - cr.top - padding;
+      } else if (tr.bottom > cr.bottom - padding) {
+        delta = tr.bottom - cr.bottom + padding;
+      }
+      if (delta === 0) return Promise.resolve();
+      if (opts.smooth && window.gsap) {
+        return new Promise(resolve => {
+          gsap.to(container, {
+            scrollTop: container.scrollTop + delta,
+            duration: opts.duration || 0.35,
+            ease: 'power2.out',
+            onComplete: resolve,
+          });
+        });
+      }
+      container.scrollTop += delta;
+      return Promise.resolve();
+    }
+
     // ---- agent cursor helper ----
-    function moveCursorTo(targetEl, opts = {}) {
+    async function moveCursorTo(targetEl, opts) {
+      opts = opts || {};
+      if (!targetEl || !window.gsap) return;
+      // bring any scrollable container into a state where the target is visible —
+      // otherwise the cursor lands on something the viewer can't see.
+      await scrollIntoSafe(targetEl, { smooth: true, padding: 22 });
       return new Promise(resolve => {
-        if (!targetEl || !window.gsap) return resolve();
         const dr = desktop.getBoundingClientRect();
         const tr = targetEl.getBoundingClientRect();
         const x = tr.left - dr.left + tr.width / 2;
@@ -2851,9 +2894,19 @@
       return new Promise(resolve => {
         let i = 0;
         el.textContent = '';
+        let sinceLastScroll = 0;
         function step() {
-          if (i >= text.length) return resolve();
+          if (i >= text.length) {
+            // final scroll to make sure the end is visible
+            scrollIntoSafe(el, { padding: 24 });
+            return resolve();
+          }
           el.textContent += text[i++];
+          // scroll every few chars instead of every char — smoother + cheaper
+          if (++sinceLastScroll >= 4) {
+            sinceLastScroll = 0;
+            scrollIntoSafe(el, { padding: 24 });
+          }
           setTimeout(step, speed + Math.random() * 30);
         }
         step();
@@ -2867,6 +2920,7 @@
       div.textContent = text;
       chatBody.appendChild(div);
       gsap.to(div, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' });
+      scrollIntoSafe(div, { smooth: true, padding: 18 });
       return div;
     }
     function appendAssistantHeader(label) {
@@ -2875,6 +2929,7 @@
       wrap.innerHTML = '<div class="meta">' + label + '</div><div class="body"></div>';
       chatBody.appendChild(wrap);
       gsap.to(wrap, { opacity: 1, duration: 0.4, ease: 'expo.out' });
+      scrollIntoSafe(wrap, { smooth: true, padding: 18 });
       return wrap;
     }
     function appendChips(parent, chips) {
