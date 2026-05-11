@@ -46,6 +46,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true, logged: true });
   }
 
+  // 1) Notification to the inbox owner — same as before.
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -72,9 +73,45 @@ export default async function handler(req, res) {
       // Still return ok:true — we've logged the signup, don't show the user an error.
       return res.status(200).json({ ok: true, logged: true });
     }
-    return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('[waitlist] resend exception', String(e));
     return res.status(200).json({ ok: true, logged: true });
   }
+
+  // 2) Confirmation to the user. Fire-and-best-effort — if this fails, the
+  //    signup is still considered successful and we still got our notification.
+  try {
+    const confirm = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey,
+      },
+      body: JSON.stringify({
+        from: 'GreenCube <onboarding@resend.dev>',
+        to: [email],
+        reply_to: inbox,
+        subject: "You're on the list.",
+        text:
+          "Hey,\n\n" +
+          "Thanks for joining the GreenCube early access list.\n\n" +
+          "GreenCube is a personal AI that runs entirely on your computer. " +
+          "It knows you, helps you, and your data never leaves your machine.\n\n" +
+          "It's not ready yet, but it's getting close. " +
+          "When it is, you'll be the first to hear from me.\n\n" +
+          "Until then,\n" +
+          "The GreenCube team\n\n" +
+          "—\n" +
+          "greencube.app\n",
+      }),
+    });
+    if (!confirm.ok) {
+      const err = await confirm.text().catch(() => '');
+      console.error('[waitlist] confirmation send failed', confirm.status, err);
+    }
+  } catch (e) {
+    console.error('[waitlist] confirmation send exception', String(e));
+  }
+
+  return res.status(200).json({ ok: true });
 }
