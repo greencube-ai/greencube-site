@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6ZN19GZEP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6ZN19GZEP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Get GreenCube — €7, yours forever</title>
+  <meta name="description" content="GreenCube is a personal AI that runs entirely on your computer. One payment. Yours forever. Not rented." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="Get GreenCube — yours, not rented" />
+  <meta property="og:description" content="A personal AI that runs on your computer. One payment. Yours forever." />
+  <meta property="og:url" content="https://greencube.app/buy" />
+  <meta property="og:type" content="website" />
+
+  <link rel="canonical" href="https://greencube.app/buy" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Lemon Squeezy overlay. We render OUR page; the card form, payment,
+       VAT and merchant-of-record all live inside this hosted overlay.
+       We never touch card data or tax logic. -->
+  <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+
+  <style>
+    /* pre-paint: hide body until fonts load */
+    html { background: #F5F1E8; }
+    body { opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.fonts-ready { opacity: 1; }
+  </style>
+
+  <style>
+    /* ============== tokens (mirrors index.html / download.html) ============== */
+    :root {
+      --paper:      #F5F1E8;
+      --paper-soft: #FBF8F0;
+      --paper-warm: #F0ECE3;
+
+      --night:      #15281F;
+      --night-2:    #0F2118;
+      --forest:     #1F3A2E;
+      --moss:       #5B8A6E;
+      --sage:       #9CB89E;
+      --gold:       #C9A961;
+      --gold-warm:  #D4B575;
+
+      --ink:        #1A1A1A;
+      --ink-soft:   #555555;
+      --ink-mute:   #8A8275;
+      --ink-faint:  #B8B0A0;
+      --line:       #DDD8CE;
+
+      --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:  'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--sans); font-weight: 400; line-height: 1.55;
+      color: var(--ink); background: var(--paper);
+      overflow-x: hidden; min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    em { font-style: italic; }
+    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ============== header (mirrors index.html) ============== */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 32px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      border-bottom: 1px solid transparent; color: var(--ink);
+      transition: background 0.5s var(--ease-out), border-color 0.5s var(--ease-out),
+                  backdrop-filter 0.5s var(--ease-out), padding 0.5s var(--ease-out);
+    }
+    header.scrolled {
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(245, 241, 232, 0.78);
+      border-bottom-color: var(--line); padding: 14px 32px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; letter-spacing: -0.005em; }
+    .brand .mark { width: 16px; height: 16px; border: 1.5px solid currentColor; border-radius: 4px; animation: brand-spin 14s linear infinite; }
+    @keyframes brand-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+    .header-nav { display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
+    .header-nav a {
+      color: var(--forest); letter-spacing: -0.005em;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px;
+      transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { color: var(--paper); background: var(--forest); border-color: var(--forest); }
+
+    /* ============== layout ============== */
+    main {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto;
+      padding: 150px 32px 110px;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center;
+    }
+    main::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 22% 22%, rgba(201, 169, 97, 0.13), transparent 60%),
+        radial-gradient(ellipse 70% 55% at 85% 95%, rgba(91, 138, 110, 0.10), transparent 60%);
+    }
+
+    /* ---- left: the pitch ---- */
+    .pitch { text-align: left; }
+    .eyebrow {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-mute); display: inline-flex; align-items: center; gap: 12px; margin-bottom: 24px;
+    }
+    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    .pitch h1 {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(46px, 6vw, 76px); line-height: 0.98; letter-spacing: -0.04em;
+      color: var(--forest); margin-bottom: 22px;
+    }
+    .pitch h1 em { color: var(--moss); }
+    .pitch .lede { font-size: 17px; line-height: 1.6; color: var(--ink-soft); max-width: 42ch; margin-bottom: 30px; }
+    .points { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+    .points li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--ink-soft); }
+    .points li .tick {
+      flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; border-radius: 50%;
+      background: rgba(91, 138, 110, 0.14); color: var(--moss);
+      display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+    }
+    .points li strong { color: var(--ink); font-weight: 600; }
+
+    /* ---- right: the order-summary card ---- */
+    .order {
+      background: var(--paper-soft); border: 1px solid var(--line); border-radius: 20px;
+      padding: 32px; box-shadow: 0 28px 64px -34px rgba(31, 58, 46, 0.34);
+    }
+    .order-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+    .order-title { font-family: var(--serif); font-size: 26px; color: var(--forest); letter-spacing: -0.01em; }
+    .order-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--moss); background: rgba(91, 138, 110, 0.12); padding: 4px 10px; border-radius: 999px;
+    }
+    .order-sub { font-size: 14px; color: var(--ink-mute); margin-bottom: 22px; }
+
+    .line { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 15px; }
+    .line .label { color: var(--ink-soft); }
+    .line .val { color: var(--ink); font-variant-numeric: tabular-nums; }
+    .line.muted .label, .line.muted .val { color: var(--ink-mute); font-size: 13.5px; }
+    .rule { height: 1px; background: var(--line); margin: 8px 0; border: 0; }
+    .total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 0 4px; }
+    .total .label { font-size: 15px; font-weight: 600; color: var(--ink); }
+    .total .amount { font-family: var(--serif); font-size: 40px; color: var(--forest); letter-spacing: -0.02em; line-height: 1; }
+    .total .amount .cur { font-size: 24px; vertical-align: 1px; margin-right: 1px; }
+    .vat-note { font-size: 12px; color: var(--ink-faint); text-align: right; margin-top: 2px; }
+
+    .buy-btn {
+      width: 100%; min-height: 60px; margin-top: 22px; padding: 0 28px; border-radius: 14px;
+      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .buy-btn:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
+    .buy-btn:active { transform: translateY(0); }
+    .buy-btn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+    .buy-btn .arrow { transition: transform 0.3s var(--ease-out); }
+    .buy-btn:hover .arrow { transform: translateX(3px); }
+
+    .buy-status { min-height: 18px; margin-top: 14px; font-size: 13px; text-align: center; color: var(--ink-mute); }
+    .buy-status.error { color: #B33A3A; }
+
+    .trust { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+    .trust .row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--ink-mute); }
+    .trust .row svg { flex: 0 0 auto; }
+    .trust a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+    .trust a:hover { color: var(--forest); }
+
+    /* ============== footer ============== */
+    footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 40px 0 48px; }
+    footer .row {
+      max-width: 1240px; margin: 0 auto; padding: 0 32px;
+      display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+      font-size: 14px; color: var(--ink-mute);
+    }
+    footer .footer-note { color: var(--ink-soft); }
+    footer .links { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer a:hover { color: var(--forest); }
+
+    @media (max-width: 880px) {
+      main { grid-template-columns: 1fr; gap: 40px; padding-top: 120px; }
+      .pitch { text-align: center; }
+      .pitch .lede { margin-left: auto; margin-right: auto; }
+      .eyebrow { justify-content: center; }
+      .points { max-width: 360px; margin: 0 auto; text-align: left; }
+      footer .row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="/" class="brand" aria-label="GreenCube home">
+    <span class="mark" aria-hidden="true"></span>
+    <span>GreenCube</span>
+  </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="how-it-works.html">Why GreenCube</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ===== left: the pitch ===== -->
+  <section class="pitch">
+    <div class="eyebrow">One payment · yours forever</div>
+    <h1>Every AI is rented.<br>This one is <em>yours.</em></h1>
+    <p class="lede">
+      GreenCube runs entirely on your computer. No subscription, no cloud, no one
+      reading your data. Pay once, own it — the way software used to work.
+    </p>
+    <ul class="points">
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Runs 100% on your machine.</strong> Your data never leaves it.</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>One payment, no subscription.</strong> Not rented, not metered.</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>A license key that's yours</strong> — activate it on your computer.</span></li>
+    </ul>
+  </section>
+
+  <!-- ===== right: order summary + buy ===== -->
+  <section class="order" aria-label="Order summary">
+    <div class="order-head">
+      <span class="order-title">GreenCube</span>
+      <span class="order-tag">Lifetime</span>
+    </div>
+    <p class="order-sub">A personal AI that lives on your computer.</p>
+
+    <div class="line">
+      <span class="label">GreenCube — lifetime license</span>
+      <span class="val">€7.00</span>
+    </div>
+    <div class="line muted">
+      <span class="label">One-time payment · no renewal</span>
+      <span class="val">—</span>
+    </div>
+
+    <hr class="rule" />
+
+    <div class="total">
+      <span class="label">Total due today</span>
+      <span class="amount"><span class="cur">€</span>7</span>
+    </div>
+    <!-- Lemon Squeezy is the merchant of record. Any applicable VAT/sales tax
+         is calculated and shown INSIDE their overlay at checkout. We do not
+         compute, display, or collect tax ourselves. -->
+    <p class="vat-note">Taxes, if any, are calculated at checkout.</p>
+
+    <button class="buy-btn" id="buy-btn" type="button">
+      <span>Get GreenCube — €7</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </button>
+    <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
+
+    <div class="trust">
+      <div class="row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B8A6E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Secure checkout handled by <strong>Lemon Squeezy</strong>, our payment provider.</span>
+      </div>
+      <div class="row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8275" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+        <span>Card details are entered on their secure form — never on this page.</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="row">
+    <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
+    <nav class="links" aria-label="Footer">
+      <a href="how-it-works.html">Why GreenCube</a>
+      <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:team@greencube.world">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // ---------- font gate (mirrors index.html / download.html) ----------
+  const start = () => document.body.classList.add('fonts-ready');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1200);
+
+  // ---------- header scrolled state ----------
+  const header = document.getElementById('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  // ====================================================================
+  //  LEMON SQUEEZY OVERLAY CHECKOUT
+  //
+  //  Architecture: we open Lemon Squeezy's HOSTED overlay (lemon.js). The
+  //  card form, payment processing, VAT/tax, and merchant-of-record all live
+  //  inside that overlay. This page writes ZERO card logic and ZERO tax
+  //  logic. We only: (1) open the overlay, (2) listen for Checkout.Success,
+  //  (3) route the buyer to our existing /download page.
+  //
+  //  TODO: paste the product's hosted checkout URL from the Lemon Squeezy
+  //  dashboard (Products → your product → "Share" / checkout link). Use the
+  //  TEST-MODE url while testing. `?embed=1` makes lemon.js open it as an
+  //  overlay instead of navigating away.
+  // ====================================================================
+  const CHECKOUT_URL = 'https://greencube.lemonsqueezy.com/checkout/buy/84235914-6cde-4105-b419-193acc2e2d98';
+
+  const buyBtn = document.getElementById('buy-btn');
+  const status = document.getElementById('buy-status');
+
+  function withEmbed(url) {
+    if (!url) return url;
+    return url + (url.includes('?') ? '&' : '?') + 'embed=1';
+  }
+
+  // Best-effort, DISPLAY-ONLY extraction of a license key from the
+  // Checkout.Success Order object. This is NOT proof of entitlement — the
+  // app validates the key against our server later. If we can't find a key
+  // here, that's fine: /download degrades gracefully to its no-key fallback
+  // ("find your key in your purchase email"), and the key also arrives by
+  // email + the dashboard redirect. So we never depend on this value.
+  function extractLicenseKey(order) {
+    if (!order || typeof order !== 'object') return '';
+    const candidates = [
+      order.license_key,
+      order.data && order.data.attributes && order.data.attributes.license_key,
+      order.attributes && order.attributes.license_key,
+      order.first_order_item && order.first_order_item.license_key,
+      order.meta && order.meta.license_key,
+    ];
+    const hit = candidates.find((v) => typeof v === 'string' && v.trim());
+    return hit ? hit.trim() : '';
+  }
+
+  function goToDownload(licenseKey) {
+    const base = '/download';
+    location.href = licenseKey
+      ? base + '?key=' + encodeURIComponent(licenseKey)
+      : base; // no-key fallback handles this cleanly
+  }
+
+  // lemon.js may finish loading and auto-init before this script runs, or
+  // after. createLemonSqueezy() is idempotent and safe to call to ensure the
+  // global is ready for our setup.
+  function initLemon() {
+    if (typeof window.createLemonSqueezy === 'function') {
+      try { window.createLemonSqueezy(); } catch (_) {}
+    }
+    if (!window.LemonSqueezy) return false;
+
+    window.LemonSqueezy.Setup({
+      eventHandler: (event) => {
+        // event = { event: 'Checkout.Success' | 'Checkout.ViewLoaded' | 'PaymentMethodUpdate.Mounted' | ..., data: {...} }
+        if (!event || event.event !== 'Checkout.Success') return;
+        const order = event.data && (event.data.order || event.data);
+        const key = extractLicenseKey(order);
+        status.textContent = 'Purchase complete — taking you to your download…';
+        // small beat so the overlay's own success state is visible first
+        setTimeout(() => goToDownload(key), 600);
+      },
+    });
+    return true;
+  }
+
+  // Try now; if lemon.js hasn't defined the global yet (defer), retry briefly.
+  let ready = initLemon();
+  if (!ready) {
+    let tries = 0;
+    const t = setInterval(() => {
+      tries += 1;
+      if (initLemon() || tries > 40) clearInterval(t); // ~4s max
+    }, 100);
+    // also try on window load as a belt-and-braces fallback
+    addEventListener('load', initLemon);
+  }
+
+  buyBtn.addEventListener('click', () => {
+    status.classList.remove('error');
+    if (!CHECKOUT_URL) {
+      status.textContent = 'Checkout link not configured yet — add the Lemon Squeezy product URL.';
+      status.classList.add('error');
+      return;
+    }
+    if (!window.LemonSqueezy || !window.LemonSqueezy.Url) {
+      // Overlay script not ready — degrade to opening the hosted page directly
+      // (still 100% Lemon Squeezy; just not as an in-page overlay).
+      status.textContent = 'Opening secure checkout…';
+      window.open(CHECKOUT_URL, '_blank', 'noopener');
+      return;
+    }
+    status.textContent = 'Opening secure checkout…';
+    window.LemonSqueezy.Url.Open(withEmbed(CHECKOUT_URL));
+    // Closing the overlay without paying simply dismisses it — lemon.js
+    // restores the page; no Checkout.Success fires, so we stay right here
+    // with no broken state. We intentionally clear the status shortly after
+    // so a dismissed overlay doesn't leave "Opening…" lingering.
+    setTimeout(() => { if (status.textContent === 'Opening secure checkout…') status.textContent = ''; }, 4000);
+  });
+})();
+</script>
+</body>
+</html>
