@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6ZN19GZEP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6ZN19GZEP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Download GreenCube — thanks for your purchase</title>
+  <meta name="description" content="Download GreenCube and grab your license key." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <!-- A post-purchase page; keep it out of search results. -->
+  <meta name="robots" content="noindex" />
+
+  <link rel="canonical" href="https://greencube.app/download" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* pre-paint: hide body until fonts load */
+    html { background: #F5F1E8; }
+    body { opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.fonts-ready { opacity: 1; }
+  </style>
+
+  <style>
+    /* ============== tokens (mirrors index.html) ============== */
+    :root {
+      --paper:      #F5F1E8;
+      --paper-soft: #FBF8F0;
+      --paper-warm: #F0ECE3;
+
+      --night:      #15281F;
+      --night-2:    #0F2118;
+      --forest:     #1F3A2E;
+      --moss:       #5B8A6E;
+      --sage:       #9CB89E;
+      --gold:       #C9A961;
+      --gold-warm:  #D4B575;
+
+      --ink:          #1A1A1A;
+      --ink-soft:     #555555;
+      --ink-mute:     #8A8275;
+      --ink-faint:    #B8B0A0;
+      --line:         #DDD8CE;
+      --on-dark:      #F5F1E8;
+
+      --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:  'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ============== reset + base ============== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    em { font-style: italic; }
+    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
+
+    .grain {
+      position: fixed; inset: 0;
+      z-index: 1; pointer-events: none;
+      opacity: 0.05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ============== header (mirrors index.html) ============== */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid transparent;
+      color: var(--ink);
+      transition: background 0.5s var(--ease-out),
+                  border-color 0.5s var(--ease-out),
+                  backdrop-filter 0.5s var(--ease-out),
+                  padding 0.5s var(--ease-out);
+    }
+    header.scrolled {
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(245, 241, 232, 0.78);
+      border-bottom-color: var(--line);
+      padding: 14px 32px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--serif); font-size: 22px; letter-spacing: -0.005em;
+    }
+    .brand .mark {
+      width: 16px; height: 16px;
+      border: 1.5px solid currentColor; border-radius: 4px;
+      animation: brand-spin 14s linear infinite;
+    }
+    @keyframes brand-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+    .header-nav { display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
+    .header-nav a {
+      color: var(--forest); letter-spacing: -0.005em;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px;
+      transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { color: var(--paper); background: var(--forest); border-color: var(--forest); }
+
+    /* ============== layout ============== */
+    main {
+      position: relative; z-index: 2;
+      max-width: 720px; margin: 0 auto;
+      padding: 168px 32px 120px;
+      text-align: center;
+    }
+    main::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 18%, rgba(201, 169, 97, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 55% at 50% 100%, rgba(91, 138, 110, 0.10), transparent 60%);
+    }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ink-mute);
+      display: inline-flex; align-items: center; gap: 12px; margin-bottom: 22px;
+    }
+    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+
+    h1 {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(48px, 8vw, 84px); line-height: 0.98;
+      letter-spacing: -0.04em; color: var(--forest);
+      margin-bottom: 18px;
+    }
+    h1 em { color: var(--moss); }
+    .lede {
+      font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55;
+      color: var(--ink-soft); max-width: 44ch; margin: 0 auto 44px;
+    }
+
+    /* ============== cards ============== */
+    .card {
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px 32px;
+      text-align: left;
+      box-shadow: 0 18px 44px -28px rgba(31, 58, 46, 0.30);
+    }
+    .card + .card { margin-top: 22px; }
+    .card-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-mute); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .card-label .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--moss);
+      box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5);
+      animation: pulse 2.6s var(--ease-out) infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
+      70% { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
+    }
+
+    /* ---- license key row ---- */
+    .key-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+    .key-box {
+      flex: 1 1 280px;
+      display: flex; align-items: center;
+      min-height: 54px; padding: 0 18px;
+      background: #fff; border: 1px solid rgba(31, 58, 46, 0.12); border-radius: 12px;
+      font-family: var(--mono); font-size: 15px; font-weight: 500;
+      color: var(--forest); letter-spacing: 0.01em;
+      word-break: break-all; user-select: all;
+      box-shadow: inset 0 1px 2px rgba(31, 58, 46, 0.04);
+    }
+    .copy-btn {
+      flex: 0 0 auto;
+      min-height: 54px; padding: 0 24px; border-radius: 12px;
+      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
+      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .copy-btn:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 14px 34px -12px rgba(31, 58, 46, 0.45); }
+    .copy-btn:active { transform: translateY(0); }
+    .copy-btn.copied { background: var(--moss); border-color: var(--moss); }
+    .key-hint { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+
+    /* ---- no-key fallback form ---- */
+    .key-form { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+    .key-form input {
+      flex: 1 1 280px; min-height: 54px; padding: 0 18px; border-radius: 12px;
+      background: #fff; border: 1px solid rgba(31, 58, 46, 0.12);
+      font-family: var(--mono); font-size: 15px; color: var(--forest);
+      outline: none; box-shadow: inset 0 1px 2px rgba(31, 58, 46, 0.04);
+      transition: border-color 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .key-form input::placeholder { font-family: var(--sans); color: var(--ink-faint); }
+    .key-form input:focus { border-color: var(--moss); box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10); }
+
+    /* ---- downloads ---- */
+    .dl-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; min-height: 60px; padding: 0 28px; border-radius: 14px;
+      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      font-size: 16px; font-weight: 600; cursor: pointer; text-align: center;
+      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .dl-primary:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
+    .dl-primary:active { transform: translateY(0); }
+    .dl-primary .os-sub { font-weight: 400; opacity: 0.7; font-size: 13px; }
+    .dl-status { margin-top: 14px; font-size: 13px; color: var(--ink-mute); min-height: 18px; }
+
+    .dl-others { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .dl-others-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 14px; }
+    .dl-list { display: flex; flex-direction: column; gap: 10px; }
+    .dl-link {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 13px 16px; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper); transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+    }
+    .dl-link:hover { border-color: var(--moss); background: #fff; }
+    .dl-link .meta { display: flex; flex-direction: column; gap: 2px; }
+    .dl-link .name { font-size: 15px; font-weight: 600; color: var(--forest); }
+    .dl-link .sub { font-size: 12px; color: var(--ink-mute); }
+    .dl-link .arrow { color: var(--moss); font-weight: 600; transition: transform 0.3s var(--ease-out); }
+    .dl-link:hover .arrow { transform: translateX(3px); }
+    .dl-link.is-current { display: none; } /* the detected OS is already the big button */
+
+    .activate-note {
+      margin-top: 36px; font-size: 13px; line-height: 1.6; color: var(--ink-mute);
+      max-width: 52ch; margin-left: auto; margin-right: auto;
+    }
+    .activate-note strong { color: var(--ink-soft); font-weight: 600; }
+
+    /* ============== footer (mirrors index.html) ============== */
+    footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--line);
+      padding: 40px 0 48px; margin-top: 40px;
+    }
+    footer .row {
+      max-width: 1240px; margin: 0 auto; padding: 0 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-mute);
+    }
+    footer .footer-note { color: var(--ink-soft); }
+    footer .links { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer a:hover { color: var(--forest); }
+
+    @media (max-width: 600px) {
+      main { padding-top: 130px; }
+      .copy-btn { flex: 1 1 100%; }
+      footer .row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="/" class="brand" aria-label="GreenCube home">
+    <span class="mark" aria-hidden="true"></span>
+    <span>GreenCube</span>
+  </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="how-it-works.html">Why GreenCube</a>
+  </nav>
+</header>
+
+<main>
+  <div class="eyebrow">Thank you</div>
+  <h1>You're <em>in.</em></h1>
+  <p class="lede">Your copy of GreenCube is downloading. Keep your license key safe — you'll need it to activate the app.</p>
+
+  <!-- ===== LICENSE KEY (shown when ?key= is present) ===== -->
+  <section class="card" id="key-card" hidden>
+    <div class="card-label"><span class="dot" aria-hidden="true"></span>Your license key</div>
+    <div class="key-row">
+      <div class="key-box" id="key-value" tabindex="0" aria-label="License key"></div>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+    </div>
+    <p class="key-hint">Paste this into GreenCube the first time you open it. We've also emailed it to you.</p>
+  </section>
+
+  <!-- ===== NO-KEY FALLBACK (shown when ?key= is absent) ===== -->
+  <section class="card" id="nokey-card" hidden>
+    <div class="card-label">Your license key</div>
+    <p class="key-hint" style="margin-top:0;margin-bottom:16px;">
+      It's in your purchase confirmation email (subject line includes your order). Already have it? Paste it here to keep it handy:
+    </p>
+    <form class="key-form" id="key-form" novalidate>
+      <input type="text" id="key-input" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" autocomplete="off" spellcheck="false" aria-label="License key" />
+      <button class="copy-btn" type="submit">Show &amp; copy</button>
+    </form>
+  </section>
+
+  <!-- ===== DOWNLOAD ===== -->
+  <section class="card" style="margin-top:22px;">
+    <div class="card-label">Download</div>
+    <button class="dl-primary" id="dl-primary" type="button">
+      <span id="dl-primary-label">Download GreenCube</span>
+    </button>
+    <p class="dl-status" id="dl-status" role="status" aria-live="polite"></p>
+
+    <div class="dl-others">
+      <div class="dl-others-label">All platforms</div>
+      <div class="dl-list" id="dl-list"><!-- populated by JS --></div>
+    </div>
+  </section>
+
+  <p class="activate-note">
+    <strong>Your key isn't validated on this page.</strong> Activation happens inside the app,
+    which verifies the key with our server. This page just hands you the key and the right download.
+  </p>
+</main>
+
+<footer>
+  <div class="row">
+    <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
+    <nav class="links" aria-label="Footer">
+      <a href="how-it-works.html">Why GreenCube</a>
+      <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:team@greencube.world">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // ---------- font gate (mirrors index.html) ----------
+  const start = () => document.body.classList.add('fonts-ready');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1200);
+
+  // ---------- header scrolled state ----------
+  const header = document.getElementById('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  // ====================================================================
+  //  DOWNLOAD TARGETS
+  //  TODO: replace `url` values with the real GitHub Release asset URLs
+  //  once binaries are published (github.com/greencube-ai/<repo>/releases).
+  //  Leaving a url empty disables auto-download for that OS and surfaces a
+  //  "downloads coming soon" message instead of a broken link.
+  // ====================================================================
+  const DOWNLOADS = {
+    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: '' },
+    mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
+    linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
+  };
+  const ORDER = ['windows', 'mac', 'linux'];
+
+  // ---------- OS detection ----------
+  // Prefer the modern, non-deprecated User-Agent Client Hints API
+  // (navigator.userAgentData.platform), which Chromium exposes as a clean
+  // platform string. Fall back to parsing navigator.platform / userAgent for
+  // Safari, Firefox, and older browsers that don't implement UA-CH.
+  function detectOS() {
+    const uaPlat = (navigator.userAgentData && navigator.userAgentData.platform || '').toLowerCase();
+    const plat = (navigator.platform || '').toLowerCase();
+    const ua = (navigator.userAgent || '').toLowerCase();
+    const hay = uaPlat + ' ' + plat + ' ' + ua;
+
+    if (/win/.test(hay)) return 'windows';
+    // iPadOS reports as "macintosh" but is touch — treat as mac for download UX.
+    if (/mac|darwin|iphone|ipad|ipod/.test(hay)) return 'mac';
+    if (/linux|android|cros|x11/.test(hay)) return 'linux';
+    return null; // unknown — no auto-download, user picks from the list
+  }
+
+  function triggerDownload(url) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.setAttribute('download', '');
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // ---------- render downloads ----------
+  const detected = detectOS();
+  const primaryBtn = document.getElementById('dl-primary');
+  const primaryLabel = document.getElementById('dl-primary-label');
+  const dlStatus = document.getElementById('dl-status');
+  const dlList = document.getElementById('dl-list');
+
+  const primaryKey = detected && DOWNLOADS[detected] ? detected : null;
+
+  if (primaryKey) {
+    const d = DOWNLOADS[primaryKey];
+    primaryLabel.innerHTML = 'Download for ' + d.name + ' &nbsp;<span class="os-sub">' + d.sub + '</span>';
+  } else {
+    // Unknown OS — point them at the list below rather than guessing.
+    primaryLabel.textContent = 'Choose your platform below';
+    primaryBtn.style.background = 'var(--paper-warm)';
+    primaryBtn.style.color = 'var(--ink-soft)';
+    primaryBtn.style.borderColor = 'var(--line)';
+    primaryBtn.style.cursor = 'default';
+  }
+
+  primaryBtn.addEventListener('click', () => {
+    if (!primaryKey) return;
+    const url = DOWNLOADS[primaryKey].url;
+    if (!url) { dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.'; return; }
+    triggerDownload(url);
+    dlStatus.textContent = 'Downloading…';
+  });
+
+  // build the "all platforms" list (everything except the detected one)
+  ORDER.forEach((key) => {
+    if (key === primaryKey) return;
+    const d = DOWNLOADS[key];
+    const a = document.createElement('a');
+    a.className = 'dl-link';
+    a.href = d.url || '#';
+    if (d.url) { a.setAttribute('download', ''); a.rel = 'noopener'; }
+    a.innerHTML =
+      '<span class="meta"><span class="name">' + d.name + '</span>' +
+      '<span class="sub">' + d.sub + (d.url ? '' : ' · coming soon') + '</span></span>' +
+      '<span class="arrow" aria-hidden="true">↓</span>';
+    if (!d.url) {
+      a.addEventListener('click', (e) => { e.preventDefault(); dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.'; });
+    }
+    dlList.appendChild(a);
+  });
+
+  // ---------- auto-start the download ----------
+  // Convenience only. A small delay lets the page paint and the key render
+  // first, so the user sees their key even as the download kicks off.
+  if (primaryKey && DOWNLOADS[primaryKey].url) {
+    dlStatus.textContent = 'Your download should start automatically…';
+    setTimeout(() => {
+      triggerDownload(DOWNLOADS[primaryKey].url);
+      dlStatus.innerHTML = 'Download started. Didn’t work? Use the button above.';
+    }, 900);
+  } else if (primaryKey) {
+    dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.';
+  }
+
+  // ====================================================================
+  //  LICENSE KEY (display + convenience ONLY)
+  //
+  //  SECURITY: the key in the URL is NOT proof of purchase. We never treat
+  //  it as such. It is shown for the user's convenience and copied into the
+  //  app. Real entitlement is verified server-side (app -> our server ->
+  //  Lemon Squeezy license API) at activation time. Do not add any "unlock"
+  //  or gated-download logic that trusts this value.
+  // ====================================================================
+  function readKey() {
+    try {
+      const k = new URLSearchParams(location.search).get('key');
+      return k ? k.trim() : '';
+    } catch (_) { return ''; }
+  }
+
+  async function copyText(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (_) {
+      // Fallback for non-secure contexts / older browsers.
+      const t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      t.remove();
+    }
+    if (btn) {
+      const prev = btn.textContent;
+      btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = prev; btn.classList.remove('copied'); }, 1800);
+    }
+  }
+
+  const keyCard = document.getElementById('key-card');
+  const nokeyCard = document.getElementById('nokey-card');
+
+  function showKey(value) {
+    document.getElementById('key-value').textContent = value;
+    keyCard.hidden = false;
+    nokeyCard.hidden = true;
+  }
+
+  const urlKey = readKey();
+  if (urlKey) {
+    showKey(urlKey);
+    document.getElementById('copy-btn').addEventListener('click', (e) =>
+      copyText(urlKey, e.currentTarget));
+  } else {
+    // Graceful degrade: no key in the URL. Don't break — offer the fallback.
+    nokeyCard.hidden = false;
+    document.getElementById('key-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = (document.getElementById('key-input').value || '').trim();
+      if (!v) { document.getElementById('key-input').focus(); return; }
+      showKey(v);
+      const btn = document.getElementById('copy-btn');
+      document.getElementById('copy-btn').addEventListener('click', (ev) =>
+        copyText(v, ev.currentTarget));
+      copyText(v, btn);
+    });
+  }
+})();
+</script>
+</body>
+</html>
