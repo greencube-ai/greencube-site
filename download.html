@@ -370,13 +370,13 @@
 
   // ====================================================================
   //  DOWNLOAD TARGETS
-  //  TODO: replace `url` values with the real GitHub Release asset URLs
-  //  once binaries are published (github.com/greencube-ai/<repo>/releases).
-  //  Leaving a url empty disables auto-download for that OS and surfaces a
-  //  "downloads coming soon" message instead of a broken link.
+  //  Hosted on the Cloudflare R2 CDN (models.greencube.app/downloads/).
+  //  Windows is live. macOS/Linux builds are not produced yet — leaving a url
+  //  empty disables auto-download for that OS and surfaces a "coming soon"
+  //  message instead of a broken link.
   // ====================================================================
   const DOWNLOADS = {
-    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: '' },
+    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/GreenCube_0.1.0_x64-setup.exe' },
     mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
     linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
   };
