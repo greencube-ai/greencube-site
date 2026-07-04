@@ -13,7 +13,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Download GreenCube — thanks for your purchase</title>
-  <meta name="description" content="Download GreenCube and grab your license key." />
+  <meta name="description" content="Download GreenCube, then open it and sign in to unlock." />
   <meta name="theme-color" content="#F5F1E8" />
   <!-- A post-purchase page; keep it out of search results. -->
   <meta name="robots" content="noindex" />
@@ -302,29 +302,7 @@
 <main>
   <div class="eyebrow">Thank you</div>
   <h1>You're <em>in.</em></h1>
-  <p class="lede">Your copy of GreenCube is downloading. Keep your license key safe — you'll need it to activate the app.</p>
-
-  <!-- ===== LICENSE KEY (shown when ?key= is present) ===== -->
-  <section class="card" id="key-card" hidden>
-    <div class="card-label"><span class="dot" aria-hidden="true"></span>Your license key</div>
-    <div class="key-row">
-      <div class="key-box" id="key-value" tabindex="0" aria-label="License key"></div>
-      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
-    </div>
-    <p class="key-hint">Paste this into GreenCube the first time you open it. We've also emailed it to you.</p>
-  </section>
-
-  <!-- ===== NO-KEY FALLBACK (shown when ?key= is absent) ===== -->
-  <section class="card" id="nokey-card" hidden>
-    <div class="card-label">Your license key</div>
-    <p class="key-hint" style="margin-top:0;margin-bottom:16px;">
-      It's in your purchase confirmation email (subject line includes your order). Already have it? Paste it here to keep it handy:
-    </p>
-    <form class="key-form" id="key-form" novalidate>
-      <input type="text" id="key-input" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" autocomplete="off" spellcheck="false" aria-label="License key" />
-      <button class="copy-btn" type="submit">Show &amp; copy</button>
-    </form>
-  </section>
+  <p class="lede">Your copy of GreenCube is downloading. Open it and sign in with the email you bought with — that unlocks it. No key to paste.</p>
 
   <!-- ===== DOWNLOAD ===== -->
   <section class="card" style="margin-top:22px;">
@@ -341,8 +319,8 @@
   </section>
 
   <p class="activate-note">
-    <strong>Your key isn't validated on this page.</strong> Activation happens inside the app,
-    which verifies the key with our server. This page just hands you the key and the right download.
+    <strong>Activation happens inside the app.</strong> Open GreenCube and sign in with the
+    same email you used at checkout — it verifies your purchase once, then runs fully offline.
   </p>
 </main>
 
@@ -468,69 +446,6 @@
     }, 900);
   } else if (primaryKey) {
     dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.';
-  }
-
-  // ====================================================================
-  //  LICENSE KEY (display + convenience ONLY)
-  //
-  //  SECURITY: the key in the URL is NOT proof of purchase. We never treat
-  //  it as such. It is shown for the user's convenience and copied into the
-  //  app. Real entitlement is verified server-side (app -> our server ->
-  //  Lemon Squeezy license API) at activation time. Do not add any "unlock"
-  //  or gated-download logic that trusts this value.
-  // ====================================================================
-  function readKey() {
-    try {
-      const k = new URLSearchParams(location.search).get('key');
-      return k ? k.trim() : '';
-    } catch (_) { return ''; }
-  }
-
-  async function copyText(text, btn) {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (_) {
-      // Fallback for non-secure contexts / older browsers.
-      const t = document.createElement('textarea');
-      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
-      document.body.appendChild(t); t.select();
-      try { document.execCommand('copy'); } catch (_) {}
-      t.remove();
-    }
-    if (btn) {
-      const prev = btn.textContent;
-      btn.textContent = 'Copied ✓'; btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = prev; btn.classList.remove('copied'); }, 1800);
-    }
-  }
-
-  const keyCard = document.getElementById('key-card');
-  const nokeyCard = document.getElementById('nokey-card');
-
-  function showKey(value) {
-    document.getElementById('key-value').textContent = value;
-    keyCard.hidden = false;
-    nokeyCard.hidden = true;
-  }
-
-  const urlKey = readKey();
-  if (urlKey) {
-    showKey(urlKey);
-    document.getElementById('copy-btn').addEventListener('click', (e) =>
-      copyText(urlKey, e.currentTarget));
-  } else {
-    // Graceful degrade: no key in the URL. Don't break — offer the fallback.
-    nokeyCard.hidden = false;
-    document.getElementById('key-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const v = (document.getElementById('key-input').value || '').trim();
-      if (!v) { document.getElementById('key-input').focus(); return; }
-      showKey(v);
-      const btn = document.getElementById('copy-btn');
-      document.getElementById('copy-btn').addEventListener('click', (ev) =>
-        copyText(v, ev.currentTarget));
-      copyText(v, btn);
-    });
   }
 })();
 </script>
