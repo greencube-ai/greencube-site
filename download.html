@@ -192,42 +192,6 @@
       100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
     }
 
-    /* ---- license key row ---- */
-    .key-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
-    .key-box {
-      flex: 1 1 280px;
-      display: flex; align-items: center;
-      min-height: 54px; padding: 0 18px;
-      background: #fff; border: 1px solid rgba(31, 58, 46, 0.12); border-radius: 12px;
-      font-family: var(--mono); font-size: 15px; font-weight: 500;
-      color: var(--forest); letter-spacing: 0.01em;
-      word-break: break-all; user-select: all;
-      box-shadow: inset 0 1px 2px rgba(31, 58, 46, 0.04);
-    }
-    .copy-btn {
-      flex: 0 0 auto;
-      min-height: 54px; padding: 0 24px; border-radius: 12px;
-      background: var(--forest); color: #fff; border: 1px solid var(--forest);
-      font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
-      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
-    }
-    .copy-btn:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 14px 34px -12px rgba(31, 58, 46, 0.45); }
-    .copy-btn:active { transform: translateY(0); }
-    .copy-btn.copied { background: var(--moss); border-color: var(--moss); }
-    .key-hint { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
-
-    /* ---- no-key fallback form ---- */
-    .key-form { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
-    .key-form input {
-      flex: 1 1 280px; min-height: 54px; padding: 0 18px; border-radius: 12px;
-      background: #fff; border: 1px solid rgba(31, 58, 46, 0.12);
-      font-family: var(--mono); font-size: 15px; color: var(--forest);
-      outline: none; box-shadow: inset 0 1px 2px rgba(31, 58, 46, 0.04);
-      transition: border-color 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
-    }
-    .key-form input::placeholder { font-family: var(--sans); color: var(--ink-faint); }
-    .key-form input:focus { border-color: var(--moss); box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10); }
-
     /* ---- downloads ---- */
     .dl-primary {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -354,11 +318,22 @@
   //  message instead of a broken link.
   // ====================================================================
   const DOWNLOADS = {
-    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.0/GreenCube_0.1.0_x64-setup.exe' },
+    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.2/GreenCube_0.1.2_x64-setup.exe' },
     mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
     linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
   };
   const ORDER = ['windows', 'mac', 'linux'];
+
+  // Keep the Windows link evergreen: the auto-update manifest on the CDN always
+  // holds the newest installer URL. If the browser can read it (CORS willing),
+  // upgrade the link in place; if not, the pinned URL above still works.
+  fetch('https://models.greencube.app/updates/latest.json', { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((m) => {
+      const url = m && m.platforms && m.platforms['windows-x86_64'] && m.platforms['windows-x86_64'].url;
+      if (url) DOWNLOADS.windows.url = url;
+    })
+    .catch(() => { /* CORS or offline — pinned fallback stays */ });
 
   // ---------- OS detection ----------
   // Prefer the modern, non-deprecated User-Agent Client Hints API
