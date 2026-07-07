@@ -30,7 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* pre-paint: hide body until fonts load */
@@ -64,6 +64,7 @@
       --on-dark-mute: rgba(245, 241, 232, 0.40);
       --on-dark-line: rgba(245, 241, 232, 0.10);
 
+      --display: 'Space Grotesk', 'Geist', -apple-system, system-ui, sans-serif;
       --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
       --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --mono:  'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
@@ -269,20 +270,18 @@
       align-items: center;
     }
     .hero h1 {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(46px, 7vw, 104px);
-      line-height: 0.98;
-      letter-spacing: -0.035em;
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(44px, 6.6vw, 96px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
       color: var(--forest);
       margin-bottom: 26px;
       white-space: nowrap;
-      text-shadow:
-        0 26px 44px rgba(31, 58, 46, 0.13),
-        0 10px 20px rgba(31, 58, 46, 0.07);
+      text-shadow: none;
     }
-    .hero h1 em { color: var(--moss); }
+    .hero h1 em { font-style: normal; color: var(--moss); }
     .hero .lede {
       font-family: var(--sans);
       font-size: clamp(16px, 1.25vw, 19px);
