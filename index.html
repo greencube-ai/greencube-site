@@ -13,12 +13,12 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>GreenCube — an AI that lives where you live</title>
-  <meta name="description" content="A personal AI that runs entirely on your computer. Chat, code, write, plan — with memory that grows, agents that collaborate, and tools that act on your machine. Local. Private. Yours." />
+  <title>GreenCube — AI that's yours, not rented</title>
+  <meta name="description" content="A private AI that runs on your computer. Your data never leaves it. No limits, no subscription — pay once, it's yours." />
   <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="GreenCube — an AI that lives where you live" />
-  <meta property="og:description" content="A personal AI that runs entirely on your computer. Local, private, yours." />
+  <meta property="og:title" content="GreenCube — AI that's yours, not rented" />
+  <meta property="og:description" content="Runs on your computer. Private, unlimited, yours. No subscription — pay once." />
   <meta property="og:url" content="https://greencube.world" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -288,9 +288,28 @@
       font-size: clamp(16px, 1.25vw, 19px);
       line-height: 1.5;
       color: var(--ink-soft);
-      max-width: 36ch;
-      margin: 0 auto 32px;
+      max-width: 38ch;
+      margin: 0 auto 26px;
       letter-spacing: -0.005em;
+    }
+
+    /* hero value chips — staccato proof, no fluff */
+    .hero-chips {
+      list-style: none; padding: 0;
+      display: inline-flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin: 0 auto 34px;
+    }
+    .hero-chips li {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 15px; border-radius: 999px;
+      border: 1px solid rgba(31, 58, 46, 0.16);
+      background: rgba(255, 255, 255, 0.55);
+      font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+      color: var(--forest); letter-spacing: -0.005em;
+    }
+    .hero-chips li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--moss); flex: 0 0 auto;
     }
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
@@ -1801,11 +1820,18 @@
 <section class="hero" id="top">
   <div class="wrap">
     <h1>
-      <span class="rv-mask"><span>Your <em>personal</em> AI.</span></span>
+      <span class="rv-mask"><span>AI that's <em>yours.</em></span></span>
+      <span class="rv-mask"><span>Not rented.</span></span>
     </h1>
-    <p class="lede rv">Lives on your computer. Built around you.</p>
+    <p class="lede rv">Runs on your computer. Your data never leaves it. No limits, no subscription.</p>
+    <ul class="hero-chips rv">
+      <li>Private</li>
+      <li>Offline</li>
+      <li>Unlimited</li>
+      <li>Pay once</li>
+    </ul>
     <div class="cta-row rv">
-      <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube</span></a>
+      <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube — €8</span></a>
       <a href="#demo" class="cta-pill cta-ghost">Watch demo <span class="arrow">→</span></a>
     </div>
   </div>
@@ -2496,6 +2522,7 @@
     const heroLines = document.querySelectorAll('.hero h1 .rv-mask > *');
     const heroTail = [
       document.querySelector('.hero .lede'),
+      document.querySelector('.hero .hero-chips'),
       document.querySelector('.hero .cta-row'),
     ].filter(Boolean);
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
