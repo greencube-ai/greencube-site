@@ -192,6 +192,24 @@
       100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
     }
 
+    /* ---- what-happens-next steps ---- */
+    .steps { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 16px; }
+    .steps li {
+      counter-increment: step;
+      position: relative; padding-left: 44px;
+      font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute; left: 0; top: 1px;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(91, 138, 110, 0.14); color: var(--moss);
+      font-size: 13px; font-weight: 700;
+    }
+    .steps li strong { color: var(--ink); font-weight: 600; }
+    .steps li em { font-style: normal; font-family: var(--mono); font-size: 12.5px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+
     /* ---- downloads ---- */
     .dl-primary {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -282,6 +300,27 @@
     </div>
   </section>
 
+  <!-- ===== WHAT HAPPENS NEXT ===== -->
+  <section class="card" style="margin-top:22px;">
+    <div class="card-label">What happens next</div>
+    <ol class="steps">
+      <li>
+        <strong>Windows will show a blue warning</strong> — “Windows protected your PC.”
+        That’s normal for new software from a small company: click
+        <em>More info</em>, then <em>Run anyway</em>. GreenCube is safe — Windows just
+        doesn’t know us yet.
+      </li>
+      <li>
+        <strong>First launch downloads GreenCube’s AI brain</strong> — a few GB, one time
+        only. Grab a coffee; the app shows progress the whole way.
+      </li>
+      <li>
+        <strong>Sign in with the email you bought with</strong> — checked once, then
+        GreenCube is yours and runs fully offline.
+      </li>
+    </ol>
+  </section>
+
   <p class="activate-note">
     <strong>Activation happens inside the app.</strong> Open GreenCube and sign in with the
     same email you used at checkout — it verifies your purchase once, then runs fully offline.
@@ -318,7 +357,7 @@
   //  message instead of a broken link.
   // ====================================================================
   const DOWNLOADS = {
-    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.2/GreenCube_0.1.2_x64-setup.exe' },
+    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.8/GreenCube_0.1.8_x64-setup.exe' },
     mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
     linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
   };
