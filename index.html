@@ -192,6 +192,15 @@
     .header-nav a:hover::after { transform: translateX(3px); }
     header.dark .header-nav a { color: var(--on-dark); border-color: var(--on-dark-line); }
     header.dark .header-nav a:hover { background: var(--gold); border-color: var(--gold); color: var(--night); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
+      color: var(--paper); background: var(--forest);
+      padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; box-shadow: 0 12px 26px -12px rgba(0,0,0,0.42); }
+    header.dark .nav-cta { background: var(--gold); color: var(--night); }
+    header.dark .nav-cta:hover { background: var(--gold-warm); }
     .pill {
       display: inline-flex;
       align-items: center;
@@ -324,13 +333,22 @@
     @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; opacity: 1; } .scroll-cue .chev { animation: none; } }
 
     /* ============== what-it-does capabilities ============== */
-    .caps { position: relative; z-index: 2; padding: 92px 0; }
+    .caps {
+      position: relative; z-index: 2; padding: 100px 0;
+      background: #F0ECE3;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
     .caps-wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+    .caps-eyebrow {
+      display: block; text-align: center; margin-bottom: 14px;
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss);
+    }
     .caps-head {
       font-family: var(--display); font-weight: 600;
-      font-size: clamp(26px, 3.2vw, 42px); line-height: 1.06;
+      font-size: clamp(28px, 3.4vw, 46px); line-height: 1.06;
       letter-spacing: -0.025em; color: var(--forest);
-      text-align: center; margin-bottom: 44px;
+      text-align: center; margin-bottom: 46px;
     }
     .caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .cap {
@@ -1852,8 +1870,9 @@
   </a>
   <nav class="header-nav" aria-label="Primary">
     <a href="how-it-works.html">Why GreenCube</a>
+    <a href="/download">Download</a>
   </nav>
-  <span class="pill"><span class="dot" aria-hidden="true"></span>Early access open</span>
+  <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
 
 <!-- =========== HERO =========== -->
@@ -1871,8 +1890,8 @@
       <li>Pay once</li>
     </ul>
     <div class="cta-row rv">
-      <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube — €8</span></a>
-      <a href="#what" class="cta-pill cta-ghost">What it does <span class="arrow">→</span></a>
+      <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube — €9</span></a>
+      <a href="how-it-works.html" class="cta-pill cta-ghost">Why GreenCube <span class="arrow">→</span></a>
     </div>
   </div>
   <a href="#what" class="scroll-cue" aria-label="See what it does">
@@ -1884,6 +1903,7 @@
 <!-- =========== WHAT IT DOES — three honest capabilities =========== -->
 <section class="caps" id="what" aria-label="What GreenCube does">
   <div class="caps-wrap">
+    <span class="caps-eyebrow rv">What it does</span>
     <h2 class="caps-head rv">One app. All on your machine.</h2>
     <div class="caps-grid">
       <article class="cap rv">
@@ -1908,13 +1928,14 @@
 <!-- =========== MANIFESTO — dark band, stamped statements =========== -->
 <section class="manifesto" id="manifesto" data-theme="dark">
   <div class="head">
-    <span class="eyebrow rv">Why GreenCube</span>
+    <span class="eyebrow rv">The difference</span>
   </div>
   <ul class="manifesto-lines">
     <li class="manifesto-line">Your data never leaves your computer.</li>
+    <li class="manifesto-line">Big tech can't harvest what it never sees.</li>
+    <li class="manifesto-line">No server farm burning power for every word you type.</li>
     <li class="manifesto-line">No limit ever cuts you off mid-thought.</li>
-    <li class="manifesto-line">No subscription. No account. No one reading your chats.</li>
-    <li class="manifesto-line">Works on a plane. In a blackout. When the servers go down.</li>
+    <li class="manifesto-line">No subscription. No account. No one watching.</li>
     <li class="manifesto-line">Every other AI is rented.</li>
     <li class="manifesto-line is-final">This one is <em>yours.</em></li>
   </ul>
@@ -1923,12 +1944,15 @@
 <footer>
   <div class="row">
     <div class="brand-info">
-      <div>© 2026 GreenCube</div>
+      <div>© 2026 GreenCube — Edunexis SL</div>
       <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
     </div>
     <nav class="links" aria-label="Footer">
-      <a href="#top" class="cta-back">Get early access <span class="arrow" aria-hidden="true">↑</span></a>
+      <a href="/buy">Get GreenCube</a>
       <a href="how-it-works.html">Why GreenCube</a>
+      <a href="/download">Download</a>
+      <a href="https://legal.greencube.app/privacy">Privacy</a>
+      <a href="https://legal.greencube.app/terms">Terms</a>
       <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:support@greencube.app">Contact</a>
     </nav>
