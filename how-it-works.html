@@ -72,9 +72,13 @@
     }
     .brand { display: inline-flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
     .brand .mark { width: 15px; height: 15px; border: 1.6px solid currentColor; border-radius: 4px; }
-    .nav-links { display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; }
-    .nav-links a { color: var(--ink-soft); }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links { display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
+    .nav-links a {
+      display: inline-flex; align-items: center; gap: 7px; color: var(--ink);
+      padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+    .nav-links a:hover { border-color: var(--ink); background: var(--paper-warm); }
     .nav-cta {
       font-size: 14px; font-weight: 600; color: var(--paper); background: var(--ink);
       padding: 9px 18px; border-radius: 999px; transition: transform 0.3s var(--ease), background 0.3s var(--ease);
@@ -143,7 +147,7 @@
 
 <header>
   <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
-  <nav class="nav-links" aria-label="Primary"><a href="/">Home</a></nav>
+  <nav class="nav-links" aria-label="Primary"><a href="/"><span aria-hidden="true">←</span> Home</a></nav>
   <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
 
