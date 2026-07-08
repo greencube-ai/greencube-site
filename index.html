@@ -326,6 +326,33 @@
     @keyframes cueBounce { 0%, 100% { transform: translateY(0); opacity: 0.55; } 50% { transform: translateY(5px); opacity: 1; } }
     @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; opacity: 1; } .scroll-cue .chev { animation: none; } }
 
+    /* ============== what-it-does capabilities ============== */
+    .caps { position: relative; z-index: 2; padding: 118px 0; }
+    .caps-wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .caps-head {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(28px, 3.8vw, 50px); line-height: 1.05;
+      letter-spacing: -0.025em; color: var(--forest);
+      text-align: center; margin-bottom: 50px;
+    }
+    .caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .cap {
+      background: var(--paper-soft); border: 1px solid var(--line);
+      border-radius: 20px; padding: 32px 28px; text-align: left;
+      box-shadow: 0 18px 44px -30px rgba(72, 82, 47, 0.26);
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+    }
+    .cap:hover { transform: translateY(-3px); border-color: var(--moss); box-shadow: 0 28px 56px -30px rgba(72, 82, 47, 0.38); }
+    .cap-ico { display: block; width: 34px; height: 34px; color: var(--moss); margin-bottom: 18px; }
+    .cap-ico svg { width: 100%; height: 100%; display: block; }
+    .cap h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 9px; }
+    .cap p { font-family: var(--sans); font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+    @media (max-width: 760px) {
+      .caps { padding: 76px 0; }
+      .caps-grid { grid-template-columns: 1fr; gap: 14px; }
+      .caps-head { margin-bottom: 34px; }
+    }
+
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
     .cta-row {
       display: inline-flex;
@@ -1641,11 +1668,11 @@
       position: relative;
       text-align: center;
       padding-bottom: 26px;
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(34px, 5.4vw, 84px);
-      line-height: 1.04;
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(30px, 4.6vw, 66px);
+      line-height: 1.08;
       letter-spacing: -0.025em;
       color: var(--on-dark);
       max-width: 24ch;
@@ -1668,13 +1695,15 @@
     }
     .manifesto-line.is-visible::after { width: 84px; }
     .manifesto-line.is-final {
-      font-size: clamp(56px, 9vw, 156px);
+      font-size: clamp(48px, 7.5vw, 116px);
       max-width: 18ch;
-      letter-spacing: -0.035em;
-      line-height: 0.96;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
       padding-top: 32px;
+      font-weight: 600;
     }
-    .manifesto-line.is-final em { color: var(--gold); }
+    .manifesto-line em { font-style: normal; }
+    .manifesto-line.is-final em { color: var(--gold); font-style: normal; }
     .manifesto-line.is-final.is-visible::after { width: 132px; height: 1.5px; }
 
     @media (max-width: 760px) {
@@ -1846,634 +1875,35 @@
     </ul>
     <div class="cta-row rv">
       <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube — €8</span></a>
-      <a href="#demo" class="cta-pill cta-ghost">Watch demo <span class="arrow">→</span></a>
+      <a href="#what" class="cta-pill cta-ghost">What it does <span class="arrow">→</span></a>
     </div>
   </div>
-  <a href="#demo" class="scroll-cue" aria-label="See it in action">
-    <span>See it in action</span>
+  <a href="#what" class="scroll-cue" aria-label="See what it does">
+    <span>See what it does</span>
     <span class="chev" aria-hidden="true">↓</span>
   </a>
 </section>
 
-<!-- =========== DEMO — interactive split-screen centerpiece =========== -->
-<section class="demo" id="demo" aria-label="Live GreenCube demo">
-  <div class="demo-intro">
-    <h2 class="demo-headline rv">See it <em>work</em>.</h2>
-    <p class="demo-subtext rv">One request. GreenCube handles the rest.</p>
-  </div>
-  <div class="demo-frame rv" id="demo-frame">
-
-    <!-- macOS-style window chrome across the whole frame -->
-    <div class="frame-chrome">
-      <span class="traffic">
-        <span class="t-red"></span>
-        <span class="t-yellow"></span>
-        <span class="t-green"></span>
-      </span>
-      <span class="frame-title">demo · greencube.app</span>
-      <span class="frame-spacer"></span>
-    </div>
-
-    <div class="frame-split">
-
-    <!-- LEFT — chat -->
-    <div class="demo-chat">
-      <div class="dchat-head">
-        <span class="dchat-brand"><span class="dchat-mark"></span>GreenCube</span>
-        <span class="dchat-newchat">＋ New chat</span>
-      </div>
-      <div class="dchat-body" id="dchat-body">
-        <div class="mini-graph" id="mini-graph">
-          <div class="label">
-            <span class="mem-count"><em>29</em> memories</span>
-            <span class="expand-hint" id="graph-hint">tap to expand ↗</span>
-          </div>
-          <svg viewBox="0 0 480 340" preserveAspectRatio="xMidYMid meet">
-            <!-- edges first so nodes draw on top -->
-            <g class="edges">
-              <!-- center to many -->
-              <line class="edge" x1="240" y1="170" x2="160" y2="60"/>
-              <line class="edge" x1="240" y1="170" x2="80" y2="95"/>
-              <line class="edge" x1="240" y1="170" x2="350" y2="70"/>
-              <line class="edge" x1="240" y1="170" x2="420" y2="105"/>
-              <line class="edge" x1="240" y1="170" x2="350" y2="135"/>
-              <line class="edge" x1="240" y1="170" x2="415" y2="170"/>
-              <line class="edge" x1="240" y1="170" x2="370" y2="200"/>
-              <line class="edge" x1="240" y1="170" x2="295" y2="215"/>
-              <line class="edge" x1="240" y1="170" x2="305" y2="180"/>
-              <line class="edge" x1="240" y1="170" x2="290" y2="240"/>
-              <line class="edge" x1="240" y1="170" x2="195" y2="285"/>
-              <line class="edge" x1="240" y1="170" x2="250" y2="90"/>
-              <line class="edge" x1="240" y1="170" x2="65" y2="195"/>
-              <line class="edge" x1="240" y1="170" x2="215" y2="250"/>
-              <!-- intra: personal -->
-              <line class="edge sub" x1="160" y1="60" x2="80" y2="35"/>
-              <line class="edge sub" x1="160" y1="60" x2="80" y2="95"/>
-              <line class="edge sub" x1="80" y1="35" x2="80" y2="95"/>
-              <line class="edge sub" x1="175" y1="110" x2="250" y2="90"/>
-              <!-- intra: work -->
-              <line class="edge sub" x1="350" y1="70" x2="420" y2="105"/>
-              <line class="edge sub" x1="350" y1="70" x2="350" y2="135"/>
-              <line class="edge sub" x1="420" y1="105" x2="350" y2="135"/>
-              <line class="edge sub" x1="350" y1="70" x2="415" y2="170"/>
-              <line class="edge sub" x1="420" y1="105" x2="425" y2="225"/>
-              <!-- intra: skills -->
-              <line class="edge sub" x1="415" y1="170" x2="370" y2="200"/>
-              <line class="edge sub" x1="370" y1="200" x2="425" y2="225"/>
-              <line class="edge sub" x1="370" y1="200" x2="385" y2="245"/>
-              <line class="edge sub" x1="425" y1="225" x2="385" y2="245"/>
-              <!-- intra: routines -->
-              <line class="edge sub" x1="65" y1="195" x2="130" y2="220"/>
-              <line class="edge sub" x1="130" y1="220" x2="140" y2="280"/>
-              <line class="edge sub" x1="140" y1="280" x2="45" y2="245"/>
-              <line class="edge sub" x1="45" y1="245" x2="65" y2="195"/>
-              <line class="edge sub" x1="140" y1="280" x2="75" y2="300"/>
-              <!-- intra: edu / docs -->
-              <line class="edge sub" x1="195" y1="285" x2="155" y2="315"/>
-              <line class="edge sub" x1="195" y1="285" x2="290" y2="240"/>
-              <line class="edge sub" x1="290" y1="240" x2="370" y2="290"/>
-              <line class="edge sub" x1="290" y1="240" x2="350" y2="70"/>
-              <line class="edge sub" x1="215" y1="250" x2="370" y2="290"/>
-              <!-- intra: projects -->
-              <line class="edge sub" x1="260" y1="285" x2="235" y2="320"/>
-              <line class="edge sub" x1="235" y1="320" x2="315" y2="315"/>
-              <line class="edge sub" x1="235" y1="320" x2="415" y2="305"/>
-              <line class="edge sub" x1="295" y1="215" x2="235" y2="320"/>
-              <line class="edge sub" x1="295" y1="215" x2="415" y2="305"/>
-              <!-- bridges -->
-              <line class="edge sub" x1="250" y1="90" x2="315" y2="315"/>
-              <line class="edge sub" x1="175" y1="110" x2="260" y2="285"/>
-            </g>
-
-            <!-- center -->
-            <g class="node is-center" data-node="center">
-              <circle class="pulse" cx="240" cy="170" r="9"/>
-              <circle cx="240" cy="170" r="9"/>
-              <text x="240" y="173" text-anchor="middle">Alex</text>
-            </g>
-
-            <!-- PERSONAL cluster -->
-            <g class="node" data-node="weddinggifts"><circle cx="80" cy="35" r="3.5"/><text x="86" y="38" text-anchor="start">wedding gifts</text></g>
-            <g class="node" data-node="mom"><circle cx="160" cy="60" r="3.5"/><text x="166" y="63" text-anchor="start">mom's number</text></g>
-            <g class="node" data-node="sister"><circle cx="80" cy="95" r="3.5"/><text x="86" y="98" text-anchor="start">sister's bday</text></g>
-            <g class="node" data-node="reading"><circle cx="175" cy="110" r="3.5"/><text x="181" y="113" text-anchor="start">weekend reading</text></g>
-            <g class="node" data-node="typeface"><circle cx="250" cy="90" r="3.5"/><text x="256" y="93" text-anchor="start">fav typeface</text></g>
-
-            <!-- WORK cluster (lit during demo) -->
-            <g class="node" data-node="standard"><circle cx="350" cy="70" r="3.5"/><text x="356" y="73" text-anchor="start">The Standard '24</text></g>
-            <g class="node" data-node="toma"><circle cx="420" cy="105" r="3.5"/><text x="416" y="98" text-anchor="end">Toma '23</text></g>
-            <g class="node" data-node="intern"><circle cx="350" cy="135" r="3.5"/><text x="356" y="138" text-anchor="start">marketing intern '22</text></g>
-
-            <!-- SKILLS cluster (lit) -->
-            <g class="node" data-node="customer"><circle cx="415" cy="170" r="3.5"/><text x="411" y="173" text-anchor="end">customer service</text></g>
-            <g class="node" data-node="bilingual"><circle cx="370" cy="200" r="3.5"/><text x="366" y="203" text-anchor="end">bilingual ES + EN</text></g>
-            <g class="node" data-node="pos"><circle cx="425" cy="225" r="3.5"/><text x="421" y="228" text-anchor="end">POS systems</text></g>
-            <g class="node" data-node="calm"><circle cx="385" cy="245" r="3.5"/><text x="381" y="248" text-anchor="end">calm in chaos</text></g>
-
-            <!-- LOCATION (lit) -->
-            <g class="node" data-node="walkable"><circle cx="305" cy="180" r="3.5"/><text x="311" y="183" text-anchor="start">lives walkable</text></g>
-
-            <!-- ROUTINES cluster -->
-            <g class="node" data-node="runs"><circle cx="65" cy="195" r="3.5"/><text x="71" y="198" text-anchor="start">morning runs</text></g>
-            <g class="node" data-node="gym"><circle cx="130" cy="220" r="3.5"/><text x="136" y="223" text-anchor="start">tuesday gym</text></g>
-            <g class="node" data-node="nocoffee"><circle cx="45" cy="245" r="3.5"/><text x="51" y="248" text-anchor="start">no coffee after 4</text></g>
-            <g class="node" data-node="standup"><circle cx="140" cy="280" r="3.5"/><text x="146" y="283" text-anchor="start">thursday standup</text></g>
-            <g class="node" data-node="dentist"><circle cx="75" cy="300" r="3.5"/><text x="81" y="303" text-anchor="start">dentist apr 22</text></g>
-
-            <!-- EDUCATION cluster -->
-            <g class="node" data-node="commajor"><circle cx="195" cy="285" r="3.5"/><text x="195" y="298" text-anchor="middle">communication major</text></g>
-            <g class="node" data-node="thesis"><circle cx="155" cy="315" r="3.5"/><text x="155" y="328" text-anchor="middle">thesis draft</text></g>
-
-            <!-- PROJECTS cluster -->
-            <g class="node" data-node="react"><circle cx="260" cy="285" r="3.5"/><text x="266" y="288" text-anchor="start">react portfolio</text></g>
-            <g class="node" data-node="obsidian"><circle cx="235" cy="320" r="3.5"/><text x="235" y="333" text-anchor="middle">obsidian vault</text></g>
-            <g class="node" data-node="designrefs"><circle cx="315" cy="315" r="3.5"/><text x="321" y="318" text-anchor="start">design refs</text></g>
-
-            <!-- DOCS (resume lit) -->
-            <g class="node" data-node="resume"><circle cx="290" cy="240" r="3.5"/><text x="296" y="243" text-anchor="start">resume v3.pdf</text></g>
-            <g class="node" data-node="taxes"><circle cx="370" cy="290" r="3.5"/><text x="376" y="293" text-anchor="start">tax docs '25</text></g>
-
-            <!-- OTHER -->
-            <g class="node" data-node="groceries"><circle cx="215" cy="250" r="3.5"/><text x="221" y="253" text-anchor="start">groceries</text></g>
-            <g class="node" data-node="greencube"><circle cx="295" cy="215" r="3.5"/><text x="301" y="218" text-anchor="start">greencube</text></g>
-            <g class="node" data-node="raycast"><circle cx="415" cy="305" r="3.5"/><text x="411" y="308" text-anchor="end">raycast shortcuts</text></g>
-          </svg>
-        </div>
-      </div>
-      <div class="dchat-input-row">
-        <div class="dchat-input" id="dchat-input">
-          <span class="dchat-placeholder" id="dchat-placeholder">Ask GreenCube anything...</span>
-          <span class="dchat-typing" id="dchat-typing"></span><span class="dchat-caret" id="dchat-caret"></span>
-        </div>
-        <button class="dchat-send" id="dchat-send" tabindex="-1" aria-label="Send">↑</button>
-      </div>
-    </div>
-
-    <!-- RIGHT — desktop -->
-    <div class="demo-desktop" id="demo-desktop">
-      <div class="desk-wall">
-        <svg class="wp-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            <radialGradient id="wp-warm" cx="0.55" cy="0.45" r="0.7">
-              <stop offset="0"    stop-color="#FFC974" stop-opacity="0.95"/>
-              <stop offset="0.30" stop-color="#FF8E64" stop-opacity="0.85"/>
-              <stop offset="0.62" stop-color="#E0468A" stop-opacity="0.55"/>
-              <stop offset="1"    stop-color="#5C2980" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="wp-pink" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#FF7BA0" stop-opacity="0.85"/>
-              <stop offset="1" stop-color="#B14EC2" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="wp-teal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#4FB8E8" stop-opacity="0.40"/>
-              <stop offset="1" stop-color="#3A4FCF" stop-opacity="0"/>
-            </linearGradient>
-            <filter id="wp-blur"><feGaussianBlur stdDeviation="22"/></filter>
-          </defs>
-
-          <path filter="url(#wp-blur)" fill="url(#wp-warm)"
-                d="M -120 380 C 140 200 360 500 620 320 S 940 140 1320 360 L 1320 900 L -120 900 Z"/>
-          <path filter="url(#wp-blur)" fill="url(#wp-pink)"
-                d="M 420 -120 C 260 180 580 320 760 220 S 1060 60 1240 -40 L 1240 -120 Z"/>
-          <path filter="url(#wp-blur)" fill="url(#wp-teal)"
-                d="M -120 -40 C 80 240 320 60 540 220 S 760 60 900 200 L 900 -120 L -120 -120 Z"/>
-          <path filter="url(#wp-blur)" fill="#FFD8A0" opacity="0.45"
-                d="M 760 240 C 880 200 980 320 1080 280 C 1180 240 1280 360 1320 320 L 1320 80 L 760 80 Z"/>
-        </svg>
-      </div>
-
-      <div class="desk-menubar">
-        <span class="sys-mark" aria-hidden="true"></span>
-        <span class="menu-app" id="menu-app">Finder</span>
-        <span class="menu-item">File</span>
-        <span class="menu-item">Edit</span>
-        <span class="menu-item">View</span>
-        <span class="menu-item">Window</span>
-        <span class="menu-item">Help</span>
-        <span class="menu-spacer"></span>
-        <span class="menu-right">
-          <span class="menu-glyph" aria-hidden="true" title="Battery">
-            <span class="menu-battery"><span class="lvl"></span></span>
-          </span>
-          <span class="menu-glyph" aria-hidden="true" title="Wi-Fi">
-            <svg viewBox="0 0 16 16">
-              <path d="M 1.5 5.5 C 5.5 1.5, 10.5 1.5, 14.5 5.5"/>
-              <path d="M 3.5 8 C 6 5.5, 10 5.5, 12.5 8"/>
-              <path d="M 5.5 10.5 C 7 9, 9 9, 10.5 10.5"/>
-              <circle cx="8" cy="13" r="0.7" fill="currentColor"/>
-            </svg>
-          </span>
-          <span class="menu-glyph" aria-hidden="true" title="Search">
-            <svg viewBox="0 0 16 16">
-              <circle cx="7" cy="7" r="4.5"/>
-              <path d="M 10.4 10.4 L 13.5 13.5"/>
-            </svg>
-          </span>
-          <span class="menu-glyph" aria-hidden="true" title="Control Center">
-            <svg viewBox="0 0 16 16">
-              <rect x="3"  y="2.5" width="3.4" height="11" rx="1.4"/>
-              <rect x="9.6" y="2.5" width="3.4" height="11" rx="1.4"/>
-              <line x1="4.7" y1="5.5"  x2="4.7" y2="6.5"/>
-              <line x1="11.3" y1="9.5"  x2="11.3" y2="10.5"/>
-            </svg>
-          </span>
-          <span class="menu-cube" aria-hidden="true" title="GreenCube"></span>
-          <span class="menu-date" id="menu-date">Mon · May 11</span>
-          <span class="menu-clock" id="menu-clock">9:41 AM</span>
-        </span>
-      </div>
-
-      <!-- Pages window -->
-      <div class="dwin" id="win-pages" data-app="pages" data-title="Pages — Resume.pages">
-        <div class="dwin-titlebar" data-drag>
-          <span class="traffic">
-            <span class="t-red"   data-action="close"></span>
-            <span class="t-yellow" data-action="min"></span>
-            <span class="t-green"></span>
-          </span>
-          <span class="dwin-title">Resume — Alex Rivera.pages</span>
-          <span style="width:60px"></span>
-        </div>
-        <div class="dwin-body">
-          <div class="pages-toolbar">
-            <span class="ptb-font">Georgia</span>
-            <span class="ptb-size">11 pt</span>
-            <span class="ptb-sep"></span>
-            <span class="ptb-btn"><b>B</b></span>
-            <span class="ptb-btn"><i>I</i></span>
-            <span class="ptb-btn"><span style="text-decoration:underline">U</span></span>
-            <span class="ptb-sep"></span>
-            <span class="ptb-btn is-active">≡</span>
-            <span class="ptb-btn">⋮</span>
-            <span class="ptb-btn">≣</span>
-            <span class="ptb-spacer"></span>
-            <span class="ptb-btn" title="Bullets">•</span>
-            <span class="ptb-btn" title="Numbered">1.</span>
-          </div>
-          <div class="pages-doc">
-            <div class="doc-name typed" id="doc-name"></div>
-            <div class="doc-contact typed" id="doc-contact"></div>
-            <div class="doc-section">
-              <h3>Experience</h3>
-              <div id="doc-exp"></div>
-            </div>
-            <div class="doc-section">
-              <h3>Education</h3>
-              <div class="doc-job typed" id="doc-edu"></div>
-            </div>
-            <div class="doc-section">
-              <h3>Skills</h3>
-              <div class="doc-job typed" id="doc-skills"></div>
-            </div>
-            <div class="save-toast" id="save-toast">✓ Saved as Resume.pdf</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Maps window -->
-      <div class="dwin" id="win-maps" data-app="maps" data-title="Maps">
-        <div class="dwin-titlebar" data-drag>
-          <span class="traffic">
-            <span class="t-red"   data-action="close"></span>
-            <span class="t-yellow" data-action="min"></span>
-            <span class="t-green"></span>
-          </span>
-          <span class="dwin-title">Maps — Restaurants near you</span>
-          <span style="width:60px"></span>
-        </div>
-        <div class="dwin-body maps-body">
-          <div class="maps-toolbar">
-            <span class="maps-search">
-              <span class="ic">⌕</span>restaurants hiring near me
-            </span>
-            <span class="maps-zoom" aria-hidden="true"><span>−</span><span>+</span></span>
-          </div>
-          <div class="maps-inner">
-          <div class="maps-canvas" id="maps-canvas">
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <defs>
-                <linearGradient id="mp-base" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#F4EFE0"/>
-                  <stop offset="1" stop-color="#EAE2C9"/>
-                </linearGradient>
-              </defs>
-              <rect width="400" height="300" fill="url(#mp-base)"/>
-              <!-- park areas -->
-              <path d="M 280 30 Q 360 20 388 70 Q 380 100 320 110 Q 270 100 280 30 Z"
-                    fill="#B8D2B5" opacity="0.55"/>
-              <path d="M 40 240 Q 130 250 200 240 L 200 300 L 40 300 Z"
-                    fill="#B8D2B5" opacity="0.50"/>
-              <!-- river ribbon -->
-              <path d="M -20 280 Q 80 250 180 275 T 420 268 L 420 320 L -20 320 Z"
-                    fill="#B8D7E8" opacity="0.55"/>
-              <!-- major streets (white, wide) -->
-              <g stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" fill="none">
-                <path d="M -20 130 Q 200 150 420 140"/>
-                <path d="M -20 200 Q 200 195 420 210"/>
-                <path d="M 130 -20 Q 145 150 135 320"/>
-                <path d="M 260 -20 Q 250 150 265 320"/>
-              </g>
-              <!-- street outlines -->
-              <g stroke="#D9D2B8" stroke-width="8.5" fill="none" opacity="0.55">
-                <path d="M -20 130 Q 200 150 420 140"/>
-                <path d="M -20 200 Q 200 195 420 210"/>
-                <path d="M 130 -20 Q 145 150 135 320"/>
-                <path d="M 260 -20 Q 250 150 265 320"/>
-              </g>
-              <!-- minor streets (thin) -->
-              <g stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.9">
-                <line x1="-20" y1="60"  x2="420" y2="68"/>
-                <line x1="-20" y1="95"  x2="420" y2="102"/>
-                <line x1="-20" y1="165" x2="420" y2="170"/>
-                <line x1="-20" y1="245" x2="420" y2="248"/>
-                <line x1="60"  y1="-20" x2="68"  y2="320"/>
-                <line x1="195" y1="-20" x2="200" y2="320"/>
-                <line x1="330" y1="-20" x2="340" y2="320"/>
-              </g>
-              <!-- building blocks -->
-              <g fill="#E8DFC2" opacity="0.55">
-                <rect x="70"  y="68"  width="58" height="58"/>
-                <rect x="200" y="68"  width="58" height="58"/>
-                <rect x="270" y="170" width="60" height="32"/>
-                <rect x="68"  y="170" width="60" height="32"/>
-                <rect x="200" y="215" width="58" height="28"/>
-              </g>
-            </svg>
-            <div class="map-pin user" style="left:50%;top:55%"></div>
-            <div class="map-pin" id="map-pin-1" style="left:34%;top:36%">
-              <div class="pin-shape"><span class="pin-num">1</span></div>
-            </div>
-            <div class="map-pin" id="map-pin-2" style="left:68%;top:42%">
-              <div class="pin-shape"><span class="pin-num">2</span></div>
-            </div>
-            <div class="map-pin" id="map-pin-3" style="left:54%;top:74%">
-              <div class="pin-shape"><span class="pin-num">3</span></div>
-            </div>
-          </div>
-          <div class="maps-list">
-            <h4>3 nearby · hiring</h4>
-            <div class="maps-result" id="maps-r1">
-              <div class="head"><span class="num">1</span><span class="name">Park Bistro</span></div>
-              <div class="dist">0.4 km · 5 min walk</div>
-              <div class="email">hiring@parkbistro.com</div>
-            </div>
-            <div class="maps-result" id="maps-r2">
-              <div class="head"><span class="num">2</span><span class="name">Café Lumen</span></div>
-              <div class="dist">0.7 km · 9 min walk</div>
-              <div class="email">jobs@cafelumen.com</div>
-            </div>
-            <div class="maps-result" id="maps-r3">
-              <div class="head"><span class="num">3</span><span class="name">Verde Kitchen</span></div>
-              <div class="dist">1.1 km · 14 min walk</div>
-              <div class="email">careers@verdekitchen.com</div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mail window -->
-      <div class="dwin" id="win-mail" data-app="mail" data-title="Mail">
-        <div class="dwin-titlebar" data-drag>
-          <span class="traffic">
-            <span class="t-red"   data-action="close"></span>
-            <span class="t-yellow" data-action="min"></span>
-            <span class="t-green"></span>
-          </span>
-          <span class="dwin-title">Mail — Drafts (3)</span>
-          <span style="width:60px"></span>
-        </div>
-        <div class="dwin-body mail-body">
-          <div class="mail-toolbar">
-            <span class="mtb-btn" title="New">
-              <svg viewBox="0 0 24 24"><path d="M4 19 L 11 12 L 16 17 M 12 15 L 19 8 L 16 5 L 9 12 Z M 14 7 L 17 10"/></svg>
-            </span>
-            <span class="mtb-sep"></span>
-            <span class="mtb-btn" title="Reply">
-              <svg viewBox="0 0 24 24"><path d="M9 7 L 4 12 L 9 17 M 4 12 H 16 a 4 4 0 0 1 4 4 V 19"/></svg>
-            </span>
-            <span class="mtb-btn" title="Reply all">
-              <svg viewBox="0 0 24 24"><path d="M7 7 L 2 12 L 7 17 M 11 7 L 6 12 L 11 17 M 6 12 H 17 a 4 4 0 0 1 4 4 V 19"/></svg>
-            </span>
-            <span class="mtb-btn" title="Forward">
-              <svg viewBox="0 0 24 24"><path d="M15 7 L 20 12 L 15 17 M 20 12 H 8 a 4 4 0 0 0 -4 4 V 19"/></svg>
-            </span>
-            <span class="mtb-sep"></span>
-            <span class="mtb-btn" title="Archive">
-              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="0.6"/><path d="M5 9 V 19 a 1 1 0 0 0 1 1 H 18 a 1 1 0 0 0 1 -1 V 9"/><line x1="10" y1="13" x2="14" y2="13"/></svg>
-            </span>
-            <span class="mtb-btn" title="Trash">
-              <svg viewBox="0 0 24 24"><path d="M5 7 H 19 L 18 20 a 1 1 0 0 1 -1 1 H 7 a 1 1 0 0 1 -1 -1 Z M 9 7 V 4 H 15 V 7 M 3 7 H 21"/></svg>
-            </span>
-            <span class="mtb-search">⌕ &nbsp;Search</span>
-          </div>
-          <div class="mail-inner">
-          <div class="mail-list">
-            <h4>Drafts · 3</h4>
-            <div class="mail-item" id="mail-i1">
-              <div class="to">hiring@parkbistro.com</div>
-              <div class="subj">Application — server / front-of-house</div>
-              <div class="preview">Dear Park Bistro team —</div>
-            </div>
-            <div class="mail-item" id="mail-i2">
-              <div class="to">jobs@cafelumen.com</div>
-              <div class="subj">Application — server / front-of-house</div>
-              <div class="preview">Dear Café Lumen team —</div>
-            </div>
-            <div class="mail-item" id="mail-i3">
-              <div class="to">careers@verdekitchen.com</div>
-              <div class="subj">Application — server / front-of-house</div>
-              <div class="preview">Dear Verde Kitchen team —</div>
-            </div>
-          </div>
-          <div class="mail-compose">
-            <div class="mail-field"><span class="lbl">To:</span><span class="val" id="mail-to">hiring@parkbistro.com</span></div>
-            <div class="mail-field"><span class="lbl">Subject:</span><span class="val subj" id="mail-subj">Application — server / front-of-house</span></div>
-            <div class="mail-attach" id="mail-attach">Resume.pdf · 84 KB</div>
-            <div class="mail-text typed" id="mail-text"></div>
-            <button class="mail-send-btn" id="mail-send">Send</button>
-          </div>
-          <div class="mail-counter" id="mail-counter">3 of 3 sent</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dock — custom SVG icons (original artwork) -->
-      <div class="desk-dock" id="desk-dock">
-        <button class="dock-icon" data-app="finder" tabindex="-1" aria-label="Finder">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="findL" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    stop-color="#C7E4FF"/>
-                <stop offset="0.50" stop-color="#5BA8F0"/>
-                <stop offset="1"    stop-color="#13478F"/>
-              </linearGradient>
-              <linearGradient id="findR" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFFFFF"/>
-                <stop offset="1" stop-color="#A8B0B8"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="32" height="64" fill="url(#findL)"/>
-            <rect x="32" y="0" width="32" height="64" fill="url(#findR)"/>
-            <ellipse cx="20" cy="26" rx="3" ry="6" fill="#0B1422"/>
-            <ellipse cx="44" cy="26" rx="3" ry="6" fill="#0B1422"/>
-            <path d="M16 42 Q 32 56 48 42" stroke="#0B1422" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="safari" tabindex="-1" aria-label="Safari">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <radialGradient id="safRim" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0"    stop-color="#FFFFFF"/>
-                <stop offset="0.55" stop-color="#FFFFFF"/>
-                <stop offset="0.66" stop-color="#9AC9E8"/>
-                <stop offset="0.88" stop-color="#1E70BC"/>
-                <stop offset="1"    stop-color="#0C3F76"/>
-              </radialGradient>
-              <linearGradient id="safFace" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#EAF4FB"/>
-                <stop offset="1" stop-color="#B5D0E5"/>
-              </linearGradient>
-            </defs>
-            <circle cx="32" cy="32" r="32" fill="url(#safRim)"/>
-            <circle cx="32" cy="32" r="23" fill="url(#safFace)"/>
-            <g stroke="#0E5BA3" stroke-width="1.1" stroke-linecap="round">
-              <line x1="32" y1="3"  x2="32" y2="10"/>
-              <line x1="32" y1="61" x2="32" y2="54"/>
-              <line x1="3"  y1="32" x2="10" y2="32"/>
-              <line x1="61" y1="32" x2="54" y2="32"/>
-            </g>
-            <g stroke="#0E5BA3" stroke-width="0.7" opacity="0.6">
-              <line x1="46" y1="9"  x2="43" y2="13"/>
-              <line x1="55" y1="18" x2="51" y2="20"/>
-              <line x1="9"  y1="46" x2="13" y2="43"/>
-              <line x1="18" y1="55" x2="20" y2="51"/>
-              <line x1="18" y1="9"  x2="20" y2="13"/>
-              <line x1="9"  y1="18" x2="13" y2="20"/>
-              <line x1="46" y1="55" x2="43" y2="51"/>
-              <line x1="55" y1="46" x2="51" y2="44"/>
-            </g>
-            <path d="M32 10 L38 32 L32 54 L26 32 Z" fill="#E13A2E"/>
-            <path d="M32 10 L38 32 L32 32 Z" fill="#F5F8FA"/>
-            <circle cx="32" cy="32" r="2.4" fill="#fff" stroke="#0E5BA3" stroke-width="0.8"/>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="mail" tabindex="-1" aria-label="Mail">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="mailBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    stop-color="#D6F0FF"/>
-                <stop offset="0.40" stop-color="#5DA9F5"/>
-                <stop offset="1"    stop-color="#0E4DAF"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#mailBg)"/>
-            <rect x="6" y="14" width="52" height="36" rx="4" fill="rgba(255,255,255,0.95)"/>
-            <path d="M6 16 L32 38 L58 16" stroke="#1F6BDB" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-            <path d="M6 48 L24 32 M58 48 L40 32" stroke="rgba(31,107,219,0.50)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="pages" tabindex="-1" aria-label="Pages">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="pagesBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFB964"/>
-                <stop offset="1" stop-color="#D85E04"/>
-              </linearGradient>
-              <linearGradient id="pagesPaper" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFFFFF"/>
-                <stop offset="1" stop-color="#FFE9C7"/>
-              </linearGradient>
-              <linearGradient id="pagesFold" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#FFD78B"/>
-                <stop offset="1" stop-color="#E87B17"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#pagesBg)"/>
-            <path d="M14 8 H 42 L 54 20 V 56 H 14 Z" fill="url(#pagesPaper)" stroke="#9C4B0F" stroke-width="0.8" stroke-linejoin="round"/>
-            <path d="M42 8 V 20 H 54 Z" fill="url(#pagesFold)" stroke="#9C4B0F" stroke-width="0.7" stroke-linejoin="round"/>
-            <g stroke="#D45E08" stroke-width="2" stroke-linecap="round" opacity="0.95">
-              <line x1="20" y1="28" x2="46" y2="28"/>
-              <line x1="20" y1="35" x2="46" y2="35"/>
-              <line x1="20" y1="42" x2="46" y2="42"/>
-              <line x1="20" y1="49" x2="36" y2="49"/>
-            </g>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="maps" tabindex="-1" aria-label="Maps">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="mapBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#E2EEF7"/>
-                <stop offset="1" stop-color="#7BA3C2"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#mapBg)"/>
-            <path d="M0 16 L 64 12 L 64 16 L 0 20 Z" fill="#fff" opacity="0.95"/>
-            <path d="M0 38 L 64 42 L 64 46 L 0 42 Z" fill="#fff" opacity="0.95"/>
-            <path d="M18 0 L 14 64 L 18 64 L 22 0 Z" fill="#fff" opacity="0.95"/>
-            <path d="M46 0 L 50 64 L 46 64 L 42 0 Z" fill="#fff" opacity="0.95"/>
-            <path d="M0 54 Q 32 60 64 54 L 64 64 L 0 64 Z" fill="#9CC6A8" opacity="0.55"/>
-            <ellipse cx="52" cy="10" rx="10" ry="6" fill="#9CC6A8" opacity="0.55"/>
-            <path d="M32 22 c -5.5 0 -10 4.5 -10 10 c 0 8 10 18 10 18 s 10 -10 10 -18 c 0 -5.5 -4.5 -10 -10 -10 z"
-                  fill="#E13A2E" stroke="#fff" stroke-width="2"/>
-            <circle cx="32" cy="32" r="3.6" fill="#fff"/>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="messages" tabindex="-1" aria-label="Messages">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="msgBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    stop-color="#A5F592"/>
-                <stop offset="0.45" stop-color="#3FD24A"/>
-                <stop offset="1"    stop-color="#0E821A"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#msgBg)"/>
-            <path d="M11 14 C 11 9 16 6 22 6 H 42 C 49 6 53 11 53 19 V 31 C 53 39 47 43 39 43 H 26 L 12 56 L 14 44 C 12 42 11 38 11 33 V 19 Z"
-                  fill="#fff" opacity="0.96"/>
-          </svg>
-        </button>
-        <button class="dock-icon" data-app="notes" tabindex="-1" aria-label="Notes">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="notesTop" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFEA66"/>
-                <stop offset="1" stop-color="#F5C634"/>
-              </linearGradient>
-              <linearGradient id="notesBody" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFFEF5"/>
-                <stop offset="1" stop-color="#F0E8C5"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="64" height="64" fill="url(#notesBody)"/>
-            <rect x="0" y="0" width="64" height="18" fill="url(#notesTop)"/>
-            <g stroke="#C8A234" stroke-width="1.4" stroke-linecap="round" opacity="0.85">
-              <line x1="12" y1="28" x2="52" y2="28"/>
-              <line x1="12" y1="36" x2="52" y2="36"/>
-              <line x1="12" y1="44" x2="52" y2="44"/>
-              <line x1="12" y1="52" x2="42" y2="52"/>
-            </g>
-          </svg>
-        </button>
-        <button class="dock-icon is-active gc-tile" data-app="greencube" tabindex="-1" aria-label="GreenCube">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="0" y="0" width="64" height="64" fill="#F5F1E8"/>
-            <rect x="14" y="14" width="36" height="36" rx="7"
-                  fill="none" stroke="#2BAB35" stroke-width="4.6" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Agent cursor -->
-      <div class="gc-cursor" id="gc-cursor" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path d="M3 3 L3 18 L7.5 14 L10 19.5 L12.5 18.5 L10 13 L16 13 Z"
-                fill="#1F3A2E" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-
+<!-- =========== WHAT IT DOES — three honest capabilities =========== -->
+<section class="caps" id="what" aria-label="What GreenCube does">
+  <div class="caps-wrap">
+    <h2 class="caps-head rv">One app. All on your machine.</h2>
+    <div class="caps-grid">
+      <article class="cap rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
+        <h3>Chat &amp; write</h3>
+        <p>Ask anything, draft anything, think out loud — a fast, capable AI answering right on your computer.</p>
+      </article>
+      <article class="cap rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
+        <h3>Read your documents</h3>
+        <p>Drop in a PDF or a document and it reads the whole thing — summarize it, explain it, find what matters.</p>
+      </article>
+      <article class="cap rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+        <h3>Understand images</h3>
+        <p>Show it a photo or a screenshot and it sees what is there — describe it, read it, make sense of it.</p>
+      </article>
     </div>
   </div>
 </section>
