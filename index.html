@@ -301,18 +301,24 @@
 
     /* hero value chips — staccato proof, no fluff */
     .hero-chips {
-      list-style: none; padding: 0;
+      list-style: none; padding: 10px 12px;
       display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center;
-      gap: 0; margin: 0 auto 30px;
+      gap: 0; margin: 0 auto 32px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      backdrop-filter: blur(9px) saturate(150%);
+      -webkit-backdrop-filter: blur(9px) saturate(150%);
+      box-shadow: 0 10px 30px -16px rgba(84, 95, 57, 0.4);
     }
     .hero-chips li {
       position: relative; padding: 0 18px;
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
-      color: var(--ink-soft); letter-spacing: 0.01em;
+      font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+      color: var(--ink); letter-spacing: 0.005em;
     }
     .hero-chips li + li::before {
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 1px; height: 12px; background: var(--line);
+      width: 1px; height: 13px; background: rgba(84, 95, 57, 0.28);
     }
 
     /* scroll cue — quietly promises there's more below */
@@ -1902,10 +1908,12 @@
     </g>
 
     <!-- birds -->
-    <g stroke="#78815C" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55">
+    <g stroke="#78815C" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5">
       <path d="M560,246 q12,-11 24,0 q12,-11 24,0" />
       <path d="M648,282 q9,-8 18,0 q9,-8 18,0" />
       <path d="M516,300 q8,-7 16,0 q8,-7 16,0" />
+      <path d="M602,262 q10,-9 20,0 q10,-9 20,0" />
+      <path d="M694,256 q8,-7 16,0 q8,-7 16,0" />
     </g>
 
     <!-- hill 1 (far) + haze -->
@@ -1922,6 +1930,9 @@
       <use href="#gcPine" x="1008" y="653" width="12" height="18" />
       <use href="#gcPine" x="1300" y="655" width="15" height="21" />
       <use href="#gcPine" x="1330" y="660" width="13" height="18" />
+      <use href="#gcPine" x="512" y="670" width="13" height="19" />
+      <use href="#gcPine" x="700" y="664" width="14" height="20" />
+      <use href="#gcPine" x="732" y="668" width="12" height="17" />
     </g>
     <rect x="0" y="670" width="1440" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
 
@@ -1938,6 +1949,7 @@
 
     <!-- hill 4 (front) + foreground pines -->
     <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#6E7B4C" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#F5E6C0" opacity="0.15" filter="url(#gcSoft)" />
     <g fill="#545F39">
       <use href="#gcPine" x="66" y="756" width="34" height="52" />
       <use href="#gcPine" x="116" y="744" width="44" height="66" />
