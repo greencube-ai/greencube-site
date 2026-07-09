@@ -252,23 +252,20 @@
        just headline, breath, and a soft pill row. The whitespace is the design. */
     .hero {
       position: relative;
-      min-height: 80vh;
-      padding: 150px 0 104px;
+      min-height: 94vh;
+      padding: 16vh 24px 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       text-align: center;
       overflow: hidden;
+      background: linear-gradient(180deg, #F7F2E8 0%, #F5EFE1 54%, #F0E8D5 100%);
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 45% at 50% 25%, rgba(201, 169, 97, 0.14), transparent 60%),
-        radial-gradient(ellipse 80% 55% at 50% 95%, rgba(91, 138, 110, 0.10), transparent 60%);
-      z-index: 0;
+    .hero-landscape {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; display: block;
     }
     .hero .wrap {
       position: relative;
@@ -324,9 +321,10 @@
       display: inline-flex; flex-direction: column; align-items: center; gap: 7px;
       font-family: var(--sans); font-size: 11px; font-weight: 600;
       letter-spacing: 0.16em; text-transform: uppercase; color: #8A8275;
+      color: rgba(250, 248, 240, 0.8);
       z-index: 3; opacity: 0; animation: cueIn 0.8s var(--ease-out) 1.4s forwards;
     }
-    .scroll-cue:hover { color: var(--forest); }
+    .scroll-cue:hover { color: #fff; }
     .scroll-cue .chev { font-size: 17px; line-height: 1; animation: cueBounce 1.9s ease-in-out infinite; }
     @keyframes cueIn { to { opacity: 1; } }
     @keyframes cueBounce { 0%, 100% { transform: translateY(0); opacity: 0.55; } 50% { transform: translateY(5px); opacity: 1; } }
@@ -1873,6 +1871,21 @@
 
 <!-- =========== HERO =========== -->
 <section class="hero" id="top">
+  <svg class="hero-landscape" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="gcSun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#F9EDCC" />
+        <stop offset="42%" stop-color="#EFDCB0" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#EFDCB0" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="1090" cy="320" r="310" fill="url(#gcSun)" />
+    <circle cx="1090" cy="320" r="56" fill="#F8ECCD" />
+    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#CBD2B2" opacity="0.92" />
+    <path d="M0,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1440,900 L0,900 Z" fill="#B0BD93" />
+    <path d="M0,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1440,900 L0,900 Z" fill="#8F9D6C" />
+    <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#6E7B4C" />
+  </svg>
   <div class="wrap">
     <h1>
       <span class="rv-mask"><span>AI that's <em>yours.</em></span></span>
