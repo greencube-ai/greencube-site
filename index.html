@@ -1878,13 +1878,73 @@
         <stop offset="42%" stop-color="#EFDCB0" stop-opacity="0.5" />
         <stop offset="100%" stop-color="#EFDCB0" stop-opacity="0" />
       </radialGradient>
+      <filter id="gcSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10" /></filter>
+      <linearGradient id="gcMist" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F7F1E4" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#F7F1E4" stop-opacity="0" />
+      </linearGradient>
+      <symbol id="gcPine" viewBox="0 0 24 34" overflow="visible">
+        <path d="M12,1 L4.5,12 L8.5,12 L2,20 L8,20 L4,27 L20,27 L16,20 L22,20 L15.5,12 L19.5,12 Z" />
+        <rect x="11" y="26" width="2" height="7" />
+      </symbol>
     </defs>
-    <circle cx="1090" cy="320" r="310" fill="url(#gcSun)" />
-    <circle cx="1090" cy="320" r="56" fill="#F8ECCD" />
-    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#CBD2B2" opacity="0.92" />
+
+    <!-- sun -->
+    <circle cx="1090" cy="315" r="320" fill="url(#gcSun)" />
+    <circle cx="1090" cy="315" r="55" fill="#F8ECCD" />
+
+    <!-- soft clouds -->
+    <g fill="#FBF6EA" filter="url(#gcSoft)" opacity="0.7">
+      <ellipse cx="300" cy="205" rx="140" ry="25" />
+      <ellipse cx="380" cy="228" rx="95" ry="18" />
+      <ellipse cx="845" cy="138" rx="120" ry="22" />
+      <ellipse cx="905" cy="158" rx="78" ry="15" />
+    </g>
+
+    <!-- birds -->
+    <g stroke="#78815C" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55">
+      <path d="M560,246 q12,-11 24,0 q12,-11 24,0" />
+      <path d="M648,282 q9,-8 18,0 q9,-8 18,0" />
+      <path d="M516,300 q8,-7 16,0 q8,-7 16,0" />
+    </g>
+
+    <!-- hill 1 (far) + haze -->
+    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#CBD2B2" />
+    <rect x="0" y="598" width="1440" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
+
+    <!-- hill 2 + distant pines -->
     <path d="M0,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1440,900 L0,900 Z" fill="#B0BD93" />
+    <g fill="#99A77D">
+      <use href="#gcPine" x="120" y="650" width="15" height="22" />
+      <use href="#gcPine" x="150" y="655" width="13" height="19" />
+      <use href="#gcPine" x="184" y="652" width="14" height="20" />
+      <use href="#gcPine" x="980" y="648" width="14" height="20" />
+      <use href="#gcPine" x="1008" y="653" width="12" height="18" />
+      <use href="#gcPine" x="1300" y="655" width="15" height="21" />
+      <use href="#gcPine" x="1330" y="660" width="13" height="18" />
+    </g>
+    <rect x="0" y="670" width="1440" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
+
+    <!-- hill 3 + mid pines -->
     <path d="M0,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1440,900 L0,900 Z" fill="#8F9D6C" />
+    <g fill="#79875A">
+      <use href="#gcPine" x="356" y="716" width="24" height="34" />
+      <use href="#gcPine" x="408" y="726" width="20" height="28" />
+      <use href="#gcPine" x="452" y="720" width="22" height="31" />
+      <use href="#gcPine" x="1120" y="722" width="22" height="31" />
+      <use href="#gcPine" x="1166" y="730" width="19" height="26" />
+    </g>
+    <rect x="0" y="742" width="1440" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
+
+    <!-- hill 4 (front) + foreground pines -->
     <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#6E7B4C" />
+    <g fill="#545F39">
+      <use href="#gcPine" x="66" y="756" width="34" height="52" />
+      <use href="#gcPine" x="116" y="744" width="44" height="66" />
+      <use href="#gcPine" x="184" y="762" width="30" height="46" />
+      <use href="#gcPine" x="1248" y="754" width="40" height="60" />
+      <use href="#gcPine" x="1314" y="768" width="30" height="46" />
+    </g>
   </svg>
   <div class="wrap">
     <h1>
