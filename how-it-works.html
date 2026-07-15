@@ -50,14 +50,13 @@
     body.ready { opacity: 1; }
 
     :root {
-      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3;
-      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #8A8275; --line: #DDD8CE;
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
       --olive: #7E8A5A; --olive-deep: #5C663F; --gold: #C9A961;
-      --night: #131310;
-      --on-dark: #F1EEE4; --on-dark-soft: rgba(241,238,228,.62); --on-dark-mute: rgba(241,238,228,.34); --on-dark-line: rgba(241,238,228,.13);
       --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
       --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
     }
     *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
@@ -65,82 +64,119 @@
     a { color: inherit; text-decoration: none; }
     em { font-style: normal; color: var(--olive); }
 
-    .wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
-    .wrap-wide { max-width: 1060px; }
-
     header { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 16px 30px; background: rgba(245,241,232,.85); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); border-bottom: 1px solid var(--line); }
     .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -.01em; }
     .brand .mark { width: 14px; height: 14px; border: 1.6px solid currentColor; border-radius: 4px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; font-weight: 600; color: var(--ink); padding: 7px 15px; border: 1px solid var(--line); border-radius: 999px; transition: border-color .3s var(--ease), background .3s var(--ease); }
     .back:hover { border-color: var(--ink); background: var(--paper-warm); }
-    .nav-cta { font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 8px 17px; border-radius: 999px; transition: transform .3s var(--ease); }
-    .nav-cta:hover { transform: translateY(-1px); }
+    .nav-cta { font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 8px 17px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; }
     @media (max-width: 620px) { .back { display: none; } }
 
-    .eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); }
+    .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); text-align: center; }
+    .panel { margin: 10px; border-radius: 18px; background: var(--paper-warm); border: 1px solid var(--line); }
+    .inner { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+    .narrow { max-width: 760px; margin: 0 auto; padding: 0 28px; }
 
-    .hero { padding: 104px 0 92px; text-align: center; }
-    .hero .eyebrow { margin-bottom: 22px; }
-    .hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px,5.6vw,64px); line-height: 1.02; letter-spacing: -.035em; margin-bottom: 24px; }
-    .hero p { font-size: clamp(16.5px,1.5vw,19.5px); color: var(--ink-soft); max-width: 50ch; margin: 0 auto; }
+    h2.sec {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(28px, 3.8vw, 46px); line-height: 1.08; letter-spacing: -.03em;
+      color: var(--ink); text-align: center;
+    }
+    h2.sec .mute { color: var(--ink-mute); }
+    .sec-sub { font-size: 16.5px; color: var(--ink-soft); text-align: center; max-width: 54ch; margin: 16px auto 0; }
 
-    .dark { background: var(--night); color: var(--on-dark); padding: 96px 0; margin: 10px; border-radius: 18px; border: 1px solid var(--on-dark-line); }
-    .dark .eyebrow { color: var(--gold); }
-    .band-head { text-align: center; margin-bottom: 76px; }
-    .band-head .eyebrow { margin-bottom: 18px; }
-    .band-head h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px,3.6vw,42px); letter-spacing: -.03em; line-height: 1.1; color: var(--on-dark); }
+    .phero { padding: 108px 0 84px; text-align: center; }
+    .phero .eyebrow { margin-bottom: 20px; }
+    .phero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(36px, 5.8vw, 68px); line-height: 1.02; letter-spacing: -.035em; margin-bottom: 22px; }
+    .phero h1 .mute { color: var(--ink-mute); }
+    .phero p { font-size: clamp(16.5px, 1.5vw, 19px); color: var(--ink-soft); max-width: 52ch; margin: 0 auto; }
 
-    .truth { display: grid; grid-template-columns: 72px 1fr; gap: 28px; padding: 44px 0; border-top: 1px solid var(--on-dark-line); }
-    .truth:last-of-type { border-bottom: 1px solid var(--on-dark-line); }
-    .truth .n { font-family: var(--display); font-weight: 600; font-size: 15px; color: var(--gold); letter-spacing: .06em; padding-top: 10px; }
-    .truth h3 { font-family: var(--display); font-weight: 600; font-size: clamp(23px,2.9vw,34px); line-height: 1.14; letter-spacing: -.025em; color: var(--on-dark); margin-bottom: 14px; }
-    .truth p { font-size: 16.5px; line-height: 1.66; color: var(--on-dark-soft); margin-bottom: 12px; }
-    .truth p strong { color: var(--on-dark); font-weight: 600; }
-    .src { font-size: 12.5px; color: var(--on-dark-mute); }
-    .src a { color: var(--on-dark-mute); border-bottom: 1px solid var(--on-dark-line); }
-    .src a:hover { color: var(--gold); border-color: var(--gold); }
-    @media (max-width: 620px) { .truth { grid-template-columns: 1fr; gap: 8px; } .truth .n { padding-top: 0; } }
+    .truths { padding: 84px 0 92px; }
+    .truth-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .truth {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 30px 28px 26px; box-shadow: var(--shadow-card);
+      display: flex; flex-direction: column;
+      transition: transform .4s var(--ease), box-shadow .5s var(--ease), border-color .4s var(--ease);
+    }
+    .truth:hover { transform: translateY(-4px); border-color: var(--olive); box-shadow: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7); }
+    .truth .n {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(126,138,90,.14); color: var(--olive-deep);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-weight: 600; font-size: 13.5px;
+      margin-bottom: 20px;
+    }
+    .truth h3 { font-family: var(--display); font-weight: 600; font-size: 20.5px; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 12px; }
+    .truth p { font-size: 14.5px; line-height: 1.62; color: var(--ink-soft); margin-bottom: 12px; }
+    .truth p strong { color: var(--ink); font-weight: 600; }
+    .truth .src { margin-top: auto; font-size: 12px; color: var(--ink-mute); }
+    .truth .src a { border-bottom: 1px solid var(--line); }
+    .truth .src a:hover { color: var(--olive-deep); border-color: var(--olive-deep); }
+    @media (max-width: 860px) { .truth-grid { grid-template-columns: 1fr; } }
 
-    .quote { background: var(--paper-warm); padding: 108px 0; text-align: center; margin: 10px; border-radius: 18px; border: 1px solid var(--line); }
-    .quote blockquote { font-family: var(--display); font-weight: 600; font-size: clamp(30px,5vw,58px); line-height: 1.06; letter-spacing: -.035em; color: var(--ink); margin-bottom: 28px; }
-    .quote blockquote span { color: var(--olive); }
-    .quote p { font-size: 17px; color: var(--ink-soft); max-width: 52ch; margin: 0 auto 30px; }
-
-    .tbl-wrap { max-width: 520px; margin: 0 auto; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper-soft); }
-    table { width: 100%; border-collapse: collapse; font-size: 15px; }
-    th, td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); }
-    th { font-family: var(--display); font-weight: 600; background: var(--paper); }
-    tr:last-child td { border-bottom: none; }
-    td { color: var(--ink-soft); }
+    .quote { padding: 96px 0; text-align: center; }
+    .quote .eyebrow { margin-bottom: 18px; }
+    .quote blockquote { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 4.8vw, 56px); line-height: 1.05; letter-spacing: -.035em; color: var(--ink); }
+    .quote blockquote .mute { color: var(--ink-mute); }
+    .quote > .narrow > p { font-size: 16.5px; color: var(--ink-soft); max-width: 52ch; margin: 22px auto 36px; }
+    .plans {
+      max-width: 560px; margin: 0 auto; background: var(--card);
+      border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+      box-shadow: var(--shadow-card); text-align: left;
+    }
+    .plans table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .plans th, .plans td { padding: 13px 20px; border-bottom: 1px solid var(--line); }
+    .plans th { font-family: var(--display); font-weight: 600; background: var(--paper-soft); font-size: 13.5px; }
+    .plans tr:last-child td { border-bottom: none; }
+    .plans td { color: var(--ink-soft); }
     .bad { color: #A2543F; font-weight: 600; }
     .good { color: var(--olive-deep); font-weight: 600; }
+    .quote .fine { font-size: 13.5px; color: var(--ink-mute); margin-top: 22px; }
 
-    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 56px; }
-    .stat { text-align: center; }
-    .stat .big { font-family: var(--display); font-weight: 600; font-size: clamp(32px,4vw,50px); letter-spacing: -.03em; color: var(--gold); line-height: 1; margin-bottom: 16px; white-space: nowrap; }
-    .stat h4 { font-size: 15.5px; font-weight: 600; color: var(--on-dark); margin-bottom: 10px; }
-    .stat p { font-size: 14px; color: var(--on-dark-soft); line-height: 1.62; max-width: 30ch; margin: 0 auto; }
-    @media (max-width: 760px) { .stats { grid-template-columns: 1fr; gap: 48px; } }
+    .cost { padding: 84px 0 92px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .stat {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 34px 28px; text-align: center; box-shadow: var(--shadow-card);
+    }
+    .stat .big { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 3.6vw, 46px); letter-spacing: -.03em; color: var(--olive-deep); line-height: 1; margin-bottom: 14px; white-space: nowrap; }
+    .stat h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .stat p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; max-width: 30ch; margin: 0 auto; }
+    .cost .fine { text-align: center; font-size: 13px; color: var(--ink-mute); margin-top: 30px; }
+    .cost .fine a { border-bottom: 1px solid var(--line); }
+    .cost .fine a:hover { color: var(--olive-deep); border-color: var(--olive-deep); }
+    @media (max-width: 860px) { .stat-grid { grid-template-columns: 1fr; } }
 
     .turn { padding: 108px 0 96px; text-align: center; }
-    .turn h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px,4.6vw,56px); letter-spacing: -.035em; line-height: 1.04; margin-bottom: 20px; }
-    .turn > .wrap > p { font-size: 18px; color: var(--ink-soft); max-width: 48ch; margin: 0 auto 52px; }
-    .points { list-style: none; display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; text-align: left; margin-bottom: 52px; }
-    .points li { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 15px; padding: 22px 24px; }
-    .points strong { display: block; font-family: var(--display); font-weight: 600; font-size: 16px; margin-bottom: 5px; letter-spacing: -.01em; }
-    .points span { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
-    @media (max-width: 680px) { .points { grid-template-columns: 1fr; } }
+    .turn .eyebrow { margin-bottom: 18px; }
+    .turn h2.sec { margin-bottom: 18px; }
+    .turn .sec-sub { margin-bottom: 52px; }
+    .points { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: left; margin-bottom: 56px; }
+    .points li { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 22px; box-shadow: var(--shadow-card); }
+    .points .tick { width: 26px; height: 26px; border-radius: 50%; background: rgba(126,138,90,.15); color: var(--olive-deep); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+    .points strong { display: block; font-family: var(--display); font-weight: 600; font-size: 15.5px; margin-bottom: 5px; letter-spacing: -.01em; }
+    .points span { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+    @media (max-width: 980px) { .points { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .points { grid-template-columns: 1fr; } }
 
-    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(20px,2.5vw,30px); letter-spacing: -.025em; color: var(--ink); max-width: 24ch; margin: 0 auto 46px; line-height: 1.18; }
-    .kicker-line em { color: var(--olive); }
+    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(20px, 2.5vw, 29px); letter-spacing: -.025em; color: var(--ink); max-width: 26ch; margin: 0 auto 44px; line-height: 1.2; }
 
-    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; transition: transform .3s var(--ease), box-shadow .4s var(--ease); }
-    .cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -16px rgba(0,0,0,.45); }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease), box-shadow .5s var(--ease); }
+    .cta:hover { transform: translateY(-2px); background: #000; box-shadow: 0 3px 6px rgba(26,26,26,.16), 0 20px 44px -16px rgba(26,26,26,.6), inset 0 1px 0 rgba(255,255,255,.16); }
     .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
 
-    .readmore { margin-top: 54px; font-size: 14.5px; color: var(--ink-mute); }
-    .readmore a { color: var(--olive-deep); border-bottom: 1px solid var(--line); }
-    .readmore a:hover { color: var(--ink); border-color: var(--ink); }
+    .faq { padding: 88px 0 96px; }
+    .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .qa { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px 26px; box-shadow: var(--shadow-card); }
+    .qa .q-ico { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--paper); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; font-family: var(--display); margin-bottom: 14px; }
+    .qa h3 { font-family: var(--display); font-weight: 600; font-size: 16.5px; letter-spacing: -.01em; margin-bottom: 8px; }
+    .qa p { font-size: 14px; color: var(--ink-soft); line-height: 1.62; }
+    .faq .more { text-align: center; margin-top: 34px; font-size: 14.5px; color: var(--ink-mute); }
+    .faq .more a { color: var(--olive-deep); border-bottom: 1px solid var(--line); }
+    .faq .more a:hover { color: var(--ink); border-color: var(--ink); }
+    @media (max-width: 760px) { .faq-grid { grid-template-columns: 1fr; } }
 
     footer { border-top: 1px solid var(--line); padding: 40px 0 48px; }
     footer .row { max-width: 1080px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-mute); }
@@ -157,57 +193,49 @@
   <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow">The deal nobody reads</div>
-    <h1>You're not the customer.<br>You're the <em>training data.</em></h1>
-    <p>Every question you type into a cloud AI leaves your computer. What happens to it next isn't a conspiracy &mdash; it's written down, in their own documentation. Most people have just never read it.</p>
+<section class="phero">
+  <div class="narrow">
+    <span class="eyebrow">Why GreenCube</span>
+    <h1>You're not the customer.<br><span class="mute">You're the training data.</span></h1>
+    <p>Every question you type into a cloud AI leaves your computer. What happens next isn't a conspiracy &mdash; it's written in their own documentation. Most people have just never read it.</p>
   </div>
 </section>
 
-<section class="dark">
-  <div class="wrap">
-    <div class="band-head">
-      <div class="eyebrow">What actually happens to your words</div>
-      <h2>Three things they tell you, quietly.</h2>
-    </div>
-
-    <div class="truth">
-      <div class="n">01</div>
-      <div>
-        <h3>By default, they train on you.</h3>
-        <p>On ChatGPT's consumer plans &mdash; Free, Plus, Go, Pro &mdash; <strong>your conversations are used to train the model unless you go and switch it off.</strong> It isn't opt-in. It's opt-out, and the default favours them.</p>
-        <p class="src"><a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">OpenAI &mdash; how your data is used to improve model performance</a></p>
+<div class="panel">
+  <section class="truths">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">In their own words</span>
+      <h2 class="sec">Three things they tell you, <span class="mute">quietly.</span></h2>
+      <div class="truth-grid" style="margin-top: 54px;">
+        <article class="truth">
+          <span class="n">01</span>
+          <h3>By default, they train on you.</h3>
+          <p>On ChatGPT's consumer plans &mdash; Free, Plus, Go, Pro &mdash; <strong>your conversations train the model unless you switch it off.</strong> It isn't opt-in. It's opt-out, and the default favours them.</p>
+          <p class="src"><a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">Source: OpenAI documentation</a></p>
+        </article>
+        <article class="truth">
+          <span class="n">02</span>
+          <h3>People can read them.</h3>
+          <p>Not "an algorithm." People. OpenAI states that <strong>authorized employees and third-party contractors</strong> may access your conversations. Whatever you typed at 2am sits on a server, attached to your email, readable.</p>
+          <p class="src"><a href="https://openai.com/policies/row-privacy-policy/" target="_blank" rel="noopener">Source: OpenAI privacy policy</a></p>
+        </article>
+        <article class="truth">
+          <span class="n">03</span>
+          <h3>Deleted doesn't mean gone.</h3>
+          <p>A court ordered OpenAI to preserve chat logs &mdash; <strong>including conversations people had already deleted.</strong> Once your words are on someone else's computer, deletion is a policy, not a fact.</p>
+          <p class="src"><a href="https://openai.com/index/response-to-nyt-data-demands/" target="_blank" rel="noopener">Source: OpenAI on the NYT data demands</a></p>
+        </article>
       </div>
     </div>
-
-    <div class="truth">
-      <div class="n">02</div>
-      <div>
-        <h3>People can read them.</h3>
-        <p>Not "an algorithm." People. OpenAI states that <strong>authorized employees and specialized third-party contractors</strong> may access your conversations &mdash; for engineering support, to investigate abuse, and for legal compliance.</p>
-        <p>Whatever you typed at 2am sits on a server, attached to your email address, readable.</p>
-        <p class="src"><a href="https://openai.com/policies/row-privacy-policy/" target="_blank" rel="noopener">OpenAI &mdash; privacy policy</a></p>
-      </div>
-    </div>
-
-    <div class="truth">
-      <div class="n">03</div>
-      <div>
-        <h3>Deleted doesn't mean gone.</h3>
-        <p>During the New York Times' litigation, <strong>a court ordered OpenAI to preserve user chat logs &mdash; including conversations people had already deleted.</strong> OpenAI publicly fought the order.</p>
-        <p>That's the part worth sitting with. Once your words are on someone else's computer, <strong>deletion is a policy, not a fact.</strong> A court, a subpoena, or a breach can undo it &mdash; and nobody has to ask you.</p>
-        <p class="src"><a href="https://openai.com/index/response-to-nyt-data-demands/" target="_blank" rel="noopener">OpenAI &mdash; responding to the NYT's data demands</a></p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <section class="quote">
-  <div class="wrap">
-    <blockquote>Consumers pay with data.<br><span>Businesses pay with money.</span></blockquote>
+  <div class="narrow">
+    <span class="eyebrow">The pattern</span>
+    <blockquote style="margin-top:18px">Consumers pay with data.<br><span class="mute">Businesses pay with money.</span></blockquote>
     <p>Look at who gets privacy. ChatGPT Team, Enterprise and the API are <strong>not</strong> trained on. The free and cheap consumer plans are. Privacy isn't a principle in that model &mdash; it's an upsell.</p>
-    <div class="tbl-wrap">
+    <div class="plans">
       <table>
         <thead><tr><th>Plan</th><th>Trains on your chats?</th></tr></thead>
         <tbody>
@@ -217,62 +245,92 @@
         </tbody>
       </table>
     </div>
+    <p class="fine">Per OpenAI's own plan documentation.</p>
   </div>
 </section>
 
-<section class="dark">
-  <div class="wrap wrap-wide">
-    <div class="band-head">
-      <div class="eyebrow">And there's a bill you never see</div>
-      <h2>Someone else's warehouse is drinking for your questions.</h2>
+<div class="panel">
+  <section class="cost">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">The bill you never see</span>
+      <h2 class="sec">Someone else's warehouse is <span class="mute">drinking for your questions.</span></h2>
+      <div class="stat-grid" style="margin-top: 54px;">
+        <div class="stat">
+          <div class="big">&frac12; litre</div>
+          <h4>of fresh water, per short chat</h4>
+          <p>20&ndash;50 questions to a cloud AI evaporates about half a litre of clean water cooling the servers.</p>
+        </div>
+        <div class="stat">
+          <div class="big">700,000 L</div>
+          <h4>to train a single model</h4>
+          <p>GPT-3's training drank as much fresh water as building 370 cars. One model, one training run.</p>
+        </div>
+        <div class="stat">
+          <div class="big">2&times; by 2030</div>
+          <h4>the world's data-centre power</h4>
+          <p>Data centres already burn ~1.5% of global electricity. The IEA expects that to roughly double.</p>
+        </div>
+      </div>
+      <p class="fine">
+        Sources: <a href="https://news.ucr.edu/articles/2023/04/28/ai-programs-consume-large-volumes-scarce-water" target="_blank" rel="noopener">UC Riverside</a> &middot;
+        <a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener">IEA</a> &middot;
+        estimates vary by method &mdash; <a href="/how-much-water-does-ai-use">we break the numbers down honestly</a>.
+      </p>
     </div>
-    <div class="stats">
-      <div class="stat">
-        <div class="big">&frac12; litre</div>
-        <h4>of fresh water, per short chat</h4>
-        <p>Ask a cloud AI 20&ndash;50 questions and roughly half a litre of clean water is evaporated cooling the servers.</p>
-      </div>
-      <div class="stat">
-        <div class="big">700,000 L</div>
-        <h4>to train a single model</h4>
-        <p>GPT-3's training drank about as much fresh water as building 370 cars. That's one model, one training run.</p>
-      </div>
-      <div class="stat">
-        <div class="big">2&times; by 2030</div>
-        <h4>the world's data-centre power</h4>
-        <p>Data centres already burn ~1.5% of global electricity. The IEA expects that to roughly double this decade.</p>
-      </div>
-    </div>
-    <p class="src" style="text-align:center;margin-top:50px">
-      Sources: <a href="https://news.ucr.edu/articles/2023/04/28/ai-programs-consume-large-volumes-scarce-water" target="_blank" rel="noopener">UC Riverside</a> &middot;
-      <a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener">IEA</a> &middot;
-      water estimates vary by method and location &mdash; <a href="/how-much-water-does-ai-use">we break the numbers down honestly here</a>.
-    </p>
-  </div>
-</section>
+  </section>
+</div>
 
 <section class="turn">
-  <div class="wrap">
-    <h2>So we built the obvious thing.</h2>
-    <p>GreenCube runs the AI on <em>your</em> computer. Not in a warehouse. Not on someone's server. On the machine already in front of you.</p>
+  <div class="inner">
+    <span class="eyebrow">The way out</span>
+    <h2 class="sec">So we built <span class="mute">the obvious thing.</span></h2>
+    <p class="sec-sub">GreenCube runs the AI on <em>your</em> computer. Not in a warehouse. Not on someone's server. On the machine already in front of you.</p>
 
     <ul class="points">
-      <li><strong>Nothing to train on</strong><span>Your words never leave the device. There's no copy on a server to feed a model.</span></li>
-      <li><strong>Nothing to read</strong><span>No employee, no contractor, no reviewer. There is no inbox your chats land in.</span></li>
-      <li><strong>Nothing to preserve</strong><span>No court order can reach a conversation that never existed anywhere but your laptop.</span></li>
-      <li><strong>Nothing to cool</strong><span>No data centre, no evaporating reservoir. Just the computer you already own and power.</span></li>
+      <li><span class="tick" aria-hidden="true">&#10003;</span><strong>Nothing to train on</strong><span>Your words never leave the device. There's no copy on a server to feed a model.</span></li>
+      <li><span class="tick" aria-hidden="true">&#10003;</span><strong>Nothing to read</strong><span>No employee, no contractor, no reviewer. There is no inbox your chats land in.</span></li>
+      <li><span class="tick" aria-hidden="true">&#10003;</span><strong>Nothing to preserve</strong><span>No court order can reach a conversation that never existed anywhere but your laptop.</span></li>
+      <li><span class="tick" aria-hidden="true">&#10003;</span><strong>Nothing to cool</strong><span>No data centre, no evaporating reservoir. Just the computer you already own.</span></li>
     </ul>
 
     <div class="kicker-line">The only conversation nobody can read is the one that <em>never left.</em></div>
 
     <a href="/buy" class="cta">Get GreenCube &mdash; &euro;9 <span aria-hidden="true">&rarr;</span></a>
     <span class="cta-sub">One-time payment. No subscription. Runs fully offline after a single sign-in.</span>
-
-    <div class="readmore">
-      Go deeper: <a href="/does-chatgpt-train-on-your-data">Does ChatGPT train on your data?</a> &middot; <a href="/how-much-water-does-ai-use">How much water does AI use?</a>
-    </div>
   </div>
 </section>
+
+<div class="panel">
+  <section class="faq">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">Questions</span>
+      <h2 class="sec">Asked before you <span class="mute">get started.</span></h2>
+      <div class="faq-grid" style="margin-top: 54px;">
+        <article class="qa">
+          <span class="q-ico" aria-hidden="true">?</span>
+          <h3>Does cloud AI really train on my conversations?</h3>
+          <p>On ChatGPT's consumer plans (Free, Plus, Go, Pro), yes &mdash; by default, unless you find the opt-out in settings. Business plans and the API are not trained on by default.</p>
+        </article>
+        <article class="qa">
+          <span class="q-ico" aria-hidden="true">?</span>
+          <h3>Can people actually read my chats?</h3>
+          <p>Yes. OpenAI states authorized employees and specialized contractors may access conversations for engineering support, abuse investigation and legal compliance.</p>
+        </article>
+        <article class="qa">
+          <span class="q-ico" aria-hidden="true">?</span>
+          <h3>If I delete a chat, is it gone?</h3>
+          <p>Not necessarily. A court ordered OpenAI to preserve chat logs that would otherwise have been deleted &mdash; including chats users deleted themselves. On someone else's server, deletion is a policy, not a fact.</p>
+        </article>
+        <article class="qa">
+          <span class="q-ico" aria-hidden="true">?</span>
+          <h3>How is GreenCube different?</h3>
+          <p>The AI model runs locally on your own computer. Your conversations never leave your device &mdash; nothing to store, review, train on, or subpoena. One payment, fully offline after a single sign-in.</p>
+        </article>
+      </div>
+      <p class="more">Go deeper: <a href="/does-chatgpt-train-on-your-data">Does ChatGPT train on your data?</a> &middot; <a href="/how-much-water-does-ai-use">How much water does AI use?</a></p>
+    </div>
+  </section>
+</div>
 
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
   <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
