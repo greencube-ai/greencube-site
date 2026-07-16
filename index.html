@@ -141,8 +141,8 @@
     .grain {
       position: fixed; inset: 0;
       z-index: 60; pointer-events: none;
-      opacity: 0.17; mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.24; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     .progress {
       position: fixed; top: 0; left: 0;
@@ -321,12 +321,16 @@
       font-style: normal;
       font-weight: 600;
       font-size: clamp(40px, 6.0vw, 88px);
-      line-height: 1.01;
-      letter-spacing: -0.033em;
+      line-height: 0.97;
+      letter-spacing: -0.028em;
       color: var(--forest);
       margin-bottom: 26px;
       white-space: nowrap;
       text-shadow: none;
+      /* wider but not taller: General Sans has no width axis, so stretch the
+         glyphs horizontally and pull them down a touch vertically */
+      transform: scaleX(1.1) scaleY(0.94);
+      transform-origin: center top;
     }
     .hero h1 em { font-style: normal; color: var(--moss); }
     .hero .lede {
@@ -355,21 +359,6 @@
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
       width: 1px; height: 12px; background: rgba(84, 95, 57, 0.3);
     }
-
-    /* scroll cue — quietly promises there's more below */
-    .scroll-cue {
-      position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
-      display: inline-flex; flex-direction: column; align-items: center; gap: 7px;
-      font-family: var(--sans); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase; color: #8A8275;
-      color: rgba(250, 248, 240, 0.8);
-      z-index: 3; opacity: 0; animation: cueIn 0.8s var(--ease-out) 1.4s forwards;
-    }
-    .scroll-cue:hover { color: #fff; }
-    .scroll-cue .chev { font-size: 17px; line-height: 1; animation: cueBounce 1.9s ease-in-out infinite; }
-    @keyframes cueIn { to { opacity: 1; } }
-    @keyframes cueBounce { 0%, 100% { transform: translateY(0); opacity: 0.55; } 50% { transform: translateY(5px); opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; opacity: 1; } .scroll-cue .chev { animation: none; } }
 
     /* ============== what-it-does capabilities ============== */
     .caps {
@@ -1877,6 +1866,9 @@
         font-size: clamp(40px, 12vw, 72px);
         white-space: normal;
         margin-bottom: 28px;
+        /* the headline wraps here — a horizontal stretch would push it off-screen */
+        transform: none;
+        line-height: 1.0;
         text-shadow:
           0 14px 26px rgba(31, 58, 46, 0.10),
           0 5px 12px rgba(31, 58, 46, 0.05);
@@ -1931,7 +1923,7 @@
     <a href="/how-it-works">Why GreenCube</a>
     <a href="/does-chatgpt-train-on-your-data">Your data</a>
     <a href="/how-much-water-does-ai-use">AI &amp; water</a>
-    <a href="/download">Download</a>
+    <a href="/buy">Download</a>
   </nav>
   <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
@@ -1947,6 +1939,16 @@
         <stop offset="100%" stop-color="#EFDCA8" stop-opacity="0" />
       </radialGradient>
       <filter id="gcSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10" /></filter>
+      <!-- coloured-pencil pass: a long-wavelength warp so the edges wobble like a
+           hand drew them, then fine tooth multiplied into the fill so the colour
+           sits unevenly the way pencil does on paper -->
+      <filter id="gcPencil" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="3" seed="4" result="warp" />
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" xChannelSelector="R" yChannelSelector="G" result="wobbled" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="4" seed="11" result="tooth" />
+        <feColorMatrix in="tooth" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="toothGrey" />
+        <feComposite in="wobbled" in2="toothGrey" operator="arithmetic" k1="0.28" k2="0.72" k3="0" k4="0" />
+      </filter>
       <linearGradient id="gcMist" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#F7F1E4" stop-opacity="0.9" />
         <stop offset="100%" stop-color="#F7F1E4" stop-opacity="0" />
@@ -1986,18 +1988,20 @@
       <path d="M1302,250 q10,-9 20,0 q10,-9 20,0" opacity="0.7" />
     </g>
 
+    <!-- everything below is drawn, so it all takes the pencil pass together -->
+    <g filter="url(#gcPencil)">
     <!-- distant ridge — depth behind the hills, and a cool note against the warm
          green. Kept low and hazy so it reads as distance, not scenery. -->
-    <path d="M0,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1440,700 L0,700 Z" fill="#AFC2CC" opacity="0.42" />
-    <rect x="0" y="540" width="1440" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
+    <path d="M-40,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1480,566 L1480,740 L-40,740 Z" fill="#A3BDCD" opacity="0.46" />
+    <rect x="-40" y="540" width="1520" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
 
     <!-- hill 1 (far) + haze -->
-    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#C6D3A6" />
-    <rect x="0" y="598" width="1440" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
+    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#C4D897" />
+    <rect x="-40" y="598" width="1520" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
 
     <!-- hill 2 + distant pines -->
-    <path d="M0,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1440,900 L0,900 Z" fill="#A9BC84" />
-    <g fill="#8E9F68">
+    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#A1C06D" />
+    <g fill="#87A05B">
       <use href="#gcPine" x="120" y="650" width="15" height="22" />
       <use href="#gcPine" x="150" y="655" width="13" height="19" />
       <use href="#gcPine" x="184" y="652" width="14" height="20" />
@@ -2012,11 +2016,11 @@
       <use href="#gcPine" x="864" y="662" width="13" height="19" />
       <use href="#gcPine" x="1128" y="656" width="12" height="18" />
     </g>
-    <rect x="0" y="670" width="1440" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
+    <rect x="-40" y="670" width="1520" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
 
     <!-- hill 3 + mid pines -->
-    <path d="M0,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1440,900 L0,900 Z" fill="#889B5C" />
-    <g fill="#6F8148">
+    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#7F9B47" />
+    <g fill="#65803A">
       <use href="#gcPine" x="356" y="716" width="24" height="34" />
       <use href="#gcPine" x="408" y="726" width="20" height="28" />
       <use href="#gcPine" x="452" y="720" width="22" height="31" />
@@ -2025,12 +2029,12 @@
       <use href="#gcPine" x="620" y="730" width="20" height="28" />
       <use href="#gcPine" x="1290" y="726" width="21" height="30" />
     </g>
-    <rect x="0" y="742" width="1440" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
+    <rect x="-40" y="742" width="1520" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
 
     <!-- hill 4 (front) + foreground pines -->
-    <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#647341" />
-    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#F7E6B4" opacity="0.2" filter="url(#gcSoft)" />
-    <g fill="#4B5730">
+    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#5A7433" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FAE39F" opacity="0.26" filter="url(#gcSoft)" />
+    <g fill="#3F5524">
       <use href="#gcPine" x="66" y="756" width="34" height="52" />
       <use href="#gcPine" x="116" y="744" width="44" height="66" />
       <use href="#gcPine" x="184" y="762" width="30" height="46" />
@@ -2038,6 +2042,7 @@
       <use href="#gcPine" x="1314" y="768" width="30" height="46" />
       <use href="#gcPine" x="240" y="774" width="24" height="36" />
       <use href="#gcPine" x="1196" y="772" width="26" height="40" />
+    </g>
     </g>
   </svg>
   <div class="wrap">
@@ -2057,10 +2062,6 @@
       <a href="how-it-works.html" class="cta-pill cta-ghost">Why GreenCube <span class="arrow">→</span></a>
     </div>
   </div>
-  <a href="#what" class="scroll-cue" aria-label="See what it does">
-    <span>See what it does</span>
-    <span class="chev" aria-hidden="true">↓</span>
-  </a>
 </section>
 
 <!-- =========== WHAT IT DOES — three honest capabilities =========== -->
