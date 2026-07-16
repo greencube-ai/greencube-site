@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6ZN19GZEP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6ZN19GZEP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AI's environmental impact — what the data centres actually cost (2026)</title>
+  <meta name="description" content="Data centre electricity doubles to ~945 TWh by 2030. Google's power use rose 37% in a single year. Microsoft's emissions went from 13 to 20 million tons while pledging carbon negative. One large data centre drinks as much water as a town. The verified numbers — and the ones we won't overstate." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="AI's environmental impact — what the data centres actually cost" />
+  <meta property="og:description" content="The companies promising net zero are building this, and their own reports show them going backwards. The verified numbers, with sources." />
+  <meta property="og:url" content="https://greencube.app/ai-environmental-impact" />
+  <meta property="og:type" content="article" />
+  <link rel="canonical" href="https://greencube.app/ai-environmental-impact" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231A1A1A' stroke-width='3'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AI's environmental impact — what the data centres actually cost",
+    "description": "Verified figures on data centre electricity, emissions and water from the IEA, Google's and Microsoft's own environmental reports, UC Riverside and EESI — including the claims that do not hold up.",
+    "datePublished": "2026-07-16",
+    "dateModified": "2026-07-16",
+    "author": { "@type": "Organization", "name": "GreenCube", "url": "https://greencube.app" },
+    "publisher": { "@type": "Organization", "name": "GreenCube", "url": "https://greencube.app" },
+    "mainEntityOfPage": "https://greencube.app/ai-environmental-impact"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How much electricity do AI data centres use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The IEA estimates data centres consumed around 415 terawatt hours in 2024, about 1.5% of global electricity. It projects that roughly doubles to around 945 TWh by 2030, just under 3% of world consumption, growing about 15% a year — more than four times faster than electricity demand from all other sectors combined." } },
+      { "@type": "Question", "name": "Are Big Tech's emissions rising because of AI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, according to their own reports. Microsoft's emissions rose from 13 million tons of CO2 equivalent in 2020 to 20 million tons in 2025, a 54% increase, including a 25% rise in a single year, while the company is publicly pledged to be carbon negative by 2030. Google reported a 37% annual increase in electricity demand in 2025 and a 25% year-over-year rise in supply chain emissions." } },
+      { "@type": "Question", "name": "How much water does a data centre use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A large data centre can consume up to 5 million gallons per day — comparable to a town of 10,000 to 50,000 people. US data centres consumed about 449 million gallons per day as of 2021. Much of it is evaporated for cooling rather than returned." } },
+      { "@type": "Question", "name": "Is AI destroying the planet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not on its own, and it is worth being precise. The IEA puts data centres at about 1.5% of global electricity in 2024 rising to just under 3% by 2030, and says data centre growth accounts for less than 10% of global electricity demand growth to 2030. The genuine concerns are the speed of growth, the local water and land impacts, and that the companies building it are missing their own climate targets." } },
+      { "@type": "Question", "name": "Does running AI locally use less energy?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Per query, consumer hardware is measurably less energy-efficient than purpose-built data centre accelerators — research measuring intelligence per joule found cloud chips outperform a high-end local machine by roughly 1.6x to 7.4x, even at batch size one. Running locally avoids data centre cooling water and does not require new data centre capacity to be built, but it is not more energy-efficient per answer." } }
+    ]
+  }
+  </script>
+
+  <style>
+    html { background: #F5F1E8; }
+    body { opacity: 0; transition: opacity .5s ease; }
+    body.ready { opacity: 1; }
+
+    :root {
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
+      --olive: #7E8A5A; --olive-deep: #5C663F;
+      --sun: #D9A93F; --sun-deep: #A87C1E;
+      --clay: #C0794F; --clay-deep: #93502A;
+      --sky: #6E97BE; --sky-deep: #416A90;
+      --night: #242A15;
+      --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
+      --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    em { font-style: normal; color: var(--olive); }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 60; pointer-events: none;
+      opacity: .24; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 14px 30px; background: rgba(245,241,232,.88);
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -.01em; flex: 0 0 auto; }
+    .brand .mark { width: 14px; height: 14px; border: 1.7px solid var(--olive); border-radius: 4px; }
+    .nav { display: inline-flex; align-items: center; gap: 4px; }
+    .nav a { position: relative; font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 9px; white-space: nowrap; transition: color .25s var(--ease), background .25s var(--ease); }
+    .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
+    .nav a.on { color: var(--ink); font-weight: 600; }
+    .nav a.on::after { content:''; position:absolute; left:13px; right:13px; bottom:2px; height:2px; border-radius:2px; background: var(--olive); }
+    @media (max-width: 940px) { .nav { display: none; } }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; }
+
+    .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); text-align: center; }
+    .band { position: relative; background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+    h2.sec { font-family: var(--display); font-weight: 600; font-size: clamp(28px,3.8vw,46px); line-height: 1.08; letter-spacing: -.03em; text-align: center; }
+    h2.sec .mute { color: var(--ink-mute); }
+    .sec-sub { font-size: 16.5px; color: var(--ink-soft); text-align: center; max-width: 58ch; margin: 16px auto 0; }
+    .src { font-size: 11.5px; color: var(--ink-mute); }
+    .src a { border-bottom: 1px solid var(--line); }
+    .src a:hover { color: var(--olive-deep); border-color: var(--olive-deep); }
+
+    /* hero */
+    .phero { position: relative; padding: 100px 0 84px; text-align: center; overflow: hidden; }
+    .phero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 46% 44% at 80% 10%, rgba(192,121,79,.16), transparent 62%),
+        radial-gradient(ellipse 52% 46% at 14% 26%, rgba(110,151,190,.12), transparent 62%);
+    }
+    .phero > div { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; padding: 0 32px; }
+    .phero .eyebrow { margin-bottom: 20px; color: var(--clay-deep); }
+    .phero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(36px,5.4vw,62px); line-height: 1.02; letter-spacing: -.035em; margin-bottom: 24px; max-width: 18ch; margin-left: auto; margin-right: auto; }
+    .phero h1 .mute { color: var(--ink-mute); }
+    .phero p { font-size: clamp(17px,1.55vw,20px); color: var(--ink-soft); max-width: 62ch; margin: 0 auto; }
+
+    /* the scale */
+    .scale { padding: 104px 0; }
+    .scale h2.sec { margin-bottom: 14px; }
+    .scale .sec-sub { margin-bottom: 48px; }
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .stat { border-radius: 18px; padding: 32px 26px; text-align: center; border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .stat .big { font-family: var(--display); font-weight: 600; font-size: clamp(30px,3.2vw,44px); letter-spacing: -.03em; line-height: 1; margin-bottom: 12px; white-space: nowrap; }
+    .stat h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 7px; }
+    .stat p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.58; max-width: 32ch; margin: 0 auto; }
+    .stat.s-clay { background: linear-gradient(180deg, rgba(192,121,79,.14), rgba(192,121,79,.04)); } .stat.s-clay .big { color: var(--clay-deep); }
+    .stat.s-sun { background: linear-gradient(180deg, rgba(217,169,63,.16), rgba(217,169,63,.04)); } .stat.s-sun .big { color: var(--sun-deep); }
+    .stat.s-sky { background: linear-gradient(180deg, rgba(110,151,190,.14), rgba(110,151,190,.04)); } .stat.s-sky .big { color: var(--sky-deep); }
+    .scale .src { display: block; text-align: center; margin-top: 26px; }
+    @media (max-width: 860px) { .stat-row { grid-template-columns: 1fr; } }
+
+    /* their own numbers */
+    .promises { padding: 104px 0; }
+    .promises h2.sec { margin-bottom: 14px; }
+    .promises .sec-sub { margin-bottom: 48px; }
+    .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .pcard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px 30px; box-shadow: var(--shadow-card); overflow: hidden; }
+    .pcard::before { content:''; position:absolute; inset:0 0 auto 0; height:4px; background: var(--clay); }
+    .pcard .who { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -.02em; margin-bottom: 4px; }
+    .pcard .pledge { display: inline-block; font-size: 12.5px; font-weight: 600; color: var(--olive-deep); background: rgba(126,138,90,.14); padding: 3px 10px; border-radius: 999px; margin-bottom: 18px; }
+    .pcard .rows { display: grid; gap: 10px; margin-bottom: 16px; }
+    .pcard .r { display: flex; gap: 12px; align-items: baseline; font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
+    .pcard .r b { flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--clay-deep); min-width: 88px; letter-spacing: -.01em; }
+    .pcard .verdict { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -.01em; color: var(--ink); padding-top: 14px; border-top: 1px solid var(--line); }
+    @media (max-width: 800px) { .p-grid { grid-template-columns: 1fr; } }
+
+    /* water */
+    .water { padding: 104px 0; text-align: center; }
+    .water blockquote { font-family: var(--display); font-weight: 600; font-size: clamp(28px,4.4vw,50px); line-height: 1.06; letter-spacing: -.035em; }
+    .water blockquote .mute { color: var(--sky-deep); }
+    .water > .narrow > p { font-size: 16.5px; color: var(--ink-soft); max-width: 60ch; margin: 22px auto 0; }
+    .w-list { display: grid; gap: 12px; max-width: 680px; margin: 36px auto 0; text-align: left; }
+    .w-item { display: flex; gap: 16px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--sky); border-radius: 12px; padding: 18px 22px; box-shadow: var(--shadow-card); }
+    .w-item b { flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--sky-deep); min-width: 96px; letter-spacing: -.01em; }
+    .w-item p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+    .w-item p strong { color: var(--ink); font-weight: 600; }
+    .water .src { display: block; margin-top: 24px; }
+
+    /* the honest bit */
+    .honest { padding: 104px 0; }
+    .honest .box { max-width: 820px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--olive); border-radius: 18px; padding: 40px 44px; box-shadow: var(--shadow-card); }
+    .honest .eyebrow { text-align: left; margin-bottom: 14px; }
+    .honest h2 { font-family: var(--display); font-weight: 600; font-size: clamp(24px,3vw,34px); line-height: 1.1; letter-spacing: -.028em; margin-bottom: 18px; }
+    .honest p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.68; margin-bottom: 14px; }
+    .honest p strong { color: var(--ink); font-weight: 600; }
+    .honest p:last-of-type { margin-bottom: 0; }
+    .honest .rule { height: 1px; background: var(--line); margin: 24px 0; }
+    @media (max-width: 640px) { .honest .box { padding: 30px 24px; } }
+
+    /* read next */
+    .more-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .mcard { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: var(--shadow-card); transition: transform .4s var(--ease), border-color .4s var(--ease); }
+    .mcard:hover { transform: translateY(-4px); border-color: var(--olive); }
+    .mcard .lbl { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--olive); margin-bottom: 10px; display: block; }
+    .mcard h3 { font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.015em; margin-bottom: 7px; }
+    .mcard p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .mcard .go { display: inline-block; margin-top: 14px; font-size: 13.5px; font-weight: 600; color: var(--olive-deep); }
+    @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } }
+
+    /* cta */
+    .turn { padding: 104px 0; text-align: center; }
+    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.6vw,31px); letter-spacing: -.025em; max-width: 30ch; margin: 0 auto 42px; line-height: 1.2; }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .cta:hover { transform: translateY(-2px); background: #000; }
+    .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+
+    footer { border-top: 1px solid var(--line); padding: 40px 0 48px; }
+    footer .row-f { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-mute); }
+    footer .links { display: inline-flex; gap: 20px; flex-wrap: wrap; }
+    footer a:hover { color: var(--ink); }
+    @media (max-width: 600px) { footer .row-f { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/how-it-works">Why GreenCube</a>
+    <a href="/your-data">Your data</a>
+    <a href="/ai-environmental-impact" class="on">AI &amp; the planet</a>
+    <a href="/buy">Download</a>
+  </nav>
+  <a href="/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="phero">
+  <div>
+    <span class="eyebrow">AI &amp; the planet</span>
+    <h1>Every answer is made <em>somewhere.</em> <span class="mute">That somewhere is real.</span></h1>
+    <p>Cloud AI feels weightless &mdash; a text box, an instant reply, nothing in your hands. It isn't. It's a building on real land, drinking real water, pulling from a real grid, going up faster than anything else on it. Below is what's actually verified, in the companies' own words. Including the parts that don't flatter us.</p>
+  </div>
+</section>
+
+<!-- ============ THE SCALE ============ -->
+<div class="band">
+  <section class="scale">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">The trajectory</span>
+      <h2 class="sec">Nothing else on the grid <span class="mute">is growing like this.</span></h2>
+      <p class="sec-sub">These are the International Energy Agency's numbers &mdash; the most sober source there is on this, and the one least likely to be accused of hype.</p>
+
+      <div class="stat-row">
+        <div class="stat s-clay">
+          <div class="big">415 &rarr; 945</div>
+          <h4>terawatt hours a year</h4>
+          <p>Data centre electricity roughly doubles between 2024 and 2030.</p>
+        </div>
+        <div class="stat s-sun">
+          <div class="big">1.5% &rarr; 3%</div>
+          <h4>of all the world's electricity</h4>
+          <p>Not of tech's electricity. Of everything humanity plugs in.</p>
+        </div>
+        <div class="stat s-sky">
+          <div class="big">4&times; faster</div>
+          <h4>than every other sector</h4>
+          <p>Growing ~15% a year, more than four times the rate of all other demand combined.</p>
+        </div>
+      </div>
+      <span class="src">Source: <a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener">IEA, <em>Energy and AI</em></a> &mdash; &ldquo;around 415 terawatt hours (TWh), or about 1.5% of global electricity consumption in 2024&rdquo;, projected to &ldquo;double to reach around 945 TWh by 2030&rdquo;.</span>
+    </div>
+  </section>
+</div>
+
+<!-- ============ THEIR OWN NUMBERS ============ -->
+<section class="promises">
+  <div class="inner">
+    <span class="eyebrow" style="margin-bottom:16px">Their own reports</span>
+    <h2 class="sec">The companies promising to fix it <span class="mute">are the ones building it.</span></h2>
+    <p class="sec-sub">You don't need an activist to tell you this is going badly. It's in their annual environmental reports, published by them, about themselves.</p>
+
+    <div class="p-grid">
+      <article class="pcard">
+        <div class="who">Microsoft</div>
+        <span class="pledge">Pledged: carbon <em>negative</em> by 2030</span>
+        <div class="rows">
+          <div class="r"><b>13M &rarr; 20M</b><span>tons of CO<sub>2</sub> equivalent, 2020 to 2025 &mdash; a <strong>54% rise</strong> in five years.</span></div>
+          <div class="r"><b>+25%</b><span>in a single year, driven by the data centre buildout for AI.</span></div>
+          <div class="r"><b>2% &rarr; 13%</b><span>share of its footprint coming from purchased energy, in one year.</span></div>
+        </div>
+        <p class="verdict">Four years from a carbon-negative deadline, and moving the other way.</p>
+      </article>
+
+      <article class="pcard">
+        <div class="who">Google</div>
+        <span class="pledge">Pledged: net zero by 2030</span>
+        <div class="rows">
+          <div class="r"><b>+37%</b><span>electricity demand in a single year (2025).</span></div>
+          <div class="r"><b>+25%</b><span>supply chain emissions year over year &mdash; the concrete, steel and silicon of new AI infrastructure.</span></div>
+          <div class="r"><b>78%</b><span>of its freshwater use replenished by its water projects &mdash; so roughly a fifth wasn't.</span></div>
+        </div>
+        <p class="verdict">Operational emissions fell 2%. Everything needed to build it went up.</p>
+      </article>
+    </div>
+    <span class="src" style="display:block; text-align:center; margin-top:24px;">
+      Sources: <a href="https://www.theregister.com/on-prem/2026/07/10/ai-driven-datacenter-builds-drive-microsofts-emissions-up-a-quarter-in-one-year/5269924" target="_blank" rel="noopener">Microsoft's 2026 sustainability disclosure</a> &middot;
+      <a href="https://blog.google/company-news/outreach-and-initiatives/sustainability/2026-environmental-report/" target="_blank" rel="noopener">Google's 2026 Environmental Report</a>
+    </span>
+  </div>
+</section>
+
+<!-- ============ WATER ============ -->
+<div class="band">
+  <section class="water">
+    <div class="narrow">
+      <span class="eyebrow" style="color:var(--sky-deep); margin-bottom:18px">The part with a postcode</span>
+      <blockquote>One building drinks<br><span class="mute">like a small town.</span></blockquote>
+      <p>Electricity is abstract. Water isn't &mdash; it comes out of a specific reservoir, next to specific people, and evaporative cooling doesn't give it back.</p>
+
+      <div class="w-list">
+        <div class="w-item">
+          <b>5M gallons</b>
+          <p><strong>Per day, for one large data centre</strong> &mdash; about 1.8 billion a year. That's the water use of <strong>a town of 10,000 to 50,000 people</strong>.</p>
+        </div>
+        <div class="w-item">
+          <b>449M gallons</b>
+          <p><strong>Per day, US data centres combined</strong> &mdash; 163.7 billion gallons a year, as of 2021, before the AI buildout really began.</p>
+        </div>
+        <div class="w-item">
+          <b>519 ml</b>
+          <p>A single <strong>100-word AI prompt</strong> is estimated to use roughly one bottle of water.</p>
+        </div>
+        <div class="w-item">
+          <b>700,000 L</b>
+          <p>Evaporated <strong>training GPT-3</strong> in Microsoft's US data centres &mdash; about the freshwater used to manufacture <strong>370 BMWs</strong>.</p>
+        </div>
+      </div>
+      <span class="src">
+        Sources: <a href="https://www.eesi.org/articles/view/data-centers-and-water-consumption" target="_blank" rel="noopener">EESI</a> &middot;
+        <a href="https://news.ucr.edu/articles/2023/04/28/ai-programs-consume-large-volumes-scarce-water" target="_blank" rel="noopener">UC Riverside</a> &middot;
+        <a href="https://arxiv.org/abs/2304.03271" target="_blank" rel="noopener">&ldquo;Making AI Less Thirsty&rdquo;</a>.
+        Disclosure is largely voluntary, so communities often can't find out what's being used next door.
+      </span>
+    </div>
+  </section>
+</div>
+
+<!-- ============ THE HONEST BIT ============ -->
+<section class="honest">
+  <div class="inner">
+    <div class="box">
+      <span class="eyebrow">What we're not going to tell you</span>
+      <h2>AI is not why the planet is in trouble.</h2>
+      <p>We sell local AI. It would be convenient for us to end this page with "…and that's why the cloud is killing the Earth." It isn't true, and you'd be right to stop trusting the rest of the page if we said it.</p>
+      <p>The same IEA report says data centre growth accounts for <strong>less than 10% of global electricity demand growth</strong> to 2030, and that data centres land at <strong>just under 3%</strong> of world consumption. Aviation, cement, steel and cattle are not waiting for AI to catch up. Anyone selling you AI as the villain of climate change is selling you something.</p>
+      <div class="rule"></div>
+      <p><strong>And one more, about us.</strong> Running a model on your own laptop is <em>not</em> more energy-efficient than running it in a data centre. It's less. Research measuring intelligence per joule found purpose-built cloud chips beat a high-end local machine by roughly <strong>1.6&times; to 7.4&times;</strong> &mdash; and that's at batch size one, so it isn't even the batching advantage. Their hardware is genuinely better at this than yours.</p>
+      <p>What's actually true is narrower, and we'll only claim this much: <strong>no cooling tower evaporates a town's water so you can ask a question</strong>, and <strong>nothing new gets built because you asked it</strong> &mdash; your computer already exists, and it's already on.</p>
+      <p class="src" style="margin-top:18px">Sources: <a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener">IEA</a> &middot; <a href="https://arxiv.org/html/2511.07885v3" target="_blank" rel="noopener">&ldquo;Intelligence per Watt&rdquo;, arXiv 2511.07885</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ READ NEXT ============ -->
+<div class="band">
+  <section class="promises" style="padding:88px 0">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">Go deeper</span>
+      <h2 class="sec" style="margin-bottom:44px">The rest of <span class="mute">the receipts.</span></h2>
+      <div class="more-grid">
+        <a class="mcard" href="/how-much-water-does-ai-use">
+          <span class="lbl">Deep dive</span>
+          <h3>How much water does AI use?</h3>
+          <p>The full numbers, why credible researchers disagree about them, and what actually reduces it.</p>
+          <span class="go">Read the answer &rarr;</span>
+        </a>
+        <a class="mcard" href="/your-data">
+          <span class="lbl">The other cost</span>
+          <h3>What happens to your data</h3>
+          <p>The environment is one bill. Your conversations are the other one, and you pay that every time you type.</p>
+          <span class="go">See what stays on your machine &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CTA ============ -->
+<section class="turn">
+  <div class="inner">
+    <div class="kicker-line">You can't fix the grid from a text box. You can decide where your own AI runs.</div>
+    <a href="/buy" class="cta">Get GreenCube &mdash; &euro;9 <span aria-hidden="true">&rarr;</span></a>
+    <span class="cta-sub">One-time payment. Runs on the computer you already own.</span>
+  </div>
+</section>
+
+<footer>
+  <div class="row-f">
+    <div>
+      <div>&copy; 2026 GreenCube &mdash; Edunexis SL</div>
+      <div>AI that's <em>owned,</em> not rented.</div>
+    </div>
+    <nav class="links" aria-label="Footer">
+      <a href="/buy">Get GreenCube</a>
+      <a href="/">Home</a>
+      <a href="/how-it-works">Why GreenCube</a>
+      <a href="/your-data">Your data</a>
+      <a href="/how-much-water-does-ai-use">AI &amp; water</a>
+      <a href="https://legal.greencube.app/privacy">Privacy</a>
+      <a href="https://legal.greencube.app/terms">Terms</a>
+      <a href="mailto:support@greencube.app">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const show = () => document.body.classList.add('ready');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
+  setTimeout(show, 900);
+</script>
+</body>
+</html>
