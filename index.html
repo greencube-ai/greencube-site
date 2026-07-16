@@ -132,13 +132,17 @@
     ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
 
     /* ============== fixed overlays ============== */
-    /* Paper grain over the whole page (sits above the z-index:2 sections, below
-       the header at 100 — pointer-events:none so it never eats a click). */
+    /* Paper grain over the whole page. Sits above the z-index:2 sections, below
+       the header at 100. pointer-events:none so it never eats a click.
+       The feColorMatrix pushes the turbulence R channel into RGB and forces
+       alpha to 1 — an OPAQUE grey static. The previous recipe pinned RGB to a
+       constant and varied only alpha, which multiplied out to ~2% and was
+       invisible no matter what opacity it was given. */
     .grain {
       position: fixed; inset: 0;
       z-index: 60; pointer-events: none;
-      opacity: 0.06; mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.17; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     .progress {
       position: fixed; top: 0; left: 0;
@@ -198,19 +202,19 @@
     .header-nav {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 14px;
-      font-weight: 500;
+      gap: 2px;
+      font-size: 15px;
+      font-weight: 600;
     }
     .header-nav a {
-      color: var(--ink-soft);
+      color: var(--forest);
       letter-spacing: -0.005em;
-      padding: 8px 13px;
+      padding: 8px 14px;
       border-radius: 9px;
       white-space: nowrap;
       transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out);
     }
-    .header-nav a:hover { color: var(--ink); background: rgba(126, 138, 90, 0.10); }
+    .header-nav a:hover { color: var(--moss); background: rgba(126, 138, 90, 0.12); }
     header.dark .header-nav a { color: var(--on-dark-soft); }
     header.dark .header-nav a:hover { color: var(--on-dark); background: rgba(245, 241, 232, 0.09); }
     @media (max-width: 940px) { .header-nav { display: none; } }
@@ -290,6 +294,19 @@
       width: 100%; height: 100%;
       z-index: 0; pointer-events: none; display: block;
     }
+    /* Weather, not UI: slow enough that you notice it only if you stop and look.
+       All of it is decorative, so it all drops on prefers-reduced-motion. */
+    .gc-clouds-a { animation: gcDriftA 132s ease-in-out infinite alternate; }
+    .gc-clouds-b { animation: gcDriftB 96s  ease-in-out infinite alternate; }
+    .gc-birds    { animation: gcBirds  54s  ease-in-out infinite alternate; }
+    .gc-glow     { animation: gcBreathe 12s ease-in-out infinite; transform-box: view-box; transform-origin: 1090px 315px; }
+    @keyframes gcDriftA { from { transform: translateX(-30px); } to { transform: translateX(52px); } }
+    @keyframes gcDriftB { from { transform: translateX(34px); }  to { transform: translateX(-38px); } }
+    @keyframes gcBirds  { from { transform: translate(-22px, 6px); } to { transform: translate(64px, -12px); } }
+    @keyframes gcBreathe { 0%, 100% { opacity: 0.86; transform: scale(1); } 50% { opacity: 1; transform: scale(1.045); } }
+    @media (prefers-reduced-motion: reduce) {
+      .gc-clouds-a, .gc-clouds-b, .gc-birds, .gc-glow { animation: none; }
+    }
     .hero .wrap {
       position: relative;
       z-index: 2;
@@ -303,9 +320,9 @@
       font-family: var(--display);
       font-style: normal;
       font-weight: 600;
-      font-size: clamp(40px, 6.8vw, 100px);
-      line-height: 1.0;
-      letter-spacing: -0.035em;
+      font-size: clamp(40px, 6.0vw, 88px);
+      line-height: 1.01;
+      letter-spacing: -0.033em;
       color: var(--forest);
       margin-bottom: 26px;
       white-space: nowrap;
@@ -1941,33 +1958,46 @@
     </defs>
 
     <!-- sun -->
-    <circle cx="1090" cy="315" r="320" fill="url(#gcSun)" />
-    <circle cx="1090" cy="315" r="55" fill="#FBF0D4" />
+    <g class="gc-glow"><circle cx="1090" cy="315" r="320" fill="url(#gcSun)" /></g>
+    <circle cx="1090" cy="315" r="55" fill="#FDF3D6" />
+    <circle cx="1090" cy="315" r="78" fill="none" stroke="#F3E2AE" stroke-width="1.5" opacity="0.5" />
 
-    <!-- soft clouds -->
-    <g fill="#FBF6EA" filter="url(#gcSoft)" opacity="0.7">
+    <!-- soft clouds — two banks drifting at different speeds -->
+    <g class="gc-clouds-a" fill="#FDF9EF" filter="url(#gcSoft)" opacity="0.78">
       <ellipse cx="300" cy="205" rx="140" ry="25" />
       <ellipse cx="380" cy="228" rx="95" ry="18" />
+      <ellipse cx="196" cy="226" rx="76" ry="14" />
+    </g>
+    <g class="gc-clouds-b" fill="#FDF9EF" filter="url(#gcSoft)" opacity="0.7">
       <ellipse cx="845" cy="138" rx="120" ry="22" />
       <ellipse cx="905" cy="158" rx="78" ry="15" />
+      <ellipse cx="1245" cy="196" rx="104" ry="18" />
     </g>
 
-    <!-- birds -->
-    <g stroke="#78815C" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5">
-      <path d="M560,246 q12,-11 24,0 q12,-11 24,0" />
-      <path d="M648,282 q9,-8 18,0 q9,-8 18,0" />
-      <path d="M516,300 q8,-7 16,0 q8,-7 16,0" />
-      <path d="M602,262 q10,-9 20,0 q10,-9 20,0" />
-      <path d="M694,256 q8,-7 16,0 q8,-7 16,0" />
+    <!-- birds — kept clear of the centred headline column (~x430-1010); they used
+         to fly straight through it but were too faint for anyone to notice -->
+    <g class="gc-birds" stroke="#4F5A33" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
+      <path d="M148,252 q15,-13 30,0 q15,-13 30,0" />
+      <path d="M214,292 q11,-10 22,0 q11,-10 22,0" />
+      <path d="M264,236 q10,-9 20,0 q10,-9 20,0" opacity="0.8" />
+      <path d="M170,332 q9,-8 18,0 q9,-8 18,0" opacity="0.7" />
+      <path d="M306,288 q8,-7 16,0 q8,-7 16,0" opacity="0.55" />
+      <path d="M1232,208 q13,-11 26,0 q13,-11 26,0" opacity="0.85" />
+      <path d="M1302,250 q10,-9 20,0 q10,-9 20,0" opacity="0.7" />
     </g>
+
+    <!-- distant ridge — depth behind the hills, and a cool note against the warm
+         green. Kept low and hazy so it reads as distance, not scenery. -->
+    <path d="M0,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1440,700 L0,700 Z" fill="#AFC2CC" opacity="0.42" />
+    <rect x="0" y="540" width="1440" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
 
     <!-- hill 1 (far) + haze -->
-    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#CBD2B2" />
+    <path d="M0,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1440,900 L0,900 Z" fill="#C6D3A6" />
     <rect x="0" y="598" width="1440" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
 
     <!-- hill 2 + distant pines -->
-    <path d="M0,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1440,900 L0,900 Z" fill="#B0BD93" />
-    <g fill="#99A77D">
+    <path d="M0,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1440,900 L0,900 Z" fill="#A9BC84" />
+    <g fill="#8E9F68">
       <use href="#gcPine" x="120" y="650" width="15" height="22" />
       <use href="#gcPine" x="150" y="655" width="13" height="19" />
       <use href="#gcPine" x="184" y="652" width="14" height="20" />
@@ -1978,29 +2008,36 @@
       <use href="#gcPine" x="512" y="670" width="13" height="19" />
       <use href="#gcPine" x="700" y="664" width="14" height="20" />
       <use href="#gcPine" x="732" y="668" width="12" height="17" />
+      <use href="#gcPine" x="256" y="658" width="12" height="18" />
+      <use href="#gcPine" x="864" y="662" width="13" height="19" />
+      <use href="#gcPine" x="1128" y="656" width="12" height="18" />
     </g>
     <rect x="0" y="670" width="1440" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
 
     <!-- hill 3 + mid pines -->
-    <path d="M0,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1440,900 L0,900 Z" fill="#8F9D6C" />
-    <g fill="#79875A">
+    <path d="M0,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1440,900 L0,900 Z" fill="#889B5C" />
+    <g fill="#6F8148">
       <use href="#gcPine" x="356" y="716" width="24" height="34" />
       <use href="#gcPine" x="408" y="726" width="20" height="28" />
       <use href="#gcPine" x="452" y="720" width="22" height="31" />
       <use href="#gcPine" x="1120" y="722" width="22" height="31" />
       <use href="#gcPine" x="1166" y="730" width="19" height="26" />
+      <use href="#gcPine" x="620" y="730" width="20" height="28" />
+      <use href="#gcPine" x="1290" y="726" width="21" height="30" />
     </g>
     <rect x="0" y="742" width="1440" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
 
     <!-- hill 4 (front) + foreground pines -->
-    <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#6E7B4C" />
-    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#F5E6C0" opacity="0.15" filter="url(#gcSoft)" />
-    <g fill="#545F39">
+    <path d="M0,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1440,900 L0,900 Z" fill="#647341" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#F7E6B4" opacity="0.2" filter="url(#gcSoft)" />
+    <g fill="#4B5730">
       <use href="#gcPine" x="66" y="756" width="34" height="52" />
       <use href="#gcPine" x="116" y="744" width="44" height="66" />
       <use href="#gcPine" x="184" y="762" width="30" height="46" />
       <use href="#gcPine" x="1248" y="754" width="40" height="60" />
       <use href="#gcPine" x="1314" y="768" width="30" height="46" />
+      <use href="#gcPine" x="240" y="774" width="24" height="36" />
+      <use href="#gcPine" x="1196" y="772" width="26" height="40" />
     </g>
   </svg>
   <div class="wrap">
