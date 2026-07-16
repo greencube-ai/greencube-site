@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6ZN19GZEP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6ZN19GZEP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Your data — it stays on your computer | GreenCube</title>
+  <meta name="description" content="GreenCube runs the AI on your own machine, so your conversations, documents and images never leave it. Here's exactly what stays, exactly what GreenCube sends, and nothing hidden in between." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="Your data — it stays on your computer" />
+  <meta property="og:description" content="The AI runs on your machine, so there's no server to send your words to. Here's exactly what stays and exactly what GreenCube sends." />
+  <meta property="og:url" content="https://greencube.app/your-data" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://greencube.app/your-data" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231A1A1A' stroke-width='3'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Does GreenCube send my conversations anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The AI model runs on your own computer, so your question is answered on your machine. There is no server that receives your conversations, which means there is nothing to store, read or train on." } },
+      { "@type": "Question", "name": "Where are my GreenCube chats stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "On your own computer. They are not uploaded, backed up to a company server, or synced to an account." } },
+      { "@type": "Question", "name": "Do I need an account to use GreenCube?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You sign in once so GreenCube can confirm you paid. That sign-in only involves your email address — it never sees your conversations, documents or images." } },
+      { "@type": "Question", "name": "What does GreenCube connect to the internet for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Three things: confirming your purchase when you sign in, downloading the AI model the first time, and checking whether a new version is available. None of them carry anything you typed. Separately, there is an Offline/Online switch for live web search — it is off by default, and only when you turn it on do search queries reach the web." } },
+      { "@type": "Question", "name": "Does GreenCube work offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, and that is the default. After you sign in once and the model downloads, GreenCube works with no internet at all — on a plane, in a blackout, or when the servers are down." } }
+    ]
+  }
+  </script>
+
+  <style>
+    html { background: #F5F1E8; }
+    body { opacity: 0; transition: opacity .5s ease; }
+    body.ready { opacity: 1; }
+
+    :root {
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
+      --olive: #7E8A5A; --olive-deep: #5C663F;
+      --sun: #D9A93F; --sun-deep: #A87C1E;
+      --clay: #C0794F; --clay-deep: #93502A;
+      --sky: #6E97BE; --sky-deep: #416A90;
+      --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
+      --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    em { font-style: normal; color: var(--olive); }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 60; pointer-events: none;
+      opacity: .24; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 14px 30px; background: rgba(245,241,232,.88);
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -.01em; flex: 0 0 auto; }
+    .brand .mark { width: 14px; height: 14px; border: 1.7px solid var(--olive); border-radius: 4px; }
+    .nav { display: inline-flex; align-items: center; gap: 4px; }
+    .nav a { position: relative; font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 9px; white-space: nowrap; transition: color .25s var(--ease), background .25s var(--ease); }
+    .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
+    .nav a.on { color: var(--ink); font-weight: 600; }
+    .nav a.on::after { content:''; position:absolute; left:13px; right:13px; bottom:2px; height:2px; border-radius:2px; background: var(--olive); }
+    @media (max-width: 940px) { .nav { display: none; } }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; }
+
+    .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); text-align: center; }
+    .band { position: relative; background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    h2.sec { font-family: var(--display); font-weight: 600; font-size: clamp(28px,3.8vw,46px); line-height: 1.08; letter-spacing: -.03em; text-align: center; }
+    h2.sec .mute { color: var(--ink-mute); }
+    .sec-sub { font-size: 16.5px; color: var(--ink-soft); text-align: center; max-width: 56ch; margin: 16px auto 0; }
+
+    /* hero */
+    .phero { position: relative; padding: 104px 0 88px; text-align: center; overflow: hidden; }
+    .phero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 46% 44% at 78% 12%, rgba(217,169,63,.15), transparent 62%),
+        radial-gradient(ellipse 52% 46% at 16% 24%, rgba(110,151,190,.12), transparent 62%);
+    }
+    .phero > div { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; padding: 0 32px; }
+    .phero .eyebrow { margin-bottom: 20px; }
+    .phero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(36px,5.4vw,62px); line-height: 1.02; letter-spacing: -.035em; margin-bottom: 24px; max-width: 17ch; margin-left: auto; margin-right: auto; }
+    .phero h1 .mute { color: var(--ink-mute); }
+    .phero p { font-size: clamp(17px,1.55vw,20px); color: var(--ink-soft); max-width: 60ch; margin: 0 auto; }
+
+    /* what stays */
+    .stays { padding: 110px 0; }
+    .stays h2.sec { margin-bottom: 14px; }
+    .stays .sec-sub { margin-bottom: 54px; }
+    .s-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .scard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 30px 28px; box-shadow: var(--shadow-card); overflow: hidden; transition: transform .4s var(--ease), box-shadow .5s var(--ease); }
+    .scard:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .scard::before { content:''; position:absolute; inset:0 0 auto 0; height:4px; background: var(--olive); }
+    .scard::after { content:''; position:absolute; right:-40px; top:-40px; width:150px; height:150px; border-radius:50%; background: var(--olive); opacity:.06; }
+    .scard .ico { position:relative; z-index:2; width:46px; height:46px; border-radius:13px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px; background: rgba(126,138,90,.15); color: var(--olive-deep); }
+    .scard .ico svg { width: 23px; height: 23px; }
+    .scard h3 { position:relative; z-index:2; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -.02em; margin-bottom: 9px; }
+    .scard p { position:relative; z-index:2; font-size: 15px; color: var(--ink-soft); line-height: 1.62; }
+    @media (max-width: 760px) { .s-grid { grid-template-columns: 1fr; } }
+
+    /* what we send — the honest ledger */
+    .ledger { padding: 110px 0; }
+    .ledger h2.sec { margin-bottom: 14px; }
+    .ledger .sec-sub { margin-bottom: 44px; }
+    .rows { max-width: 800px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-card); }
+    .row { display: flex; gap: 18px; align-items: flex-start; padding: 22px 26px; border-bottom: 1px solid var(--line); }
+    .row:last-child { border-bottom: none; }
+    .row .when { flex: 0 0 128px; font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--olive-deep); padding-top: 2px; }
+    .row .what strong { display: block; font-family: var(--display); font-weight: 600; font-size: 16.5px; letter-spacing: -.01em; margin-bottom: 4px; }
+    .row .what span { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+    .row.opt .when { color: var(--sun-deep); }
+    .row.opt { background: linear-gradient(180deg, rgba(217,169,63,.09), rgba(217,169,63,.03)); }
+    .ledger .close { text-align: center; max-width: 62ch; margin: 30px auto 0; font-size: 16px; color: var(--ink-soft); }
+    .ledger .close strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 640px) { .row { flex-direction: column; gap: 6px; } .row .when { flex: none; } }
+
+    /* the other way */
+    .other { padding: 110px 0; text-align: center; }
+    .other blockquote { font-family: var(--display); font-weight: 600; font-size: clamp(28px,4.4vw,50px); line-height: 1.06; letter-spacing: -.035em; }
+    .other blockquote .mute { color: var(--clay); }
+    .other > .narrow > p { font-size: 16.5px; color: var(--ink-soft); max-width: 58ch; margin: 22px auto 0; }
+    .o-list { display: grid; gap: 12px; max-width: 660px; margin: 36px auto 0; text-align: left; }
+    .o-item { display: flex; gap: 14px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--clay); border-radius: 12px; padding: 16px 20px; box-shadow: var(--shadow-card); }
+    .o-item .dot { flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: rgba(192,121,79,.16); color: var(--clay-deep); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 2px; }
+    .o-item p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.58; }
+    .o-item p strong { color: var(--ink); font-weight: 600; }
+    .other .more { display: inline-block; margin-top: 30px; font-size: 14.5px; font-weight: 600; color: var(--olive-deep); border-bottom: 1px solid var(--line); }
+    .other .more:hover { border-color: var(--olive-deep); }
+
+    /* faq */
+    .faq { padding: 110px 0; }
+    .faq h2.sec { margin-bottom: 54px; }
+    .faq-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .qa { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; box-shadow: var(--shadow-card); }
+    .qa .q-ico { width: 26px; height: 26px; border-radius: 50%; background: var(--olive); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; font-family: var(--display); margin-bottom: 14px; }
+    .qa h3 { font-family: var(--display); font-weight: 600; font-size: 16.5px; letter-spacing: -.01em; margin-bottom: 8px; }
+    .qa p { font-size: 14px; color: var(--ink-soft); line-height: 1.62; }
+    @media (max-width: 760px) { .faq-grid { grid-template-columns: 1fr; } }
+
+    /* cta */
+    .turn { padding: 110px 0; text-align: center; }
+    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.6vw,31px); letter-spacing: -.025em; max-width: 26ch; margin: 0 auto 42px; line-height: 1.2; }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .cta:hover { transform: translateY(-2px); background: #000; }
+    .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+
+    footer { border-top: 1px solid var(--line); padding: 40px 0 48px; }
+    footer .row-f { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-mute); }
+    footer .links { display: inline-flex; gap: 20px; flex-wrap: wrap; }
+    footer a:hover { color: var(--ink); }
+    @media (max-width: 600px) { footer .row-f { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/how-it-works">Why GreenCube</a>
+    <a href="/your-data" class="on">Your data</a>
+    <a href="/how-much-water-does-ai-use">AI &amp; water</a>
+    <a href="/buy">Download</a>
+  </nav>
+  <a href="/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="phero">
+  <div>
+    <span class="eyebrow">Your data</span>
+    <h1>Your words stay on <em>this</em> computer. <span class="mute">All of them.</span></h1>
+    <p>GreenCube runs the AI on your own machine. Your question is answered right here &mdash; so there's no server holding your conversations, and nothing for anyone to store, read or train on.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT STAYS ============ -->
+<div class="band">
+  <section class="stays">
+    <div class="inner">
+      <span class="eyebrow" style="margin-bottom:16px">What never leaves</span>
+      <h2 class="sec">Everything you actually <span class="mute">care about.</span></h2>
+      <p class="sec-sub">Not "we don't look." There is no copy anywhere for anyone to look at.</p>
+
+      <div class="s-grid">
+        <article class="scard">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
+          <h3>Your conversations</h3>
+          <p>Answered by a model running on your own machine. They never cross the internet, so no server ever receives them.</p>
+        </article>
+        <article class="scard">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
+          <h3>Your documents</h3>
+          <p>Drop in a PDF and it's read from your disk, where it already was. Nothing is uploaded to be processed.</p>
+        </article>
+        <article class="scard">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+          <h3>Your images</h3>
+          <p>Screenshots and photos are understood on your machine. They don't get sent off to be looked at.</p>
+        </article>
+        <article class="scard">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6"/><path d="M3 6l9 6 9-6"/><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"/></svg></span>
+          <h3>Your history</h3>
+          <p>Kept on your computer, not synced to an account. There's no cloud copy that outlives the one you can delete.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ THE LEDGER ============ -->
+<section class="ledger">
+  <div class="inner">
+    <span class="eyebrow" style="margin-bottom:16px">Nothing hidden</span>
+    <h2 class="sec">So what <em>does</em> GreenCube send?</h2>
+    <p class="sec-sub">A privacy page that only lists the good parts isn't a privacy page. Here is every time GreenCube touches the internet.</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="when">Once, at sign-in</div>
+        <div class="what">
+          <strong>Your email address</strong>
+          <span>To check that you actually paid. That's the whole exchange &mdash; it never sees a conversation, a document or an image.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Once, at setup</div>
+        <div class="what">
+          <strong>The AI model, downloading</strong>
+          <span>A few gigabytes come down to your machine so the AI can live there. Traffic goes one way: to you.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Now and then</div>
+        <div class="what">
+          <strong>A version check</strong>
+          <span>GreenCube asks whether a newer version exists, so you're not stuck on an old one. It sends nothing about you.</span>
+        </div>
+      </div>
+      <div class="row opt">
+        <div class="when">Only if you say so</div>
+        <div class="what">
+          <strong>A web search &mdash; when you switch Online on</strong>
+          <span>There's an Offline/Online switch, and it starts Offline. Flip it on and GreenCube can look things up on the web, which means that search reaches the internet like any search would. Leave it alone and nothing does.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="close">The first three carry <strong>nothing you typed.</strong> The fourth is a switch you control, and it's off until you move it.</p>
+  </div>
+</section>
+
+<!-- ============ THE OTHER WAY ============ -->
+<div class="band">
+  <section class="other">
+    <div class="narrow">
+      <span class="eyebrow" style="color:var(--clay-deep); margin-bottom:18px">The other way round</span>
+      <blockquote>When the AI lives in their building,<br><span class="mute">your words have to go there.</span></blockquote>
+      <p>It isn't malice, it's plumbing. A cloud model physically cannot answer you without receiving what you wrote. Everything after that follows from it:</p>
+
+      <div class="o-list">
+        <div class="o-item">
+          <span class="dot" aria-hidden="true">&rarr;</span>
+          <p><strong>It gets stored.</strong> Your words land on a server and sit there &mdash; and once they do, they're subject to whatever policy, breach or court order comes later.</p>
+        </div>
+        <div class="o-item">
+          <span class="dot" aria-hidden="true">&rarr;</span>
+          <p><strong>It can train the model.</strong> On consumer plans, conversations are used to improve the model by default unless you go and switch it off.</p>
+        </div>
+        <div class="o-item">
+          <span class="dot" aria-hidden="true">&rarr;</span>
+          <p><strong>People can read it.</strong> Not just software &mdash; authorized staff and contractors can access conversations for support, abuse review and legal compliance.</p>
+        </div>
+        <div class="o-item">
+          <span class="dot" aria-hidden="true">&rarr;</span>
+          <p><strong>Deleting is a request, not a fact.</strong> On someone else's machine, "deleted" means they agreed to delete it. A court has already ordered chat logs preserved that users had deleted.</p>
+        </div>
+      </div>
+
+      <a class="more" href="/does-chatgpt-train-on-your-data">See the receipts &mdash; plan by plan, with sources &rarr;</a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="inner">
+    <span class="eyebrow" style="margin-bottom:16px">Questions</span>
+    <h2 class="sec">The honest <span class="mute">answers.</span></h2>
+    <div class="faq-grid">
+      <article class="qa">
+        <span class="q-ico" aria-hidden="true">?</span>
+        <h3>Can GreenCube read my conversations?</h3>
+        <p>No &mdash; and not because we promise. There's no server that has them. The AI answered you from your own machine, so there's nothing on our side to read.</p>
+      </article>
+      <article class="qa">
+        <span class="q-ico" aria-hidden="true">?</span>
+        <h3>Then why do I need an account?</h3>
+        <p>Only to confirm you paid, once. It's your email and nothing else. Your chats never touch it.</p>
+      </article>
+      <article class="qa">
+        <span class="q-ico" aria-hidden="true">?</span>
+        <h3>Does it really work offline?</h3>
+        <p>Yes, and that's how it starts. After sign-in and the model download, you can pull the plug entirely &mdash; plane, blackout, servers down. It keeps working.</p>
+      </article>
+      <article class="qa">
+        <span class="q-ico" aria-hidden="true">?</span>
+        <h3>What changes if I turn Online on?</h3>
+        <p>GreenCube can then look things up on the web, so those lookups reach the internet the way any search does. It's off by default, it's a visible switch, and turning it back off returns you to fully local.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="turn">
+  <div class="inner">
+    <div class="kicker-line">The only conversation nobody can read is the one that <em>never left.</em></div>
+    <a href="/buy" class="cta">Get GreenCube &mdash; &euro;9 <span aria-hidden="true">&rarr;</span></a>
+    <span class="cta-sub">One-time payment. No subscription. Runs fully offline after a single sign-in.</span>
+  </div>
+</section>
+
+<footer>
+  <div class="row-f">
+    <div>
+      <div>&copy; 2026 GreenCube &mdash; Edunexis SL</div>
+      <div>AI that's <em>owned,</em> not rented.</div>
+    </div>
+    <nav class="links" aria-label="Footer">
+      <a href="/buy">Get GreenCube</a>
+      <a href="/">Home</a>
+      <a href="/how-it-works">Why GreenCube</a>
+      <a href="/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a>
+      <a href="https://legal.greencube.app/privacy">Privacy</a>
+      <a href="https://legal.greencube.app/terms">Terms</a>
+      <a href="mailto:support@greencube.app">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const show = () => document.body.classList.add('ready');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
+  setTimeout(show, 900);
+</script>
+</body>
+</html>
