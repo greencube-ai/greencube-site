@@ -99,7 +99,17 @@
     .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
     .nav a.on { color: var(--ink); font-weight: 600; }
     .nav a.on::after { content: ''; position: absolute; left: 13px; right: 13px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--olive); }
-    @media (max-width: 940px) { .nav { display: none; } }
+    /* On a phone the nav drops onto its own row under the logo rather than
+       vanishing — there's no hamburger, so hiding it left no way to reach
+       another page. */
+    @media (max-width: 940px) {
+      header { flex-wrap: wrap; row-gap: 8px; padding: 12px 16px; }
+      .brand { order: 1; }
+      .nav-cta { order: 2; }
+      .nav { order: 3; width: 100%; justify-content: center; gap: 0; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; }
+      .nav a { padding: 6px 8px; }
+      .nav a.on::after { left: 8px; right: 8px; }
+    }
     .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; white-space: nowrap; text-decoration: none; transition: transform .3s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
 

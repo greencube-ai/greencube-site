@@ -100,7 +100,17 @@
     .nav a.on::after { content:''; position:absolute; left:13px; right:13px; bottom:2px; height:2px; border-radius:2px; background: var(--olive); }
     .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
-    @media (max-width: 940px) { .nav { display: none; } }
+    /* On a phone the nav drops onto its own row under the logo rather than
+       vanishing — there's no hamburger, so hiding it left no way to reach
+       another page. */
+    @media (max-width: 940px) {
+      header { flex-wrap: wrap; row-gap: 8px; padding: 12px 16px; }
+      .brand { order: 1; }
+      .nav-cta { order: 2; }
+      .nav { order: 3; width: 100%; justify-content: center; gap: 0; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; }
+      .nav a { padding: 6px 8px; }
+      .nav a.on::after { left: 8px; right: 8px; }
+    }
 
     .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); text-align: center; }
     .band { position: relative; background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -145,6 +155,18 @@
     .side.them .tag { color: var(--clay-deep); background: rgba(192,121,79,.14); }
     .side.us .tag { color: var(--olive-deep); background: rgba(126,138,90,.16); }
     @media (max-width: 860px) { .compare { grid-template-columns: 1fr; } }
+    /* The SVG scales with its column, so its labels shrink with it. On a phone
+       the diagram renders ~0.6x and 9.5-unit text lands at ~6px — unreadable.
+       Size the labels up in viewBox units so they come back to ~11-13px. */
+    .side svg .d-narrow { display: none; }
+    @media (max-width: 640px) {
+      .side svg .dl { font-size: 20px; }
+      .side svg .dt { font-size: 16px; letter-spacing: .06em; }
+      /* at 16 units "EVERYTHING YOU TYPE" is ~190 wide but the gap between the
+         laptop and the server is only 155 — it collided. Short label instead. */
+      .side svg .d-wide { display: none; }
+      .side svg .d-narrow { display: block; }
+    }
 
     /* ---------- reasons ---------- */
     .reasons { padding: 110px 0; }
@@ -297,7 +319,7 @@
             </defs>
             <rect width="560" height="340" fill="url(#tBg)"/>
 
-            <text x="336" y="52" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A79F8C" text-anchor="middle" letter-spacing=".14em">THE INTERNET</text>
+            <text class="dt" x="336" y="52" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A79F8C" text-anchor="middle" letter-spacing=".14em">THE INTERNET</text>
             <line x1="336" y1="66" x2="336" y2="272" stroke="#C4BBA8" stroke-width="2" stroke-dasharray="5 7"/>
 
             <!-- your computer -->
@@ -312,10 +334,11 @@
               <rect x="92" y="189" width="52" height="6" rx="3" opacity=".8"/>
               <rect x="92" y="202" width="64" height="6" rx="3" opacity=".6"/>
             </g>
-            <text x="130" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">You</text>
+            <text class="dl" x="130" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">You</text>
 
             <!-- your words cross the line -->
-            <text x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">EVERYTHING YOU TYPE</text>
+            <text class="dt d-wide" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">EVERYTHING YOU TYPE</text>
+            <text class="dt d-narrow" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">YOUR WORDS</text>
             <path d="M232,196 L356,196" stroke="#C0794F" stroke-width="2.4" stroke-dasharray="6 8" fill="none"/>
             <path d="M370,196 l-14,-7 l3,7 l-3,7 z" fill="#C0794F"/>
             <g fill="#C0794F">
@@ -326,7 +349,7 @@
 
             <!-- their server: the AI lives here, and your words pile up beside it -->
             <rect x="376" y="146" width="148" height="105" rx="10" fill="#3C3A34"/>
-            <text x="450" y="166" font-family="Geist, sans-serif" font-size="9" font-weight="600" fill="#9A9186" text-anchor="middle" letter-spacing=".14em">THE AI</text>
+            <text class="dt" x="450" y="166" font-family="Geist, sans-serif" font-size="9" font-weight="600" fill="#9A9186" text-anchor="middle" letter-spacing=".14em">THE AI</text>
             <g fill="none" stroke="#B4ACA0" stroke-linejoin="round" stroke-linecap="round">
               <path d="M450,172 L467.3,182 L467.3,202 L450,212 L432.7,202 L432.7,182 Z" stroke-width="2.6"/>
               <path d="M450,192 L432.7,182 M450,192 L467.3,182 M450,192 L450,212" stroke-width="1.8" opacity=".7"/>
@@ -337,8 +360,8 @@
               <rect x="406" y="234" width="30" height="5.5" rx="2.75" opacity=".5"/>
               <rect x="442" y="234" width="52" height="5.5" rx="2.75" opacity=".35"/>
             </g>
-            <text x="450" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">Their server</text>
-            <text x="450" y="304" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">YOUR WORDS STAY HERE</text>
+            <text class="dl" x="450" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">Their server</text>
+            <text class="dt" x="450" y="304" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">YOUR WORDS STAY HERE</text>
           </svg>
           <div class="cap">
             <span class="tag">Every other AI</span>
@@ -370,8 +393,8 @@
               <path d="M280,188 L252.3,172 M280,188 L307.7,172 M280,188 L280,220" stroke-width="2.3" opacity=".75"/>
             </g>
             <ellipse cx="280" cy="272" rx="118" ry="6" fill="#7E8A5A" opacity=".14"/>
-            <text x="280" y="298" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#5C663F" text-anchor="middle">Your computer</text>
-            <text x="280" y="318" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#5C663F" text-anchor="middle" letter-spacing=".12em">THE AI RUNS IN HERE</text>
+            <text class="dl" x="280" y="298" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#5C663F" text-anchor="middle">Your computer</text>
+            <text class="dt" x="280" y="318" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#5C663F" text-anchor="middle" letter-spacing=".12em">THE AI RUNS IN HERE</text>
           </svg>
           <div class="cap">
             <span class="tag">GreenCube</span>
