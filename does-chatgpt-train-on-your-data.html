@@ -90,15 +90,27 @@
     a { color: inherit; }
     em { font-style: normal; color: var(--olive-deep); font-weight: 500; }
 
+    .grain {
+      position: fixed; inset: 0; z-index: 60; pointer-events: none;
+      opacity: .055; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
     header {
-      position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center;
-      padding: 18px 32px; background: rgba(245,241,232,0.86);
-      backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
+      position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 14px 30px; background: rgba(245,241,232,0.88);
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
       border-bottom: 1px solid var(--line);
     }
-    .brand { display: inline-flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; text-decoration: none; }
-    .brand .mark { width: 15px; height: 15px; border: 1.6px solid currentColor; border-radius: 4px; }
-    .nav-cta { font-size: 14px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; text-decoration: none; transition: transform .3s var(--ease), background .3s var(--ease); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; flex: 0 0 auto; }
+    .brand .mark { width: 14px; height: 14px; border: 1.7px solid var(--olive); border-radius: 4px; }
+    .nav { display: inline-flex; align-items: center; gap: 4px; }
+    .nav a { position: relative; font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 9px; white-space: nowrap; text-decoration: none; transition: color .25s var(--ease), background .25s var(--ease); }
+    .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
+    .nav a.on { color: var(--ink); font-weight: 600; }
+    .nav a.on::after { content: ''; position: absolute; left: 13px; right: 13px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--olive); }
+    @media (max-width: 940px) { .nav { display: none; } }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; white-space: nowrap; text-decoration: none; transition: transform .3s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
 
     article { max-width: 720px; margin: 0 auto; padding: 64px 24px 40px; }
@@ -150,8 +162,16 @@
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+
 <header>
   <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/how-it-works">Why GreenCube</a>
+    <a href="/does-chatgpt-train-on-your-data" class="on">Your data</a>
+    <a href="/how-much-water-does-ai-use">AI &amp; water</a>
+    <a href="/download">Download</a>
+  </nav>
   <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
 

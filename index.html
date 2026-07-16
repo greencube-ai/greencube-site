@@ -132,10 +132,12 @@
     ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
 
     /* ============== fixed overlays ============== */
+    /* Paper grain over the whole page (sits above the z-index:2 sections, below
+       the header at 100 — pointer-events:none so it never eats a click). */
     .grain {
       position: fixed; inset: 0;
-      z-index: 1; pointer-events: none;
-      opacity: 0.05; mix-blend-mode: multiply;
+      z-index: 60; pointer-events: none;
+      opacity: 0.06; mix-blend-mode: multiply;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     .progress {
@@ -196,37 +198,22 @@
     .header-nav {
       display: inline-flex;
       align-items: center;
-      gap: 22px;
+      gap: 4px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
     }
     .header-nav a {
-      color: var(--forest);
+      color: var(--ink-soft);
       letter-spacing: -0.005em;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      transition: color 0.3s var(--ease-out),
-                  background 0.3s var(--ease-out),
-                  border-color 0.3s var(--ease-out);
+      padding: 8px 13px;
+      border-radius: 9px;
+      white-space: nowrap;
+      transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out);
     }
-    .header-nav a::after {
-      content: '→';
-      display: inline-block;
-      transition: transform 0.3s var(--ease-out);
-      font-weight: 400;
-    }
-    .header-nav a:hover {
-      color: var(--paper);
-      background: var(--forest);
-      border-color: var(--forest);
-    }
-    .header-nav a:hover::after { transform: translateX(3px); }
-    header.dark .header-nav a { color: var(--on-dark); border-color: var(--on-dark-line); }
-    header.dark .header-nav a:hover { background: var(--gold); border-color: var(--gold); color: var(--night); }
+    .header-nav a:hover { color: var(--ink); background: rgba(126, 138, 90, 0.10); }
+    header.dark .header-nav a { color: var(--on-dark-soft); }
+    header.dark .header-nav a:hover { color: var(--on-dark); background: rgba(245, 241, 232, 0.09); }
+    @media (max-width: 940px) { .header-nav { display: none; } }
     .nav-cta {
       font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
       color: var(--paper); background: var(--forest);
@@ -316,24 +303,25 @@
       font-family: var(--display);
       font-style: normal;
       font-weight: 600;
-      font-size: clamp(38px, 5.2vw, 76px);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      font-size: clamp(40px, 6.8vw, 100px);
+      line-height: 1.0;
+      letter-spacing: -0.035em;
       color: var(--forest);
-      margin-bottom: 24px;
+      margin-bottom: 26px;
       white-space: nowrap;
       text-shadow: none;
     }
     .hero h1 em { font-style: normal; color: var(--moss); }
     .hero .lede {
       font-family: var(--sans);
-      font-size: clamp(16px, 1.25vw, 19px);
+      font-size: clamp(16px, 1.45vw, 21px);
       line-height: 1.5;
       color: var(--ink-soft);
-      max-width: 38ch;
-      margin: 0 auto 26px;
+      max-width: 48ch;
+      margin: 0 auto 28px;
       letter-spacing: -0.005em;
     }
+    .hero .hero-chips li { font-size: 15px; padding: 0 21px; }
 
     /* hero value chips — staccato proof, no fluff */
     .hero-chips {
@@ -392,8 +380,23 @@
       transition: transform 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.4s var(--ease-out);
     }
     .cap:hover { transform: translateY(-4px); border-color: var(--moss); box-shadow: 0 2px 4px rgba(72, 82, 47, 0.06), 0 34px 60px -32px rgba(72, 82, 47, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
-    .cap-ico { display: block; width: 34px; height: 34px; color: var(--moss); margin-bottom: 18px; }
-    .cap-ico svg { width: 100%; height: 100%; display: block; }
+    /* each capability carries a colour pulled from the hero landscape */
+    .cap { position: relative; overflow: hidden; }
+    .cap::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--tint, var(--moss)); opacity: .85; }
+    .cap::after { content: ''; position: absolute; right: -46px; top: -46px; width: 160px; height: 160px; border-radius: 50%; background: var(--tint, var(--moss)); opacity: .06; }
+    .cap:hover { border-color: var(--tint, var(--moss)); }
+    .cap-ico {
+      position: relative; z-index: 2;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 46px; height: 46px; border-radius: 13px; margin-bottom: 18px;
+      background: color-mix(in srgb, var(--tint, var(--moss)) 16%, transparent);
+      color: var(--tint-deep, var(--moss));
+    }
+    .cap-ico svg { width: 23px; height: 23px; display: block; }
+    .cap h3, .cap p { position: relative; z-index: 2; }
+    .cap-chat  { --tint: #7E8A5A; --tint-deep: #5C663F; }
+    .cap-docs  { --tint: #D9A93F; --tint-deep: #A87C1E; }
+    .cap-image { --tint: #6E97BE; --tint-deep: #416A90; }
     .cap h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 9px; }
     .cap p { font-family: var(--sans); font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
     @media (max-width: 760px) {
@@ -1907,6 +1910,12 @@
     <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="/how-it-works">Why GreenCube</a>
+    <a href="/does-chatgpt-train-on-your-data">Your data</a>
+    <a href="/how-much-water-does-ai-use">AI &amp; water</a>
+    <a href="/download">Download</a>
+  </nav>
   <a href="/buy" class="nav-cta">Get GreenCube</a>
 </header>
 
@@ -2023,18 +2032,18 @@
     <span class="caps-eyebrow rv">What it does</span>
     <h2 class="caps-head rv">One app. All on your machine.</h2>
     <div class="caps-grid">
-      <article class="cap rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
+      <article class="cap cap-chat rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
         <h3>Chat &amp; write</h3>
         <p>Ask anything, draft anything. Fast, capable answers — right on your machine.</p>
       </article>
-      <article class="cap rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
+      <article class="cap cap-docs rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
         <h3>Read your documents</h3>
         <p>Drop in a PDF. It reads the whole thing — summarize, explain, find what matters.</p>
       </article>
-      <article class="cap rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+      <article class="cap cap-image rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
         <h3>Understand images</h3>
         <p>Show it a photo or screenshot. It sees what's there and makes sense of it.</p>
       </article>
