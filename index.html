@@ -73,7 +73,7 @@
 
   <style>
     /* pre-paint: hide body until fonts load */
-    html { background: #F5F1E8; scrollbar-gutter: stable both-edges; }
+    html { background: #F5F1E8; }
     body { opacity: 0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     body.fonts-ready { opacity: 1; }
   </style>
@@ -340,13 +340,7 @@
       /* nudge the whole text block off the top; the landscape behind is
          absolutely positioned and stays put */
       margin-top: 15px;
-      /* Optical centering: the block is geometrically centered, but the warm
-         sun-glow sits top-right and pulls the eye that way, so a small
-         rightward shift makes it *read* centered. Desktop only — the mobile
-         hero has no such glow dominance. */
-      transform: translateX(16px);
     }
-    @media (max-width: 760px) { .hero .wrap { transform: none; } }
     .hero h1 {
       font-family: var(--display);
       font-style: normal;
