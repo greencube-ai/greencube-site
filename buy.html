@@ -67,6 +67,24 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is GreenCube really one payment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is 9 euros once and GreenCube is yours. There is no subscription, no renewal, no monthly fee and no second charge later." } },
+      { "@type": "Question", "name": "What do I need to run GreenCube?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A Windows 10 or 11 computer. On first run it downloads the AI model itself, a few gigabytes, once. After that everything happens on your own machine." } },
+      { "@type": "Question", "name": "Do I need internet to use GreenCube?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only twice: to sign in once so the purchase can be confirmed, and to download the AI the first time. After that it works with no connection at all." } },
+      { "@type": "Question", "name": "If GreenCube is private, why do I need an account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The sign-in only checks that you bought it. It never sees a conversation, a document or an image. Those are answered on your own computer and are never sent anywhere." } },
+      { "@type": "Question", "name": "Is GreenCube as smart as ChatGPT?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The large cloud models run on data centre hardware and are more capable. GreenCube is a genuinely useful AI that is private, unlimited and owned outright. That is the trade-off." } }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -241,6 +259,30 @@
     .trust a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
     .trust a:hover { color: var(--forest); }
 
+    /* ============== what you get + FAQ ============== */
+    .detail { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 96px 32px 8px; }
+    .detail .eyebrow { justify-content: flex-start; margin-bottom: 14px; }
+    .detail h2 {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1;
+      letter-spacing: -0.028em; color: var(--forest); margin-bottom: 34px;
+    }
+    .gets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .get {
+      background: var(--paper-soft); border: 1px solid var(--line);
+      border-radius: 16px; padding: 24px 26px;
+    }
+    .get h3 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: -0.012em; color: var(--forest); margin-bottom: 7px; }
+    .get p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+    .faq-list { display: grid; gap: 14px; margin-top: 4px; }
+    .faq-item { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
+    .faq-item h3 { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 7px; }
+    .faq-item p { font-size: 14.5px; line-height: 1.62; color: var(--ink-soft); }
+    .detail .closer { margin-top: 34px; font-size: 15px; color: var(--ink-soft); }
+    .detail .closer a { color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 760px) { .gets { grid-template-columns: 1fr; } .detail { padding-top: 64px; } }
+
     /* ============== footer ============== */
     footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 40px 0 48px; }
     footer .row {
@@ -323,6 +365,57 @@
     </div>
   </section>
 </main>
+
+<!-- ===== what you get + buyer questions ===== -->
+<section class="detail" aria-label="What you get and common questions">
+  <div class="eyebrow">What&rsquo;s included</div>
+  <h2>Everything, on your own machine.</h2>
+
+  <div class="gets">
+    <article class="get">
+      <h3>Chat &amp; write</h3>
+      <p>Ask anything, draft anything &mdash; emails, essays, plans, code. The answers come from a model running on your own computer, not a server.</p>
+    </article>
+    <article class="get">
+      <h3>Read your documents</h3>
+      <p>Drop in a PDF and it reads the whole thing. Summarise it, explain the hard parts, or find the one line you need. The file never leaves your disk.</p>
+    </article>
+    <article class="get">
+      <h3>Understand images</h3>
+      <p>Show it a photo, a screenshot or a diagram and it explains what&rsquo;s there. Useful for homework, error messages and anything you can&rsquo;t quite parse.</p>
+    </article>
+    <article class="get">
+      <h3>Make study material</h3>
+      <p>Ask, and it turns the conversation into flashcards, a quiz, a table or a clean write-up &mdash; in a panel beside the chat, ready to keep.</p>
+    </article>
+  </div>
+
+  <h2 style="margin-top:64px">Questions people ask before buying.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <h3>Is it really one payment?</h3>
+      <p>Yes. &euro;9 once, and GreenCube is yours. There&rsquo;s no subscription, no renewal, no monthly fee and no second charge later. If it were rented, we&rsquo;d have called it something else.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What do I need to run it?</h3>
+      <p>A Windows 10 or 11 computer. On first run it downloads the AI itself &mdash; a few gigabytes, once &mdash; and after that everything happens on your machine.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need internet?</h3>
+      <p>Only twice: to sign in once so we can confirm you paid, and to download the AI the first time. After that it works with no connection at all &mdash; on a plane, in a blackout, or when the servers are down.</p>
+    </div>
+    <div class="faq-item">
+      <h3>If it&rsquo;s private, why do I need an account?</h3>
+      <p>The sign-in only checks that you bought it. It never sees a conversation, a document or an image &mdash; those are answered on your computer and never sent anywhere.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is it as smart as ChatGPT?</h3>
+      <p>Honestly, no. The big cloud models run on hardware the size of a building and they&rsquo;re more capable. GreenCube is a genuinely useful AI that is private, unlimited and yours. That&rsquo;s the trade, and we&rsquo;d rather you know it now than feel misled later.</p>
+    </div>
+  </div>
+
+  <p class="closer">Still deciding? <a href="/how-it-works">Read why GreenCube exists</a> &mdash; where the AI actually runs, and what that changes.</p>
+</section>
 
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
   <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
