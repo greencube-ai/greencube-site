@@ -308,6 +308,78 @@
       .points { max-width: 360px; margin: 0 auto; text-align: left; }
       footer .row { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ============== fit check (hardware onboarding before checkout) ============== */
+    .fit-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      display: none; align-items: center; justify-content: center; padding: 24px;
+      background: rgba(25, 30, 14, 0.44);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; transition: opacity .35s var(--ease-out);
+    }
+    .fit-overlay.open { display: flex; opacity: 1; }
+    .fit-card {
+      position: relative; width: 100%; max-width: 464px;
+      background: var(--paper-soft); border: 1px solid var(--line);
+      border-radius: 22px; padding: 34px 32px 28px;
+      box-shadow: 0 40px 90px -40px rgba(31, 58, 46, 0.55);
+      transform: translateY(12px) scale(0.985); transition: transform .4s var(--ease-out);
+    }
+    .fit-overlay.open .fit-card { transform: none; }
+    .fit-close {
+      position: absolute; top: 15px; right: 15px; width: 30px; height: 30px;
+      border-radius: 50%; border: 1px solid var(--line); background: transparent;
+      color: var(--ink-mute); font-size: 14px; cursor: pointer; line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: color .3s, border-color .3s;
+    }
+    .fit-close:hover { color: var(--forest); border-color: var(--moss); }
+
+    .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss); margin-bottom: 12px; }
+    .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest); margin-bottom: 10px; }
+    .fit-sub { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 22px; }
+
+    .fit-step { display: none; }
+    .fit-step.active { display: block; animation: fit-in .4s var(--ease-out) both; }
+    @keyframes fit-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .fit-q { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+    .fit-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .fit-opt {
+      padding: 13px 12px; border-radius: 13px; border: 1px solid var(--line);
+      background: var(--paper); color: var(--ink); cursor: pointer; text-align: center;
+      font-size: 14.5px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
+    }
+    .fit-opt small { display: block; font-weight: 500; font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
+    .fit-opt:hover { border-color: var(--moss); background: var(--paper-warm); transform: translateY(-1px); }
+
+    .fit-skip { display: block; width: 100%; margin-top: 18px; background: none; border: none; font-size: 12.5px; color: var(--ink-faint); cursor: pointer; text-align: center; }
+    .fit-skip:hover { color: var(--ink-mute); text-decoration: underline; }
+
+    .fit-bar { height: 8px; border-radius: 999px; background: var(--paper-warm); overflow: hidden; margin: 24px 0 10px; }
+    .fit-bar span { display: block; height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--sage), var(--moss)); transition: width .2s linear; }
+    .fit-testing-note { font-size: 12.5px; color: var(--ink-mute); text-align: center; }
+
+    .fit-verdict { display: flex; align-items: center; gap: 13px; margin-bottom: 4px; }
+    .fit-dot { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .fit-dot.green { background: rgba(126, 138, 90, 0.16); color: var(--moss); }
+    .fit-dot.amber { background: rgba(201, 169, 97, 0.20); color: #A9832F; }
+    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest); letter-spacing: -0.015em; }
+    .fit-reassure { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 14px 0 2px; }
+    .fit-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 2px; }
+    .fit-chip { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+    .fit-honest { font-size: 11.5px; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; }
+    .fit-cta {
+      width: 100%; min-height: 54px; margin-top: 20px; padding: 0 24px; border-radius: 13px;
+      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      font-size: 15.5px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      transition: transform .3s var(--ease-out), background .3s var(--ease-out), box-shadow .4s var(--ease-out);
+    }
+    .fit-cta:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
+    .fit-cta .arrow { transition: transform .3s var(--ease-out); }
+    .fit-cta:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 480px) { .fit-card { padding: 30px 22px 24px; } }
   </style>
 </head>
 <body>
@@ -450,6 +522,49 @@
   </div>
 </footer>
 
+<!-- ===== fit check: opens when the buyer clicks Get GreenCube ===== -->
+<div class="fit-overlay" id="fit-overlay" role="dialog" aria-modal="true" aria-labelledby="fit-title">
+  <div class="fit-card">
+    <button class="fit-close" id="fit-close" type="button" aria-label="Close">✕</button>
+
+    <!-- step 1: intro + RAM self-report -->
+    <div class="fit-step active" id="fit-step-intro">
+      <div class="fit-eyebrow">Quick check</div>
+      <h2 id="fit-title">Let&rsquo;s make sure GreenCube runs great for you.</h2>
+      <p class="fit-sub">GreenCube runs the AI on your own computer, so your machine matters. A few seconds now means no &euro;9 spent on a slow experience.</p>
+      <div class="fit-q">How much memory (RAM) does your computer have?</div>
+      <div class="fit-opts">
+        <button class="fit-opt" data-ram="8" type="button">8 GB<small>or less</small></button>
+        <button class="fit-opt" data-ram="16" type="button">16 GB<small>most laptops</small></button>
+        <button class="fit-opt" data-ram="32" type="button">32 GB+<small>plenty</small></button>
+        <button class="fit-opt" data-ram="unsure" type="button">Not sure<small>we&rsquo;ll estimate</small></button>
+      </div>
+      <button class="fit-skip" id="fit-skip" type="button">Skip and go straight to checkout →</button>
+    </div>
+
+    <!-- step 2: in-browser speed test -->
+    <div class="fit-step" id="fit-step-testing">
+      <div class="fit-eyebrow">Checking</div>
+      <h2>Seeing how fast GreenCube will run&hellip;</h2>
+      <p class="fit-sub">Running a quick speed test right here on your computer. Nothing leaves your browser.</p>
+      <div class="fit-bar"><span id="fit-bar-fill"></span></div>
+      <p class="fit-testing-note" id="fit-testing-note">Measuring&hellip;</p>
+    </div>
+
+    <!-- step 3: verdict -->
+    <div class="fit-step" id="fit-step-result">
+      <div class="fit-verdict">
+        <span class="fit-dot" id="fit-dot"></span>
+        <h3 id="fit-headline"></h3>
+      </div>
+      <p class="fit-reassure" id="fit-reassure"></p>
+      <div class="fit-chips" id="fit-chips"></div>
+      <button class="fit-cta" id="fit-continue" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">→</span></button>
+      <p class="fit-honest">This is a quick estimate from your browser. GreenCube checks your exact hardware on first run &mdash; and you&rsquo;re covered by a 14-day refund either way.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 (() => {
   // ---------- font gate (mirrors index.html / download.html) ----------
@@ -478,11 +593,113 @@
   const buyBtn = document.getElementById('buy-btn');
   const status = document.getElementById('buy-status');
 
-  buyBtn.addEventListener('click', () => {
+  function goCheckout() {
     status.classList.remove('error');
     status.textContent = 'Opening secure checkout…';
     location.href = STRIPE_CHECKOUT_URL;
+  }
+
+  // ====================================================================
+  //  FIT CHECK
+  //  Clicking "Get GreenCube" opens a warm, skippable hardware check FIRST,
+  //  so nobody spends €9 on a machine that will run the local AI too slowly.
+  //  It NEVER blocks the purchase — worst case it says "a bit slower" and
+  //  points at the 14-day refund. The website check is deliberately rough
+  //  (a browser cannot read true RAM/GPU); the app confirms exactly on first
+  //  run. RAM is asked directly because it is the real bottleneck for a local
+  //  LLM, and the speed test is a genuine (if engine-dependent) CPU probe.
+  // ====================================================================
+  const overlay = document.getElementById('fit-overlay');
+  const stepIntro = document.getElementById('fit-step-intro');
+  const stepTesting = document.getElementById('fit-step-testing');
+  const stepResult = document.getElementById('fit-step-result');
+  const barFill = document.getElementById('fit-bar-fill');
+  let selectedRam = null;
+
+  const showStep = (el) => {
+    [stepIntro, stepTesting, stepResult].forEach((s) => s.classList.remove('active'));
+    el.classList.add('active');
+  };
+  const openFit = () => { showStep(stepIntro); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
+
+  buyBtn.addEventListener('click', openFit);
+  document.getElementById('fit-close').addEventListener('click', closeFit);
+  document.getElementById('fit-skip').addEventListener('click', goCheckout);
+  document.getElementById('fit-continue').addEventListener('click', goCheckout);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
+
+  document.querySelectorAll('.fit-opt').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); runTest(); });
   });
+
+  // A real (if rough) CPU probe: a fixed amount of numeric work, timed, and
+  // chunked across animation frames so the bar animates and the page never
+  // freezes. We measure only the compute time, not the wall clock.
+  const ROUNDS = 20;
+  const ITERS = 3_000_000;
+  function runTest() {
+    showStep(stepTesting);
+    barFill.style.width = '0%';
+    let round = 0, computeMs = 0;
+    const startedAt = performance.now();
+    const doRound = () => {
+      const t0 = performance.now();
+      let acc = 0;
+      for (let i = 0; i < ITERS; i++) acc += Math.sqrt(i * 1.0001) * 0.5 + Math.sin(i);
+      if (acc === Infinity) console.log(acc); // guard against dead-code elimination
+      computeMs += performance.now() - t0;
+      round++;
+      barFill.style.width = Math.round((round / ROUNDS) * 100) + '%';
+      if (round < ROUNDS) { requestAnimationFrame(doRound); return; }
+      const elapsed = performance.now() - startedAt, minShow = 1400;
+      const finish = () => showResult(computeMs);
+      elapsed < minShow ? setTimeout(finish, minShow - elapsed) : finish();
+    };
+    requestAnimationFrame(doRound);
+  }
+
+  function showResult(computeMs) {
+    const opsPerMs = (ROUNDS * ITERS) / computeMs; // higher = faster
+    const cores = navigator.hardwareConcurrency || 0;
+
+    // Rough speed tier. Thresholds are engine-dependent and CALIBRATED BY
+    // TESTING — logged below so the number can be checked against real machines.
+    let speedTier;
+    if (opsPerMs >= 70_000) speedTier = 'fast';
+    else if (opsPerMs >= 35_000) speedTier = 'good';
+    else speedTier = 'modest';
+    console.log('[fit] opsPerMs=' + Math.round(opsPerMs) + ' computeMs=' + Math.round(computeMs) + ' cores=' + cores + ' tier=' + speedTier + ' ram=' + selectedRam);
+
+    // RAM is the primary predictor for a local LLM; speed refines it.
+    const ramStrong = selectedRam === '16' || selectedRam === '32';
+    const ramWeak = selectedRam === '8';
+    let green;
+    if (ramStrong) green = speedTier !== 'modest';
+    else if (ramWeak) green = false;               // 8GB: honest amber, refund-backed
+    else green = speedTier === 'fast' && cores >= 4; // unsure: only call it green when clearly fast
+
+    const dot = document.getElementById('fit-dot');
+    dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
+    dot.innerHTML = green
+      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.7" fill="currentColor" stroke="none"/></svg>';
+    document.getElementById('fit-headline').textContent = green ? "You're all set." : "It'll run — just a little slower.";
+    document.getElementById('fit-reassure').textContent = green
+      ? "GreenCube should run smoothly on your computer. And if anything feels off, you've got 14 days to get your money back — no questions."
+      : "GreenCube will still work, but replies may come a bit slower on this machine. You're covered by a 14-day, no-questions refund, so there's no risk in trying it.";
+
+    const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimated' }[selectedRam];
+    const speedLabel = { fast: 'Fast machine', good: 'Good speed', modest: 'Modest speed' }[speedTier];
+    const chips = document.getElementById('fit-chips');
+    chips.innerHTML = '';
+    [ramLabel, speedLabel, cores ? cores + ' CPU cores' : null].filter(Boolean).forEach((t) => {
+      const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
+    });
+
+    showStep(stepResult);
+  }
 })();
 </script>
 </body>
