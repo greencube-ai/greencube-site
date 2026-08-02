@@ -664,21 +664,25 @@
     const opsPerMs = (ROUNDS * ITERS) / computeMs; // higher = faster
     const cores = navigator.hardwareConcurrency || 0;
 
-    // Rough speed tier. Thresholds are engine-dependent and CALIBRATED BY
-    // TESTING — logged below so the number can be checked against real machines.
+    // Rough speed tier. A browser benchmark mostly measures the JS ENGINE, not
+    // the hardware — a phone can out-score an 11-core desktop — so this is a
+    // flavour signal only, never the decider. Logged for calibration.
     let speedTier;
-    if (opsPerMs >= 70_000) speedTier = 'fast';
-    else if (opsPerMs >= 35_000) speedTier = 'good';
+    if (opsPerMs >= 45_000) speedTier = 'fast';
+    else if (opsPerMs >= 18_000) speedTier = 'good';
     else speedTier = 'modest';
     console.log('[fit] opsPerMs=' + Math.round(opsPerMs) + ' computeMs=' + Math.round(computeMs) + ' cores=' + cores + ' tier=' + speedTier + ' ram=' + selectedRam);
 
-    // RAM is the primary predictor for a local LLM; speed refines it.
-    const ramStrong = selectedRam === '16' || selectedRam === '32';
-    const ramWeak = selectedRam === '8';
+    // RAM DECIDES. A local ~4GB model has to fit alongside the OS, so memory is
+    // what actually determines a good experience. 16GB is the recommended
+    // baseline → always green. 8GB is genuinely tight → honest amber. The noisy
+    // speed test is NOT allowed to override this; it only helps estimate the
+    // "not sure" case.
+    const dm = navigator.deviceMemory || 0; // capped at 8, rounded — a hint only
     let green;
-    if (ramStrong) green = speedTier !== 'modest';
-    else if (ramWeak) green = false;               // 8GB: honest amber, refund-backed
-    else green = speedTier === 'fast' && cores >= 4; // unsure: only call it green when clearly fast
+    if (selectedRam === '16' || selectedRam === '32') green = true;
+    else if (selectedRam === '8') green = false;
+    else green = dm >= 8 || cores >= 8 || speedTier === 'fast';
 
     const dot = document.getElementById('fit-dot');
     dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
@@ -694,7 +698,12 @@
     const speedLabel = { fast: 'Fast machine', good: 'Good speed', modest: 'Modest speed' }[speedTier];
     const chips = document.getElementById('fit-chips');
     chips.innerHTML = '';
-    [ramLabel, speedLabel, cores ? cores + ' CPU cores' : null].filter(Boolean).forEach((t) => {
+    // Never show 'Modest speed' under a green verdict — the noisy test would
+    // undercut a result RAM already earned.
+    const chipList = [ramLabel];
+    if (!(green && speedTier === 'modest')) chipList.push(speedLabel);
+    if (cores) chipList.push(cores + ' CPU cores');
+    chipList.forEach((t) => {
       const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
     });
 
