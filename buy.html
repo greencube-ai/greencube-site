@@ -88,7 +88,9 @@
     ]
   }
   </script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231F3A2E' stroke-width='3'/></svg>" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -542,6 +544,15 @@
       <button class="fit-skip" id="fit-skip" type="button">Skip and go straight to checkout →</button>
     </div>
 
+    <!-- step 0: shown FIRST when the visitor isn't on Windows -->
+    <div class="fit-step" id="fit-step-os">
+      <div class="fit-eyebrow">Heads up</div>
+      <h2 id="fit-os-title"></h2>
+      <p class="fit-sub" id="fit-os-sub"></p>
+      <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
+      <button class="fit-skip" id="fit-os-secondary" type="button"></button>
+    </div>
+
     <!-- step 2: in-browser speed test -->
     <div class="fit-step" id="fit-step-testing">
       <div class="fit-eyebrow">Checking</div>
@@ -610,6 +621,7 @@
   //  LLM, and the speed test is a genuine (if engine-dependent) CPU probe.
   // ====================================================================
   const overlay = document.getElementById('fit-overlay');
+  const stepOs = document.getElementById('fit-step-os');
   const stepIntro = document.getElementById('fit-step-intro');
   const stepTesting = document.getElementById('fit-step-testing');
   const stepResult = document.getElementById('fit-step-result');
@@ -617,11 +629,65 @@
   let selectedRam = null;
 
   const showStep = (el) => {
-    [stepIntro, stepTesting, stepResult].forEach((s) => s.classList.remove('active'));
+    [stepOs, stepIntro, stepTesting, stepResult].forEach((s) => s.classList.remove('active'));
     el.classList.add('active');
   };
-  const openFit = () => { showStep(stepIntro); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
+
+  // GreenCube is a Windows desktop app. A Mac/Linux/phone visitor can't run it,
+  // so paying would just mean a refund — surface that BEFORE the RAM check, which
+  // otherwise happily ran a speed test on a phone as if it could install.
+  function detectOS() {
+    const uaData = navigator.userAgentData;
+    const hay = ((uaData && uaData.platform) || '') + ' ' + (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+    const h = hay.toLowerCase();
+    const touch = (navigator.maxTouchPoints || 0) > 1;
+    if ((uaData && uaData.mobile) || /iphone|ipod|android|mobile/.test(h) || (/ipad/.test(h)) || (/mac/.test(h) && touch)) return 'mobile';
+    if (/win/.test(h)) return 'windows';
+    if (/mac|darwin/.test(h)) return 'mac';
+    if (/linux|cros|x11/.test(h)) return 'linux';
+    return 'unknown';
+  }
+
+  function setupOsStep(os) {
+    const title = document.getElementById('fit-os-title');
+    const sub = document.getElementById('fit-os-sub');
+    const primaryLabel = document.getElementById('fit-os-primary-label');
+    const primary = document.getElementById('fit-os-primary');
+    const secondary = document.getElementById('fit-os-secondary');
+    if (os === 'mobile') {
+      // Phone visitors very likely own a Windows PC and are just browsing, so
+      // stay encouraging — but make it unmistakable it's a PC app.
+      title.textContent = 'GreenCube runs on a Windows PC.';
+      sub.textContent = "It's a desktop app for Windows 10 and 11, not a phone app. You can buy now and download it on your PC later — you'll sign in there with the same email — or just open greencube.app on your PC when you're ready.";
+      primaryLabel.textContent = 'Buy now, set up on my PC →';
+      primary.onclick = goCheckout;
+      secondary.textContent = 'Not now';
+      secondary.onclick = closeFit;
+    } else {
+      // On the very machine they'd use, and it won't run — so the safe default
+      // is NOT to buy. Prominent "got it", quiet escape hatch for dual-PC owners.
+      const name = os === 'mac' ? 'a Mac' : 'Linux';
+      title.textContent = os === 'mac' ? "GreenCube doesn't run on Mac yet." : "GreenCube doesn't run on Linux yet.";
+      sub.textContent = 'Right now GreenCube is Windows-only (Windows 10 and 11) — it will not run on ' + name + '. Mac and Linux versions are coming. If you also have a Windows PC you’re good; otherwise we’d hold off for now.';
+      primaryLabel.textContent = 'Got it';
+      primary.onclick = closeFit;
+      secondary.textContent = 'I have a Windows PC — continue anyway →';
+      secondary.onclick = goCheckout;
+    }
+  }
+
+  const openFit = () => {
+    const os = detectOS();
+    if (os === 'windows' || os === 'unknown') {
+      showStep(stepIntro);
+    } else {
+      setupOsStep(os);
+      showStep(stepOs);
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
 
   buyBtn.addEventListener('click', openFit);
   document.getElementById('fit-close').addEventListener('click', closeFit);
@@ -689,10 +755,10 @@
     dot.innerHTML = green
       ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>'
       : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.7" fill="currentColor" stroke="none"/></svg>';
-    document.getElementById('fit-headline').textContent = green ? "You're all set." : "It'll run — just a little slower.";
+    document.getElementById('fit-headline').textContent = green ? "You're all set." : "This should work.";
     document.getElementById('fit-reassure').textContent = green
       ? "GreenCube should run smoothly on your computer. And if anything feels off, you've got 14 days to get your money back — no questions."
-      : "GreenCube will still work, but replies may come a bit slower on this machine. You're covered by a 14-day, no-questions refund, so there's no risk in trying it.";
+      : "GreenCube should run fine here — with less memory, replies may be a touch slower, but perfectly usable. And you're covered by a 14-day, no-questions refund, so there's no risk in trying it.";
 
     const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimated' }[selectedRam];
     const speedLabel = { fast: 'Fast machine', good: 'Good speed', modest: 'Modest speed' }[speedTier];
