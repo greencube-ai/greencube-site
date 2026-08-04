@@ -358,10 +358,6 @@
     .fit-skip { display: block; width: 100%; margin-top: 18px; background: none; border: none; font-size: 12.5px; color: var(--ink-faint); cursor: pointer; text-align: center; }
     .fit-skip:hover { color: var(--ink-mute); text-decoration: underline; }
 
-    .fit-bar { height: 8px; border-radius: 999px; background: var(--paper-warm); overflow: hidden; margin: 24px 0 10px; }
-    .fit-bar span { display: block; height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--sage), var(--moss)); transition: width .2s linear; }
-    .fit-testing-note { font-size: 12.5px; color: var(--ink-mute); text-align: center; }
-
     .fit-verdict { display: flex; align-items: center; gap: 13px; margin-bottom: 4px; }
     .fit-dot { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
     .fit-dot.green { background: rgba(126, 138, 90, 0.16); color: var(--moss); }
@@ -558,15 +554,6 @@
       <button class="fit-skip" id="fit-os-secondary" type="button"></button>
     </div>
 
-    <!-- step 2: in-browser speed test -->
-    <div class="fit-step" id="fit-step-testing">
-      <div class="fit-eyebrow">Checking</div>
-      <h2>Seeing how fast GreenCube will run&hellip;</h2>
-      <p class="fit-sub">Running a quick speed test right here on your computer. Nothing leaves your browser.</p>
-      <div class="fit-bar"><span id="fit-bar-fill"></span></div>
-      <p class="fit-testing-note" id="fit-testing-note">Measuring&hellip;</p>
-    </div>
-
     <!-- step 3: verdict -->
     <div class="fit-step" id="fit-step-result">
       <div class="fit-verdict">
@@ -618,24 +605,24 @@
 
   // ====================================================================
   //  FIT CHECK
-  //  Clicking "Get GreenCube" opens a warm, skippable hardware check FIRST,
-  //  so nobody spends €9 on a machine that will run the local AI too slowly.
-  //  It NEVER blocks the purchase — worst case it says "a bit slower" and
-  //  points at the 14-day refund. The website check is deliberately rough
-  //  (a browser cannot read true RAM/GPU); the app confirms exactly on first
-  //  run. RAM is asked directly because it is the real bottleneck for a local
-  //  LLM, and the speed test is a genuine (if engine-dependent) CPU probe.
+  //  Clicking "Get GreenCube" opens a warm, skippable check FIRST, so nobody
+  //  spends €9 on a machine that can't run the local AI. It NEVER blocks the
+  //  purchase — worst case it says "a bit slower" and points at the 14-day
+  //  refund. Two things a browser CAN judge honestly: the OS (GreenCube is
+  //  Windows-only) and RAM (asked directly — it's the real bottleneck for a
+  //  local model, and the ~4GB model must fit alongside the OS). We do NOT run
+  //  a browser speed benchmark: it measures the JS engine, not the hardware
+  //  (a phone out-scored an 11-core desktop), so it misled more than it helped.
+  //  The accurate speed test lives in the APP's first-run wizard.
   // ====================================================================
   const overlay = document.getElementById('fit-overlay');
   const stepOs = document.getElementById('fit-step-os');
   const stepIntro = document.getElementById('fit-step-intro');
-  const stepTesting = document.getElementById('fit-step-testing');
   const stepResult = document.getElementById('fit-step-result');
-  const barFill = document.getElementById('fit-bar-fill');
   let selectedRam = null;
 
   const showStep = (el) => {
-    [stepOs, stepIntro, stepTesting, stepResult].forEach((s) => s.classList.remove('active'));
+    [stepOs, stepIntro, stepResult].forEach((s) => s.classList.remove('active'));
     el.classList.add('active');
   };
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
@@ -703,58 +690,22 @@
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
 
   document.querySelectorAll('.fit-opt').forEach((btn) => {
-    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); runTest(); });
+    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showResult(); });
   });
 
-  // A real (if rough) CPU probe: a fixed amount of numeric work, timed, and
-  // chunked across animation frames so the bar animates and the page never
-  // freezes. We measure only the compute time, not the wall clock.
-  const ROUNDS = 20;
-  const ITERS = 3_000_000;
-  function runTest() {
-    showStep(stepTesting);
-    barFill.style.width = '0%';
-    let round = 0, computeMs = 0;
-    const startedAt = performance.now();
-    const doRound = () => {
-      const t0 = performance.now();
-      let acc = 0;
-      for (let i = 0; i < ITERS; i++) acc += Math.sqrt(i * 1.0001) * 0.5 + Math.sin(i);
-      if (acc === Infinity) console.log(acc); // guard against dead-code elimination
-      computeMs += performance.now() - t0;
-      round++;
-      barFill.style.width = Math.round((round / ROUNDS) * 100) + '%';
-      if (round < ROUNDS) { requestAnimationFrame(doRound); return; }
-      const elapsed = performance.now() - startedAt, minShow = 1400;
-      const finish = () => showResult(computeMs);
-      elapsed < minShow ? setTimeout(finish, minShow - elapsed) : finish();
-    };
-    requestAnimationFrame(doRound);
-  }
-
-  function showResult(computeMs) {
-    const opsPerMs = (ROUNDS * ITERS) / computeMs; // higher = faster
+  function showResult() {
     const cores = navigator.hardwareConcurrency || 0;
-
-    // Rough speed tier. A browser benchmark mostly measures the JS ENGINE, not
-    // the hardware — a phone can out-score an 11-core desktop — so this is a
-    // flavour signal only, never the decider. Logged for calibration.
-    let speedTier;
-    if (opsPerMs >= 45_000) speedTier = 'fast';
-    else if (opsPerMs >= 18_000) speedTier = 'good';
-    else speedTier = 'modest';
-    console.log('[fit] opsPerMs=' + Math.round(opsPerMs) + ' computeMs=' + Math.round(computeMs) + ' cores=' + cores + ' tier=' + speedTier + ' ram=' + selectedRam);
 
     // RAM DECIDES. A local ~4GB model has to fit alongside the OS, so memory is
     // what actually determines a good experience. 16GB is the recommended
-    // baseline → always green. 8GB is genuinely tight → honest amber. The noisy
-    // speed test is NOT allowed to override this; it only helps estimate the
-    // "not sure" case.
-    const dm = navigator.deviceMemory || 0; // capped at 8, rounded — a hint only
+    // baseline → always green. 8GB is genuinely tight → honest amber. "Not sure"
+    // falls back to what the browser can glimpse (deviceMemory is capped at 8 and
+    // rounded, cores is a weak hint), leaning green unless both look small.
+    const dm = navigator.deviceMemory || 0;
     let green;
     if (selectedRam === '16' || selectedRam === '32') green = true;
     else if (selectedRam === '8') green = false;
-    else green = dm >= 8 || cores >= 8 || speedTier === 'fast';
+    else green = dm >= 8 || cores >= 8;
 
     const dot = document.getElementById('fit-dot');
     dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
@@ -767,14 +718,9 @@
       : "GreenCube should run fine here — with less memory, replies may be a touch slower, but perfectly usable. And you're covered by a 14-day, no-questions refund, so there's no risk in trying it.";
 
     const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimated' }[selectedRam];
-    const speedLabel = { fast: 'Fast machine', good: 'Good speed', modest: 'Modest speed' }[speedTier];
     const chips = document.getElementById('fit-chips');
     chips.innerHTML = '';
-    // Never show 'Modest speed' under a green verdict — the noisy test would
-    // undercut a result RAM already earned.
-    const chipList = [ramLabel];
-    if (!(green && speedTier === 'modest')) chipList.push(speedLabel);
-    if (cores) chipList.push(cores + ' CPU cores');
+    const chipList = [ramLabel, 'Windows', cores ? cores + ' CPU cores' : null].filter(Boolean);
     chipList.forEach((t) => {
       const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
     });
