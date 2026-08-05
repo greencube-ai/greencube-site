@@ -310,6 +310,75 @@
       .points { max-width: 360px; margin: 0 auto; text-align: left; }
       footer .row { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ============== fit check (hardware onboarding before checkout) ============== */
+    .fit-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      display: none; align-items: center; justify-content: center; padding: 24px;
+      background: rgba(25, 30, 14, 0.44);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; transition: opacity .35s var(--ease-out);
+    }
+    .fit-overlay.open { display: flex; opacity: 1; }
+    .fit-card {
+      position: relative; width: 100%; max-width: 464px;
+      background: var(--paper-soft); border: 1px solid var(--line);
+      border-radius: 22px; padding: 34px 32px 28px;
+      box-shadow: 0 40px 90px -40px rgba(31, 58, 46, 0.55);
+      transform: translateY(12px) scale(0.985); transition: transform .4s var(--ease-out);
+    }
+    .fit-overlay.open .fit-card { transform: none; }
+    .fit-close {
+      position: absolute; top: 15px; right: 15px; width: 30px; height: 30px;
+      border-radius: 50%; border: 1px solid var(--line); background: transparent;
+      color: var(--ink-mute); font-size: 14px; cursor: pointer; line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: color .3s, border-color .3s;
+    }
+    .fit-close:hover { color: var(--forest); border-color: var(--moss); }
+
+    .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss); margin-bottom: 12px; }
+    .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest); margin-bottom: 10px; }
+    .fit-sub { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 22px; }
+
+    .fit-step { display: none; }
+    .fit-step.active { display: block; animation: fit-in .4s var(--ease-out) both; }
+    @keyframes fit-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .fit-q { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+    .fit-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .fit-opt {
+      padding: 13px 12px; border-radius: 13px; border: 1px solid var(--line);
+      background: var(--paper); color: var(--ink); cursor: pointer; text-align: center;
+      font-size: 14.5px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
+    }
+    .fit-opt small { display: block; font-weight: 500; font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
+    .fit-opt:hover { border-color: var(--moss); background: var(--paper-warm); transform: translateY(-1px); }
+
+    .fit-skip { display: block; width: 100%; margin-top: 18px; background: none; border: none; font-size: 12.5px; color: var(--ink-faint); cursor: pointer; text-align: center; }
+    .fit-skip:hover { color: var(--ink-mute); text-decoration: underline; }
+
+    .fit-verdict { display: flex; align-items: center; gap: 13px; margin-bottom: 4px; }
+    .fit-dot { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .fit-dot.green { background: rgba(126, 138, 90, 0.16); color: var(--moss); }
+    .fit-dot.amber { background: rgba(201, 169, 97, 0.20); color: #A9832F; }
+    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest); letter-spacing: -0.015em; }
+    .fit-reassure { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 14px 0 2px; }
+    .fit-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 2px; }
+    .fit-chip { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+    .fit-expect { font-size: 12.5px; color: var(--ink-mute); line-height: 1.55; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
+    .fit-honest { font-size: 11.5px; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; }
+    .fit-cta {
+      width: 100%; min-height: 54px; margin-top: 20px; padding: 0 24px; border-radius: 13px;
+      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      font-size: 15.5px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      transition: transform .3s var(--ease-out), background .3s var(--ease-out), box-shadow .4s var(--ease-out);
+    }
+    .fit-cta:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
+    .fit-cta .arrow { transition: transform .3s var(--ease-out); }
+    .fit-cta:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 480px) { .fit-card { padding: 30px 22px 24px; } }
   </style>
 </head>
 <body>
@@ -423,6 +492,10 @@
       <h3>¿Es tan lista como ChatGPT?</h3>
       <p>Con sinceridad, no. Los grandes modelos de la nube funcionan en hardware del tamaño de un edificio y son más capaces. GreenCube es una IA de verdad útil, privada, sin límites y tuya. Ese es el trato, y preferimos que lo sepas ahora a que te sientas engañado después.</p>
     </div>
+    <div class="faq-item">
+      <h3>¿A qué velocidad va?</h3>
+      <p>Depende de tu ordenador, porque la IA funciona <em>en tu ordenador</em>, no en un servidor. Piénsalo como un videojuego: el mismo título va más fluido en una máquina más potente. Así que no responderá tan al instante como los centros de datos de ChatGPT, y en un portátil más ligero las respuestas llegan un poco más despacio. En la mayoría de los equipos va con soltura, y siempre es privada, sin límites y tuya. La comprobación rápida de arriba te da una idea antes de comprar.</p>
+    </div>
   </div>
 
   <p class="closer">¿Aún lo estás pensando? <a href="/es/how-it-works">Lee por qué existe GreenCube</a>: dónde funciona la IA de verdad y qué cambia eso.</p>
@@ -452,6 +525,50 @@
   </div>
 </footer>
 
+<!-- ===== comprobación de compatibilidad: se abre al pulsar Consigue GreenCube ===== -->
+<div class="fit-overlay" id="fit-overlay" role="dialog" aria-modal="true" aria-labelledby="fit-title">
+  <div class="fit-card">
+    <button class="fit-close" id="fit-close" type="button" aria-label="Cerrar">✕</button>
+
+    <!-- paso 0: se muestra PRIMERO si el visitante no está en Windows -->
+    <div class="fit-step" id="fit-step-os">
+      <div class="fit-eyebrow">Un momento</div>
+      <h2 id="fit-os-title"></h2>
+      <p class="fit-sub" id="fit-os-sub"></p>
+      <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
+      <button class="fit-skip" id="fit-os-secondary" type="button"></button>
+    </div>
+
+    <!-- paso 1: intro + RAM -->
+    <div class="fit-step active" id="fit-step-intro">
+      <div class="fit-eyebrow">Comprobación rápida</div>
+      <h2 id="fit-title">Asegurémonos de que GreenCube te irá bien.</h2>
+      <p class="fit-sub">GreenCube ejecuta la IA en tu propio ordenador, así que tu máquina importa. Unos segundos ahora y no gastas 9&nbsp;&euro; en una experiencia lenta.</p>
+      <div class="fit-q">¿Cuánta memoria (RAM) tiene tu ordenador?</div>
+      <div class="fit-opts">
+        <button class="fit-opt" data-ram="8" type="button">8 GB<small>o menos</small></button>
+        <button class="fit-opt" data-ram="16" type="button">16 GB<small>la mayoría</small></button>
+        <button class="fit-opt" data-ram="32" type="button">32 GB+<small>de sobra</small></button>
+        <button class="fit-opt" data-ram="unsure" type="button">No lo sé<small>lo estimamos</small></button>
+      </div>
+      <button class="fit-skip" id="fit-skip" type="button">Saltar e ir directo al pago →</button>
+    </div>
+
+    <!-- paso 2: veredicto -->
+    <div class="fit-step" id="fit-step-result">
+      <div class="fit-verdict">
+        <span class="fit-dot" id="fit-dot"></span>
+        <h3 id="fit-headline"></h3>
+      </div>
+      <p class="fit-reassure" id="fit-reassure"></p>
+      <div class="fit-chips" id="fit-chips"></div>
+      <p class="fit-expect">Un apunte honesto: como la IA funciona en <em>tu</em> ordenador, su velocidad depende de tu máquina, un poco como un videojuego. No será tan instantánea como los centros de datos de ChatGPT, pero es privada, sin límites y tuya.</p>
+      <button class="fit-cta" id="fit-continue" type="button"><span>Continuar al pago</span><span class="arrow" aria-hidden="true">→</span></button>
+      <p class="fit-honest">Es una estimación rápida desde tu navegador. GreenCube comprueba tu hardware exacto al abrirse por primera vez, y en cualquier caso tienes 14 días de reembolso.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 (() => {
   // ---------- font gate (mirrors index.html / download.html) ----------
@@ -480,11 +597,121 @@
   const buyBtn = document.getElementById('buy-btn');
   const status = document.getElementById('buy-status');
 
-  buyBtn.addEventListener('click', () => {
+  function goCheckout() {
     status.classList.remove('error');
     status.textContent = 'Abriendo el pago seguro…';
     location.href = STRIPE_CHECKOUT_URL;
+  }
+
+  // ====================================================================
+  //  COMPROBACIÓN DE COMPATIBILIDAD (misma lógica que /buy en inglés)
+  //  Al pulsar "Consigue GreenCube" se abre una comprobación cálida y
+  //  saltable: nadie gasta 9 € en una máquina que no puede con la IA local.
+  //  Nunca bloquea la compra. Un navegador solo puede juzgar con honestidad
+  //  dos cosas: el sistema (GreenCube es solo para Windows) y la RAM (se
+  //  pregunta directamente: es el cuello de botella real de un modelo local).
+  //  NO ejecutamos un test de velocidad en el navegador: mide el motor de JS,
+  //  no el hardware. El test de velocidad preciso vive en el asistente de la app.
+  // ====================================================================
+  const overlay = document.getElementById('fit-overlay');
+  const stepOs = document.getElementById('fit-step-os');
+  const stepIntro = document.getElementById('fit-step-intro');
+  const stepResult = document.getElementById('fit-step-result');
+  let selectedRam = null;
+
+  const showStep = (el) => {
+    [stepOs, stepIntro, stepResult].forEach((s) => s.classList.remove('active'));
+    el.classList.add('active');
+  };
+  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
+
+  function detectOS() {
+    const uaData = navigator.userAgentData;
+    const hay = ((uaData && uaData.platform) || '') + ' ' + (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+    const h = hay.toLowerCase();
+    const touch = (navigator.maxTouchPoints || 0) > 1;
+    if ((uaData && uaData.mobile) || /iphone|ipod|android|mobile/.test(h) || (/ipad/.test(h)) || (/mac/.test(h) && touch)) return 'mobile';
+    if (/win/.test(h)) return 'windows';
+    if (/mac|darwin/.test(h)) return 'mac';
+    if (/linux|cros|x11/.test(h)) return 'linux';
+    return 'unknown';
+  }
+
+  function setupOsStep(os) {
+    const title = document.getElementById('fit-os-title');
+    const sub = document.getElementById('fit-os-sub');
+    const primaryLabel = document.getElementById('fit-os-primary-label');
+    const primary = document.getElementById('fit-os-primary');
+    const secondary = document.getElementById('fit-os-secondary');
+    if (os === 'mobile') {
+      title.textContent = 'GreenCube funciona en un PC con Windows.';
+      sub.textContent = 'Es una app de escritorio para Windows 10 y 11, no una app de móvil. Puedes comprarla ahora y descargarla luego en tu PC (inicias sesión allí con el mismo correo), o abrir greencube.app en tu PC cuando quieras.';
+      primaryLabel.textContent = 'Comprar ahora, instalar en mi PC →';
+      primary.onclick = goCheckout;
+      secondary.textContent = 'Ahora no';
+      secondary.onclick = closeFit;
+    } else {
+      const name = os === 'mac' ? 'un Mac' : 'Linux';
+      title.textContent = os === 'mac' ? 'GreenCube aún no funciona en Mac.' : 'GreenCube aún no funciona en Linux.';
+      sub.textContent = 'Por ahora GreenCube es solo para Windows (10 y 11): no funcionará en ' + name + '. Las versiones para Mac y Linux están en camino. Si también tienes un PC con Windows, perfecto; si no, mejor esperar de momento.';
+      primaryLabel.textContent = 'Entendido';
+      primary.onclick = closeFit;
+      secondary.textContent = 'Tengo un PC con Windows: continuar →';
+      secondary.onclick = goCheckout;
+    }
+  }
+
+  const openFit = () => {
+    const os = detectOS();
+    if (os === 'windows' || os === 'unknown') {
+      showStep(stepIntro);
+    } else {
+      setupOsStep(os);
+      showStep(stepOs);
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  buyBtn.addEventListener('click', openFit);
+  document.getElementById('fit-close').addEventListener('click', closeFit);
+  document.getElementById('fit-skip').addEventListener('click', goCheckout);
+  document.getElementById('fit-continue').addEventListener('click', goCheckout);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
+
+  document.querySelectorAll('.fit-opt').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showResult(); });
   });
+
+  function showResult() {
+    const cores = navigator.hardwareConcurrency || 0;
+    const dm = navigator.deviceMemory || 0;
+    let green;
+    if (selectedRam === '16' || selectedRam === '32') green = true;
+    else if (selectedRam === '8') green = false;
+    else green = dm >= 8 || cores >= 8;
+
+    const dot = document.getElementById('fit-dot');
+    dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
+    dot.innerHTML = green
+      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.7" fill="currentColor" stroke="none"/></svg>';
+    document.getElementById('fit-headline').textContent = green ? '¡Todo listo!' : 'Debería funcionar.';
+    document.getElementById('fit-reassure').textContent = green
+      ? 'GreenCube debería ir con soltura en tu ordenador. Y si algo no cuadra, tienes 14 días para recuperar tu dinero, sin preguntas.'
+      : 'GreenCube debería ir bien aquí; con menos memoria las respuestas pueden tardar un poco más, pero es perfectamente usable. Y tienes 14 días de reembolso sin preguntas, así que no hay riesgo en probarlo.';
+
+    const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimada' }[selectedRam];
+    const chips = document.getElementById('fit-chips');
+    chips.innerHTML = '';
+    const chipList = [ramLabel, 'Windows', cores ? cores + ' núcleos' : null].filter(Boolean);
+    chipList.forEach((t) => {
+      const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
+    });
+
+    showStep(stepResult);
+  }
 })();
 </script>
 </body>
