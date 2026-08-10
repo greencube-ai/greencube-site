@@ -385,7 +385,16 @@
   //  message instead of a broken link.
   // ====================================================================
   const DOWNLOADS = {
-    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.33/GreenCube_0.1.33_x64-setup.exe' },
+    // This link had to be rewritten and pushed by hand on every release, the
+    // step lived in a script we no longer release with, and it was missed — so
+    // this button handed every new buyer 0.1.33 while 0.1.34 was live.
+    //
+    // The release workflow now also publishes to a FIXED key,
+    // downloads/latest/GreenCube-setup.exe, which the next release will create.
+    // Once it exists, point this at that key and it never needs touching again.
+    // Not yet: it currently 404s, and a dead download button is worse than an
+    // old one.
+    windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/0.1.34/GreenCube_0.1.34_x64-setup.exe' },
     mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
     linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
   };
