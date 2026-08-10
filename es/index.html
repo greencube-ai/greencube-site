@@ -415,17 +415,20 @@
       position: absolute; left: 32px; bottom: 38px; z-index: 4;
       display: inline-flex; align-items: center; gap: 11px;
       padding: 11px 20px 11px 11px; border-radius: 999px;
-      background: #FDFBF5;
-      border: 1.5px solid var(--moss);
+      /* warm paper, not near-white: #FDFBF5 read as a stark white chip
+         against the landscape and fought the rest of the page */
+      background: rgba(245, 241, 232, 0.94);
+      border: 1px solid rgba(126, 138, 90, 0.55);
       font-size: 15px; font-weight: 600; letter-spacing: -0.008em;
       color: var(--forest);
-      box-shadow: 0 2px 4px rgba(72, 82, 47, .10), 0 20px 44px -18px rgba(72, 82, 47, .55);
+      box-shadow: 0 1px 3px rgba(72, 82, 47, .10), 0 16px 36px -20px rgba(72, 82, 47, .45);
       transition: transform .4s var(--ease-out), box-shadow .5s var(--ease-out), background .3s var(--ease-out);
     }
     .hero-water:hover {
       transform: translateY(-3px);
-      background: #fff;
-      box-shadow: 0 3px 6px rgba(72, 82, 47, .13), 0 30px 60px -20px rgba(72, 82, 47, .62);
+      background: var(--paper-soft);
+      border-color: var(--moss);
+      box-shadow: 0 3px 6px rgba(72, 82, 47, .12), 0 28px 56px -22px rgba(72, 82, 47, .5);
     }
     .hero-water .drop-wrap {
       width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
