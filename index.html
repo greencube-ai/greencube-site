@@ -413,6 +413,11 @@
        Absolute on desktop, but it falls back into normal flow below 900px so
        it can never land on the CTAs. */
     .hero-water {
+      /* No entrance animation, and deliberately no opacity:0 anywhere. This
+         badge first carried .rv (which the hero intro never animated, so it sat
+         invisible), then a CSS fade-in. Both are states where a reader can end
+         up seeing nothing, and this is the one element that has to be seen.
+         It is simply always visible. */
       position: absolute; left: 32px; bottom: 38px; z-index: 4;
       display: inline-flex; align-items: center; gap: 11px;
       padding: 11px 20px 11px 11px; border-radius: 999px;
@@ -975,7 +980,7 @@
       <span class="rv-mask"><span>AI that's <em>yours.</em></span></span>
       <span class="rv-mask"><span>Not rented.</span></span>
     </h1>
-    <p class="lede rv">An AI that runs on your own computer. No&nbsp;wifi&nbsp;needed.</p>
+    <p class="lede rv">An AI that runs on your own computer. No&nbsp;wifi&nbsp;needed. No&nbsp;usage&nbsp;limits.</p>
     <ul class="hero-chips rv">
       <li>Private</li>
       <li>Offline</li>
@@ -990,7 +995,7 @@
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <a href="/ai-environmental-impact" class="hero-water rv">
+  <a href="/ai-environmental-impact#water" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2.7s6 6.4 6 10.6a6 6 0 0 1-12 0c0-4.2 6-10.6 6-10.6z"/>
