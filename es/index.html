@@ -369,14 +369,19 @@
       transform-origin: center top;
     }
     .hero h1 em { font-style: normal; color: var(--moss); }
+    /* the one-line claim. Carries as much weight as the chip row under it,
+       so it reads as a statement rather than a caption. */
     .hero .lede {
       font-family: var(--sans);
-      font-size: clamp(16px, 1.45vw, 21px);
-      line-height: 1.5;
-      color: var(--ink-soft);
-      max-width: 48ch;
-      margin: 0 auto 28px;
-      letter-spacing: -0.005em;
+      font-size: clamp(18px, 1.75vw, 25px);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--ink);
+      /* the second sentence is nbsp-bound, so the line always breaks between
+         the two sentences rather than orphaning "No" */
+      max-width: 36ch;
+      margin: 0 auto 30px;
+      letter-spacing: -0.018em;
     }
     .hero .hero-chips li { font-size: 15px; padding: 0 21px; }
 
@@ -395,6 +400,36 @@
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
       width: 1px; height: 12px; background: rgba(84, 95, 57, 0.3);
     }
+
+    /* corner note into the water page. Absolute on desktop, but it falls back
+       into normal flow below 900px so it can never land on the CTAs. */
+    .hero-water {
+      position: absolute; left: 32px; bottom: 30px; z-index: 4;
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 10px 16px 10px 12px; border-radius: 999px;
+      background: rgba(253, 251, 245, 0.82);
+      border: 1px solid rgba(126, 138, 90, 0.28);
+      backdrop-filter: saturate(140%) blur(8px);
+      -webkit-backdrop-filter: saturate(140%) blur(8px);
+      font-size: 13.5px; font-weight: 500; color: var(--forest);
+      box-shadow: 0 1px 2px rgba(72, 82, 47, .06), 0 14px 30px -20px rgba(72, 82, 47, .4);
+      transition: transform .4s var(--ease-out), box-shadow .5s var(--ease-out), border-color .3s var(--ease-out);
+    }
+    .hero-water:hover {
+      transform: translateY(-2px);
+      border-color: var(--moss);
+      box-shadow: 0 2px 4px rgba(72, 82, 47, .08), 0 22px 44px -22px rgba(72, 82, 47, .5);
+    }
+    .hero-water .drop { width: 17px; height: 17px; color: #6E97BE; flex: 0 0 auto; }
+    .hero-water .arrow { transition: transform .3s var(--ease-out); color: var(--ink-mute); }
+    .hero-water:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 900px) {
+      .hero-water {
+        position: static; margin: 4px auto 0; bottom: auto; left: auto;
+        font-size: 12.5px; padding: 9px 14px 9px 11px;
+      }
+    }
+
 
     /* ============== what-it-does capabilities ============== */
     .caps {
@@ -658,60 +693,83 @@
       will-change: transform;
     }
 
-    /* ============== footer — minimal closure after the manifesto ============== */
+    /* ============== footer ============== */
     footer {
-      padding: 72px 0 56px;
-      color: var(--ink-mute);
-      font-size: 13px;
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
       position: relative;
       z-index: 2;
       background: var(--paper);
+      border-top: 1px solid var(--line);
     }
-    footer .row {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
     }
-    footer .brand-info {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest);
     }
-    footer .footer-note {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 13px;
-      color: var(--ink-mute);
-      letter-spacing: -0.005em;
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss); border-radius: 4px;
     }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft);
+      font-size: 14px; font-weight: 500; color: var(--forest);
+      transition: border-color .3s var(--ease-out), transform .35s var(--ease-out), background .3s var(--ease-out);
+    }
+    footer .f-mail:hover { border-color: var(--moss); background: #fff; transform: translateY(-1px); }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
     footer a { transition: color 0.3s var(--ease-out); }
     footer a:hover { color: var(--forest); }
-    footer .links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex-wrap: wrap;
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
     }
-    footer .cta-back {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--forest);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
     }
-    footer .cta-back:hover { color: var(--gold); }
-    footer .cta-back .arrow {
-      display: inline-block;
-      transition: transform 0.3s var(--ease-out);
+    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
     }
-    footer .cta-back:hover .arrow { transform: translateY(-3px); }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
 
     /* ============== reduced motion ============== */
     @media (prefers-reduced-motion: reduce) {
@@ -903,7 +961,7 @@
       <span class="rv-mask"><span>IA que es <em>tuya.</em></span></span>
       <span class="rv-mask"><span>No alquilada.</span></span>
     </h1>
-    <p class="lede rv">Funciona en tu ordenador. Tus datos nunca salen de ahí. Sin límites, sin suscripción.</p>
+    <p class="lede rv">Una IA que funciona en tu propio ordenador. No&nbsp;hace&nbsp;falta&nbsp;wifi.</p>
     <ul class="hero-chips rv">
       <li>Privada</li>
       <li>Sin internet</li>
@@ -915,6 +973,13 @@
       <a href="/es/how-it-works" class="cta-pill cta-ghost">Por qué GreenCube <span class="arrow">→</span></a>
     </div>
   </div>
+  <a href="/es/ai-environmental-impact" class="hero-water rv">
+    <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2.7s6 6.4 6 10.6a6 6 0 0 1-12 0c0-4.2 6-10.6 6-10.6z"/>
+    </svg>
+    <span>Ahorra agua cada vez que usas IA</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
 </section>
 
 <!-- =========== WHAT IT DOES — three honest capabilities =========== -->
@@ -963,22 +1028,73 @@
 </section>
 
 <footer>
-  <div class="row">
-    <div class="brand-info">
-      <div>© 2026 GreenCube — Edunexis SL</div>
-      <div class="footer-note">IA en <em>propiedad,</em> no de alquiler.</div>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="#top" class="brand-lock" aria-label="GreenCube inicio">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">IA en <em>propiedad,</em> no de alquiler.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          support@greencube.app
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Producto">
+        <h3>Producto</h3>
+        <ul>
+          <li><a href="/es/buy">Consigue GreenCube</a></li>
+          <li><a href="/download" hreflang="en">Descargar (EN)</a></li>
+          <li><a href="/es/how-it-works">Por qué GreenCube</a></li>
+          <li><a href="/es/buy">Precio</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Aprende">
+        <h3>Aprende</h3>
+        <ul>
+          <li><a href="/es/your-data">Tus datos</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data" hreflang="en">ChatGPT y tus datos (EN)</a></li>
+          <li><a href="/es/ai-environmental-impact">La IA y el planeta</a></li>
+          <li><a href="/how-much-water-does-ai-use" hreflang="en">La IA y el agua (EN)</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Empresa">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="/es/mission">Nuestra misión</a></li>
+          <li><a href="https://blog.greencube.app/blog" hreflang="en">Blog (EN)</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Soporte">
+        <h3>Soporte</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Pedir ayuda</a></li>
+          <li><a href="/es/buy">Requisitos del sistema</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidad</a></li>
+          <li><a href="https://legal.greencube.app/terms">Términos de uso</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="links" aria-label="Footer">
-      <a href="/es/buy">Consigue GreenCube</a>
-      <a href="/es/how-it-works">Por qué GreenCube</a>
-      <a href="/does-chatgpt-train-on-your-data" hreflang="en">ChatGPT y tus datos (EN)</a>
-      <a href="/how-much-water-does-ai-use" hreflang="en">La IA y el agua (EN)</a>
-      <a href="/download">Descargar</a>
-      <a href="https://legal.greencube.app/privacy">Privacidad</a>
-      <a href="https://legal.greencube.app/terms">Términos</a>
-      <a href="https://blog.greencube.app/blog" hreflang="en">Blog (EN)</a>
-      <a href="mailto:support@greencube.app">Contacto</a>
-    </nav>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Hecho en España.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Privacidad</a>
+        <a href="https://legal.greencube.app/terms">Términos</a>
+      </div>
+      <div class="f-lang">
+        <a href="/" hreflang="en">EN</a>
+        <a href="/es/" aria-current="true" hreflang="es">ES</a>
+      </div>
+    </div>
   </div>
 </footer>
 
