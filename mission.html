@@ -11,18 +11,18 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Our mission — GreenCube</title>
-  <meta name="description" content="Our mission is to restore privacy to everyone. Who we build for, where GreenCube came from, and the four principles every decision runs through." />
+  <title>Our mission | GreenCube</title>
+  <meta name="description" content="Our mission is to restore privacy to everyone. What GreenCube is, who we build it for, where it came from, and the four principles behind every decision." />
   <meta name="theme-color" content="#F5F1E8" />
 
-  <meta property="og:title" content="Our mission — GreenCube" />
-  <meta property="og:description" content="Humanity deserves full ownership of their data. Unless they explicitly choose to share it. This is what we're building, who we build it for, and why." />
+  <meta property="og:title" content="Our mission | GreenCube" />
+  <meta property="og:description" content="Humanity deserves full ownership of their data. Unless they explicitly choose to share it. What we are building, who we build it for, and why." />
   <meta property="og:url" content="https://greencube.app/mission" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://greencube.app/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="GreenCube — AI that's yours. Not rented. Runs on your own computer." />
+  <meta property="og:image:alt" content="GreenCube. AI that is yours, not rented. Runs on your own computer." />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://greencube.app/og.png" />
@@ -38,40 +38,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
 
+  <!-- Sets .js before first paint. Every hidden-until-revealed state below is
+       scoped to .js, so if this script never runs (or the observer misfires)
+       the page renders fully visible instead of as a grid of empty boxes. -->
+  <script>document.documentElement.className = 'js';</script>
+
   <style>
     html { background: #F5F1E8; }
     body { opacity: 0; transition: opacity .5s ease; }
     body.ready { opacity: 1; }
+    html:not(.js) body { opacity: 1; }
 
     :root {
-      /* site tokens */
       --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
       --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
       --olive: #7E8A5A; --olive-deep: #5C663F;
 
-      /* brand deck — primary */
+      /* brand deck, primary */
       --linen:    #F5F1E8;
       --sage:     #8EA674;
       --graphite: #333333;
-      /* brand deck — secondary */
+      /* brand deck, secondary */
       --jasmine:   #FAE289;
       --wisteria:  #8EABE1;
       --tangerine: #FA9F75;
 
-      /* text that sits ON the coloured grounds — darkened so body copy
+      /* text that sits ON the coloured grounds, darkened so body copy
          clears AA on sage, the tightest of the four */
       --on-color:      #1F2418;
       --on-color-soft: rgba(31,36,24,.78);
       --on-dark:       #F5F1E8;
       --on-dark-soft:  rgba(245,241,232,.70);
-      --on-dark-mute:  rgba(245,241,232,.44);
 
       --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
       --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       --serif: 'Instrument Serif','Times New Roman',Georgia,serif;
       --ease: cubic-bezier(.16,1,.3,1);
-      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
-      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
     }
     *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
@@ -80,7 +82,7 @@
     img, svg { display: block; max-width: 100%; }
     ::selection { background: rgba(142,166,116,.34); color: var(--graphite); }
 
-    /* ---------- paper grain: the tactile layer ---------- */
+    /* ---------- paper grain ---------- */
     .grain {
       position: fixed; inset: 0; z-index: 60; pointer-events: none;
       opacity: .24; mix-blend-mode: multiply;
@@ -109,8 +111,6 @@
     .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
     .head-right { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-    .lang { flex: 0 0 auto; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft); padding: 6px 9px; border: 1px solid var(--line); border-radius: 8px; }
-    .lang:hover { color: var(--ink); border-color: var(--olive); }
     @media (max-width: 940px) {
       header { flex-wrap: wrap; row-gap: 8px; padding: 12px 16px; }
       .brand { order: 1; } .head-right { order: 2; }
@@ -122,16 +122,13 @@
     /* ---------- shared ---------- */
     .inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
     .wide { max-width: 980px; margin: 0 auto; padding: 0 32px; }
-    .narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
     .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); }
-    .ch-num { font-family: var(--display); font-weight: 600; font-size: 11.5px; letter-spacing: .19em; opacity: .5; }
 
-    /* quiet reveal — the whole page uses one motion, and only one */
-    .rv { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .rv.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+    .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } }
 
-    /* ---------- 01 · hero, on linen ---------- */
+    /* ---------- hero ---------- */
     .phero { position: relative; padding: 108px 0 96px; overflow: hidden; }
     .phero::before {
       content:''; position:absolute; inset:0; pointer-events:none;
@@ -148,24 +145,23 @@
       max-width: 15ch; color: var(--graphite);
     }
     .phero h1 .em { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
-    .phero .lede { font-size: clamp(17px,1.6vw,21px); color: var(--ink-soft); max-width: 54ch; margin-top: 28px; }
+    .phero .lede { font-size: clamp(17px,1.6vw,21px); color: var(--ink-soft); max-width: 50ch; margin-top: 28px; }
 
-    /* ---------- 02 · what it is ---------- */
-    .whatis { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-warm); padding: 86px 0; }
+    /* ---------- what it is: what, how, why ---------- */
+    .whatis { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-warm); padding: 90px 0; }
     .whatis .eyebrow { margin-bottom: 20px; }
     .whatis p.big {
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(27px,3.9vw,48px); line-height: 1.16; letter-spacing: -.018em;
-      color: var(--graphite); max-width: 22ch;
+      color: var(--graphite); max-width: 20ch;
     }
-    .whatis .three { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 34px; }
-    .whatis .three span {
-      font-size: 12.5px; font-weight: 600; letter-spacing: .04em;
-      padding: 7px 15px; border-radius: 999px;
-      border: 1px solid rgba(126,138,90,.34); color: var(--olive-deep); background: rgba(142,166,116,.10);
-    }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .step { border-top: 2px solid var(--sage); padding-top: 18px; }
+    .step h3 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: -.015em; color: var(--graphite); }
+    .step p { font-size: 15.5px; color: var(--ink-soft); margin-top: 8px; line-height: 1.6; }
+    @media (max-width: 780px) { .steps { grid-template-columns: 1fr; gap: 26px; } }
 
-    /* ---------- 03 · who we build for, full-bleed SAGE ---------- */
+    /* ---------- who we build for, sage ---------- */
     .who { background: var(--sage); color: var(--on-color); padding: 104px 0; }
     .who .eyebrow { color: rgba(31,36,24,.62); margin-bottom: 22px; }
     .who h2 {
@@ -173,7 +169,7 @@
       font-size: clamp(30px,4.4vw,54px); line-height: 1.06; letter-spacing: -.032em;
       max-width: 18ch;
     }
-    .who p { font-size: clamp(16px,1.4vw,18.5px); color: var(--on-color-soft); max-width: 56ch; margin-top: 22px; }
+    .who p { font-size: clamp(16px,1.4vw,18.5px); color: var(--on-color-soft); max-width: 52ch; margin-top: 22px; }
     .who .creed {
       margin-top: 54px; padding-top: 40px; border-top: 1px solid rgba(31,36,24,.22);
       font-family: var(--serif); font-weight: 400;
@@ -182,23 +178,23 @@
     }
     .who .creed em { font-style: italic; }
 
-    /* ---------- 04 · origin story, full-bleed GRAPHITE ---------- */
-    .origin { background: var(--graphite); color: var(--on-dark); padding: 104px 0 110px; }
+    /* ---------- origin story, graphite ---------- */
+    .origin { background: var(--graphite); color: var(--on-dark); padding: 104px 0 108px; }
     .origin .eyebrow { color: rgba(245,241,232,.50); margin-bottom: 22px; }
     .origin h2 {
       font-family: var(--display); font-weight: 600;
       font-size: clamp(30px,4.4vw,54px); line-height: 1.06; letter-spacing: -.032em;
       max-width: 20ch;
     }
-    .origin .sub { font-size: clamp(16px,1.4vw,18.5px); color: var(--on-dark-soft); max-width: 54ch; margin-top: 20px; }
+    .origin .sub { font-size: clamp(16px,1.4vw,18.5px); color: var(--on-dark-soft); max-width: 50ch; margin-top: 20px; }
 
-    /* the ventures — markers echo the brandmark (rounded square), not dots */
-    .track { margin-top: 56px; display: grid; gap: 0; max-width: 640px; }
+    /* markers echo the brandmark, a rounded square */
+    .track { margin-top: 54px; display: grid; gap: 0; max-width: 620px; }
     .leg { position: relative; padding: 0 0 26px 40px; }
     .leg::before {
       content:''; position: absolute; left: 4px; top: 6px;
       width: 12px; height: 12px; border-radius: 4px;
-      border: 2.4px solid var(--marker, var(--on-dark-mute));
+      border: 2.4px solid var(--marker, rgba(245,241,232,.44));
     }
     .leg::after {
       content:''; position: absolute; left: 9.4px; top: 22px; bottom: -2px;
@@ -208,62 +204,122 @@
     .leg h3 { font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.015em; }
     .leg p { font-size: 14.5px; color: var(--on-dark-soft); margin-top: 4px; }
 
-    .walls { margin-top: 46px; }
-    .walls .lead { font-size: clamp(17px,1.5vw,20px); color: var(--on-dark); max-width: 46ch; font-weight: 500; }
+    .walls { margin-top: 44px; }
+    .walls .lead { font-size: clamp(17px,1.5vw,20px); color: var(--on-dark); max-width: 42ch; font-weight: 500; }
     .wall-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 22px; max-width: 720px; }
-    .wall {
-      border: 1px solid rgba(245,241,232,.16); border-radius: 14px;
-      padding: 18px 18px 20px; background: rgba(245,241,232,.04);
-    }
-    .wall .w-n { font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .12em; color: var(--tangerine); }
-    .wall h4 { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.012em; margin-top: 9px; }
-    .wall p { font-size: 13.5px; color: var(--on-dark-soft); margin-top: 5px; line-height: 1.55; }
+    .wall { border: 1px solid rgba(245,241,232,.16); border-radius: 14px; padding: 20px; background: rgba(245,241,232,.04); }
+    .wall h4 { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.012em; }
+    .wall p { font-size: 13.5px; color: var(--on-dark-soft); margin-top: 6px; line-height: 1.55; }
     @media (max-width: 760px) { .wall-row { grid-template-columns: 1fr; } }
 
-    .turnpoint {
-      margin-top: 60px; padding-top: 44px; border-top: 1px solid rgba(245,241,232,.16);
-      display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap;
-    }
-    .turnpoint .age {
-      font-family: var(--display); font-weight: 600;
-      font-size: clamp(76px,11vw,150px); line-height: .8; letter-spacing: -.06em;
-      color: var(--sage); flex: 0 0 auto;
-    }
-    .turnpoint .said {
+    .closing-line {
+      margin-top: 54px; padding-top: 40px; border-top: 1px solid rgba(245,241,232,.16);
       font-family: var(--serif); font-weight: 400;
-      font-size: clamp(24px,3.3vw,40px); line-height: 1.16; letter-spacing: -.018em;
-      max-width: 17ch; flex: 1 1 320px;
+      font-size: clamp(25px,3.5vw,42px); line-height: 1.18; letter-spacing: -.018em;
+      max-width: 20ch;
     }
+    .closing-line .hl { color: var(--sage); }
 
-    /* ---------- 05 · principles, the secondary palette ---------- */
-    .principles { padding: 104px 0 110px; }
+    /* ---------- principles ---------- */
+    .principles { padding: 104px 0 106px; }
     .principles .eyebrow { margin-bottom: 22px; }
     .principles h2 {
       font-family: var(--display); font-weight: 600;
       font-size: clamp(30px,4.4vw,54px); line-height: 1.06; letter-spacing: -.032em;
       color: var(--graphite); max-width: 20ch;
     }
-    .principles .sub { font-size: clamp(16px,1.4vw,18.5px); color: var(--ink-soft); max-width: 54ch; margin-top: 20px; }
-    .p-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 54px; }
+    .principles .sub { font-size: clamp(16px,1.4vw,18.5px); color: var(--ink-soft); max-width: 50ch; margin-top: 20px; }
+    .p-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 50px; }
     .prin {
-      position: relative; border-radius: 22px; padding: 34px 32px 36px;
-      color: var(--on-color); overflow: hidden;
+      border-radius: 22px; padding: 32px 30px 34px; color: var(--on-color);
       box-shadow: 0 1px 2px rgba(72,82,47,.06), 0 24px 50px -34px rgba(72,82,47,.34);
       transition: transform .45s var(--ease), box-shadow .55s var(--ease);
     }
     .prin:hover { transform: translateY(-4px); box-shadow: 0 3px 6px rgba(72,82,47,.08), 0 38px 66px -34px rgba(72,82,47,.42); }
-    .prin .p-n { font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .16em; color: rgba(31,36,24,.55); }
-    .prin h3 { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.2vw,26px); letter-spacing: -.022em; line-height: 1.14; margin-top: 14px; }
-    .prin p { font-size: 15.5px; line-height: 1.62; color: var(--on-color-soft); margin-top: 12px; }
+    .prin .p-ico {
+      width: 40px; height: 40px; border-radius: 12px; margin-bottom: 18px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(31,36,24,.12); color: var(--on-color);
+    }
+    .prin .p-ico svg { width: 21px; height: 21px; }
+    .prin h3 { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.2vw,26px); letter-spacing: -.022em; line-height: 1.14; }
+    .prin p { font-size: 15.5px; line-height: 1.62; color: var(--on-color-soft); margin-top: 11px; }
     .p-jasmine   { background: var(--jasmine); }
     .p-wisteria  { background: var(--wisteria); }
     .p-tangerine { background: var(--tangerine); }
     .p-sage      { background: var(--sage); }
     @media (max-width: 800px) { .p-grid { grid-template-columns: 1fr; } }
 
-    /* ---------- 06 · close ---------- */
-    .turn { padding: 106px 0 104px; text-align: center; }
-    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(22px,2.8vw,34px); letter-spacing: -.028em; color: var(--graphite); max-width: 24ch; margin: 0 auto 40px; line-height: 1.16; }
+    /* ---------- colour ---------- */
+    /* a deeper ground than paper-warm on purpose: Soft Linen is only 5 shades
+       off #F0ECE3 and vanished into it, reading as an empty outlined box. */
+    .palette { border-top: 1px solid var(--line); background: #E8E2D5; padding: 100px 0 108px; }
+    .palette .eyebrow { margin-bottom: 22px; }
+    .palette h2 {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(30px,4.4vw,54px); line-height: 1.06; letter-spacing: -.032em;
+      color: var(--graphite); max-width: 20ch;
+    }
+    .palette .sub { font-size: clamp(16px,1.4vw,18.5px); color: var(--ink-soft); max-width: 50ch; margin-top: 20px; }
+    .pal-label {
+      display: flex; align-items: center; gap: 14px;
+      font-family: var(--display); font-weight: 600; font-size: 12px;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute);
+      margin: 54px 0 18px;
+    }
+    .pal-label::after { content:''; flex: 1; height: 1px; background: var(--line); }
+    .sw-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media (max-width: 720px) { .sw-row { grid-template-columns: 1fr; } }
+
+    .sw {
+      position: relative; display: block; width: 100%;
+      height: 260px; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(31,36,24,.14); background: transparent;
+      font: inherit; text-align: left; cursor: pointer; padding: 0;
+      transition: transform .45s var(--ease), box-shadow .5s var(--ease);
+    }
+    .sw:hover { transform: translateY(-5px); box-shadow: 0 3px 8px rgba(72,82,47,.09), 0 34px 60px -34px rgba(72,82,47,.44); }
+    .sw:focus-visible { outline: 2px solid var(--graphite); outline-offset: 3px; }
+    /* the colour wipes up from the floor of the tile. Filled by default;
+       only .js hides it, so a JS failure shows colour rather than nothing. */
+    .sw-fill { position: absolute; inset: 0; background: var(--c); }
+    .js .sw-fill { clip-path: inset(100% 0 0 0); transition: clip-path .85s var(--ease); }
+    .js .sw.in .sw-fill { clip-path: inset(0 0 0 0); }
+    .js .sw-row .sw:nth-child(2) .sw-fill { transition-delay: .13s; }
+    .js .sw-row .sw:nth-child(3) .sw-fill { transition-delay: .26s; }
+    .sw-meta {
+      position: absolute; left: 0; right: 0; bottom: 26px; z-index: 2;
+      text-align: center; color: var(--fg);
+    }
+    .js .sw-meta {
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .5s ease .42s, transform .5s var(--ease) .42s;
+    }
+    .js .sw-row .sw:nth-child(2) .sw-meta { transition-delay: .55s; }
+    .js .sw-row .sw:nth-child(3) .sw-meta { transition-delay: .68s; }
+    .js .sw.in .sw-meta { opacity: 1; transform: none; }
+    .sw-hex {
+      display: block; font-family: var(--display); font-weight: 600;
+      font-size: clamp(22px,2.3vw,28px); letter-spacing: -.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .sw-name { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-top: 7px; opacity: .66; }
+    .sw-copied {
+      position: absolute; top: 14px; right: 14px; z-index: 3;
+      font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--fg); background: rgba(255,255,255,.34); border-radius: 999px;
+      padding: 5px 11px; opacity: 0; transform: translateY(-4px);
+      transition: opacity .25s ease, transform .25s var(--ease);
+    }
+    .sw.copied .sw-copied { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .js .sw-fill { clip-path: inset(0 0 0 0); transition: none; }
+      .js .sw-meta { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- close ---------- */
+    .turn { padding: 104px 0; text-align: center; }
+    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(22px,2.8vw,34px); letter-spacing: -.028em; color: var(--graphite); max-width: 22ch; margin: 0 auto 40px; line-height: 1.16; }
     .kicker-line .em { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.008em; }
     .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease), box-shadow .5s var(--ease); }
     .cta:hover { transform: translateY(-2px); background: #000; box-shadow: 0 3px 6px rgba(26,26,26,.16), 0 20px 44px -16px rgba(26,26,26,.6), inset 0 1px 0 rgba(255,255,255,.16); }
@@ -295,53 +351,62 @@
   </div>
 </header>
 
-<!-- ============ 01 · MISSION ============ -->
+<!-- ============ MISSION ============ -->
 <section class="phero">
   <div class="wide">
-    <span class="eyebrow rv">Identity &amp; Mission</span>
+    <span class="eyebrow rv">Identity and mission</span>
     <h1 class="rv">Our mission is to restore privacy to <span class="em">everyone.</span></h1>
-    <p class="lede rv">Not to the people who can read a settings page. Not to the ones who know which toggle to find. To everyone.</p>
+    <p class="lede rv">Not just the people who know which settings to change. Everyone.</p>
   </div>
 </section>
 
-<!-- ============ 02 · WHAT IT IS ============ -->
+<!-- ============ WHAT IT IS ============ -->
 <section class="whatis">
   <div class="wide">
     <span class="eyebrow rv">What GreenCube is</span>
-    <p class="big rv">An AI assistant that runs on your laptop. Fully private. Fully offline.</p>
-    <div class="three rv">
-      <span>Yours, not rented</span>
-      <span>Nothing leaves your machine</span>
-      <span>Pay once</span>
+    <p class="big rv">An AI that lives on your own laptop.</p>
+    <div class="steps">
+      <div class="step rv">
+        <h3>What it is</h3>
+        <p>An app you install on your laptop, the same way you install a game.</p>
+      </div>
+      <div class="step rv">
+        <h3>How it works</h3>
+        <p>Your laptop does the thinking. Normally an AI runs on a company's computer far away, so everything you type has to travel there. This one does not.</p>
+      </div>
+      <div class="step rv">
+        <h3>Why it matters</h3>
+        <p>It works with no internet. And your words stay on your laptop, so nobody can read them.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 03 · WHO WE BUILD FOR — sage ============ -->
+<!-- ============ WHO WE BUILD FOR ============ -->
 <section class="who">
   <div class="wide">
     <span class="eyebrow rv">Who we build for</span>
     <h2 class="rv">Everyday people who are tired of accepting cookies.</h2>
-    <p class="rv">Not engineers. Not people who read privacy policies for fun. The people who click <em>Accept All</em> because there is no other button — and who never agreed to have their life sold to Big Tech, they just ran out of ways to say no.</p>
+    <p class="rv">Not engineers. Not people who read privacy policies for fun. The people who click <em>Accept All</em> because there is no other button. They never agreed to have their life sold. They just ran out of ways to say no.</p>
     <p class="creed rv">Humanity deserves full ownership of their data. Unless they <em>explicitly</em> choose to share it.</p>
   </div>
 </section>
 
-<!-- ============ 04 · ORIGIN STORY — graphite ============ -->
+<!-- ============ ORIGIN STORY ============ -->
 <section class="origin">
   <div class="wide">
     <span class="eyebrow rv">Origin story</span>
     <h2 class="rv">GreenCube started because the tools kept failing the person using them.</h2>
-    <p class="sub rv">Hector found building and entrepreneurship early, and got straight to work. Most of it didn't last. All of it taught him something.</p>
+    <p class="sub rv">Hector started building things young. Most of them did not last. All of them taught him something.</p>
 
     <div class="track">
       <div class="leg rv" style="--marker: #FAE289">
         <h3>A clothing brand</h3>
-        <p>The first real thing. Made, launched, sold.</p>
+        <p>The first real one. Made it, launched it, sold it.</p>
       </div>
       <div class="leg rv" style="--marker: #8EABE1">
         <h3>Dropshipping</h3>
-        <p>Learning what actually moves and what only looks like it does.</p>
+        <p>Learning what really sells and what only looks like it does.</p>
       </div>
       <div class="leg rv" style="--marker: #FA9F75">
         <h3>Reselling</h3>
@@ -354,71 +419,112 @@
     </div>
 
     <div class="walls">
-      <p class="lead rv">He used AI across every single one of them. And every single time, he hit the same three walls.</p>
+      <p class="lead rv">He used AI in every one of them. Every time, he hit the same three walls.</p>
       <div class="wall-row">
         <div class="wall rv">
-          <span class="w-n">01</span>
           <h4>Usage limits</h4>
-          <p>Cut off mid-thought, right when the work was going somewhere.</p>
+          <p>Cut off in the middle of the work.</p>
         </div>
         <div class="wall rv">
-          <span class="w-n">02</span>
           <h4>Server downtime</h4>
-          <p>Someone else's outage, and your day stops with it.</p>
+          <p>Their computer breaks, and your day stops with it.</p>
         </div>
         <div class="wall rv">
-          <span class="w-n">03</span>
           <h4>Your data at risk</h4>
-          <p>Every idea typed into a box owned by a company that keeps it.</p>
+          <p>Every idea typed into a box that a company keeps.</p>
         </div>
       </div>
     </div>
 
-    <div class="turnpoint rv">
-      <span class="age" aria-hidden="true">15</span>
-      <p class="said">So at fifteen, he stopped working around the problem and started building GreenCube.</p>
-    </div>
+    <p class="closing-line rv">So at <span class="hl">fifteen</span>, he stopped working around the problem and started building GreenCube.</p>
   </div>
 </section>
 
-<!-- ============ 05 · PRINCIPLES ============ -->
+<!-- ============ PRINCIPLES ============ -->
 <section class="principles">
   <div class="wide">
-    <span class="eyebrow rv">Principles &amp; philosophy</span>
+    <span class="eyebrow rv">Principles and philosophy</span>
     <h2 class="rv">Four things every decision runs through.</h2>
-    <p class="sub rv">Not wall art. These are the arguments we actually have, written down so they stay settled.</p>
+    <p class="sub rv">These are the arguments we actually have, written down so they stay settled.</p>
 
     <div class="p-grid">
       <article class="prin p-jasmine rv">
-        <span class="p-n">01</span>
+        <span class="p-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
         <h3>First principles</h3>
-        <p>Don't listen to "it's impossible." If it doesn't break the laws of physics, it can be done — and usually the only thing in the way is that nobody has bothered yet.</p>
+        <p>Do not listen to "it is impossible." If it does not break the laws of physics, it can be done.</p>
       </article>
       <article class="prin p-wisteria rv">
-        <span class="p-n">02</span>
+        <span class="p-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/></svg></span>
         <h3>The user</h3>
-        <p>The user is who we work for. Treat them as family. Every single decision has to be made entirely in their best interest — including the ones that cost us money.</p>
+        <p>The user is who we work for. Treat them like family. Every decision is made in their best interest, even the ones that cost us money.</p>
       </article>
       <article class="prin p-tangerine rv">
-        <span class="p-n">03</span>
+        <span class="p-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.6"/><path d="M2 19h20"/></svg></span>
         <h3>Use the product</h3>
-        <p>Use GreenCube every day. You can't build for someone you don't sit next to, and the fastest way to understand what a user needs is to need it yourself.</p>
+        <p>We use GreenCube every day. The fastest way to understand what someone needs is to need it yourself.</p>
       </article>
       <article class="prin p-sage rv">
-        <span class="p-n">04</span>
+        <span class="p-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 9.4c-2 0-3.6 1.2-3.6 2.6s1.6 2.6 3.6 2.6c3.1 0 5.7-5.2 8.8-5.2 2 0 3.6 1.2 3.6 2.6s-1.6 2.6-3.6 2.6c-3.1 0-5.7-5.2-8.8-5.2z"/></svg></span>
         <h3>Buy once, own forever</h3>
-        <p>You should own your software, your music, your movies. No monthly subscriptions, no selling your data, no getting quietly steered by an algorithm you never asked for.</p>
+        <p>You should own your software, your music, your movies. No subscriptions. No selling your data. No algorithm steering you.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============ 06 · CLOSE ============ -->
+<!-- ============ COLOUR ============ -->
+<section class="palette">
+  <div class="wide">
+    <span class="eyebrow rv">Colour</span>
+    <h2 class="rv">The colours we build with.</h2>
+    <p class="sub rv">Three we use everywhere. Three we bring in when something needs to come alive. Tap any one to copy it.</p>
+
+    <h3 class="pal-label rv">Primary</h3>
+    <div class="sw-row">
+      <button class="sw" style="--c:#F5F1E8; --fg:#1F2418" data-hex="F5F1E8" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="F5F1E8">F5F1E8</span><span class="sw-name">Soft Linen</span></span>
+      </button>
+      <button class="sw" style="--c:#8EA674; --fg:#1F2418" data-hex="8EA674" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="8EA674">8EA674</span><span class="sw-name">Sage Green</span></span>
+      </button>
+      <button class="sw" style="--c:#333333; --fg:#F5F1E8" data-hex="333333" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="333333">333333</span><span class="sw-name">Graphite</span></span>
+      </button>
+    </div>
+
+    <h3 class="pal-label rv">Secondary</h3>
+    <div class="sw-row">
+      <button class="sw" style="--c:#FAE289; --fg:#1F2418" data-hex="FAE289" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="FAE289">FAE289</span><span class="sw-name">Jasmine</span></span>
+      </button>
+      <button class="sw" style="--c:#8EABE1; --fg:#1F2418" data-hex="8EABE1" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="8EABE1">8EABE1</span><span class="sw-name">Wisteria Blue</span></span>
+      </button>
+      <button class="sw" style="--c:#FA9F75; --fg:#1F2418" data-hex="FA9F75" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copied</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="FA9F75">FA9F75</span><span class="sw-name">Tangerine Dream</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
 <section class="turn">
   <div class="inner">
     <div class="kicker-line rv">Every other AI is rented. This one is <span class="em">yours.</span></div>
-    <a href="/buy" class="cta rv">Get GreenCube &mdash; &euro;9 <span aria-hidden="true">&rarr;</span></a>
-    <span class="cta-sub rv">One-time payment. No subscription. Runs fully offline after a single sign-in.</span>
+    <a href="/buy" class="cta rv">Get GreenCube for &euro;9 <span aria-hidden="true">&rarr;</span></a>
+    <span class="cta-sub rv">One time payment. No subscription. Works offline after a single sign in.</span>
   </div>
 </section>
 
@@ -438,8 +544,8 @@
 <footer>
   <div class="row">
     <div>
-      <div>&copy; 2026 GreenCube &mdash; Edunexis SL</div>
-      <div>AI that's <em>owned,</em> not rented.</div>
+      <div>&copy; 2026 GreenCube. Edunexis SL.</div>
+      <div>AI that is <em>owned,</em> not rented.</div>
     </div>
     <nav class="links" aria-label="Footer">
       <a href="/buy">Get GreenCube</a>
@@ -458,24 +564,96 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
   setTimeout(show, 900);
 
-  // one reveal, staggered within each section so a band lands as a unit
   (() => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- one quiet reveal, staggered within each section ----
     const items = [...document.querySelectorAll('.rv')];
-    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!('IntersectionObserver' in window) || reduced) {
       items.forEach(el => el.classList.add('in'));
-      return;
+      document.querySelectorAll('.sw').forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const sec = e.target.closest('section');
+          const peers = sec ? [...sec.querySelectorAll('.rv')] : items;
+          e.target.style.transitionDelay = Math.min(peers.indexOf(e.target), 6) * 70 + 'ms';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+      items.forEach(el => io.observe(el));
     }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const sec = e.target.closest('section');
-        const peers = sec ? [...sec.querySelectorAll('.rv')] : items;
-        e.target.style.transitionDelay = Math.min(peers.indexOf(e.target), 6) * 70 + 'ms';
-        e.target.classList.add('in');
-        io.unobserve(e.target);
+
+    // ---- swatches: wipe up, then settle the hex out of a scramble ----
+    const HEXCHARS = '0123456789ABCDEF';
+    const scramble = (el, final) => {
+      const start = performance.now();
+      const DUR = 460;
+      const tick = (now) => {
+        const t = Math.min((now - start) / DUR, 1);
+        // characters lock in left to right as t advances
+        const locked = Math.floor(t * final.length);
+        let out = '';
+        for (let i = 0; i < final.length; i++) {
+          out += i < locked ? final[i] : HEXCHARS[(Math.random() * 16) | 0];
+        }
+        el.textContent = out;
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = final;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const swatches = [...document.querySelectorAll('.sw')];
+    if ('IntersectionObserver' in window && !reduced) {
+      const swIo = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const sw = e.target;
+          sw.classList.add('in');
+          const hex = sw.querySelector('.sw-hex');
+          const row = [...sw.parentElement.children].indexOf(sw);
+          // start the scramble as the meta finishes fading in
+          setTimeout(() => scramble(hex, hex.dataset.final), 420 + row * 130);
+          swIo.unobserve(sw);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.25 });
+      swatches.forEach(el => swIo.observe(el));
+    } else {
+      swatches.forEach(el => el.classList.add('in'));
+    }
+
+    // Failsafe: nothing on this page is allowed to stay invisible. If an
+    // observer never delivers, reveal whatever is still hidden and above the
+    // fold so the reader never meets a blank tile.
+    setTimeout(() => {
+      const vh = window.innerHeight;
+      [...items, ...swatches].forEach(el => {
+        if (el.classList.contains('in')) return;
+        if (el.getBoundingClientRect().top < vh) el.classList.add('in');
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-    items.forEach(el => io.observe(el));
+    }, 2500);
+
+    // ---- tap to copy ----
+    swatches.forEach(sw => {
+      sw.addEventListener('click', async () => {
+        const hex = '#' + sw.dataset.hex;
+        try {
+          await navigator.clipboard.writeText(hex);
+        } catch (err) {
+          const ta = document.createElement('textarea');
+          ta.value = hex; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+        sw.classList.add('copied');
+        clearTimeout(sw._t);
+        sw._t = setTimeout(() => sw.classList.remove('copied'), 1300);
+      });
+    });
   })();
 </script>
 </body>
