@@ -233,17 +233,24 @@
     /* On a phone the nav drops onto its own row under the logo rather than
        vanishing. There's no hamburger, so hiding it left no way at all to
        reach another page. */
-    @media (max-width: 940px) {
+    /* 1040, not 940: the fifth nav item ("Our mission") pushes the row wide
+       enough that the CTA clipped off the right edge in the 940-1000 range. */
+    @media (max-width: 1040px) {
       header { flex-wrap: wrap; row-gap: 8px; }
       .brand { order: 1; }
       .head-right { order: 2; }
       .header-nav {
-        order: 3; width: 100%; justify-content: center;
+        order: 3; left: 0; width: 100%; justify-content: center;
+        flex-wrap: wrap; row-gap: 2px;
         gap: 0; font-size: 12.5px;
         border-top: 1px solid var(--line); padding-top: 9px;
       }
       .header-nav a { padding: 6px 8px; }
       header.dark .header-nav { border-top-color: var(--on-dark-line); }
+      /* the header is fixed and transparent, so once the nav takes a second row
+         it sat straight on top of the headline. 16vh didn't clear a two-row
+         header anywhere in this band. (<=760 already handles itself below.) */
+      .hero { padding-top: 170px; }
     }
     .nav-cta {
       font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
@@ -771,6 +778,7 @@
     <a href="/how-it-works">Why GreenCube</a>
     <a href="/your-data">Your data</a>
     <a href="/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="/mission">Our mission</a>
     <a href="/buy">Download</a>
   </nav>
   <div class="head-right">
@@ -969,6 +977,7 @@
     <nav class="links" aria-label="Footer">
       <a href="/buy">Get GreenCube</a>
       <a href="how-it-works.html">Why GreenCube</a>
+      <a href="/mission">Our mission</a>
       <a href="/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a>
       <a href="/how-much-water-does-ai-use">AI &amp; water</a>
       <a href="/download">Download</a>
