@@ -386,35 +386,32 @@
 
     .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss); margin-bottom: 12px; }
     .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest); margin-bottom: 10px; }
-    .fit-sub { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 22px; }
+    /* Nothing in this dialog is allowed to be small faint grey text. Every
+       line here is something a buyer needs to read, so it is sized to be read
+       at a glance, not squinted at. */
+    .fit-sub { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 24px; }
 
     .fit-step { display: none; }
     .fit-step.active { display: block; animation: fit-in .4s var(--ease-out) both; }
     @keyframes fit-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-    .fit-q { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+    .fit-q { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
     .fit-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .fit-opt {
-      padding: 13px 12px; border-radius: 13px; border: 1px solid var(--line);
+      padding: 16px 12px; border-radius: 13px; border: 1px solid var(--line);
       background: var(--paper); color: var(--ink); cursor: pointer; text-align: center;
-      font-size: 14.5px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
+      font-size: 16px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
     }
-    .fit-opt small { display: block; font-weight: 500; font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
     .fit-opt:hover { border-color: var(--moss); background: var(--paper-warm); transform: translateY(-1px); }
 
-    .fit-skip { display: block; width: 100%; margin-top: 18px; background: none; border: none; font-size: 12.5px; color: var(--ink-faint); cursor: pointer; text-align: center; }
-    .fit-skip:hover { color: var(--ink-mute); text-decoration: underline; }
+    .fit-skip { display: block; width: 100%; margin-top: 20px; background: none; border: none; font-size: 14.5px; font-weight: 500; color: var(--ink-soft); cursor: pointer; text-align: center; }
+    .fit-skip:hover { color: var(--ink); text-decoration: underline; }
 
-    .fit-verdict { display: flex; align-items: center; gap: 13px; margin-bottom: 4px; }
-    .fit-dot { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
-    .fit-dot.green { background: rgba(126, 138, 90, 0.16); color: var(--moss); }
-    .fit-dot.amber { background: rgba(201, 169, 97, 0.20); color: #A9832F; }
-    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest); letter-spacing: -0.015em; }
-    .fit-reassure { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 14px 0 2px; }
-    .fit-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 2px; }
-    .fit-chip { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
-    .fit-expect { font-size: 12.5px; color: var(--ink-mute); line-height: 1.55; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
-    .fit-honest { font-size: 11.5px; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; }
+    .fit-verdict { margin-bottom: 4px; }
+    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--forest); letter-spacing: -0.02em; }
+    .fit-reassure { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 12px 0 0; }
+    .fit-help { font-size: 15px; line-height: 1.5; color: var(--ink-soft); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .fit-help a { color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
     .fit-cta {
       width: 100%; min-height: 54px; margin-top: 20px; padding: 0 24px; border-radius: 13px;
       background: var(--forest); color: #fff; border: 1px solid var(--forest);
@@ -586,16 +583,16 @@
     <!-- step 1: intro + RAM self-report -->
     <div class="fit-step active" id="fit-step-intro">
       <div class="fit-eyebrow">Quick check</div>
-      <h2 id="fit-title">Let&rsquo;s make sure GreenCube runs great for you.</h2>
-      <p class="fit-sub">GreenCube runs the AI on your own computer, so your machine matters. A few seconds now means no &euro;8.99 spent on a slow experience.</p>
-      <div class="fit-q">How much memory (RAM) does your computer have?</div>
+      <h2 id="fit-title">Will GreenCube run well on your computer?</h2>
+      <p class="fit-sub">The AI runs on your machine, so memory matters.</p>
+      <div class="fit-q">How much memory (RAM) do you have?</div>
       <div class="fit-opts">
-        <button class="fit-opt" data-ram="8" type="button">8 GB<small>or less</small></button>
-        <button class="fit-opt" data-ram="16" type="button">16 GB<small>most laptops</small></button>
-        <button class="fit-opt" data-ram="32" type="button">32 GB+<small>plenty</small></button>
-        <button class="fit-opt" data-ram="unsure" type="button">Not sure<small>we&rsquo;ll estimate</small></button>
+        <button class="fit-opt" data-ram="8" type="button">8 GB</button>
+        <button class="fit-opt" data-ram="16" type="button">16 GB</button>
+        <button class="fit-opt" data-ram="32" type="button">32 GB or more</button>
+        <button class="fit-opt" data-ram="unsure" type="button">Not sure</button>
       </div>
-      <button class="fit-skip" id="fit-skip" type="button">Skip and go straight to checkout →</button>
+      <button class="fit-skip" id="fit-skip" type="button">Skip and go to checkout →</button>
     </div>
 
     <!-- step 0: shown FIRST when the visitor isn't on Windows -->
@@ -610,14 +607,11 @@
     <!-- step 3: verdict -->
     <div class="fit-step" id="fit-step-result">
       <div class="fit-verdict">
-        <span class="fit-dot" id="fit-dot"></span>
         <h3 id="fit-headline"></h3>
       </div>
       <p class="fit-reassure" id="fit-reassure"></p>
-      <div class="fit-chips" id="fit-chips"></div>
-      <p class="fit-expect">One honest heads-up: because the AI runs on <em>your</em> computer, its speed depends on your machine, a bit like a game. It won&rsquo;t be as instant as ChatGPT&rsquo;s data centres, but it&rsquo;s private, unlimited and yours.</p>
+      <p class="fit-help">If anything goes wrong, email <a href="mailto:support@greencube.app">support@greencube.app</a> and we will fix it or refund you.</p>
       <button class="fit-cta" id="fit-continue" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">→</span></button>
-      <p class="fit-honest">This is a quick estimate from your browser. GreenCube checks your exact hardware on first run, and you&rsquo;re covered by a 14-day refund either way.</p>
     </div>
   </div>
 </div>
@@ -760,23 +754,14 @@
     else if (selectedRam === '8') green = false;
     else green = dm >= 8 || cores >= 8;
 
-    const dot = document.getElementById('fit-dot');
-    dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
-    dot.innerHTML = green
-      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>'
-      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.7" fill="currentColor" stroke="none"/></svg>';
-    document.getElementById('fit-headline').textContent = green ? "You're all set." : "This should work.";
+    // No tick or warning icon: the headline says the verdict in words, and a
+    // red-or-green badge on a checkout screen reads as pass/fail anxiety.
+    document.getElementById('fit-headline').textContent = green
+      ? "You're all set."
+      : "This will work.";
     document.getElementById('fit-reassure').textContent = green
-      ? "GreenCube should run smoothly on your computer. And if anything feels off, you have 14 days to get your money back, no questions."
-      : "GreenCube should run fine here. With less memory, replies may be a touch slower, but perfectly usable. And you're covered by a 14-day, no-questions refund, so there's no risk in trying it.";
-
-    const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimated' }[selectedRam];
-    const chips = document.getElementById('fit-chips');
-    chips.innerHTML = '';
-    const chipList = [ramLabel, 'Windows', cores ? cores + ' CPU cores' : null].filter(Boolean);
-    chipList.forEach((t) => {
-      const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
-    });
+      ? "GreenCube should run smoothly on your computer."
+      : "GreenCube runs on 8 GB. Replies come a little slower than on a bigger machine.";
 
     showStep(stepResult);
   }
