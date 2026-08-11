@@ -12,7 +12,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Download GreenCube — thanks for your purchase</title>
+  <title>Download GreenCube, thanks for your purchase</title>
   <meta name="description" content="Download GreenCube, then open it and sign in to unlock." />
   <meta name="theme-color" content="#F5F1E8" />
   <!-- A post-purchase page; keep it out of search results. -->
@@ -20,14 +20,14 @@
 
   <link rel="canonical" href="https://greencube.app/download" />
 
-  <meta property="og:title" content="Download GreenCube — thanks for your purchase" />
+  <meta property="og:title" content="Download GreenCube: thanks for your purchase" />
   <meta property="og:description" content="Download GreenCube, then open it and sign in to unlock." />
   <meta property="og:url" content="https://greencube.app/download" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://greencube.app/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="GreenCube — AI that's yours. Not rented. Runs on your own computer." />
+  <meta property="og:image:alt" content="GreenCube: AI that's yours. Not rented. Runs on your own computer." />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://greencube.app/og.png" />
@@ -300,7 +300,7 @@
 <main>
   <div class="eyebrow">Thank you</div>
   <h1>You're <em>in.</em></h1>
-  <p class="lede">Your copy of GreenCube is downloading. Open it and sign in with the email you bought with — that unlocks it. No key to paste.</p>
+  <p class="lede">Your copy of GreenCube is downloading. Open it and sign in with the email you bought with, that unlocks it. No key to paste.</p>
 
   <!-- ===== DOWNLOAD ===== -->
   <section class="card" style="margin-top:22px;">
@@ -321,17 +321,17 @@
     <div class="card-label">What happens next</div>
     <ol class="steps">
       <li>
-        <strong>Windows will show a blue warning</strong> — “Windows protected your PC.”
+        <strong>Windows will show a blue warning</strong>, “Windows protected your PC.”
         That’s normal for new software from a small company: click
-        <em>More info</em>, then <em>Run anyway</em>. GreenCube is safe — Windows just
+        <em>More info</em>, then <em>Run anyway</em>. GreenCube is safe, Windows just
         doesn’t know us yet.
       </li>
       <li>
-        <strong>First launch downloads GreenCube’s AI brain</strong> — a few GB, one time
+        <strong>First launch downloads GreenCube’s AI brain</strong>, a few GB, one time
         only. Grab a coffee; the app shows progress the whole way.
       </li>
       <li>
-        <strong>Sign in with the email you bought with</strong> — checked once, then
+        <strong>Sign in with the email you bought with</strong>, checked once, then
         GreenCube is yours and runs fully offline.
       </li>
     </ol>
@@ -339,7 +339,7 @@
 
   <p class="activate-note">
     <strong>Activation happens inside the app.</strong> Open GreenCube and sign in with the
-    same email you used at checkout — it verifies your purchase once, then runs fully offline.
+    same email you used at checkout, it verifies your purchase once, then runs fully offline.
   </p>
 </main>
 
@@ -405,7 +405,7 @@
       const url = m && m.platforms && m.platforms['windows-x86_64'] && m.platforms['windows-x86_64'].url;
       if (url) DOWNLOADS.windows.url = url;
     })
-    .catch(() => { /* CORS or offline — pinned fallback stays */ });
+    .catch(() => { /* CORS or offline, pinned fallback stays */ });
 
   // ---------- OS detection ----------
   // Prefer the modern, non-deprecated User-Agent Client Hints API
@@ -422,7 +422,7 @@
     // iPadOS reports as "macintosh" but is touch — treat as mac for download UX.
     if (/mac|darwin|iphone|ipad|ipod/.test(hay)) return 'mac';
     if (/linux|android|cros|x11/.test(hay)) return 'linux';
-    return null; // unknown — no auto-download, user picks from the list
+    return null; // unknown, so no auto-download; the user picks from the list
   }
 
   function triggerDownload(url) {
@@ -459,7 +459,7 @@
   primaryBtn.addEventListener('click', () => {
     if (!primaryKey) return;
     const url = DOWNLOADS[primaryKey].url;
-    if (!url) { dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.'; return; }
+    if (!url) { dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.'; return; }
     triggerDownload(url);
     dlStatus.textContent = 'Downloading…';
   });
@@ -477,7 +477,7 @@
       '<span class="sub">' + d.sub + (d.url ? '' : ' · coming soon') + '</span></span>' +
       '<span class="arrow" aria-hidden="true">↓</span>';
     if (!d.url) {
-      a.addEventListener('click', (e) => { e.preventDefault(); dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.'; });
+      a.addEventListener('click', (e) => { e.preventDefault(); dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.'; });
     }
     dlList.appendChild(a);
   });
@@ -492,7 +492,7 @@
       dlStatus.innerHTML = 'Download started. Didn’t work? Use the button above.';
     }, 900);
   } else if (primaryKey) {
-    dlStatus.textContent = 'Builds are being published — check back shortly or watch your email.';
+    dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.';
   }
 })();
 </script>
