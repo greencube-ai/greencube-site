@@ -16,6 +16,28 @@
       "destination": "https://greencube.app/download",
       "permanent": true
     },
+
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept-language", "value": "es(-[A-Za-z]+)?([;,].*)?" }],
+      "missing": [
+        { "type": "cookie", "key": "gc_lang" },
+        { "type": "header", "key": "user-agent", "value": "(?i).*(bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless).*" }
+      ],
+      "destination": "/es/",
+      "permanent": false
+    },
+    {
+      "source": "/:page(buy|how-it-works|your-data|mission|ai-environmental-impact|how-much-water-does-ai-use)",
+      "has": [{ "type": "header", "key": "accept-language", "value": "es(-[A-Za-z]+)?([;,].*)?" }],
+      "missing": [
+        { "type": "cookie", "key": "gc_lang" },
+        { "type": "header", "key": "user-agent", "value": "(?i).*(bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless).*" }
+      ],
+      "destination": "/es/:page",
+      "permanent": false
+    },
+
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "greencube.world" }],

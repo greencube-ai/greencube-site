@@ -142,17 +142,17 @@
       --paper-soft: #FBF8F0;
       --paper-warm: #F0ECE3;
 
-      --night:      #242A15;
-      --night-2:    #191E0E;
+      --night:      #333333;
+      --night-2:    #262626;
       --forest:     #1A1A1A;
       --moss:       #7E8A5A;
-      --sage:       #A7B389;
-      --gold:       #C9A961;
-      --gold-warm:  #D4B575;
+      --sage:       #8EA674;
+      --gold:       #FAE289;
+      --gold-warm:  #F3D461;
 
       --ink:        #1A1A1A;
       --ink-soft:   #555555;
-      --ink-mute:   #8A8275;
+      --ink-mute:   #9A937F;
       --ink-faint:  #B8B0A0;
       --line:       #DDD8CE;
 
@@ -173,14 +173,14 @@
     }
     body {
       font-family: var(--sans); font-weight: 400; line-height: 1.55;
-      color: var(--ink); background: var(--paper);
+      color: var(--ink); background: var(--paper, #F5F1E8);
       overflow-x: hidden; min-height: 100vh;
     }
     a { color: inherit; text-decoration: none; }
     button, input { font-family: inherit; }
     img, svg { display: block; max-width: 100%; }
     em { font-style: italic; }
-    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
+    ::selection { background: rgba(250, 226, 137, 0.32); color: var(--forest, #1A1A1A); }
 
     .grain {
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -194,8 +194,8 @@
       padding: 22px 32px;
       display: flex; justify-content: space-between; align-items: center; gap: 16px;
       border-bottom: 1px solid transparent; color: var(--ink);
-      transition: background 0.5s var(--ease-out), border-color 0.5s var(--ease-out),
-                  backdrop-filter 0.5s var(--ease-out), padding 0.5s var(--ease-out);
+      transition: background 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), border-color 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
+                  backdrop-filter 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), padding 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
     header.scrolled {
       backdrop-filter: saturate(140%) blur(14px);
@@ -207,16 +207,16 @@
     .brand .mark { width: 17px; height: 17px; border: 2.6px solid currentColor; border-radius: 4px; animation: brand-spin 14s linear infinite; }
     @keyframes brand-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
     .head-right { display: inline-flex; align-items: center; gap: 18px; }
-    .lang { font-size: 13px; font-weight: 600; color: var(--forest); padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; letter-spacing: .02em; }
-    .lang:hover { border-color: var(--moss); color: var(--moss); }
+    .lang { font-size: 13px; font-weight: 600; color: var(--forest, #1A1A1A); padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; letter-spacing: .02em; }
+    .lang:hover { border-color: var(--moss, #7E8A5A); color: var(--moss, #7E8A5A); }
     .header-nav { display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
     .header-nav a {
-      color: var(--forest); letter-spacing: -0.005em;
+      color: var(--forest, #1A1A1A); letter-spacing: -0.005em;
       display: inline-flex; align-items: center; gap: 6px;
       padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px;
-      transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+      transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), border-color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
-    .header-nav a:hover { color: var(--paper); background: var(--forest); border-color: var(--forest); }
+    .header-nav a:hover { color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); }
 
     /* ============== layout ============== */
     main {
@@ -237,7 +237,7 @@
       text-decoration: none;
       transition: border-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
     }
-    .scroll-cue:hover { border-color: var(--moss); color: var(--ink); }
+    .scroll-cue:hover { border-color: var(--moss, #7E8A5A); color: var(--ink); }
     .scroll-cue svg { width: 15px; height: 15px; animation: cue-bob 2.4s ease-in-out infinite; }
     @keyframes cue-bob { 0%, 100% { transform: translateY(-1px); } 50% { transform: translateY(3px); } }
     @media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
@@ -245,8 +245,8 @@
     main::before {
       content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(ellipse 55% 45% at 22% 22%, rgba(201, 169, 97, 0.13), transparent 60%),
-        radial-gradient(ellipse 70% 55% at 85% 95%, rgba(91, 138, 110, 0.10), transparent 60%);
+        radial-gradient(ellipse 55% 45% at 22% 22%, rgba(250, 226, 137, 0.13), transparent 60%),
+        radial-gradient(ellipse 70% 55% at 85% 95%, rgba(142, 166, 116, 0.10), transparent 60%);
     }
 
     /* ---- left: the pitch ---- */
@@ -259,50 +259,50 @@
     .pitch h1 {
       font-family: var(--display); font-style: normal; font-weight: 600;
       font-size: clamp(38px, 5vw, 62px); line-height: 1.02; letter-spacing: -0.03em;
-      color: var(--forest); margin-bottom: 22px;
+      color: var(--forest, #1A1A1A); margin-bottom: 22px;
     }
-    .pitch h1 em { font-style: normal; color: var(--moss); }
+    .pitch h1 em { font-style: normal; color: var(--moss, #7E8A5A); }
     .pitch .lede { font-size: 17px; line-height: 1.6; color: var(--ink-soft); max-width: 42ch; margin-bottom: 30px; }
     .points { list-style: none; display: flex; flex-direction: column; gap: 13px; }
     .points li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--ink-soft); }
     .points li .tick {
       flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; border-radius: 50%;
-      background: rgba(91, 138, 110, 0.14); color: var(--moss);
+      background: rgba(142, 166, 116, 0.14); color: var(--moss, #7E8A5A);
       display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
     }
     .points li strong { color: var(--ink); font-weight: 600; }
 
     /* ---- right: the order-summary card ---- */
     .order {
-      background: var(--paper-soft); border: 1px solid var(--line); border-radius: 20px;
-      padding: 32px; box-shadow: 0 28px 64px -34px rgba(31, 58, 46, 0.34);
+      background: var(--paper-soft, #FBF8F0); border: 1px solid var(--line); border-radius: 20px;
+      padding: 32px; box-shadow: 0 28px 64px -34px rgba(31, 36, 24, 0.34);
     }
     .order-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
-    .order-title { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--forest); letter-spacing: -0.015em; }
+    .order-title { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--forest, #1A1A1A); letter-spacing: -0.015em; }
     .order-tag {
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--moss); background: rgba(91, 138, 110, 0.12); padding: 4px 10px; border-radius: 999px;
+      color: var(--moss, #7E8A5A); background: rgba(142, 166, 116, 0.12); padding: 4px 10px; border-radius: 999px;
     }
     .order-sub { font-size: 14px; color: var(--ink-mute); margin-bottom: 26px; }
 
     /* one clear price — shown once */
     .price { display: flex; align-items: baseline; gap: 14px; padding: 6px 0 2px; border-top: 1px solid var(--line); padding-top: 24px; }
-    .price .amount { font-family: var(--display); font-weight: 600; font-size: 52px; color: var(--forest); letter-spacing: -0.03em; line-height: 1; }
+    .price .amount { font-family: var(--display); font-weight: 600; font-size: 52px; color: var(--forest, #1A1A1A); letter-spacing: -0.03em; line-height: 1; }
     .price .amount .cur { font-size: 30px; vertical-align: 4px; margin-right: 2px; }
     .price .meta { font-size: 13px; line-height: 1.4; color: var(--ink-mute); }
     .vat-note { font-size: 12px; color: var(--ink-faint); margin-top: 12px; }
 
     .buy-btn {
       width: 100%; min-height: 60px; margin-top: 22px; padding: 0 28px; border-radius: 14px;
-      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      background: var(--forest, #1A1A1A); color: #fff; border: 1px solid var(--forest, #1A1A1A);
       font-size: 16px; font-weight: 600; cursor: pointer;
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out);
+      transition: transform 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), box-shadow 0.4s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
-    .buy-btn:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
+    .buy-btn:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 36, 24, 0.5); }
     .buy-btn:active { transform: translateY(0); }
     .buy-btn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
-    .buy-btn .arrow { transition: transform 0.3s var(--ease-out); }
+    .buy-btn .arrow { transition: transform 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
     .buy-btn:hover .arrow { transform: translateX(3px); }
 
     .buy-status { min-height: 18px; margin-top: 14px; font-size: 13px; text-align: center; color: var(--ink-mute); }
@@ -312,7 +312,7 @@
     .trust .row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--ink-mute); }
     .trust .row svg { flex: 0 0 auto; }
     .trust a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
-    .trust a:hover { color: var(--forest); }
+    .trust a:hover { color: var(--forest, #1A1A1A); }
 
     /* ============== what you get + FAQ ============== */
     .detail { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 96px 32px 8px; }
@@ -320,22 +320,22 @@
     .detail h2 {
       font-family: var(--display); font-weight: 600;
       font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1;
-      letter-spacing: -0.028em; color: var(--forest); margin-bottom: 34px;
+      letter-spacing: -0.028em; color: var(--forest, #1A1A1A); margin-bottom: 34px;
     }
     .gets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .get {
-      background: var(--paper-soft); border: 1px solid var(--line);
+      background: var(--paper-soft, #FBF8F0); border: 1px solid var(--line);
       border-radius: 16px; padding: 24px 26px;
     }
-    .get h3 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: -0.012em; color: var(--forest); margin-bottom: 7px; }
+    .get h3 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: -0.012em; color: var(--forest, #1A1A1A); margin-bottom: 7px; }
     .get p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
 
     .faq-list { display: grid; gap: 14px; margin-top: 4px; }
-    .faq-item { background: var(--paper-soft); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
-    .faq-item h3 { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 7px; }
+    .faq-item { background: var(--paper-soft, #FBF8F0); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
+    .faq-item h3 { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--forest, #1A1A1A); margin-bottom: 7px; }
     .faq-item p { font-size: 14.5px; line-height: 1.62; color: var(--ink-soft); }
     .detail .closer { margin-top: 34px; font-size: 15px; color: var(--ink-soft); }
-    .detail .closer a { color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .detail .closer a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
     @media (max-width: 760px) { .gets { grid-template-columns: 1fr; } .detail { padding-top: 64px; } }
 
     /* ============== footer ============== */
@@ -347,7 +347,7 @@
     }
     footer .footer-note { color: var(--ink-soft); }
     footer .links { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer a:hover { color: var(--forest); }
+    footer a:hover { color: var(--forest, #1A1A1A); }
 
     @media (max-width: 880px) {
       main { grid-template-columns: 1fr; gap: 40px; padding-top: 120px; }
@@ -364,15 +364,15 @@
       display: none; align-items: center; justify-content: center; padding: 24px;
       background: rgba(25, 30, 14, 0.44);
       backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      opacity: 0; transition: opacity .35s var(--ease-out);
+      opacity: 0; transition: opacity .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
     .fit-overlay.open { display: flex; opacity: 1; }
     .fit-card {
       position: relative; width: 100%; max-width: 464px;
-      background: var(--paper-soft); border: 1px solid var(--line);
+      background: var(--paper-soft, #FBF8F0); border: 1px solid var(--line);
       border-radius: 22px; padding: 34px 32px 28px;
-      box-shadow: 0 40px 90px -40px rgba(31, 58, 46, 0.55);
-      transform: translateY(12px) scale(0.985); transition: transform .4s var(--ease-out);
+      box-shadow: 0 40px 90px -40px rgba(31, 36, 24, 0.55);
+      transform: translateY(12px) scale(0.985); transition: transform .4s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
     .fit-overlay.open .fit-card { transform: none; }
     .fit-close {
@@ -382,45 +382,56 @@
       display: inline-flex; align-items: center; justify-content: center;
       transition: color .3s, border-color .3s;
     }
-    .fit-close:hover { color: var(--forest); border-color: var(--moss); }
+    .fit-close:hover { color: var(--forest, #1A1A1A); border-color: var(--moss, #7E8A5A); }
 
-    .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss); margin-bottom: 12px; }
-    .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest); margin-bottom: 10px; }
+    .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss, #7E8A5A); margin-bottom: 12px; }
+    .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest, #1A1A1A); margin-bottom: 10px; }
     /* Nothing in this dialog is allowed to be small faint grey text. Every
        line here is something a buyer needs to read, so it is sized to be read
        at a glance, not squinted at. */
     .fit-sub { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 24px; }
 
     .fit-step { display: none; }
-    .fit-step.active { display: block; animation: fit-in .4s var(--ease-out) both; }
+    .fit-step.active { display: block; animation: fit-in .4s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) both; }
     @keyframes fit-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
     .fit-q { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
     .fit-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .fit-opt {
       padding: 16px 12px; border-radius: 13px; border: 1px solid var(--line);
-      background: var(--paper); color: var(--ink); cursor: pointer; text-align: center;
+      background: var(--paper, #F5F1E8); color: var(--ink); cursor: pointer; text-align: center;
       font-size: 16px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
     }
-    .fit-opt:hover { border-color: var(--moss); background: var(--paper-warm); transform: translateY(-1px); }
+    .fit-opt:hover { border-color: var(--moss, #7E8A5A); background: var(--paper-warm); transform: translateY(-1px); }
 
     .fit-skip { display: block; width: 100%; margin-top: 20px; background: none; border: none; font-size: 14.5px; font-weight: 500; color: var(--ink-soft); cursor: pointer; text-align: center; }
     .fit-skip:hover { color: var(--ink); text-decoration: underline; }
 
     .fit-verdict { margin-bottom: 4px; }
-    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--forest); letter-spacing: -0.02em; }
+    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--forest, #1A1A1A); letter-spacing: -0.02em; }
+    /* The tier name is the answer, so it is named out loud rather than implied.
+       --tier-mk is set per tier by the script and is the only thing that changes
+       colour here: no green tick, no amber warning, nothing that reads pass/fail. */
+    .fit-tier { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 10px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+    .fit-tier-dot { width: 12px; height: 12px; border-radius: 4px; border: 2.4px solid var(--tier-mk, var(--moss, #7E8A5A)); }
+    .fit-gets { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 9px; }
+    .fit-gets li { position: relative; padding-left: 20px; font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
+    .fit-gets li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 3px; border: 2px solid var(--tier-mk, var(--moss, #7E8A5A)); }
+    .fit-gets li b { font-weight: 600; color: var(--ink); }
+    .fit-note { font-size: 15px; line-height: 1.5; color: var(--ink-soft); margin-top: 16px; }
+    .fit-note a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
     .fit-reassure { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 12px 0 0; }
     .fit-help { font-size: 15px; line-height: 1.5; color: var(--ink-soft); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
-    .fit-help a { color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+    .fit-help a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
     .fit-cta {
       width: 100%; min-height: 54px; margin-top: 20px; padding: 0 24px; border-radius: 13px;
-      background: var(--forest); color: #fff; border: 1px solid var(--forest);
+      background: var(--forest, #1A1A1A); color: #fff; border: 1px solid var(--forest, #1A1A1A);
       font-size: 15.5px; font-weight: 600; cursor: pointer;
       display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      transition: transform .3s var(--ease-out), background .3s var(--ease-out), box-shadow .4s var(--ease-out);
+      transition: transform .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), box-shadow .4s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
-    .fit-cta:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 58, 46, 0.5); }
-    .fit-cta .arrow { transition: transform .3s var(--ease-out); }
+    .fit-cta:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 36, 24, 0.5); }
+    .fit-cta .arrow { transition: transform .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
     .fit-cta:hover .arrow { transform: translateX(3px); }
     @media (max-width: 480px) { .fit-card { padding: 30px 22px 24px; } }
   </style>
@@ -437,6 +448,7 @@
   <div class="head-right">
     <nav class="header-nav" aria-label="Primary">
       <a href="how-it-works.html">Why GreenCube</a>
+      <a href="what-you-get.html">What you get</a>
     </nav>
     <a href="/es/buy" class="lang" hreflang="es">ES</a>
   </div>
@@ -483,7 +495,7 @@
 
     <div class="trust">
       <div class="row">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B8A6E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6A8050" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         <span>Secure checkout by <strong>Stripe</strong>, card details never touch this page.</span>
       </div>
     </div>
@@ -555,23 +567,81 @@
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
   <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
     <defs><linearGradient id="gcFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="70%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="100%" stop-color="#F5F1E8" stop-opacity="1"/></linearGradient></defs>
-    <path d="M0,96 C 300,64 560,110 840,86 C 1090,66 1290,102 1440,82 L1440,240 L0,240 Z" fill="#CBD2B2"/>
-    <path d="M0,132 C 280,108 560,150 820,132 C 1080,116 1300,146 1440,130 L1440,240 L0,240 Z" fill="#AEBB90"/>
-    <g fill="#93A170"><path d="M190,112 l-7,20 h14 Z"/><path d="M214,118 l-6,17 h12 Z"/><path d="M1160,110 l-7,20 h14 Z"/><path d="M1184,117 l-6,16 h12 Z"/></g>
-    <path d="M0,168 C 340,150 620,184 900,168 C 1140,154 1320,178 1440,170 L1440,240 L0,240 Z" fill="#8D9B6A"/>
-    <g fill="#6F7C4E"><path d="M430,146 l-8,24 h16 Z"/><path d="M458,153 l-7,19 h14 Z"/><path d="M960,148 l-8,23 h16 Z"/><path d="M986,155 l-7,18 h14 Z"/></g>
-    <path d="M0,200 C 360,190 700,210 1040,200 C 1240,194 1360,204 1440,202 L1440,240 L0,240 Z" fill="#6E7B4C"/>
+    <path d="M0,96 C 300,64 560,110 840,86 C 1090,66 1290,102 1440,82 L1440,240 L0,240 Z" fill="#C6D4AE"/>
+    <path d="M0,132 C 280,108 560,150 820,132 C 1080,116 1300,146 1440,130 L1440,240 L0,240 Z" fill="#AEC191"/>
+    <g fill="#9AB07F"><path d="M190,112 l-7,20 h14 Z"/><path d="M214,118 l-6,17 h12 Z"/><path d="M1160,110 l-7,20 h14 Z"/><path d="M1184,117 l-6,16 h12 Z"/></g>
+    <path d="M0,168 C 340,150 620,184 900,168 C 1140,154 1320,178 1440,170 L1440,240 L0,240 Z" fill="#9AB07F"/>
+    <g fill="#6A8050"><path d="M430,146 l-8,24 h16 Z"/><path d="M458,153 l-7,19 h14 Z"/><path d="M960,148 l-8,23 h16 Z"/><path d="M986,155 l-7,18 h14 Z"/></g>
+    <path d="M0,200 C 360,190 700,210 1040,200 C 1240,194 1360,204 1440,202 L1440,240 L0,240 Z" fill="#5C663F"/>
     <rect x="0" y="60" width="1440" height="180" fill="url(#gcFade)"/>
   </svg>
 </div>
 <footer>
-  <div class="row">
-    <div class="footer-note">AI that's <em>owned,</em> not rented.</div>
-    <nav class="links" aria-label="Footer">
-      <a href="how-it-works.html">Why GreenCube</a>
-      <a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:support@greencube.app">Contact</a>
-    </nav>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="/" class="brand-lock" aria-label="GreenCube home">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail" data-email="support@greencube.app" data-copied="Address copied">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          <span class="f-mail-label">support@greencube.app</span>
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="/buy">Get GreenCube</a></li>
+          <li><a href="/#what">What it does</a></li>
+          <li><a href="/how-it-works">Why GreenCube</a></li>
+          <li><a href="/how-it-works#fits">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/your-data">Your data</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="/ai-environmental-impact">AI &amp; the planet</a></li>
+          <li><a href="/how-much-water-does-ai-use">AI &amp; water</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/mission">Our mission</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Support">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Get help</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Privacy</a>
+        <a href="https://legal.greencube.app/terms">Terms</a>
+      </div>
+      <div class="f-lang">
+        <a href="/buy" aria-current="true" hreflang="en">EN</a>
+        <a href="/es/buy" hreflang="es">ES</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -584,7 +654,7 @@
     <div class="fit-step active" id="fit-step-intro">
       <div class="fit-eyebrow">Quick check</div>
       <h2 id="fit-title">Will GreenCube run well on your computer?</h2>
-      <p class="fit-sub">The AI runs on your machine, so memory matters.</p>
+      <p class="fit-sub">The AI runs on your machine, so two things decide how it feels. Two questions, both skippable.</p>
       <div class="fit-q">How much memory (RAM) do you have?</div>
       <div class="fit-opts">
         <button class="fit-opt" data-ram="8" type="button">8 GB</button>
@@ -593,6 +663,24 @@
         <button class="fit-opt" data-ram="unsure" type="button">Not sure</button>
       </div>
       <button class="fit-skip" id="fit-skip" type="button">Skip and go to checkout →</button>
+    </div>
+
+    <!-- step 2: the graphics card, the other half of what names a tier. Memory
+         decides how much fits; a card the app can actually use decides how fast
+         it runs. Asking only about RAM could call a 16 GB gaming PC "Sprout"
+         when it is really Bloom, which undersells the machine in front of us. -->
+    <div class="fit-step" id="fit-step-gpu">
+      <div class="fit-eyebrow">Quick check</div>
+      <h2>Does it have a graphics card?</h2>
+      <p class="fit-sub">A separate card, the kind a gaming PC has. Most laptops don&rsquo;t, and that is perfectly fine.</p>
+      <div class="fit-q">Pick the closest.</div>
+      <div class="fit-opts">
+        <button class="fit-opt" data-gpu="strong" type="button">Yes, a strong one</button>
+        <button class="fit-opt" data-gpu="yes" type="button">Yes, a normal one</button>
+        <button class="fit-opt" data-gpu="no" type="button">No, built-in graphics</button>
+        <button class="fit-opt" data-gpu="unsure" type="button">Not sure</button>
+      </div>
+      <button class="fit-skip" id="fit-skip-gpu" type="button">Skip and go to checkout →</button>
     </div>
 
     <!-- step 0: shown FIRST when the visitor isn't on Windows -->
@@ -607,9 +695,12 @@
     <!-- step 3: verdict -->
     <div class="fit-step" id="fit-step-result">
       <div class="fit-verdict">
+        <div class="fit-tier" id="fit-tier"><span class="fit-tier-dot" aria-hidden="true"></span><span id="fit-tier-name"></span></div>
         <h3 id="fit-headline"></h3>
       </div>
       <p class="fit-reassure" id="fit-reassure"></p>
+      <ul class="fit-gets" id="fit-gets"></ul>
+      <p class="fit-note">Those are only the defaults. Every one of them is a switch in Settings, so your computer is never told what you are allowed to ask for. <a href="/what-you-get#tiers">See all four tiers →</a></p>
       <p class="fit-help">If anything goes wrong, email <a href="mailto:support@greencube.app">support@greencube.app</a> and we will fix it or refund you.</p>
       <button class="fit-cta" id="fit-continue" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">→</span></button>
     </div>
@@ -665,11 +756,13 @@
   const overlay = document.getElementById('fit-overlay');
   const stepOs = document.getElementById('fit-step-os');
   const stepIntro = document.getElementById('fit-step-intro');
+  const stepGpu = document.getElementById('fit-step-gpu');
   const stepResult = document.getElementById('fit-step-result');
   let selectedRam = null;
+  let selectedGpu = null;
 
   const showStep = (el) => {
-    [stepOs, stepIntro, stepResult].forEach((s) => s.classList.remove('active'));
+    [stepOs, stepIntro, stepGpu, stepResult].forEach((s) => s.classList.remove('active'));
     el.classList.add('active');
   };
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
@@ -732,40 +825,167 @@
   buyBtn.addEventListener('click', openFit);
   document.getElementById('fit-close').addEventListener('click', closeFit);
   document.getElementById('fit-skip').addEventListener('click', goCheckout);
+  document.getElementById('fit-skip-gpu').addEventListener('click', goCheckout);
   document.getElementById('fit-continue').addEventListener('click', goCheckout);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
 
-  document.querySelectorAll('.fit-opt').forEach((btn) => {
-    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showResult(); });
+  document.querySelectorAll('[data-ram]').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showStep(stepGpu); });
+  });
+  document.querySelectorAll('[data-gpu]').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedGpu = btn.getAttribute('data-gpu'); showResult(); });
   });
 
+  // ====================================================================
+  //  WHICH TIER
+  //  The same four tiers the app itself uses (perf_tier_for, docs/TIERS.md):
+  //  memory decides how much FITS, a usable graphics card decides how FAST it
+  //  runs, and only the two together name the right one. The Apple Silicon
+  //  branch of that rule is irrelevant here — GreenCube is Windows-only.
+  //
+  //  Every line below describes a DEFAULT, never an entitlement. All four tiers
+  //  are the same app at the same price, and every capability named here is a
+  //  switch in Settings, which is why the copy says so rather than hiding it.
+  // ====================================================================
+  const TIERS = {
+    seed: {
+      mk: '#FAE289',
+      label: 'Tier one',
+      headline: 'Your computer is a Seed.',
+      reassure: 'GreenCube runs on 8 GB. Replies arrive a word at a time rather than in a rush, and everything you came for is still there.',
+      gets: [
+        '<b>Unlimited answers</b>, documents, flashcards, quizzes and tables.',
+        '<b>Real PowerPoint files</b>, exactly like every bigger machine gets.',
+        'Web pages stay off here by default, because they would take minutes.'
+      ]
+    },
+    sprout: {
+      mk: '#8EA674',
+      label: 'Tier two',
+      headline: 'Your computer is a Sprout.',
+      reassure: '16 GB or more runs the fuller engine. It works well. It is simply not instant, because without a graphics card your processor is the thing writing every word.',
+      gets: [
+        '<b>Gemma E4B</b>, the fuller engine, with both choices shown to you at setup.',
+        '<b>Slide decks the model writes itself</b>, plus everything Seed gets.',
+        'Web pages once it has told you the wait, measured on your own machine.',
+        '<b>Memory past 16 GB is not wasted</b> &mdash; the context window grows with it, tier or no tier.'
+      ]
+    },
+    bloom: {
+      mk: '#FA9F75',
+      label: 'Tier three',
+      headline: 'Your computer is a Bloom.',
+      reassure: 'A real graphics card is where waiting stops being the thing you notice.',
+      gets: [
+        '<b>Web pages, freely.</b> No warning, no estimate, no asking.',
+        '<b>It sees images with the engine&rsquo;s own eyes</b>, not through a separate captioner.',
+        'A wider context window, so a long conversation keeps its thread.'
+      ]
+    },
+    thrive: {
+      mk: '#8EABE1',
+      label: 'Tier four',
+      headline: 'Your computer is a Thrive.',
+      reassure: 'The top tier. From here your computer is the only thing still deciding what GreenCube can do.',
+      gets: [
+        '<b>The largest engine your computer can hold</b>, picked by measuring it rather than guessing.',
+        '<b>The context window follows your free memory</b>, until the model&rsquo;s own training runs out.',
+        'Every capability on from the start, with nothing to confirm.'
+      ]
+    }
+  };
+
+  function tierFor(ram, gpu) {
+    // "Not sure" about the card counts as no card. That is the honest direction
+    // to round: a machine that turns out faster than promised is a good
+    // surprise, and the opposite is a refund.
+    const strongCard = gpu === 'strong';
+    const anyCard = gpu === 'strong' || gpu === 'yes';
+
+    let gb;
+    if (ram === '8') gb = 8;
+    else if (ram === '16') gb = 16;
+    else if (ram === '32') gb = 32;
+    else {
+      // Unsure: fall back to the little the browser can glimpse. deviceMemory is
+      // rounded and capped at 8, cores is a weak hint, so this only ever decides
+      // between "small" and "ordinary" — never the top tier.
+      const dm = navigator.deviceMemory || 0;
+      const cores = navigator.hardwareConcurrency || 0;
+      gb = (dm >= 8 || cores >= 8) ? 16 : 8;
+    }
+
+    if (strongCard && gb >= 24) return 'thrive';
+    if (anyCard && gb >= 8) return 'bloom';
+    if (gb >= 12) return 'sprout';
+    return 'seed';
+  }
+
   function showResult() {
-    const cores = navigator.hardwareConcurrency || 0;
+    const t = TIERS[tierFor(selectedRam, selectedGpu)];
 
-    // RAM DECIDES. A local ~4GB model has to fit alongside the OS, so memory is
-    // what actually determines a good experience. 16GB is the recommended
-    // baseline → always green. 8GB is genuinely tight → honest amber. "Not sure"
-    // falls back to what the browser can glimpse (deviceMemory is capped at 8 and
-    // rounded, cores is a weak hint), leaning green unless both look small.
-    const dm = navigator.deviceMemory || 0;
-    let green;
-    if (selectedRam === '16' || selectedRam === '32') green = true;
-    else if (selectedRam === '8') green = false;
-    else green = dm >= 8 || cores >= 8;
-
-    // No tick or warning icon: the headline says the verdict in words, and a
+    // No tick or warning icon: the tier name says the verdict in words, and a
     // red-or-green badge on a checkout screen reads as pass/fail anxiety.
-    document.getElementById('fit-headline').textContent = green
-      ? "You're all set."
-      : "This will work.";
-    document.getElementById('fit-reassure').textContent = green
-      ? "GreenCube should run smoothly on your computer."
-      : "GreenCube runs on 8 GB. Replies come a little slower than on a bigger machine.";
+    const badge = document.getElementById('fit-tier');
+    badge.style.setProperty('--tier-mk', t.mk);
+    document.getElementById('fit-tier-name').textContent = t.label;
+    document.getElementById('fit-headline').textContent = t.headline;
+    document.getElementById('fit-reassure').textContent = t.reassure;
+
+    const gets = document.getElementById('fit-gets');
+    gets.style.setProperty('--tier-mk', t.mk);
+    gets.innerHTML = t.gets.map((g) => '<li>' + g + '</li>').join('');
 
     showStep(stepResult);
   }
 })();
+</script>
+<script>
+  // Brave (and any browser with no mail handler registered) silently does
+  // nothing on a mailto:. Copy the address on click as well, so the click
+  // always produces something useful. Default is not prevented, so a working
+  // mail client still opens.
+  (() => {
+    const mail = document.querySelector('.f-mail');
+    if (!mail) return;
+    const label = mail.querySelector('.f-mail-label');
+    const addr = mail.dataset.email || 'support@greencube.app';
+    mail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+      if (!label) return;
+      const original = label.textContent;
+      mail.classList.add('copied');
+      label.textContent = mail.dataset.copied || 'Address copied';
+      clearTimeout(mail._t);
+      mail._t = setTimeout(() => {
+        label.textContent = original;
+        mail.classList.remove('copied');
+      }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
+    });
+  })();
 </script>
 </body>
 </html>

@@ -93,17 +93,17 @@
       --paper-soft: #FBF8F0;
       --paper-warm: #F0ECE3;
 
-      --night:      #242A15;
-      --night-2:    #191E0E;
+      --night:      #333333;
+      --night-2:    #262626;
       --forest:     #1A1A1A;
       --moss:       #7E8A5A;
-      --sage:       #A7B389;
-      --gold:       #C9A961;
-      --gold-warm:  #D4B575;
+      --sage:       #8EA674;
+      --gold:       #FAE289;
+      --gold-warm:  #F3D461;
 
       --ink:          #1A1A1A;
       --ink-soft:     #555555;
-      --ink-mute:     #8A8275;
+      --ink-mute:     #9A937F;
       --ink-faint:    #B8B0A0;
       --line:         #DDD8CE;
       --on-dark:      #F5F1E8;
@@ -140,7 +140,7 @@
     button, input { font-family: inherit; }
     img, svg, canvas { display: block; max-width: 100%; }
     em { font-style: italic; }
-    ::selection { background: rgba(201, 169, 97, 0.32); color: var(--forest); }
+    ::selection { background: rgba(250, 226, 137, 0.32); color: var(--forest); }
 
     /* ============== fixed overlays ============== */
     /* Paper grain over the whole page. Sits above the z-index:2 sections, below
@@ -281,9 +281,9 @@
     }
     header.dark .pill .dot { background: var(--gold); }
     @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0.5); }
-      70%  { box-shadow: 0 0 0 9px rgba(91, 138, 110, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(91, 138, 110, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(142, 166, 116, 0.5); }
+      70%  { box-shadow: 0 0 0 9px rgba(142, 166, 116, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(142, 166, 116, 0); }
     }
 
     /* ============== layout primitives ============== */
@@ -320,7 +320,7 @@
       justify-content: flex-start;
       text-align: center;
       overflow: hidden;
-      background: linear-gradient(180deg, #F7F2E8 0%, #F5EFE1 54%, #F0E8D5 100%);
+      background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
     }
     .hero-landscape {
       position: absolute; inset: 0;
@@ -433,7 +433,7 @@
     .hero-water .drop-wrap {
       width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
       display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(110, 151, 190, 0.16); color: #416A90;
+      background: rgba(142, 171, 225, 0.20); color: #3D5E93;
     }
     .hero-water .drop { width: 16px; height: 16px; }
     .hero-water .arrow { transition: transform .3s var(--ease-out); color: var(--moss); }
@@ -486,10 +486,78 @@
     }
     .cap-ico svg { width: 23px; height: 23px; display: block; }
     .cap h3, .cap p { position: relative; z-index: 2; }
-    .cap-chat  { --tint: #7E8A5A; --tint-deep: #5C663F; }
-    .cap-docs  { --tint: #D9A93F; --tint-deep: #A87C1E; }
-    .cap-image { --tint: #6E97BE; --tint-deep: #416A90; }
-    .cap-study { --tint: #C0794F; --tint-deep: #93502A; }
+    .cap-write { --tint: #8EA674; --tint-deep: #5C663F; }
+    .cap-read  { --tint: #FAE289; --tint-deep: #8A6B1C; }
+    .cap-build { --tint: #FA9F75; --tint-deep: #A8492A; }
+    .cap-agent { --tint: #8EABE1; --tint-deep: #3D5E93; }
+
+    /* Bullets, not paragraphs. Three fragments a person can take in at a
+       glance beat two sentences they will skim past. */
+    .cap-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; position: relative; z-index: 2; }
+    .cap-list li {
+      position: relative; padding-left: 19px;
+      font-family: var(--sans); font-size: 14.5px; line-height: 1.45; color: var(--ink-soft);
+    }
+    .cap-list li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 7px; height: 7px; border-radius: 2px;
+      border: 1.8px solid var(--tint, var(--moss, #7E8A5A));
+      transition: background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    /* the card fills its own bullets in as you move down it */
+    .cap:hover .cap-list li::before { background: var(--tint, var(--moss, #7E8A5A)); }
+    .cap:hover .cap-list li:nth-child(2)::before { transition-delay: .06s; }
+    .cap:hover .cap-list li:nth-child(3)::before { transition-delay: .12s; }
+    .cap-ico { transition: transform .45s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
+    .cap:hover .cap-ico { transform: translateY(-2px) rotate(-4deg); }
+
+    /* ---------- the four tiers ----------
+       A strip, not a comparison table: each card says what that machine feels
+       like rather than ticking rows, because the honest headline is that all
+       four run the same app for the same money. */
+    .tiers { padding: 96px 0 108px; background: var(--paper); }
+    .tiers-wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .tiers-sub {
+      font-family: var(--sans); font-size: 16.5px; line-height: 1.6;
+      color: var(--ink-soft); max-width: 58ch; margin: 18px 0 0;
+    }
+    .tier-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 38px; }
+    .tier-card {
+      position: relative; overflow: hidden;
+      background: var(--paper-soft); border: 1px solid var(--line); border-radius: 18px;
+      padding: 24px 22px 26px;
+      transition: transform .45s var(--ease-out), border-color .3s var(--ease-out), box-shadow .5s var(--ease-out);
+    }
+    .tier-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--tint); }
+    .tier-card::after { content: ''; position: absolute; right: -50px; top: -50px; width: 150px; height: 150px; border-radius: 50%; background: var(--tint); opacity: .10; }
+    .tier-card:hover { transform: translateY(-4px); border-color: var(--tint); box-shadow: 0 2px 4px rgba(72, 82, 47, 0.06), 0 30px 54px -32px rgba(72, 82, 47, 0.34); }
+    .tier-card > * { position: relative; z-index: 2; }
+    .tier-n { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+    .tier-card h3 { font-family: var(--display); font-weight: 600; font-size: 27px; letter-spacing: -0.03em; color: var(--forest); margin-top: 10px; }
+    .tier-spec { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--moss); margin-top: 8px; }
+    .tier-list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+    .tier-list li {
+      position: relative; padding-left: 18px;
+      font-family: var(--sans); font-size: 14px; line-height: 1.4; color: var(--ink-soft);
+    }
+    .tier-list li::before {
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 7px; height: 7px; border-radius: 2px; border: 1.8px solid var(--tint);
+      transition: background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    .tier-card:hover .tier-list li::before { background: var(--tint); }
+    .tier-card:hover .tier-list li:nth-child(2)::before { transition-delay: .06s; }
+    .tier-card:hover .tier-list li:nth-child(3)::before { transition-delay: .12s; }
+    .tiers-cta {
+      display: inline-flex; align-items: center; gap: 9px; margin-top: 30px;
+      font-family: var(--sans); font-size: 15.5px; font-weight: 600; color: var(--forest);
+      border: 1px solid var(--line); background: var(--paper-soft);
+      padding: 13px 24px; border-radius: 999px;
+      transition: transform .35s var(--ease-out), border-color .3s var(--ease-out);
+    }
+    .tiers-cta:hover { transform: translateY(-2px); border-color: var(--moss); }
+    @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
     .cap h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 9px; }
     .cap p { font-family: var(--sans); font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
     @media (max-width: 760px) {
@@ -529,8 +597,8 @@
       padding: 0 24px;
       background: var(--paper-soft);
       color: var(--ink);
-      border: 1px solid rgba(31, 58, 46, 0.09);
-      box-shadow: inset 0 1px 2px rgba(31, 58, 46, 0.04);
+      border: 1px solid rgba(31, 36, 24, 0.09);
+      box-shadow: inset 0 1px 2px rgba(31, 36, 24, 0.04);
       outline: none;
       transition: background 0.3s var(--ease-out),
                   border-color 0.3s var(--ease-out),
@@ -540,11 +608,11 @@
       color: var(--ink-faint);
       font-weight: 400;
     }
-    .cta-form input[type=email]:hover { border-color: rgba(91, 138, 110, 0.40); }
+    .cta-form input[type=email]:hover { border-color: rgba(142, 166, 116, 0.40); }
     .cta-form input[type=email]:focus {
       background: #fff;
       border-color: var(--moss);
-      box-shadow: 0 0 0 4px rgba(91, 138, 110, 0.10);
+      box-shadow: 0 0 0 4px rgba(142, 166, 116, 0.10);
     }
     .cta-primary {
       padding: 0 28px;
@@ -619,8 +687,8 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 60% 50% at 22% 18%, rgba(201, 169, 97, 0.13), transparent 60%),
-        radial-gradient(ellipse 50% 60% at 82% 82%, rgba(91, 138, 110, 0.14), transparent 60%);
+        radial-gradient(ellipse 60% 50% at 22% 18%, rgba(250, 226, 137, 0.13), transparent 60%),
+        radial-gradient(ellipse 50% 60% at 82% 82%, rgba(142, 166, 116, 0.14), transparent 60%);
     }
     .manifesto .head {
       max-width: 1180px;
@@ -812,8 +880,8 @@
         transform: none;
         line-height: 1.0;
         text-shadow:
-          0 14px 26px rgba(31, 58, 46, 0.10),
-          0 5px 12px rgba(31, 58, 46, 0.05);
+          0 14px 26px rgba(31, 36, 24, 0.10),
+          0 5px 12px rgba(31, 36, 24, 0.05);
       }
       .hero .lede { font-size: 17px; margin-bottom: 28px; }
       .cta-row, .cta-form {
@@ -860,10 +928,10 @@
   <svg class="hero-landscape" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <radialGradient id="gcSun" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#FBF1D6" />
-        <stop offset="22%" stop-color="#F5E4B8" stop-opacity="0.66" />
-        <stop offset="46%" stop-color="#EFDCA8" stop-opacity="0.42" />
-        <stop offset="100%" stop-color="#EFDCA8" stop-opacity="0" />
+        <stop offset="0%" stop-color="#FDF3CE" />
+        <stop offset="22%" stop-color="#FCEAA8" stop-opacity="0.66" />
+        <stop offset="46%" stop-color="#FAE289" stop-opacity="0.42" />
+        <stop offset="100%" stop-color="#FAE289" stop-opacity="0" />
       </radialGradient>
       <filter id="gcSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10" /></filter>
       <!-- coloured-pencil pass: a long-wavelength warp so the edges wobble like a
@@ -877,8 +945,8 @@
         <feComposite in="wobbled" in2="toothGrey" operator="arithmetic" k1="0.28" k2="0.72" k3="0" k4="0" />
       </filter>
       <linearGradient id="gcMist" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#F7F1E4" stop-opacity="0.9" />
-        <stop offset="100%" stop-color="#F7F1E4" stop-opacity="0" />
+        <stop offset="0%" stop-color="#F7F2E6" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#F7F2E6" stop-opacity="0" />
       </linearGradient>
       <symbol id="gcPine" viewBox="0 0 24 34" overflow="visible">
         <path d="M12,1 L4.5,12 L8.5,12 L2,20 L8,20 L4,27 L20,27 L16,20 L22,20 L15.5,12 L19.5,12 Z" />
@@ -888,16 +956,16 @@
 
     <!-- sun -->
     <g class="gc-glow"><circle cx="1090" cy="315" r="320" fill="url(#gcSun)" /></g>
-    <circle cx="1090" cy="315" r="55" fill="#FDF3D6" />
-    <circle cx="1090" cy="315" r="78" fill="none" stroke="#F3E2AE" stroke-width="1.5" opacity="0.5" />
+    <circle cx="1090" cy="315" r="55" fill="#FDF2CA" />
+    <circle cx="1090" cy="315" r="78" fill="none" stroke="#F7DC92" stroke-width="1.5" opacity="0.5" />
 
     <!-- soft clouds — two banks drifting at different speeds -->
-    <g class="gc-clouds-a" fill="#FDF9EF" filter="url(#gcSoft)" opacity="0.78">
+    <g class="gc-clouds-a" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.78">
       <ellipse cx="300" cy="205" rx="140" ry="25" />
       <ellipse cx="380" cy="228" rx="95" ry="18" />
       <ellipse cx="196" cy="226" rx="76" ry="14" />
     </g>
-    <g class="gc-clouds-b" fill="#FDF9EF" filter="url(#gcSoft)" opacity="0.7">
+    <g class="gc-clouds-b" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.7">
       <ellipse cx="845" cy="138" rx="120" ry="22" />
       <ellipse cx="905" cy="158" rx="78" ry="15" />
       <ellipse cx="1245" cy="196" rx="104" ry="18" />
@@ -905,7 +973,7 @@
 
     <!-- birds — kept clear of the centred headline column (~x430-1010); they used
          to fly straight through it but were too faint for anyone to notice -->
-    <g class="gc-birds" stroke="#4F5A33" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
+    <g class="gc-birds" stroke="#5C663F" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
       <path d="M148,252 q15,-13 30,0 q15,-13 30,0" />
       <path d="M214,292 q11,-10 22,0 q11,-10 22,0" />
       <path d="M264,236 q10,-9 20,0 q10,-9 20,0" opacity="0.8" />
@@ -919,16 +987,16 @@
     <g filter="url(#gcPencil)">
     <!-- distant ridge — depth behind the hills, and a cool note against the warm
          green. Kept low and hazy so it reads as distance, not scenery. -->
-    <path d="M-40,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1480,566 L1480,740 L-40,740 Z" fill="#A3BDCD" opacity="0.46" />
+    <path d="M-40,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1480,566 L1480,740 L-40,740 Z" fill="#B6C7DF" opacity="0.46" />
     <rect x="-40" y="540" width="1520" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
 
     <!-- hill 1 (far) + haze -->
-    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#C4D897" />
+    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#C6D4AE" />
     <rect x="-40" y="598" width="1520" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
 
     <!-- hill 2 + distant pines -->
-    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#A1C06D" />
-    <g fill="#87A05B">
+    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#AEC191" />
+    <g fill="#9AB07F">
       <use href="#gcPine" x="120" y="650" width="15" height="22" />
       <use href="#gcPine" x="150" y="655" width="13" height="19" />
       <use href="#gcPine" x="184" y="652" width="14" height="20" />
@@ -946,8 +1014,8 @@
     <rect x="-40" y="670" width="1520" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
 
     <!-- hill 3 + mid pines -->
-    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#7F9B47" />
-    <g fill="#65803A">
+    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#8EA674" />
+    <g fill="#78905E">
       <use href="#gcPine" x="356" y="716" width="24" height="34" />
       <use href="#gcPine" x="408" y="726" width="20" height="28" />
       <use href="#gcPine" x="452" y="720" width="22" height="31" />
@@ -959,9 +1027,9 @@
     <rect x="-40" y="742" width="1520" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
 
     <!-- hill 4 (front) + foreground pines -->
-    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#5A7433" />
-    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FAE39F" opacity="0.26" filter="url(#gcSoft)" />
-    <g fill="#3F5524">
+    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#6A8050" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FAE289" opacity="0.26" filter="url(#gcSoft)" />
+    <g fill="#4E5F3A">
       <use href="#gcPine" x="66" y="756" width="34" height="52" />
       <use href="#gcPine" x="116" y="744" width="44" height="66" />
       <use href="#gcPine" x="184" y="762" width="30" height="46" />
@@ -1004,27 +1072,95 @@
 <section class="caps" id="what" aria-label="What GreenCube does">
   <div class="caps-wrap">
     <span class="caps-eyebrow rv">Qué hace</span>
-    <h2 class="caps-head rv">Una app. Todo en tu ordenador.</h2>
+    <h2 class="caps-head rv">Dile lo que quieres. Te lo hace.</h2>
     <div class="caps-grid">
-      <article class="cap cap-chat rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
-        <h3>Chatea y escribe</h3>
-        <p>Pregúntale lo que sea, redacta lo que sea. Respuestas rápidas y buenas, en tu propio ordenador.</p>
+      <article class="cap cap-write rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+        <h3>Chatea y programa</h3>
+        <ul class="cap-list">
+          <li>Correos, trabajos, solicitudes</li>
+          <li>Código, scripts, fórmulas</li>
+          <li>El mensaje que no paras de reescribir</li>
+        </ul>
       </article>
-      <article class="cap cap-docs rv">
+      <article class="cap cap-read rv">
         <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
-        <h3>Lee tus documentos</h3>
-        <p>Suéltale un PDF. Se lo lee entero: te lo resume, te lo explica y encuentra lo que importa.</p>
+        <h3>Lee lo que sea</h3>
+        <ul class="cap-list">
+          <li>PDFs, contratos, informes</li>
+          <li>Fotos, capturas, gráficos</li>
+          <li>Pregúntale qué significa todo eso</li>
+        </ul>
       </article>
-      <article class="cap cap-image rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
-        <h3>Entiende imágenes</h3>
-        <p>Enséñale una foto o una captura. Ve lo que hay y lo entiende.</p>
+      <article class="cap cap-build rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 22h8M12 18v4"/></svg></span>
+        <h3>Crea artefactos</h3>
+        <ul class="cap-list">
+          <li>Páginas web, presentaciones, PowerPoints</li>
+          <li>Fichas, tests, tablas de estudio</li>
+          <li>Archivos de verdad, donde tú quieras</li>
+        </ul>
       </article>
-      <article class="cap cap-study rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span>
-        <h3>Crea material de estudio</h3>
-        <p>Pídeselo y convierte la conversación en fichas, un test, una tabla o un resumen limpio, en un panel a tu lado, listo para guardar.</p>
+      <article class="cap cap-agent rv">
+        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4.5"/><path d="M12 3.2h.01"/><path d="M9 13.5h.01M15 13.5h.01"/><path d="M1.5 13v3M22.5 13v3"/></svg></span>
+        <h3>Dale un encargo y vete</h3>
+        <ul class="cap-list">
+          <li>Resúmenes del correo y respuestas redactadas</li>
+          <li>Escribe código, lo ejecuta y arregla lo que falla</li>
+          <li>Escríbele desde el móvil y tu PC lo hace</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========== LOS CUATRO NIVELES =========== -->
+<section class="tiers" id="tiers" aria-label="Cómo funciona GreenCube en distintos ordenadores">
+  <div class="tiers-wrap">
+    <span class="caps-eyebrow rv">Tu ordenador</span>
+    <h2 class="caps-head rv">Mira qué puede funcionar en tu ordenador.</h2>
+    <p class="tiers-sub rv">Lo deciden dos cosas: cuánta RAM tienes y si tienes tarjeta gráfica. La misma app y el mismo precio en cualquier caso.</p>
+
+    <div class="tier-row">
+      <article class="tier-card rv" style="--tint:#FAE289">
+        <span class="tier-n">Nivel uno</span>
+        <h3>Seed</h3>
+        <p class="tier-spec">8 GB de RAM, sin tarjeta</p>
+        <ul class="tier-list">
+          <li>Todo sigue funcionando</li>
+          <li>Las respuestas tardan más</li>
+          <li>Lo pesado espera tu permiso</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#8EA674">
+        <span class="tier-n">Nivel dos</span>
+        <h3>Sprout</h3>
+        <p class="tier-spec">16 GB de RAM, sin tarjeta</p>
+        <ul class="tier-list">
+          <li>Una IA más grande y mejor</li>
+          <li>Escribe presentaciones</li>
+          <li>Crea páginas, avisando antes</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#FA9F75">
+        <span class="tier-n">Nivel tres</span>
+        <h3>Bloom</h3>
+        <p class="tier-spec">Tarjeta de 4 GB o más</p>
+        <ul class="tier-list">
+          <li>Se acabaron los avisos de espera</li>
+          <li>Lee bien tus imágenes</li>
+          <li>Recuerda conversaciones largas</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#8EABE1">
+        <span class="tier-n">Nivel cuatro</span>
+        <h3>Thrive</h3>
+        <p class="tier-spec">Tarjeta de 8 GB, 24 GB de RAM</p>
+        <ul class="tier-list">
+          <li>La IA más grande que te quepa</li>
+          <li>La que más recuerda</li>
+          <li>Sin nada guardado en el cajón</li>
+        </ul>
       </article>
     </div>
   </div>
@@ -1251,6 +1387,20 @@
         label.textContent = original;
         mail.classList.remove('copied');
       }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
     });
   })();
 </script>

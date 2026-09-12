@@ -118,10 +118,10 @@
       --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
       --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
       --olive: #7E8A5A; --olive-deep: #5C663F;
-      --sun: #D9A93F; --sun-deep: #A87C1E;
-      --clay: #C0794F; --clay-deep: #93502A;
-      --sky: #6E97BE; --sky-deep: #416A90;
-      --night: #242A15;
+      --sun: #FAE289; --sun-deep: #8A6B1C;
+      --clay: #FA9F75; --clay-deep: #A8492A;
+      --sky: #8EABE1; --sky-deep: #3D5E93;
+      --night: #333333;
       --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
       --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       --ease: cubic-bezier(.16,1,.3,1);
@@ -130,7 +130,7 @@
     }
     *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper); overflow-x: hidden; }
+    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper, #F5F1E8); overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
     em { font-style: normal; color: var(--olive); }
 
@@ -165,7 +165,7 @@
       .nav a { padding: 6px 8px; }
       .nav a.on::after { left: 8px; right: 8px; }
     }
-    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper, #F5F1E8); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
 
     .head-right { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
@@ -280,7 +280,7 @@
     /* cta */
     .turn { padding: 104px 0; text-align: center; }
     .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.6vw,31px); letter-spacing: -.025em; max-width: 30ch; margin: 0 auto 42px; line-height: 1.2; }
-    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper, #F5F1E8); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
     .cta:hover { transform: translateY(-2px); background: #000; }
     .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
 
@@ -289,6 +289,85 @@
     footer .links { display: inline-flex; gap: 20px; flex-wrap: wrap; }
     footer a:hover { color: var(--ink); }
     @media (max-width: 600px) { footer .row-f { flex-direction: column; align-items: flex-start; } }
+  
+/* ============== footer ============== */
+    footer {
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper, #F5F1E8);
+      border-top: 1px solid var(--line);
+    }
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest, #1A1A1A);
+    }
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss, #7E8A5A); border-radius: 4px;
+    }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft, #FBF8F0);
+      font-size: 14px; font-weight: 500; color: var(--forest, #1A1A1A);
+      transition: border-color .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), transform .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    footer .f-mail:hover { border-color: var(--moss, #7E8A5A); background: #fff; transform: translateY(-1px); }
+    footer .f-mail.copied { border-color: var(--moss, #7E8A5A); background: #fff; }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss, #7E8A5A); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest, #1A1A1A);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
+    footer a { transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
+    footer a:hover { color: var(--forest, #1A1A1A); }
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
+    }
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    }
+    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -519,21 +598,71 @@
 </section>
 
 <footer>
-  <div class="row-f">
-    <div>
-      <div>&copy; 2026 GreenCube. Edunexis SL.</div>
-      <div>AI that's <em>owned,</em> not rented.</div>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="/" class="brand-lock" aria-label="GreenCube home">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail" data-email="support@greencube.app" data-copied="Address copied">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          <span class="f-mail-label">support@greencube.app</span>
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="/buy">Get GreenCube</a></li>
+          <li><a href="/#what">What it does</a></li>
+          <li><a href="/how-it-works">Why GreenCube</a></li>
+          <li><a href="/how-it-works#fits">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/your-data">Your data</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="/ai-environmental-impact">AI &amp; the planet</a></li>
+          <li><a href="/how-much-water-does-ai-use">AI &amp; water</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/mission">Our mission</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Support">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Get help</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="links" aria-label="Footer">
-      <a href="/buy">Get GreenCube</a>
-      <a href="/">Home</a>
-      <a href="/how-it-works">Why GreenCube</a>
-      <a href="/your-data">Your data</a>
-      <a href="/how-much-water-does-ai-use">AI &amp; water</a>
-      <a href="https://legal.greencube.app/privacy">Privacy</a>
-      <a href="https://legal.greencube.app/terms">Terms</a>
-      <a href="mailto:support@greencube.app">Contact</a>
-    </nav>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Privacy</a>
+        <a href="https://legal.greencube.app/terms">Terms</a>
+      </div>
+      <div class="f-lang">
+        <a href="/ai-environmental-impact" aria-current="true" hreflang="en">EN</a>
+        <a href="/es/ai-environmental-impact" hreflang="es">ES</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -541,6 +670,52 @@
   const show = () => document.body.classList.add('ready');
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
   setTimeout(show, 900);
+</script>
+<script>
+  // Brave (and any browser with no mail handler registered) silently does
+  // nothing on a mailto:. Copy the address on click as well, so the click
+  // always produces something useful. Default is not prevented, so a working
+  // mail client still opens.
+  (() => {
+    const mail = document.querySelector('.f-mail');
+    if (!mail) return;
+    const label = mail.querySelector('.f-mail-label');
+    const addr = mail.dataset.email || 'support@greencube.app';
+    mail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+      if (!label) return;
+      const original = label.textContent;
+      mail.classList.add('copied');
+      label.textContent = mail.dataset.copied || 'Address copied';
+      clearTimeout(mail._t);
+      mail._t = setTimeout(() => {
+        label.textContent = original;
+        mail.classList.remove('copied');
+      }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
+    });
+  })();
 </script>
 </body>
 </html>

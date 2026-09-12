@@ -98,9 +98,9 @@
       --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
 
       --olive: #7E8A5A; --olive-deep: #5C663F;
-      --sun: #D9A93F; --sun-deep: #A87C1E;
-      --clay: #C0794F; --clay-deep: #93502A;
-      --sky: #6E97BE; --sky-deep: #416A90;
+      --sun: #FAE289; --sun-deep: #8A6B1C;
+      --clay: #FA9F75; --clay-deep: #A8492A;
+      --sky: #8EABE1; --sky-deep: #3D5E93;
 
       --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
       --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -110,7 +110,7 @@
     }
     *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper); overflow-x: hidden; }
+    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper, #F5F1E8); overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
     em { font-style: normal; color: var(--olive); }
 
@@ -140,7 +140,7 @@
     .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
     .nav a.on { color: var(--ink); font-weight: 600; }
     .nav a.on::after { content:''; position:absolute; left:13px; right:13px; bottom:2px; height:2px; border-radius:2px; background: var(--olive); }
-    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper, #F5F1E8); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
     .nav-cta:hover { transform: translateY(-1px); background: #000; }
     /* On a phone the nav drops onto its own row under the logo rather than
        vanishing — there's no hamburger, so hiding it left no way to reach
@@ -261,7 +261,7 @@
     .plans { max-width: 560px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card); text-align: left; }
     .plans table { width: 100%; border-collapse: collapse; font-size: 15px; }
     .plans th, .plans td { padding: 13px 20px; border-bottom: 1px solid var(--line); }
-    .plans th { font-family: var(--display); font-weight: 600; background: var(--paper-soft); font-size: 13.5px; }
+    .plans th { font-family: var(--display); font-weight: 600; background: var(--paper-soft, #FBF8F0); font-size: 13.5px; }
     .plans tr:last-child td { border-bottom: none; }
     .plans td { color: var(--ink-soft); }
     .bad { color: var(--clay-deep); font-weight: 600; }
@@ -319,7 +319,7 @@
     /* ---------- cta ---------- */
     .turn { padding: 110px 0; text-align: center; }
     .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.6vw,31px); letter-spacing: -.025em; color: var(--ink); max-width: 26ch; margin: 0 auto 42px; line-height: 1.2; }
-    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease), box-shadow .5s var(--ease); }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper, #F5F1E8); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease), box-shadow .5s var(--ease); }
     .cta:hover { transform: translateY(-2px); background: #000; box-shadow: 0 3px 6px rgba(26,26,26,.16), 0 20px 44px -16px rgba(26,26,26,.6), inset 0 1px 0 rgba(255,255,255,.16); }
     .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
 
@@ -328,6 +328,85 @@
     footer .links { display: inline-flex; gap: 20px; flex-wrap: wrap; }
     footer a:hover { color: var(--ink); }
     @media (max-width: 600px) { footer .row { flex-direction: column; align-items: flex-start; } }
+  
+/* ============== footer ============== */
+    footer {
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper, #F5F1E8);
+      border-top: 1px solid var(--line);
+    }
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest, #1A1A1A);
+    }
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss, #7E8A5A); border-radius: 4px;
+    }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft, #FBF8F0);
+      font-size: 14px; font-weight: 500; color: var(--forest, #1A1A1A);
+      transition: border-color .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), transform .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    footer .f-mail:hover { border-color: var(--moss, #7E8A5A); background: #fff; transform: translateY(-1px); }
+    footer .f-mail.copied { border-color: var(--moss, #7E8A5A); background: #fff; }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss, #7E8A5A); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest, #1A1A1A);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
+    footer a { transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
+    footer a:hover { color: var(--forest, #1A1A1A); }
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
+    }
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    }
+    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -392,19 +471,19 @@
               <path d="M50,238 L210,238 L221,251 L39,251 Z" fill="#DDD5C3" stroke="#B9AF9C" stroke-width="2" stroke-linejoin="round"/>
               <rect x="118" y="241" width="24" height="2.6" rx="1.3" fill="#B9AF9C"/>
             </g>
-            <g fill="#C0794F">
+            <g fill="#FA9F75">
               <rect x="92" y="176" width="76" height="6" rx="3"/>
               <rect x="92" y="189" width="52" height="6" rx="3" opacity=".8"/>
               <rect x="92" y="202" width="64" height="6" rx="3" opacity=".6"/>
             </g>
-            <text class="dl" x="130" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">Tú</text>
+            <text class="dl" x="130" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#9A937F" text-anchor="middle">Tú</text>
 
             <!-- your words cross the line -->
-            <text class="dt d-wide" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">TODO LO QUE ESCRIBES</text>
-            <text class="dt d-narrow" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS</text>
-            <path d="M232,196 L356,196" stroke="#C0794F" stroke-width="2.4" stroke-dasharray="6 8" fill="none"/>
-            <path d="M370,196 l-14,-7 l3,7 l-3,7 z" fill="#C0794F"/>
-            <g fill="#C0794F">
+            <text class="dt d-wide" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TODO LO QUE ESCRIBES</text>
+            <text class="dt d-narrow" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS</text>
+            <path d="M232,196 L356,196" stroke="#FA9F75" stroke-width="2.4" stroke-dasharray="6 8" fill="none"/>
+            <path d="M370,196 l-14,-7 l3,7 l-3,7 z" fill="#FA9F75"/>
+            <g fill="#FA9F75">
               <rect x="246" y="192.5" width="18" height="7" rx="3.5"/>
               <rect x="286" y="192.5" width="18" height="7" rx="3.5" opacity=".7"/>
               <rect x="322" y="192.5" width="18" height="7" rx="3.5" opacity=".45"/>
@@ -417,14 +496,14 @@
               <path d="M450,172 L467.3,182 L467.3,202 L450,212 L432.7,202 L432.7,182 Z" stroke-width="2.6"/>
               <path d="M450,192 L432.7,182 M450,192 L467.3,182 M450,192 L450,212" stroke-width="1.8" opacity=".7"/>
             </g>
-            <g fill="#C0794F">
+            <g fill="#FA9F75">
               <rect x="406" y="224" width="48" height="5.5" rx="2.75"/>
               <rect x="460" y="224" width="34" height="5.5" rx="2.75" opacity=".7"/>
               <rect x="406" y="234" width="30" height="5.5" rx="2.75" opacity=".5"/>
               <rect x="442" y="234" width="52" height="5.5" rx="2.75" opacity=".35"/>
             </g>
-            <text class="dl" x="450" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#8A8275" text-anchor="middle">Su servidor</text>
-            <text class="dt" x="450" y="304" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#93502A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS SE QUEDAN AQUÍ</text>
+            <text class="dl" x="450" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#9A937F" text-anchor="middle">Su servidor</text>
+            <text class="dt" x="450" y="304" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS SE QUEDAN AQUÍ</text>
           </svg>
           <div class="cap">
             <span class="tag">Las demás IA</span>
@@ -438,7 +517,7 @@
           <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: the AI sits inside your own computer, so nothing crosses the internet and there is no server on the other side">
             <defs>
               <linearGradient id="uBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#F9F5EA"/><stop offset="100%" stop-color="#EEF0DD"/>
+                <stop offset="0%" stop-color="#F9F5EA"/><stop offset="100%" stop-color="#E8EEDC"/>
               </linearGradient>
             </defs>
             <rect width="560" height="340" fill="url(#uBg)"/>
@@ -451,7 +530,7 @@
               <path d="M172,248 L388,248 L402,264 L158,264 Z" fill="#DDD5C3" stroke="#A99F8B" stroke-width="2" stroke-linejoin="round"/>
               <rect x="264" y="252" width="32" height="3" rx="1.5" fill="#A99F8B"/>
             </g>
-            <g fill="none" stroke="#5F6B3E" stroke-linejoin="round" stroke-linecap="round">
+            <g fill="none" stroke="#5C663F" stroke-linejoin="round" stroke-linecap="round">
               <path d="M280,156 L307.7,172 L307.7,204 L280,220 L252.3,204 L252.3,172 Z" stroke-width="3.4"/>
               <path d="M280,188 L252.3,172 M280,188 L307.7,172 M280,188 L280,220" stroke-width="2.3" opacity=".75"/>
             </g>
@@ -671,29 +750,82 @@
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
   <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
     <defs><linearGradient id="gcFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="70%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="100%" stop-color="#F5F1E8" stop-opacity="1"/></linearGradient></defs>
-    <path d="M0,96 C 300,64 560,110 840,86 C 1090,66 1290,102 1440,82 L1440,240 L0,240 Z" fill="#CBD2B2"/>
-    <path d="M0,132 C 280,108 560,150 820,132 C 1080,116 1300,146 1440,130 L1440,240 L0,240 Z" fill="#AEBB90"/>
-    <g fill="#93A170"><path d="M190,112 l-7,20 h14 Z"/><path d="M214,118 l-6,17 h12 Z"/><path d="M1160,110 l-7,20 h14 Z"/><path d="M1184,117 l-6,16 h12 Z"/></g>
-    <path d="M0,168 C 340,150 620,184 900,168 C 1140,154 1320,178 1440,170 L1440,240 L0,240 Z" fill="#8D9B6A"/>
-    <g fill="#6F7C4E"><path d="M430,146 l-8,24 h16 Z"/><path d="M458,153 l-7,19 h14 Z"/><path d="M960,148 l-8,23 h16 Z"/><path d="M986,155 l-7,18 h14 Z"/></g>
-    <path d="M0,200 C 360,190 700,210 1040,200 C 1240,194 1360,204 1440,202 L1440,240 L0,240 Z" fill="#6E7B4C"/>
+    <path d="M0,96 C 300,64 560,110 840,86 C 1090,66 1290,102 1440,82 L1440,240 L0,240 Z" fill="#C6D4AE"/>
+    <path d="M0,132 C 280,108 560,150 820,132 C 1080,116 1300,146 1440,130 L1440,240 L0,240 Z" fill="#AEC191"/>
+    <g fill="#9AB07F"><path d="M190,112 l-7,20 h14 Z"/><path d="M214,118 l-6,17 h12 Z"/><path d="M1160,110 l-7,20 h14 Z"/><path d="M1184,117 l-6,16 h12 Z"/></g>
+    <path d="M0,168 C 340,150 620,184 900,168 C 1140,154 1320,178 1440,170 L1440,240 L0,240 Z" fill="#9AB07F"/>
+    <g fill="#6A8050"><path d="M430,146 l-8,24 h16 Z"/><path d="M458,153 l-7,19 h14 Z"/><path d="M960,148 l-8,23 h16 Z"/><path d="M986,155 l-7,18 h14 Z"/></g>
+    <path d="M0,200 C 360,190 700,210 1040,200 C 1240,194 1360,204 1440,202 L1440,240 L0,240 Z" fill="#5C663F"/>
     <rect x="0" y="60" width="1440" height="180" fill="url(#gcFade)"/>
   </svg>
 </div>
 
 <footer>
-  <div class="row">
-    <div>
-      <div>&copy; 2026 GreenCube, Edunexis SL</div>
-      <div>IA en <em>propiedad,</em> no de alquiler.</div>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="/es/" class="brand-lock" aria-label="GreenCube inicio">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">IA en <em>propiedad,</em> no de alquiler.</p>
+        <a href="mailto:support@greencube.app" class="f-mail" data-email="support@greencube.app" data-copied="Dirección copiada">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          <span class="f-mail-label">support@greencube.app</span>
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Producto">
+        <h3>Producto</h3>
+        <ul>
+          <li><a href="/es/buy">Consigue GreenCube</a></li>
+          <li><a href="/es/#what">Qué hace</a></li>
+          <li><a href="/es/how-it-works">Por qué GreenCube</a></li>
+          <li><a href="/es/how-it-works#fits">¿Funcionará en mi ordenador?</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Aprende">
+        <h3>Aprende</h3>
+        <ul>
+          <li><a href="/es/your-data">Tus datos</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data" hreflang="en">ChatGPT y tus datos (EN)</a></li>
+          <li><a href="/es/ai-environmental-impact">La IA y el planeta</a></li>
+          <li><a href="/es/how-much-water-does-ai-use">La IA y el agua</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Empresa">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="/es/mission">Nuestra misión</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Soporte">
+        <h3>Soporte</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Pedir ayuda</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidad</a></li>
+          <li><a href="https://legal.greencube.app/terms">Términos de uso</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="links" aria-label="Footer">
-      <a href="/es/buy">Consigue GreenCube</a>
-      <a href="/es/">Inicio</a>
-      <a href="https://legal.greencube.app/privacy">Privacidad</a>
-      <a href="https://legal.greencube.app/terms">Términos</a>
-      <a href="mailto:support@greencube.app">Contacto</a>
-    </nav>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Hecho en España.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Privacidad</a>
+        <a href="https://legal.greencube.app/terms">Términos</a>
+      </div>
+      <div class="f-lang">
+        <a href="/how-it-works" hreflang="en">EN</a>
+        <a href="/es/how-it-works" aria-current="true" hreflang="es">ES</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -701,6 +833,52 @@
   const show = () => document.body.classList.add('ready');
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
   setTimeout(show, 900);
+</script>
+<script>
+  // Brave (and any browser with no mail handler registered) silently does
+  // nothing on a mailto:. Copy the address on click as well, so the click
+  // always produces something useful. Default is not prevented, so a working
+  // mail client still opens.
+  (() => {
+    const mail = document.querySelector('.f-mail');
+    if (!mail) return;
+    const label = mail.querySelector('.f-mail-label');
+    const addr = mail.dataset.email || 'support@greencube.app';
+    mail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+      if (!label) return;
+      const original = label.textContent;
+      mail.classList.add('copied');
+      label.textContent = mail.dataset.copied || 'Address copied';
+      clearTimeout(mail._t);
+      mail._t = setTimeout(() => {
+        label.textContent = original;
+        mail.classList.remove('copied');
+      }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
+    });
+  })();
 </script>
 </body>
 </html>
