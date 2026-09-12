@@ -916,9 +916,13 @@
       gb = (dm >= 8 || cores >= 8) ? 16 : 8;
     }
 
+    // A strong card holds the weights itself, so it tiers on its own. An
+    // ordinary card cannot, so it needs the RAM behind it — and on a small
+    // machine it lifts you one step and no further. Mirrors perf_tier_from.
     if (strongCard && gb >= 24) return 'thrive';
-    if (anyCard && gb >= 8) return 'bloom';
-    if (gb >= 12) return 'sprout';
+    if (strongCard && gb >= 8) return 'bloom';
+    if (anyCard && gb >= 16) return 'bloom';
+    if (gb >= 12 || (anyCard && gb >= 8)) return 'sprout';
     return 'seed';
   }
 

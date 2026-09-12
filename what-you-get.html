@@ -618,9 +618,14 @@
       if (gb >= 12) return 'bloom';
       return 'seed';
     }
+    // A strong card holds the weights itself, so it tiers on its own. A 4 GB
+    // card cannot, so it needs the RAM behind it — and on a small machine it
+    // lifts you one step and no further. A card makes you faster; memory
+    // decides what fits. Mirrors perf_tier_from in the app.
     if (vram >= 8 && gb >= 24) return 'thrive';
-    if (vram >= 4 && gb >= 8) return 'bloom';
-    if (gb >= 12) return 'sprout';
+    if (vram >= 8 && gb >= 8) return 'bloom';
+    if (vram >= 4 && gb >= 16) return 'bloom';
+    if (gb >= 12 || (vram >= 4 && gb >= 8)) return 'sprout';
     return 'seed';
   }
 
