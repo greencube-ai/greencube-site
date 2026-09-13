@@ -107,53 +107,33 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ============== header (mirrors index.html) ============== */
+    /* ============== header (matches the rest of the site) ============== */
     header {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 22px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      border-bottom: 1px solid transparent;
-      color: var(--ink);
-      transition: background 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
-                  border-color 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
-                  backdrop-filter 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1)),
-                  padding 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 14px 30px; background: rgba(245, 241, 232, 0.92);
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+      border-bottom: 1px solid var(--line);
     }
-    header.scrolled {
-      backdrop-filter: saturate(140%) blur(14px);
-      -webkit-backdrop-filter: saturate(140%) blur(14px);
-      background: rgba(245, 241, 232, 0.78);
-      border-bottom-color: var(--line);
-      padding: 14px 32px;
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--ink); }
+    .brand .mark { width: 15px; height: 15px; border: 2.6px solid var(--moss, #7E8A5A); border-radius: 4px; }
+    .nav { display: inline-flex; align-items: center; gap: 2px; }
+    .nav a { font-size: 13.5px; font-weight: 500; color: var(--ink-soft); padding: 8px 11px; border-radius: 9px; white-space: nowrap; transition: color .25s, background .25s; }
+    .nav a:hover { color: var(--ink); background: rgba(126, 138, 90, 0.10); }
+    /* someone who just paid needs help more than a buy button */
+    .help { font-size: 13.5px; font-weight: 600; color: var(--ink); padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; transition: border-color .25s; }
+    .help:hover { border-color: var(--moss, #7E8A5A); }
+    @media (max-width: 860px) {
+      header { flex-wrap: wrap; row-gap: 8px; padding: 12px 16px; }
+      .nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 8px; }
+      .nav a { padding: 6px 8px; font-size: 12.5px; }
     }
-    .brand {
-      display: inline-flex; align-items: center; gap: 12px;
-      font-family: var(--serif); font-size: 22px; letter-spacing: -0.005em;
-    }
-    .brand .mark {
-      width: 17px; height: 17px;
-      border: 2.6px solid currentColor; border-radius: 4px;
-      animation: brand-spin 14s linear infinite;
-    }
-    @keyframes brand-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
-    .header-nav { position: relative; left: 24px; display: inline-flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 600; }
-    .header-nav a {
-      color: var(--forest, #1A1A1A); letter-spacing: -0.005em;
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px;
-      transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), border-color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
-    }
-    .header-nav a:hover { color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); }
 
     /* ============== layout ============== */
     main {
       position: relative; z-index: 2;
       max-width: 720px; margin: 0 auto;
-      padding: 168px 32px 120px;
+      padding: 88px 32px 110px;
       text-align: center;
     }
     main::before {
@@ -251,6 +231,9 @@
     .dl-link .meta { display: flex; flex-direction: column; gap: 2px; }
     .dl-link .name { font-size: 15px; font-weight: 600; color: var(--forest, #1A1A1A); }
     .dl-link .sub { font-size: 12px; color: var(--ink-mute); }
+    .dl-link.soon { cursor: default; }
+    .dl-link.soon:hover { border-color: var(--line); background: var(--paper-soft, #FBF8F0); }
+    .dl-link .soon-pill { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-mute); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
     .dl-link .arrow { color: var(--moss, #7E8A5A); font-weight: 600; transition: transform 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
     .dl-link:hover .arrow { transform: translateX(3px); }
     .dl-link.is-current { display: none; } /* the detected OS is already the big button */
@@ -259,7 +242,7 @@
       margin-top: 36px; font-size: 13px; line-height: 1.6; color: var(--ink-mute);
       max-width: 52ch; margin-left: auto; margin-right: auto;
     }
-    .activate-note strong { color: var(--ink-soft); font-weight: 600; }
+    .activate-note a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
     /* ============== footer (mirrors index.html) ============== */
     footer {
@@ -367,19 +350,20 @@
 <div class="grain" aria-hidden="true"></div>
 
 <header id="header">
-  <a href="/" class="brand" aria-label="GreenCube home">
-    <span class="mark" aria-hidden="true"></span>
-    <span>GreenCube</span>
-  </a>
-  <nav class="header-nav" aria-label="Primary">
-    <a href="how-it-works.html">Why GreenCube</a>
+  <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/how-it-works">Why GreenCube</a>
+    <a href="/what-you-get">What you get</a>
+    <a href="/your-data">Your data</a>
+    <a href="/mission">Our mission</a>
   </nav>
+  <a href="mailto:support@greencube.app" class="help">Need help?</a>
 </header>
 
 <main>
   <div class="eyebrow">Thank you</div>
   <h1>You're <em>in.</em></h1>
-  <p class="lede">Your copy of GreenCube is downloading. Open it and sign in with the email you bought with, that unlocks it. No key to paste.</p>
+  <p class="lede">Your download has started. Open GreenCube and sign in with the email you paid with. That unlocks it, no key needed.</p>
 
   <!-- ===== DOWNLOAD ===== -->
   <section class="card" style="margin-top:22px;">
@@ -399,27 +383,13 @@
   <section class="card" style="margin-top:22px;">
     <div class="card-label">What happens next</div>
     <ol class="steps">
-      <li>
-        <strong>Windows will show a blue warning</strong>, “Windows protected your PC.”
-        That’s normal for new software from a small company: click
-        <em>More info</em>, then <em>Run anyway</em>. GreenCube is safe, Windows just
-        doesn’t know us yet.
-      </li>
-      <li>
-        <strong>First launch downloads GreenCube’s AI brain</strong>, a few GB, one time
-        only. Grab a coffee; the app shows progress the whole way.
-      </li>
-      <li>
-        <strong>Sign in with the email you bought with</strong>, checked once, then
-        GreenCube is yours and runs fully offline.
-      </li>
+      <li><strong>Windows may warn you.</strong> Click <em>More info</em>, then <em>Run anyway</em>. It does that for new apps from small companies.</li>
+      <li><strong>The first launch downloads the AI.</strong> A few GB, only once. The app shows the progress.</li>
+      <li><strong>Sign in with the email you paid with.</strong> It checks once, then runs offline for good.</li>
     </ol>
   </section>
 
-  <p class="activate-note">
-    <strong>Activation happens inside the app.</strong> Open GreenCube and sign in with the
-    same email you used at checkout, it verifies your purchase once, then runs fully offline.
-  </p>
+  <p class="activate-note">While it downloads: <a href="/what-you-get">see what your computer can run &rarr;</a></p>
 </main>
 
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
@@ -517,7 +487,7 @@
   // ====================================================================
   //  DOWNLOAD TARGETS
   //  Hosted on the Cloudflare R2 CDN (models.greencube.app/downloads/).
-  //  Windows is live. macOS/Linux builds are not produced yet — leaving a url
+  //  Windows is live. macOS is not produced yet — leaving a url
   //  empty disables auto-download for that OS and surfaces a "coming soon"
   //  message instead of a broken link.
   // ====================================================================
@@ -528,10 +498,9 @@
     // with — so it handed every new buyer 0.1.33 while 0.1.34 was live.
     // Nothing to remember now: releasing updates the file behind this URL.
     windows: { name: 'Windows',     sub: '.exe installer · Windows 10/11', url: 'https://models.greencube.app/downloads/latest/GreenCube-setup.exe' },
-    mac:     { name: 'macOS',       sub: 'Universal .dmg · macOS 12+',     url: '' },
-    linux:   { name: 'Linux',       sub: '.AppImage · x86_64',             url: '' },
+    mac:     { name: 'macOS',       sub: 'Apple silicon and Intel Macs',   url: '' },
   };
-  const ORDER = ['windows', 'mac', 'linux'];
+  const ORDER = ['windows', 'mac'];
 
   // Keep the Windows link evergreen: the auto-update manifest on the CDN always
   // holds the newest installer URL. If the browser can read it (CORS willing),
@@ -596,7 +565,7 @@
   primaryBtn.addEventListener('click', () => {
     if (!primaryKey) return;
     const url = DOWNLOADS[primaryKey].url;
-    if (!url) { dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.'; return; }
+    if (!url) { dlStatus.textContent = 'GreenCube is Windows only for now. The Mac version is on the way.'; return; }
     triggerDownload(url);
     dlStatus.textContent = 'Downloading…';
   });
@@ -611,17 +580,20 @@
     if (d.url) { a.setAttribute('download', ''); a.rel = 'noopener'; }
     a.innerHTML =
       '<span class="meta"><span class="name">' + d.name + '</span>' +
-      '<span class="sub">' + d.sub + (d.url ? '' : ' · coming soon') + '</span></span>' +
-      '<span class="arrow" aria-hidden="true">↓</span>';
+      '<span class="sub">' + d.sub + '</span></span>' +
+      (d.url ? '<span class="arrow" aria-hidden="true">↓</span>' : '<span class="soon-pill">Coming soon</span>');
     if (!d.url) {
-      a.addEventListener('click', (e) => { e.preventDefault(); dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.'; });
+      // A row with nothing behind it must not look like a download.
+      a.classList.add('soon');
+      a.removeAttribute('href');
+      a.setAttribute('aria-disabled', 'true');
     }
     dlList.appendChild(a);
   });
 
   // ---------- auto-start the download ----------
-  // Convenience only. A small delay lets the page paint and the key render
-  // first, so the user sees their key even as the download kicks off.
+  // Convenience only. A short delay lets the page paint first, so the buyer
+  // sees where they are before the browser's download prompt appears.
   if (primaryKey && DOWNLOADS[primaryKey].url) {
     dlStatus.textContent = 'Your download should start automatically…';
     setTimeout(() => {
@@ -629,7 +601,7 @@
       dlStatus.innerHTML = 'Download started. Didn’t work? Use the button above.';
     }, 900);
   } else if (primaryKey) {
-    dlStatus.textContent = 'Builds are being published. Check back shortly or watch your email.';
+    dlStatus.textContent = 'GreenCube is Windows only for now. The Mac version is on the way.';
   }
 })();
 </script>
