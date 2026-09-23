@@ -188,19 +188,45 @@
     .phero p { font-size: clamp(17px,1.55vw,20px); color: var(--ink-soft); max-width: 60ch; margin: 0 auto; }
 
     /* ---------- the explainer diagrams ---------- */
-    .explain { padding: 110px 0; }
+    .explain { padding: 110px 0; border-top: 1px solid var(--line); }
     .explain h2.sec { margin-bottom: 14px; }
     .explain .sec-sub { margin-bottom: 54px; }
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-    .side { border-radius: 22px; border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow-card); background: var(--card); transition: transform .4s var(--ease), box-shadow .5s var(--ease); }
-    .side:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
-    .side svg { display: block; width: 100%; height: auto; }
-    .side .cap { padding: 24px 28px 26px; }
-    .side .tag { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px; }
-    .side h3 { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -.018em; margin-bottom: 7px; }
-    .side p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.62; }
-    .side.them .tag { color: var(--clay-deep); background: rgba(192,121,79,.14); }
-    .side.us .tag { color: var(--olive-deep); background: rgba(126,138,90,.16); }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .side {
+      border-radius: 28px; padding: 16px 16px 28px;
+      background: color-mix(in srgb, var(--c) 24%, var(--card));
+      border: 1px solid color-mix(in srgb, var(--c) 52%, transparent);
+      transition: transform .45s var(--ease), box-shadow .6s var(--ease);
+    }
+    .side:hover { transform: translateY(-4px); box-shadow: 0 34px 60px -40px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+    .side.them { --c: #FA9F75; --c-deep: #A8492A; }
+    .side.us   { --c: #8EA674; --c-deep: #4E5F3A; }
+    .side svg { display: block; width: 100%; height: auto; border-radius: 18px; background: rgba(255, 253, 248, .6); overflow: visible; }
+    .side .cap { padding: 22px 12px 0; }
+    .side .tag {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px;
+      font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep);
+    }
+    .side .tag::before { content: ''; width: 9px; height: 9px; border-radius: 3px; border: 2px solid var(--c-deep); background: var(--c); }
+    .side h3 { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 2vw, 27px); line-height: 1.1; letter-spacing: -.025em; color: var(--ink); margin-bottom: 8px; }
+    .side p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* the words travel over, one after another, and never come back */
+    .side .fly rect { animation: hw-fly 3s linear infinite; }
+    .side .fly rect:nth-child(2) { animation-delay: 1s; }
+    .side .fly rect:nth-child(3) { animation-delay: 2s; }
+    @keyframes hw-fly { 0% { transform: translateX(0); opacity: 0; } 12%, 80% { opacity: 1; } 100% { transform: translateX(140px); opacity: 0; } }
+    /* the answer writes itself on your own screen */
+    .side .ans rect { transform-box: fill-box; transform-origin: left center; animation: hw-type 4.5s var(--ease) infinite; }
+    .side .ans rect:nth-child(2) { animation-delay: .35s; }
+    .side .ans rect:nth-child(3) { animation-delay: .7s; }
+    @keyframes hw-type { 0%, 12% { transform: scaleX(0); } 40%, 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+    /* the turtle: blinks, and waves now and then */
+    .turtle .tt-eyes { transform-box: fill-box; transform-origin: center; animation: tt-blink 5.2s infinite; }
+    .turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: tt-wave 5s var(--ease) infinite; }
+    @keyframes tt-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+    @keyframes tt-wave { 0%, 64%, 100% { transform: rotate(0); } 71% { transform: rotate(-28deg); } 78% { transform: rotate(2deg); } 85% { transform: rotate(-24deg); } }
+    @media (prefers-reduced-motion: reduce) { .side .fly rect, .side .ans rect, .turtle * { animation: none; } .side .fly rect { opacity: 0; } .side .fly rect:first-child { opacity: 1; transform: translateX(60px); } }
     @media (max-width: 860px) { .compare { grid-template-columns: 1fr; } }
     /* The SVG scales with its column, so its labels shrink with it. On a phone
        the diagram renders ~0.6x and 9.5-unit text lands at ~6px — unreadable.
@@ -438,72 +464,46 @@
 </section>
 
 <!-- ============ THE PICTURE ============ -->
-<div class="band">
-  <section class="explain">
+<section class="explain">
     <div class="inner">
       <span class="eyebrow" style="margin-bottom:16px">La idea entera, en un dibujo</span>
-      <h2 class="sec">¿Dónde vive la IA <span class="mute">en realidad?</span></h2>
+      <h2 class="sec">¿Dónde vive la IA en realidad?</h2>
       <p class="sec-sub">Entiende este dibujo y lo entiendes todo. ¿Qué ordenador piensa, el suyo o el tuyo?</p>
 
       <div class="compare">
-        <!-- Both panels share one grammar: your computer on the left, a dashed
-             INTERNET line at x=336, and a box on the far side at x=376 sharing the
-             laptop's baseline (y=251). The only thing that changes between the two
-             is which side of that line the cube — the AI — sits on. -->
-
-        <!-- ============ THEM ============ -->
+        <!-- ============ THEM: your words cross the internet and pile up on their server ============ -->
         <div class="side them">
-          <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: the AI sits on their server across the internet, so everything you type has to travel there and is kept alongside it">
-            <defs>
-              <linearGradient id="tBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#F8F3EB"/><stop offset="100%" stop-color="#F1E9DD"/>
-              </linearGradient>
-            </defs>
-            <rect width="560" height="340" fill="url(#tBg)"/>
+          <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama: la IA está en su servidor, al otro lado de internet, así que todo lo que escribes viaja hasta allí y se guarda a su lado" fill="none" stroke="#1A1A1A" stroke-linejoin="round" stroke-linecap="round">
+            <text class="dt" x="330" y="56" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#9A937F" stroke="none" text-anchor="middle" letter-spacing=".14em">INTERNET</text>
+            <line x1="330" y1="70" x2="330" y2="246" stroke="#1A1A1A" stroke-opacity=".3" stroke-width="2" stroke-dasharray="5 7"/>
 
-            <text class="dt" x="336" y="52" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A79F8C" text-anchor="middle" letter-spacing=".14em">INTERNET</text>
-            <line x1="336" y1="66" x2="336" y2="272" stroke="#C4BBA8" stroke-width="2" stroke-dasharray="5 7"/>
+            <!-- your laptop -->
+            <rect x="60" y="120" width="150" height="98" rx="10" fill="#FFFDF8" stroke-width="2.6"/>
+            <g fill="#FA9F75" stroke="none"><rect x="80" y="142" width="84" height="8" rx="4"/><rect x="80" y="158" width="58" height="8" rx="4" opacity=".75"/><rect x="80" y="174" width="72" height="8" rx="4" opacity=".55"/></g>
+            <path d="M46,218 H224 L238,234 H32 Z" fill="#F4ECD6" stroke-width="2.4"/>
+            <text class="dl" x="135" y="266" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#545454" stroke="none" text-anchor="middle">Tú</text>
 
-            <!-- your computer -->
-            <g>
-              <rect x="64" y="150" width="132" height="88" rx="9" fill="#FFFDF8" stroke="#B9AF9C" stroke-width="2.5"/>
-              <rect x="75" y="161" width="110" height="66" rx="4" fill="#EFE9DB"/>
-              <path d="M50,238 L210,238 L221,251 L39,251 Z" fill="#DDD5C3" stroke="#B9AF9C" stroke-width="2" stroke-linejoin="round"/>
-              <rect x="118" y="241" width="24" height="2.6" rx="1.3" fill="#B9AF9C"/>
-            </g>
-            <g fill="#FA9F75">
-              <rect x="92" y="176" width="76" height="6" rx="3"/>
-              <rect x="92" y="189" width="52" height="6" rx="3" opacity=".8"/>
-              <rect x="92" y="202" width="64" height="6" rx="3" opacity=".6"/>
-            </g>
-            <text class="dl" x="130" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#9A937F" text-anchor="middle">Tú</text>
-
-            <!-- your words cross the line -->
-            <text class="dt d-wide" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TODO LO QUE ESCRIBES</text>
-            <text class="dt d-narrow" x="298" y="174" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS</text>
-            <path d="M232,196 L356,196" stroke="#FA9F75" stroke-width="2.4" stroke-dasharray="6 8" fill="none"/>
-            <path d="M370,196 l-14,-7 l3,7 l-3,7 z" fill="#FA9F75"/>
-            <g fill="#FA9F75">
-              <rect x="246" y="192.5" width="18" height="7" rx="3.5"/>
-              <rect x="286" y="192.5" width="18" height="7" rx="3.5" opacity=".7"/>
-              <rect x="322" y="192.5" width="18" height="7" rx="3.5" opacity=".45"/>
+            <!-- your words, on their way over -->
+            <text class="dt d-wide" x="300" y="150" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" stroke="none" text-anchor="middle" letter-spacing=".12em">TODO LO QUE ESCRIBES</text>
+            <text class="dt d-narrow" x="300" y="150" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" stroke="none" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS</text>
+            <g class="fly" fill="#FA9F75" stroke="none">
+              <rect x="236" y="166" width="22" height="9" rx="4.5"/>
+              <rect x="236" y="166" width="22" height="9" rx="4.5"/>
+              <rect x="236" y="166" width="22" height="9" rx="4.5"/>
             </g>
 
-            <!-- their server: the AI lives here, and your words pile up beside it -->
-            <rect x="376" y="146" width="148" height="105" rx="10" fill="#3C3A34"/>
-            <text class="dt" x="450" y="166" font-family="Geist, sans-serif" font-size="9" font-weight="600" fill="#9A9186" text-anchor="middle" letter-spacing=".14em">LA IA</text>
-            <g fill="none" stroke="#B4ACA0" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M450,172 L467.3,182 L467.3,202 L450,212 L432.7,202 L432.7,182 Z" stroke-width="2.6"/>
-              <path d="M450,192 L432.7,182 M450,192 L467.3,182 M450,192 L450,212" stroke-width="1.8" opacity=".7"/>
+            <!-- their server: the AI lives there, and your words stay beside it -->
+            <rect x="394" y="100" width="128" height="136" rx="12" fill="#2B2B2B" stroke-width="2.6"/>
+            <g stroke="#FFFDF8" stroke-opacity=".25" stroke-width="1.6"><path d="M406,160 H510 M406,194 H510"/></g>
+            <rect x="440" y="114" width="36" height="36" rx="9" stroke="#FFFDF8" stroke-opacity=".8" stroke-width="2.4"/>
+            <rect x="451" y="125" width="14" height="14" rx="3.5" stroke="#FFFDF8" stroke-opacity=".6" stroke-width="2"/>
+            <g fill="#FA9F75" stroke="none">
+              <rect x="410" y="170" width="50" height="7" rx="3.5"/><rect x="466" y="170" width="34" height="7" rx="3.5" opacity=".75"/>
+              <rect x="410" y="204" width="32" height="7" rx="3.5" opacity=".6"/><rect x="448" y="204" width="52" height="7" rx="3.5" opacity=".45"/>
+              <rect x="410" y="216" width="44" height="7" rx="3.5" opacity=".35"/>
             </g>
-            <g fill="#FA9F75">
-              <rect x="406" y="224" width="48" height="5.5" rx="2.75"/>
-              <rect x="460" y="224" width="34" height="5.5" rx="2.75" opacity=".7"/>
-              <rect x="406" y="234" width="30" height="5.5" rx="2.75" opacity=".5"/>
-              <rect x="442" y="234" width="52" height="5.5" rx="2.75" opacity=".35"/>
-            </g>
-            <text class="dl" x="450" y="284" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#9A937F" text-anchor="middle">Su servidor</text>
-            <text class="dt" x="450" y="304" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS SE QUEDAN AQUÍ</text>
+            <text class="dl" x="458" y="266" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#545454" stroke="none" text-anchor="middle">Su servidor</text>
+            <text class="dt" x="458" y="286" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#A8492A" stroke="none" text-anchor="middle" letter-spacing=".12em">TUS PALABRAS SE QUEDAN AQUÍ</text>
           </svg>
           <div class="cap">
             <span class="tag">Las demás IA</span>
@@ -512,31 +512,46 @@
           </div>
         </div>
 
-        <!-- ============ US ============ -->
+        <!-- ============ US: one computer, the AI inside it, and the turtle keeping it company ============ -->
         <div class="side us">
-          <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: the AI sits inside your own computer, so nothing crosses the internet and there is no server on the other side">
-            <defs>
-              <linearGradient id="uBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#F9F5EA"/><stop offset="100%" stop-color="#E8EEDC"/>
-              </linearGradient>
-            </defs>
-            <rect width="560" height="340" fill="url(#uBg)"/>
-
-            <!-- No internet line, no far side: there is nothing else in this story.
-                 One machine, with the AI inside it. The empty panel is the point. -->
-            <g>
-              <rect x="190" y="128" width="180" height="120" rx="11" fill="#FFFDF8" stroke="#A99F8B" stroke-width="2.5"/>
-              <rect x="204" y="142" width="152" height="92" rx="5" fill="#F4F1E3"/>
-              <path d="M172,248 L388,248 L402,264 L158,264 Z" fill="#DDD5C3" stroke="#A99F8B" stroke-width="2" stroke-linejoin="round"/>
-              <rect x="264" y="252" width="32" height="3" rx="1.5" fill="#A99F8B"/>
+          <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama: la IA está dentro de tu propio ordenador, así que nada cruza internet y no hay ningún servidor al otro lado" fill="none" stroke="#1A1A1A" stroke-linejoin="round" stroke-linecap="round">
+            <ellipse cx="270" cy="258" rx="150" ry="9" fill="#8EA674" fill-opacity=".22" stroke="none"/>
+            <rect x="150" y="84" width="240" height="150" rx="12" fill="#FFFDF8" stroke-width="2.6"/>
+            <!-- the AI: a little green cube, right there on your screen -->
+            <rect x="178" y="118" width="54" height="54" rx="13" fill="#8EA674" stroke-width="2.6"/>
+            <rect x="193" y="133" width="24" height="24" rx="6" stroke="#FFFDF8" stroke-width="2.6"/>
+            <!-- your question, and the answer writing itself underneath -->
+            <rect x="250" y="120" width="112" height="12" rx="6" fill="#FA9F75" fill-opacity=".85" stroke="none"/>
+            <g class="ans" fill="#8EA674" stroke="none">
+              <rect x="250" y="146" width="96" height="10" rx="5"/>
+              <rect x="250" y="164" width="116" height="10" rx="5"/>
+              <rect x="250" y="182" width="74" height="10" rx="5"/>
             </g>
-            <g fill="none" stroke="#5C663F" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M280,156 L307.7,172 L307.7,204 L280,220 L252.3,204 L252.3,172 Z" stroke-width="3.4"/>
-              <path d="M280,188 L252.3,172 M280,188 L307.7,172 M280,188 L280,220" stroke-width="2.3" opacity=".75"/>
+            <path d="M130,234 H410 L426,252 H114 Z" fill="#E4EDD3" stroke-width="2.4"/>
+            <g transform="translate(518 172) scale(-1 1)">
+              <svg class="turtle" x="0" y="0" width="96" height="83" viewBox="0 0 120 104" overflow="visible">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg>
             </g>
-            <ellipse cx="280" cy="272" rx="118" ry="6" fill="#7E8A5A" opacity=".14"/>
-            <text class="dl" x="280" y="298" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#5C663F" text-anchor="middle">Tu ordenador</text>
-            <text class="dt" x="280" y="318" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#5C663F" text-anchor="middle" letter-spacing=".12em">LA IA FUNCIONA AQUÍ DENTRO</text>
+            <text class="dl" x="270" y="286" font-family="Geist, sans-serif" font-size="12.5" font-weight="600" fill="#4E5F3A" stroke="none" text-anchor="middle">Tu ordenador</text>
+            <text class="dt" x="270" y="306" font-family="Geist, sans-serif" font-size="9.5" font-weight="600" fill="#4E5F3A" stroke="none" text-anchor="middle" letter-spacing=".12em">LA IA FUNCIONA AQUÍ DENTRO</text>
           </svg>
           <div class="cap">
             <span class="tag">GreenCube</span>
@@ -546,8 +561,7 @@
         </div>
       </div>
     </div>
-  </section>
-</div>
+</section>
 
 <!-- ============ CÓMO FUNCIONA DE VERDAD ============ -->
 <section class="howto" id="fits">
