@@ -43,7 +43,7 @@
   "name": "GreenCube",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Windows 10, Windows 11",
-  "description": "GreenCube es una IA que es tuya. Funciona en tu propio ordenador, sin límites de uso, sin suscripción y sin wifi. Chatea y escribe, programa, lee PDF e imágenes, y crea material de estudio y archivos de PowerPoint. Pagas una vez.",
+  "description": "GreenCube es una IA que es tuya. Funciona en tu propio ordenador, sin límites de uso, sin suscripción y sin wifi. Chats, sesiones de código, generación de imágenes y archivos adjuntos ilimitados, además de presentaciones de PowerPoint, material de estudio y páginas web. Pagas una vez.",
   "url": "https://greencube.app",
   "downloadUrl": "https://greencube.app/download",
   "offers": {
@@ -54,12 +54,14 @@
     "availability": "https://schema.org/InStock"
   },
   "featureList": [
-    "Runs fully offline on your own computer",
-    "Chat and write with a local AI",
-    "Read and summarise your documents and PDFs",
-    "Understand images and screenshots",
-    "No subscription and no usage limits",
-    "Your conversations never leave your device"
+    "Chats ilimitados con una IA en tu propio ordenador",
+    "Sesiones de código ilimitadas: describes una app y se construye",
+    "Generación de imágenes ilimitada",
+    "Archivos adjuntos ilimitados: PDF, contratos, fotos y capturas",
+    "Crea presentaciones de PowerPoint, tarjetas, tests y páginas web",
+    "Responde con franqueza, sin filtros añadidos",
+    "Funciona sin internet; tus conversaciones nunca salen de tu equipo",
+    "Sin suscripción y sin límites de uso: 9,99 EUR una sola vez"
   ],
   "publisher": {
     "@type": "Organization",
@@ -97,7 +99,7 @@
       --night-2:    #262626;
       --forest:     #1A1A1A;
       --moss:       #7E8A5A;
-      --sage:       #8EA674;
+      --sage:       #AFC098;
       --gold:       #FAE289;
       --gold-warm:  #F3D461;
 
@@ -195,10 +197,11 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-family: var(--serif);
-      font-size: 22px;
-      letter-spacing: -0.005em;
+      gap: 11px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.01em;
     }
     .brand .mark {
       width: 17px; height: 17px;
@@ -232,7 +235,9 @@
     /* On a phone the nav drops onto its own row under the logo rather than
        vanishing. There's no hamburger, so hiding it left no way at all to
        reach another page. */
-    @media (max-width: 1060px) {
+    /* 1040, not 940: the fifth nav item ("Our mission") pushes the row wide
+       enough that the CTA clipped off the right edge in the 940-1000 range. */
+    @media (max-width: 1040px) {
       header { flex-wrap: wrap; row-gap: 8px; }
       .brand { order: 1; }
       .head-right { order: 2; }
@@ -244,6 +249,9 @@
       }
       .header-nav a { padding: 6px 8px; }
       header.dark .header-nav { border-top-color: var(--on-dark-line); }
+      /* the header is fixed and transparent, so once the nav takes a second row
+         it sat straight on top of the headline. 16vh didn't clear a two-row
+         header anywhere in this band. (<=760 already handles itself below.) */
       .hero { padding-top: 170px; }
     }
     .nav-cta {
@@ -446,13 +454,7 @@
       .hero-water .drop-wrap { width: 27px; height: 27px; }
     }
 
-    /* ============== what-it-does capabilities ============== */
-    .caps {
-      position: relative; z-index: 2; padding: 110px 0;
-      background: #F0ECE3;
-      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    }
-    .caps-wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    /* section labels, shared by the tiers strip */
     .caps-eyebrow {
       display: block; text-align: center; margin-bottom: 14px;
       font-family: var(--sans); font-size: 12px; font-weight: 600;
@@ -464,61 +466,13 @@
       letter-spacing: -0.025em; color: var(--forest);
       text-align: center; margin-bottom: 46px;
     }
-    .caps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .cap {
-      background: var(--paper-soft); border: 1px solid var(--line);
-      border-radius: 20px; padding: 32px 28px; text-align: left;
-      box-shadow: 0 1px 2px rgba(72, 82, 47, 0.05), 0 20px 44px -30px rgba(72, 82, 47, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-      transition: transform 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.4s var(--ease-out);
-    }
-    .cap:hover { transform: translateY(-4px); border-color: var(--moss); box-shadow: 0 2px 4px rgba(72, 82, 47, 0.06), 0 34px 60px -32px rgba(72, 82, 47, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
-    /* each capability carries a colour pulled from the hero landscape */
-    .cap { position: relative; overflow: hidden; }
-    .cap::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--tint, var(--moss)); opacity: .85; }
-    .cap::after { content: ''; position: absolute; right: -46px; top: -46px; width: 160px; height: 160px; border-radius: 50%; background: var(--tint, var(--moss)); opacity: .06; }
-    .cap:hover { border-color: var(--tint, var(--moss)); }
-    .cap-ico {
-      position: relative; z-index: 2;
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 46px; height: 46px; border-radius: 13px; margin-bottom: 18px;
-      background: color-mix(in srgb, var(--tint, var(--moss)) 16%, transparent);
-      color: var(--tint-deep, var(--moss));
-    }
-    .cap-ico svg { width: 23px; height: 23px; display: block; }
-    .cap h3, .cap p { position: relative; z-index: 2; }
-    .cap-write { --tint: #8EA674; --tint-deep: #5C663F; }
-    .cap-read  { --tint: #FAE289; --tint-deep: #8A6B1C; }
-    .cap-build { --tint: #FA9F75; --tint-deep: #A8492A; }
-    .cap-agent { --tint: #8EABE1; --tint-deep: #3D5E93; }
-    /* Not in the downloadable app yet. Remove the pill the day it ships. */
-    .cap-soon { position: relative; z-index: 2; display: inline-block; margin: -3px 0 11px; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--tint-deep); background: rgba(61, 94, 147, 0.10); }
-
-    /* Bullets, not paragraphs. Three fragments a person can take in at a
-       glance beat two sentences they will skim past. */
-    .cap-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; position: relative; z-index: 2; }
-    .cap-list li {
-      position: relative; padding-left: 19px;
-      font-family: var(--sans); font-size: 14.5px; line-height: 1.45; color: var(--ink-soft);
-    }
-    .cap-list li::before {
-      content: ''; position: absolute; left: 0; top: 7px;
-      width: 7px; height: 7px; border-radius: 2px;
-      border: 1.8px solid var(--tint, var(--moss, #7E8A5A));
-      transition: background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
-    }
-    /* the card fills its own bullets in as you move down it */
-    .cap:hover .cap-list li::before { background: var(--tint, var(--moss, #7E8A5A)); }
-    .cap:hover .cap-list li:nth-child(2)::before { transition-delay: .06s; }
-    .cap:hover .cap-list li:nth-child(3)::before { transition-delay: .12s; }
-    .cap-ico { transition: transform .45s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
-    .cap:hover .cap-ico { transform: translateY(-2px) rotate(-4deg); }
 
     /* ---------- the four tiers ----------
        A strip, not a comparison table: each card says what that machine feels
        like rather than ticking rows, because the honest headline is that all
        four run the same app for the same money. */
     .tiers { padding: 96px 0 108px; background: var(--paper); }
-    .tiers-wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .tiers-wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
     .tiers-sub {
       font-family: var(--sans); font-size: 16.5px; line-height: 1.6;
       color: var(--ink-soft); max-width: 58ch; margin: 18px 0 0;
@@ -560,13 +514,69 @@
     .tiers-cta:hover { transform: translateY(-2px); border-color: var(--moss); }
     @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
-    .cap h3 { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--forest); margin-bottom: 9px; }
-    .cap p { font-family: var(--sans); font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
-    @media (max-width: 760px) {
-      .caps { padding: 76px 0; }
-      .caps-grid { grid-template-columns: 1fr; gap: 14px; }
-      .caps-head { margin-bottom: 34px; }
+    /* ---------- the tier table: the four cards, spelled out ---------- */
+    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
+    .tier-table tbody tr:last-child > * { border-bottom: 0; }
+    .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
+    .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
+    .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
+    .tier-table td { color: var(--ink-soft); }
+    .tier-table th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper-soft); }
+    .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+    .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
+    .tier-table .yes svg { width: 16px; height: 16px; }
+    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+
+    /* ---------- a note from Hector ---------- */
+    .note-wrap { max-width: 680px; margin: 64px auto 0; }
+    .note-card {
+      width: 100%; display: flex; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer;
+      font: inherit; text-align: left; color: inherit; border-radius: 22px; background: #FFFDF8; border: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(31, 36, 24, .05), 0 30px 60px -44px rgba(78, 95, 58, .5);
+      transition: transform .45s var(--ease-out), border-color .3s var(--ease-out);
     }
+    .note-card:hover { transform: translateY(-3px); border-color: var(--moss); }
+    .note-env {
+      flex: 0 0 auto; width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+      background: rgba(250, 226, 137, .45); color: #8A6B1C; transition: transform .5s var(--ease-out);
+    }
+    .note-env svg { width: 24px; height: 24px; }
+    .note-card:hover .note-env { transform: rotate(-8deg); }
+    .note-who b { display: block; font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.015em; color: var(--forest); }
+    .note-who small { font-size: 13.5px; color: var(--ink-mute); }
+    .note-open { margin-left: auto; font-size: 13.5px; font-weight: 600; color: var(--moss); padding: 7px 15px; border: 1px solid var(--line); border-radius: 999px; }
+
+    /* the letter itself: pops onto the page, a little askew, then settles */
+    .note-pop {
+      width: min(560px, calc(100% - 32px)); max-height: calc(100% - 48px); margin: auto; padding: 38px 40px 34px;
+      border: 1px solid var(--line); border-radius: 22px; background: #FFFDF8; color: var(--ink);
+      box-shadow: 0 50px 100px -40px rgba(31, 36, 24, .55);
+    }
+    .note-pop[open] { animation: note-pop .6s var(--ease-out); }
+    .note-pop::backdrop { background: rgba(31, 36, 24, .38); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+    .note-pop[open]::backdrop { animation: note-fade .4s ease-out; }
+    @keyframes note-pop { from { opacity: 0; transform: translateY(26px) scale(.9) rotate(-3deg); } 60% { transform: translateY(-4px) scale(1.01) rotate(.6deg); } to { opacity: 1; transform: none; } }
+    @keyframes note-fade { from { opacity: 0; } to { opacity: 1; } }
+    .note-x {
+      position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--line); background: #FFFDF8; font-size: 22px; line-height: 1; color: var(--ink-soft); cursor: pointer;
+    }
+    .note-x:hover { border-color: var(--moss); color: var(--forest); }
+    .note-kicker { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--moss); }
+    .note-pop p + p { margin-top: 16px; }
+    .note-pop p:not(.note-kicker):not(.note-sign) { font-size: 17px; line-height: 1.7; }
+    .note-kicker + p { margin-top: 14px; }
+    .note-sign { margin-top: 24px !important; font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest); }
+    .note-sign small { display: block; margin-top: 2px; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--ink-mute); }
+    .note-sign a { display: inline-block; margin-top: 8px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--moss); text-decoration: underline; text-underline-offset: 3px; }
+    /* the turtle signs off beside the signature, facing the letter */
+    .note-pop .note-turtle { position: absolute; right: 30px; bottom: 26px; width: 92px; scale: -1 1; }
+    @media (max-width: 760px) { .note-pop { padding: 30px 22px 26px; } .note-pop .note-turtle { width: 68px; right: 18px; bottom: 20px; } }
+    @media (prefers-reduced-motion: reduce) { .note-pop[open], .note-pop[open]::backdrop { animation: none; } }
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
     .cta-row {
@@ -766,6 +776,141 @@
       .manifesto-line.is-final { font-size: 17vw; }
     }
 
+    /* ============== the four markers (mission.html's palette) ==============
+       Colour lives INSIDE cards on this page, never as a full-width band. */
+    :root {
+      --card: #FDFBF5;
+      --m-sage: #8EA674;      --m-sage-deep: #4E5F3A;
+      --m-jasmine: #FAE289;   --m-jasmine-deep: #8A6B1C;
+      --m-tangerine: #FA9F75; --m-tangerine-deep: #A8492A;
+      --m-wisteria: #8EABE1;  --m-wisteria-deep: #3D5E93;
+    }
+    .t-sage      { --c: var(--m-sage);      --c-deep: var(--m-sage-deep); }
+    .t-jasmine   { --c: var(--m-jasmine);   --c-deep: var(--m-jasmine-deep); }
+    .t-tangerine { --c: var(--m-tangerine); --c-deep: var(--m-tangerine-deep); }
+    .t-wisteria  { --c: var(--m-wisteria);  --c-deep: var(--m-wisteria-deep); }
+
+    .sec { position: relative; z-index: 2; background: var(--paper); }
+    .sec-wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .sec-eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px;
+      font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--moss);
+    }
+    .sec-eyebrow::before { content: ''; width: 9px; height: 9px; border-radius: 3px; border: 2px solid var(--moss); }
+    .sec-head {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(34px, 4.4vw, 62px); line-height: 1.02; letter-spacing: -.03em; color: var(--forest);
+    }
+    .sec-sub { font-size: clamp(16px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-soft); max-width: 44ch; }
+    .sec-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 22px 48px; flex-wrap: wrap; }
+    .sec-top .sec-sub { margin-bottom: 6px; }
+
+    /* ============== the turtle ==============
+       Our mascot, at most once per page. It blinks, waves now and then, and
+       toddles when .walking is on. */
+    .turtle { display: block; overflow: visible; }
+    .turtle .tt-eyes { transform-box: fill-box; transform-origin: center; animation: tt-blink 5.2s infinite; }
+    .turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: tt-wave 5s var(--ease-out) infinite; }
+    .turtle.walking .tt-arm { animation: none; }
+    .turtle.walking .tt-leg { animation: tt-step .34s ease-in-out infinite alternate; }
+    .turtle.walking .tt-leg.b { animation-delay: -.17s; }
+    .turtle.walking .tt-bob { animation: tt-bob .34s ease-in-out infinite alternate; }
+    @keyframes tt-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+    @keyframes tt-wave { 0%, 64%, 100% { transform: rotate(0); } 71% { transform: rotate(-28deg); } 78% { transform: rotate(2deg); } 85% { transform: rotate(-24deg); } }
+    @keyframes tt-step { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+    @keyframes tt-bob { from { transform: translateY(0) rotate(0); } to { transform: translateY(-2px) rotate(-1.5deg); } }
+    /* ============== 1 · NO LIMITS: the turtle walks across as the cards go by ==============
+       With .pin-on the section's inside sticks. The turtle appears first; then,
+       as you scroll, it walks the full width left to right while the cards come
+       in from the right and travel left. Without JS / with reduced motion the
+       row just scrolls sideways. */
+    .feat { border-top: 1px solid var(--line); padding: 110px 0 90px; }
+    .track-wrap { margin-top: 42px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .track-wrap::-webkit-scrollbar { display: none; }
+    .track { display: flex; gap: 18px; width: max-content; padding: 16px 32px 28px; }
+    .track .make { width: 292px; flex: 0 0 auto; scroll-snap-align: center; transform-origin: 50% 160%; }
+    .guide { position: relative; height: 104px; margin: 0 32px; }
+    .gbody { position: absolute; left: 0; bottom: 4px; width: 92px; }
+    .gbody .turtle { width: 100%; }
+    .gbody .turtle.back { scale: -1 1; }
+
+    .feat.pin-on { padding: 0; }
+    .feat.pin-on .feat-stick { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 64px; overflow: hidden; }
+    .feat.pin-on .track-wrap { overflow: visible; }
+    .feat.pin-on .track { will-change: transform; }
+
+    /* the cards */
+    .make {
+      position: relative; display: flex; flex-direction: column;
+      border-radius: 22px; padding: 16px 16px 22px; background: var(--card);
+      border: 1px solid var(--line);
+      transition: border-color .3s var(--ease-out), box-shadow .5s var(--ease-out);
+    }
+    .make:hover { border-color: var(--c); box-shadow: 0 30px 54px -36px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+    .make-art {
+      position: relative; height: 150px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 18px;
+      background:
+        radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--c) 40%, #fff) 0 18%, transparent 19%),
+        color-mix(in srgb, var(--c) 30%, var(--card));
+    }
+    .make-art svg { width: 92px; height: 92px; transition: transform .6s var(--ease-out); }
+    .make:hover .make-art svg { transform: translateY(-4px) rotate(-3deg); }
+    .fc-tag {
+      position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--forest); background: #FFFDF8;
+      border: 1px solid color-mix(in srgb, var(--c-deep) 30%, transparent);
+    }
+    .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
+    .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
+    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
+    .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
+
+    /* ============== 2 · PRIVATE, NO FILTER: plain facts, one per row ============== */
+    .facts { padding: 120px 0 130px; border-top: 1px solid var(--line); }
+    .fact-list { list-style: none; padding: 0; margin: 50px 0 0; border-top: 1px solid var(--line); }
+    .fact { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px 48px; align-items: baseline; padding: 30px 0; border-bottom: 1px solid var(--line); }
+    .fact h3 {
+      display: flex; align-items: baseline; gap: 16px;
+      font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.6vw, 36px);
+      line-height: 1.1; letter-spacing: -.028em; color: var(--forest);
+    }
+    .fact h3::before {
+      content: ''; flex: 0 0 auto; width: 14px; height: 14px; border-radius: 4px; transform: translateY(-2px);
+      border: 2px solid var(--c-deep); background: var(--c); transition: transform .5s var(--ease-out);
+    }
+    .fact:hover h3::before { transform: translateY(-2px) rotate(45deg); }
+    .fact p { font-size: clamp(16px, 1.3vw, 17.5px); line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+    .fact-note { margin-top: 26px; font-size: 14px; line-height: 1.6; color: var(--ink-mute); max-width: 72ch; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .turtle * { animation: none !important; }
+    }
+    @media (max-height: 760px) {
+      .feat.pin-on .make-art { height: 116px; }
+      .feat.pin-on .make-art svg { width: 76px; height: 76px; }
+      .feat.pin-on .track-wrap { margin-top: 26px; }
+    }
+    @media (max-width: 900px) {
+      .fact { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .sec-wrap { padding: 0 16px; }
+      .feat:not(.pin-on) { padding: 84px 0 64px; }
+      .feat.pin-on .feat-stick { padding-top: 96px; }
+      .feat .sec-sub { display: none; }
+      .track { padding: 12px 16px 22px; gap: 14px; }
+      .track .make { width: 76vw; }
+      .guide { margin: 0 16px; }
+      .facts { padding: 84px 0 96px; }
+    }
+
+    /* the lede: what is unlimited first, then why and what it costs */
+    .hero .lede { max-width: 40ch; }
+    .hero .lede strong { display: block; font-weight: 700; color: var(--forest); }
+    .hero .lede .why { display: block; margin-top: 6px; font-size: .8em; font-weight: 500; color: var(--ink-soft); letter-spacing: -.01em; }
+    @media (max-width: 760px) { .tl { white-space: normal; } }
+
     /* ============== reveal-on-scroll utility ============== */
     .rv {
       opacity: 0;
@@ -885,7 +1030,7 @@
           0 14px 26px rgba(31, 36, 24, 0.10),
           0 5px 12px rgba(31, 36, 24, 0.05);
       }
-      .hero .lede { font-size: 17px; margin-bottom: 28px; }
+      .hero .lede { font-size: 19px; margin-bottom: 26px; }
       .cta-row, .cta-form {
         flex-direction: column;
         width: 100%;
@@ -1047,18 +1192,21 @@
       <span class="rv-mask"><span>IA que es <em>tuya.</em></span></span>
       <span class="rv-mask"><span>No alquilada.</span></span>
     </h1>
-    <p class="lede rv">Una IA que funciona en tu propio ordenador. Sin&nbsp;límites&nbsp;de&nbsp;uso. No&nbsp;hace&nbsp;falta&nbsp;wifi.</p>
+    <p class="lede rv"><strong>Chats, código, imágenes y archivos sin&nbsp;límites.</strong><span class="why">Funciona en tu propio ordenador, así que nunca se acaba&nbsp;nada.</span></p>
     <ul class="hero-chips rv">
       <li>Sin límites</li>
       <li>Privada</li>
-      <li>Sin internet</li>
-      <li>Pago único</li>
+      <li>Funciona sin internet</li>
+      <li>9,99&nbsp;€</li>
     </ul>
     <div class="cta-row rv">
       <a href="/es/buy" class="cta-pill cta-primary"><span>Consigue GreenCube</span></a>
       <a href="/es/how-it-works" class="cta-pill cta-ghost">Por qué GreenCube <span class="arrow">→</span></a>
     </div>
   </div>
+  <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
+       anchoring here keeps the badge in the section corner rather than at the
+       bottom of the centred text block -->
   <a href="/es/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1070,59 +1218,178 @@
   </a>
 </section>
 
-<!-- =========== WHAT IT DOES — three honest capabilities =========== -->
-<section class="caps" id="what" aria-label="What GreenCube does">
-  <div class="caps-wrap">
-    <span class="caps-eyebrow rv">Qué hace</span>
-    <h2 class="caps-head rv">Dile lo que quieres. Te lo hace.</h2>
-    <div class="caps-grid">
-      <article class="cap cap-write rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
-        <h3>Chatea y programa</h3>
-        <ul class="cap-list">
-          <li>Correos, trabajos, solicitudes</li>
-          <li>Código, scripts, fórmulas</li>
-          <li>El mensaje que no paras de reescribir</li>
-        </ul>
+<!-- =========== 1 · NO LIMITS — the turtle walks across while everything it does goes by =========== -->
+<section class="sec feat" id="what" aria-label="Qué hace GreenCube">
+  <div class="feat-stick">
+    <div class="sec-wrap sec-top">
+      <div>
+        <span class="sec-eyebrow">Sin límites</span>
+        <h2 class="sec-head">Sin límites con los que chocar.</h2>
+      </div>
+      <p class="sec-sub">Funciona en tu propio ordenador, así que no hay contador. Esto es todo lo que hace.</p>
+    </div>
+    <div class="track-wrap">
+      <div class="track">
+      <article class="make t-sage">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/>
+            <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/>
+            <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/>
+            <path d="M47 61h28" stroke-width="3"/>
+          </svg>
+        </div>
+        <span class="make-kind">Chats</span>
+        <q>Explícame el interés compuesto como si tuviera doce años. Y ahora ponme un test.</q>
+        <span class="make-out">Sin límite, sin volver dentro de 5 horas</span>
       </article>
-      <article class="cap cap-read rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg></span>
-        <h3>Lee lo que sea</h3>
-        <ul class="cap-list">
-          <li>PDFs, contratos, informes</li>
-          <li>Fotos, capturas, gráficos</li>
-          <li>Pregúntale qué significa todo eso</li>
-        </ul>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="10" y="16" width="76" height="60" rx="8" fill="#2B2B2B"/>
+            <path d="M10 28h76" stroke="#FFFDF8" stroke-width="1.6" opacity=".3"/>
+            <path d="M22 40h14" stroke="#8EABE1" stroke-width="3.2"/><path d="M40 40h22" stroke="#FA9F75" stroke-width="3.2"/>
+            <path d="M28 50h26" stroke="#C6D9A8" stroke-width="3.2"/><path d="M28 60h16" stroke="#FAE289" stroke-width="3.2"/>
+            <path d="M22 70h10" stroke="#8EABE1" stroke-width="3.2"/>
+            <path d="M68 50l-6 6 6 6M76 50l6 6-6 6" stroke="#FFFDF8" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">Sesiones de código</span>
+        <q>Hazme una app de reservas para mi barbería.</q>
+        <span class="make-out">Sigue durante horas, no se acaba nada</span>
       </article>
-      <article class="cap cap-build rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 22h8M12 18v4"/></svg></span>
-        <h3>Crea artefactos</h3>
-        <ul class="cap-list">
-          <li>Páginas web, presentaciones, PowerPoints</li>
-          <li>Fichas, tests, tablas de estudio</li>
-          <li>Archivos de verdad, donde tú quieras</li>
-        </ul>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/>
+            <circle cx="62" cy="34" r="8" fill="#FAE289"/>
+            <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/>
+            <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/>
+            <path d="M26 84l6-8M70 84l-6-8" />
+          </svg>
+        </div>
+        <span class="make-kind">Generar imágenes</span>
+        <q>Un zorro leyendo en una biblioteca soleada, en acuarela.</q>
+        <span class="make-out">Todas las que quieras, sin cupo diario</span>
       </article>
-      <article class="cap cap-agent rv">
-        <span class="cap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4.5"/><path d="M12 3.2h.01"/><path d="M9 13.5h.01M15 13.5h.01"/><path d="M1.5 13v3M22.5 13v3"/></svg></span>
-        <h3>Dale un encargo y vete</h3>
-        <span class="cap-soon">Muy pronto</span>
-        <ul class="cap-list">
-          <li>Resúmenes del correo y respuestas redactadas</li>
-          <li>Escribe código, lo ejecuta y arregla lo que falla</li>
-          <li>Escríbele desde el móvil y tu PC lo hace</li>
-        </ul>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">Archivos adjuntos</span>
+        <q>¿Me devuelven la fianza si me voy antes?</q>
+        <span class="make-out">PDF, fotos, capturas, todos los que quieras</span>
       </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">Presentaciones</span>
+        <q>Haz una presentación de diez diapositivas sobre la Revolución francesa.</q>
+        <span class="make-out">Un archivo de PowerPoint de verdad</span>
+      </article>
+      <article class="make t-sage">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">Estudio</span>
+        <q>Convierte el tema cuatro en tarjetas y un test.</q>
+        <span class="make-out">Tarjetas y un test, junto al chat</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
+            <path d="M12 32h72"/><circle cx="20" cy="26" r="1.6" fill="#1A1A1A"/><circle cx="26" cy="26" r="1.6" fill="#1A1A1A"/>
+            <rect x="21" y="40" width="26" height="24" rx="4" fill="#FA9F75"/>
+            <path d="M54 43h20" stroke-width="4"/><path d="M54 52h16M54 59h12" stroke="#A8492A" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">Páginas web</span>
+        <q>Crea una página web para mi panadería.</q>
+        <span class="make-out">Una página que puedes abrir y compartir</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Muy pronto</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <circle cx="66" cy="28" r="11" fill="#FAE289"/>
+            <path d="M66 10v4M66 42v4M48 28h4M80 28h4M53 15l3 3M76 38l3 3M79 15l-3 3" />
+            <rect x="14" y="38" width="54" height="38" rx="6" fill="#8EABE1"/>
+            <path d="M16 42l25 18 25-18" fill="#FFFDF8"/>
+          </svg>
+        </div>
+        <span class="make-kind">Automatizaciones</span>
+        <q>Cada mañana, resume mi bandeja de entrada y redacta las respuestas.</q>
+        <span class="make-out">Se ejecuta a su hora mientras sigues con tu día</span>
+      </article>
+      </div>
+    </div>
+    <div class="guide">
+      <div class="gbody">
+  <svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- =========== LOS CUATRO NIVELES =========== -->
+<!-- =========== 2 · PRIVATE, NO FILTER — plain facts =========== -->
+<section class="sec facts" id="private" aria-label="Privada y sin filtros añadidos">
+  <div class="sec-wrap">
+    <span class="sec-eyebrow rv">Privada y directa</span>
+    <h2 class="sec-head rv">Nadie leyendo por encima.<br>Ningún filtro añadido.</h2>
+    <ul class="fact-list">
+      <li class="fact t-sage rv"><h3>Tus chats nunca salen de tu ordenador.</h3><p>Los chats, archivos e imágenes se crean y se guardan en tu equipo. Nadie los lee, entrena con ellos ni los vende.</p></li>
+      <li class="fact t-tangerine rv"><h3>Ningún filtro añadido.</h3><p>La IA en la nube pasa tu pregunta por la política de contenidos de una empresa. GreenCube no añade ningún filtro propio a las respuestas.</p></li>
+      <li class="fact t-jasmine rv"><h3>Hecha para responder, no para negarse.</h3><p>Sus modelos tienen instrucciones de responder con franqueza. Palabrotas, ficción oscura, opiniones sin rodeos, historia dura e investigación de seguridad: todo vale.</p></li>
+      <li class="fact t-wisteria rv"><h3>Solo el daño real queda fuera.</h3><p>No ayudará a nadie a hacer daño a otras personas, explotar a menores, robar o entrar en cuentas ajenas. Todo lo demás, puedes preguntarlo.</p></li>
+    </ul>
+    <p class="fact-note rv">Cómo lo hace: GreenCube da a sus modelos instrucciones permanentes de responder con franqueza. Los guía en lugar de reentrenarlos, así que de vez en cuando alguno todavía puede negarse. Puedes desactivarlo en Ajustes.</p>
+  </div>
+</section>
+
+<!-- =========== THE FOUR TIERS — what your own machine does with it =========== -->
 <section class="tiers" id="tiers" aria-label="Cómo funciona GreenCube en distintos ordenadores">
   <div class="tiers-wrap">
-    <span class="caps-eyebrow rv">Tu ordenador</span>
-    <h2 class="caps-head rv">Mira qué puede funcionar en tu ordenador.</h2>
-    <p class="tiers-sub rv">Lo deciden dos cosas: cuánta RAM tienes y si tienes tarjeta gráfica. La misma app y el mismo precio en cualquier caso.</p>
+    <span class="caps-eyebrow rv">Tu equipo</span>
+    <h2 class="caps-head rv">Mira qué puede hacer tu equipo.</h2>
+    <p class="tiers-sub rv">Lo deciden dos cosas: cuánta RAM tienes y si tienes tarjeta gráfica. La misma app y el mismo precio en todos los casos.</p>
 
     <div class="tier-row">
       <article class="tier-card rv" style="--tint:#FAE289">
@@ -1130,9 +1397,9 @@
         <h3>Seed</h3>
         <p class="tier-spec">8 GB de RAM, sin tarjeta</p>
         <ul class="tier-list">
-          <li>Todo sigue funcionando</li>
-          <li>Las respuestas tardan más</li>
-          <li>Lo pesado espera tu permiso</li>
+          <li>Todo funciona, solo que más lento</li>
+          <li>Pensado para caber en 8 GB</li>
+          <li>Páginas web e imágenes, desactivadas al principio</li>
         </ul>
       </article>
       <article class="tier-card rv" style="--tint:#8EA674">
@@ -1140,19 +1407,19 @@
         <h3>Sprout</h3>
         <p class="tier-spec">16 GB de RAM, u 8 GB con tarjeta</p>
         <ul class="tier-list">
-          <li>Una IA más grande y mejor</li>
+          <li>Velocidad estable y cómoda</li>
           <li>Escribe presentaciones</li>
-          <li>Crea páginas, avisando antes</li>
+          <li>Páginas web e imágenes, avisándote antes de la espera</li>
         </ul>
       </article>
       <article class="tier-card rv" style="--tint:#FA9F75">
         <span class="tier-n">Nivel tres</span>
         <h3>Bloom</h3>
-        <p class="tier-spec">Tarjeta y 16 GB de RAM</p>
+        <p class="tier-spec">Tarjeta de 8 GB, o tarjeta y 16 GB de RAM</p>
         <ul class="tier-list">
-          <li>Se acabaron los avisos de espera</li>
-          <li>Lee bien tus imágenes</li>
-          <li>Recuerda conversaciones largas</li>
+          <li>Rápido, gracias a la tarjeta gráfica</li>
+          <li>Páginas web e imágenes, sin aviso de espera</li>
+          <li>Lee chats y documentos más largos de una vez</li>
         </ul>
       </article>
       <article class="tier-card rv" style="--tint:#8EABE1">
@@ -1160,12 +1427,72 @@
         <h3>Thrive</h3>
         <p class="tier-spec">Tarjeta de 8 GB, 24 GB de RAM</p>
         <ul class="tier-list">
-          <li>La IA más grande que te quepa</li>
-          <li>La que más recuerda</li>
-          <li>Sin nada guardado en el cajón</li>
+          <li>El modelo de IA más grande que quepa en tu tarjeta</li>
+          <li>El más rápido de los cuatro</li>
+          <li>Lee los chats y documentos más largos</li>
         </ul>
       </article>
     </div>
+
+
+    <div class="tt-wrap rv">
+      <table class="tier-table">
+        <caption>Qué hace cada nivel</caption>
+        <thead>
+          <tr><th scope="col">Qué hace</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Velocidad</th><td>Lento, palabra a palabra</td><td>Estable</td><td>Rápido</td><td>El más rápido</td></tr>
+          <tr><th scope="row">Tamaño del modelo de IA</th><td>Pequeño</td><td>Mediano</td><td>Mediano</td><td>El más grande que quepa en tu tarjeta</td></tr>
+          <tr><th scope="row">Chat, documentos y fotos</th><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Tarjetas, tests y archivos de PowerPoint</th><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Presentaciones que escribe la IA</th><td>Escribe un documento y lo guarda como diapositivas</td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Páginas web</th><td>Desactivadas al principio. Puedes activarlas</td><td>Pregunta antes y te dice cuánto tardará</td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Apps que programa</th><td>Hasta 8 archivos cada vez</td><td>Hasta 12 archivos</td><td>Hasta 24 archivos</td><td>Hasta 48 archivos</td></tr>
+          <tr><th scope="row">Generar imágenes</th><td>Desactivado al principio. Puedes activarlo</td><td>Pregunta antes y te dice cuánto tardará</td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sí"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Cuánto puede leer de una vez<small>Un chat, un documento o ambos</small></th><td>Unas 3.000 palabras</td><td>Unas 12.000 palabras</td><td>De 12.000 a 25.000 palabras</td><td>50.000 palabras o más</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tt-note rv">Las cifras de palabras son orientativas: crecen con la memoria libre de tu ordenador. Todo lo demás es un punto de partida, no un candado: en Ajustes puedes activar o desactivar cada cosa.</p>
+
+    <a href="/what-you-get" class="tiers-cta rv">Descubre cuál es el tuyo<span aria-hidden="true">&rarr;</span></a>
+
+    <!-- a note from Hector: the card opens a letter over the page -->
+    <div class="note-wrap rv">
+      <button type="button" class="note-card" data-note-open>
+        <span class="note-env" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+        <span class="note-who"><b>Una nota de Hector</b><small>Fundador y CEO</small></span>
+        <span class="note-open">Léela</span>
+      </button>
+    </div>
+    <dialog class="note-pop" aria-labelledby="note-title">
+      <button type="button" class="note-x" data-note-close aria-label="Cerrar">&times;</button>
+      <p class="note-kicker" id="note-title">Una nota de Hector</p>
+      <p>Hola, soy Hector. Creé GreenCube porque estaba harto de que la IA me dijera que había llegado a mi límite y que tenía que esperar horas para volver a usarla. Podías usar una IA en tu propio ordenador, pero eso significaba elegir un modelo y configurarlo todo tú mismo, y la mayoría de la gente no sabe ni por dónde empezar. Así que hice GreenCube: lo instalas y funciona. Sin límites y sin nada que configurar.</p>
+      <p>Cada ordenador es distinto, y no puedo saber cómo funcionará GreenCube en el tuyo. No quiero que nadie se quede con algo que no le funciona. Normalmente las descargas no se reembolsan, pero prefiero que estés contento: si en 14 días no es lo que buscabas, escríbeme, cuéntame qué ha pasado y te devuelvo el dinero íntegro.</p>
+      <p class="note-sign">Hector<small>Fundador y CEO de GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p>
+      <svg class="turtle note-turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg>
+    </dialog>
   </div>
 </section>
 
@@ -1175,9 +1502,9 @@
     <span class="eyebrow rv">La diferencia</span>
   </div>
   <ul class="manifesto-lines">
-    <li class="manifesto-line">Tus datos nunca salen de tu ordenador.</li>
     <li class="manifesto-line">Ningún límite te corta a mitad de una idea.</li>
-    <li class="manifesto-line">Sin suscripción. Sin renovaciones. Nadie leyendo tus conversaciones.</li>
+    <li class="manifesto-line">Sin suscripción. Sin renovaciones. Sin créditos.</li>
+    <li class="manifesto-line">Tus datos nunca salen de tu ordenador.</li>
     <li class="manifesto-line">Funciona en un avión. En un apagón. Cuando se caen los servidores.</li>
     <li class="manifesto-line">Todas las demás IA son de alquiler.</li>
     <li class="manifesto-line is-final">Esta es <em>tuya.</em></li>
@@ -1404,6 +1731,88 @@
         document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
           '; path=/; max-age=31536000; samesite=lax';
       });
+    });
+  })();
+</script>
+<script>
+  // "No limits to hit". The section's inside sticks while you scroll through it:
+  // first the turtle appears on its own at the left; then it walks the full
+  // width to the right while the cards come in from the right edge and travel
+  // left past it, leaning like a slow wheel. Under reduced motion none of this
+  // runs and the row simply scrolls sideways.
+  (() => {
+    const sec = document.querySelector('.feat');
+    if (!sec || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const wrap = sec.querySelector('.track-wrap');
+    const track = sec.querySelector('.track');
+    const cards = [...track.children];
+    const guide = sec.querySelector('.guide');
+    const body = guide.querySelector('.gbody');
+    const turtle = body.querySelector('.turtle');
+    sec.classList.add('pin-on');
+
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    let W = 0, tw = 0, intro = 0, outro = 0, lastY = scrollY, idle = 0, queued = false;
+
+    const measure = () => {
+      W = wrap.clientWidth;
+      tw = track.scrollWidth;
+      intro = innerHeight * 0.4;
+      outro = innerHeight * 0.3;
+      sec.style.height = (innerHeight + intro + tw + outro) + 'px';
+      paint();
+    };
+
+    const paint = () => {
+      queued = false;
+      const s = clamp(-sec.getBoundingClientRect().top, 0, intro + tw + outro);
+
+      // the turtle appears first, before anything moves
+      const shown = clamp((s + innerHeight * 0.25) / (intro * 0.8), 0, 1);
+      body.style.opacity = shown;
+
+      // then the walk and the row share one clock
+      const along = clamp(s - intro, 0, tw);
+      track.style.transform = `translateX(${W - along}px)`;
+      const room = guide.clientWidth - body.clientWidth;
+      body.style.translate = `${room * (along / tw)}px ${(1 - shown) * 12}px`;
+
+      const mid = innerWidth / 2;
+      cards.forEach((c) => {
+        const b = c.getBoundingClientRect();
+        const off = clamp((b.left + b.width / 2 - mid) / innerWidth, -1, 1);
+        c.style.transform = `translateY(${off * off * 46}px) rotate(${off * 7}deg)`;
+      });
+    };
+
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      if (y !== lastY) {
+        turtle.classList.toggle('back', y < lastY);
+        turtle.classList.add('walking');
+        clearTimeout(idle);
+        idle = setTimeout(() => turtle.classList.remove('walking'), 160);
+        lastY = y;
+      }
+      if (!queued) { queued = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    measure();
+  })();
+</script>
+<script>
+  // A note from Hector: the card opens the letter over the page. Escape, the
+  // close button, or a click outside the letter puts it away.
+  (() => {
+    const pop = document.querySelector('.note-pop');
+    const open = document.querySelector('[data-note-open]');
+    if (!pop || !open || typeof pop.showModal !== 'function') return;
+    open.addEventListener('click', () => pop.showModal());
+    pop.querySelector('[data-note-close]').addEventListener('click', () => pop.close());
+    pop.addEventListener('click', (e) => {
+      const r = pop.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) pop.close();
     });
   })();
 </script>
