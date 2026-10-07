@@ -344,6 +344,12 @@
       footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
       footer .f-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    /* the line under the heading is the whole instruction: make it read first */
+    .lede { font-size: clamp(17.5px, 1.45vw, 20px); font-weight: 500; color: var(--ink); max-width: 46ch; }
+    .lede a { font-weight: 700; color: var(--forest, #1A1A1A); text-decoration: underline; text-decoration-color: var(--moss, #7E8A5A); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .lede a:hover { color: var(--moss, #7E8A5A); }
+    .card-label { font-size: 13px; font-weight: 700; color: var(--forest, #1A1A1A); }
   </style>
 </head>
 <body>
@@ -491,29 +497,18 @@
   //  empty disables auto-download for that OS and surfaces a "coming soon"
   //  message instead of a broken link.
   // ====================================================================
+  // Words the script shows, per page language. Same page for everyone: the
+  // welcome for new buyers lives in the app's setup, not here.
   const ES = document.documentElement.lang === 'es';
   const W = ES ? {
     win: 'Descargar para Windows', winSub: '.exe · Windows 10/11', macSub: 'Macs con Apple silicon e Intel',
     pick: 'Elige tu plataforma abajo', macOnly: 'GreenCube es solo para Windows por ahora. La versión para Mac está en camino.',
-    downloading: 'Descargando…', auto: 'Tu descarga debería empezar sola…', started: 'Descarga iniciada. ¿No ha funcionado? Usa el botón de arriba.',
-    soon: 'Muy pronto', thanks: 'Gracias', paidTitle: '¡Ya es <em>tuya!</em>',
-    paidLede: 'Tu descarga está empezando. Abre GreenCube e inicia sesión con el email con el que pagaste. Así se desbloquea, sin claves.'
+    downloading: 'Descargando…', soon: 'Muy pronto'
   } : {
     win: 'Download for Windows', winSub: '.exe installer · Windows 10/11', macSub: 'Apple silicon and Intel Macs',
-    pick: 'Choose your platform below', macOnly: W.macOnly,
-    downloading: 'Downloading…', auto: 'Your download should start automatically…', started: 'Download started. Didn’t work? Use the button above.',
-    soon: 'Coming soon', thanks: 'Thank you', paidTitle: 'You&rsquo;re <em>in.</em>',
-    paidLede: 'Your download is starting. Open GreenCube and sign in with the email you paid with. That unlocks it, no key needed.'
+    pick: 'Choose your platform below', macOnly: 'GreenCube is Windows only for now. The Mac version is on the way.',
+    downloading: 'Downloading…', soon: 'Coming soon'
   };
-  // Stripe sends buyers here after paying. Set the payment link's redirect to
-  // /download?paid=1; the referrer check covers it until then.
-  const params = new URLSearchParams(location.search);
-  const PAID = params.has('paid') || params.has('session_id') || /stripe\.com/.test(document.referrer);
-  if (PAID) {
-    document.getElementById('dl-eyebrow').textContent = W.thanks;
-    document.getElementById('dl-title').innerHTML = W.paidTitle;
-    document.getElementById('dl-lede').textContent = W.paidLede;
-  }
 
   const DOWNLOADS = {
     // A FIXED key, republished by the release workflow every time. This link
@@ -618,13 +613,7 @@
   // ---------- auto-start the download ----------
   // Convenience only. A short delay lets the page paint first, so the buyer
   // sees where they are before the browser's download prompt appears.
-  if (PAID && primaryKey && DOWNLOADS[primaryKey].url) {
-    dlStatus.textContent = W.auto;
-    setTimeout(() => {
-      triggerDownload(DOWNLOADS[primaryKey].url);
-      dlStatus.textContent = W.started;
-    }, 900);
-  } else if (primaryKey && !DOWNLOADS[primaryKey].url) {
+  if (primaryKey && !DOWNLOADS[primaryKey].url) {
     dlStatus.textContent = W.macOnly;
   }
 })();
