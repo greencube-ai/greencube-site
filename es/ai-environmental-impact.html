@@ -489,6 +489,8 @@
     .w-truth h3 { font: 600 20px/1.2 var(--display); letter-spacing: -.015em; color: var(--ink); }
     .w-truth p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
     @media (max-width: 820px) { .w-stats, .w-truth, .w-water-out { grid-template-columns: 1fr; } }
+    .w-src, #water .w-fine { font-weight: 600; color: var(--ink-soft); }
+    .w-src a, #water .w-fine a { color: var(--ink); }
   </style>
 </head>
 <body>
@@ -499,8 +501,8 @@
   <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
   <nav class="nav" aria-label="Primary">
     <a href="/es/how-it-works">Por qué GreenCube</a>
-    <a href="/es/your-data">Tus datos</a>
     <a href="/es/ai-environmental-impact" class="on">La IA y el planeta</a>
+    <a href="/es/your-data">Tus datos</a>
     <a href="/es/mission">Nuestra misión</a>
     <a href="/es/download">Descargar</a>
   </nav>
@@ -605,7 +607,7 @@
         <h3>Producto</h3>
         <ul>
           <li><a href="/es/buy">Consigue GreenCube</a></li>
-          <li><a href="/es/#what">Qué hace</a></li>
+          <li><a href="/es/how-it-works#can">Qué hace</a></li>
           <li><a href="/es/how-it-works">Por qué GreenCube</a></li>
           <li><a href="/es/what-you-get">¿Funcionará en mi ordenador?</a></li>
         </ul>
@@ -714,7 +716,7 @@
     const box = document.getElementById('w-water'), r = document.getElementById('q-range');
     if (!box || !r) return;
     const es = document.documentElement.lang === 'es';
-    const nf = new Intl.NumberFormat(es ? 'es-ES' : 'en-GB', { maximumFractionDigits: 1 });
+    const nf = new Intl.NumberFormat(es ? 'es-ES' : 'en-GB', { maximumFractionDigits: 1, useGrouping: false });
     const LOW = 0.26, HIGH = 25;   // mL per question: Google 2025 / UC Riverside 2023 (500 mL per 20 questions)
     const $ = (id) => document.getElementById(id);
     const paint = () => {
