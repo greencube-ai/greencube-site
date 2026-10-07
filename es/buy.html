@@ -536,6 +536,18 @@
       footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
       footer .f-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    /* the turtle hands you the letter: pops up over its top edge, smiles and waves */
+    .lt-turtle-wave { position: relative; z-index: 2; width: 96px; margin: -4px auto -20px; opacity: 0; transform: translateY(28px) scale(.8);
+      transition: transform .65s cubic-bezier(.34,1.56,.64,1), opacity .3s ease; }
+    .lt-letter.show .lt-turtle-wave { opacity: 1; transform: none; }
+    .lt-turtle-wave svg { display: block; width: 100%; overflow: visible; }
+    .lt-turtle-wave .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: lt-wave 2.6s ease-in-out .7s infinite; }
+    .lt-turtle-wave .tt-eyes { transform-box: fill-box; transform-origin: center; animation: lt-blink 4.6s infinite; }
+    @keyframes lt-wave { 0%, 55%, 100% { transform: rotate(0); } 12% { transform: rotate(-30deg); } 24% { transform: rotate(4deg); } 36% { transform: rotate(-26deg); } 46% { transform: rotate(0); } }
+    @keyframes lt-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+    .lt-paper-full { padding-top: 30px; }
+    @media (prefers-reduced-motion: reduce) { .lt-turtle-wave .tt-arm, .lt-turtle-wave .tt-eyes { animation: none; } .lt-turtle-wave { transition: none; } }
   </style>
 </head>
 <body>
@@ -768,7 +780,26 @@
     <!-- step 0: a letter from Hector, before anything else -->
     <div class="fit-step" id="fit-step-letter">
       <div class="lt-letter" id="lt-letter">
-        <div class="lt-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></div>
+        <div class="lt-turtle-wave" aria-hidden="true"><svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg></div>
         <div class="lt-paper-full"><h2>Una nota de Hector</h2><p>Hola, soy Hector. Creé GreenCube porque estaba harto de que la IA me dijera que había llegado a mi límite y que tenía que esperar horas para volver a usarla. Podías usar una IA en tu propio ordenador, pero eso significaba elegir un modelo y configurarlo todo tú mismo, y la mayoría de la gente no sabe ni por dónde empezar. Así que hice GreenCube: lo instalas y funciona. Sin límites y sin nada que configurar.</p><p>Cada ordenador es distinto, y no puedo saber cómo funcionará GreenCube en el tuyo. No quiero que nadie se quede con algo que no le funciona. Normalmente las descargas no se reembolsan, pero prefiero que estés contento: si en 14 días no es lo que buscabas, escríbeme, cuéntame qué ha pasado y te devuelvo el dinero íntegro.</p><p class="sign">Hector<small>Fundador y CEO de GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
         <div class="lt-after"><p class="lt-next">Ahora, una prueba rápida para asegurarnos de que GreenCube va fluida en tu PC.</p>
         <button class="fit-cta" id="lt-go" type="button"><span>Empezar la prueba</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
