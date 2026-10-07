@@ -392,6 +392,144 @@
       footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
       footer .f-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    #why { --sun: #FAE289; --sun-deep: #8A6B1C; --clay: #FA9F75; --clay-deep: #A8492A; --sky: #8EABE1; --sky-deep: #3D5E93;
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7); }
+
+    /* ================= Why GreenCube, rebuilt 2026-10-07 =================
+       Short, clear, a bit playful: two small toys (send a message / switch the
+       Wi-Fi off) show the two big things instead of explaining them. */
+    .w { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .w-sec { padding: 92px 0; }
+    .w-sec + .w-sec { border-top: 1px solid var(--line); }
+    .w-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--olive); }
+    .w-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -.035em; color: var(--ink); margin-top: 12px; }
+    .w-h2 em { font-style: normal; color: var(--olive); }
+    .w-sub { font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--ink-soft); margin-top: 14px; max-width: 46ch; }
+    .w-center { text-align: center; } .w-center .w-sub { margin-left: auto; margin-right: auto; }
+
+    /* hero */
+    .w-hero { padding: 150px 0 70px; text-align: center; }
+    .w-hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 7vw, 92px); line-height: .98; letter-spacing: -.04em; color: var(--ink); margin-top: 16px; }
+    .w-hero h1 em { font-style: normal; color: var(--olive); }
+    .w-hero p { font-size: clamp(18px, 1.7vw, 23px); font-weight: 600; color: var(--ink); margin-top: 22px; }
+    .w-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; list-style: none; padding: 0; }
+    .w-pills li { padding: 9px 16px; border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+    .w-pills li:nth-child(1) { background: color-mix(in srgb, var(--sun) 60%, #fff); }
+    .w-pills li:nth-child(2) { background: color-mix(in srgb, var(--sky) 45%, #fff); }
+    .w-pills li:nth-child(3) { background: color-mix(in srgb, var(--clay) 45%, #fff); }
+
+    /* toy 1: who stops first */
+    .w-race { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+    .w-lane { border-radius: 24px; padding: 26px 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); transition: opacity .4s var(--ease), filter .4s var(--ease); }
+    .w-lane.gc { background: color-mix(in srgb, var(--olive) 14%, var(--card)); border-color: color-mix(in srgb, var(--olive) 35%, transparent); }
+    .w-lane .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-lane.gc .who { color: var(--olive-deep); }
+    .w-count { font-family: var(--display); font-weight: 600; font-size: clamp(54px, 7vw, 84px); line-height: 1; letter-spacing: -.04em; color: var(--ink); margin-top: 10px; display: inline-block; }
+    .w-count.pop { animation: w-pop .32s var(--ease); }
+    @keyframes w-pop { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .w-lane .left { font-size: 15px; color: var(--ink-soft); margin-top: 6px; min-height: 1.5em; }
+    .w-bar { height: 10px; border-radius: 99px; background: var(--paper-warm); margin-top: 16px; overflow: hidden; }
+    .w-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--clay); transition: width .35s var(--ease); }
+    .w-lane.gc .w-bar i { width: 100%; background: linear-gradient(90deg, var(--olive), var(--sun), var(--olive)); background-size: 200% 100%; animation: w-flow 2.4s linear infinite; }
+    @keyframes w-flow { to { background-position: -200% 0; } }
+    .w-lane.locked { opacity: .55; filter: grayscale(.6); }
+    .w-lane.locked .left { color: var(--clay-deep); font-weight: 600; }
+    .w-send { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 17px 30px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); cursor: pointer; box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .2s var(--ease), background .3s var(--ease); }
+    .w-send:hover { transform: translateY(-2px); background: #000; }
+    .w-send:active { transform: translateY(1px) scale(.97); }
+    .w-fine { font-size: 13px; color: var(--ink-mute); margin-top: 16px; }
+
+    /* toy 2: the Wi-Fi switch */
+    .w-wifi { display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 12px 18px 12px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); cursor: pointer; font: 600 16px var(--sans); color: var(--ink); }
+    .w-wifi .sw { position: relative; width: 52px; height: 30px; border-radius: 99px; background: var(--olive); transition: background .3s var(--ease); }
+    .w-wifi .sw::after { content: ''; position: absolute; top: 3px; left: 25px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .3s cubic-bezier(.34,1.56,.64,1); }
+    .w-wifi[aria-checked="false"] .sw { background: #C9C2B2; }
+    .w-wifi[aria-checked="false"] .sw::after { left: 3px; }
+    .w-net { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; text-align: left; }
+    .w-chat { border-radius: 24px; padding: 22px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .w-chat .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-chat.gc .who { color: var(--olive-deep); }
+    .w-bubble { margin-top: 14px; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-bubble.me { background: var(--paper-warm); margin-left: 18%; border-bottom-right-radius: 6px; }
+    .w-bubble.ai { background: color-mix(in srgb, var(--olive) 16%, #fff); margin-right: 12%; border-bottom-left-radius: 6px; transition: background .3s var(--ease), color .3s var(--ease); }
+    .w-bubble.ai.err { background: color-mix(in srgb, var(--clay) 22%, #fff); color: var(--clay-deep); font-weight: 600; }
+
+    /* three steps */
+    .w-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; counter-reset: s; }
+    .w-step { border-radius: 24px; padding: 26px 24px; background: var(--c); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-step b { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #fff; font: 600 20px var(--display); color: var(--ink); }
+    .w-step h3 { font: 600 23px/1.15 var(--display); letter-spacing: -.02em; color: var(--ink); margin-top: 16px; }
+    .w-step p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
+
+    /* what you can do */
+    .w-can { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; list-style: none; padding: 0; }
+    .w-can li { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); font: 600 19px/1.25 var(--display); letter-spacing: -.015em; color: var(--ink); transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease); }
+    .w-can li small { display: block; margin-top: 6px; font: 400 14.5px/1.45 var(--sans); color: var(--ink-soft); letter-spacing: 0; }
+    .w-can li:hover { transform: translateY(-3px) rotate(-.6deg); background: color-mix(in srgb, var(--c) 40%, #fff); border-color: var(--c); }
+
+    /* yours */
+    .w-yours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .w-yours div { border-radius: 24px; padding: 28px 24px; background: var(--card); border: 1px solid var(--line); }
+    .w-yours b { display: block; font: 600 clamp(30px, 3.4vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-yours span { display: block; font-size: 15.5px; color: var(--ink-soft); margin-top: 10px; line-height: 1.45; }
+
+    /* questions */
+    .w-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .w-faq div { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); }
+    .w-faq h3 { font: 600 18px/1.25 var(--display); letter-spacing: -.012em; color: var(--ink); }
+    .w-faq p { font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 8px; }
+    .w-faq a, .w-end .alt { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* the end */
+    .w-end { text-align: center; padding: 100px 0 40px; }
+    .w-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 18px 34px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .3s var(--ease), background .3s var(--ease); }
+    .w-cta:hover { transform: translateY(-2px); background: #000; }
+    .w-end .alt { display: block; margin-top: 18px; font-size: 15px; }
+
+    .w-in { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .w-in.seen { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .w-in { opacity: 1; transform: none; transition: none; } .w-lane.gc .w-bar i { animation: none; } }
+    @media (max-width: 820px) {
+      .w-race, .w-net, .w-steps, .w-can, .w-yours, .w-faq { grid-template-columns: 1fr; }
+      .w-hero { padding: 130px 0 50px; } .w-sec { padding: 70px 0; } .w { padding: 0 16px; }
+    }
+
+    /* mission: fears you flip into answers, and the levels that led here */
+    .w-big { font: 600 clamp(26px, 3.4vw, 40px)/1.15 var(--display); letter-spacing: -.025em; color: var(--ink); margin-top: 22px; }
+    .w-big em { font-style: normal; color: var(--olive); }
+    .w-fears { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .w-fear { perspective: 900px; height: 230px; border: 0; padding: 0; background: none; cursor: pointer; font: inherit; text-align: left; }
+    .w-fear > span { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.34,1.3,.5,1); }
+    .w-fear.flipped > span { transform: rotateY(180deg); }
+    .w-fear em { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border-radius: 22px; font-style: normal; backface-visibility: hidden; }
+    .w-fear em:first-child { background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .w-fear em + em { transform: rotateY(180deg); background: color-mix(in srgb, var(--c) 34%, #fff); }
+    .w-fear b { font: 600 20px/1.2 var(--display); letter-spacing: -.015em; color: var(--ink); }
+    .w-fear small { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-fear em + em b { font-size: 18px; }
+    .w-fear em + em small { color: var(--olive-deep); }
+    .w-fear:hover > span { transform: rotateY(12deg); }
+    .w-fear.flipped:hover > span { transform: rotateY(180deg); }
+    .w-levels { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 40px; }
+    .w-level { border-radius: 20px; padding: 20px 18px; background: var(--card); border: 1px solid var(--line); transition: transform .35s var(--ease); }
+    .w-level:hover { transform: translateY(-4px); }
+    .w-level small { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-level h3 { font: 600 18px/1.2 var(--display); letter-spacing: -.012em; color: var(--ink); margin-top: 8px; }
+    .w-level p { font-size: 14px; line-height: 1.45; color: var(--ink-soft); margin-top: 6px; }
+    .w-level.done { opacity: .72; }
+    .w-level.done h3 { text-decoration: line-through; text-decoration-color: var(--clay); text-decoration-thickness: 2px; }
+    .w-level.win { background: color-mix(in srgb, var(--olive) 22%, #fff); border-color: color-mix(in srgb, var(--olive) 45%, transparent); opacity: 1; }
+    .w-level.win small { color: var(--olive-deep); }
+    .w-walls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .w-walls div { border-radius: 18px; padding: 18px; background: color-mix(in srgb, var(--clay) 18%, #fff); }
+    .w-walls h4 { font: 600 17px var(--display); color: var(--ink); }
+    .w-walls p { font-size: 14.5px; color: var(--ink-soft); margin-top: 4px; }
+    .w-lead { font-weight: 600; color: var(--ink-soft); margin-top: 36px; }
+    @media (max-width: 960px) { .w-fears { grid-template-columns: 1fr 1fr; } .w-levels { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .w-fears, .w-levels, .w-walls { grid-template-columns: 1fr; } .w-fear { height: 190px; } }
   </style>
 </head>
 <body>
@@ -413,104 +551,58 @@
   </div>
 </header>
 
-<!-- ============ MISSION ============ -->
-<section class="phero">
-  <div class="wide">
-    <span class="eyebrow rv">Our mission</span>
-    <h1 class="rv">Intelligence with <span class="em">no limits.</span></h1>
-    <p class="lede rv">AI is a tool that makes you more. It helps you learn faster, build more and think bigger. It&rsquo;s not here to replace you or take your job. And nobody should be able to meter it or watch you use it.</p>
-    <p class="creed-hero rv">AI should <span class="em">amplify</span> you. Not replace you.</p>
+<main id="why">
+<section class="w-hero">
+  <div class="w">
+    <span class="w-eyebrow">Our mission</span>
+    <h1>Intelligence with<br><em>no limits.</em></h1>
+    <p>AI should amplify you. Not replace you.</p>
   </div>
 </section>
 
-<!-- ============ WHAT IT IS ============ -->
-<section class="whatis">
-  <div class="wide">
-    <span class="eyebrow rv">What GreenCube is</span>
-    <p class="big rv">An AI that lives on your own PC.</p>
-    <div class="steps">
-      <div class="step rv">
-        <h3>What it is</h3>
-        <p>An app you install on your PC, the same way you install a game.</p>
-      </div>
-      <div class="step rv">
-        <h3>How it works</h3>
-        <p>Your PC does the thinking. So nothing is metered, and nothing has to travel to a company&rsquo;s servers.</p>
-      </div>
-      <div class="step rv">
-        <h3>Why it matters</h3>
-        <p>No limits, it works offline, and nobody can watch what you do with it.</p>
-      </div>
-    </div>
+<section class="w-sec" id="believe">
+  <div class="w">
+    <span class="w-eyebrow">What we believe</span>
+    <h2 class="w-h2">AI is a tool <em>that makes you more.</em></h2>
+    <p class="w-big">It helps you learn faster, build more and think bigger. It&rsquo;s not here to take your job. <em>And nobody should be able to meter it or watch you use it.</em></p>
   </div>
 </section>
 
-<!-- ============ WHO WE BUILD FOR ============ -->
-<section class="who">
-  <div class="wide">
-    <span class="eyebrow rv">Who we build for</span>
-    <h2 class="rv">Anyone who wants to do more.</h2>
-    <p class="rv">Students, gamers, builders. People who hit &ldquo;you&rsquo;ve reached your limit&rdquo; at the worst moment. People who can&rsquo;t pay &euro;20 every month. People who just want a tool that works, and stays theirs.</p>
-    <p class="creed rv">A tool should work for you. Not count you, and not watch you.</p>
+<section class="w-sec w-center" id="worries">
+  <div class="w">
+    <span class="w-eyebrow">Flip them</span>
+    <h2 class="w-h2">The worries. <em>And the answers.</em></h2>
+    <p class="w-sub">Tap a card.</p>
+    <div class="w-fears"><button type="button" class="w-fear" style="--c:var(--olive)"><span><em><small>The worry</small><b>&ldquo;AI will replace me.&rdquo;</b></em><em><small>With GreenCube</small><b>It amplifies you. You do the thinking; it makes you faster.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--sun)"><span><em><small>The worry</small><b>&ldquo;I&rsquo;ll hit a limit when I need it most.&rdquo;</b></em><em><small>With GreenCube</small><b>No limits. No credits. No &ldquo;come back in 5 hours&rdquo;.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--sky)"><span><em><small>The worry</small><b>&ldquo;Someone&rsquo;s reading what I type.&rdquo;</b></em><em><small>With GreenCube</small><b>It runs on your PC. Nobody sees your chats.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--clay)"><span><em><small>The worry</small><b>&ldquo;It costs &euro;20 every month.&rdquo;</b></em><em><small>With GreenCube</small><b>&euro;9.99 once. Then it&rsquo;s yours.</b></em></span></button></div>
   </div>
 </section>
 
-<!-- ============ ORIGIN STORY ============ -->
-<section class="origin">
-  <div class="wide">
-    <span class="eyebrow rv">Origin story</span>
-    <h2 class="rv">GreenCube started because the tools kept failing the person using them.</h2>
-    <p class="sub rv">Hector started building things young. Every one of them failed. Every one of them taught him something.</p>
-
-    <div class="track">
-      <div class="leg rv" style="--marker: #FAE289">
-        <h3>A clothing brand</h3>
-        <p>The first real one. Made it, launched it, watched it go nowhere.</p>
-      </div>
-      <div class="leg rv" style="--marker: #8EABE1">
-        <h3>Dropshipping</h3>
-        <p>Learned what really sells, mostly by picking things that did not.</p>
-      </div>
-      <div class="leg rv" style="--marker: #FA9F75">
-        <h3>Reselling</h3>
-        <p>Busy for months. Profitable for none of them.</p>
-      </div>
-      <div class="leg rv" style="--marker: #8EA674">
-        <h3>A run of SaaS ideas</h3>
-        <p>Built, tested, shelved. Each one closer to a real problem.</p>
-      </div>
-    </div>
-
-    <div class="walls">
-      <p class="lead rv">He used AI in every one of them. Every time, he hit the same three walls.</p>
-      <div class="wall-row">
-        <div class="wall rv">
-          <h4>Usage limits</h4>
-          <p>Cut off in the middle of the work.</p>
-        </div>
-        <div class="wall rv">
-          <h4>Server downtime</h4>
-          <p>Their computer breaks, and your day stops with it.</p>
-        </div>
-        <div class="wall rv">
-          <h4>Your data at risk</h4>
-          <p>Every idea typed into a box that a company keeps.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="closing-line rv">Every one of them failed. Every one of them hit the same wall. So at <span class="hl">fifteen</span>, he started building GreenCube.</p>
+<section class="w-sec" id="who">
+  <div class="w">
+    <span class="w-eyebrow">Who we build for</span>
+    <h2 class="w-h2">Anyone who wants <em>to do more.</em></h2>
+    <p class="w-big" style="font-size:clamp(19px,1.9vw,24px);font-weight:500;color:var(--ink-soft)">Students, gamers, builders. People who hit &ldquo;you&rsquo;ve reached your limit&rdquo; at the worst moment. People who can&rsquo;t pay &euro;20 every month. People who just want a tool that works, and stays theirs.</p>
   </div>
 </section>
 
-<!-- ============ CLOSE ============ -->
-<section class="turn">
-  <div class="inner">
-    <div class="kicker-line rv">No limits. No meter. <span class="em">Yours.</span></div>
-    <a href="/buy" class="cta rv">Get GreenCube for &euro;9.99 <span aria-hidden="true">&rarr;</span></a>
-    <span class="cta-sub rv">One payment. No subscription. Works offline after one sign-in.</span>
+<section class="w-sec" id="started">
+  <div class="w">
+    <span class="w-eyebrow">How it started</span>
+    <h2 class="w-h2">Every level <em>hit the same wall.</em></h2>
+    <div class="w-levels"><div class="w-level done"><small>Level 1</small><h3>A clothing brand</h3><p>Made it, launched it, watched it go nowhere.</p></div><div class="w-level done"><small>Level 2</small><h3>Dropshipping</h3><p>Learned what sells, mostly by picking what didn&rsquo;t.</p></div><div class="w-level done"><small>Level 3</small><h3>Reselling</h3><p>Busy for months. Profitable for none.</p></div><div class="w-level done"><small>Level 4</small><h3>SaaS ideas</h3><p>Built, tested, shelved. Each one closer.</p></div><div class="w-level win"><small>Level 5</small><h3>GreenCube</h3><p>Started at fifteen. Still going.</p></div></div>
+    <p class="w-lead">In every one, I used AI. In every one, I hit the same three walls:</p>
+    <div class="w-walls"><div><h4>Usage limits</h4><p>Cut off in the middle of the work.</p></div><div><h4>Server downtime</h4><p>Their computer breaks, your day stops.</p></div><div><h4>Your ideas, on their servers</h4><p>Every idea typed into a box a company keeps.</p></div></div>
   </div>
 </section>
+
+<section class="w-end">
+  <div class="w">
+    <h2 class="w-h2">No limits. No meter. <em>Yours.</em></h2>
+    <a href="/buy" class="w-cta">Get GreenCube, €9.99 <span aria-hidden="true">&rarr;</span></a>
+    <a href="/how-it-works" class="alt">Why GreenCube</a>
+  </div>
+</section>
+</main>
 
 <div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
   <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
@@ -735,6 +827,14 @@
           '; path=/; max-age=31536000; samesite=lax';
       });
     });
+  })();
+</script>
+<script>
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = !reduce && 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .15 }) : null;
+    document.querySelectorAll('#why .w-sec .w > *, #why .w-end .w > *').forEach((el) => { if (io) { el.classList.add('w-in'); io.observe(el); } });
+    document.querySelectorAll('.w-fear').forEach((b) => b.addEventListener('click', () => b.classList.toggle('flipped')));
   })();
 </script>
 </body>
