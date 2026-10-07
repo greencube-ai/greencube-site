@@ -521,6 +521,27 @@
     .w-lead { font-weight: 600; color: var(--ink-soft); margin-top: 36px; }
     @media (max-width: 960px) { .w-fears { grid-template-columns: 1fr 1fr; } .w-levels { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .w-fears, .w-levels, .w-walls { grid-template-columns: 1fr; } .w-fear { height: 190px; } }
+
+    /* mission, serious version: plain rows, a clean timeline, the brand colours */
+    .w-rows { list-style: none; padding: 0; margin: 36px 0 0; border-top: 1px solid var(--line); }
+    .w-rows li { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px 40px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .w-rows h3 { font: 600 clamp(21px, 2.2vw, 28px)/1.15 var(--display); letter-spacing: -.02em; color: var(--ink); }
+    .w-rows p { font-size: 17px; line-height: 1.55; color: var(--ink-soft); }
+    .w-line { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+    .w-line::before { content: ''; position: absolute; left: 8px; right: 8px; top: 7px; height: 2px; background: var(--line); }
+    .w-line li { position: relative; padding: 30px 16px 0 0; }
+    .w-line li::before { content: ''; position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--paper, #F5F1E8); border: 2px solid var(--ink-mute); }
+    .w-line li.now::before { background: var(--olive); border-color: var(--olive-deep); }
+    .w-line h3 { font: 600 18px/1.2 var(--display); letter-spacing: -.012em; color: var(--ink); }
+    .w-line p { font-size: 14.5px; line-height: 1.45; color: var(--ink-soft); margin-top: 6px; }
+    .w-line li.now h3 { color: var(--olive-deep); }
+    #colours .sw-row { margin-top: 14px; }
+    #colours .pal-label { margin-top: 30px; }
+    @media (max-width: 820px) {
+      .w-rows li { grid-template-columns: 1fr; }
+      .w-line { grid-template-columns: 1fr; } .w-line::before { left: 7px; right: auto; top: 8px; bottom: 8px; width: 2px; height: auto; }
+      .w-line li { padding: 0 0 22px 32px; }
+    }
   </style>
 </head>
 <body>
@@ -559,12 +580,11 @@
   </div>
 </section>
 
-<section class="w-sec w-center" id="worries">
+<section class="w-sec" id="stand">
   <div class="w">
-    <span class="w-eyebrow">Dales la vuelta</span>
-    <h2 class="w-h2">Las dudas. <em>Y las respuestas.</em></h2>
-    <p class="w-sub">Toca una tarjeta.</p>
-    <div class="w-fears"><button type="button" class="w-fear" style="--c:var(--olive)"><span><em><small>La duda</small><b>&laquo;La IA me va a sustituir.&raquo;</b></em><em><small>Con GreenCube</small><b>Te potencia. Tú piensas; ella te hace más rápido.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--sun)"><span><em><small>La duda</small><b>&laquo;Me quedaré sin mensajes justo cuando más lo necesite.&raquo;</b></em><em><small>Con GreenCube</small><b>Sin límites. Sin créditos. Sin &laquo;vuelve dentro de 5 horas&raquo;.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--sky)"><span><em><small>La duda</small><b>&laquo;Alguien está leyendo lo que escribo.&raquo;</b></em><em><small>Con GreenCube</small><b>Funciona en tu PC. Nadie ve tus chats.</b></em></span></button><button type="button" class="w-fear" style="--c:var(--clay)"><span><em><small>La duda</small><b>&laquo;Cuesta 20&nbsp;&euro; cada mes.&raquo;</b></em><em><small>Con GreenCube</small><b>9,99&nbsp;&euro; una vez. Y es tuya.</b></em></span></button></div>
+    <span class="w-eyebrow">Lo que defendemos</span>
+    <h2 class="w-h2">Cuatro cosas <em>que no vamos a cambiar.</em></h2>
+    <ul class="w-rows"><li><h3>Potenciar, no sustituir.</h3><p>La IA debería hacerte más rápido y mejor en lo que haces. Tú mandas.</p></li><li><h3>Sin contador.</h3><p>Sin límites, sin créditos, sin &laquo;vuelve dentro de 5 horas&raquo;. Úsala todo lo que quieras.</p></li><li><h3>Sin vigilancia.</h3><p>Funciona en tu PC. Nadie lee tus chats ni vende lo que haces.</p></li><li><h3>Un precio justo.</h3><p>9,99&nbsp;&euro; una vez, todo incluido. Y es tuya.</p></li></ul>
   </div>
 </section>
 
@@ -579,10 +599,56 @@
 <section class="w-sec" id="started">
   <div class="w">
     <span class="w-eyebrow">Cómo empezó</span>
-    <h2 class="w-h2">Cada nivel <em>chocó con el mismo muro.</em></h2>
-    <div class="w-levels"><div class="w-level done"><small>Nivel 1</small><h3>Una marca de ropa</h3><p>La hice, la lancé y vi cómo no iba a ninguna parte.</p></div><div class="w-level done"><small>Nivel 2</small><h3>Dropshipping</h3><p>Aprendí lo que se vende, sobre todo eligiendo lo que no.</p></div><div class="w-level done"><small>Nivel 3</small><h3>Reventa</h3><p>Meses ocupado. Ninguno rentable.</p></div><div class="w-level done"><small>Nivel 4</small><h3>Ideas de SaaS</h3><p>Construidas, probadas, aparcadas. Cada una más cerca.</p></div><div class="w-level win"><small>Nivel 5</small><h3>GreenCube</h3><p>Empezada a los quince. Y sigue.</p></div></div>
+    <h2 class="w-h2">Cada idea <em>chocó con el mismo muro.</em></h2>
+    <ol class="w-line"><li><h3>Una marca de ropa</h3><p>La hice, la lancé y vi cómo no iba a ninguna parte.</p></li><li><h3>Dropshipping</h3><p>Aprendí lo que se vende, sobre todo eligiendo lo que no.</p></li><li><h3>Reventa</h3><p>Meses ocupado. Ninguno rentable.</p></li><li><h3>Ideas de SaaS</h3><p>Construidas, probadas, aparcadas. Cada una más cerca.</p></li><li class="now"><h3>GreenCube</h3><p>Empezada a los quince. Y sigue.</p></li></ol>
     <p class="w-lead">En todas usé IA. En todas me choqué con los mismos tres muros:</p>
     <div class="w-walls"><div><h4>Límites de uso</h4><p>Te cortan a mitad del trabajo.</p></div><div><h4>Servidores caídos</h4><p>Su ordenador falla y tu día se para.</p></div><div><h4>Tus ideas, en sus servidores</h4><p>Cada idea escrita en una caja que guarda una empresa.</p></div></div>
+  </div>
+</section>
+
+<section class="w-sec" id="colours">
+  <div class="w">
+    <span class="w-eyebrow">Nuestros colores</span>
+    <h2 class="w-h2">Los colores <em>con los que construimos.</em></h2>
+    <p class="w-sub">Tres que usamos en todo. Tres que sacamos cuando algo tiene que cobrar vida. Toca cualquiera para copiarlo.</p>
+    <h3 class="pal-label">Primarios</h3>
+    <div class="sw-row">
+      <button class="sw" style="--c:#F5F1E8; --fg:#1F2418" data-hex="F5F1E8" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="F5F1E8">F5F1E8</span><span class="sw-name">Soft Linen</span></span>
+      </button>
+      <button class="sw" style="--c:#8EA674; --fg:#1F2418" data-hex="8EA674" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="8EA674">8EA674</span><span class="sw-name">Sage Green</span></span>
+      </button>
+      <button class="sw" style="--c:#333333; --fg:#F5F1E8" data-hex="333333" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="333333">333333</span><span class="sw-name">Graphite</span></span>
+      </button>
+    </div>
+
+    <h3 class="pal-label">Secundarios</h3>
+    <div class="sw-row">
+      <button class="sw" style="--c:#FAE289; --fg:#1F2418" data-hex="FAE289" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="FAE289">FAE289</span><span class="sw-name">Jasmine</span></span>
+      </button>
+      <button class="sw" style="--c:#8EABE1; --fg:#1F2418" data-hex="8EABE1" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="8EABE1">8EABE1</span><span class="sw-name">Wisteria Blue</span></span>
+      </button>
+      <button class="sw" style="--c:#FA9F75; --fg:#1F2418" data-hex="FA9F75" type="button">
+        <span class="sw-fill"></span>
+        <span class="sw-copied">Copiado</span>
+        <span class="sw-meta"><span class="sw-hex" data-final="FA9F75">FA9F75</span><span class="sw-name">Tangerine Dream</span></span>
+      </button>
+    </div>
+  
   </div>
 </section>
 
@@ -825,7 +891,6 @@
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const io = !reduce && 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .15 }) : null;
     document.querySelectorAll('#why .w-sec .w > *, #why .w-end .w > *').forEach((el) => { if (io) { el.classList.add('w-in'); io.observe(el); } });
-    document.querySelectorAll('.w-fear').forEach((b) => b.addEventListener('click', () => b.classList.toggle('flipped')));
   })();
 </script>
 </body>
