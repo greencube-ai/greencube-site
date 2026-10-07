@@ -210,7 +210,7 @@
     note.hidden = state.vram !== -1;
 
     // light up the matching tier card just below
-    document.querySelectorAll('.tier-card').forEach((c) => {
+    document.querySelectorAll('.tier-card, .flat-tier').forEach((c) => {
       const h = c.querySelector('h3');
       c.classList.toggle('yours', !!h && h.textContent.trim() === t.name);
     });
@@ -225,7 +225,7 @@
     state.ram = null; state.card = null; state.vram = 0; state.guessed = false;
     input.value = ''; shown = []; paint();
     game.classList.remove('lit');
-    document.querySelectorAll('.tier-card.yours').forEach((c) => c.classList.remove('yours'));
+    document.querySelectorAll('.tier-card.yours, .flat-tier.yours').forEach((c) => c.classList.remove('yours'));
     game.style.setProperty('--mk', '#8EA674');
     show('ram');
   });
