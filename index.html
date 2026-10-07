@@ -911,6 +911,94 @@
     .hero .lede .why { display: block; margin-top: 6px; font-size: .8em; font-weight: 500; color: var(--ink-soft); letter-spacing: -.01em; }
     @media (max-width: 760px) { .tl { white-space: normal; } }
 
+    /* ============== the two-question check, inside "See what can run on your machine" ==============
+       Same check as /what-you-get (shared /tier-quiz.js). Big on purpose: it was
+       easy to scroll past as a link. The answer lights up the matching tier card. */
+    #game {
+      --mk: #8EA674; --graphite: #333333; --card: #FDFBF5; --on-color: #1F2418;
+      position: relative; margin: 34px auto 0; max-width: 880px; min-height: 380px;
+      display: grid; align-content: center; justify-items: center; text-align: center;
+      padding: 46px 24px 50px; border-radius: 28px; overflow: hidden;
+      background: #FFFDF6; border: 1px solid rgba(110, 128, 74, .18);
+    }
+    #game .glow {
+      position: absolute; left: 50%; top: 50%; width: 760px; height: 760px;
+      transform: translate(-50%, -50%); pointer-events: none; border-radius: 50%;
+      background: radial-gradient(circle, var(--mk) 0%, transparent 62%);
+      opacity: .16; transition: opacity .9s var(--ease-out), background .9s var(--ease-out);
+    }
+    #game.lit .glow { opacity: .36; }
+    #game .step { display: none; position: relative; z-index: 2; width: 100%; }
+    #game .step.on { display: block; animation: quiz-rise .55s var(--ease-out) both; }
+    @keyframes quiz-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    #game .kicker { display: block; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--moss); }
+    #game h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 42px); line-height: 1.05; letter-spacing: -.035em; color: var(--graphite); max-width: 18ch; margin: 14px auto 0; }
+    #game .tiny { font-size: 13.5px; color: var(--ink-mute); margin-top: 18px; }
+    #game .picks { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    #game .opt {
+      padding: 15px 26px; border-radius: 999px; border: 1px solid var(--line);
+      background: var(--card); cursor: pointer; font-size: 16px; font-weight: 600; color: var(--graphite);
+      transition: border-color .25s var(--ease-out), background .25s var(--ease-out), color .25s var(--ease-out), transform .25s var(--ease-out);
+    }
+    #game .opt:hover { transform: translateY(-3px); border-color: var(--mk); background: var(--mk); color: var(--on-color); }
+    #game .opt:focus-visible { outline: 2px solid var(--graphite); outline-offset: 3px; }
+    #game .opt.quiet { font-weight: 500; font-size: 15px; padding: 12px 20px; color: var(--ink-soft); }
+    #game .pips { display: flex; gap: 7px; justify-content: center; margin-top: 30px; }
+    #game .pip { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+    #game .pip.now { background: var(--graphite); }
+    #game .back, #game .again { display: block; margin: 16px auto 0; background: none; border: 0; font-size: 14px; color: var(--ink-mute); cursor: pointer; }
+    #game .back:hover, #game .again:hover { color: var(--ink); text-decoration: underline; }
+    #game .finder { position: relative; max-width: 430px; margin: 26px auto 0; text-align: left; }
+    #game .finder input {
+      width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line);
+      background: var(--card); font-size: 16.5px; color: var(--ink);
+      transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+    #game .finder input::placeholder { color: var(--ink-mute); }
+    #game .finder input:focus { outline: none; border-color: var(--mk); box-shadow: 0 0 0 4px rgba(142, 166, 116, .18); }
+    #game .hits {
+      position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 20;
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      box-shadow: 0 20px 44px -22px rgba(31, 36, 24, .4); max-height: 286px; overflow-y: auto;
+    }
+    #game .hits:empty { display: none; }
+    #game .hit { display: flex; justify-content: space-between; align-items: center; gap: 14px; width: 100%; padding: 13px 18px; background: none; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; text-align: left; }
+    #game .hit:last-child { border-bottom: 0; }
+    #game .hit:hover, #game .hit.cursor { background: rgba(142, 166, 116, .14); }
+    #game .h-n { font-size: 15.5px; font-weight: 600; color: var(--graphite); }
+    #game .h-v { font-size: 13px; color: var(--ink-mute); white-space: nowrap; }
+    #game .miss { padding: 15px 18px; font-size: 14.5px; color: var(--ink-soft); }
+    #game .miss b { display: block; margin-bottom: 10px; font-weight: 600; color: var(--graphite); }
+    #game .sizes { display: flex; gap: 6px; flex-wrap: wrap; }
+    #game .sizes button { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 7px 13px; font-size: 13.5px; font-weight: 600; cursor: pointer; color: var(--graphite); }
+    #game .sizes button:hover { border-color: var(--mk); background: var(--mk); color: var(--on-color); }
+    #game .rev-top { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-mute); }
+    #game .rev-name { font-family: var(--display); font-weight: 600; font-size: clamp(58px, 10vw, 110px); line-height: .92; letter-spacing: -.05em; color: var(--mk); margin-top: 10px; animation: quiz-bloom .7s var(--ease-out) both; }
+    @keyframes quiz-bloom { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+    #game .rev-feels { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 28px); color: var(--graphite); margin-top: 10px; }
+    #game .rev-spec { font-size: 14.5px; color: var(--ink-soft); margin-top: 16px; }
+    #game .rev-spec b { color: var(--graphite); font-weight: 600; }
+    #game .rev-note { font-size: 14px; color: var(--ink-soft); margin: 14px auto 0; max-width: 40ch; padding: 12px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    #game .go {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 26px;
+      background: var(--forest); color: var(--paper); font-size: 16px; font-weight: 600;
+      padding: 15px 30px; border-radius: 999px;
+      box-shadow: 0 2px 4px rgba(26, 26, 26, .16), 0 14px 30px -14px rgba(26, 26, 26, .6);
+      transition: transform .35s var(--ease-out), background .3s var(--ease-out);
+    }
+    #game .go:hover { transform: translateY(-2px); background: #000; }
+
+    #game { max-width: 980px; min-height: 440px; margin: 40px auto 0; padding: 56px 28px 60px;
+      box-shadow: 0 30px 60px -40px rgba(72, 82, 47, .45); }
+    #game h3 { font-size: clamp(30px, 4.4vw, 50px); }
+    #game .opt { padding: 17px 30px; font-size: 17px; }
+    /* the card search drops down past the box, so the box must not clip; the glow is kept inside instead */
+    #game { overflow: visible; }
+    #game .glow { left: 0; top: 0; width: 100%; height: 100%; transform: none; border-radius: 28px;
+      background: radial-gradient(ellipse at 50% 50%, var(--mk) 0%, transparent 70%); }
+    .tier-card.yours { border-color: var(--tint); box-shadow: 0 0 0 3px var(--tint), 0 30px 54px -32px rgba(72, 82, 47, 0.34); transform: translateY(-4px); }
+    @media (max-width: 760px) { #game { padding: 40px 16px 44px; min-height: 0; } }
+
     /* ============== reveal-on-scroll utility ============== */
     .rv {
       opacity: 0;
@@ -1190,9 +1278,9 @@
   <div class="wrap">
     <h1>
       <span class="rv-mask"><span>AI that's <em>yours.</em></span></span>
-      <span class="rv-mask"><span>Not rented.</span></span>
+      <span class="rv-mask"><span>No limits.</span></span>
     </h1>
-    <p class="lede rv"><strong>Unlimited chats, code, images and&nbsp;files.</strong><span class="why">It runs on your own computer, so nothing ever runs&nbsp;out.</span></p>
+    <p class="lede rv"><strong>Unlimited chats, code, images and&nbsp;files.</strong><span class="why">It runs on your own PC, so nothing ever runs&nbsp;out.</span></p>
     <ul class="hero-chips rv">
       <li>Unlimited</li>
       <li>Private</li>
@@ -1240,7 +1328,7 @@
           </svg>
         </div>
         <span class="make-kind">Chats</span>
-        <q>Explain compound interest like I'm twelve. Now quiz me.</q>
+        <q>Quiz me on organic chemistry until I stop getting them wrong.</q>
         <span class="make-out">No limit, no coming back in 5 hours</span>
       </article>
       <article class="make t-wisteria">
@@ -1255,7 +1343,7 @@
           </svg>
         </div>
         <span class="make-kind">Coding sessions</span>
-        <q>Build me a booking app for my barbershop.</q>
+        <q>Make me a Snake game I can play in my browser.</q>
         <span class="make-out">Keep going for hours, nothing runs out</span>
       </article>
       <article class="make t-tangerine">
@@ -1269,7 +1357,7 @@
           </svg>
         </div>
         <span class="make-kind">Image generation</span>
-        <q>A fox reading in a sunlit library, watercolour.</q>
+        <q>A pixel-art logo for my gaming clan.</q>
         <span class="make-out">As many as you want, no daily count</span>
       </article>
       <article class="make t-jasmine">
@@ -1283,7 +1371,7 @@
           </svg>
         </div>
         <span class="make-kind">Attachments</span>
-        <q>Do I get my deposit back if I leave early?</q>
+        <q>Here's my lab report. What would a strict professor mark down?</q>
         <span class="make-out">PDFs, photos, screenshots, as many as you like</span>
       </article>
       <article class="make t-jasmine">
@@ -1297,7 +1385,7 @@
           </svg>
         </div>
         <span class="make-kind">Slide decks</span>
-        <q>Make a ten-slide deck on the French Revolution.</q>
+        <q>Ten slides on the French Revolution for Monday's seminar.</q>
         <span class="make-out">A real PowerPoint file</span>
       </article>
       <article class="make t-sage">
@@ -1311,7 +1399,7 @@
           </svg>
         </div>
         <span class="make-kind">Study</span>
-        <q>Turn chapter four into flashcards and a quiz.</q>
+        <q>Turn this lecture PDF into flashcards and a quiz.</q>
         <span class="make-out">Cards and a quiz, beside the chat</span>
       </article>
       <article class="make t-tangerine">
@@ -1324,7 +1412,7 @@
           </svg>
         </div>
         <span class="make-kind">Web pages</span>
-        <q>Build a landing page for my bakery.</q>
+        <q>A page for my Discord server, with the rules and an invite link.</q>
         <span class="make-out">A page you can open and share</span>
       </article>
       <article class="make t-wisteria">
@@ -1391,7 +1479,52 @@
     <h2 class="caps-head rv">See what can run on your machine.</h2>
     <p class="tiers-sub rv">Two things decide it: how much RAM, and whether you have a graphics card. Same app, same price either way.</p>
 
-    <div class="tier-row">
+    <div id="game" class="rv">
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="step on" id="s-ram">
+        <span class="kicker">Question 1 of 2</span>
+        <h3>How much RAM does it have?</h3>
+        <div class="picks">
+          <button class="opt" type="button" data-ram="8">8 GB</button>
+          <button class="opt" type="button" data-ram="16">16 GB</button>
+          <button class="opt" type="button" data-ram="32">32 GB or more</button>
+          <button class="opt" type="button" data-ram="unsure">No idea</button>
+        </div>
+        <p class="tiny">RAM, not storage. Not the hard drive or SSD space.</p>
+        <div class="pips"><span class="pip now"></span><span class="pip"></span></div>
+      </div>
+
+      <div class="step" id="s-gpu">
+        <span class="kicker">Question 2 of 2</span>
+        <h3>What graphics card or chip?</h3>
+        <div class="finder">
+          <input type="text" id="gpu-in" autocomplete="off" spellcheck="false"
+                 placeholder="Start typing, e.g. 4060, Radeon, Iris"
+                 aria-label="Search for your graphics card or chip" role="combobox" aria-expanded="false" aria-controls="hits" />
+          <div class="hits" id="hits" role="listbox" aria-label="Matching graphics cards and chips"></div>
+        </div>
+        <div class="picks">
+          <button class="opt quiet" type="button" id="gpu-none">I don&rsquo;t have one</button>
+          <button class="opt quiet" type="button" id="gpu-dunno">I don&rsquo;t know</button>
+        </div>
+        <p class="tiny">Most laptops have no separate card, and that is completely fine.</p>
+        <div class="pips"><span class="pip"></span><span class="pip now"></span></div>
+        <button class="back" type="button" id="back-ram">&larr; Back</button>
+      </div>
+
+      <div class="step" id="s-rev">
+        <span class="rev-top">Your PC is a</span>
+        <div class="rev-name" id="r-name">Sprout</div>
+        <p class="rev-feels" id="r-feels"></p>
+        <p class="rev-spec" id="r-spec"></p>
+        <p class="rev-note" id="r-note" hidden></p>
+        <a href="#tier-cards" class="go"><span>See what it can do</span><span aria-hidden="true">&darr;</span></a>
+        <button class="again" type="button" id="again">Start again</button>
+      </div>
+    </div>
+
+    <div class="tier-row" id="tier-cards">
       <article class="tier-card rv" style="--tint:#FAE289">
         <span class="tier-n">Tier one</span>
         <h3>Seed</h3>
@@ -1456,7 +1589,6 @@
     </div>
     <p class="tt-note rv">Word counts are typical: they grow with how much memory your computer has free. Everything else is a starting point, not a lock (images need 12&nbsp;GB RAM). Settings &rarr; What your computer can do switches each one on or off.</p>
 
-    <a href="/what-you-get" class="tiers-cta rv">Find out which one you are<span aria-hidden="true">&rarr;</span></a>
 
     <!-- a note from Hector: the card opens a letter over the page -->
     <div class="note-wrap rv">
@@ -1816,5 +1948,6 @@
     });
   })();
 </script>
+<script src="/tier-quiz.js" defer></script>
 </body>
 </html>
