@@ -428,40 +428,27 @@
     .buy-note .sign { font-weight: 700; color: var(--ink, #1A1A1A); }
     .buy-note .sign small { display: block; font-weight: 500; color: var(--ink-mute, #9A937F); }
 
-    /* ============== the letter: clicking "Get GreenCube" first brings a note from Hector ==============
-       A turtle spins slowly on its shell on a little water while an envelope comes in,
-       opens, and the letter slides out. Then: a quick check, then checkout. */
+    /* ============== the letter: simple and calm ==============
+       A small stamp pops in, the letter settles in like a sheet of paper landing,
+       and the lines fade in one after another. */
     .fit-card { max-height: calc(100vh - 48px); overflow-y: auto; }
-    .lt-scene { position: relative; height: 118px; margin: -6px auto 4px; }
-    .lt-water { position: absolute; left: 50%; bottom: 8px; width: 210px; height: 34px; transform: translateX(-50%); border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 40%, rgba(142,171,225,.55), rgba(142,171,225,.18) 60%, transparent 72%); }
-    .lt-water::before, .lt-water::after { content: ''; position: absolute; inset: 6px 30px; border-radius: 50%; border: 1.5px solid rgba(61,94,147,.28); animation: lt-ripple 3.6s ease-out infinite; }
-    .lt-water::after { animation-delay: 1.8s; }
-    @keyframes lt-ripple { from { transform: scale(.55); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
-    .lt-turtle { position: absolute; left: 50%; bottom: 20px; width: 86px; margin-left: -43px; animation: lt-bob 3.2s ease-in-out infinite; }
-    .lt-turtle > div { animation: lt-spin 9s linear infinite; transform-style: preserve-3d; }
-    .lt-turtle svg { display: block; width: 100%; transform: scaleY(-1); }
-    @keyframes lt-spin { to { transform: rotateY(360deg); } }
-    @keyframes lt-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
-
-    .lt-stage { position: relative; height: 176px; margin: 26px 0 6px; perspective: 700px; }
-    .lt-env { position: absolute; left: 50%; top: 16px; width: 220px; height: 132px; margin-left: -110px; border-radius: 10px;
-      background: #F3E8CC; box-shadow: 0 18px 34px -18px rgba(72,82,47,.55); opacity: 0; transform: translate(150px, 90px) rotate(14deg);
-      transition: transform .9s cubic-bezier(.2,.9,.25,1.1), opacity .5s ease; }
-    .lt-env::after { content: ''; position: absolute; inset: 0; border-radius: 10px; background: linear-gradient(to top right, transparent 49.5%, #E9D9B2 50%) left / 50% 100% no-repeat, linear-gradient(to top left, transparent 49.5%, #E9D9B2 50%) right / 50% 100% no-repeat; z-index: 3; }
-    .lt-flap { position: absolute; left: 0; right: 0; top: 0; height: 74px; z-index: 4; transform-origin: top; transition: transform .55s ease, z-index 0s .28s;
-      background: #E4D2A6; clip-path: polygon(0 0, 100% 0, 50% 100%); }
-    .lt-paper { position: absolute; left: 14px; right: 14px; top: 10px; height: 110px; z-index: 2; border-radius: 6px; background: #FFFDF8; box-shadow: 0 4px 12px -6px rgba(0,0,0,.25);
-      transition: transform .7s cubic-bezier(.2,.9,.25,1); }
-    .lt-paper i { display: block; height: 5px; margin: 14px 16px 0; border-radius: 3px; background: #E6E0D2; }
-    .lt-paper i:first-child { width: 40%; background: #C9D5B3; margin-top: 16px; }
-    .lt-stage.in .lt-env { opacity: 1; transform: none; }
-    .lt-stage.open .lt-flap { transform: rotateX(180deg); z-index: 1; }
-    .lt-stage.out .lt-paper { transform: translateY(-48px); }
-    .lt-stage.read { height: 0; margin: 0; overflow: hidden; transition: height .5s ease .1s; }
-    .lt-letter { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; pointer-events: none; height: 0; overflow: hidden; }
-    .lt-letter.show { opacity: 1; transform: none; pointer-events: auto; height: auto; overflow: visible; }
-    .lt-letter .lt-paper-full { background: #FFFDF8; border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 18px; box-shadow: 0 16px 36px -26px rgba(72,82,47,.5); }
+    .lt-stamp { display: grid; place-items: center; width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 50%;
+      background: #8EA674; color: #FFFDF8; box-shadow: 0 8px 18px -10px rgba(78,95,58,.7); transform: scale(.4); opacity: 0;
+      transition: transform .5s cubic-bezier(.34,1.56,.64,1), opacity .3s ease; }
+    .lt-stamp svg { width: 24px; height: 24px; }
+    .lt-letter.show .lt-stamp { transform: none; opacity: 1; }
+    .lt-paper-full { background: #FFFDF8; border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 18px;
+      box-shadow: 0 6px 14px -12px rgba(31,36,24,.25);
+      transform: translateY(22px) rotate(-1.2deg); opacity: 0; transition: transform .8s cubic-bezier(.2,.9,.25,1) .12s, opacity .5s ease .12s; }
+    .lt-letter.show .lt-paper-full { transform: none; opacity: 1; }
+    .lt-paper-full > * { opacity: 0; transform: translateY(6px); transition: opacity .5s ease, transform .5s ease; }
+    .lt-letter.show .lt-paper-full > * { opacity: 1; transform: none; }
+    .lt-letter.show .lt-paper-full > :nth-child(1) { transition-delay: .45s; }
+    .lt-letter.show .lt-paper-full > :nth-child(2) { transition-delay: .6s; }
+    .lt-letter.show .lt-paper-full > :nth-child(3) { transition-delay: .75s; }
+    .lt-letter.show .lt-paper-full > :nth-child(4) { transition-delay: .9s; }
+    .lt-letter .lt-after { opacity: 0; transition: opacity .5s ease 1.05s; }
+    .lt-letter.show .lt-after { opacity: 1; }
     .lt-letter h2 { font-family: var(--display, 'General Sans', sans-serif); font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
     .lt-letter p { font-size: 15px; line-height: 1.6; color: var(--ink-soft, #545454); margin-top: 10px; }
     .lt-letter .sign { font-weight: 700; color: var(--ink, #1A1A1A); }
@@ -470,7 +457,85 @@
     .lt-next { margin-top: 18px; font-size: 15px; font-weight: 600; color: var(--ink, #1A1A1A); text-align: center; }
     .fit-help { font-size: 14px; line-height: 1.5; color: var(--ink-soft, #545454); margin-top: 14px; }
     .fit-help a { color: var(--ink, #1A1A1A); font-weight: 600; text-decoration: underline; }
-    @media (prefers-reduced-motion: reduce) { .lt-turtle, .lt-turtle > div, .lt-water::before, .lt-water::after { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .lt-stamp, .lt-paper-full, .lt-paper-full > *, .lt-letter .lt-after { transition: none; } }
+    /* ============== footer ============== */
+    footer {
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper, #F5F1E8);
+      border-top: 1px solid var(--line);
+    }
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest, #1A1A1A);
+    }
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss, #7E8A5A); border-radius: 4px;
+    }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft, #FBF8F0);
+      font-size: 14px; font-weight: 500; color: var(--forest, #1A1A1A);
+      transition: border-color .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), transform .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    footer .f-mail:hover { border-color: var(--moss, #7E8A5A); background: #fff; transform: translateY(-1px); }
+    footer .f-mail.copied { border-color: var(--moss, #7E8A5A); background: #fff; }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss, #7E8A5A); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest, #1A1A1A);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
+    footer a { transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
+    footer a:hover { color: var(--forest, #1A1A1A); }
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
+    }
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    }
+    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -702,32 +767,12 @@
     <!-- paso 1: intro + RAM -->
     <!-- step 0: a letter from Hector, before anything else -->
     <div class="fit-step" id="fit-step-letter">
-      <div class="lt-scene" aria-hidden="true"><div class="lt-water"></div><div class="lt-turtle"><div><svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
-    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
-      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
-      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
-        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
-        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
-      </g>
-      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
-      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
-      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
-      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
-      <g stroke="none">
-        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
-        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
-        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
-      </g>
-      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
-    </g>
-  </svg></div></div></div>
-      <div class="lt-stage" id="lt-stage" aria-hidden="true"><div class="lt-env"><div class="lt-flap"></div><div class="lt-paper"><i></i><i></i><i></i><i></i></div></div></div>
       <div class="lt-letter" id="lt-letter">
+        <div class="lt-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></div>
         <div class="lt-paper-full"><h2>Una nota de Hector</h2><p>Hola, soy Hector. Creé GreenCube porque estaba harto de que la IA me dijera que había llegado a mi límite y que tenía que esperar horas para volver a usarla. Podías usar una IA en tu propio ordenador, pero eso significaba elegir un modelo y configurarlo todo tú mismo, y la mayoría de la gente no sabe ni por dónde empezar. Así que hice GreenCube: lo instalas y funciona. Sin límites y sin nada que configurar.</p><p>Cada ordenador es distinto, y no puedo saber cómo funcionará GreenCube en el tuyo. No quiero que nadie se quede con algo que no le funciona. Normalmente las descargas no se reembolsan, pero prefiero que estés contento: si en 14 días no es lo que buscabas, escríbeme, cuéntame qué ha pasado y te devuelvo el dinero íntegro.</p><p class="sign">Hector<small>Fundador y CEO de GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
-        <p class="lt-next">Ahora, una prueba rápida para asegurarnos de que GreenCube va fluida en tu PC.</p>
+        <div class="lt-after"><p class="lt-next">Ahora, una prueba rápida para asegurarnos de que GreenCube va fluida en tu PC.</p>
         <button class="fit-cta" id="lt-go" type="button"><span>Empezar la prueba</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
-        <button class="fit-skip" id="lt-skip" type="button">Saltar e ir al pago →</button>
+        <button class="fit-skip" id="lt-skip" type="button">Saltar e ir al pago →</button></div>
       </div>
     </div>
 
@@ -814,22 +859,15 @@
 
   // ---------- the letter: first thing after "Get GreenCube" ----------
   const stepLetter = document.getElementById('fit-step-letter');
-  const ltStage = document.getElementById('lt-stage');
   const ltLetter = document.getElementById('lt-letter');
-  const ltTimers = [];
   const openLetter = () => {
-    ltTimers.splice(0).forEach(clearTimeout);
-    ltStage.className = 'lt-stage'; ltLetter.classList.remove('show');
     [stepLetter, stepOs, stepIntro, stepResult].concat(typeof stepGpu !== 'undefined' ? [stepGpu] : []).forEach((s) => s.classList.remove('active'));
+    ltLetter.classList.remove('show');
     stepLetter.classList.add('active');
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { ltStage.className = 'lt-stage read'; ltLetter.classList.add('show'); return; }
-    const at = (ms, fn) => ltTimers.push(setTimeout(fn, ms));
-    at(40, () => ltStage.classList.add('in'));
-    at(1000, () => ltStage.classList.add('open'));
-    at(1550, () => ltStage.classList.add('out'));
-    at(2350, () => { ltStage.classList.add('read'); ltLetter.classList.add('show'); });
+    void ltLetter.offsetWidth;
+    setTimeout(() => ltLetter.classList.add('show'), 20);
   };
 
   const showStep = (el) => {
