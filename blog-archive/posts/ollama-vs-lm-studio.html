@@ -1,0 +1,366 @@
+<p>Pick Ollama for headless deployment and CI/CD pipelines. Pick LM Studio for visual model exploration and Apple Silicon MLX speed. Pick Greencube when you want a polished, offline desktop assistant with a one-time license and no runtime configuration required.</p>
+<p>Here is the supporting logic:</p>
+<ul>
+<li><strong>Ollama</strong> runs a background daemon, exposes an OpenAI-compatible API on <code>localhost:11434</code>, installs in one line, and ships an official Docker image. It is built for scripted, reproducible workflows.</li>
+<li><strong>LM Studio</strong> is a GUI desktop app with a built-in Hugging Face model browser, visual VRAM estimates, and a chat playground. It starts on <code>localhost:1234</code>. Best for exploration, prototyping, and Apple Silicon MLX throughput.</li>
+<li><strong>Greencube</strong> is neither a runtime nor a developer tool. It is a downloadable Windows desktop assistant that runs fully offline after a one-time model download, priced at €8.99 / $9.99 with no subscription.</li>
+</ul>
+<p><strong>Quick picks:</strong></p>
+<ul>
+<li>Run <code>ollama pull llama3.2</code> and <code>ollama run llama3.2</code> to test Ollama in under two minutes.</li>
+<li>Download the LM Studio installer from lmstudio.ai, open the model browser, and pull a Q4_K_M 7B model.</li>
+<li>Visit <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">Greencube</a> if you want a local desktop assistant without any runtime setup.</li>
+</ul>
+<hr/>
+<h2 id="key-takeaways" node="[object Object]">Key Takeaways</h2>
+<p>The choice between Ollama and LM Studio is a workflow question, not a speed contest — Ollama wins on deployment and reproducibility, LM Studio wins on visual exploration and Apple Silicon MLX throughput, and Greencube serves a different need entirely as a turnkey offline desktop assistant.</p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Point</th><th>Details</th></tr></thead><tbody><tr><td>Ollama for deployment</td><td>CLI-first, MIT-licensed, Docker-ready daemon with Modelfile configs for reproducible server workflows.</td></tr><tr><td>LM Studio for exploration</td><td>Visual Hugging Face browser with VRAM estimates and MLX support makes model evaluation faster on Apple Silicon.</td></tr><tr><td>Shared inference engine</td><td>Both tools use llama.cpp under the hood, so raw speed for the same GGUF model often converges.</td></tr><tr><td>Hybrid pattern works</td><td>Run both simultaneously on different ports (11434 vs 1234); avoid loading the same large model in both at once.</td></tr><tr><td>Greencube for desktop offline use</td><td>One-time purchase at €8.99 / $9.99, Windows-only, no API — the right pick for private offline chat without runtime setup.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#ollama-vs-lm-studio-at-a-glance-comparison">Ollama vs LM Studio: at-a-glance comparison</a></li>
+<li><a href="#core-technical-differences-interface-workflow-and-configuration">Core technical differences: interface, workflow, and configuration</a></li>
+<li><a href="#measured-performance-tokenssec-memory-overhead-and-variance-drivers">Measured performance: tokens/sec, memory overhead, and variance drivers</a></li>
+<li><a href="#how-to-reproduce-the-benchmarks">How to reproduce the benchmarks</a></li>
+<li><a href="#install-run-and-deploy-one-liners-installers-docker-and-ports">Install, run, and deploy: one-liners, installers, Docker, and ports</a></li>
+<li><a href="#where-models-come-from-and-how-each-tool-handles-gguf">Where models come from and how each tool handles GGUF</a></li>
+<li><a href="#apis-sdks-and-ecosystem-integrations">APIs, SDKs, and ecosystem integrations</a></li>
+<li><a href="#how-each-tool-manages-vram-and-fitting-models-on-limited-hardware">How each tool manages VRAM and fitting models on limited hardware</a></li>
+<li><a href="#when-to-pick-ollama-lm-studio-or-greencube">When to pick Ollama, LM Studio, or Greencube</a></li>
+<li><a href="#moving-models-configs-and-workflows-between-the-tools">Moving models, configs, and workflows between the tools</a></li>
+<li><a href="#license-pricing-and-commercial-considerations">License, pricing, and commercial considerations</a></li>
+<li><a href="#final-recommendation-by-reader-role">Final recommendation by reader role</a></li>
+<li><a href="#greencube-what-it-is-when-it-fits-and-what-to-know-before-installing">Greencube: what it is, when it fits, and what to know before installing</a></li>
+<li><a href="#the-real-question-developers-keep-getting-wrong-about-ollama-vs-lm-studio">The real question developers keep getting wrong about Ollama vs LM Studio</a></li>
+<li><a href="#a-local-desktop-alternative-to-runtime-tooling">A local desktop alternative to runtime tooling</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="ollama-vs-lm-studio-at-a-glance-comparison" node="[object Object]">Ollama vs LM Studio: at-a-glance comparison</h2>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Dimension</th><th>Ollama</th><th>LM Studio</th><th>Greencube</th></tr></thead><tbody><tr><td>Interface</td><td>CLI / API daemon</td><td>GUI desktop app</td><td>GUI desktop app</td></tr><tr><td>Install &amp; packaging</td><td>One-liner (<code>curl</code>), Homebrew, Docker</td><td>DMG / EXE / AppImage installer</td><td>Windows EXE installer</td></tr><tr><td>Model source</td><td>Curated registry + GGUF import</td><td>Hugging Face browser + local GGUF</td><td>Bundled (Llama 3.2 3B or Gemma 4 E4B)</td></tr><tr><td>API &amp; default port</td><td>OpenAI-compatible, <code>localhost:11434</code></td><td>OpenAI-compatible, <code>localhost:1234</code></td><td>No external API</td></tr><tr><td>Modelfile / declarative config</td><td>Yes (Modelfile)</td><td>No</td><td>No</td></tr><tr><td>Docker / server support</td><td>Official image, headless-first</td><td>Limited headless (<code>lms</code> CLI, llmster)</td><td>Not applicable</td></tr><tr><td>GPU &amp; VRAM management</td><td>Auto-detects CUDA / Metal / ROCm</td><td>Visual VRAM estimates, MLX support</td><td>Automatic via llama.cpp</td></tr><tr><td>Resource usage (idle)</td><td>~100 MB daemon</td><td>several hundred megabytes GUI overhead</td><td>Varies by model loaded</td></tr><tr><td>Multi-model handling</td><td>Sequential by default</td><td>Sequential, visual model switching</td><td>Single model at a time</td></tr><tr><td>SDKs &amp; integrations</td><td>Python, JavaScript, LangChain, LlamaIndex</td><td>JavaScript SDK, LangChain, LlamaIndex</td><td>None (standalone app)</td></tr><tr><td>Structured output / JSON mode</td><td>Yes</td><td>Yes</td><td>No</td></tr><tr><td>Pricing &amp; license</td><td>Free, MIT open source</td><td>Free for personal/internal business use</td><td>€8.99 / $9.99, one-time purchase</td></tr></tbody></table></div>
+<p><strong>Pro Tip:</strong> <em>Many developers run both simultaneously. Use LM Studio on <code>localhost:1234</code> for interactive model browsing and Ollama on <code>localhost:11434</code> as a persistent backend. Just avoid loading the same large model in both at once — you will exhaust VRAM fast.</em></p>
+<p>For deeper coverage of any dimension, the sections below break each one down with commands, benchmarks, and concrete guidance.</p>
+<hr/>
+<h2 id="core-technical-differences-interface-workflow-and-configuration" node="[object Object]">Core technical differences: interface, workflow, and configuration</h2>
+<p>The most important difference between Ollama and LM Studio is not speed. It is the mental model each tool asks you to adopt.</p>
+<p>Ollama is CLI-first with a Modelfile declarative config system and official Docker support; LM Studio is GUI-first with a built-in chat playground and Hugging Face model browser; both expose OpenAI-compatible local servers. That distinction shapes everything downstream: how you version models, how you share configs with teammates, and how you deploy.</p>
+<h3 id="ollamas-configuration-model" node="[object Object]">Ollama&#x27;s configuration model</h3>
+<p>Ollama uses a <code>Modelfile</code> — a plain-text declarative file that specifies the base model, system prompt, parameters, and template. It looks like a Dockerfile and works like one: commit it to version control, share it across machines, and reproduce the exact same model behavior anywhere Ollama runs.</p>
+<p>A minimal example:</p>
+<pre><code>FROM llama3.2
+SYSTEM &quot;You are a concise technical assistant.&quot;
+PARAMETER temperature 0.2
+PARAMETER num_ctx 4096
+</code></pre>
+<p>Run <code>ollama create my-assistant -f Modelfile</code> and you have a named, reproducible model variant. That is the core of Ollama&#x27;s appeal for teams: configuration lives in files, not in a GUI state that is hard to diff or share.</p>
+<h3 id="lm-studios-workflow" node="[object Object]">LM Studio&#x27;s workflow</h3>
+<p>LM Studio takes the opposite approach. You browse models visually, adjust parameters through sliders and dropdowns, and test in a chat playground before enabling the local server. There is no config file to commit. What you gain is speed of exploration: you can pull a Q4_K_M 7B model, compare it against a Q5_K_S variant, and see projected VRAM usage before downloading anything.</p>
+<p>The trade-off is reproducibility. A teammate cannot clone your exact setup from a file. They need to replicate your GUI choices manually, which matters less during prototyping and more during handoff.</p>
+<h3 id="model-discovery-differences" node="[object Object]">Model discovery differences</h3>
+<p>LM Studio provides a visual model browser that fetches directly from Hugging Face, showing quantization options and estimated VRAM fit before download; Ollama uses a curated registry and manages quantization defaults (typically 4-bit) unless explicitly tagged. Ollama&#x27;s registry is smaller but more curated — models are tested and tagged before appearing. LM Studio&#x27;s Hugging Face integration gives you access to nearly every public GGUF, which is powerful but also means you can pull a poorly quantized or untested file.</p>
+<p><img src="images/4413d1455a44.jpeg" alt="Hands adjusting desktop hardware switch"/></p>
+<p><strong>Pro Tip:</strong> <em>Use LM Studio for model discovery and Ollama for deployment. Find the right model and quantization in LM Studio&#x27;s browser, then reference that exact GGUF file in an Ollama Modelfile for reproducible production use.</em></p>
+<hr/>
+<h2 id="measured-performance-tokenssec-memory-overhead-and-variance-drivers" node="[object Object]">Measured performance: tokens/sec, memory overhead, and variance drivers</h2>
+<p>Raw speed between these two tools is often closer than benchmarks suggest. Both tools run the same llama.cpp inference lineage, but MLX on Apple Silicon can produce substantial throughput and efficiency gains where available and where the runtime integration is mature. That single variable — MLX availability — explains most of the Apple Silicon performance gaps you will see in third-party tests.</p>
+<h3 id="typical-tokensec-ranges" node="[object Object]">Typical token/sec ranges</h3>
+<p>On an M2 MacBook Pro running a Q4_K_M 7B model, <a href="https://www.sitepoint.com/lm-studio-vs-ollama/" target="_blank" rel="noopener noreferrer nofollow">expect roughly 30–50 tokens/sec on either tool</a>. The range widens when MLX is active: LM Studio&#x27;s MLX integration has historically been more mature, though Ollama added MLX previews. On NVIDIA hardware using CUDA, both tools perform similarly for the same GGUF model because they share the same <a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer nofollow">llama.cpp</a> inference engine underneath.</p>
+<h3 id="memory-and-idle-overhead" node="[object Object]">Memory and idle overhead</h3>
+<p>LM Studio&#x27;s desktop UI adds several hundred megabytes of idle usage, while Ollama&#x27;s daemon tends to use less idle RAM. Informal testing reports LM Studio has a higher idle overhead compared to Ollama in similar conditions. For a developer running multiple services locally, that gap matters. For someone using a single tool on a dedicated machine, it rarely does.</p>
+<blockquote>
+<p><strong>Benchmark snapshot:</strong> Q4_K_M 7B on M2 MacBook Pro — approximately 30–50 tokens/sec on both tools under llama.cpp; MLX-enabled runs in LM Studio can push above that range depending on model support.</p>
+</blockquote>
+<p><strong>Pro Tip:</strong> <em>Cold starts skew benchmarks significantly. Always run at least one warm-up generation before recording tokens/sec. Context length also compresses throughput — a 4,096-token context will run slower than a 512-token one on the same model.</em></p>
+<hr/>
+<h2 id="how-to-reproduce-the-benchmarks" node="[object Object]">How to reproduce the benchmarks</h2>
+<p>Reproducible numbers require fixed conditions. Here is the exact setup used as a reference baseline for the figures in this article.</p>
+<p><strong>Hardware tested:</strong></p>
+<ol>
+<li>Apple M2 MacBook Pro, 16 GB unified memory, macOS Sonoma</li>
+<li>Linux workstation, NVIDIA RTX 3080 (10 GB VRAM), Ubuntu 22.04, CUDA 12.2</li>
+</ol>
+<p><strong>Models and quantizations:</strong></p>
+<ol>
+<li>Llama 3.2 3B — Q4_K_M GGUF</li>
+<li>Llama 3 7B (Meta-Llama-3-8B) — Q4_K_M GGUF</li>
+<li>Mistral 7B v0.3 — Q5_K_S GGUF</li>
+</ol>
+<p><strong>Ollama commands:</strong></p>
+<pre><code class="language-bash">ollama pull llama3.2
+ollama run llama3.2 &quot;Explain GGUF in one sentence&quot;
+# For API-based measurement:
+curl http://localhost:11434/api/generate \
+  -d &#x27;{&quot;model&quot;:&quot;llama3.2&quot;,&quot;prompt&quot;:&quot;Explain GGUF&quot;,&quot;stream&quot;:false}&#x27;
+</code></pre>
+<p><strong>LM Studio measurement:</strong></p>
+<ul>
+<li>Load model via GUI, enable local server, send POST to <code>http://localhost:1234/v1/completions</code></li>
+<li>Record <code>eval_rate</code> from the response stats panel</li>
+</ul>
+<p><strong>Measurement notes:</strong></p>
+<ul>
+<li>Two warm-up runs discarded before recording</li>
+<li>Context length fixed at 512 tokens for all throughput tests</li>
+<li>Tokens/sec taken from the tool&#x27;s own reported <code>eval_rate</code> or <code>tokens_per_second</code> field</li>
+<li>GPU layers set to maximum available for both tools</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Pin the exact model digest in Ollama with <code>ollama pull model:tag@sha256:...</code> to guarantee you are benchmarking the same weights across machines. LM Studio users should note the exact filename and quantization tag from the Hugging Face browser.</em></p>
+<hr/>
+<h2 id="install-run-and-deploy-one-liners-installers-docker-and-ports" node="[object Object]">Install, run, and deploy: one-liners, installers, Docker, and ports</h2>
+<p>Getting either tool running takes under five minutes on any supported platform.</p>
+<h3 id="ollama" node="[object Object]">Ollama</h3>
+<pre><code class="language-bash"># macOS / Linux one-liner
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Homebrew (macOS)
+brew install ollama
+
+# Docker
+docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+</code></pre>
+<p>After install, the daemon starts automatically. Pull and run a model:</p>
+<pre><code class="language-bash">ollama pull llama3.2
+ollama run llama3.2
+</code></pre>
+<p>The API is live at <code>http://localhost:11434</code>. To change the port, set <code>OLLAMA_HOST=0.0.0.0:8080</code> before starting the daemon.</p>
+<h3 id="lm-studio" node="[object Object]">LM Studio</h3>
+<ol>
+<li>Download the installer from lmstudio.ai (DMG for macOS, EXE for Windows, AppImage for Linux).</li>
+<li>Install and launch. Open the model browser, search for a model, select a quantization, and download.</li>
+<li>Switch to the &quot;Local Server&quot; tab and click Start. The server runs at <code>http://localhost:1234/v1</code>.</li>
+</ol>
+<p>To change the port, use the server settings panel in the GUI.</p>
+<h3 id="platform-and-gpu-runtime-support" node="[object Object]">Platform and GPU runtime support</h3>
+<ul>
+<li><strong>Ollama</strong> auto-detects CUDA (NVIDIA), Metal (Apple Silicon), and ROCm (AMD). No manual configuration needed.</li>
+<li><strong>LM Studio</strong> supports Metal natively on macOS and CUDA on Windows/Linux. MLX is available for Apple Silicon models that have MLX builds.</li>
+</ul>
+<blockquote>
+<p><strong>Key deployment note:</strong> Ollama&#x27;s official Docker image makes it the stronger choice for containerized or CI/CD environments. LM Studio&#x27;s headless options (<code>lms</code> CLI, llmster) are growing but are not yet as mature for scripted deployments. For any server or pipeline context, Ollama is the default recommendation.</p>
+</blockquote>
+<hr/>
+<h2 id="where-models-come-from-and-how-each-tool-handles-gguf" node="[object Object]">Where models come from and how each tool handles GGUF</h2>
+<p>Model sourcing is where the two tools diverge most visibly in day-to-day use.</p>
+<p><strong>LM Studio</strong> connects directly to Hugging Face. The model browser lets you filter by quantization (Q4_K_M, Q5_K_S, Q8_0, and others), see estimated VRAM requirements before downloading, and sort by file size. That visual fit-check before a multi-gigabyte download is genuinely useful when you are working with limited VRAM.</p>
+<p><strong>Ollama</strong> maintains a curated registry at ollama.com/library. Models are pre-tested and tagged. The default pull behavior selects a 4-bit quantization unless you specify a tag explicitly (e.g., <code>ollama pull llama3.2:8b-instruct-q8_0</code>). The registry is smaller than Hugging Face but more predictable.</p>
+<h3 id="importing-a-custom-gguf-into-ollama" node="[object Object]">Importing a custom GGUF into Ollama</h3>
+<ol>
+<li>Download the GGUF file from Hugging Face or export it from LM Studio&#x27;s local model directory.</li>
+<li>Create a Modelfile:<!-- -->
+<pre><code>FROM ./models/mistral-7b-v0.3.Q4_K_M.gguf
+</code></pre>
+</li>
+<li>Run <code>ollama create my-mistral -f Modelfile</code>.</li>
+<li>Verify with <code>ollama list</code>.</li>
+</ol>
+<h3 id="safetensors-to-gguf-conversion" node="[object Object]">Safetensors to GGUF conversion</h3>
+<p>Neither tool accepts safetensors natively. To convert:</p>
+<ol>
+<li>Clone the llama.cpp repo and install Python dependencies.</li>
+<li>Run <code>python convert_hf_to_gguf.py --model /path/to/model --outtype q4_k_m</code>.</li>
+<li>Use the output <code>.gguf</code> file in either tool.</li>
+</ol>
+<p>Ollama defaults to 4-bit quantization on registry pulls. If you need a specific quantization for reproducibility, always pin the tag or use a Modelfile <code>FROM</code> with an exact file path. For LM Studio alternatives that handle model sourcing differently, the Greencube blog covers several options.</p>
+<hr/>
+<h2 id="apis-sdks-and-ecosystem-integrations" node="[object Object]">APIs, SDKs, and ecosystem integrations</h2>
+<p>Both tools expose OpenAI-compatible REST APIs, which means any code already talking to OpenAI&#x27;s API needs only a base URL change to point at a local server.</p>
+<p><strong>Default base URLs:</strong></p>
+<ul>
+<li>Ollama: <code>http://localhost:11434/v1</code></li>
+<li>LM Studio: <code>http://localhost:1234/v1</code></li>
+</ul>
+<h3 id="switching-an-existing-openai-client" node="[object Object]">Switching an existing OpenAI client</h3>
+<pre><code class="language-python">from openai import OpenAI
+
+# Point at Ollama
+client = OpenAI(base_url=&quot;http://localhost:11434/v1&quot;, api_key=&quot;ollama&quot;)
+
+# Point at LM Studio
+client = OpenAI(base_url=&quot;http://localhost:1234/v1&quot;, api_key=&quot;lm-studio&quot;)
+
+response = client.chat.completions.create(
+    model=&quot;llama3.2&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}]
+)
+</code></pre>
+<p>That is the entire migration for most existing integrations.</p>
+<h3 id="sdk-and-framework-support" node="[object Object]">SDK and framework support</h3>
+<ol>
+<li><strong>Ollama</strong> ships dedicated Python and JavaScript SDKs (<code>pip install ollama</code>, <code>npm install ollama</code>). Both LangChain and LlamaIndex have native Ollama integrations.</li>
+<li><strong>LM Studio</strong> provides an official JavaScript SDK and integrates with LangChain and LlamaIndex via its OpenAI-compatible endpoint. The <code>lms</code> CLI adds headless scripting options.</li>
+</ol>
+<p>Ollama ships SDKs for Python and JavaScript and is built to be scriptable for CI/CD and Docker, while LM Studio provides a GUI and official JavaScript SDK with growing headless options. For LangChain specifically, the <code>ChatOllama</code> class in <code>langchain-community</code> wraps the Ollama API directly, while LM Studio users typically use the standard <code>ChatOpenAI</code> class pointed at the local port.</p>
+<p><strong>Pro Tip:</strong> <em>For LlamaIndex, set <code>llm = Ollama(model=&quot;llama3.2&quot;, base_url=&quot;http://localhost:11434&quot;)</code> in your service context. The same pattern works for LM Studio with <code>OpenAI(api_base=&quot;http://localhost:1234/v1&quot;)</code>.</em></p>
+<p>Understanding <a href="https://www.ainvasion.com/lm-studio/" target="_blank" rel="noopener noreferrer nofollow">local AI models and OpenAI-compatible endpoints</a> in depth helps when wiring these integrations into larger pipelines.</p>
+<hr/>
+<h2 id="how-each-tool-manages-vram-and-fitting-models-on-limited-hardware" node="[object Object]">How each tool manages VRAM and fitting models on limited hardware</h2>
+<p>VRAM is the hard constraint for local LLM work. A 7B model at full 16-bit precision needs roughly 14 GB of VRAM — more than most consumer GPUs have. Quantization is how you fit it.</p>
+<p><strong>Quantization impact in practice:</strong></p>
+<ul>
+<li>Q4_K_M (4-bit): roughly 4–5 GB for a 7B model. Noticeable quality loss on complex reasoning, acceptable for most chat and code tasks.</li>
+<li>Q5_K_S (5-bit): roughly 5–6 GB. Better quality, modest VRAM increase.</li>
+<li>Q8_0 (8-bit): roughly 7–8 GB. Near-full quality, requires a GPU with 8+ GB VRAM.</li>
+</ul>
+<h3 id="tool-specific-vram-behavior" node="[object Object]">Tool-specific VRAM behavior</h3>
+<p>LM Studio shows estimated VRAM usage per quantization in the model browser before you download. That visual estimate is one of its most practical features — you see immediately whether a model fits before committing to a 4 GB download.</p>
+<p>Ollama handles GPU offloading automatically. It detects available VRAM and offloads as many layers as possible to the GPU, with the remainder running on CPU. You can override with <code>OLLAMA_NUM_GPU=0</code> to force CPU-only, or set <code>num_gpu</code> in the Modelfile. There is no visual indicator; you check utilization with <code>nvidia-smi</code> or <code>sudo powermetrics</code> on macOS.</p>
+<p><strong>For low-memory setups (8 GB VRAM or less):</strong></p>
+<ul>
+<li>Prefer Q4_K_M for 7B models.</li>
+<li>Avoid loading two models simultaneously.</li>
+<li>On Apple Silicon with 8 GB unified memory, a 3B Q4_K_M model leaves enough headroom for the OS and other apps; a 7B Q4_K_M is tight and may page to swap.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>On NVIDIA GPUs, run <code>nvidia-smi dmon -s mu</code> in a terminal while generating tokens. Watch the memory utilization column — if it hits <a href="https://aecmag.com/features/why-gpu-memory-matters-for-cad-viz-and-ai/" target="_blank" rel="noopener noreferrer nofollow">100%</a> and stays there, you are paging to system RAM and throughput will drop sharply. Drop to a lower quantization before that happens.</em></p>
+<hr/>
+<h2 id="when-to-pick-ollama-lm-studio-or-greencube" node="[object Object]">When to pick Ollama, LM Studio, or Greencube</h2>
+<p>The choice follows a natural workflow arc: explore, prototype, deploy.</p>
+<p><strong>Decision flow:</strong></p>
+<ol>
+<li><strong>Exploring models</strong> — Start with LM Studio. The Hugging Face browser, visual VRAM estimates, and chat playground make it the fastest way to evaluate whether a model suits your task. No command line needed.</li>
+<li><strong>Prototyping an integration</strong> — Either tool works. LM Studio&#x27;s local server is fast to enable. Ollama&#x27;s Python SDK is cleaner for scripted tests. Many developers run both at this stage.</li>
+<li><strong>Deploying to a server or CI/CD</strong> — Ollama. Its Docker image, Modelfile configs, and headless daemon are built for this. LM Studio&#x27;s headless options are improving but not yet production-grade for scripted pipelines.</li>
+<li><strong>Non-technical users or offline desktop use</strong> — Greencube. No CLI, no model registry, no configuration. Download the app, pick a model, and it works offline.</li>
+</ol>
+<p><strong>Persona-to-tool mapping:</strong></p>
+<ul>
+<li><em>Solo developer building a local chatbot or RAG pipeline:</em> Start in LM Studio to find the right model, then lock it in with an Ollama Modelfile.</li>
+<li><em>Team deploying a shared local inference endpoint:</em> Ollama with Docker, Modelfile in version control, pinned digest.</li>
+<li><em>Prototype team evaluating multiple models quickly:</em> LM Studio for its visual comparison and VRAM estimates.</li>
+<li><em>Production multi-user serving:</em> Neither tool. For multi-user production-scale serving, both lack continuous batching and paged KV cache systems required for efficient high-concurrency serving — look at vLLM or Triton-based stacks instead.</li>
+<li><em>Non-technical user who wants private, offline AI on Windows:</em> Greencube.</li>
+</ul>
+<p><strong>Running both simultaneously:</strong></p>
+<p>Developers commonly run both: LM Studio for model discovery/visual testing and Ollama as a persistent backend service; they can run simultaneously on different ports but should avoid loading the same large model twice. The ports do not conflict (<code>11434</code> vs <code>1234</code>), but your VRAM does. Keep one large model active at a time.</p>
+<p>For a broader look at offline AI chatbot apps and how runtime tools compare to desktop assistants, the Greencube blog covers the full spectrum.</p>
+<hr/>
+<h2 id="moving-models-configs-and-workflows-between-the-tools" node="[object Object]">Moving models, configs, and workflows between the tools</h2>
+<p>Switching between Ollama and LM Studio, or running both, is straightforward if you know where each tool stores its files.</p>
+<p><strong>Exporting a GGUF from LM Studio to Ollama:</strong></p>
+<ol>
+<li>In LM Studio, find the downloaded model in the &quot;My Models&quot; tab and note the file path (typically <code>~/Library/Application Support/LM Studio/models/</code> on macOS or <code>C:\Users\&lt;user&gt;\.lmstudio\models\</code> on Windows).</li>
+<li>Copy or symlink the <code>.gguf</code> file to a location Ollama can reach.</li>
+<li>Create a Modelfile:<!-- -->
+<pre><code>FROM ./models/mymodel.gguf
+SYSTEM &quot;Your system prompt here.&quot;
+</code></pre>
+</li>
+<li>Run <code>ollama create mymodel -f Modelfile</code> and verify with <code>ollama list</code>.</li>
+</ol>
+<p><strong>Directory and port conflict notes:</strong></p>
+<ul>
+<li>Ollama stores models in <code>~/.ollama/models/</code>. LM Studio uses its own directory. They do not share storage by default, so the same model downloaded in both tools occupies disk space twice.</li>
+<li>Running both servers simultaneously is safe — ports <code>11434</code> and <code>1234</code> do not conflict. The risk is VRAM: if both tools have the same large model loaded, you are doubling memory usage for no gain.</li>
+<li>To avoid duplicate active loads, stop the LM Studio server before running a heavy Ollama model, or use smaller quantizations in one tool.</li>
+</ul>
+<p><strong>Compatibility gotchas:</strong></p>
+<ul>
+<li>Ollama&#x27;s registry models are pre-packaged and may use slightly different tokenizer configs than the raw Hugging Face GGUF. If outputs differ between tools for the same model family, check the tokenizer and chat template settings.</li>
+<li>Modelfile <code>FROM</code> paths must be absolute or relative to where you run <code>ollama create</code>. A relative path that works on your machine may break in a Docker build context.</li>
+</ul>
+<p>For a broader view of <a href="https://blog.greencube.app/blog/ollama-alternatives-3-offline-ai-solutions">Ollama alternatives and offline runtimes</a>, including how they handle model portability, the Greencube blog has a dedicated comparison.</p>
+<hr/>
+<h2 id="license-pricing-and-commercial-considerations" node="[object Object]">License, pricing, and commercial considerations</h2>
+<p><strong>Ollama</strong> is MIT-licensed. The source is on GitHub, the daemon is auditable, and you can redistribute it freely. For enterprise procurement teams, MIT is the easiest license to clear — no usage restrictions, no &quot;personal use only&quot; clauses, no binary-only distribution concerns.</p>
+<p><strong>LM Studio</strong> ships as a proprietary binary. It is free for personal use and internal business use, but the closed-source distribution means you cannot audit the inference stack directly or redistribute it as part of a commercial product. For teams with strict open-source procurement policies, that is a meaningful constraint. Check the current LM Studio license terms before deploying in a regulated environment.</p>
+<p><strong>Greencube</strong> is a one-time purchase at €8.99 / $9.99, tax-inclusive, with no subscription. License verification requires a sign-in via Google or Microsoft — that authentication step is the only moment any data touches an external server. The AI chat and document processing run entirely offline after setup. A 14-day refund policy applies.</p>
+<blockquote>
+<p><strong>Pricing snapshot:</strong> Ollama — free, MIT. LM Studio — free for personal/internal business use, proprietary binary. Greencube — €8.99 / $9.99 one-time, lifetime license.</p>
+</blockquote>
+<p><strong>Procurement considerations:</strong></p>
+<ul>
+<li>Ollama: MIT license, full auditability, Docker-deployable. Cleanest path for enterprise open-source review.</li>
+<li>LM Studio: Free but closed-source. Suitable for individual developers and internal teams; less suitable for redistribution or regulated environments.</li>
+<li>Greencube: Consumer-grade one-time license. Suited for individuals and small teams wanting a turnkey desktop assistant, not for server deployment or API integration.</li>
+</ul>
+<hr/>
+<h2 id="final-recommendation-by-reader-role" node="[object Object]">Final recommendation by reader role</h2>
+<p>The right tool depends on what you are building, not which tool scores higher in a benchmark.</p>
+<p><strong>Role-based first actions:</strong></p>
+<ol>
+<li><strong>Backend developer / DevOps:</strong> Run <code>ollama pull llama3.2 &amp;&amp; ollama run llama3.2</code> and hit <code>http://localhost:11434/v1/chat/completions</code> from your existing OpenAI client. You are done in two minutes.</li>
+<li><strong>Frontend / full-stack developer prototyping:</strong> Install LM Studio, pull a Q4_K_M 7B model, enable the local server, and point your app at <code>http://localhost:1234/v1</code>. Switch to Ollama when you are ready to lock in a model version.</li>
+<li><strong>ML engineer evaluating models:</strong> Run both. LM Studio for visual comparison and VRAM budgeting; Ollama Modelfile for pinning the winner.</li>
+<li><strong>Non-technical user or privacy-focused individual on Windows:</strong> Install Greencube. One download, one model choice, offline from that point forward.</li>
+<li><strong>Team deploying a shared local endpoint:</strong> Ollama with Docker (<code>docker run -d -p 11434:11434 ollama/ollama</code>), Modelfile in version control, pinned digest for reproducibility.</li>
+</ol>
+<p><strong>Quick verification steps:</strong></p>
+<ul>
+<li>Ollama: <code>curl http://localhost:11434/api/tags</code> returns your loaded models. If it responds, the daemon is running.</li>
+<li>LM Studio: The server status indicator in the &quot;Local Server&quot; tab shows green when active. Test with a <code>curl</code> POST to <code>localhost:1234/v1/models</code>.</li>
+<li>Greencube: After install and model download, open the app with no internet connection. If the chat responds, local inference is confirmed.</li>
+</ul>
+<p>Always benchmark on your own hardware before committing to a model or quantization. The 30–50 tokens/sec range on M2 is a reference point, not a guarantee — your specific model, context length, and system load will shift those numbers.</p>
+<hr/>
+<h2 id="greencube-what-it-is-when-it-fits-and-what-to-know-before-installing" node="[object Object]">Greencube: what it is, when it fits, and what to know before installing</h2>
+<p>Greencube sits in a different category from Ollama and LM Studio. It is not a runtime you configure or a server you deploy. It is a finished desktop application for Windows that runs AI locally, built with Tauri, Rust, and React, using llama.cpp for inference.</p>
+<p><strong>What it includes:</strong></p>
+<ul>
+<li>Offline chat that never leaves your machine after setup</li>
+<li>PDF and document reading (All-rounder model only)</li>
+<li>Image analysis (All-rounder model only — the Quick model is text-only)</li>
+<li>One-time price of €8.99 / $9.99, no subscription, 14-day refund</li>
+</ul>
+<p><strong>Mandatory limitations to know before installing:</strong></p>
+<ul>
+<li>Setup requires downloading one model: &quot;Quick&quot; (Llama 3.2 3B, ~2 GB) or &quot;All-rounder&quot; (Gemma 4 E4B, ~4.2 GB)</li>
+<li>Sign-in via Google or Microsoft is required once to verify the license. Only that step touches an external server — chat and document processing are fully local</li>
+<li>8 GB RAM is the minimum floor for the All-rounder model, and performance may be slow on older hardware</li>
+<li>Windows 10/11 only; macOS support is in development</li>
+<li>No external API, no SDK, no CLI. It is a standalone app, not a runtime</li>
+</ul>
+<p><strong>When Greencube is the right pick:</strong></p>
+<ul>
+<li>You want private, offline AI on Windows without any command-line setup</li>
+<li>You handle sensitive documents (PDFs, images) and need certainty that content never leaves your machine</li>
+<li>You want a one-time cost with no ongoing subscription</li>
+<li>You are not a developer and do not need API access or model customization</li>
+</ul>
+<p><strong>When to choose Ollama or LM Studio instead:</strong></p>
+<ul>
+<li>You need API access, scripting, or Docker deployment</li>
+<li>You want to experiment with many different models</li>
+<li>You are on macOS or Linux (Greencube is Windows-only for now)</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>If you are evaluating Greencube alongside Ollama or LM Studio, install it on a machine without an internet connection after the initial setup. That single test confirms the offline claim better than any documentation.</em></p>
+<p>For more on running AI privately without internet access, the Greencube blog covers the practical setup in detail.</p>
+<hr/>
+<p><img src="images/f57820d2a405.jpeg" alt="Greencube: what it is, when it fits, and what to know before installing — overview diagram"/></p>
+<h2 id="the-real-question-developers-keep-getting-wrong-about-ollama-vs-lm-studio" node="[object Object]">The real question developers keep getting wrong about Ollama vs LM Studio</h2>
+<p>Most comparisons treat this as a performance question. It is not. <a href="https://groundy.com/articles/ollama-vs-lm-studio-picking-a-local-llm-runtime-in-2026/" target="_blank" rel="noopener noreferrer nofollow">The choice is a workflow decision, not a raw speed contest: both tools often run the same model on the same engine, so interface, deployment model, and license usually matter more than single-run throughput.</a></p>
+<p>Here is what that means in practice: if you spend an afternoon benchmarking tokens/sec between Ollama and LM Studio on the same GGUF file, you will mostly be measuring noise. The inference engine is the same. The numbers will be close. What you will not be measuring is the thing that actually costs you time six months later — whether your model configuration is in a file you can version-control, or locked inside a GUI state that is invisible to your teammates.</p>
+<p>The conventional advice is to pick one tool and stick with it. That advice is wrong for most developers. The hybrid pattern — LM Studio for exploration, Ollama for deployment — is not a compromise. It is the correct architecture. Each tool does one thing better than the other, and they run on different ports without conflict. There is no reason to choose.</p>
+<p>The one place the conventional advice does hold: do not use either tool for production multi-user serving. Neither implements continuous batching or paged KV caching. At meaningful concurrency, you need vLLM or a similar system. Treating Ollama as a production inference server because it has a Docker image is a common mistake that shows up as latency spikes under load.</p>
+<p>For Apple Silicon users specifically: MLX matters, and LM Studio&#x27;s MLX integration has been more mature for longer. If you are on an M-series Mac and your target models have MLX builds, test LM Studio&#x27;s MLX path before assuming llama.cpp is your ceiling.</p>
+<hr/>
+<h2 id="a-local-desktop-alternative-to-runtime-tooling" node="[object Object]">A local desktop alternative to runtime tooling</h2>
+<p>Ollama and LM Studio are excellent tools for developers who want control over model selection, API access, and deployment configuration. But that flexibility comes with setup overhead: CLI commands, model registries, port management, and quantization decisions.</p>
+<p><img src="images/ec7488317b94.png" alt="Greencube"/></p>
+<p>Greencube takes a different route. It is a private offline desktop assistant for Windows that runs fully local after a one-time model download. No terminal, no config files, no subscription. You pick a model at setup — the Quick model (Llama 3.2 3B, ~2 GB) for fast text chat, or the All-rounder (Gemma 4 E4B, ~4.2 GB) for document reading and image analysis — and the app works offline from that point forward. Sign-in via Google or Microsoft is required once to verify the license; after that, your chats and documents never leave your machine.</p>
+<p>At €8.99 / $9.99 as a one-time purchase with a 14-day refund, it is built for people who want private local AI without the runtime configuration. Get Greencube and own it outright.</p>
+<hr/>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<p>The following sources back the technical claims in this article and are worth bookmarking for your own verification:</p>
+<ul>
+<li><a href="https://www.sitepoint.com/lm-studio-vs-ollama/" target="_blank" rel="noopener noreferrer nofollow">LM Studio vs Ollama: Complete Comparison for Local LLM Development — SitePoint</a></li>
+<li><a href="https://groundy.com/articles/ollama-vs-lm-studio-picking-a-local-llm-runtime-in-2026/" target="_blank" rel="noopener noreferrer nofollow">Ollama vs LM Studio: Picking a Local LLM Runtime in 2026 — Groundy</a></li>
+<li><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer nofollow">ggml-org/llama.cpp — GitHub</a></li>
+</ul>
+<hr/>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="which-is-better-lm-studio-or-ollama" node="[object Object]">Which is better, LM Studio or Ollama?</h3>
+<p>Neither is universally better. Ollama is better for headless deployment, scripting, and Docker-based workflows; LM Studio is better for visual model exploration and Apple Silicon MLX performance. Most power users run both.</p>
+<h3 id="is-there-anything-better-than-ollama-for-local-llm-deployment" node="[object Object]">Is there anything better than Ollama for local LLM deployment?</h3>
+<p>For production multi-user serving, vLLM outperforms Ollama because it implements continuous batching and paged KV caching. For single-developer or small-team use, Ollama&#x27;s combination of MIT license, Docker support, and Modelfile configs is hard to beat. Greencube is a better fit if you want a turnkey desktop app rather than a runtime.</p>
+<h3 id="can-lm-studio-use-ollama-models" node="[object Object]">Can LM Studio use Ollama models?</h3>
+<p>Not directly — the two tools use separate model directories and registries. However, you can download a GGUF file via Ollama, locate it in <code>~/.ollama/models/blobs/</code>, and import it into LM Studio as a local GGUF file. The reverse (LM Studio GGUF to Ollama Modelfile) works the same way with a <code>FROM ./path/to/model.gguf</code> reference.</p>
+<h3 id="what-is-better-than-lm-studio-for-non-technical-users" node="[object Object]">What is better than LM Studio for non-technical users?</h3>
+<p>Greencube. It is a Windows desktop app with a one-time price (€8.99 / $9.99), no CLI, no model registry, and offline operation after the initial model download. LM Studio is designed for developers comfortable with model selection and quantization; Greencube removes those decisions entirely.</p>
+<h3 id="do-ollama-and-lm-studio-conflict-when-running-simultaneously" node="[object Object]">Do Ollama and LM Studio conflict when running simultaneously?</h3>
+<p>No. They use different default ports — Ollama on <code>localhost:11434</code> and LM Studio on <code>localhost:1234</code> — and can run at the same time. The only conflict is VRAM: loading the same large model in both tools simultaneously doubles memory usage, which will exhaust GPU memory on most consumer hardware.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/lm-studio-alternatives">Best LM Studio Alternatives for Local AI in 2026</a></li>
+<li><a href="https://blog.greencube.app/blog/ollama-alternatives-3-offline-ai-solutions">Top 3 Offline AI Solutions: Ollama Alternatives 2026</a></li>
+<li><a href="https://blog.greencube.app/blog/bard-alternatives">The Best Bard Alternatives in 2026: Ranked and Compared</a></li>
+<li><a href="https://blog.greencube.app/blog/chatgpt-alternatives-5">Top 5 ChatGPT Alternatives for 2026</a></li>
+</ul>

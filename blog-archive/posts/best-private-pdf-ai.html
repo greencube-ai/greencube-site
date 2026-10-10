@@ -1,0 +1,127 @@
+<p>The best private PDF AI is a local, offline desktop app that processes your files entirely on your own hardware. For most privacy-first readers, that means an app like Greencube, which handles chat, summarization, and document analysis without ever sending a file to a server. The one real trade-off: setup requires downloading a model file (roughly 2GB to 4.2GB) and enough RAM to run it comfortably.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Local desktop apps like Greencube require downloading a model between 2GB and 4.2GB and need at least 8GB of RAM for optimal performance.</li>
+<li>Cloud-based AI tools process files on servers and are capped by file size and page limits, unlike local apps that rely solely on hardware capacity.</li>
+<li>Browser-local tools offer genuine privacy by running entirely inside the browser without uploading files, but they have limited AI capabilities compared to local models.</li>
+<li>For sensitive tasks such as redaction or handling confidential documents, a local or self-hosted AI model reduces the risk of data exposure significantly.</li>
+<li>Verifying offline operation by disconnecting from Wi-Fi is the best way to confirm if an AI app truly processes files locally.</li>
+</ul>
+</blockquote>
+<hr/>
+<h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-are-the-best-private-pdf-ai-tool-categories">What Are the Best Private PDF AI Tool Categories?</a></li>
+<li><a href="#how-does-each-pdf-ai-job-change-your-privacy-risk">How Does Each PDF AI Job Change Your Privacy Risk?</a></li>
+<li><a href="#what-should-you-check-before-trusting-a-privacy-claim">What Should You Check Before Trusting a Privacy Claim?</a></li>
+<li><a href="#how-does-greencube-handle-private-pdf-ai">How Does Greencube Handle Private PDF AI?</a></li>
+<li><a href="#which-private-pdf-ai-should-you-actually-pick">Which Private PDF AI Should You Actually Pick?</a></li>
+<li><a href="#what-privacy-first-buyers-get-wrong-about-pdf-ai">What Privacy-First Buyers Get Wrong About PDF AI</a></li>
+<li><a href="#get-private-pdf-ai-without-the-subscription">Get Private PDF AI Without the Subscription</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-are-the-best-private-pdf-ai-tool-categories" node="[object Object]">What Are the Best Private PDF AI Tool Categories?</h2>
+<p>Before you pick a specific app, you need to know what category you&#x27;re actually shopping in. &quot;Private PDF AI&quot; gets used loosely, and four very different architectures hide behind that label.</p>
+<p><strong>Private, offline desktop apps</strong> install on your machine and run AI inference locally, usually through a downloaded language model. Nothing leaves your device once the model is running, though most require a one-time sign-in to verify a license. <strong>Browser-local tools</strong> use WebAssembly (WASM) to run PDF processing directly inside your browser tab. Your file technically never uploads to a server, but you&#x27;re limited to whatever a browser sandbox can handle. <strong>Cloud PDF AI</strong> is the default most people already use, from Adobe&#x27;s AI Assistant to various SaaS chat-with-PDF products, and it processes your document on the vendor&#x27;s servers regardless of how &quot;secure&quot; the marketing sounds. <strong>BYOK (bring your own key) or hybrid setups</strong> let you connect your own API key to a self-hosted interface, giving you some control over which cloud model handles your data without locking you into one vendor&#x27;s app.</p>
+<p>Here&#x27;s how they stack up on the things that actually matter for privacy:</p>
+<ul>
+<li><strong>File location during processing:</strong> Desktop apps and browser-local tools keep files on-device; cloud AI and most BYOK setups send file content to a remote server for inference.</li>
+<li><strong>Offline capability:</strong> Desktop apps work with zero internet connection after setup; browser-local tools often work offline after the first page load; cloud AI and BYOK setups require a live connection every time.</li>
+<li><strong>Pricing shape:</strong> Desktop apps tend toward one-time purchases; browser-local tools mix free tiers with small one-time unlocks; cloud AI is almost always subscription-based.</li>
+<li><strong>File size and volume limits:</strong> Cloud tools cap file size and page count by plan; desktop and browser-local tools are usually limited only by your own hardware.</li>
+</ul>
+<p>Adobe&#x27;s own documentation is a good illustration of what &quot;cloud processing&quot; really means in practice. Adobe Acrobat&#x27;s AI Assistant handles files up to <a href="https://community.adobe.com/questions-9/ai-assistant-1301601" target="_blank" rel="noopener noreferrer nofollow">100MB and 600 pages</a>, and while Adobe states it doesn&#x27;t train models on your inputs, the document interaction itself still happens on Adobe&#x27;s servers. That&#x27;s not a criticism of Adobe specifically. It&#x27;s the standard architecture for nearly every cloud PDF AI product, and it&#x27;s worth understanding before you assume &quot;secure&quot; means &quot;private.&quot;</p>
+<blockquote>
+<p><strong>Quick stat:</strong> Most consumer PDF AI tools on the market today are cloud-based by default, meaning your document content is transmitted to a remote server for every single AI operation, even a simple summary.</p>
+</blockquote>
+<p>Browser-local tools solve the upload problem differently. Products like <a href="https://rectopdf.ai/" target="_blank" rel="noopener noreferrer nofollow">RectoPDF</a> run entirely inside the browser using WebAssembly, so files never leave the device, and basic tools continue working offline once the page has loaded once. <a href="https://oxygenpdf.com/" target="_blank" rel="noopener noreferrer nofollow">OxygenPDF</a> takes a similar approach, advertising more than 60 PDF utilities that run on-device with zero uploads and no account requirement. These are genuinely private in the sense that matters (the file bytes stay local), but they trade some heavy-duty AI capability for that speed and simplicity, since a browser sandbox has less horsepower than a dedicated local model running with real system RAM.</p>
+<p>If your job involves anything sensitive, a legal contract, medical records, unpublished research, or financial statements, the category you choose determines your actual risk exposure far more than any privacy policy language does.</p>
+<h2 id="how-does-each-pdf-ai-job-change-your-privacy-risk" node="[object Object]">How Does Each PDF AI Job Change Your Privacy Risk?</h2>
+<p>Not every PDF task carries the same privacy stakes, and the AI architecture behind each job matters differently depending on what you&#x27;re doing.</p>
+<h3 id="1-editing" node="[object Object]">1. Editing</h3>
+<p>Editing a PDF with AI (rewriting a clause, restructuring a section, fixing formatting) can happen entirely on-device with the right local tool, or it can require a round-trip to a server if the app&#x27;s AI features are cloud-dependent even when the base editor is local. Check whether the AI-assisted edit function specifically runs offline. Some apps market themselves as &quot;offline PDF editors&quot; while quietly routing the AI features through an API call.</p>
+<h3 id="2-chat-summarize-and-question-answering" node="[object Object]">2. Chat, Summarize, and Question Answering</h3>
+<p>This is where the local versus remote distinction matters most. When you ask an AI to summarize a 40-page report or answer questions across multiple PDFs, a locally-run model processes that entire request on your machine. A cloud-based assistant sends the extracted text (and often the full document) to a remote server, gets a response, and streams it back. Both approaches can ground answers in your actual document and cite the source page, but only the local approach guarantees the content never left your hard drive. Multi-file chat, where you query across a folder of documents at once, tends to be more common in desktop apps with local models than in lightweight browser tools, simply because it requires holding more context in memory.</p>
+<p><img src="images/bc3c21a5dbc3.jpeg" alt="User manually handling AI model on offline PC"/></p>
+<h3 id="3-conversion-batch-processing-and-ocr" node="[object Object]">3. Conversion, Batch Processing, and OCR</h3>
+<p>Converting PDFs to Word, extracting tables, or running optical character recognition (OCR) on scanned documents is where browser-local WebAssembly tools genuinely shine. <a href="https://pdfsuite.co/" target="_blank" rel="noopener noreferrer nofollow">PDFsuite</a>, for example, runs 28 PDF tools directly in the browser and offers an installable progressive web app for offline batch work, claiming files never reach a server. For high-volume conversion jobs where you&#x27;re processing dozens of files, this architecture avoids both upload time and per-file cloud costs.</p>
+<h3 id="4-redaction-and-compliance" node="[object Object]">4. Redaction and Compliance</h3>
+<p>Redaction is the job with the highest stakes and the least room for error. A naive &quot;find and black out&quot; approach can miss hidden text, metadata, or clipped elements that a document&#x27;s rendering layer conceals from simple text extraction. Enterprise-grade redaction tools like <a href="https://www.pdf-tools.com/docs/smart-redact/" target="_blank" rel="noopener noreferrer nofollow">pdftools&#x27; AI Smart Redact</a> address this by combining deterministic rule matching for structured identifiers (Social Security numbers, account numbers) with named-entity recognition models, then wrapping the whole process in per-file encryption and audit trails. That combination gives you something a basic redaction tool can&#x27;t: a provable record of what was removed and when, which matters enormously if you&#x27;re in a regulated industry facing an audit.</p>
+<p><strong>Numbered checklist for handling large or sensitive files:</strong></p>
+<ol>
+<li>Confirm the tool&#x27;s stated file size and page limits before you start, since cloud tools like Adobe&#x27;s cap out at 100MB and 600 pages.</li>
+<li>Check the model size and RAM requirement if you&#x27;re using a local desktop app. A larger model (4GB+) needs more system memory to run without slowing to a crawl.</li>
+<li>Split extremely large PDFs into smaller sections if your local model struggles with context length.</li>
+<li>For redaction jobs, verify the tool checks the rendering layer, not just extracted text, for hidden content.</li>
+<li>Keep a local backup before any AI-assisted edit or redaction pass, regardless of which tool you use.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>If you&#x27;re unsure whether an app&#x27;s AI features are actually local, disconnect from Wi-Fi and try running a summary or chat query. If it still works, the processing is happening on your device.</em></p>
+<h2 id="what-should-you-check-before-trusting-a-privacy-claim" node="[object Object]">What Should You Check Before Trusting a Privacy Claim?</h2>
+<p>&quot;Private&quot; is one of the most overused words in software marketing, and it rarely means what you&#x27;d assume. Use this checklist before you trust any vendor&#x27;s privacy claim, cloud or local.</p>
+<ul>
+<li><strong>Processing location:</strong> Ask directly where the AI inference happens. Local device, browser sandbox, or remote server.</li>
+<li><strong>Model hosting:</strong> Is the AI model downloaded and run on your machine, or is every query hitting an external API?</li>
+<li><strong>Logging policy:</strong> Does the vendor retain chat history, document content, or usage metadata on their servers?</li>
+<li><strong>BYOK support:</strong> If it&#x27;s a hybrid tool, can you supply your own API key rather than routing through the vendor&#x27;s account?</li>
+<li><strong>Encryption at rest:</strong> Are your local files and any cached data encrypted on disk?</li>
+<li><strong>Offline mode:</strong> Does the core AI functionality work with no internet connection, or does it silently fail without one?</li>
+<li><strong>Auditability:</strong> Can you verify the privacy claim yourself, for example by testing offline as described above, rather than taking marketing copy at face value?</li>
+</ul>
+<p>Ask any vendor these questions directly: Do files ever leave my device during normal use? Is the AI processing local, or does it call a remote API? Is sign-in required only to validate my license, or does it also transmit document data? Is there a written data retention policy, and how long is content kept if any does reach a server?</p>
+<p>Watch for these red flags, each of which should make you walk away: a tool that requires a mandatory server upload for its core AI features but calls itself &quot;private&quot; because the base editor works offline; privacy language that&#x27;s vague about <em>where</em> processing happens (&quot;secure&quot; and &quot;encrypted&quot; are not the same as &quot;local&quot;); and any hidden sharing of extracted text or usage analytics buried in a terms-of-service document nobody reads.</p>
+<p>There&#x27;s a real trade-off buried in all of this. Stronger privacy guarantees generally mean a bigger resource footprint, more disk space for a downloaded model, more RAM to run it, and a slower initial setup. Researchers at institutions like <a href="https://hai.stanford.edu/research" target="_blank" rel="noopener noreferrer nofollow">Stanford HAI</a> have pushed for exactly this kind of verifiable behavior over marketing assurances, and it&#x27;s the right standard to hold every tool to, including ones that call themselves private.</p>
+<h2 id="how-does-greencube-handle-private-pdf-ai" node="[object Object]">How Does Greencube Handle Private PDF AI?</h2>
+<p>Greencube is built around a straightforward premise: your documents and your conversations about them stay on your Windows PC, full stop, aside from the license check at setup. It runs on <a href="https://blog.greencube.app/blog/local-ai-models-explained">llama.cpp</a> for local inference, wrapped in a lightweight Tauri and Rust application with a React interface, and it never routes your chats or PDFs through a remote server.</p>
+<p>Setup requires picking one of two models and downloading it once. The <strong>Quick</strong> model (Llama 3.2 3B) is about 2GB, fast, and handles plain text well, but it can&#x27;t read images embedded in a PDF. The <strong>All-rounder</strong> model (Gemma 4 E4B) is roughly 4.2GB, reads images, and can generate study guides or structured documents from what it reads, but it runs slower and needs at least 8GB of RAM, which is a floor, not a comfort zone; older laptops with exactly 8GB may feel sluggish under real workloads.</p>
+<p>Once a model is downloaded, Greencube handles PDF summarization, multi-document chat, and question answering entirely offline. Sign-in through Google or Microsoft is required, but only to verify your one-time license. It doesn&#x27;t transmit chat content or document data. Checkout runs through Stripe, same as any standard software purchase.</p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Feature</th><th>Quick model</th><th>All-rounder model</th></tr></thead><tbody><tr><td>Download size</td><td>~2GB</td><td>~4.2GB</td></tr><tr><td>Reads images</td><td>No</td><td>Yes</td></tr><tr><td>Minimum RAM</td><td>8GB</td><td>8GB (can be slow at the floor)</td></tr><tr><td>Speed</td><td>Faster</td><td>Slower</td></tr><tr><td>Best for</td><td>Text-only PDFs, quick summaries</td><td>Scanned documents, image-heavy files, study guides</td></tr></tbody></table></div>
+<p>Before installing, confirm the basics:</p>
+<ul>
+<li>Windows 10 or 11 (Mac support is in development, not yet available).</li>
+<li>At least 8GB of RAM, more if you plan to run the All-rounder model alongside other applications.</li>
+<li>Enough free disk space for whichever model you choose, plus normal app overhead.</li>
+<li>A Google or Microsoft account for one-time license verification.</li>
+</ul>
+<p>Pricing is a one-time payment of <strong>€8.99 / $9.99</strong>, with no subscription and a 14-day refund window. There&#x27;s no per-file limit and no monthly cap on usage once it&#x27;s installed. For a deeper look at how local model sizing and hardware requirements work across tools generally, the primer on local AI models covers the mechanics in more detail.</p>
+<h2 id="which-private-pdf-ai-should-you-actually-pick" node="[object Object]">Which Private PDF AI Should You Actually Pick?</h2>
+<p>Students working through long readings or scanned lecture notes get the most out of a local desktop app with an image-capable model, since it handles both text and photographed pages without a subscription eating into a tight budget. Researchers juggling multiple papers at once need strong multi-file chat, which favors a full local model over a lightweight browser tool. Privacy-conscious professionals handling contracts, financial records, or client data should treat cloud AI as a non-starter for anything sensitive and lean on local desktop apps or, for compliance-heavy redaction work, a self-hosted tool built for audit trails.</p>
+<p>Cloud tools still make sense for low-stakes, high-volume public documents where speed and zero setup matter more than privacy. Browser-local tools are the right call for quick, occasional conversions or OCR jobs where you don&#x27;t want to install anything. But when the document is sensitive and the plan is repeated use, a downloaded model and a one-time purchase beat a subscription that keeps sending your files somewhere else. Just remember: any local option, Greencube included, needs that one-time model download and enough RAM to run smoothly.</p>
+<p><img src="images/78e9ec1f249a.jpeg" alt="Which Private PDF AI Should You Actually Pick? — overview diagram"/></p>
+<h2 id="what-privacy-first-buyers-get-wrong-about-pdf-ai" node="[object Object]">What Privacy-First Buyers Get Wrong About PDF AI</h2>
+<p>Most guides to this topic treat &quot;private&quot; as a marketing checkbox instead of a testable claim. That&#x27;s backwards. The right approach is to verify behavior, not read policy language, because a vendor calling something &quot;secure cloud processing&quot; and a vendor running inference on your own chip are describing two fundamentally different risk profiles, even when their websites use nearly identical reassuring phrases.</p>
+<p>The overrated factor here is raw AI capability. Readers assume a private, local model must be a downgrade from a cloud frontier model, and technically it is; cloud AI still wins on large-scale reasoning. But for reading, summarizing, and chatting with your own PDFs, the gap matters far less than most buying guides suggest. What actually matters is ownership: no recurring fee, no server dependency, no usage cap.</p>
+<p>If you take one thing from this guide, test the offline claim yourself before trusting it. Turn off your Wi-Fi and see what still works.</p>
+<blockquote>
+<p><em>— Greencube</em></p>
+</blockquote>
+<h2 id="get-private-pdf-ai-without-the-subscription" node="[object Object]">Get Private PDF AI Without the Subscription</h2>
+<p>Every recurring PDF AI subscription is a bet that you&#x27;ll use it forever. Greencube flips that: pay once, own it forever, and never send another document to someone else&#x27;s server. It&#x27;s built specifically for the reader this article describes, someone who wants real chat and summarization power over their PDFs without trusting a vendor&#x27;s privacy policy to hold up.</p>
+<p><img src="images/ec7488317b94.png" alt="Greencube"/></p>
+<p>Setup takes downloading one model (Quick or All-rounder, depending on whether you need image reading) and signing in once through Google or Microsoft to activate your license. From there, everything, chats, document analysis, summaries, runs offline on your own Windows 10 or 11 machine with no monthly bill and no usage cap. If you&#x27;re preparing documents you also want AI systems to be able to reference accurately elsewhere, the guide to PDF SEO for AI citability is worth a look too.</p>
+<p>The full picture on how Greencube compares to other local and cloud assistants is on the <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">Greencube product page</a>. Ready to stop paying monthly for something you can own outright? Get Greencube for €8.99 / $9.99, a one-time purchase with a 14-day refund if it&#x27;s not the right fit.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://community.adobe.com/questions-9/ai-assistant-1301601" target="_blank" rel="noopener noreferrer nofollow">Adobe community: AI Assistant details</a></li>
+<li><a href="https://rectopdf.ai/" target="_blank" rel="noopener noreferrer nofollow">RectoPDF — Private PDF tools in your browser</a></li>
+<li><a href="https://oxygenpdf.com/" target="_blank" rel="noopener noreferrer nofollow">OxygenPDF — The Fast, Private PDF Toolkit</a></li>
+<li><a href="https://www.pdf-tools.com/docs/smart-redact/" target="_blank" rel="noopener noreferrer nofollow">AI Smart Redact | Pdftools Developer Documentation</a></li>
+</ul>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="which-ai-is-best-for-private-use" node="[object Object]">Which AI is best for private use?</h3>
+<p>A local, offline AI app that runs inference on your own device is the most private option, since your data never reaches a third-party server. Greencube is built specifically around this model for PDF and document work on Windows.</p>
+<h3 id="which-ai-works-best-with-pdfs" node="[object Object]">Which AI works best with PDFs?</h3>
+<p>It depends on the job: local desktop apps with a downloaded model handle chat and summarization privately, while browser-local tools like RectoPDF and OxygenPDF are strong for quick, offline conversions and basic edits without installing software.</p>
+<h3 id="which-ai-pdf-generator-is-the-best" node="[object Object]">Which AI PDF generator is the best?</h3>
+<p>For generating study guides or structured documents from a PDF&#x27;s content, a local model that can also read images, such as Greencube&#x27;s All-rounder model, produces useful output without uploading the source file anywhere.</p>
+<h3 id="is-there-a-private-version-of-ai" node="[object Object]">Is there a private version of AI?</h3>
+<p>Yes. Local desktop AI apps and browser-local WebAssembly tools both keep file processing on-device, unlike most cloud AI assistants, which send document content to a remote server even when marketed as secure.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/best-private-ai">The Best Private AI for People Who Actually Care About Privacy</a></li>
+<li><a href="https://blog.greencube.app/blog/best-pdf-summarizer">The Best PDF Summarizer for People Who Won&#x27;t Upload Sensitive Files</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-chatbot-windows">The Best Local AI Chatbot for Windows: Private, Simple, Yours</a></li>
+<li><a href="https://blog.greencube.app/blog/secure-ai-on-pc">Secure AI on Your PC: A Private, Offline Buyer&#x27;s Guide</a></li>
+</ul>

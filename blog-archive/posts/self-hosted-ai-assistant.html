@@ -1,0 +1,154 @@
+<p>Yes, you can run a private AI assistant entirely on your own hardware, and three practical paths get you there. A desktop app like Greencube gets non-technical users chatting offline in minutes. A self-hosted server with a separate web interface gives developers full control over models and data. A hybrid setup keeps sensitive documents local while routing complex reasoning to cloud models when needed.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Running a private AI on your hardware requires matching your technical skills, hardware capacity, and privacy needs to one of the three main setups: desktop app, self-hosted server, or hybrid.</li>
+<li>A desktop app suits non-technical users seeking fast, offline chat with minimal setup, while self-hosted servers are ideal for more control, multi-user access, and custom retrieval pipelines.</li>
+<li>Hardware requirements mainly depend on the model size, with 8GB RAM needed for efficient inference of models up to 3 billion parameters, and storage planning must account for model file sizes and quantization.</li>
+<li>True privacy involves minimal network traffic, with license verification being the only online step, and all data and models should stay on local devices unless explicitly routed to the cloud.</li>
+<li>Cost-effective options include one-time purchases for desktop apps, whereas self-hosted servers entail ongoing maintenance, and cloud API bills can escalate quickly with heavy document processing.</li>
+</ul>
+</blockquote>
+<hr/>
+<h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#which-setup-fits-you-a-60-second-checklist">Which Setup Fits You? A 60-Second Checklist</a></li>
+<li><a href="#how-do-you-choose-the-right-approach">How Do You Choose the Right Approach?</a></li>
+<li><a href="#whats-inside-a-self-hosted-ai-assistant">What&#x27;s Inside a Self-Hosted AI Assistant?</a></li>
+<li><a href="#how-much-hardware-do-you-actually-need">How Much Hardware Do You Actually Need?</a></li>
+<li><a href="#setting-up-your-assistant-three-recipes">Setting Up Your Assistant: Three Recipes</a></li>
+<li><a href="#what-does-private-actually-mean-here">What Does &quot;Private&quot; Actually Mean Here?</a></li>
+<li><a href="#common-setup-problems-and-how-to-fix-them">Common Setup Problems and How to Fix Them</a></li>
+<li><a href="#why-greencube-bets-on-desktop-first-simplicity">Why Greencube Bets on Desktop-First Simplicity</a></li>
+<li><a href="#how-to-get-started-with-greencube">How to Get Started With Greencube</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="which-setup-fits-you-a-60-second-checklist" node="[object Object]">Which Setup Fits You? A 60-Second Checklist</h2>
+<p>Before you download anything, match your skills, hardware, and privacy requirements against the three approaches. Guessing wrong here means wasted hours reinstalling software or discovering your laptop can&#x27;t handle the model you picked.</p>
+<p>A desktop app fits you if you want something running today, not this weekend. You don&#x27;t need to touch a terminal, and you&#x27;re fine trading some flexibility for simplicity. This is where a <strong>local AI assistant</strong> like Greencube lives. It installs, downloads one model, and you&#x27;re chatting. The tradeoff is fewer customization knobs than a server build.</p>
+<p>A self-hosted server plus a web UI fits you if you already run Docker, want multi-user access, or need to plug in a custom retrieval pipeline. You&#x27;ll spend a weekend on setup and periodic maintenance afterward, but you get full control over which model runner, database, and interface you use.</p>
+<p>A hybrid model fits you if some of your work is genuinely sensitive (client contracts, medical notes, financial records) and some isn&#x27;t. You keep the sensitive stuff local and let a cloud API handle the reasoning-heavy tasks that a small local model struggles with.</p>
+<p>Quick fit check:</p>
+<ul>
+<li><strong>Non-technical, wants privacy fast:</strong> desktop app (Greencube or similar).</li>
+<li><strong>Comfortable with Docker and command lines:</strong> self-hosted server + UI.</li>
+<li><strong>Mixed sensitivity workload, wants frontier reasoning sometimes:</strong> hybrid.</li>
+<li><strong>Team of five or more:</strong> self-hosted server, likely on dedicated hardware.</li>
+<li><strong>Budget under $50 total:</strong> desktop app, one-time purchase, avoids recurring API bills.</li>
+</ul>
+<p>Cost and maintenance scale with control. A desktop app needs zero maintenance beyond occasional updates. A self-hosted stack needs someone watching disk space, model versions, and security patches indefinitely.</p>
+<h2 id="how-do-you-choose-the-right-approach" node="[object Object]">How Do You Choose the Right Approach?</h2>
+<p>Pick your deployment path by answering ten questions honestly, not by chasing whichever tool has the most GitHub stars this month. The best self-hosted assistant for a solo writer looks nothing like the best one for a five-person legal team.</p>
+<ol>
+<li>What data actually touches the assistant, and does any of it legally need to stay on-premises?</li>
+<li>Does the tool require a network call for anything beyond license checks or updates?</li>
+<li>If the local model can&#x27;t handle a task, is there a fallback, and where does that data go?</li>
+<li>Who manages credentials, and does the setup support single sign-on if you&#x27;re deploying for a team?</li>
+<li>How often do you plan to swap or upgrade models, and does the architecture make that painless?</li>
+<li>What&#x27;s the realistic maintenance load: patching a server monthly, or nothing at all?</li>
+<li>Is pricing one-time, subscription, or usage-based, and which fits your actual usage pattern?</li>
+<li>How large is the model download, and do you have the disk space and bandwidth to spare?</li>
+<li>Does the tool support the file types you actually work with (PDFs, images, spreadsheets)?</li>
+<li>What happens to your chat history and documents if you uninstall or switch machines?</li>
+</ol>
+<p>Question one matters more than the rest combined. A tool that phones home for anything beyond a one-time license check isn&#x27;t really local, no matter what the marketing says.</p>
+<p><strong>Pro Tip:</strong> <em>Ask any vendor point-blank: &quot;What leaves my device, and when?&quot; If the answer takes more than one sentence, that&#x27;s a sign the privacy story has fine print.</em></p>
+<p>Cost modeling deserves its own line item. A one-time purchase with no subscription is predictable. A cloud API bills per token, and those costs compound fast if you&#x27;re processing long documents daily. Community deployment notes on the <a href="https://www.reddit.com/r/selfhosted/comments/1jbk06h/the_complete_guide_to_building_your_free_local_ai/" target="_blank" rel="noopener noreferrer nofollow">self-hosted AI setup thread on Reddit</a> show users repeatedly underestimating storage and bandwidth needs for model downloads before their first successful chat.</p>
+<h2 id="whats-inside-a-self-hosted-ai-assistant" node="[object Object]">What&#x27;s Inside a Self-Hosted AI Assistant?</h2>
+<p>Every self-hosted setup, regardless of complexity, breaks down into four components: a model runner, a front end, a storage layer, and optional connectors. Understanding these pieces matters even if you&#x27;re buying a packaged app, because it tells you exactly what you&#x27;re trusting with your data.</p>
+<p>The <strong>model runner</strong> does the actual inference. Options like <a href="https://hai.stanford.edu/ai-index" target="_blank" rel="noopener noreferrer nofollow">llama.cpp</a> run efficiently on CPU-only machines, while tools like Ollama and LM Studio wrap that inference in a friendlier interface with model management built in. Some setups add an OpenAI-compatible gateway on top, which lets you swap models without rewriting your front end&#x27;s code. The project behind <a href="https://github.com/evi-assistant/evi-ai" target="_blank" rel="noopener noreferrer nofollow">eVi</a> demonstrates this well: a Python core with pluggable backends across LM Studio, Ollama, and llama.cpp, so the same assistant runs whether you&#x27;re on a laptop or a dedicated server.</p>
+<p>Your <strong>front end</strong> is how you actually talk to the assistant. A desktop app bundles everything into one installer, which is the pattern behind consumer tools like <a href="https://apps.microsoft.com/detail/9n9l7mz02t2n?gl=US&amp;hl=en-US" target="_blank" rel="noopener noreferrer nofollow">Local AI Assistant on the Microsoft Store</a>. A web UI gives you browser access from any device on your network, useful if multiple people need access. A command-line interface is fastest for developers who live in a terminal and don&#x27;t want a GUI eating resources.</p>
+<p><strong>Storage</strong> is where architecture choices get serious. Chat history and documents need somewhere to live, and if you&#x27;re doing retrieval-augmented generation (RAG), you need a vector store for embeddings. <a href="https://ownpilot.dev/" target="_blank" rel="noopener noreferrer nofollow">OwnPilot&#x27;s deployment documentation</a> recommends a Docker Compose stack running Postgres with the pgvector extension, a pragmatic combination that handles both structured chat logs and vector search without adding a separate database engine. Encryption at rest matters here too, especially if the machine running your assistant isn&#x27;t physically secured.</p>
+<p><strong>Connectors</strong> extend the assistant into your existing tools, calendar sync, email search, file system access, but each one is a privacy tradeoff. Thoth&#x27;s architecture defaults to local-first operation with optional cloud provider integrations, a pattern worth copying: local by default, cloud only when you explicitly opt in for a specific task. If you&#x27;re building assistant integrations into a development workflow, guidance on Claude Code IDE integration covers similar tradeoffs around local tooling versus cloud calls.</p>
+<h2 id="how-much-hardware-do-you-actually-need" node="[object Object]">How Much Hardware Do You Actually Need?</h2>
+<p>Model size dictates hardware more than any other single factor, and getting this wrong is the single most common reason self-hosted setups feel sluggish. A 3 billion parameter model like Llama 3.2 3B runs comfortably on 8GB of RAM with CPU-only inference, no graphics card required. Step up to a model in the 7 to 9 billion parameter range, and you&#x27;re looking at noticeably slower responses on CPU alone unless you add a GPU with at least 6GB of video memory.</p>
+<p>Here&#x27;s the practical breakdown:</p>
+<p>Eight gigabytes of RAM is a floor, not a comfort zone. On older laptops with slower memory or background processes competing for resources, even a 4 billion parameter model can feel sluggish at that minimum. The Stanford AI Index tracks the broader trend driving this: model capability keeps climbing while efficient smaller models close the gap with much larger ones, which is exactly why an 8GB machine can now run something genuinely useful that would have needed a workstation three years ago.</p>
+<p>Model file sizes matter for storage planning too. A quantized 3B model runs around 2GB on disk. A 4B model with image capabilities lands closer to 4.2GB. Multiply that by however many models you&#x27;re testing, and a modest laptop SSD fills up fast.</p>
+<p><img src="images/fb3cf3cf03be.jpeg" alt="Local AI model hardware and storage comparison"/></p>
+<p>Quantization, running the model at reduced numerical precision, is the single biggest performance lever available to you. It shrinks file size and speeds inference with a small, usually acceptable, quality tradeoff. Batching multiple requests together helps on servers handling several users at once, but it does nothing for a single-user desktop setup.</p>
+<h2 id="setting-up-your-assistant-three-recipes" node="[object Object]">Setting Up Your Assistant: Three Recipes</h2>
+<p>Pick the recipe matching your chosen approach and follow it start to finish. Each one gets you to a working first chat, though &quot;working&quot; means different things depending on the path.</p>
+<h3 id="recipe-1-greencube-desktop-app" node="[object Object]">Recipe 1: Greencube desktop app</h3>
+<ol>
+<li>Download the installer from the official site and run it on Windows 10 or 11.</li>
+<li>Choose your model: <strong>Quick</strong> (Llama 3.2 3B, about 2GB, fast, text-only) or <strong>All-rounder</strong> (Gemma 4 E4B, about 4.2GB, reads images, needs 8GB RAM minimum).</li>
+<li>Let the model download complete, this happens once and runs locally afterward.</li>
+<li>Sign in with Google or Microsoft to verify your one-time license. This step confirms purchase only; it doesn&#x27;t send your chats or documents anywhere.</li>
+<li>Start chatting or drop in a PDF for analysis. Everything from this point runs offline.</li>
+</ol>
+<p>Total time to first chat: typically under 15 minutes, most of it spent waiting on the model download.</p>
+<h3 id="recipe-2-self-hosted-server-web-ui" node="[object Object]">Recipe 2: Self-hosted server + web UI</h3>
+<ul>
+<li>Install a model runner like Ollama or llama.cpp on a machine with adequate RAM for your chosen model.</li>
+<li>Start an OpenAI-compatible gateway so your front end can talk to the model using a standard API format.</li>
+<li>Deploy a web UI, either a lightweight custom front end or a packaged option, pointing it at your gateway&#x27;s address.</li>
+<li>Set up Postgres with pgvector if you want document retrieval, following a pattern similar to OwnPilot&#x27;s Docker Compose stack.</li>
+<li>Ingest your documents into the vector store, then test retrieval with a few sample queries before trusting it with real work.</li>
+</ul>
+<p>Expect a full weekend for a first working setup, longer if you&#x27;re new to Docker or database configuration.</p>
+<h3 id="recipe-3-hybrid-local-plus-cloud-fallback" node="[object Object]">Recipe 3: Hybrid local plus cloud fallback</h3>
+<ul>
+<li>Run your RAG pipeline and document storage entirely locally, exactly as in Recipe 2.</li>
+<li>Configure a fallback rule: when a query needs reasoning beyond your local model&#x27;s ability, route it to a cloud API.</li>
+<li>Strip or redact sensitive identifiers before any fallback call leaves your machine.</li>
+<li>Log which queries triggered a cloud fallback so you can audit exposure after the fact.</li>
+</ul>
+<p>The hybrid path demands more discipline than either pure approach, because one misconfigured routing rule can leak something you meant to keep local. Test your redaction logic before you trust it with anything sensitive.</p>
+<h2 id="what-does-private-actually-mean-here" node="[object Object]">What Does &quot;Private&quot; Actually Mean Here?</h2>
+<p>&quot;Local&quot; rarely means &quot;zero network traffic, ever,&quot; and any tool claiming otherwise is oversimplifying. Even the most privacy-focused desktop assistants typically need one connection: verifying that you own a valid license. Greencube works this way. Sign-in through Google or Microsoft confirms your purchase, and checkout itself runs through Stripe. Beyond that single verification step, your chats and any documents you upload stay on your machine and are never transmitted anywhere. The AI processing itself, the actual analysis, runs fully offline.</p>
+<p><img src="images/375738480e60.jpeg" alt="Offline processing and license verification boundary"/></p>
+<p>That distinction, license verification versus data processing, is worth understanding before you buy anything marketed as private. A tool that needs your API key to function is fundamentally different from one that needs a one-time login to unlock features you already own.</p>
+<p>Security practices matter regardless of which path you choose. Store any API keys in an environment variable or a dedicated secrets manager, never hardcoded in a config file you might commit to a repository. If you&#x27;re exposing a self-hosted gateway to your home network, put it behind a firewall rule that blocks external access by default. Enterprise deployments of desktop AI tools increasingly ship with managed installers and SSO support, a pattern worth watching if you&#x27;re rolling out an assistant across a team rather than a single machine.</p>
+<p>Cost comparisons make the tradeoffs concrete. A one-time desktop purchase at $9.99 costs less than a single month of most subscription AI services. A self-hosted server costs nothing beyond electricity and hardware you already own, but ongoing cloud API calls for a hybrid setup can run anywhere from a few dollars to well over $50 monthly depending on document volume and query complexity.</p>
+<h2 id="common-setup-problems-and-how-to-fix-them" node="[object Object]">Common Setup Problems and How to Fix Them</h2>
+<p>Most self-hosted assistant failures trace back to a handful of repeat offenders, and nearly all of them are fixable in under ten minutes once you know what to check.</p>
+<ul>
+<li><strong>Model won&#x27;t load or throws a format error:</strong> confirm you downloaded the correct quantization format for your runner; llama.cpp and Ollama don&#x27;t always accept the same file types interchangeably.</li>
+<li><strong>System freezes or crashes during inference:</strong> you&#x27;re likely out of RAM; close background applications or switch to a smaller model before assuming your hardware is broken.</li>
+<li><strong>Connector or credential errors:</strong> double-check API keys are current and stored correctly; expired keys are the most common cause of a connector silently failing.</li>
+<li><strong>Slow responses after an update:</strong> a new model version sometimes defaults to a larger context window than your hardware handles well; check the settings before reverting anything.</li>
+<li><strong>Lost RAG index after an upgrade:</strong> back up your vector store separately from your application before any major version upgrade, since some migrations rebuild indexes from scratch.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Keep a copy of your last known-working model file even after upgrading. If a new version underperforms on your specific hardware, you&#x27;ll want to roll back without re-downloading gigabytes.</em></p>
+<h2 id="why-greencube-bets-on-desktop-first-simplicity" node="[object Object]">Why Greencube Bets on Desktop-First Simplicity</h2>
+<p>Most of the self-hosted AI conversation online assumes you want to tinker. Docker Compose, vector databases, gateway configuration, that&#x27;s a legitimate path, and we covered it in detail above because plenty of readers genuinely want that control. But the loudest voices in this space consistently undersell how much friction that setup demands from someone who just wants a private place to ask questions and read a PDF without a subscription meter running.</p>
+<p>Greencube exists for the reader who wants the privacy benefits of self-hosting without the maintenance burden of running one. Two local models, a one-time price, and no ongoing infrastructure to patch. That&#x27;s a deliberate tradeoff, not an oversight. We&#x27;re not claiming it out-reasons a frontier cloud model on a hard problem, because it doesn&#x27;t. Cloud models with far more compute behind them remain ahead on large-scale reasoning, and anyone telling you otherwise about any desktop tool is overselling.</p>
+<p>What Greencube offers instead is ownership. You buy it once, it runs on your machine, and it keeps working with no internet connection after setup. The All-rounder model needs at least 8GB of RAM to read images and build documents, and that&#x27;s a floor, not a guarantee of speed on older hardware. The Quick model skips image reading entirely in exchange for smaller size and faster responses. Know which one matches your actual workload before you install.</p>
+<blockquote>
+<p><em>— Greencube</em></p>
+</blockquote>
+<h2 id="how-to-get-started-with-greencube" node="[object Object]">How to Get Started With Greencube</h2>
+<p>Greencube costs a one-time purchase price with no subscription, covered by a 14-day refund window. It runs on Windows 10 and 11, with a Mac version currently in development.</p>
+<p><img src="images/ec7488317b94.png" alt="Greencube"/></p>
+<p>Setup starts with picking your model. <strong>Quick</strong> (Llama 3.2 3B, roughly 2GB) handles fast text chat and drafting but can&#x27;t read images. <strong>All-rounder</strong> (Gemma 4 E4B, roughly 4.2GB) reads images, builds study guides and documents, and needs at least 8GB of RAM to run smoothly, more if you&#x27;re also multitasking with other heavy applications. Before installing, confirm you have enough free disk space for whichever model you choose, plus a little headroom for updates.</p>
+<p>You&#x27;ll sign in once with Google or Microsoft to verify your license after purchase. That&#x27;s the only step involving a network call. Every chat and every document you analyze afterward stays on your machine, processed offline, with no subscription meter and no usage cap. If you&#x27;re deciding between a subscription AI chatbot and owning your tool outright, <a href="https://blog.greencube.app/blog/private-ai-assistant">see how Greencube compares as a private AI assistant</a> or check the <a href="https://blog.greencube.app/blog/install-local-ai">step-by-step install walkthrough</a> before you buy. Ready to skip the server setup entirely? Get Greencube here and have it running before your coffee gets cold.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<p>The self-hosted AI ecosystem moves fast, and the projects below shaped much of the practical guidance in this article. The Stanford AI Index tracks capability and deployment trends across the broader AI landscape, useful context for why smaller local models keep closing the gap with cloud giants. OwnPilot documents a privacy-first, Docker-based deployment pattern for readers building a server stack from scratch. Thoth on GitHub shows a local-first architecture with optional cloud fallbacks, a template worth studying regardless of which tool you ultimately choose. eVi demonstrates multi-frontend, multi-backend flexibility for anyone planning a setup spanning several machines.</p>
+<p>For hands-on troubleshooting from people who&#x27;ve actually done this, the community setup guide on Reddit remains one of the more grounded resources available, warts and all. If you want the desktop route instead of a server build, <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">Greencube&#x27;s product page</a> covers pricing and download details directly, and the <a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Windows offline setup guide</a> walks through first-run configuration.</p>
+<ul>
+<li><a href="https://hai.stanford.edu/ai-index" target="_blank" rel="noopener noreferrer nofollow">AI Index — Stanford HAI</a></li>
+<li><a href="https://www.reddit.com/r/selfhosted/comments/1jbk06h/the_complete_guide_to_building_your_free_local_ai/" target="_blank" rel="noopener noreferrer nofollow">The Complete Guide to Building Your Free Local AI — Reddit</a></li>
+<li><a href="https://ownpilot.dev/" target="_blank" rel="noopener noreferrer nofollow">OwnPilot — Privacy‑First Personal AI Assistant</a></li>
+<li><a href="https://github.com/evi-assistant/evi-ai" target="_blank" rel="noopener noreferrer nofollow">eVi — local-first personal AI assistant</a></li>
+</ul>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="can-you-self-host-your-own-ai" node="[object Object]">Can you self-host your own AI?</h3>
+<p>Yes. You can run a model runner like Ollama or llama.cpp on your own hardware, pair it with a web interface, and keep all your data on your machine, or choose a packaged desktop app that handles the setup for you.</p>
+<h3 id="can-i-build-my-own-personal-ai-assistant" node="[object Object]">Can I build my own personal AI assistant?</h3>
+<p>Yes, using open-source components like a local model runner, a front end, and a vector database for document retrieval, though it typically takes a full weekend for a first working setup if you&#x27;re new to the tools involved.</p>
+<h3 id="how-much-does-a-personal-ai-assistant-cost" node="[object Object]">How much does a personal AI assistant cost?</h3>
+<p>Costs range from a one-time purchase like Greencube&#x27;s $9.99 to free open-source stacks that cost nothing but your time, up through cloud API bills that can exceed $50 monthly for heavy document processing.</p>
+<h3 id="can-i-build-my-own-ai-agent-for-free" node="[object Object]">Can I build my own AI agent for free?</h3>
+<p>Yes, open-source model runners and front ends are free to download and run, though you&#x27;ll need hardware capable of running the model and time to configure the retrieval and connector pieces yourself.</p>
+<h3 id="whats-the-difference-between-a-desktop-ai-app-and-a-self-hosted-server" node="[object Object]">What&#x27;s the difference between a desktop AI app and a self-hosted server?</h3>
+<p>A desktop app like Greencube installs everything in one package for single-user offline use, while a self-hosted server separates the model runner, database, and web interface across components you configure and maintain yourself, typically for multi-user or team access.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/private-ai-assistant">Best Private AI Assistant in 2026: Local and Offline</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+<li><a href="https://blog.greencube.app/blog/why-offline-ai">Offline AI: Why It Matters and How to Get Started</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+</ul>

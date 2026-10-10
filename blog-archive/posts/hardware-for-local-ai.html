@@ -1,0 +1,141 @@
+<p>If you plan to run AI locally, buy for memory first and clock speed second. Every use case, from a lightweight 7B chatbot to a 70B coding assistant, comes down to whether your GPU&#x27;s VRAM or your Mac&#x27;s unified memory can hold the model plus its working data. Starter setups need 8GB, everyday use wants 16GB, serious hobbyists should target 24GB or more, and workstation-class work means multi-GPU rigs or a high-memory Apple Silicon Mac. Apple Silicon offers a simpler unified-memory path; NVIDIA offers an expandable, upgradeable one.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Running larger models requires at least 16GB of VRAM for 13B models and 24GB or more for 30B-class models, with multi-GPU setups or high-memory Apple Silicon Macs for the biggest workloads.</li>
+<li>Memory headroom must account for KV cache, activations, and runtime overhead; doubling the model&#x27;s weight size provides a practical estimate for GPU requirements.</li>
+<li>Apple Silicon offers simplified unified memory, suitable for smaller models and lighter workloads, while NVIDIA&#x27;s ecosystem enables more expandability and multi-GPU scaling.</li>
+<li>To prevent out-of-memory errors, reduce context length, lower precision, apply quantization, and manage memory fragmentation before upgrading hardware.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#hardware-for-local-ai-picks-by-tier-and-budget">Hardware for Local AI: Picks by Tier and Budget</a></li>
+<li><a href="#how-much-vram-does-a-model-actually-need">How Much VRAM Does a Model Actually Need?</a></li>
+<li><a href="#apple-silicon-or-nvidia-which-fits-your-workflow">Apple Silicon or NVIDIA: Which Fits Your Workflow?</a></li>
+<li><a href="#what-cpu-ram-and-storage-actually-support-a-gpu">What CPU, RAM, and Storage Actually Support a GPU?</a></li>
+<li><a href="#which-quantization-level-fits-your-gpu">Which Quantization Level Fits Your GPU?</a></li>
+<li><a href="#which-local-ai-tools-work-best-on-your-hardware">Which Local AI Tools Work Best on Your Hardware?</a></li>
+<li><a href="#what-do-real-local-ai-builds-cost-and-run">What Do Real Local AI Builds Cost and Run?</a></li>
+<li><a href="#why-do-local-models-run-out-of-memory-and-how-do-you-fix-it">Why Do Local Models Run Out of Memory, and How Do You Fix It?</a></li>
+<li><a href="#greencube-local-ai-that-matches-your-hardware-not-the-other-way-around">GreenCube: Local AI That Matches Your Hardware, Not the Other Way Around</a></li>
+<li><a href="#the-pragmatic-case-for-buying-memory-before-you-buy-speed">The Pragmatic Case for Buying Memory Before You Buy Speed</a></li>
+<li><a href="#want-local-ai-running-today-without-building-a-rig">Want Local AI Running Today Without Building a Rig?</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="hardware-for-local-ai-picks-by-tier-and-budget" node="[object Object]">Hardware for Local AI: Picks by Tier and Budget</h2>
+<p>The right hardware for local ai depends entirely on what &quot;local AI&quot; means to you. Someone summarizing PDFs on a laptop has completely different requirements than someone fine-tuning a 32B model overnight. Four tiers cover almost everyone.</p>
+<p><strong>Starter tier</strong> targets 7B and smaller models at 4-bit quantization. You need 8GB of VRAM (an RTX 3060 12GB or RTX 4060 8GB works fine) or a Mac with 16GB of unified memory. This tier runs quantized 7B chat models, basic coding assistants, and short-context summarization at usable speeds. It&#x27;s also the tier where <a href="https://blog.greencube.app/blog/how-does-local-ai-work">running local AI on older laptops</a> with 2 to 5GB of free memory becomes realistic, since a well-chosen small model doesn&#x27;t need a dedicated GPU at all.</p>
+<p><strong>Everyday tier</strong> is the practical sweet spot for most enthusiasts. A 16GB VRAM card, such as an RTX 4060 Ti 16GB or RTX 4070 Super, handles 13B to 20B models comfortably at 4-bit quantization, according to community hardware benchmarking in the <a href="https://dev.to/axrisi/the-local-ai-hardware-guide-2026-4mk" target="_blank" rel="noopener noreferrer nofollow">Local AI Hardware Guide</a>. Pair it with 32 to 64GB of system RAM and a 1TB NVMe drive, since model files alone can run 8 to 15GB each and you&#x27;ll want room for several.</p>
+<p><strong>Power user tier</strong> moves to Around 24GB of VRAM is a practical threshold for running 30B and 32B-class models at 4-bit precision. Cards like the RTX 4090 or used RTX 3090 commonly offer this capacity, and the used 24GB card market has become a legitimately smart upgrade path rather than a compromise. Retailer roundups now treat <a href="https://www.newegg.com/insider/best-ai-pc-builds-for-running-local-llms-in-2026/" target="_blank" rel="noopener noreferrer nofollow">used 24GB cards as a standard recommendation</a> for anyone serious about local inference on a budget. Pair this tier with 64 to 128GB system RAM.</p>
+<p><strong>Workstation tier</strong> is for 70B-plus models, heavy image or video generation, or multi-model pipelines. Here you&#x27;re looking at either multiple 24GB+ GPUs with tensor parallelism, or a high-memory Apple Silicon Mac Studio with 128GB, 256GB, or larger unified memory pools.</p>
+<ol>
+<li>Starter: 8GB VRAM or 16GB unified memory, 7B models</li>
+<li>Everyday: 16GB VRAM, 32 to 64GB system RAM, 13B to 20B models</li>
+<li>Power user: 24GB VRAM, 64 to 128GB system RAM, 30B to 32B models</li>
+<li>Workstation: multi-GPU or 128GB+ unified memory, 70B+ models</li>
+</ol>
+<p>Multi-GPU builds add real complexity: you need matching drivers, adequate PCIe lanes, and software that supports tensor parallelism. Before committing to that, most people are better served by a single used 24GB card or a memory upgrade on their current rig.</p>
+<h2 id="how-much-vram-does-a-model-actually-need" node="[object Object]">How Much VRAM Does a Model Actually Need?</h2>
+<p>VRAM math starts with a simple rule: model weights are the floor, not the ceiling. A model&#x27;s file size at a given precision tells you the minimum memory to hold it, but you also need room for the KV cache, activations, and runtime overhead.</p>
+<p>Here&#x27;s the arithmetic. At FP16 (2 bytes per parameter), a 7B model needs roughly 14GB just for weights. Drop to 8-bit quantization and that halves to about 7GB. Drop to 4-bit (common in GGUF or AWQ formats) and you&#x27;re down to roughly 3.5 to 4GB. The same math scales linearly: a 13B model at 4-bit lands around 7 to 8GB, a 32B model around 18 to 20GB, and a 70B model around 38 to 40GB.</p>
+<p>Weights alone aren&#x27;t the whole story. NVIDIA&#x27;s own troubleshooting documentation for out-of-memory errors treats the model file size as a baseline and instructs developers to add headroom for KV cache proportional to context length, plus activations and a runtime reserve.</p>
+<p><strong>Statistic callout:</strong> Community hardware guides converge on tiered targets: 8GB VRAM comfortably runs small 7B models, 16GB is the practical minimum for 13B models with headroom, and 24GB or more is recommended for 30B-class models, according to the Local AI Hardware Guide.</p>
+<p>Longer context windows change this math fast. Doubling your context length roughly doubles your KV cache footprint, which is why a model that fits comfortably at 4K tokens can throw an out-of-memory error at 32K tokens on the same card. If you&#x27;re planning to work with long documents or extended conversations, budget extra VRAM headroom before you buy, not after.</p>
+<p>To quickly diagnose whether a GPU will fit a model: take the quantized weight size, multiply by 1.3 to 1.5 for typical KV cache and activation overhead, then add 2GB for runtime. If that number exceeds your VRAM, your options are a smaller quantization level, a smaller model, or splitting the model across multiple GPUs.</p>
+<p><img src="images/4238030245e0.jpeg" alt="How Much VRAM Does a Model Actually Need? — overview diagram"/></p>
+<h2 id="apple-silicon-or-nvidia-which-fits-your-workflow" node="[object Object]">Apple Silicon or NVIDIA: Which Fits Your Workflow?</h2>
+<p>The core tradeoff is unified memory versus discrete VRAM, and neither one wins outright. It depends on whether you value simplicity or expandability more.</p>
+<p>Apple Silicon Macs pool RAM and GPU memory into a single unified space, meaning a Mac with 64GB of unified memory can technically use much of that for a large model, something no consumer discrete GPU at that price point can match. Apple&#x27;s <a href="https://developer.apple.com/videos/play/wwdc2026/326/" target="_blank" rel="noopener noreferrer nofollow">Core AI developer materials</a> recommend smaller, task-specific models for mobile-class Apple devices, but larger unified-memory Macs can run substantially bigger models by pulling in the CPU, GPU, and Neural Engine together. The newest M6 and M5 Ultra chips push this further, with <a href="https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/" target="_blank" rel="noopener noreferrer nofollow">larger unified memory pools and higher memory bandwidth</a> that meaningfully expand which local models a Mac Studio can handle at usable speeds.</p>
+<ul>
+<li><strong>Apple Silicon strengths</strong>: unified memory scales with total RAM, quiet and energy-efficient operation, no separate GPU purchase needed.</li>
+<li><strong>Apple Silicon limits</strong>: maximum unified memory caps out per chip generation, and macOS toolchains (MLX, Core AI conversions) differ from the CUDA ecosystem most research code targets first.</li>
+<li><strong>NVIDIA strengths</strong>: the CUDA ecosystem has the broadest tooling for quantization, multi-GPU tensor parallelism, and production-grade inference servers.</li>
+<li><strong>AMD/Intel considerations</strong>: worth considering for cost-conscious Linux builds, though software compatibility lags CUDA for cutting-edge quantization formats.</li>
+</ul>
+<p>If you want a single quiet machine that &quot;just works&quot; for chat and document tasks, an Apple Silicon Mac with generous unified memory is genuinely compelling. If you want to scale up over time, add a second card, experiment with different quantization formats, or run inference servers, NVIDIA&#x27;s ecosystem gives you more room to grow without replacing the whole machine.</p>
+<h2 id="what-cpu-ram-and-storage-actually-support-a-gpu" node="[object Object]">What CPU, RAM, and Storage Actually Support a GPU?</h2>
+<p>Your GPU or unified memory gets the attention, but a mismatched CPU, RAM, or storage setup will bottleneck it anyway. Here&#x27;s what actually matters.</p>
+<ol>
+<li><strong>System RAM</strong>: aim for roughly double your VRAM tier. A 16GB GPU pairs well with 32 to 64GB system RAM; a 24GB GPU wants 64GB minimum. RAM below VRAM capacity means the OS and any CPU-offloaded layers start swapping, and that swap traffic runs at a fraction of GPU memory bandwidth.</li>
+<li><strong>CPU</strong>: for GPU-based inference, a mid-range 6 to 8 core CPU is plenty since the GPU does the heavy lifting. If you&#x27;re running CPU-only inference with llama.cpp, prioritize core count and memory bandwidth instead.</li>
+<li><strong>Storage</strong>: a 1TB NVMe SSD is the practical minimum. Model files run 4 to 40GB each, quantized variants multiply that, and slow storage directly delays model load times every time you switch models.</li>
+<li><strong>PSU</strong>: budget 650 to 850 watts for a single high-end GPU build, and 1000 to 1200 watts if you&#x27;re running dual GPUs. Undersized PSUs cause random crashes under sustained load, which is easy to misdiagnose as a software bug.</li>
+<li><strong>Cooling</strong>: sustained inference workloads run GPUs at high utilization for minutes or hours at a time, unlike gaming&#x27;s bursty loads. Case airflow with at least two intake and one exhaust fan keeps thermal throttling from silently cutting your throughput.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>Monitor GPU temperature and power draw during your first long inference session with a tool like HWiNFO or <code>nvidia-smi</code>. If temperatures climb past 80°C under sustained load, your case airflow needs work before you blame the model or the software.</em></p>
+<h2 id="which-quantization-level-fits-your-gpu" node="[object Object]">Which Quantization Level Fits Your GPU?</h2>
+<p>Quantization is the single biggest lever for fitting bigger models on smaller hardware, and it matters more than almost any other buying decision. NVIDIA&#x27;s NeMo documentation confirms that formats like FP8, INT8, and INT4 reduce model memory footprints and let larger models run on smaller GPUs with minimal quality loss when properly calibrated.</p>
+<p>Two approaches get you there. Post-training quantization (PTQ) compresses an already-trained model, is fast to apply, and works well for most local use cases. Quantization-aware training (QAT) bakes precision reduction into the training process itself, which preserves more accuracy but requires access to training infrastructure most local users don&#x27;t have. For running existing open models, PTQ is what you&#x27;ll use almost every time.</p>
+<p><strong>Statistic callout:</strong> NeMo&#x27;s model optimization documentation shows that INT4 with proper PTQ calibration can significantly shrink model memory while keeping validation loss close to the original full-precision model.</p>
+<p>In practice, here&#x27;s what common model sizes look like across precisions: a 7B model runs about 14GB at FP16, 7GB at INT8, and 4GB at INT4 or Q4. A 13B model runs roughly 26GB, 13GB, and 7GB across the same three precisions. A 32B model spans about 64GB, 32GB, and 18GB. A 70B model spans roughly 140GB, 70GB, and 40GB. That last number is why even power users with a single 24GB card need aggressive quantization or a multi-GPU split to touch 70B models at all. When one card can&#x27;t hold the quantized weights plus KV cache, tensor parallelism across two or more GPUs becomes the only path forward, short of dropping to a smaller model.</p>
+<p><img src="images/412b5ec57dcc.jpeg" alt="Model memory requirements by precision"/></p>
+<h2 id="which-local-ai-tools-work-best-on-your-hardware" node="[object Object]">Which Local AI Tools Work Best on Your Hardware?</h2>
+<p>Software choice should follow hardware, not the other way around. Each tool has a natural fit.</p>
+<ul>
+<li><strong>Ollama</strong> wraps model management and serving into simple commands, and it runs well on nearly anything from a modest laptop to a multi-GPU workstation. It&#x27;s the easiest starting point for learning how local AI works without wrestling with configuration files.</li>
+<li><strong>LM Studio</strong> gives you a graphical interface for downloading and chatting with GGUF models, which suits users who don&#x27;t want a terminal.</li>
+<li><strong>vLLM</strong> is built for server-grade throughput and batching, best suited to workstation-tier NVIDIA setups running multiple concurrent requests.</li>
+<li><strong>NeMo and TensorRT</strong> provide NVIDIA-specific optimizations like the FP8/INT8/INT4 quantization paths already discussed, aimed at squeezing maximum throughput from CUDA hardware.</li>
+<li><strong>llama.cpp</strong> is the engine underneath much of the ecosystem and remains the best option for CPU-only or memory-constrained machines.</li>
+</ul>
+<p>On format compatibility: GGUF is the preferred format on Apple Silicon and CPU-only setups, while AWQ and safetensors, or TensorRT-exported models, tend to run faster on NVIDIA hardware. Before buying anything, confirm your GPU&#x27;s CUDA version matches what your chosen runtime expects, since driver mismatches cause more failed setups than actual hardware shortfalls.</p>
+<h2 id="what-do-real-local-ai-builds-cost-and-run" node="[object Object]">What Do Real Local AI Builds Cost and Run?</h2>
+<p>Numbers matter more than specs on paper, so here&#x27;s what four real budget tiers look like when you shop for them.</p>
+<ol>
+<li><strong>Starter build</strong> (roughly $600 to $900 total): an RTX 4060 8GB or a Mac mini with 16GB unified memory, 32GB system RAM, 1TB NVMe. This runs quantized 7B models at solid conversational speed, handles document summarization, and covers basic coding help. Power draw stays modest, around 150 to 200 watts under load.</li>
+<li><strong>Everyday build</strong> (roughly $1,200 to $1,600): RTX 4070 Super or RTX 4060 Ti 16GB, 64GB system RAM, 1 to 2TB NVMe. This comfortably handles 13B to 20B models at 4-bit quantization with room for multitasking. See <a href="https://blog.greencube.app/blog/best-local-ai-models">which models fit which hardware tier</a> for specific model recommendations at this level.</li>
+<li><strong>Enthusiast build</strong> (roughly $1,800 to $2,400, less with a used card): RTX 4090 or used RTX 3090 with 24GB VRAM, 64 to 128GB system RAM, 2TB NVMe. This tier runs 30B to 32B models well and handles longer contexts without immediately hitting memory walls. The used GPU market is a legitimate way to hit this tier for hundreds less than new pricing, though expect more fan noise and higher idle power draw from older cards.</li>
+<li><strong>Workstation build</strong> (roughly $4,000 and up, or a high-memory Mac Studio): dual 24GB GPUs with tensor parallelism, or 128GB+ unified memory on Apple Silicon, for 70B-plus models and heavy image or video generation. Expect 500 to 800 watts sustained under dual-GPU load, and plan for a case with genuine airflow, not just a tower with fans bolted on.</li>
+</ol>
+<h2 id="why-do-local-models-run-out-of-memory-and-how-do-you-fix-it" node="[object Object]">Why Do Local Models Run Out of Memory, and How Do You Fix It?</h2>
+<p>Out-of-memory errors almost always trace back to one of three stages: loading the model weights, allocating the KV cache, or running activations during generation. NVIDIA&#x27;s NIM troubleshooting guide points to a mismatch between model profile and available GPU memory as the most common root cause, and the backend logs usually name the exact stage that failed if you read past the first error line.</p>
+<p>Before assuming you need new hardware, work through these fixes in order:</p>
+<ul>
+<li>Lower the context length, since KV cache scales directly with it.</li>
+<li>Drop to a lower precision (INT8 or INT4 instead of FP16).</li>
+<li>Apply PTQ if you&#x27;re currently running an unquantized model.</li>
+<li>Set allocator options like <code>PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True</code> to reduce fragmentation.</li>
+<li>Reduce the <code>gpu-memory-utilization</code> parameter if your runtime exposes it.</li>
+<li>Disable CUDA graph capture, which reserves a fixed memory block upfront.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Many OOM errors are fragmentation, not a genuine capacity shortfall. NVIDIA&#x27;s own troubleshooting docs note that allocator settings alone frequently recover enough memory to load a model that otherwise appeared too large for the card.</em></p>
+<p>Only after exhausting these should you consider a second GPU or tensor parallelism. If your workload genuinely exceeds what any local setup can handle, a hybrid approach with a cloud API for the largest jobs remains reasonable.</p>
+<h2 id="greencube-local-ai-that-matches-your-hardware-not-the-other-way-around" node="[object Object]">GreenCube: Local AI That Matches Your Hardware, Not the Other Way Around</h2>
+<p>Not everyone wants to build a rig around memory math. GreenCube is a private AI assistant that runs entirely on your own Windows or Mac computer, with no cloud and no server involved. At setup, you pick one of two local models: &quot;Quick&quot; (Llama 3.2 3B, about 2GB, fast, text only) for modest hardware, or &quot;All-rounder&quot; (Gemma 4 E4B, about 4.2GB, reads images and builds study guides, needs 8GB RAM) for machines with more headroom. Chats and files never leave your machine, and a one-time Google or Microsoft sign-in just verifies your license. If you want a working example of these principles before building your own rig, <a href="https://blog.greencube.app/blog/install-local-ai">installing local AI</a> with GreenCube&#x27;s Quick model is a low-stakes way to feel the difference unified memory and VRAM make firsthand.</p>
+<h2 id="the-pragmatic-case-for-buying-memory-before-you-buy-speed" node="[object Object]">The Pragmatic Case for Buying Memory Before You Buy Speed</h2>
+<p>Local hardware makes the most sense when privacy matters, your workload is predictable, and you&#x27;re willing to accept somewhat slower output than a frontier cloud model delivers. It makes less sense for genuinely massive reasoning tasks or one-off jobs that don&#x27;t justify owning hardware at all. For those, a cloud API remains the more sensible tool, and there&#x27;s no shame in mixing both.</p>
+<p>If you&#x27;re upgrading, buy incrementally: a used 24GB card or a RAM upgrade almost always beats jumping straight to a multi-GPU workstation. Pick a VRAM tier, <a href="https://blog.greencube.app/blog/local-ai-models-explained">download a small model first</a>, and confirm it runs well before spending on anything bigger. For getting your workflow and instructions right on that first model, a resource like <a href="https://babylovegrowth.ai/blog/how-to-humanize-ai-text" target="_blank" rel="noopener noreferrer nofollow">this guide on refining AI instructions</a> is worth a read too.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="want-local-ai-running-today-without-building-a-rig" node="[object Object]">Want Local AI Running Today Without Building a Rig?</h2>
+<p>GreenCube skips the memory math entirely. It&#x27;s a one-time purchase with everything included, no subscription and no ongoing fees. It installs on Windows, downloads its model once during setup, and then works completely offline. If your computer is on the modest side, the Quick model (Llama 3.2 3B) handles fast text chat without needing a dedicated GPU. If you&#x27;ve got more RAM and unified memory to spare, the All-rounder model (Gemma 4 E4B) reads images and helps build study guides and documents, at a somewhat slower pace in exchange for more capability.</p>
+<p><img src="images/ec7488317b94.png" alt="GreenCube"/></p>
+<p>GreenCube&#x27;s tiers simply describe what your particular computer handles well, not a paid plan structure. A slower machine will still answer questions and build documents, just more slowly than a newer one. Your chats and files stay on your computer the entire time, and only features you actively switch on ever touch the internet. A one-time Google or Microsoft sign-in unlocks the license, nothing more. If you&#x27;d rather try before deciding, start at the <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube landing page</a>, or go straight to the GreenCube Lifetime purchase page to get set up in the next few minutes.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/326/" target="_blank" rel="noopener noreferrer nofollow">Core AI overview (WWDC26)</a></li>
+<li><a href="https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/" target="_blank" rel="noopener noreferrer nofollow">Apple introduces M6 and M5 Ultra for a big leap in performance and AI compute</a></li>
+<li><a href="https://dev.to/axrisi/the-local-ai-hardware-guide-2026-4mk" target="_blank" rel="noopener noreferrer nofollow">The Local AI Hardware Guide (2026) - DEV Community</a></li>
+</ul>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="what-hardware-do-i-need-for-ai" node="[object Object]">What hardware do I need for AI?</h3>
+<p>For local AI, the essentials are a GPU with at least 8GB of VRAM (or a Mac with 16GB or more of unified memory), 32GB or more of system RAM, and a fast NVMe drive for model storage. The exact target scales with model size, and VRAM tiers map fairly predictably to model sizes, from 8GB for small 7B models up to 24GB or more for 30B-class models.</p>
+<h3 id="what-is-the-best-ai-tool-to-run-locally" node="[object Object]">What is the best AI tool to run locally?</h3>
+<p>There&#x27;s no single best tool since it depends on your hardware and comfort level. Ollama and LM Studio suit most people who want a simple setup, vLLM fits server-grade NVIDIA workstations, and GreenCube offers a turn-key desktop option with no configuration for readers who want offline privacy without managing model files themselves.</p>
+<h3 id="which-cpu-do-i-need-for-local-ai" node="[object Object]">Which CPU do I need for local AI?</h3>
+<p>For GPU-based inference, a mid-range 6 to 8 core CPU is sufficient since the GPU handles the actual computation. If you&#x27;re running models without a GPU, on a CPU-only setup with a tool like llama.cpp, prioritize core count and memory bandwidth instead, since the CPU becomes the primary bottleneck.</p>
+<h3 id="can-i-run-an-ai-model-locally-without-a-dedicated-gpu" node="[object Object]">Can I run an AI model locally without a dedicated GPU?</h3>
+<p>Yes, smaller quantized models run acceptably on CPU-only systems or older laptops with as little as 2 to 5GB of free memory, though response speed will be noticeably slower than on a GPU. GreenCube&#x27;s Quick model, built on Llama 3.2 3B at about 2GB, is designed specifically for this kind of modest hardware.</p>
+<h3 id="how-much-does-greencube-cost" node="[object Object]">How much does GreenCube cost?</h3>
+<p>GreenCube is a one-time purchase for $9.99, with everything included and no subscription. You can buy it directly on the GreenCube Lifetime page.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/best-local-ai-models">Best Local AI Models by Hardware Tier in 2026</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+</ul>

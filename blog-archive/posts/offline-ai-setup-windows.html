@@ -1,0 +1,172 @@
+<p>Yes, you can run AI fully offline on Windows. Download a local runner or a turnkey app while you still have internet, pull the model files, then cut the connection and run your first prompt. Everything stays on your machine.</p>
+<p>Two paths get you there:</p>
+<ul>
+<li><strong>Turnkey app (Greencube):</strong> Install once, open, and chat. No model management, no terminal, no accounts. Reads PDFs and images too. Best for non-technical users who want privacy without the setup overhead.</li>
+<li><strong>Local LLM runner (Ollama or LM Studio):</strong> More control, model choice, and a local API. Requires a few manual steps but runs entirely offline once configured.</li>
+</ul>
+<p><strong>Verification in one step:</strong> Disconnect Wi-Fi or enable airplane mode, send a test prompt, and confirm you get a response. If it works offline, you&#x27;re done.</p>
+<p><strong>Pro Tip:</strong> <em>Before downloading any model, run llmfit to scan your hardware and see exactly which model sizes will fit your RAM and VRAM. It saves you from a 20-minute download that crashes on load.</em></p>
+<hr/>
+<h2 id="key-takeaways" node="[object Object]">Key Takeaways</h2>
+<p>Running AI fully offline on Windows is straightforward once you match your hardware to the right model size and confirm all cloud connectors are disabled before cutting the network.</p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Point</th><th>Details</th></tr></thead><tbody><tr><td>Two clear paths</td><td>Greencube for zero-setup privacy; Ollama or LM Studio for model flexibility and a local API.</td></tr><tr><td>Hardware floor</td><td>8 GB RAM handles small models; 16 GB is recommended for 7–8B parameter models.</td></tr><tr><td>Cloud connectors</td><td>Disabling optional cloud integrations is the step that makes a setup truly private, not just offline.</td></tr><tr><td>Offline verification</td><td>Enable airplane mode, run a test prompt, and watch Resource Monitor for zero outbound traffic.</td></tr><tr><td>Greencube</td><td>One-click install, offline PDF and image reading, one-time purchase, no model management needed.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-do-you-need-before-starting-your-offline-ai-setup-on-windows">What do you need before starting your offline AI setup on Windows?</a></li>
+<li><a href="#which-approach-fits-you-greencube-or-a-local-llm-runner">Which approach fits you: Greencube or a local LLM runner?</a></li>
+<li><a href="#how-to-install-and-run-a-local-llm-runner-on-windows">How to install and run a local LLM runner on Windows</a></li>
+<li><a href="#how-to-match-model-size-and-quantization-to-your-windows-hardware">How to match model size and quantization to your Windows hardware</a></li>
+<li><a href="#how-do-you-confirm-your-windows-ai-setup-is-truly-private">How do you confirm your Windows AI setup is truly private?</a></li>
+<li><a href="#quick-fixes-for-common-windows-offline-ai-problems">Quick fixes for common Windows offline AI problems</a></li>
+<li><a href="#why-greencube-is-the-recommended-turnkey-option-for-windows-users">Why Greencube is the recommended turnkey option for Windows users</a></li>
+<li><a href="#the-honest-take-on-offline-ai-for-windows-users">The honest take on offline AI for Windows users</a></li>
+<li><a href="#greencube-private-offline-ai-with-nothing-to-configure">Greencube: private offline AI with nothing to configure</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-do-you-need-before-starting-your-offline-ai-setup-on-windows" node="[object Object]">What do you need before starting your offline AI setup on Windows?</h2>
+<p>Get these confirmed before you download anything. A failed install mid-way is almost always a skipped prerequisite.</p>
+<p><strong>Windows version:</strong> WSL2 requires Windows 10 21H2 (build 19045.3208+) or Windows 11 21H2 (build 22621+). <a href="https://docs.nvidia.com/ai-workbench/user-guide/latest/installation/windows.html" target="_blank" rel="noopener noreferrer nofollow">NVIDIA AI Workbench</a> documents these exact build numbers alongside admin privileges and container runtime requirements (Docker Desktop or Podman). Greencube and LM Studio run on standard Windows 10/11 without WSL2.</p>
+<p><strong>Hardware minimums vs. what actually works:</strong></p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Spec</th><th>Minimum</th><th>Recommended</th></tr></thead><tbody><tr><td>RAM</td><td>At least 8 GB</td><td>More RAM is recommended</td></tr><tr><td>VRAM (GPU)</td><td>Moderate VRAM required</td><td>Higher VRAM recommended</td></tr><tr><td>CPU</td><td>AVX2-capable</td><td>Modern multi-core CPUs preferred</td></tr><tr><td>Disk space</td><td>Sufficient free space needed</td><td>More free space improves experience</td></tr><tr><td>OS</td><td>Windows 10 (21H2) or later</td><td>Windows 11 recommended</td></tr></tbody></table></div>
+<p><strong>Before you begin:</strong></p>
+<ul>
+<li>Admin rights on the machine (required for driver installs and some runners)</li>
+<li>GPU drivers updated (NVIDIA preferred; AMD works with caveats)</li>
+<li>Decide: turnkey app or local runner? That choice determines everything below.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Run llmfit before picking a model. It scans your system and tells you which GGUF sizes will load without crashing — far faster than trial and error.</em></p>
+<hr/>
+<h2 id="which-approach-fits-you-greencube-or-a-local-llm-runner" node="[object Object]">Which approach fits you: Greencube or a local LLM runner?</h2>
+<p>The honest split: Greencube is for people who want private AI working in five minutes. Ollama and LM Studio are for people who want to choose their own models, run a local API, or experiment with configurations.</p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Dimension</th><th>Greencube</th><th>Ollama / LM Studio</th></tr></thead><tbody><tr><td>Ease of setup</td><td>One-click install</td><td>Moderate (CLI or GUI)</td></tr><tr><td>Cloud integrations</td><td>None by default</td><td>Must be disabled manually</td></tr><tr><td>GPU support</td><td>Automatic</td><td>NVIDIA CUDA preferred</td></tr><tr><td>PDF / image reading</td><td>Built-in</td><td>Not built-in (plugins vary)</td></tr><tr><td>Local API</td><td>No</td><td>Yes (localhost:11434)</td></tr><tr><td>Technical skill</td><td>None required</td><td>Low to moderate</td></tr><tr><td>Cost</td><td>One-time purchase</td><td>Free / open source</td></tr></tbody></table></div>
+<p><img src="images/bc2489dc3e18.jpeg" alt="Hands toggling privacy switch on desktop"/></p>
+<p><strong>Pick Greencube if</strong> you handle sensitive documents, want offline PDF and image analysis, and have no interest in managing model files. Students, freelancers, and professionals with confidential data fit this profile well. Read more on <a href="https://markaicode.com/ollama-offline-installation-guide/" target="_blank" rel="noopener noreferrer nofollow">local AI models explained</a> if you want background before deciding.</p>
+<p><strong>Pick a local runner if</strong> you need a local API for integrations, want to swap between models, or enjoy the technical side. <a href="https://techtippr.com/run-ai-locally-windows/" target="_blank" rel="noopener noreferrer nofollow">Beginner-friendly guides</a> recommend Ollama for CLI users and LM Studio for anyone who prefers a GUI. Use llmfit as a pre-download hardware fit check before pulling large model files.</p>
+<hr/>
+<h2 id="how-to-install-and-run-a-local-llm-runner-on-windows" node="[object Object]">How to install and run a local LLM runner on Windows</h2>
+<p>This workflow follows the Ollama offline installation guide and the <a href="https://insiderllm.com/guides/running-ai-offline-complete-guide/" target="_blank" rel="noopener noreferrer nofollow">air-gapped LLM setup approach</a> for machines that will eventually go fully offline.</p>
+<ol>
+<li><strong>On a connected machine:</strong> Download the Ollama Windows installer (<code>OllamaSetup.exe</code>) and the LM Studio installer if you prefer a GUI. Pull the model you want while online: <code>ollama pull llama3</code>. The model blobs land in <code>C:\Users\&lt;user&gt;\.ollama\models</code>.</li>
+<li><strong>Transfer to the offline machine:</strong> Copy the installer, the full <code>.ollama\models</code> folder (blobs and manifests), and any Python wheels or Docker images you need onto an encrypted USB drive or SSD.</li>
+<li><strong>Install and place files:</strong> Run <code>OllamaSetup.exe</code> on the offline machine. Restore the models folder to <code>C:\Users\&lt;user&gt;\.ollama\models</code>. For LM Studio, place GGUF files in its models directory (shown in the app&#x27;s settings).</li>
+<li><strong>Start the runner:</strong> Open a terminal and run <code>ollama serve</code>, then <code>ollama run llama3</code>. Confirm the model loads. For LM Studio, select the model from the sidebar and click Load.</li>
+<li><strong>Disable cloud integrations:</strong> In Ollama, no cloud connectors are active by default, but check for any optional plugins or update-check settings. In LM Studio, go to Settings and turn off telemetry and auto-update checks. <a href="https://corsair.com/us/en/explorer/diy-builder/how-tos/how-to-run-a-local-llm-on-windows-no-cloud-required/" target="_blank" rel="noopener noreferrer nofollow">Disabling optional cloud-integration features</a> is the step most people skip — and it&#x27;s the one that determines whether your setup is truly private.</li>
+<li><strong>Verify offline:</strong> Enable airplane mode or disconnect ethernet. Send a test prompt. Check <code>ollama list</code> to confirm models are present. Hit <code>http://localhost:11434</code> in a browser — if you get a response, inference is local.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>Bundle your installer, model blobs, and manifests into a single zip archive before transferring. Manifests without their matching blobs will cause a load error that looks like a driver problem.</em></p>
+<hr/>
+<h2 id="how-to-match-model-size-and-quantization-to-your-windows-hardware" node="[object Object]">How to match model size and quantization to your Windows hardware</h2>
+<p><a href="https://modelfit.io/guides/run-ai-offline/" target="_blank" rel="noopener noreferrer nofollow">Hardware guidance for local models</a> is consistent: 8 GB RAM handles small models, 16 GB is the practical floor for 7–8B parameter models, and 32 GB or more opens up larger models. GPU acceleration makes a real difference in response speed, and NVIDIA CUDA drivers are the most stable option on Windows.</p>
+<ul>
+<li><strong>Q4 quantization</strong> cuts a 7B model to roughly 4 GB VRAM. Response quality drops slightly but it&#x27;s the right call for 8 GB cards.</li>
+<li><strong>Q8 quantization</strong> is closer to full precision and needs about 8 GB VRAM for a 7B model. Use it when you have headroom.</li>
+<li><strong>CPU-only mode</strong> works but is slow. Expect 5–15 tokens per second on a modern CPU versus 50+ on a mid-range GPU.</li>
+<li>AMD GPUs work via ROCm, but driver support on Windows is less consistent than NVIDIA. If you hit GPU detection failures, falling back to CPU mode is the fastest fix.</li>
+<li>Increase your Windows page file (virtual memory) if you&#x27;re running close to your RAM limit. Go to System Properties &gt; Advanced &gt; Performance Settings &gt; Virtual Memory and set a custom size of at least 1.5× your physical RAM.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Prefer GGUF builds from Hugging Face&#x27;s TheBloke or bartowski collections — they&#x27;re pre-quantized, well-tested, and labeled clearly by VRAM requirement.</em></p>
+<hr/>
+<p><img src="images/0df5c53dd9ef.jpeg" alt="How to match model size and quantization to your Windows hardware — overview diagram"/></p>
+<h2 id="how-do-you-confirm-your-windows-ai-setup-is-truly-private" node="[object Object]">How do you confirm your Windows AI setup is truly private?</h2>
+<p>Installing the software is half the job. The other half is confirming nothing leaves your machine. Here&#x27;s the checklist:</p>
+<p><strong>Disable cloud connectors and telemetry:</strong></p>
+<ul>
+<li>In Ollama: no cloud account is required; verify no update-check or analytics flags are set in your config.</li>
+<li>In LM Studio: Settings &gt; Privacy — disable telemetry and crash reporting.</li>
+<li>In Windows itself: Settings &gt; Privacy &amp; Security &gt; Diagnostics &amp; Feedback — set to Basic or off.</li>
+<li>Check Windows Firewall rules and block outbound connections for runner executables if you want hard enforcement.</li>
+</ul>
+<p><strong>Verify no outbound traffic during inference:</strong></p>
+<ol>
+<li>Open Resource Monitor (search in Start) and go to the Network tab.</li>
+<li>Start a model inference session.</li>
+<li>Watch for any outbound connections from <code>ollama.exe</code>, <code>lmstudio.exe</code>, or your app process. There should be none during a prompt.</li>
+<li>Alternatively, enable airplane mode before running a prompt. A successful response confirms local inference.</li>
+</ol>
+<p><strong>Secure your files:</strong></p>
+<ul>
+<li>Model files and chat logs sit in <code>C:\Users\&lt;user&gt;\.ollama\</code> or the LM Studio data folder. Set folder permissions to your user account only.</li>
+<li>Enable BitLocker on the drive holding your models and chat history if the machine could be accessed by others.</li>
+<li>Delete chat logs manually after sensitive sessions, or configure the runner to not persist history.</li>
+</ul>
+<p>For a deeper hardening walkthrough, the offline AI security guide covers Windows Firewall rules and telemetry-disabling steps in detail.</p>
+<p><strong>Pro Tip:</strong> <em>Run a quick Wireshark capture during your first inference session. Filter by your runner&#x27;s process name. Zero packets out means you&#x27;re clean.</em></p>
+<hr/>
+<h2 id="quick-fixes-for-common-windows-offline-ai-problems" node="[object Object]">Quick fixes for common Windows offline AI problems</h2>
+<p><strong>WSL2 errors:</strong> Confirm your Windows build meets the minimum (19045.3208 for Windows 10, 22621 for Windows 11). Run <code>wsl --install</code> as administrator. If UAC prompts are blocking it, right-click the terminal and choose &quot;Run as administrator.&quot;</p>
+<p><strong>GPU not detected:</strong></p>
+<ul>
+<li>Update NVIDIA drivers from the GeForce Experience app or the NVIDIA website directly.</li>
+<li>Run <code>nvidia-smi</code> in a terminal. If it returns GPU info, CUDA is present. If not, reinstall drivers.</li>
+<li>AMD users: verify ROCm is installed and check the runner&#x27;s documentation for Windows ROCm support status.</li>
+</ul>
+<p><strong>Out-of-memory / model won&#x27;t load:</strong></p>
+<ul>
+<li>Switch to a smaller quantized model (Q4 instead of Q8, or a 3B model instead of 7B).</li>
+<li>Increase the Windows page file as described in the performance section above.</li>
+<li>Close other applications before loading a large model.</li>
+</ul>
+<p><strong>App still making network calls:</strong></p>
+<ul>
+<li>Check for optional plugins or extensions inside the runner — some install with network-dependent features enabled.</li>
+<li>Uninstall any third-party plugins, restart the runner, and re-test with airplane mode active.</li>
+<li>Review Windows Firewall outbound rules and add a block rule for the runner executable.</li>
+</ul>
+<hr/>
+<h2 id="why-greencube-is-the-recommended-turnkey-option-for-windows-users" node="[object Object]">Why Greencube is the recommended turnkey option for Windows users</h2>
+<p>Greencube is built for the reader who wants private AI without any of the above complexity. It runs <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">entirely offline on your Windows machine</a>, with no cloud account, no model downloads to manage, and no terminal commands.</p>
+<p>Key features:</p>
+<ul>
+<li><strong>One-click install:</strong> Download, install, open. The model is bundled.</li>
+<li><strong>Offline PDF and image reading:</strong> Analyze documents and images locally. Nothing leaves your machine, as confirmed by Corsair&#x27;s local LLM privacy guidance.</li>
+<li><strong>No cloud account required:</strong> No sign-in, no subscription, no data sent anywhere.</li>
+<li><strong>One-time purchase:</strong> Pay once, use forever. No monthly fee.</li>
+</ul>
+<p>Students handling research papers, freelancers with client documents, and professionals in regulated industries are the natural fit. For more on the no-setup promise, see what makes Greencube different from subscription AI tools.</p>
+<hr/>
+<h2 id="the-honest-take-on-offline-ai-for-windows-users" node="[object Object]">The honest take on offline AI for Windows users</h2>
+<p>Most people overthink this. If you want private AI and you&#x27;re not a developer, Greencube is the answer. Install it, use it, done. The runner path (Ollama, LM Studio) is genuinely good, but it asks you to manage model files, monitor config settings, and manually verify that cloud connectors are off. That&#x27;s fine if you enjoy it. If you don&#x27;t, it&#x27;s friction that adds no privacy benefit over a well-built turnkey app.</p>
+<p>One thing worth setting straight on performance: a local model on consumer hardware is slower than a cloud API. A 7B model on a mid-range GPU gives you a capable, private assistant. It won&#x27;t match GPT-4 on reasoning benchmarks, but for document analysis, drafting, and private Q&amp;A, it&#x27;s more than enough.</p>
+<p>Start with Greencube if privacy and simplicity are the goal. Start with Ollama and run llmfit first if you want flexibility.</p>
+<hr/>
+<h2 id="greencube-private-offline-ai-with-nothing-to-configure" node="[object Object]">Greencube: private offline AI with nothing to configure</h2>
+<p>Most offline AI setups ask you to manage model files, toggle cloud settings, and verify network logs. Greencube skips all of that. It&#x27;s a one-time purchase that installs like any Windows app and works immediately, with no accounts and no internet required after download.</p>
+<p><img src="images/ec7488317b94.png" alt="Greencube"/></p>
+<ul>
+<li>Chat privately with a capable local AI</li>
+<li>Read and analyze PDFs and images, fully offline</li>
+<li>No subscriptions, no cloud, no model management</li>
+<li>One-time payment, yours permanently</li>
+</ul>
+<p>If you&#x27;ve read this far and the runner path sounds like more work than you want, get Greencube now and skip straight to using private AI.</p>
+<hr/>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://corsair.com/us/en/explorer/diy-builder/how-tos/how-to-run-a-local-llm-on-windows-no-cloud-required/" target="_blank" rel="noopener noreferrer nofollow">How to run a local LLM on Windows — no cloud required | CORSAIR</a></li>
+<li><a href="https://docs.nvidia.com/ai-workbench/user-guide/latest/installation/windows.html" target="_blank" rel="noopener noreferrer nofollow">Install AI Workbench on Windows — NVIDIA documentation</a></li>
+<li><a href="https://markaicode.com/ollama-offline-installation-guide/" target="_blank" rel="noopener noreferrer nofollow">How to Install Ollama Offline: Run AI Models in Air-Gapped Environments (2026) | Markaicode</a></li>
+<li><a href="https://insiderllm.com/guides/running-ai-offline-complete-guide/" target="_blank" rel="noopener noreferrer nofollow">Run AI Offline: Air-Gapped LLMs, No Internet (2026) | InsiderLLM</a></li>
+<li><a href="https://modelfit.io/guides/run-ai-offline/" target="_blank" rel="noopener noreferrer nofollow">Run AI Offline: Complete Guide to Local LLMs Without Internet (2026) | ModelFit</a></li>
+<li><a href="https://techtippr.com/run-ai-locally-windows/" target="_blank" rel="noopener noreferrer nofollow">How to Run AI Locally on Windows in 2026: A Complete Beginner’s Guide | Techtippr</a></li>
+</ul>
+<hr/>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="can-you-run-ai-completely-offline-on-windows" node="[object Object]">Can you run AI completely offline on Windows?</h3>
+<p>Yes. Download a local runner like Ollama or a turnkey app like Greencube while online, then disable your network connection. All inference runs locally with no data leaving your machine.</p>
+<h3 id="what-are-the-minimum-hardware-requirements-for-local-ai-on-windows" node="[object Object]">What are the minimum hardware requirements for local AI on Windows?</h3>
+<p>You need sufficient RAM for your model size, typically at least 8 GB for small models and more for larger models, an AVX2-capable CPU, and adequate free disk space. A dedicated GPU speeds things up significantly but is not required.</p>
+<h3 id="how-do-i-verify-my-offline-ai-setup-isnt-sending-data-to-the-cloud" node="[object Object]">How do I verify my offline AI setup isn&#x27;t sending data to the cloud?</h3>
+<p>Enable airplane mode before running a prompt. If you get a response, inference is local. For a harder check, open Resource Monitor, go to the Network tab, and confirm zero outbound connections from your runner during a session.</p>
+<h3 id="what-is-the-easiest-way-to-set-up-ai-offline-on-windows-without-technical-knowledge" node="[object Object]">What is the easiest way to set up AI offline on Windows without technical knowledge?</h3>
+<p>Greencube installs like any Windows app, requires no model downloads or configuration, and runs fully offline with built-in PDF and image reading. It&#x27;s a one-time purchase with no accounts or subscriptions required.</p>
+<h3 id="do-i-need-wsl2-to-run-ai-offline-on-windows" node="[object Object]">Do I need WSL2 to run AI offline on Windows?</h3>
+<p>Not always. Greencube and LM Studio run without WSL2. Ollama&#x27;s Windows installer also runs natively. WSL2 is required for containerized tools like NVIDIA AI Workbench, which needs Windows 10 build 19045.3208 or Windows 11 build 22621 at minimum.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/no-setup-ai">No Setup AI: Private, Offline, One-Time Purchase</a></li>
+<li><a href="https://blog.greencube.app/blog/ai-without-internet">AI Without Internet: Run Local AI Privately on Any Laptop</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-security">Offline AI Security: A Practical Hardening Guide</a></li>
+</ul>

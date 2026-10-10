@@ -1,0 +1,138 @@
+<p>An LLM (large language model) is a transformer-based neural network trained to predict the next word in a sequence, and that simple mechanism is what powers modern chatbots, code assistants, and document tools. The practical takeaway: these models handle writing, summarizing, coding, and analysis remarkably well, but you get to choose between running one locally on your own machine for privacy or tapping a cloud API for raw scale.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Smaller models under 3 billion parameters run quickly on modest hardware and are suitable for drafting and simple questions, but lack advanced reasoning.</li>
+<li>Medium models between 4 and 9 billion parameters improve reasoning and often support multimodal functions, requiring more RAM and dedicated GPU hardware.</li>
+<li>Large models exceeding 15GB in size demand significant computing resources and are generally impractical for personal hosting, favoring cloud access for complex tasks.</li>
+<li>Fine-tuning and reinforcement learning from human feedback significantly enhance instruction-following, tone, and helpfulness, rather than just increasing raw size.</li>
+<li>Pairing local models with retrieval systems helps mitigate hallucinations and improve factual accuracy, especially in sensitive or detailed use cases.</li>
+</ul>
+</blockquote>
+<hr/>
+<h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-are-llm-models-and-how-do-they-actually-work">What Are LLM Models and How Do They Actually Work?</a></li>
+<li><a href="#how-are-llms-trained-pretraining-fine-tuning-and-rlhf">How Are LLMs Trained? Pretraining, Fine-Tuning, and RLHF</a></li>
+<li><a href="#what-can-llms-do-well-and-where-do-they-fail">What Can LLMs Do Well, and Where Do They Fail?</a></li>
+<li><a href="#which-open-source-llm-models-can-you-run-yourself">Which Open-Source LLM Models Can You Run Yourself?</a></li>
+<li><a href="#how-do-you-choose-the-right-llm-for-your-needs">How Do You Choose the Right LLM for Your Needs?</a></li>
+<li><a href="#what-does-running-an-llm-locally-actually-look-like">What Does Running an LLM Locally Actually Look Like?</a></li>
+<li><a href="#where-can-you-learn-more-about-llms">Where Can You Learn More About LLMs?</a></li>
+<li><a href="#our-take-what-actually-matters-when-evaluating-llms">Our Take: What Actually Matters When Evaluating LLMs</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-are-llm-models-and-how-do-they-actually-work" node="[object Object]">What Are LLM Models and How Do They Actually Work?</h2>
+<p>Getting a large language model to write a coherent paragraph starts with breaking your sentence into pieces it can digest. That process, called tokenization, chops text into chunks (sometimes whole words, sometimes fragments like &quot;un&quot; and &quot;packing&quot;) and converts each chunk into a number. From there, every token gets mapped into a vector, a long list of numbers called an embedding, that captures something about its meaning and how it relates to other words nearby.</p>
+<p><img src="images/fbcc81d1cdc8.jpeg" alt="Illustration of tokens becoming numerical embeddings"/></p>
+<p>Once text becomes numbers, the <a href="https://aws.amazon.com/what-is/large-language-model/" target="_blank" rel="noopener noreferrer nofollow">transformer architecture</a> takes over. Each transformer block runs two main operations: self-attention and a feed-forward layer. Self-attention lets every token look at every other token in the input at the same time and decide which ones matter for understanding it. That&#x27;s a real departure from older recurrent networks, which read text one word at a time and struggled with long documents. Because attention processes a full sequence in parallel, transformers scale across GPUs far more efficiently, which is a big part of why they went from research curiosity to industry standard in a few years.</p>
+<p>A positional encoding gets added alongside the embeddings so the model knows word order. Without it, &quot;dog bites man&quot; and &quot;man bites dog&quot; would look identical to the attention mechanism, since attention on its own has no sense of sequence.</p>
+<p>Not every transformer is built the same way. Three flavors show up constantly:</p>
+<ul>
+<li><strong>Decoder-only models</strong> (the GPT family, Llama, Gemma) generate text one token at a time and dominate today&#x27;s chatbots and assistants.</li>
+<li><strong>Encoder-decoder models</strong> (like the original T5) read an entire input first, then generate output, which suits translation and structured summarization.</li>
+<li><strong>Encoder-only models</strong> (like BERT) never generate free text at all. They&#x27;re built for classification and understanding tasks, such as sentiment scoring or search ranking.</li>
+</ul>
+<p>Inference, the act of actually generating a response, is just this process repeated over and over: predict the most likely next token, add it to the sequence, and repeat. That&#x27;s why outputs are probabilistic rather than fixed. The model isn&#x27;t retrieving a stored answer. It&#x27;s sampling from a probability distribution over its entire vocabulary at every step, which is also why the same prompt can produce slightly different phrasing each time.</p>
+<p><strong>Resource math worth knowing:</strong> a rough rule of thumb is that <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank" rel="noopener noreferrer nofollow">1 billion parameters take up about 2GB of storage</a> once quantized down from full precision. That&#x27;s why a 3 billion parameter model lands around 2GB on disk, while a model in the 7 to 8 billion parameter range needs 4 to 5GB. If you&#x27;re planning to run anything locally, that math is the first thing to check against your available disk space and memory.</p>
+<p><img src="images/4ec3d8d8fade.jpeg" alt="Parameter counts compared with model storage sizes"/></p>
+<h2 id="how-are-llms-trained-pretraining-fine-tuning-and-rlhf" node="[object Object]">How Are LLMs Trained? Pretraining, Fine-Tuning, and RLHF</h2>
+<p>A raw language model starts life as a next-token predictor with no manners. It has read an enormous amount of text and gotten very good at completing sentences, but nobody has taught it to follow instructions or refuse harmful requests. Getting from that raw state to something like a helpful assistant takes several distinct stages.</p>
+<p><img src="images/78e4b3c31c92.jpeg" alt="Illustration of three LLM training stages"/></p>
+<p><strong>Pretraining</strong> comes first. The model learns through self-supervised learning on massive text corpora, meaning it doesn&#x27;t need human-labeled examples. It just tries to predict masked or upcoming tokens across billions of documents pulled from sources like Common Crawl, digitized books, and curated web text. This stage is where the model absorbs grammar, facts, reasoning patterns, and, unfortunately, whatever biases exist in that data.</p>
+<p><strong>Fine-tuning</strong> narrows that broad competence toward specific behavior. Instruction tuning shows the model thousands of examples of prompts paired with the kind of response a human would want, teaching it to follow directions instead of just continuing text in whatever direction is statistically likely. Few-shot prompting is a lighter-weight alternative: instead of retraining anything, you show the model two or three examples directly in your prompt and let it infer the pattern on the fly.</p>
+<p><strong>RLHF</strong> (reinforcement learning from human feedback) is the step that gets a model to sound genuinely cooperative rather than technically correct. Human raters rank multiple model responses to the same prompt, and that ranking data trains a reward model, which then nudges the LLM toward outputs people actually prefer. Pretraining plus fine-tuning plus RLHF is the standard pipeline behind most assistant-style models on the market today.</p>
+<p>A few things worth knowing before you assume bigger is always better:</p>
+<ul>
+<li>Scaling up pretraining data and parameters generally increases capability, but it also multiplies compute cost and energy use substantially.</li>
+<li>Models trained without RLHF tend to be technically fluent but noticeably worse at following nuanced instructions or declining inappropriate requests.</li>
+<li>RLHF isn&#x27;t a cure for factual errors. It shapes tone and helpfulness, not truthfulness.</li>
+<li>Alignment quality and training data quality shape a model&#x27;s perceived intelligence more than raw parameter count, according to AWS&#x27;s technical breakdown of LLM training.</li>
+</ul>
+<h2 id="what-can-llms-do-well-and-where-do-they-fail" node="[object Object]">What Can LLMs Do Well, and Where Do They Fail?</h2>
+<p>Modern language models handle a surprisingly wide range of tasks: drafting and editing text, summarizing long documents, translating between languages, generating and debugging code, and working through multi-step reasoning problems when prompted carefully. Combine an LLM with memory, API access, and decision logic, and you get an AI agent capable of booking things, querying databases, or chaining multiple tasks together without a human approving every step.</p>
+<p>Some of that capability doesn&#x27;t show up gradually as models get bigger. Research on <a href="https://arxiv.org/abs/2303.18223v11" target="_blank" rel="noopener noreferrer nofollow">emergent abilities</a> has documented skills, like multi-step arithmetic or certain reasoning tasks, that essentially don&#x27;t work at all below a certain scale threshold and then click into place once a model crosses it. That&#x27;s a genuinely strange property of these systems, and it&#x27;s part of why predicting what a bigger version of a model will be able to do is harder than it sounds.</p>
+<p>None of this comes without real failure modes:</p>
+<ol>
+<li><strong>Hallucination.</strong> Because an LLM is fundamentally a statistical next-token predictor, it optimizes for plausible-sounding text, not verified truth. It will confidently invent citations, dates, and facts that sound entirely reasonable and are completely wrong.</li>
+<li><strong>Bias.</strong> Training data reflects the internet&#x27;s skew, so models can reproduce stereotypes or underrepresent certain viewpoints unless specifically corrected during fine-tuning.</li>
+<li><strong>Compute cost.</strong> Running and training frontier-scale models consumes enormous energy and hardware resources, which is part of why the <a href="https://www.oecd.org/en/publications/ai-language-models_13d38f92-en.html" target="_blank" rel="noopener noreferrer nofollow">OECD</a> treats language models as a serious policy and governance concern.</li>
+<li><strong>Multimodality gaps.</strong> A model trained only on text cannot interpret an image or audio clip. Reading a photo of a receipt or a scanned PDF requires a model specifically trained or fine-tuned for vision input.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>If hallucinations are a dealbreaker for your use case, pair your LLM with retrieval-augmented generation (RAG), which grounds answers in a specific document or database instead of the model&#x27;s memory alone. It&#x27;s the single most effective mitigation available right now, short of manual fact-checking.</em></p>
+<h2 id="which-open-source-llm-models-can-you-run-yourself" node="[object Object]">Which Open-Source LLM Models Can You Run Yourself?</h2>
+<p>Open-weight models publish their trained parameters for anyone to download, inspect, and run, which is different from a fully open-source project that also releases training code and data. That distinction matters if you&#x27;re evaluating license terms, since some open-weight models restrict commercial use while others don&#x27;t.</p>
+<p>Rather than naming specific products, it helps to think in three capability tiers:</p>
+<ul>
+<li><strong>Small models</strong> (roughly 1 to 3 billion parameters): fast, text-only, and light enough to run on a laptop with modest specs. Good for drafting, quick Q&amp;A, and simple summarization.</li>
+<li><strong>Medium models</strong> (roughly 4 to 9 billion parameters): a meaningful step up in reasoning quality, often multimodal, but they demand more RAM and run noticeably slower on older hardware.</li>
+<li><strong>Large models</strong> (tens of billions of parameters and up): the most capable tier, but they typically require dedicated GPU hardware and are impractical for most people to host on a personal machine.</li>
+</ul>
+<p>Here&#x27;s how those tiers stack up on the practical decisions that matter for local hosting:</p>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Factor</th><th>Small models</th><th>Medium models</th><th>Large models</th></tr></thead><tbody><tr><td>Typical download size</td><td>~2GB</td><td>~4 to 5GB</td><td>15GB+</td></tr><tr><td>RAM/VRAM needed</td><td>Small models need moderate RAM</td><td>Medium models require more RAM and possibly dedicated GPU hardware</td><td>Large models demand significant RAM and typically a strong GPU</td></tr><tr><td>Inference speed on CPU</td><td>Generally fast for small models</td><td>Moderate to slow for medium models</td><td>May be impractical for large models on CPU</td></tr><tr><td>Modality</td><td>Usually text only for small models</td><td>Medium models often handle text and images</td><td>Modality support varies for large models</td></tr></tbody></table></div>
+<p>Quantization, the process of compressing a model&#x27;s weights into lower-precision numbers, is what makes running any of these tiers on consumer hardware feasible at all. It shrinks file size and memory needs substantially, sometimes at a modest cost to output quality, so <a href="https://cset.georgetown.edu/article/emergent-abilities-in-large-language-models-an-explainer/" target="_blank" rel="noopener noreferrer nofollow">testing a quantized model locally</a> before committing to it for serious work is worth the hour it takes.</p>
+<p>The local versus cloud decision usually comes down to three factors. Choose local hosting when privacy matters more than raw capability, when you need offline access, or when you want to avoid per-token costs on high-volume tasks. Choose a cloud API when you need the largest available models for complex reasoning, when latency from your own hardware would be a bottleneck, or when your workload is occasional enough that a subscription or pay-per-use model makes more financial sense. For a deeper breakdown of which models fit which hardware, <a href="https://blog.greencube.app/blog/best-local-ai-models">Greencube&#x27;s guide to local models by hardware tier</a> walks through the specifics.</p>
+<h2 id="how-do-you-choose-the-right-llm-for-your-needs" node="[object Object]">How Do You Choose the Right LLM for Your Needs?</h2>
+<p>Start with the job you&#x27;re actually trying to do, because that answer eliminates most of the noise. Someone summarizing sensitive legal documents has an entirely different priority list than someone building a customer-facing chatbot or a developer wiring an LLM into an automated pipeline.</p>
+<p>Run through this checklist before committing to any model or deployment:</p>
+<ol>
+<li><strong>Context window.</strong> How much text can the model hold in memory at once? A model with a short context window will forget the beginning of a long document by the time it reaches the end.</li>
+<li><strong>Modality.</strong> Do you need the model to read images or PDFs, or is text-only sufficient? Not every model handles both.</li>
+<li><strong>Latency and cost model.</strong> Is a subscription fee acceptable, or do you need a one-time cost with no per-query billing?</li>
+<li><strong>License terms.</strong> Some open-weight models restrict commercial use or require attribution. Read the actual license, not just the marketing page.</li>
+<li><strong>Update cadence.</strong> Does the provider patch security issues and improve the model regularly, or has it been abandoned?</li>
+</ol>
+<p>A few concrete questions to ask a vendor, or to check yourself for a DIY local setup:</p>
+<ul>
+<li>What data was this model trained on, and is that disclosed anywhere?</li>
+<li>What&#x27;s the real-world token limit for context, not just the marketing number?</li>
+<li>Does this model run entirely offline, or does it phone home for any part of inference?</li>
+<li>What hardware does it realistically need to hit usable speed?</li>
+</ul>
+<p>Watch for a few red flags: vendors who won&#x27;t specify the license clearly, platforms that are vague about where your data goes during processing, and benchmark claims that sound too good relative to the model&#x27;s size. If you decide to try local hosting yourself, <a href="https://blog.greencube.app/blog/install-local-ai">this step-by-step installation guide</a> covers the hardware checklist in more detail than a shopping list ever could.</p>
+<h2 id="what-does-running-an-llm-locally-actually-look-like" node="[object Object]">What Does Running an LLM Locally Actually Look Like?</h2>
+<p>Greencube is a concrete example of what local deployment involves in practice, and it&#x27;s worth using as a reference point rather than an abstraction. It&#x27;s a desktop app that runs entirely on your own Windows PC, offering private chat plus document and image reading, for a one-time price of €8.99 / $9.99 with a 14-day refund window. No subscription, no per-query billing.</p>
+<p>Setup isn&#x27;t instant, and it shouldn&#x27;t be marketed that way. You pick one of two models and download it once: <strong>Quick</strong> (Llama 3.2 3B, about 2GB, fast, text only) or <strong>All-rounder</strong> (Gemma 4 E4B, about 4.2GB, reads images and builds study guides, slower, and needs at least 8GB of RAM, which is a floor, not a comfort zone on older machines). A few realities worth knowing going in:</p>
+<ul>
+<li>Windows 10/11 only for now, with a Mac version in development.</li>
+<li>Sign-in via Google or Microsoft confirms your one-time license, and checkout runs through Stripe. Your chats and documents themselves never leave your machine.</li>
+<li>Heavier document analysis tasks will run noticeably slower on aging hardware, regardless of which model you pick.</li>
+<li>Pairing local retrieval, feeding a model your own documents directly, improves factual grounding compared to relying on the model&#x27;s training memory alone.</li>
+</ul>
+<h2 id="where-can-you-learn-more-about-llms" node="[object Object]">Where Can You Learn More About LLMs?</h2>
+<p>A handful of primary sources go a long way past this overview. Wikipedia&#x27;s large language model entry is a solid technical reference for architecture and terminology. AWS&#x27;s explainer breaks down attention mechanisms in plainer engineering terms. <a href="https://www.ibm.com/think/topics/large-language-models" target="_blank" rel="noopener noreferrer nofollow">IBM&#x27;s overview of LLMs</a> covers the training pipeline, including RLHF, in more depth. The arXiv paper on emergent abilities is denser but rewarding if you want the research behind scale thresholds, and the OECD&#x27;s report on AI language models frames the policy and risk side of things. If you&#x27;re curious how LLMs are reshaping adjacent fields, this strategy guide on LLMs and SEO is a useful look at how these models are changing content workflows outside the chatbot use case.</p>
+<h2 id="our-take-what-actually-matters-when-evaluating-llms" node="[object Object]">Our Take: What Actually Matters When Evaluating LLMs</h2>
+<p>Most explainers treat parameter count as the headline number, and that&#x27;s the wrong obsession. A 7 billion parameter model with clean training data and solid instruction tuning will outperform a sloppily aligned larger model on real tasks more often than the spec sheet suggests. Alignment quality and data curation do more work than raw scale, and that gap only gets wider once you factor in emergent abilities that don&#x27;t scale predictably.</p>
+<p>The bigger blind spot in most advice on this topic is the false binary between &quot;use ChatGPT&quot; and &quot;learn to train your own model.&quot; Most people don&#x27;t need either extreme. A tuned local model handling private documents, paired with a cloud model for the occasional heavy reasoning task, covers the actual spectrum of needs far better than committing to one or the other.</p>
+<p>If you&#x27;re evaluating options for yourself, prioritize the job first: privacy-sensitive document work points toward local hosting, complex multi-step reasoning points toward cloud scale. Match the tool to the task, not the other way around.</p>
+<blockquote>
+<p><em>— Greencube</em></p>
+</blockquote>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank" rel="noopener noreferrer nofollow">Large language model — Wikipedia</a></li>
+<li><a href="https://aws.amazon.com/what-is/large-language-model/" target="_blank" rel="noopener noreferrer nofollow">What is LLM (Large Language Model)? - AWS</a></li>
+<li><a href="https://www.ibm.com/think/topics/large-language-models" target="_blank" rel="noopener noreferrer nofollow">What Are Large Language Models (LLMs)? | IBM</a></li>
+<li><a href="https://arxiv.org/abs/2303.18223v11" target="_blank" rel="noopener noreferrer nofollow">Emergent abilities of large language models — arXiv</a></li>
+<li><a href="https://www.oecd.org/en/publications/ai-language-models_13d38f92-en.html" target="_blank" rel="noopener noreferrer nofollow">AI language models — OECD</a></li>
+</ul>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="what-are-the-different-types-of-llm-models" node="[object Object]">What Are the Different Types of LLM Models?</h3>
+<p>LLMs generally split into decoder-only models (used for text generation, like most chatbots), encoder-decoder models (used for translation and structured summarization), and encoder-only models (used for classification tasks rather than generation).</p>
+<h3 id="is-chatgpt-an-llm-or-generative-ai" node="[object Object]">Is ChatGPT an LLM or Generative AI?</h3>
+<p>ChatGPT is a product built on top of an LLM, and that LLM is itself a specific category of generative AI trained to predict the next token in a sequence.</p>
+<h3 id="what-are-the-top-llm-models-right-now" node="[object Object]">What Are the Top LLM Models Right Now?</h3>
+<p>Rather than a fixed leaderboard, models are best grouped by capability tier: small models (1 to 3 billion parameters, fast and text-only), medium models (4 to 9 billion parameters, often multimodal), and large frontier-scale models that need dedicated GPU infrastructure.</p>
+<h3 id="what-are-llm-models-in-plain-terms" node="[object Object]">What Are LLM Models, in Plain Terms?</h3>
+<p>An LLM model is a transformer-based neural network trained on massive text data to predict the next word in a sequence, which is the mechanism underlying chatbots, code assistants, and summarization tools.</p>
+<h3 id="can-i-run-an-llm-without-an-internet-connection" node="[object Object]">Can I Run an LLM without an Internet Connection?</h3>
+<p>Yes, if you use a locally hosted model with enough RAM and disk space for the download, which is typically 2 to 5GB for smaller and mid-sized models, though sign-in for license verification may still require a brief internet connection.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/best-local-ai-models">Best Local AI Models by Hardware Tier in 2026</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+<li><a href="https://blog.greencube.app/blog/lm-studio-alternatives">Best LM Studio Alternatives for Local AI in 2026</a></li>
+</ul>

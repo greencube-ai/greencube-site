@@ -1,0 +1,124 @@
+<p>Private document AI refers to systems that read, search, and summarize your files while keeping the content under your control. You have three practical deployment choices: a fully local desktop app, a hosted private workspace with contractual protections, or a masking layer that strips identifying details before anything reaches the cloud. Whichever you pick, verify how data moves through OCR, indexing, prompts, and backups before you trust it with sensitive files.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Fully local desktop tools process all data on your device without network access, minimizing exposure of sensitive files.</li>
+<li>Hosted private workspaces add contractual and technical safeguards, but still require verification of data isolation and retention policies.</li>
+<li>Masking layers can reduce cloud AI risks only if their effectiveness and verification are confirmed before use.</li>
+<li>Answer quality improves with multi-stage retrieval and citation verification, which reduce hallucinations and unsupported responses.</li>
+<li>Running initial tests by disconnecting from the internet and manually verifying citations can help ensure privacy claims hold true.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-private-document-ai-actually-means">What private document AI actually means</a></li>
+<li><a href="#how-these-systems-work-ocr-retrieval-and-citations">How these systems work: OCR, retrieval, and citations</a></li>
+<li><a href="#privacy-and-governance-controls-worth-demanding">Privacy and governance controls worth demanding</a></li>
+<li><a href="#a-verification-checklist-you-can-run-today">A verification checklist you can run today</a></li>
+<li><a href="#greencube-a-privacy-first-fully-offline-desktop-assistant">GreenCube: a privacy-first, fully offline desktop assistant</a></li>
+<li><a href="#fitting-private-document-ai-into-existing-workflows">Fitting private document AI into existing workflows</a></li>
+<li><a href="#local-app-hosted-workspace-or-masking-which-fits-you">Local app, hosted workspace, or masking: which fits you?</a></li>
+<li><a href="#try-greencube-a-private-offline-document-ai-you-can-test-today">Try GreenCube: a private, offline document AI you can test today</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+<h2 id="what-private-document-ai-actually-means" node="[object Object]">What private document AI actually means</h2>
+<p>&quot;Private&quot; is not one thing. It describes where your files, their extracted text, and the AI&#x27;s working memory physically sit, and who can see them along the way.</p>
+<p>A <strong>fully local desktop</strong> tool processes everything on your own machine: no file or query ever reaches an external server. A <strong>hosted private workspace</strong> runs on a vendor&#x27;s infrastructure but adds contractual guarantees such as encryption, tenant isolation, and a promise not to use your prompts to train shared models. A <strong>privacy layer</strong> sits in front of a cloud AI tool and masks or pseudonymizes sensitive details, like names or account numbers, before the text is sent out.</p>
+<p>Each pipeline has several places where exposure can happen:</p>
+<ul>
+<li>The raw file itself, during upload or import.</li>
+<li>The text pulled out by OCR, which may be processed on-device or sent to a remote service.</li>
+<li>The embeddings and search index built from that text, wherever they are stored.</li>
+<li>The prompts and generated answers, plus any logs or crash reports kept afterward.</li>
+<li>Backups and telemetry, which can quietly retain copies long after a session ends.</li>
+</ul>
+<p>A product calling itself &quot;private&quot; is making an architectural claim. The <a href="https://csrc.nist.gov/pubs/ir/8579/ipd" target="_blank" rel="noopener noreferrer nofollow">NIST technical report on chatbot security</a> treats this kind of internal-document chat as a governance problem, not a marketing label, and recommends checking each stage of the pipeline rather than taking the claim at face value.</p>
+<h2 id="how-these-systems-work-ocr-retrieval-and-citations" node="[object Object]">How these systems work: OCR, retrieval, and citations</h2>
+<p>Most private document AI tools follow the same basic pipeline, and each stage introduces its own trade-offs.</p>
+<ul>
+<li><strong>OCR and ingestion</strong> turn scanned pages or images into text. On-device OCR keeps that text off any network; cloud OCR sends the raw image somewhere first, which matters if the document contains handwriting, signatures, or photos.</li>
+<li><strong>Indexing and embeddings</strong> convert text into searchable vectors. Where that index lives, locally on disk or on a vendor&#x27;s servers, determines whether a breach elsewhere could expose your document contents.</li>
+<li><strong>Retrieval and RAG</strong> (retrieval-augmented generation) pull the most relevant passages before the model answers. Weak retrieval is a leading cause of hallucinated or unsupported answers, since the model fills gaps with guesses when it cannot find the right passage.</li>
+<li><strong>Citations and provenance</strong> let you check an answer against the source text, which is the only reliable way to catch a wrong or invented claim.</li>
+</ul>
+<p><strong>Multi-stage retrieval and verification can meaningfully improve answer quality.</strong> <a href="https://arxiv.org/pdf/2401.15884v2" target="_blank" rel="noopener noreferrer nofollow">Research on corrective retrieval</a> found a 12.5% improvement in Recall@20 for a hybrid retrieval strategy over the best single-method baseline on its benchmark, a sign that how a system retrieves passages affects how trustworthy its answers are. Separate work on citation verification in RAG systems proposes checking each citation against its source passage before the answer is finalized, which reduces the chance that a confident-sounding citation points to nothing real.</p>
+<h2 id="privacy-and-governance-controls-worth-demanding" node="[object Object]">Privacy and governance controls worth demanding</h2>
+<p>Before trusting any document AI tool with sensitive files, confirm the following:</p>
+<ol>
+<li><strong>Data residency and encryption.</strong> Know whether files are encrypted at rest and in transit, and in which country or region they are stored.</li>
+<li><strong>Tenant isolation.</strong> For hosted tools, confirm your data is logically separated from other customers&#x27;, not just access-controlled.</li>
+<li><strong>Retention and deletion controls.</strong> Check how long chat history, uploaded files, and backups persist, and whether you can delete them on demand.</li>
+<li><strong>No-training promises versus actual behavior.</strong> A vendor&#x27;s claim that prompts are not used for training is only as strong as the telemetry and logging it actually ships with. <a href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy" target="_blank" rel="noopener noreferrer nofollow">Microsoft&#x27;s enterprise AI privacy documentation</a> notes that hosted offerings can commit contractually to this, but that is a different property from never transmitting data at all.</li>
+<li><strong>Access controls and audit logs.</strong> Role-based permissions and a visible audit trail matter for any team, not just regulated industries.</li>
+<li><strong>Lifecycle governance.</strong> NIST&#x27;s AI Risk Management Framework treats privacy as something to monitor across the tool&#x27;s whole lifecycle, not a setting you configure once and forget.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>Ask any vendor to name the exact boundary in writing (never transmitted, not used for training, encrypted-only metadata) because these are three different promises, and a vague &quot;we respect your privacy&quot; answers none of them.</em></p>
+<h2 id="a-verification-checklist-you-can-run-today" node="[object Object]">A verification checklist you can run today</h2>
+<p>Claims are cheap to make and quick to check. Before relying on any private document AI tool for real work, run through this sequence:</p>
+<ol>
+<li>Import a representative PDF or scanned image, something close to what you actually handle.</li>
+<li>Confirm whether OCR runs on your device or sends the image elsewhere.</li>
+<li>Disconnect from the internet and see whether document processing still works.</li>
+<li>Watch outbound network connections and logs while you run a normal task.</li>
+<li>Locate where indexes, embeddings, chat history, crash reports, and backups are actually stored.</li>
+<li>Open any citation the tool generates and compare it, line by line, against the original document.</li>
+</ol>
+<div class="my-4 w-full overflow-x-auto"><table node="[object Object]" class="min-w-full border-collapse"><thead><tr><th>Pipeline stage</th><th>What to check</th><th>Why it matters</th></tr></thead><tbody><tr><td>File import</td><td>Does upload require internet access</td><td>Confirms whether raw files ever leave the device</td></tr><tr><td>OCR</td><td>Runs offline or calls an external service</td><td>Determines exposure of scanned images and handwriting</td></tr><tr><td>Index and embeddings</td><td>Storage location (local disk vs vendor server)</td><td>Determines what a breach elsewhere could expose</td></tr><tr><td>Citations</td><td>Match original document text exactly</td><td>Confirms answers are traceable, not invented</td></tr></tbody></table></div>
+<p>A tool that passes steps 1 through 4 with no outbound traffic is demonstrating local processing rather than just claiming it. A tool that fails step 6, producing a citation that does not match the source, is a sign to verify every answer manually before you trust it. Research on multi-agent retrieval verification makes the same point: grounding an answer in retrieved passages does not guarantee the citation is accurate, so attribution needs its own check.</p>
+<h2 id="greencube-a-privacy-first-fully-offline-desktop-assistant" node="[object Object]">GreenCube: a privacy-first, fully offline desktop assistant</h2>
+<p>GreenCube is one example of a fully local desktop approach. It runs entirely on a Windows or Mac computer, with no server and no cloud component involved in processing chats or documents.</p>
+<ul>
+<li>Files, chats, and generated answers stay on the device; nothing is uploaded to analyze a document.</li>
+<li>A one-time Google or Microsoft sign-in verifies the license only; it does not transmit chat data or documents anywhere.</li>
+<li>At setup, you download one AI model once: &quot;Quick&quot; (fast, plain text only) or &quot;All-rounder&quot; (reads images, builds study guides and documents, needs more memory and runs slower).</li>
+<li>The price is a one-time €9.99 / US$9.99, with everything included and no subscription.</li>
+<li>Performance depends on your computer. Tiers like Seed, Sprout, Bloom, and Thrive describe what different hardware handles well, and a slower machine will answer and build documents more slowly, not necessarily worse.</li>
+</ul>
+<p>GreenCube does not claim compliance certifications, and it does not claim to out-reason large cloud AI models on complex tasks. The pitch is narrower: privacy by design, ownership of your own data, and offline operation at a fixed price. That fits private PDF review, checking a legal draft before it goes out, or researching material that should never leave your machine.</p>
+<p><strong>Pro Tip:</strong> <em>Run the verification checklist above on any tool you install, GreenCube included. A fully local design is only as private as what actually happens when you disconnect the internet and watch.</em></p>
+<h2 id="fitting-private-document-ai-into-existing-workflows" node="[object Object]">Fitting private document AI into existing workflows</h2>
+<p>Most teams do not replace their document systems outright. A local or hosted private document AI tool typically sits alongside existing storage, not inside it.</p>
+<p>A practical pattern is to keep source files in whatever system already manages them, a shared drive, a document management platform, a case management tool, and use the AI tool as a separate reading and drafting layer. You open or import the specific files you need help with, work on them locally, and save any output back into your existing system manually. This avoids giving a new tool broad, automated access to everything you store.</p>
+<p><img src="images/d8c88c59c918.jpeg" alt="Workflow from storage through local AI and back"/></p>
+<p>For teams handling especially sensitive material, access control matters as much as the AI tool itself. Limit who can install or use the tool on which machines, keep an inventory of which devices have sensitive files loaded locally, and separate that access from general company accounts where possible.</p>
+<p>Governance frameworks built for AI deployment generally recommend documenting data provenance and defining risk-based rules before rollout, which applies here too: decide which document types are allowed into any AI tool, local or hosted, before someone makes that call informally. A <a href="https://devpulse.com/insights/ai-governance-framework-guide" target="_blank" rel="noopener">practical AI governance framework</a> lays out this kind of lifecycle thinking in more detail, covering policy, provenance, and risk-based evaluation steps that apply whether you are rolling out one desktop tool or a dozen.</p>
+<p>Integration, in other words, is less about plugging an API into your stack and more about deciding where the boundary sits between your existing systems and anything new.</p>
+<h2 id="local-app-hosted-workspace-or-masking-which-fits-you" node="[object Object]">Local app, hosted workspace, or masking: which fits you?</h2>
+<p>A fully local app gives you the strongest boundary a provider can offer: nothing leaves your machine, though the security of that machine is now entirely on you. A hosted private workspace trades some of that boundary for administrative features, like centralized access logs and contractual terms, that larger organizations often need. Masking before sending data to a cloud AI tool is a pragmatic middle path when local models cannot handle the workload, but it only works if the masking is actually verified, not assumed.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="try-greencube-a-private-offline-document-ai-you-can-test-today" node="[object Object]">Try GreenCube: a private, offline document AI you can test today</h2>
+<p>If you want to see exactly where your files go, the simplest test is to use a tool that never sends them anywhere. GreenCube runs fully offline on Windows and Mac, after a one-time setup that downloads your chosen AI model once, and costs a single €9.99 / US$9.99 with no subscription and everything included.</p>
+<p><img src="images/ec7488317b94.png" alt="GreenCube"/></p>
+<ul>
+<li>Download GreenCube and pick a model: Quick for speed, All-rounder for images and longer documents.</li>
+<li>Import a real PDF or scanned file and watch how it&#x27;s processed.</li>
+<li>Disconnect your internet and confirm the tool keeps working.</li>
+<li>Run through our <a href="https://blog.greencube.app/blog/offline-ai-security">offline AI security hardening guide</a> for deeper checks on telemetry and device-level protections.</li>
+</ul>
+<p>Get started on the GreenCube Lifetime buy page and run the checklist yourself before trusting any document to it.</p>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="is-there-an-ai-that-is-completely-private" node="[object Object]">Is there an AI that is completely private?</h3>
+<p>No AI tool is private by default; privacy depends on its architecture and how you configure it. A fully local desktop tool that never connects to the internet for processing, like GreenCube, keeps files on your device, which is the closest practical version of complete privacy available today.</p>
+<h3 id="is-it-legal-to-use-ai-to-write-legal-documents" node="[object Object]">Is it legal to use AI to write legal documents?</h3>
+<p>Using AI to draft or check legal documents is generally legal, but the rules on review, disclosure, and liability vary by jurisdiction and area of law. A licensed attorney should review anything AI-assisted before it is filed or relied upon, and confidentiality rules may restrict which tools you can use with client information.</p>
+<h3 id="what-is-the-best-ai-for-documents" node="[object Object]">What is the best AI for documents?</h3>
+<p>There is no single best tool; the right choice depends on whether you need offline privacy, hosted collaboration features, or raw reasoning power on complex material. For professionals who need files to stay on their own machine, fully local options such as GreenCube are built specifically for that constraint, while hosted enterprise tools trade some of that boundary for broader features.</p>
+<h3 id="can-i-make-a-private-ai" node="[object Object]">Can I make a private AI?</h3>
+<p>You can run private AI locally using open-weight models and local inference software, though this typically requires technical setup and capable hardware. Packaged tools that handle the model download and setup for you, running fully offline after installation, offer a simpler path to the same result without the configuration work.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://csrc.nist.gov/pubs/ir/8579/ipd" target="_blank" rel="noopener noreferrer nofollow">Developing the NCCoE Chatbot: Technical and Security Learnings from the Initial Implementation | CSRC</a></li>
+<li><a href="https://arxiv.org/pdf/2401.15884v2" target="_blank" rel="noopener noreferrer nofollow">Corrective Retrieval Augmented Generation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/data-privacy" target="_blank" rel="noopener noreferrer nofollow">Data privacy and handling in Microsoft’s enterprise AI offerings</a></li>
+</ul>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/best-private-pdf-ai">Best Private PDF AI for Privacy-First Users</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-security">Offline AI Security: A Practical Hardening Guide</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+<li><a href="https://blog.greencube.app/blog/secure-ai-on-pc">Secure AI on Your PC: A Private, Offline Buyer&#x27;s Guide</a></li>
+</ul>

@@ -1,0 +1,115 @@
+<p>If you need a private, one-time-purchase Windows alternative to cloud AI tools that keeps chats and PDF or image analysis entirely on your device. The right category is a local desktop assistant, not another subscription service. Greencube fits that brief directly: it runs offline after a one-time model download, costs a flat fee, and keeps your chat and document data local to your device. The trade-off is honest, too. You gain full ownership and privacy, but a local model still won&#x27;t out-reason a frontier cloud AI on heavy, large-scale tasks.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Local models with a size of 2GB suit text-only tasks and run efficiently on machines with 8GB of RAM, while the 4.2GB image-capable model needs more memory and processing power.</li>
+<li>Ensuring OCR, embedding, and inference processes happen entirely on your device is critical for genuine privacy and requires verifying no external API calls during operation.</li>
+<li>Running inference locally reduces the risk of data interception but shifts security responsibilities to users, requiring encryption, strong passwords, and careful management of files and backups.</li>
+<li>Greencube offers a one-time purchase with models that operate fully offline, providing ownership and privacy without subscription costs, but with performance trade-offs compared to cloud AI.</li>
+<li>A machine with at least 8GB of RAM is essential for smooth operation, especially for image-related tasks, and lower specifications can cause significant slowdowns during document processing.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-does-a-one-time-purchase-offline-windows-assistant-actually-deliver">What Does a One-Time-Purchase Offline Windows Assistant Actually Deliver?</a></li>
+<li><a href="#how-does-local-document-ai-actually-work">How Does Local Document AI Actually Work?</a></li>
+<li><a href="#how-do-you-choose-an-offline-windows-ai-assistant">How Do You Choose an Offline Windows AI Assistant?</a></li>
+<li><a href="#what-are-the-hardware-requirements-for-local-ai-on-windows">What Are the Hardware Requirements for Local AI on Windows?</a></li>
+<li><a href="#what-does-local-ai-actually-protect-and-what-does-it-not">What Does Local AI Actually Protect, and What Does It Not?</a></li>
+<li><a href="#what-are-greencubes-actual-specs-and-limits">What Are Greencube&#x27;s Actual Specs and Limits?</a></li>
+<li><a href="#why-most-private-ai-advice-misses-the-point">Why Most &quot;Private AI&quot; Advice Misses the Point</a></li>
+<li><a href="#ready-to-try-a-local-assistant-instead-of-a-subscription">Ready to Try a Local Assistant Instead of a Subscription?</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-does-a-one-time-purchase-offline-windows-assistant-actually-deliver" node="[object Object]">What Does a One-Time-Purchase Offline Windows Assistant Actually Deliver?</h2>
+<p>The product category here is a local inference app: software that downloads a language model once, then answers questions and reads documents entirely on your own hardware. No monthly bill, no server round trip, no usage cap tied to a subscription tier. For someone comparing <a href="https://blog.greencube.app/blog/offline-ai-vs-cloud-ai">apps like NovelAI</a> that run in the cloud, this is a structurally different product: you&#x27;re buying software, not renting access.</p>
+<p>At setup, you typically pick between two model sizes, each downloaded once and stored locally:</p>
+<ul>
+<li>A smaller, faster text-only model (roughly 2GB) built for quick chat and drafting.</li>
+<li>A larger model (roughly 4.2GB) that can also read images and scanned pages, at the cost of more RAM and slower responses.</li>
+</ul>
+<p>The pros are straightforward: your chats and documents stay on the machine, there&#x27;s no recurring cost, and usage isn&#x27;t metered, reflecting <a href="https://alhora.app/ai-principles" target="_blank" rel="noopener">Alhora&#x27;s AI Principles: It Never Writes Your Book</a> around privacy-first design. The cons matter too. Local models trail cloud giants on complex multi-step reasoning, the image-capable option needs meaningfully more memory, and you&#x27;re responsible for your own backups and device security instead of a vendor&#x27;s infrastructure. For privacy-first buyers, that trade usually still wins. For someone who needs top-tier reasoning on every query, it might not.</p>
+<h2 id="how-does-local-document-ai-actually-work" node="[object Object]">How Does Local Document AI Actually Work?</h2>
+<p>Three separate stages have to happen on your device, not one server somewhere, for a document assistant to be genuinely private. Skip the mechanics and you&#x27;re trusting a marketing claim instead of an architecture.</p>
+<ol>
+<li><strong>Local OCR and parsing.</strong> The app reads a scanned PDF or image and converts it into text using an on-device vision model, no cloud vision API involved.</li>
+<li><strong>Local embeddings and vector search.</strong> The extracted text gets converted into numerical vectors and indexed locally, so the assistant can pull the relevant passage when you ask a question.</li>
+<li><strong>Local LLM inference.</strong> The language model generates your answer using only that locally retrieved text, running entirely on your CPU or GPU.</li>
+</ol>
+<p>A document assistant is only as private as its weakest link in that chain. If any single stage quietly calls an external OCR service or a cloud embedding API, <a href="https://dev.to/doc2meaisolutions/why-local-document-ai-is-really-an-ocr-rag-local-inference-problem-1ang" target="_blank" rel="noopener noreferrer nofollow">the offline privacy guarantee is broken</a> even if the chat window looks completely local. Poor OCR is also the most common failure point: garbled text extraction leads to bad retrieval, and bad retrieval leads to a confident, wrong answer from the model.</p>
+<p><strong>Pro Tip:</strong> <em>Open Task Manager&#x27;s network tab (or a free tool like GlassWire) while you feed a PDF into the app. If you see outbound traffic during processing, something in that pipeline isn&#x27;t actually local.</em></p>
+<h2 id="how-do-you-choose-an-offline-windows-ai-assistant" node="[object Object]">How Do You Choose an Offline Windows AI Assistant?</h2>
+<p>Run any candidate, including Greencube, through the same checklist. A polished interface tells you nothing about what&#x27;s happening under the hood.</p>
+<ul>
+<li>Confirm OCR happens locally, not through a cloud vision API, especially if you&#x27;ll be scanning images or receipts.</li>
+<li>Confirm embeddings and vector search run on-device rather than through a hosted service.</li>
+<li>Confirm inference itself is local, meaning the model file lives on your drive.</li>
+<li>Check whether the app supports scanned-image analysis at all. Not every local model does; text-only models simply can&#x27;t read pictures.</li>
+<li>Look at installer quality, the pricing structure (one-time versus recurring), the refund window, and whether support documentation actually exists.</li>
+<li>Ask who&#x27;s responsible for security once the app is local. Disk encryption, account access, and update habits become your job, not the vendor&#x27;s.</li>
+</ul>
+<h2 id="what-are-the-hardware-requirements-for-local-ai-on-windows" node="[object Object]">What Are the Hardware Requirements for Local AI on Windows?</h2>
+<p>Every local model has to be downloaded once before it runs offline, so plan for that download regardless of which option you pick. <a href="https://learn.microsoft.com/en-us/windows/ai/cloud-ai" target="_blank" rel="noopener noreferrer nofollow">Microsoft&#x27;s own guidance on choosing between cloud and local Windows AI models</a> confirms that on-device viability depends heavily on your machine&#x27;s memory and processor, not just the software itself.</p>
+<ul>
+<li>The lighter text-only model runs around 2GB and works fine on modest hardware.</li>
+<li>The image-capable model runs around 4.2GB and needs more headroom to process scanned pages and pictures.</li>
+</ul>
+<blockquote>
+<p><strong>8GB of RAM is the floor for image-capable local models, not a comfortable target.</strong> On older or budget laptops, that floor can still mean noticeably slower responses, especially the first time a large scanned PDF gets processed.</p>
+</blockquote>
+<p>If your machine has 8GB of RAM and mostly handles text chat, start with the smaller model. Save the larger, image-capable one for machines with 8GB or more where you specifically need OCR on scanned documents. Once both models are downloaded, everything runs with no internet connection required, though CPU-only machines will feel noticeably slower than anything with a dedicated GPU. Local <a href="https://github.com/gibbenergy/Vision-Ingest" target="_blank" rel="noopener noreferrer nofollow">document parsing tools show similar patterns</a>, offering low-VRAM modes specifically because image processing spikes memory use fast.</p>
+<h2 id="what-does-local-ai-actually-protect-and-what-does-it-not" node="[object Object]">What Does Local AI Actually Protect, and What Does It Not?</h2>
+<p>Running inference locally removes the biggest structural risk of cloud AI: your conversation and document content simply never leaves the device, so there&#x27;s <a href="https://aiworldtoday.com/guides/local-ai-vs-cloud-ai" target="_blank" rel="noopener noreferrer nofollow">nothing for a third-party server to intercept or log</a>. That also reduces exposure under frameworks like GDPR or HIPAA, since <a href="https://doi.org/10.5281/zenodo.20776293" target="_blank" rel="noopener noreferrer nofollow">data residency stops being a question</a> when nothing gets transmitted.</p>
+<p>Local doesn&#x27;t fix everything, though. The risks that remain are yours to manage:</p>
+<ul>
+<li>Malware or spyware already on your machine can still read local files, model outputs, or logs.</li>
+<li>Unencrypted drives expose everything if the laptop is lost or stolen.</li>
+<li>Shared Windows accounts or weak passwords defeat the privacy benefit entirely.</li>
+<li>Unmanaged backups can quietly copy sensitive chats or documents to less secure storage.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>Turn on BitLocker, use a dedicated Windows account with a strong password, and check your firewall logs occasionally for anything unexpected reaching out. Local software shifts the security burden from a vendor&#x27;s servers to your own habits.</em></p>
+<h2 id="what-are-greencubes-actual-specs-and-limits" node="[object Object]">What Are Greencube&#x27;s Actual Specs and Limits?</h2>
+<p>Greencube is built with Tauri, Rust, and React, and it runs inference through llama.cpp entirely on your machine. That&#x27;s a deliberately lightweight, native stack rather than a browser wrapper around a remote API.</p>
+<p>The license costs a one-time fee, with a 14-day refund window and no subscription attached. Signing in through Google or Microsoft is required to verify the license. Chats and document processing run locally on your machine.</p>
+<p>At setup, you choose between two models, downloaded once each: a smaller, faster text-only model around 2GB, and a larger model of about 4.2GB that can read images and scanned pages but requires more memory. Greencube runs on Windows 10 and 11, with a Mac version in development.</p>
+<p><img src="images/13bfe68cab13.jpeg" alt="Comparison of two local AI models"/></p>
+<p>Worth saying plainly: Greencube isn&#x27;t pitched as smarter than a top cloud model. It offers privacy, offline access, no usage limits, and a price you pay once.</p>
+<h2 id="why-most-private-ai-advice-misses-the-point" node="[object Object]">Why Most &quot;Private AI&quot; Advice Misses the Point</h2>
+<p>Most guides to private AI stop at &quot;it runs on your device&quot; and call that enough. That&#x27;s the wrong finish line. A chat window can feel completely offline while the document you just uploaded gets shipped to a cloud OCR endpoint behind the scenes, because the interface doesn&#x27;t distinguish between local inference and local-looking inference.</p>
+<p><img src="images/74e7f21241fa.jpeg" alt="Why Most &quot;Private AI&quot; Advice Misses the Point — overview diagram"/></p>
+<p>The conventional advice also treats RAM requirements as a footnote. It isn&#x27;t one. An 8GB floor for image-capable models is a real constraint that determines whether your specific laptop will feel usable or frustrating, and vendors that gloss over that number are setting buyers up for a bad first impression.</p>
+<p>What actually deserves priority, in order: verify the OCR and embedding steps are local before you trust anything else about the app, match the model size to your RAM honestly rather than optimistically, and accept upfront that a local model is a privacy and ownership trade, not a capability upgrade. Readers who go in with that framing end up satisfied. Readers expecting a pocket-sized GPT-4 competitor usually don&#x27;t.</p>
+<blockquote>
+<p><em>— Greencube</em></p>
+</blockquote>
+<h2 id="ready-to-try-a-local-assistant-instead-of-a-subscription" node="[object Object]">Ready to Try a Local Assistant Instead of a Subscription?</h2>
+<p>Greencube is the alternative to another monthly AI subscription: pay once, own the app, and keep every chat and document on your own laptop instead of a vendor&#x27;s server. That&#x27;s a meaningful shift for anyone who&#x27;s tired of recurring charges for tools they use inconsistently, and it matches what <a href="https://blog.greencube.app/blog/ai-without-subscription">owning your AI outright</a> is supposed to mean.</p>
+<p><img src="images/ec7488317b94.png" alt="Greencube"/></p>
+<p>If your laptop has 8GB of RAM or less, or you mainly need text chat and drafting help, start with the Quick model. If you regularly scan receipts, contracts, or handwritten notes and have 8GB or more to spare, the All-rounder model is worth the extra download size. Either way, the license is a one-time €8.99 / $9.99, backed by a 14-day refund if it&#x27;s not a fit. Grab it from the Greencube purchase page, or browse the <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">full product overview</a> first if you want the details before you commit.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://dev.to/doc2meaisolutions/why-local-document-ai-is-really-an-ocr-rag-local-inference-problem-1ang" target="_blank" rel="noopener noreferrer nofollow">Why “Local Document AI” Is Really an OCR + RAG + Local Inference Problem - DEV Community</a></li>
+<li><a href="https://aiworldtoday.com/guides/local-ai-vs-cloud-ai" target="_blank" rel="noopener noreferrer nofollow">Local AI vs Cloud AI: Privacy, Cost and Speed</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows/ai/cloud-ai" target="_blank" rel="noopener noreferrer nofollow">Choose between cloud-based and local AI models | Microsoft Learn</a></li>
+<li><a href="https://github.com/gibbenergy/Vision-Ingest" target="_blank" rel="noopener noreferrer nofollow">Vision Ingest — local-first document parsing (GitHub)</a></li>
+</ul>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="is-there-a-free-fully-offline-alternative-to-cloud-ai-chat-tools" node="[object Object]">Is There a Free, Fully Offline Alternative to Cloud AI Chat Tools?</h3>
+<p>Free local model runners exist, but a polished one-time-purchase desktop app with built-in document OCR, like Greencube at €8.99 / $9.99, usually saves setup time compared with assembling free tools yourself.</p>
+<h3 id="can-an-offline-windows-assistant-read-scanned-pdfs-and-photos" node="[object Object]">Can an Offline Windows Assistant Read Scanned PDFs and Photos?</h3>
+<p>Only if the model you choose supports image input. Greencube&#x27;s All-rounder model (Gemma 4 E4B, about 4.2GB) reads images and scanned pages; the smaller Quick model is text-only.</p>
+<h3 id="how-much-ram-do-i-need-for-a-local-ai-assistant-on-windows" node="[object Object]">How Much RAM Do I Need for a Local AI Assistant on Windows?</h3>
+<p>Eight gigabytes of RAM is the stated minimum for image-capable local models, and it&#x27;s a floor, not a comfort zone. Older machines at that level may still run noticeably slowly.</p>
+<h3 id="does-signing-in-break-the-privacy-promise-of-a-local-ai-app" node="[object Object]">Does Signing In Break the Privacy Promise of a Local AI App?</h3>
+<p>Not in the way people assume. Sign-in through Google or Microsoft verifies your license only; your actual chats and document analysis still run entirely on-device with no data transmitted.</p>
+<h3 id="how-can-i-verify-an-app-is-actually-processing-documents-locally" node="[object Object]">How Can I Verify an App Is Actually Processing Documents Locally?</h3>
+<p>Watch network activity with a monitor like GlassWire while processing a file. Genuine local pipelines show no outbound traffic during OCR, embedding, or inference.</p>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/unlimited-ai">Own a Private Offline Assistant on Windows, Unlimited AI for €8.99</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-chatbot-windows">The Best Local AI Chatbot for Windows: Private, Simple, Yours</a></li>
+<li><a href="https://blog.greencube.app/blog/gemini-alternatives">Gemini Alternatives for Private, Offline Windows AI</a></li>
+<li><a href="https://blog.greencube.app/blog/best-local-ai-ui">Pay €8.99 Once for GreenCube, a Private Local AI UI for Windows</a></li>
+</ul>
