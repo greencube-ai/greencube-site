@@ -131,7 +131,7 @@
     /* soft fade-in on load (no longer waits for the fonts) */
     html { background: #F5F1E8; }
     body { animation: gc-page-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-    @keyframes gc-page-in { from { opacity: 0; } }
+    @keyframes gc-page-in { from { opacity: 0.01; } }  /* not 0: Chrome never records a first paint for a page that starts fully transparent */
     @media (prefers-reduced-motion: reduce) { body { animation: none; } }
   </style>
 
