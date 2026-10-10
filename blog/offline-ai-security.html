@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Offline AI Security: A Practical Hardening Guide | GreenCube blog</title>
+  <meta name="description" content="Enhance your offline AI security with effective hardening strategies. Learn key practices for protecting sensitive data and ensuring integrity." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Offline AI Security: A Practical Hardening Guide | GreenCube blog" />
+  <meta property="og:description" content="Enhance your offline AI security with effective hardening strategies. Learn key practices for protecting sensitive data and ensuring integrity." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/offline-ai-security" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/8b1b97992c51.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/8b1b97992c51.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/offline-ai-security" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Offline AI Security: A Practical Hardening Guide", "description": "Enhance your offline AI security with effective hardening strategies. Learn key practices for protecting sensitive data and ensuring integrity.", "image": "https://blog.greencube.app/blog/images/8b1b97992c51.jpg", "datePublished": "2026-07-27", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/offline-ai-security", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there any AI that runs completely offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Several tools run entirely on local hardware with no network connection required, including open-source models like Llama and Mistral deployed via Ollama or llama.cpp, and desktop apps like GreenCube that package local inference for non-technical users with no setup required."}}, {"@type": "Question", "name": "Can you build a fully offline AI system for sensitive data?", "acceptedAnswer": {"@type": "Answer", "text": "You can, but it requires hardware-backed boot integrity (UEFI Secure Boot, TPM2 PCR sealing), a default-deny egress policy, a formal USB transfer workflow with GPG encryption, and a model quarantine pipeline — all operating together. Missing any one of those controls weakens the overall posture."}}, {"@type": "Question", "name": "What is the biggest security risk in an offline AI deployment?", "acceptedAnswer": {"@type": "Answer", "text": "The transfer workflow. USB drives moving data into and out of the air-gapped system are the primary attack surface. Encrypt with GPG on the connected host, verify signatures on both ends, and wipe or physically destroy media after use per your policy."}}, {"@type": "Question", "name": "Which AI can I use without an internet connection?", "acceptedAnswer": {"@type": "Answer", "text": "Open-source models deployed locally (Llama, Mistral, Phi) run without internet access once downloaded and verified. For a no-setup option, GreenCube installs as a desktop app and runs fully offline on Windows, with no accounts, no cloud telemetry, and a one-time purchase price."}}, {"@type": "Question", "name": "How does offline AI map to HIPAA compliance?", "acceptedAnswer": {"@type": "Answer", "text": "An air-gapped deployment satisfies HIPAA's transmission-security safeguard by design, but auditors still require access logs, session records, chain-of-custody documentation for any data transfers, a written key-management policy, and a documented update process. Offline operation addresses the technical safeguards; administrative and physical safeguards require separate documentation."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Offline AI Security: A Practical Hardening Guide</h1>
+<p class="byline">GreenCube &middot; 27 July 2026 &middot; updated 10 October 2026</p>
+<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today you sign in once with Google or Microsoft to activate it, and the first launch downloads the AI model; after that it works offline and your chats and files never leave your PC. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<img class="cover" src="/blog/images/8b1b97992c51.jpg" alt="" width="1200" height="686" fetchpriority="high"/>
+<p>Yes, offline AI can be secure for sensitive data — but only when hardware-backed boot integrity, a default-deny egress policy, and a formal data-lifecycle workflow are all in place simultaneously. Miss any one of those three, and &quot;offline&quot; becomes a label rather than a guarantee.</p>
+<p>The single most important thing to verify first: confirm UEFI Secure Boot is active, TPM2 PCR sealing is configured, and your OS enforces a deny-all outbound rule at the nftables level before any model ever touches real data. The sections below walk through the full threat model, architecture patterns, lifecycle controls, compliance mapping, and a deployable checklist — in that order.</p>
+<p><img src="/blog/images/98f50c669e57.jpg" alt="Engineer configuring hardware boot security" width="1200" height="686" loading="lazy" decoding="async"/></p>
+<hr/>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-offline-actually-means-and-the-threats-that-remain">What &quot;offline&quot; actually means and the threats that remain</a></li>
+<li><a href="#how-to-build-an-offline-first-architecture-with-hardware-backed-integrity">How to build an offline-first architecture with hardware-backed integrity</a></li>
+<li><a href="#data-handling-model-provenance-and-lifecycle-controls">Data handling, model provenance, and lifecycle controls</a></li>
+<li><a href="#operational-policies-and-physical-security-controls-you-cannot-skip">Operational policies and physical security controls you cannot skip</a></li>
+<li><a href="#model-specific-threats-and-how-to-test-for-them-offline">Model-specific threats and how to test for them offline</a></li>
+<li><a href="#mapping-offline-ai-controls-to-us-compliance-frameworks">Mapping offline AI controls to U.S. compliance frameworks</a></li>
+<li><a href="#practical-constraints-indicative-costs-and-a-realistic-deployment-timeline">Practical constraints, indicative costs, and a realistic deployment timeline</a></li>
+<li><a href="#when-you-want-an-easy-trustworthy-offline-ai-without-building-the-stack-yourself">When you want an easy, trustworthy offline AI without building the stack yourself</a></li>
+<li><a href="#copyable-deployment-checklist-for-secure-offline-ai">Copyable deployment checklist for secure offline AI</a></li>
+<li><a href="#key-takeaways">Key Takeaways</a></li>
+<li><a href="#the-operational-pitfall-most-teams-learn-the-hard-way">The operational pitfall most teams learn the hard way</a></li>
+<li><a href="#greencube-private-offline-ai-without-building-the-stack">GreenCube: private offline AI without building the stack</a></li>
+<li><a href="#authoritative-sources-and-further-reading">Authoritative sources and further reading</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-offline-actually-means-and-the-threats-that-remain">What &quot;offline&quot; actually means and the threats that remain</h2>
+<p>&quot;Offline&quot; and &quot;air-gapped&quot; are not synonyms in practice. A true air-gapped machine has no network interfaces active at the OS or firmware level: Ethernet physically unplugged, Wi-Fi disabled in BIOS, cellular radio absent or disabled. An &quot;offline&quot; machine that still has a live NIC with a default-deny firewall rule is a different security posture entirely — one software misconfiguration away from egress.</p>
+<p><strong>The threat vectors that survive air-gapping:</strong></p>
+<ul>
+<li><strong>Insider misuse.</strong> A credentialed operator can exfiltrate data on a USB drive, photograph a screen, or print sensitive outputs. Technical controls alone cannot close this.</li>
+<li><strong>Removable media.</strong> USB drives are the primary data channel into and out of an air-gapped system. A contaminated drive can carry malware, poisoned model weights, or exfiltration payloads.</li>
+<li><strong>Supply-chain compromise.</strong> A model downloaded from an untrusted source, or a dependency bundled with a backdoor, enters the system before any runtime control can catch it.</li>
+<li><strong>Firmware and BIOS tampering.</strong> An attacker with physical access can flash a malicious UEFI image that survives OS reinstalls.</li>
+<li><strong>Compromised peripherals.</strong> Keyboards, mice, and USB hubs with embedded microcontrollers have been used as attack vectors in high-security environments.</li>
+<li><strong>Human error.</strong> Connecting the machine &quot;just once&quot; for a patch, reusing an unclean USB, or leaving printed outputs unattended.</li>
+</ul>
+<p>That last point deserves emphasis. Air-gapped systems are considered compromised the moment they touch the internet, even briefly. Treat any such connection as a full re-provisioning event, not a recoverable incident.</p>
+<p>Common mistakes that invalidate offline guarantees: hybrid cloud fallbacks that permit egress for telemetry, unmonitored hardcopy outputs left in shared spaces, and reusing USB media across security boundaries without wiping.</p>
+<hr/>
+<h2 id="how-to-build-an-offline-first-architecture-with-hardware-backed-integrity">How to build an offline-first architecture with hardware-backed integrity</h2>
+<p>The architecture goal is a system where every layer — from firmware to model runtime — is cryptographically attested before sensitive data enters.</p>
+<h3 id="hardware-backed-boot-integrity">Hardware-backed boot integrity</h3>
+<p>UEFI Secure Boot with a custom MOK (Machine Owner Key) ensures only signed bootloaders and kernels load. TPM2 PCR sealing extends this: PCR registers 0, 2, 4, and 7 capture firmware, driver, bootloader, and Secure Boot policy measurements. Seal the disk-encryption key to those PCR values so the key is released only when the boot chain is unmodified. Any firmware tampering breaks the seal and the system refuses to decrypt.</p>
+<p>Modern <a href="https://github.com/SecAI-Hub/SecAI_OS" target="_blank" rel="noopener noreferrer nofollow">air-gapped OS stacks</a> built on Fedora Atomic/Silverblue patterns implement this with a sealed runtime, a model quarantine pipeline, and TPM2-based attestation gating — the model is not promoted to &quot;trusted&quot; until attestation passes.</p>
+<h3 id="egress-controls">Egress controls</h3>
+<p>Default-deny nftables rules with an explicit allowlist for zero destinations is the baseline. An airlock proxy pattern adds a controlled, audited chokepoint: any process that attempts outbound traffic hits the proxy, which logs and drops by default. Tool-firewall patterns restrict which binaries can open sockets at all.</p>
+<h3 id="architecture-trade-offs">Architecture trade-offs</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Layer</th><th>Highest-assurance approach</th><th>Operational cost</th></tr></thead><tbody><tr><td>Boot integrity</td><td>UEFI Secure Boot + TPM2 PCR sealing</td><td>Requires custom MOK enrollment; complicates hardware replacement</td></tr><tr><td>OS platform</td><td>Immutable/atomic OS (Fedora Atomic style)</td><td>Updates require signed bundle delivery; no live patching</td></tr><tr><td>Model runtime</td><td>Sealed quarantine pipeline with attestation gate</td><td>Seven-stage verification adds hours to model onboarding</td></tr><tr><td>Egress</td><td>Default-deny nftables + airlock proxy</td><td>Any legitimate egress requires explicit allowlist change and audit entry</td></tr><tr><td>Update delivery</td><td>Signed bundles via controlled USB workflow</td><td>Operational overhead ~30 minutes per update cycle</td></tr></tbody></table></div>
+<p>The supply-chain verification step is where most teams underestimate complexity. Every dependency in the model&#x27;s runtime environment needs a verified provenance chain, not just the model weights themselves.</p>
+<hr/>
+<h2 id="data-handling-model-provenance-and-lifecycle-controls">Data handling, model provenance, and lifecycle controls</h2>
+<p>Keeping data protected across the full lifecycle requires formal stages, not ad hoc practices.</p>
+<p><strong>Ingest:</strong> Encrypt all input data on the connected host before it moves. Use 4096-bit GPG keys. Transfer as <code>.gpg</code> files on a sealed USB drive. The private key never leaves the air-gapped host.</p>
+<p><strong>Model quarantine:</strong> Before any model is used on sensitive data, run a seven-stage quarantine pipeline: source policy check, format gate, integrity check (hash pinning against a known-good manifest), provenance verification (cosign or equivalent), static scan, behavioral test, and diffusion scan. A model that fails any stage is not promoted.</p>
+<p><strong>Verification before transfer:</strong> For open-source model releases, verify the SHA256 checksum and cosign signature on the connected machine before the USB is sealed. Bundle all dependencies for offline install so the air-gapped host never needs to resolve a package at runtime.</p>
+<p><strong>Local use:</strong> Model inference runs entirely on the air-gapped host. No telemetry, no callback URLs, no update checks.</p>
+<p><strong>Output encryption:</strong> Re-encrypt outputs with GPG before they leave the air-gapped host. Outputs travel as ciphertext, not plaintext.</p>
+<p><strong>Secure disposal:</strong> Wipe or physically destroy USB media after each transfer cycle if policy requires. Maintain a destruction log. For long-term archival, encrypt with a separately managed key and document the key-rotation schedule.</p>
+<p><strong>Key management:</strong> Rotate GPG keys every 1–2 years. Keep the private key on the air-gapped host only. Store offline backups of the key in a physically secured location with documented chain of custody. TPM2-sealed keys add a hardware binding that survives key-file theft but not hardware replacement, so document the re-sealing procedure.</p>
+<p><strong>Authenticated updates without network access:</strong> Build signed update bundles on a vetted connected machine, verify signatures on that machine, transfer via the sealed USB workflow, and verify again on the air-gapped host before applying. Never apply an update bundle whose signature you have not checked on both ends of the transfer.</p>
+<hr/>
+<h2 id="operational-policies-and-physical-security-controls-you-cannot-skip">Operational policies and physical security controls you cannot skip</h2>
+<p>Technical controls are necessary but not sufficient. <a href="https://www.security.org/resources/guide-securing-confidential-data/" target="_blank" rel="noopener noreferrer nofollow">Physical environment vulnerabilities</a> — unattended devices, printed outputs, improperly disposed documents — routinely negate the benefits of offline operation in real deployments.</p>
+<p><strong>Access policies:</strong> Role-based access with the minimum privilege needed for each role. A two-person rule for any sensitive transfer: one operator initiates, a second verifies the chain-of-custody log before the USB is unsealed. Sessions auto-lock after a defined idle period. All session activity is logged locally with tamper-evident signatures.</p>
+<p><strong>Removable media workflow:</strong> Encrypt on the connected machine, transport via a physically sealed courier process, decrypt only on the air-gapped host, re-encrypt outputs before the return trip. The USB drive itself should be dedicated to this workflow and never used on any other machine.</p>
+<p><strong>Audit evidence:</strong> Signed transfer logs with content hashes (never plaintext content). Tamper seals on enclosures, documented at each transfer. Destruction logs for media and hardcopy. Auditors in HIPAA and FedRAMP contexts will ask for all of these.</p>
+<p><strong>Pro Tip:</strong> <em>Label every USB drive used in the transfer workflow with a unique serial number and log it in a physical register. An unlabeled drive appearing in the workflow is an immediate incident trigger — no exceptions.</em></p>
+<p>Hardcopy outputs deserve the same chain-of-custody treatment as digital transfers. A printed page containing model output on sensitive data is as much a data artifact as the encrypted file it came from. Shred under supervision; log the destruction.</p>
+<hr/>
+<h2 id="model-specific-threats-and-how-to-test-for-them-offline">Model-specific threats and how to test for them offline</h2>
+<p>Model poisoning, prompt injection, and hallucinations each require distinct mitigations — and all three can be tested locally without network access.</p>
+<p><strong>Threats:</strong></p>
+<ol>
+<li><strong>Model poisoning.</strong> Malicious weights introduced via a compromised supply chain or a tampered update bundle. The quarantine pipeline (provenance, static scan, behavioral test) is the primary defense.</li>
+<li><strong>Prompt injection.</strong> An adversarial string in input data that hijacks the model&#x27;s behavior. Particularly dangerous when the model processes documents from external sources.</li>
+<li><strong>Data poisoning via transfer media.</strong> A contaminated USB introduces malicious training examples or adversarial inputs into the ingestion pipeline.</li>
+<li><strong>Hallucinations producing false forensic claims.</strong> A model inventing CVEs, case citations, or medical findings that do not exist in the ingested data.</li>
+</ol>
+<p><strong>Testing methodology:</strong></p>
+<p>A deterministic fact-extraction layer — regex parsers and structured parsers that run before the LLM — is the most effective hallucination control. Force the model to cite only facts present in the extracted structured output. If the model references something not in the extraction, that is a test failure.</p>
+<p><strong>Red-team checklist:</strong></p>
+<ol>
+<li>Feed malformed inputs (truncated PDFs, corrupted images) and verify the system fails safely without exposing raw error traces.</li>
+<li>Inject adversarial prompt strings in document metadata fields and verify the model does not execute them.</li>
+<li>Submit inputs containing fictional CVEs or case numbers and verify the model does not affirm them as real.</li>
+<li>Run behavioral regression tests after every model update to confirm output distributions have not shifted.</li>
+<li>Attempt to elicit the model&#x27;s system prompt or internal configuration via indirect injection.</li>
+<li>Verify that the model&#x27;s responses reference only items present in the ingested data, not external knowledge that could indicate a network call or a poisoned weight.</li>
+</ol>
+<p><a href="https://aisecurity.cisco.com/" target="_blank" rel="noopener noreferrer nofollow">Lifecycle-driven AI security</a> — treating model supply chain, development, quarantine, and runtime monitoring as distinct control domains — is what separates a hardened deployment from a machine that just happens to be unplugged.</p>
+<hr/>
+<h2 id="mapping-offline-ai-controls-to-us-compliance-frameworks">Mapping offline AI controls to U.S. compliance frameworks</h2>
+<p>Air-gapped AI deployments in the United States most commonly need to satisfy HIPAA, FTC reasonable-security expectations, and state privacy laws such as California&#x27;s CPRA.</p>
+<p><strong>HIPAA:</strong> The administrative safeguards require documented access policies, workforce training, and a contingency plan. The technical safeguards require access controls, audit controls, integrity controls, and transmission security. An air-gapped deployment satisfies transmission security by definition, but auditors will still expect access logs, session records, and a documented key-management policy. The physical safeguards map directly to the chain-of-custody and media-disposal controls described above.</p>
+<p><strong>FTC reasonable security / CPRA:</strong> The FTC&#x27;s reasonable-security standard is contextual, but for sensitive data it consistently expects encryption at rest, access controls, and documented incident-response procedures. CPRA adds data-minimization obligations: if the model does not need a field to perform its function, that field should not be ingested.</p>
+<p><strong>Evidence auditors want to see:</strong> Signed access logs with timestamps, chain-of-custody records for every USB transfer, signed model provenance documentation, a written key-management policy with rotation dates, and a documented update process showing how patches reach the air-gapped host without a network connection.</p>
+<p><strong>When air-gapping is necessary versus when encryption and VPN suffice:</strong> Genetics research, legal discovery involving privileged materials, and classified research typically require air-gapping. Most enterprise use cases involving PII can be adequately protected with encryption at rest, a zero-trust network architecture, and a VPN — air-gapping adds operational cost that is only justified when the data sensitivity or regulatory requirement demands it.</p>
+<hr/>
+<h2 id="practical-constraints-indicative-costs-and-a-realistic-deployment-timeline">Practical constraints, indicative costs, and a realistic deployment timeline</h2>
+<p>Air-gapped AI is not free in compute, energy, or staff time. Setting accurate expectations before procurement avoids the most common deployment failures.</p>
+<p><strong>Compute and energy trade-offs:</strong> Local inference on a GPU-equipped workstation handles most 7B–13B parameter models at acceptable latency for document analysis. CPU-only inference on the same class of hardware is roughly 5–10x slower for the same model size. <a href="https://greencube.app/how-much-water-does-ai-use" target="_blank" rel="noopener noreferrer nofollow">Local inference</a> avoids the water and energy costs of cloud data centers, but the on-premises hardware draws continuous power even when idle.</p>
+<p><strong>Indicative cost items:</strong></p>
+<ul>
+<li>Dedicated workstation or server hardware: varies by GPU tier</li>
+<li>Tamper-evident enclosures and physical security hardware: varies by facility</li>
+<li>Signed update media and courier process: ongoing operational cost</li>
+<li>Audit logging appliances or local SIEM: varies by compliance requirement</li>
+<li>Staff time for transfer workflows, model quarantine, and audit evidence: the largest ongoing cost</li>
+</ul>
+<p>An air-gapped proof-of-concept typically requires modest hardware investment when using open-source model stacks, with minimal software licensing costs. Operational overhead per inference job includes time for staging and transfer.</p>
+<p><strong>Sample timeline:</strong> A hardened single-machine setup typically requires a few days for initial configuration including BIOS hardening, OS installation, TPM2 enrollment, egress rules configuration, and initial model quarantine. Staffing for ongoing operations requires personnel trained in the transfer workflow and audit log verification. Operational overhead per week varies depending on deployment volume.</p>
+<hr/>
+<h2 id="when-you-want-an-easy-trustworthy-offline-ai-without-building-the-stack-yourself">When you want an easy, trustworthy offline AI without building the stack yourself</h2>
+<p>Not every team needs a full air-gapped infrastructure. The decision point is straightforward: if you are processing classified, legally privileged, or regulated health data at scale, build the hardened stack. If you need private, local AI for document analysis, PDF reading, or general chat without cloud telemetry, a turnkey offline desktop app is the faster and more practical path.</p>
+<p><a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube</a> is built for exactly that second case. It runs entirely on your own machine, stores nothing in the cloud, requires no model setup, no accounts, and no subscription. One-time purchase, install and use. It handles PDFs and images locally, which covers the most common document-analysis workflows for professionals who want AI that is genuinely theirs.</p>
+<p>For a proof-of-concept evaluation, verify three things: no outbound connections during a session (monitor with a packet capture or a local firewall log), all storage stays in a local directory you control, and the install process requires no account creation or activation server call. GreenCube passes all three by design.</p>
+<p><strong>Pro Tip:</strong> <em>Before trusting any &quot;offline&quot; AI app with sensitive data, run it for 10 minutes while capturing traffic with Wireshark or a similar tool. Zero outbound packets is the only acceptable result. If you see DNS queries or HTTPS connections, the app is not offline regardless of what the marketing says.</em></p>
+<p>Understanding <a href="https://greencube.app/does-chatgpt-train-on-your-data" target="_blank" rel="noopener noreferrer nofollow">what cloud AI does with your data</a> makes the contrast with a local-only tool concrete — cloud models often use conversations for training, a risk that simply does not exist when the model never leaves your hardware.</p>
+<hr/>
+<h2 id="copyable-deployment-checklist-for-secure-offline-ai">Copyable deployment checklist for secure offline AI</h2>
+<p><strong>Must (non-negotiable for any sensitive-data deployment):</strong></p>
+<ol>
+<li>Enable UEFI Secure Boot with a custom MOK and seal the disk-encryption key to TPM2 PCR values 0, 2, 4, and 7.</li>
+<li>Encrypt all storage (HDD/SSD) with a TPM2-sealed key; verify the seal breaks on any firmware change.</li>
+<li>Set default-deny egress rules at the nftables level; document every allowlist entry with a business justification.</li>
+<li>Deliver all software updates as signed bundles verified on both the connected host and the air-gapped host before application.</li>
+<li>Enforce a formal USB transfer workflow: encrypt with GPG on the connected host, transfer sealed, decrypt only on the air-gapped host, re-encrypt outputs before return.</li>
+</ol>
+<p><strong>Should (strongly recommended for production deployments):</strong></p>
+<ol start="6">
+<li>Run every new model through the full quarantine pipeline (source policy, format gate, hash pinning, cosign provenance, static scan, behavioral test, diffusion scan) before use on real data.</li>
+<li>Deploy a deterministic fact-extraction layer before the LLM to prevent hallucinations on forensic or regulated outputs.</li>
+<li>Implement local tamper-evident logging with signed log entries; store logs on write-once media or a separate logging appliance.</li>
+<li>Apply tamper seals to enclosures and USB drives; log seal numbers in a physical register.</li>
+</ol>
+<p><strong>Can (optional, adds depth for high-assurance environments):</strong></p>
+<ol start="10">
+<li>Add a local-only search mediation layer that strips PII before any query reaches the model.</li>
+<li>Implement a hardened GUI for non-technical operators that restricts available actions to the approved workflow only.</li>
+<li>For environments that require occasional controlled external lookups, route through a Tor-based airlock with PII stripping and full audit logging — never direct internet access from the air-gapped host.</li>
+</ol>
+<hr/>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>Offline AI is secure for sensitive data only when hardware-backed boot integrity, default-deny egress, a formal USB transfer workflow, and a model quarantine pipeline operate together as a system.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Point</th><th>Details</th></tr></thead><tbody><tr><td>Hardware trust anchors first</td><td>UEFI Secure Boot and TPM2 PCR sealing are the foundation; every other control depends on them.</td></tr><tr><td>Air-gap means no network, ever</td><td>A single internet connection is treated as a full compromise; re-provision from verified media.</td></tr><tr><td>Transfer workflow is the attack surface</td><td>Encrypt with GPG on the connected host, verify on both ends, and wipe or destroy media after use.</td></tr><tr><td>Fact-extraction prevents hallucinations</td><td>A deterministic parsing layer before the LLM stops the model from inventing CVEs or false forensic claims.</td></tr><tr><td>GreenCube for turnkey local AI</td><td>GreenCube runs fully offline with no cloud telemetry, no accounts, and one-time payment — verify with a packet capture before trusting it with sensitive data.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="the-operational-pitfall-most-teams-learn-the-hard-way">The operational pitfall most teams learn the hard way</h2>
+<p>The most common failure in air-gapped AI deployments is not a sophisticated attack. It is someone connecting the machine &quot;just once&quot; to download a missing dependency, then treating the system as still air-gapped afterward. That single connection invalidates the entire security posture. The machine must be re-provisioned from verified media, and the incident must be logged.</p>
+<p>The second most common failure is physical. A model output printed for a meeting, left on a conference table, and photographed by a visitor is a data breach regardless of how well the digital controls were designed. Physical document handling — supervised printing, immediate shredding, destruction logs — deserves the same engineering attention as cryptographic key management. The chain of custody does not end at the USB port.</p>
+<hr/>
+<h2 id="greencube-private-offline-ai-without-building-the-stack">GreenCube: private offline AI without building the stack</h2>
+<p>Most teams reading this guide do not need a full air-gapped infrastructure. They need AI that stays on their machine, reads their documents, and never phones home. That is the gap GreenCube fills.</p>
+<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
+<p>GreenCube is a desktop AI app that runs entirely on your own computer. No cloud, no accounts, no subscription. It reads PDFs and images locally, handles chat, and costs a single one-time payment. For professionals who want AI that is genuinely private, it is the fastest path from &quot;I need offline AI&quot; to actually using it. The install takes minutes, requires no model configuration, and works for non-technical users out of the box.</p>
+<p>For a proof-of-concept, <a href="https://greencube.app/buy" target="_blank" rel="noopener noreferrer nofollow">download GreenCube</a> and run it for a session while monitoring outbound traffic. You will see zero network activity. That is the baseline any offline AI tool should meet, and it is what GreenCube delivers by design.</p>
+<hr/>
+<h2 id="authoritative-sources-and-further-reading">Authoritative sources and further reading</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Source</th><th>Why it is useful</th></tr></thead><tbody><tr><td>SecAI-Hub/SecAI_OS (GitHub)</td><td>Reference OS stack implementing Secure Boot, TPM2 PCR sealing, model quarantine pipeline, and default-deny egress for air-gapped AI deployments.</td></tr><tr><td>Secure Offline LLM Workflow (PromptQuorum)</td><td>Practical GPG transfer workflow, key-management guidance, cost estimates, and operational overhead figures for air-gapped LLM setups.</td></tr><tr><td>Syd Offline AI Security Assistant (SydSec)</td><td>Demonstrates fact-extraction architecture and deterministic parsing as hallucination controls for offline AI security tools.</td></tr><tr><td>Sydsec/syd (GitHub)</td><td>Signed release and SHA256 verification workflow for air-gapped binary distribution; useful for software acquisition and verification procedures.</td></tr><tr><td>Cisco AI Security Lifecycle Guidance</td><td>Lifecycle-driven AI security framework covering model supply chain, development, testing, and runtime monitoring.</td></tr><tr><td>Security.org: Securing Confidential Data</td><td>Covers physical environment vulnerabilities — printed outputs, unattended devices, improper disposal — that negate offline security controls.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-there-any-ai-that-runs-completely-offline">Is there any AI that runs completely offline?</h3>
+<p>Yes. Several tools run entirely on local hardware with no network connection required, including open-source models like Llama and Mistral deployed via Ollama or llama.cpp, and desktop apps like GreenCube that package local inference for non-technical users with no setup required.</p>
+<h3 id="can-you-build-a-fully-offline-ai-system-for-sensitive-data">Can you build a fully offline AI system for sensitive data?</h3>
+<p>You can, but it requires hardware-backed boot integrity (UEFI Secure Boot, TPM2 PCR sealing), a default-deny egress policy, a formal USB transfer workflow with GPG encryption, and a model quarantine pipeline — all operating together. Missing any one of those controls weakens the overall posture.</p>
+<h3 id="what-is-the-biggest-security-risk-in-an-offline-ai-deployment">What is the biggest security risk in an offline AI deployment?</h3>
+<p>The transfer workflow. USB drives moving data into and out of the air-gapped system are the primary attack surface. Encrypt with GPG on the connected host, verify signatures on both ends, and wipe or physically destroy media after use per your policy.</p>
+<h3 id="which-ai-can-i-use-without-an-internet-connection">Which AI can I use without an internet connection?</h3>
+<p>Open-source models deployed locally (Llama, Mistral, Phi) run without internet access once downloaded and verified. For a no-setup option, GreenCube installs as a desktop app and runs fully offline on Windows, with no accounts, no cloud telemetry, and a one-time purchase price.</p>
+<h3 id="how-does-offline-ai-map-to-hipaa-compliance">How does offline AI map to HIPAA compliance?</h3>
+<p>An air-gapped deployment satisfies HIPAA&#x27;s transmission-security safeguard by design, but auditors still require access logs, session records, chain-of-custody documentation for any data transfers, a written key-management policy, and a documented update process. Offline operation addresses the technical safeguards; administrative and physical safeguards require separate documentation.</p>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube — AI that&#x27;s yours, not rented</a></li>
+<li><a href="https://greencube.app/buy" target="_blank" rel="noopener noreferrer nofollow">Get GreenCube — €9.99, yours forever</a></li>
+<li><a href="https://greencube.app/how-much-water-does-ai-use" target="_blank" rel="noopener noreferrer nofollow">How much water does AI use? (2026) — the real numbers</a></li>
+<li><a href="https://greencube.app/does-chatgpt-train-on-your-data" target="_blank" rel="noopener noreferrer nofollow">Does ChatGPT train on your data? (2026) — the honest answer</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

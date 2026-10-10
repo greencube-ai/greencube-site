@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Keep Gemini Local: GreenCube Offline AI for Nontechnical Windows Users | GreenCube blog</title>
+  <meta name="description" content="Gemini here means GreenCube, a $9.99 one-time offline AI for Windows that keeps chats and files local. Setup steps, privacy hardening, and troubleshooting." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Keep Gemini Local: GreenCube Offline AI for Nontechnical Windows Users | GreenCube blog" />
+  <meta property="og:description" content="Gemini here means GreenCube, a $9.99 one-time offline AI for Windows that keeps chats and files local. Setup steps, privacy hardening, and troubleshooting." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/gemini" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/8ae9113c0eff.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/8ae9113c0eff.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/gemini" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Keep Gemini Local: GreenCube Offline AI for Nontechnical Windows Users", "description": "Gemini here means GreenCube, a $9.99 one-time offline AI for Windows that keeps chats and files local. Setup steps, privacy hardening, and troubleshooting.", "image": "https://blog.greencube.app/blog/images/8ae9113c0eff.jpg", "datePublished": "2026-09-20", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/gemini", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What Does \"Gemini\" Mean in This Context?", "acceptedAnswer": {"@type": "Answer", "text": "In this article, Gemini refers to GreenCube, a downloadable desktop AI that runs fully offline on Windows. It is not related to any cloud-based assistant; every chat and file stays on your own machine."}}, {"@type": "Question", "name": "How Much Does GreenCube Cost?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube is a one-time purchase of $9.99, with no subscription and no recurring fees. It includes a 14-day refund window if it doesn't work out for you."}}, {"@type": "Question", "name": "Can GreenCube Read PDFs and Images?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, but only with the All-rounder model (Gemma 4 E4B), which needs roughly 8GB of RAM. The Quick model (Llama 3.2 3B) is faster but handles plain text only and cannot read images or documents."}}, {"@type": "Question", "name": "Does GreenCube Need the Internet to Work?", "acceptedAnswer": {"@type": "Answer", "text": "Only for two things: the initial model download and the one-time sign-in to verify your license. After that, chat and document analysis run completely offline."}}, {"@type": "Question", "name": "Is Local AI Actually More Private Than Cloud AI?", "acceptedAnswer": {"@type": "Answer", "text": "Local inference keeps your prompts and files off remote servers, removing the biggest privacy risk in cloud AI: third-party logging of what you type. It still requires basic operating system hygiene, like managing cloud sync and clipboard history, to stay fully private."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Keep Gemini Local: GreenCube Offline AI for Nontechnical Windows Users</h1>
+<p class="byline">GreenCube &middot; 20 September 2026 &middot; updated 10 October 2026</p>
+<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically, instead of the two models (&ldquo;Quick&rdquo; and &ldquo;All-rounder&rdquo;) described below. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<img class="cover" src="/blog/images/8ae9113c0eff.jpg" alt="Decorative offline AI privacy title card" width="1080" height="720" fetchpriority="high"/>
+<p>Gemini here refers to a downloadable desktop AI that runs fully offline on your Windows PC and keeps every chat and file on your own machine. It is a one-time purchase with no subscription and includes a refund window. It fits privacy-conscious people, students, and professionals who need local document and image reading without sending anything to a server.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>GreenCube offers two models: Quick for speed and text-only tasks on lower-end hardware, and All-rounder for image and document reading on more capable machines.</li>
+<li>Running entirely offline keeps data on your device, preventing external interception and third-party logging, but OS-level processes can still pose privacy risks.</li>
+<li>A typical setup involves downloading models once, verifying offline operation, and securing files with encryption while excluding them from cloud backups.</li>
+<li>Cloud AI outperforms offline tools in complex reasoning and large datasets, but local AI provides permanent ownership and predictable costs without subscription fees.</li>
+<li>For best performance, match the model to your hardware&#x27;s RAM, close unnecessary background apps, and process reasonably sized files for faster responses.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-gemini-greencube-actually-is">What Gemini (GreenCube) Actually Is</a></li>
+<li><a href="#why-offline-ai-protects-your-privacy-and-speeds-things-up">Why Offline AI Protects Your Privacy and Speeds Things Up</a></li>
+<li><a href="#checking-your-pc-and-picking-quick-vs-all-rounder">Checking Your PC and Picking Quick vs. All-Rounder</a></li>
+<li><a href="#setting-up-greencube-download-verify-go-offline">Setting Up GreenCube: Download, Verify, Go Offline</a></li>
+<li><a href="#locking-down-privacy-once-greencube-is-running">Locking Down Privacy Once GreenCube Is Running</a></li>
+<li><a href="#how-offline-ai-compares-to-other-options-on-the-market">How Offline AI Compares to Other Options on the Market</a></li>
+<li><a href="#where-offline-ai-actually-gets-used-day-to-day">Where Offline AI Actually Gets Used Day to Day</a></li>
+<li><a href="#fixing-the-most-common-setup-and-runtime-problems">Fixing the Most Common Setup and Runtime Problems</a></li>
+<li><a href="#getting-the-best-speed-and-responsiveness-from-gemini">Getting the Best Speed and Responsiveness From Gemini</a></li>
+<li><a href="#why-local-processing-changes-your-security-position">Why Local Processing Changes Your Security Position</a></li>
+<li><a href="#author-perspective-setting-realistic-expectations">Author Perspective: Setting Realistic Expectations</a></li>
+<li><a href="#get-greencube-one-download-one-price-yours-to-keep">Get GreenCube: One Download, One Price, Yours to Keep</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-gemini-greencube-actually-is">What Gemini (GreenCube) Actually Is</h2>
+<p>GreenCube is a desktop application you download and run directly on Windows, with a Mac version currently in development. Once installed, it works as a private chat assistant and document reader that never needs an open internet connection to think, respond, or analyze a file.</p>
+<p>The app handles two main jobs well. First, offline chat: ask questions, draft text, brainstorm, and get answers from a model running entirely on your hardware. Second, local document and image reading through the All-rounder model, which can pull information out of PDFs and pictures and turn them into study guides or summaries.</p>
+<ul>
+<li>Runs on Windows, with Mac support coming</li>
+<li>Offline chat and text generation with no per-message limits</li>
+<li>Local PDF and image analysis (All-rounder model only)</li>
+<li>One-time purchase, no subscription, unlimited use</li>
+</ul>
+<p>The trade-off is honest and worth stating plainly: GreenCube is not going to out-reason a frontier cloud model on complex, large-scale tasks. Cloud systems still lead on raw reasoning power. What GreenCube trades for that ceiling is privacy, ownership, and a flat price, and on a slower laptop, expect answers to come a beat or two slower than on a fast desktop.</p>
+<h2 id="why-offline-ai-protects-your-privacy-and-speeds-things-up">Why Offline AI Protects Your Privacy and Speeds Things Up</h2>
+<p>Local inference means your prompts and files never leave your computer to reach a remote server, a key benefit highlighted by the Gemini Ranking Tool that optimizes for privacy and real-time responsiveness. When a model runs entirely on your own hardware, there&#x27;s nothing to intercept in transit and no company logs your conversation history on their infrastructure. That&#x27;s the central privacy argument for local AI, and it holds up as long as the app is actually configured to keep processing on-device.</p>
+<p>There&#x27;s a practical speed benefit too. <a href="https://dockyard.com/blog/2025/03/06/introduction-to-local-ai-why-it-matters" target="_blank" rel="noopener noreferrer nofollow">Local inference removes the round-trip to remote servers</a>, which cuts the lag you feel with cloud chatbots and makes the assistant feel more like a built-in tool than a separate errand. No network hop also means no waiting on someone else&#x27;s server load.</p>
+<p>None of this makes your PC leak-proof on its own. A few things can still expose your data even when the AI itself never phones home:</p>
+<ul>
+<li>Cloud backup tools (OneDrive, iCloud) can quietly sync chat logs or exported documents</li>
+<li>Windows Search indexing can cache snippets of files you analyzed</li>
+<li>Clipboard history can retain copied text from sensitive documents</li>
+<li>Browser extensions or other background apps can capture screen content</li>
+</ul>
+<p>Running a model locally solves the biggest privacy problem in AI: your words leaving your machine. It doesn&#x27;t automatically solve the smaller, older problem of operating system hygiene.</p>
+<h2 id="checking-your-pc-and-picking-quick-vs-all-rounder">Checking Your PC and Picking Quick vs. All-Rounder</h2>
+<p><img src="/blog/images/5810d35172a9.jpg" alt="Quick and All-rounder model comparison" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<p>GreenCube runs on Windows. Beyond that, what your computer can comfortably handle depends on its RAM and processor, not on official minimum specs alone. Local AI models are heavily quantized (compressed) so they can run on <a href="https://offgridai.io/blogs/news/how-privacy-focused-offline-ai-works-without-internet-a-technical-guide" target="_blank" rel="noopener noreferrer nofollow">standard consumer hardware</a>, which is why even modest laptops from the past few years can usually run the lighter model.</p>
+<p>At setup, you choose one of two models to download once:</p>
+<ul>
+<li><strong>Quick (Llama 3.2 3B, about 2GB)</strong>: fast responses, plain text only, can&#x27;t read images or PDFs, ideal for older or budget laptops</li>
+<li><strong>All-rounder (Gemma 4 E4B, about 4.2GB)</strong>: reads images and documents, builds study guides, needs roughly 8GB of RAM, and runs noticeably slower on weaker hardware</li>
+</ul>
+<p>GreenCube also groups performance into four informal tiers: Seed, Sprout, Bloom, and Thrive. These aren&#x27;t paid plans. They&#x27;re a plain-language way of showing what your particular computer handles well, from basic chat on modest hardware (Seed) up to fast, full-featured document analysis on strong machines (Thrive). A slower PC will still answer questions and build documents; it just takes longer.</p>
+<h2 id="setting-up-greencube-download-verify-go-offline">Setting Up GreenCube: Download, Verify, Go Offline</h2>
+<p>Getting GreenCube running takes three steps, and only one of them requires an internet connection after the initial setup.</p>
+<ol>
+<li><strong>Download the installer and pick your model.</strong> The app downloads either Quick or All-rounder once, then caches it locally. This mirrors how <a href="https://github.com/MicrosoftDocs/azure-ai-docs/blob/main/articles/foundry-local/concepts/foundry-local-architecture.md" target="_blank" rel="noopener noreferrer nofollow">Foundry Local&#x27;s download-on-first-use pattern works</a>: pull the model once, store it, run entirely from that local copy afterward.</li>
+<li><strong>Sign in once with Google or Microsoft.</strong> This step verifies your one-time license only. No chat content or documents are uploaded during or after this check.</li>
+<li><strong>Confirm you&#x27;re offline.</strong> Turn off Wi-Fi and open the app. If chat and document reading still work, your setup is genuinely local.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>After your first successful offline test, note the model file&#x27;s size and modification date. If either changes unexpectedly later, something re-downloaded it, and that&#x27;s worth investigating.</em></p>
+<p>For a full walk-through with screenshots, GreenCube&#x27;s <a href="https://blog.greencube.app/blog/offline-ai-setup-windows">offline setup guide for Windows</a> covers the same steps in more detail.</p>
+<h2 id="locking-down-privacy-once-greencube-is-running">Locking Down Privacy Once GreenCube Is Running</h2>
+<p>Getting a model running locally solves the biggest risk. Everyday Windows habits can still create small leaks around it, so a few extra steps close most of the gap.</p>
+<p>Store the model files on an encrypted volume using BitLocker, and exclude the GreenCube model folder from any cloud backup or sync tool you run. If OneDrive or Dropbox is set to sync your whole user folder, that one setting can undo most of the privacy benefit you just gained.</p>
+<ul>
+<li>Turn off clipboard history in Windows Settings if you paste sensitive text into chats</li>
+<li>Exclude the app&#x27;s data folder from search indexing</li>
+<li>Use temporary-chat or auto-clear settings to avoid piling up saved transcripts</li>
+<li>After installing, test with a packet capture tool or simply monitor network activity to confirm the app goes quiet once the model is downloaded</li>
+</ul>
+<p>Security researchers who focus on local AI recommend a similar checklist: <a href="https://www.runlocalai.co/paths/privacy-first" target="_blank" rel="noopener noreferrer nofollow">record model checksums and block outbound traffic</a> once setup is done, rather than just trusting that &quot;local&quot; automatically means &quot;private.&quot; Running an open-weight model on your own machine removes the biggest privacy risk in cloud AI, third-party logging of your prompts, but that only holds if the rest of your system isn&#x27;t quietly exporting the same data somewhere else.</p>
+<p><strong>Pro Tip:</strong> <em>Set a calendar reminder to re-check your sync and backup exclusions every few months. Software updates sometimes reset folder exclusions without warning.</em></p>
+<h2 id="how-offline-ai-compares-to-other-options-on-the-market">How Offline AI Compares to Other Options on the Market</h2>
+<p>Cloud AI assistants generally win on raw capability. They run enormous models on server farms and can handle multi-step reasoning, huge context windows, and specialized tasks that no laptop-sized model can currently match. If your work involves massive datasets or research-grade reasoning, a cloud tool still has the edge.</p>
+<p>Where offline tools like GreenCube pull ahead is everything downstream of &quot;how smart is the model.&quot; There&#x27;s no subscription creeping up every year, no usage cap resetting monthly, and no chat log sitting on someone else&#x27;s server waiting to be part of a data breach headline. You pay once, and the tool works exactly the same whether you&#x27;re online or completely disconnected.</p>
+<p>Browser-based AI extensions and hybrid tools sit in the middle. Some claim to process data locally but still ping a server for parts of the response, which muddies the privacy story. Genuinely offline tools using runtimes like llama.cpp keep the entire inference path on your device, with <a href="https://blogs.windows.com/windowsdeveloper/2025/09/23/windows-ml-is-generally-available-empowering-developers-to-scale-local-ai-across-windows-devices/" target="_blank" rel="noopener noreferrer nofollow">Windows ML&#x27;s production-ready local runtime</a> showing that hardware-accelerated local execution is now a mainstream path on Windows, not a workaround.</p>
+<p>The honest framing: choose based on the job. Frontier reasoning at scale still favors cloud. Privacy, predictable cost, and offline access favor a local tool. For comparison shopping among offline-first options, GreenCube&#x27;s <a href="https://blog.greencube.app/blog/gemini-alternatives">rundown of Gemini alternatives</a> breaks down where each approach fits.</p>
+<p><img src="/blog/images/a29fe19db21b.jpg" alt="How Offline AI Compares to Other Options on the Market — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<h2 id="where-offline-ai-actually-gets-used-day-to-day">Where Offline AI Actually Gets Used Day to Day</h2>
+<p>Students studying from lecture PDFs or scanned textbook pages get the most obvious use case. The All-rounder model reads an image or document and turns it into a condensed study guide, all without the file ever leaving the laptop, which matters when the material includes personal grades or unpublished research notes.</p>
+<p>Professionals handling sensitive paperwork, contracts, medical intake forms, financial statements, use offline AI to summarize or query documents that shouldn&#x27;t be pasted into a public chatbot in the first place. Freelance writers draft outlines and rough copy without worrying about a cloud provider training on their unpublished work.</p>
+<p>Frequent flyers on trains, flights, or in low-signal areas get a quieter benefit: the assistant simply doesn&#x27;t care whether there&#x27;s a network. Chat and document reading behave identically with Wi-Fi on or off, because the model runs from local cache after the first download.</p>
+<p>Teachers and tutors reviewing student submissions get a private way to summarize or check work without uploading student information to a third party. Given how strict most school data policies are, that alone can be the deciding factor.</p>
+<h2 id="fixing-the-most-common-setup-and-runtime-problems">Fixing the Most Common Setup and Runtime Problems</h2>
+<p>Most GreenCube issues trace back to one of three things: a stalled download, a sign-in hiccup, or a resource crunch on lower-end hardware.</p>
+<p>If the model download stalls or fails partway through, check your firewall or antivirus settings first. Some security software throttles large file downloads by default. Restarting the download after temporarily allowing the app through your firewall solves this in most cases.</p>
+<p>If sign-in with Google or Microsoft won&#x27;t complete, it&#x27;s almost always a browser cookie or cache issue tied to that one-time verification step, not a problem with your GreenCube account itself. Clearing the sign-in page&#x27;s cache or trying a different default browser usually clears it.</p>
+<p>If responses feel sluggish or the app seems to freeze on the All-rounder model, check available RAM. That model needs roughly 8GB free to run comfortably, and if Chrome tabs or other apps are eating your memory, close them before running a document analysis. Switching to the Quick model is a reasonable fallback on machines that consistently struggle.</p>
+<p>If you suspect the app is calling out to the internet when it shouldn&#x27;t be, disconnect entirely and repeat your usual chat or document task. If it still works exactly the same, you have your answer.</p>
+<h2 id="getting-the-best-speed-and-responsiveness-from-gemini">Getting the Best Speed and Responsiveness From Gemini</h2>
+<p>Match the model to the machine rather than defaulting to the more capable option. If your laptop has 8GB of RAM or less, Quick will feel far more responsive than All-rounder struggling at its ceiling.</p>
+<p>Close memory-heavy background apps, browser tabs especially, before running document analysis. A model competing with forty open tabs for RAM will always feel slower than the hardware suggests it should be.</p>
+<p>Keep documents and images reasonably sized before feeding them in. A 200-page scanned PDF takes noticeably longer to process than a cleanly cropped 10-page excerpt, and breaking large files into relevant sections often gets you a better answer, faster.</p>
+<p>Restart the app after long sessions. Like most local software handling large in-memory models, GreenCube runs cleanest right after a fresh launch rather than after hours of continuous use.</p>
+<p>Give the <a href="https://blog.greencube.app/blog/how-does-local-ai-work">initial model download</a> time to finish completely, and avoid interrupting it. A partial or corrupted model file is one of the more common causes of odd, inconsistent behavior later.</p>
+<h2 id="why-local-processing-changes-your-security-position">Why Local Processing Changes Your Security Position</h2>
+<p>Running AI locally shifts the entire threat model in your favor. There&#x27;s no server-side database of your conversations for a hacker to breach, no cloud provider&#x27;s employee who could theoretically read a flagged chat, and no terms-of-service update that suddenly changes what happens to your past prompts.</p>
+<p>That said, local doesn&#x27;t mean zero risk, it means a different, usually smaller set of risks. Your exposure moves from &quot;a company&#x27;s servers&quot; to &quot;your own operating system&#x27;s habits.&quot; The main remaining privacy gaps come from OS-level behavior and optional integrations, not from the AI model itself once it&#x27;s downloaded and running.</p>
+<p>This is a genuinely different security posture than cloud AI, not just a smaller version of the same one. With cloud tools, you&#x27;re trusting a company&#x27;s infrastructure, policies, and legal exposure to subpoenas or breaches. With local tools, you&#x27;re trusting your own device security, which is something you can actually inspect and control: encryption, sync settings, firewall rules, all visible and adjustable by you directly.</p>
+<p>For anyone handling client contracts, medical records, financial documents, or simply conversations they&#x27;d rather not have logged anywhere, that shift from &quot;trust a company&#x27;s promises&quot; to &quot;control your own settings&quot; is the real value of an offline-first tool.</p>
+<h2 id="author-perspective-setting-realistic-expectations">Author Perspective: Setting Realistic Expectations</h2>
+<p>The people who get the most out of GreenCube aren&#x27;t chasing the smartest possible AI. They&#x27;re students and professionals who need a private, offline tool for document work and everyday drafting, and who&#x27;d rather own something outright than rent access to a server. Local wins decisively on privacy and response speed. Cloud still leads on frontier reasoning, and pretending otherwise does readers a disservice. Given the one-time price and 14-day refund, the lowest-risk move is simply to try it on your own files and judge the fit yourself.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="get-greencube-one-download-one-price-yours-to-keep">Get GreenCube: One Download, One Price, Yours to Keep</h2>
+<p>GreenCube is the alternative to renting AI access month after month: pay once, keep every chat and document on your own Windows PC, and never see another subscription charge tied to it. Compared to cloud subscriptions that keep billing whether you use them or not, this is a flat cost with unlimited use built in.</p>
+<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
+<p>Sign-in with Google or Microsoft happens exactly once, purely to confirm your license. It never uploads a single chat or file; those stay on your machine permanently. Pick Quick for fast, text-only speed or All-rounder for document and image reading, and switch your expectations to match your hardware tier rather than fighting it.</p>
+<p>If you&#x27;re ready to see how it runs on your own files, head to the GreenCube buy page to get your lifetime license, backed by a 14-day refund if it isn&#x27;t the right fit. For a broader look at what the app offers before you commit, the <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube overview page</a> walks through the privacy and offline features in more detail.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://dockyard.com/blog/2025/03/06/introduction-to-local-ai-why-it-matters" target="_blank" rel="noopener noreferrer nofollow">Introduction to local AI — why it matters | Dockyard</a></li>
+<li><a href="https://blogs.windows.com/windowsdeveloper/2025/09/23/windows-ml-is-generally-available-empowering-developers-to-scale-local-ai-across-windows-devices/" target="_blank" rel="noopener noreferrer nofollow">Windows ML is generally available, empowering developers to scale local AI across Windows devices</a></li>
+<li><a href="https://www.runlocalai.co/paths/privacy-first" target="_blank" rel="noopener noreferrer nofollow">Privacy-first local AI: keep every prompt local — operator path | RunLocalAI</a></li>
+<li><a href="https://github.com/MicrosoftDocs/azure-ai-docs/blob/main/articles/foundry-local/concepts/foundry-local-architecture.md" target="_blank" rel="noopener noreferrer nofollow">Foundry Local concepts — architecture (MicrosoftDocs)</a></li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-does-gemini-mean-in-this-context">What Does &quot;Gemini&quot; Mean in This Context?</h3>
+<p>In this article, Gemini refers to GreenCube, a downloadable desktop AI that runs fully offline on Windows. It is not related to any cloud-based assistant; every chat and file stays on your own machine.</p>
+<h3 id="how-much-does-greencube-cost">How Much Does GreenCube Cost?</h3>
+<p>GreenCube is a one-time purchase of $9.99, with no subscription and no recurring fees. It includes a 14-day refund window if it doesn&#x27;t work out for you.</p>
+<h3 id="can-greencube-read-pdfs-and-images">Can GreenCube Read PDFs and Images?</h3>
+<p>Yes, but only with the All-rounder model (Gemma 4 E4B), which needs roughly 8GB of RAM. The Quick model (Llama 3.2 3B) is faster but handles plain text only and cannot read images or documents.</p>
+<h3 id="does-greencube-need-the-internet-to-work">Does GreenCube Need the Internet to Work?</h3>
+<p>Only for two things: the initial model download and the one-time sign-in to verify your license. After that, chat and document analysis run completely offline.</p>
+<h3 id="is-local-ai-actually-more-private-than-cloud-ai">Is Local AI Actually More Private Than Cloud AI?</h3>
+<p>Local inference keeps your prompts and files off remote servers, removing the biggest privacy risk in cloud AI: third-party logging of what you type. It still requires basic operating system hygiene, like managing cloud sync and clipboard history, to stay fully private.</p>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/gemini-alternatives">Gemini Alternatives for Private, Offline Windows AI</a></li>
+<li><a href="https://blog.greencube.app/blog/best-local-ai-ui">Pay €9.99 Once for GreenCube, a Private Local AI UI for Windows</a></li>
+<li><a href="https://blog.greencube.app/blog/chatgpt-vs-greencube">Keep Chats Local on Windows: ChatGPT or GreenCube (€9.99 One-Time)</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

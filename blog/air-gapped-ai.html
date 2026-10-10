@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Air Gapped AI: A Security Team&#x27;s Deployment Guide | GreenCube blog</title>
+  <meta name="description" content="Discover how to deploy air gapped AI for secure environments. Ensure compliance with regulatory standards like FedRAMP and CMMC. Learn more!" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Air Gapped AI: A Security Team&#x27;s Deployment Guide | GreenCube blog" />
+  <meta property="og:description" content="Discover how to deploy air gapped AI for secure environments. Ensure compliance with regulatory standards like FedRAMP and CMMC. Learn more!" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/air-gapped-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/325c2b1bf886.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/325c2b1bf886.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/air-gapped-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Air Gapped AI: A Security Team's Deployment Guide", "description": "Discover how to deploy air gapped AI for secure environments. Ensure compliance with regulatory standards like FedRAMP and CMMC. Learn more!", "image": "https://blog.greencube.app/blog/images/325c2b1bf886.jpg", "datePublished": "2026-08-01", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/air-gapped-ai", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is air gapping in AI?", "acceptedAnswer": {"@type": "Answer", "text": "Air gapping in AI means running an AI system inside a physically isolated network with no routable path to the public internet, so that models, data, and outputs never leave the organization's boundary. It removes entire attack classes by taking the system off the institutional network graph."}}, {"@type": "Question", "name": "What does \"air-gapped\" mean in tech?", "acceptedAnswer": {"@type": "Answer", "text": "An air-gapped system has no physical or logical connection to any external network, including no external DNS resolution, no public certificate authority trust chains, and no outbound connections of any kind. The term comes from the literal \"air gap\" between the isolated system and any connected network."}}, {"@type": "Question", "name": "What is the difference between air-gapped and offline?", "acceptedAnswer": {"@type": "Answer", "text": "\"Offline\" typically means a device or application is not currently connected to the internet but could be reconnected. \"Air-gapped\" means the system is physically and permanently isolated with no connection path available, a much stronger and auditable guarantee that accrediting authorities require for classified and CUI workloads."}}, {"@type": "Question", "name": "Does GreenCube qualify as air-gapped AI?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube runs fully offline on a single machine with no cloud connection or telemetry, making it a practical privacy solution for individuals and small teams. It does not constitute an enterprise air-gapped enclave with the full accreditation controls (signed artifact ingest, internal PKI, SIEM) that FedRAMP High or DoD IL5 require."}}, {"@type": "Question", "name": "When is a full enterprise air gap legally required?", "acceptedAnswer": {"@type": "Answer", "text": "A full enterprise air gap is typically required when data carries a CUI, SECRET, or higher classification, when a contract references FedRAMP High, DoD IL5/IL6, or CMMC Level 3, or when a security policy explicitly prohibits any outbound connectivity from the AI runtime. Consult your ISSO and the relevant accreditation body for a definitive determination."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Air Gapped AI: A Security Team&#x27;s Deployment Guide</h1>
+<p class="byline">GreenCube &middot; 1 August 2026 &middot; updated 10 October 2026</p>
+
+<img class="cover" src="/blog/images/325c2b1bf886.jpg" alt="Decorative title card with security and AI themed sketches" width="1200" height="686" fetchpriority="high"/>
+<p>Air-gapped AI means running an AI system inside a physically isolated enclave where no routable path to the public internet exists. Models, weights, data, and inference outputs never cross that boundary. If your workload touches classified information, Controlled Unclassified Information (CUI), or any environment governed by FedRAMP High, DoD IL5/IL6, or CMMC Level 3, you are almost certainly required to consider it.</p>
+<p>Three quick decision checks before you read further:</p>
+<ul>
+<li><strong>Regulated classification:</strong> Does your data carry a CUI, SECRET, or higher marking, or does it live inside a SCIF? A true air gap is likely mandatory, not optional.</li>
+<li><strong>Contractual or accreditation requirements:</strong> Does your contract reference DoD IL5/IL6, FedRAMP High, or CMMC? Those frameworks expect evidence of enforced isolation, not just a policy statement.</li>
+<li><strong>Outbound telemetry prohibition:</strong> Does your security policy or data-handling agreement forbid any outbound call from the AI runtime? Many commercial LLM deployments make silent telemetry calls that violate this on day one.</li>
+</ul>
+<p>For small teams or individuals who need provable privacy without enterprise-scale infrastructure, GreenCube offers a fully <a href="https://blog.greencube.app/blog/local-ai-models-explained">offline AI deployment</a> that runs entirely on a single machine with no cloud connection required. For enterprise accreditation, the rest of this guide covers the full architecture.</p>
+<hr/>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-does-air-gapped-ai-actually-mean-and-how-is-it-different-from-just-offline">What does &quot;air-gapped AI&quot; actually mean, and how is it different from just &quot;offline&quot;?</a></li>
+<li><a href="#what-core-components-must-live-inside-an-air-gapped-enclave">What core components must live inside an air-gapped enclave?</a></li>
+<li><a href="#how-does-an-air-gapped-ai-deployment-actually-run-day-to-day">How does an air-gapped AI deployment actually run day to day?</a></li>
+<li><a href="#which-deployment-shape-matches-your-regulatory-tier">Which deployment shape matches your regulatory tier?</a></li>
+<li><a href="#what-are-the-most-common-ways-air-gapped-ai-projects-fail">What are the most common ways air-gapped AI projects fail?</a></li>
+<li><a href="#what-are-the-real-operational-tradeoffs-of-running-ai-in-an-air-gap">What are the real operational tradeoffs of running AI in an air gap?</a></li>
+<li><a href="#step-by-step-implementation-checklist-for-an-air-gapped-ai-deployment">Step-by-step implementation checklist for an air-gapped AI deployment</a></li>
+<li><a href="#what-do-practitioners-and-auditors-actually-look-for-in-air-gapped-ai">What do practitioners and auditors actually look for in air-gapped AI?</a></li>
+<li><a href="#key-takeaways">Key Takeaways</a></li>
+<li><a href="#the-part-most-guides-skip-air-gapping-is-a-lifecycle-commitment-not-a-one-time-build">The part most guides skip: air-gapping is a lifecycle commitment, not a one-time build</a></li>
+<li><a href="#private-offline-ai-without-the-enterprise-overhead">Private offline AI without the enterprise overhead</a></li>
+<li><a href="#useful-sources-for-accreditation-and-further-reading">Useful sources for accreditation and further reading</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-does-air-gapped-ai-actually-mean-and-how-is-it-different-from-just-offline">What does &quot;air-gapped AI&quot; actually mean, and how is it different from just &quot;offline&quot;?</h2>
+<p>The phrase gets misused constantly. Teams say &quot;isolated&quot; when they mean &quot;on-prem.&quot; They say &quot;air-gapped&quot; when they mean &quot;behind a VPN.&quot; Auditors know the difference, and so should you.</p>
+<p><strong>True air-gapped AI</strong> means the enclave has no physical or logical path to any external network. No DNS resolution to external hosts. No external certificate authority trust chains. No outbound NTP to public time servers. No vendor license callbacks. No NAT gateway that could be re-enabled. The system is, in the literal sense, off the institutional network graph, which <a href="https://arxiv.org/html/2603.24898" target="_blank" rel="noopener noreferrer nofollow">removes entire attack classes</a> including lateral movement, botnet enrollment, and network-mediated compromise.</p>
+<h3 id="how-on-prem-and-vpc-isolation-fall-short">How on-prem and VPC &quot;isolation&quot; fall short</h3>
+<p>Many teams mistake VPC isolation or a private cloud deployment for an air gap. They are not the same thing, and auditors treat those as differentiators. Here is what makes on-prem and VPC patterns weaker:</p>
+<ul>
+<li><strong>NAT gateways and allowlists:</strong> Traffic can still leave the environment via permitted routes. An allowlist is a policy control, not a physical one.</li>
+<li><strong>Vendor control-plane access:</strong> Many on-prem AI platforms phone home for license validation, model updates, or telemetry. That call breaks any air-gap claim.</li>
+<li><strong>External CA trust chains:</strong> If the system trusts a public certificate authority, an attacker who compromises that CA can issue certificates your enclave will accept.</li>
+<li><strong>Shared DNS resolvers:</strong> Any DNS query that reaches an external resolver is an outbound channel, even if the query itself seems harmless.</li>
+</ul>
+<h3 id="the-no-routable-path-test">The &quot;no routable path&quot; test</h3>
+<p>Assessors and accrediting authorities use a simple test: can any process on any machine in the enclave initiate a connection that reaches a host outside the boundary? If the answer is yes under any condition, including maintenance windows, the environment does not qualify as air-gapped. Run a controlled inference job and capture all network traffic at the host, hypervisor, and physical switch layers simultaneously. Zero outbound packets is the only passing result.</p>
+<hr/>
+<h2 id="what-core-components-must-live-inside-an-air-gapped-enclave">What core components must live inside an air-gapped enclave?</h2>
+<p><img src="/blog/images/2d41d89ca3ac.jpg" alt="Infographic illustrating air-gapped AI deployment steps" width="1080" height="720" loading="lazy" decoding="async"/></p>
+<p>Nothing in the AI stack can depend on an external network at runtime. That sounds obvious, but the dependency list is longer than most architects expect on first pass.</p>
+<h3 id="the-full-component-inventory">The full component inventory</h3>
+<ul>
+<li><strong>Local model registry:</strong> Signed model weights stored in an internal registry with provenance metadata. No pulling from Hugging Face or any external hub at runtime.</li>
+<li><strong>Inference engine:</strong> Local serving stacks such as vLLM or Text Generation Inference (TGI) run entirely on enclave hardware. No external API calls during inference.</li>
+<li><strong>Vector store and embedding models:</strong> The retrieval-augmented generation (RAG) stack needs a local vector database (Qdrant, Weaviate, or Milvus deployed internally) and local embedding models. Calling an external embedding API is one of the most common ways an air gap silently breaks.</li>
+<li><strong>Container and image registry:</strong> A mirrored registry (Harbor is a common choice) holds all container images. No pulls from Docker Hub or any public registry.</li>
+<li><strong>Package mirrors:</strong> Python packages, OS packages, and any other runtime dependencies must come from an internal mirror. pip install from PyPI is not available.</li>
+<li><strong>Internal PKI and CA:</strong> The enclave runs its own certificate authority. No external CA trust chains.</li>
+<li><strong>SIEM and log storage:</strong> Observability data stays inside the boundary. Logs ship to an internal SIEM; nothing goes to a cloud-hosted logging service.</li>
+<li><strong>Orchestration layer:</strong> Kubernetes with Helm, or a container runtime like Podman, deployed and managed entirely inside the enclave.</li>
+<li><strong>Local identity provider:</strong> User authentication runs against an internal IdP (Active Directory, FreeIPA, or a FIPS-validated equivalent). No external OAuth or SAML federation to a public IdP.</li>
+</ul>
+<h3 id="hardware-and-cryptography-notes">Hardware and cryptography notes</h3>
+<p>GPU sizing depends on the model you are serving. A 7-billion-parameter model quantized to 4-bit can run on a single A100 or equivalent; a 70-billion-parameter model at full precision needs multiple high-memory GPUs. Storage must use encryption validated under FIPS 140-2 or FIPS 140-3 where DoD or FedRAMP High compliance is required. CPU selection matters for inference on smaller models: high core counts and fast NVMe I/O reduce time-to-first-token on CPU-only deployments. Plan for redundant storage and local backup capacity since no cloud backup path exists.</p>
+<p>Software Bill of Materials (SBOM) generation is not optional in regulated environments. Every container image and model artifact entering the enclave needs an SBOM that auditors can inspect. Artifact provenance, including the signing key used and the chain-of-custody record, belongs in the ATO evidence package.</p>
+<p><strong>Pro Tip:</strong> <em>Wire your local observability stack to alert on any process attempting a network connection outside the enclave&#x27;s internal CIDR range. In Kubernetes, a NetworkPolicy that defaults to deny-all egress and permits only intra-cluster traffic is the minimum starting point. Pair it with a host-level eBPF sensor (Falco works well here) to catch connections that bypass the CNI layer.</em></p>
+<hr/>
+<h2 id="how-does-an-air-gapped-ai-deployment-actually-run-day-to-day">How does an air-gapped AI deployment actually run day to day?</h2>
+<p>At runtime, inference and retrieval run entirely on local hardware. A user query hits the local inference engine, which calls the local vector store if RAG is configured, and returns a response. No packet leaves the enclave during that entire cycle. That is the design goal, and it is also where most deployments quietly fail.</p>
+<p><img src="/blog/images/c4ead62489d6.jpg" alt="Technician operating air-gapped AI hardware in server room" width="1200" height="686" loading="lazy" decoding="async"/></p>
+<h3 id="the-update-and-patch-path">The update and patch path</h3>
+<p>Since you cannot pull updates from the internet, every artifact update follows a staged transfer process. Successful deployments rely on one-way ingest pipelines where containers, model weights, and libraries are scanned, signed, and checksummed on a staging machine before physical transfer into the enclave.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Stage</th><th>Action</th><th>Verification</th></tr></thead><tbody><tr><td>Staging zone prep</td><td>Download artifact to internet-connected staging host</td><td>Verify source hash against vendor-published checksum</td></tr><tr><td>Artifact signing</td><td>Sign artifact with an offline key held by the transfer authority</td><td>Confirm signature with the enclave&#x27;s trusted public key</td></tr><tr><td>Malware and SBOM scan</td><td>Run antivirus and SBOM diff against the previous version</td><td>Document findings; reject if new unsigned dependencies appear</td></tr><tr><td>Transfer</td><td>Move via data diode or vetted removable media per transfer SOP</td><td>Log media serial number, transfer timestamp, and operator identity</td></tr><tr><td>Enclave ingest</td><td>Import artifact into the internal registry</td><td>Re-verify checksum inside the enclave before activation</td></tr><tr><td>Operator sign-off</td><td>Authorized ISSO or operator approves activation</td><td>Record approval in the audit log with timestamp and identity</td></tr></tbody></table></div>
+<p>Data diodes (hardware-enforced one-way transfer devices) are the preferred path for high-classification environments. Removable media (a &quot;sneakernet&quot; transfer) is acceptable at lower tiers when the media is encrypted, tracked by serial number, and handled under a written transfer SOP. The SOP must specify who is authorized to carry media, what scanning happens before and after transfer, and how the media is sanitized or destroyed afterward.</p>
+<hr/>
+<h2 id="which-deployment-shape-matches-your-regulatory-tier">Which deployment shape matches your regulatory tier?</h2>
+<p>Not every workload needs a full air gap. The right isolation level depends on the classification of the data, the accreditation framework governing the system, and the contractual obligations in your agreement.</p>
+<h3 id="the-isolation-continuum">The isolation continuum</h3>
+<p><strong>Connected (standard cloud or SaaS):</strong> Suitable for public or low-sensitivity data. No isolation controls beyond standard access management. Appropriate for FedRAMP Low or unclassified commercial workloads.</p>
+<p><strong>BYOC (Bring Your Own Cloud / VPC deployment):</strong> The model runs in your cloud tenant, but the provider&#x27;s control plane still has some access. Appropriate for FedRAMP Moderate in many cases, but auditors will scrutinize vendor access paths. Isolated AI networks at this tier still permit outbound DNS and CA calls, which matters for your threat model.</p>
+<p><strong>Air-gapped with data diode ingest:</strong> A physically isolated enclave with a hardware-enforced one-way ingest channel. Appropriate for FedRAMP High, DoD IL5, HIPAA workloads with strict outbound prohibitions, and CMMC Level 3 environments handling CUI.</p>
+<p><strong>Fully air-gapped (no ingest channel at runtime):</strong> Updates arrive only via vetted removable media under strict SOP. Required for DoD IL6 (SECRET) and above, SCIF deployments, and any system where even a one-way hardware channel is considered an unacceptable risk surface.</p>
+<h3 id="us-regulatory-mapping">U.S. regulatory mapping</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Framework</th><th>Minimum isolation tier</th><th>Key requirement</th></tr></thead><tbody><tr><td>FedRAMP Moderate</td><td>BYOC with strict egress controls</td><td>Vendor access paths must be documented and limited</td></tr><tr><td>FedRAMP High</td><td>Air-gapped with diode or fully air-gapped</td><td>No outbound connectivity from the AI runtime</td></tr><tr><td>DoD IL5</td><td>Air-gapped with diode</td><td>CUI and mission-critical data; DISA STIG compliance</td></tr><tr><td>DoD IL6 (SECRET)</td><td>Fully air-gapped</td><td>Physical isolation; removable-media transfer SOP required</td></tr><tr><td>CMMC Level 3</td><td>Air-gapped with diode minimum</td><td>CUI protection; NIST SP 800-171 controls enforced</td></tr><tr><td>HIPAA / HITRUST</td><td>Depends on data sensitivity</td><td>Outbound telemetry prohibition common in BAAs</td></tr></tbody></table></div>
+<p>Practical signals that you need to move up a tier: your contract contains a clause prohibiting data from leaving a specific boundary, your data carries a CUI or higher marking, your auditor&#x27;s questionnaire asks for evidence of enforced isolation rather than a policy statement, or your ATO package requires proof that no data exfiltrated during a controlled test.</p>
+<hr/>
+<h2 id="what-are-the-most-common-ways-air-gapped-ai-projects-fail">What are the most common ways air-gapped AI projects fail?</h2>
+<p>The gap between &quot;we have an air-gapped policy&quot; and &quot;our enclave is actually air-gapped&quot; is where most projects break. The most common failure is a misconfigured RAG pipeline where a local model attempts to call a remote embedding or search API, silently breaking the enclave boundary.</p>
+<h3 id="the-failure-list-practitioners-actually-see">The failure list practitioners actually see</h3>
+<ul>
+<li><strong>RAG pipelines calling external embedding APIs:</strong> A developer configures LangChain or LlamaIndex with a default embedding provider (OpenAI, Cohere) and deploys it inside the enclave. The first query triggers an outbound HTTPS call. The model appears to work, the enclave is broken, and no one notices until an audit.</li>
+<li><strong>Implicit DNS leaks:</strong> A container resolves an external hostname during startup for a health check or a license validation. The DNS query leaves the enclave even if the TCP connection is blocked.</li>
+<li><strong>External CA trust chains:</strong> The system ships with the default OS trust store, which includes public CAs. A compromised or mis-issued certificate from any of those CAs could be accepted by the enclave.</li>
+<li><strong>Unvetted removable-media imports:</strong> A well-meaning operator plugs in a personal USB drive to &quot;just copy one file.&quot; Without a written SOP and enforced scanning, that is an uncontrolled ingest path.</li>
+<li><strong>Telemetry baked into model serving frameworks:</strong> Some inference servers phone home for usage metrics or version checks by default. Check every framework&#x27;s default configuration before deployment.</li>
+<li><strong>Supply-chain risks in container images:</strong> A base image pulled from a public registry before transfer may contain a dependency with a hidden outbound call. SBOM diffing catches this; skipping the diff does not.</li>
+</ul>
+<h3 id="mitigations-that-actually-hold-up-under-audit">Mitigations that actually hold up under audit</h3>
+<p>Default-deny egress at both the host (iptables/nftables or eBPF) and the orchestration layer (Kubernetes NetworkPolicy) is the baseline. Treat compliance as a runtime property and enforce controls in the kernel and orchestration layers so compromised processes cannot reach the network even if they try. Artifact signing with a key held offline and checksum verification at ingest catches supply-chain tampering. Least-privilege identity policies limit the blast radius if a process is compromised.</p>
+<p><strong>Pro Tip:</strong> <em>Before any accreditation review, run a &quot;silence test&quot;: start a full inference workload, including a RAG query, and capture all network traffic at the physical switch for 15 minutes. Any packet with a destination outside the enclave&#x27;s internal CIDR is a finding. This test is cheap to run and catches hidden dependencies that policy reviews miss entirely.</em></p>
+<hr/>
+<h2 id="what-are-the-real-operational-tradeoffs-of-running-ai-in-an-air-gap">What are the real operational tradeoffs of running AI in an air gap?</h2>
+<p>Air-gapping solves a specific threat model. It does not solve every problem, and it creates several new ones. Decision-makers who treat it as a universal answer end up with expensive, hard-to-maintain systems that underdeliver.</p>
+<h3 id="the-tradeoff-summary">The tradeoff summary</h3>
+<p><strong>Update cadence:</strong> Cloud-hosted models get continuous updates. An air-gapped deployment updates on a controlled cycle, typically monthly or quarterly, depending on the transfer SOP and the accreditation body&#x27;s requirements. That lag means your model may be several versions behind the current state of the art. For most regulated workloads, that is an acceptable tradeoff. For workloads that depend on real-time knowledge, it is a serious constraint.</p>
+<p><img src="/blog/images/1e255aa822c7.jpg" alt="Security team discussing air-gapped AI tradeoffs in meeting room" width="1200" height="686" loading="lazy" decoding="async"/></p>
+<p><strong>Model freshness vs. provable isolation:</strong> You cannot have both simultaneously. Every update cycle is a risk event that requires signing, scanning, and chain-of-custody documentation. Teams that try to update too frequently create audit fatigue and increase the chance of a procedural error during transfer.</p>
+<p><strong>Hardware costs:</strong> You own the hardware. A GPU cluster capable of serving a large high-parameter model costs significantly more than a cloud API subscription for equivalent throughput. Factor in redundancy, physical security, power, and cooling.</p>
+<p><strong>Audit overhead:</strong> Every artifact transfer generates documentation. Every access event generates a log entry. The operational cost of maintaining an auditable air-gapped enclave is real and ongoing.</p>
+<h3 id="capacity-planning">Capacity planning</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Scenario</th><th>Model size</th><th>Hardware minimum</th><th>Expected latency</th></tr></thead><tbody><tr><td>Single-user document analysis</td><td>7B parameters (4-bit quantized)</td><td>1x A100 or equivalent</td><td>Under 2 seconds per query</td></tr><tr><td>Small team</td><td>medium-sized model (4-bit quantized)</td><td>moderate GPU hardware</td><td>low-latency inference</td></tr><tr><td>Department-scale</td><td>large model (8-bit quantized)</td><td>multiple GPUs</td><td>typical inference latency</td></tr><tr><td>High-throughput classified workload</td><td>Multiple models</td><td>Dedicated GPU cluster</td><td>Depends on QPS target</td></tr></tbody></table></div>
+<p>Quantization (4-bit or 8-bit) reduces GPU memory requirements substantially and is the standard approach for fitting large models onto available hardware. The quality tradeoff is measurable but acceptable for most document analysis and question-answering tasks.</p>
+<p><strong>When air-gapping is cost-effective:</strong> The data carries a classification or regulatory designation that makes any outbound path legally or contractually prohibited. The threat model includes nation-state adversaries or insider threats with network access. The ATO requires evidence of enforced isolation.</p>
+<p><strong>When BYOC or connected tiers suffice:</strong> The data is unclassified and the primary concern is vendor data use policies. A strong BYOC deployment with strict egress controls and a reviewed vendor agreement may satisfy the requirement at lower operational cost.</p>
+<hr/>
+<h2 id="step-by-step-implementation-checklist-for-an-air-gapped-ai-deployment">Step-by-step implementation checklist for an air-gapped AI deployment</h2>
+<p>This checklist covers the three phases every deployment goes through: pre-deployment planning, staging and ingest, and ongoing operations. Adapt it to your specific accreditation framework; the sequence holds across FedRAMP, DoD, and HIPAA contexts.</p>
+<h3 id="phase-1-pre-deployment-planning">Phase 1: Pre-deployment planning</h3>
+<ol>
+<li><strong>Map your threat model.</strong> Identify the adversary types (insider, nation-state, supply chain), the data classification, and the specific controls your accreditation framework requires. Document this before touching hardware.</li>
+<li><strong>Capture accreditation requirements.</strong> Pull the specific control families from your framework (NIST SP 800-53 for FedRAMP, DISA STIGs for DoD, NIST SP 800-171 for CMMC). Map each AI component to the controls it must satisfy.</li>
+<li><strong>Define your SBOM policy.</strong> Decide which SBOM format you will use (SPDX or CycloneDX), who generates it, and how it is stored and compared at each ingest cycle.</li>
+<li><strong>Procure hardware.</strong> Size GPUs based on the model and QPS targets above. Confirm FIPS 140-2/140-3 validated storage encryption. Plan physical security for the enclave room.</li>
+<li><strong>Establish the internal PKI.</strong> Stand up an offline root CA and an intermediate CA for the enclave. Document the key ceremony and store root keys offline in hardware security modules (HSMs).</li>
+<li><strong>Define transfer authority roles.</strong> Assign named individuals as transfer authorities. Document their responsibilities, the media they are authorized to handle, and the escalation path if a transfer is rejected.</li>
+</ol>
+<h3 id="phase-2-staging-and-ingest-runbook">Phase 2: Staging and ingest runbook</h3>
+<ol>
+<li><strong>Build the staging zone.</strong> Set up an internet-connected staging host that is physically and logically separate from the enclave. This machine downloads artifacts and performs initial scanning.</li>
+<li><strong>Download and verify artifacts.</strong> Pull model weights, container images, and packages. Verify each against the vendor-published checksum before proceeding.</li>
+<li><strong>Sign artifacts.</strong> Use an offline signing key held by the transfer authority. Record the signing key ID and timestamp in the chain-of-custody log.</li>
+<li><strong>Run malware scanning and SBOM diff.</strong> Scan every artifact. Compare the new SBOM against the previous version and document any new dependencies. Reject artifacts with unsigned or unexplained new dependencies.</li>
+<li><strong>Create the transfer bundle.</strong> Package signed artifacts with their checksums and SBOM into an encrypted transfer bundle. Record the bundle hash.</li>
+<li><strong>Execute the transfer.</strong> Move the bundle via data diode or vetted removable media per the written SOP. Log the media serial number, operator identity, and timestamp.</li>
+<li><strong>Verify inside the enclave.</strong> Re-verify the bundle hash and each artifact checksum after transfer. Confirm signatures against the enclave&#x27;s trusted public key.</li>
+<li><strong>Record chain-of-custody evidence.</strong> File the complete transfer record in the ATO evidence package. This record is what auditors examine during an IL or FedRAMP review.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>Never activate a newly transferred artifact on the same day it arrives. Impose a mandatory 24-hour hold period during which a second operator independently verifies the checksums and SBOM diff. This two-person integrity check is a standard control in classified environments and catches errors that a single reviewer under time pressure will miss.</em></p>
+<h3 id="phase-3-operational-runbook">Phase 3: Operational runbook</h3>
+<ol>
+<li><strong>Daily health checks.</strong> Verify that all enclave services are running, that the SIEM is collecting logs, and that no unexpected processes are active. Run the silence test (network capture during inference) weekly.</li>
+<li><strong>Access review.</strong> Review user access logs weekly. Flag any access outside normal working hours or from unexpected endpoints. Revoke access for departed personnel within one business day.</li>
+<li><strong>Incident response.</strong> Because the enclave has no outbound comms, incident response relies on local forensics. Maintain a local copy of your IR playbook. Isolate affected nodes by powering them down or disconnecting them from the internal enclave network. Preserve disk images before any remediation.</li>
+<li><strong>Disaster recovery.</strong> Maintain encrypted local backups of model weights, configuration, and data on separate storage within the enclave. Test restoration quarterly. Document the recovery time objective (RTO) and recovery point objective (RPO) in your DR plan.</li>
+<li><strong>Accreditation evidence collection.</strong> Before each periodic review, compile transfer records, access logs, SBOM diffs, and silence test results into the evidence package. Assign a named owner for this task.</li>
+</ol>
+<p>For a deeper look at hardening the operational layer, the <a href="https://blog.greencube.app/blog/offline-ai-security">offline AI security guide</a> covers practical controls for maintaining and updating isolated AI systems.</p>
+<hr/>
+<h2 id="what-do-practitioners-and-auditors-actually-look-for-in-air-gapped-ai">What do practitioners and auditors actually look for in air-gapped AI?</h2>
+<p>The gap between a compliant-looking deployment and one that passes an accreditation review is almost always in the runtime evidence, not the architecture diagrams.</p>
+<h3 id="pre-review-diagnostic-checks">Pre-review diagnostic checks</h3>
+<p>Before an accreditation review, run these checks yourself so the auditor does not find them first:</p>
+<p><strong>SBOM matching:</strong> Compare the SBOM of every running container against the SBOM that entered the enclave at last ingest. Any new package that appeared after ingest is a finding. This catches post-transfer modifications and supply-chain insertions.</p>
+<p><strong>CA chain inspection:</strong> Enumerate every certificate in the enclave&#x27;s trust store. Any public CA (DigiCert, Let&#x27;s Encrypt, or any commercial root) that is not explicitly required and documented is a finding. Auditors for classified workloads expect a trust store containing only the internal CA.</p>
+<p><strong>DNS and NTP sink tests:</strong> Configure a local DNS sinkhole and NTP server. Run a full inference workload and check whether any query reached the sinkhole or whether any process attempted to contact an external NTP server. Either result is a finding.</p>
+<p><strong>Egress enforcement validation:</strong> Attempt to initiate an outbound connection from inside the enclave to a known external IP. The connection must fail at the network layer, not just at the application layer. Application-layer controls alone do not satisfy auditors for high-classification environments.</p>
+<h3 id="patterns-that-hold-up-under-scrutiny">Patterns that hold up under scrutiny</h3>
+<p>Treating compliance as an enforceable runtime property rather than a policy document is the single most important shift in mindset. Default-deny egress enforced at the kernel (iptables, nftables, or eBPF via Falco or Tetragon) means a misconfigured application cannot phone home even if it tries. One-way ingest via data diode enforces the same principle at the physical layer.</p>
+<p>Air-gapping eliminates whole attack classes but transfers the hardest problems to lifecycle management: packaging, signing, verifying, and moving artifacts securely into the enclave on a controlled cadence. Teams that underestimate this cost end up with stale models, broken ingest procedures, and audit findings that could have been avoided with upfront planning. Assign a named owner for lifecycle management before the first artifact enters the enclave.</p>
+<p>Operational failures often come from hidden dependencies such as DNS, CA, and NTP calls, and from egress holes quietly punched to solve update or telemetry problems. The silence test described in the risks section is the objective check that validates runtime behavior rather than relying on configuration review alone.</p>
+<hr/>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>A true air-gapped AI deployment requires physical network isolation, signed artifact ingest, enforced default-deny egress at the kernel layer, and continuous audit evidence collection to satisfy FedRAMP High, DoD IL5/IL6, and CMMC accreditation requirements.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Point</th><th>Details</th></tr></thead><tbody><tr><td>True air gap vs. isolated</td><td>No routable path, no external DNS, no public CA trust chains; VPC isolation does not qualify.</td></tr><tr><td>Signed artifact ingest</td><td>Every model weight and container must be signed, checksummed, and SBOM-verified before entering the enclave.</td></tr><tr><td>Enforce at the kernel layer</td><td>Default-deny egress in iptables/eBPF catches misconfigured apps that policy controls miss.</td></tr><tr><td>Lifecycle cost is the dominant burden</td><td>Plan update cadence, transfer SOPs, and named owners before the first artifact enters the enclave.</td></tr><tr><td>GreenCube for small teams</td><td>GreenCube runs fully offline on a single machine with no cloud connection, covering privacy needs without enterprise enclave complexity.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="the-part-most-guides-skip-air-gapping-is-a-lifecycle-commitment-not-a-one-time-build">The part most guides skip: air-gapping is a lifecycle commitment, not a one-time build</h2>
+<p>Most articles about air-gapped AI focus on the architecture diagram and the compliance checklist. Both matter. But the thing that actually determines whether a deployment survives its first annual review is something less glamorous: who owns the update cycle, and whether they have the time and authority to run it properly.</p>
+<p>The architecture is the easy part. You can design a technically correct air-gapped enclave in a week. The hard part is the 36th month, when the team that built it has turned over, the transfer SOP is three versions out of date, and the ISSO who signed off on the original ATO package has moved to a different agency. That is when auditors find findings, and that is when the real cost of air-gapping becomes visible.</p>
+<p>There is also a tendency in the industry to treat air-gapping as a binary choice: either you have a full enterprise enclave or you are using a cloud API with no privacy controls. That framing misses a large population of users who need provable local privacy without the operational burden of a classified enclave. A researcher handling sensitive interview data, a lawyer reviewing privileged documents, a small defense contractor who needs offline AI for CUI but does not have a dedicated ISSO. For those users, a lightweight offline desktop tool that runs entirely on their own machine is not a compromise. It is the right tool for the job.</p>
+<p>The lesson from practitioners who have run air-gapped AI through multiple accreditation cycles is consistent: plan the lifecycle before you plan the architecture. Assign owners, define cadence, write the transfer SOP, and run the silence test before you call the environment production-ready. The auditor will ask for all of it.</p>
+<hr/>
+<h2 id="private-offline-ai-without-the-enterprise-overhead">Private offline AI without the enterprise overhead</h2>
+<p>For individuals and small teams who need AI data protection without standing up a full enterprise enclave, GreenCube is a direct path to provable privacy. It runs entirely on your own Windows machine, with no cloud connection, no account creation, and no subscription. You get chat, PDF analysis, and image understanding, all processed locally, with nothing ever transmitted externally.</p>
+<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
+<p>The difference from a cloud AI tool is concrete: your documents never leave your device. There is no vendor with access to your queries, no telemetry, and no dependency on an internet connection. For a lawyer reviewing privileged documents, a researcher handling sensitive data, or a contractor working with CUI who does not need a full DoD-accredited enclave, GreenCube covers the privacy requirement at a fraction of the operational cost.</p>
+<p>If your workload requires FedRAMP High, DoD IL5/IL6, or CMMC Level 3 accreditation, you need the full enterprise air-gapped architecture described in this guide. But if your requirement is simply that AI stays on your machine and never touches the cloud, <a href="https://greencube.app/buy" target="_blank" rel="noopener noreferrer nofollow">GreenCube is a one-time purchase</a> that works immediately after installation, no model setup or technical configuration required. Visit <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">greencube.app</a> to see what it does and get started.</p>
+<hr/>
+<h2 id="useful-sources-for-accreditation-and-further-reading">Useful sources for accreditation and further reading</h2>
+<p>These are the primary and practitioner sources most relevant for U.S. regulated environments. NIST publications and ISOO guidance are prescriptive mandates; the practitioner guides are useful for evidence package construction and architecture validation.</p>
+<ul>
+<li><a href="https://dspace.mit.edu/handle/1721.1/164901" target="_blank" rel="noopener noreferrer nofollow"><strong>The Strategic Necessity of Air-Gapped AI Systems</strong></a> (MIT DSpace) — Academic treatment of air-gapped AI as a strategic control; useful for framing in ATO narratives and executive briefings.</li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank" rel="noopener noreferrer nofollow"><strong>NIST SP 800-53 (Security and Privacy Controls)</strong></a> — The prescriptive control catalog for FedRAMP and federal systems; map every enclave component to the relevant control families here.</li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-171/rev-3/final" target="_blank" rel="noopener noreferrer nofollow"><strong>NIST SP 800-171 (Protecting CUI in Nonfederal Systems)</strong></a> — Required reading for CMMC Level 2 and Level 3 compliance; directly applicable to CUI handling in air-gapped AI deployments.</li>
+<li><a href="https://www.fedramp.gov/assets/resources/documents/CSP_A_FedRAMP_Authorization_Boundary_Guidance.pdf" target="_blank" rel="noopener noreferrer nofollow"><strong>FedRAMP Authorization Boundary Guidance</strong></a> — Defines what constitutes the authorization boundary; essential for scoping an air-gapped AI ATO package correctly.</li>
+<li><a href="https://public.cyber.mil/dccs/" target="_blank" rel="noopener noreferrer nofollow"><strong>DISA Cloud Computing Security Requirements Guide (CC SRG)</strong></a> — Governs DoD IL tiers; specifies the physical and logical isolation requirements for IL5 and IL6 deployments.</li>
+<li><a href="https://www.archives.gov/cui" target="_blank" rel="noopener noreferrer nofollow"><strong>ISOO CUI Registry and Notices</strong></a> — The authoritative source for CUI categories and handling requirements; determines whether your data classification triggers an air-gap requirement.</li>
+<li><a href="https://hai.stanford.edu/ai-index/2025-ai-index-report" target="_blank" rel="noopener noreferrer nofollow"><strong>AI Index Report 2025</strong></a> (Stanford HAI) — Broad context on AI adoption in government and regulated sectors; useful for executive briefings on why air-gapped AI is becoming a standard requirement.</li>
+</ul>
+<p>NIST SP 800-53 and the DISA CC SRG are prescriptive mandates with specific control requirements. The MIT and Stanford sources are guidance and context, not mandates, but they carry weight in ATO narratives. The FedRAMP boundary guidance and ISOO CUI registry are the two sources most directly relevant to scoping and classification decisions.</p>
+<hr/>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-air-gapping-in-ai">What is air gapping in AI?</h3>
+<p>Air gapping in AI means running an AI system inside a physically isolated network with no routable path to the public internet, so that models, data, and outputs never leave the organization&#x27;s boundary. It removes entire attack classes by taking the system off the institutional network graph.</p>
+<h3 id="what-does-air-gapped-mean-in-tech">What does &quot;air-gapped&quot; mean in tech?</h3>
+<p>An air-gapped system has no physical or logical connection to any external network, including no external DNS resolution, no public certificate authority trust chains, and no outbound connections of any kind. The term comes from the literal &quot;air gap&quot; between the isolated system and any connected network.</p>
+<h3 id="what-is-the-difference-between-air-gapped-and-offline">What is the difference between air-gapped and offline?</h3>
+<p>&quot;Offline&quot; typically means a device or application is not currently connected to the internet but could be reconnected. &quot;Air-gapped&quot; means the system is physically and permanently isolated with no connection path available, a much stronger and auditable guarantee that accrediting authorities require for classified and CUI workloads.</p>
+<h3 id="does-greencube-qualify-as-air-gapped-ai">Does GreenCube qualify as air-gapped AI?</h3>
+<p>GreenCube runs fully offline on a single machine with no cloud connection or telemetry, making it a practical privacy solution for individuals and small teams. It does not constitute an enterprise air-gapped enclave with the full accreditation controls (signed artifact ingest, internal PKI, SIEM) that FedRAMP High or DoD IL5 require.</p>
+<h3 id="when-is-a-full-enterprise-air-gap-legally-required">When is a full enterprise air gap legally required?</h3>
+<p>A full enterprise air gap is typically required when data carries a CUI, SECRET, or higher classification, when a contract references FedRAMP High, DoD IL5/IL6, or CMMC Level 3, or when a security policy explicitly prohibits any outbound connectivity from the AI runtime. Consult your ISSO and the relevant accreditation body for a definitive determination.</p>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/offline-ai-security">Offline AI Security: A Practical Hardening Guide</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/gdpr-compliant-ai">GDPR Compliant AI: Your 2026 Compliance Roadmap</a></li>
+<li><a href="https://blog.greencube.app/blog/ollama-alternatives-3-offline-ai-solutions">Top 3 Offline AI Solutions: Ollama Alternatives 2026</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

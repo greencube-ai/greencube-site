@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>GGUF vs GGML: Why One File Wins for Private Local AI | GreenCube blog</title>
+  <meta name="description" content="See why GGUF beats GGML for private local AI: one file bundles weights, metadata, and the tokenizer; GreenCube uses it to run AI on your desktop." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="GGUF vs GGML: Why One File Wins for Private Local AI | GreenCube blog" />
+  <meta property="og:description" content="See why GGUF beats GGML for private local AI: one file bundles weights, metadata, and the tokenizer; GreenCube uses it to run AI on your desktop." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/gguf-vs-ggml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/04bfa5068d34.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/04bfa5068d34.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/gguf-vs-ggml" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GGUF vs GGML: Why One File Wins for Private Local AI", "description": "See why GGUF beats GGML for private local AI: one file bundles weights, metadata, and the tokenizer; GreenCube uses it to run AI on your desktop.", "image": "https://blog.greencube.app/blog/images/04bfa5068d34.jpg", "datePublished": "2026-10-10", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/gguf-vs-ggml", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are GGUF models better than GGML models?", "acceptedAnswer": {"@type": "Answer", "text": "For current local inference, yes: GGUF's key-value metadata, single-file packaging, and quantization support make it more reliable and better supported than GGML's older list-based format. GGML still works for archival purposes, but new tools rarely add features for it."}}, {"@type": "Question", "name": "Can I still use old GGML files?", "acceptedAnswer": {"@type": "Answer", "text": "Some older tools can still read .ggml files, but active development has moved to GGUF, so support is shrinking. The more reliable path is to find a GGUF version of the same model rather than keeping the original .ggml file in your workflow."}}, {"@type": "Question", "name": "Does converting to GGUF reduce model quality?", "acceptedAnswer": {"@type": "Answer", "text": "Conversion itself does not change quality; the quantization level you choose during conversion does. Picking a lower-precision --outtype flag in the conversion script trades some accuracy for a smaller, faster-loading file."}}, {"@type": "Question", "name": "Do I need to convert models myself to use a tool like GreenCube?", "acceptedAnswer": {"@type": "Answer", "text": "No. GreenCube downloads its model automatically during setup, so there's no manual conversion, file hunting, or command-line work involved. You pick a model option once, and the app handles the rest."}}, {"@type": "Question", "name": "Why do some apps need more RAM to run local models than others?", "acceptedAnswer": {"@type": "Answer", "text": "RAM needs come down to model size and quantization level: a larger or less-compressed model needs more memory to load and run. Guides on matching models to hardware or options like cloud-based GPU desktops are both ways to handle a model that's heavier than your current machine comfortably supports."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>GGUF vs GGML: Why One File Wins for Private Local AI</h1>
+<p class="byline">GreenCube &middot; 10 October 2026</p>
+
+<img class="cover" src="/blog/images/04bfa5068d34.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<p>GGUF is the format to use for local inference today. It bundles model weights, metadata, and the tokenizer into one extensible file that loads fast and supports quantization, which is why most modern runtimes build around it. GGML, the older list-based format, still shows up in archives and old workflows, but it has no real place in a current setup.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>GGUF bundles weights, tokenizer, and typed metadata in one aligned file, letting compatible runtimes map it from disk and skip unknown fields.</li>
+<li>Published head to head benchmarks are scarce; model speed and RAM depend more on size and quantization than format, while lower precision can reduce quality.</li>
+<li>Hugging Face Transformers dequantizes GGUF weights to fp32 in training contexts, so quantized files save memory during inference, not fine tuning.</li>
+<li>If conversion fails, check for a missing config.json, a Python version mismatch, or an incomplete download; most readers should choose a trusted, already converted build instead.</li>
+<li>Ollama, llama.cpp, and Hugging Face support GGUF directly, while remaining GGML support mainly serves backward compatibility and archival files rather than new model workflows.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#at-a-glance-comparison-gguf-vs-ggml">At-a-glance comparison: GGUF vs GGML</a></li>
+<li><a href="#how-the-formats-differ-technically">How the formats differ technically</a></li>
+<li><a href="#what-these-differences-mean-when-you-run-models-locally">What these differences mean when you run models locally</a></li>
+<li><a href="#how-to-convert-a-hugging-face-model-to-gguf-and-run-it">How to convert a Hugging Face model to GGUF and run it</a></li>
+<li><a href="#real-world-example-gguf-powering-local-privacy-first-apps">Real-world example: GGUF powering local, privacy-first apps</a></li>
+<li><a href="#comparative-performance-benchmarks-between-gguf-and-ggml-models-in-terms-of-speed-and-memory-usage">Comparative performance benchmarks between GGUF and GGML models in terms of speed and memory usage</a></li>
+<li><a href="#compatibility-and-support-differences-for-different-local-ai-applications-beyond-llamacpp">Compatibility and support differences for different local AI applications beyond llama.cpp</a></li>
+<li><a href="#format-adoption-and-community-momentum">Format adoption and community momentum</a></li>
+<li><a href="#security-and-data-privacy-implications-of-using-gguf-vs-ggml-locally">Security and data privacy implications of using GGUF vs GGML locally</a></li>
+<li><a href="#a-short-take-on-where-the-format-is-headed">A short take on where the format is headed</a></li>
+<li><a href="#a-straightforward-way-to-run-gguf-models-locally">A straightforward way to run GGUF models locally</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+<h2 id="at-a-glance-comparison-gguf-vs-ggml">At-a-glance comparison: GGUF vs GGML</h2>
+<p>The two formats solve the same basic problem (packaging a model for local use) in very different ways, and the gap explains why one replaced the other.</p>
+<ul>
+<li><strong>Metadata model:</strong> GGUF stores metadata as typed key-value pairs; GGML used an untyped list that broke when new fields were added, according to <a href="https://www.ibm.com/think/topics/gguf-versus-ggml" target="_blank" rel="noopener noreferrer nofollow">IBM&#x27;s comparison</a>.</li>
+<li><strong>Packaging:</strong> GGUF keeps tensors, metadata, and the tokenizer in a single file, so there is nothing else to track down before running a model.</li>
+<li><strong>Extensibility:</strong> New architectures and tokenizer types can be added to GGUF without breaking older files, a design goal the <a href="https://github.com/ggml-org/ggml/blob/master/docs/gguf.md" target="_blank" rel="noopener noreferrer nofollow">GGUF specification</a> documents directly.</li>
+<li><strong>Quantization and loading:</strong> GGUF&#x27;s layout is friendly to memory-mapped (mmap) loading and supports several quantization types, which keeps RAM use down on modest hardware.</li>
+</ul>
+<p>GGML&#x27;s list-based hyperparameters worked fine for early, simple models, but every new architecture risked breaking compatibility with existing tools.</p>
+<h2 id="how-the-formats-differ-technically">How the formats differ technically</h2>
+<p>The practical gap between GGUF and GGML comes down to how each one stores information about the model, not just the raw weights.</p>
+<p>GGML described a model&#x27;s hyperparameters as a flat, untyped list. That worked when models were simple, but adding a new field, say, a different tokenizer vocabulary or an extra architecture parameter, meant changing the list&#x27;s shape. Older files and older code often could not read newer ones, and newer code sometimes misread older files. <a href="https://www.ibm.com/think/topics/gguf-versus-ggml" target="_blank" rel="noopener noreferrer nofollow">IBM&#x27;s technical explainer</a> describes this as the core reason GGML caused breaking changes as the ecosystem grew.</p>
+<p>GGUF replaced that list with typed key-value metadata. Each field has a name and a type, so adding a new key (for a new tokenizer, a new architecture flag, or anything else) does not disturb fields that already exist. Readers can skip keys they don&#x27;t recognize instead of failing outright.</p>
+<p>Beyond metadata, GGUF defines a consistent file header, a version number, and alignment settings for tensor data, details laid out in the <a href="https://github.com/ggml-org/llama.cpp/blob/d59d455f/ggml/include/gguf.h" target="_blank" rel="noopener noreferrer nofollow">gguf.h specification</a> inside the llama.cpp repository. That alignment matters because it lets runtimes memory-map the file directly instead of copying it into RAM first, which speeds up loading.</p>
+<p><img src="/blog/images/fa6bc7047815.jpg" alt="GGML and GGUF format structure comparison" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<p>GGUF also supports a range of block-wise quantization types, the low-precision number formats that shrink a model&#x27;s footprint on disk and in memory. Because the format was built with these types in mind from the start, tools that produce and read GGUF files handle quantized weights predictably, which is a big part of why quantized models distributed as GGUF just work across different runtimes.</p>
+<h2 id="what-these-differences-mean-when-you-run-models-locally">What these differences mean when you run models locally</h2>
+<p>On a real machine, these design choices turn into faster load times and fewer compatibility headaches.</p>
+<p>Because GGUF packs everything into one aligned, mmap-friendly file, runtime projects can map it straight from disk instead of parsing scattered files first. That is a major reason llama.cpp, Ollama, and similar tools standardized on it. The format is built for inference, not training: when Hugging Face Transformers loads a GGUF file, it dequantizes the weights to fp32, according to the <a href="https://huggingface.co/docs/transformers/gguf" target="_blank" rel="noopener noreferrer nofollow">Transformers GGUF documentation</a>, so the memory savings apply when you run the model, not when you fine-tune it.</p>
+<p>A few practical points follow from this:</p>
+<ul>
+<li><strong>Loading speed:</strong> A single aligned file with embedded metadata loads faster than a multi-file setup with separate configuration.</li>
+<li><strong>Memory use:</strong> Quantized GGUF files take up less RAM at rest; training or fine-tuning in a framework like Transformers expands that usage back toward full precision.</li>
+<li><strong>Tool support:</strong> llama.cpp, Ollama, and Hugging Face&#x27;s own model hub all expect or support GGUF directly.</li>
+</ul>
+<p><strong>GGUF&#x27;s quantization options let a model that would otherwise need far more memory run on a machine with limited RAM</strong>, which is the main reason quantized GGUF builds dominate the <a href="https://blog.greencube.app/blog/best-local-ai-models">local model listings</a> people use to pick a model for their hardware.</p>
+<h2 id="how-to-convert-a-hugging-face-model-to-gguf-and-run-it">How to convert a Hugging Face model to GGUF and run it</h2>
+<p>Converting a model you found on Hugging Face into something you can run locally follows a fairly fixed path.</p>
+<ol>
+<li>Run the <code>convert-hf-to-gguf.py</code> script from llama.cpp against the source model folder, picking an <code>--outtype</code> quantization flag (common choices trade off size against accuracy).</li>
+<li>If the model uses an architecture llama.cpp does not already recognize, you need to define that architecture and add the matching GGML graph logic, a process the llama.cpp HOWTO walks through step by step.</li>
+<li>Watch for common snags: a missing <code>config.json</code> in the source folder, a Python version mismatch with the conversion script&#x27;s requirements, or an incomplete download, all of which community conversion discussions flag repeatedly.</li>
+<li>When a pitfall shows up, it is usually faster to re-download a trusted, already-converted GGUF build than to debug a conversion by hand.</li>
+<li>Once you have a working GGUF file, the runtime path is simple: place it where your tool expects it, load it with llama.cpp or Ollama, and start running prompts.</li>
+</ol>
+<p>Because adding a brand-new architecture to llama.cpp is genuinely technical work, most people are better off sourcing a preconverted GGUF file from a reputable model repository rather than building the pipeline themselves.</p>
+<h2 id="real-world-example-gguf-powering-local-privacy-first-apps">Real-world example: GGUF powering local, privacy-first apps</h2>
+<p>Desktop apps built for offline AI are a direct, practical example of what GGUF&#x27;s design makes possible. A single quantized file that loads quickly and runs without a network connection is exactly what a downloadable, privacy-first assistant needs. We built GreenCube around that same idea: it runs entirely on a Windows or Mac computer, downloading one model once during setup rather than streaming anything from a server afterward.</p>
+<p>Chats and files never leave the device, and the model keeps working with no internet connection once it&#x27;s installed. That only works because the model ships as a single, self-contained, quantized file, the same packaging GGUF was designed to provide.</p>
+<h2 id="comparative-performance-benchmarks-between-gguf-and-ggml-models-in-terms-of-speed-and-memory-usage">Comparative performance benchmarks between GGUF and GGML models in terms of speed and memory usage</h2>
+<p>Independent, apples-to-apples benchmark numbers comparing GGUF and GGML side by side are not widely published, so it&#x27;s more useful to look at what the format design predicts and what practitioners consistently report.</p>
+<p>GGUF&#x27;s aligned, mmap-compatible layout lets a runtime map the file directly from disk rather than parsing it piece by piece, which tends to shorten load times compared to older, less structured formats. Because GGUF also supports a range of quantization types natively, a quantized GGUF build of a given model generally uses less RAM at rest than a quantized or loosely packaged equivalent.</p>
+<p>GGML files, by contrast, predate most of this tooling and the ecosystem built around them has largely moved on, so current runtimes rarely optimize for GGML loading paths at all. In practice this means the realistic choice is not between two actively maintained, equally fast formats. It&#x27;s between a modern format with active performance work behind it and a legacy one with little ongoing attention.</p>
+<p>For a given model, the speed and memory profile you experience will depend far more on the quantization level you pick (lower precision generally means less RAM and faster loading, at some cost to output quality) than on any GGUF versus GGML comparison. That&#x27;s why guides on <a href="https://blog.greencube.app/blog/llm-models">choosing models for your hardware tier</a> focus on quantization level and parameter count rather than file format alone.</p>
+<p><img src="/blog/images/32189da65b34.jpg" alt="Comparative performance benchmarks between GGUF and GGML models in terms of speed and memory usage — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<h2 id="compatibility-and-support-differences-for-different-local-ai-applications-beyond-llamacpp">Compatibility and support differences for different local AI applications beyond llama.cpp</h2>
+<p>GGUF&#x27;s reach extends well past llama.cpp itself. Ollama, one of the most common ways people run local models through a simple command-line or app interface, reads GGUF natively. Hugging Face&#x27;s model hub recognizes and displays GGUF files directly, and the Transformers library can load them too, with the caveat that it dequantizes weights to fp32 for training contexts.</p>
+<p>Beyond these, a growing set of desktop chat apps, local API servers, and developer tools standardize on GGUF as their expected input format, largely because its single-file packaging removes the need to hunt down separate config files, tokenizer files, and weight files that other formats often require.</p>
+<p>GGML support, by comparison, is effectively frozen. Tools that still mention it generally do so for backward compatibility or archival reading, not as a format they recommend for new models. If you come across a <code>.ggml</code> file today, the practical move is to look for a GGUF version of the same model rather than trying to find software that still loads the original.</p>
+<p>This matters for anyone evaluating a local AI application beyond llama.cpp: checking whether a tool explicitly lists GGUF support is a fast way to judge whether it is actively maintained for modern local inference, or built on older assumptions.</p>
+<h2 id="format-adoption-and-community-momentum">Format adoption and community momentum</h2>
+<p>Format adoption tends to follow the tools people actually use, and GGUF has that momentum. llama.cpp standardized on it, Ollama built its model distribution around it, and Hugging Face added native GGUF recognition to its hub, which together cover most of the on-ramps people use to find and run local models.</p>
+<p>That kind of layered adoption, where the inference engine, the distribution hub, and the user-facing tools all agree on one format, is what keeps a format alive and growing rather than frozen in place. New quantization schemes and architecture support tend to land in GGUF first, because that&#x27;s where the active development and the active user base both are.</p>
+<p>GGML, by contrast, stopped being the focus of new feature work once GGUF&#x27;s extensibility advantages became clear. Maintainers and model publishers migrated their distribution pipelines, and the community&#x27;s documentation, troubleshooting threads, and conversion tools shifted with them. A format without active contributors adding features or fixing edge cases tends to fall further behind with each new model architecture that appears, and that&#x27;s the position GGML now occupies.</p>
+<p>For anyone picking a format today, the practical signal is simple: look at where new quantization types, new architectures, and new tooling show up first. Right now, that&#x27;s GGUF, consistently.</p>
+<h2 id="security-and-data-privacy-implications-of-using-gguf-vs-ggml-locally">Security and data privacy implications of using GGUF vs GGML locally</h2>
+<p>Neither GGUF nor GGML changes the basic privacy picture of local inference: a model file, regardless of format, runs on your own machine without needing to send your prompts or documents anywhere. The format governs how weights and metadata are packaged, not whether your data leaves the device.</p>
+<p>That said, format choice does affect how safely you can source a model. Because GGUF is now the default output of official conversion tools and the format most model hubs display prominently, it&#x27;s easier to find GGUF builds from identifiable, traceable sources. Older <code>.ggml</code> files circulating without clear provenance are harder to verify, since the tooling and documentation around them has largely moved on, meaning fewer eyes are checking that a given file matches its claimed source.</p>
+<p>The practical privacy and security advice is the same regardless of format: download model files from a source you trust, keep the application running the model up to date, and favor tools that make clear where a model came from and how it was converted. A model file packaged as a single, well-documented GGUF file with embedded metadata makes that kind of verification more straightforward than a loose collection of older files with no built-in record of their origin.</p>
+<h2 id="a-short-take-on-where-the-format-is-headed">A short take on where the format is headed</h2>
+<p>GGUF is the practical choice for local inference, full stop. The sensible path forward is to prefer GGUF-distributed models, lean on official conversion tools like <code>convert-hf-to-gguf.py</code> instead of hand-editing files, and re-download a converted build rather than trying to rework a legacy <code>.ggml</code> file by hand. Favor distributions with clear versioning and complete metadata: that clarity is exactly what GGUF was built to provide.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="a-straightforward-way-to-run-gguf-models-locally">A straightforward way to run GGUF models locally</h2>
+<p>We built our app around the same idea that makes GGUF useful in the first place: one file, one setup step, and nothing sent anywhere afterward. Install it on Windows or Mac, sign in once with Google or Microsoft to unlock the license, and pick a model to download during setup. From there, everything runs on your own computer.</p>
+<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
+<ul>
+<li>Runs fully offline once set up, with no subscription and no ongoing cloud dependency.</li>
+<li>Chats and documents stay on your device; nothing is uploaded unless you turn on a feature that explicitly goes online.</li>
+<li>Costs a one-time fee, with everything included.</li>
+<li>Works on both Windows and Mac, with tiers reflecting what different computers handle well (a slower machine will still answer and build things, just at a slower pace).</li>
+</ul>
+<p>If local, private AI without a subscription sounds like what you need, get GreenCube and start from a single download.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="are-gguf-models-better-than-ggml-models">Are GGUF models better than GGML models?</h3>
+<p>For current local inference, yes: GGUF&#x27;s key-value metadata, single-file packaging, and quantization support make it more reliable and better supported than GGML&#x27;s older list-based format. GGML still works for archival purposes, but new tools rarely add features for it.</p>
+<h3 id="can-i-still-use-old-ggml-files">Can I still use old GGML files?</h3>
+<p>Some older tools can still read <code>.ggml</code> files, but active development has moved to GGUF, so support is shrinking. The more reliable path is to find a GGUF version of the same model rather than keeping the original <code>.ggml</code> file in your workflow.</p>
+<h3 id="does-converting-to-gguf-reduce-model-quality">Does converting to GGUF reduce model quality?</h3>
+<p>Conversion itself does not change quality; the quantization level you choose during conversion does. Picking a lower-precision <code>--outtype</code> flag in the conversion script trades some accuracy for a smaller, faster-loading file.</p>
+<h3 id="do-i-need-to-convert-models-myself-to-use-a-tool-like-greencube">Do I need to convert models myself to use a tool like GreenCube?</h3>
+<p>No. GreenCube downloads its model automatically during setup, so there&#x27;s no manual conversion, file hunting, or command-line work involved. You pick a model option once, and the app handles the rest.</p>
+<h3 id="why-do-some-apps-need-more-ram-to-run-local-models-than-others">Why do some apps need more RAM to run local models than others?</h3>
+<p>RAM needs come down to model size and quantization level: a larger or less-compressed model needs more memory to load and run. Guides on matching models to hardware or options like cloud-based GPU desktops are both ways to handle a model that&#x27;s heavier than your current machine comfortably supports.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://www.ibm.com/think/topics/gguf-versus-ggml" target="_blank" rel="noopener noreferrer nofollow">GGUF versus GGML | IBM</a></li>
+<li><a href="https://huggingface.co/docs/transformers/gguf" target="_blank" rel="noopener noreferrer nofollow">Transformers documentation: GGUF</a></li>
+<li><a href="https://github.com/ggml-org/ggml/blob/master/docs/gguf.md" target="_blank" rel="noopener noreferrer nofollow">GGUF documentation (ggml-org/ggml)</a></li>
+<li><a href="https://github.com/ggml-org/llama.cpp/blob/d59d455f/ggml/include/gguf.h" target="_blank" rel="noopener noreferrer nofollow">gguf.h (llama.cpp repository)</a></li>
+</ul>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/local-ai-vs-chatgpt">Local AI vs ChatGPT: Local First Rules for Tech Savvy Users</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+<li><a href="https://blog.greencube.app/blog/how-does-local-ai-work">How Local AI Works on Your Laptop: Run Models with 2–5GB Free</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

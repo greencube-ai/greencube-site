@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls | GreenCube blog</title>
+  <meta name="description" content="Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls | GreenCube blog" />
+  <meta property="og:description" content="Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ollama" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/d61bfa7dd883.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/d61bfa7dd883.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ollama" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls", "description": "Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls.", "image": "https://blog.greencube.app/blog/images/d61bfa7dd883.jpg", "datePublished": "2026-09-21", "dateModified": "2026-09-21", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ollama", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What Exactly Does Ollama Do?", "acceptedAnswer": {"@type": "Answer", "text": "Ollama runs open-weight large language models directly on your computer through a command-line tool, a desktop app, and a local REST API. It handles downloading, quantizing behind the scenes, and serving models like gpt-oss, Qwen, and Gemma so you can chat with them or call them from your own scripts."}}, {"@type": "Question", "name": "What Is Ollama vs ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "Ollama runs models locally on your own hardware, while ChatGPT is a cloud service running on OpenAI's servers. Ollama trades some raw model capability for privacy and no per-token cost, since your prompts never leave your device unless you opt into Ollama's own cloud models."}}, {"@type": "Question", "name": "Is Ollama Fully Free?", "acceptedAnswer": {"@type": "Answer", "text": "Ollama itself is free and open source under an MIT license, and local models cost nothing beyond your own electricity and hardware, according to its Wikipedia entry. Cloud models require an Ollama account and may carry their own usage terms since they run on Ollama's hosted infrastructure rather than your machine."}}, {"@type": "Question", "name": "What Are the Disadvantages of Ollama?", "acceptedAnswer": {"@type": "Answer", "text": "The biggest drawbacks are hardware limits and a capability gap versus top cloud models: large models need serious RAM or GPU memory, and even well-tuned local models trail frontier cloud systems on complex reasoning. Running Ollama's background service continuously can also drain battery and use CPU or GPU resources you'd rather save, per AMD's own setup guidance."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls</h1>
+<p class="byline">GreenCube &middot; 21 September 2026</p>
+
+<img class="cover" src="/blog/images/d61bfa7dd883.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<p>Ollama is a free, open-source runtime that lets you download and run large language models like gpt-oss, Qwen, and Gemma directly on your own computer, through a command-line tool, a desktop app, or a local REST API. It&#x27;s the right pick when you want private, offline access to open-weight models without per-token fees. It&#x27;s the wrong pick if you need frontier-level reasoning or don&#x27;t own hardware with enough RAM or GPU memory to run models locally.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Models like 20B size are typically impractical for most consumer hardware due to high memory and GPU requirements, making cloud deployment preferable for such sizes.</li>
+<li>Quantized versions of models reduce their size significantly, allowing 3B and 7B models to run comfortably on common laptops with 8 to 16GB of RAM.</li>
+<li>The memory footprint of a 20B model varies depending on the quantization method, so users should check specific model sizes before downloading.</li>
+<li>Ollama&#x27;s local REST API is compatible with OpenAI&#x27;s format, enabling easy integration into coding assistants, automation, and deployment pipelines.</li>
+<li>For optimal day-to-day use, users should regularly remove unused models, be cautious of background resource consumption, and prefer cloud options for larger models requiring more hardware power.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-ollama-offers-core-features-and-concepts">What Ollama Offers: Core Features and Concepts</a></li>
+<li><a href="#how-to-install-and-run-your-first-model">How to Install and Run Your First Model</a></li>
+<li><a href="#picking-a-model-that-fits-your-hardware">Picking a Model That Fits Your Hardware</a></li>
+<li><a href="#building-on-the-api-scripts-agents-and-integrations">Building on the API: Scripts, Agents, and Integrations</a></li>
+<li><a href="#running-it-day-to-day-resource-habits-and-housekeeping">Running It Day to Day: Resource Habits and Housekeeping</a></li>
+<li><a href="#when-ollama-fits-and-where-it-doesnt">When Ollama Fits, and Where It Doesn&#x27;t</a></li>
+<li><a href="#an-editors-take-on-getting-started-with-ollama">An Editor&#x27;s Take on Getting Started With Ollama</a></li>
+<li><a href="#where-to-read-the-official-docs-next">Where to Read the Official Docs Next</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="what-ollama-offers-core-features-and-concepts">What Ollama Offers: Core Features and Concepts</h2>
+<p>Ollama&#x27;s design is command-line first, but that&#x27;s only the entry point. The project ships a native desktop app for people who&#x27;d rather chat through a window than a terminal, plus a local REST API that mirrors OpenAI-compatible endpoints so existing tools can talk to it with minimal rewiring. That API detail matters more than it sounds: it means code written for OpenAI&#x27;s chat completions format often runs against Ollama with only a base URL change, according to the <a href="https://github.com/ollama/ollama" target="_blank" rel="noopener noreferrer nofollow">official Ollama repository</a>.</p>
+<p>Every model in Ollama follows a <code>name:tag</code> convention, similar to Docker images. The registry organizes models this way so you can grab a specific variant, like a smaller quantized build, without downloading the full-precision version by accident.</p>
+<p>Ollama also splits models into two behaviors:</p>
+<ul>
+<li><strong>Local models</strong> run entirely on your machine&#x27;s CPU or GPU, with prompts never leaving your device.</li>
+<li><strong>Cloud models</strong> offload execution to Ollama&#x27;s own cloud service for larger models your hardware can&#x27;t handle, and they require an Ollama account and API key to authenticate, per the cloud models documentation.</li>
+</ul>
+<p>The whole project is open source under an MIT license, with its full command reference and model-management tools published on its <a href="https://en.wikipedia.org/wiki/Ollama" target="_blank" rel="noopener noreferrer nofollow">Wikipedia entry</a> and GitHub repo.</p>
+<h2 id="how-to-install-and-run-your-first-model">How to Install and Run Your First Model</h2>
+<p>Getting from a blank terminal to a working local chatbot takes about five commands. Here&#x27;s the sequence:</p>
+<ol>
+<li><strong>Install Ollama.</strong> Download the installer for your platform from the official site, or run the install script on Linux-compatible systems. Windows and Mac users get a guided installer; the setup process also installs the background service that powers the API.</li>
+<li><strong>Pull a model.</strong> Run <code>ollama pull qwen2.5:7b</code> (or whichever name:tag you want). Check the model&#x27;s listed size on the registry page before pulling. A 7B model can easily run 4 to 5GB, and a slow connection or a full disk will stall the download.</li>
+<li><strong>Run it.</strong> Type <code>ollama run qwen2.5:7b</code> in your terminal to start chatting immediately, or open the desktop app if you&#x27;d rather use a graphical window.</li>
+<li><strong>List what you have.</strong> <code>ollama list</code> shows every model currently downloaded, with size and modification date.</li>
+<li><strong>Inspect a model.</strong> <code>ollama show qwen2.5:7b</code> prints its parameters, template, and license details.</li>
+<li><strong>Remove what you don&#x27;t need.</strong> <code>ollama rm qwen2.5:7b</code> deletes the model files and frees disk space.</li>
+</ol>
+<p>If a command fails, check two things first: file permissions on the install directory, and whether your disk actually has room. Model files are large enough that a nearly full drive is the most common cause of a failed pull, and the <a href="https://developer.amd.com/playbooks/ollama-getting-started/" target="_blank" rel="noopener noreferrer nofollow">AMD AI Playbook</a> on Ollama walks through this exact install and run sequence with screenshots for people setting up their first machine.</p>
+<p><strong>Pro Tip:</strong> <em>Before you pull a 20B or larger model, run a small 3B quantized model first. It downloads in minutes, confirms your setup works end to end, and tells you whether your machine&#x27;s fan spins up like a jet engine before you commit to a multi-gigabyte download.</em></p>
+<h2 id="picking-a-model-that-fits-your-hardware">Picking a Model That Fits Your Hardware</h2>
+<p>The registry&#x27;s most requested models right now include gpt-oss, Qwen, and Gemma, each published under multiple size tags such as <code>gpt-oss:20b</code>, <code>qwen2.5:7b</code>, or <code>gemma2:9b</code>. The number in the tag usually refers to parameter count in billions, not file size, and quantized variants of the same model can be a fraction of the full-precision footprint.</p>
+<p><img src="/blog/images/13df1cf36baa.jpg" alt="Picking a Model That Fits Your Hardware — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<p>Quantization is what makes any of this realistic on a laptop. It compresses a model&#x27;s weights so it needs less memory and compute to run, which is why 3B and 7B models work fine on typical consumer hardware while a 70B model demands serious GPU memory or a beefy workstation, a tradeoff community guides on local versus cloud deployment commonly flag when recommending a starting point.</p>
+<p>Rough guidance for sizing your setup:</p>
+<ul>
+<li><strong>3B models</strong>: run comfortably on most modern laptops with 8GB of RAM, no dedicated GPU required.</li>
+<li><strong>7B to 8B models</strong>: want 16GB of RAM; a GPU speeds things up noticeably but isn&#x27;t strictly mandatory.</li>
+<li><strong>13B to 20B models</strong>: benefit heavily from a dedicated GPU with 12GB or more of VRAM.</li>
+<li><strong>70B and larger</strong>: generally impractical on consumer hardware, which is exactly the gap cloud models are built to fill.</li>
+</ul>
+<p>One detail catches people off guard: a <code>20b</code> tag doesn&#x27;t always mean the same memory footprint across models, since quantization strategy varies by release. It pays to check the specific tag&#x27;s listed size on the Ollama GitHub repo before assuming two &quot;20B&quot; models behave identically. If your hardware can&#x27;t clear these numbers, cloud models offload the heavy lifting while keeping the same command-line workflow.</p>
+<h2 id="building-on-the-api-scripts-agents-and-integrations">Building on the API: Scripts, Agents, and Integrations</h2>
+<p>Ollama&#x27;s local REST API runs on <code>localhost</code> by default, exposing endpoints like <code>/api/generate</code> for single-shot completions, <code>/api/chat</code> for multi-turn conversations, and <code>/api/tags</code> to list installed models programmatically. Because the surface is OpenAI-compatible, most client libraries in Python or JavaScript that already speak the OpenAI chat completions format need only a base URL swap to point at your local instance, a design choice confirmed in the Ollama repository&#x27;s own documentation.</p>
+<p>This makes Ollama a natural backend for:</p>
+<ul>
+<li><strong>Coding assistants</strong> that need a local model for autocomplete or refactoring suggestions without sending code to a third party.</li>
+<li><strong>Agent runtimes</strong> that chain multiple model calls together for research or automation tasks.</li>
+<li><strong>Docker-based deployments</strong>, where Ollama runs in a container alongside your application stack.</li>
+<li><strong>Cloud model calls</strong>, which require setting an <code>OLLAMA_API_KEY</code> environment variable to authenticate against the hosted service.</li>
+</ul>
+<p>If you&#x27;re scripting prompts for a local model, the way you write instructions still matters. Guides on structuring instructions for AI text output apply just as well to local models as they do to cloud ones.</p>
+<h2 id="running-it-day-to-day-resource-habits-and-housekeeping">Running It Day to Day: Resource Habits and Housekeeping</h2>
+<p>Ollama runs as a background service the moment it&#x27;s installed, which means it&#x27;s sitting in memory even when you&#x27;re not actively chatting. On a laptop, that service can pull noticeably on CPU or GPU usage and drain battery faster than expected, and the AMD AI Playbook specifically calls out stopping the service from the system tray when you&#x27;re not using it.</p>
+<p>A few habits keep things tidy:</p>
+<ul>
+<li><strong>Clear out unused models</strong> with <code>ollama rm</code> regularly. Model files add up fast, and a handful of 7B and 13B downloads can eat tens of gigabytes without you noticing.</li>
+<li><strong>Quit the service when idle</strong> if you&#x27;re on battery power or need every CPU cycle for something else.</li>
+<li><strong>Start small before scaling up.</strong> Test quantized tags before pulling the largest version of a model.</li>
+<li><strong>Keep cloud in reserve.</strong> For heavier workloads than your machine can handle, cloud models exist specifically for that gap.</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>If you&#x27;re embedding Ollama into a script that spins up and tears down repeatedly, add an explicit step to unload the model when the task finishes. Otherwise it can sit resident in memory long after your script has exited.</em></p>
+<p>On privacy, local mode keeps every prompt and response on your device with nothing transmitted anywhere. Cloud models flip that: they need an account and an API key, and your prompts travel to Ollama&#x27;s servers for processing.</p>
+<h2 id="when-ollama-fits-and-where-it-doesnt">When Ollama Fits, and Where It Doesn&#x27;t</h2>
+<p>Ollama earns its place for privacy-sensitive work, offline scripting, and any workflow where you&#x27;d rather not pay per token or send data off your machine. It struggles where raw capability matters most: local 7B or 13B models simply don&#x27;t match frontier cloud models on complex reasoning, and latency on modest hardware can be rough.</p>
+<ul>
+<li><strong>Good fit</strong>: private note analysis, offline coding help, local automation scripts.</li>
+<li><strong>Poor fit</strong>: production-scale reasoning, tasks needing the largest available models.</li>
+<li><strong>Sensible middle ground</strong>: run private, everyday tasks locally, and reach for the cloud only when a job genuinely needs more horsepower, echoing how <a href="https://www.layer3labs.io/comparisons/chatgpt-alternatives-for-linux" target="_blank" rel="noopener noreferrer nofollow">developers commonly split work between local and cloud tools</a>.</li>
+</ul>
+<h2 id="an-editors-take-on-getting-started-with-ollama">An Editor&#x27;s Take on Getting Started With Ollama</h2>
+<p>Start small. Install Ollama, pull a 3B model, run it from the terminal, then write ten lines of Python that call the REST API instead of typing prompts by hand. That single exercise teaches you more about how Ollama actually behaves than any amount of reading.</p>
+<p><img src="/blog/images/7dbc1f69dc83.jpg" alt="Four-step Ollama developer starter workflow" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<p>Watch your disk and battery for the first week. Back up any model configuration you customize, since re-pulling large files is tedious. When something breaks, the GitHub discussions around the project tend to have already solved it, and the AMD playbook is worth bookmarking for concrete, step-by-step examples rather than abstract advice.</p>
+<p>If you decide command-line tools aren&#x27;t for you, or you want document reading and image analysis without touching a terminal, <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube</a> offers a packaged offline desktop alternative built for that exact gap. It runs on Windows and Mac, with setup that downloads one AI model a single time. GreenCube&#x27;s tiers, named Seed, Sprout, Bloom, and Thrive, simply describe what your computer handles comfortably, not a subscription ladder. A slower machine will still answer and build documents, just at a slower pace. You unlock it with a one-time Google or Microsoft sign-in, and your chats and files stay on your computer. Only the features you switch on ever go online. It costs $9.99, paid once, with everything included, no subscription, and it&#x27;s built for people who want the privacy of local AI without learning a command line.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="where-to-read-the-official-docs-next">Where to Read the Official Docs Next</h2>
+<p>For hands-on installation steps and the full command reference, the Ollama GitHub repository is the primary source. The AMD AI Playbook offers a guided getting-started walkthrough with practical examples, and the Wikipedia entry gives a concise overview and release history.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://github.com/ollama/ollama" target="_blank" rel="noopener noreferrer nofollow">GitHub - ollama/ollama: Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.</a></li>
+<li><a href="https://developer.amd.com/playbooks/ollama-getting-started/" target="_blank" rel="noopener noreferrer nofollow">Getting Started with Ollama | AMD AI Playbooks</a></li>
+<li><a href="https://www.layer3labs.io/comparisons/chatgpt-alternatives-for-linux" target="_blank" rel="noopener noreferrer nofollow">ChatGPT alternatives for Linux: cloud vs local (Layer3 Labs)</a></li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-exactly-does-ollama-do">What Exactly Does Ollama Do?</h3>
+<p>Ollama runs open-weight large language models directly on your computer through a command-line tool, a desktop app, and a local REST API. It handles downloading, quantizing behind the scenes, and serving models like gpt-oss, Qwen, and Gemma so you can chat with them or call them from your own scripts.</p>
+<h3 id="what-is-ollama-vs-chatgpt">What Is Ollama vs ChatGPT?</h3>
+<p>Ollama runs models locally on your own hardware, while ChatGPT is a cloud service running on OpenAI&#x27;s servers. Ollama trades some raw model capability for privacy and no per-token cost, since your prompts never leave your device unless you opt into Ollama&#x27;s own cloud models.</p>
+<h3 id="is-ollama-fully-free">Is Ollama Fully Free?</h3>
+<p>Ollama itself is free and open source under an MIT license, and local models cost nothing beyond your own electricity and hardware, according to its Wikipedia entry. Cloud models require an Ollama account and may carry their own usage terms since they run on Ollama&#x27;s hosted infrastructure rather than your machine.</p>
+<h3 id="what-are-the-disadvantages-of-ollama">What Are the Disadvantages of Ollama?</h3>
+<p>The biggest drawbacks are hardware limits and a capability gap versus top cloud models: large models need serious RAM or GPU memory, and even well-tuned local models trail frontier cloud systems on complex reasoning. Running Ollama&#x27;s background service continuously can also drain battery and use CPU or GPU resources you&#x27;d rather save, per AMD&#x27;s own setup guidance.</p>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/ollama-vs-lm-studio">Ollama vs LM Studio: A Developer&#x27;s Comparison Guide</a></li>
+<li><a href="https://blog.greencube.app/blog/best-small-llm">Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+<li><a href="https://blog.greencube.app/blog/ollama-alternatives-3-offline-ai-solutions">Top 3 Offline AI Solutions: Ollama Alternatives 2026</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

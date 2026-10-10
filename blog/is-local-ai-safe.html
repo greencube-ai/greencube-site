@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>7 Controls to Lock Down Local AI for Privacy Conscious Users | GreenCube blog</title>
+  <meta name="description" content="Decide if local AI fits your privacy needs and apply seven practical controls—least privilege, sandboxing, authenticated interfaces, and append only logs..." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="7 Controls to Lock Down Local AI for Privacy Conscious Users | GreenCube blog" />
+  <meta property="og:description" content="Decide if local AI fits your privacy needs and apply seven practical controls—least privilege, sandboxing, authenticated interfaces, and append only logs..." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/is-local-ai-safe" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/ecc5ef64e560.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/ecc5ef64e560.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/is-local-ai-safe" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "7 Controls to Lock Down Local AI for Privacy Conscious Users", "description": "Decide if local AI fits your privacy needs and apply seven practical controls—least privilege, sandboxing, authenticated interfaces, and append only logs...", "image": "https://blog.greencube.app/blog/images/ecc5ef64e560.jpg", "datePublished": "2026-10-07", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/is-local-ai-safe", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the safest AI to use?", "acceptedAnswer": {"@type": "Answer", "text": "There's no single \"safest\" AI, since safety depends on what the tool is allowed to do, not just where it runs. A local AI with tightly limited permissions and no access to untrusted input is generally safer for sensitive tasks than a cloud tool with broad access, but both need the same core controls: least privilege, sandboxing, and human approval for irreversible actions."}}, {"@type": "Question", "name": "Should I use a local AI?", "acceptedAnswer": {"@type": "Answer", "text": "Local AI is a strong choice if you want your documents and conversations to stay on your own device and you mainly need bounded tasks like drafting, summarizing, or analyzing files. It's less suited to tasks needing frontier-level reasoning or heavy autonomous action without oversight, where a cloud model's stronger guardrails may serve you better."}}, {"@type": "Question", "name": "Is local AI harmful to the environment?", "acceptedAnswer": {"@type": "Answer", "text": "Local AI shifts energy use to your own device instead of a data center, and for occasional personal use that often means a smaller energy footprint than continuous cloud inference, according to IEA's energy and AI analysis. Large-scale training still happens in data centers regardless of how you use the finished model."}}, {"@type": "Question", "name": "Is local AI free?", "acceptedAnswer": {"@type": "Answer", "text": "Some local AI tools are free and open source, while others, like GreenCube, charge a one-time fee instead of a subscription. GreenCube costs $9.99 (€9.99), paid once, with no recurring charges."}}, {"@type": "Question", "name": "What are the biggest risks of running AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "The main risks are prompt injection from untrusted files or web content, code execution through unsafe plugins or tools, tampered or unverified model downloads, and exposed local web interfaces that lack proper authentication, as detailed in OWASP's Top 10 for LLM applications. None of these are unique to local AI, but local setups often lack the monitoring that cloud providers build in by default."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>7 Controls to Lock Down Local AI for Privacy Conscious Users</h1>
+<p class="byline">GreenCube &middot; 7 October 2026 &middot; updated 10 October 2026</p>
+<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically, instead of the two models (&ldquo;Quick&rdquo; and &ldquo;All-rounder&rdquo;) described below. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<img class="cover" src="/blog/images/ecc5ef64e560.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<p>Local AI is safe for most everyday tasks, mainly because keeping your data on your own device removes the biggest privacy risk of cloud tools, but &quot;local&quot; is not a blanket safety guarantee. Guidance from NIST on agentic AI and the <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf" target="_blank" rel="noopener noreferrer nofollow">OWASP Top 10 for LLM applications</a> both warn that an AI agent&#x27;s permissions matter more than where it runs. Local AI is a good fit for bounded, read-only tasks like summarizing a file; it&#x27;s a poor fit for letting an agent take irreversible actions on untrusted input without supervision.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Prompt injection remains the top risk for local AI, especially through hidden instructions in uploaded files or web content that can trick the model.</li>
+<li>Unrestricted code execution and unsafe plugins can lead to remote code execution on your machine, especially if access isn&#x27;t tightly scoped.</li>
+<li>Downloaded models can be tampered with or stripped of safety training, increasing the risk of unsafe behavior and unverified model integrity issues.</li>
+<li>Many local AI tools run web interfaces without proper authentication, opening attack paths via malicious websites that can connect to listening ports.</li>
+<li>Implementing strict permission controls, sandboxing, verifying downloads, and requiring human approval for critical actions are key to reducing local AI risks.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#core-risks-of-running-ai-locally">Core risks of running AI locally</a></li>
+<li><a href="#practical-mitigations-and-controls-for-safe-local-ai">Practical mitigations and controls for safe local AI</a></li>
+<li><a href="#a-simple-checklist-to-decide-and-set-up-local-ai-safely">A simple checklist to decide and set up local AI safely</a></li>
+<li><a href="#environmental-and-performance-trade-offs">Environmental and performance trade-offs</a></li>
+<li><a href="#how-we-think-about-local-ai-safety">How we think about local AI safety</a></li>
+<li><a href="#if-youre-ready-to-try-offline-ai-where-to-start-with-greencube">If you&#x27;re ready to try offline AI: where to start with GreenCube</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+<h2 id="core-risks-of-running-ai-locally">Core risks of running AI locally</h2>
+<p>Running an AI model on your own computer removes one danger (your conversations landing on someone else&#x27;s server) but introduces others that have nothing to do with the cloud. The real threat surface is what the AI is allowed to touch and what it&#x27;s asked to read.</p>
+<p>The most studied issue is <strong>prompt injection</strong>, where hidden instructions inside a file, a webpage, or a document trick the model into doing something you didn&#x27;t ask for. Indirect injection is especially sneaky: you upload a PDF to summarize, and buried text tells the model to leak other files or change its behavior. OWASP lists this as the top risk for LLM applications, and it applies to local models just as much as cloud ones.</p>
+<p>A second risk is <strong>code injection and remote code execution</strong>. Some local AI setups let the model run commands, call plugins, or execute code to be more useful. If that access isn&#x27;t tightly scoped, a malicious file or a buggy plugin can turn a chat session into a way to run arbitrary code on your machine. This isn&#x27;t theoretical: a documented vulnerability in a popular AI library, <a href="https://nvd.nist.gov/vuln/detail/cve-2026-80047" target="_blank" rel="noopener noreferrer nofollow">CVE-2026-80047</a>, allowed remote files to be written to disk before the software checked whether they could be trusted.</p>
+<p>Other risks worth knowing:</p>
+<ul>
+<li><strong>Supply-chain tampering</strong>: downloaded model files can be poisoned, have their safety training stripped out (&quot;abliterated&quot;), or ship without any way to verify they weren&#x27;t altered.</li>
+<li><strong>Exposed local interfaces</strong>: many local AI tools run a small web server on your machine, and without proper checks, a malicious webpage can talk to it behind your back.</li>
+<li><strong>Weaker guardrails in smaller models</strong>: compact local models are often easier to manipulate into ignoring their own safety instructions than large cloud models with mature defenses.</li>
+<li><strong>No vendor watching your back</strong>: cloud providers monitor for abuse at scale; on your own device, you lose that early-warning layer unless you build your own logging.</li>
+</ul>
+<p><strong>Local web interfaces are a commonly overlooked attack path.</strong> Research from the <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-clawjacked-websocket-local-agent-hijack-20/" target="_blank" rel="noopener noreferrer nofollow">Cloud Security Alliance on local agent hijacking</a> found that without proper authentication and origin checks, a malicious website can connect to a local AI&#x27;s listening port and pull data or trigger actions, the same way an unlocked front door invites trouble regardless of what neighborhood you live in.</p>
+<h2 id="practical-mitigations-and-controls-for-safe-local-ai">Practical mitigations and controls for safe local AI</h2>
+<p>The good news: most of these risks have straightforward fixes, and they line up closely with what NIST&#x27;s agentic AI guidance recommends for any AI system that can take action.</p>
+<ol>
+<li><strong>Limit what the AI can do.</strong> Give it the narrowest permissions possible, read-only access to files it needs, no open-ended shell or terminal access, and no ability to touch anything outside a defined folder.</li>
+<li><strong>Run it in a contained space.</strong> A sandbox, container, or virtual machine keeps a compromised AI process from reaching the rest of your system. Scoped identity tokens and <a href="https://devopsaitoolkit.com/blog/least-privilege-entra-id-azure-rbac-with-ai" target="_blank" rel="noopener">least-privilege access controls</a> apply here too, even on a personal machine.</li>
+<li><strong>Check what&#x27;s listening.</strong> Review which local ports and web interfaces your AI tools open, and require authentication before anything can connect to them.</li>
+<li><strong>Verify what you download.</strong> Pin specific model versions, check file signatures or checksums where available, and avoid unofficial fine-tunes with safety training stripped out.</li>
+<li><strong>Keep a record you can&#x27;t argue with.</strong> An append-only log that the model itself cannot edit gives you something to check if anything looks wrong later.</li>
+<li><strong>Require a human for anything irreversible.</strong> Deleting files, sending messages, or making purchases should need your explicit approval, never full autonomy.</li>
+<li><strong>Treat every external file as hostile until proven otherwise.</strong> Strip or sanitize text from uploads and web content before the model reads it, since this is where most prompt injection starts.</li>
+</ol>
+<p><strong>Pro Tip:</strong> <em>Before giving any local AI tool file or command access, ask what the worst thing it could do with that access would be, then scope it down until the answer is boring.</em></p>
+<h2 id="a-simple-checklist-to-decide-and-set-up-local-ai-safely">A simple checklist to decide and set up local AI safely</h2>
+<p>A quick gut check works well here: if the task involves trusted, bounded input and any mistake is easy to undo, local AI is usually a safe candidate. If it involves untrusted input (random web pages, unknown file uploads) or actions you can&#x27;t take back, slow down and add oversight first.</p>
+<p>Setup basics for a laptop or workstation:</p>
+<ul>
+<li>Choose a model from a known source rather than an anonymous upload on a forum.</li>
+<li>Turn off network access for the AI process unless a feature genuinely needs it.</li>
+<li>Run the tool in a sandbox or isolated user account, not with full admin rights.</li>
+<li>Verify checksums or signatures on model files before loading them.</li>
+</ul>
+<p>Keep it safe over time:</p>
+<ul>
+<li>Review logs occasionally for anything unexpected.</li>
+<li>Re-check your model and tools after major updates, since behavior can shift.</li>
+<li>Watch for new listening ports or services you didn&#x27;t set up yourself.</li>
+<li>Install security updates for your AI runtime promptly, the same way you would for your browser.</li>
+</ul>
+<p>Red flags to walk away from: a model advertised as having its &quot;safety filters removed,&quot; a plugin that can execute arbitrary code with no sandbox, or any tool that can&#x27;t tell you what permissions it&#x27;s using. Our <a href="https://blog.greencube.app/blog/offline-ai-security">practical hardening guide for offline AI</a> walks through sandboxing options in more depth.</p>
+<h2 id="environmental-and-performance-trade-offs">Environmental and performance trade-offs</h2>
+<p>Running AI locally uses your own device&#x27;s power instead of a data center&#x27;s, and for occasional personal use, that&#x27;s often a lighter footprint than keeping a cloud session running continuously. <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer nofollow">IEA&#x27;s analysis of energy and AI</a> notes that large-scale training and persistent cloud inference draw heavily on data-center electricity, while local use shifts that cost to your own machine in smaller, intermittent amounts.</p>
+<p>The trade-off is capability. Local models are smaller and faster to run on consumer hardware, but they can&#x27;t match frontier cloud models for complex reasoning, and cloud providers invest heavily in red-teaming that most local setups don&#x27;t replicate.</p>
+<p><img src="/blog/images/2b5a4f849197.jpg" alt="Environmental and performance trade-offs — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<h2 id="how-we-think-about-local-ai-safety">How we think about local AI safety</h2>
+<p>Our stance is simple: running AI on your own machine solves the data-location problem, not the permissions problem. An agent with too much access is risky whether it&#x27;s local or in the cloud. We built our product around full offline operation, a one-time purchase, a choice between two local models, and support for Windows with Mac support in development. A one-time Google or Microsoft sign-in only confirms your license, nothing else. For setup steps, see our <a href="https://blog.greencube.app/blog/secure-ai-on-pc">guide to securing AI on your PC</a>.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="if-youre-ready-to-try-offline-ai-where-to-start-with-greencube">If you&#x27;re ready to try offline AI: where to start with GreenCube</h2>
+<p>We built GreenCube around one idea: your chats and documents should never leave your computer unless you choose to connect something yourself. It&#x27;s a one-time purchase with no subscription and everything included.</p>
+<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
+<ul>
+<li>Two model choices to match your hardware: one optimized for plain text, another that reads images and builds study guides but needs more RAM.</li>
+<li>Works fully offline: chats and files stay on your machine; only features you turn on connect to the internet.</li>
+<li>Runs on Windows and Mac: setup downloads your chosen model once, and a one-time sign-in just verifies your license.</li>
+</ul>
+<p>If you want to see how model choice affects what you can do, our <a href="https://blog.greencube.app/blog/local-ai-models-explained">guide to local AI models</a> walks through the differences, or you can compare hardware tiers with this <a href="https://promptchief.tech/ai-model-selector.html" target="_blank" rel="noopener">AI model selector tool</a>. When you&#x27;re ready, get GreenCube Lifetime for $9.99 and start chatting offline today.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-the-safest-ai-to-use">What is the safest AI to use?</h3>
+<p>There&#x27;s no single &quot;safest&quot; AI, since safety depends on what the tool is allowed to do, not just where it runs. A local AI with tightly limited permissions and no access to untrusted input is generally safer for sensitive tasks than a cloud tool with broad access, but both need the same core controls: least privilege, sandboxing, and human approval for irreversible actions.</p>
+<h3 id="should-i-use-a-local-ai">Should I use a local AI?</h3>
+<p>Local AI is a strong choice if you want your documents and conversations to stay on your own device and you mainly need bounded tasks like drafting, summarizing, or analyzing files. It&#x27;s less suited to tasks needing frontier-level reasoning or heavy autonomous action without oversight, where a cloud model&#x27;s stronger guardrails may serve you better.</p>
+<h3 id="is-local-ai-harmful-to-the-environment">Is local AI harmful to the environment?</h3>
+<p>Local AI shifts energy use to your own device instead of a data center, and for occasional personal use that often means a smaller energy footprint than continuous cloud inference, according to IEA&#x27;s energy and AI analysis. Large-scale training still happens in data centers regardless of how you use the finished model.</p>
+<h3 id="is-local-ai-free">Is local AI free?</h3>
+<p>Some local AI tools are free and open source, while others, like GreenCube, charge a one-time fee instead of a subscription. GreenCube costs $9.99 (€9.99), paid once, with no recurring charges.</p>
+<h3 id="what-are-the-biggest-risks-of-running-ai-locally">What are the biggest risks of running AI locally?</h3>
+<p>The main risks are prompt injection from untrusted files or web content, code execution through unsafe plugins or tools, tampered or unverified model downloads, and exposed local web interfaces that lack proper authentication, as detailed in OWASP&#x27;s Top 10 for LLM applications. None of these are unique to local AI, but local setups often lack the monitoring that cloud providers build in by default.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf" target="_blank" rel="noopener noreferrer nofollow">OWASP Top 10 for Large Language Model Applications (2025)</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/cve-2026-80047" target="_blank" rel="noopener noreferrer nofollow">CVE-2026-80047 — Hugging Face Transformers arbitrary file write vulnerability (NVD)</a></li>
+<li><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer nofollow">Energy and AI – Executive summary (IEA)</a></li>
+<li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-clawjacked-websocket-local-agent-hijack-20/" target="_blank" rel="noopener noreferrer nofollow">CLAWJacked: Websocket/local agent hijack (Cloud Security Alliance labs)</a></li>
+</ul>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/best-laptop-ai-assistant">Best Laptop AI Assistant for Privacy: Local and Offline</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/ai-without-internet">AI Without Internet: Run Local AI Privately on Any Laptop</a></li>
+<li><a href="https://blog.greencube.app/blog/secure-ai-on-pc">Secure AI on Your PC: A Private, Offline Buyer&#x27;s Guide</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

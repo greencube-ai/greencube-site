@@ -21,6 +21,24 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "blog.greencube.app" }],
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [{ "type": "host", "value": "blog.greencube.app" }],
+      "destination": "/blog/sitemap.xml",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!blog|fonts/|favicon|apple-touch-icon|robots\\.txt).*)",
+      "has": [{ "type": "host", "value": "blog.greencube.app" }],
+      "destination": "https://greencube.app/:path",
+      "permanent": true
+    },
+    {
       "source": "/og.png",
       "destination": "/og.jpg",
       "permanent": true
@@ -42,6 +60,7 @@
     },
     {
       "source": "/blog/:path*",
+      "missing": [{ "type": "host", "value": "blog.greencube.app" }],
       "destination": "https://blog.greencube.app/blog/:path*",
       "permanent": true
     },

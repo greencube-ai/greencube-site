@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>How Local AI Works on Your Laptop: Run Models with 2–5GB Free | GreenCube blog</title>
+  <meta name="description" content="Understand the mechanics—model files, runtimes, and memory limits—and follow a six-step checklist to run a local model on a laptop with 2–5GB free." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="How Local AI Works on Your Laptop: Run Models with 2–5GB Free | GreenCube blog" />
+  <meta property="og:description" content="Understand the mechanics—model files, runtimes, and memory limits—and follow a six-step checklist to run a local model on a laptop with 2–5GB free." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/how-does-local-ai-work" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/images/6daceaf5e0df.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/6daceaf5e0df.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/how-does-local-ai-work" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How Local AI Works on Your Laptop: Run Models with 2–5GB Free", "description": "Understand the mechanics—model files, runtimes, and memory limits—and follow a six-step checklist to run a local model on a laptop with 2–5GB free.", "image": "https://blog.greencube.app/blog/images/6daceaf5e0df.jpg", "datePublished": "2026-09-02", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/how-does-local-ai-work", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is local AI as good as ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "For everyday tasks like drafting, summarizing, and private document Q&A, a well-chosen local model holds up well. For the hardest reasoning problems and largest-scale throughput, frontier cloud models still lead."}}, {"@type": "Question", "name": "How does local AI work without internet?", "acceptedAnswer": {"@type": "Answer", "text": "Once the model file is downloaded and the runtime is installed, the entire chat process, tokenizing your prompt, running it through the model, and generating a response, happens on your device's own CPU, GPU, or NPU with no network connection required."}}, {"@type": "Question", "name": "Is it worth running AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "It's worth it if privacy, offline access, and a predictable one-time cost matter more to you than having access to the single most powerful reasoning model available; if you need massive scale or cutting-edge reasoning, cloud AI is the better fit."}}, {"@type": "Question", "name": "Is local AI free?", "acceptedAnswer": {"@type": "Answer", "text": "The software itself can be free or low-cost depending on the tool, but running it isn't cost-free: you're paying in electricity and, eventually, time spent managing updates and model downloads yourself."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>How Local AI Works on Your Laptop: Run Models with 2–5GB Free</h1>
+<p class="byline">GreenCube &middot; 2 September 2026 &middot; updated 10 October 2026</p>
+<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically, instead of the two models (&ldquo;Quick&rdquo; and &ldquo;All-rounder&rdquo;) described below. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<img class="cover" src="/blog/images/6daceaf5e0df.jpg" alt="Decorative title card for local AI article" width="1080" height="720" fetchpriority="high"/>
+<p>Local AI runs because the model file and the math that powers it both live on your device instead of a remote server. Three things make that possible: models small enough to fit in your computer&#x27;s memory, a compression technique called quantization that shrinks those models without gutting their quality, and runtimes built specifically to squeeze fast performance out of ordinary CPUs and GPUs. The trade-off is real: you get privacy and offline access, but you give up some of the raw power that massive cloud data centers can throw at a problem.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>Small language models with quantization enable AI to run efficiently on consumer hardware, handling tasks like chat and summarization without cloud reliance.</li>
+<li>RAM is the main limit for local AI performance, with 8GB sufficient for small models and 16GB needed for mid-size options; GPU acceleration significantly improves speed.</li>
+<li>Privacy benefits of local AI are significant, but some setup steps and updates still require internet access and careful management of sensitive files.</li>
+<li>Local models are suitable for sensitive data, offline use, and predictable costs, while cloud AI remains better for high-scale, complex reasoning, or the latest models.</li>
+<li>Simplified tools like GreenCube streamline setup, offering one-time purchase options for local AI without requiring technical expertise or ongoing subscriptions.</li>
+</ul>
+</blockquote>
+<hr/>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#how-does-local-ai-work-the-core-components">How Does Local AI Work: The Core Components</a></li>
+<li><a href="#models-and-formats-why-smaller-models-make-local-ai-practical">Models and Formats: Why Smaller Models Make Local AI Practical</a></li>
+<li><a href="#runtimes-and-engines-that-power-on-device-models">Runtimes and Engines That Power On-Device Models</a></li>
+<li><a href="#hardware-and-performance-what-ram-and-chips-actually-limit">Hardware and Performance: What RAM and Chips Actually Limit</a></li>
+<li><a href="#privacy-and-offline-behavior-what-local-processing-really-protects">Privacy and Offline Behavior: What Local Processing Really Protects</a></li>
+<li><a href="#common-use-cases-and-realistic-expectations-vs-cloud-ai">Common Use Cases and Realistic Expectations vs. Cloud AI</a></li>
+<li><a href="#quick-steps-to-get-a-local-model-running-on-your-pc">Quick Steps to Get a Local Model Running on Your PC</a></li>
+<li><a href="#what-to-expect-after-setup-costs-and-maintenance">What to Expect After Setup: Costs and Maintenance</a></li>
+<li><a href="#greencube-as-a-real-world-example">GreenCube as a Real-World Example</a></li>
+<li><a href="#update-mechanisms-for-local-ai-models">Update Mechanisms for Local AI Models</a></li>
+<li><a href="#when-should-a-beginner-actually-choose-local-ai">When Should a Beginner Actually Choose Local AI?</a></li>
+<li><a href="#try-local-ai-without-the-learning-curve">Try Local AI Without the Learning Curve</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="how-does-local-ai-work-the-core-components">How Does Local AI Work: The Core Components</h2>
+<p>Every local AI setup has three moving parts: the model, the runtime, and the interface you actually type into. The model is a file sitting on your hard drive, usually somewhere between 2GB and 8GB, containing the weights (billions of numbers) that encode what the AI &quot;knows.&quot; Nothing happens until a runtime loads that file into memory and starts running calculations on your CPU, GPU, or in some phones, a dedicated NPU chip.</p>
+<p>Here&#x27;s what happens when you hit enter on a prompt:</p>
+<ul>
+<li>Your text gets broken into tokens (word fragments the model understands)</li>
+<li>The runtime feeds those tokens through the model&#x27;s layers, using a KV-cache to avoid recomputing earlier context</li>
+<li>The model predicts the next token, then the next, streaming words back to you one at a time</li>
+<li>A local vector database may pull in relevant snippets from your own documents first, a setup called retrieval-augmented generation, or RAG</li>
+</ul>
+<p>A model manager app usually sits on top of all this, handling downloads, switching between models, and giving you a chat window so you never have to touch a command line.</p>
+<h2 id="models-and-formats-why-smaller-models-make-local-ai-practical">Models and Formats: Why Smaller Models Make Local AI Practical</h2>
+<p>You can&#x27;t run a 400 billion parameter model on a laptop, and you don&#x27;t need to. Small language models, or SLMs, are compact versions built specifically to run on consumer hardware instead of server racks, and they&#x27;re the real reason <a href="https://huggingface.co/blog/jjokah/small-language-model" target="_blank" rel="noopener noreferrer nofollow">local AI adoption</a> has taken off rather than staying a niche hobby for people with expensive GPUs.</p>
+<p><strong>Statistic Callout:</strong> Industry observations from Hugging Face point to SLMs as the primary driver letting high-performing AI run on aging PCs and phones that could never handle a full-scale frontier model.</p>
+<p>Quantization is the other half of the story. It reduces the precision of a model&#x27;s numbers, typically from 16-bit down to 8-bit (int8) or even 4-bit (int4), cutting file size roughly in half or more with only a modest quality hit. You&#x27;ll see this packaged in a few common formats:</p>
+<ul>
+<li><strong>GGUF</strong>: the standard format for llama.cpp-style runtimes, popular because it bundles everything a runtime needs in one file</li>
+<li><strong>Safetensors</strong>: a format favored for its speed and safety when loading weights, common in the Hugging Face ecosystem</li>
+</ul>
+<p>The trade-off is straightforward: a 4-bit quantized model runs faster and fits in less memory, but it can stumble slightly on nuanced reasoning compared to its full-precision original. For chat, summarizing, and drafting, most people never notice the difference.</p>
+<h2 id="runtimes-and-engines-that-power-on-device-models">Runtimes and Engines That Power On-Device Models</h2>
+<p>The runtime is the software that actually executes the model, and the type you use shapes both speed and compatibility. Broadly, there are two styles.</p>
+<ul>
+<li><strong>In-process SDK runtimes</strong> embed directly into an app, handling model loading and hardware detection behind the scenes with no separate server to manage</li>
+<li><strong>Server-style stacks</strong> run as a background process and expose an API, useful when multiple apps need to talk to the same model</li>
+</ul>
+<p><a href="https://github.com/microsoft/foundry-local/?wt.mc_id=3reg_webpage_reactor" target="_blank" rel="noopener noreferrer nofollow">Foundry Local</a> is a good example of the first approach: it ships as an SDK with automatic hardware acceleration and a curated model catalog, so a developer doesn&#x27;t need to manually detect what chip is available. LocalAI illustrates the second, composing multiple backends like llama.cpp, vLLM, and whisper.cpp under one roof while supporting acceleration paths including CUDA, Metal, and Vulkan.</p>
+<p>That acceleration detection matters more than most people realize. A runtime that correctly identifies your GPU and routes computation through it can run several times faster than one that falls back to CPU alone. Many local tools also expose an OpenAI-compatible API, which lets developers swap a cloud model for a local one without rewriting their code.</p>
+<h2 id="hardware-and-performance-what-ram-and-chips-actually-limit">Hardware and Performance: What RAM and Chips Actually Limit</h2>
+<p>RAM is usually the hard ceiling on what you can run, more than CPU speed. As a rough guide: 8GB of RAM handles small quantized models in the 2 to 4GB range; 16GB comfortably runs mid-size models around 7 to 8 billion parameters; 32GB or more opens the door to larger, higher-quality models. Going below these brackets doesn&#x27;t mean failure. It means slower generation, or the operating system paging memory to disk, which can turn a snappy chat into a sluggish one.</p>
+<p><img src="/blog/images/292fcecb1fcb.jpg" alt="RAM and model size comparison chart" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<p>CPU-only inference works, but it&#x27;s the slowest path. A dedicated GPU speeds things up dramatically because it handles the matrix math models rely on far more efficiently than a general-purpose processor. Phones increasingly ship with NPUs, chips built specifically for AI workloads, which is why a modern smartphone can sometimes outrun an older laptop on the same size model.</p>
+<p>When a model is too big for available RAM, some systems use paged inference, streaming weights from disk in chunks rather than loading everything at once. <a href="https://arxiv.org/abs/2303.12642" target="_blank" rel="noopener noreferrer nofollow">Research on memory-efficient inference</a> shows this technique can let a machine run models larger than its RAM would normally allow, at the cost of noticeably slower responses.</p>
+<ul>
+<li>Close background apps before loading a large model to free RAM</li>
+<li>Choose a 4-bit quantized variant if your machine sits near the minimum bracket</li>
+<li>Watch Task Manager or Activity Monitor for memory pressure during your first run</li>
+</ul>
+<p><strong>Pro Tip:</strong> <em>If your laptop has 8GB of RAM, start with the smallest model variant available rather than the &quot;recommended&quot; one. You can always upgrade once you&#x27;ve confirmed your hardware handles it smoothly.</em></p>
+<h2 id="privacy-and-offline-behavior-what-local-processing-really-protects">Privacy and Offline Behavior: What Local Processing Really Protects</h2>
+<p>Running AI locally means your prompts and documents get processed on your machine, not uploaded to a company&#x27;s server for analysis. That&#x27;s the entire appeal for anyone handling sensitive contracts, medical notes, or personal journals.</p>
+<p>But &quot;local&quot; doesn&#x27;t always mean &quot;nothing ever touches the internet.&quot; A few things commonly still require a connection:</p>
+<ul>
+<li>One-time license or account verification, often through a Google or Microsoft sign-in</li>
+<li>Downloading the initial model file and any future updates</li>
+<li>Optional cloud backup features, if you choose to enable them</li>
+</ul>
+<p><a href="https://edps.europa.eu/data-protection/our-work/subjects/health_en" target="_blank" rel="noopener noreferrer nofollow">Regulators addressing health data</a> note that local processing reduces routine data transfers, but organizations still have to document their controls and access policies. <a href="https://www.hhs.gov/hipaa/index.html" target="_blank" rel="noopener noreferrer nofollow">HIPAA rules</a> in the U.S. work the same way: keeping data on-device lowers exposure, but it doesn&#x27;t erase your compliance responsibilities if you&#x27;re handling protected health information professionally. If you&#x27;re storing model files or a local vector database of embeddings, back them up the same way you&#x27;d back up any other sensitive file, ideally encrypted.</p>
+<h2 id="common-use-cases-and-realistic-expectations-vs-cloud-ai">Common Use Cases and Realistic Expectations vs. Cloud AI</h2>
+<p>Local AI earns its keep on specific jobs: private document Q&amp;A where a contract or medical file never leaves your laptop, offline assistants for travel or fieldwork with no signal, and basic image analysis on models built to handle it.</p>
+<p>Cloud AI still wins on raw horsepower. It offers the highest-end reasoning, the fastest throughput at scale, and the ability to serve thousands of simultaneous users, none of which a personal laptop can match. Comparisons between local and cloud options suggest local models now handle plenty of everyday tasks capably, but frontier cloud systems still lead on the hardest reasoning problems and high-volume workloads.</p>
+<p>The real decision comes down to four factors: how sensitive your data is, how much latency you can tolerate, whether you&#x27;d rather pay once or by subscription, and how demanding your actual task is. A deeper breakdown of these <a href="https://blog.greencube.app/blog/offline-ai-vs-cloud-ai">trade-offs between offline and cloud AI</a> can help you weigh your specific situation.</p>
+<h2 id="quick-steps-to-get-a-local-model-running-on-your-pc">Quick Steps to Get a Local Model Running on Your PC</h2>
+<p>Getting your first local model working takes less time than most beginners expect.</p>
+<ol>
+<li><strong>Check your hardware.</strong> Confirm available RAM and free disk space; most starter models need 2 to 5GB free.</li>
+<li><strong>Pick a model variant.</strong> Choose a quantized version if you&#x27;re near the minimum RAM bracket, or a full-precision one if you have headroom.</li>
+<li><strong>Install a local runtime or app.</strong> This is the software that will load and run the model file.</li>
+<li><strong>Download the model file.</strong> Formats like GGUF or safetensors are standard; the download itself can take several minutes depending on file size.</li>
+<li><strong>Launch and test.</strong> Open the app, load the model, and try a simple prompt to confirm everything works.</li>
+<li><strong>Troubleshoot if needed.</strong> If responses are painfully slow, drop to a smaller quantized variant, confirm GPU acceleration is enabled in settings, and check the app&#x27;s error log for missed dependencies.</li>
+</ol>
+<p>A full walkthrough with screenshots is available if you want to <a href="https://blog.greencube.app/blog/install-local-ai">install local AI</a> step by step rather than working from a checklist, and a <a href="https://blog.greencube.app/blog/best-local-ai-models">hardware-tier model guide</a> can help you pick the right variant for your machine before you even start downloading.</p>
+<h2 id="what-to-expect-after-setup-costs-and-maintenance">What to Expect After Setup: Costs and Maintenance</h2>
+<p>There&#x27;s no per-message bill with local AI, but it isn&#x27;t free to run. Your electricity meter still spins while your CPU or GPU works, and <a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks" target="_blank" rel="noopener noreferrer nofollow">data center energy research</a> is a useful reminder that AI computation always costs energy somewhere, whether that&#x27;s a server farm or your own desk.</p>
+<ul>
+<li>You&#x27;re responsible for updating the model and runtime yourself</li>
+<li>Security patches for the runtime software matter just as much as they do for any other app</li>
+<li>Occasional re-downloads happen when a better model version is released</li>
+</ul>
+<p>Cloud AI still makes more sense when you need massive scale, many simultaneous users, or the single most capable reasoning model available. Local AI wins when privacy, offline access, and predictable one-time costs matter more than raw ceiling performance.</p>
+<h2 id="greencube-as-a-real-world-example">GreenCube as a Real-World Example</h2>
+<p>GreenCube shows what these mechanics look like in a finished product. It&#x27;s a Windows desktop app that runs entirely offline, but setup still requires downloading one model: <strong>Quick</strong> (Llama 3.2 3B, about 2GB, fast, text only) or <strong>All-rounder</strong> (Gemma 4 E4B, about 4.2GB, reads images and builds study guides, needs at least 8GB RAM, and runs slower).</p>
+<p>Signing in with Google or Microsoft is required once, purely to verify your license; your actual chats and document processing never leave your machine. GreenCube costs <strong>€9.99 / $9.99</strong>, a one-time purchase with no subscription, which is a fair reflection of the ownership model local AI makes possible rather than a claim that it out-thinks cloud AI on hard reasoning tasks.</p>
+<h2 id="update-mechanisms-for-local-ai-models">Update Mechanisms for Local AI Models</h2>
+<p>Local models don&#x27;t patch themselves the way a cloud service silently updates behind an API. Somebody, usually you, has to trigger the process. Most local AI apps handle this through a model manager that checks for a newer version of the file you&#x27;re using and prompts a fresh download when one is available, the same way you&#x27;d update any other piece of software.</p>
+<p>The update itself typically replaces the entire model file rather than patching it incrementally. Because a quantized model might be 2 to 5GB, updating means downloading that whole file again, which is why many people stick with a working version rather than chasing every new release. Runtime software (the engine that loads and executes the model) updates separately from the model itself, and keeping that current matters more for security than the model file does, since the runtime is the piece actually talking to your hardware and, during setup or license checks, the internet.</p>
+<p>Some apps automate this update check on launch; others require you to manually visit a model catalog and pull a new file yourself. Either way, nothing about the update requires your prompts or documents to be uploaded anywhere. Only the model file itself moves, and it moves in the same direction every time: down to your device, never up from it.</p>
+<p><img src="/blog/images/baabf41a88ac.jpg" alt="Update Mechanisms for Local AI Models — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
+<h2 id="when-should-a-beginner-actually-choose-local-ai">When Should a Beginner Actually Choose Local AI?</h2>
+<p>The people who benefit most from local AI aren&#x27;t hobbyists chasing benchmarks. They&#x27;re students working with sensitive research notes, professionals handling client documents, and anyone who&#x27;s tired of wondering where their conversations end up. If that&#x27;s you, ask three questions: does your task involve data you&#x27;d rather not upload anywhere, can your hardware handle at least a small quantized model, and can you tolerate a slightly less polished answer than a frontier cloud model gives you?</p>
+<p>Start small. Try a compact model on unimportant, non-sensitive text before you trust it with anything that matters, and scale up only once you&#x27;ve confirmed your hardware keeps up.</p>
+<blockquote>
+<p><em>— GreenCube</em></p>
+</blockquote>
+<h2 id="try-local-ai-without-the-learning-curve">Try Local AI Without the Learning Curve</h2>
+<p>If everything above sounds appealing but the idea of manually managing runtimes and model files feels like too much, that&#x27;s the exact gap <a href="https://greencube.app" target="_blank" rel="noopener noreferrer nofollow">GreenCube</a> was built to close. It handles the model download, the runtime, and the interface in one package, so you pick Quick or All-rounder, sign in once to verify your license, and start chatting entirely offline afterward.</p>
+<p>It costs a one-time <strong>€9.99 / $9.99</strong>, with no subscription and no per-message limits, and it comes with a 14-day refund window if it doesn&#x27;t fit your workflow. You can also read more about <a href="https://blog.greencube.app/blog/local-ai-models-explained">local AI models and their trade-offs</a> before deciding, or head straight to buy GreenCube if you already know local AI is what you want. For anyone exploring how AI fits into broader creative or business work, resources on building a brand with AI-driven strategies are worth a look too.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://huggingface.co/blog/jjokah/small-language-model" target="_blank" rel="noopener noreferrer nofollow">Small language model blog (Hugging Face)</a></li>
+<li><a href="https://github.com/microsoft/foundry-local/?wt.mc_id=3reg_webpage_reactor" target="_blank" rel="noopener noreferrer nofollow">Foundry Local (Microsoft GitHub)</a></li>
+<li><a href="https://edps.europa.eu/data-protection/our-work/subjects/health_en" target="_blank" rel="noopener noreferrer nofollow">European Data Protection Supervisor — health data page</a></li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-local-ai-as-good-as-chatgpt">Is local AI as good as ChatGPT?</h3>
+<p>For everyday tasks like drafting, summarizing, and private document Q&amp;A, a well-chosen local model holds up well. For the hardest reasoning problems and largest-scale throughput, frontier cloud models still lead.</p>
+<h3 id="how-does-local-ai-work-without-internet">How does local AI work without internet?</h3>
+<p>Once the model file is downloaded and the runtime is installed, the entire chat process, tokenizing your prompt, running it through the model, and generating a response, happens on your device&#x27;s own CPU, GPU, or NPU with no network connection required.</p>
+<h3 id="is-it-worth-running-ai-locally">Is it worth running AI locally?</h3>
+<p>It&#x27;s worth it if privacy, offline access, and a predictable one-time cost matter more to you than having access to the single most powerful reasoning model available; if you need massive scale or cutting-edge reasoning, cloud AI is the better fit.</p>
+<h3 id="is-local-ai-free">Is local AI free?</h3>
+<p>The software itself can be free or low-cost depending on the tool, but running it isn&#x27;t cost-free: you&#x27;re paying in electricity and, eventually, time spent managing updates and model downloads yourself.</p>
+<h2 id="recommended">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/best-local-ai-models">Best Local AI Models by Hardware Tier in 2026</a></li>
+<li><a href="https://blog.greencube.app/blog/install-local-ai">Install Local AI: Get a Working Offline LLM on Your PC</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-setup-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+<li><a href="https://blog.greencube.app/blog/ai-without-internet">AI Without Internet: Run Local AI Privately on Any Laptop</a></li>
+</ul>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
