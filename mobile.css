@@ -1,0 +1,37 @@
+/* Phone fixes shared by every page. Loaded last, so it only adjusts what the
+   page's own styles already do; nothing here applies above 640 px wide. */
+@media (max-width: 640px) {
+
+  /* Menu: one row you can swipe, instead of five links wrapping onto two
+     extra rows under the logo. The fade on the right says "there's more". */
+  header > .nav, header > .header-nav {
+    flex-wrap: nowrap; justify-content: flex-start; gap: 0;
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+            mask-image: linear-gradient(90deg, #000 82%, transparent);
+  }
+  header > .nav::-webkit-scrollbar, header > .header-nav::-webkit-scrollbar { display: none; }
+  header > .nav a, header > .header-nav a { flex: 0 0 auto; padding: 8px 11px; }
+
+  /* Logo, language and button on one row, also in Spanish ("Consigue
+     GreenCube" is long) and on small 360 px phones. */
+  header { column-gap: 10px; }
+  header:has(.nav-cta) > .brand { font-size: 17px; gap: 8px; }
+  header .head-right { gap: 6px; }
+  header .head-right .lang { padding-left: 8px; padding-right: 8px; }
+  header .nav-cta { font-size: 13px; padding: 8px 13px; }
+
+  /* Home: "Unlimited | Private | Works offline | €9.99" as two neat rows,
+     with the divider only between the two items of each row. */
+  .hero .hero-chips { display: grid; grid-template-columns: auto auto; justify-content: center; row-gap: 6px; }
+  .hero .hero-chips li { padding: 0 16px; text-align: center; }
+  .hero .hero-chips li:nth-child(odd)::before { display: none; }
+
+  /* Our mission: big statements got headline-tight lines; give them air. */
+  .w-big { line-height: 1.25; }
+  p.w-big[style] { line-height: 1.5; }
+
+  /* Small grey notes were too small and too faint to read on a phone. */
+  .w-fine, .w-try-fine, .tiny, .dl-status, .tt-note { font-size: 14px; color: #6B6455; }
+  .vat-note, .price .meta, .trust span, .dl-link .sub { font-size: 13.5px; color: #6B6455; }
+}
