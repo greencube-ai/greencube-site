@@ -222,9 +222,26 @@
     main {
       position: relative; z-index: 2;
       max-width: 1080px; margin: 0 auto;
-      padding: 150px 32px 110px;
+      padding: 150px 32px 64px;
       display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center;
     }
+    /* spans both columns, sits under the pitch and the order box */
+    .scroll-cue {
+      grid-column: 1 / -1;
+      justify-self: center;
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 46px; padding: 11px 20px;
+      border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(253, 251, 245, 0.7);
+      font-size: 13.5px; font-weight: 500; color: var(--ink-soft);
+      text-decoration: none;
+      transition: border-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+    }
+    .scroll-cue:hover { border-color: var(--moss, #7E8A5A); color: var(--ink); }
+    .scroll-cue svg { width: 15px; height: 15px; animation: cue-bob 2.4s ease-in-out infinite; }
+    @keyframes cue-bob { 0%, 100% { transform: translateY(-1px); } 50% { transform: translateY(3px); } }
+    @media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
+    @media (max-width: 560px) { .scroll-cue { font-size: 12.5px; padding: 10px 16px; text-align: left; } }
     main::before {
       content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
@@ -369,35 +386,43 @@
 
     .fit-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss, #7E8A5A); margin-bottom: 12px; }
     .fit-card h2 { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.14; letter-spacing: -0.02em; color: var(--forest, #1A1A1A); margin-bottom: 10px; }
-    .fit-sub { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 22px; }
+    /* Nothing in this dialog is allowed to be small faint grey text. Every
+       line here is something a buyer needs to read, so it is sized to be read
+       at a glance, not squinted at. */
+    .fit-sub { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 24px; }
 
     .fit-step { display: none; }
     .fit-step.active { display: block; animation: fit-in .4s var(--ease-out, cubic-bezier(0.16,1,0.3,1)) both; }
     @keyframes fit-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-    .fit-q { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+    .fit-q { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
     .fit-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .fit-opt {
-      padding: 13px 12px; border-radius: 13px; border: 1px solid var(--line);
+      padding: 16px 12px; border-radius: 13px; border: 1px solid var(--line);
       background: var(--paper, #F5F1E8); color: var(--ink); cursor: pointer; text-align: center;
-      font-size: 14.5px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
+      font-size: 16px; font-weight: 600; transition: border-color .25s, background .25s, transform .2s;
     }
-    .fit-opt small { display: block; font-weight: 500; font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
     .fit-opt:hover { border-color: var(--moss, #7E8A5A); background: var(--paper-warm); transform: translateY(-1px); }
 
-    .fit-skip { display: block; width: 100%; margin-top: 18px; background: none; border: none; font-size: 12.5px; color: var(--ink-faint); cursor: pointer; text-align: center; }
-    .fit-skip:hover { color: var(--ink-mute); text-decoration: underline; }
+    .fit-skip { display: block; width: 100%; margin-top: 20px; background: none; border: none; font-size: 14.5px; font-weight: 500; color: var(--ink-soft); cursor: pointer; text-align: center; }
+    .fit-skip:hover { color: var(--ink); text-decoration: underline; }
 
-    .fit-verdict { display: flex; align-items: center; gap: 13px; margin-bottom: 4px; }
-    .fit-dot { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
-    .fit-dot.green { background: rgba(126, 138, 90, 0.16); color: var(--moss, #7E8A5A); }
-    .fit-dot.amber { background: rgba(250, 226, 137, 0.20); color: #8A6B1C; }
-    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest, #1A1A1A); letter-spacing: -0.015em; }
-    .fit-reassure { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 14px 0 2px; }
-    .fit-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 2px; }
-    .fit-chip { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); background: var(--paper, #F5F1E8); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
-    .fit-expect { font-size: 12.5px; color: var(--ink-mute); line-height: 1.55; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
-    .fit-honest { font-size: 11.5px; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; }
+    .fit-verdict { margin-bottom: 4px; }
+    .fit-verdict h3 { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--forest, #1A1A1A); letter-spacing: -0.02em; }
+    /* The tier name is the answer, so it is named out loud rather than implied.
+       --tier-mk is set per tier by the script and is the only thing that changes
+       colour here: no green tick, no amber warning, nothing that reads pass/fail. */
+    .fit-tier { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 10px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+    .fit-tier-dot { width: 12px; height: 12px; border-radius: 4px; border: 2.4px solid var(--tier-mk, var(--moss, #7E8A5A)); }
+    .fit-gets { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 9px; }
+    .fit-gets li { position: relative; padding-left: 20px; font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
+    .fit-gets li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 3px; border: 2px solid var(--tier-mk, var(--moss, #7E8A5A)); }
+    .fit-gets li b { font-weight: 600; color: var(--ink); }
+    .fit-note { font-size: 15px; line-height: 1.5; color: var(--ink-soft); margin-top: 16px; }
+    .fit-note a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+    .fit-reassure { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 12px 0 0; }
+    .fit-help { font-size: 15px; line-height: 1.5; color: var(--ink-soft); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .fit-help a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
     .fit-cta {
       width: 100%; min-height: 54px; margin-top: 20px; padding: 0 24px; border-radius: 13px;
       background: var(--forest, #1A1A1A); color: #fff; border: 1px solid var(--forest, #1A1A1A);
@@ -643,10 +668,14 @@
       </div>
     </div>
   </section>
+  <a href="#detail" class="scroll-cue">
+    <span>Qué incluye y las preguntas más habituales</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+  </a>
 </main>
 
 <!-- ===== what you get + buyer questions ===== -->
-<section class="detail" aria-label="What you get and common questions">
+<section class="detail" id="detail" aria-label="Qué incluye y preguntas frecuentes">
   <div class="eyebrow">Qué incluye</div>
   <h2>Todo, en tu propio PC.</h2>
 
@@ -814,16 +843,6 @@
   <div class="fit-card">
     <button class="fit-close" id="fit-close" type="button" aria-label="Cerrar">✕</button>
 
-    <!-- paso 0: se muestra PRIMERO si el visitante no está en Windows -->
-    <div class="fit-step" id="fit-step-os">
-      <div class="fit-eyebrow">Un momento</div>
-      <h2 id="fit-os-title"></h2>
-      <p class="fit-sub" id="fit-os-sub"></p>
-      <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
-      <button class="fit-skip" id="fit-os-secondary" type="button"></button>
-    </div>
-
-    <!-- paso 1: intro + RAM -->
     <!-- step 0: a letter from Hector, before anything else -->
     <div class="fit-step" id="fit-step-letter">
       <div class="lt-letter" id="lt-letter">
@@ -848,38 +867,65 @@
     </g>
   </svg></div>
         <div class="lt-paper-full"><h2>Una nota de Hector</h2><p>Creé GreenCube porque estaba harto de que la IA me hiciera esperar horas al llegar al límite. Así que hice una que funciona en tu propio PC: sin límites y sin nada que configurar.</p><p>Cada PC es distinto. Si no te va bien en el tuyo, escríbeme en los primeros 14 días y te devuelvo el dinero íntegro.</p><p class="sign">Hector<small>Fundador y CEO de GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
-        <div class="lt-after"><p class="lt-next">Ahora, una pregunta rápida para ver si te irá bien.</p>
+        <div class="lt-after"><p class="lt-next">Ahora, dos preguntas rápidas para ver si te irá bien en tu PC.</p>
         <button class="fit-cta" id="lt-go" type="button"><span>Empezar la prueba</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
         <button class="fit-skip" id="lt-skip" type="button">Saltar e ir al pago →</button></div>
       </div>
     </div>
 
+    <!-- step 1: intro + RAM self-report -->
     <div class="fit-step active" id="fit-step-intro">
-      <div class="fit-eyebrow">Comprobación rápida</div>
+      <div class="fit-eyebrow">Prueba rápida</div>
       <h2 id="fit-title">¿Te irá bien en tu PC?</h2>
-      <p class="fit-sub">Una pregunta rápida. Puedes saltarla.</p>
+      <p class="fit-sub">Dos preguntas rápidas. Puedes saltarte las dos.</p>
       <div class="fit-q">¿Cuánta memoria (RAM) tiene tu ordenador?</div>
       <div class="fit-opts">
-        <button class="fit-opt" data-ram="8" type="button">8 GB<small>o menos</small></button>
-        <button class="fit-opt" data-ram="16" type="button">16 GB<small>la mayoría</small></button>
-        <button class="fit-opt" data-ram="32" type="button">32 GB+<small>de sobra</small></button>
-        <button class="fit-opt" data-ram="unsure" type="button">No lo sé<small>lo estimamos</small></button>
+        <button class="fit-opt" data-ram="8" type="button">8 GB</button>
+        <button class="fit-opt" data-ram="16" type="button">16 GB</button>
+        <button class="fit-opt" data-ram="32" type="button">32 GB o más</button>
+        <button class="fit-opt" data-ram="unsure" type="button">No lo sé</button>
       </div>
       <button class="fit-skip" id="fit-skip" type="button">Saltar e ir al pago →</button>
     </div>
 
-    <!-- paso 2: veredicto -->
+    <!-- step 2: the graphics card, the other half of what names a tier. Memory
+         decides how much fits; a card the app can actually use decides how fast
+         it runs. Asking only about RAM could call a 16 GB gaming PC "Sprout"
+         when it is really Bloom, which undersells the machine in front of us. -->
+    <div class="fit-step" id="fit-step-gpu">
+      <div class="fit-eyebrow">Prueba rápida</div>
+      <h2>¿Tiene tarjeta gráfica?</h2>
+      <p class="fit-sub">Como la de un PC gaming. La mayoría de portátiles no tienen, y no pasa nada.</p>
+      <div class="fit-q">Elige la más parecida.</div>
+      <div class="fit-opts">
+        <button class="fit-opt" data-gpu="strong" type="button">Sí, una potente</button>
+        <button class="fit-opt" data-gpu="yes" type="button">Sí, una normal</button>
+        <button class="fit-opt" data-gpu="no" type="button">No, gráficos integrados</button>
+        <button class="fit-opt" data-gpu="unsure" type="button">No lo sé</button>
+      </div>
+      <button class="fit-skip" id="fit-skip-gpu" type="button">Saltar e ir al pago →</button>
+    </div>
+
+    <!-- step 0: shown FIRST when the visitor isn't on Windows -->
+    <div class="fit-step" id="fit-step-os">
+      <div class="fit-eyebrow">Atención</div>
+      <h2 id="fit-os-title"></h2>
+      <p class="fit-sub" id="fit-os-sub"></p>
+      <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
+      <button class="fit-skip" id="fit-os-secondary" type="button"></button>
+    </div>
+
+    <!-- step 3: verdict -->
     <div class="fit-step" id="fit-step-result">
       <div class="fit-verdict">
-        <span class="fit-dot" id="fit-dot"></span>
+        <div class="fit-tier" id="fit-tier"><span class="fit-tier-dot" aria-hidden="true"></span><span id="fit-tier-name"></span></div>
         <h3 id="fit-headline"></h3>
       </div>
       <p class="fit-reassure" id="fit-reassure"></p>
-      <div class="fit-chips" id="fit-chips"></div>
-      <p class="fit-expect">La velocidad depende de tu ordenador, como en un videojuego. Menos instantánea que ChatGPT, pero privada, sin límites y tuya.</p>
+      <ul class="fit-gets" id="fit-gets"></ul>
+      <p class="fit-note">Son solo valores por defecto: puedes cambiar cualquiera en Ajustes. <a href="/es/what-you-get#tiers">Ver los cuatro niveles →</a></p>
       <p class="fit-help">¿Algo va mal? Escribe a <a href="mailto:support@greencube.app">support@greencube.app</a>. Lo arreglamos o te devolvemos el dinero en los primeros 14 días.</p>
       <button class="fit-cta" id="fit-continue" type="button"><span>Continuar al pago</span><span class="arrow" aria-hidden="true">→</span></button>
-      <p class="fit-honest">Es una estimación rápida desde tu navegador. GreenCube comprueba tu hardware exacto al abrirse por primera vez, y si no es para ti, te devolvemos el dinero en los primeros 14 días.</p>
     </div>
   </div>
 </div>
@@ -919,20 +965,24 @@
   }
 
   // ====================================================================
-  //  COMPROBACIÓN DE COMPATIBILIDAD (misma lógica que /buy en inglés)
-  //  Al pulsar "Consigue GreenCube" se abre una comprobación cálida y
-  //  saltable: nadie gasta 9,99 € en una máquina que no puede con la IA local.
-  //  Nunca bloquea la compra. Un navegador solo puede juzgar con honestidad
-  //  dos cosas: el sistema (GreenCube es solo para Windows) y la RAM (se
-  //  pregunta directamente: es el cuello de botella real de un modelo local).
-  //  NO ejecutamos un test de velocidad en el navegador: mide el motor de JS,
-  //  no el hardware. El test de velocidad preciso vive en el asistente de la app.
+  //  FIT CHECK
+  //  Clicking "Get GreenCube" opens a warm, skippable check FIRST, so nobody
+  //  spends €9.99 on a machine that can't run the local AI. It NEVER blocks the
+  //  purchase — worst case it says "a bit slower" and points at the 14-day
+  //  refund. Two things a browser CAN judge honestly: the OS (GreenCube is
+  //  Windows-only) and RAM (asked directly — it's the real bottleneck for a
+  //  local model, and the ~4GB model must fit alongside the OS). We do NOT run
+  //  a browser speed benchmark: it measures the JS engine, not the hardware
+  //  (a phone out-scored an 11-core desktop), so it misled more than it helped.
+  //  The accurate speed test lives in the APP's first-run wizard.
   // ====================================================================
   const overlay = document.getElementById('fit-overlay');
   const stepOs = document.getElementById('fit-step-os');
   const stepIntro = document.getElementById('fit-step-intro');
+  const stepGpu = document.getElementById('fit-step-gpu');
   const stepResult = document.getElementById('fit-step-result');
   let selectedRam = null;
+  let selectedGpu = null;
 
 
   // ---------- the letter: first thing after "Get GreenCube" ----------
@@ -967,11 +1017,14 @@
   }
 
   const showStep = (el) => {
-    [stepLetter, stepOs, stepIntro, stepResult].forEach((s) => s.classList.remove('active'));
+    [stepLetter, stepOs, stepIntro, stepGpu, stepResult].forEach((s) => s.classList.remove('active'));
     el.classList.add('active');
   };
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
 
+  // GreenCube is a Windows desktop app. A Mac/Linux/phone visitor can't run it,
+  // so paying would just mean a refund — surface that BEFORE the RAM check, which
+  // otherwise happily ran a speed test on a phone as if it could install.
   function detectOS() {
     const uaData = navigator.userAgentData;
     const hay = ((uaData && uaData.platform) || '') + ' ' + (navigator.platform || '') + ' ' + (navigator.userAgent || '');
@@ -991,6 +1044,8 @@
     const primary = document.getElementById('fit-os-primary');
     const secondary = document.getElementById('fit-os-secondary');
     if (os === 'mobile') {
+      // Phone visitors very likely own a Windows PC and are just browsing, so
+      // stay encouraging — but make it unmistakable it's a PC app.
       title.textContent = 'GreenCube funciona en un PC con Windows.';
       sub.textContent = 'Es una app para Windows 10 y 11, no para móvil. Puedes comprar ahora e iniciar sesión luego en tu PC con el mismo correo.';
       primaryLabel.textContent = 'Comprar ahora, instalar en mi PC →';
@@ -998,6 +1053,8 @@
       secondary.textContent = 'Ahora no';
       secondary.onclick = closeFit;
     } else {
+      // On the very machine they'd use, and it won't run — so the safe default
+      // is NOT to buy. Prominent "got it", quiet escape hatch for dual-PC owners.
       title.textContent = os === 'mac' ? 'GreenCube aún no funciona en Mac.' : 'GreenCube aún no funciona en Linux.';
       sub.textContent = 'Por ahora solo funciona en Windows 10 y 11. Las versiones para Mac y Linux están en camino. Compra solo si también tienes un PC con Windows.';
       primaryLabel.textContent = 'Entendido';
@@ -1025,39 +1082,121 @@
   document.getElementById('lt-skip').addEventListener('click', goCheckout);
   document.getElementById('fit-close').addEventListener('click', closeFit);
   document.getElementById('fit-skip').addEventListener('click', goCheckout);
+  document.getElementById('fit-skip-gpu').addEventListener('click', goCheckout);
   document.getElementById('fit-continue').addEventListener('click', goCheckout);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
 
-  document.querySelectorAll('.fit-opt').forEach((btn) => {
-    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showResult(); });
+  document.querySelectorAll('[data-ram]').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showStep(stepGpu); });
+  });
+  document.querySelectorAll('[data-gpu]').forEach((btn) => {
+    btn.addEventListener('click', () => { selectedGpu = btn.getAttribute('data-gpu'); showResult(); });
   });
 
+  // ====================================================================
+  //  WHICH TIER
+  //  The same four tiers the app itself uses (perf_tier_for, docs/TIERS.md):
+  //  memory decides how much FITS, a usable graphics card decides how FAST it
+  //  runs, and only the two together name the right one. The Apple Silicon
+  //  branch of that rule is irrelevant here — GreenCube is Windows-only.
+  //
+  //  Every line below describes a DEFAULT, never an entitlement. All four tiers
+  //  are the same app at the same price, and every capability named here is a
+  //  switch in Settings, which is why the copy says so rather than hiding it.
+  // ====================================================================
+  const TIERS = {
+    seed: {
+      mk: '#FAE289',
+      label: 'Nivel uno',
+      headline: 'Tu ordenador es un Seed.',
+      reassure: 'Funciona con 8 GB. Las respuestas van algo más lentas, pero tienes todo lo que buscabas.',
+      gets: [
+        '<b>Respuestas sin límite</b>, documentos, tarjetas, tests y tablas.',
+        '<b>Archivos de PowerPoint de verdad.</b>',
+        'Las páginas web vienen desactivadas (tardarían minutos).'
+      ]
+    },
+    sprout: {
+      mk: '#8EA674',
+      label: 'Nivel dos',
+      headline: 'Tu ordenador es un Sprout.',
+      reassure: 'Va bien. No es instantánea: sin tarjeta gráfica, el procesador escribe cada palabra.',
+      gets: [
+        '<b>El modelo de IA más grande</b> (Gemma E4B).',
+        '<b>Presentaciones que escribe la propia IA</b>, además de todo lo de Seed.',
+        'Páginas web, avisándote antes de cuánto tardarán.',
+        '<b>Con más memoria, puede leer más a la vez.</b>'
+      ]
+    },
+    bloom: {
+      mk: '#FA9F75',
+      label: 'Nivel tres',
+      headline: 'Tu ordenador es un Bloom.',
+      reassure: 'Con tarjeta gráfica, las respuestas son rápidas.',
+      gets: [
+        '<b>Páginas web, sin esperas.</b>',
+        '<b>Mira las imágenes ella misma</b>, sin otra herramienta.',
+        'Las conversaciones largas no pierden el hilo.'
+      ]
+    },
+    thrive: {
+      mk: '#8EABE1',
+      label: 'Nivel cuatro',
+      headline: 'Tu ordenador es un Thrive.',
+      reassure: 'El nivel más alto: todo activado desde el principio.',
+      gets: [
+        '<b>El modelo de IA más grande que quepa en tu PC.</b>',
+        '<b>Lee todo lo que permita tu memoria.</b>',
+        'Nada que activar ni confirmar.'
+      ]
+    }
+  };
+
+  function tierFor(ram, gpu) {
+    // "Not sure" about the card counts as no card. That is the honest direction
+    // to round: a machine that turns out faster than promised is a good
+    // surprise, and the opposite is a refund.
+    const strongCard = gpu === 'strong';
+    const anyCard = gpu === 'strong' || gpu === 'yes';
+
+    let gb;
+    if (ram === '8') gb = 8;
+    else if (ram === '16') gb = 16;
+    else if (ram === '32') gb = 32;
+    else {
+      // Unsure: fall back to the little the browser can glimpse. deviceMemory is
+      // rounded and capped at 8, cores is a weak hint, so this only ever decides
+      // between "small" and "ordinary" — never the top tier.
+      const dm = navigator.deviceMemory || 0;
+      const cores = navigator.hardwareConcurrency || 0;
+      gb = (dm >= 8 || cores >= 8) ? 16 : 8;
+    }
+
+    // A strong card holds the weights itself, so it tiers on its own. An
+    // ordinary card cannot, so it needs the RAM behind it — and on a small
+    // machine it lifts you one step and no further. Mirrors perf_tier_from.
+    if (strongCard && gb >= 24) return 'thrive';
+    if (strongCard && gb >= 8) return 'bloom';
+    if (anyCard && gb >= 16) return 'bloom';
+    if (gb >= 12 || (anyCard && gb >= 8)) return 'sprout';
+    return 'seed';
+  }
+
   function showResult() {
-    const cores = navigator.hardwareConcurrency || 0;
-    const dm = navigator.deviceMemory || 0;
-    let green;
-    if (selectedRam === '16' || selectedRam === '32') green = true;
-    else if (selectedRam === '8') green = false;
-    else green = dm >= 8 || cores >= 8;
+    const t = TIERS[tierFor(selectedRam, selectedGpu)];
 
-    const dot = document.getElementById('fit-dot');
-    dot.className = 'fit-dot ' + (green ? 'green' : 'amber');
-    dot.innerHTML = green
-      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>'
-      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8v5"/><circle cx="12" cy="16.6" r="0.7" fill="currentColor" stroke="none"/></svg>';
-    document.getElementById('fit-headline').textContent = green ? '¡Todo listo!' : 'Debería funcionar.';
-    document.getElementById('fit-reassure').textContent = green
-      ? 'Debería ir con soltura en tu ordenador.'
-      : 'Debería ir bien. Con menos memoria, las respuestas tardan un poco más.';
+    // No tick or warning icon: the tier name says the verdict in words, and a
+    // red-or-green badge on a checkout screen reads as pass/fail anxiety.
+    const badge = document.getElementById('fit-tier');
+    badge.style.setProperty('--tier-mk', t.mk);
+    document.getElementById('fit-tier-name').textContent = t.label;
+    document.getElementById('fit-headline').textContent = t.headline;
+    document.getElementById('fit-reassure').textContent = t.reassure;
 
-    const ramLabel = { '8': '8 GB RAM', '16': '16 GB RAM', '32': '32 GB+ RAM', 'unsure': 'RAM estimada' }[selectedRam];
-    const chips = document.getElementById('fit-chips');
-    chips.innerHTML = '';
-    const chipList = [ramLabel, 'Windows', cores ? cores + ' núcleos' : null].filter(Boolean);
-    chipList.forEach((t) => {
-      const c = document.createElement('span'); c.className = 'fit-chip'; c.textContent = t; chips.appendChild(c);
-    });
+    const gets = document.getElementById('fit-gets');
+    gets.style.setProperty('--tier-mk', t.mk);
+    gets.innerHTML = t.gets.map((g) => '<li>' + g + '</li>').join('');
 
     showStep(stepResult);
   }
