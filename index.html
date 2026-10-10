@@ -521,52 +521,6 @@
     .tier-table .yes svg { width: 16px; height: 16px; }
     .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
 
-    /* ---------- a note from Hector ---------- */
-    .note-wrap { max-width: 680px; margin: 64px auto 0; }
-    .note-card {
-      width: 100%; display: flex; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer;
-      font: inherit; text-align: left; color: inherit; border-radius: 22px; background: #FFFDF8; border: 1px solid var(--line);
-      box-shadow: 0 1px 2px rgba(31, 36, 24, .05), 0 30px 60px -44px rgba(78, 95, 58, .5);
-      transition: transform .45s var(--ease-out), border-color .3s var(--ease-out);
-    }
-    .note-card:hover { transform: translateY(-3px); border-color: var(--moss); }
-    .note-env {
-      flex: 0 0 auto; width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
-      background: rgba(250, 226, 137, .45); color: #8A6B1C; transition: transform .5s var(--ease-out);
-    }
-    .note-env svg { width: 24px; height: 24px; }
-    .note-card:hover .note-env { transform: rotate(-8deg); }
-    .note-who b { display: block; font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.015em; color: var(--forest); }
-    .note-who small { font-size: 13.5px; color: var(--ink-mute); }
-    .note-open { margin-left: auto; font-size: 13.5px; font-weight: 600; color: var(--moss); padding: 7px 15px; border: 1px solid var(--line); border-radius: 999px; }
-
-    /* the letter itself: pops onto the page, a little askew, then settles */
-    .note-pop {
-      width: min(560px, calc(100% - 32px)); max-height: calc(100% - 48px); margin: auto; padding: 38px 40px 34px;
-      border: 1px solid var(--line); border-radius: 22px; background: #FFFDF8; color: var(--ink);
-      box-shadow: 0 50px 100px -40px rgba(31, 36, 24, .55);
-    }
-    .note-pop[open] { animation: note-pop .6s var(--ease-out); }
-    .note-pop::backdrop { background: rgba(31, 36, 24, .38); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-    .note-pop[open]::backdrop { animation: note-fade .4s ease-out; }
-    @keyframes note-pop { from { opacity: 0; transform: translateY(26px) scale(.9) rotate(-3deg); } 60% { transform: translateY(-4px) scale(1.01) rotate(.6deg); } to { opacity: 1; transform: none; } }
-    @keyframes note-fade { from { opacity: 0; } to { opacity: 1; } }
-    .note-x {
-      position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid var(--line); background: #FFFDF8; font-size: 22px; line-height: 1; color: var(--ink-soft); cursor: pointer;
-    }
-    .note-x:hover { border-color: var(--moss); color: var(--forest); }
-    .note-kicker { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--moss); }
-    .note-pop p + p { margin-top: 16px; }
-    .note-pop p:not(.note-kicker):not(.note-sign) { font-size: 17px; line-height: 1.7; }
-    .note-kicker + p { margin-top: 14px; }
-    .note-sign { margin-top: 24px !important; font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--forest); }
-    .note-sign small { display: block; margin-top: 2px; font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--ink-mute); }
-    .note-sign a { display: inline-block; margin-top: 8px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--moss); text-decoration: underline; text-underline-offset: 3px; }
-    /* the turtle signs off beside the signature, facing the letter */
-    .note-pop .note-turtle { position: absolute; right: 30px; bottom: 26px; width: 92px; scale: -1 1; }
-    @media (max-width: 760px) { .note-pop { padding: 30px 22px 26px; } .note-pop .note-turtle { width: 68px; right: 18px; bottom: 20px; } }
-    @media (prefers-reduced-motion: reduce) { .note-pop[open], .note-pop[open]::backdrop { animation: none; } }
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
     .cta-row {
@@ -1580,41 +1534,6 @@
     <p class="tt-note rv">Word counts are typical: they grow with how much memory your computer has free. Everything else is a starting point, not a lock (images need 12&nbsp;GB RAM). Settings &rarr; What your computer can do switches each one on or off.</p>
 
 
-    <!-- a note from Hector: the card opens a letter over the page -->
-    <div class="note-wrap rv">
-      <button type="button" class="note-card" data-note-open>
-        <span class="note-env" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
-        <span class="note-who"><b>A note from Hector</b><small>Founder and CEO</small></span>
-        <span class="note-open">Read it</span>
-      </button>
-    </div>
-    <dialog class="note-pop" aria-labelledby="note-title">
-      <button type="button" class="note-x" data-note-close aria-label="Close">&times;</button>
-      <p class="note-kicker" id="note-title">A note from Hector</p>
-      <p>Hi, I'm Hector. I built GreenCube because I was tired of AI telling me I'd hit my limit and had to wait hours to use it again. You could run AI on your own computer instead, but that meant choosing a model and setting it all up yourself, and most people have no idea where to start. So I made GreenCube: you install it, and it works. No limits, nothing to set up.</p>
-      <p>Every computer is different, and I can't know how GreenCube will run on yours. I don't want anyone stuck with something that doesn't work for them. Downloads usually can't be refunded, but I'd rather you were happy: if it isn't right for you within 14 days, email me, tell me what happened, and I'll refund you in full.</p>
-      <p class="note-sign">Hector<small>Founder and CEO, GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p>
-      <svg class="turtle note-turtle" viewBox="0 0 120 104" aria-hidden="true">
-    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
-      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
-      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
-        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
-        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
-      </g>
-      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
-      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
-      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
-      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
-      <g stroke="none">
-        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
-        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
-        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
-      </g>
-      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
-    </g>
-  </svg>
-    </dialog>
   </div>
 </section>
 
@@ -1921,21 +1840,6 @@
     addEventListener('resize', measure);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     measure();
-  })();
-</script>
-<script>
-  // A note from Hector: the card opens the letter over the page. Escape, the
-  // close button, or a click outside the letter puts it away.
-  (() => {
-    const pop = document.querySelector('.note-pop');
-    const open = document.querySelector('[data-note-open]');
-    if (!pop || !open || typeof pop.showModal !== 'function') return;
-    open.addEventListener('click', () => pop.showModal());
-    pop.querySelector('[data-note-close]').addEventListener('click', () => pop.close());
-    pop.addEventListener('click', (e) => {
-      const r = pop.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) pop.close();
-    });
   })();
 </script>
 <script src="/tier-quiz.js" defer></script>

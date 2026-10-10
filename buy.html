@@ -653,7 +653,7 @@
     <!-- The licence is matched on email. Paying with one address and signing
          in with another is the commonest way a buyer gets locked out, so say
          it here, at the one moment it can still be avoided. -->
-    <p class="vat-note">Pay with the email of the Google or Microsoft account you'll sign in with. That's how GreenCube recognises your purchase.</p>
+    <p class="vat-note">Pay with the same email you'll sign in with (Google or Microsoft).</p>
 
     <button class="buy-btn" id="buy-btn" type="button">
       <span>Get GreenCube</span>
@@ -869,8 +869,8 @@
       <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
     </g>
   </svg></div>
-        <div class="lt-paper-full"><h2>A note from Hector</h2><p>Hi, I'm Hector. I built GreenCube because I was tired of AI telling me I'd hit my limit and had to wait hours to use it again. You could run AI on your own computer instead, but that meant choosing a model and setting it all up yourself, and most people have no idea where to start. So I made GreenCube: you install it, and it works. No limits, nothing to set up.</p><p>Every computer is different, and I can't know how GreenCube will run on yours. I don't want anyone stuck with something that doesn't work for them. Downloads usually can't be refunded, but I'd rather you were happy: if it isn't right for you within 14 days, email me, tell me what happened, and I'll refund you in full.</p><p class="sign">Hector<small>Founder and CEO, GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
-        <div class="lt-after"><p class="lt-next">Next: a quick test to make sure GreenCube runs smoothly on your PC.</p>
+        <div class="lt-paper-full"><h2>A note from Hector</h2><p>I built GreenCube because I was tired of AI making me wait hours after hitting a limit. So I made one that runs on your own PC: no limits, nothing to set up.</p><p>Every PC is different. If it doesn&rsquo;t run well on yours, email me within 14 days and I&rsquo;ll refund you in full.</p><p class="sign">Hector<small>Founder and CEO, GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
+        <div class="lt-after"><p class="lt-next">Next: two quick questions to check it runs well on your PC.</p>
         <button class="fit-cta" id="lt-go" type="button"><span>Start the quick check</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
         <button class="fit-skip" id="lt-skip" type="button">Skip and go to checkout →</button></div>
       </div>
@@ -879,8 +879,8 @@
     <!-- step 1: intro + RAM self-report -->
     <div class="fit-step active" id="fit-step-intro">
       <div class="fit-eyebrow">Quick check</div>
-      <h2 id="fit-title">Will GreenCube run well on your computer?</h2>
-      <p class="fit-sub">The AI runs on your machine, so two things decide how it feels. Two questions, both skippable.</p>
+      <h2 id="fit-title">Will it run well on your PC?</h2>
+      <p class="fit-sub">Two quick questions. You can skip both.</p>
       <div class="fit-q">How much memory (RAM) do you have?</div>
       <div class="fit-opts">
         <button class="fit-opt" data-ram="8" type="button">8 GB</button>
@@ -898,7 +898,7 @@
     <div class="fit-step" id="fit-step-gpu">
       <div class="fit-eyebrow">Quick check</div>
       <h2>Does it have a graphics card?</h2>
-      <p class="fit-sub">A separate card, the kind a gaming PC has. Most laptops don&rsquo;t, and that is perfectly fine.</p>
+      <p class="fit-sub">Like in a gaming PC. Most laptops don&rsquo;t have one, and that&rsquo;s fine.</p>
       <div class="fit-q">Pick the closest.</div>
       <div class="fit-opts">
         <button class="fit-opt" data-gpu="strong" type="button">Yes, a strong one</button>
@@ -926,8 +926,8 @@
       </div>
       <p class="fit-reassure" id="fit-reassure"></p>
       <ul class="fit-gets" id="fit-gets"></ul>
-      <p class="fit-note">Those are only the defaults. Every one of them is a switch in Settings, so your computer is never told what you are allowed to ask for. <a href="/what-you-get#tiers">See all four tiers →</a></p>
-      <p class="fit-help">Don&rsquo;t hesitate to get in touch. If anything goes wrong, email <a href="mailto:support@greencube.app">support@greencube.app</a> and we&rsquo;ll fix it, or refund you within 14 days.</p>
+      <p class="fit-note">These are just defaults: you can change any of them in Settings. <a href="/what-you-get#tiers">See all four tiers →</a></p>
+      <p class="fit-help">Something wrong? Email <a href="mailto:support@greencube.app">support@greencube.app</a>. We&rsquo;ll fix it, or refund you within 14 days.</p>
       <button class="fit-cta" id="fit-continue" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">→</span></button>
     </div>
   </div>
@@ -1050,7 +1050,7 @@
       // Phone visitors very likely own a Windows PC and are just browsing, so
       // stay encouraging — but make it unmistakable it's a PC app.
       title.textContent = 'GreenCube runs on a Windows PC.';
-      sub.textContent = "It's a desktop app for Windows 10 and 11, not a phone app. You can buy now and download it on your PC later, signing in there with the same email, or just open greencube.app on your PC when you are ready.";
+      sub.textContent = "It's an app for Windows 10 and 11, not for phones. You can buy now and sign in on your PC later with the same email.";
       primaryLabel.textContent = 'Buy now, set up on my PC →';
       primary.onclick = goCheckout;
       secondary.textContent = 'Not now';
@@ -1058,9 +1058,8 @@
     } else {
       // On the very machine they'd use, and it won't run — so the safe default
       // is NOT to buy. Prominent "got it", quiet escape hatch for dual-PC owners.
-      const name = os === 'mac' ? 'a Mac' : 'Linux';
       title.textContent = os === 'mac' ? "GreenCube doesn't run on Mac yet." : "GreenCube doesn't run on Linux yet.";
-      sub.textContent = 'Right now GreenCube is Windows-only (Windows 10 and 11), so it will not run on ' + name + '. Mac and Linux versions are coming. If you also have a Windows PC you’re good; otherwise we’d hold off for now.';
+      sub.textContent = 'For now it only runs on Windows 10 and 11. Mac and Linux versions are coming. Only buy if you also have a Windows PC.';
       primaryLabel.textContent = 'Got it';
       primary.onclick = closeFit;
       secondary.textContent = 'I have a Windows PC, continue anyway →';
@@ -1114,45 +1113,45 @@
       mk: '#FAE289',
       label: 'Tier one',
       headline: 'Your computer is a Seed.',
-      reassure: 'GreenCube runs on 8 GB. Replies arrive a word at a time rather than in a rush, and everything you came for is still there.',
+      reassure: 'It runs on 8 GB. Replies come a bit slower, but everything you came for is there.',
       gets: [
         '<b>Unlimited answers</b>, documents, flashcards, quizzes and tables.',
-        '<b>Real PowerPoint files</b>, exactly like every bigger machine gets.',
-        'Web pages stay off here by default, because they would take minutes.'
+        '<b>Real PowerPoint files.</b>',
+        'Web pages are off by default (they would take minutes).'
       ]
     },
     sprout: {
       mk: '#8EA674',
       label: 'Tier two',
       headline: 'Your computer is a Sprout.',
-      reassure: '16 GB or more runs the fuller engine. It works well. It is simply not instant, because without a graphics card your processor is the thing writing every word.',
+      reassure: 'It runs well. Not instant: without a graphics card, your processor writes every word.',
       gets: [
-        '<b>Gemma E4B</b>, the fuller engine, with both choices shown to you at setup.',
-        '<b>Slide decks the model writes itself</b>, plus everything Seed gets.',
-        'Web pages once it has told you the wait, measured on your own machine.',
-        '<b>Memory past 16 GB is not wasted</b> &mdash; the context window grows with it, tier or no tier.'
+        '<b>The bigger AI model</b> (Gemma E4B).',
+        '<b>Slide decks the AI writes itself</b>, plus everything Seed gets.',
+        'Web pages, after telling you how long they will take.',
+        '<b>More memory lets it read more at once.</b>'
       ]
     },
     bloom: {
       mk: '#FA9F75',
       label: 'Tier three',
       headline: 'Your computer is a Bloom.',
-      reassure: 'A real graphics card is where waiting stops being the thing you notice.',
+      reassure: 'With a graphics card, replies are fast.',
       gets: [
-        '<b>Web pages, freely.</b> No warning, no estimate, no asking.',
-        '<b>It sees images with the engine&rsquo;s own eyes</b>, not through a separate captioner.',
-        'A wider context window, so a long conversation keeps its thread.'
+        '<b>Web pages, no waiting.</b>',
+        '<b>It looks at images itself</b>, not through a separate tool.',
+        'Long chats keep their thread.'
       ]
     },
     thrive: {
       mk: '#8EABE1',
       label: 'Tier four',
       headline: 'Your computer is a Thrive.',
-      reassure: 'The top tier. From here your computer is the only thing still deciding what GreenCube can do.',
+      reassure: 'The top tier: everything is on from the start.',
       gets: [
-        '<b>The largest engine your computer can hold</b>, picked by measuring it rather than guessing.',
-        '<b>The context window follows your free memory</b>, until the model&rsquo;s own training runs out.',
-        'Every capability on from the start, with nothing to confirm.'
+        '<b>The biggest AI model your PC can hold.</b>',
+        '<b>It reads as much as your memory allows.</b>',
+        'Nothing to switch on or confirm.'
       ]
     }
   };
