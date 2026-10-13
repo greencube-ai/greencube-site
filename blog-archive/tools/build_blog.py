@@ -265,6 +265,15 @@ TOPICS = [  # (key, tint class, words in the slug that put a post there); first 
                  'setup', 'install', 'windows', 'mac', 'context-window', 'internet', 'offline', 'local-ai', 'llama', 'air-gapped', 'secure-ai')),
     ('tools', 'p', ('alternatives', '-vs-', 'ollama', 'lm-studio', 'desktop-apps', 'chatbot', 'ui', 'gemini', 'claude', 'chatgpt')),
 ]
+_svg = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>'
+ICONS = {  # one small line icon per topic
+    'pc': _svg.format('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'),
+    'study': _svg.format('<path d="M3 5.5C5.5 4.5 8.5 4.5 12 6.5c3.5-2 6.5-2 9-1V19c-2.5-1-5.5-1-9 1-3.5-2-6.5-2-9-1z"/><path d="M12 6.5V20"/>'),
+    'limits': _svg.format('<path d="M7.5 15.5c-2 0-3.5-1.6-3.5-3.5s1.5-3.5 3.5-3.5c3.5 0 5.5 7 9 7 2 0 3.5-1.6 3.5-3.5S18.5 8.5 16.5 8.5c-3.5 0-5.5 7-9 7z"/>'),
+    'tools': _svg.format('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),
+    'more': _svg.format('<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>'),
+}
+
 def topic_of(slug):
     for key, tint, words in TOPICS:
         if any(w in slug for w in words): return key, tint
@@ -343,7 +352,12 @@ def list_page(lang, entries, url, path):
     guides = ''
     if rest and G:
         sort_key = lambda e: re.sub(r'^[^A-Za-z]+', '', e[1]).lower()
-        books = ''.join(f'<li><a href="{L["base"]}{s}"><h3>{esc(t)}</h3><p>{esc(d)}</p></a></li>'
+        pinned = {s: key for key, picks in PICKS.get(lang, {}).items() for s, _ in picks}
+        tint_of = dict((k, tn) for k, tn, _ in TOPICS)
+        def where(s):
+            return (pinned[s], tint_of[pinned[s]]) if s in pinned else topic_of(s)
+        books = ''.join(f'<li><a href="{L["base"]}{s}"><span class="lib-ico {where(s)[1]}">{ICONS[where(s)[0]]}</span>'
+                        f'<span class="lib-txt"><h3>{esc(t)}</h3><p>{esc(d)}</p></span></a></li>'
                         for s, t, d, *_ in sorted(rest, key=sort_key))
         guides = (f'<section class="hub-sec" id="library"><h2>{G["lib"]}</h2><p class="hub-sub">{G["lib_sub"].format(n=len(rest))}</p>'
                   f'<ul class="library">{books}</ul></section>\n')
