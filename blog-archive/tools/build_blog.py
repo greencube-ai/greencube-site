@@ -343,7 +343,8 @@ def list_page(lang, entries, url, path):
     guides = ''
     if rest and G:
         sort_key = lambda e: re.sub(r'^[^A-Za-z]+', '', e[1]).lower()
-        books = ''.join(f'<li><a href="{L["base"]}{s}">{esc(t)}</a></li>' for s, t, *_ in sorted(rest, key=sort_key))
+        books = ''.join(f'<li><a href="{L["base"]}{s}"><h3>{esc(t)}</h3><p>{esc(d)}</p></a></li>'
+                        for s, t, d, *_ in sorted(rest, key=sort_key))
         guides = (f'<section class="hub-sec" id="library"><h2>{G["lib"]}</h2><p class="hub-sub">{G["lib_sub"].format(n=len(rest))}</p>'
                   f'<ul class="library">{books}</ul></section>\n')
     content = (
