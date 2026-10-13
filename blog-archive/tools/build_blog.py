@@ -269,6 +269,33 @@ PICKS = {'en': {
               ('ollama-vs-lm-studio', 'Ollama vs LM Studio'), ('lm-studio-alternatives', 'LM Studio alternatives'),
               ('local-ai-vs-chatgpt', 'Local AI vs ChatGPT'), ('chatgpt-alternatives-5', 'ChatGPT alternatives')],
 }}
+# the blog home asks the questions students ask; each tile opens the post that answers it
+QUESTIONS = {'en': [('best-ai-for-students', 'Best AI for students?'), ('study-guide-from-pdf', 'PDF to a study guide?'),
+                    ('unlimited-ai', 'AI with no limits?'), ('ollama-vs-lm-studio', 'Ollama or LM Studio?'),
+                    ('hardware-for-local-ai', 'What PC do I need?'), ('flashcards-from-pdf', 'Flashcards from a PDF?'),
+                    ('ai-without-subscription', 'AI without a subscription?'), ('chatgpt-alternatives-5', 'ChatGPT alternatives?')]}
+GUIDE_WORDS = {'en': dict(sub='The questions students ask most.', all='All guides', all_title='All guides | GreenCube blog',
+                          all_desc='Every GreenCube guide about running AI on your own PC, by topic.', all_lede='Every guide, by topic.',
+                          back='&larr; Blog home')}
+
+def topic_sections(lang, rest, L):
+    pinned = {s: key for key, picks in PICKS.get(lang, {}).items() for s, _ in picks}
+    tint_of = {k: tn for k, tn, _ in TOPICS}
+    groups = {}
+    for e in rest:
+        where = (pinned[e[0]], tint_of[pinned[e[0]]]) if e[0] in pinned else topic_of(e[0])
+        groups.setdefault(where, []).append(e)
+    sections = []
+    for key, tint in [(k, t) for k, t, _ in TOPICS] + [('more', 'p')]:
+        posts = groups.get((key, tint), [])
+        if not posts: continue
+        have = {e[0] for e in posts}
+        top = [(s, label) for s, label in PICKS.get(lang, {}).get(key, []) if s in have]
+        others = [(e[0], e[1]) for e in posts if e[0] not in dict(top)]
+        items = ''.join(f'<li><a href="{L["base"]}{s}">{esc(label)}</a></li>' for s, label in top + others)
+        sections.append(f'<section class="hub-topic {tint}"><h2><span class="dot" aria-hidden="true"></span>{L["topics"][key]}</h2>'
+                        f'<ul class="hub-list">{items}</ul></section>')
+    return sections
 
 def list_page(lang, entries, url, path):
     L = LIST_WORDS[lang]
@@ -282,29 +309,24 @@ def list_page(lang, entries, url, path):
         cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span class="hub-top">{stat}</span>'
                      f'<span class="hub-body"><h3>{esc(t)}</h3><p>{esc(m.get("teaser", d))}</p>'
                      f'<span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></span></a>')
-    pinned = {s: key for key, picks in PICKS.get(lang, {}).items() for s, _ in picks}
-    tint_of = {k: tn for k, tn, _ in TOPICS}
-    groups = {}
-    for e in rest:
-        where = (pinned[e[0]], tint_of[pinned[e[0]]]) if e[0] in pinned else topic_of(e[0])
-        groups.setdefault(where, []).append(e)
-    sections = []
-    for key, tint in [(k, t) for k, t, _ in TOPICS] + [('more', 'p')]:
-        posts = groups.get((key, tint), [])
-        if not posts: continue
-        li = lambda s, label: f'<li><a href="{L["base"]}{s}">{esc(label)}</a></li>'
-        have = {e[0]: e[1] for e in posts}
-        top = [(s, label) for s, label in PICKS.get(lang, {}).get(key, []) if s in have]
-        others = [(e[0], e[1]) for e in posts if e[0] not in dict(top)]
-        if not top and key != 'more':
-            top, others = others[:SHOW], others[SHOW:]
-        shown = ''.join(li(s, label) for s, label in top)
-        extra = ''
-        if others:
-            extra = (f'<details class="hub-more"><summary>{L["more"].format(n=len(posts))}</summary>'
-                     f'<ul class="hub-list">{"".join(li(s, label) for s, label in others)}</ul></details>')
-        sections.append(f'<section class="hub-topic {tint}"><h2><span class="dot" aria-hidden="true"></span>{L["topics"][key]}</h2>'
-                        + (f'<ul class="hub-list">{shown}</ul>' if shown else '') + f'{extra}</section>')
+    have = {e[0] for e in rest}
+    qs = [(s, q) for s, q in QUESTIONS.get(lang, []) if s in have]
+    G = GUIDE_WORDS.get(lang)
+    guides = ''
+    if qs and G:
+        tiles = ''.join(f'<a class="hub-q {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span>{esc(q)}</span>'
+                        f'<span class="hub-q-go" aria-hidden="true">&rarr;</span></a>' for i, (s, q) in enumerate(qs))
+        guides = (f'<section class="hub-sec"><h2>{L["guides"]}</h2><p class="hub-sub">{G["sub"]}</p>'
+                  f'<div class="hub-qs">{tiles}</div>'
+                  f'<p class="hub-all"><a class="hub-ghost" href="{L["base"]}all">{G["all"]} <span aria-hidden="true">&rarr;</span></a></p></section>\n')
+        # the full list lives on its own page
+        all_content = (f'<article class="list hub">\n<section class="hub-sec hub-allpage"><p class="kicker"><a href="{L["base"].rstrip("/")}">{G["back"]}</a></p>'
+                       f'<h1>{G["all"]}</h1><p class="hub-sub">{G["all_lede"]}</p>'
+                       f'<div class="hub-topics">{"".join(topic_sections(lang, rest, L))}</div></section>\n</article>\n')
+        open(path.replace('index.html', 'all.html'), 'w', encoding='utf-8').write(page(
+            G['all_title'], G['all_desc'], url + '/all', 'https://greencube.app/og.jpg',
+            [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': G['all'], 'url': url + '/all', 'inLanguage': lang}],
+            content=all_content, og_type='website', lang=lang))
     content = (
         '<article class="list hub">\n'
         f'<section class="hub-hero"><p class="kicker">{L["kicker"]} &middot; {L["other"]}</p><h1>{L["h1"]}</h1><p class="lede">{L["lede"]}</p>'
@@ -312,7 +334,7 @@ def list_page(lang, entries, url, path):
         f'<a class="hub-ghost" href="{L["nudge_url"]}">{L["nudge"]}</a></p></section>\n'
         + (f'<section class="hub-sec" id="tests"><h2>{L["tests"]}</h2><p class="hub-sub">{L["tests_sub"]}</p>'
            f'<div class="hub-feats">{"".join(cards)}</div></section>\n' if cards else '')
-        + (f'<section class="hub-sec"><h2>{L["guides"]}</h2><div class="hub-topics">{"".join(sections)}</div></section>\n' if sections else '')
+        + guides
         + '</article>\n')
     open(path, 'w', encoding='utf-8').write(page(L['title'], L['desc'], url, 'https://greencube.app/og.jpg',
         [{'@context': 'https://schema.org', '@type': 'Blog', 'name': L['kicker'], 'url': url, 'inLanguage': lang}],
@@ -325,6 +347,7 @@ list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
+       [f'  <url><loc>{HOST}/blog/all</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \
        ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
        [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
