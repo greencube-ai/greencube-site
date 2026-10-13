@@ -186,6 +186,7 @@ for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
             own.append((lang, fn[:-5], json.loads(m.group(1)), raw[m.end():]))
 os.makedirs(f'{OUT}/es', exist_ok=True)
 listing_es = []
+own_meta = {}
 for lang, slug, meta, body in own:
     W = WORDS[lang]
     title, desc, published = meta['title'], meta['description'], meta['date']
@@ -221,36 +222,88 @@ for lang, slug, meta, body in own:
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/es/{slug}.html'
     open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts))
     (listing if lang == 'en' else listing_es).append((slug, title, desc, published, meta.get('modified', published)))
+    own_meta[(lang, slug)] = meta
 listing.sort(key=lambda l: l[3], reverse=True)
 listing_es.sort(key=lambda l: l[3], reverse=True)
 
-# ---------- the Spanish list page ----------
-if listing_es:
-    items = '\n'.join(
-        f'<li><a href="/blog/es/{s}"><span class="date">{fecha(pub)}</span><h2>{esc(t)}</h2><p>{esc(d)}</p></a></li>'
-        for s, t, d, pub, _ in listing_es)
-    content = ('<article class="list">\n<p class="kicker">Blog de GreenCube</p>\n<h1>Guías y pruebas</h1>\n'
-               '<p class="lede">IA en tu propio ordenador: qué funciona en tu PC, cuánto tarda y cómo sacarle partido para estudiar. '
-               '<a href="/blog" hreflang="en" lang="en">Blog in English &rarr;</a></p>\n'
-               f'<ul class="posts">\n{items}\n</ul>\n</article>\n')
-    open(f'{OUT}/es/index.html', 'w', encoding='utf-8').write(page(
-        'Blog de GreenCube: guías y pruebas', 'Guías y pruebas reales sobre usar IA en tu propio ordenador.',
-        f'{HOST}/blog/es', 'https://greencube.app/og.jpg',
-        [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'Blog de GreenCube', 'url': f'{HOST}/blog/es', 'inLanguage': 'es'}],
-        content, og_type='website', lang='es'))
+# ---------- the list pages: hero, our own tested posts as big cards, topic buttons + search, then every post ----------
+TOPICS = [  # (key, tint class, words in the slug that put a post there); first match wins
+    ('study', 'b', ('student', 'study', 'flashcard', 'pdf', 'notebooklm', 'humata', 'exam', 'writers', 'grammarly')),
+    ('limits', 'y', ('limit', 'unlimited', 'subscription', 'lifetime', 'limites', 'chatgpt-free')),
+    ('pc', 'g', ('gaming-pc', 'pc-gaming', 'hardware', 'laptop', 'models', 'small-llm', 'llm', 'gguf', 'quantization',
+                 'setup', 'install', 'windows', 'mac', 'context-window', 'internet', 'offline-ai', 'local-ai', 'llama')),
+    ('tools', 'p', ('alternatives', '-vs-', 'ollama', 'lm-studio', 'desktop-apps', 'chatbot', 'ui', 'gemini', 'claude', 'chatgpt')),
+]
+def topic_of(slug):
+    for key, tint, words in TOPICS:
+        if any(w in slug for w in words): return key, tint
+    return 'more', 'p'
+LIST_WORDS = {
+    'en': dict(title='GreenCube blog: real tests of AI on your own PC',
+               desc='Real tests of AI on gaming PCs and laptops, plus guides for studying with AI. What runs on your PC, how fast, and what it costs.',
+               kicker='GreenCube blog', h1='AI on <em>your own</em> PC, tested for real.',
+               lede='We measure what actually runs on gaming PCs and laptops, and how to use it to study, write and create. No fluff, real numbers.',
+               other='<a href="/blog/es" hreflang="es" lang="es">Blog en español &rarr;</a>', fresh='Tested by us', all='Every post',
+               chips=[('all', 'All'), ('pc', 'Your PC'), ('study', 'Studying'), ('limits', 'Limits &amp; price'), ('tools', 'Apps &amp; alternatives')],
+               search='Search posts', none='Nothing matches. Try another word.', read='Read', date=nice_date, base='/blog/',
+               nudge='Not sure your PC can run it? <a href="https://greencube.app/#game">Check in two questions &rarr;</a>'),
+    'es': dict(title='Blog de GreenCube: pruebas reales de IA en tu propio PC',
+               desc='Pruebas reales de IA en PCs gaming y portátiles, y guías para estudiar con IA. Qué funciona en tu PC, a qué velocidad y cuánto cuesta.',
+               kicker='Blog de GreenCube', h1='La IA, en <em>tu propio</em> PC, probada de verdad.',
+               lede='Medimos qué funciona de verdad en PCs gaming y portátiles, y cómo usarlo para estudiar, escribir y crear. Sin paja, con números reales.',
+               other='<a href="/blog" hreflang="en" lang="en">Blog in English &rarr;</a>', fresh='Probado por nosotros', all='Todos los artículos',
+               chips=[('all', 'Todo'), ('pc', 'Tu PC'), ('study', 'Estudiar'), ('limits', 'Límites y precio'), ('tools', 'Apps y alternativas')],
+               search='Buscar artículos', none='No hay nada con eso. Prueba otra palabra.', read='Leer', date=fecha, base='/blog/es/',
+               nudge='¿No sabes si tu PC puede? <a href="https://greencube.app/es/#game">Compruébalo en dos preguntas &rarr;</a>'),
+}
+LIST_JS = '''<script>
+(function(){var g=document.querySelector('.hub-grid');if(!g)return;var items=[].slice.call(g.children),chips=[].slice.call(document.querySelectorAll('.chip')),
+q=document.querySelector('.hub-search'),none=document.querySelector('.hub-none'),cur='all';
+function run(){var t=(q&&q.value||'').toLowerCase().trim(),n=0;items.forEach(function(li){var ok=(cur==='all'||li.dataset.topic===cur)&&(!t||li.textContent.toLowerCase().indexOf(t)>-1);li.hidden=!ok;if(ok)n++;});if(none)none.hidden=n>0;}
+chips.forEach(function(c){c.addEventListener('click',function(){cur=c.dataset.topic;chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});run();});});
+if(q)q.addEventListener('input',run);})();
+</script>'''
 
-# ---------- the list page ----------
-items = '\n'.join(
-    f'<li><a href="/blog/{s}"><span class="date">{nice_date(pub)}</span><h2>{esc(t)}</h2><p>{esc(d)}</p></a></li>'
-    for s, t, d, pub, _ in listing)
-content = ('<article class="list">\n<p class="kicker">GreenCube blog</p>\n<h1>Guides and comparisons</h1>\n'
-           '<p class="lede">Running AI on your own computer: what runs on your PC, how fast, and how to get the most out of it. '
-           '<a href="/blog/es" hreflang="es" lang="es">Blog en español &rarr;</a></p>\n'
-           f'<ul class="posts">\n{items}\n</ul>\n</article>\n')
-open(f'{OUT}/index.html', 'w', encoding='utf-8').write(page(
-    'GreenCube blog: guides and comparisons', 'Guides and real tests about running AI on your own computer: what runs on your PC and how fast.',
-    f'{HOST}/blog', 'https://greencube.app/og.jpg',
-    [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'GreenCube blog', 'url': f'{HOST}/blog'}], content, og_type='website'))
+def list_page(lang, entries, url, path, ld_extra):
+    L = LIST_WORDS[lang]
+    feat = [e for e in entries if (lang, e[0]) in own_meta]
+    rest = [e for e in entries if (lang, e[0]) not in own_meta]
+    fcards = []
+    for i, (s, t, d, pub, _) in enumerate(feat):
+        m = own_meta[(lang, s)]
+        tint = ('g', 'b', 'y', 'p')[i % 4]
+        stat = f'<b class="hub-stat">{m["stat"]}</b>' if m.get('stat') else ''
+        fcards.append(f'<a class="hub-feat {tint}" href="{L["base"]}{s}">{stat}<h2>{esc(t)}</h2><p>{esc(d)}</p>'
+                      f'<span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></a>')
+    names = dict(L['chips'])
+    lis = []
+    for s, t, d, pub, _ in feat + rest:
+        key, tint = topic_of(s)
+        label = names.get(key, '')
+        lis.append(f'<li data-topic="{key}"><a class="{tint}" href="{L["base"]}{s}">'
+                   f'<span class="hub-meta"><span class="dot" aria-hidden="true"></span>{label}{" &middot; " if label else ""}{L["date"](pub)}</span>'
+                   f'<h3>{esc(t)}</h3><p>{esc(d)}</p></a></li>')
+    tools = ''
+    if len(entries) >= 6:
+        chips = ''.join(f'<button type="button" class="chip" data-topic="{k}" aria-pressed="{"true" if k == "all" else "false"}">{v}</button>'
+                        for k, v in L['chips'])
+        tools = (f'<div class="hub-tools"><div class="chips" role="group">{chips}</div>'
+                 f'<input class="hub-search" type="search" placeholder="{L["search"]}" aria-label="{L["search"]}" /></div>')
+    content = (
+        f'<article class="list hub">\n<p class="kicker">{L["kicker"]}</p>\n<h1>{L["h1"]}</h1>\n<p class="lede">{L["lede"]} {L["other"]}</p>\n'
+        + (f'<h2 class="hub-h">{L["fresh"]}</h2>\n<div class="hub-feats">{"".join(fcards)}</div>\n' if fcards else '')
+        + f'<p class="hub-nudge">{L["nudge"]}</p>\n'
+        + (f'<h2 class="hub-h">{L["all"]}</h2>\n{tools}\n<ul class="hub-grid">\n' + '\n'.join(lis) + '\n</ul>\n'
+           f'<p class="hub-none" hidden>{L["none"]}</p>\n' if rest else '')
+        + '</article>\n' + (LIST_JS if tools else ''))
+    open(path, 'w', encoding='utf-8').write(page(L['title'], L['desc'], url, 'https://greencube.app/og.jpg',
+        [{'@context': 'https://schema.org', '@type': 'Blog', 'name': L['kicker'], 'url': url, 'inLanguage': lang, **ld_extra}],
+        content, og_type='website', lang=lang,
+        alts=(('en', f'{HOST}/blog'), ('es', f'{HOST}/blog/es'), ('x-default', f'{HOST}/blog')) if listing_es else ()))
+
+if listing_es:
+    list_page('es', listing_es, f'{HOST}/blog/es', f'{OUT}/es/index.html', {})
+list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html', {})
 
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
