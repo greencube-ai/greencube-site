@@ -23,6 +23,37 @@ MAX_W = 1200
 idx = json.load(open(f'{SRC}/index.json', encoding='utf-8'))
 idx.sort(key=lambda p: (p['date_published'] or p['sitemap_lastmod'] or ''), reverse=True)
 
+# old posts link to the test that measured their topic (our own posts, by slug)
+TESTED = {
+    'hardware-for-local-ai': ['can-my-gaming-pc-run-ai', 'ai-must-fit-on-gpu'],
+    'best-local-ai-models': ['ai-must-fit-on-gpu', 'small-vs-big-ai-model-laptop'],
+    'best-small-llm': ['small-vs-big-ai-model-laptop'],
+    'local-ai-models-explained': ['small-vs-big-ai-model-laptop'],
+    'best-laptop-ai-assistant': ['can-8gb-laptop-run-ai', 'intel-graphics-ai-laptop'],
+    'offline-ai-setup-windows': ['can-my-gaming-pc-run-ai'],
+    'install-local-ai': ['can-my-gaming-pc-run-ai'],
+    'local-ai-chatbot-windows': ['can-my-gaming-pc-run-ai'],
+    'best-offline-ai-chatbot': ['can-my-gaming-pc-run-ai'],
+    'ai-without-internet': ['can-my-gaming-pc-run-ai'],
+    'unlimited-ai': ['chatgpt-free-limits-2026'],
+    'no-rate-limit-ai': ['chatgpt-free-limits-2026'],
+    'ai-without-subscription': ['chatgpt-free-limits-2026'],
+    'local-ai-vs-chatgpt': ['chatgpt-free-limits-2026'],
+    'chatgpt-alternatives-5': ['chatgpt-free-limits-2026'],
+    'best-ai-for-students': ['chatgpt-free-limits-2026', 'can-my-gaming-pc-run-ai'],
+    'offline-ai-for-students': ['can-my-gaming-pc-run-ai', 'can-8gb-laptop-run-ai'],
+    'ollama-vs-lm-studio': ['ai-must-fit-on-gpu'],
+}
+OWN_TITLES = {}
+for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
+    if fn.endswith('.html'):
+        m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->', open(f'{SRC}/own/{fn}', encoding='utf-8').read(), re.S)
+        OWN_TITLES[fn[:-5]] = json.loads(m.group(1))['title']
+
+def tested_box(slug):
+    links = [f'<li><a href="/blog/{s}">{html.escape(OWN_TITLES[s])}</a></li>' for s in TESTED.get(slug, []) if s in OWN_TITLES]
+    return f'<aside class="tested"><strong>We tested this</strong><ul>{"".join(links)}</ul></aside>\n' if links else ''
+
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
 shutil.copy(os.path.join(os.path.dirname(__file__), 'blog.css'), f'{OUT}/blog.css')
@@ -155,7 +186,7 @@ for p in idx:
     byline = f'GreenCube &middot; {nice_date(published)}' + (f' &middot; updated {nice_date(modified)}' if modified != published and changed else '')
     content = (
         f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">{byline}</p>\n{note(kinds)}\n'
+        f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
         + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
         + body +
         '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
@@ -274,9 +305,7 @@ QUESTIONS = {'en': [('best-ai-for-students', 'Best AI for students?'), ('study-g
                     ('unlimited-ai', 'AI with no limits?'), ('ollama-vs-lm-studio', 'Ollama or LM Studio?'),
                     ('hardware-for-local-ai', 'What PC do I need?'), ('flashcards-from-pdf', 'Flashcards from a PDF?'),
                     ('ai-without-subscription', 'AI without a subscription?'), ('chatgpt-alternatives-5', 'ChatGPT alternatives?')]}
-GUIDE_WORDS = {'en': dict(sub='The questions students ask most.', all='All guides', all_title='All guides | GreenCube blog',
-                          all_desc='Every GreenCube guide about running AI on your own PC, by topic.', all_lede='Every guide, by topic.',
-                          back='&larr; Blog home')}
+GUIDE_WORDS = {'en': dict(lib='Library', lib_sub='All {n} guides, A to Z.')}
 
 def topic_sections(lang, rest, L):
     pinned = {s: key for key, picks in PICKS.get(lang, {}).items() for s, _ in picks}
@@ -309,24 +338,14 @@ def list_page(lang, entries, url, path):
         cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span class="hub-top">{stat}</span>'
                      f'<span class="hub-body"><h3>{esc(t)}</h3><p>{esc(m.get("teaser", d))}</p>'
                      f'<span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></span></a>')
-    have = {e[0] for e in rest}
-    qs = [(s, q) for s, q in QUESTIONS.get(lang, []) if s in have]
+    # the library: every other guide, A to Z, plain titles (leading numbers and prices ignored when sorting)
     G = GUIDE_WORDS.get(lang)
     guides = ''
-    if qs and G:
-        tiles = ''.join(f'<a class="hub-q {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span>{esc(q)}</span>'
-                        f'<span class="hub-q-go" aria-hidden="true">&rarr;</span></a>' for i, (s, q) in enumerate(qs))
-        guides = (f'<section class="hub-sec"><h2>{L["guides"]}</h2><p class="hub-sub">{G["sub"]}</p>'
-                  f'<div class="hub-qs">{tiles}</div>'
-                  f'<p class="hub-all"><a class="hub-ghost" href="{L["base"]}all">{G["all"]} <span aria-hidden="true">&rarr;</span></a></p></section>\n')
-        # the full list lives on its own page
-        all_content = (f'<article class="list hub">\n<section class="hub-sec hub-allpage"><p class="kicker"><a href="{L["base"].rstrip("/")}">{G["back"]}</a></p>'
-                       f'<h1>{G["all"]}</h1><p class="hub-sub">{G["all_lede"]}</p>'
-                       f'<div class="hub-topics">{"".join(topic_sections(lang, rest, L))}</div></section>\n</article>\n')
-        open(path.replace('index.html', 'all.html'), 'w', encoding='utf-8').write(page(
-            G['all_title'], G['all_desc'], url + '/all', 'https://greencube.app/og.jpg',
-            [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': G['all'], 'url': url + '/all', 'inLanguage': lang}],
-            content=all_content, og_type='website', lang=lang))
+    if rest and G:
+        sort_key = lambda e: re.sub(r'^[^A-Za-z]+', '', e[1]).lower()
+        books = ''.join(f'<li><a href="{L["base"]}{s}">{esc(t)}</a></li>' for s, t, *_ in sorted(rest, key=sort_key))
+        guides = (f'<section class="hub-sec" id="library"><h2>{G["lib"]}</h2><p class="hub-sub">{G["lib_sub"].format(n=len(rest))}</p>'
+                  f'<ul class="library">{books}</ul></section>\n')
     content = (
         '<article class="list hub">\n'
         f'<section class="hub-hero"><p class="kicker">{L["kicker"]} &middot; {L["other"]}</p><h1>{L["h1"]}</h1><p class="lede">{L["lede"]}</p>'
@@ -347,7 +366,6 @@ list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
-       [f'  <url><loc>{HOST}/blog/all</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \
        ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
        [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
