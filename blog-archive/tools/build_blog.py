@@ -164,7 +164,8 @@ for fn in sorted(os.listdir(f'{SRC}/own')) if os.path.isdir(f'{SRC}/own') else [
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
-        faq_html = '<h2>Questions</h2>\n' + '\n'.join(f'<h3>{esc(q)}</h3>\n<p>{esc(a)}</p>' for q, a in faq)
+        faq_html = ('<h2>Questions</h2>\n<div class="faq">\n'
+                    + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq) + '\n</div>\n')
     content = (
         f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">GreenCube &middot; {nice_date(published)}</p>\n'

@@ -13,61 +13,70 @@
  ]
 }
 -->
-<p><strong>Short answer: yes.</strong> If your PC runs games, it can run AI. We measured 7 real PCs, from a GTX 1650 desktop to an RTX 5060 one, plus two laptops with no graphics card at all. All of them could chat with an AI that runs entirely on the PC, with no internet and no subscription. What changes is how fast.</p>
+<div class="answer"><p><strong>Short answer: yes.</strong> If your PC runs games, it can run AI. We measured 7 real PCs, from an old GTX 1650 to an RTX 5060, plus two laptops with no graphics card at all. Every one of them chatted with an AI running entirely on the PC: no internet, no subscription. The only thing that changes is how fast.</p></div>
 
-<p>Below are the real numbers, what they mean, and what to check on your own PC.</p>
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>faster on the graphics card than on the processor, same PC, same AI</span></div>
+<div class="stat b"><b>20</b><span>tokens a second on a 4 GB GTX 1650. You read about 5.</span></div>
+<div class="stat p"><b>28 s</b><span>to make a picture on a 12 GB card</span></div>
+</div>
 
-<h2>The results</h2>
+<h2>The numbers</h2>
 
-<p>"Writes" is how fast the AI types its answer, in tokens per second. A token is about three quarters of a word. For comparison, most people read about 4 words a second (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), which is roughly 5 tokens a second. Anything above that is faster than you can read.</p>
+<p>"Writes" is how fast the AI types its answer, in tokens per second. A token is about three quarters of a word. Most people read about 4 words a second (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), roughly 5 tokens. So anything above 5 is faster than your eyes.</p>
 
-<table>
+<div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>Graphics</th><th>RAM</th><th>AI model</th><th>Writes (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Desktop</td><td>AMD RX 5700 XT, 8 GB</td><td>48 GB</td><td>Gemma 4 E4B</td><td><strong>63&ndash;72</strong></td></tr>
-<tr><td>Desktop</td><td>NVIDIA RTX 5060, 8 GB</td><td>32 GB</td><td>Gemma 4 E4B</td><td><strong>56</strong></td></tr>
-<tr><td>Desktop</td><td>12 GB graphics card</td><td>32 GB</td><td>Gemma 4 E4B</td><td><strong>50&ndash;55</strong></td></tr>
-<tr><td>Desktop</td><td>NVIDIA GTX 1660 Super, 6 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td><strong>35&ndash;38</strong></td></tr>
-<tr><td>Desktop</td><td>NVIDIA GTX 1650, 4 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td><strong>about 20</strong></td></tr>
-<tr><td>Laptop</td><td>Intel graphics only (Core Ultra 5)</td><td>16 GB</td><td>Gemma 4 E2B</td><td><strong>14&ndash;18</strong></td></tr>
-<tr><td>Laptop</td><td>Intel Iris Xe only</td><td>8 GB</td><td>Gemma 4 E2B</td><td><strong>about 9</strong></td></tr>
+<tr><td>Desktop</td><td>AMD RX 5700 XT, 8 GB</td><td>48 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>Desktop</td><td>NVIDIA RTX 5060, 8 GB</td><td>32 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>Desktop</td><td>12 GB graphics card</td><td>32 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>Desktop</td><td>NVIDIA GTX 1660 Super, 6 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>Desktop</td><td>NVIDIA GTX 1650, 4 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>about 20</b></td></tr>
+<tr><td>Laptop</td><td>Intel graphics only (Core Ultra 5)</td><td>16 GB</td><td>Gemma 4 E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Laptop</td><td>Intel Iris Xe only</td><td>8 GB</td><td>Gemma 4 E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>about 9</b></td></tr>
 </tbody>
-</table>
+</table></div>
 
-<p>Measured with GreenCube between September and October 2026, using its built-in engine. Speeds move a little between runs on the same PC, so where we have several runs we show the range. We also ran an RX 6600 and an RX 580, but did not record their speeds.</p>
+<p>Measured with GreenCube in September and October 2026. Speeds move a little between runs on the same PC, so where we have several runs we show the range. We also ran an RX 6600 and an RX 580, but didn't record their speeds.</p>
 
-<h2>What the numbers say</h2>
+<h2>What we learned</h2>
 
-<h3>1. Your graphics card does the work, like in a game</h3>
-<p>On the desktop with the RX 5700 XT, the same model wrote <strong>5 tokens a second on the processor and 72 on the graphics card: 14 times faster</strong>. AI is mostly the kind of maths graphics cards are built for. Any card made in the last few years helps a lot, even an old 4 GB GTX 1650.</p>
+<div class="card g">
+<h3>1. Your graphics card does the heavy lifting, like in a game</h3>
+<p>On the RX 5700 XT desktop, the same AI wrote <strong>5 tokens a second on the processor and 72 on the graphics card</strong>. AI is mostly the kind of maths graphics cards are built for. Any card from the last few years helps a lot, even an old 4 GB GTX 1650.</p>
+</div>
 
-<h3>2. VRAM decides how big a model fits</h3>
-<p>The model has to fit in the card's own memory (VRAM) to run at full speed. That same desktop had 48 GB of RAM, and it did not help a bigger model: a 12-billion-parameter model fitted on the 8 GB card for a short question, then crashed once the conversation got longer, with the card almost full. <strong>For AI, VRAM matters more than RAM.</strong> That is why GreenCube checks your card and picks a model that fits, instead of the biggest one.</p>
+<div class="card b">
+<h3>2. VRAM decides how big an AI fits</h3>
+<p>The AI has to fit in the card's own memory (VRAM) to run at full speed. That desktop had 48 GB of RAM, and it didn't save a bigger model: a 12-billion-parameter AI fitted on the 8 GB card for one short question, then crashed once the chat got longer, with the card almost full. <strong>For AI, VRAM beats RAM.</strong> That's why GreenCube checks your card and picks an AI that fits, not just the biggest one.</p>
+</div>
 
-<h3>3. No graphics card? It still works</h3>
-<p>A normal 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with the smaller model, and finished a full answer (an explanation plus three exam questions) in about 20 seconds. That is fine for studying, writing and questions. An 8 GB laptop works too, at about 9 tokens a second, as long as other apps leave it enough free memory.</p>
+<div class="card y">
+<h3>3. No graphics card? Still works</h3>
+<p>A normal 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with the smaller AI, and finished a full answer (an explanation plus three exam questions) in about 20 seconds. Totally fine for studying and writing. An 8 GB laptop works too, at about 9 tokens a second, if other apps leave it some free memory.</p>
+</div>
 
-<h3>4. Pictures need more</h3>
-<p>Making a picture is much heavier than chatting. On the desktop with a 12 GB card, a picture took <strong>28 seconds</strong>. On the 16 GB laptop with Intel graphics, about <strong>2 and a half minutes</strong>. An 8 GB laptop cannot make pictures at all: the image model alone needs about 7 GB.</p>
+<div class="card p">
+<h3>4. Pictures are the heavy stuff</h3>
+<p>Making a picture is way heavier than chatting. <strong>28 seconds</strong> on the 12 GB card, about <strong>2 and a half minutes</strong> on the 16 GB laptop. An 8 GB laptop can't make pictures at all: the picture AI alone needs about 7 GB.</p>
+</div>
 
-<h2>How to check your PC in 30 seconds</h2>
-<ol>
+<h2>Check your PC in 30 seconds</h2>
+<ol class="steps">
 <li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
 <li>Go to <strong>Performance</strong>.</li>
 <li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>
-<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. If you only see Intel graphics, you have no separate card.</li>
+<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. Only see Intel graphics? Then you have no separate card.</li>
 </ol>
 
-<h2>What to expect from your PC</h2>
-<table>
-<thead><tr><th>Your PC</th><th>What to expect</th></tr></thead>
-<tbody>
-<tr><td>Graphics card with 6 GB or more</td><td>Fast: answers appear far faster than you read. Pictures are quickest here (28 seconds on our 12 GB card).</td></tr>
-<tr><td>Graphics card with 4 GB, 16 GB RAM</td><td>Good: about 20 tokens a second in our test.</td></tr>
-<tr><td>No card, 16 GB RAM</td><td>Fine for chat and study, with a smaller model. Pictures are slow.</td></tr>
-<tr><td>No card, 8 GB RAM</td><td>Works for chat, slowly. Close other apps first. No pictures.</td></tr>
-</tbody>
-</table>
+<h2>What your PC will feel like</h2>
+<div class="expect">
+<div class="g"><h4>Card with 6 GB or more</h4><p>Fast. Answers fly by far quicker than you read, and pictures are quickest here.</p></div>
+<div class="b"><h4>4 GB card, 16 GB RAM</h4><p>Good. About 20 tokens a second in our test.</p></div>
+<div class="y"><h4>No card, 16 GB RAM</h4><p>Fine for chat and study, with a smaller AI. Pictures take a couple of minutes.</p></div>
+<div class="p"><h4>No card, 8 GB RAM</h4><p>Works for chat, slowly. Close other apps first. No pictures.</p></div>
+</div>
 
-<h2>Why run AI on your own PC at all</h2>
-<p>Because it is yours. No message limits, no monthly subscription, and it keeps working with no internet, on a train or in a library with bad Wi-Fi. It will not beat the biggest cloud AIs at everything, but for studying, writing, summarising and everyday questions, a model on your own card is more than enough, and it never runs out.</p>
+<h2>Why run AI on your own PC at all?</h2>
+<p>Because it's yours. No message limits, no monthly subscription, and it keeps working with no internet: on a train, on a mountain, or in a library with terrible Wi-Fi. It won't beat the biggest cloud AIs at everything, but for studying, writing, summarising and everyday questions, an AI on your own card is more than enough, and it never runs out.</p>
