@@ -1,0 +1,83 @@
+<!--meta
+{
+ "title": "¿Mi PC gaming puede ejecutar IA? Lo medimos en 7 PCs reales",
+ "description": "Velocidades reales de 7 PCs, de una GTX 1650 a una RTX 5060 y portátiles sin tarjeta gráfica. Qué significan tu gráfica, la VRAM y la RAM para usar IA en local en tu propio PC.",
+ "date": "2026-10-18",
+ "lang": "es",
+ "alt": "can-my-gaming-pc-run-ai",
+ "faq": [
+  {"q": "¿Funciona la IA en local con una tarjeta gráfica AMD?", "a": "Sí. Medimos tarjetas AMD (RX 5700 XT, RX 6600, RX 580) y también NVIDIA. GreenCube usa Vulkan, que funciona con las dos."},
+  {"q": "¿Cuánta VRAM necesito para usar IA en mi PC?", "a": "No hace falta ninguna, pero con 4 GB o más se nota muchísimo. En nuestras pruebas, una GTX 1650 de 4 GB escribía unos 20 tokens por segundo y una RTX 5060 de 8 GB, unos 56. Con más VRAM cabe una IA más grande en la tarjeta."},
+  {"q": "¿Puedo usar IA en un portátil sin tarjeta gráfica?", "a": "Sí. Un portátil de 16 GB con solo gráficos Intel escribía entre 14 y 18 tokens por segundo con una IA pequeña, más rápido de lo que lees. Uno de 8 GB también funciona, más despacio, y no puede crear imágenes."},
+  {"q": "¿Más RAM hace que la IA vaya más rápido?", "a": "No por sí sola. En un PC con 48 GB de RAM, la misma IA fue 14 veces más rápida en la tarjeta gráfica de 8 GB que en el procesador. La RAM importa si no tienes tarjeta; si la tienes, lo que más cuenta es la VRAM."},
+  {"q": "¿Necesito internet para usar IA en mi PC?", "a": "Solo una vez, para descargar la app y la IA y activarla. Después, puedes chatear sin ninguna conexión."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Respuesta corta: sí.</strong> Si tu PC mueve juegos, puede mover una IA. Lo medimos en 7 PCs reales, desde una GTX 1650 veterana hasta una RTX 5060, y también en dos portátiles sin tarjeta gráfica. Todos chatearon con una IA que funciona entera dentro del PC: sin internet y sin suscripción. Lo único que cambia es la velocidad.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>más rápida en la tarjeta gráfica que en el procesador, mismo PC y misma IA</span></div>
+<div class="stat b"><b>20</b><span>tokens por segundo con una GTX 1650 de 4 GB. Más rápido de lo que lees.</span></div>
+<div class="stat p"><b>28 s</b><span>para crear una imagen con una tarjeta de 12 GB</span></div>
+</div>
+
+<h2>Los números</h2>
+
+<p>"Escribe" es la velocidad a la que la IA teclea su respuesta, en tokens por segundo. Un token es un trozo de palabra: en español, cada palabra suele ocupar uno o dos. Una persona lee unas 4 palabras por segundo (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), así que a partir de unos 8 tokens por segundo la IA ya escribe más rápido de lo que tus ojos leen.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Gráfica</th><th>RAM</th><th>IA</th><th>Escribe (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>Sobremesa</td><td>AMD RX 5700 XT, 8 GB</td><td>48 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>Sobremesa</td><td>NVIDIA RTX 5060, 8 GB</td><td>32 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>Sobremesa</td><td>Gráfica de 12 GB</td><td>32 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>Sobremesa</td><td>NVIDIA GTX 1660 Super, 6 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>Sobremesa</td><td>NVIDIA GTX 1650, 4 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>unos 20</b></td></tr>
+<tr><td>Portátil</td><td>Solo gráficos Intel (Core Ultra 5)</td><td>16 GB</td><td>Gemma 4 E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Portátil</td><td>Solo Intel Iris Xe</td><td>8 GB</td><td>Gemma 4 E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>unos 9</b></td></tr>
+</tbody>
+</table></div>
+
+<p>Medido con GreenCube entre septiembre y octubre de 2026. La velocidad varía un poco entre pruebas en el mismo PC, así que cuando tenemos varias damos el rango. También probamos una RX 6600 y una RX 580, pero no apuntamos su velocidad.</p>
+
+<h2>Lo que aprendimos</h2>
+
+<div class="card g">
+<h3>1. La gráfica hace el trabajo duro, como en un juego</h3>
+<p>En el sobremesa con la RX 5700 XT, la misma IA escribía <strong>5 tokens por segundo en el procesador y 72 en la tarjeta gráfica</strong>. Una IA es sobre todo el tipo de cálculo para el que están hechas las gráficas. Cualquier tarjeta de los últimos años ayuda muchísimo, incluso una GTX 1650 de 4 GB.</p>
+</div>
+
+<div class="card b">
+<h3>2. La VRAM decide qué IA cabe</h3>
+<p>Para ir a tope, la IA tiene que caber en la memoria propia de la tarjeta (la VRAM). Ese sobremesa tenía 48 GB de RAM y no le sirvieron para una IA más grande: un modelo de 12.000 millones de parámetros cupo en la tarjeta de 8 GB para una pregunta corta, y se cayó en cuanto la conversación se alargó, con la tarjeta casi llena. <strong>Para la IA, la VRAM pesa más que la RAM.</strong> Por eso GreenCube mira tu tarjeta y elige una IA que quepa, no simplemente la más grande.</p>
+</div>
+
+<div class="card y">
+<h3>3. ¿Sin tarjeta gráfica? Funciona igual</h3>
+<p>Un portátil normal de 16 GB con solo gráficos Intel escribía entre 14 y 18 tokens por segundo con la IA pequeña, y terminó una respuesta completa (una explicación y tres preguntas de examen) en unos 20 segundos. Para estudiar y escribir va de sobra. Uno de 8 GB también funciona, a unos 9 tokens por segundo, si las demás apps le dejan memoria libre.</p>
+</div>
+
+<div class="card p">
+<h3>4. Las imágenes son lo pesado</h3>
+<p>Crear una imagen cuesta mucho más que chatear. <strong>28 segundos</strong> con la tarjeta de 12 GB y unos <strong>2 minutos y medio</strong> en el portátil de 16 GB. Un portátil de 8 GB no puede crear imágenes: la IA de imágenes necesita unos 7 GB ella sola.</p>
+</div>
+
+<h2>Mira tu PC en 30 segundos</h2>
+<ol class="steps">
+<li>Pulsa <strong>Ctrl + Mayús + Esc</strong> para abrir el Administrador de tareas.</li>
+<li>Entra en <strong>Rendimiento</strong>.</li>
+<li>Pulsa en <strong>Memoria</strong>: el número de arriba a la derecha es tu RAM.</li>
+<li>Pulsa en <strong>GPU</strong>: arriba a la derecha sale el nombre de tu tarjeta, y <strong>Memoria de GPU dedicada</strong> es tu VRAM. ¿Solo ves gráficos Intel? Entonces no tienes tarjeta aparte.</li>
+</ol>
+
+<h2>Cómo irá en tu PC</h2>
+<div class="expect">
+<div class="g"><h4>Tarjeta de 6 GB o más</h4><p>Rápido. Las respuestas vuelan mucho más rápido de lo que lees, y aquí las imágenes son lo más rápido.</p></div>
+<div class="b"><h4>Tarjeta de 4 GB y 16 GB de RAM</h4><p>Bien. Unos 20 tokens por segundo en nuestra prueba.</p></div>
+<div class="y"><h4>Sin tarjeta y 16 GB de RAM</h4><p>De sobra para chatear y estudiar, con una IA más pequeña. Las imágenes tardan un par de minutos.</p></div>
+<div class="p"><h4>Sin tarjeta y 8 GB de RAM</h4><p>Funciona para chatear, despacio. Cierra otras apps antes. Sin imágenes.</p></div>
+</div>
+
+<h2>¿Y por qué tener la IA en tu propio PC?</h2>
+<p>Porque es tuya. Sin límites de mensajes, sin cuota mensual, y sigue funcionando sin internet: en el tren, en la montaña o en una biblioteca con un wifi horrible. No le gana en todo a las IAs más grandes de la nube, pero para estudiar, escribir, resumir y dudas del día a día, una IA en tu propia tarjeta va sobrada, y nunca se acaba.</p>

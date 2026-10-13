@@ -93,11 +93,35 @@ def esc(s): return html.escape(s, quote=True)
 HEAD = open(os.path.join(os.path.dirname(__file__), 'blog_shell.html'), encoding='utf-8').read()
 shell_top, shell_bottom = HEAD.split('<!-- CONTENT -->')
 
-def page(title, desc, url, og_image, ld, content, og_type='article'):
-    top = (shell_top.replace('{{TITLE}}', esc(title)).replace('{{DESC}}', esc(desc))
+# the Spanish shell: same page, Spanish menu and footer pointing at the /es/ pages
+ES = HEAD
+for p in ('how-it-works', 'ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
+    ES = ES.replace(f'href="https://greencube.app/{p}"', f'href="https://greencube.app/es/{p}"')
+for a, b in [('<html lang="en">', '<html lang="es">'), ('href="https://greencube.app/" class="brand"', 'href="https://greencube.app/es/" class="brand"'),
+             ('href="https://greencube.app/" class="brand-lock"', 'href="https://greencube.app/es/" class="brand-lock"'),
+             ('>Why GreenCube<', '>Por qué GreenCube<'), ('>AI &amp; the planet<', '>La IA y el planeta<'), ('>Your data<', '>Tus datos<'),
+             ('>Our mission<', '>Nuestra misión<'), ('<a href="/blog" class="on">', '<a href="/blog/es" class="on">'), ('<li><a href="/blog">', '<li><a href="/blog/es">'),
+             ('>Get GreenCube<', '>Consigue GreenCube<'), ("AI that's <em>owned,</em> not rented.", 'Una IA que es <em>tuya,</em> no alquilada.'),
+             ('<h3>Product</h3>', '<h3>Producto</h3>'), ('<h3>Learn</h3>', '<h3>Aprende</h3>'), ('<h3>Company</h3>', '<h3>Empresa</h3>'),
+             ('>Will it run on my computer?<', '>¿Funcionará en mi ordenador?<'), ('>ChatGPT &amp; your data<', '>ChatGPT y tus datos (EN)<'),
+             ('>Contact<', '>Contacto<'), ('legal.greencube.app/privacy">Privacy policy<', 'legal.greencube.app/es/privacy">Política de privacidad<'),
+             ('legal.greencube.app/terms">Terms of use<', 'legal.greencube.app/es/terms">Términos de uso<'), ('Made in Spain.', 'Hecho en España.')]:
+    assert a in ES, a
+    ES = ES.replace(a, b)
+SHELLS = {'en': (shell_top, shell_bottom), 'es': tuple(ES.split('<!-- CONTENT -->'))}
+MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+
+def fecha(iso):
+    d = date.fromisoformat(iso[:10]); return f'{d.day} de {MESES[d.month - 1]} de {d.year}'
+
+def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', alts=()):
+    top, bottom = SHELLS[lang]
+    links = ''.join(f'\n  <link rel="alternate" hreflang="{l}" href="{u}" />' for l, u in alts)
+    top = (top.replace('<link rel="canonical" href="{{URL}}" />', '<link rel="canonical" href="{{URL}}" />' + links)
+           .replace('{{TITLE}}', esc(title)).replace('{{DESC}}', esc(desc))
            .replace('{{URL}}', url).replace('{{OG_IMAGE}}', og_image).replace('{{OG_TYPE}}', og_type)
            .replace('{{LD}}', '\n'.join(f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)))
-    return top + content + shell_bottom
+    return top + content + bottom
 
 report = []
 listing = []
@@ -142,15 +166,37 @@ for p in idx:
     report.append({'slug': slug, 'note': kinds, 'text_fixes': [list(c) for c in ch1 + ch2 + ch3]})
 
 # ---------- our own posts: blog-archive/own/<slug>.html, a <!--meta {json} --> block then the body ----------
-for fn in sorted(os.listdir(f'{SRC}/own')) if os.path.isdir(f'{SRC}/own') else []:
-    if not fn.endswith('.html'):
-        continue
-    slug = fn[:-5]
-    raw = open(f'{SRC}/own/{fn}', encoding='utf-8').read()
-    m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
-    meta, body = json.loads(m.group(1)), raw[m.end():]
+#     Spanish ones live in blog-archive/own/es/ and are served at /blog/es/<slug>; "alt" in the meta names the
+#     other language's slug, which links the pair with hreflang (x-default = English).
+WORDS = {
+    'en': dict(kicker='GreenCube blog', home='/blog', questions='Questions', other='Leer en español', date=nice_date,
+               cta_h='Your own AI, on your own PC', cta_a='Get GreenCube', cta_url='https://greencube.app/buy',
+               cta_p='GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.'),
+    'es': dict(kicker='Blog de GreenCube', home='/blog/es', questions='Preguntas', other='Read in English', date=fecha,
+               cta_h='Tu propia IA, en tu propio PC', cta_a='Consigue GreenCube', cta_url='https://greencube.app/es/buy',
+               cta_p='GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro;, un solo pago.'),
+}
+def post_url(lang, slug): return f'{HOST}/blog/{slug}' if lang == 'en' else f'{HOST}/blog/es/{slug}'
+own = []
+for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
+    for fn in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
+        if fn.endswith('.html'):
+            raw = open(f'{folder}/{fn}', encoding='utf-8').read()
+            m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
+            own.append((lang, fn[:-5], json.loads(m.group(1)), raw[m.end():]))
+os.makedirs(f'{OUT}/es', exist_ok=True)
+listing_es = []
+for lang, slug, meta, body in own:
+    W = WORDS[lang]
     title, desc, published = meta['title'], meta['description'], meta['date']
-    url = f'{HOST}/blog/{slug}'
+    url = post_url(lang, slug)
+    alts, other_link = (), ''
+    if meta.get('alt'):
+        olang = 'es' if lang == 'en' else 'en'
+        ourl = post_url(olang, meta['alt'])
+        en_url, es_url = (url, ourl) if lang == 'en' else (ourl, url)
+        alts = (('en', en_url), ('es', es_url), ('x-default', en_url))
+        other_link = f' &middot; <a href="{ourl.replace(HOST, "")}" hreflang="{olang}" lang="{olang}">{W["other"]}</a>'
     faq = [(f['q'], f['a']) for f in meta.get('faq', [])]
     ld = [{
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
@@ -164,18 +210,33 @@ for fn in sorted(os.listdir(f'{SRC}/own')) if os.path.isdir(f'{SRC}/own') else [
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
-        faq_html = ('<h2>Questions</h2>\n<div class="faq">\n'
+        faq_html = (f'<h2>{W["questions"]}</h2>\n<div class="faq">\n'
                     + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq) + '\n</div>\n')
     content = (
-        f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">GreenCube &middot; {nice_date(published)}</p>\n'
+        f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
+        f'<p class="byline">GreenCube &middot; {W["date"](published)}{other_link}</p>\n'
         + body + faq_html +
-        '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
-        '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p>'
-        '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
-    open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, 'https://greencube.app/og.jpg', ld, content))
-    listing.append((slug, title, desc, published, meta.get('modified', published)))
+        f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
+        f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
+    path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/es/{slug}.html'
+    open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts))
+    (listing if lang == 'en' else listing_es).append((slug, title, desc, published, meta.get('modified', published)))
 listing.sort(key=lambda l: l[3], reverse=True)
+listing_es.sort(key=lambda l: l[3], reverse=True)
+
+# ---------- the Spanish list page ----------
+if listing_es:
+    items = '\n'.join(
+        f'<li><a href="/blog/es/{s}"><span class="date">{fecha(pub)}</span><h2>{esc(t)}</h2><p>{esc(d)}</p></a></li>'
+        for s, t, d, pub, _ in listing_es)
+    content = ('<article class="list">\n<p class="kicker">Blog de GreenCube</p>\n<h1>Guías y pruebas</h1>\n'
+               '<p class="lede">IA en tu propio ordenador: qué funciona en tu PC, cuánto tarda y cómo sacarle partido para estudiar.</p>\n'
+               f'<ul class="posts">\n{items}\n</ul>\n</article>\n')
+    open(f'{OUT}/es/index.html', 'w', encoding='utf-8').write(page(
+        'Blog de GreenCube: guías y pruebas', 'Guías y pruebas reales sobre usar IA en tu propio ordenador.',
+        f'{HOST}/blog/es', 'https://greencube.app/og.jpg',
+        [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'Blog de GreenCube', 'url': f'{HOST}/blog/es', 'inLanguage': 'es'}],
+        content, og_type='website', lang='es'))
 
 # ---------- the list page ----------
 items = '\n'.join(
@@ -191,7 +252,9 @@ open(f'{OUT}/index.html', 'w', encoding='utf-8').write(page(
 
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
-       [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing]
+       [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \
+       ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
+       [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
 open(f'{OUT}/sitemap.xml', 'w', encoding='utf-8').write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + '\n'.join(urls) + '\n</urlset>\n')
 
