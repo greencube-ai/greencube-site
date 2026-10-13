@@ -230,7 +230,8 @@ if listing_es:
         f'<li><a href="/blog/es/{s}"><span class="date">{fecha(pub)}</span><h2>{esc(t)}</h2><p>{esc(d)}</p></a></li>'
         for s, t, d, pub, _ in listing_es)
     content = ('<article class="list">\n<p class="kicker">Blog de GreenCube</p>\n<h1>Guías y pruebas</h1>\n'
-               '<p class="lede">IA en tu propio ordenador: qué funciona en tu PC, cuánto tarda y cómo sacarle partido para estudiar.</p>\n'
+               '<p class="lede">IA en tu propio ordenador: qué funciona en tu PC, cuánto tarda y cómo sacarle partido para estudiar. '
+               '<a href="/blog" hreflang="en" lang="en">Blog in English &rarr;</a></p>\n'
                f'<ul class="posts">\n{items}\n</ul>\n</article>\n')
     open(f'{OUT}/es/index.html', 'w', encoding='utf-8').write(page(
         'Blog de GreenCube: guías y pruebas', 'Guías y pruebas reales sobre usar IA en tu propio ordenador.',
@@ -243,10 +244,11 @@ items = '\n'.join(
     f'<li><a href="/blog/{s}"><span class="date">{nice_date(pub)}</span><h2>{esc(t)}</h2><p>{esc(d)}</p></a></li>'
     for s, t, d, pub, _ in listing)
 content = ('<article class="list">\n<p class="kicker">GreenCube blog</p>\n<h1>Guides and comparisons</h1>\n'
-           '<p class="lede">Running AI on your own computer: tools, models, hardware and privacy.</p>\n'
+           '<p class="lede">Running AI on your own computer: what runs on your PC, how fast, and how to get the most out of it. '
+           '<a href="/blog/es" hreflang="es" lang="es">Blog en español &rarr;</a></p>\n'
            f'<ul class="posts">\n{items}\n</ul>\n</article>\n')
 open(f'{OUT}/index.html', 'w', encoding='utf-8').write(page(
-    'GreenCube blog: guides and comparisons', 'Guides and comparisons about running AI on your own computer: tools, models, hardware and privacy.',
+    'GreenCube blog: guides and comparisons', 'Guides and real tests about running AI on your own computer: what runs on your PC and how fast.',
     f'{HOST}/blog', 'https://greencube.app/og.jpg',
     [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'GreenCube blog', 'url': f'{HOST}/blog'}], content, og_type='website'))
 
