@@ -147,24 +147,30 @@ footer .f-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid va
   .stat b { font-size: 30px; }
 }
 
-/* ---------- blog home: short hero, start-here cards, one short title list per topic ---------- */
-.hub { max-width: 1000px; }
-.hub .kicker a { text-decoration: underline; text-underline-offset: 3px; }
-.hub h1 { font-size: clamp(40px, 6.4vw, 68px); line-height: 1.02; margin-bottom: 10px; }
-.hub h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--olive-deep); }
-.hub .lede { font-size: 20px; color: var(--ink-soft); margin-bottom: 40px; }
-.hub-h { font-family: var(--sans) !important; font-size: 13px !important; font-weight: 600 !important; letter-spacing: .14em !important; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 12px !important; }
-.hub-feats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 16px; }
-.hub-feat { display: flex; flex-direction: column; background: var(--tint); border-radius: 24px; padding: 26px; text-decoration: none !important; color: var(--ink) !important; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
-.hub-feat:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -18px rgba(26,26,26,.35); }
-.hub-stat { font-family: var(--display); font-weight: 600; font-size: 46px; line-height: 1; letter-spacing: -0.035em; color: var(--deep); margin-bottom: 14px; }
-.hub-feat h2 { font-size: 22px !important; margin: 0 0 6px !important; line-height: 1.2; }
-.hub-feat p { font-size: 17px; color: var(--ink); margin: 0 0 18px; }
-.hub-go { margin-top: auto; font-weight: 600; color: var(--deep); }
-.hub-nudge { font-size: 16px; color: var(--ink-soft); margin: 0 0 48px; }
-.hub-nudge a { font-weight: 600; color: var(--olive-deep); }
-.hub-topics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 40px; }
-.hub-topic h2 { display: flex; align-items: center; gap: 10px; font-size: 22px !important; margin: 0 0 10px !important; }
+/* ---------- blog home: a clear hero, then "Our tests" cards, then guides by topic ---------- */
+.hub { max-width: 1040px; padding-top: 0; }
+.hub-hero { text-align: center; padding: 84px 0 76px; border-bottom: 1px solid var(--line); }
+.hub-hero .kicker a { text-decoration: underline; text-underline-offset: 3px; }
+.hub-hero h1 { font-size: clamp(44px, 7.4vw, 84px); line-height: 1; letter-spacing: -0.04em; margin: 0 0 16px; }
+.hub-hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--olive-deep); letter-spacing: -0.01em; }
+.hub-hero .lede { font-size: 21px; color: var(--ink-soft); margin: 0 0 30px; }
+.hub-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 0; }
+.hub-ghost { display: inline-flex; align-items: center; padding: 13px 22px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper-soft); color: var(--ink) !important; font-weight: 600; font-size: 15px; text-decoration: none !important; transition: border-color .25s var(--ease), transform .25s var(--ease); }
+.hub-ghost:hover { border-color: var(--olive); transform: translateY(-2px); }
+.hub-sec { padding: 64px 0 8px; scroll-margin-top: 70px; }
+.hub-sec > h2 { font-size: clamp(28px, 3.6vw, 38px) !important; margin: 0 0 6px !important; }
+.hub-sub { font-size: 17px; margin: 0 0 26px; }
+.hub-feats { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
+.hub-feat { display: flex; flex-direction: column; background: var(--paper-soft); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; text-decoration: none !important; color: var(--ink) !important; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.hub-feat:hover { transform: translateY(-5px); box-shadow: 0 18px 34px -20px rgba(26,26,26,.4); }
+.hub-top { display: block; background: var(--tint); padding: 30px 24px 26px; }
+.hub-stat { display: block; font-family: var(--display); font-weight: 600; font-size: 52px; line-height: 1; letter-spacing: -0.04em; color: var(--deep); }
+.hub-body { display: flex; flex-direction: column; flex: 1; padding: 20px 24px 22px; }
+.hub-feat h3 { font-size: 20px !important; margin: 0 0 8px !important; line-height: 1.25; color: var(--ink); }
+.hub-feat p { font-size: 16px; color: var(--ink-soft); margin: 0 0 18px; }
+.hub-go { margin-top: auto; font-weight: 600; font-size: 15px; color: var(--deep); }
+.hub-topics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 44px; margin-top: 22px; }
+.hub-topic h2 { display: flex; align-items: center; gap: 10px; font-size: 21px !important; margin: 0 0 8px !important; }
 .hub-topic .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--acc); }
 .hub-list { list-style: none; margin: 0 !important; }
 .hub-list li { margin: 0; border-bottom: 1px solid var(--line); }
@@ -174,7 +180,8 @@ footer .f-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid va
 .hub-more summary::-webkit-details-marker { display: none; }
 .hub-more[open] summary { display: none; }
 @media (max-width: 760px) {
-  .hub-feats, .hub-topics { grid-template-columns: 1fr; }
-  .hub .lede { margin-bottom: 30px; }
+  .hub-hero { padding: 56px 0 50px; }
+  .hub-topics { grid-template-columns: 1fr; }
+  .hub-sec { padding-top: 48px; }
 }
-@media (prefers-reduced-motion: reduce) { .hub-feat, .hub-list a { transition: none; } .hub-feat:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hub-feat, .hub-list a, .hub-ghost { transition: none; } .hub-feat:hover { transform: none; } }

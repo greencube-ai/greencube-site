@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Why your AI has to fit entirely on your graphics card | GreenCube blog</title>
+  <meta name="description" content="We measured what happens when an AI model doesn&#x27;t fit in your graphics card&#x27;s VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Why your AI has to fit entirely on your graphics card | GreenCube blog" />
+  <meta property="og:description" content="We measured what happens when an AI model doesn&#x27;t fit in your graphics card&#x27;s VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Why your AI has to fit entirely on your graphics card", "description": "We measured what happens when an AI model doesn't fit in your graphics card's VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ai-must-fit-on-gpu", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What happens if an AI model doesn't fit in VRAM?", "acceptedAnswer": {"@type": "Answer", "text": "The part that doesn't fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote at 5.9 tokens a second instead of 35.6 with all of them: 6 times slower."}}, {"@type": "Question", "name": "Should I run the biggest AI model my card can load?", "acceptedAnswer": {"@type": "Answer", "text": "No. Leave room for the conversation. A 12-billion-parameter model fitted on an 8 GB card for a short question, then crashed once the chat got longer. A smaller model that fits with room to spare was faster and never crashed."}}, {"@type": "Question", "name": "How much VRAM should I leave free?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube leaves about 1.5 GB of the card free for the conversation and for Windows. Without that room, a 4 GB card ran out of memory on the first message."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Why your AI has to fit entirely on your graphics card</h1>
+<p class="byline">GreenCube &middot; 18 October 2026 &middot; <a href="/blog/es/ia-caber-tarjeta-grafica" hreflang="es" lang="es">Leer en español</a></p>
+<div class="answer"><p><strong>Short answer:</strong> an AI that fits entirely in your graphics card's memory (VRAM) is fast. One that spills over is <strong>slower than not using the card at all</strong>, and can crash. Smaller and fully on the card beats bigger and half on.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35.6</b><span>tokens a second with the whole model on the card</span></div>
+<div class="stat p"><b>5.9</b><span>with part of it left off the card: 6 times slower</span></div>
+<div class="stat y"><b>Crash</b><span>when a model that barely fits meets a long chat</span></div>
+</div>
+
+<h2>The test</h2>
+<p>A desktop with an AMD RX 5700 XT (8 GB of VRAM) and 48 GB of RAM. We loaded a 12-billion-parameter model (Gemma 4 12B, about 6.2 GB) and put more or less of it on the card, all in one session in September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>How much of the model was on the card</th><th>Writes (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>All of it</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
+<tr><td>28 of its layers</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
+<tr><td>20 of its layers</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
+<tr><td><em>For comparison: a smaller model (Gemma 4 E4B) on the processor only</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
+<tr><td><em>That smaller model, all on the card</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>What we learned</h2>
+
+<div class="card g">
+<h3>1. All or nothing</h3>
+<p>Keeping just part of the model off the card made it <strong>6 times slower</strong>. With 20 layers on the card it was slower than a smaller model running with no card at all. Half on the card is the worst of both worlds.</p>
+</div>
+
+<div class="card p">
+<h3>2. Biggest isn't best</h3>
+<p>The 12B model did fit entirely on the 8 GB card, for one short question. As the chat grew, it crashed every time: the card had almost no room left for the conversation. The smaller model had about 3 GB spare and ran at 63 to 72 tokens a second.</p>
+</div>
+
+<div class="card b">
+<h3>3. Leave room</h3>
+<p>On a 4 GB GTX 1650, a 4.2 GB model was squeezed onto a 3.9 GB card, and the very first message failed with "not enough memory". GreenCube now keeps about <strong>1.5 GB of the card free</strong> for the chat and for Windows.</p>
+</div>
+
+<h2>How to pick a model for your card</h2>
+<div class="expect">
+<div class="g"><h4>Check your VRAM</h4><p>Task Manager &rarr; Performance &rarr; GPU &rarr; Dedicated GPU memory.</p></div>
+<div class="b"><h4>Model size + 1.5 GB</h4><p>The model file plus about 1.5 GB should fit in that number.</p></div>
+<div class="y"><h4>When in doubt, go smaller</h4><p>A smaller model fully on the card beats a bigger one half on it.</p></div>
+<div class="p"><h4>Or let the app pick</h4><p>GreenCube reads your card and picks a model that fits with room to spare.</p></div>
+</div>
+
+<p>Real speeds on 7 PCs, from a GTX 1650 to an RTX 5060: <a href="/blog/can-my-gaming-pc-run-ai">see them here</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>What happens if an AI model doesn&#x27;t fit in VRAM?</summary><p>The part that doesn&#x27;t fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote at 5.9 tokens a second instead of 35.6 with all of them: 6 times slower.</p></details>
+<details><summary>Should I run the biggest AI model my card can load?</summary><p>No. Leave room for the conversation. A 12-billion-parameter model fitted on an 8 GB card for a short question, then crashed once the chat got longer. A smaller model that fits with room to spare was faster and never crashed.</p></details>
+<details><summary>How much VRAM should I leave free?</summary><p>GreenCube leaves about 1.5 GB of the card free for the conversation and for Windows. Without that room, a 4 GB card ran out of memory on the first message.</p></details>
+</div>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

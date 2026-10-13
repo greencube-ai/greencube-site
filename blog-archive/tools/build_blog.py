@@ -241,18 +241,18 @@ def topic_of(slug):
 LIST_WORDS = {
     'en': dict(title='GreenCube blog: AI on your own PC, tested',
                desc='Short, tested answers about running AI on your own gaming PC or laptop, and using it to study.',
-               kicker='GreenCube blog', h1='AI on <em>your own</em> PC.', lede='Real tests. Short answers.',
-               other='<a href="/blog/es" hreflang="es" lang="es">En español</a>', start='Start here', read='Read',
+               kicker='GreenCube blog', h1='AI on <em>your own</em> PC.', lede='Real tests. Short answers.', go='See the tests', tests='Our tests', tests_sub='Real numbers from real PCs.', guides='Guides',
+               other='<a href="/blog/es" hreflang="es" lang="es">En español</a>', start='Start here', read='Read the test',
                topics={'pc': 'Your PC', 'study': 'Studying', 'limits': 'Limits and price', 'tools': 'Apps and alternatives', 'more': 'More'},
                more='Show all {n}', base='/blog/',
-               nudge='Will it run on your PC? <a href="https://greencube.app/#game">Check in 2 questions &rarr;</a>'),
+               nudge='Will it run on my PC?', nudge_url='https://greencube.app/#game'),
     'es': dict(title='Blog de GreenCube: la IA en tu propio PC, probada',
                desc='Respuestas cortas y probadas sobre usar IA en tu propio PC gaming o portátil, y sobre estudiar con ella.',
-               kicker='Blog de GreenCube', h1='La IA, en <em>tu propio</em> PC.', lede='Pruebas reales. Respuestas cortas.',
-               other='<a href="/blog" hreflang="en" lang="en">In English</a>', start='Empieza aquí', read='Leer',
+               kicker='Blog de GreenCube', h1='La IA, en <em>tu propio</em> PC.', lede='Pruebas reales. Respuestas cortas.', go='Ver las pruebas', tests='Nuestras pruebas', tests_sub='Números reales de PCs reales.', guides='Guías',
+               other='<a href="/blog" hreflang="en" lang="en">In English</a>', start='Empieza aquí', read='Leer la prueba',
                topics={'pc': 'Tu PC', 'study': 'Estudiar', 'limits': 'Límites y precio', 'tools': 'Apps y alternativas', 'more': 'Más'},
                more='Ver los {n}', base='/blog/es/',
-               nudge='¿Funcionará en tu PC? <a href="https://greencube.app/es/#game">Compruébalo en 2 preguntas &rarr;</a>'),
+               nudge='¿Funcionará en mi PC?', nudge_url='https://greencube.app/es/#game'),
 }
 SHOW = 6  # titles shown per topic before "Show all"
 # the best posts per topic, shown first under short plain names; every other post sits behind "Show all"
@@ -273,13 +273,15 @@ PICKS = {'en': {
 def list_page(lang, entries, url, path):
     L = LIST_WORDS[lang]
     feat = [e for e in entries if (lang, e[0]) in own_meta]
+    feat.sort(key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
     rest = [e for e in entries if (lang, e[0]) not in own_meta]
     cards = []
     for i, (s, t, d, pub, _) in enumerate(feat):
         m = own_meta[(lang, s)]
         stat = f'<b class="hub-stat">{m["stat"]}</b>' if m.get('stat') else ''
-        cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}">{stat}'
-                     f'<h2>{esc(t)}</h2><p>{esc(m.get("teaser", d))}</p><span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></a>')
+        cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span class="hub-top">{stat}</span>'
+                     f'<span class="hub-body"><h3>{esc(t)}</h3><p>{esc(m.get("teaser", d))}</p>'
+                     f'<span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></span></a>')
     pinned = {s: key for key, picks in PICKS.get(lang, {}).items() for s, _ in picks}
     tint_of = {k: tn for k, tn, _ in TOPICS}
     groups = {}
@@ -304,10 +306,13 @@ def list_page(lang, entries, url, path):
         sections.append(f'<section class="hub-topic {tint}"><h2><span class="dot" aria-hidden="true"></span>{L["topics"][key]}</h2>'
                         + (f'<ul class="hub-list">{shown}</ul>' if shown else '') + f'{extra}</section>')
     content = (
-        f'<article class="list hub">\n<p class="kicker">{L["kicker"]} &middot; {L["other"]}</p>\n<h1>{L["h1"]}</h1>\n<p class="lede">{L["lede"]}</p>\n'
-        + (f'<h2 class="hub-h">{L["start"]}</h2>\n<div class="hub-feats">{"".join(cards)}</div>\n' if cards else '')
-        + f'<p class="hub-nudge">{L["nudge"]}</p>\n'
-        + (f'<div class="hub-topics">{"".join(sections)}</div>\n' if sections else '')
+        '<article class="list hub">\n'
+        f'<section class="hub-hero"><p class="kicker">{L["kicker"]} &middot; {L["other"]}</p><h1>{L["h1"]}</h1><p class="lede">{L["lede"]}</p>'
+        f'<p class="hub-btns"><a class="cta" href="#tests">{L["go"]} <span aria-hidden="true">&darr;</span></a>'
+        f'<a class="hub-ghost" href="{L["nudge_url"]}">{L["nudge"]}</a></p></section>\n'
+        + (f'<section class="hub-sec" id="tests"><h2>{L["tests"]}</h2><p class="hub-sub">{L["tests_sub"]}</p>'
+           f'<div class="hub-feats">{"".join(cards)}</div></section>\n' if cards else '')
+        + (f'<section class="hub-sec"><h2>{L["guides"]}</h2><div class="hub-topics">{"".join(sections)}</div></section>\n' if sections else '')
         + '</article>\n')
     open(path, 'w', encoding='utf-8').write(page(L['title'], L['desc'], url, 'https://greencube.app/og.jpg',
         [{'@context': 'https://schema.org', '@type': 'Blog', 'name': L['kicker'], 'url': url, 'inLanguage': lang}],
