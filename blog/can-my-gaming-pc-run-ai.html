@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Can my gaming PC run AI? We measured 7 real PCs | GreenCube blog</title>
+  <meta name="description" content="Real speeds from 7 PCs, from a GTX 1650 to an RTX 5060 and laptops with no graphics card. What your graphics card, VRAM and RAM mean for running AI on your own PC." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Can my gaming PC run AI? We measured 7 real PCs | GreenCube blog" />
+  <meta property="og:description" content="Real speeds from 7 PCs, from a GTX 1650 to an RTX 5060 and laptops with no graphics card. What your graphics card, VRAM and RAM mean for running AI on your own PC." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/can-my-gaming-pc-run-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/can-my-gaming-pc-run-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Can my gaming PC run AI? We measured 7 real PCs", "description": "Real speeds from 7 PCs, from a GTX 1650 to an RTX 5060 and laptops with no graphics card. What your graphics card, VRAM and RAM mean for running AI on your own PC.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/can-my-gaming-pc-run-ai", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does AI on my PC work with an AMD graphics card?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We measured AMD cards (RX 5700 XT, RX 6600, RX 580) as well as NVIDIA ones. GreenCube uses Vulkan, which works on both."}}, {"@type": "Question", "name": "How much VRAM do I need to run AI?", "acceptedAnswer": {"@type": "Answer", "text": "None is required, but 4 GB or more makes a big difference. On our test PCs, a 4 GB GTX 1650 wrote about 20 tokens a second and an 8 GB RTX 5060 about 56. More VRAM lets a bigger model fit on the card."}}, {"@type": "Question", "name": "Can I run AI on a laptop with no graphics card?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with a small model, which is faster than you read. An 8 GB laptop works too, more slowly, and cannot make pictures."}}, {"@type": "Question", "name": "Does more RAM make AI faster?", "acceptedAnswer": {"@type": "Answer", "text": "Not on its own. On a desktop with 48 GB of RAM, the same model ran 14 times faster once it was on the 8 GB graphics card than on the processor. RAM matters when you have no card; with a card, VRAM matters most."}}, {"@type": "Question", "name": "Do I need internet to run AI on my PC?", "acceptedAnswer": {"@type": "Answer", "text": "Only once, to download the app and the AI model and to activate it. After that, chatting works with no internet at all."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/how-it-works">Why GreenCube</a>
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>Can my gaming PC run AI? We measured 7 real PCs</h1>
+<p class="byline">GreenCube &middot; 18 October 2026</p>
+<p><strong>Short answer: yes.</strong> If your PC runs games, it can run AI. We measured 7 real PCs, from a GTX 1650 desktop to an RTX 5060 one, plus two laptops with no graphics card at all. All of them could chat with an AI that runs entirely on the PC, with no internet and no subscription. What changes is how fast.</p>
+
+<p>Below are the real numbers, what they mean, and what to check on your own PC.</p>
+
+<h2>The results</h2>
+
+<p>"Writes" is how fast the AI types its answer, in tokens per second. A token is about three quarters of a word. For comparison, most people read about 4 words a second (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), which is roughly 5 tokens a second. Anything above that is faster than you can read.</p>
+
+<table>
+<thead><tr><th>PC</th><th>Graphics</th><th>RAM</th><th>AI model</th><th>Writes (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>Desktop</td><td>AMD RX 5700 XT, 8 GB</td><td>48 GB</td><td>Gemma 4 E4B</td><td><strong>63&ndash;72</strong></td></tr>
+<tr><td>Desktop</td><td>NVIDIA RTX 5060, 8 GB</td><td>32 GB</td><td>Gemma 4 E4B</td><td><strong>56</strong></td></tr>
+<tr><td>Desktop</td><td>12 GB graphics card</td><td>32 GB</td><td>Gemma 4 E4B</td><td><strong>50&ndash;55</strong></td></tr>
+<tr><td>Desktop</td><td>NVIDIA GTX 1660 Super, 6 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td><strong>35&ndash;38</strong></td></tr>
+<tr><td>Desktop</td><td>NVIDIA GTX 1650, 4 GB</td><td>16 GB</td><td>Gemma 4 E4B</td><td><strong>about 20</strong></td></tr>
+<tr><td>Laptop</td><td>Intel graphics only (Core Ultra 5)</td><td>16 GB</td><td>Gemma 4 E2B</td><td><strong>14&ndash;18</strong></td></tr>
+<tr><td>Laptop</td><td>Intel Iris Xe only</td><td>8 GB</td><td>Gemma 4 E2B</td><td><strong>about 9</strong></td></tr>
+</tbody>
+</table>
+
+<p>Measured with GreenCube between September and October 2026, using its built-in engine. Speeds move a little between runs on the same PC, so where we have several runs we show the range. We also ran an RX 6600 and an RX 580, but did not record their speeds.</p>
+
+<h2>What the numbers say</h2>
+
+<h3>1. Your graphics card does the work, like in a game</h3>
+<p>On the desktop with the RX 5700 XT, the same model wrote <strong>5 tokens a second on the processor and 72 on the graphics card: 14 times faster</strong>. AI is mostly the kind of maths graphics cards are built for. Any card made in the last few years helps a lot, even an old 4 GB GTX 1650.</p>
+
+<h3>2. VRAM decides how big a model fits</h3>
+<p>The model has to fit in the card's own memory (VRAM) to run at full speed. That same desktop had 48 GB of RAM, and it did not help a bigger model: a 12-billion-parameter model fitted on the 8 GB card for a short question, then crashed once the conversation got longer, with the card almost full. <strong>For AI, VRAM matters more than RAM.</strong> That is why GreenCube checks your card and picks a model that fits, instead of the biggest one.</p>
+
+<h3>3. No graphics card? It still works</h3>
+<p>A normal 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with the smaller model, and finished a full answer (an explanation plus three exam questions) in about 20 seconds. That is fine for studying, writing and questions. An 8 GB laptop works too, at about 9 tokens a second, as long as other apps leave it enough free memory.</p>
+
+<h3>4. Pictures need more</h3>
+<p>Making a picture is much heavier than chatting. On the desktop with a 12 GB card, a picture took <strong>28 seconds</strong>. On the 16 GB laptop with Intel graphics, about <strong>2 and a half minutes</strong>. An 8 GB laptop cannot make pictures at all: the image model alone needs about 7 GB.</p>
+
+<h2>How to check your PC in 30 seconds</h2>
+<ol>
+<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
+<li>Go to <strong>Performance</strong>.</li>
+<li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>
+<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. If you only see Intel graphics, you have no separate card.</li>
+</ol>
+
+<h2>What to expect from your PC</h2>
+<table>
+<thead><tr><th>Your PC</th><th>What to expect</th></tr></thead>
+<tbody>
+<tr><td>Graphics card with 6 GB or more</td><td>Fast: answers appear far faster than you read. Pictures are quickest here (28 seconds on our 12 GB card).</td></tr>
+<tr><td>Graphics card with 4 GB, 16 GB RAM</td><td>Good: about 20 tokens a second in our test.</td></tr>
+<tr><td>No card, 16 GB RAM</td><td>Fine for chat and study, with a smaller model. Pictures are slow.</td></tr>
+<tr><td>No card, 8 GB RAM</td><td>Works for chat, slowly. Close other apps first. No pictures.</td></tr>
+</tbody>
+</table>
+
+<h2>Why run AI on your own PC at all</h2>
+<p>Because it is yours. No message limits, no monthly subscription, and it keeps working with no internet, on a train or in a library with bad Wi-Fi. It will not beat the biggest cloud AIs at everything, but for studying, writing, summarising and everyday questions, a model on your own card is more than enough, and it never runs out.</p>
+<h2>Questions</h2>
+<h3>Does AI on my PC work with an AMD graphics card?</h3>
+<p>Yes. We measured AMD cards (RX 5700 XT, RX 6600, RX 580) as well as NVIDIA ones. GreenCube uses Vulkan, which works on both.</p>
+<h3>How much VRAM do I need to run AI?</h3>
+<p>None is required, but 4 GB or more makes a big difference. On our test PCs, a 4 GB GTX 1650 wrote about 20 tokens a second and an 8 GB RTX 5060 about 56. More VRAM lets a bigger model fit on the card.</p>
+<h3>Can I run AI on a laptop with no graphics card?</h3>
+<p>Yes. A 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with a small model, which is faster than you read. An 8 GB laptop works too, more slowly, and cannot make pictures.</p>
+<h3>Does more RAM make AI faster?</h3>
+<p>Not on its own. On a desktop with 48 GB of RAM, the same model ran 14 times faster once it was on the 8 GB graphics card than on the processor. RAM matters when you have no card; with a card, VRAM matters most.</p>
+<h3>Do I need internet to run AI on my PC?</h3>
+<p>Only once, to download the app and the AI model and to activate it. After that, chatting works with no internet at all.</p>
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/how-it-works">Why GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

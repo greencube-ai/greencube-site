@@ -17,7 +17,7 @@ import facts
 
 SRC, OUT = 'blog-archive', 'blog'
 HOST = 'https://blog.greencube.app'
-TODAY = date.today().isoformat()
+TODAY = '2026-10-10'  # the day the archived posts were corrected; rebuilding must not re-date them
 MAX_W = 1200
 
 idx = json.load(open(f'{SRC}/index.json', encoding='utf-8'))
@@ -140,6 +140,41 @@ for p in idx:
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
     report.append({'slug': slug, 'note': kinds, 'text_fixes': [list(c) for c in ch1 + ch2 + ch3]})
+
+# ---------- our own posts: blog-archive/own/<slug>.html, a <!--meta {json} --> block then the body ----------
+for fn in sorted(os.listdir(f'{SRC}/own')) if os.path.isdir(f'{SRC}/own') else []:
+    if not fn.endswith('.html'):
+        continue
+    slug = fn[:-5]
+    raw = open(f'{SRC}/own/{fn}', encoding='utf-8').read()
+    m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
+    meta, body = json.loads(m.group(1)), raw[m.end():]
+    title, desc, published = meta['title'], meta['description'], meta['date']
+    url = f'{HOST}/blog/{slug}'
+    faq = [(f['q'], f['a']) for f in meta.get('faq', [])]
+    ld = [{
+        '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
+        'image': 'https://greencube.app/og.jpg', 'datePublished': published, 'dateModified': meta.get('modified', published),
+        'inLanguage': meta.get('lang', 'en'), 'mainEntityOfPage': url,
+        'author': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'},
+        'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
+                      'logo': {'@type': 'ImageObject', 'url': 'https://greencube.app/icon-512.png'}},
+    }]
+    faq_html = ''
+    if faq:
+        ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
+            {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
+        faq_html = '<h2>Questions</h2>\n' + '\n'.join(f'<h3>{esc(q)}</h3>\n<p>{esc(a)}</p>' for q, a in faq)
+    content = (
+        f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
+        f'<p class="byline">GreenCube &middot; {nice_date(published)}</p>\n'
+        + body + faq_html +
+        '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
+        '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p>'
+        '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
+    open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, 'https://greencube.app/og.jpg', ld, content))
+    listing.append((slug, title, desc, published, meta.get('modified', published)))
+listing.sort(key=lambda l: l[3], reverse=True)
 
 # ---------- the list page ----------
 items = '\n'.join(
