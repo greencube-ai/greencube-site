@@ -38,6 +38,19 @@ def fix_text(s):
     for rx, rep in PRICE_FIXES:
         s = sub(rx, rep, s)
     s = sub(ABOUT_10, 'US$9.99', s, only_gc=True)
+    # the refund window is 15 days since 2026-10-11 (terms §5); only inside sentences about a refund
+    def refund15(m):
+        a = max(s.rfind('.', 0, m.start()), s.rfind('>', 0, m.start()), s.rfind('"', 0, m.start()))
+        b = min([x for x in (s.find('.', m.end()), s.find('<', m.end()), s.find('"', m.end())) if x != -1] or [len(s)])
+        if 'refund' not in s[a + 1:b].lower(): return m.group(0)
+        changes.append((m.group(0), '15' + m.group(1)))
+        return '15' + m.group(1)
+    s = re.sub(r'\b14([- ]days?)\b', refund15, s)
+    for old, new in (('Refund window</td><td>14 days', 'Refund window</td><td>15 days'),
+                     ('GreenCube offers 14 days', 'GreenCube offers 15 days'),
+                     ('A 14-day window covers', 'A 15-day window covers')):
+        if old in s:
+            changes.append((old, new)); s = s.replace(old, new)
     s = s.replace('$9.99 USD', 'US$9.99')
     n = len(re.findall(r'\bGreencube\b', s))
     if n: changes.append(('Greencube', 'GreenCube x%d' % n))
