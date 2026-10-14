@@ -42,9 +42,16 @@ TESTED = {
     'ai-without-subscription': ['chatgpt-free-limits'],
     'local-ai-vs-chatgpt': ['chatgpt-free-limits'],
     'chatgpt-alternatives-5': ['chatgpt-free-limits'],
-    'best-ai-for-students': ['chatgpt-free-limits', 'can-my-pc-run-ai'],
+    'best-ai-for-students': ['ai-to-study-from-pdf', 'chatgpt-free-limits', 'can-my-pc-run-ai'],
     'offline-ai-for-students': ['can-my-pc-run-ai', 'run-ai-on-8gb-ram'],
     'ollama-vs-lm-studio': ['how-much-vram-for-ai'],
+    'study-guide-from-pdf': ['ai-to-study-from-pdf'],
+    'flashcards-from-pdf': ['ai-to-study-from-pdf'],
+    'best-pdf-summarizer': ['ai-to-study-from-pdf'],
+    'notebooklm-alternatives': ['ai-to-study-from-pdf'],
+    'humata-ai-alternatives': ['ai-to-study-from-pdf'],
+    'ai-study-planner-offline': ['ai-to-study-from-pdf'],
+    'best-ai-for-computer-science-students': ['ai-to-study-from-pdf'],
 }
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
