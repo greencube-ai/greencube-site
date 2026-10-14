@@ -1,0 +1,137 @@
+<p>Yes, healthcare teams can use AI with protected health information, but only after signing a Business Associate Agreement and putting documented administrative and technical safeguards in place. A risk analysis, access controls, audit logging, and ongoing monitoring all need to exist before any AI tool touches patient data. Separately, if the tool supports diagnosis or treatment decisions, you also need to check whether it qualifies as a regulated medical device.</p>
+<hr/>
+<blockquote>
+<p><strong>TL;DR:</strong></p>
+<ul>
+<li>A cloud provider remains a business associate even without decryption keys, so verify every subcontractor has a BAA and document permitted uses and breach deadlines.</li>
+<li>Limit each tool to necessary patient data, assign unique accounts, encrypt stored and transmitted information, and review access logs and model performance after launch.</li>
+<li>When software influences diagnosis or treatment, check its intended use and FDA authorization; regulated tools typically require premarket review and should supplement other clinical data.</li>
+<li>Local AI keeps chats and files on the device, reducing transmission and third party storage risks, but still requires safeguards and depends on hardware.</li>
+</ul>
+</blockquote>
+<hr/><h2 id="table-of-contents" node="[object Object]">Table of Contents</h2>
+<ul>
+<li><a href="#what-hipaa-requires-when-ai-processes-phi">What HIPAA requires when AI processes PHI</a></li>
+<li><a href="#technical-safeguards-every-ai-deployment-using-phi-should-provide">Technical safeguards every AI deployment using PHI should provide</a></li>
+<li><a href="#vendor-due-diligence-and-what-to-insist-on-in-a-baa">Vendor due diligence and what to insist on in a BAA</a></li>
+<li><a href="#step-by-step-deployment-checklist-for-clinical-workflows">Step-by-step deployment checklist for clinical workflows</a></li>
+<li><a href="#fda-and-clinical-risk-when-ai-tools-are-regulated-as-medical-devices">FDA and clinical risk: when AI tools are regulated as medical devices</a></li>
+<li><a href="#privacy-first-alternatives-and-local-or-offline-ai">Privacy-first alternatives and local or offline AI</a></li>
+<li><a href="#data-storage-and-retention-policies-specific-to-ai-systems-processing-phi">Data storage and retention policies specific to AI systems processing PHI</a></li>
+<li><a href="#procedures-for-managing-and-responding-to-data-breaches-involving-ai-applications">Procedures for managing and responding to data breaches involving AI applications</a></li>
+<li><a href="#training-requirements-and-best-practices-for-staff-using-hipaa-compliant-ai-tools">Training requirements and best practices for staff using HIPAA-compliant AI tools</a></li>
+<li><a href="#pragmatic-governance-beats-checklisting-alone">Pragmatic governance beats checklisting alone</a></li>
+<li><a href="#how-greencube-fits-privacy-first-clinician-workflows">How GreenCube fits privacy-first clinician workflows</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+<h2 id="what-hipaa-requires-when-ai-processes-phi" node="[object Object]">What HIPAA requires when AI processes PHI</h2>
+<p>Any AI vendor that creates, receives, maintains, or transmits protected health information on behalf of a covered entity is a business associate under HIPAA, and that relationship requires a signed <a href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html" target="_blank" rel="noopener noreferrer nofollow">Business Associate Agreement</a> before any data changes hands. Using a cloud-based AI service to process PHI without a BAA in place is a direct violation of the HIPAA Rules, specifically 45 C.F.R. §§164.308(b)(1) and §164.502(e). Covered entities, meaning the hospital, clinic, or practice itself, hold ultimate oversight responsibility, while business associates carry direct liability for certain provisions like breach notification.</p>
+<p>Beyond the contract, the Security Rule requires a documented risk analysis of threats to the confidentiality, integrity, and availability of electronic PHI before you deploy any new technology, including AI. HHS does not mandate one specific methodology, but it does require you to document your findings and the reasoning behind the safeguards you choose. Skipping this step, even for a tool that seems low risk, leaves you without the paper trail regulators expect during an audit.</p>
+<p>The Privacy Rule adds another layer: the minimum necessary standard. An AI tool should only access the PHI it needs for its specific function, not a patient&#x27;s entire record by default. In practice, this means:</p>
+<ul>
+<li>Scope AI access to the specific fields or documents the task requires, not the full chart.</li>
+<li>Document who can view AI outputs that reference PHI, and why.</li>
+<li>Limit AI-generated summaries or notes to the use case they were built for.</li>
+</ul>
+<h2 id="technical-safeguards-every-ai-deployment-using-phi-should-provide" node="[object Object]">Technical safeguards every AI deployment using PHI should provide</h2>
+<p>Once the legal framework is in place, the technology itself has to meet specific controls. The HIPAA Security Series on administrative and technical safeguards lays out the core categories, and most apply directly to AI systems handling PHI.</p>
+<ol>
+<li><strong>Encrypt PHI in transit and at rest.</strong> Encryption is an addressable specification under the Security Rule, meaning you must implement it or document an equivalent alternative, not skip it.</li>
+<li><strong>Use unique user IDs and least-privilege access.</strong> Every person interacting with the AI system needs their own login, and access should match their actual job function, with emergency access procedures defined separately.</li>
+<li><strong>Log every access and action.</strong> Audit logs should capture who accessed PHI through the AI tool, when, and what they did with it, retained long enough to support breach investigations and compliance audits.</li>
+<li><strong>Secure transmission channels.</strong> Data moving between the AI tool and any other system needs protection against interception, with automatic logoff for idle sessions.</li>
+<li><strong>Verify data integrity.</strong> Authentication mechanisms should confirm that PHI has not been altered or destroyed improperly, whether by the AI system or a bad actor.</li>
+</ol>
+<p><strong>Lifecycle monitoring, meaning ongoing validation and logging after deployment, is widely treated as essential for safe AI use in healthcare settings, not just a one-time setup step.</strong> Static safeguards configured at launch do not account for model updates, new integrations, or shifting usage patterns, so logs and access reviews need to continue well past go-live.</p>
+<h2 id="vendor-due-diligence-and-what-to-insist-on-in-a-baa" node="[object Object]">Vendor due diligence and what to insist on in a BAA</h2>
+<p>A signed BAA is the starting point, not the finish line. Before you sign anything, insist on seeing how the vendor actually handles the technical and contractual details.</p>
+<ul>
+<li>Confirm the BAA spells out permitted uses of PHI, subcontractor flow-down obligations, and specific breach notification timelines.</li>
+<li>Request architecture diagrams and key management documentation so you understand exactly where and how PHI is processed.</li>
+<li>Ask for SOC-type reports or evidence of third-party security testing, especially for any cloud or hosted component.</li>
+<li>Map the full subcontractor chain: if your AI vendor relies on another cloud provider, that provider also needs a BAA.</li>
+<li>Clarify whether any component is a true no-view or zero-access service, and get that claim documented rather than assumed.</li>
+</ul>
+<p>HHS guidance on cloud computing makes an important point here: a cloud service provider is a business associate even if it never holds the decryption key to the data it stores. Encryption alone does not remove the need for a BAA.</p>
+<p>It also helps to look at how other industries structure staff-facing AI rules. One useful reference outside health care is this <a href="https://nfd.ca/company-blog/ai-policy-for-employees" target="_blank" rel="noopener">AI policy for employees</a> guide, which walks through governance structures that translate well into clinical settings.</p>
+<p><strong>Pro Tip:</strong> <em>Signing a BAA does not transfer your risk analysis obligation to the vendor. You still have to validate their configuration and document your own findings.</em></p>
+<h2 id="step-by-step-deployment-checklist-for-clinical-workflows" node="[object Object]">Step-by-step deployment checklist for clinical workflows</h2>
+<p>Rolling out an AI tool into a clinical environment works best as a staged process rather than a single go-live event.</p>
+<ol>
+<li><strong>Inventory PHI flows.</strong> Map exactly which data elements the AI tool will touch, from intake forms to clinical notes to billing records.</li>
+<li><strong>Classify the use case by risk level.</strong> A tool that drafts administrative summaries carries different risk than one that influences a treatment decision.</li>
+<li><strong>Complete the risk analysis.</strong> Document threats, likelihood, and the safeguards chosen, tied to the Security Rule&#x27;s requirements.</li>
+<li><strong>Configure least-privilege access before launch.</strong> Limit the tool to the specific users and data it needs on day one.</li>
+<li><strong>Turn on logging from the start.</strong> Retroactive logging cannot reconstruct what already happened.</li>
+<li><strong>Set human-in-the-loop rules.</strong> Define which AI outputs require a clinician&#x27;s review before they reach a patient record or influence care.</li>
+<li><strong>Apply data minimization.</strong> Feed the AI tool only the fields relevant to its task, not entire charts by default.</li>
+<li><strong>Run routine audits post-launch.</strong> Schedule recurring reviews of access logs and output accuracy.</li>
+<li><strong>Watch for model drift.</strong> Performance can shift over time as usage patterns change, so periodic revalidation matters.</li>
+<li><strong>Keep an incident response plan ready.</strong> Know who gets notified and what steps happen first if something goes wrong.</li>
+</ol>
+<p>Assign a named owner for each stage, with a realistic timeline and a documentation template, so an auditor can trace exactly who approved what and when.</p>
+<h2 id="fda-and-clinical-risk-when-ai-tools-are-regulated-as-medical-devices" node="[object Object]">FDA and clinical risk: when AI tools are regulated as medical devices</h2>
+<p>Some AI tools cross into territory the FDA regulates directly. Software intended to assist in diagnosis or clinical decision-making can qualify as a <a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener noreferrer nofollow">medical device under FDA oversight</a>, which changes the validation, labeling, and governance expectations around it.</p>
+<p>If a tool falls into that category, it typically requires premarket review and must be used alongside other clinical data rather than as a standalone decision-maker. Before relying on any AI output clinically, check the FDA&#x27;s authorization listings and read the tool&#x27;s intended-use statement carefully. A product marketed for general note-taking is not the same as one cleared for diagnostic support, even if the underlying technology looks similar.</p>
+<h2 id="privacy-first-alternatives-and-local-or-offline-ai" node="[object Object]">Privacy-first alternatives and local or offline AI</h2>
+<p>Local inference means the AI model runs directly on a device rather than sending data to a remote server, so nothing leaves the machine during use. That structural difference removes an entire category of transmission and third-party storage risk, though it does not replace the need for your own risk analysis and safeguards.</p>
+<ul>
+<li>Local AI fits well for private note drafting, reviewing sensitive documents, or classroom use where no cloud transmission is desired.</li>
+<li>Cloud AI still makes sense for large-scale reasoning tasks or workflows that need to scale across many users and locations at once.</li>
+<li>Compute limits matter: local models are generally smaller and slower than frontier cloud models, especially on older hardware.</li>
+</ul>
+<p>One example of this approach is <a href="https://greencube.app/" target="_blank" rel="noopener noreferrer nofollow">GreenCube</a>, a desktop AI assistant that runs entirely offline on Windows, with a Mac version in development. At setup, you pick one of two local models to download once, and nothing in your chats or documents gets sent to a server; sign-in through Google or Microsoft exists only to verify the one-time license.</p>
+<p><strong>Pro Tip:</strong> <em>Before trusting any local AI tool with sensitive documents, verify its offline behavior yourself rather than taking a vendor&#x27;s word for it.</em> A <a href="https://blog.greencube.app/blog/private-document-ai">checklist for validating local document AI</a> walks through exactly how to do that.</p>
+<h2 id="data-storage-and-retention-policies-specific-to-ai-systems-processing-phi" node="[object Object]">Data storage and retention policies specific to AI systems processing PHI</h2>
+<p>AI systems that process PHI need storage and retention rules that match the sensitivity of what they handle, not a generic IT policy borrowed from elsewhere. That starts with knowing exactly where data lands: does the AI tool cache inputs, store conversation history, or retain training data derived from PHI? Each of those needs its own retention schedule and deletion process.</p>
+<p>Retention periods should follow your organization&#x27;s existing medical record retention rules, since AI-generated notes or summaries that touch patient care often become part of the record. Where an AI tool creates temporary files, logs, or cached outputs that are not part of the permanent record, define a shorter deletion window and document it.</p>
+<p>Storage location matters too. If a vendor stores PHI in the cloud, confirm which region or jurisdiction the data resides in, and whether that affects the business associate&#x27;s obligations. For tools that operate entirely on local hardware, retention is simpler to control because the data never leaves the device in the first place, but you still need a policy for how long local files persist and who can access them. <a href="https://blog.greencube.app/blog/offline-ai-security">Offline AI hardening guidance</a> covers practical steps for securing that kind of local storage.</p>
+<p><img src="images/ab5054ba3b96.jpeg" alt="Cloud and local AI data storage comparison"/></p>
+<h2 id="procedures-for-managing-and-responding-to-data-breaches-involving-ai-applications" node="[object Object]">Procedures for managing and responding to data breaches involving AI applications</h2>
+<p>A breach involving an AI application follows the same core HIPAA breach notification obligations as any other PHI incident, but the investigation often takes a different shape. Start by identifying exactly what the AI tool had access to at the time of the incident, since AI systems sometimes touch broader datasets than a single application would.</p>
+<p>Your incident response plan should name who gets notified first, typically your privacy officer or security lead, and set a clear timeline for assessing whether the incident meets the threshold for a reportable breach. Business associates are required to report breaches to the covered entity, so your contracts should already specify exact notification windows rather than vague language like &quot;promptly.&quot;</p>
+<p>Document the root cause, whether it was a misconfigured access control, a vendor-side failure, or an internal process gap, and record the remediation steps taken. This documentation matters twice: once for your own audit trail, and once if regulators request evidence of how you responded. Rehearsing the response plan with a tabletop exercise before a real incident happens tends to expose gaps that a written policy alone misses.</p>
+<h2 id="training-requirements-and-best-practices-for-staff-using-hipaa-compliant-ai-tools" node="[object Object]">Training requirements and best practices for staff using HIPAA-compliant AI tools</h2>
+<p>Staff who interact with AI tools that touch PHI need training that goes beyond a general HIPAA refresher. They need to understand exactly what the specific tool does with data: what it stores, what it logs, and what happens to information once they type it in.</p>
+<p>Effective training covers a few concrete behaviors: entering only the minimum necessary information into an AI tool, recognizing when an AI-generated output needs clinical review before it reaches a patient record, and knowing how to report a suspected misuse or malfunction. Staff should also know who owns the AI vendor relationship internally, so questions about data handling have a clear point of contact rather than getting lost.</p>
+<p>Refresher training matters as much as initial onboarding, especially when a vendor updates a tool&#x27;s features or when your organization expands the tool&#x27;s use case. A workforce that was trained on a note-summarization tool six months ago may need new guidance once that same tool starts handling intake forms. Building training reviews into your annual compliance cycle keeps the gap from growing unnoticed.</p>
+<h2 id="pragmatic-governance-beats-checklisting-alone" node="[object Object]">Pragmatic governance beats checklisting alone</h2>
+<p>Checklists matter, but they can create false confidence. The organizations that avoid trouble are the ones that keep watching after launch, not just at the start. I&#x27;d rather see a small pilot with real logging and a human reviewing outputs than a fully documented rollout nobody monitors past day one.</p>
+<blockquote>
+<p><em>— Hector Gras</em></p>
+</blockquote>
+<h2 id="how-greencube-fits-privacy-first-clinician-workflows" node="[object Object]">How GreenCube fits privacy-first clinician workflows</h2>
+<p>For tasks where patient details never need to touch a server, GreenCube gives you a way to work entirely offline. It&#x27;s a desktop AI assistant for Windows, with Mac support in development, and at setup you choose one of two local models to download once: a fast, text-only option or a slower all-rounder that also reads images and documents.</p>
+<p><img src="images/ec7488317b94.png" alt="GreenCube"/></p>
+<ul>
+<li>Available via a one-time purchase, with no subscription fees and all features included (check the product page for current pricing).</li>
+<li>Chats and files stay on your own machine; sign-in through Google or Microsoft only verifies your license.</li>
+<li>Fits private note drafting, reviewing sensitive documents, or any task where you&#x27;d rather not send patient details anywhere.</li>
+<li>Honest trade-off: local models depend on your computer&#x27;s hardware, and cloud models remain more capable for large-scale reasoning tasks.</li>
+</ul>
+<p>If a privacy-first workflow for sensitive drafting or document review sounds useful, you can see the full setup on the GreenCube product page or go straight to the GreenCube Lifetime purchase page to get started.</p>
+<p>This article is general information, not a substitute for advice from a qualified doctor. Consult a qualified healthcare professional about your own circumstances before acting on anything here.</p>
+<h2 id="faq" node="[object Object]">FAQ</h2>
+<h3 id="does-chatgpt-have-a-hipaa-compliant-version" node="[object Object]">Does ChatGPT have a HIPAA compliant version?</h3>
+<p>A standard ChatGPT consumer account does not come with a signed Business Associate Agreement, so it should not be used with PHI by default. Whether any version qualifies depends entirely on whether the provider will sign a BAA and whether the covered entity completes its own risk analysis of that configuration.</p>
+<h3 id="is-ai-prohibited-by-hipaa" node="[object Object]">Is AI prohibited by HIPAA?</h3>
+<p>No, HIPAA does not prohibit AI use with patient data, but it requires a signed BAA, a documented risk analysis, and technical safeguards like access controls and audit logging before PHI touches the system. Skipping those steps, not the AI itself, is what creates the violation.</p>
+<h3 id="what-is-the-30-rule-in-ai" node="[object Object]">What is the 30% rule in AI?</h3>
+<p>There is no established &quot;30% rule&quot; recognized in HIPAA or FDA guidance on AI, so this likely refers to an informal industry term rather than a regulatory standard. If you&#x27;ve seen it cited for a specific context, check the primary source directly rather than treating it as an official threshold.</p>
+<h3 id="does-openai-have-a-hipaa-compliant-version" node="[object Object]">Does OpenAI have a HIPAA compliant version?</h3>
+<p>Whether a vendor like OpenAI can support HIPAA-covered use depends on whether it will sign a BAA for the specific product tier in question and what safeguards that agreement covers. Covered entities still need to complete their own risk analysis of the configuration regardless of what the vendor offers.</p>
+<h3 id="what-should-i-check-before-trusting-an-ai-tool-with-patient-data" node="[object Object]">What should I check before trusting an AI tool with patient data?</h3>
+<p>Confirm a signed BAA is in place, verify the vendor&#x27;s encryption and access control practices, and check whether the tool&#x27;s intended use crosses into FDA-regulated territory. A completed, documented risk analysis specific to that tool is required before clinical use, not optional paperwork.</p>
+<h2 id="sources" node="[object Object]">Sources</h2>
+<ul>
+<li><a href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html" target="_blank" rel="noopener noreferrer nofollow">Hhs</a></li>
+<li><a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener noreferrer nofollow">Artificial intelligence-enabled medical devices | FDA</a></li>
+</ul>
+<h2 id="recommended" node="[object Object]">Recommended</h2>
+<ul>
+<li><a href="https://blog.greencube.app/blog/local-ai-vs-chatgpt">Local AI vs ChatGPT: Local First Rules for Tech Savvy Users</a></li>
+<li><a href="https://blog.greencube.app/blog/local-ai-models-explained">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
+<li><a href="https://blog.greencube.app/blog/offline-ai-vs-cloud-ai">Offline AI vs Cloud AI: A Practical 2026 Decision Guide</a></li>
+<li><a href="https://blog.greencube.app/blog/is-local-ai-safe">7 Controls to Lock Down Local AI for Privacy Conscious Users</a></li>
+</ul>
