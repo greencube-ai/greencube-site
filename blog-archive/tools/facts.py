@@ -21,6 +21,18 @@ OLD_MODELS = re.compile(r'All-rounder|\bQuick\b[^.<]{0,40}\bmodel|\btwo (local )
 NO_ACCOUNT = re.compile(r'no (cloud )?accounts?\b|without (an )?account|no (account|sign[- ]?in|signup|sign[- ]up|login)\b|no account creation|no activation key', re.I)
 
 
+HARDWARE_BLANKS = [
+    ('<td>Entry-level</td><td>—</td>', '<td>Entry-level</td><td>8 GB</td>'),
+    ('<td>Mid-range</td><td>—</td><td>PDF analysis', '<td>Mid-range</td><td>16 GB</td><td>PDF analysis'),
+    ('<td>High-end (with GPU)</td><td>—</td>', '<td>High-end (with GPU)</td><td>16 GB + a 6 GB or larger graphics card</td>'),
+    ('<td>— RAM handles basic chat;', '<td>8 GB of RAM handles basic chat;'),
+    ('<td>Modern CPU + discrete GPU</td><td>—</td><td>—</td>', '<td>Modern CPU + discrete GPU</td><td>16 GB or more</td><td>10 GB+ free (more for pictures)</td>'),
+    ('<td>Minimum</td><td>—</td><td>10 GB free</td><td>Integrated / — VRAM</td>', '<td>Minimum</td><td>8 GB</td><td>10 GB free</td><td>Integrated graphics, no card</td>'),
+    ('<td>Mid-range</td><td>16 GB</td><td>—</td><td>4 GB VRAM</td>', '<td>Mid-range</td><td>16 GB</td><td>10 GB free</td><td>4 GB VRAM</td>'),
+    ('<td>Recommended</td><td>—</td><td>—</td><td>—</td>', '<td>Recommended</td><td>16 GB or more</td><td>10 GB+ free</td><td>8 GB VRAM or more</td>'),
+    ('<td>10 GB free</td><td>—</td>', '<td>10 GB free</td><td>10 GB+ free (more for pictures)</td>'),
+]
+
 def fix_text(s):
     """Fix prices and brand spelling in a piece of HTML or text. Returns (new, changes)."""
     changes = []
@@ -51,6 +63,10 @@ def fix_text(s):
                      ('A 14-day window covers', 'A 15-day window covers')):
         if old in s:
             changes.append((old, new)); s = s.replace(old, new)
+    # hardware tables BabyLoveGrowth left blank ("—"), filled with what we measured (8 GB chats, 16 GB for PDFs, a card for speed)
+    for old, new in HARDWARE_BLANKS:
+        if old in s:
+            changes.append((old[:40], new[:40])); s = s.replace(old, new)
     s = s.replace('$9.99 USD', 'US$9.99')
     n = len(re.findall(r'\bGreencube\b', s))
     if n: changes.append(('Greencube', 'GreenCube x%d' % n))
