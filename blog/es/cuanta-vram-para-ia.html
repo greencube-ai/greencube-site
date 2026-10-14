@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Por qué la IA tiene que caber entera en tu tarjeta gráfica | Blog de GreenCube</title>
-  <meta name="description" content="Medimos qué pasa cuando un modelo de IA no cabe en la VRAM de tu tarjeta gráfica: 6 veces más lento y fallos en chats largos. Cómo elegir un modelo que quepa." />
+  <title>¿Cuánta VRAM necesitas para la IA? Por qué tiene que caber en tu gráfica | Blog de GreenCube</title>
+  <meta name="description" content="¿Cuánta VRAM necesitas para usar IA en local? Lo medimos: un modelo que no cabe en tu tarjeta gráfica va 6 veces más lento y falla en chats largos. Cómo elegir uno que quepa." />
   <meta name="theme-color" content="#F5F1E8" />
-  <meta property="og:title" content="Por qué la IA tiene que caber entera en tu tarjeta gráfica | Blog de GreenCube" />
-  <meta property="og:description" content="Medimos qué pasa cuando un modelo de IA no cabe en la VRAM de tu tarjeta gráfica: 6 veces más lento y fallos en chats largos. Cómo elegir un modelo que quepa." />
-  <meta property="og:url" content="https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica" />
+  <meta property="og:title" content="¿Cuánta VRAM necesitas para la IA? Por qué tiene que caber en tu gráfica | Blog de GreenCube" />
+  <meta property="og:description" content="¿Cuánta VRAM necesitas para usar IA en local? Lo medimos: un modelo que no cabe en tu tarjeta gráfica va 6 veces más lento y falla en chats largos. Cómo elegir uno que quepa." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://greencube.app/og.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://greencube.app/og.jpg" />
-  <link rel="canonical" href="https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica" />
-  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
-  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica" />
-  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -25,7 +25,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Por qué la IA tiene que caber entera en tu tarjeta gráfica", "description": "Medimos qué pasa cuando un modelo de IA no cabe en la VRAM de tu tarjeta gráfica: 6 veces más lento y fallos en chats largos. Cómo elegir un modelo que quepa.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "es", "mainEntityOfPage": "https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "¿Cuánta VRAM necesitas para la IA? Por qué tiene que caber en tu gráfica", "description": "¿Cuánta VRAM necesitas para usar IA en local? Lo medimos: un modelo que no cabe en tu tarjeta gráfica va 6 veces más lento y falla en chats largos. Cómo elegir uno que quepa.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "es", "mainEntityOfPage": "https://blog.greencube.app/blog/es/cuanta-vram-para-ia", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué pasa si un modelo de IA no cabe en la VRAM?", "acceptedAnswer": {"@type": "Answer", "text": "La parte que no cabe funciona desde la memoria normal y todo va más lento. En nuestra tarjeta de 8 GB, un modelo con 28 de sus capas en la tarjeta escribía a 5,9 tokens por segundo en vez de 35,6 con todas: 6 veces más lento."}}, {"@type": "Question", "name": "¿Debería usar el modelo más grande que cargue mi tarjeta?", "acceptedAnswer": {"@type": "Answer", "text": "No. Deja sitio para la conversación. Un modelo de 12.000 millones de parámetros cupo en una tarjeta de 8 GB para una pregunta corta, y se cayó en cuanto el chat se alargó. Uno más pequeño que cabía con margen fue más rápido y nunca falló."}}, {"@type": "Question", "name": "¿Cuánta VRAM debo dejar libre?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube deja libres unos 1,5 GB de la tarjeta para la conversación y para Windows. Sin ese margen, una tarjeta de 4 GB se quedó sin memoria en el primer mensaje."}}]}</script>
 </head>
 <body>
@@ -45,8 +45,8 @@
 <main>
 <article>
 <p class="kicker"><a href="/blog/es">Blog de GreenCube</a></p>
-<h1>Por qué la IA tiene que caber entera en tu tarjeta gráfica</h1>
-<p class="byline">GreenCube &middot; 18 de octubre de 2026 &middot; <a href="/blog/ai-must-fit-on-gpu" hreflang="en" lang="en">Read in English</a></p>
+<h1>¿Cuánta VRAM necesitas para la IA? Por qué tiene que caber en tu gráfica</h1>
+<p class="byline">GreenCube &middot; 18 de octubre de 2026 &middot; <a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">Read in English</a></p>
 <div class="answer"><p><strong>Respuesta corta:</strong> una IA que cabe entera en la memoria de tu tarjeta gráfica (la VRAM) va rápida. Una que se sale va <strong>más lenta que si no usaras la tarjeta</strong>, y puede fallar. Más pequeña y entera en la tarjeta gana a más grande y a medias.</p></div>
 
 <div class="stats">
@@ -94,7 +94,7 @@
 <div class="p"><h4>O deja que elija la app</h4><p>GreenCube mira tu tarjeta y elige un modelo que quepa con margen.</p></div>
 </div>
 
-<p>Velocidades reales en 7 PCs, de una GTX 1650 a una RTX 5060: <a href="/blog/es/mi-pc-gaming-puede-ejecutar-ia">míralas aquí</a>.</p>
+<p>Velocidades reales en 7 PCs, de una GTX 1650 a una RTX 5060: <a href="/blog/es/ia-en-mi-pc">míralas aquí</a>.</p>
 <h2>Preguntas</h2>
 <div class="faq">
 <details><summary>¿Qué pasa si un modelo de IA no cabe en la VRAM?</summary><p>La parte que no cabe funciona desde la memoria normal y todo va más lento. En nuestra tarjeta de 8 GB, un modelo con 28 de sus capas en la tarjeta escribía a 5,9 tokens por segundo en vez de 35,6 con todas: 6 veces más lento.</p></details>

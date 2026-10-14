@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Why your AI has to fit entirely on your graphics card | GreenCube blog</title>
-  <meta name="description" content="We measured what happens when an AI model doesn&#x27;t fit in your graphics card&#x27;s VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits." />
+  <title>How much VRAM do you need for AI? Why the model must fit on your GPU | GreenCube blog</title>
+  <meta name="description" content="How much VRAM do you need for AI? We measured it: a model that spills out of your graphics card runs 6 times slower and crashes in long chats. How to pick one that fits." />
   <meta name="theme-color" content="#F5F1E8" />
-  <meta property="og:title" content="Why your AI has to fit entirely on your graphics card | GreenCube blog" />
-  <meta property="og:description" content="We measured what happens when an AI model doesn&#x27;t fit in your graphics card&#x27;s VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits." />
-  <meta property="og:url" content="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <meta property="og:title" content="How much VRAM do you need for AI? Why the model must fit on your GPU | GreenCube blog" />
+  <meta property="og:description" content="How much VRAM do you need for AI? We measured it: a model that spills out of your graphics card runs 6 times slower and crashes in long chats. How to pick one that fits." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://greencube.app/og.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://greencube.app/og.jpg" />
-  <link rel="canonical" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
-  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
-  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-caber-tarjeta-grafica" />
-  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-must-fit-on-gpu" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -25,7 +25,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Why your AI has to fit entirely on your graphics card", "description": "We measured what happens when an AI model doesn't fit in your graphics card's VRAM: 6 times slower, and crashes in long chats. How to pick a model that fits.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ai-must-fit-on-gpu", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How much VRAM do you need for AI? Why the model must fit on your GPU", "description": "How much VRAM do you need for AI? We measured it: a model that spills out of your graphics card runs 6 times slower and crashes in long chats. How to pick one that fits.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/how-much-vram-for-ai", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What happens if an AI model doesn't fit in VRAM?", "acceptedAnswer": {"@type": "Answer", "text": "The part that doesn't fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote at 5.9 tokens a second instead of 35.6 with all of them: 6 times slower."}}, {"@type": "Question", "name": "Should I run the biggest AI model my card can load?", "acceptedAnswer": {"@type": "Answer", "text": "No. Leave room for the conversation. A 12-billion-parameter model fitted on an 8 GB card for a short question, then crashed once the chat got longer. A smaller model that fits with room to spare was faster and never crashed."}}, {"@type": "Question", "name": "How much VRAM should I leave free?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube leaves about 1.5 GB of the card free for the conversation and for Windows. Without that room, a 4 GB card ran out of memory on the first message."}}]}</script>
 </head>
 <body>
@@ -45,8 +45,8 @@
 <main>
 <article>
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
-<h1>Why your AI has to fit entirely on your graphics card</h1>
-<p class="byline">GreenCube &middot; 18 October 2026 &middot; <a href="/blog/es/ia-caber-tarjeta-grafica" hreflang="es" lang="es">Leer en español</a></p>
+<h1>How much VRAM do you need for AI? Why the model must fit on your GPU</h1>
+<p class="byline">GreenCube &middot; 18 October 2026 &middot; <a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Leer en español</a></p>
 <div class="answer"><p><strong>Short answer:</strong> an AI that fits entirely in your graphics card's memory (VRAM) is fast. One that spills over is <strong>slower than not using the card at all</strong>, and can crash. Smaller and fully on the card beats bigger and half on.</p></div>
 
 <div class="stats">
@@ -94,7 +94,7 @@
 <div class="p"><h4>Or let the app pick</h4><p>GreenCube reads your card and picks a model that fits with room to spare.</p></div>
 </div>
 
-<p>Real speeds on 7 PCs, from a GTX 1650 to an RTX 5060: <a href="/blog/can-my-gaming-pc-run-ai">see them here</a>.</p>
+<p>Real speeds on 7 PCs, from a GTX 1650 to an RTX 5060: <a href="/blog/can-my-pc-run-ai">see them here</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>What happens if an AI model doesn&#x27;t fit in VRAM?</summary><p>The part that doesn&#x27;t fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote at 5.9 tokens a second instead of 35.6 with all of them: 6 times slower.</p></details>
