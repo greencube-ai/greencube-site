@@ -217,6 +217,21 @@ WORDS = {
                cta_p='GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro;, un solo pago.'),
 }
 def post_url(lang, slug): return f'{HOST}/blog/{slug}' if lang == 'en' else f'{HOST}/blog/es/{slug}'
+AUTHOR = 'Hector Gras'  # our own tested posts are his; the archived BabyLoveGrowth posts stay signed GreenCube
+def author_url(lang): return post_url(lang, 'hector-gras')
+WORDS['en']['by'], WORDS['es']['by'] = 'By', 'Por'
+AUTHOR_PAGE = {
+    'en': dict(title='Hector Gras | GreenCube blog', desc='Hector Gras builds GreenCube and tests how AI really runs on real PCs, from 8 GB laptops to gaming PCs.',
+               kicker='GreenCube blog', role='Founder of GreenCube',
+               bio=['I build GreenCube, the AI you own: it runs on your own PC, with no limits.',
+                    'I also test how AI really runs on real machines, from cheap 8 GB laptops to gaming PCs. Every number on this blog comes from those tests: what we measured, on which PC, and when. When a new result comes in, the post gets updated.'],
+               tests='My tests', contact='Questions or a PC we should test? Write to'),
+    'es': dict(title='Hector Gras | Blog de GreenCube', desc='Hector Gras hace GreenCube y prueba cómo funciona de verdad la IA en PCs reales, de portátiles de 8 GB a PCs gaming.',
+               kicker='Blog de GreenCube', role='Fundador de GreenCube',
+               bio=['Hago GreenCube, la IA que es tuya: funciona en tu propio PC y sin límites.',
+                    'También pruebo cómo funciona de verdad la IA en máquinas reales, de portátiles baratos de 8 GB a PCs gaming. Cada número de este blog sale de esas pruebas: qué medimos, en qué PC y cuándo. Cuando llega un resultado nuevo, el artículo se actualiza.'],
+               tests='Mis pruebas', contact='¿Dudas o un PC que deberíamos probar? Escribe a'),
+}
 own = []
 for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
     for fn in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
@@ -243,7 +258,7 @@ for lang, slug, meta, body in own:
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
         'image': 'https://greencube.app/og.jpg', 'datePublished': published, 'dateModified': meta.get('modified', published),
         'inLanguage': meta.get('lang', 'en'), 'mainEntityOfPage': url,
-        'author': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'},
+        'author': {'@type': 'Person', 'name': AUTHOR, 'url': author_url(lang)},
         'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
                       'logo': {'@type': 'ImageObject', 'url': 'https://greencube.app/icon-512.png'}},
     }]
@@ -255,7 +270,7 @@ for lang, slug, meta, body in own:
                     + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq) + '\n</div>\n')
     content = (
         f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">GreenCube &middot; {W["date"](published)}{other_link}</p>\n'
+        f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}{other_link}</p>\n'
         + body + faq_html +
         f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
         f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
@@ -384,6 +399,25 @@ def list_page(lang, entries, url, path):
         content, og_type='website', lang=lang,
         alts=(('en', f'{HOST}/blog'), ('es', f'{HOST}/blog/es'), ('x-default', f'{HOST}/blog')) if listing_es else ()))
 
+# ---------- the author page, one per language ----------
+for lang, entries in (('en', listing), ('es', listing_es)):
+    A, W = AUTHOR_PAGE[lang], WORDS[lang]
+    mine = sorted([e for e in entries if (lang, e[0]) in own_meta], key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
+    if not mine: continue
+    url = author_url(lang)
+    items = ''.join(f'<li><a href="{post_url(lang, s).replace(HOST, "")}"><h3>{esc(t)}</h3><p>{esc(own_meta[(lang, s)].get("teaser", d))}</p></a></li>'
+                    for s, t, d, *_ in mine)
+    content = (f'<article class="list hub">\n<section class="hub-sec hub-allpage"><p class="kicker"><a href="{W["home"]}">{A["kicker"]}</a></p>'
+               f'<h1>{AUTHOR}</h1><p class="hub-sub">{A["role"]}</p>' + ''.join(f'<p>{x}</p>' for x in A['bio'])
+               + f'<p>{A["contact"]} <a href="mailto:support@greencube.app">support@greencube.app</a>.</p>'
+               f'<h2 class="hub-h" style="margin-top:36px !important">{A["tests"]}</h2><ul class="library">{items}</ul></section>\n</article>\n')
+    ld = [{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': url, 'inLanguage': lang,
+           'mainEntity': {'@type': 'Person', 'name': AUTHOR, 'url': url, 'jobTitle': A['role'],
+                          'worksFor': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'}}}]
+    path = f'{OUT}/hector-gras.html' if lang == 'en' else f'{OUT}/es/hector-gras.html'
+    open(path, 'w', encoding='utf-8').write(page(A['title'], A['desc'], url, 'https://greencube.app/og.jpg', ld, content,
+        og_type='profile', lang=lang, alts=(('en', author_url('en')), ('es', author_url('es')), ('x-default', author_url('en')))))
+
 if listing_es:
     list_page('es', listing_es, f'{HOST}/blog/es', f'{OUT}/es/index.html')
 list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
@@ -391,6 +425,7 @@ list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \
+       [f'  <url><loc>{author_url(lg)}</loc><lastmod>{max(e[4] for e in ls)}</lastmod></url>' for lg, ls in (('en', listing), ('es', listing_es)) if ls] + \
        ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
        [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
 open(f'{OUT}/sitemap.xml', 'w', encoding='utf-8').write(
