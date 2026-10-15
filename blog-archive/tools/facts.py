@@ -58,6 +58,8 @@ def fix_text(s):
         changes.append((m.group(0), '15' + m.group(1)))
         return '15' + m.group(1)
     s = re.sub(r'\b14([- ]days?)\b', refund15, s)
+    # the Why GreenCube page moved into the home page (2026-10-15); a link fix, not a content change
+    s = re.sub(r'https://(?:www\.)?greencube\.app/(es/)?how-it-works', lambda m: f'https://greencube.app/{m.group(1) or ""}#can', s)
     for old, new in (('Refund window</td><td>14 days', 'Refund window</td><td>15 days'),
                      ('GreenCube offers 14 days', 'GreenCube offers 15 days'),
                      ('A 14-day window covers', 'A 15-day window covers')):

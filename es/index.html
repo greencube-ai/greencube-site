@@ -1077,6 +1077,238 @@
       footer { padding: 40px 0 48px; }
       footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
     }
+    /* moved from the Why GreenCube page (removed 2026-10-15); scoped to .gcwhy */
+    .gcwhy {
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
+
+      --olive: #7E8A5A; --olive-deep: #5C663F;
+      --sun: #FAE289; --sun-deep: #8A6B1C;
+      --clay: #FA9F75; --clay-deep: #A8492A;
+      --sky: #8EABE1; --sky-deep: #3D5E93;
+
+      --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
+      --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    /* ================= Why GreenCube, rebuilt 2026-10-07 =================
+       Short, clear, a bit playful: two small toys (send a message / switch the
+       Wi-Fi off) show the two big things instead of explaining them. */
+    .w { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .w-sec { padding: 92px 0; }
+    .w-sec + .w-sec { border-top: 1px solid var(--line); }
+    .w-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--olive); }
+    .w-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -.035em; color: var(--ink); margin-top: 12px; }
+    .w-h2 em { font-style: normal; color: var(--olive); }
+    .w-sub { font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--ink-soft); margin-top: 14px; max-width: 46ch; }
+    .w-center { text-align: center; } .w-center .w-sub { margin-left: auto; margin-right: auto; }
+
+    /* hero */
+    .w-hero { padding: 150px 0 70px; text-align: center; }
+    .w-hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 7vw, 92px); line-height: .98; letter-spacing: -.04em; color: var(--ink); margin-top: 16px; }
+    .w-hero h1 em { font-style: normal; color: var(--olive); }
+    .w-hero p { font-size: clamp(18px, 1.7vw, 23px); font-weight: 600; color: var(--ink); margin-top: 22px; }
+    .w-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; list-style: none; padding: 0; }
+    .w-pills li { padding: 9px 16px; border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+    .w-pills li { background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; }
+    .w-pills li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--olive); }
+
+    /* toy 1: who stops first */
+    .w-race { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+    .w-lane { border-radius: 24px; padding: 26px 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); transition: opacity .4s var(--ease), filter .4s var(--ease); }
+    .w-lane.gc { background: color-mix(in srgb, var(--olive) 14%, var(--card)); border-color: color-mix(in srgb, var(--olive) 35%, transparent); }
+    .w-lane .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-lane.gc .who { color: var(--olive-deep); }
+    .w-count { font-family: var(--display); font-weight: 600; font-size: clamp(54px, 7vw, 84px); line-height: 1; letter-spacing: -.04em; color: var(--ink); margin-top: 10px; display: inline-block; }
+    .w-count.pop { animation: w-pop .32s var(--ease); }
+    @keyframes w-pop { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .w-lane .left { font-size: 15px; color: var(--ink-soft); margin-top: 6px; min-height: 1.5em; }
+    .w-bar { height: 10px; border-radius: 99px; background: var(--paper-warm); margin-top: 16px; overflow: hidden; }
+    .w-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--clay); transition: width .35s var(--ease); }
+    .w-lane.gc .w-bar i { width: 100%; background: linear-gradient(90deg, var(--olive), var(--sun), var(--olive)); background-size: 200% 100%; animation: w-flow 2.4s linear infinite; }
+    @keyframes w-flow { to { background-position: -200% 0; } }
+    .w-lane.locked { opacity: .55; filter: grayscale(.6); }
+    .w-lane.locked .left { color: var(--clay-deep); font-weight: 600; }
+    .w-send { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 17px 30px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); cursor: pointer; box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .2s var(--ease), background .3s var(--ease); }
+    .w-send:hover { transform: translateY(-2px); background: #000; }
+    .w-send:active { transform: translateY(1px) scale(.97); }
+    .w-fine { font-size: 13px; color: var(--ink-mute); margin-top: 16px; }
+
+    /* toy 2: the Wi-Fi switch */
+    .w-wifi { display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 12px 18px 12px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); cursor: pointer; font: 600 16px var(--sans); color: var(--ink); }
+    .w-wifi .sw { position: relative; width: 52px; height: 30px; border-radius: 99px; background: var(--olive); transition: background .3s var(--ease); }
+    .w-wifi .sw::after { content: ''; position: absolute; top: 3px; left: 25px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .3s cubic-bezier(.34,1.56,.64,1); }
+    .w-wifi[aria-checked="false"] .sw { background: #C9C2B2; }
+    .w-wifi[aria-checked="false"] .sw::after { left: 3px; }
+    .w-net { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; text-align: left; }
+    .w-chat { border-radius: 24px; padding: 22px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .w-chat .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-chat.gc .who { color: var(--olive-deep); }
+    .w-bubble { margin-top: 14px; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-bubble.me { background: var(--paper-warm); margin-left: 18%; border-bottom-right-radius: 6px; }
+    .w-bubble.ai { background: color-mix(in srgb, var(--olive) 16%, #fff); margin-right: 12%; border-bottom-left-radius: 6px; transition: background .3s var(--ease), color .3s var(--ease); }
+    .w-bubble.ai.err { background: color-mix(in srgb, var(--clay) 22%, #fff); color: var(--clay-deep); font-weight: 600; }
+
+    /* three steps */
+    .w-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; counter-reset: s; }
+    .w-step { border-radius: 24px; padding: 26px 24px; background: var(--c); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-step b { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #fff; font: 600 20px var(--display); color: var(--ink); }
+    .w-step h3 { font: 600 23px/1.15 var(--display); letter-spacing: -.02em; color: var(--ink); margin-top: 16px; }
+    .w-step p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
+
+    /* what you can do */
+    .w-can { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; list-style: none; padding: 0; }
+    .w-can li { border-radius: 20px; padding: 22px 22px; background: color-mix(in srgb, var(--c) 26%, #fff); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); font: 600 19px/1.25 var(--display); letter-spacing: -.015em; color: var(--ink); transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease); }
+    .w-can li small { display: block; margin-top: 6px; font: 400 14.5px/1.45 var(--sans); color: var(--ink-soft); letter-spacing: 0; }
+    .w-can li:hover { transform: translateY(-4px) rotate(-.8deg); background: color-mix(in srgb, var(--c) 42%, #fff); border-color: var(--c); box-shadow: var(--shadow-hi); }
+
+    /* yours */
+    .w-yours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .w-yours div { border-radius: 24px; padding: 28px 24px; background: color-mix(in srgb, var(--c) 30%, #fff); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-yours div:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-yours div:nth-child(1) { --c: var(--sun); } .w-yours div:nth-child(2) { --c: var(--olive); } .w-yours div:nth-child(3) { --c: var(--sky); }
+    .w-yours b { display: block; font: 600 clamp(30px, 3.4vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-yours span { display: block; font-size: 15.5px; color: var(--ink-soft); margin-top: 10px; line-height: 1.45; }
+
+    /* questions */
+    .w-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .w-faq div { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); }
+    .w-faq h3 { font: 600 18px/1.25 var(--display); letter-spacing: -.012em; color: var(--ink); }
+    .w-faq p { font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 8px; }
+    .w-faq a, .w-end .alt { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* the end */
+    .w-end { text-align: center; padding: 100px 0 40px; }
+    .w-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 18px 34px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .3s var(--ease), background .3s var(--ease); }
+    .w-cta:hover { transform: translateY(-2px); background: #000; }
+    .w-end .alt { display: block; margin-top: 18px; font-size: 15px; }
+
+    .w-in { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .w-in.seen { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .w-in { opacity: 1; transform: none; transition: none; } .w-lane.gc .w-bar i { animation: none; } }
+    @media (max-width: 820px) {
+      .w-race, .w-net, .w-steps, .w-can, .w-yours, .w-faq { grid-template-columns: 1fr; }
+      .w-hero { padding: 130px 0 50px; } .w-sec { padding: 70px 0; } .w { padding: 0 16px; }
+    }
+
+    /* what you can do: a mini chat. Tap a request, it "types" it, GreenCube answers. */
+    .w-try { margin-top: 36px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; align-items: start; }
+    .w-asks { display: flex; flex-direction: column; gap: 10px; }
+    .w-ask { text-align: left; padding: 15px 18px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); cursor: pointer;
+      font: 600 16px/1.3 var(--sans); color: var(--ink); display: flex; align-items: center; gap: 12px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+    .w-ask .e { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; background: color-mix(in srgb, var(--c) 35%, #fff); }
+    .w-ask:hover { transform: translateX(4px); border-color: var(--c); }
+    .w-ask.on { background: color-mix(in srgb, var(--c) 22%, #fff); border-color: var(--c); transform: translateX(6px); }
+    .w-win { border-radius: 26px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-hi); overflow: hidden; min-height: 380px; display: flex; flex-direction: column; }
+    .w-win-top { display: flex; align-items: center; gap: 7px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--ink-mute); }
+    .w-win-top i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+    .w-win-top span { margin-left: 8px; }
+    .w-win-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .w-msg { max-width: 88%; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-msg.me { align-self: flex-end; background: var(--paper-warm); border-bottom-right-radius: 6px; min-height: 1.45em; }
+    .w-msg.me .cur { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; background: var(--ink); vertical-align: -2px; animation: w-blink .8s steps(1) infinite; }
+    @keyframes w-blink { 50% { opacity: 0; } }
+    .w-msg.ai { align-self: flex-start; background: color-mix(in srgb, var(--olive) 14%, #fff); border-bottom-left-radius: 6px; animation: w-rise .45s var(--ease) both; }
+    @keyframes w-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .w-dots { display: inline-flex; gap: 5px; padding: 4px 2px; } .w-dots b { width: 7px; height: 7px; border-radius: 50%; background: var(--olive); animation: w-dot 1s infinite; }
+    .w-dots b:nth-child(2) { animation-delay: .15s; } .w-dots b:nth-child(3) { animation-delay: .3s; }
+    @keyframes w-dot { 0%, 100% { opacity: .3; transform: none; } 50% { opacity: 1; transform: translateY(-3px); } }
+    .w-out { margin-top: 10px; }
+    .w-file { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-weight: 600; font-size: 14.5px; }
+    .w-file b { padding: 5px 11px; border-radius: 99px; background: var(--ink); color: var(--paper); font-size: 13px; }
+    .w-snake { display: grid; grid-template-columns: repeat(12, 12px); gap: 2px; margin-top: 10px; }
+    .w-snake i { width: 12px; height: 12px; border-radius: 3px; background: rgba(26,26,26,.06); }
+    .w-snake i.s { background: var(--olive); } .w-snake i.h { background: var(--olive-deep); } .w-snake i.f { background: var(--clay); }
+    .w-flip { perspective: 800px; cursor: pointer; margin-top: 10px; width: 100%; max-width: 330px; height: 120px; border: 0; background: none; padding: 0; font: inherit; }
+    .w-flip > span { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .6s var(--ease); }
+    .w-flip.flipped > span { transform: rotateY(180deg); }
+    .w-flip em { position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; border-radius: 14px; font-style: normal; font-weight: 600; text-align: center; backface-visibility: hidden; background: #fff; border: 1px solid var(--line); }
+    .w-flip em + em { transform: rotateY(180deg); background: color-mix(in srgb, var(--sun) 45%, #fff); }
+    .w-flip small { display: block; margin-top: 6px; font-weight: 500; font-size: 12.5px; color: var(--ink-mute); }
+    .w-pix { display: grid; grid-template-columns: repeat(8, 14px); gap: 1px; margin-top: 10px; }
+    .w-pix i { width: 14px; height: 14px; }
+    .w-slides { display: flex; gap: 10px; margin-top: 10px; }
+    .w-slides span { width: 104px; height: 64px; border-radius: 8px; background: #fff; border: 1px solid var(--line); padding: 8px; font-size: 11.5px; font-weight: 700; line-height: 1.2; box-shadow: 0 6px 14px -10px rgba(72,82,47,.5); }
+    .w-slides span::after { content: ''; display: block; margin-top: 8px; height: 4px; width: 70%; border-radius: 2px; background: var(--line); box-shadow: 0 8px 0 var(--line); }
+    .w-msg.ai ul { margin: 8px 0 0 18px; } .w-msg.ai li { margin-top: 3px; }
+    .w-try-fine { font-size: 13px; color: var(--ink-mute); margin-top: 14px; }
+    @media (max-width: 820px) { .w-try { grid-template-columns: 1fr; } .w-asks { flex-direction: row; overflow-x: auto; padding-bottom: 6px; } .w-ask { flex: 0 0 auto; } .w-win { min-height: 340px; } }
+
+    /* money: slide the months, watch the subscription pile up next to €9.99 once */
+    .w-money { margin-top: 36px; border-radius: 28px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-hi); padding: 34px 32px 30px; text-align: left; }
+    .w-months { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-weight: 600; color: var(--ink-soft); }
+    .w-months b { font: 600 clamp(30px, 3.6vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-range { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; border-radius: 99px; margin: 18px 0 30px; cursor: pointer;
+      background: linear-gradient(90deg, var(--clay) 0 var(--p, 33%), var(--paper-warm) var(--p, 33%) 100%); outline: none; }
+    .w-range::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); box-shadow: 0 4px 10px rgba(0,0,0,.18); transition: transform .2s cubic-bezier(.34,1.56,.64,1); }
+    .w-range::-webkit-slider-thumb:hover, .w-range:active::-webkit-slider-thumb { transform: scale(1.18); }
+    .w-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); }
+    .w-range:focus-visible { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 50%, transparent); }
+    .w-row { display: grid; grid-template-columns: 190px 1fr auto; align-items: center; gap: 16px; margin-top: 16px; }
+    .w-row .lbl { font-weight: 700; color: var(--ink); line-height: 1.25; }
+    .w-row .lbl small { display: block; font-weight: 500; font-size: 13px; color: var(--ink-mute); }
+    .w-track { height: 34px; border-radius: 10px; background: var(--paper-warm); overflow: hidden; }
+    .w-track i { display: block; height: 100%; border-radius: 10px; transition: width .35s var(--ease); }
+    .w-row.sub .w-track i { background: var(--clay); }
+    .w-row.gc .w-track i { background: var(--olive); }
+    .w-row .amt { font: 600 clamp(22px, 2.4vw, 30px)/1 var(--display); letter-spacing: -.02em; color: var(--ink); min-width: 4.5em; text-align: right; }
+    .w-keep { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .w-keep span { font-weight: 600; color: var(--ink-soft); }
+    .w-keep b { font: 600 clamp(34px, 4.4vw, 54px)/1 var(--display); letter-spacing: -.035em; color: var(--olive-deep); }
+    @media (max-width: 820px) { .w-row { grid-template-columns: 1fr auto; } .w-row .w-track { grid-column: 1 / -1; grid-row: 2; } .w-money { padding: 26px 18px 22px; } }
+
+    /* mini chat, round 2: the answers are playable */
+    .w-spin { display: inline-block; width: 16px; height: 16px; margin-right: 9px; vertical-align: -3px; border-radius: 50%;
+      border: 2.5px solid currentColor; border-right-color: transparent; animation: w-spin .8s linear infinite; }
+    @keyframes w-spin { to { transform: rotate(360deg); } }
+    .w-win { min-height: 470px; }
+    .w-game { margin-top: 10px; }
+    .w-snake-c { display: block; width: 100%; max-width: 288px; aspect-ratio: 12 / 9; border-radius: 12px; background: #EEF1E2; touch-action: none; }
+    .w-game-ui { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .w-score { font-weight: 700; font-size: 14px; }
+    .w-btn { border: 0; border-radius: 99px; padding: 8px 16px; background: var(--ink); color: var(--paper); font: 600 14px var(--sans); cursor: pointer; transition: transform .15s; }
+    .w-btn:active { transform: scale(.95); }
+    .w-btn.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    .w-pad { display: none; gap: 6px; margin-top: 10px; }
+    .w-pad button { width: 44px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-size: 16px; cursor: pointer; }
+    @media (hover: none) { .w-pad { display: flex; } }
+    .w-hint { font-size: 12.5px; color: var(--ink-mute); margin-top: 8px; }
+    .w-img { margin-top: 10px; border-radius: 14px; overflow: hidden; max-width: 340px; position: relative; }
+    .w-img img { display: block; width: 100%; height: auto; animation: w-develop 2.6s cubic-bezier(.3,.6,.3,1) both; }
+    @keyframes w-develop { 0% { filter: blur(22px) saturate(.2) brightness(1.2); } 60% { filter: blur(4px) saturate(.8); } 100% { filter: none; } }
+    .w-img-cap { font-size: 12.5px; color: var(--ink-mute); margin-top: 8px; }
+    .w-deck { margin-top: 10px; }
+    .w-deck .w-flip { max-width: 340px; height: 140px; }
+    .w-deck-nav { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .w-deck-nav button { width: 38px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 15px; }
+    .w-deck-nav button:disabled { opacity: .35; cursor: default; }
+    .w-deck-nav span { font-weight: 700; font-size: 13.5px; color: var(--ink-soft); }
+    .w-dv { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; margin-top: 10px; max-width: 360px; }
+    .w-sl { aspect-ratio: 16 / 9; border-radius: 8px; padding: 9px 10px; background: var(--bg); color: var(--ink2); box-shadow: 0 6px 14px -10px rgba(0,0,0,.45); border: 1px solid rgba(0,0,0,.06); transition: background .35s, color .35s; overflow: hidden; }
+    .w-sl b { display: block; font: 700 11.5px/1.2 var(--display); }
+    .w-sl small { display: block; font-size: 9.5px; color: var(--csoft); margin-top: 3px; }
+    .w-sl i { display: block; height: 4px; border-radius: 2px; background: var(--soft); opacity: .45; margin-top: 6px; width: 80%; }
+    .w-sl i::before { content: ''; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--acc); vertical-align: top; margin-left: -7px; }
+    .w-sl i + i { width: 65%; } .w-sl i + i + i { width: 72%; }
+    .w-sl.cover { grid-row: span 2; aspect-ratio: auto; background: var(--cbg); color: var(--cink); display: flex; flex-direction: column; justify-content: flex-end; padding: 12px; }
+    .w-sl.cover b { font-size: 16px; }
+    .w-sl.cover::before { content: ''; width: 26px; height: 4px; border-radius: 2px; background: var(--acc); margin-bottom: 8px; }
+    .w-sl.big { display: grid; place-items: center; text-align: center; }
+    .w-sl.big b { font-size: 15px; color: var(--acc); }
+    .w-themes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .w-themes button { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 6px; border-radius: 99px; border: 1px solid var(--line); background: #fff; font: 600 12.5px var(--sans); cursor: pointer; }
+    .w-themes button i { width: 14px; height: 14px; border-radius: 50%; background: var(--sw); border: 1px solid rgba(0,0,0,.15); }
+    .w-themes button.on { border-color: var(--ink); background: var(--paper-warm); }
+    .w-dv[data-theme="sage"] { --bg:#F6F4EC; --ink2:#1F2A17; --soft:#4E5A45; --acc:#8EA674; --cbg:#4E5F3A; --cink:#F6F4EC; --csoft:#D5DEC7; }
+    .w-dv[data-theme="tangerine"] { --bg:#FFF7F1; --ink2:#2B1B12; --soft:#6B4A3A; --acc:#FA9F75; --cbg:#A8492A; --cink:#FFF7F1; --csoft:#FBD3BF; }
+    .w-dv[data-theme="wisteria"] { --bg:#F4F7FD; --ink2:#15213A; --soft:#4A5874; --acc:#8EABE1; --cbg:#3D5E93; --cink:#F4F7FD; --csoft:#C9D7F2; }
+    .w-dv[data-theme="jasmine"] { --bg:#FFFBEA; --ink2:#2A220C; --soft:#6A5A2E; --acc:#E9C54A; --cbg:#FAE289; --cink:#2A220C; --csoft:#6A5A2E; }
+    .w-dv[data-theme="night"] { --bg:#1C1F19; --ink2:#F2F0E6; --soft:#B9BDAE; --acc:#8EA674; --cbg:#0F120D; --cink:#F2F0E6; --csoft:#B9BDAE; }
+    .w-dv[data-theme="paper"] { --bg:#FFFFFF; --ink2:#1C1F19; --soft:#5A6152; --acc:#8EA674; --cbg:#1C1F19; --cink:#FFFFFF; --csoft:#D9DCD3; }
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
@@ -1092,7 +1324,7 @@
     <span>GreenCube</span>
   </a>
   <nav class="header-nav" aria-label="Primary">
-    <a href="/es/how-it-works">Por qué GreenCube</a>
+    <a href="/es/#can">Por qué GreenCube</a>
     <a href="/es/ai-environmental-impact">La IA y el planeta</a>
     <a href="/es/your-data">Tus datos</a>
     <a href="/es/mission">Nuestra misión</a>
@@ -1235,7 +1467,7 @@
     </ul>
     <div class="cta-row rv">
       <a href="/es/buy" class="cta-pill cta-primary"><span>Consigue GreenCube</span></a>
-      <a href="/es/how-it-works" class="cta-pill cta-ghost">Por qué GreenCube <span class="arrow">→</span></a>
+      <a href="/es/#can" class="cta-pill cta-ghost">Por qué GreenCube <span class="arrow">→</span></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
@@ -1403,6 +1635,61 @@
   </div>
 </section>
 
+<div class="gcwhy">
+<section class="w-sec" id="can">
+  <div class="w">
+    <span class="w-eyebrow">Lo que puedes hacer</span>
+    <h2 class="w-h2">Todo. <em>En tu PC.</em></h2>
+    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>Hazme un juego de la serpiente</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>Dibuja un escritorio acogedor de noche, en acuarela</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>Pregúntame de biología celular</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>Resume mi PDF de 40 páginas</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>10 diapositivas para el lunes</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>¿Por qué peta mi código?</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · sin internet</span></div><div class="w-win-body" id="w-chat" data-score="Puntos" data-play="▶ Jugar" data-again="Otra vez" data-over="Fin del juego"></div></div></div><p class="w-try-fine">Una muestra de cosas reales que hace GreenCube. Toca otra.</p><template data-k="snake" data-ask="Hazme un juego de la serpiente"><p>Hecho. Juega aquí mismo:</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="Juego de la serpiente"></canvas><div class="w-game-ui"><span class="w-score">Puntos 0</span><button type="button" class="w-btn w-play">▶ Jugar</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">Flechas o desliza para moverte.</p></div></template><template data-k="image" data-ask="Dibuja un escritorio acogedor de noche, en acuarela"><p>Aquí la tienes:</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="Un escritorio acogedor de noche junto a una ventana, con lámpara, portátil, libros y una planta, en acuarela. Hecho por GreenCube."></picture></div><p class="w-img-cap">Hecha en tu PC. Sin límite diario.</p></template><template data-k="quiz" data-ask="Pregúntame de biología celular"><p>Aquí tienes tus tarjetas. Gíralas y pasa a la siguiente:</p><div class="w-deck" data-cards="[[&quot;¿Qué hace la mitocondria?&quot;, &quot;Produce energía (ATP) para la célula.&quot;], [&quot;¿Dónde se guarda el ADN de la célula?&quot;, &quot;En el núcleo.&quot;], [&quot;¿Qué fabrican los ribosomas?&quot;, &quot;Proteínas.&quot;], [&quot;¿Qué decide lo que entra y sale de la célula?&quot;, &quot;La membrana celular.&quot;], [&quot;¿Vegetal o animal: qué células tienen pared celular?&quot;, &quot;Las vegetales.&quot;]]" data-hint="toca para girar"><button type="button" class="w-flip"><span><em><span class="q">¿Qué hace la mitocondria?</span><small>toca para girar</small></em><em class="a">Produce energía (ATP) para la célula.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="Tarjeta anterior">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="Tarjeta siguiente">&rarr;</button></div></div></template><template data-k="pdf" data-ask="Resume mi PDF de 40 páginas"><p>40 páginas, en 6 puntos:</p><ul><li>El estudio prueba una batería nueva hecha de sodio.</li><li>Carga el doble de rápido que las baterías de litio de hoy.</li><li>Aguanta 3.000 cargas antes de perder un 20&nbsp;% de capacidad.</li><li>El sodio es más barato y fácil de encontrar que el litio.</li><li>Pesa más, así que encaja mejor en casas y autobuses que en móviles.</li><li>Aún hay que probarla a gran escala antes de venderla.</li></ul></template><template data-k="slides" data-ask="10 diapositivas para el lunes"><p>Tu presentación está lista. Elige un estilo:</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>La Revolución francesa</b><small>De 1789 a 1799</small></div><div class="w-sl"><b>Por qué empezó</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>Salvia</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>Mandarina</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>Glicina</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>Jazmín</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>Noche</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>Liso</button></div></template><template data-k="bug" data-ask="¿Por qué peta mi código?"><p>Tu bucle no termina nunca: <b>i</b> no sube. Añade <b>i += 1</b> en la línea 12 y funciona.</p></template>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="no-limits">
+  <div class="w">
+    <span class="w-eyebrow">Límites</span>
+    <h2 class="w-h2">¿Llegas al límite? <em>Aquí no.</em></h2>
+    <p class="w-sub">Pulsa el botón y mira quién se para antes.</p>
+    <div class="w-race" data-sent="imágenes" data-left="Te quedan {n} hoy" data-locked="Límite de imágenes alcanzado. Prueba más tarde." data-inf="Sin límite">
+      <div class="w-lane" id="lane-cloud"><span class="who">IA en la nube, plan gratis</span><div><span class="w-count" id="n-cloud">0</span></div><p class="left" id="l-cloud"></p><div class="w-bar"><i id="b-cloud"></i></div></div>
+      <div class="w-lane gc" id="lane-gc"><span class="who">GreenCube</span><div><span class="w-count" id="n-gc">0</span></div><p class="left">Sin límite</p><div class="w-bar"><i></i></div></div>
+    </div>
+    <button class="w-send" type="button" id="w-send">Crear una imagen <span aria-hidden="true">&rarr;</span></button>
+    <p class="w-fine">Es un juguete, pero la idea es real: los planes gratis de la nube siguen limitando las imágenes y los archivos. GreenCube nunca.</p>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="offline">
+  <div class="w">
+    <span class="w-eyebrow">Sin internet</span>
+    <h2 class="w-h2">¿Sin wifi en la biblioteca? <em>Sigue funcionando.</em></h2>
+    <p class="w-sub">Pulsa el interruptor.</p>
+    <button class="w-wifi" type="button" role="switch" aria-checked="false" id="w-wifi"><span class="sw" aria-hidden="true"></span>Wifi</button>
+    <div class="w-net" data-ok="¡Vale! Pregunta 1: ¿en qué año empezó?" data-err="Revisa tu internet e inténtalo de nuevo.">
+      <div class="w-chat"><span class="who">IA en la nube, plan gratis</span><p class="w-bubble me">Hazme preguntas sobre la Revolución francesa.</p><p class="w-bubble ai err" id="a-cloud"><span class="w-spin" aria-hidden="true"></span>Revisa tu internet e inténtalo de nuevo.</p></div>
+      <div class="w-chat gc"><span class="who">GreenCube</span><p class="w-bubble me">Hazme preguntas sobre la Revolución francesa.</p><p class="w-bubble ai">¡Vale! Pregunta 1: ¿en qué año empezó?</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="money">
+  <div class="w">
+    <span class="w-eyebrow">Dinero</span>
+    <h2 class="w-h2">¿Pagas 20&nbsp;&euro; al mes? <em>Para.</em></h2>
+    <p class="w-sub">Desliza para ver lo que te cuesta una suscripción de IA.</p>
+    <div class="w-money" data-lang="es">
+      <div class="w-months"><span>Meses</span><b id="m-n">12 meses</b></div>
+      <input class="w-range" id="m-range" type="range" min="1" max="36" value="12" aria-label="Meses">
+      <div class="w-row sub"><span class="lbl">Suscripción de IA<small>y aun así tiene límites</small></span><div class="w-track"><i id="m-sub"></i></div><span class="amt" id="m-sub-n"></span></div>
+      <div class="w-row gc"><span class="lbl">GreenCube<small>una vez, sin límites</small></span><div class="w-track"><i id="m-gc"></i></div><span class="amt" id="m-gc-n"></span></div>
+      <div class="w-keep"><span>Te ahorras</span><b id="m-keep"></b></div>
+    </div>
+    <p class="w-fine">La mayoría de planes de IA de pago cuestan unos 20&nbsp;&euro; al mes, y hasta los de pago tienen límites de uso.</p>
+  </div>
+</section>
+
+</div>
+
+
 <!-- =========== 2 · PRIVATE, NO FILTER — plain facts =========== -->
 <section class="sec facts" id="private" aria-label="Privada y sin filtros añadidos">
   <div class="sec-wrap">
@@ -1540,6 +1827,32 @@
 </section>
 
 <!-- =========== MANIFESTO — dark band, stamped statements =========== -->
+<div class="gcwhy">
+<section class="w-sec" id="how">
+  <div class="w">
+    <span class="w-eyebrow">Cómo funciona</span>
+    <h2 class="w-h2">Tres pasos. <em>Y ya.</em></h2>
+    <div class="w-steps"><div class="w-step" style="--c:color-mix(in srgb, var(--sun) 45%, #fff)"><b>1</b><h3>Descárgala</h3><p>Un instalador, como un juego.</p></div><div class="w-step" style="--c:color-mix(in srgb, var(--sky) 45%, #fff)"><b>2</b><h3>Se baja la IA</h3><p>La primera vez, descarga la IA a tu PC. Unos pocos GB, una vez.</p></div><div class="w-step" style="--c:color-mix(in srgb, var(--clay) 45%, #fff)"><b>3</b><h3>A darle</h3><p>Chatea, programa, crea imágenes. Con o sin internet, todo lo que quieras.</p></div></div>
+  </div>
+</section>
+
+<section class="w-sec" id="questions">
+  <div class="w">
+    <span class="w-eyebrow">Preguntas</span>
+    <h2 class="w-h2">Respuestas <em>rápidas.</em></h2>
+    <div class="w-faq"><div><h3>¿Funcionará en mi PC?</h3><p>Si tiene Windows 10 u 11 y 8 GB de RAM, sí. Una tarjeta gráfica la hace rápida. <a href="/es/#game">Compruébalo con dos preguntas</a>.</p></div><div><h3>¿Necesito internet?</h3><p>Una vez, para iniciar sesión y descargar la IA. Después funciona sin internet. Solo se conecta para actualizarse, o si activas Online.</p></div><div><h3>¿Es tan lista como ChatGPT?</h3><p>No. Las IA más grandes de la nube son más listas. GreenCube no tiene límites, funciona sin internet y es tuya. Ese es el trato.</p></div><div><h3>¿Por qué necesito una cuenta?</h3><p>Solo para comprobar que has pagado. Nunca ve tus chats, archivos ni imágenes.</p></div></div>
+  </div>
+</section>
+
+<section class="w-end">
+  <div class="w">
+    <h2 class="w-h2">Sin límites. Sin suscripción. <em>Tuya.</em></h2>
+    <a href="/es/buy" class="w-cta">Consigue GreenCube, 9,99 € <span aria-hidden="true">&rarr;</span></a>
+    <a href="/es/#game" class="alt">Comprueba tu PC primero</a>
+  </div>
+</section>
+</div>
+
 <section class="manifesto" id="manifesto" data-theme="dark">
   <div class="head">
     <span class="eyebrow rv">La diferencia</span>
@@ -1574,8 +1887,8 @@
         <h3>Producto</h3>
         <ul>
           <li><a href="/es/buy">Consigue GreenCube</a></li>
-          <li><a href="/es/how-it-works#can">Qué hace</a></li>
-          <li><a href="/es/how-it-works">Por qué GreenCube</a></li>
+          <li><a href="/es/#can">Qué hace</a></li>
+          <li><a href="/es/#can">Por qué GreenCube</a></li>
           <li><a href="/es/what-you-get">¿Funcionará en mi ordenador?</a></li>
         </ul>
       </nav>
@@ -1847,5 +2160,194 @@
 </script>
 <script src="/tier-quiz.js" defer></script>
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+  // the two toys and the gentle reveal
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = !reduce && 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .15 }) : null;
+    document.querySelectorAll('.gcwhy .w-sec .w > *, .gcwhy .w-end .w > *').forEach((el) => { if (io) { el.classList.add('w-in'); io.observe(el); } });
+
+    // 1. who stops first: the free cloud plan locks at 10, GreenCube keeps counting
+    const race = document.querySelector('.w-race');
+    if (race) {
+      const CAP = 10;
+      let n = 0;
+      const $ = (id) => document.getElementById(id);
+      const pop = (el) => { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); };
+      const paint = () => {
+        const c = Math.min(n, CAP);
+        $('n-cloud').textContent = c;
+        $('b-cloud').style.width = (c / CAP * 100) + '%';
+        $('l-cloud').textContent = n >= CAP ? race.dataset.locked : race.dataset.left.replace('{n}', CAP - c);
+        $('lane-cloud').classList.toggle('locked', n >= CAP);
+        $('n-gc').textContent = n;
+      };
+      $('w-send').addEventListener('click', () => {
+        n += 1;
+        if (n <= CAP) pop($('n-cloud'));
+        pop($('n-gc'));
+        paint();
+      });
+      paint();
+    }
+
+    // 2. the Wi-Fi switch: the cloud answer needs it, GreenCube's does not
+    const sw = document.getElementById('w-wifi');
+    const net = document.querySelector('.w-net');
+    if (sw && net) {
+      sw.addEventListener('click', () => {
+        const on = sw.getAttribute('aria-checked') !== 'true';
+        sw.setAttribute('aria-checked', String(on));
+        const a = document.getElementById('a-cloud');
+        a.innerHTML = on ? net.dataset.ok : '<span class="w-spin" aria-hidden="true"></span>' + net.dataset.err;
+        a.classList.toggle('err', !on);
+      });
+    }
+  })();
+</script>
+<script>
+  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
+  (() => {
+    const box = document.getElementById('w-chat');
+    if (!box) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const asks = [...document.querySelectorAll('.w-ask')];
+    let run = 0, stopGame = () => {};
+
+    function snake(root) {
+      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
+      const W = 12, Hh = 9, S = 20;
+      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
+      let body, dir, next, food, pts, timer = null;
+      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
+      const draw = () => {
+        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
+        g.fillStyle = 'rgba(26,26,26,.04)';
+        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
+        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
+        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
+      };
+      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
+      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
+      const tick = () => {
+        dir = next;
+        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
+        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
+          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
+        }
+        body.unshift(h);
+        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
+        draw();
+      };
+      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
+      function key(e) {
+        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
+        if (d && timer) { e.preventDefault(); turn(d); }
+      }
+      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
+      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
+      let sx, sy;
+      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      cv.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
+      }, { passive: true });
+      reset();
+      stopGame = stop;
+    }
+
+    function deck(root) {
+      const cards = JSON.parse(root.dataset.cards);
+      let i = 0;
+      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
+      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
+      const show = () => {
+        flip.classList.remove('flipped');
+        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
+        pos.textContent = (i + 1) + ' / ' + cards.length;
+        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
+      };
+      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
+      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
+      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
+      prev.disabled = true;
+    }
+
+    function themes(root) {
+      const dv = root.querySelector('.w-dv');
+      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
+        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
+        dv.dataset.theme = b.dataset.t;
+      }));
+    }
+
+    function play(btn) {
+      const id = ++run;
+      stopGame(); stopGame = () => {};
+      asks.forEach((b) => b.classList.toggle('on', b === btn));
+      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
+      const text = tpl.dataset.ask;
+      box.innerHTML = '';
+      const me = document.createElement('p');
+      me.className = 'w-msg me';
+      box.appendChild(me);
+      let i = 0;
+      const answer = () => {
+        if (id !== run) return;
+        const ai = document.createElement('div');
+        ai.className = 'w-msg ai';
+        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
+        box.appendChild(ai);
+        setTimeout(() => {
+          if (id !== run) return;
+          ai.innerHTML = '';
+          ai.appendChild(tpl.content.cloneNode(true));
+          ai.querySelectorAll('.w-game').forEach(snake);
+          ai.querySelectorAll('.w-deck').forEach(deck);
+          if (ai.querySelector('.w-dv')) themes(ai);
+        }, reduce ? 0 : 700);
+      };
+      if (reduce) { me.textContent = text; answer(); return; }
+      const type = () => {
+        if (id !== run) return;
+        me.innerHTML = '';
+        me.append(text.slice(0, i));
+        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
+        if (i++ < text.length) setTimeout(type, 26);
+        else { me.textContent = text; setTimeout(answer, 250); }
+      };
+      type();
+    }
+    asks.forEach((b) => b.addEventListener('click', () => play(b)));
+    const sec = document.getElementById('can');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
+      io.observe(sec);
+    } else play(asks[0]);
+  })();
+</script>
+<script>
+  // money: months slider -> subscription total vs GreenCube once
+  (() => {
+    const r = document.getElementById('m-range');
+    if (!r) return;
+    const es = document.documentElement.lang === 'es';
+    const fmt = new Intl.NumberFormat(es ? 'es-ES' : 'en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2, minimumFractionDigits: 0 });
+    const MONTH = 20, ONCE = 9.99, MAX = 36 * MONTH;
+    const $ = (id) => document.getElementById(id);
+    const paint = () => {
+      const m = +r.value, sub = m * MONTH;
+      $('m-n').textContent = m + (es ? (m === 1 ? ' mes' : ' meses') : (m === 1 ? ' month' : ' months'));
+      $('m-sub').style.width = (sub / MAX * 100) + '%';
+      $('m-gc').style.width = Math.max(ONCE / MAX * 100, 1.6) + '%';
+      $('m-sub-n').textContent = fmt.format(sub);
+      $('m-gc-n').textContent = fmt.format(ONCE);
+      $('m-keep').textContent = fmt.format(Math.max(0, sub - ONCE));
+      r.style.setProperty('--p', ((m - 1) / 35 * 100) + '%');
+    };
+    r.addEventListener('input', paint);
+    paint();
+  })();
+</script>
 </body>
 </html>

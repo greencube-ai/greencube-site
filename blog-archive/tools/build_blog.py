@@ -135,8 +135,9 @@ shell_top, shell_bottom = HEAD.split('<!-- CONTENT -->')
 
 # the Spanish shell: same page, Spanish menu and footer pointing at the /es/ pages
 ES = HEAD
-for p in ('how-it-works', 'ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
+for p in ('ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
     ES = ES.replace(f'href="https://greencube.app/{p}"', f'href="https://greencube.app/es/{p}"')
+ES = ES.replace('href="https://greencube.app/#can"', 'href="https://greencube.app/es/#can"')
 for a, b in [('<html lang="en">', '<html lang="es">'), ('href="https://greencube.app/" class="brand"', 'href="https://greencube.app/es/" class="brand"'),
              ('href="https://greencube.app/" class="brand-lock"', 'href="https://greencube.app/es/" class="brand-lock"'),
              ('>Why GreenCube<', '>Por qué GreenCube<'), ('>AI &amp; the planet<', '>La IA y el planeta<'), ('>Your data<', '>Tus datos<'),
