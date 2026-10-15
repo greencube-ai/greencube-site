@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>This page swam away | GreenCube</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <style>
+    :root { --paper: #F5F1E8; --ink: #1A1A1A; --ink-soft: #545454; --line: #DDD8CE; --olive: #7E8A5A; --olive-deep: #5C663F;
+      --display: 'General Sans', 'Geist', -apple-system, system-ui, sans-serif; --sans: 'Geist', -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    header { padding: 22px 30px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; color: var(--ink); text-decoration: none; }
+    .brand .mark { width: 15px; height: 15px; border: 2.6px solid var(--olive); border-radius: 4px; }
+    main { flex: 1; display: grid; place-items: center; padding: 20px 24px 80px; text-align: center; }
+    .turtle { width: 150px; margin: 0 auto 18px; overflow: visible; animation: swim 2.6s ease-in-out infinite; }
+    .turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: wave 1.6s ease-in-out infinite; }
+    .turtle .tt-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+    @keyframes swim { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
+    @keyframes wave { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-28deg); } 60% { transform: rotate(4deg); } }
+    @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+    h1 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 6vw, 56px); letter-spacing: -.035em; line-height: 1.05; }
+    h1 em { font-style: normal; color: var(--olive); }
+    p { font-size: 18px; color: var(--ink-soft); margin-top: 12px; }
+    p.es { font-size: 15px; margin-top: 6px; }
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+    .btns a { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 600; font-size: 15px; text-decoration: none; }
+    .btns .go { background: var(--ink); color: var(--paper); }
+    .btns .alt { border: 1px solid var(--line); color: var(--ink); background: #FBF8F0; }
+    @media (prefers-reduced-motion: reduce) { .turtle, .turtle * { animation: none !important; } }
+  </style>
+</head>
+<body>
+<header><a href="https://greencube.app/" class="brand"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a></header>
+<main>
+  <div>
+    <svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+      <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+        <ellipse cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+        <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+          <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+          <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+        </g>
+        <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+        <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+        <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+        <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+        <g stroke="none">
+          <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+          <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+          <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+        </g>
+        <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+      </g>
+    </svg>
+    <h1>This page <em>swam away.</em></h1>
+    <p>The turtle looked everywhere. It&rsquo;s not here.</p>
+    <p class="es" lang="es">Esta página se fue nadando. La tortuga la buscó por todas partes.</p>
+    <div class="btns">
+      <a class="go" href="https://greencube.app/">Back to GreenCube <span aria-hidden="true">&rarr;</span></a>
+      <a class="alt" href="https://blog.greencube.app/blog">Read the blog</a>
+    </div>
+  </div>
+</main>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

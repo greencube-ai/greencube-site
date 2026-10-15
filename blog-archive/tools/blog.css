@@ -216,3 +216,17 @@ footer .f-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid va
 
 .lib-ico { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--tint); color: var(--deep); }
 .lib-txt { min-width: 0; }
+
+  /* the turtle walks slowly along the top of the footer: slow and steady */
+  footer { position: relative; overflow-x: clip; }
+  .f-turtle { position: absolute; z-index: 1; top: -35px; left: -70px; width: 44px; pointer-events: none; animation: f-walk 90s linear infinite; }
+  .f-turtle img { display: block; width: 100%; height: auto; animation: f-bob .55s ease-in-out infinite alternate; }
+  @keyframes f-walk { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 140px)); } }
+  @keyframes f-bob { to { transform: translateY(-2px) rotate(-2deg); } }
+  @media (prefers-reduced-motion: reduce) { .f-turtle { animation: none; left: auto; right: 8%; } .f-turtle img { animation: none; } }
+
+/* the turtle peeks over the box at the end of our posts */
+.cta-box { position: relative; }
+.cta-turtle { position: absolute; right: 30px; top: -36px; width: 58px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+.cta-turtle img { display: block; width: 100%; height: auto; }
+.cta-box:hover .cta-turtle { transform: translateY(-6px) rotate(-4deg); }
