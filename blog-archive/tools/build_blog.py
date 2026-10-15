@@ -137,10 +137,9 @@ shell_top, shell_bottom = HEAD.split('<!-- CONTENT -->')
 ES = HEAD
 for p in ('ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
     ES = ES.replace(f'href="https://greencube.app/{p}"', f'href="https://greencube.app/es/{p}"')
-ES = ES.replace('href="https://greencube.app/#can"', 'href="https://greencube.app/es/#can"')
 for a, b in [('<html lang="en">', '<html lang="es">'), ('href="https://greencube.app/" class="brand"', 'href="https://greencube.app/es/" class="brand"'),
              ('href="https://greencube.app/" class="brand-lock"', 'href="https://greencube.app/es/" class="brand-lock"'),
-             ('>Why GreenCube<', '>Por qué GreenCube<'), ('>AI &amp; the planet<', '>La IA y el planeta<'), ('>Your data<', '>Tus datos<'),
+             ('>AI &amp; the planet<', '>La IA y el planeta<'), ('>Your data<', '>Tus datos<'),
              ('>Our mission<', '>Nuestra misión<'), ('<a href="/blog" class="on">', '<a href="/blog/es" class="on">'), ('<li><a href="/blog">', '<li><a href="/blog/es">'),
              ('>Get GreenCube<', '>Consigue GreenCube<'), ("AI that's <em>owned,</em> not rented.", 'Una IA que es <em>tuya,</em> no alquilada.'),
              ('<h3>Product</h3>', '<h3>Producto</h3>'), ('<h3>Learn</h3>', '<h3>Aprende</h3>'), ('<h3>Company</h3>', '<h3>Empresa</h3>'),
