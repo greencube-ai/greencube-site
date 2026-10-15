@@ -347,12 +347,11 @@
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
 <style id="turtle-walk">
-  /* the turtle sits on the top line of the footer, above the logo; a small hop on hover */
-  footer { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -34px; left: max(32px, calc(50% - 588px)); width: 44px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
+  .f-brand { position: relative; }
+  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
   .f-turtle img { display: block; width: 100%; height: auto; }
-  footer:hover .f-turtle { transform: translateY(-6px) rotate(-4deg); }
-  @media (max-width: 760px) { .f-turtle { left: 24px; } }
+  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
   @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
 </style>
 <style id="turtle-main">
@@ -459,10 +458,9 @@
   </svg>
 </div>
 <footer>
-  <span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="44" height="38" loading="lazy" /></span>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
         <a href="/" class="brand-lock" aria-label="GreenCube home">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
