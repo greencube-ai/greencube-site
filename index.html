@@ -1313,13 +1313,13 @@
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
 <style id="turtle-walk">
-  /* the turtle walks slowly along the top of the footer: slow and steady */
-  footer { position: relative; overflow-x: clip; }
-  .f-turtle { position: absolute; z-index: 1; top: -35px; left: -70px; width: 44px; pointer-events: none; animation: f-walk 90s linear infinite; }
-  .f-turtle img { display: block; width: 100%; height: auto; animation: f-bob .55s ease-in-out infinite alternate; }
-  @keyframes f-walk { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 140px)); } }
-  @keyframes f-bob { to { transform: translateY(-2px) rotate(-2deg); } }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { animation: none; left: auto; right: 8%; } .f-turtle img { animation: none; } }
+  /* the turtle sits on the top line of the footer, above the logo; a small hop on hover */
+  footer { position: relative; }
+  .f-turtle { position: absolute; z-index: 1; top: -34px; left: max(32px, calc(50% - 588px)); width: 44px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  .f-turtle img { display: block; width: 100%; height: auto; }
+  footer:hover .f-turtle { transform: translateY(-6px) rotate(-4deg); }
+  @media (max-width: 760px) { .f-turtle { left: 24px; } }
+  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
 </style>
 <style id="turtle-main">
   /* the mascot in the places everyone passes: hero, three steps, download */
@@ -1344,6 +1344,13 @@
   .dl-turtle .tt-body { animation: gt-hop 1.1s ease 0.3s 2, gt-bob 2.8s ease-in-out 2.6s infinite; }
   .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
   @media (max-width: 760px) { .hero-turtle { right: 18px; bottom: 26px; width: 76px; } }
+
+  /* hero v2: the turtle on the hill with its laptop */
+  .hero-turtle { width: clamp(130px, 12vw, 190px); right: 7%; bottom: 6%; }
+  .hero-turtle .tt-arm { animation: none; }
+  .hero-turtle .tt-type { animation: gt-type .5s ease-in-out infinite alternate; }
+  @keyframes gt-type { from { transform: rotate(0); } to { transform: rotate(-9deg); } }
+  @media (max-width: 760px) { .hero-turtle { width: 108px; right: 14px; bottom: 22px; } }
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -1506,8 +1513,15 @@
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <div class="gt hero-turtle" aria-hidden="true"><svg viewBox="0 0 120 104" aria-hidden="true" focusable="false">
-    <g class="tt-body"><g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+  <div class="gt hero-turtle" aria-hidden="true"><svg viewBox="0 0 172 108" aria-hidden="true" focusable="false">
+    <ellipse cx="96" cy="101" rx="74" ry="6.5" fill="#2E3A1E" opacity=".16"/>
+    <g stroke="#1A1A1A" stroke-width="2.2" stroke-linejoin="round">
+      <path d="M100,92 L168,92 L163,98 L105,98 Z" fill="#C9CBBE"/>
+      <path d="M116,52 L160,48 L164,91 L120,92 Z" fill="#3B4232"/>
+      <rect x="133" y="62" width="14" height="14" rx="3" fill="none" stroke="#AFCB7C" stroke-width="2.6"/>
+    </g>
+    <g class="tt-body">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
       <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
       <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
       <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
@@ -1516,7 +1530,7 @@
       </g>
       <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
       <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
-      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <g class="tt-arm tt-type"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
       <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
       <g stroke="none">
         <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>

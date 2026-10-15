@@ -503,13 +503,13 @@
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
 <style id="turtle-walk">
-  /* the turtle walks slowly along the top of the footer: slow and steady */
-  footer { position: relative; overflow-x: clip; }
-  .f-turtle { position: absolute; z-index: 1; top: -35px; left: -70px; width: 44px; pointer-events: none; animation: f-walk 90s linear infinite; }
-  .f-turtle img { display: block; width: 100%; height: auto; animation: f-bob .55s ease-in-out infinite alternate; }
-  @keyframes f-walk { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 140px)); } }
-  @keyframes f-bob { to { transform: translateY(-2px) rotate(-2deg); } }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { animation: none; left: auto; right: 8%; } .f-turtle img { animation: none; } }
+  /* the turtle sits on the top line of the footer, above the logo; a small hop on hover */
+  footer { position: relative; }
+  .f-turtle { position: absolute; z-index: 1; top: -34px; left: max(32px, calc(50% - 588px)); width: 44px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  .f-turtle img { display: block; width: 100%; height: auto; }
+  footer:hover .f-turtle { transform: translateY(-6px) rotate(-4deg); }
+  @media (max-width: 760px) { .f-turtle { left: 24px; } }
+  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
 </style>
 </head>
 <body>

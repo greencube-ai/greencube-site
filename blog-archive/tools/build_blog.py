@@ -198,7 +198,7 @@ for p in idx:
         f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
         + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
         + body +
-        '\n<div class="cta-box"><span class="cta-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="58" height="50" loading="lazy" /></span><h3>Your own AI, on your own PC</h3>'
+        '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
         '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p>'
         '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
@@ -272,7 +272,7 @@ for lang, slug, meta, body in own:
         f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}{other_link}</p>\n'
         + body + faq_html +
-        f'\n<div class="cta-box"><span class="cta-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="58" height="50" loading="lazy" /></span><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
+        f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
         f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/es/{slug}.html'
     open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts))
