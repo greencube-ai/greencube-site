@@ -600,6 +600,30 @@
     .rp-fly.gone { animation: rp-gone .35s ease forwards; }
     @keyframes rp-gone { to { opacity: 0; transform: scale(1.08); } }
     @media (prefers-reduced-motion: reduce) { .rp-fly { display: none !important; } .fit-overlay.rp-mode .fit-card { opacity: 1; transform: none; pointer-events: auto; } }
+
+    /* ============== the turtle on the buy button ==============
+       It hides behind the button with only its head peeking over the top edge.
+       Hover: it climbs out and waves. Click: a cord drops from above, the turtle
+       jumps, grabs it and pulls, and the letter opens (the same turtle rides it in). */
+    .bt-wrap { position: relative; margin-top: 96px; }
+    .bt-wrap .buy-btn { position: relative; z-index: 2; margin-top: 0; }
+    .bt-turtle { position: absolute; z-index: 1; left: 50%; bottom: 100%; width: 92px; margin-left: -46px; pointer-events: none;
+      transform: translateY(48%); transition: transform .5s cubic-bezier(.3,1.6,.45,1); }
+    .bt-turtle svg { display: block; width: 100%; overflow: visible; }
+    .bt-turtle .tt-eyes { transform-box: fill-box; transform-origin: center; animation: lt-blink 4.6s infinite; }
+    .bt-wrap:hover .bt-turtle, .bt-wrap:focus-within .bt-turtle { transform: translateY(6%); }
+    .bt-wrap:hover .bt-turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: lt-wave 1.3s ease-in-out infinite; }
+    .bt-cord { position: absolute; z-index: 0; left: calc(50% + 22px); bottom: calc(100% + 38px); width: 2px; height: 80px; background: #1A1A1A;
+      transform-origin: top; transform: scaleY(0); opacity: 0; pointer-events: none; }
+    .bt-cord::after { content: ''; position: absolute; left: -5px; bottom: -10px; width: 12px; height: 12px; border-radius: 50%; background: #FA9F75; border: 2px solid #1A1A1A; }
+    .bt-wrap.pull .bt-cord { animation: bt-cord 1s ease forwards; }
+    .bt-wrap.pull .bt-turtle { animation: bt-jump 1s cubic-bezier(.3,.7,.4,1) forwards; }
+    .bt-wrap.pull .bt-turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; transform: rotate(-150deg); transition: transform .15s; }
+    @keyframes bt-cord { 0% { opacity: 1; transform: scaleY(0); } 28% { opacity: 1; transform: scaleY(1); } 58% { transform: scaleY(1) translateY(0); }
+      80% { transform: scaleY(1) translateY(26px); } 100% { opacity: 0; transform: scaleY(1) translateY(0); } }
+    @keyframes bt-jump { 0% { transform: translateY(6%); } 30% { transform: translateY(-26%); } 58% { transform: translateY(-26%); }
+      80% { transform: translateY(-14%); } 100% { transform: translateY(6%); } }
+    @media (prefers-reduced-motion: reduce) { .bt-turtle, .bt-wrap.pull .bt-turtle, .bt-wrap.pull .bt-cord { transition: none; animation: none; } }
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
@@ -656,10 +680,33 @@
          it here, at the one moment it can still be avoided. -->
     <p class="vat-note">Paga con el mismo email con el que iniciarás sesión (Google o Microsoft).</p>
 
-    <button class="buy-btn" id="buy-btn" type="button">
-      <span>Consigue GreenCube</span>
-      <span class="arrow" aria-hidden="true">→</span>
-    </button>
+    <div class="bt-wrap" id="bt-wrap">
+      <span class="bt-cord" aria-hidden="true"></span>
+      <div class="bt-turtle" aria-hidden="true"><svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg></div>
+      <button class="buy-btn" id="buy-btn" type="button">
+        <span>Consigue GreenCube</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
     <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
 
     <div class="trust">
@@ -1076,7 +1123,16 @@
     document.body.style.overflow = 'hidden';
   };
 
-  buyBtn.addEventListener('click', openLetter);
+  // the turtle jumps, pulls the cord, then the letter opens
+  const btWrap = document.getElementById('bt-wrap');
+  let pulling = false;
+  buyBtn.addEventListener('click', () => {
+    if (pulling) return;
+    if (!btWrap || matchMedia('(prefers-reduced-motion: reduce)').matches) { openLetter(); return; }
+    pulling = true;
+    btWrap.classList.add('pull');
+    setTimeout(() => { openLetter(); btWrap.classList.remove('pull'); pulling = false; }, 1000);
+  });
   rpFly.addEventListener('click', revealLetter);
   document.getElementById('lt-go').addEventListener('click', openFit);
   document.getElementById('lt-skip').addEventListener('click', goCheckout);
