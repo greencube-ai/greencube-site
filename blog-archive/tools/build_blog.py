@@ -110,8 +110,8 @@ def clean(body):
     return re.sub(r'<img\b[^>]*>', img, body)
 
 NOTE_PARTS = {
-    'models': 'today GreenCube picks the right AI model for your computer automatically, '
-              'instead of the two models (&ldquo;Quick&rdquo; and &ldquo;All-rounder&rdquo;) described below',
+    'models': 'today GreenCube picks the right AI model for your computer automatically '
+              '(Gemma 4 E2B on smaller PCs, Gemma 4 E4B with a graphics card), so you no longer choose between two models',
     'account': 'today you sign in once with Google or Microsoft to activate it, and the first launch downloads the AI model; '
                'after that it works offline and your chats and files never leave your PC',
 }

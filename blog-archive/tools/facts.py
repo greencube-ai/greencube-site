@@ -21,6 +21,53 @@ OLD_MODELS = re.compile(r'All-rounder|\bQuick\b[^.<]{0,40}\bmodel|\btwo (local )
 NO_ACCOUNT = re.compile(r'no (cloud )?accounts?\b|without (an )?account|no (account|sign[- ]?in|signup|sign[- ]up|login)\b|no account creation|no activation key', re.I)
 
 
+# The old product made you PICK "Quick" (Llama 3.2 3B, text-only) or "All-rounder" (Gemma 4 E4B).
+# Today GreenCube picks for you: Gemma 4 E2B on smaller PCs, Gemma 4 E4B with a graphics card.
+# Only phrases that mean the model are touched ("Quick fixes", "Quick how-to" stay).
+Q = r'(?:&quot;|"|“|”|</?strong>|</?b>|</?em>)*'
+MODEL_FIXES = [
+    (r'At setup,? you (?:pick|choose)(?: between)?(?: one of)? two (?:local )?models(?: to download)?:', 'GreenCube picks one of two local models for your PC:'),
+    (r'(?i:choose) ' + Q + 'Quick' + Q + ' or ' + Q + 'All-rounder' + Q + r' and download it', 'GreenCube picks the model that fits your PC and downloads it'),
+    (r'choose ' + Q + 'Quick' + Q + ' or ' + Q + 'All-rounder' + Q + r' depending on whether you need image reading', 'GreenCube picks the model that fits your PC'),
+    (r'with a ' + Q + 'Quick' + Q + ' or ' + Q + 'All-rounder' + Q + r' model download', 'with an AI model picked for your PC'),
+    (Q + 'Quick' + Q + r'(?: model)?\s*\(Llama 3\.2 3B,\s*(?:about |roughly |around |~)?2\s?GB(?: download)?(?:,\s*(?:fast, )?text-only(?:, fast)?)?', 'the smaller model (Gemma 4 E2B, about 2.6 GB'),
+    (Q + 'All-rounder' + Q + r'(?: model)?\s*\(Gemma 4 E4B,\s*(?:about |roughly |around |~)?4', 'the bigger model (Gemma 4 E4B, about 4'),
+    (r'\bQuick pulls about 2\s?GB', 'The smaller model pulls about 2.6 GB'),
+    (r'\bAll-rounder pulls about 4', 'the bigger one pulls about 4'),
+    (r'the quick model is around 2\s?GB', 'the smaller model is around 2.6 GB'),
+    (r'the all-rounder is about 4', 'the bigger model is about 4'),
+    (Q + 'Quick' + Q + ' or ' + Q + 'All-rounder' + Q, 'the smaller or bigger model'),
+    (r"(?:\bthe )?" + Q + 'All-rounder' + Q + r' model', 'the bigger model'),
+    (r"(?:\bthe )?" + Q + 'Quick' + Q + r' model', 'the smaller model'),
+    (r'\bpick ' + Q + 'Quick' + Q, 'get the smaller model'),
+    (r'\bor ' + Q + 'All-rounder' + Q, 'or the bigger model'),
+    (r'(smaller model|Quick option|Quick) \(Llama 3\.2 3B', 'smaller model (Gemma 4 E2B'),
+    (r'\bQuick uses Llama 3\.2 3B, weighs in around 2\s?GB', 'The smaller model is Gemma 4 E2B, about 2.6 GB'),
+    (r"GreenCube(&#x27;|')s Quick option", r"GreenCube\1s smaller model"),
+    (r'\b(stick with|picked|pick|choose|chose|with|use|using|handle) ' + Q + 'Quick' + Q + r'\b(?! (?:fixes|how-to|diagnostics|start|tip|check|look|reference|summary|guide))', r'\1 the smaller model'),
+    (r'\b' + Q + 'Quick' + Q + r' (can|can&#x27;t|cannot|is|handles|runs|works|for|and)\b', r'the smaller model \1'),
+    (r'(smaller model[^.<]{0,60}?)(?:,\s*)?(?:and )?(?:can&#x27;t|cannot|can\'t) (?:see|read) images(?: at all)?', r'\1'),
+    (r'((?:smaller model|Quick|built on|GreenCube)[^.]{0,50}?)Llama 3\.2 3B', r'\1Gemma 4 E2B'),
+    (r'\bCurated local models \(Llama 3\.2 3B or Gemma 4 E4B\)', 'Curated local models (Gemma 4 E2B or E4B)'),
+    (Q + 'Quick' + Q + r'\s*\((about|approximately|roughly|around) 2\s?GB', r'the smaller model (\1 2.6 GB'),
+    (r'\b(as|since|because|but|while|unless) ' + Q + 'Quick' + Q + r' ', r'\1 the smaller model '),
+    (r'\bQuick uses Gemma 4 E2B', 'The smaller model uses Gemma 4 E2B'),
+    (Q + 'Quick' + Q + r'\s*\(~\s?2\s?GB', 'the smaller model (~2.6 GB'),
+    (r'\bQuick or All-Rounder\b', 'the smaller or bigger model'),
+    (r'\b(Pick|Choose) ' + Q + 'Quick' + Q + r'\b', r'\1 the smaller model'),
+    (r'\bQuick needs about 2\s?GB', 'The smaller model needs about 2.6 GB'),
+    (r'Bundled \(Llama 3\.2 3B or Gemma 4 E4B\)', 'Bundled (Gemma 4 E2B or E4B)'),
+    (r'the (?:fast )?text-only the smaller model', 'the smaller, faster model'),
+    (r'the image(?:[- ]and PDF)?-capable the bigger model', 'the bigger model'),
+    (r'(Gemma 4 E2B, about 2\.6 GB),?\s*(?:fast, )?(?:text-only|plain text only)(?:, fast)?', r'\1, fast'),
+    (r'(smaller model[^.<]{0,40}?)\b(?:fast, )?text-only\b ?', r'\1'),
+    (Q + 'All-rounder' + Q, 'the bigger model'),
+    (r"'s the (smaller|bigger) model", r"'s \1 model"),
+    (r'&#x27;s the (smaller|bigger) model', r'&#x27;s \1 model'),
+    (r'\bthe the (smaller|bigger)', r'the \1'),
+    (r'\bThe the (smaller|bigger)', r'The \1'),
+]
+
 HARDWARE_BLANKS = [
     ('<td>Entry-level</td><td>—</td>', '<td>Entry-level</td><td>8 GB</td>'),
     ('<td>Mid-range</td><td>—</td><td>PDF analysis', '<td>Mid-range</td><td>16 GB</td><td>PDF analysis'),
@@ -65,6 +112,9 @@ def fix_text(s):
                      ('A 14-day window covers', 'A 15-day window covers')):
         if old in s:
             changes.append((old, new)); s = s.replace(old, new)
+    for rx, rep in MODEL_FIXES:
+        s, k = re.subn(rx, rep, s)
+        if k: changes.append(('old model names', '%s x%d' % (rep[:30], k)))
     # hardware tables BabyLoveGrowth left blank ("—"), filled with what we measured (8 GB chats, 16 GB for PDFs, a card for speed)
     for old, new in HARDWARE_BLANKS:
         if old in s:

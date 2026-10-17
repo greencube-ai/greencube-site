@@ -43,7 +43,7 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Ollama vs LM Studio: A Developer&#x27;s Comparison Guide</h1>
 <p class="byline">GreenCube &middot; 13 August 2026 &middot; updated 10 October 2026</p>
-<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically, instead of the two models (&ldquo;Quick&rdquo; and &ldquo;All-rounder&rdquo;) described below. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically (Gemma 4 E2B on smaller PCs, Gemma 4 E4B with a graphics card), so you no longer choose between two models. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
 <aside class="tested"><strong>We tested this</strong><ul><li><a href="/blog/how-much-vram-for-ai">How much VRAM do you need for AI? Why the model must fit on your GPU</a></li></ul></aside>
 <img class="cover" src="/blog/images/a93e1e8a7573.jpg" alt="Decorative title card illustration" width="1200" height="686" fetchpriority="high"/>
 <p>Pick Ollama for headless deployment and CI/CD pipelines. Pick LM Studio for visual model exploration and Apple Silicon MLX speed. Pick GreenCube when you want a polished, offline desktop assistant with a one-time license and no runtime configuration required.</p>
@@ -85,7 +85,7 @@
 <li><a href="#faq">FAQ</a></li>
 </ul>
 <h2 id="ollama-vs-lm-studio-at-a-glance-comparison">Ollama vs LM Studio: at-a-glance comparison</h2>
-<div class="tbl-wrap"><table><thead><tr><th>Dimension</th><th>Ollama</th><th>LM Studio</th><th>GreenCube</th></tr></thead><tbody><tr><td>Interface</td><td>CLI / API daemon</td><td>GUI desktop app</td><td>GUI desktop app</td></tr><tr><td>Install &amp; packaging</td><td>One-liner (<code>curl</code>), Homebrew, Docker</td><td>DMG / EXE / AppImage installer</td><td>Windows EXE installer</td></tr><tr><td>Model source</td><td>Curated registry + GGUF import</td><td>Hugging Face browser + local GGUF</td><td>Bundled (Llama 3.2 3B or Gemma 4 E4B)</td></tr><tr><td>API &amp; default port</td><td>OpenAI-compatible, <code>localhost:11434</code></td><td>OpenAI-compatible, <code>localhost:1234</code></td><td>No external API</td></tr><tr><td>Modelfile / declarative config</td><td>Yes (Modelfile)</td><td>No</td><td>No</td></tr><tr><td>Docker / server support</td><td>Official image, headless-first</td><td>Limited headless (<code>lms</code> CLI, llmster)</td><td>Not applicable</td></tr><tr><td>GPU &amp; VRAM management</td><td>Auto-detects CUDA / Metal / ROCm</td><td>Visual VRAM estimates, MLX support</td><td>Automatic via llama.cpp</td></tr><tr><td>Resource usage (idle)</td><td>~100 MB daemon</td><td>several hundred megabytes GUI overhead</td><td>Varies by model loaded</td></tr><tr><td>Multi-model handling</td><td>Sequential by default</td><td>Sequential, visual model switching</td><td>Single model at a time</td></tr><tr><td>SDKs &amp; integrations</td><td>Python, JavaScript, LangChain, LlamaIndex</td><td>JavaScript SDK, LangChain, LlamaIndex</td><td>None (standalone app)</td></tr><tr><td>Structured output / JSON mode</td><td>Yes</td><td>Yes</td><td>No</td></tr><tr><td>Pricing &amp; license</td><td>Free, MIT open source</td><td>Free for personal/internal business use</td><td>€9.99 / $9.99, one-time purchase</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Dimension</th><th>Ollama</th><th>LM Studio</th><th>GreenCube</th></tr></thead><tbody><tr><td>Interface</td><td>CLI / API daemon</td><td>GUI desktop app</td><td>GUI desktop app</td></tr><tr><td>Install &amp; packaging</td><td>One-liner (<code>curl</code>), Homebrew, Docker</td><td>DMG / EXE / AppImage installer</td><td>Windows EXE installer</td></tr><tr><td>Model source</td><td>Curated registry + GGUF import</td><td>Hugging Face browser + local GGUF</td><td>Bundled (Gemma 4 E2B or E4B)</td></tr><tr><td>API &amp; default port</td><td>OpenAI-compatible, <code>localhost:11434</code></td><td>OpenAI-compatible, <code>localhost:1234</code></td><td>No external API</td></tr><tr><td>Modelfile / declarative config</td><td>Yes (Modelfile)</td><td>No</td><td>No</td></tr><tr><td>Docker / server support</td><td>Official image, headless-first</td><td>Limited headless (<code>lms</code> CLI, llmster)</td><td>Not applicable</td></tr><tr><td>GPU &amp; VRAM management</td><td>Auto-detects CUDA / Metal / ROCm</td><td>Visual VRAM estimates, MLX support</td><td>Automatic via llama.cpp</td></tr><tr><td>Resource usage (idle)</td><td>~100 MB daemon</td><td>several hundred megabytes GUI overhead</td><td>Varies by model loaded</td></tr><tr><td>Multi-model handling</td><td>Sequential by default</td><td>Sequential, visual model switching</td><td>Single model at a time</td></tr><tr><td>SDKs &amp; integrations</td><td>Python, JavaScript, LangChain, LlamaIndex</td><td>JavaScript SDK, LangChain, LlamaIndex</td><td>None (standalone app)</td></tr><tr><td>Structured output / JSON mode</td><td>Yes</td><td>Yes</td><td>No</td></tr><tr><td>Pricing &amp; license</td><td>Free, MIT open source</td><td>Free for personal/internal business use</td><td>€9.99 / $9.99, one-time purchase</td></tr></tbody></table></div>
 <p><strong>Pro Tip:</strong> <em>Many developers run both simultaneously. Use LM Studio on <code>localhost:1234</code> for interactive model browsing and Ollama on <code>localhost:11434</code> as a persistent backend. Just avoid loading the same large model in both at once — you will exhaust VRAM fast.</em></p>
 <p>For deeper coverage of any dimension, the sections below break each one down with commands, benchmarks, and concrete guidance.</p>
 <hr/>
@@ -344,15 +344,15 @@ SYSTEM &quot;Your system prompt here.&quot;
 <p><strong>What it includes:</strong></p>
 <ul>
 <li>Offline chat that never leaves your machine after setup</li>
-<li>PDF and document reading (All-rounder model only)</li>
-<li>Image analysis (All-rounder model only — the Quick model is text-only)</li>
+<li>PDF and document reading (the bigger model only)</li>
+<li>Image analysis (the bigger model only — the smaller model is )</li>
 <li>One-time price of €9.99 / $9.99, no subscription, 15-day refund</li>
 </ul>
 <p><strong>Mandatory limitations to know before installing:</strong></p>
 <ul>
-<li>Setup requires downloading one model: &quot;Quick&quot; (Llama 3.2 3B, ~2 GB) or &quot;All-rounder&quot; (Gemma 4 E4B, ~4.2 GB)</li>
+<li>Setup requires downloading one model: the smaller model (Gemma 4 E2B, about 2.6 GB) or the bigger model (Gemma 4 E4B, about 4.2 GB)</li>
 <li>Sign-in via Google or Microsoft is required once to verify the license. Only that step touches an external server — chat and document processing are fully local</li>
-<li>8 GB RAM is the minimum floor for the All-rounder model, and performance may be slow on older hardware</li>
+<li>8 GB RAM is the minimum floor for the bigger model, and performance may be slow on older hardware</li>
 <li>Windows 10/11 only; macOS support is in development</li>
 <li>No external API, no SDK, no CLI. It is a standalone app, not a runtime</li>
 </ul>
@@ -383,7 +383,7 @@ SYSTEM &quot;Your system prompt here.&quot;
 <h2 id="a-local-desktop-alternative-to-runtime-tooling">A local desktop alternative to runtime tooling</h2>
 <p>Ollama and LM Studio are excellent tools for developers who want control over model selection, API access, and deployment configuration. But that flexibility comes with setup overhead: CLI commands, model registries, port management, and quantization decisions.</p>
 <p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
-<p>GreenCube takes a different route. It is a private offline desktop assistant for Windows that runs fully local after a one-time model download. No terminal, no config files, no subscription. You pick a model at setup — the Quick model (Llama 3.2 3B, ~2 GB) for fast text chat, or the All-rounder (Gemma 4 E4B, ~4.2 GB) for document reading and image analysis — and the app works offline from that point forward. Sign-in via Google or Microsoft is required once to verify the license; after that, your chats and documents never leave your machine.</p>
+<p>GreenCube takes a different route. It is a private offline desktop assistant for Windows that runs fully local after a one-time model download. No terminal, no config files, no subscription. You pick a model at setup — the smaller model (Gemma 4 E2B, about 2.6 GB) for fast text chat, or the bigger model (Gemma 4 E4B, about 4.2 GB) for document reading and image analysis — and the app works offline from that point forward. Sign-in via Google or Microsoft is required once to verify the license; after that, your chats and documents never leave your machine.</p>
 <p>At €9.99 / $9.99 as a one-time purchase with a 15-day refund, it is built for people who want private local AI without the runtime configuration. Get GreenCube and own it outright.</p>
 <hr/>
 <h2 id="sources">Sources</h2>
