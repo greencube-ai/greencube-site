@@ -168,6 +168,8 @@ report = []
 listing = []
 for p in idx:
     slug = p['slug']
+    if slug in OWN_TITLES:  # rewritten as our own tested post at the same address; that version is built below
+        continue
     raw = open(f'{SRC}/posts/{slug}.html', encoding='utf-8').read()
     kinds = facts.notes_for(p['title'] + '\n' + raw + '\n' + '\n'.join(f['q'] + ' ' + f['a'] for f in p['faq']))
     body, ch1 = facts.fix_text(clean(raw))
@@ -367,9 +369,11 @@ def topic_sections(lang, rest, L):
 
 def list_page(lang, entries, url, path):
     L = LIST_WORDS[lang]
-    feat = [e for e in entries if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') != 'pc']
+    hidden = ('pc', 'guide') if lang in GUIDE_WORDS else ('pc',)  # with no library (Spanish), a rewritten old post shows as a card
+    feat = [e for e in entries if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') not in hidden]
     feat.sort(key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
-    rest = [e for e in entries if (lang, e[0]) not in own_meta]  # PC pages are reached from their test, not listed here
+    # PC pages are reached from their test, not listed here; an old post we rewrote ("guide") stays in the library
+    rest = [e for e in entries if (lang, e[0]) not in own_meta or own_meta[(lang, e[0])].get('kind') == 'guide']
     cards = []
     for i, (s, t, d, pub, _) in enumerate(feat):
         m = own_meta[(lang, s)]

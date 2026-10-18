@@ -971,7 +971,16 @@
   function goCheckout() {
     status.classList.remove('error');
     status.textContent = 'Abriendo el pago seguro…';
-    location.href = STRIPE_CHECKOUT_URL;
+    location.href = checkoutUrl();
+  }
+
+  // Where this buyer came from (set by /src.js from the links they followed), as Stripe's client_reference_id:
+  // letters, digits, - and _ only, at most 200. Shows on each payment in the Stripe dashboard.
+  function checkoutUrl() {
+    const s = window.GC_SRC;
+    if (!s) return STRIPE_CHECKOUT_URL;
+    const id = (s.src + '__' + s.lp).replace(/[^A-Za-z0-9_-]/g, '-').slice(0, 200);
+    return STRIPE_CHECKOUT_URL + (STRIPE_CHECKOUT_URL.includes('?') ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(id);
   }
 
   // ====================================================================
@@ -1259,5 +1268,6 @@
   })();
 </script>
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="/src.js" defer></script>
 </body>
 </html>
