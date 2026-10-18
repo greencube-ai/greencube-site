@@ -428,6 +428,8 @@ if listing_es:
     list_page('es', listing_es, f'{HOST}/blog/es', f'{OUT}/es/index.html')
 list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 
+open(f'{OUT}/{pc_pages.CSV_NAME}', 'w', encoding='utf-8', newline='').write(pc_pages.csv_text())  # every measurement, for anyone to download
+
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \

@@ -183,8 +183,8 @@
         (es ? 'Aún no hemos medido tu tarjeta. ' : 'We haven\'t measured your card yet. ')
         + (p.same ? (es ? 'Tarjetas de ' + v + ' GB que sí medimos: ' : 'Cards with ' + v + ' GB we did measure: ') : (es ? 'Las tarjetas medidas más parecidas: ' : 'The closest cards we measured: '))
         + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' GB)') + ', ' + speed(x); }).join('; ') + '. '
-        + (es ? 'La velocidad depende de lo nueva que sea la tarjeta, no solo de su memoria, así que no nos inventamos un número para la tuya.'
-              : 'Speed depends on how new the card is, not just its memory, so we won\'t guess a number for yours.')
+        + (es ? 'La velocidad depende de lo nueva que sea la tarjeta, no solo de su memoria, así que no nos inventamos un número para la tuya (<a href="' + D.method + '">por qué</a>).'
+              : 'Speed depends on how new the card is, not just its memory, so we won\'t guess a number for yours (<a href="' + D.method + '">why</a>).')
         + (c.kind === 'laptop' ? (es ? ' La versión para portátil de una tarjeta suele ir más lenta que la de sobremesa con el mismo nombre.' : ' The laptop version of a card is usually slower than the desktop one with the same name.') : '')]);
     } else {
       var l = laptopFor(R);

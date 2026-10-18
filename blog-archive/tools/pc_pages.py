@@ -276,7 +276,7 @@ def measured_table(pc, lang):
         '<p><strong>Escribir</strong> es la velocidad a la que la IA teclea su respuesta, en tokens por segundo; un token es un trozo de palabra, y en español cada palabra suele ocupar uno o dos. <strong>Leer</strong> es lo rápido que asimila lo que le das: tu pregunta, un texto pegado o un PDF. Leer siempre es mucho más rápido que escribir, porque la IA puede leer muchos tokens a la vez pero tiene que escribirlos de uno en uno.</p>\n')
     return (intro + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in L['th']) + '</tr></thead>\n<tbody>\n'
             + '\n'.join(rows) + '\n</tbody>\n</table></div>\n'
-            f'<p>{L["how"]}</p><ol class="src">{how}</ol>\n<p>{L["ranges"]}'
+            f'<p>{L["how"]} <a href="{method_path(lang)}">{pick(lang, "More on how we measure", "Más sobre cómo medimos")}</a></p><ol class="src">{how}</ol>\n<p>{L["ranges"]}'
             + (pick(lang, ' * This tester mostly asked short questions, so answers under 100 tokens are counted too. Short answers measure a little slower.',
                     ' * Este tester hizo sobre todo preguntas cortas, así que también cuentan las respuestas de menos de 100 tokens. Las respuestas cortas salen algo más lentas.') if any(r.get('short') for r in pc['runs']) else '')
             + '</p>\n')
@@ -368,7 +368,7 @@ def pages(lang):
         body += (f'<h2>{L["h_more"]}</h2>\n<ul>\n{others}</ul>\n'
                  f'<p><a href="{hub}">{L["hub_t"]}</a> {L["all"].format(n=count())}.</p>\n')
         out.append((pc['slug'][lang], meta, body))
-    return out
+    return out + [method_page(lang)]
 
 def count(): return len([p for p in PCS if headline(p)])
 
@@ -410,7 +410,7 @@ def checker(lang):
     p8 = [(p, r) for p in with_page() if p['kind'] == 'desktop' and p['vram'] >= 8 for r in pictures(p) if r['on'] == 'card']
     p6 = [(p, r) for p in with_page() if p['kind'] == 'desktop' and 6 <= p['vram'] < 8 for r in pictures(p) if r['on'] == 'card']
     lap = next((p for p in with_page() if p['kind'] == 'laptop' and any(r['on'] == 'chip' for r in pictures(p))), None)
-    data = {'lang': lang, 'groups': GPUS['groups'], 'pcs': pcs, 'engines': ENG, 'bigFloor': BIG_FLOOR, 'big': big,
+    data = {'lang': lang, 'groups': GPUS['groups'], 'method': method_path(lang), 'pcs': pcs, 'engines': ENG, 'bigFloor': BIG_FLOOR, 'big': big,
             'pics8': {'n': len(p8), 'lo': min(r['picture'][0] for _, r in p8), 'hi': max(r['picture'][1] for _, r in p8)} if p8 else None,
             'pics6': {'pc': {'name': name(p6[0][0], lang), 'url': page_path(p6[0][0], lang)}, 't': p6[0][1]['picture']} if p6 else None,
             'picLaptop': {'chip': next(r['picture'] for r in pictures(lap) if r['on'] == 'chip'),
@@ -437,3 +437,166 @@ def checker(lang):
             f'<button type="button" data-ram="16">16 GB</button><button type="button" data-ram="32">{T["more"]}</button></div></div>\n'
             f'<p class="chk-help">{T["help"]}</p>\n<div id="chk-out" aria-live="polite"></div>\n<p class="chk-priv">{T["priv"]}</p>\n</section>\n'
             '<script>' + JS.replace('/*DATA*/null', json.dumps(data, ensure_ascii=False).replace('</', r'<\/')) + '</script>\n')
+
+
+# ---------- how we measure: the methods, every PC, the estimate test, and the data as a CSV ----------
+METHOD_SLUG = {'en': 'how-we-measure-ai-speed', 'es': 'como-medimos-la-velocidad-de-la-ia'}
+CSV_NAME = 'greencube-ai-speeds.csv'
+SPECS_URL = 'https://www.techpowerup.com/gpu-specs/'
+GOOD = 15  # %: estimates are good enough to show only if no hidden card is off by more than this
+
+def method_path(lang): return f'/blog/{METHOD_SLUG["en"]}' if lang == 'en' else f'/blog/es/{METHOD_SLUG["es"]}'
+
+def holdout(skip=None):
+    """Hide each card, predict its E4B writing speed from the others' speed per GB/s of memory bandwidth, compare."""
+    pts = [(p, mid(headline(p)['writes'])) for p in with_page()
+           if p.get('bw') and headline(p)['engine'] == 'e4b' and headline(p)['on'] == 'card' and p is not skip]
+    rows = []
+    for p, m in pts:
+        eff = sum(o / q['bw'] for q, o in pts if q is not p) / (len(pts) - 1)
+        rows.append((p, m, eff * p['bw'], (eff * p['bw'] - m) / m))
+    rows.sort(key=lambda r: -r[1])
+    def med(v):
+        v = sorted(v)
+        return v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2
+    errs = [abs(r[3]) for r in rows]
+    worst = max(rows, key=lambda r: abs(r[3]))
+    if skip: return dict(worst_pct=round(100 * max(errs)))
+    rest = holdout(skip=worst[0])  # the same test run again without the worst card
+    return dict(rows=rows, median=round(100 * med(errs)), worst=worst, worst_pct=round(100 * abs(worst[3])),
+                rest_worst=rest['worst_pct'], good=100 * max(errs) <= GOOD)
+
+def csv_text():
+    """Every measured run, one row each."""
+    import csv, io
+    f = io.StringIO()
+    w = csv.writer(f, lineterminator='\n')
+    w.writerow(['pc', 'kind', 'graphics', 'vram_gb', 'ram_gb', 'processor', 'ai_model', 'ran_on', 'writes_tok_s_low', 'writes_tok_s_high',
+                'reads_tok_s_low', 'reads_tok_s_high', 'picture_s_low', 'picture_s_high', 'method', 'greencube_version', 'date', 'second_pc'])
+    for p in PCS:
+        for r in p['runs']:
+            w.writerow([p['id'], p['kind'], p.get('chip') or f'{p["vendor"]} {p["gpu"]}', p['vram'], p['ram'], p['cpu'],
+                        ENG[r['engine']]['name'] if 'engine' in r else 'Z-Image Turbo (pictures)', r['on'],
+                        *(r.get('writes') or ['', '']), *(r.get('reads') or ['', '']), *(r.get('picture') or ['', '']),
+                        r['method'], r.get('v', ''), r['date'], 'yes' if r.get('second') else ''])
+    return f.getvalue()
+
+MW = {
+    'en': dict(
+        title="How we measure AI speed on real PCs, and why we don't guess",
+        desc="Every speed on the GreenCube blog comes from one of {n} real PCs. How we measure, every PC we tested, the data as a CSV, and the test that shows why we don't estimate the rest.",
+        ans="Every speed on this blog comes from a real PC running GreenCube: {n} PCs so far, measured between {d0} and {d1}. We don't estimate speeds for cards we haven't measured: when we tested estimates on the cards we have, the typical one was off by {med}% and the worst by {worst}%.",
+        s1="real PCs measured, desktops and laptops", s2="measurements, all in the CSV below", s3="how far off the worst speed estimate was",
+        h_what="What we measure",
+        what=("<p>Three things, because they are what you feel when you use an AI on your own PC:</p>\n<ul>\n"
+              "<li><strong>Writing speed:</strong> how fast the AI types its answer, in tokens a second. A token is about three quarters of an English word, and most people read about 5 tokens a second, so anything above that comes out faster than you can read.</li>\n"
+              "<li><strong>Reading speed:</strong> how fast it takes in what you give it: your question, a pasted text or a PDF. It is always much faster than writing, because the AI reads many tokens at once but writes them one by one.</li>\n"
+              "<li><strong>Picture time:</strong> how long one 512×512 picture takes, from the click to the finished image.</li>\n</ul>\n"
+              "<p>We measure the AIs GreenCube ships, the same files every user downloads: Google's {e2b} ({e2bgb} GB), {e4b} ({e4bgb} GB) and {b12} ({b12gb} GB) for chat, and Z-Image Turbo for pictures. A different AI, or the same one compressed differently, would give different numbers, so we only compare like with like.</p>\n"),
+        h_how="How we measure", how_lead="Four ways, and every number on the blog says which one it came from:",
+        names={'app': 'Real chats', 'app-test': "GreenCube's startup test", 'bench': "llama.cpp's speed test", 'picture': 'Picture test'}, used='Used for',
+        how_tail=("<p>Real chats are the best evidence, because that is what you will feel, so the main number on every page comes from real chats whenever we have them. "
+                  "The startup test is one short answer, so we use it for the card-versus-processor comparison (it times both the same way), and as the main number only where a tester sent no long answers.</p>\n"),
+        h_pcs="Every PC we measured", pcs_lead="Real testers' own PCs, used the way they normally use them, not lab machines. We don't publish their names.",
+        th_pcs=('PC', 'Type', 'VRAM', 'RAM', 'Main number from', 'GreenCube', 'Date', 'Writes (tokens/s)'),
+        ranges=("<h2>Why the numbers come as ranges</h2>\n<ul>\n"
+                "<li><strong>Other apps.</strong> A browser, a game launcher or a video call uses the same memory and graphics card.</li>\n"
+                "<li><strong>The first time is slower.</strong> The first answer after installing, or the first picture, includes loading and setting up the card. We say so where it matters (for example \"the first took 83 s while it loaded\").</li>\n"
+                "<li><strong>Short answers measure slower.</strong> Every answer has a small fixed start, which weighs more on a 20-token reply than on a 400-token one. That is why real-chat ranges count answers of 100 tokens or more, and we flag it where a tester only sent short ones.</li>\n"
+                "<li><strong>We leave out the extremes.</strong> Real-chat ranges go from the 10th to the 90th percentile, so one odd answer cannot move them.</li>\n</ul>\n"),
+        h_est="Can you guess a card's speed from its specs?",
+        est=("<p>It would be handy: there are hundreds of cards and we have measured {n} PCs. The usual way is memory bandwidth. To write each token, the AI reads its whole model from the card's memory, so in theory speed is roughly bandwidth divided by model size, times some efficiency. Many online calculators work like this.</p>\n"
+             "<p>So we tested it on our own data. We hid one card at a time, worked out the speed per GB/s from the others, predicted the hidden card from its bandwidth (from the makers' specs, collected in the <a href=\"{specs}\" rel=\"noopener\">TechPowerUp GPU database</a>), and compared with what we measured. Same AI on all of them ({e4b}, whole on the card).</p>\n"),
+        th_est=('Card', 'Memory bandwidth', 'Measured (tokens/s)', 'Predicted', 'Off by'),
+        est_res=("<p>The typical estimate was off by {med}%. The worst was the {worst_link}: its memory suggests about {pred} tokens a second, but it wrote {meas}. Run the test again without it and the others are still off by up to {rest}%. "
+                 "The newer AMD RX 6600 went the other way, faster than its bandwidth suggests; its large on-chip cache (AMD calls it Infinity Cache) may be part of why. Each measured number is that card's main number, so they don't all come from the same kind of test; that adds some noise, but it can't explain missing by three times.</p>\n"),
+        bad=("<strong>That is not good enough.</strong> A guess that can be {rest}% off on a modern card, or {worst}% on an older one, would tell some people their PC is fine when it is slow, or the other way round. "
+             "So the checker and the card pages only ever show cards we measured, and say clearly when yours isn't one of them. We run this test again with every new card, and if the error gets small, we will say so here before we show a single estimate."),
+        good="Good enough to show estimates, clearly marked as estimates.",
+        gaps=("<h2>What we haven't measured yet</h2>\n<ul>\n<li>A laptop with a gaming card.</li>\n<li>{b12} on a card with 10 GB or more.</li>\n"
+              "<li>Pictures on the {nopic}.</li>\n<li>Other AIs than the ones GreenCube ships, and Linux or Mac (GreenCube is for Windows).</li>\n</ul>\n"),
+        data=("<h2>Get the data</h2>\n<p>Every measurement on this page, one row each, is in <a href=\"/blog/{csv}\" download>{csv}</a>: the PC, the AI, where it ran, writing and reading speeds, picture times, how it was measured, the GreenCube version and the date. "
+              "If you use it, please cite \"GreenCube, AI speed measurements on real PCs, {year}\" and link to this page.</p>\n"
+              "<h2>Add your PC</h2>\n<p>Already using GreenCube? Send your log to <a href=\"mailto:support@greencube.app\">support@greencube.app</a>. We add your PC to the tests, without your name, and a new card gets its own page. Not sure what your PC has? <a href=\"{hub}#checker\">Check it here</a>.</p>\n"),
+        faq=[("Where do GreenCube's AI speed numbers come from?", "From {n} real PCs running GreenCube, measured in real chats, with GreenCube's startup speed test, with llama.cpp's speed test and with a picture test. Every number says which."),
+             ("Can you estimate AI speed from a graphics card's specs?", "Not reliably yet. Predicting from memory bandwidth, our estimates were typically {med}% off and up to {worst}% off, so we only show cards we measured."),
+             ("Can I download the data?", "Yes: every measurement is in {csv}, linked on this page.")]),
+    'es': dict(
+        title="Cómo medimos la velocidad de la IA en PCs reales, y por qué no la adivinamos",
+        desc="Cada velocidad del blog de GreenCube sale de uno de {n} PCs reales. Cómo medimos, cada PC que probamos, los datos en CSV y la prueba que muestra por qué no estimamos el resto.",
+        ans="Cada velocidad de este blog sale de un PC real con GreenCube: {n} PCs hasta ahora, medidos entre el {d0} y el {d1}. No estimamos velocidades de tarjetas que no hemos medido: cuando probamos a estimar las que sí tenemos, la estimación típica fallaba un {med}% y la peor un {worst}%.",
+        s1="PCs reales medidos, sobremesas y portátiles", s2="mediciones, todas en el CSV de abajo", s3="lo que falló la peor estimación de velocidad",
+        h_what="Qué medimos",
+        what=("<p>Tres cosas, porque son lo que notas al usar una IA en tu propio PC:</p>\n<ul>\n"
+              "<li><strong>Velocidad de escritura:</strong> lo rápido que la IA teclea su respuesta, en tokens por segundo. Un token es un trozo de palabra (en español cada palabra suele ocupar uno o dos), y una persona lee unos 8 tokens por segundo, así que por encima de eso la respuesta sale más rápido de lo que lees.</li>\n"
+              "<li><strong>Velocidad de lectura:</strong> lo rápido que asimila lo que le das: tu pregunta, un texto pegado o un PDF. Siempre es mucho más rápida que la escritura, porque la IA lee muchos tokens a la vez pero los escribe de uno en uno.</li>\n"
+              "<li><strong>Tiempo por imagen:</strong> lo que tarda una imagen de 512×512, desde el clic hasta la imagen terminada.</li>\n</ul>\n"
+              "<p>Medimos las IAs que trae GreenCube, los mismos archivos que descarga cualquier usuario: {e2b} ({e2bgb} GB), {e4b} ({e4bgb} GB) y {b12} ({b12gb} GB) de Google para chatear, y Z-Image Turbo para las imágenes. Otra IA, o la misma comprimida de otra forma, daría otros números, así que solo comparamos lo comparable.</p>\n"),
+        h_how="Cómo medimos", how_lead="De cuatro formas, y cada número del blog dice de cuál sale:",
+        names={'app': 'Chats reales', 'app-test': 'La prueba de arranque de GreenCube', 'bench': 'La prueba de velocidad de llama.cpp', 'picture': 'Prueba de imágenes'}, used='Usado en',
+        how_tail=("<p>Los chats reales son la mejor prueba, porque es lo que vas a notar, así que el número principal de cada página sale de chats reales siempre que los tenemos. "
+                  "La prueba de arranque es una sola respuesta corta, así que la usamos para comparar tarjeta y procesador (mide los dos igual), y como número principal solo cuando un tester no mandó respuestas largas.</p>\n"),
+        h_pcs="Todos los PCs que medimos", pcs_lead="Los PCs de testers reales, usados como los usan siempre, no máquinas de laboratorio. No publicamos sus nombres.",
+        th_pcs=('PC', 'Tipo', 'VRAM', 'RAM', 'Número principal', 'GreenCube', 'Fecha', 'Escribe (tokens/s)'),
+        ranges=("<h2>Por qué los números son rangos</h2>\n<ul>\n"
+                "<li><strong>Otras apps.</strong> Un navegador, un launcher de juegos o una videollamada usan la misma memoria y la misma tarjeta.</li>\n"
+                "<li><strong>La primera vez va más lenta.</strong> La primera respuesta tras instalar, o la primera imagen, incluye cargar y preparar la tarjeta. Lo decimos donde importa (por ejemplo, \"la primera tardó 83 s mientras cargaba\").</li>\n"
+                "<li><strong>Las respuestas cortas salen más lentas.</strong> Cada respuesta tiene un pequeño arranque fijo, que pesa más en una de 20 tokens que en una de 400. Por eso los rangos de chats reales cuentan respuestas de 100 tokens o más, y lo avisamos cuando un tester solo mandó respuestas cortas.</li>\n"
+                "<li><strong>Dejamos fuera los extremos.</strong> Los rangos de chats reales van del percentil 10 al 90, así que una respuesta rara no los mueve.</li>\n</ul>\n"),
+        h_est="¿Se puede adivinar la velocidad de una tarjeta por sus especificaciones?",
+        est=("<p>Sería práctico: hay cientos de tarjetas y hemos medido {n} PCs. Lo habitual es usar el ancho de banda de memoria. Para escribir cada token, la IA lee su modelo entero de la memoria de la tarjeta, así que en teoría la velocidad es más o menos el ancho de banda dividido entre el tamaño del modelo, por cierta eficiencia. Muchas calculadoras online funcionan así.</p>\n"
+             "<p>Así que lo probamos con nuestros datos. Escondimos una tarjeta cada vez, calculamos la velocidad por GB/s con las demás, predijimos la escondida a partir de su ancho de banda (de las especificaciones de los fabricantes, recogidas en la <a href=\"{specs}\" rel=\"noopener\">base de datos de TechPowerUp</a>) y lo comparamos con lo medido. La misma IA en todas ({e4b}, entera en la tarjeta).</p>\n"),
+        th_est=('Tarjeta', 'Ancho de banda', 'Medido (tokens/s)', 'Predicho', 'Error'),
+        est_res=("<p>La estimación típica falló un {med}%. La peor fue la {worst_link}: por su memoria tocarían unos {pred} tokens por segundo, pero escribía {meas}. Repitiendo la prueba sin ella, las demás siguen fallando hasta un {rest}%. "
+                 "La RX 6600, más nueva, fue al revés, más rápida de lo que dice su ancho de banda; su gran caché dentro del chip (AMD la llama Infinity Cache) puede ser parte del motivo. Cada número medido es el número principal de su tarjeta, así que no todos salen del mismo tipo de prueba; eso añade algo de ruido, pero no explica fallar por tres veces.</p>\n"),
+        bad=("<strong>No es suficiente.</strong> Una estimación que puede fallar un {rest}% en una tarjeta moderna, o un {worst}% en una antigua, le diría a alguien que su PC va bien cuando va lento, o al revés. "
+             "Así que el comprobador y las páginas de tarjetas solo muestran tarjetas medidas, y dicen claramente cuándo la tuya no es una de ellas. Repetimos esta prueba con cada tarjeta nueva, y si el error baja, lo diremos aquí antes de mostrar una sola estimación."),
+        good="Suficiente para mostrar estimaciones, marcadas claramente como estimaciones.",
+        gaps=("<h2>Lo que aún no hemos medido</h2>\n<ul>\n<li>Un portátil con tarjeta gaming.</li>\n<li>{b12} en una tarjeta de 10 GB o más.</li>\n"
+              "<li>Imágenes en la {nopic}.</li>\n<li>Otras IAs aparte de las que trae GreenCube, y Linux o Mac (GreenCube es para Windows).</li>\n</ul>\n"),
+        data=("<h2>Descarga los datos</h2>\n<p>Todas las mediciones de esta página, una por fila, están en <a href=\"/blog/{csv}\" download>{csv}</a>: el PC, la IA, dónde funcionó, velocidades de escritura y lectura, tiempos por imagen, cómo se midió, la versión de GreenCube y la fecha. "
+              "Si lo usas, cita \"GreenCube, mediciones de velocidad de IA en PCs reales, {year}\" y enlaza a esta página.</p>\n"
+              "<h2>Añade tu PC</h2>\n<p>¿Ya usas GreenCube? Mándanos tu registro a <a href=\"mailto:support@greencube.app\">support@greencube.app</a>. Añadimos tu PC a las pruebas, sin tu nombre, y una tarjeta nueva tiene su propia página. ¿No sabes qué tiene tu PC? <a href=\"{hub}#checker\">Míralo aquí</a>.</p>\n"),
+        faq=[("¿De dónde salen los números de velocidad de GreenCube?", "De {n} PCs reales con GreenCube, medidos en chats reales, con la prueba de arranque de GreenCube, con la prueba de velocidad de llama.cpp y con una prueba de imágenes. Cada número dice de cuál sale."),
+             ("¿Se puede estimar la velocidad de la IA con las especificaciones de la tarjeta?", "Aún no de forma fiable. Prediciendo por ancho de banda, nuestras estimaciones fallaban un {med}% de media y hasta un {worst}%, así que solo mostramos tarjetas medidas."),
+             ("¿Puedo descargar los datos?", "Sí: todas las mediciones están en {csv}, enlazado en esta página.")]),
+}
+
+def method_page(lang):
+    M, L = MW[lang], W[lang]
+    pcs = ranked()
+    dates = sorted(r['date'] for p in pcs for r in p['runs'])
+    H = holdout()
+    hub = f'/blog/{HUB["en"]}' if lang == 'en' else f'/blog/es/{HUB["es"]}'
+    nopic = [p for p in pcs if p['kind'] == 'desktop' and not pictures(p)]
+    f = dict(n=count(), d0=date(dates[0], lang), d1=date(dates[-1], lang), med=H['median'], worst=H['worst_pct'], rest=H['rest_worst'],
+             e2b=ENG['e2b']['name'], e2bgb=num(ENG['e2b']['gb'], lang), e4b=ENG['e4b']['name'], e4bgb=num(ENG['e4b']['gb'], lang),
+             b12=ENG[BIG]['name'], b12gb=num(ENG[BIG]['gb'], lang), specs=SPECS_URL, csv=CSV_NAME, year=dates[-1][:4], hub=hub,
+             worst_link=link(H['worst'][0], lang), pred=num(round(H['worst'][2]), lang), meas=num(round(H['worst'][1]), lang),
+             nopic=pick(lang, ', the ', ', la ').join(link(p, lang) for p in nopic))
+    b = f'<div class="answer"><p>{esc(M["ans"].format(**f))}</p></div>\n'
+    b += ('<div class="stats">\n' + f'<div class="stat g"><b>{count()}</b><span>{M["s1"]}</span></div>\n'
+          + f'<div class="stat b"><b>{sum(len(p["runs"]) for p in PCS)}</b><span>{M["s2"]}</span></div>\n'
+          + f'<div class="stat y"><b>{H["worst_pct"]}%</b><span>{M["s3"]}</span></div>\n</div>\n')
+    b += f'<h2>{M["h_what"]}</h2>\n' + M['what'].format(**f)
+    b += f'<h2>{M["h_how"]}</h2>\n<p>{M["how_lead"]}</p>\n'
+    for m, tint in (('app', 'g'), ('app-test', 'b'), ('bench', 'y'), ('picture', 'p')):
+        on = ', '.join(link(p, lang) for p in pcs if any(r['method'] == m for r in p['runs']))
+        b += (f'<div class="card {tint}">\n<h3>{M["names"][m]}</h3>\n<p>{esc(METHODS[m][lang].replace(" {v}", ""))}</p>\n'
+              + (f'<p>{M["used"]}: {on}.</p>\n' if on else '') + '</div>\n')
+    b += M['how_tail']
+    rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{L["kind"][p["kind"]]}</td><td>{str(p["vram"]) + " GB" if p["vram"] else "–"}</td><td>{p["ram"]} GB</td>'
+                   f'<td>{esc(M["names"][headline(p)["method"]])}</td><td>{headline(p).get("v", "–")}</td><td>{date(headline(p)["date"], lang)}</td><td><b>{hl(p, lang)}</b></td></tr>\n'
+                   for p in pcs)
+    b += (f'<h2>{M["h_pcs"]}</h2>\n<p>{M["pcs_lead"]}</p>\n<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_pcs'])
+          + '</tr></thead>\n<tbody>\n' + rows + '</tbody>\n</table></div>\n')
+    b += M['ranges']
+    t_rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{p["bw"]} GB/s</td><td>{num(round(m), lang)}</td><td>{num(round(pr), lang)}</td>'
+                     f'<td><b>{"+" if er > 0 else "−"}{round(abs(er) * 100)}%</b></td></tr>\n' for p, m, pr, er in H['rows'])
+    b += (f'<h2>{M["h_est"]}</h2>\n' + M['est'].format(**f) + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_est'])
+          + '</tr></thead>\n<tbody>\n' + t_rows + '</tbody>\n</table></div>\n' + M['est_res'].format(**f)
+          + f'<p>{(M["good"] if H["good"] else M["bad"]).format(**f)}</p>\n')
+    b += M['gaps'].format(**f) + M['data'].format(**f)
+    meta = {'title': M['title'], 'description': M['desc'].format(**f), 'date': dates[-1], 'lang': lang, 'kind': 'pc',
+            'alt': METHOD_SLUG['es' if lang == 'en' else 'en'], 'faq': [{'q': q, 'a': a.format(**f)} for q, a in M['faq']]}
+    return METHOD_SLUG[lang], meta, b

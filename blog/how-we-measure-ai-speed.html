@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>How we measure AI speed on real PCs, and why we don&#x27;t guess | GreenCube blog</title>
+  <meta name="description" content="Every speed on the GreenCube blog comes from one of 10 real PCs. How we measure, every PC we tested, the data as a CSV, and the test that shows why we don&#x27;t estimate the rest." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="How we measure AI speed on real PCs, and why we don&#x27;t guess | GreenCube blog" />
+  <meta property="og:description" content="Every speed on the GreenCube blog comes from one of 10 real PCs. How we measure, every PC we tested, the data as a CSV, and the test that shows why we don&#x27;t estimate the rest." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How we measure AI speed on real PCs, and why we don't guess", "description": "Every speed on the GreenCube blog comes from one of 10 real PCs. How we measure, every PC we tested, the data as a CSV, and the test that shows why we don't estimate the rest.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where do GreenCube's AI speed numbers come from?", "acceptedAnswer": {"@type": "Answer", "text": "From 10 real PCs running GreenCube, measured in real chats, with GreenCube's startup speed test, with llama.cpp's speed test and with a picture test. Every number says which."}}, {"@type": "Question", "name": "Can you estimate AI speed from a graphics card's specs?", "acceptedAnswer": {"@type": "Answer", "text": "Not reliably yet. Predicting from memory bandwidth, our estimates were typically 19% off and up to 239% off, so we only show cards we measured."}}, {"@type": "Question", "name": "Can I download the data?", "acceptedAnswer": {"@type": "Answer", "text": "Yes: every measurement is in greencube-ai-speeds.csv, linked on this page."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="https://greencube.app/your-data">Your data</a>
+    <a href="https://greencube.app/mission">Our mission</a>
+    <a href="/blog" class="on">Blog</a>
+  </nav>
+  <a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<h1>How we measure AI speed on real PCs, and why we don&#x27;t guess</h1>
+<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 14 October 2026 &middot; <a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Leer en español</a></p>
+<div class="answer"><p>Every speed on this blog comes from a real PC running GreenCube: 10 PCs so far, measured between 22 September 2026 and 14 October 2026. We don&#x27;t estimate speeds for cards we haven&#x27;t measured: when we tested estimates on the cards we have, the typical one was off by 19% and the worst by 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>real PCs measured, desktops and laptops</span></div>
+<div class="stat b"><b>34</b><span>measurements, all in the CSV below</span></div>
+<div class="stat y"><b>239%</b><span>how far off the worst speed estimate was</span></div>
+</div>
+<h2>What we measure</h2>
+<p>Three things, because they are what you feel when you use an AI on your own PC:</p>
+<ul>
+<li><strong>Writing speed:</strong> how fast the AI types its answer, in tokens a second. A token is about three quarters of an English word, and most people read about 5 tokens a second, so anything above that comes out faster than you can read.</li>
+<li><strong>Reading speed:</strong> how fast it takes in what you give it: your question, a pasted text or a PDF. It is always much faster than writing, because the AI reads many tokens at once but writes them one by one.</li>
+<li><strong>Picture time:</strong> how long one 512×512 picture takes, from the click to the finished image.</li>
+</ul>
+<p>We measure the AIs GreenCube ships, the same files every user downloads: Google's Gemma 4 E2B (2.6 GB), Gemma 4 E4B (4.2 GB) and Gemma 4 12B (6.4 GB) for chat, and Z-Image Turbo for pictures. A different AI, or the same one compressed differently, would give different numbers, so we only compare like with like.</p>
+<h2>How we measure</h2>
+<p>Four ways, and every number on the blog says which one it came from:</p>
+<div class="card g">
+<h3>Real chats</h3>
+<p>Real chats in GreenCube: the speed of every answer of 100 tokens or more, read from the app&#x27;s log. The range leaves out the slowest and the fastest tenth.</p>
+<p>Used for: <a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/ai-on-rx-580">RX 580</a>, <a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a>.</p>
+</div>
+<div class="card b">
+<h3>GreenCube's startup test</h3>
+<p>GreenCube&#x27;s own speed test, which it runs at startup to choose between the graphics card and the processor: a short answer written once on each.</p>
+<p>Used for: <a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ai-on-rx-580">RX 580</a>, <a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a>.</p>
+</div>
+<div class="card y">
+<h3>llama.cpp's speed test</h3>
+<p>llama.cpp&#x27;s own speed test (llama-bench), the engine GreenCube runs on, with the same AI files: 128 tokens written, a 512-token text read.</p>
+<p>Used for: <a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 laptop</a>.</p>
+</div>
+<div class="card p">
+<h3>Picture test</h3>
+<p>GreenCube&#x27;s picture engine (Z-Image Turbo), 512×512 pixels, 8 steps, timed from the click to the finished picture.</p>
+<p>Used for: <a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 laptop</a>.</p>
+</div>
+<p>Real chats are the best evidence, because that is what you will feel, so the main number on every page comes from real chats whenever we have them. The startup test is one short answer, so we use it for the card-versus-processor comparison (it times both the same way), and as the main number only where a tester sent no long answers.</p>
+<h2>Every PC we measured</h2>
+<p>Real testers' own PCs, used the way they normally use them, not lab machines. We don't publish their names.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Type</th><th>VRAM</th><th>RAM</th><th>Main number from</th><th>GreenCube</th><th>Date</th><th>Writes (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Desktop</td><td>11 GB</td><td>128 GB</td><td>Real chats</td><td>0.1.44</td><td>14 October 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Desktop</td><td>8 GB</td><td>48 GB</td><td>llama.cpp&#x27;s speed test</td><td>–</td><td>22 September 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/ai-on-rtx-5060">RTX 5060</a></td><td>Desktop</td><td>8 GB</td><td>32 GB</td><td>GreenCube&#x27;s startup test</td><td>0.1.42</td><td>1 October 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/ai-on-rtx-3060">RTX 3060</a></td><td>Desktop</td><td>12 GB</td><td>32 GB</td><td>Real chats</td><td>0.1.42–0.1.43</td><td>6 October 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-6600">RX 6600</a></td><td>Desktop</td><td>8 GB</td><td>16 GB</td><td>Real chats</td><td>0.1.42–0.1.44</td><td>9 October 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Desktop</td><td>6 GB</td><td>16 GB</td><td>Real chats</td><td>0.1.42</td><td>1 October 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/ai-on-gtx-1650">GTX 1650</a></td><td>Desktop</td><td>4 GB</td><td>16 GB</td><td>Real chats</td><td>0.1.40</td><td>23 September 2026</td><td><b>about 20</b></td></tr>
+<tr><td><a href="/blog/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 laptop</a></td><td>Laptop</td><td>–</td><td>16 GB</td><td>llama.cpp&#x27;s speed test</td><td>–</td><td>28 September 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-580">RX 580</a></td><td>Desktop</td><td>8 GB</td><td>16 GB</td><td>Real chats</td><td>0.1.42</td><td>1 October 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a></td><td>Laptop</td><td>–</td><td>8 GB</td><td>Real chats</td><td>0.1.42</td><td>4 October 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Why the numbers come as ranges</h2>
+<ul>
+<li><strong>Other apps.</strong> A browser, a game launcher or a video call uses the same memory and graphics card.</li>
+<li><strong>The first time is slower.</strong> The first answer after installing, or the first picture, includes loading and setting up the card. We say so where it matters (for example "the first took 83 s while it loaded").</li>
+<li><strong>Short answers measure slower.</strong> Every answer has a small fixed start, which weighs more on a 20-token reply than on a 400-token one. That is why real-chat ranges count answers of 100 tokens or more, and we flag it where a tester only sent short ones.</li>
+<li><strong>We leave out the extremes.</strong> Real-chat ranges go from the 10th to the 90th percentile, so one odd answer cannot move them.</li>
+</ul>
+<h2>Can you guess a card's speed from its specs?</h2>
+<p>It would be handy: there are hundreds of cards and we have measured 10 PCs. The usual way is memory bandwidth. To write each token, the AI reads its whole model from the card's memory, so in theory speed is roughly bandwidth divided by model size, times some efficiency. Many online calculators work like this.</p>
+<p>So we tested it on our own data. We hid one card at a time, worked out the speed per GB/s from the others, predicted the hidden card from its bandwidth (from the makers' specs, collected in the <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">TechPowerUp GPU database</a>), and compared with what we measured. Same AI on all of them (Gemma 4 E4B, whole on the card).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Card</th><th>Memory bandwidth</th><th>Measured (tokens/s)</th><th>Predicted</th><th>Off by</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/s</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/s</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/s</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/s</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-6600">RX 6600</a></td><td>224 GB/s</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/s</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/ai-on-rx-580">RX 580</a></td><td>256 GB/s</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>The typical estimate was off by 19%. The worst was the <a href="/blog/ai-on-rx-580">RX 580</a>: its memory suggests about 36 tokens a second, but it wrote 11. Run the test again without it and the others are still off by up to 33%. The newer AMD RX 6600 went the other way, faster than its bandwidth suggests; its large on-chip cache (AMD calls it Infinity Cache) may be part of why. Each measured number is that card's main number, so they don't all come from the same kind of test; that adds some noise, but it can't explain missing by three times.</p>
+<p><strong>That is not good enough.</strong> A guess that can be 33% off on a modern card, or 239% on an older one, would tell some people their PC is fine when it is slow, or the other way round. So the checker and the card pages only ever show cards we measured, and say clearly when yours isn't one of them. We run this test again with every new card, and if the error gets small, we will say so here before we show a single estimate.</p>
+<h2>What we haven't measured yet</h2>
+<ul>
+<li>A laptop with a gaming card.</li>
+<li>Gemma 4 12B on a card with 10 GB or more.</li>
+<li>Pictures on the <a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a>, the <a href="/blog/ai-on-rtx-5060">RTX 5060</a>, the <a href="/blog/ai-on-gtx-1650">GTX 1650</a>, the <a href="/blog/ai-on-rx-580">RX 580</a>.</li>
+<li>Other AIs than the ones GreenCube ships, and Linux or Mac (GreenCube is for Windows).</li>
+</ul>
+<h2>Get the data</h2>
+<p>Every measurement on this page, one row each, is in <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: the PC, the AI, where it ran, writing and reading speeds, picture times, how it was measured, the GreenCube version and the date. If you use it, please cite "GreenCube, AI speed measurements on real PCs, 2026" and link to this page.</p>
+<h2>Add your PC</h2>
+<p>Already using GreenCube? Send your log to <a href="mailto:support@greencube.app">support@greencube.app</a>. We add your PC to the tests, without your name, and a new card gets its own page. Not sure what your PC has? <a href="/blog/can-my-pc-run-ai#checker">Check it here</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Where do GreenCube&#x27;s AI speed numbers come from?</summary><p>From 10 real PCs running GreenCube, measured in real chats, with GreenCube&#x27;s startup speed test, with llama.cpp&#x27;s speed test and with a picture test. Every number says which.</p></details>
+<details><summary>Can you estimate AI speed from a graphics card&#x27;s specs?</summary><p>Not reliably yet. Predicting from memory bandwidth, our estimates were typically 19% off and up to 239% off, so we only show cards we measured.</p></details>
+<details><summary>Can I download the data?</summary><p>Yes: every measurement is in greencube-ai-speeds.csv, linked on this page.</p></details>
+</div>
+
+<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI that's <em>owned,</em> not rented.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/buy">Get GreenCube</a></li>
+          <li><a href="https://greencube.app/what-you-get">Will it run on my computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Learn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="https://greencube.app/your-data">Your data</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; your data</a></li>
+          <li><a href="https://greencube.app/ai-environmental-impact">AI &amp; the planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://greencube.app/mission">Our mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacy policy</a></li>
+          <li><a href="https://legal.greencube.app/terms">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
