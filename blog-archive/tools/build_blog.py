@@ -177,7 +177,8 @@ for p in idx:
         q, _ = facts.fix_text(f['q']); a, _ = facts.fix_text(f['a']); faq.append((q, a))
     changed = bool(ch1 or ch2 or ch3 or kinds)
     published = (p['date_published'] or p['sitemap_lastmod'])[:10]
-    modified = TODAY if changed else (p['date_modified'] or p['sitemap_lastmod'] or published)[:10]
+    # corrected posts count as updated on TODAY, but never before they were published (posts saved after 10-10)
+    modified = max(TODAY, published) if changed else (p['date_modified'] or p['sitemap_lastmod'] or published)[:10]
     url = f'{HOST}/blog/{slug}'
     cover = image(p['cover_image']) if p['cover_image'] else None
     og = HOST + cover[0] if cover else 'https://greencube.app/og.jpg'
