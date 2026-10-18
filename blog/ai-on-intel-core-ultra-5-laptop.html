@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Can an Intel Core Ultra 5 laptop run AI? Measured: 14–18 tokens a second", "description": "Real test: Gemma 4 E2B wrote 14–18 tokens a second on a laptop with no graphics card (Intel Core Ultra 5 125U) and 16 GB of RAM. What it means for chat, study and pictures.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can an Intel Core Ultra 5 laptop run AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a laptop with no graphics card (Intel Core Ultra 5 125U) and 16 GB of RAM, Gemma 4 E2B wrote 14–18 tokens a second. You read about 5, so answers come out faster than you can read them."}}, {"@type": "Question", "name": "Can an Intel Core Ultra 5 laptop make AI pictures?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor only."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can an Intel Core Ultra 5 laptop run AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a laptop with no graphics card (Intel Core Ultra 5 125U) and 16 GB of RAM, Gemma 4 E2B wrote 14–18 tokens a second. You read about 5, so answers come out faster than you can read them."}}, {"@type": "Question", "name": "Can an Intel Core Ultra 5 laptop make AI pictures?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor alone."}}]}</script>
 </head>
 <body>
 
@@ -52,28 +52,42 @@
 <div class="stat p"><b>2:02–2:38 min</b><span>to make a picture</span></div>
 <div class="stat y"><b>8–10</b><span>with Gemma 4 E4B</span></div>
 </div>
+<h2>What that means in practice</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Task</th><th>Time on this PC</th></tr></thead>
+<tbody>
+<tr><td>Write a normal answer (400 tokens, about 300 words)</td><td><b>22–29 s</b></td></tr>
+<tr><td>Make a picture (512×512, built-in graphics)</td><td><b>2:02–2:38 min</b></td></tr>
+<tr><td>Make a picture (512×512, processor alone)</td><td><b>11:27–13:32 min</b></td></tr>
+</tbody>
+</table></div>
+<p>Worked out from the speeds measured on this PC: time is length divided by speed, and a real answer also spends a moment getting started. For scale, most people read about 4 words a second (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), so a 400-token answer takes you over a minute just to read.</p>
 <h2>What we measured</h2>
+<p><strong>Writing</strong> is how fast the AI types its answer, in tokens a second; a token is about three quarters of an English word. <strong>Reading</strong> is how fast it takes in what you give it: your question, a pasted text or a PDF. Reading is always much faster than writing, because the AI can read many tokens at once but has to write them one by one.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>What</th><th>Ran on</th><th>Result</th><th>Measured</th></tr></thead>
 <tbody>
 <tr><td>Gemma 4 E2B</td><td>processor only</td><td><b>14–18</b> tokens a second writing</td><td>28 September 2026 <sup>1</sup></td></tr>
 <tr><td>Gemma 4 E4B</td><td>processor only</td><td><b>8–10</b> tokens a second writing</td><td>28 September 2026 <sup>1</sup></td></tr>
-<tr><td>picture (512×512)</td><td>built-in Intel graphics</td><td><b>2:02–2:38 min</b></td><td>23 September 2026 <sup>2</sup></td></tr>
-<tr><td>picture (512×512)</td><td>processor only</td><td><b>11:27–13:32 min</b></td><td>14 October 2026 <sup>2</sup></td></tr>
+<tr><td>Picture (512×512)</td><td>built-in Intel graphics</td><td><b>2:02–2:38 min</b></td><td>27 September 2026 <sup>2</sup></td></tr>
+<tr><td>Picture (512×512)</td><td>processor only</td><td><b>11:27–13:32 min</b></td><td>14 October 2026 <sup>2</sup></td></tr>
 </tbody>
 </table></div>
-<p>How we measured:</p><ol class="src"><li value="1">llama.cpp&#x27;s own speed test (llama-bench), the engine GreenCube runs on</li><li value="2">GreenCube&#x27;s picture engine (Z-Image Turbo), 512x512, 8 steps</li></ol>
+<p>How each number was measured:</p><ol class="src"><li>llama.cpp&#x27;s own speed test (llama-bench), the engine GreenCube runs on, with the same AI files: 128 tokens written, a 512-token text read.</li><li>GreenCube&#x27;s picture engine (Z-Image Turbo), 512×512 pixels, 8 steps, timed from the click to the finished picture.</li></ol>
 <p>Where we have several runs we show the range: speeds move a little between runs on the same PC.</p>
 <h2>What it means</h2>
 <div class="card b">
 <h3>No graphics card? It still works</h3>
-<p>With no card, the AI runs on the processor. The smaller Gemma 4 E2B wrote 14–18 tokens a second. The bigger Gemma 4 E4B works too, at 8–10.</p>
+<p>With no graphics card, the AI runs on the processor. It is slower than on a gaming PC, but the smaller Gemma 4 E2B still writes 14–18 tokens a second, enough to study, summarise and write with. The bigger Gemma 4 E4B works too, at 8–10: smarter, but you will feel the wait on long answers.</p>
 </div>
 <div class="card p">
 <h3>Pictures</h3>
-<p>Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor only.</p>
+<p>Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor alone. A picture uses its own AI of about 6 GB and far more maths than a chat answer, so the graphics matter even more here.</p>
 </div>
+<h2>How it compares</h2>
+<p>Of the 2 PCs we measured with Gemma 4 E2B, this one is <strong>number 1</strong> for writing speed. The <a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a> writes 5–7, so this one is about 2.5 times as fast.</p>
 <h2>The test PC</h2>
+<p>A real tester's own PC, used the way they normally use it, not a lab machine:</p>
 <ul>
 <li>Laptop</li>
 <li><strong>Graphics:</strong> built-in Intel graphics only</li>
@@ -81,20 +95,32 @@
 <li><strong>RAM:</strong> 16 GB</li>
 <li><strong>Processor:</strong> Intel Core Ultra 5 125U, 14 threads</li>
 </ul>
+<h2>Check your own PC</h2>
+<p>Not sure what your PC has? It takes 30 seconds:</p>
+<ol class="steps">
+<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
+<li>Go to <strong>Performance</strong>.</li>
+<li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>
+<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. Only see Intel or AMD graphics with no dedicated memory? Then you have no separate card.</li>
+</ol>
+<p>Then find the closest card in <a href="/blog/can-my-pc-run-ai">the full table</a>. The same card with more VRAM can fit a bigger AI; a newer card of the same size is usually faster.</p>
 <h2>Other PCs we measured</h2>
 <ul>
-<li><a href="/blog/ai-on-rtx-2080-ti">NVIDIA RTX 2080 Ti, 11 GB</a>: 65–71 tokens a second</li>
-<li><a href="/blog/ai-on-rx-5700-xt">AMD RX 5700 XT, 8 GB</a>: 63–72 tokens a second</li>
-<li><a href="/blog/ai-on-rtx-5060">NVIDIA RTX 5060, 8 GB</a>: 56 tokens a second</li>
-<li><a href="/blog/ai-on-gtx-1660-super">NVIDIA GTX 1660 Super, 6 GB</a>: 35–38 tokens a second</li>
-<li><a href="/blog/ai-on-gtx-1650">NVIDIA GTX 1650, 4 GB</a>: about 20 tokens a second</li>
-<li><a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe only</a>: 9.3 tokens a second</li>
+<li><a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rtx-5060">RTX 5060</a>: 56 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rtx-3060">RTX 3060</a>: 53–55 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rx-6600">RX 6600</a>: 42–44 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-gtx-1650">GTX 1650</a>: about 20 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rx-580">RX 580</a>: 10–11 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a>: 5–7 tokens a second (Gemma 4 E2B)</li>
 </ul>
-<p><a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> All 8 PCs side by side, and how to check yours.</p>
+<p><a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> All 10 PCs in one table, and what your PC will feel like.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Can an Intel Core Ultra 5 laptop run AI locally?</summary><p>Yes. On a laptop with no graphics card (Intel Core Ultra 5 125U) and 16 GB of RAM, Gemma 4 E2B wrote 14–18 tokens a second. You read about 5, so answers come out faster than you can read them.</p></details>
-<details><summary>Can an Intel Core Ultra 5 laptop make AI pictures?</summary><p>Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor only.</p></details>
+<details><summary>Can an Intel Core Ultra 5 laptop make AI pictures?</summary><p>Yes. One picture (512×512) took 2:02–2:38 min on the built-in Intel graphics, and 11:27–13:32 min on the processor alone.</p></details>
 </div>
 
 <div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>

@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Can an RTX 5060 run AI? Measured: 56 tokens a second", "description": "Real test: Gemma 4 E4B wrote 56 tokens a second on a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM. What it means for chat, study and pictures.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ai-on-rtx-5060", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can an RTX 5060 run AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM, Gemma 4 E4B wrote 56 tokens a second. You read about 5, so answers come out faster than you can read them."}}, {"@type": "Question", "name": "Can an RTX 5060 make AI pictures?", "acceptedAnswer": {"@type": "Answer", "text": "We haven't timed pictures on this one yet. When we do, the number goes here."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can an RTX 5060 run AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM, Gemma 4 E4B wrote 56 tokens a second. You read about 5, so answers come out faster than you can read them."}}, {"@type": "Question", "name": "Can an RTX 5060 make AI pictures?", "acceptedAnswer": {"@type": "Answer", "text": "Very likely, but we haven't timed a picture on this card yet. When we do, the number goes here."}}, {"@type": "Question", "name": "Is AI faster on the RTX 5060 or on the processor?", "acceptedAnswer": {"@type": "Answer", "text": "On the card, by far: 55.9 tokens a second against 12.1 on the processor, about 4.6 times faster."}}, {"@type": "Question", "name": "Can an RTX 5060 run Gemma 4 12B?", "acceptedAnswer": {"@type": "Answer", "text": "Not comfortably. GreenCube suggests the bigger Gemma 4 12B only on cards with 10 GB or more of VRAM, and this one has 8. On an 8 GB AMD RX 5700 XT it answered short questions, then crashed in a long chat."}}]}</script>
 </head>
 <body>
 
@@ -49,30 +49,56 @@
 <div class="answer"><p><strong>Yes.</strong> On a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM, Gemma 4 E4B wrote 56 tokens a second. You read about 5, so answers come out faster than you can read them.</p></div>
 <div class="stats">
 <div class="stat g"><b>56</b><span>tokens a second with Gemma 4 E4B</span></div>
+<div class="stat b"><b>4.6×</b><span>faster on the card than on the processor</span></div>
 </div>
+<h2>What that means in practice</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Task</th><th>Time on this PC</th></tr></thead>
+<tbody>
+<tr><td>Write a normal answer (400 tokens, about 300 words)</td><td><b>7 s</b></td></tr>
+</tbody>
+</table></div>
+<p>Worked out from the speeds measured on this PC: time is length divided by speed, and a real answer also spends a moment getting started. For scale, most people read about 4 words a second (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), so a 400-token answer takes you over a minute just to read.</p>
 <h2>What we measured</h2>
+<p><strong>Writing</strong> is how fast the AI types its answer, in tokens a second; a token is about three quarters of an English word. <strong>Reading</strong> is how fast it takes in what you give it: your question, a pasted text or a PDF. Reading is always much faster than writing, because the AI can read many tokens at once but has to write them one by one.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>What</th><th>Ran on</th><th>Result</th><th>Measured</th></tr></thead>
 <tbody>
-<tr><td>Gemma 4 E4B</td><td>graphics card</td><td><b>56</b> tokens a second writing</td><td>1 October 2026</td></tr>
+<tr><td>Gemma 4 E4B</td><td>graphics card</td><td><b>55.9</b> tokens a second writing</td><td>1 October 2026</td></tr>
+<tr><td>Gemma 4 E4B</td><td>processor only</td><td><b>12.1</b> tokens a second writing</td><td>1 October 2026</td></tr>
 </tbody>
 </table></div>
-<p>How we measured:</p><ol class="src"><li value="1">GreenCube 0.1.42, in real chats</li></ol>
+<p>How each number was measured:</p><ol class="src"><li>GreenCube 0.1.42&#x27;s own speed test, which it runs at startup to choose between the graphics card and the processor: a short answer written once on each.</li></ol>
 <p>Where we have several runs we show the range: speeds move a little between runs on the same PC.</p>
 <h2>What it means</h2>
+<div class="card g">
+<h3>The graphics card does the work</h3>
+<p>Same PC, same AI (Gemma 4 E4B): 12.1 tokens a second on the processor alone, 55.9 on the graphics card, about <strong>4.6 times faster</strong>. A graphics card is built to do thousands of small sums at once for games, and running an AI is mostly that same kind of maths. GreenCube times both when it starts and uses the faster one.</p>
+</div>
 <div class="card b">
 <h3>The whole AI fits on the card</h3>
-<p>Gemma 4 E4B is a 4.2 GB file and the card has 8 GB of its own memory (VRAM), so all of it runs on the card. That is what makes it this fast.</p>
+<p>Gemma 4 E4B is a 4.2 GB file and the card has 8 GB of its own memory (VRAM). All of it fits, with room left for the conversation, so the card never waits for the slower memory in the rest of the PC. That is the biggest reason it runs this fast.</p>
 </div>
 <div class="card y">
-<h3>Gemma 4 12B needs a bigger card</h3>
-<p>GreenCube suggests the bigger Gemma 4 12B only on cards with 10 GB or more. On an 8 GB <a href="/blog/ai-on-rx-5700-xt">AMD RX 5700 XT</a> it answered short questions, then crashed in a long chat.</p>
+<h3>The bigger Gemma 4 12B</h3>
+<p>Not comfortably. GreenCube suggests the bigger Gemma 4 12B only on cards with 10 GB or more of VRAM, and this one has 8. On an 8 GB AMD RX 5700 XT it answered short questions, then crashed in a long chat.</p>
 </div>
 <div class="card p">
 <h3>Pictures</h3>
-<p>We haven&#x27;t timed pictures on this one yet. When we do, the number goes here.</p>
+<p>Very likely, but we haven&#x27;t timed a picture on this card yet. When we do, the number goes here. A picture uses its own AI of about 6 GB and far more maths than a chat answer, so the graphics matter even more here.</p>
 </div>
+<h2>How it compares</h2>
+<p>Of the 8 PCs we measured with Gemma 4 E4B, this one is <strong>number 3</strong> for writing speed. The <a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a> writes 63–72, about 20% faster. The <a href="/blog/ai-on-rtx-3060">RTX 3060</a> writes 53–55, so this one is about 5% faster.</p>
+<p>We measured 4 cards with 8 GB, and they are far apart:</p>
+<ul>
+<li><a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens a second</li>
+<li><strong>RTX 5060</strong>: 56 tokens a second (startup test)</li>
+<li><a href="/blog/ai-on-rx-6600">RX 6600</a>: 42–44 tokens a second</li>
+<li><a href="/blog/ai-on-rx-580">RX 580</a>: 10–11 tokens a second</li>
+</ul>
+<p>Memory decides which AI fits. How new the card is decides how fast it runs.</p>
 <h2>The test PC</h2>
+<p>A real tester's own PC, used the way they normally use it, not a lab machine:</p>
 <ul>
 <li>Desktop</li>
 <li><strong>Graphics:</strong> NVIDIA RTX 5060</li>
@@ -80,20 +106,34 @@
 <li><strong>RAM:</strong> 32 GB</li>
 <li><strong>Processor:</strong> 16 threads</li>
 </ul>
+<h2>Check your own PC</h2>
+<p>Not sure what your PC has? It takes 30 seconds:</p>
+<ol class="steps">
+<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
+<li>Go to <strong>Performance</strong>.</li>
+<li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>
+<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. Only see Intel or AMD graphics with no dedicated memory? Then you have no separate card.</li>
+</ol>
+<p>Then find the closest card in <a href="/blog/can-my-pc-run-ai">the full table</a>. The same card with more VRAM can fit a bigger AI; a newer card of the same size is usually faster.</p>
 <h2>Other PCs we measured</h2>
 <ul>
-<li><a href="/blog/ai-on-rtx-2080-ti">NVIDIA RTX 2080 Ti, 11 GB</a>: 65–71 tokens a second</li>
-<li><a href="/blog/ai-on-rx-5700-xt">AMD RX 5700 XT, 8 GB</a>: 63–72 tokens a second</li>
-<li><a href="/blog/ai-on-gtx-1660-super">NVIDIA GTX 1660 Super, 6 GB</a>: 35–38 tokens a second</li>
-<li><a href="/blog/ai-on-gtx-1650">NVIDIA GTX 1650, 4 GB</a>: about 20 tokens a second</li>
-<li><a href="/blog/ai-on-intel-core-ultra-5-laptop">Intel graphics only (Core Ultra 5)</a>: 14–18 tokens a second</li>
-<li><a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe only</a>: 9.3 tokens a second</li>
+<li><a href="/blog/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rtx-3060">RTX 3060</a>: 53–55 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-rx-6600">RX 6600</a>: 42–44 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-gtx-1650">GTX 1650</a>: about 20 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 laptop</a>: 14–18 tokens a second (Gemma 4 E2B)</li>
+<li><a href="/blog/ai-on-rx-580">RX 580</a>: 10–11 tokens a second (Gemma 4 E4B)</li>
+<li><a href="/blog/ai-on-intel-iris-xe-laptop">Intel Iris Xe laptop</a>: 5–7 tokens a second (Gemma 4 E2B)</li>
 </ul>
-<p><a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> All 8 PCs side by side, and how to check yours.</p>
+<p><a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> All 10 PCs in one table, and what your PC will feel like.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Can an RTX 5060 run AI locally?</summary><p>Yes. On a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM, Gemma 4 E4B wrote 56 tokens a second. You read about 5, so answers come out faster than you can read them.</p></details>
-<details><summary>Can an RTX 5060 make AI pictures?</summary><p>We haven&#x27;t timed pictures on this one yet. When we do, the number goes here.</p></details>
+<details><summary>Can an RTX 5060 make AI pictures?</summary><p>Very likely, but we haven&#x27;t timed a picture on this card yet. When we do, the number goes here.</p></details>
+<details><summary>Is AI faster on the RTX 5060 or on the processor?</summary><p>On the card, by far: 55.9 tokens a second against 12.1 on the processor, about 4.6 times faster.</p></details>
+<details><summary>Can an RTX 5060 run Gemma 4 12B?</summary><p>Not comfortably. GreenCube suggests the bigger Gemma 4 12B only on cards with 10 GB or more of VRAM, and this one has 8. On an 8 GB AMD RX 5700 XT it answered short questions, then crashed in a long chat.</p></details>
 </div>
 
 <div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>

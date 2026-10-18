@@ -1,7 +1,7 @@
 """One page per measured PC, and the speed table in the "Can my PC run AI?" test, written from blog-archive/data/pcs.json.
 
-build_blog.py calls pages() and table(); every sentence that holds a number is written here from the data, so a
-corrected number changes everywhere at once. A PC with no measured speed (or no known model) gets no page.
+build_blog.py calls pages() and table(). Every sentence that holds a number is written here from the data, so a
+corrected number changes everywhere at once. A PC with no measured speed gets no page.
 """
 import json, os, html
 
@@ -11,10 +11,14 @@ ENG, METHODS = DATA['engines'], DATA['methods']
 PCS = DATA['pcs']
 HUB = {'en': 'can-my-pc-run-ai', 'es': 'ia-en-mi-pc'}
 BIG = '12b'
-BIG_FLOOR = 10  # GB of VRAM GreenCube asks for before it suggests the 12B
-READ = {'en': 5, 'es': 8}  # tokens a second a person reads (about 4 words; Spanish words take more tokens)
+BIG_FLOOR = 10      # GB of VRAM GreenCube asks for before it suggests the 12B
+SLOW = 20           # tokens a second: below this, a card that holds the whole AI is "slow at AI"
+ANSWER, DOC = 400, 5000  # tokens in a normal answer, and in a long document (about 7 pages)
+READ_URL = 'https://doi.org/10.1016/j.jml.2019.104047'
 
 def esc(s): return html.escape(s, quote=True)
+def pick(lang, en, es): return en if lang == 'en' else es
+def mid(r): return (r[0] + r[1]) / 2
 
 def num(x, lang):
     s = f'{int(x):,}' if x == int(x) else f'{x:,.1f}'
@@ -22,13 +26,28 @@ def num(x, lang):
 
 def rng(r, lang, approx=False):
     s = num(r[0], lang) if r[0] == r[1] else f'{num(r[0], lang)}–{num(r[1], lang)}'
-    return ({'en': 'about ', 'es': 'unos '}[lang] + s) if approx else s
+    return pick(lang, 'about ', 'unos ') + s if approx else s
+
+def rw(r, lang, approx=False):
+    """The same range in whole numbers, for titles and sentences."""
+    return rng([round(r[0]), round(r[1])], lang, approx)
+
+def hl(pc, lang):
+    """A PC's headline speed in whole numbers."""
+    h = headline(pc)
+    return rw(h['writes'], lang, h.get('approx'))
 
 def secs(r, lang):
+    """8–9 s, 28 s, 2:02–2:38 min"""
+    r = [round(r[0]), round(r[1])]
     if r[1] < 90:
-        return (f'{r[0]} s' if r[0] == r[1] else f'{r[0]}–{r[1]} s')
+        return f'{r[0]} s' if r[0] == r[1] else f'{r[0]}–{r[1]} s'
     mm = lambda t: f'{t // 60}:{t % 60:02d}'
     return f'{mm(r[0])} min' if r[0] == r[1] else f'{mm(r[0])}–{mm(r[1])} min'
+
+def times(tokens, speeds, lang):
+    """How long `tokens` take at a measured speed range: the slow end of the speed gives the long time."""
+    return secs([tokens / speeds[1], tokens / speeds[0]], lang)
 
 def date(d, lang):
     y, m = d[:4], int(d[5:7])
@@ -45,13 +64,15 @@ def name(pc, lang, art=False):
 def label(pc, lang):
     return pc.get('label', {}).get(lang) or f'{pc["vendor"]} {pc["gpu"]}, {pc["vram"]} GB'
 
+def an(n): return 'an' if str(n).startswith(('8', '11', '18')) else 'a'
 def text_runs(pc): return [r for r in pc['runs'] if 'engine' in r]
 def pictures(pc): return [r for r in pc['runs'] if 'picture' in r]
+RANK = {'app': 2, 'bench': 2, 'app-test': 1}
 
 def headline(pc):
-    """The speed a person gets in GreenCube: the fastest everyday engine, not the startup test or the 12B."""
-    runs = [r for r in text_runs(pc) if r['method'] != 'app-test' and r['engine'] != BIG]
-    return max(runs, key=lambda r: r['writes'][0]) if runs else None
+    """The speed a person gets: real chats or the full benchmark before the short startup test; never the 12B or a second tester."""
+    runs = [r for r in text_runs(pc) if r['engine'] != BIG and not r.get('second')]
+    return max(runs, key=lambda r: (RANK[r['method']], r['writes'][0])) if runs else None
 
 def card_vs_cpu(pc):
     """(card run, processor run) measured the same way on the same engine, or None."""
@@ -61,48 +82,56 @@ def card_vs_cpu(pc):
                 return c, p
     return None
 
-def method(r, lang):
-    return METHODS[r['method']][lang].replace('{v}', r.get('v', '')).replace('  ', ' ').replace(' ,', ',')
+def times_x(cv, lang):
+    x = mid(cv[0]['writes']) / mid(cv[1]['writes'])
+    return num(round(x) if x >= 10 else round(x, 1), lang)
+
+def method(r, lang): return METHODS[r['method']][lang].replace(' {v}', f' {r["v"]}' if r.get('v') else '')
 
 W = {
     'en': dict(on={'card': 'graphics card', 'cpu': 'processor only', 'chip': 'built-in Intel graphics', 'split': 'graphics card, overflowing into RAM'},
                kind={'desktop': 'Desktop', 'laptop': 'Laptop'}, tps='tokens a second', writes='writing', reads='reading',
-               pic='picture (512×512)', first='the first took {f} s while it loaded',
-               h_meas='What we measured', h_mean='What it means', h_pc='The test PC', h_more='Other PCs we measured',
-               th=('What', 'Ran on', 'Result', 'Measured'), how='How we measured:',
+               pic='Picture (512×512)', first='the first took {f} s while it loaded',
+               h_feel='What that means in practice', h_meas='What we measured', h_mean='What it means', h_cmp='How it compares',
+               h_pc='The test PC', h_check='Check your own PC', h_more='Other PCs we measured',
+               th=('What', 'Ran on', 'Result', 'Measured'), th_feel=('Task', 'Time on this PC'), how='How each number was measured:',
                ranges='Where we have several runs we show the range: speeds move a little between runs on the same PC.',
                spec=('Graphics', 'Graphics memory (VRAM)', 'RAM', 'Processor'), none='none (no separate graphics card)',
-               all='All {n} PCs side by side, and how to check yours', hub_t='Can my PC run AI?',
-               q_run='Can {a} run AI locally?', q_pic='Can {a} make AI pictures?', q_cpu='Is AI faster on the {n} or on the processor?'),
+               all='All {n} PCs in one table, and what your PC will feel like', hub_t='Can my PC run AI?',
+               q_run='Can {a} run AI locally?', q_pic='Can {a} make AI pictures?', q_cpu='Is AI faster on the {n} or on the processor?',
+               q_big='Can {a} run Gemma 4 12B?'),
     'es': dict(on={'card': 'tarjeta gráfica', 'cpu': 'solo procesador', 'chip': 'gráficos Intel integrados', 'split': 'tarjeta gráfica, desbordando a la RAM'},
                kind={'desktop': 'Sobremesa', 'laptop': 'Portátil'}, tps='tokens por segundo', writes='escribiendo', reads='leyendo',
-               pic='imagen (512×512)', first='la primera tardó {f} s mientras cargaba',
-               h_meas='Lo que medimos', h_mean='Qué significa', h_pc='El PC de la prueba', h_more='Otros PCs que medimos',
-               th=('Qué', 'Dónde', 'Resultado', 'Medido'), how='Cómo lo medimos:',
+               pic='Imagen (512×512)', first='la primera tardó {f} s mientras cargaba',
+               h_feel='Qué significa en la práctica', h_meas='Lo que medimos', h_mean='Qué significa', h_cmp='Cómo se compara',
+               h_pc='El PC de la prueba', h_check='Mira tu propio PC', h_more='Otros PCs que medimos',
+               th=('Qué', 'Dónde', 'Resultado', 'Medido'), th_feel=('Tarea', 'Tiempo en este PC'), how='Cómo se midió cada número:',
                ranges='Cuando tenemos varias pruebas damos el rango: la velocidad varía un poco entre pruebas en el mismo PC.',
                spec=('Gráfica', 'Memoria gráfica (VRAM)', 'RAM', 'Procesador'), none='ninguna (sin tarjeta gráfica aparte)',
-               all='Los {n} PCs juntos, y cómo mirar el tuyo', hub_t='¿Puedo usar IA en mi PC?',
-               q_run='¿Puede {a} ejecutar IA en local?', q_pic='¿Puede {a} crear imágenes con IA?', q_cpu='¿La IA va más rápido en la {n} o en el procesador?'),
+               all='Los {n} PCs en una tabla, y cómo irá el tuyo', hub_t='¿Puedo usar IA en mi PC?',
+               q_run='¿Puede {a} ejecutar IA en local?', q_pic='¿Puede {a} crear imágenes con IA?', q_cpu='¿La IA va más rápido en la {n} o en el procesador?',
+               q_big='¿Puede {a} ejecutar Gemma 4 12B?'),
 }
 
 def where_phrase(pc, lang):
     """'a desktop with an NVIDIA RTX 5060 (8 GB) and 32 GB of RAM'"""
     if pc['kind'] == 'laptop':
-        return {'en': f'a laptop with no graphics card ({pc["chip"]}) and {pc["ram"]} GB of RAM',
-                'es': f'un portátil sin tarjeta gráfica ({pc["chip"]}) y {pc["ram"]} GB de RAM'}[lang]
-    return {'en': f'a desktop with {"an" if pc["vendor"] in ("NVIDIA", "AMD", "Intel") else "a"} {pc["vendor"]} {pc["gpu"]} ({pc["vram"]} GB) and {pc["ram"]} GB of RAM',
-            'es': f'un sobremesa con una {pc["vendor"]} {pc["gpu"]} ({pc["vram"]} GB) y {pc["ram"]} GB de RAM'}[lang]
+        return pick(lang, f'a laptop with no graphics card ({pc["chip"]}) and {pc["ram"]} GB of RAM',
+                    f'un portátil sin tarjeta gráfica ({pc["chip"]}) y {pc["ram"]} GB de RAM')
+    return pick(lang, f'a desktop with an {pc["vendor"]} {pc["gpu"]} ({pc["vram"]} GB) and {pc["ram"]} GB of RAM',
+                f'un sobremesa con una {pc["vendor"]} {pc["gpu"]} ({pc["vram"]} GB) y {pc["ram"]} GB de RAM')
 
 def answer(pc, lang):
     h = headline(pc)
-    sp = rng(h['writes'], lang, h.get('approx'))
+    sp = hl(pc, lang)
     eng = ENG[h['engine']]['name']
-    fast = h['writes'][0] > READ[lang]
+    lo = h['writes'][0]
     if lang == 'en':
-        return (f'Yes. On {where_phrase(pc, lang)}, {eng} wrote {sp} tokens a second. '
-                + ('You read about 5, so answers come out faster than you can read them.' if fast else 'That is about as fast as you read.'))
-    return (f'Sí. En {where_phrase(pc, lang)}, {eng} escribía {sp} tokens por segundo. '
-            + ('Más rápido de lo que lees.' if fast else 'Más o menos a tu ritmo de lectura.'))
+        tail = ('You read about 5, so answers come out faster than you can read them.' if lo > 6 else
+                'You read about 5, so answers come out at about reading speed.')
+        return f'Yes. On {where_phrase(pc, lang)}, {eng} wrote {sp} tokens a second. {tail}'
+    tail = 'Más rápido de lo que lees.' if lo > 9 else 'Más o menos a tu ritmo de lectura.'
+    return f'Sí. En {where_phrase(pc, lang)}, {eng} escribía {sp} tokens por segundo. {tail}'
 
 def picture_sentence(pc, lang):
     pics = pictures(pc)
@@ -110,149 +139,232 @@ def picture_sentence(pc, lang):
         parts = []
         for r in pics:
             t = secs(r['picture'], lang)
-            on = W[lang]['on'][r['on']]
             first = f' ({W[lang]["first"].format(f=r["first"])})' if r.get('first') else ''
-            parts.append({'en': f'{t} on the {on}{first}', 'es': f'{t} en {"la " if r["on"] == "card" else "el " if r["on"] == "cpu" else "los "}{on.replace("solo ", "")}{first}'}[lang])
-        return {'en': 'Yes. One picture (512×512) took ' + ', and '.join(parts) + '.',
-                'es': 'Sí. Una imagen (512×512) tardó ' + ', y '.join(parts) + '.'}[lang]
+            where = {'card': ('the graphics card', 'la tarjeta gráfica'), 'cpu': ('the processor alone', 'solo el procesador'),
+                     'chip': ('the built-in Intel graphics', 'los gráficos Intel integrados')}[r['on']]
+            parts.append(pick(lang, f'{t} on {where[0]}{first}', f'{t} con {where[1]}{first}'))
+        return pick(lang, 'Yes. One picture (512×512) took ' + ', and '.join(parts) + '.',
+                    'Sí. Una imagen (512×512) tardó ' + ', y '.join(parts) + '.')
     if pc['kind'] == 'laptop' and pc['ram'] <= 8:
-        return {'en': f'No. The picture AI needs about 7 GB of memory to itself, more than {"an" if str(pc["ram"]).startswith(("8", "11", "18")) else "a"} {pc["ram"]} GB laptop can free up. Chat and study work fine.',
-                'es': f'No. La IA de imágenes necesita unos 7 GB de memoria para ella sola, más de lo que puede liberar un portátil de {pc["ram"]} GB. Chatear y estudiar sí funcionan.'}[lang]
-    return {'en': 'We haven\'t timed pictures on this one yet. When we do, the number goes here.',
-            'es': 'Aún no hemos cronometrado imágenes en este PC. Cuando lo hagamos, el número irá aquí.'}[lang]
+        return pick(lang, f'No. The picture AI needs about 7 GB of memory to itself, more than {an(pc["ram"])} {pc["ram"]} GB laptop can free up. Chat and study work fine.',
+                    f'No. La IA de imágenes necesita unos 7 GB de memoria para ella sola, más de lo que puede liberar un portátil de {pc["ram"]} GB. Chatear y estudiar sí funcionan.')
+    return pick(lang, 'Very likely, but we haven\'t timed a picture on this card yet. When we do, the number goes here.',
+                'Muy probablemente, pero aún no hemos cronometrado una imagen con esta tarjeta. Cuando lo hagamos, el número irá aquí.')
 
-def insights(pc, lang, by_id):
-    """(tint, heading, text) cards, each built from a rule and the numbers."""
+def big_sentence(pc, lang):
+    """What we know about the 12B on this PC, or None for laptops."""
+    if pc['kind'] != 'desktop': return None
+    b = ENG[BIG]
+    big = [r for r in text_runs(pc) if r['engine'] == BIG]
+    if big and big[0].get('crash'):
+        r = big[0]
+        return pick(lang, f'Only for short chats. The bigger {b["name"]} ({num(b["gb"], lang)} GB) wrote {rng(r["writes"], lang)} tokens a second on a short question, but once the chat reached {num(r["crash"], lang)} tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with {BIG_FLOOR} GB or more.',
+                    f'Solo para chats cortos. La más grande, {b["name"]} ({num(b["gb"], lang)} GB), escribía {rng(r["writes"], lang)} tokens por segundo con una pregunta corta, pero cuando el chat llegó a {num(r["crash"], lang)} tokens (una conversación larga) se colgó, con la tarjeta casi llena. Por eso GreenCube solo propone la 12B con tarjetas de {BIG_FLOOR} GB o más.')
+    if pc['vram'] >= BIG_FLOOR:
+        return pick(lang, f'It should. {b["name"]} is a {num(b["gb"], lang)} GB file and this card has {pc["vram"]} GB, which leaves room for a long conversation too. We haven\'t measured it on this card yet.',
+                    f'Debería. {b["name"]} ocupa {num(b["gb"], lang)} GB y esta tarjeta tiene {pc["vram"]}, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.')
+    ref = next((p for p in PCS if any(r['engine'] == BIG and r.get('crash') for r in text_runs(p))), None)
+    tail = pick(lang, f' On an 8 GB {ref["vendor"]} {ref["gpu"]} it answered short questions, then crashed in a long chat.',
+                f' En una {ref["vendor"]} {ref["gpu"]} de 8 GB respondió preguntas cortas y luego se colgó en un chat largo.') if ref else ''
+    return pick(lang, f'Not comfortably. GreenCube suggests the bigger {b["name"]} only on cards with {BIG_FLOOR} GB or more of VRAM, and this one has {pc["vram"]}.{tail}',
+                f'No con holgura. GreenCube solo propone la más grande, {b["name"]}, con tarjetas de {BIG_FLOOR} GB de VRAM o más, y esta tiene {pc["vram"]}.{tail}')
+
+def page_path(pc, lang): return f'/blog/{pc["slug"]["en"]}' if lang == 'en' else f'/blog/es/{pc["slug"]["es"]}'
+def link(pc, lang): return f'<a href="{page_path(pc, lang)}">{esc(name(pc, lang))}</a>'
+def with_page(): return [p for p in PCS if p.get('slug') and headline(p)]
+def ranked(): return sorted(with_page(), key=lambda p: -mid(headline(p)['writes']))
+def the(pc, lang):
+    """'la RX 6600' / 'el portátil con…' / 'the RX 6600'"""
+    return pick(lang, 'the', 'el' if pc['kind'] == 'laptop' else 'la')
+
+def insights(pc, lang):
+    """(tint, heading, html) cards, each built from a rule and the numbers."""
     out = []
     h = headline(pc)
+    e = ENG[h['engine']]
+    hs = hl(pc, lang)
     cv = card_vs_cpu(pc)
     if cv:
         c, p = cv
-        x = c['writes'][1] / p['writes'][1]
-        xs = num(round(x) if x >= 10 else round(x, 1), lang)
-        out.append(('g', {'en': f'The card is {xs}× faster than the processor', 'es': f'La tarjeta va {xs} veces más rápido que el procesador'}[lang],
-                    {'en': f'Same PC, same AI ({ENG[c["engine"]]["name"]}): {rng(p["writes"], lang)} tokens a second on the processor alone, {rng(c["writes"], lang)} on the graphics card. AI is the kind of maths graphics cards are built for.',
-                     'es': f'Mismo PC, misma IA ({ENG[c["engine"]]["name"]}): {rng(p["writes"], lang)} tokens por segundo solo con el procesador y {rng(c["writes"], lang)} con la tarjeta gráfica. Una IA es justo el tipo de cálculo para el que están hechas las gráficas.'}[lang]))
-    e = ENG[h['engine']]
-    if h['on'] == 'card':
-        out.append(('b', {'en': 'The whole AI fits on the card', 'es': 'La IA entera cabe en la tarjeta'}[lang],
-                    {'en': f'{e["name"]} is a {num(e["gb"], lang)} GB file and the card has {pc["vram"]} GB of its own memory (VRAM), so all of it runs on the card. That is what makes it this fast.',
-                     'es': f'{e["name"]} ocupa {num(e["gb"], lang)} GB y la tarjeta tiene {pc["vram"]} GB de memoria propia (VRAM), así que funciona entera en la tarjeta. Por eso va tan rápido.'}[lang]))
+        out.append(('g', pick(lang, 'The graphics card does the work', 'La tarjeta gráfica hace el trabajo'),
+            pick(lang, f'Same PC, same AI ({ENG[c["engine"]]["name"]}): {rng(p["writes"], lang)} tokens a second on the processor alone, {rng(c["writes"], lang)} on the graphics card, about <strong>{times_x(cv, lang)} times faster</strong>. A graphics card is built to do thousands of small sums at once for games, and running an AI is mostly that same kind of maths. GreenCube times both when it starts and uses the faster one.',
+                 f'Mismo PC, misma IA ({ENG[c["engine"]]["name"]}): {rng(p["writes"], lang)} tokens por segundo solo con el procesador y {rng(c["writes"], lang)} con la tarjeta gráfica, unas <strong>{times_x(cv, lang)} veces más rápido</strong>. Una gráfica está hecha para hacer miles de cuentas pequeñas a la vez para los juegos, y una IA es sobre todo ese mismo tipo de cálculo. GreenCube cronometra las dos al arrancar y usa la más rápida.')))
+    if h['on'] == 'card' and h['writes'][0] >= SLOW:
+        out.append(('b', pick(lang, 'The whole AI fits on the card', 'La IA entera cabe en la tarjeta'),
+            pick(lang, f'{e["name"]} is a {num(e["gb"], lang)} GB file and the card has {pc["vram"]} GB of its own memory (VRAM). All of it fits, with room left for the conversation, so the card never waits for the slower memory in the rest of the PC. That is the biggest reason it runs this fast.',
+                 f'{e["name"]} ocupa {num(e["gb"], lang)} GB y la tarjeta tiene {pc["vram"]} GB de memoria propia (VRAM). Cabe entera, con sitio de sobra para la conversación, así que la tarjeta nunca espera a la memoria más lenta del resto del PC. Esa es la razón principal de que vaya tan rápido.')))
+    elif h['on'] == 'card':
+        peers = [p for p in ranked() if p is not pc and p['vram'] == pc['vram'] and p['kind'] == 'desktop']
+        cmp = pick(lang, ' For comparison, other {v} GB cards we measured write {l} with the same AI.', ' Para comparar, otras tarjetas de {v} GB que medimos escriben {l} con la misma IA.').format(
+            v=pc['vram'], l=', '.join(f'{hl(p, lang)} ({link(p, lang)})' for p in peers[:3])) if peers else ''
+        out.append(('b', pick(lang, 'It fits, but this card is slow at AI', 'Cabe, pero esta tarjeta es lenta para IA'),
+            pick(lang, f'{e["name"]} ({num(e["gb"], lang)} GB) fits whole in the card\'s {pc["vram"]} GB, yet it writes only {hs} tokens a second. Older cards are much slower at this kind of maths, and more memory does not change that.{cmp} It still writes faster than you read, so chat and study work; it just feels slower than a newer card.',
+                 f'{e["name"]} ({num(e["gb"], lang)} GB) cabe entera en los {pc["vram"]} GB de la tarjeta, y aun así solo escribe {hs} tokens por segundo. Las tarjetas antiguas son mucho más lentas en este tipo de cálculo, y tener más memoria no lo arregla.{cmp} Sigue escribiendo más rápido de lo que lees, así que chatear y estudiar funcionan; solo se nota más lenta que una tarjeta nueva.')))
     elif h['on'] == 'split':
         rd = h.get('reads')
-        swing = ({'en': f' Reading what you paste swung between {num(rd[0], lang)} and {num(rd[1], lang)} tokens a second from one day to the next, most likely because the card was full.',
-                  'es': f' La lectura de lo que pegas osciló entre {num(rd[0], lang)} y {num(rd[1], lang)} tokens por segundo de un día a otro, seguramente porque la tarjeta estaba llena.'}[lang] if rd and rd[0] != rd[1] else '')
-        out.append(('b', {'en': 'Not all of it fits on the card', 'es': 'No cabe entera en la tarjeta'}[lang],
-                    {'en': f'{e["name"]} is a {num(e["gb"], lang)} GB file and the card has {pc["vram"]} GB, so it does not fit whole and part of it sits in the normal memory (RAM). It still writes {rng(h["writes"], lang, h.get("approx"))} tokens a second.{swing}',
-                     'es': f'{e["name"]} ocupa {num(e["gb"], lang)} GB y la tarjeta tiene {pc["vram"]} GB, así que no cabe entera y una parte queda en la memoria normal del PC (RAM). Aun así escribe {rng(h["writes"], lang, h.get("approx"))} tokens por segundo.{swing}'}[lang]))
+        swing = pick(lang, f' Reading what you paste swung between {num(rd[0], lang)} and {num(rd[1], lang)} tokens a second from one day to the next, most likely because the card was full.',
+                     f' La lectura de lo que pegas osciló entre {num(rd[0], lang)} y {num(rd[1], lang)} tokens por segundo de un día a otro, seguramente porque la tarjeta estaba llena.') if rd and rd[0] != rd[1] else ''
+        out.append(('b', pick(lang, 'Not all of it fits on the card', 'No cabe entera en la tarjeta'),
+            pick(lang, f'{e["name"]} is a {num(e["gb"], lang)} GB file and the card has {pc["vram"]} GB, so it does not fit whole and part of it sits in the normal memory (RAM). Every word it writes has to reach that part over a much slower path, so speed drops and moves around. It still writes {hs} tokens a second.{swing}',
+                 f'{e["name"]} ocupa {num(e["gb"], lang)} GB y la tarjeta tiene {pc["vram"]}, así que no cabe entera y una parte queda en la memoria normal (RAM). Cada palabra que escribe tiene que llegar a esa parte por un camino mucho más lento, así que la velocidad baja y varía. Aun así escribe {hs} tokens por segundo.{swing}')))
     else:
-        other = [r for r in text_runs(pc) if r['engine'] != h['engine'] and r['on'] == h['on']]
-        cmp = ({'en': f' The bigger {ENG[other[0]["engine"]]["name"]} works too, at {rng(other[0]["writes"], lang)}.',
-                'es': f' La más grande, {ENG[other[0]["engine"]]["name"]}, también funciona, a {rng(other[0]["writes"], lang)}.'}[lang] if other else '')
+        other = [r for r in text_runs(pc) if r['engine'] != h['engine'] and r['on'] == h['on'] and r['method'] == h['method']]
+        cmp = pick(lang, f' The bigger {ENG[other[0]["engine"]]["name"]} works too, at {rng(other[0]["writes"], lang)}: smarter, but you will feel the wait on long answers.',
+                   f' La más grande, {ENG[other[0]["engine"]]["name"]}, también funciona, a {rng(other[0]["writes"], lang)}: más lista, pero en respuestas largas se nota la espera.') if other else ''
         chip = [r for r in text_runs(pc) if r['on'] == 'chip' and r['engine'] == h['engine']]
-        chip_s = ({'en': f' Running it on the built-in Intel graphics was slower here ({rng(chip[0]["writes"], lang)}), so the processor is the better place.',
-                   'es': f' En los gráficos Intel integrados iba más lento ({rng(chip[0]["writes"], lang)}), así que es mejor el procesador.'}[lang] if chip else '')
-        out.append(('b', {'en': 'No graphics card? It still works', 'es': '¿Sin tarjeta gráfica? Funciona igual'}[lang],
-                    {'en': f'With no card, the AI runs on the processor. The smaller {e["name"]} wrote {rng(h["writes"], lang)} tokens a second.{cmp}{chip_s}',
-                     'es': f'Sin tarjeta, la IA funciona en el procesador. La pequeña, {e["name"]}, escribía {rng(h["writes"], lang)} tokens por segundo.{cmp}{chip_s}'}[lang]))
-    if pc['kind'] == 'desktop':
-        big = [r for r in text_runs(pc) if r['engine'] == BIG]
-        b = ENG[BIG]
-        if big and big[0].get('crash'):
-            r = big[0]
-            out.append(('y', {'en': f'{b["name"]}: fast, then it crashed', 'es': f'{b["name"]}: rápida, y luego se colgó'}[lang],
-                        {'en': f'The bigger {b["name"]} ({num(b["gb"], lang)} GB) wrote {rng(r["writes"], lang)} tokens a second on a short question. Once the chat reached {r["crash"]:,} tokens (a long conversation), it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with {BIG_FLOOR} GB or more.',
-                         'es': f'La más grande, {b["name"]} ({num(b["gb"], lang)} GB), escribía {rng(r["writes"], lang)} tokens por segundo con una pregunta corta. Cuando el chat llegó a {r["crash"]:,} tokens (una conversación larga), se colgó, con la tarjeta casi llena. Por eso GreenCube solo propone la 12B con tarjetas de {BIG_FLOOR} GB o más.'}[lang].replace(f'{r["crash"]:,}', f'{r["crash"]:,}'.replace(',', '.') if lang == 'es' else f'{r["crash"]:,}')))
-        elif pc['vram'] >= BIG_FLOOR:
-            out.append(('y', {'en': f'Room for {b["name"]}', 'es': f'Hay sitio para {b["name"]}'}[lang],
-                        {'en': f'With {pc["vram"]} GB, the bigger {b["name"]} ({num(b["gb"], lang)} GB) should fit on this card too. We haven\'t measured it here yet.',
-                         'es': f'Con {pc["vram"]} GB, la más grande, {b["name"]} ({num(b["gb"], lang)} GB), también debería caber en esta tarjeta. Aún no la hemos medido aquí.'}[lang]))
-        else:
-            ref = next((p for p in PCS if any(r['engine'] == BIG and r.get('crash') for r in text_runs(p))), None)
-            link = f'<a href="{page_path(ref, lang)}">{ref["vendor"]} {ref["gpu"]}</a>' if ref else ''
-            out.append(('y', {'en': f'{b["name"]} needs a bigger card', 'es': f'{b["name"]} necesita una tarjeta más grande'}[lang],
-                        {'en': f'GreenCube suggests the bigger {b["name"]} only on cards with {BIG_FLOOR} GB or more.' + (f' On an 8 GB {link} it answered short questions, then crashed in a long chat.' if link else ''),
-                         'es': f'GreenCube solo propone la más grande, {b["name"]}, con tarjetas de {BIG_FLOOR} GB o más.' + (f' En una {link} de 8 GB respondió preguntas cortas y luego se colgó en un chat largo.' if link else '')}[lang]))
-    out.append(('p', {'en': 'Pictures', 'es': 'Imágenes'}[lang], picture_sentence(pc, lang)))
+        cpu_t = [r for r in text_runs(pc) if r['on'] == 'cpu' and r['engine'] == h['engine'] and chip and r['method'] == chip[0]['method']]
+        chip_s = pick(lang, f' GreenCube\'s startup test also tried the built-in Intel graphics for writing: {rng(chip[0]["writes"], lang)}, against {rng(cpu_t[0]["writes"], lang)} on the processor, so it writes on the processor here.',
+                      f' La prueba de arranque de GreenCube también probó a escribir con los gráficos Intel integrados: {rng(chip[0]["writes"], lang)}, frente a {rng(cpu_t[0]["writes"], lang)} con el procesador, así que aquí escribe con el procesador.') if chip and cpu_t else ''
+        out.append(('b', pick(lang, 'No graphics card? It still works', '¿Sin tarjeta gráfica? Funciona igual'),
+            pick(lang, f'With no graphics card, the AI runs on the processor. It is slower than on a gaming PC, but the smaller {e["name"]} still writes {hs} tokens a second, enough to study, summarise and write with.{cmp}{chip_s}',
+                 f'Sin tarjeta gráfica, la IA funciona en el procesador. Va más lenta que en un PC gaming, pero la pequeña, {e["name"]}, escribe {hs} tokens por segundo, suficiente para estudiar, resumir y escribir.{cmp}{chip_s}')))
+    for r in text_runs(pc):
+        if r.get('second'):
+            short = pick(lang, ' Most of its answers were short, and short answers measure slower than long ones: its longest came near the top of that range.',
+                         ' La mayoría de sus respuestas fueron cortas, y las respuestas cortas salen más lentas que las largas: la más larga quedó cerca del máximo.') if r.get('short') else ''
+            reads = pick(lang, f', and read at {rng(r["reads"], lang)}', f' y leía a {rng(r["reads"], lang)}') if r.get('reads') else ''
+            out.append(('g', pick(lang, 'A second PC with the same card', 'Un segundo PC con la misma tarjeta'),
+                pick(lang, f'Another tester\'s {pc["gpu"]} ran {ENG[r["engine"]]["name"]} in GreenCube {r.get("v", "")}: it wrote {rng(r["writes"], lang)} tokens a second{reads}.{short}',
+                     f'La {pc["gpu"]} de otro tester usó {ENG[r["engine"]]["name"]} en GreenCube {r.get("v", "")}: escribía {rng(r["writes"], lang)} tokens por segundo{reads}.{short}')))
+    bs = big_sentence(pc, lang)
+    if bs:
+        out.append(('y', pick(lang, f'The bigger {ENG[BIG]["name"]}', f'La más grande, {ENG[BIG]["name"]}'), esc(bs)))
+    why = pick(lang, ' A picture uses its own AI of about 6 GB and far more maths than a chat answer, so the graphics matter even more here.',
+               ' Una imagen usa su propia IA, de unos 6 GB, y muchas más cuentas que una respuesta de chat, así que aquí los gráficos importan todavía más.')
+    out.append(('p', pick(lang, 'Pictures', 'Imágenes'), esc(picture_sentence(pc, lang)) + (why if pictures(pc) or pc['kind'] == 'desktop' else '')))
     return out
 
-def page_path(pc, lang): return f'/blog/{pc["slug"]["en"]}' if lang == 'en' else f'/blog/es/{pc["slug"]["es"]}'
-def with_page(): return [p for p in PCS if p.get('slug') and headline(p)]
-
-def stats(pc, lang):
+def feel(pc, lang):
+    """Task -> time on this PC, worked out from the measured speeds."""
     h = headline(pc)
-    out = [('g', rng(h['writes'], lang, h.get('approx')), {'en': f'tokens a second with {ENG[h["engine"]]["name"]}', 'es': f'tokens por segundo con {ENG[h["engine"]]["name"]}'}[lang])]
-    cv = card_vs_cpu(pc)
-    if cv:
-        x = cv[0]['writes'][1] / cv[1]['writes'][1]
-        out.append(('b', num(round(x) if x >= 10 else round(x, 1), lang) + '×', {'en': 'faster on the card than on the processor', 'es': 'más rápido en la tarjeta que en el procesador'}[lang]))
-    pics = pictures(pc)
-    if pics:
-        r = pics[0]
-        out.append(('p', secs(r['picture'], lang), {'en': 'to make a picture', 'es': 'para crear una imagen'}[lang]))
-    for r in text_runs(pc):
-        if len(out) >= 3: break
-        if r['engine'] != h['engine'] and r['method'] != 'app-test':
-            out.append(('y', rng(r['writes'], lang), {'en': f'with {ENG[r["engine"]]["name"]}', 'es': f'con {ENG[r["engine"]]["name"]}'}[lang]
-                        + ({'en': ' (short chats only)', 'es': ' (solo chats cortos)'}[lang] if r.get('crash') else '')))
-    return out[:3]
+    rows = [(pick(lang, f'Write a normal answer ({ANSWER} tokens, about 300 words)', f'Escribir una respuesta normal ({ANSWER} tokens, media página)'), times(ANSWER, h['writes'], lang))]
+    if h.get('reads'):
+        rows.append((pick(lang, f'Read a long document you give it ({num(DOC, lang)} tokens, about 7 pages)', f'Leer un documento largo que le das ({num(DOC, lang)} tokens, unas 6 páginas)'), times(DOC, h['reads'], lang)))
+    for r in pictures(pc):
+        on = pick(lang, {'card': '', 'cpu': ', processor alone', 'chip': ', built-in graphics'}[r['on']], {'card': '', 'cpu': ', solo procesador', 'chip': ', gráficos integrados'}[r['on']])
+        rows.append((pick(lang, f'Make a picture (512×512{on})', f'Crear una imagen (512×512{on})'), secs(r['picture'], lang) + (pick(lang, f' (first: {r["first"]} s)', f' (la primera: {r["first"]} s)') if r.get('first') else '')))
+    L = W[lang]
+    t = ('<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{x}</th>' for x in L['th_feel']) + '</tr></thead>\n<tbody>\n'
+         + '\n'.join(f'<tr><td>{esc(a)}</td><td><b>{esc(b)}</b></td></tr>' for a, b in rows) + '\n</tbody>\n</table></div>\n')
+    return t + pick(lang,
+        f'<p>Worked out from the speeds measured on this PC: time is length divided by speed, and a real answer also spends a moment getting started. For scale, most people read about 4 words a second (<a href="{READ_URL}" rel="noopener">Brysbaert, 2019</a>), so a {ANSWER}-token answer takes you over a minute just to read.</p>\n',
+        f'<p>Calculado a partir de las velocidades medidas en este PC: el tiempo es la longitud dividida entre la velocidad, y una respuesta real tarda además un momento en arrancar. Para hacerte una idea, una persona lee unas 4 palabras por segundo (<a href="{READ_URL}" rel="noopener">Brysbaert, 2019</a>), así que solo leer una respuesta de {ANSWER} tokens te lleva más de un minuto.</p>\n')
 
 def measured_table(pc, lang):
     L = W[lang]
+    methods = []
+    for r in pc['runs']:
+        if r['method'] not in methods: methods.append(r['method'])
     rows = []
     for r in pc['runs']:
         if 'engine' in r:
             res = f'<b>{rng(r["writes"], lang, r.get("approx"))}</b> {L["tps"]} {L["writes"]}'
             if r.get('reads'):
-                res += f' &middot; {rng(r["reads"], lang, r.get("approx_reads"))} {L["reads"]}'
-            what = ENG[r['engine']]['name']
+                res += f' &middot; {rng(r["reads"], lang)} {L["reads"]}'
+            what = ENG[r['engine']]['name'] + (pick(lang, ' (second PC)', ' (segundo PC)') if r.get('second') else '') + ('*' if r.get('short') else '')
         else:
             res = f'<b>{secs(r["picture"], lang)}</b>' + (f' ({L["first"].format(f=r["first"])})' if r.get('first') else '')
             what = L['pic']
-        mark = sorted({x['method'] for x in pc['runs']}).index(r['method']) + 1
-        sup = f' <sup>{mark}</sup>' if len({x['method'] for x in pc['runs']}) > 1 else ''
+        sup = f' <sup>{methods.index(r["method"]) + 1}</sup>' if len(methods) > 1 else ''
         rows.append(f'<tr><td>{what}</td><td>{L["on"][r["on"]]}</td><td>{res}</td><td>{date(r["date"], lang)}{sup}</td></tr>')
-    how = ''.join(f'<li value="{i}">{esc(method(next(r for r in pc["runs"] if r["method"] == m), lang))}</li>'
-                  for i, m in enumerate(sorted({x['method'] for x in pc['runs']}), 1))
-    return (f'<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in L['th']) + '</tr></thead>\n<tbody>\n'
+    def versions(m):  # every GreenCube version behind one method on this page
+        vs = list(dict.fromkeys(r['v'] for r in pc['runs'] if r['method'] == m and r.get('v')))
+        return {'method': m, 'v': pick(lang, ' and ', ' y ').join(vs)} if vs else {'method': m}
+    how = ''.join(f'<li>{esc(method(versions(m), lang))}</li>' for m in methods)
+    intro = pick(lang,
+        '<p><strong>Writing</strong> is how fast the AI types its answer, in tokens a second; a token is about three quarters of an English word. <strong>Reading</strong> is how fast it takes in what you give it: your question, a pasted text or a PDF. Reading is always much faster than writing, because the AI can read many tokens at once but has to write them one by one.</p>\n',
+        '<p><strong>Escribir</strong> es la velocidad a la que la IA teclea su respuesta, en tokens por segundo; un token es un trozo de palabra, y en español cada palabra suele ocupar uno o dos. <strong>Leer</strong> es lo rápido que asimila lo que le das: tu pregunta, un texto pegado o un PDF. Leer siempre es mucho más rápido que escribir, porque la IA puede leer muchos tokens a la vez pero tiene que escribirlos de uno en uno.</p>\n')
+    return (intro + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in L['th']) + '</tr></thead>\n<tbody>\n'
             + '\n'.join(rows) + '\n</tbody>\n</table></div>\n'
-            f'<p>{L["how"]}</p><ol class="src">{how}</ol>\n<p>{L["ranges"]}</p>\n')
+            f'<p>{L["how"]}</p><ol class="src">{how}</ol>\n<p>{L["ranges"]}'
+            + (pick(lang, ' * This tester mostly asked short questions, so answers under 100 tokens are counted too. Short answers measure a little slower.',
+                    ' * Este tester hizo sobre todo preguntas cortas, así que también cuentan las respuestas de menos de 100 tokens. Las respuestas cortas salen algo más lentas.') if any(r.get('short') for r in pc['runs']) else '')
+            + '</p>\n')
+
+def compare(pc, lang):
+    eng = headline(pc)['engine']
+    order = [p for p in ranked() if headline(p)['engine'] == eng]
+    k = order.index(pc)
+    m = mid(headline(pc)['writes'])
+    def faster(a, b):
+        """'about 45% faster' / 'about 2.5 times as fast' / None when within 5%."""
+        x = a / b
+        if x >= 2: return pick(lang, f'about {num(round(x, 1), lang)} times as fast', f'unas {num(round(x, 1), lang)} veces más rápido')
+        p = round((x - 1) * 20) * 5  # to the nearest 5%
+        return pick(lang, f'about {p}% faster', f'un {p}% más rápido') if p >= 5 else None
+    def tag(p):  # a speed from the short startup test is marked, since it is not the same test as real chats
+        return pick(lang, ' (startup test)', ' (prueba de arranque)') if headline(p)['method'] == 'app-test' else ''
+    e = ENG[eng]['name']
+    parts = [pick(lang, f'Of the {len(order)} PCs we measured with {e}, this one is <strong>number {k + 1}</strong> for writing speed.',
+                  f'De los {len(order)} PCs que medimos con {e}, este es el <strong>número {k + 1}</strong> en velocidad de escritura.')]
+    if k > 0:
+        up = order[k - 1]; f = faster(mid(headline(up)['writes']), m)
+        parts.append(pick(lang, f'The {link(up, lang)} writes {hl(up, lang)}{tag(up)}, ' + (f'{f}.' if f else 'about the same.'),
+                          f'{the(up, lang).capitalize()} {link(up, lang)} escribe {hl(up, lang)}{tag(up)}, ' + (f'{f}.' if f else 'más o menos lo mismo.')))
+    if k + 1 < len(order):
+        dn = order[k + 1]; f = faster(m, mid(headline(dn)['writes']))
+        parts.append(pick(lang, f'The {link(dn, lang)} writes {hl(dn, lang)}{tag(dn)}, so this one is ' + (f'{f}.' if f else 'about as fast.'),
+                          f'{the(dn, lang).capitalize()} {link(dn, lang)} escribe {hl(dn, lang)}{tag(dn)}, así que este va ' + (f'{f}.' if f else 'más o menos igual.')))
+    out = '<p>' + ' '.join(parts) + '</p>\n'
+    peers = [p for p in order if p['vram'] == pc['vram'] and p['kind'] == 'desktop']
+    if pc['kind'] == 'desktop' and len(peers) >= 3:
+        items = ''.join(f'<li>{link(p, lang) if p is not pc else "<strong>" + esc(name(p, lang)) + "</strong>"}: {hl(p, lang)} {W[lang]["tps"]}{tag(p)}</li>\n' for p in peers)
+        out += pick(lang, f'<p>We measured {len(peers)} cards with {pc["vram"]} GB, and they are far apart:</p>\n<ul>\n{items}</ul>\n<p>Memory decides which AI fits. How new the card is decides how fast it runs.</p>\n',
+                    f'<p>Medimos {len(peers)} tarjetas de {pc["vram"]} GB, y hay mucha diferencia entre ellas:</p>\n<ul>\n{items}</ul>\n<p>La memoria decide qué IA cabe. Lo nueva que sea la tarjeta decide lo rápido que va.</p>\n')
+    return out
+
+CHECK = {
+    'en': '<ol class="steps">\n<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>\n<li>Go to <strong>Performance</strong>.</li>\n<li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>\n<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. Only see Intel or AMD graphics with no dedicated memory? Then you have no separate card.</li>\n</ol>\n',
+    'es': '<ol class="steps">\n<li>Pulsa <strong>Ctrl + Mayús + Esc</strong> para abrir el Administrador de tareas.</li>\n<li>Ve a <strong>Rendimiento</strong>.</li>\n<li>Pulsa <strong>Memoria</strong>: el número de arriba a la derecha es tu RAM.</li>\n<li>Pulsa <strong>GPU</strong>: el nombre de arriba a la derecha es tu tarjeta, y <strong>Memoria de GPU dedicada</strong> es tu VRAM. ¿Solo ves gráficos Intel o AMD sin memoria dedicada? Entonces no tienes tarjeta aparte.</li>\n</ol>\n',
+}
 
 def pages(lang):
     """[(slug, meta, body)] for every measured PC in this language."""
     L = W[lang]
     out = []
-    pcs = with_page()
-    for pc in pcs:
+    hub = f'/blog/{HUB["en"]}' if lang == 'en' else f'/blog/es/{HUB["es"]}'
+    for pc in with_page():
         h = headline(pc)
-        sp = rng(h['writes'], lang, h.get('approx'))
+        sp = hl(pc, lang)
         a = name(pc, lang, art=True)
-        title = {'en': f'Can {a} run AI? Measured: {sp} tokens a second', 'es': f'¿Puede {a} ejecutar IA? Medido: {sp} tokens por segundo'}[lang]
-        title = title[0].upper() + title[1:]
+        title = pick(lang, f'Can {a} run AI? Measured: {sp} tokens a second', f'¿Puede {a} ejecutar IA? Medido: {sp} tokens por segundo')
         ans = answer(pc, lang)
         pic = picture_sentence(pc, lang)
-        desc = {'en': f'Real test: {ENG[h["engine"]]["name"]} wrote {sp} tokens a second on {where_phrase(pc, lang)}. What it means for chat, study and pictures.',
-                'es': f'Prueba real: {ENG[h["engine"]]["name"]} escribía {sp} tokens por segundo en {where_phrase(pc, lang)}. Qué significa para chatear, estudiar e imágenes.'}[lang]
+        desc = pick(lang, f'Real test: {ENG[h["engine"]]["name"]} wrote {sp} tokens a second on {where_phrase(pc, lang)}. What it means for chat, study and pictures.',
+                    f'Prueba real: {ENG[h["engine"]]["name"]} escribía {sp} tokens por segundo en {where_phrase(pc, lang)}. Qué significa para chatear, estudiar e imágenes.')
         faq = [{'q': L['q_run'].format(a=a), 'a': ans}, {'q': L['q_pic'].format(a=a), 'a': pic}]
         cv = card_vs_cpu(pc)
         if cv:
-            x = cv[0]['writes'][1] / cv[1]['writes'][1]
             faq.append({'q': L['q_cpu'].format(n=name(pc, lang)),
-                        'a': {'en': f'On the card, by far: {rng(cv[0]["writes"], lang)} tokens a second against {rng(cv[1]["writes"], lang)} on the processor, about {num(round(x) if x >= 10 else round(x, 1), lang)} times faster.',
-                              'es': f'En la tarjeta, de largo: {rng(cv[0]["writes"], lang)} tokens por segundo frente a {rng(cv[1]["writes"], lang)} en el procesador, unas {num(round(x) if x >= 10 else round(x, 1), lang)} veces más rápido.'}[lang]})
+                        'a': pick(lang, f'On the card, by far: {rng(cv[0]["writes"], lang)} tokens a second against {rng(cv[1]["writes"], lang)} on the processor, about {times_x(cv, lang)} times faster.',
+                                  f'En la tarjeta, de largo: {rng(cv[0]["writes"], lang)} tokens por segundo frente a {rng(cv[1]["writes"], lang)} en el procesador, unas {times_x(cv, lang)} veces más rápido.')})
+        if big_sentence(pc, lang):
+            faq.append({'q': L['q_big'].format(a=a), 'a': big_sentence(pc, lang)})
         latest = max(r['date'] for r in pc['runs'])
         latest = latest if len(latest) > 7 else latest + '-01'
-        meta = {'title': title, 'description': desc, 'date': latest, 'lang': lang, 'kind': 'pc', 'alt': pc['slug']['es' if lang == 'en' else 'en'], 'faq': faq}
-        body = f'<div class="answer"><p><strong>{esc(ans.split(" ", 1)[0])}</strong> {esc(ans.split(" ", 1)[1])}</p></div>\n'
-        body += '<div class="stats">\n' + '\n'.join(f'<div class="stat {t}"><b>{esc(b)}</b><span>{esc(s)}</span></div>' for t, b, s in stats(pc, lang)) + '\n</div>\n'
+        meta = {'title': title[0].upper() + title[1:], 'description': desc, 'date': latest, 'lang': lang, 'kind': 'pc',
+                'alt': pc['slug']['es' if lang == 'en' else 'en'], 'faq': faq}
+        first, rest = ans.split(' ', 1)
+        body = f'<div class="answer"><p><strong>{esc(first)}</strong> {esc(rest)}</p></div>\n'
+        st = [('g', sp, pick(lang, f'tokens a second with {ENG[h["engine"]]["name"]}', f'tokens por segundo con {ENG[h["engine"]]["name"]}'))]
+        if cv: st.append(('b', times_x(cv, lang) + '×', pick(lang, 'faster on the card than on the processor', 'más rápido en la tarjeta que en el procesador')))
+        if pictures(pc): st.append(('p', secs(pictures(pc)[0]['picture'], lang), pick(lang, 'to make a picture', 'para crear una imagen')))
+        for r in text_runs(pc):
+            if len(st) < 3 and r['engine'] != h['engine'] and r['method'] == h['method'] and not r.get('second'):
+                st.append(('y', rng(r['writes'], lang), pick(lang, f'with {ENG[r["engine"]]["name"]}', f'con {ENG[r["engine"]]["name"]}') + (pick(lang, ' (short chats only)', ' (solo chats cortos)') if r.get('crash') else '')))
+        body += '<div class="stats">\n' + '\n'.join(f'<div class="stat {t}"><b>{esc(b)}</b><span>{esc(s)}</span></div>' for t, b, s in st[:3]) + '\n</div>\n'
+        body += f'<h2>{L["h_feel"]}</h2>\n' + feel(pc, lang)
         body += f'<h2>{L["h_meas"]}</h2>\n' + measured_table(pc, lang)
-        body += f'<h2>{L["h_mean"]}</h2>\n' + ''.join(f'<div class="card {t}">\n<h3>{esc(hd)}</h3>\n<p>{tx if "<a " in tx else esc(tx)}</p>\n</div>\n' for t, hd, tx in insights(pc, lang, None))
-        spec = ({'en': 'built-in Intel graphics only', 'es': 'solo gráficos Intel integrados'}[lang] if pc['kind'] == 'laptop' else f'{pc["vendor"]} {pc["gpu"]}',
-                L['none'] if not pc['vram'] else f'{pc["vram"]} GB', f'{pc["ram"]} GB', pc['cpu'].replace('threads', {'en': 'threads', 'es': 'hilos'}[lang]))
-        body += f'<h2>{L["h_pc"]}</h2>\n<ul>\n<li>{L["kind"][pc["kind"]]}</li>\n' + ''.join(f'<li><strong>{k}:</strong> {esc(v)}</li>\n' for k, v in zip(L['spec'], spec)) + '</ul>\n'
-        others = ''.join(f'<li><a href="{page_path(o, lang)}">{esc(label(o, lang))}</a>: {rng(headline(o)["writes"], lang, headline(o).get("approx"))} {L["tps"]}</li>\n'
-                         for o in pcs if o is not pc)
-        hub = f'/blog/{HUB["en"]}' if lang == 'en' else f'/blog/es/{HUB["es"]}'
+        body += f'<h2>{L["h_mean"]}</h2>\n' + ''.join(f'<div class="card {t}">\n<h3>{esc(hd)}</h3>\n<p>{tx}</p>\n</div>\n' for t, hd, tx in insights(pc, lang))
+        body += f'<h2>{L["h_cmp"]}</h2>\n' + compare(pc, lang)
+        spec = (pick(lang, 'built-in Intel graphics only', 'solo gráficos Intel integrados') if pc['kind'] == 'laptop' else f'{pc["vendor"]} {pc["gpu"]}',
+                L['none'] if not pc['vram'] else f'{pc["vram"]} GB', f'{pc["ram"]} GB', pc['cpu'].replace('threads', pick(lang, 'threads', 'hilos')))
+        body += (f'<h2>{L["h_pc"]}</h2>\n<p>' + pick(lang, 'A real tester\'s own PC, used the way they normally use it, not a lab machine:', 'El PC de un tester real, usado como lo usa siempre, no una máquina de laboratorio:')
+                 + f'</p>\n<ul>\n<li>{L["kind"][pc["kind"]]}</li>\n' + ''.join(f'<li><strong>{k}:</strong> {esc(v)}</li>\n' for k, v in zip(L['spec'], spec)) + '</ul>\n')
+        body += (f'<h2>{L["h_check"]}</h2>\n' + pick(lang, '<p>Not sure what your PC has? It takes 30 seconds:</p>\n', '<p>¿No sabes qué tiene tu PC? Se mira en 30 segundos:</p>\n') + CHECK[lang]
+                 + pick(lang, f'<p>Then find the closest card in <a href="{hub}">the full table</a>. The same card with more VRAM can fit a bigger AI; a newer card of the same size is usually faster.</p>\n',
+                        f'<p>Después busca la tarjeta más parecida en <a href="{hub}">la tabla completa</a>. La misma tarjeta con más VRAM puede con una IA más grande; una tarjeta más nueva del mismo tamaño suele ir más rápido.</p>\n'))
+        others = ''.join(f'<li>{link(o, lang)}: {hl(o, lang)} {L["tps"]} ({ENG[headline(o)["engine"]]["name"]})</li>\n' for o in ranked() if o is not pc)
         body += (f'<h2>{L["h_more"]}</h2>\n<ul>\n{others}</ul>\n'
                  f'<p><a href="{hub}">{L["hub_t"]}</a> {L["all"].format(n=count())}.</p>\n')
         out.append((pc['slug'][lang], meta, body))
@@ -263,7 +375,7 @@ def count(): return len([p for p in PCS if headline(p)])
 def table(lang):
     """The speed table in the "Can my PC run AI?" test: one row per measured PC, fastest first, linked to its page."""
     L = W[lang]
-    pcs = sorted([p for p in PCS if headline(p)], key=lambda p: -headline(p)['writes'][0])
+    pcs = sorted([p for p in PCS if headline(p)], key=lambda p: -mid(headline(p)['writes']))
     top = max(headline(p)['writes'][1] for p in pcs)
     rows = []
     for p in pcs:
@@ -272,7 +384,7 @@ def table(lang):
         if p.get('slug'): g = f'<a href="{page_path(p, lang)}">{g}</a>'
         lo = '' if h['on'] in ('card', 'split') else ' lo'
         rows.append(f'<tr><td>{L["kind"][p["kind"]]}</td><td>{g}</td><td>{p["ram"]} GB</td><td>{ENG[h["engine"]]["name"]}</td>'
-                    f'<td class="spd"><span class="bar{lo}" style="--w:{round(100 * h["writes"][1] / top)}%"></span><b>{rng(h["writes"], lang, h.get("approx"))}</b></td></tr>')
-    head = {'en': ('PC', 'Graphics', 'RAM', 'AI model', 'Writes (tokens/s)'), 'es': ('PC', 'Gráfica', 'RAM', 'IA', 'Escribe (tokens/s)')}[lang]
+                    f'<td class="spd"><span class="bar{lo}" style="--w:{round(100 * h["writes"][1] / top)}%"></span><b>{hl(p, lang)}</b></td></tr>')
+    head = pick(lang, ('PC', 'Graphics', 'RAM', 'AI model', 'Writes (tokens/s)'), ('PC', 'Gráfica', 'RAM', 'IA', 'Escribe (tokens/s)'))
     return ('<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in head) + '</tr></thead>\n<tbody>\n'
             + '\n'.join(rows) + '\n</tbody>\n</table></div>')

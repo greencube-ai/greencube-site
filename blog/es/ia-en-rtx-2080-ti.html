@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "¿Puede una RTX 2080 Ti ejecutar IA? Medido: 65–71 tokens por segundo", "description": "Prueba real: Gemma 4 E4B escribía 65–71 tokens por segundo en un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM. Qué significa para chatear, estudiar e imágenes.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "es", "mainEntityOfPage": "https://blog.greencube.app/blog/es/ia-en-rtx-2080-ti", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/es/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Puede una RTX 2080 Ti ejecutar IA en local?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Gemma 4 E4B escribía 65–71 tokens por segundo. Más rápido de lo que lees."}}, {"@type": "Question", "name": "¿Puede una RTX 2080 Ti crear imágenes con IA?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Una imagen (512×512) tardó 8–9 s en la tarjeta gráfica (la primera tardó 83 s mientras cargaba)."}}, {"@type": "Question", "name": "¿La IA va más rápido en la RTX 2080 Ti o en el procesador?", "acceptedAnswer": {"@type": "Answer", "text": "En la tarjeta, de largo: 75,6 tokens por segundo frente a 13,5 en el procesador, unas 5,6 veces más rápido."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Puede una RTX 2080 Ti ejecutar IA en local?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Gemma 4 E4B escribía 65–71 tokens por segundo. Más rápido de lo que lees."}}, {"@type": "Question", "name": "¿Puede una RTX 2080 Ti crear imágenes con IA?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Una imagen (512×512) tardó 8–9 s con la tarjeta gráfica (la primera tardó 83 s mientras cargaba)."}}, {"@type": "Question", "name": "¿La IA va más rápido en la RTX 2080 Ti o en el procesador?", "acceptedAnswer": {"@type": "Answer", "text": "En la tarjeta, de largo: 75,6 tokens por segundo frente a 13,5 en el procesador, unas 5,6 veces más rápido."}}, {"@type": "Question", "name": "¿Puede una RTX 2080 Ti ejecutar Gemma 4 12B?", "acceptedAnswer": {"@type": "Answer", "text": "Debería. Gemma 4 12B ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta."}}]}</script>
 </head>
 <body>
 
@@ -52,36 +52,50 @@
 <div class="stat b"><b>5,6×</b><span>más rápido en la tarjeta que en el procesador</span></div>
 <div class="stat p"><b>8–9 s</b><span>para crear una imagen</span></div>
 </div>
+<h2>Qué significa en la práctica</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Tarea</th><th>Tiempo en este PC</th></tr></thead>
+<tbody>
+<tr><td>Escribir una respuesta normal (400 tokens, media página)</td><td><b>6 s</b></td></tr>
+<tr><td>Leer un documento largo que le das (5.000 tokens, unas 6 páginas)</td><td><b>3–4 s</b></td></tr>
+<tr><td>Crear una imagen (512×512)</td><td><b>8–9 s (la primera: 83 s)</b></td></tr>
+</tbody>
+</table></div>
+<p>Calculado a partir de las velocidades medidas en este PC: el tiempo es la longitud dividida entre la velocidad, y una respuesta real tarda además un momento en arrancar. Para hacerte una idea, una persona lee unas 4 palabras por segundo (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), así que solo leer una respuesta de 400 tokens te lleva más de un minuto.</p>
 <h2>Lo que medimos</h2>
+<p><strong>Escribir</strong> es la velocidad a la que la IA teclea su respuesta, en tokens por segundo; un token es un trozo de palabra, y en español cada palabra suele ocupar uno o dos. <strong>Leer</strong> es lo rápido que asimila lo que le das: tu pregunta, un texto pegado o un PDF. Leer siempre es mucho más rápido que escribir, porque la IA puede leer muchos tokens a la vez pero tiene que escribirlos de uno en uno.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Qué</th><th>Dónde</th><th>Resultado</th><th>Medido</th></tr></thead>
 <tbody>
 <tr><td>Gemma 4 E4B</td><td>tarjeta gráfica</td><td><b>65–71</b> tokens por segundo escribiendo &middot; 1.380–1.800 leyendo</td><td>14 de octubre de 2026 <sup>1</sup></td></tr>
 <tr><td>Gemma 4 E4B</td><td>tarjeta gráfica</td><td><b>75,6</b> tokens por segundo escribiendo</td><td>14 de octubre de 2026 <sup>2</sup></td></tr>
 <tr><td>Gemma 4 E4B</td><td>solo procesador</td><td><b>13,5</b> tokens por segundo escribiendo</td><td>14 de octubre de 2026 <sup>2</sup></td></tr>
-<tr><td>imagen (512×512)</td><td>tarjeta gráfica</td><td><b>8–9 s</b> (la primera tardó 83 s mientras cargaba)</td><td>12 de octubre de 2026 <sup>3</sup></td></tr>
+<tr><td>Imagen (512×512)</td><td>tarjeta gráfica</td><td><b>8–9 s</b> (la primera tardó 83 s mientras cargaba)</td><td>12 de octubre de 2026 <sup>3</sup></td></tr>
 </tbody>
 </table></div>
-<p>Cómo lo medimos:</p><ol class="src"><li value="1">GreenCube 0.1.44, en chats reales</li><li value="2">La prueba de velocidad que hace GreenCube 0.1.44 al arrancar</li><li value="3">El motor de imágenes de GreenCube (Z-Image Turbo), 512x512, 8 pasos</li></ol>
+<p>Cómo se midió cada número:</p><ol class="src"><li>Chats reales en GreenCube 0.1.44: la velocidad de cada respuesta de 100 tokens o más, sacada del registro de la app. El rango deja fuera la décima parte más lenta y la más rápida.</li><li>La prueba de velocidad de GreenCube 0.1.44, que hace al arrancar para elegir entre la tarjeta gráfica y el procesador: una respuesta corta escrita una vez en cada uno.</li><li>El motor de imágenes de GreenCube (Z-Image Turbo), 512×512 píxeles y 8 pasos, cronometrado desde el clic hasta la imagen terminada.</li></ol>
 <p>Cuando tenemos varias pruebas damos el rango: la velocidad varía un poco entre pruebas en el mismo PC.</p>
 <h2>Qué significa</h2>
 <div class="card g">
-<h3>La tarjeta va 5,6 veces más rápido que el procesador</h3>
-<p>Mismo PC, misma IA (Gemma 4 E4B): 13,5 tokens por segundo solo con el procesador y 75,6 con la tarjeta gráfica. Una IA es justo el tipo de cálculo para el que están hechas las gráficas.</p>
+<h3>La tarjeta gráfica hace el trabajo</h3>
+<p>Mismo PC, misma IA (Gemma 4 E4B): 13,5 tokens por segundo solo con el procesador y 75,6 con la tarjeta gráfica, unas <strong>5,6 veces más rápido</strong>. Una gráfica está hecha para hacer miles de cuentas pequeñas a la vez para los juegos, y una IA es sobre todo ese mismo tipo de cálculo. GreenCube cronometra las dos al arrancar y usa la más rápida.</p>
 </div>
 <div class="card b">
 <h3>La IA entera cabe en la tarjeta</h3>
-<p>Gemma 4 E4B ocupa 4,2 GB y la tarjeta tiene 11 GB de memoria propia (VRAM), así que funciona entera en la tarjeta. Por eso va tan rápido.</p>
+<p>Gemma 4 E4B ocupa 4,2 GB y la tarjeta tiene 11 GB de memoria propia (VRAM). Cabe entera, con sitio de sobra para la conversación, así que la tarjeta nunca espera a la memoria más lenta del resto del PC. Esa es la razón principal de que vaya tan rápido.</p>
 </div>
 <div class="card y">
-<h3>Hay sitio para Gemma 4 12B</h3>
-<p>Con 11 GB, la más grande, Gemma 4 12B (6,4 GB), también debería caber en esta tarjeta. Aún no la hemos medido aquí.</p>
+<h3>La más grande, Gemma 4 12B</h3>
+<p>Debería. Gemma 4 12B ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.</p>
 </div>
 <div class="card p">
 <h3>Imágenes</h3>
-<p>Sí. Una imagen (512×512) tardó 8–9 s en la tarjeta gráfica (la primera tardó 83 s mientras cargaba).</p>
+<p>Sí. Una imagen (512×512) tardó 8–9 s con la tarjeta gráfica (la primera tardó 83 s mientras cargaba). Una imagen usa su propia IA, de unos 6 GB, y muchas más cuentas que una respuesta de chat, así que aquí los gráficos importan todavía más.</p>
 </div>
+<h2>Cómo se compara</h2>
+<p>De los 8 PCs que medimos con Gemma 4 E4B, este es el <strong>número 1</strong> en velocidad de escritura. La <a href="/blog/es/ia-en-rx-5700-xt">RX 5700 XT</a> escribe 63–72, así que este va más o menos igual.</p>
 <h2>El PC de la prueba</h2>
+<p>El PC de un tester real, usado como lo usa siempre, no una máquina de laboratorio:</p>
 <ul>
 <li>Sobremesa</li>
 <li><strong>Gráfica:</strong> NVIDIA RTX 2080 Ti</li>
@@ -89,21 +103,34 @@
 <li><strong>RAM:</strong> 128 GB</li>
 <li><strong>Procesador:</strong> 32 hilos</li>
 </ul>
+<h2>Mira tu propio PC</h2>
+<p>¿No sabes qué tiene tu PC? Se mira en 30 segundos:</p>
+<ol class="steps">
+<li>Pulsa <strong>Ctrl + Mayús + Esc</strong> para abrir el Administrador de tareas.</li>
+<li>Ve a <strong>Rendimiento</strong>.</li>
+<li>Pulsa <strong>Memoria</strong>: el número de arriba a la derecha es tu RAM.</li>
+<li>Pulsa <strong>GPU</strong>: el nombre de arriba a la derecha es tu tarjeta, y <strong>Memoria de GPU dedicada</strong> es tu VRAM. ¿Solo ves gráficos Intel o AMD sin memoria dedicada? Entonces no tienes tarjeta aparte.</li>
+</ol>
+<p>Después busca la tarjeta más parecida en <a href="/blog/es/ia-en-mi-pc">la tabla completa</a>. La misma tarjeta con más VRAM puede con una IA más grande; una tarjeta más nueva del mismo tamaño suele ir más rápido.</p>
 <h2>Otros PCs que medimos</h2>
 <ul>
-<li><a href="/blog/es/ia-en-rx-5700-xt">AMD RX 5700 XT, 8 GB</a>: 63–72 tokens por segundo</li>
-<li><a href="/blog/es/ia-en-rtx-5060">NVIDIA RTX 5060, 8 GB</a>: 56 tokens por segundo</li>
-<li><a href="/blog/es/ia-en-gtx-1660-super">NVIDIA GTX 1660 Super, 6 GB</a>: 35–38 tokens por segundo</li>
-<li><a href="/blog/es/ia-en-gtx-1650">NVIDIA GTX 1650, 4 GB</a>: unos 20 tokens por segundo</li>
-<li><a href="/blog/es/ia-en-portatil-intel-core-ultra-5">Solo gráficos Intel (Core Ultra 5)</a>: 14–18 tokens por segundo</li>
-<li><a href="/blog/es/ia-en-portatil-intel-iris-xe">Solo Intel Iris Xe</a>: 9,3 tokens por segundo</li>
+<li><a href="/blog/es/ia-en-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-rtx-5060">RTX 5060</a>: 56 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-rtx-3060">RTX 3060</a>: 53–55 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-rx-6600">RX 6600</a>: 42–44 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-gtx-1660-super">GTX 1660 Super</a>: 37–38 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-gtx-1650">GTX 1650</a>: unos 20 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-portatil-intel-core-ultra-5">portátil con Intel Core Ultra 5</a>: 14–18 tokens por segundo (Gemma 4 E2B)</li>
+<li><a href="/blog/es/ia-en-rx-580">RX 580</a>: 10–11 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/es/ia-en-portatil-intel-iris-xe">portátil con Intel Iris Xe</a>: 5–7 tokens por segundo (Gemma 4 E2B)</li>
 </ul>
-<p><a href="/blog/es/ia-en-mi-pc">¿Puedo usar IA en mi PC?</a> Los 8 PCs juntos, y cómo mirar el tuyo.</p>
+<p><a href="/blog/es/ia-en-mi-pc">¿Puedo usar IA en mi PC?</a> Los 10 PCs en una tabla, y cómo irá el tuyo.</p>
 <h2>Preguntas</h2>
 <div class="faq">
 <details><summary>¿Puede una RTX 2080 Ti ejecutar IA en local?</summary><p>Sí. En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Gemma 4 E4B escribía 65–71 tokens por segundo. Más rápido de lo que lees.</p></details>
-<details><summary>¿Puede una RTX 2080 Ti crear imágenes con IA?</summary><p>Sí. Una imagen (512×512) tardó 8–9 s en la tarjeta gráfica (la primera tardó 83 s mientras cargaba).</p></details>
+<details><summary>¿Puede una RTX 2080 Ti crear imágenes con IA?</summary><p>Sí. Una imagen (512×512) tardó 8–9 s con la tarjeta gráfica (la primera tardó 83 s mientras cargaba).</p></details>
 <details><summary>¿La IA va más rápido en la RTX 2080 Ti o en el procesador?</summary><p>En la tarjeta, de largo: 75,6 tokens por segundo frente a 13,5 en el procesador, unas 5,6 veces más rápido.</p></details>
+<details><summary>¿Puede una RTX 2080 Ti ejecutar Gemma 4 12B?</summary><p>Debería. Gemma 4 12B ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.</p></details>
 </div>
 
 <div class="cta-box"><h3>Tu propia IA, en tu propio PC</h3><p>GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro;, un solo pago.</p><a class="cta" href="https://greencube.app/es/buy">Consigue GreenCube <span aria-hidden="true">&rarr;</span></a></div>
