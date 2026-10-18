@@ -99,6 +99,10 @@ EXACT_FIXES = [
     ('Greencube is the strongest choice for non-technical users. It installs', 'Greencube is built for non-technical users. It installs'),
     ('Apps like Greencube operate with zero telemetry and no external server communication after setup, meaning your conversations never leave your device.',
      'Check what each app still sends. Greencube keeps your chats and files on your PC; ' + ONLINE + '.'),
+    ('Greencube is the strongest pick for anyone who wants a capable offline AI without touching a config file.',
+     'Greencube is built for anyone who wants an offline AI without touching a config file.'),
+    ('GreenCube bypasses ongoing costs and internet dependence, providing faster responses on hardware that matches its model size, unlike cloud models that offer larger, more capable AI with frequent updates.',
+     'GreenCube removes the monthly cost and the need for internet, while cloud models offer larger, more capable AI with frequent updates.'),
     ('Greencube supports PDF reading and image analysis fully offline. Most other apps on this list focus on text chat only, so document analysis is a meaningful differentiator for Greencube.',
      'Greencube reads PDFs and images offline. Several other apps on this list can chat with documents too, so check how each one handles long files.'),
 ]
