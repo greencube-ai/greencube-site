@@ -54,6 +54,21 @@ TESTED = {
     'ai-study-planner-offline': ['ai-to-study-from-pdf'],
     'best-ai-for-computer-science-students': ['ai-to-study-from-pdf'],
 }
+# old posts link to the page where we checked their topic against the companies' own pages (2026-10-18)
+TRAINING, NOTES, SUBSCRIPTION = 'ai-that-doesnt-train-on-your-data', 'ai-to-summarize-notes', 'ai-without-subscription'
+CHECKED = {
+    'is-chatgpt-private': [TRAINING], 'best-private-ai': [TRAINING], 'private-ai-assistant': [TRAINING],
+    'best-private-chat-ai': [TRAINING, SUBSCRIPTION], 'secure-ai-on-pc': [TRAINING], 'is-local-ai-safe': [TRAINING],
+    'microsoft-copilot-alternatives': [TRAINING], 'gemini-alternatives': [TRAINING], 'meta-ai-alternatives': [TRAINING],
+    'deepseek-alternatives': [TRAINING], 'monica-ai-alternatives': [TRAINING],
+    'claude-vs-greencube': [TRAINING, SUBSCRIPTION], 'greencube-vs-claude': [TRAINING, SUBSCRIPTION],
+    'chatgpt-vs-greencube': [TRAINING, SUBSCRIPTION], 'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals': [TRAINING],
+    'gemini-vs-greencube': [TRAINING, NOTES], 'ollama-vs-greencube': [SUBSCRIPTION],
+    'best-pdf-summarizer': [NOTES], 'notebooklm-alternatives': [NOTES, TRAINING], 'humata-ai-alternatives': [NOTES],
+    'pdfai-alternatives': [NOTES], 'best-private-pdf-ai': [NOTES, TRAINING], 'study-guide-from-pdf': [NOTES],
+    'lifetime-ai-software': [SUBSCRIPTION], 'unlimited-ai': [SUBSCRIPTION], 'no-rate-limit-ai': [SUBSCRIPTION],
+    'best-ai-for-students': [NOTES, SUBSCRIPTION], 'notion-ai-alternatives': [SUBSCRIPTION],
+}
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
@@ -61,8 +76,10 @@ for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
         OWN_TITLES[fn[:-5]] = json.loads(m.group(1))['title'].replace('{{pcs}}', str(pc_pages.count()))
 
 def tested_box(slug):
-    links = [f'<li><a href="/blog/{s}">{html.escape(OWN_TITLES[s])}</a></li>' for s in TESTED.get(slug, []) if s in OWN_TITLES]
-    return f'<aside class="tested"><strong>We tested this</strong><ul>{"".join(links)}</ul></aside>\n' if links else ''
+    def items(slugs): return ''.join(f'<li><a href="/blog/{s}">{html.escape(OWN_TITLES[s])}</a></li>' for s in slugs if s in OWN_TITLES)
+    tested, checked = items(TESTED.get(slug, [])), items(CHECKED.get(slug, []))
+    out = f'<aside class="tested"><strong>We tested this</strong><ul>{tested}</ul></aside>\n' if tested else ''
+    return out + (f'<aside class="tested"><strong>We checked this</strong><ul>{checked}</ul></aside>\n' if checked else '')
 
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
