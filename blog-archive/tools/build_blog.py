@@ -58,7 +58,7 @@ OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
         m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->', open(f'{SRC}/own/{fn}', encoding='utf-8').read(), re.S)
-        OWN_TITLES[fn[:-5]] = json.loads(m.group(1))['title']
+        OWN_TITLES[fn[:-5]] = json.loads(m.group(1))['title'].replace('{{pcs}}', str(pc_pages.count()))
 
 def tested_box(slug):
     links = [f'<li><a href="/blog/{s}">{html.escape(OWN_TITLES[s])}</a></li>' for s in TESTED.get(slug, []) if s in OWN_TITLES]
