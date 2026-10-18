@@ -1,0 +1,100 @@
+{
+ "about": "Every AI speed GreenCube has measured on a real PC. The card pages, the table in the 'Can my PC run AI?' test and (later) the checker are all written from this file by blog-archive/tools/pc_pages.py, so a number changes here and everywhere at once. Source: the app repo's docs/MEASUREMENTS.md and testers' logs. Speeds in tokens per second; writes = answer speed, reads = how fast it reads what you paste. A machine with no measured speed gets no page.",
+ "engines": {
+  "e2b": {"name": "Gemma 4 E2B", "gb": 2.6},
+  "e4b": {"name": "Gemma 4 E4B", "gb": 4.2},
+  "12b": {"name": "Gemma 4 12B", "gb": 6.4}
+ },
+ "methods": {
+  "bench": {"en": "llama.cpp's own speed test (llama-bench), the engine GreenCube runs on", "es": "La prueba de velocidad de llama.cpp (llama-bench), el motor sobre el que funciona GreenCube"},
+  "app": {"en": "GreenCube {v}, in real chats", "es": "GreenCube {v}, en chats reales"},
+  "app-test": {"en": "GreenCube {v}'s own speed test at startup", "es": "La prueba de velocidad que hace GreenCube {v} al arrancar"},
+  "picture": {"en": "GreenCube's picture engine (Z-Image Turbo), 512x512, 8 steps", "es": "El motor de imágenes de GreenCube (Z-Image Turbo), 512x512, 8 pasos"}
+ },
+ "pcs": [
+  {
+   "id": "rtx-2080-ti", "slug": {"en": "ai-on-rtx-2080-ti", "es": "ia-en-rtx-2080-ti"},
+   "kind": "desktop", "vendor": "NVIDIA", "gpu": "RTX 2080 Ti", "art": {"en": "an", "es": "una"},
+   "vram": 11, "ram": 128, "cpu": "32 threads",
+   "runs": [
+    {"engine": "e4b", "on": "card", "writes": [65, 71], "reads": [1380, 1800], "method": "app", "v": "0.1.44", "date": "2026-10-14"},
+    {"engine": "e4b", "on": "card", "writes": [75.6, 75.6], "method": "app-test", "v": "0.1.44", "date": "2026-10-14"},
+    {"engine": "e4b", "on": "cpu", "writes": [13.5, 13.5], "method": "app-test", "v": "0.1.44", "date": "2026-10-14"},
+    {"picture": [8, 9], "first": 83, "on": "card", "method": "picture", "date": "2026-10-12"}
+   ]
+  },
+  {
+   "id": "rx-5700-xt", "slug": {"en": "ai-on-rx-5700-xt", "es": "ia-en-rx-5700-xt"},
+   "kind": "desktop", "vendor": "AMD", "gpu": "RX 5700 XT", "art": {"en": "an", "es": "una"},
+   "vram": 8, "ram": 48, "cpu": "Intel Core i7-9700",
+   "runs": [
+    {"engine": "e4b", "on": "card", "writes": [63, 72], "reads": [594, 609], "method": "bench", "date": "2026-09-22"},
+    {"engine": "e4b", "on": "cpu", "writes": [5.0, 5.0], "reads": [357, 357], "method": "bench", "date": "2026-09-22"},
+    {"engine": "12b", "on": "card", "writes": [20, 36], "reads": [108, 113], "method": "bench", "date": "2026-09-22", "crash": 8192}
+   ]
+  },
+  {
+   "id": "rtx-5060", "slug": {"en": "ai-on-rtx-5060", "es": "ia-en-rtx-5060"},
+   "kind": "desktop", "vendor": "NVIDIA", "gpu": "RTX 5060", "art": {"en": "an", "es": "una"},
+   "vram": 8, "ram": 32, "cpu": "16 threads",
+   "runs": [
+    {"engine": "e4b", "on": "card", "writes": [56, 56], "method": "app", "v": "0.1.42", "date": "2026-10-01"}
+   ]
+  },
+  {
+   "id": "card-12gb", "slug": null,
+   "kind": "desktop", "vendor": "", "gpu": "12 GB graphics card", "label": {"en": "12 GB graphics card", "es": "Gráfica de 12 GB"}, "art": {"en": "a", "es": "una"},
+   "vram": 12, "ram": 32, "cpu": "12 threads", "note": "model not known yet, so no page of its own",
+   "runs": [
+    {"engine": "e4b", "on": "card", "writes": [50, 55], "method": "app", "date": "2026-10"},
+    {"picture": [28, 28], "on": "card", "method": "picture", "date": "2026-10"}
+   ]
+  },
+  {
+   "id": "gtx-1660-super", "slug": {"en": "ai-on-gtx-1660-super", "es": "ia-en-gtx-1660-super"},
+   "kind": "desktop", "vendor": "NVIDIA", "gpu": "GTX 1660 Super", "art": {"en": "a", "es": "una"},
+   "vram": 6, "ram": 16, "cpu": "16 threads",
+   "runs": [
+    {"engine": "e4b", "on": "card", "writes": [35, 38], "reads": [350, 350], "approx_reads": true, "method": "app", "v": "0.1.42", "date": "2026-10-01"}
+   ]
+  },
+  {
+   "id": "gtx-1650", "slug": {"en": "ai-on-gtx-1650", "es": "ia-en-gtx-1650"},
+   "kind": "desktop", "vendor": "NVIDIA", "gpu": "GTX 1650", "art": {"en": "a", "es": "una"},
+   "vram": 4, "ram": 16, "cpu": "16 threads",
+   "runs": [
+    {"engine": "e4b", "on": "split", "writes": [20, 20], "approx": true, "reads": [24, 395], "method": "app", "v": "0.1.40", "date": "2026-09-23"}
+   ]
+  },
+  {
+   "id": "intel-core-ultra-5-laptop", "slug": {"en": "ai-on-intel-core-ultra-5-laptop", "es": "ia-en-portatil-intel-core-ultra-5"},
+   "kind": "laptop", "vendor": "Intel", "gpu": "Core Ultra 5 laptop", "chip": "Intel Core Ultra 5 125U",
+   "name": {"en": "Intel Core Ultra 5 laptop", "es": "portátil con Intel Core Ultra 5"}, "label": {"en": "Intel graphics only (Core Ultra 5)", "es": "Solo gráficos Intel (Core Ultra 5)"},
+   "art": {"en": "an", "es": "un"}, "vram": 0, "ram": 16, "cpu": "Intel Core Ultra 5 125U, 14 threads",
+   "runs": [
+    {"engine": "e2b", "on": "cpu", "writes": [14, 18], "method": "bench", "date": "2026-09-28"},
+    {"engine": "e4b", "on": "cpu", "writes": [8, 10], "method": "bench", "date": "2026-09-28"},
+    {"picture": [122, 158], "on": "chip", "method": "picture", "date": "2026-09-23"},
+    {"picture": [687, 812], "on": "cpu", "method": "picture", "date": "2026-10-14"}
+   ]
+  },
+  {
+   "id": "intel-iris-xe-laptop", "slug": {"en": "ai-on-intel-iris-xe-laptop", "es": "ia-en-portatil-intel-iris-xe"},
+   "kind": "laptop", "vendor": "Intel", "gpu": "Iris Xe laptop", "chip": "Intel processor with Iris Xe graphics",
+   "name": {"en": "Intel Iris Xe laptop", "es": "portátil con Intel Iris Xe"}, "label": {"en": "Intel Iris Xe only", "es": "Solo Intel Iris Xe"},
+   "art": {"en": "an", "es": "un"}, "vram": 0, "ram": 8, "cpu": "Intel, 8 threads",
+   "runs": [
+    {"engine": "e2b", "on": "cpu", "writes": [9.3, 9.3], "method": "app", "date": "2026-10-04"},
+    {"engine": "e2b", "on": "chip", "writes": [5.0, 5.0], "method": "app", "date": "2026-10-04"}
+   ]
+  },
+  {
+   "id": "rx-6600", "slug": null, "kind": "desktop", "vendor": "AMD", "gpu": "RX 6600", "art": {"en": "an", "es": "una"},
+   "vram": 8, "ram": 16, "cpu": "12 threads", "note": "ran GreenCube, speed not recorded yet", "runs": []
+  },
+  {
+   "id": "rx-580", "slug": null, "kind": "desktop", "vendor": "AMD", "gpu": "RX 580", "art": {"en": "an", "es": "una"},
+   "vram": 8, "ram": 16, "cpu": "12 threads", "note": "ran GreenCube, speed not recorded yet", "runs": []
+  }
+ ]
+}

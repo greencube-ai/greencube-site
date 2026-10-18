@@ -14,6 +14,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 import facts
+import pc_pages
 
 SRC, OUT = 'blog-archive', 'blog'
 HOST = 'https://blog.greencube.app'
@@ -239,7 +240,10 @@ for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
         if fn.endswith('.html'):
             raw = open(f'{folder}/{fn}', encoding='utf-8').read()
             m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
-            own.append((lang, fn[:-5], json.loads(m.group(1)), raw[m.end():]))
+            body = raw[m.end():].replace('<!--pcs:table-->', pc_pages.table(lang)).replace('{{pcs}}', str(pc_pages.count()))
+            meta = json.loads(m.group(1).replace('{{pcs}}', str(pc_pages.count())))
+            own.append((lang, fn[:-5], meta, body))
+    own += [(lang, s, m, b) for s, m, b in pc_pages.pages(lang)]  # one page per measured PC, written from data/pcs.json
 os.makedirs(f'{OUT}/es', exist_ok=True)
 listing_es = []
 own_meta = {}
@@ -362,9 +366,9 @@ def topic_sections(lang, rest, L):
 
 def list_page(lang, entries, url, path):
     L = LIST_WORDS[lang]
-    feat = [e for e in entries if (lang, e[0]) in own_meta]
+    feat = [e for e in entries if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') != 'pc']
     feat.sort(key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
-    rest = [e for e in entries if (lang, e[0]) not in own_meta]
+    rest = [e for e in entries if (lang, e[0]) not in own_meta]  # PC pages are reached from their test, not listed here
     cards = []
     for i, (s, t, d, pub, _) in enumerate(feat):
         m = own_meta[(lang, s)]
@@ -403,7 +407,7 @@ def list_page(lang, entries, url, path):
 # ---------- the author page, one per language ----------
 for lang, entries in (('en', listing), ('es', listing_es)):
     A, W = AUTHOR_PAGE[lang], WORDS[lang]
-    mine = sorted([e for e in entries if (lang, e[0]) in own_meta], key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
+    mine = sorted([e for e in entries if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') != 'pc'], key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
     if not mine: continue
     url = author_url(lang)
     items = ''.join(f'<li><a href="{post_url(lang, s).replace(HOST, "")}"><h3>{esc(t)}</h3><p>{esc(own_meta[(lang, s)].get("teaser", d))}</p></a></li>'
