@@ -80,6 +80,29 @@ HARDWARE_BLANKS = [
     ('<td>10 GB free</td><td>—</td>', '<td>10 GB free</td><td>10 GB+ free (more for pictures)</td>'),
 ]
 
+# Claims about GreenCube that are not true (it goes online to sign in once, download the AI and updates, and search when
+# Online is on) or not measured (better than LM Studio, Ollama and the rest), fixed by exact phrase (2026-10-18)
+ONLINE = 'it goes online only to sign in once, download the AI and its updates, and search the web when you turn Online on (it starts off every time)'
+EXACT_FIXES = [
+    ('The best offline AI chatbot for most users is <strong>Greencube</strong>: a one-time purchase desktop app',
+     'One offline AI chatbot to look at is <strong>Greencube</strong>: a one-time purchase desktop app'),
+    ('reads PDFs and images, and never phones home', 'reads PDFs and images, and keeps your chats and files on your PC'),
+    ('deserve a tool that never phones home', 'deserve a tool that keeps them on your own PC'),
+    ('reads their documents, and never phones home', 'reads their documents, and keeps their chats and files on their own machine'),
+    ('understands your images, and never phones home', 'understands your images, and keeps your chats and files on your PC'),
+    ('<td>Zero telemetry, fully local</td>', '<td>Chats and files stay on your PC</td>'),
+    ('Greencube and Atomic Chat are explicit about zero external communication after setup.',
+     'Greencube keeps your chats and files on your PC: ' + ONLINE + '.'),
+    ('If zero data leakage is non-negotiable, choose Greencube or Atomic Chat. Both are explicit about no external communication.',
+     'If keeping your chats on your own PC matters most, check what each app still sends. Greencube keeps chats and files on your PC; only Online search, which starts off every time, sends your question to a search engine.'),
+    ('Greencube is the offline AI that actually works for most people', 'Where Greencube fits'),
+    ('Greencube is the strongest choice for non-technical users. It installs', 'Greencube is built for non-technical users. It installs'),
+    ('Apps like Greencube operate with zero telemetry and no external server communication after setup, meaning your conversations never leave your device.',
+     'Check what each app still sends. Greencube keeps your chats and files on your PC; ' + ONLINE + '.'),
+    ('Greencube supports PDF reading and image analysis fully offline. Most other apps on this list focus on text chat only, so document analysis is a meaningful differentiator for Greencube.',
+     'Greencube reads PDFs and images offline. Several other apps on this list can chat with documents too, so check how each one handles long files.'),
+]
+
 def fix_text(s):
     """Fix prices and brand spelling in a piece of HTML or text. Returns (new, changes)."""
     changes = []
@@ -112,6 +135,9 @@ def fix_text(s):
                      ('A 14-day window covers', 'A 15-day window covers')):
         if old in s:
             changes.append((old, new)); s = s.replace(old, new)
+    for old, new in EXACT_FIXES:
+        if old in s:
+            changes.append((old[:40], new[:40])); s = s.replace(old, new)
     for rx, rep in MODEL_FIXES:
         s, k = re.subn(rx, rep, s)
         if k: changes.append(('old model names', '%s x%d' % (rep[:30], k)))

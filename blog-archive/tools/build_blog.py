@@ -114,7 +114,7 @@ NOTE_PARTS = {
     'models': 'today GreenCube picks the right AI model for your computer automatically '
               '(Gemma 4 E2B on smaller PCs, Gemma 4 E4B with a graphics card), so you no longer choose between two models',
     'account': 'today you sign in once with Google or Microsoft to activate it, and the first launch downloads the AI model; '
-               'after that it works offline and your chats and files never leave your PC',
+               'after that it works offline, and your chats and files stay on your PC',
 }
 
 def note(kinds):
