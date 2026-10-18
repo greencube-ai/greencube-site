@@ -388,3 +388,56 @@ def table(lang):
     head = pick(lang, ('PC', 'Graphics', 'RAM', 'AI model', 'Writes (tokens/s)'), ('PC', 'Gráfica', 'RAM', 'IA', 'Escribe (tokens/s)'))
     return ('<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in head) + '</tr></thead>\n<tbody>\n'
             + '\n'.join(rows) + '\n</tbody>\n</table></div>')
+
+# ---------- the checker inside "Can my PC run AI?": picker + verdicts, all numbers from pcs.json ----------
+GPUS = json.load(open(f'{SRC}/data/gpus.json', encoding='utf-8'))
+JS = open(os.path.join(os.path.dirname(__file__), 'checker.js'), encoding='utf-8').read()
+
+def checker(lang):
+    """The checker's HTML and script for one language."""
+    def whole(r): return [round(r[0]), round(r[1])]
+    pcs = []
+    for p in with_page():
+        h = headline(p)
+        pic = next((r for r in pictures(p) if r['on'] == 'card'), None)
+        pcs.append({'vendor': p['vendor'], 'model': p['gpu'], 'vram': p['vram'], 'kind': p['kind'], 'ram': p['ram'],
+                    'name': name(p, lang), 'url': page_path(p, lang), 'writes': whole(h['writes']), 'approx': bool(h.get('approx')),
+                    'test': h['method'] == 'app-test', 'engine': ENG[h['engine']]['name'],
+                    'pic': whole(pic['picture']) if pic else None, 'first': pic.get('first') if pic else None})
+    ref = next((p for p in with_page() for r in text_runs(p) if r['engine'] == BIG and r.get('crash')), None)
+    big = ({'pc': {'name': name(ref, lang), 'url': page_path(ref, lang)},
+            'writes': whole(next(r for r in text_runs(ref) if r['engine'] == BIG)['writes'])} if ref else None)
+    p8 = [(p, r) for p in with_page() if p['kind'] == 'desktop' and p['vram'] >= 8 for r in pictures(p) if r['on'] == 'card']
+    p6 = [(p, r) for p in with_page() if p['kind'] == 'desktop' and 6 <= p['vram'] < 8 for r in pictures(p) if r['on'] == 'card']
+    lap = next((p for p in with_page() if p['kind'] == 'laptop' and any(r['on'] == 'chip' for r in pictures(p))), None)
+    data = {'lang': lang, 'groups': GPUS['groups'], 'pcs': pcs, 'engines': ENG, 'bigFloor': BIG_FLOOR, 'big': big,
+            'pics8': {'n': len(p8), 'lo': min(r['picture'][0] for _, r in p8), 'hi': max(r['picture'][1] for _, r in p8)} if p8 else None,
+            'pics6': {'pc': {'name': name(p6[0][0], lang), 'url': page_path(p6[0][0], lang)}, 't': p6[0][1]['picture']} if p6 else None,
+            'picLaptop': {'chip': next(r['picture'] for r in pictures(lap) if r['on'] == 'chip'),
+                          'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None}
+    opts = ''
+    i = 0
+    for g in GPUS['groups']:
+        items = ''
+        for model, _ in g['cards']:
+            shown = GPUS['builtin'][lang] if g['kind'] == 'none' else f'{g["vendor"]} {model}'.replace('NVIDIA RTX', 'NVIDIA GeForce RTX').replace('NVIDIA GTX', 'NVIDIA GeForce GTX').replace('AMD RX', 'AMD Radeon RX').replace(' Laptop', pick(lang, ' Laptop', ' (portátil)'))
+            items += f'<option value="{i}">{esc(shown)}</option>'
+            i += 1
+        opts += f'<optgroup label="{esc(g["label"][lang])}">{items}</optgroup>'
+    T = pick(lang,
+        dict(h='Will AI run on your PC?', lead='Pick your graphics card and RAM: you get what runs, how fast it ran on real PCs, and what we haven\'t measured yet.',
+             card='Graphics card', choose='Pick your card…', vram='Card memory (VRAM)', ram='RAM', more='32 GB or more',
+             help='Not sure what you have? <a href="#by-hand">Check in Task Manager</a>, it takes 30 seconds.',
+             priv='This runs in your browser. Nothing about your PC is sent anywhere.', nojs='Turn on JavaScript to use the checker, or read the table below.'),
+        dict(h='¿Funcionará la IA en tu PC?', lead='Elige tu tarjeta gráfica y tu RAM: verás qué funciona, a qué velocidad fue en PCs reales y qué no hemos medido aún.',
+             card='Tarjeta gráfica', choose='Elige tu tarjeta…', vram='Memoria de la tarjeta (VRAM)', ram='RAM', more='32 GB o más',
+             help='¿No sabes qué tienes? <a href="#by-hand">Míralo en el Administrador de tareas</a>, se tarda 30 segundos.',
+             priv='Esto funciona en tu navegador. No se envía nada sobre tu PC a ningún sitio.', nojs='Activa JavaScript para usar el comprobador, o mira la tabla de abajo.'))
+    return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'
+            f'<p class="chk-detect" id="chk-detect">{T["nojs"]}</p>\n'
+            f'<div class="chk-q"><label for="chk-card">{T["card"]}</label><select id="chk-card"><option value="">{T["choose"]}</option>{opts}</select></div>\n'
+            f'<div class="chk-q" id="chk-vram" hidden><span>{T["vram"]}</span><div class="chk-opts"></div></div>\n'
+            f'<div class="chk-q" id="chk-ram"><span>{T["ram"]}</span><div class="chk-opts"><button type="button" data-ram="8">8 GB</button>'
+            f'<button type="button" data-ram="16">16 GB</button><button type="button" data-ram="32">{T["more"]}</button></div></div>\n'
+            f'<p class="chk-help">{T["help"]}</p>\n<div id="chk-out" aria-live="polite"></div>\n<p class="chk-priv">{T["priv"]}</p>\n</section>\n'
+            '<script>' + JS.replace('/*DATA*/null', json.dumps(data, ensure_ascii=False).replace('</', r'<\/')) + '</script>\n')

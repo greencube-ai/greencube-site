@@ -240,7 +240,8 @@ for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
         if fn.endswith('.html'):
             raw = open(f'{folder}/{fn}', encoding='utf-8').read()
             m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
-            body = raw[m.end():].replace('<!--pcs:table-->', pc_pages.table(lang)).replace('{{pcs}}', str(pc_pages.count()))
+            body = (raw[m.end():].replace('<!--pcs:table-->', pc_pages.table(lang)).replace('<!--pcs:checker-->', pc_pages.checker(lang))
+                    .replace('{{pcs}}', str(pc_pages.count())))
             meta = json.loads(m.group(1).replace('{{pcs}}', str(pc_pages.count())))
             own.append((lang, fn[:-5], meta, body))
     own += [(lang, s, m, b) for s, m, b in pc_pages.pages(lang)]  # one page per measured PC, written from data/pcs.json
