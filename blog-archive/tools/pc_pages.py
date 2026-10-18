@@ -414,28 +414,24 @@ def checker(lang):
             'pics8': {'n': len(p8), 'lo': min(r['picture'][0] for _, r in p8), 'hi': max(r['picture'][1] for _, r in p8)} if p8 else None,
             'pics6': {'pc': {'name': name(p6[0][0], lang), 'url': page_path(p6[0][0], lang)}, 't': p6[0][1]['picture']} if p6 else None,
             'picLaptop': {'chip': next(r['picture'] for r in pictures(lap) if r['on'] == 'chip'),
-                          'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None}
-    opts = ''
-    i = 0
-    for g in GPUS['groups']:
-        items = ''
-        for model, _ in g['cards']:
-            shown = GPUS['builtin'][lang] if g['kind'] == 'none' else f'{g["vendor"]} {model}'.replace('NVIDIA RTX', 'NVIDIA GeForce RTX').replace('NVIDIA GTX', 'NVIDIA GeForce GTX').replace('AMD RX', 'AMD Radeon RX').replace(' Laptop', pick(lang, ' Laptop', ' (portátil)'))
-            items += f'<option value="{i}">{esc(shown)}</option>'
-            i += 1
-        opts += f'<optgroup label="{esc(g["label"][lang])}">{items}</optgroup>'
+                          'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None,
+            'builtin': GPUS['builtin'][lang]}
     T = pick(lang,
-        dict(h='Will AI run on your PC?', lead='Pick your graphics card and RAM: you get what runs, how fast it ran on real PCs, and what we haven\'t measured yet.',
-             card='Graphics card', choose='Pick your card…', vram='Card memory (VRAM)', ram='RAM', more='32 GB or more',
+        dict(h='Will AI run on your PC?', lead='Type your graphics card and pick your RAM: you get what runs, how fast it ran on real PCs, and what we haven\'t measured yet.',
+             card='Your graphics card', ph='Start typing, e.g. 3060, RX 6600, Iris', none='I don\'t have a separate card',
+             vram='Card memory (VRAM)', ram='RAM', more='32 GB or more',
              help='Not sure what you have? <a href="#by-hand">Check in Task Manager</a>, it takes 30 seconds.',
              priv='This runs in your browser. Nothing about your PC is sent anywhere.', nojs='Turn on JavaScript to use the checker, or read the table below.'),
-        dict(h='¿Funcionará la IA en tu PC?', lead='Elige tu tarjeta gráfica y tu RAM: verás qué funciona, a qué velocidad fue en PCs reales y qué no hemos medido aún.',
-             card='Tarjeta gráfica', choose='Elige tu tarjeta…', vram='Memoria de la tarjeta (VRAM)', ram='RAM', more='32 GB o más',
+        dict(h='¿Funcionará la IA en tu PC?', lead='Escribe tu tarjeta gráfica y elige tu RAM: verás qué funciona, a qué velocidad fue en PCs reales y qué no hemos medido aún.',
+             card='Tu tarjeta gráfica', ph='Empieza a escribir, p. ej. 3060, RX 6600, Iris', none='No tengo tarjeta aparte', vram='Memoria de la tarjeta (VRAM)', ram='RAM', more='32 GB o más',
              help='¿No sabes qué tienes? <a href="#by-hand">Míralo en el Administrador de tareas</a>, se tarda 30 segundos.',
              priv='Esto funciona en tu navegador. No se envía nada sobre tu PC a ningún sitio.', nojs='Activa JavaScript para usar el comprobador, o mira la tabla de abajo.'))
     return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'
             f'<p class="chk-detect" id="chk-detect">{T["nojs"]}</p>\n'
-            f'<div class="chk-q"><label for="chk-card">{T["card"]}</label><select id="chk-card"><option value="">{T["choose"]}</option>{opts}</select></div>\n'
+            f'<div class="chk-q chk-q-card"><label for="chk-in">{T["card"]}</label>'
+            f'<div class="chk-finder"><input type="text" id="chk-in" autocomplete="off" spellcheck="false" placeholder="{T["ph"]}" role="combobox" '
+            f'aria-autocomplete="list" aria-expanded="false" aria-controls="chk-hits" /><div class="chk-hits" id="chk-hits" role="listbox"></div></div>'
+            f'<button type="button" class="chk-quiet" id="chk-none">{T["none"]}</button></div>\n'
             f'<div class="chk-q" id="chk-vram" hidden><span>{T["vram"]}</span><div class="chk-opts"></div></div>\n'
             f'<div class="chk-q" id="chk-ram"><span>{T["ram"]}</span><div class="chk-opts"><button type="button" data-ram="8">8 GB</button>'
             f'<button type="button" data-ram="16">16 GB</button><button type="button" data-ram="32">{T["more"]}</button></div></div>\n'
