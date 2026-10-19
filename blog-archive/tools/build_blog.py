@@ -69,6 +69,10 @@ CHECKED = {
     'lifetime-ai-software': [SUBSCRIPTION], 'unlimited-ai': [SUBSCRIPTION], 'no-rate-limit-ai': [SUBSCRIPTION],
     'best-ai-for-students': [NOTES, SUBSCRIPTION], 'notion-ai-alternatives': [SUBSCRIPTION],
 }
+# Old "GreenCube vs X" pages written before our "test it first" rule: kept online for anyone with the link, but out of
+# search (noindex) and out of the sitemap until honest, dated fact tables replace them after 14 Nov (Hector, 2026-10-19)
+NOINDEX = {'ollama-vs-greencube', 'claude-vs-greencube', 'greencube-vs-claude', 'chatgpt-vs-greencube',
+           'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals', 'gemini-vs-greencube'}
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
@@ -179,6 +183,8 @@ def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', 
            .replace('{{TITLE}}', esc(title)).replace('{{DESC}}', esc(desc))
            .replace('{{URL}}', url).replace('{{OG_IMAGE}}', og_image).replace('{{OG_TYPE}}', og_type)
            .replace('{{LD}}', '\n'.join(f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)))
+    if any(url.endswith('/' + slug) for slug in NOINDEX):
+        top = top.replace('<link rel="canonical"', '<meta name="robots" content="noindex, follow" />\n  <link rel="canonical"', 1)
     return top + content + bottom
 
 report = []
@@ -453,7 +459,7 @@ open(f'{OUT}/{pc_pages.CSV_NAME}', 'w', encoding='utf-8', newline='').write(pc_p
 
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
-       [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing] + \
+       [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing if s not in NOINDEX] + \
        [f'  <url><loc>{author_url(lg)}</loc><lastmod>{max(e[4] for e in ls)}</lastmod></url>' for lg, ls in (('en', listing), ('es', listing_es)) if ls] + \
        ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
        [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
