@@ -433,6 +433,10 @@
     .fit-cta:hover { transform: translateY(-1px); background: var(--night-2); box-shadow: 0 16px 38px -14px rgba(31, 36, 24, 0.5); }
     .fit-cta .arrow { transition: transform .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
     .fit-cta:hover .arrow { transform: translateX(3px); }
+    /* phone visitors: send the link to themselves instead of leaving (send-to-pc.js) */
+    .fit-share { width: 100%; min-height: 50px; margin-top: 10px; padding: 0 20px; border-radius: 13px; background: transparent; color: var(--forest, #1A1A1A); border: 1.5px solid var(--forest, #1A1A1A); font-size: 15px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+    .fit-share:hover { background: rgba(31, 36, 24, .05); }
+    .fit-share[hidden] { display: none; }
     @media (max-width: 480px) { .fit-card { padding: 30px 22px 24px; } }
 
     /* Hector's note, right above the button: seen before anyone goes to checkout */
@@ -604,6 +608,7 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
+  <script src="/send-to-pc.js" defer></script>
 <style id="turtle-walk">
   /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
   .f-brand { position: relative; }
@@ -925,6 +930,7 @@
       <h2 id="fit-os-title"></h2>
       <p class="fit-sub" id="fit-os-sub"></p>
       <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
+      <button class="fit-share" id="fit-os-share" type="button" hidden><span id="fit-os-share-label"></span></button>
       <button class="fit-skip" id="fit-os-secondary" type="button"></button>
     </div>
 
@@ -1074,6 +1080,13 @@
       primary.onclick = goCheckout;
       secondary.textContent = 'Not now';
       secondary.onclick = closeFit;
+      // the leak was "Not now": let them send the link to their PC instead (send-to-pc.js)
+      const share = document.getElementById('fit-os-share');
+      if (share && window.gcSendToPC) {
+        document.getElementById('fit-os-share-label').textContent = 'Send the link to my PC →';
+        share.hidden = false;
+        share.onclick = async () => { if (await window.gcSendToPC()) closeFit(); };
+      }
     } else {
       // On the very machine they'd use, and it won't run — so the safe default
       // is NOT to buy. Prominent "got it", quiet escape hatch for dual-PC owners.
