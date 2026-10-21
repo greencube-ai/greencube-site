@@ -1114,7 +1114,15 @@
   buyBtn.addEventListener('click', openLetter);
   rpFly.addEventListener('click', revealLetter);
   document.getElementById('lt-go').addEventListener('click', openFit);
-  document.getElementById('lt-skip').addEventListener('click', goCheckout);
+  // Skipping the letter and the RAM check must not skip the "it's a Windows app" step:
+  // phone and Mac/Linux visitors still see it (with "Send the link to my PC"); Windows goes straight to checkout.
+  const skipToCheckout = () => {
+    const os = detectOS();
+    if (os === 'windows' || os === 'unknown') { goCheckout(); return; }
+    setupOsStep(os);
+    showStep(stepOs);
+  };
+  document.getElementById('lt-skip').addEventListener('click', skipToCheckout);
   document.getElementById('fit-close').addEventListener('click', closeFit);
   document.getElementById('fit-skip').addEventListener('click', goCheckout);
   document.getElementById('fit-skip-gpu').addEventListener('click', goCheckout);
