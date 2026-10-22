@@ -248,7 +248,10 @@ def cmd_redirects():
         pages = [p[:-5] for p in map(os.path.basename, glob.glob(os.path.join(ROOT, lang, '*.html'))) if p != 'index.html']
         if not os.path.exists(os.path.join(ROOT, lang, 'index.html')):
             continue
-        has = [{'type': 'header', 'key': 'accept-language', 'value': lang + r'(-[A-Za-z]+)?([;,].*)?'}]
+        # the browser's first language decides; Chinese splits by script/region
+        value = {'zh': r'zh(-(CN|cn|SG|sg|Hans[^;,]*))?([;,].*)?',
+                 'zh-tw': r'zh-(TW|tw|HK|hk|MO|mo|Hant[^;,]*)([;,].*)?'}.get(lang, lang + r'(-[A-Za-z]+)?([;,].*)?')
+        has = [{'type': 'header', 'key': 'accept-language', 'value': value}]
         new.append({'source': '/', 'has': has, 'missing': missing, 'destination': f'/{lang}/', 'permanent': False})
         if pages:
             new.append({'source': '/:page(' + '|'.join(sorted(pages)) + ')', 'has': has, 'missing': missing,
