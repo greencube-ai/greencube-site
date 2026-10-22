@@ -41,7 +41,7 @@ LANGS = {
 }
 NAMES = {'en': 'English', 'es': 'Español', 'pt': 'Português', 'fr': 'Français', 'de': 'Deutsch', 'it': 'Italiano',
          'nl': 'Nederlands', 'pl': 'Polski', 'tr': 'Türkçe', 'ru': 'Русский', 'uk': 'Українська', 'ar': 'العربية',
-         'hi': 'हिन्दी', 'id': 'Bahasa Indonesia', 'vi': 'Tiếng Việt', 'th': 'ไทย', 'ja': '日本語', 'ko': '한국어',
+         'hi': 'हिन्दी', 'id': 'Indonesia', 'vi': 'Tiếng Việt', 'th': 'ไทย', 'ja': '日本語', 'ko': '한국어',
          'zh': '简体中文', 'zh-tw': '繁體中文'}
 
 
