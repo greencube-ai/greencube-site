@@ -185,6 +185,29 @@
       "permanent": false
     },
     {
+      "source": "/:page(ai-environmental-impact|buy|download|how-much-water-does-ai-use|mission|what-you-get|your-data)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "pt(-[A-Za-z]+)?([;,].*)?"
+        }
+      ],
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "gc_lang"
+        },
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless).*"
+        }
+      ],
+      "destination": "/pt/:page",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "has": [
         {

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>A IA e o planeta: os números reais de água e energia | GreenCube</title>
+  <meta name="description" content="Quanta água e eletricidade a IA realmente usa, com fontes, e o que muda quando a IA roda no seu próprio PC. A versão honesta." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="A IA e o planeta: os números reais" />
+  <meta property="og:description" content="Quanta água e energia a IA usa, com fontes, e o que muda quando ela roda no seu PC." />
+  <meta property="og:url" content="https://greencube.app/ai-environmental-impact" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="GreenCube. Uma IA que é sua, não alugada. Roda no seu próprio computador." />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://greencube.app/pt/ai-environmental-impact" />
+  <link rel="alternate" hreflang="en" href="https://greencube.app/ai-environmental-impact" />
+  <link rel="alternate" hreflang="es" href="https://greencube.app/es/ai-environmental-impact" />
+  <link rel="alternate" hreflang="pt-BR" href="https://greencube.app/pt/ai-environmental-impact" />
+  <link rel="alternate" hreflang="x-default" href="https://greencube.app/ai-environmental-impact" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A IA e o planeta: os números reais de água e energia",
+  "description": "Quanta água e eletricidade a IA realmente usa, com fontes, e o que muda quando a IA roda no seu próprio PC. A versão honesta.",
+  "datePublished": "2026-07-16",
+  "dateModified": "2026-10-07",
+  "author": {
+    "@type": "Organization",
+    "name": "GreenCube",
+    "url": "https://greencube.app"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GreenCube",
+    "url": "https://greencube.app"
+  },
+  "mainEntityOfPage": "https://greencube.app/ai-environmental-impact"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quanta água gasta uma pergunta para uma IA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entre algumas gotas e um par de colheres de sopa, dependendo de quem mede. O Google diz 0,26 mL por prompt do Gemini; a UC Riverside estimou cerca de 10 a 25 mL por pergunta ao ChatGPT, contando a água por trás da eletricidade."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanta eletricidade os data centers usam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cerca de 415 TWh em 2024, uns 1,5% da eletricidade do mundo, a caminho de cerca de 945 TWh em 2030, segundo a AIE."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O GreenCube é mais sustentável?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não usa água de resfriamento de data center nem precisa de um data center novo. Seu PC ainda usa eletricidade, então o impacto não é zero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A IA está destruindo o planeta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. Está crescendo rápido, mas ainda é uma parte pequena da energia do mundo. O que mais importa é como é construída e com que energia funciona."
+      }
+    }
+  ]
+}
+  </script>
+
+  <style>
+    html { background: #F5F1E8; }
+    body { animation: gc-page-in .5s ease both; }
+    @keyframes gc-page-in { from { opacity: 0.01; } }  /* not 0: Chrome never records a first paint for a page that starts fully transparent */
+    @media (prefers-reduced-motion: reduce) { body { animation: none; } }
+
+    :root {
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
+      --olive: #7E8A5A; --olive-deep: #5C663F;
+      --sun: #FAE289; --sun-deep: #8A6B1C;
+      --clay: #FA9F75; --clay-deep: #A8492A;
+      --sky: #8EABE1; --sky-deep: #3D5E93;
+      --night: #333333;
+      --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
+      --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: var(--sans); line-height: 1.65; color: var(--ink); background: var(--paper, #F5F1E8); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    em { font-style: normal; color: var(--olive); }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 60; pointer-events: none;
+      opacity: .24; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 14px 30px; background: rgba(245,241,232,.88);
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -.01em; flex: 0 0 auto; }
+    .brand .mark { width: 15px; height: 15px; border: 2.6px solid var(--olive); border-radius: 4px; }
+    .nav { position: relative; left: 24px; display: inline-flex; align-items: center; gap: 4px; }
+    .nav a { position: relative; font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 9px; white-space: nowrap; transition: color .25s var(--ease), background .25s var(--ease); }
+    .nav a:hover { color: var(--ink); background: rgba(126,138,90,.10); }
+    .nav a.on { color: var(--ink); font-weight: 600; }
+    .nav a.on::after { content:''; position:absolute; left:13px; right:13px; bottom:2px; height:2px; border-radius:2px; background: var(--olive); }
+    /* On a phone the nav drops onto its own row under the logo rather than
+       vanishing. There's no hamburger, so hiding it left no way to reach
+       another page. */
+    @media (max-width: 940px) {
+      header { flex-wrap: wrap; row-gap: 8px; padding: 12px 16px; }
+      .brand { order: 1; }
+      .head-right { order: 2; }
+      .nav { order: 3; left: 0; width: 100%; justify-content: center; flex-wrap: wrap; row-gap: 2px; gap: 0; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; }
+      .nav a { padding: 6px 8px; }
+      .nav a.on::after { left: 8px; right: 8px; }
+    }
+    .nav-cta { flex: 0 0 auto; font-size: 13.5px; font-weight: 600; color: var(--paper, #F5F1E8); background: var(--ink); padding: 9px 18px; border-radius: 999px; box-shadow: 0 1px 2px rgba(26,26,26,.12), 0 6px 16px -10px rgba(26,26,26,.5), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; }
+
+    .head-right { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+    .lang { flex: 0 0 auto; font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--ink-soft); padding: 6px 9px; border: 1px solid var(--line);
+      border-radius: 8px; text-decoration: none; }
+    .lang:hover { color: var(--ink); border-color: var(--olive); }
+    .eyebrow { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--olive); text-align: center; }
+    .band { position: relative; background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+    h2.sec { font-family: var(--display); font-weight: 600; font-size: clamp(28px,3.8vw,46px); line-height: 1.08; letter-spacing: -.03em; text-align: center; }
+    h2.sec .mute { color: var(--ink-mute); }
+    .sec-sub { font-size: 16.5px; color: var(--ink-soft); text-align: center; max-width: 58ch; margin: 16px auto 0; }
+    .src { font-size: 11.5px; color: var(--ink-mute); }
+    .src a { border-bottom: 1px solid var(--line); }
+    .src a:hover { color: var(--olive-deep); border-color: var(--olive-deep); }
+
+    /* hero */
+    .phero { position: relative; padding: 100px 0 84px; text-align: center; overflow: hidden; }
+    .phero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 46% 44% at 80% 10%, rgba(192,121,79,.16), transparent 62%),
+        radial-gradient(ellipse 52% 46% at 14% 26%, rgba(110,151,190,.12), transparent 62%);
+    }
+    .phero > div { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; padding: 0 32px; }
+    .phero .eyebrow { margin-bottom: 20px; color: var(--clay-deep); }
+    .phero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(36px,5.4vw,62px); line-height: 1.02; letter-spacing: -.035em; margin-bottom: 24px; max-width: 18ch; margin-left: auto; margin-right: auto; }
+    .phero h1 .mute { color: var(--ink-mute); }
+    .phero p { font-size: clamp(17px,1.55vw,20px); color: var(--ink-soft); max-width: 62ch; margin: 0 auto; }
+    /* the point of the page, stated before anyone has to scroll for it */
+    .tldr {
+      max-width: 640px; margin: 36px auto 0; text-align: left;
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--olive); border-radius: 14px;
+      padding: 24px 26px; box-shadow: var(--shadow-card);
+    }
+    .tldr strong.-lbl, .tldr > strong:first-child {
+      display: block; font-family: var(--display); font-weight: 600;
+      font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--olive-deep); margin-bottom: 12px;
+    }
+    .tldr p { font-size: 16px; color: var(--ink-soft); line-height: 1.6; max-width: none; }
+    .tldr p + p { margin-top: 11px; }
+    .tldr p strong { color: var(--ink); font-weight: 600; }
+    .tldr em { font-style: normal; color: var(--clay-deep); font-weight: 600; }
+
+    /* the scale */
+    .scale { padding: 104px 0; }
+    .scale h2.sec { margin-bottom: 14px; }
+    .scale .sec-sub { margin-bottom: 48px; }
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .stat { border-radius: 18px; padding: 32px 26px; text-align: center; border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .stat .big { font-family: var(--display); font-weight: 600; font-size: clamp(30px,3.2vw,44px); letter-spacing: -.03em; line-height: 1; margin-bottom: 12px; white-space: nowrap; }
+    .stat h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 7px; }
+    .stat p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.58; max-width: 32ch; margin: 0 auto; }
+    .stat.s-clay { background: linear-gradient(180deg, rgba(192,121,79,.14), rgba(192,121,79,.04)); } .stat.s-clay .big { color: var(--clay-deep); }
+    .stat.s-sun { background: linear-gradient(180deg, rgba(217,169,63,.16), rgba(217,169,63,.04)); } .stat.s-sun .big { color: var(--sun-deep); }
+    .stat.s-sky { background: linear-gradient(180deg, rgba(110,151,190,.14), rgba(110,151,190,.04)); } .stat.s-sky .big { color: var(--sky-deep); }
+    .scale .src { display: block; text-align: center; margin-top: 26px; }
+    @media (max-width: 860px) { .stat-row { grid-template-columns: 1fr; } }
+
+    /* their own numbers */
+    .promises { padding: 104px 0; }
+    .promises h2.sec { margin-bottom: 14px; }
+    .promises .sec-sub { margin-bottom: 48px; }
+    .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .pcard { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px 30px; box-shadow: var(--shadow-card); overflow: hidden; }
+    .pcard::before { content:''; position:absolute; inset:0 0 auto 0; height:4px; background: var(--clay); }
+    .pcard .who { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -.02em; margin-bottom: 4px; }
+    .pcard .pledge { display: inline-block; font-size: 12.5px; font-weight: 600; color: var(--olive-deep); background: rgba(126,138,90,.14); padding: 3px 10px; border-radius: 999px; margin-bottom: 18px; }
+    .pcard .rows { display: grid; gap: 10px; margin-bottom: 16px; }
+    .pcard .r { display: flex; gap: 12px; align-items: baseline; font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
+    .pcard .r b { flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--clay-deep); min-width: 88px; letter-spacing: -.01em; }
+    .pcard .verdict { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -.01em; color: var(--ink); padding-top: 14px; border-top: 1px solid var(--line); }
+    @media (max-width: 800px) { .p-grid { grid-template-columns: 1fr; } }
+
+    /* water */
+    .water { padding: 104px 0; text-align: center; }
+    .water blockquote { font-family: var(--display); font-weight: 600; font-size: clamp(28px,4.4vw,50px); line-height: 1.06; letter-spacing: -.035em; }
+    .water blockquote .mute { color: var(--sky-deep); }
+    .water > .narrow > p { font-size: 16.5px; color: var(--ink-soft); max-width: 60ch; margin: 22px auto 0; }
+    .w-list { display: grid; gap: 12px; max-width: 680px; margin: 36px auto 0; text-align: left; }
+    .w-item { display: flex; gap: 16px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--sky); border-radius: 12px; padding: 18px 22px; box-shadow: var(--shadow-card); }
+    .w-item b { flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--sky-deep); min-width: 96px; letter-spacing: -.01em; }
+    .w-item p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+    .w-item p strong { color: var(--ink); font-weight: 600; }
+    .water .src { display: block; margin-top: 24px; }
+
+    /* the honest bit */
+    .honest { padding: 104px 0; }
+    .honest .box { max-width: 820px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--olive); border-radius: 18px; padding: 40px 44px; box-shadow: var(--shadow-card); }
+    .honest .eyebrow { text-align: left; margin-bottom: 14px; }
+    .honest h2 { font-family: var(--display); font-weight: 600; font-size: clamp(24px,3vw,34px); line-height: 1.1; letter-spacing: -.028em; margin-bottom: 18px; }
+    .honest p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.68; margin-bottom: 14px; }
+    .honest p strong { color: var(--ink); font-weight: 600; }
+    .honest p:last-of-type { margin-bottom: 0; }
+    .honest .rule { height: 1px; background: var(--line); margin: 24px 0; }
+    @media (max-width: 640px) { .honest .box { padding: 30px 24px; } }
+
+    /* read next */
+    .more-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .mcard { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: var(--shadow-card); transition: transform .4s var(--ease), border-color .4s var(--ease); }
+    .mcard:hover { transform: translateY(-4px); border-color: var(--olive); }
+    .mcard .lbl { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--olive); margin-bottom: 10px; display: block; }
+    .mcard h3 { font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.015em; margin-bottom: 7px; }
+    .mcard p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .mcard .go { display: inline-block; margin-top: 14px; font-size: 13.5px; font-weight: 600; color: var(--olive-deep); }
+    @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } }
+
+    /* cta */
+    .turn { padding: 104px 0; text-align: center; }
+    .kicker-line { font-family: var(--display); font-weight: 600; font-size: clamp(21px,2.6vw,31px); letter-spacing: -.025em; max-width: 30ch; margin: 0 auto 42px; line-height: 1.2; }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper, #F5F1E8); font-size: 16px; font-weight: 600; padding: 16px 30px; border-radius: 14px; box-shadow: 0 1px 2px rgba(26,26,26,.14), 0 8px 22px -12px rgba(26,26,26,.55), inset 0 1px 0 rgba(255,255,255,.14); transition: transform .4s var(--ease), background .3s var(--ease); }
+    .cta:hover { transform: translateY(-2px); background: #000; }
+    .cta-sub { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+
+    footer { border-top: 1px solid var(--line); padding: 40px 0 48px; }
+    footer .row-f { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-mute); }
+    footer .links { display: inline-flex; gap: 20px; flex-wrap: wrap; }
+    footer a:hover { color: var(--ink); }
+    @media (max-width: 600px) { footer .row-f { flex-direction: column; align-items: flex-start; } }
+  
+/* ============== footer ============== */
+    footer {
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper, #F5F1E8);
+      border-top: 1px solid var(--line);
+    }
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest, #1A1A1A);
+    }
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss, #7E8A5A); border-radius: 4px;
+    }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft, #FBF8F0);
+      font-size: 14px; font-weight: 500; color: var(--forest, #1A1A1A);
+      transition: border-color .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), transform .35s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    footer .f-mail:hover { border-color: var(--moss, #7E8A5A); background: #fff; transform: translateY(-1px); }
+    footer .f-mail.copied { border-color: var(--moss, #7E8A5A); background: #fff; }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss, #7E8A5A); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest, #1A1A1A);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
+    footer a { transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)); }
+    footer a:hover { color: var(--forest, #1A1A1A); }
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
+    }
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    }
+    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ================= Why GreenCube, rebuilt 2026-10-07 =================
+       Short, clear, a bit playful: two small toys (send a message / switch the
+       Wi-Fi off) show the two big things instead of explaining them. */
+    .w { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .w-sec { padding: 92px 0; }
+    .w-sec + .w-sec { border-top: 1px solid var(--line); }
+    .w-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--olive); }
+    .w-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -.035em; color: var(--ink); margin-top: 12px; }
+    .w-h2 em { font-style: normal; color: var(--olive); }
+    .w-sub { font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--ink-soft); margin-top: 14px; max-width: 46ch; }
+    .w-center { text-align: center; } .w-center .w-sub { margin-left: auto; margin-right: auto; }
+
+    /* hero */
+    .w-hero { padding: 150px 0 70px; text-align: center; }
+    .w-hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 7vw, 92px); line-height: .98; letter-spacing: -.04em; color: var(--ink); margin-top: 16px; }
+    .w-hero h1 em { font-style: normal; color: var(--olive); }
+    .w-hero p { font-size: clamp(18px, 1.7vw, 23px); font-weight: 600; color: var(--ink); margin-top: 22px; }
+    .w-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; list-style: none; padding: 0; }
+    .w-pills li { padding: 9px 16px; border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+    .w-pills li:nth-child(1) { background: color-mix(in srgb, var(--sun) 60%, #fff); }
+    .w-pills li:nth-child(2) { background: color-mix(in srgb, var(--sky) 45%, #fff); }
+    .w-pills li:nth-child(3) { background: color-mix(in srgb, var(--clay) 45%, #fff); }
+
+    /* toy 1: who stops first */
+    .w-race { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+    .w-lane { border-radius: 24px; padding: 26px 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); transition: opacity .4s var(--ease), filter .4s var(--ease); }
+    .w-lane.gc { background: color-mix(in srgb, var(--olive) 14%, var(--card)); border-color: color-mix(in srgb, var(--olive) 35%, transparent); }
+    .w-lane .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-lane.gc .who { color: var(--olive-deep); }
+    .w-count { font-family: var(--display); font-weight: 600; font-size: clamp(54px, 7vw, 84px); line-height: 1; letter-spacing: -.04em; color: var(--ink); margin-top: 10px; display: inline-block; }
+    .w-count.pop { animation: w-pop .32s var(--ease); }
+    @keyframes w-pop { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .w-lane .left { font-size: 15px; color: var(--ink-soft); margin-top: 6px; min-height: 1.5em; }
+    .w-bar { height: 10px; border-radius: 99px; background: var(--paper-warm); margin-top: 16px; overflow: hidden; }
+    .w-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--clay); transition: width .35s var(--ease); }
+    .w-lane.gc .w-bar i { width: 100%; background: linear-gradient(90deg, var(--olive), var(--sun), var(--olive)); background-size: 200% 100%; animation: w-flow 2.4s linear infinite; }
+    @keyframes w-flow { to { background-position: -200% 0; } }
+    .w-lane.locked { opacity: .55; filter: grayscale(.6); }
+    .w-lane.locked .left { color: var(--clay-deep); font-weight: 600; }
+    .w-send { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 17px 30px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); cursor: pointer; box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .2s var(--ease), background .3s var(--ease); }
+    .w-send:hover { transform: translateY(-2px); background: #000; }
+    .w-send:active { transform: translateY(1px) scale(.97); }
+    .w-fine { font-size: 13px; color: var(--ink-mute); margin-top: 16px; }
+
+    /* toy 2: the Wi-Fi switch */
+    .w-wifi { display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 12px 18px 12px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); cursor: pointer; font: 600 16px var(--sans); color: var(--ink); }
+    .w-wifi .sw { position: relative; width: 52px; height: 30px; border-radius: 99px; background: var(--olive); transition: background .3s var(--ease); }
+    .w-wifi .sw::after { content: ''; position: absolute; top: 3px; left: 25px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .3s cubic-bezier(.34,1.56,.64,1); }
+    .w-wifi[aria-checked="false"] .sw { background: #C9C2B2; }
+    .w-wifi[aria-checked="false"] .sw::after { left: 3px; }
+    .w-net { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; text-align: left; }
+    .w-chat { border-radius: 24px; padding: 22px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .w-chat .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-chat.gc .who { color: var(--olive-deep); }
+    .w-bubble { margin-top: 14px; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-bubble.me { background: var(--paper-warm); margin-left: 18%; border-bottom-right-radius: 6px; }
+    .w-bubble.ai { background: color-mix(in srgb, var(--olive) 16%, #fff); margin-right: 12%; border-bottom-left-radius: 6px; transition: background .3s var(--ease), color .3s var(--ease); }
+    .w-bubble.ai.err { background: color-mix(in srgb, var(--clay) 22%, #fff); color: var(--clay-deep); font-weight: 600; }
+
+    /* three steps */
+    .w-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; counter-reset: s; }
+    .w-step { border-radius: 24px; padding: 26px 24px; background: var(--c); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-step b { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #fff; font: 600 20px var(--display); color: var(--ink); }
+    .w-step h3 { font: 600 23px/1.15 var(--display); letter-spacing: -.02em; color: var(--ink); margin-top: 16px; }
+    .w-step p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
+
+    /* what you can do */
+    .w-can { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; list-style: none; padding: 0; }
+    .w-can li { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); font: 600 19px/1.25 var(--display); letter-spacing: -.015em; color: var(--ink); transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease); }
+    .w-can li small { display: block; margin-top: 6px; font: 400 14.5px/1.45 var(--sans); color: var(--ink-soft); letter-spacing: 0; }
+    .w-can li:hover { transform: translateY(-3px) rotate(-.6deg); background: color-mix(in srgb, var(--c) 40%, #fff); border-color: var(--c); }
+
+    /* yours */
+    .w-yours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .w-yours div { border-radius: 24px; padding: 28px 24px; background: var(--card); border: 1px solid var(--line); }
+    .w-yours b { display: block; font: 600 clamp(30px, 3.4vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-yours span { display: block; font-size: 15.5px; color: var(--ink-soft); margin-top: 10px; line-height: 1.45; }
+
+    /* questions */
+    .w-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .w-faq div { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); }
+    .w-faq h3 { font: 600 18px/1.25 var(--display); letter-spacing: -.012em; color: var(--ink); }
+    .w-faq p { font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 8px; }
+    .w-faq a, .w-end .alt { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* the end */
+    .w-end { text-align: center; padding: 100px 0 40px; }
+    .w-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 18px 34px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .3s var(--ease), background .3s var(--ease); }
+    .w-cta:hover { transform: translateY(-2px); background: #000; }
+    .w-end .alt { display: block; margin-top: 18px; font-size: 15px; }
+
+    .w-in { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .w-in.seen { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .w-in { opacity: 1; transform: none; transition: none; } .w-lane.gc .w-bar i { animation: none; } }
+    @media (max-width: 820px) {
+      .w-race, .w-net, .w-steps, .w-can, .w-yours, .w-faq { grid-template-columns: 1fr; }
+      .w-hero { padding: 130px 0 50px; } .w-sec { padding: 70px 0; } .w { padding: 0 16px; }
+    }
+
+    /* money: slide the months, watch the subscription pile up next to €9.99 once */
+    .w-money { margin-top: 36px; border-radius: 28px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-hi); padding: 34px 32px 30px; text-align: left; }
+    .w-months { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-weight: 600; color: var(--ink-soft); }
+    .w-months b { font: 600 clamp(30px, 3.6vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-range { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; border-radius: 99px; margin: 18px 0 30px; cursor: pointer;
+      background: linear-gradient(90deg, var(--clay) 0 var(--p, 33%), var(--paper-warm) var(--p, 33%) 100%); outline: none; }
+    .w-range::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); box-shadow: 0 4px 10px rgba(0,0,0,.18); transition: transform .2s cubic-bezier(.34,1.56,.64,1); }
+    .w-range::-webkit-slider-thumb:hover, .w-range:active::-webkit-slider-thumb { transform: scale(1.18); }
+    .w-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); }
+    .w-range:focus-visible { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 50%, transparent); }
+    .w-row { display: grid; grid-template-columns: 190px 1fr auto; align-items: center; gap: 16px; margin-top: 16px; }
+    .w-row .lbl { font-weight: 700; color: var(--ink); line-height: 1.25; }
+    .w-row .lbl small { display: block; font-weight: 500; font-size: 13px; color: var(--ink-mute); }
+    .w-track { height: 34px; border-radius: 10px; background: var(--paper-warm); overflow: hidden; }
+    .w-track i { display: block; height: 100%; border-radius: 10px; transition: width .35s var(--ease); }
+    .w-row.sub .w-track i { background: var(--clay); }
+    .w-row.gc .w-track i { background: var(--olive); }
+    .w-row .amt { font: 600 clamp(22px, 2.4vw, 30px)/1 var(--display); letter-spacing: -.02em; color: var(--ink); min-width: 4.5em; text-align: right; }
+    .w-keep { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .w-keep span { font-weight: 600; color: var(--ink-soft); }
+    .w-keep b { font: 600 clamp(34px, 4.4vw, 54px)/1 var(--display); letter-spacing: -.035em; color: var(--olive-deep); }
+    @media (max-width: 820px) { .w-row { grid-template-columns: 1fr auto; } .w-row .w-track { grid-column: 1 / -1; grid-row: 2; } .w-money { padding: 26px 18px 22px; } }
+
+    /* AI & the planet */
+    .w-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .w-stats div { border-radius: 24px; padding: 26px 24px; background: color-mix(in srgb, var(--c) 28%, #fff); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+    .w-stats div:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-stats b { display: block; font: 600 clamp(38px, 4.6vw, 58px)/1 var(--display); letter-spacing: -.035em; color: var(--ink); }
+    .w-stats span { display: block; font-size: 15.5px; line-height: 1.45; color: var(--ink-soft); margin-top: 10px; }
+    .w-src { font-size: 13px; color: var(--ink-mute); margin-top: 14px; }
+    .w-src a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+    .w-water-out { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+    .w-water-out div { border-radius: 18px; padding: 20px; }
+    .w-water-out .cloud { background: color-mix(in srgb, var(--sky) 24%, #fff); }
+    .w-water-out .gc { background: color-mix(in srgb, var(--olive) 18%, #fff); }
+    .w-water-out small { display: block; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-water-out b { display: block; font: 600 clamp(28px, 3.4vw, 40px)/1.05 var(--display); letter-spacing: -.03em; color: var(--ink); margin-top: 8px; }
+    .w-water-out span { display: block; font-size: 14.5px; color: var(--ink-soft); margin-top: 6px; }
+    .w-year { margin-top: 18px; font-weight: 600; color: var(--ink-soft); }
+    .w-truth { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .w-truth div { border-radius: 22px; padding: 24px 22px; background: var(--card); border: 1px solid var(--line); }
+    .w-truth h3 { font: 600 20px/1.2 var(--display); letter-spacing: -.015em; color: var(--ink); }
+    .w-truth p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
+    @media (max-width: 820px) { .w-stats, .w-truth, .w-water-out { grid-template-columns: 1fr; } }
+    .w-src, #water .w-fine { font-weight: 600; color: var(--ink-soft); }
+    .w-src a, #water .w-fine a { color: var(--ink); }
+  </style>
+  <link rel="stylesheet" href="/mobile.css" />
+  <script src="/mobile.js" defer></script>
+<style id="turtle-walk">
+  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
+  .f-brand { position: relative; }
+  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  .f-turtle img { display: block; width: 100%; height: auto; }
+  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
+  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
+</style>
+<style id="lang-pick-css">
+    .lang-pick { position: relative; }
+    .lang-pick > summary { list-style: none; cursor: pointer; }
+    .lang-pick > summary::-webkit-details-marker { display: none; }
+    .lang-pick .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid;
+      grid-template-columns: repeat(2, minmax(110px, 1fr)); gap: 2px; padding: 8px; border-radius: 14px;
+      background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+    .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
+    .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
+    footer .f-lang { flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <a href="/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/pt/ai-environmental-impact" class="on">A IA e o planeta</a>
+    <a href="/pt/your-data">Seus dados</a>
+    <a href="/pt/mission">Nossa missão</a>
+    <a href="/pt/buy">Baixar</a>
+  </nav>
+  <div class="head-right">
+    <details class="lang-pick"><summary class="lang" aria-label="Language">PT</summary><div class="lang-list"><a href="/ai-environmental-impact" hreflang="en" lang="en">English</a><a href="/es/ai-environmental-impact" hreflang="es" lang="es">Español</a><a href="/pt/ai-environmental-impact" hreflang="pt" lang="pt-BR" aria-current="true">Português</a></div></details>
+    <a href="/pt/buy" class="nav-cta">Quero o GreenCube</a>
+  </div>
+</header>
+
+<main id="why">
+<section class="w-hero">
+  <div class="w">
+    <span class="w-eyebrow">A IA e o planeta</span>
+    <h1>A IA funciona com<br><em>água e energia.</em></h1>
+    <p>Aqui estão os números reais, e o que muda quando a IA está no seu PC.</p>
+  </div>
+</section>
+
+<section class="w-sec" id="power">
+  <div class="w">
+    <span class="w-eyebrow">Energia</span>
+    <h2 class="w-h2">Os data centers estão <em>crescendo rápido.</em></h2>
+    <div class="w-stats"><div style="--c:var(--sun)"><b>1,5%</b><span>da eletricidade do mundo foi para data centers em 2024.</span></div><div style="--c:var(--clay)"><b>2&times;</b><span>Até 2030 devem usar mais que o dobro.</span></div><div style="--c:var(--sky)"><b>945 TWh</b><span>por ano em 2030: um pouco mais do que todo o Japão usa hoje.</span></div></div>
+    <p class="w-src">Fonte: <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener">AIE, Energy and AI (2025)</a>.</p>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="water">
+  <div class="w">
+    <span class="w-eyebrow">Água</span>
+    <h2 class="w-h2">Quanta água <em>suas perguntas</em> gastam?</h2>
+    <p class="w-sub">Data centers são resfriados com água que evapora. Arraste para ver o seu ano.</p>
+    <div class="w-money" id="w-water" data-year="São {n} perguntas por ano." data-l="litros" data-b="Até {b} garrafas de meio litro." data-u1="pergunta por dia" data-u2="perguntas por dia">
+      <div class="w-months"><span>Perguntas por dia</span><b id="q-n"></b></div>
+      <input class="w-range" id="q-range" type="range" min="1" max="200" value="30" aria-label="Perguntas por dia">
+      <div class="w-water-out">
+        <div class="cloud"><small>IA na nuvem</small><b id="q-cloud"></b><span>de água doce, dependendo de quem mede</span><span id="q-bottles"></span></div>
+        <div class="gc"><small>GreenCube</small><b>0 litros</b><span>de água de resfriamento de data center. Seu PC usa um ventilador.</span></div>
+      </div>
+      <p class="w-year" id="q-year"></p>
+    </div>
+    <p class="w-fine">Mínimo: <a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference/" target="_blank" rel="noopener">Google, 0,26 mL por prompt do Gemini (2025)</a>. Máximo: <a href="https://arxiv.org/abs/2304.03271" target="_blank" rel="noopener">UC Riverside, cerca de 500 mL a cada 20 a 50 perguntas (2023)</a>, que também conta a água usada para gerar a eletricidade. As estimativas variam muito.</p>
+  </div>
+</section>
+
+<section class="w-sec" id="honest">
+  <div class="w">
+    <span class="w-eyebrow">A parte honesta</span>
+    <h2 class="w-h2">Seu PC <em>não é mágica.</em></h2>
+    <div class="w-truth"><div><h3>Seu PC também usa eletricidade.</h3><p>Rodar IA em casa gasta energia, e os grandes chips de data center tiram mais respostas de cada watt do que um PC doméstico.</p></div><div><h3>Mas nenhuma torre de resfriamento roda por você.</h3><p>Seu PC é resfriado por um ventilador, não evaporando água. E ninguém constrói um data center novo porque você fez uma pergunta.</p></div><div><h3>A IA não é o problema principal.</h3><p>Mesmo em 2030, os data centers serão poucos por cento da eletricidade do mundo. Aviões, cimento e aço pesam mais. Preferimos contar a verdade.</p></div></div>
+  </div>
+</section>
+
+<section class="w-sec" id="questions">
+  <div class="w">
+    <span class="w-eyebrow">Perguntas</span>
+    <h2 class="w-h2">Respostas <em>rápidas.</em></h2>
+    <div class="w-faq"><div><h3>Quanta água gasta uma pergunta para uma IA?</h3><p>Entre algumas gotas e um par de colheres de sopa, dependendo de quem mede. O Google diz 0,26 mL por prompt do Gemini; a UC Riverside estimou cerca de 10 a 25 mL por pergunta ao ChatGPT, contando a água por trás da eletricidade.</p></div><div><h3>Quanta eletricidade os data centers usam?</h3><p>Cerca de 415 TWh em 2024, uns 1,5% da eletricidade do mundo, a caminho de cerca de 945 TWh em 2030, segundo a AIE.</p></div><div><h3>O GreenCube é mais sustentável?</h3><p>Não usa água de resfriamento de data center nem precisa de um data center novo. Seu PC ainda usa eletricidade, então o impacto não é zero.</p></div><div><h3>A IA está destruindo o planeta?</h3><p>Não. Está crescendo rápido, mas ainda é uma parte pequena da energia do mundo. O que mais importa é como é construída e com que energia funciona.</p></div></div>
+    <p class="w-fine">Quer mais? <a href="/pt/how-much-water-does-ai-use">Quanta água a IA gasta?</a></p>
+  </div>
+</section>
+
+<section class="w-end">
+  <div class="w">
+    <h2 class="w-h2">IA no PC <em>que você já tem.</em></h2>
+    <a href="/pt/buy" class="w-cta">Quero o GreenCube, €9,99 <span aria-hidden="true">&rarr;</span></a>
+    <a href="/pt/#can" class="alt">Veja o que ela faz</a>
+  </div>
+</section>
+</main>
+
+<div aria-hidden="true" style="position:relative;width:100%;height:168px;margin-bottom:-1px;overflow:hidden;line-height:0;pointer-events:none;">
+  <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+    <defs><linearGradient id="gcFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="70%" stop-color="#F5F1E8" stop-opacity="0"/><stop offset="100%" stop-color="#F5F1E8" stop-opacity="1"/></linearGradient></defs>
+    <path d="M0,96 C 300,64 560,110 840,86 C 1090,66 1290,102 1440,82 L1440,240 L0,240 Z" fill="#C6D4AE"/>
+    <path d="M0,132 C 280,108 560,150 820,132 C 1080,116 1300,146 1440,130 L1440,240 L0,240 Z" fill="#AEC191"/>
+    <g fill="#9AB07F"><path d="M190,112 l-7,20 h14 Z"/><path d="M214,118 l-6,17 h12 Z"/><path d="M1160,110 l-7,20 h14 Z"/><path d="M1184,117 l-6,16 h12 Z"/></g>
+    <path d="M0,168 C 340,150 620,184 900,168 C 1140,154 1320,178 1440,170 L1440,240 L0,240 Z" fill="#9AB07F"/>
+    <g fill="#6A8050"><path d="M430,146 l-8,24 h16 Z"/><path d="M458,153 l-7,19 h14 Z"/><path d="M960,148 l-8,23 h16 Z"/><path d="M986,155 l-7,18 h14 Z"/></g>
+    <path d="M0,200 C 360,190 700,210 1040,200 C 1240,194 1360,204 1440,202 L1440,240 L0,240 Z" fill="#5C663F"/>
+    <rect x="0" y="60" width="1440" height="180" fill="url(#gcFade)"/>
+  </svg>
+</div>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="/pt/" class="brand-lock" aria-label="Início do GreenCube">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">IA que é <em>sua,</em> não alugada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail" data-email="support@greencube.app" data-copied="Endereço copiado">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          <span class="f-mail-label">support@greencube.app</span>
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Produto">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="/pt/buy">Quero o GreenCube</a></li>
+          <li><a href="/pt/#can">O que ela faz</a></li>
+          <li><a href="/pt/what-you-get">Vai rodar no meu computador?</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Aprenda">
+        <h3>Aprenda</h3>
+        <ul>
+          <li><a href="https://blog.greencube.app/blog">Blog</a></li>
+          <li><a href="/pt/your-data">Seus dados</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data">ChatGPT e seus dados (EN)</a></li>
+          <li><a href="/pt/ai-environmental-impact">A IA e o planeta</a></li>
+          <li><a href="/pt/how-much-water-does-ai-use">A IA e a água</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Empresa">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="/pt/mission">Nossa missão</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contato</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Suporte">
+        <h3>Suporte</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Obter ajuda</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidade (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termos de uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Feito na Espanha.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Privacidade</a>
+        <a href="https://legal.greencube.app/terms">Termos</a>
+      </div>
+      <div class="f-lang"><a href="/ai-environmental-impact" hreflang="en">EN</a><a href="/es/ai-environmental-impact" hreflang="es">ES</a><a href="/pt/ai-environmental-impact" hreflang="pt" aria-current="true">PT</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const show = () => document.body.classList.add('ready');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(show);
+  setTimeout(show, 900);
+</script>
+<script>
+  // Brave (and any browser with no mail handler registered) silently does
+  // nothing on a mailto:. Copy the address on click as well, so the click
+  // always produces something useful. Default is not prevented, so a working
+  // mail client still opens.
+  (() => {
+    const mail = document.querySelector('.f-mail');
+    if (!mail) return;
+    const label = mail.querySelector('.f-mail-label');
+    const addr = mail.dataset.email || 'support@greencube.app';
+    mail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+      if (!label) return;
+      const original = label.textContent;
+      mail.classList.add('copied');
+      label.textContent = mail.dataset.copied || 'Address copied';
+      clearTimeout(mail._t);
+      mail._t = setTimeout(() => {
+        label.textContent = original;
+        mail.classList.remove('copied');
+      }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
+    });
+  })();
+</script>
+<script>
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = !reduce && 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .15 }) : null;
+    document.querySelectorAll('#why .w-sec .w > *, #why .w-end .w > *').forEach((el) => { if (io) { el.classList.add('w-in'); io.observe(el); } });
+    // water: questions a day -> a year of cloud AI water, low and high estimate
+    const box = document.getElementById('w-water'), r = document.getElementById('q-range');
+    if (!box || !r) return;
+    const LANG = document.documentElement.lang || 'en';
+    const nf = new Intl.NumberFormat(LANG === 'en' ? 'en-GB' : LANG, { maximumFractionDigits: 1, useGrouping: false });
+    const LOW = 0.26, HIGH = 25;   // mL per question: Google 2025 / UC Riverside 2023 (500 mL per 20 questions)
+    const $ = (id) => document.getElementById(id);
+    const paint = () => {
+      const q = +r.value, year = q * 365;
+      const lo = year * LOW / 1000, hi = year * HIGH / 1000;
+      $('q-n').textContent = q + ' ' + (q === 1 ? box.dataset.u1 : box.dataset.u2);
+      $('q-cloud').textContent = nf.format(lo) + ' – ' + nf.format(Math.round(hi)) + ' ' + box.dataset.l;
+      $('q-bottles').textContent = box.dataset.b.replace('{b}', nf.format(Math.round(hi / 0.5)));
+      $('q-year').textContent = box.dataset.year.replace('{n}', nf.format(year));
+      r.style.setProperty('--p', ((q - 1) / 199 * 100) + '%');
+    };
+    r.addEventListener('input', paint);
+    paint();
+  })();
+</script>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="/src.js" defer></script>
+</body>
+</html>

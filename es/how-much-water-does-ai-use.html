@@ -21,6 +21,7 @@
   <link rel="canonical" href="https://greencube.app/es/how-much-water-does-ai-use" />
   <link rel="alternate" hreflang="en" href="https://greencube.app/how-much-water-does-ai-use" />
   <link rel="alternate" hreflang="es" href="https://greencube.app/es/how-much-water-does-ai-use" />
+  <link rel="alternate" hreflang="pt-BR" href="https://greencube.app/pt/how-much-water-does-ai-use" />
   <link rel="alternate" hreflang="x-default" href="https://greencube.app/how-much-water-does-ai-use" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
@@ -612,7 +613,7 @@
         <a href="https://legal.greencube.app/es/privacy">Privacidad</a>
         <a href="https://legal.greencube.app/es/terms">Términos</a>
       </div>
-      <div class="f-lang"><a href="/how-much-water-does-ai-use" hreflang="en">EN</a><a href="/es/how-much-water-does-ai-use" hreflang="es" aria-current="true">ES</a></div>
+      <div class="f-lang"><a href="/how-much-water-does-ai-use" hreflang="en">EN</a><a href="/es/how-much-water-does-ai-use" hreflang="es" aria-current="true">ES</a><a href="/pt/how-much-water-does-ai-use" hreflang="pt">PT</a></div>
     </div>
   </div>
 </footer>
@@ -671,8 +672,8 @@
     // how we count: 15 mL per message, exactly like the app (WATER_ML_PER_QUERY)
     const box = document.getElementById('w-count'), r = document.getElementById('c-range');
     if (!box || !r) return;
-    const es = document.documentElement.lang === 'es';
-    const nf = new Intl.NumberFormat(es ? 'es-ES' : 'en-GB', { maximumFractionDigits: 1, useGrouping: false });
+    const LANG = document.documentElement.lang || 'en';
+    const nf = new Intl.NumberFormat(LANG === 'en' ? 'en-GB' : LANG, { maximumFractionDigits: 1, useGrouping: false });
     const paint = () => {
       const n = +r.value, ml = n * 15;
       document.getElementById('c-n').textContent = n + ' ' + (n === 1 ? box.dataset.u1 : box.dataset.u2);

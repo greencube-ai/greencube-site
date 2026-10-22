@@ -242,8 +242,31 @@ def cmd_redirects():
     print(len(new), 'language redirects')
 
 
+def cmd_sitemap():
+    """List every translated main page in sitemap.xml (English and Spanish entries are kept as they are)."""
+    import datetime
+    p = os.path.join(ROOT, 'sitemap.xml')
+    s = open(p, encoding='utf-8').read()
+    ours = '|'.join(l for l in LANGS if l not in ('en', 'es'))
+    s = re.sub(r'  <url><loc>' + re.escape(HOST) + r'/(?:' + ours + r')/[^<]*</loc>.*?</url>\n', '', s)
+    today = datetime.date.today().isoformat()
+    rows = ''
+    for lang in LANGS:
+        if lang in ('en', 'es'):
+            continue
+        for f in sorted(glob.glob(os.path.join(ROOT, lang, '*.html')), key=lambda f: f.endswith('index.html') is False):
+            page = os.path.basename(f)
+            rows += (f'  <url><loc>{url(lang, page)}</loc><lastmod>{today}</lastmod><changefreq>monthly</changefreq>'
+                     f'<priority>{"1.0" if page == "index.html" else "0.8"}</priority></url>\n')
+    s = s.replace('</urlset>', rows + '</urlset>')
+    open(p, 'w', encoding='utf-8', newline='\n').write(s)
+    print(rows.count('<url>'), 'translated pages in sitemap.xml')
+
+
 if __name__ == '__main__':
     c, args = sys.argv[1], sys.argv[2:]
+    if c == 'sitemap':
+        cmd_sitemap()
     if c == 'todo':
         cmd_todo(args[0], args[1:])
     elif c == 'build':
