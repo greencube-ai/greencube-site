@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>GreenCube : une IA qui est à vous. Sans limites.</title>
+  <meta name="description" content="GreenCube est une IA qui vous appartient. Elle tourne sur votre propre ordinateur, sans limites d'utilisation, sans abonnement et sans besoin de wifi. Vous payez une fois." />
+  <meta name="theme-color" content="#F5F1E8" />
+
+  <meta property="og:title" content="GreenCube : une IA qui est à vous. Sans limites." />
+  <meta property="og:description" content="GreenCube est une IA qui vous appartient. Elle tourne sur votre propre ordinateur, sans limites d'utilisation, sans abonnement et sans besoin de wifi. Vous payez une fois." />
+  <meta property="og:url" content="https://greencube.app" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="GreenCube: AI that's yours. Not rented. Runs on your own computer." />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GreenCube : une IA qui est à vous. Sans limites." />
+  <meta name="twitter:description" content="GreenCube est une IA qui vous appartient. Elle tourne sur votre propre ordinateur, sans limites d'utilisation, sans abonnement et sans besoin de wifi. Vous payez une fois." />
+
+  <link rel="canonical" href="https://greencube.app/fr/" />
+  <link rel="alternate" hreflang="en" href="https://greencube.app/" />
+  <link rel="alternate" hreflang="es" href="https://greencube.app/es/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://greencube.app/pt/" />
+  <link rel="alternate" hreflang="fr" href="https://greencube.app/fr/" />
+  <link rel="alternate" hreflang="x-default" href="https://greencube.app/" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "GreenCube",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "description": "GreenCube est une IA qui vous appartient. Elle tourne sur votre propre ordinateur, sans limites d'utilisation, sans abonnement et sans besoin de wifi. Discussions, sessions de code, génération d'images et pièces jointes illimitées, plus des présentations PowerPoint, du matériel de révision et des pages web. Vous payez une fois.",
+  "url": "https://greencube.app",
+  "downloadUrl": "https://greencube.app/download",
+  "offers": {
+    "@type": "Offer",
+    "price": "9.99",
+    "priceCurrency": "EUR",
+    "url": "https://greencube.app/buy",
+    "availability": "https://schema.org/InStock"
+  },
+  "featureList": [
+    "Discussions illimitées avec une IA sur votre propre ordinateur",
+    "Sessions de code illimitées : décrivez une appli et elle est construite",
+    "Génération d'images illimitée",
+    "Pièces jointes illimitées : PDF, contrats, photos et captures d'écran",
+    "Crée des présentations PowerPoint, des fiches, des quiz et des pages web",
+    "Répond franchement, sans filtre de contenu ajouté",
+    "Fonctionne entièrement hors ligne ; vos conversations restent sur votre appareil",
+    "Sans abonnement et sans limites d'utilisation : 9,99 EUR une seule fois"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://greencube.app/#org",
+    "name": "GreenCube",
+    "legalName": "Edunexis SL",
+    "url": "https://greencube.app",
+    "logo": "https://greencube.app/icon-512.png",
+    "email": "support@greencube.app",
+    "founder": { "@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Cartagena", "addressRegion": "Murcia", "addressCountry": "ES" },
+    "sameAs": ["https://www.youtube.com/@greencubeapp", "https://github.com/greencube-ai", "https://blog.greencube.app/blog"]
+  }
+}
+  </script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+
+  <style>
+    /* soft fade-in on load (no longer waits for the fonts) */
+    html { background: #F5F1E8; }
+    body { animation: gc-page-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    @keyframes gc-page-in { from { opacity: 0.01; } }  /* not 0: Chrome never records a first paint for a page that starts fully transparent */
+    @media (prefers-reduced-motion: reduce) { body { animation: none; } }
+  </style>
+
+  <style>
+    /* ============== tokens (mirrors src/styles/tokens.css) ============== */
+    :root {
+      --paper:      #F5F1E8;
+      --paper-soft: #FBF8F0;
+      --paper-warm: #F0ECE3;
+
+      --night:      #333333;
+      --night-2:    #262626;
+      --forest:     #1A1A1A;
+      --moss:       #7E8A5A;
+      --sage:       #AFC098;
+      --gold:       #FAE289;
+      --gold-warm:  #F3D461;
+
+      --ink:          #1A1A1A;
+      --ink-soft:     #555555;
+      --ink-mute:     #9A937F;
+      --ink-faint:    #B8B0A0;
+      --line:         #DDD8CE;
+      --on-dark:      #F5F1E8;
+      --on-dark-soft: rgba(245, 241, 232, 0.66);
+      --on-dark-mute: rgba(245, 241, 232, 0.40);
+      --on-dark-line: rgba(245, 241, 232, 0.10);
+
+      --display: 'General Sans', 'Geist', -apple-system, system-ui, sans-serif;
+      --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+      --sans:  'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:  'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ============== reset + base ============== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
+    img, svg, canvas { display: block; max-width: 100%; }
+    em { font-style: italic; }
+    ::selection { background: rgba(250, 226, 137, 0.32); color: var(--forest); }
+
+    /* ============== fixed overlays ============== */
+    /* Paper grain over the whole page. Sits above the z-index:2 sections, below
+       the header at 100. pointer-events:none so it never eats a click.
+       The feColorMatrix pushes the turbulence R channel into RGB and forces
+       alpha to 1 — an OPAQUE grey static. The previous recipe pinned RGB to a
+       constant and varied only alpha, which multiplied out to ~2% and was
+       invisible no matter what opacity it was given. */
+    .grain {
+      position: fixed; inset: 0;
+      z-index: 60; pointer-events: none;
+      opacity: 0.24; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .progress {
+      position: fixed; top: 0; left: 0;
+      height: 1.5px; width: 0%;
+      background: linear-gradient(90deg, var(--moss), var(--gold));
+      z-index: 200; pointer-events: none;
+    }
+
+    /* ============== header ============== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.5s var(--ease-out),
+                  border-color 0.5s var(--ease-out),
+                  backdrop-filter 0.5s var(--ease-out),
+                  color 0.5s var(--ease-out),
+                  padding 0.5s var(--ease-out);
+      border-bottom: 1px solid transparent;
+      color: var(--ink);
+    }
+    header.scrolled {
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(245, 241, 232, 0.78);
+      border-bottom-color: var(--line);
+      padding: 14px 32px;
+    }
+    header.dark { color: var(--on-dark); }
+    header.dark.scrolled {
+      background: rgba(15, 33, 24, 0.72);
+      border-bottom-color: var(--on-dark-line);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    .brand .mark {
+      width: 17px; height: 17px;
+      border: 2.6px solid currentColor;
+      border-radius: 4px;
+      animation: brand-spin 14s linear infinite;
+    }
+    @keyframes brand-spin {
+      from { rotate: 0deg; }
+      to   { rotate: 360deg; }
+    }
+    .header-nav {
+      position: relative; left: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .header-nav a {
+      color: var(--forest);
+      letter-spacing: -0.005em;
+      padding: 8px 14px;
+      border-radius: 9px;
+      white-space: nowrap;
+      transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { color: var(--moss); background: rgba(126, 138, 90, 0.12); }
+    header.dark .header-nav a { color: var(--on-dark-soft); }
+    header.dark .header-nav a:hover { color: var(--on-dark); background: rgba(245, 241, 232, 0.09); }
+    /* On a phone the nav drops onto its own row under the logo rather than
+       vanishing. There's no hamburger, so hiding it left no way at all to
+       reach another page. */
+    /* 1040, not 940: the fifth nav item ("Our mission") pushes the row wide
+       enough that the CTA clipped off the right edge in the 940-1000 range. */
+    @media (max-width: 1040px) {
+      header { flex-wrap: wrap; row-gap: 8px; }
+      .brand { order: 1; }
+      .head-right { order: 2; }
+      .header-nav {
+        order: 3; left: 0; width: 100%; justify-content: center;
+        flex-wrap: wrap; row-gap: 2px;
+        gap: 0; font-size: 12.5px;
+        border-top: 1px solid var(--line); padding-top: 9px;
+      }
+      .header-nav a { padding: 6px 8px; }
+      header.dark .header-nav { border-top-color: var(--on-dark-line); }
+      /* the header is fixed and transparent, so once the nav takes a second row
+         it sat straight on top of the headline. 16vh didn't clear a two-row
+         header anywhere in this band. (<=760 already handles itself below.) */
+      .hero { padding-top: 170px; }
+    }
+    .nav-cta {
+      font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
+      color: var(--paper); background: var(--forest);
+      padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(26,26,26,0.12), 0 6px 16px -10px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.14);
+      transition: transform 0.4s var(--ease-out), background 0.3s var(--ease-out), box-shadow 0.5s var(--ease-out);
+    }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; box-shadow: 0 2px 5px rgba(26,26,26,0.16), 0 14px 30px -12px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.16); }
+    header.dark .nav-cta { background: var(--gold); color: var(--night); }
+    header.dark .nav-cta:hover { background: var(--gold-warm); }
+    .head-right { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+    .lang { flex: 0 0 auto; font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--ink-soft); padding: 6px 9px; border: 1px solid var(--line);
+      border-radius: 8px; text-decoration: none; }
+    .lang:hover { color: var(--ink); border-color: var(--olive); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 13px 7px 11px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.78;
+      letter-spacing: 0.005em;
+    }
+    .pill .dot {
+      width: 7px; height: 7px;
+      background: var(--moss);
+      border-radius: 50%;
+      animation: pulse 2.6s var(--ease-out) infinite;
+    }
+    header.dark .pill .dot { background: var(--gold); }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(142, 166, 116, 0.5); }
+      70%  { box-shadow: 0 0 0 9px rgba(142, 166, 116, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(142, 166, 116, 0); }
+    }
+
+    /* ============== layout primitives ============== */
+    .wrap   { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 880px;  margin: 0 auto; padding: 0 32px; }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 22px; height: 1px;
+      background: var(--gold);
+    }
+    .dark-section .eyebrow { color: var(--on-dark-mute); }
+
+    /* ============== hero ============== */
+    /* A centered, single-column moment. No diagrams, no cube, no scroll cue —
+       just headline, breath, and a soft pill row. The whitespace is the design. */
+    .hero {
+      position: relative;
+      min-height: 94vh;
+      padding: 16vh 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
+    }
+    .hero-landscape {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; display: block;
+    }
+    /* Weather, not UI: slow enough that you notice it only if you stop and look.
+       All of it is decorative, so it all drops on prefers-reduced-motion. */
+    .gc-clouds-a { animation: gcDriftA 132s ease-in-out infinite alternate; }
+    .gc-clouds-b { animation: gcDriftB 96s  ease-in-out infinite alternate; }
+    .gc-birds    { animation: gcBirds  54s  ease-in-out infinite alternate; }
+    .gc-glow     { animation: gcBreathe 12s ease-in-out infinite; transform-box: view-box; transform-origin: 1090px 315px; }
+    @keyframes gcDriftA { from { transform: translateX(-30px); } to { transform: translateX(52px); } }
+    @keyframes gcDriftB { from { transform: translateX(34px); }  to { transform: translateX(-38px); } }
+    @keyframes gcBirds  { from { transform: translate(-22px, 6px); } to { transform: translate(64px, -12px); } }
+    @keyframes gcBreathe { 0%, 100% { opacity: 0.86; transform: scale(1); } 50% { opacity: 1; transform: scale(1.045); } }
+    @media (prefers-reduced-motion: reduce) {
+      .gc-clouds-a, .gc-clouds-b, .gc-birds, .gc-glow { animation: none; }
+    }
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+      max-width: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* nudge the whole text block off the top; the landscape behind is
+         absolutely positioned and stays put */
+      margin-top: 15px;
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(40px, 6.0vw, 88px);
+      line-height: 0.97;
+      letter-spacing: -0.028em;
+      color: var(--forest);
+      margin-bottom: 26px;
+      white-space: nowrap;
+      text-shadow: none;
+      /* wider but not taller: General Sans has no width axis, so stretch the
+         glyphs horizontally and pull them down a touch vertically */
+      transform: scaleX(1.1) scaleY(0.94);
+      transform-origin: center top;
+    }
+    .hero h1 em { font-style: normal; color: var(--moss); }
+    /* the one-line claim. Carries as much weight as the chip row under it,
+       so it reads as a statement rather than a caption. */
+    .hero .lede {
+      font-family: var(--sans);
+      font-size: clamp(18px, 1.75vw, 25px);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--ink);
+      /* the second sentence is nbsp-bound, so the line always breaks between
+         the two sentences rather than orphaning "No" */
+      max-width: 36ch;
+      margin: 0 auto 30px;
+      letter-spacing: -0.018em;
+    }
+    .hero .hero-chips li { font-size: 16.5px; padding: 0 21px; }
+
+    /* hero value chips — staccato proof, no fluff */
+    .hero-chips {
+      list-style: none; padding: 0;
+      display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center;
+      gap: 0; margin: 0 auto 32px;
+    }
+    .hero-chips li {
+      position: relative; padding: 0 18px;
+      font-family: var(--sans); font-size: 15px; font-weight: 700;
+      color: var(--ink); letter-spacing: 0.005em;
+    }
+    .hero-chips li + li::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 1px; height: 12px; background: rgba(84, 95, 57, 0.3);
+    }
+
+    /* Corner link into the environmental page. Deliberately high contrast:
+       the first version was a translucent pill at 13.5px and people scrolled
+       straight past it. Solid ground, moss outline, tinted droplet.
+       Absolute on desktop, but it falls back into normal flow below 900px so
+       it can never land on the CTAs. */
+    .hero-water {
+      /* No entrance animation, and deliberately no opacity:0 anywhere. This
+         badge first carried .rv (which the hero intro never animated, so it sat
+         invisible), then a CSS fade-in. Both are states where a reader can end
+         up seeing nothing, and this is the one element that has to be seen.
+         It is simply always visible. */
+      position: absolute; left: 32px; bottom: 38px; z-index: 4;
+      display: inline-flex; align-items: center; gap: 11px;
+      padding: 11px 20px 11px 11px; border-radius: 999px;
+      /* warm paper, not near-white: #FDFBF5 read as a stark white chip
+         against the landscape and fought the rest of the page */
+      background: rgba(245, 241, 232, 0.94);
+      border: 1px solid rgba(126, 138, 90, 0.55);
+      font-size: 15px; font-weight: 600; letter-spacing: -0.008em;
+      color: var(--forest);
+      box-shadow: 0 1px 3px rgba(72, 82, 47, .10), 0 16px 36px -20px rgba(72, 82, 47, .45);
+      transition: transform .4s var(--ease-out), box-shadow .5s var(--ease-out), background .3s var(--ease-out);
+    }
+    .hero-water:hover {
+      transform: translateY(-3px);
+      background: var(--paper-soft);
+      border-color: var(--moss);
+      box-shadow: 0 3px 6px rgba(72, 82, 47, .12), 0 28px 56px -22px rgba(72, 82, 47, .5);
+    }
+    .hero-water .drop-wrap {
+      width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(142, 171, 225, 0.20); color: #3D5E93;
+    }
+    .hero-water .drop { width: 16px; height: 16px; }
+    .hero-water .arrow { transition: transform .3s var(--ease-out); color: var(--moss); }
+    .hero-water:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 900px) {
+      .hero-water {
+        position: static; margin: 6px auto 0; bottom: auto; left: auto;
+        font-size: 14px; padding: 10px 17px 10px 10px;
+      }
+      .hero-water .drop-wrap { width: 27px; height: 27px; }
+    }
+
+    /* section labels, shared by the tiers strip */
+    .caps-eyebrow {
+      display: block; text-align: center; margin-bottom: 14px;
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss);
+    }
+    .caps-head {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(28px, 3.4vw, 46px); line-height: 1.06;
+      letter-spacing: -0.025em; color: var(--forest);
+      text-align: center; margin-bottom: 46px;
+    }
+
+    /* ---------- the four tiers ----------
+       A strip, not a comparison table: each card says what that machine feels
+       like rather than ticking rows, because the honest headline is that all
+       four run the same app for the same money. */
+    .tiers { padding: 96px 0 108px; background: var(--paper); }
+    .tiers-wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .tiers-sub {
+      font-family: var(--sans); font-size: 16.5px; line-height: 1.6;
+      color: var(--ink-soft); max-width: 58ch; margin: 18px 0 0;
+    }
+    .tier-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 38px; }
+    .tier-card {
+      position: relative; overflow: hidden;
+      background: var(--paper-soft); border: 1px solid var(--line); border-radius: 18px;
+      padding: 24px 22px 26px;
+      transition: transform .45s var(--ease-out), border-color .3s var(--ease-out), box-shadow .5s var(--ease-out);
+    }
+    .tier-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--tint); }
+    .tier-card::after { content: ''; position: absolute; right: -50px; top: -50px; width: 150px; height: 150px; border-radius: 50%; background: var(--tint); opacity: .10; }
+    .tier-card:hover { transform: translateY(-4px); border-color: var(--tint); box-shadow: 0 2px 4px rgba(72, 82, 47, 0.06), 0 30px 54px -32px rgba(72, 82, 47, 0.34); }
+    .tier-card > * { position: relative; z-index: 2; }
+    .tier-n { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+    .tier-card h3 { font-family: var(--display); font-weight: 600; font-size: 27px; letter-spacing: -0.03em; color: var(--forest); margin-top: 10px; }
+    .tier-spec { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--moss); margin-top: 8px; }
+    .tier-list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+    .tier-list li {
+      position: relative; padding-left: 18px;
+      font-family: var(--sans); font-size: 14px; line-height: 1.4; color: var(--ink-soft);
+    }
+    .tier-list li::before {
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 7px; height: 7px; border-radius: 2px; border: 1.8px solid var(--tint);
+      transition: background .3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    .tier-card:hover .tier-list li::before { background: var(--tint); }
+    .tier-card:hover .tier-list li:nth-child(2)::before { transition-delay: .06s; }
+    .tier-card:hover .tier-list li:nth-child(3)::before { transition-delay: .12s; }
+    .tiers-cta {
+      display: inline-flex; align-items: center; gap: 9px; margin-top: 30px;
+      font-family: var(--sans); font-size: 15.5px; font-weight: 600; color: var(--forest);
+      border: 1px solid var(--line); background: var(--paper-soft);
+      padding: 13px 24px; border-radius: 999px;
+      transition: transform .35s var(--ease-out), border-color .3s var(--ease-out);
+    }
+    .tiers-cta:hover { transform: translateY(-2px); border-color: var(--moss); }
+    @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
+    /* ---------- the tier table: the four cards, spelled out ---------- */
+    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
+    .tier-table tbody tr:last-child > * { border-bottom: 0; }
+    .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
+    .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
+    .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
+    .tier-table td { color: var(--ink-soft); }
+    .tier-table th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper-soft); }
+    .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+    .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
+    .tier-table .yes svg { width: 16px; height: 16px; }
+    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+
+
+    /* CTA row — soft pill email + filled pill + ghost pill, centered */
+    .cta-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .cta-form {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+    }
+    .cta-pill,
+    .cta-form input[type=email] {
+      height: 54px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      box-sizing: border-box;
+    }
+    .cta-form input[type=email] {
+      width: 290px;
+      padding: 0 24px;
+      background: var(--paper-soft);
+      color: var(--ink);
+      border: 1px solid rgba(31, 36, 24, 0.09);
+      box-shadow: inset 0 1px 2px rgba(31, 36, 24, 0.04);
+      outline: none;
+      transition: background 0.3s var(--ease-out),
+                  border-color 0.3s var(--ease-out),
+                  box-shadow 0.4s var(--ease-out);
+    }
+    .cta-form input[type=email]::placeholder {
+      color: var(--ink-faint);
+      font-weight: 400;
+    }
+    .cta-form input[type=email]:hover { border-color: rgba(142, 166, 116, 0.40); }
+    .cta-form input[type=email]:focus {
+      background: #fff;
+      border-color: var(--moss);
+      box-shadow: 0 0 0 4px rgba(142, 166, 116, 0.10);
+    }
+    .cta-primary {
+      padding: 0 28px;
+      background: var(--forest);
+      color: #fff;
+      border: 1px solid var(--forest);
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(26, 26, 26, 0.14),
+                  0 8px 22px -12px rgba(26, 26, 26, 0.55),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      transition: transform 0.4s var(--ease-out),
+                  background 0.3s var(--ease-out),
+                  box-shadow 0.5s var(--ease-out);
+    }
+    .cta-primary span { display: inline-block; }
+    .cta-primary:hover {
+      transform: translateY(-2px);
+      background: #000;
+      box-shadow: 0 3px 6px rgba(26, 26, 26, 0.16),
+                  0 20px 44px -16px rgba(26, 26, 26, 0.6),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+    .cta-primary:active { transform: translateY(0); }
+    .cta-primary:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
+    .cta-ghost {
+      padding: 0 26px;
+      background: transparent;
+      color: var(--forest);
+      border: 1px solid var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s var(--ease-out),
+                  color 0.3s var(--ease-out);
+    }
+    .cta-ghost .arrow { transition: transform 0.3s var(--ease-out); }
+    .cta-ghost:hover {
+      background: var(--forest);
+      color: var(--paper);
+    }
+    .cta-ghost:hover .arrow { transform: translateX(3px); }
+
+    .cta-status {
+      width: 100%;
+      min-height: 18px;
+      margin-top: 22px;
+      font-size: 13px;
+      text-align: center;
+      color: var(--moss);
+    }
+    .cta-status.error { color: #B33A3A; }
+
+    /* ============== manifesto — dark band, stamped statements ============== */
+    .manifesto {
+      position: relative;
+      background: var(--night);
+      color: var(--on-dark);
+      padding: 180px 0 190px;
+      overflow: hidden;
+      border-top: 1px solid var(--on-dark-line);
+      border-bottom: 1px solid var(--on-dark-line);
+    }
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 22% 18%, rgba(250, 226, 137, 0.13), transparent 60%),
+        radial-gradient(ellipse 50% 60% at 82% 82%, rgba(142, 166, 116, 0.14), transparent 60%);
+    }
+    .manifesto .head {
+      max-width: 1180px;
+      margin: 0 auto 140px;
+      padding: 0 32px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .manifesto .head .eyebrow {
+      justify-content: center;
+      color: var(--on-dark-mute);
+    }
+
+    .manifesto-lines {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 130px;
+      position: relative;
+      z-index: 1;
+      list-style: none;
+    }
+    .manifesto-line {
+      position: relative;
+      text-align: center;
+      padding-bottom: 26px;
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(30px, 4.6vw, 66px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--on-dark);
+      max-width: 24ch;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      will-change: transform, opacity;
+    }
+    .manifesto-line .accent { color: var(--gold); font-style: normal; font-weight: 500; }
+    .manifesto-line::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 1px;
+      background: var(--gold);
+      width: 0;
+      transform: translateX(-50%);
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .manifesto-line.is-visible::after { width: 84px; }
+    .manifesto-line.is-final {
+      font-size: clamp(48px, 7.5vw, 116px);
+      max-width: 18ch;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+      padding-top: 32px;
+      font-weight: 600;
+    }
+    .manifesto-line em { font-style: normal; }
+    .manifesto-line.is-final em { color: var(--gold); font-style: normal; }
+    .manifesto-line.is-final.is-visible::after { width: 132px; height: 1.5px; }
+
+    @media (max-width: 760px) {
+      .manifesto { padding: 130px 0 150px; }
+      .manifesto .head { padding: 0 22px; margin-bottom: 90px; }
+      .manifesto-lines { padding: 0 22px; gap: 80px; }
+      .manifesto-line { font-size: 11vw; }
+      .manifesto-line.is-final { font-size: 17vw; }
+    }
+
+    /* ============== the four markers (mission.html's palette) ==============
+       Colour lives INSIDE cards on this page, never as a full-width band. */
+    :root {
+      --card: #FDFBF5;
+      --m-sage: #8EA674;      --m-sage-deep: #4E5F3A;
+      --m-jasmine: #FAE289;   --m-jasmine-deep: #8A6B1C;
+      --m-tangerine: #FA9F75; --m-tangerine-deep: #A8492A;
+      --m-wisteria: #8EABE1;  --m-wisteria-deep: #3D5E93;
+    }
+    .t-sage      { --c: var(--m-sage);      --c-deep: var(--m-sage-deep); }
+    .t-jasmine   { --c: var(--m-jasmine);   --c-deep: var(--m-jasmine-deep); }
+    .t-tangerine { --c: var(--m-tangerine); --c-deep: var(--m-tangerine-deep); }
+    .t-wisteria  { --c: var(--m-wisteria);  --c-deep: var(--m-wisteria-deep); }
+
+    .sec { position: relative; z-index: 2; background: var(--paper); }
+    .sec-wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .sec-eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px;
+      font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--moss);
+    }
+    .sec-eyebrow::before { content: ''; width: 9px; height: 9px; border-radius: 3px; border: 2px solid var(--moss); }
+    .sec-head {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(34px, 4.4vw, 62px); line-height: 1.02; letter-spacing: -.03em; color: var(--forest);
+    }
+    .sec-sub { font-size: clamp(16px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-soft); max-width: 44ch; }
+    .sec-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 22px 48px; flex-wrap: wrap; }
+    .sec-top .sec-sub { margin-bottom: 6px; }
+
+    /* ============== the turtle ==============
+       Our mascot, at most once per page. It blinks, waves now and then, and
+       toddles when .walking is on. */
+    .turtle { display: block; overflow: visible; }
+    .turtle .tt-eyes { transform-box: fill-box; transform-origin: center; animation: tt-blink 5.2s infinite; }
+    .turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: tt-wave 5s var(--ease-out) infinite; }
+    .turtle.walking .tt-arm { animation: none; }
+    .turtle.walking .tt-leg { animation: tt-step .34s ease-in-out infinite alternate; }
+    .turtle.walking .tt-leg.b { animation-delay: -.17s; }
+    .turtle.walking .tt-bob { animation: tt-bob .34s ease-in-out infinite alternate; }
+    @keyframes tt-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+    @keyframes tt-wave { 0%, 64%, 100% { transform: rotate(0); } 71% { transform: rotate(-28deg); } 78% { transform: rotate(2deg); } 85% { transform: rotate(-24deg); } }
+    @keyframes tt-step { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+    @keyframes tt-bob { from { transform: translateY(0) rotate(0); } to { transform: translateY(-2px) rotate(-1.5deg); } }
+    /* ============== 1 · NO LIMITS: the turtle walks across as the cards go by ==============
+       With .pin-on the section's inside sticks. The turtle appears first; then,
+       as you scroll, it walks the full width left to right while the cards come
+       in from the right and travel left. Without JS / with reduced motion the
+       row just scrolls sideways. */
+    .feat { border-top: 1px solid var(--line); padding: 110px 0 90px; }
+    .track-wrap { margin-top: 42px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .track-wrap::-webkit-scrollbar { display: none; }
+    .track { display: flex; gap: 18px; width: max-content; padding: 16px 32px 28px; }
+    .track .make { width: 292px; flex: 0 0 auto; scroll-snap-align: center; transform-origin: 50% 160%; }
+    .guide { position: relative; height: 104px; margin: 0 32px; }
+    .gbody { position: absolute; left: 0; bottom: 4px; width: 92px; }
+    .gbody .turtle { width: 100%; }
+    .gbody .turtle.back { scale: -1 1; }
+
+    .feat.pin-on { padding: 0; }
+    .feat.pin-on .feat-stick { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 64px; overflow: hidden; }
+    .feat.pin-on .track-wrap { overflow: visible; }
+    .feat.pin-on .track { will-change: transform; }
+
+    /* the cards */
+    .make {
+      position: relative; display: flex; flex-direction: column;
+      border-radius: 22px; padding: 16px 16px 22px; background: var(--card);
+      border: 1px solid var(--line);
+      transition: border-color .3s var(--ease-out), box-shadow .5s var(--ease-out);
+    }
+    .make:hover { border-color: var(--c); box-shadow: 0 30px 54px -36px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+    .make-art {
+      position: relative; height: 150px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 18px;
+      background:
+        radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--c) 40%, #fff) 0 18%, transparent 19%),
+        color-mix(in srgb, var(--c) 30%, var(--card));
+    }
+    .make-art svg { width: 92px; height: 92px; transition: transform .6s var(--ease-out); }
+    .make:hover .make-art svg { transform: translateY(-4px) rotate(-3deg); }
+    .fc-tag {
+      position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--forest); background: #FFFDF8;
+      border: 1px solid color-mix(in srgb, var(--c-deep) 30%, transparent);
+    }
+    .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
+    .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
+    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
+    .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
+
+    /* ============== 2 · PRIVATE, NO FILTER: plain facts, one per row ============== */
+    .facts { padding: 120px 0 130px; border-top: 1px solid var(--line); }
+    .fact-list { list-style: none; padding: 0; margin: 50px 0 0; border-top: 1px solid var(--line); }
+    .fact { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px 48px; align-items: baseline; padding: 30px 0; border-bottom: 1px solid var(--line); }
+    .fact h3 {
+      display: flex; align-items: baseline; gap: 16px;
+      font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.6vw, 36px);
+      line-height: 1.1; letter-spacing: -.028em; color: var(--forest);
+    }
+    .fact h3::before {
+      content: ''; flex: 0 0 auto; width: 14px; height: 14px; border-radius: 4px; transform: translateY(-2px);
+      border: 2px solid var(--c-deep); background: var(--c); transition: transform .5s var(--ease-out);
+    }
+    .fact:hover h3::before { transform: translateY(-2px) rotate(45deg); }
+    .fact p { font-size: clamp(16px, 1.3vw, 17.5px); line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+    .fact-note { margin-top: 26px; font-size: 14px; line-height: 1.6; color: var(--ink-mute); max-width: 72ch; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .turtle * { animation: none !important; }
+    }
+    @media (max-height: 760px) {
+      .feat.pin-on .make-art { height: 116px; }
+      .feat.pin-on .make-art svg { width: 76px; height: 76px; }
+      .feat.pin-on .track-wrap { margin-top: 26px; }
+    }
+    @media (max-width: 900px) {
+      .fact { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .sec-wrap { padding: 0 16px; }
+      .feat:not(.pin-on) { padding: 84px 0 64px; }
+      .feat.pin-on .feat-stick { padding-top: 96px; }
+      .feat .sec-sub { display: none; }
+      .track { padding: 12px 16px 22px; gap: 14px; }
+      .track .make { width: 76vw; }
+      .guide { margin: 0 16px; }
+      .facts { padding: 84px 0 96px; }
+    }
+
+    /* the lede: what is unlimited first, then why and what it costs */
+    .hero .lede { max-width: 40ch; }
+    .hero .lede strong { display: block; font-weight: 700; color: var(--forest); }
+    .hero .lede .why { display: block; margin-top: 6px; font-size: .8em; font-weight: 500; color: var(--ink-soft); letter-spacing: -.01em; }
+    @media (max-width: 760px) { .tl { white-space: normal; } }
+
+    /* ============== the two-question check, inside "See what can run on your machine" ==============
+       Same check as /what-you-get (shared /tier-quiz.js). Big on purpose: it was
+       easy to scroll past as a link. The answer lights up the matching tier card. */
+    #game {
+      --mk: #8EA674; --graphite: #333333; --card: #FDFBF5; --on-color: #1F2418;
+      position: relative; margin: 34px auto 0; max-width: 880px; min-height: 380px;
+      display: grid; align-content: center; justify-items: center; text-align: center;
+      padding: 46px 24px 50px; border-radius: 28px; overflow: hidden;
+      background: #FFFDF6; border: 1px solid rgba(110, 128, 74, .18);
+    }
+    #game .glow {
+      position: absolute; left: 50%; top: 50%; width: 760px; height: 760px;
+      transform: translate(-50%, -50%); pointer-events: none; border-radius: 50%;
+      background: radial-gradient(circle, var(--mk) 0%, transparent 62%);
+      opacity: .16; transition: opacity .9s var(--ease-out), background .9s var(--ease-out);
+    }
+    #game.lit .glow { opacity: .36; }
+    #game .step { display: none; position: relative; z-index: 2; width: 100%; }
+    #game .step.on { display: block; animation: quiz-rise .55s var(--ease-out) both; }
+    @keyframes quiz-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    #game .kicker { display: block; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--moss); }
+    #game h3 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 42px); line-height: 1.05; letter-spacing: -.035em; color: var(--graphite); max-width: 18ch; margin: 14px auto 0; }
+    #game .tiny { font-size: 13.5px; color: var(--ink-mute); margin-top: 18px; }
+    #game .picks { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    #game .opt {
+      padding: 15px 26px; border-radius: 999px; border: 1px solid var(--line);
+      background: var(--card); cursor: pointer; font-size: 16px; font-weight: 600; color: var(--graphite);
+      transition: border-color .25s var(--ease-out), background .25s var(--ease-out), color .25s var(--ease-out), transform .25s var(--ease-out);
+    }
+    #game .opt:hover { transform: translateY(-3px); border-color: var(--mk); background: var(--mk); color: var(--on-color); }
+    #game .opt:focus-visible { outline: 2px solid var(--graphite); outline-offset: 3px; }
+    #game .opt.quiet { font-weight: 500; font-size: 15px; padding: 12px 20px; color: var(--ink-soft); }
+    #game .pips { display: flex; gap: 7px; justify-content: center; margin-top: 30px; }
+    #game .pip { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+    #game .pip.now { background: var(--graphite); }
+    #game .back, #game .again { display: block; margin: 16px auto 0; background: none; border: 0; font-size: 14px; color: var(--ink-mute); cursor: pointer; }
+    #game .back:hover, #game .again:hover { color: var(--ink); text-decoration: underline; }
+    #game .finder { position: relative; max-width: 430px; margin: 26px auto 0; text-align: left; }
+    #game .finder input {
+      width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line);
+      background: var(--card); font-size: 16.5px; color: var(--ink);
+      transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+    #game .finder input::placeholder { color: var(--ink-mute); }
+    #game .finder input:focus { outline: none; border-color: var(--mk); box-shadow: 0 0 0 4px rgba(142, 166, 116, .18); }
+    #game .hits {
+      position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 20;
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      box-shadow: 0 20px 44px -22px rgba(31, 36, 24, .4); max-height: 286px; overflow-y: auto;
+    }
+    #game .hits:empty { display: none; }
+    #game .hit { display: flex; justify-content: space-between; align-items: center; gap: 14px; width: 100%; padding: 13px 18px; background: none; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; text-align: left; }
+    #game .hit:last-child { border-bottom: 0; }
+    #game .hit:hover, #game .hit.cursor { background: rgba(142, 166, 116, .14); }
+    #game .h-n { font-size: 15.5px; font-weight: 600; color: var(--graphite); }
+    #game .h-v { font-size: 13px; color: var(--ink-mute); white-space: nowrap; }
+    #game .miss { padding: 15px 18px; font-size: 14.5px; color: var(--ink-soft); }
+    #game .miss b { display: block; margin-bottom: 10px; font-weight: 600; color: var(--graphite); }
+    #game .sizes { display: flex; gap: 6px; flex-wrap: wrap; }
+    #game .sizes button { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 7px 13px; font-size: 13.5px; font-weight: 600; cursor: pointer; color: var(--graphite); }
+    #game .sizes button:hover { border-color: var(--mk); background: var(--mk); color: var(--on-color); }
+    #game .rev-top { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-mute); }
+    #game .rev-name { font-family: var(--display); font-weight: 600; font-size: clamp(58px, 10vw, 110px); line-height: .92; letter-spacing: -.05em; color: var(--mk); margin-top: 10px; animation: quiz-bloom .7s var(--ease-out) both; }
+    @keyframes quiz-bloom { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+    #game .rev-feels { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 28px); color: var(--graphite); margin-top: 10px; }
+    #game .rev-spec { font-size: 14.5px; color: var(--ink-soft); margin-top: 16px; }
+    #game .rev-spec b { color: var(--graphite); font-weight: 600; }
+    #game .rev-note { font-size: 14px; color: var(--ink-soft); margin: 14px auto 0; max-width: 40ch; padding: 12px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    #game .go {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 26px;
+      background: var(--forest); color: var(--paper); font-size: 16px; font-weight: 600;
+      padding: 15px 30px; border-radius: 999px;
+      box-shadow: 0 2px 4px rgba(26, 26, 26, .16), 0 14px 30px -14px rgba(26, 26, 26, .6);
+      transition: transform .35s var(--ease-out), background .3s var(--ease-out);
+    }
+    #game .go:hover { transform: translateY(-2px); background: #000; }
+
+    #game { max-width: 980px; min-height: 440px; margin: 40px auto 0; padding: 56px 28px 60px;
+      box-shadow: 0 30px 60px -40px rgba(72, 82, 47, .45); }
+    #game h3 { font-size: clamp(30px, 4.4vw, 50px); }
+    #game .opt { padding: 17px 30px; font-size: 17px; }
+    /* the card search drops down past the box, so the box must not clip; the glow is kept inside instead */
+    #game { overflow: visible; }
+    #game .glow { left: 0; top: 0; width: 100%; height: 100%; transform: none; border-radius: 28px;
+      background: radial-gradient(ellipse at 50% 50%, var(--mk) 0%, transparent 70%); }
+    .tier-card.yours { border-color: var(--tint); box-shadow: 0 0 0 3px var(--tint), 0 30px 54px -32px rgba(72, 82, 47, 0.34); transform: translateY(-4px); }
+    @media (max-width: 760px) { #game { padding: 40px 16px 44px; min-height: 0; } }
+
+    /* ============== reveal-on-scroll utility ============== */
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    .rv-mask { overflow: hidden; padding-bottom: 0.06em; }
+    .rv-mask > * {
+      display: block;
+      transform: translateY(110%);
+      will-change: transform;
+    }
+
+    /* ============== footer ============== */
+    footer {
+      padding: 76px 0 44px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    footer .f-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    /* brand block gets its own column, then the link columns share the rest */
+    footer .f-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.15fr) repeat(4, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+    footer .f-brand .brand-lock {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--display); font-weight: 600; font-size: 19px;
+      letter-spacing: -0.01em; color: var(--forest);
+    }
+    footer .f-brand .brand-lock .mark {
+      width: 15px; height: 15px; border: 2.6px solid var(--moss); border-radius: 4px;
+    }
+    footer .f-note {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--ink-soft);
+      margin-top: 14px; letter-spacing: -0.005em;
+    }
+    /* the email is the thing people actually look for down here */
+    footer .f-mail {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 22px; padding: 11px 17px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-soft);
+      font-size: 14px; font-weight: 500; color: var(--forest);
+      transition: border-color .3s var(--ease-out), transform .35s var(--ease-out), background .3s var(--ease-out);
+    }
+    footer .f-mail:hover { border-color: var(--moss); background: #fff; transform: translateY(-1px); }
+    footer .f-mail.copied { border-color: var(--moss); background: #fff; }
+    footer .f-mail svg { width: 16px; height: 16px; color: var(--moss); }
+
+    footer h3 {
+      font-family: var(--display); font-weight: 600;
+      font-size: 13px; letter-spacing: 0.02em; color: var(--forest);
+      margin-bottom: 15px;
+    }
+    footer .f-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer .f-col a { color: var(--ink-soft); font-size: 14px; }
+    footer a { transition: color 0.3s var(--ease-out); }
+    footer a:hover { color: var(--forest); }
+
+    footer .f-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      margin-top: 56px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-mute);
+    }
+    footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
+    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
+    footer .f-lang a {
+      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    }
+    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
+    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
+
+    @media (max-width: 1100px) {
+      footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
+      footer .f-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      footer { padding: 56px 0 36px; }
+      footer .f-top { grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+      footer .f-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ============== reduced motion ============== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .rv, .rv-mask > * { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ============== mobile ============== */
+    @media (max-width: 760px) {
+      header { padding: 12px 16px; }
+      header.scrolled { padding: 10px 16px; }
+      .wrap, .narrow { padding: 0 22px; }
+      .hero { padding: 132px 0 96px; min-height: auto; }
+      .hero h1 {
+        font-size: clamp(40px, 12vw, 72px);
+        white-space: normal;
+        margin-bottom: 28px;
+        /* the headline wraps here — a horizontal stretch would push it off-screen */
+        transform: none;
+        line-height: 1.0;
+        text-shadow:
+          0 14px 26px rgba(31, 36, 24, 0.10),
+          0 5px 12px rgba(31, 36, 24, 0.05);
+      }
+      .hero .lede { font-size: 19px; margin-bottom: 26px; }
+      .cta-row, .cta-form {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+      }
+      .cta-form { width: 100%; }
+      .cta-form input[type=email] { width: 100%; }
+      .cta-primary, .cta-ghost {
+        width: 100%;
+        justify-content: center;
+      }
+      footer { padding: 40px 0 48px; }
+      footer .row { flex-direction: column; align-items: flex-start; padding: 0 22px; }
+    }
+    /* moved from the Why GreenCube page (removed 2026-10-15); scoped to .gcwhy */
+    .gcwhy {
+      --paper: #F5F1E8; --paper-soft: #FBF8F0; --paper-warm: #F0ECE3; --card: #FDFBF5;
+      --ink: #1A1A1A; --ink-soft: #545454; --ink-mute: #9A937F; --line: #DDD8CE;
+
+      --olive: #7E8A5A; --olive-deep: #5C663F;
+      --sun: #FAE289; --sun-deep: #8A6B1C;
+      --clay: #FA9F75; --clay-deep: #A8492A;
+      --sky: #8EABE1; --sky-deep: #3D5E93;
+
+      --display: 'General Sans','Geist',-apple-system,system-ui,sans-serif;
+      --sans: 'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+      --shadow-card: 0 1px 2px rgba(72,82,47,.05), 0 20px 44px -30px rgba(72,82,47,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      --shadow-hi: 0 2px 4px rgba(72,82,47,.06), 0 34px 60px -32px rgba(72,82,47,.34), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    /* ================= Why GreenCube, rebuilt 2026-10-07 =================
+       Short, clear, a bit playful: two small toys (send a message / switch the
+       Wi-Fi off) show the two big things instead of explaining them. */
+    .w { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .w-sec { padding: 92px 0; }
+    .w-sec + .w-sec { border-top: 1px solid var(--line); }
+    .w-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--olive); }
+    .w-h2 { font-family: var(--display); font-weight: 600; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -.035em; color: var(--ink); margin-top: 12px; }
+    .w-h2 em { font-style: normal; color: var(--olive); }
+    .w-sub { font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--ink-soft); margin-top: 14px; max-width: 46ch; }
+    .w-center { text-align: center; } .w-center .w-sub { margin-left: auto; margin-right: auto; }
+
+    /* hero */
+    .w-hero { padding: 150px 0 70px; text-align: center; }
+    .w-hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 7vw, 92px); line-height: .98; letter-spacing: -.04em; color: var(--ink); margin-top: 16px; }
+    .w-hero h1 em { font-style: normal; color: var(--olive); }
+    .w-hero p { font-size: clamp(18px, 1.7vw, 23px); font-weight: 600; color: var(--ink); margin-top: 22px; }
+    .w-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; list-style: none; padding: 0; }
+    .w-pills li { padding: 9px 16px; border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+    .w-pills li { background: var(--card); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; }
+    .w-pills li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--olive); }
+
+    /* toy 1: who stops first */
+    .w-race { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+    .w-lane { border-radius: 24px; padding: 26px 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); transition: opacity .4s var(--ease), filter .4s var(--ease); }
+    .w-lane.gc { background: color-mix(in srgb, var(--olive) 14%, var(--card)); border-color: color-mix(in srgb, var(--olive) 35%, transparent); }
+    .w-lane .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-lane.gc .who { color: var(--olive-deep); }
+    .w-count { font-family: var(--display); font-weight: 600; font-size: clamp(54px, 7vw, 84px); line-height: 1; letter-spacing: -.04em; color: var(--ink); margin-top: 10px; display: inline-block; }
+    .w-count.pop { animation: w-pop .32s var(--ease); }
+    @keyframes w-pop { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .w-lane .left { font-size: 15px; color: var(--ink-soft); margin-top: 6px; min-height: 1.5em; }
+    .w-bar { height: 10px; border-radius: 99px; background: var(--paper-warm); margin-top: 16px; overflow: hidden; }
+    .w-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--clay); transition: width .35s var(--ease); }
+    .w-lane.gc .w-bar i { width: 100%; background: linear-gradient(90deg, var(--olive), var(--sun), var(--olive)); background-size: 200% 100%; animation: w-flow 2.4s linear infinite; }
+    @keyframes w-flow { to { background-position: -200% 0; } }
+    .w-lane.locked { opacity: .55; filter: grayscale(.6); }
+    .w-lane.locked .left { color: var(--clay-deep); font-weight: 600; }
+    .w-send { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 17px 30px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); cursor: pointer; box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .2s var(--ease), background .3s var(--ease); }
+    .w-send:hover { transform: translateY(-2px); background: #000; }
+    .w-send:active { transform: translateY(1px) scale(.97); }
+    .w-fine { font-size: 13px; color: var(--ink-mute); margin-top: 16px; }
+
+    /* toy 2: the Wi-Fi switch */
+    .w-wifi { display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 12px 18px 12px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); cursor: pointer; font: 600 16px var(--sans); color: var(--ink); }
+    .w-wifi .sw { position: relative; width: 52px; height: 30px; border-radius: 99px; background: var(--olive); transition: background .3s var(--ease); }
+    .w-wifi .sw::after { content: ''; position: absolute; top: 3px; left: 25px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .3s cubic-bezier(.34,1.56,.64,1); }
+    .w-wifi[aria-checked="false"] .sw { background: #C9C2B2; }
+    .w-wifi[aria-checked="false"] .sw::after { left: 3px; }
+    .w-net { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; text-align: left; }
+    .w-chat { border-radius: 24px; padding: 22px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+    .w-chat .who { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .w-chat.gc .who { color: var(--olive-deep); }
+    .w-bubble { margin-top: 14px; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-bubble.me { background: var(--paper-warm); margin-left: 18%; border-bottom-right-radius: 6px; }
+    .w-bubble.ai { background: color-mix(in srgb, var(--olive) 16%, #fff); margin-right: 12%; border-bottom-left-radius: 6px; transition: background .3s var(--ease), color .3s var(--ease); }
+    .w-bubble.ai.err { background: color-mix(in srgb, var(--clay) 22%, #fff); color: var(--clay-deep); font-weight: 600; }
+
+    /* three steps */
+    .w-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; counter-reset: s; }
+    .w-step { border-radius: 24px; padding: 26px 24px; background: var(--c); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-step b { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #fff; font: 600 20px var(--display); color: var(--ink); }
+    .w-step h3 { font: 600 23px/1.15 var(--display); letter-spacing: -.02em; color: var(--ink); margin-top: 16px; }
+    .w-step p { font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 8px; }
+
+    /* what you can do */
+    .w-can { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; list-style: none; padding: 0; }
+    .w-can li { border-radius: 20px; padding: 22px 22px; background: color-mix(in srgb, var(--c) 26%, #fff); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); font: 600 19px/1.25 var(--display); letter-spacing: -.015em; color: var(--ink); transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease); }
+    .w-can li small { display: block; margin-top: 6px; font: 400 14.5px/1.45 var(--sans); color: var(--ink-soft); letter-spacing: 0; }
+    .w-can li:hover { transform: translateY(-4px) rotate(-.8deg); background: color-mix(in srgb, var(--c) 42%, #fff); border-color: var(--c); box-shadow: var(--shadow-hi); }
+
+    /* yours */
+    .w-yours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .w-yours div { border-radius: 24px; padding: 28px 24px; background: color-mix(in srgb, var(--c) 30%, #fff); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .w-yours div:hover { transform: translateY(-4px); box-shadow: var(--shadow-hi); }
+    .w-yours div:nth-child(1) { --c: var(--sun); } .w-yours div:nth-child(2) { --c: var(--olive); } .w-yours div:nth-child(3) { --c: var(--sky); }
+    .w-yours b { display: block; font: 600 clamp(30px, 3.4vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-yours span { display: block; font-size: 15.5px; color: var(--ink-soft); margin-top: 10px; line-height: 1.45; }
+
+    /* questions */
+    .w-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .w-faq div { border-radius: 20px; padding: 22px 22px; background: var(--card); border: 1px solid var(--line); }
+    .w-faq h3 { font: 600 18px/1.25 var(--display); letter-spacing: -.012em; color: var(--ink); }
+    .w-faq p { font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 8px; }
+    .w-faq a, .w-end .alt { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* the end */
+    .w-end { text-align: center; padding: 100px 0 40px; }
+    .w-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 18px 34px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 600 17px var(--sans); box-shadow: 0 2px 4px rgba(26,26,26,.16), 0 14px 30px -14px rgba(26,26,26,.6); transition: transform .3s var(--ease), background .3s var(--ease); }
+    .w-cta:hover { transform: translateY(-2px); background: #000; }
+    .w-end .alt { display: block; margin-top: 18px; font-size: 15px; }
+
+    .w-in { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .w-in.seen { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .w-in { opacity: 1; transform: none; transition: none; } .w-lane.gc .w-bar i { animation: none; } }
+    @media (max-width: 820px) {
+      .w-race, .w-net, .w-steps, .w-can, .w-yours, .w-faq { grid-template-columns: 1fr; }
+      .w-hero { padding: 130px 0 50px; } .w-sec { padding: 70px 0; } .w { padding: 0 16px; }
+    }
+
+    /* what you can do: a mini chat. Tap a request, it "types" it, GreenCube answers. */
+    .w-try { margin-top: 36px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; align-items: start; }
+    .w-asks { display: flex; flex-direction: column; gap: 10px; }
+    .w-ask { text-align: left; padding: 15px 18px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); cursor: pointer;
+      font: 600 16px/1.3 var(--sans); color: var(--ink); display: flex; align-items: center; gap: 12px;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+    .w-ask .e { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; background: color-mix(in srgb, var(--c) 35%, #fff); }
+    .w-ask:hover { transform: translateX(4px); border-color: var(--c); }
+    .w-ask.on { background: color-mix(in srgb, var(--c) 22%, #fff); border-color: var(--c); transform: translateX(6px); }
+    .w-win { border-radius: 26px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-hi); overflow: hidden; min-height: 380px; display: flex; flex-direction: column; }
+    .w-win-top { display: flex; align-items: center; gap: 7px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--ink-mute); }
+    .w-win-top i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+    .w-win-top span { margin-left: 8px; }
+    .w-win-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .w-msg { max-width: 88%; padding: 12px 16px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+    .w-msg.me { align-self: flex-end; background: var(--paper-warm); border-bottom-right-radius: 6px; min-height: 1.45em; }
+    .w-msg.me .cur { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; background: var(--ink); vertical-align: -2px; animation: w-blink .8s steps(1) infinite; }
+    @keyframes w-blink { 50% { opacity: 0; } }
+    .w-msg.ai { align-self: flex-start; background: color-mix(in srgb, var(--olive) 14%, #fff); border-bottom-left-radius: 6px; animation: w-rise .45s var(--ease) both; }
+    @keyframes w-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .w-dots { display: inline-flex; gap: 5px; padding: 4px 2px; } .w-dots b { width: 7px; height: 7px; border-radius: 50%; background: var(--olive); animation: w-dot 1s infinite; }
+    .w-dots b:nth-child(2) { animation-delay: .15s; } .w-dots b:nth-child(3) { animation-delay: .3s; }
+    @keyframes w-dot { 0%, 100% { opacity: .3; transform: none; } 50% { opacity: 1; transform: translateY(-3px); } }
+    .w-out { margin-top: 10px; }
+    .w-file { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-weight: 600; font-size: 14.5px; }
+    .w-file b { padding: 5px 11px; border-radius: 99px; background: var(--ink); color: var(--paper); font-size: 13px; }
+    .w-snake { display: grid; grid-template-columns: repeat(12, 12px); gap: 2px; margin-top: 10px; }
+    .w-snake i { width: 12px; height: 12px; border-radius: 3px; background: rgba(26,26,26,.06); }
+    .w-snake i.s { background: var(--olive); } .w-snake i.h { background: var(--olive-deep); } .w-snake i.f { background: var(--clay); }
+    .w-flip { perspective: 800px; cursor: pointer; margin-top: 10px; width: 100%; max-width: 330px; height: 120px; border: 0; background: none; padding: 0; font: inherit; }
+    .w-flip > span { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .6s var(--ease); }
+    .w-flip.flipped > span { transform: rotateY(180deg); }
+    .w-flip em { position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; border-radius: 14px; font-style: normal; font-weight: 600; text-align: center; backface-visibility: hidden; background: #fff; border: 1px solid var(--line); }
+    .w-flip em + em { transform: rotateY(180deg); background: color-mix(in srgb, var(--sun) 45%, #fff); }
+    .w-flip small { display: block; margin-top: 6px; font-weight: 500; font-size: 12.5px; color: var(--ink-mute); }
+    .w-pix { display: grid; grid-template-columns: repeat(8, 14px); gap: 1px; margin-top: 10px; }
+    .w-pix i { width: 14px; height: 14px; }
+    .w-slides { display: flex; gap: 10px; margin-top: 10px; }
+    .w-slides span { width: 104px; height: 64px; border-radius: 8px; background: #fff; border: 1px solid var(--line); padding: 8px; font-size: 11.5px; font-weight: 700; line-height: 1.2; box-shadow: 0 6px 14px -10px rgba(72,82,47,.5); }
+    .w-slides span::after { content: ''; display: block; margin-top: 8px; height: 4px; width: 70%; border-radius: 2px; background: var(--line); box-shadow: 0 8px 0 var(--line); }
+    .w-msg.ai ul { margin: 8px 0 0 18px; } .w-msg.ai li { margin-top: 3px; }
+    .w-try-fine { font-size: 13px; color: var(--ink-mute); margin-top: 14px; }
+    @media (max-width: 820px) { .w-try { grid-template-columns: 1fr; } .w-asks { flex-direction: row; overflow-x: auto; padding-bottom: 6px; } .w-ask { flex: 0 0 auto; } .w-win { min-height: 340px; } }
+
+    /* money: slide the months, watch the subscription pile up next to €9.99 once */
+    .w-money { margin-top: 36px; border-radius: 28px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-hi); padding: 34px 32px 30px; text-align: left; }
+    .w-months { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-weight: 600; color: var(--ink-soft); }
+    .w-months b { font: 600 clamp(30px, 3.6vw, 42px)/1 var(--display); letter-spacing: -.03em; color: var(--ink); }
+    .w-range { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; border-radius: 99px; margin: 18px 0 30px; cursor: pointer;
+      background: linear-gradient(90deg, var(--clay) 0 var(--p, 33%), var(--paper-warm) var(--p, 33%) 100%); outline: none; }
+    .w-range::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); box-shadow: 0 4px 10px rgba(0,0,0,.18); transition: transform .2s cubic-bezier(.34,1.56,.64,1); }
+    .w-range::-webkit-slider-thumb:hover, .w-range:active::-webkit-slider-thumb { transform: scale(1.18); }
+    .w-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); }
+    .w-range:focus-visible { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 50%, transparent); }
+    .w-row { display: grid; grid-template-columns: 190px 1fr auto; align-items: center; gap: 16px; margin-top: 16px; }
+    .w-row .lbl { font-weight: 700; color: var(--ink); line-height: 1.25; }
+    .w-row .lbl small { display: block; font-weight: 500; font-size: 13px; color: var(--ink-mute); }
+    .w-track { height: 34px; border-radius: 10px; background: var(--paper-warm); overflow: hidden; }
+    .w-track i { display: block; height: 100%; border-radius: 10px; transition: width .35s var(--ease); }
+    .w-row.sub .w-track i { background: var(--clay); }
+    .w-row.gc .w-track i { background: var(--olive); }
+    .w-row .amt { font: 600 clamp(22px, 2.4vw, 30px)/1 var(--display); letter-spacing: -.02em; color: var(--ink); min-width: 4.5em; text-align: right; }
+    .w-keep { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .w-keep span { font-weight: 600; color: var(--ink-soft); }
+    .w-keep b { font: 600 clamp(34px, 4.4vw, 54px)/1 var(--display); letter-spacing: -.035em; color: var(--olive-deep); }
+    @media (max-width: 820px) { .w-row { grid-template-columns: 1fr auto; } .w-row .w-track { grid-column: 1 / -1; grid-row: 2; } .w-money { padding: 26px 18px 22px; } }
+
+    /* mini chat, round 2: the answers are playable */
+    .w-spin { display: inline-block; width: 16px; height: 16px; margin-right: 9px; vertical-align: -3px; border-radius: 50%;
+      border: 2.5px solid currentColor; border-right-color: transparent; animation: w-spin .8s linear infinite; }
+    @keyframes w-spin { to { transform: rotate(360deg); } }
+    .w-win { min-height: 470px; }
+    .w-game { margin-top: 10px; }
+    .w-snake-c { display: block; width: 100%; max-width: 288px; aspect-ratio: 12 / 9; border-radius: 12px; background: #EEF1E2; touch-action: none; }
+    .w-game-ui { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .w-score { font-weight: 700; font-size: 14px; }
+    .w-btn { border: 0; border-radius: 99px; padding: 8px 16px; background: var(--ink); color: var(--paper); font: 600 14px var(--sans); cursor: pointer; transition: transform .15s; }
+    .w-btn:active { transform: scale(.95); }
+    .w-btn.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    .w-pad { display: none; gap: 6px; margin-top: 10px; }
+    .w-pad button { width: 44px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-size: 16px; cursor: pointer; }
+    @media (hover: none) { .w-pad { display: flex; } }
+    .w-hint { font-size: 12.5px; color: var(--ink-mute); margin-top: 8px; }
+    .w-img { margin-top: 10px; border-radius: 14px; overflow: hidden; max-width: 340px; position: relative; }
+    .w-img img { display: block; width: 100%; height: auto; animation: w-develop 2.6s cubic-bezier(.3,.6,.3,1) both; }
+    @keyframes w-develop { 0% { filter: blur(22px) saturate(.2) brightness(1.2); } 60% { filter: blur(4px) saturate(.8); } 100% { filter: none; } }
+    .w-img-cap { font-size: 12.5px; color: var(--ink-mute); margin-top: 8px; }
+    .w-deck { margin-top: 10px; }
+    .w-deck .w-flip { max-width: 340px; height: 140px; }
+    .w-deck-nav { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .w-deck-nav button { width: 38px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 15px; }
+    .w-deck-nav button:disabled { opacity: .35; cursor: default; }
+    .w-deck-nav span { font-weight: 700; font-size: 13.5px; color: var(--ink-soft); }
+    .w-dv { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; margin-top: 10px; max-width: 360px; }
+    .w-sl { aspect-ratio: 16 / 9; border-radius: 8px; padding: 9px 10px; background: var(--bg); color: var(--ink2); box-shadow: 0 6px 14px -10px rgba(0,0,0,.45); border: 1px solid rgba(0,0,0,.06); transition: background .35s, color .35s; overflow: hidden; }
+    .w-sl b { display: block; font: 700 11.5px/1.2 var(--display); }
+    .w-sl small { display: block; font-size: 9.5px; color: var(--csoft); margin-top: 3px; }
+    .w-sl i { display: block; height: 4px; border-radius: 2px; background: var(--soft); opacity: .45; margin-top: 6px; width: 80%; }
+    .w-sl i::before { content: ''; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--acc); vertical-align: top; margin-left: -7px; }
+    .w-sl i + i { width: 65%; } .w-sl i + i + i { width: 72%; }
+    .w-sl.cover { grid-row: span 2; aspect-ratio: auto; background: var(--cbg); color: var(--cink); display: flex; flex-direction: column; justify-content: flex-end; padding: 12px; }
+    .w-sl.cover b { font-size: 16px; }
+    .w-sl.cover::before { content: ''; width: 26px; height: 4px; border-radius: 2px; background: var(--acc); margin-bottom: 8px; }
+    .w-sl.big { display: grid; place-items: center; text-align: center; }
+    .w-sl.big b { font-size: 15px; color: var(--acc); }
+    .w-themes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .w-themes button { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 6px; border-radius: 99px; border: 1px solid var(--line); background: #fff; font: 600 12.5px var(--sans); cursor: pointer; }
+    .w-themes button i { width: 14px; height: 14px; border-radius: 50%; background: var(--sw); border: 1px solid rgba(0,0,0,.15); }
+    .w-themes button.on { border-color: var(--ink); background: var(--paper-warm); }
+    .w-dv[data-theme="sage"] { --bg:#F6F4EC; --ink2:#1F2A17; --soft:#4E5A45; --acc:#8EA674; --cbg:#4E5F3A; --cink:#F6F4EC; --csoft:#D5DEC7; }
+    .w-dv[data-theme="tangerine"] { --bg:#FFF7F1; --ink2:#2B1B12; --soft:#6B4A3A; --acc:#FA9F75; --cbg:#A8492A; --cink:#FFF7F1; --csoft:#FBD3BF; }
+    .w-dv[data-theme="wisteria"] { --bg:#F4F7FD; --ink2:#15213A; --soft:#4A5874; --acc:#8EABE1; --cbg:#3D5E93; --cink:#F4F7FD; --csoft:#C9D7F2; }
+    .w-dv[data-theme="jasmine"] { --bg:#FFFBEA; --ink2:#2A220C; --soft:#6A5A2E; --acc:#E9C54A; --cbg:#FAE289; --cink:#2A220C; --csoft:#6A5A2E; }
+    .w-dv[data-theme="night"] { --bg:#1C1F19; --ink2:#F2F0E6; --soft:#B9BDAE; --acc:#8EA674; --cbg:#0F120D; --cink:#F2F0E6; --csoft:#B9BDAE; }
+    .w-dv[data-theme="paper"] { --bg:#FFFFFF; --ink2:#1C1F19; --soft:#5A6152; --acc:#8EA674; --cbg:#1C1F19; --cink:#FFFFFF; --csoft:#D9DCD3; }
+  </style>
+  <link rel="stylesheet" href="/mobile.css" />
+  <script src="/mobile.js" defer></script>
+<style id="turtle-walk">
+  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
+  .f-brand { position: relative; }
+  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  .f-turtle img { display: block; width: 100%; height: auto; }
+  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
+  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
+</style>
+<style id="turtle-main">
+  /* the mascot in the places everyone passes: hero, three steps, download */
+  .gt svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .gt .tt-eyes { transform-box: fill-box; transform-origin: center; animation: gt-blink 4.6s infinite; }
+  .gt .tt-arm { transform-box: view-box; transform-origin: 88px 58px; }
+  @keyframes gt-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+  @keyframes gt-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes gt-wave { 0%, 70%, 100% { transform: rotate(0); } 76% { transform: rotate(-30deg); } 82% { transform: rotate(4deg); } 88% { transform: rotate(-26deg); } }
+  @keyframes gt-hop { 0%, 100% { transform: translateY(0) scale(1); } 30% { transform: translateY(-22px) scale(1.02, .98); } 55% { transform: translateY(0) scale(1.04, .94); } 70% { transform: translateY(-6px); } }
+  /* three steps: peeks over the last card */
+  .w-step { position: relative; }
+  .step-turtle { position: absolute; top: -44px; right: 18px; width: 64px; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
+  .w-step:hover .step-turtle { transform: translateY(-8px) rotate(-5deg); }
+  /* download: a happy hop over the title */
+  .dl-turtle { width: 104px; margin: 0 auto 8px; }
+  .dl-turtle .tt-body { animation: gt-hop 1.1s ease 0.3s 2, gt-bob 2.8s ease-in-out 2.6s infinite; }
+  .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
+
+
+  /* hero: the turtle flies its little plane across the sky, behind the headline, now and then */
+  .hero-plane { position: absolute; z-index: 1; top: 13%; left: -240px; width: clamp(120px, 10vw, 170px); pointer-events: none; animation: hp-fly 46s linear 3s infinite; }
+  .hero-plane .hp-bob { animation: hp-bob 3s ease-in-out infinite; }
+  .hero-plane .hp-prop { transform-box: fill-box; transform-origin: center; animation: hp-prop .12s linear infinite alternate; }
+  .hero-plane .hp-scarf { transform-box: fill-box; transform-origin: right center; animation: hp-scarf .5s ease-in-out infinite alternate; }
+  @keyframes hp-fly { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(calc(100vw + 480px)); } }
+  @keyframes hp-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+  @keyframes hp-prop { from { transform: scaleY(1); } to { transform: scaleY(.15); } }
+  @keyframes hp-scarf { from { transform: rotate(-4deg); } to { transform: rotate(6deg) scaleX(1.08); } }
+  @media (max-width: 760px) { .hero-plane { top: 9%; width: 96px; } }
+  @media (prefers-reduced-motion: reduce) { .hero-plane { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
+</style>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/fr/", "inLanguage": "fr"}</script>
+<style id="lang-pick-css">
+    .lang-pick { position: relative; }
+    .lang-pick > summary { list-style: none; cursor: pointer; }
+    .lang-pick > summary::-webkit-details-marker { display: none; }
+    .lang-pick .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid;
+      grid-template-columns: repeat(2, minmax(110px, 1fr)); gap: 2px; padding: 8px; border-radius: 14px;
+      background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+    .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
+    .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
+    footer .f-lang { flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header id="header">
+  <a href="#top" class="brand" aria-label="GreenCube home">
+    <span class="mark" aria-hidden="true"></span>
+    <span>GreenCube</span>
+  </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="/fr/ai-environmental-impact">L'IA et la planète</a>
+    <a href="/fr/your-data">Vos données</a>
+    <a href="/fr/mission">Notre mission</a>
+    <a href="/fr/buy">Télécharger</a>
+  </nav>
+  <div class="head-right">
+    <details class="lang-pick"><summary class="lang" aria-label="Language">FR</summary><div class="lang-list"><a href="/" hreflang="en" lang="en">English</a><a href="/es/" hreflang="es" lang="es">Español</a><a href="/pt/" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/" hreflang="fr" lang="fr" aria-current="true">Français</a></div></details>
+    <a href="/fr/buy" class="nav-cta">Obtenir GreenCube</a>
+  </div>
+</header>
+
+<!-- =========== HERO =========== -->
+<section class="hero" id="top">
+  <svg class="hero-landscape" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="gcSun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FDF3CE" />
+        <stop offset="22%" stop-color="#FCEAA8" stop-opacity="0.66" />
+        <stop offset="46%" stop-color="#FAE289" stop-opacity="0.42" />
+        <stop offset="100%" stop-color="#FAE289" stop-opacity="0" />
+      </radialGradient>
+      <filter id="gcSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10" /></filter>
+      <!-- coloured-pencil pass: a long-wavelength warp so the edges wobble like a
+           hand drew them, then fine tooth multiplied into the fill so the colour
+           sits unevenly the way pencil does on paper -->
+      <filter id="gcPencil" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="3" seed="4" result="warp" />
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" xChannelSelector="R" yChannelSelector="G" result="wobbled" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="4" seed="11" result="tooth" />
+        <feColorMatrix in="tooth" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="toothGrey" />
+        <feComposite in="wobbled" in2="toothGrey" operator="arithmetic" k1="0.28" k2="0.72" k3="0" k4="0" />
+      </filter>
+      <linearGradient id="gcMist" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F7F2E6" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#F7F2E6" stop-opacity="0" />
+      </linearGradient>
+      <symbol id="gcPine" viewBox="0 0 24 34" overflow="visible">
+        <path d="M12,1 L4.5,12 L8.5,12 L2,20 L8,20 L4,27 L20,27 L16,20 L22,20 L15.5,12 L19.5,12 Z" />
+        <rect x="11" y="26" width="2" height="7" />
+      </symbol>
+    </defs>
+
+    <!-- sun -->
+    <g class="gc-glow"><circle cx="1090" cy="315" r="320" fill="url(#gcSun)" /></g>
+    <circle cx="1090" cy="315" r="55" fill="#FDF2CA" />
+    <circle cx="1090" cy="315" r="78" fill="none" stroke="#F7DC92" stroke-width="1.5" opacity="0.5" />
+
+    <!-- soft clouds — two banks drifting at different speeds -->
+    <g class="gc-clouds-a" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.78">
+      <ellipse cx="300" cy="205" rx="140" ry="25" />
+      <ellipse cx="380" cy="228" rx="95" ry="18" />
+      <ellipse cx="196" cy="226" rx="76" ry="14" />
+    </g>
+    <g class="gc-clouds-b" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.7">
+      <ellipse cx="845" cy="138" rx="120" ry="22" />
+      <ellipse cx="905" cy="158" rx="78" ry="15" />
+      <ellipse cx="1245" cy="196" rx="104" ry="18" />
+    </g>
+
+    <!-- birds — kept clear of the centred headline column (~x430-1010); they used
+         to fly straight through it but were too faint for anyone to notice -->
+    <g class="gc-birds" stroke="#5C663F" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
+      <path d="M148,252 q15,-13 30,0 q15,-13 30,0" />
+      <path d="M214,292 q11,-10 22,0 q11,-10 22,0" />
+      <path d="M264,236 q10,-9 20,0 q10,-9 20,0" opacity="0.8" />
+      <path d="M170,332 q9,-8 18,0 q9,-8 18,0" opacity="0.7" />
+      <path d="M306,288 q8,-7 16,0 q8,-7 16,0" opacity="0.55" />
+      <path d="M1232,208 q13,-11 26,0 q13,-11 26,0" opacity="0.85" />
+      <path d="M1302,250 q10,-9 20,0 q10,-9 20,0" opacity="0.7" />
+    </g>
+
+    <!-- everything below is drawn, so it all takes the pencil pass together -->
+    <g filter="url(#gcPencil)">
+    <!-- distant ridge — depth behind the hills, and a cool note against the warm
+         green. Kept low and hazy so it reads as distance, not scenery. -->
+    <path d="M-40,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1480,566 L1480,740 L-40,740 Z" fill="#B6C7DF" opacity="0.46" />
+    <rect x="-40" y="540" width="1520" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
+
+    <!-- hill 1 (far) + haze -->
+    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#C6D4AE" />
+    <rect x="-40" y="598" width="1520" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
+
+    <!-- hill 2 + distant pines -->
+    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#AEC191" />
+    <g fill="#9AB07F">
+      <use href="#gcPine" x="120" y="650" width="15" height="22" />
+      <use href="#gcPine" x="150" y="655" width="13" height="19" />
+      <use href="#gcPine" x="184" y="652" width="14" height="20" />
+      <use href="#gcPine" x="980" y="648" width="14" height="20" />
+      <use href="#gcPine" x="1008" y="653" width="12" height="18" />
+      <use href="#gcPine" x="1300" y="655" width="15" height="21" />
+      <use href="#gcPine" x="1330" y="660" width="13" height="18" />
+      <use href="#gcPine" x="512" y="670" width="13" height="19" />
+      <use href="#gcPine" x="700" y="664" width="14" height="20" />
+      <use href="#gcPine" x="732" y="668" width="12" height="17" />
+      <use href="#gcPine" x="256" y="658" width="12" height="18" />
+      <use href="#gcPine" x="864" y="662" width="13" height="19" />
+      <use href="#gcPine" x="1128" y="656" width="12" height="18" />
+    </g>
+    <rect x="-40" y="670" width="1520" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
+
+    <!-- hill 3 + mid pines -->
+    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#8EA674" />
+    <g fill="#78905E">
+      <use href="#gcPine" x="356" y="716" width="24" height="34" />
+      <use href="#gcPine" x="408" y="726" width="20" height="28" />
+      <use href="#gcPine" x="452" y="720" width="22" height="31" />
+      <use href="#gcPine" x="1120" y="722" width="22" height="31" />
+      <use href="#gcPine" x="1166" y="730" width="19" height="26" />
+      <use href="#gcPine" x="620" y="730" width="20" height="28" />
+      <use href="#gcPine" x="1290" y="726" width="21" height="30" />
+    </g>
+    <rect x="-40" y="742" width="1520" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
+
+    <!-- hill 4 (front) + foreground pines -->
+    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#6A8050" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FAE289" opacity="0.26" filter="url(#gcSoft)" />
+    <g fill="#4E5F3A">
+      <use href="#gcPine" x="66" y="756" width="34" height="52" />
+      <use href="#gcPine" x="116" y="744" width="44" height="66" />
+      <use href="#gcPine" x="184" y="762" width="30" height="46" />
+      <use href="#gcPine" x="1248" y="754" width="40" height="60" />
+      <use href="#gcPine" x="1314" y="768" width="30" height="46" />
+      <use href="#gcPine" x="240" y="774" width="24" height="36" />
+      <use href="#gcPine" x="1196" y="772" width="26" height="40" />
+    </g>
+    </g>
+  </svg>
+  <div class="wrap">
+    <h1>
+      <span class="rv-mask"><span>Une IA qui est <em>à vous.</em></span></span>
+      <span class="rv-mask"><span>Sans limites.</span></span>
+    </h1>
+    <p class="lede rv"><strong>Discussions, code, images et fichiers sans&nbsp;limites.</strong><span class="why">Elle tourne sur votre propre PC, alors rien ne s'épuise&nbsp;jamais.</span></p>
+    <ul class="hero-chips rv">
+      <li>Illimitée</li>
+      <li>Privée</li>
+      <li>Fonctionne hors ligne</li>
+      <li>9,99&nbsp;€</li>
+    </ul>
+    <div class="cta-row rv">
+      <a href="/fr/buy" class="cta-pill cta-primary"><span>Obtenir GreenCube</span></a>
+      <a href="/fr/#can" class="cta-pill cta-ghost">Voir ce qu'elle fait <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
+       anchoring here keeps the badge in the section corner rather than at the
+       bottom of the centred text block -->
+  <div class="gt hero-plane" aria-hidden="true"><div class="hp-bob"><svg viewBox="0 0 200 110" aria-hidden="true" focusable="false">
+    <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <path class="hp-scarf" d="M98,50 C84,46 74,52 62,46 C70,56 84,58 98,56 Z" fill="#FA9F75"/>
+      <path d="M24,40 L44,40 L54,62 L28,62 Z" fill="#FA9F75"/>
+      <path d="M22,66 C22,56 34,52 52,52 L150,52 C170,52 184,58 184,68 C184,78 170,84 150,84 L44,84 C30,84 22,76 22,66 Z" fill="#FAE289"/>
+      <path d="M96,52 C96,44 104,38 114,38 C124,38 132,44 132,52 Z" fill="#8EABE1" stroke-width="2"/>
+      <circle cx="114" cy="38" r="15" fill="#AFCB7C"/>
+      <g stroke="none"><circle cx="119" cy="36" r="2.6" fill="#1A1A1A"/><circle cx="126.5" cy="35.6" r="2" fill="#1A1A1A"/>
+        <circle cx="119.8" cy="35.2" r=".8" fill="#fff"/><ellipse cx="123" cy="42" rx="3.2" ry="1.8" fill="#FA9F75" opacity=".6"/></g>
+      <path d="M121,45 q2.2,1.6 4.4,0" fill="none" stroke-width="1.8"/>
+      <ellipse cx="104" cy="80" rx="42" ry="8" fill="#FA9F75"/>
+      <circle cx="160" cy="66" r="4" fill="#fff" stroke-width="2"/>
+      <rect x="184" y="62" width="6" height="8" rx="2" fill="#1A1A1A" stroke="none"/>
+      <ellipse class="hp-prop" cx="192" cy="66" rx="3" ry="18" fill="#DDD8CE" stroke-width="1.6"/>
+    </g>
+  </svg></div></div>
+  <a href="/fr/how-much-water-does-ai-use" class="hero-water">
+    <span class="drop-wrap" aria-hidden="true">
+      <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2.7s6 6.4 6 10.6a6 6 0 0 1-12 0c0-4.2 6-10.6 6-10.6z"/>
+      </svg>
+    </span>
+    <span>Économisez de l'eau à chaque fois que vous utilisez l'IA</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</section>
+
+<!-- =========== 1 · NO LIMITS — the turtle walks across while everything it does goes by =========== -->
+<section class="sec feat" id="what" aria-label="Ce que fait GreenCube">
+  <div class="feat-stick">
+    <div class="sec-wrap sec-top">
+      <div>
+        <span class="sec-eyebrow">Illimitée</span>
+        <h2 class="sec-head">Aucune limite à atteindre.</h2>
+      </div>
+      <p class="sec-sub">Elle tourne sur votre propre ordinateur, donc rien n'est compté. Voici tout ce qu'elle fait.</p>
+    </div>
+    <div class="track-wrap">
+      <div class="track">
+      <article class="make t-sage">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/>
+            <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/>
+            <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/>
+            <path d="M47 61h28" stroke-width="3"/>
+          </svg>
+        </div>
+        <span class="make-kind">Chats</span>
+        <q>Interroge-moi en chimie organique jusqu'à ce que je ne me trompe plus.</q>
+        <span class="make-out">Pas de limite, pas de « revenez dans 5 heures »</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="10" y="16" width="76" height="60" rx="8" fill="#2B2B2B"/>
+            <path d="M10 28h76" stroke="#FFFDF8" stroke-width="1.6" opacity=".3"/>
+            <path d="M22 40h14" stroke="#8EABE1" stroke-width="3.2"/><path d="M40 40h22" stroke="#FA9F75" stroke-width="3.2"/>
+            <path d="M28 50h26" stroke="#C6D9A8" stroke-width="3.2"/><path d="M28 60h16" stroke="#FAE289" stroke-width="3.2"/>
+            <path d="M22 70h10" stroke="#8EABE1" stroke-width="3.2"/>
+            <path d="M68 50l-6 6 6 6M76 50l6 6-6 6" stroke="#FFFDF8" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">Sessions de code</span>
+        <q>Fais-moi un jeu du serpent auquel je peux jouer dans mon navigateur.</q>
+        <span class="make-out">Continuez pendant des heures, rien ne s'épuise</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/>
+            <circle cx="62" cy="34" r="8" fill="#FAE289"/>
+            <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/>
+            <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/>
+            <path d="M26 84l6-8M70 84l-6-8" />
+          </svg>
+        </div>
+        <span class="make-kind">Génération d'images</span>
+        <q>Un logo en pixel art pour mon clan de jeu.</q>
+        <span class="make-out">Autant que vous voulez, sans quota quotidien</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">Pièces jointes</span>
+        <q>Voici mon compte rendu de TP. Qu'est-ce qu'un prof exigeant me reprocherait ?</q>
+        <span class="make-out">PDF, photos, captures d'écran, autant que vous voulez</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">Présentations</span>
+        <q>Dix diapositives sur la Révolution française pour le séminaire de lundi.</q>
+        <span class="make-out">Un vrai fichier PowerPoint</span>
+      </article>
+      <article class="make t-sage">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">Révisions</span>
+        <q>Transforme ce PDF de cours en fiches et en quiz.</q>
+        <span class="make-out">Des fiches et un quiz, à côté de la discussion</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
+            <path d="M12 32h72"/><circle cx="20" cy="26" r="1.6" fill="#1A1A1A"/><circle cx="26" cy="26" r="1.6" fill="#1A1A1A"/>
+            <rect x="21" y="40" width="26" height="24" rx="4" fill="#FA9F75"/>
+            <path d="M54 43h20" stroke-width="4"/><path d="M54 52h16M54 59h12" stroke="#A8492A" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">Pages web</span>
+        <q>Une page pour mon serveur Discord, avec les règles et un lien d'invitation.</q>
+        <span class="make-out">Une page que vous pouvez ouvrir et partager</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Bientôt</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <circle cx="66" cy="28" r="11" fill="#FAE289"/>
+            <path d="M66 10v4M66 42v4M48 28h4M80 28h4M53 15l3 3M76 38l3 3M79 15l-3 3" />
+            <rect x="14" y="38" width="54" height="38" rx="6" fill="#8EABE1"/>
+            <path d="M16 42l25 18 25-18" fill="#FFFDF8"/>
+          </svg>
+        </div>
+        <span class="make-kind">Automatisations</span>
+        <q>Chaque matin, résume ma boîte de réception et rédige les réponses.</q>
+        <span class="make-out">Tourne à heure fixe pendant que vous vivez votre journée</span>
+      </article>
+      </div>
+    </div>
+    <div class="guide">
+      <div class="gbody">
+  <svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gcwhy">
+<section class="w-sec" id="can">
+  <div class="w">
+    <span class="w-eyebrow">Ce que vous pouvez faire</span>
+    <h2 class="w-h2">Tout. <em>Sur votre PC.</em></h2>
+    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>Fais-moi un jeu du serpent</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>Dessine un bureau douillet la nuit, à l'aquarelle</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>Interroge-moi en biologie cellulaire</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>Résume mon PDF de 40 pages</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>10 diapos pour lundi</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>Pourquoi mon code plante ?</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · hors ligne</span></div><div class="w-win-body" id="w-chat" data-score="Score" data-play="▶ Jouer" data-again="Rejouer" data-over="Partie terminée"></div></div></div><p class="w-try-fine">Un aperçu de vraies choses que fait GreenCube. Touchez-en une autre.</p><template data-k="snake" data-ask="Fais-moi un jeu du serpent"><p>C'est fait. Jouez-y ici même :</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="Jeu du serpent"></canvas><div class="w-game-ui"><span class="w-score">Score 0</span><button type="button" class="w-btn w-play">▶ Jouer</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">Flèches ou glissez pour bouger.</p></div></template><template data-k="image" data-ask="Dessine un bureau douillet la nuit, à l'aquarelle"><p>La voici :</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="Un bureau douillet la nuit près d'une fenêtre, avec une lampe, un ordinateur portable, des livres et une plante, à l'aquarelle. Fait par GreenCube."></picture></div><p class="w-img-cap">Faite sur votre PC. Sans limite quotidienne.</p></template><template data-k="quiz" data-ask="Interroge-moi en biologie cellulaire"><p>Voici vos fiches. Retournez-les, puis passez à la suivante :</p><div class="w-deck" data-cards="[[&quot;À quoi sert la mitochondrie ?&quot;, &quot;Elle produit l'énergie (ATP) de la cellule.&quot;], [&quot;Où est gardé l'ADN de la cellule ?&quot;, &quot;Dans le noyau.&quot;], [&quot;Que fabriquent les ribosomes ?&quot;, &quot;Des protéines.&quot;], [&quot;Qu'est-ce qui décide de ce qui entre et sort de la cellule ?&quot;, &quot;La membrane cellulaire.&quot;], [&quot;Végétale ou animale : quelles cellules ont une paroi ?&quot;, &quot;Les cellules végétales.&quot;]]" data-hint="touchez pour retourner"><button type="button" class="w-flip"><span><em><span class="q">À quoi sert la mitochondrie ?</span><small>touchez pour retourner</small></em><em class="a">Elle produit l'énergie (ATP) de la cellule.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="Fiche précédente">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="Fiche suivante">&rarr;</button></div></div></template><template data-k="pdf" data-ask="Résume mon PDF de 40 pages"><p>40 pages, en 6 points :</p><ul><li>L'étude teste une nouvelle batterie au sodium.</li><li>Elle se recharge deux fois plus vite que les batteries lithium actuelles.</li><li>Elle tient 3&nbsp;000 charges avant de perdre 20&nbsp;% de sa capacité.</li><li>Le sodium est moins cher et plus facile à trouver que le lithium.</li><li>Elle est plus lourde, donc mieux adaptée aux maisons et aux bus qu'aux téléphones.</li><li>Il faut encore la tester à grande échelle avant de pouvoir la vendre.</li></ul></template><template data-k="slides" data-ask="10 diapos pour lundi"><p>Votre présentation est prête. Choisissez un style :</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>La Révolution française</b><small>De 1789 à 1799</small></div><div class="w-sl"><b>Pourquoi elle a commencé</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>Sauge</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>Mandarine</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>Glycine</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>Jasmin</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>Nuit</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>Sobre</button></div></template><template data-k="bug" data-ask="Pourquoi mon code plante ?"><p>Votre boucle ne s'arrête jamais : <b>i</b> n'augmente jamais. Ajoutez <b>i += 1</b> à la ligne 12 et ça marche.</p></template>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="money">
+  <div class="w">
+    <span class="w-eyebrow">Argent</span>
+    <h2 class="w-h2">Vous payez 20&nbsp;&euro; par mois ? <em>Stop.</em></h2>
+    <p class="w-sub">Faites glisser pour voir ce qu'un abonnement IA vous coûte.</p>
+    <div class="w-money" data-lang="fr">
+      <div class="w-months"><span>Mois</span><b id="m-n">12 mois</b></div>
+      <input class="w-range" id="m-range" type="range" min="1" max="36" value="12" aria-label="Mois">
+      <div class="w-row sub"><span class="lbl">Abonnement IA<small>et il a quand même des limites</small></span><div class="w-track"><i id="m-sub"></i></div><span class="amt" id="m-sub-n"></span></div>
+      <div class="w-row gc"><span class="lbl">GreenCube<small>une fois, sans limites</small></span><div class="w-track"><i id="m-gc"></i></div><span class="amt" id="m-gc-n"></span></div>
+      <div class="w-keep"><span>Vous gardez</span><b id="m-keep"></b></div>
+    </div>
+    <p class="w-fine">La plupart des offres IA payantes coûtent environ 20&nbsp;&euro; par mois, et même les offres payantes ont des limites d'utilisation.</p>
+  </div>
+</section>
+
+<section class="w-sec w-center" id="offline">
+  <div class="w">
+    <span class="w-eyebrow">Hors ligne</span>
+    <h2 class="w-h2">Pas de wifi à la bibliothèque ? <em>Ça marche quand même.</em></h2>
+    <p class="w-sub">Même question, sans internet. Une seule des deux répond.</p>
+    <div class="w-net">
+      <div class="w-chat"><span class="who">IA dans le cloud &middot; sans wifi</span><p class="w-bubble me">Interroge-moi sur la Révolution française.</p><p class="w-bubble ai err">Connexion impossible. Vérifiez votre internet et réessayez.</p></div>
+      <div class="w-chat gc"><span class="who">GreenCube &middot; sans wifi</span><p class="w-bubble me">Interroge-moi sur la Révolution française.</p><p class="w-bubble ai">Bien sûr ! Question 1 : en quelle année a-t-elle commencé ?</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+</div>
+
+
+<!-- =========== 2 · PRIVATE, NO FILTER — plain facts =========== -->
+<section class="sec facts" id="private" aria-label="Privée et sans filtre ajouté">
+  <div class="sec-wrap">
+    <span class="sec-eyebrow rv">Privée et directe</span>
+    <h2 class="sec-head rv">Personne qui lit par-dessus votre épaule.<br>Aucun filtre ajouté.</h2>
+    <ul class="fact-list">
+      <li class="fact t-sage rv"><h3>Vos discussions restent sur votre ordinateur.</h3><p>Discussions, fichiers et images sont créés et gardés sur votre machine. Personne ne les lit, ne s'entraîne dessus ni ne les vend. Seules les recherches web sortent, et seulement si vous activez Online.</p></li>
+      <li class="fact t-tangerine rv"><h3>Aucun filtre ajouté.</h3><p>L'IA dans le cloud fait passer votre question par la politique de contenu d'une entreprise. GreenCube n'ajoute aucun filtre à lui sur les réponses.</p></li>
+      <li class="fact t-jasmine rv"><h3>Faite pour répondre, pas pour refuser.</h3><p>Ses modèles ont pour consigne de répondre franchement. Gros mots, fiction sombre, opinions tranchées, histoire difficile et recherche en sécurité : tout est permis.</p></li>
+      <li class="fact t-wisteria rv"><h3>Seul le vrai mal est exclu.</h3><p>Elle n'aidera personne à blesser des gens, exploiter des enfants, voler ou pirater des comptes. Tout le reste, vous pouvez le demander.</p></li>
+    </ul>
+    <p class="fact-note rv">Comment : GreenCube donne à ses modèles des consignes permanentes pour répondre franchement. Il les oriente au lieu de les réentraîner, donc il arrive encore qu'un modèle dise non. Vous pouvez désactiver cela dans les Paramètres.</p>
+  </div>
+</section>
+
+<!-- =========== THE FOUR TIERS — what your own machine does with it =========== -->
+<section class="tiers" id="tiers" aria-label="Comment GreenCube tourne sur différents ordinateurs">
+  <div class="tiers-wrap">
+    <span class="caps-eyebrow rv">Votre machine</span>
+    <h2 class="caps-head rv">Voyez ce qui peut tourner sur votre machine.</h2>
+    <p class="tiers-sub rv">Deux choses décident : la quantité de RAM, et si vous avez une carte graphique. Même appli, même prix dans tous les cas.</p>
+
+    <div id="game" class="rv">
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="step on" id="s-ram">
+        <span class="kicker">Question 1 sur 2</span>
+        <h3>Combien de RAM a-t-il ?</h3>
+        <div class="picks">
+          <button class="opt" type="button" data-ram="8">8 GB</button>
+          <button class="opt" type="button" data-ram="16">16 GB</button>
+          <button class="opt" type="button" data-ram="32">32 Go ou plus</button>
+          <button class="opt" type="button" data-ram="unsure">Aucune idée</button>
+        </div>
+        <p class="tiny">La RAM, pas le stockage. Pas l'espace du disque dur ou du SSD.</p>
+        <div class="pips"><span class="pip now"></span><span class="pip"></span></div>
+      </div>
+
+      <div class="step" id="s-gpu">
+        <span class="kicker">Question 2 sur 2</span>
+        <h3>Quelle carte graphique ou puce ?</h3>
+        <div class="finder">
+          <input type="text" id="gpu-in" autocomplete="off" spellcheck="false"
+                 placeholder="Commencez à taper, ex. 4060, Radeon, Iris"
+                 aria-label="Cherchez votre carte graphique ou puce" role="combobox" aria-expanded="false" aria-controls="hits" />
+          <div class="hits" id="hits" role="listbox" aria-label="Cartes graphiques et puces correspondantes"></div>
+        </div>
+        <div class="picks">
+          <button class="opt quiet" type="button" id="gpu-none">Je n'en ai pas</button>
+          <button class="opt quiet" type="button" id="gpu-dunno">Je ne sais pas</button>
+        </div>
+        <p class="tiny">La plupart des portables n'ont pas de carte séparée, et c'est tout à fait normal.</p>
+        <div class="pips"><span class="pip"></span><span class="pip now"></span></div>
+        <button class="back" type="button" id="back-ram">&larr; Retour</button>
+      </div>
+
+      <div class="step" id="s-rev">
+        <span class="rev-top">Votre PC est un</span>
+        <div class="rev-name" id="r-name">Sprout</div>
+        <p class="rev-feels" id="r-feels"></p>
+        <p class="rev-spec" id="r-spec"></p>
+        <p class="rev-note" id="r-note" hidden></p>
+        <a href="#tier-cards" class="go"><span>Voir ce qu'il peut faire</span><span aria-hidden="true">&darr;</span></a>
+        <button class="again" type="button" id="again">Recommencer</button>
+      </div>
+    </div>
+
+    <div class="tier-row" id="tier-cards">
+      <article class="tier-card rv" style="--tint:#FAE289">
+        <span class="tier-n">Niveau un</span>
+        <h3>Seed</h3>
+        <p class="tier-spec">8 Go de RAM, sans carte</p>
+        <ul class="tier-list">
+          <li>Tout fonctionne, juste plus lentement</li>
+          <li>Taillé pour tenir dans 8 Go</li>
+          <li>Pages web désactivées au départ. Les images demandent 12&nbsp;Go de RAM</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#8EA674">
+        <span class="tier-n">Niveau deux</span>
+        <h3>Sprout</h3>
+        <p class="tier-spec">16 Go de RAM, ou 8 Go avec une carte</p>
+        <ul class="tier-list">
+          <li>Vitesse régulière et confortable</li>
+          <li>Écrit des présentations</li>
+          <li>Pages web et images, en annonçant l'attente</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#FA9F75">
+        <span class="tier-n">Niveau trois</span>
+        <h3>Bloom</h3>
+        <p class="tier-spec">Carte de 8 Go, ou une carte + 16 Go de RAM</p>
+        <ul class="tier-list">
+          <li>Rapide, grâce à la carte graphique</li>
+          <li>Pages web et images, sans avertissement d'attente</li>
+          <li>Lit des discussions et documents plus longs d'un coup</li>
+        </ul>
+      </article>
+      <article class="tier-card rv" style="--tint:#8EABE1">
+        <span class="tier-n">Niveau quatre</span>
+        <h3>Thrive</h3>
+        <p class="tier-spec">Carte de 8 Go, 24 Go de RAM</p>
+        <ul class="tier-list">
+          <li>Le plus grand modèle d'IA que votre carte peut contenir</li>
+          <li>Le plus rapide des quatre</li>
+          <li>Lit les discussions et documents les plus longs</li>
+        </ul>
+      </article>
+    </div>
+
+
+    <div class="tt-wrap rv">
+      <table class="tier-table">
+        <caption>Ce que fait chaque niveau</caption>
+        <thead>
+          <tr><th scope="col">Ce qu'elle fait</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Vitesse</th><td>Lent, un mot à la fois</td><td>Régulier</td><td>Rapide</td><td>Le plus rapide</td></tr>
+          <tr><th scope="row">Taille du modèle d'IA</th><td>Petit</td><td>Moyen</td><td>Moyen</td><td>Le plus grand que votre carte peut contenir</td></tr>
+          <tr><th scope="row">Discussion, documents et photos</th><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Fiches, quiz et fichiers PowerPoint</th><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Présentations écrites par l'IA</th><td>Écrit un document, puis l'enregistre en diapositives</td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Pages web</th><td>Désactivées au départ. Vous pouvez les activer</td><td>Demande d'abord et vous dit combien de temps ça prendra</td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Applis qu'elle code</th><td>Jusqu'à 8 fichiers à la fois</td><td>Jusqu'à 12 fichiers</td><td>Jusqu'à 24 fichiers</td><td>Jusqu'à 48 fichiers</td></tr>
+          <tr><th scope="row">Génération d'images</th><td>Demande 12&nbsp;Go de RAM</td><td>Demande d'abord et vous dit combien de temps ça prendra</td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Oui"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Ce qu'elle peut lire d'un coup<small>Une discussion, un document, ou les deux</small></th><td>Environ 3&nbsp;000 mots</td><td>Environ 12&nbsp;000 mots</td><td>Environ 12&nbsp;000 à 25&nbsp;000 mots</td><td>50&nbsp;000 mots ou plus</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tt-note rv">Les nombres de mots sont indicatifs : ils augmentent avec la mémoire libre de votre ordinateur. Tout le reste est un point de départ, pas un verrou (les images demandent 12&nbsp;Go de RAM). Paramètres &rarr; Ce que votre ordinateur peut faire active ou désactive chaque élément.</p>
+
+
+  </div>
+</section>
+
+<!-- =========== MANIFESTO — dark band, stamped statements =========== -->
+<div class="gcwhy">
+<section class="w-sec" id="how">
+  <div class="w">
+    <span class="w-eyebrow">Comment ça marche</span>
+    <h2 class="w-h2">Trois étapes. <em>C'est tout.</em></h2>
+    <div class="w-steps"><div class="w-step" style="--c:color-mix(in srgb, var(--sun) 45%, #fff)"><b>1</b><h3>Téléchargez-la</h3><p>Un installateur, comme un jeu.</p></div><div class="w-step" style="--c:color-mix(in srgb, var(--sky) 45%, #fff)"><b>2</b><h3>Elle récupère l'IA</h3><p>La première fois, elle télécharge l'IA sur votre PC. Quelques Go, une seule fois.</p></div><div class="w-step" style="--c:color-mix(in srgb, var(--clay) 45%, #fff)"><div class="gt step-turtle" aria-hidden="true"><svg viewBox="0 0 120 104" aria-hidden="true" focusable="false">
+    <g class="tt-body"><g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </g></svg></div><b>3</b><h3>C'est parti</h3><p>Discutez, codez, créez des images. En ligne ou hors ligne, autant que vous voulez.</p></div></div>
+  </div>
+</section>
+
+<section class="w-sec" id="questions">
+  <div class="w">
+    <span class="w-eyebrow">Questions</span>
+    <h2 class="w-h2">Réponses <em>rapides.</em></h2>
+    <div class="w-faq"><div><h3>Est-ce que ça tourne sur mon PC ?</h3><p>S'il a Windows 10 ou 11 et 8 Go de RAM, oui. Une carte graphique la rend rapide. <a href="/fr/#game">Vérifiez votre PC en deux questions</a>.</p></div><div><h3>Ai-je besoin d'internet ?</h3><p>Une fois, pour vous connecter et télécharger l'IA. Ensuite, elle fonctionne sans internet. Elle ne se connecte que pour les mises à jour, ou si vous activez Online.</p></div><div><h3>Est-elle aussi intelligente que ChatGPT ?</h3><p>Non. Les plus grandes IA du cloud sont plus intelligentes. GreenCube n'a pas de limites, fonctionne hors ligne et est à vous. C'est le marché.</p></div><div><h3>Pourquoi ai-je besoin d'un compte ?</h3><p>Seulement pour vérifier que vous avez payé. Il ne voit jamais vos discussions, fichiers ou images.</p></div></div>
+  </div>
+</section>
+
+<section class="w-end">
+  <div class="w">
+    <h2 class="w-h2">Sans limites. Sans abonnement. <em>À vous.</em></h2>
+    <a href="/fr/buy" class="w-cta">Obtenir GreenCube, 9,99&nbsp;€ <span aria-hidden="true">&rarr;</span></a>
+    <a href="/fr/#game" class="alt">Vérifiez d'abord votre PC</a>
+  </div>
+</section>
+</div>
+
+<section class="manifesto" id="manifesto" data-theme="dark">
+  <div class="head">
+    <span class="eyebrow rv">La différence</span>
+  </div>
+  <ul class="manifesto-lines">
+    <li class="manifesto-line">Aucune limite ne vous coupe en pleine réflexion.</li>
+    <li class="manifesto-line">Pas d'abonnement. Pas de renouvellement. Pas de crédits.</li>
+    <li class="manifesto-line">Vos discussions restent sur votre ordinateur.</li>
+    <li class="manifesto-line">Ça marche en avion. Pendant une panne de courant. Quand les serveurs tombent.</li>
+    <li class="manifesto-line">Toutes les autres IA sont louées.</li>
+    <li class="manifesto-line is-final">Celle-ci est <em>à vous.</em></li>
+  </ul>
+</section>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="#top" class="brand-lock" aria-label="Accueil GreenCube">
+          <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
+        </a>
+        <p class="f-note">Une IA qui est <em>possédée,</em> pas louée.</p>
+        <a href="mailto:support@greencube.app" class="f-mail" data-email="support@greencube.app" data-copied="Adresse copiée">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+          <span class="f-mail-label">support@greencube.app</span>
+        </a>
+      </div>
+
+      <nav class="f-col" aria-label="Produit">
+        <h3>Produit</h3>
+        <ul>
+          <li><a href="/fr/buy">Obtenir GreenCube</a></li>
+          <li><a href="/fr/#can">Ce qu'elle fait</a></li>
+          <li><a href="/fr/what-you-get">Est-ce que ça tourne sur mon ordinateur ?</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Apprendre">
+        <h3>Apprendre</h3>
+        <ul>
+          <li><a href="https://blog.greencube.app/blog">Blog</a></li>
+          <li><a href="/fr/your-data">Vos données</a></li>
+          <li><a href="/does-chatgpt-train-on-your-data">ChatGPT et vos données (EN)</a></li>
+          <li><a href="/fr/ai-environmental-impact">L'IA et la planète</a></li>
+          <li><a href="/fr/how-much-water-does-ai-use">L'IA et l'eau</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Entreprise">
+        <h3>Entreprise</h3>
+        <ul>
+          <li><a href="/fr/mission">Notre mission</a></li>
+          <li><a href="https://github.com/greencube-ai" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="f-col" aria-label="Assistance">
+        <h3>Assistance</h3>
+        <ul>
+          <li><a href="mailto:support@greencube.app">Obtenir de l'aide</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Politique de confidentialité (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Conditions d'utilisation (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="f-bottom">
+      <div>© 2026 GreenCube. Edunexis SL. Fait en Espagne.</div>
+      <div class="f-legal">
+        <a href="https://legal.greencube.app/privacy">Confidentialité</a>
+        <a href="https://legal.greencube.app/terms">Conditions</a>
+      </div>
+      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr" aria-current="true">FR</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- libs — synchronous so the inline IIFE below can use them at parse time -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+  // ---------- font gate ----------
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    document.body.classList.add('fonts-ready');
+    runIntro();
+    initManifesto();
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  setTimeout(start, 1200);
+
+  // ---------- hero intro ----------
+  function runIntro() {
+    if (!window.gsap || reduced) {
+      document.querySelectorAll('.rv-mask > *').forEach(el => el.style.transform = 'translateY(0)');
+      document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+    const heroLines = document.querySelectorAll('.hero h1 .rv-mask > *');
+    const heroTail = [
+      document.querySelector('.hero .lede'),
+      document.querySelector('.hero .hero-chips'),
+      document.querySelector('.hero .cta-row'),
+    ].filter(Boolean);
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+    tl.to(heroLines, { y: 0, duration: 1.05, stagger: 0.10 })
+      .to(heroTail, { y: 0, opacity: 1, duration: 0.85, stagger: 0.10 }, '-=0.55');
+  }
+
+  // ---------- header dark-state on scroll ----------
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  if (window.ScrollTrigger) {
+    document.querySelectorAll('[data-theme="dark"]').forEach(section => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 60px',
+        end: 'bottom 60px',
+        onEnter:     () => header.classList.add('dark'),
+        onLeave:     () => header.classList.remove('dark'),
+        onEnterBack: () => header.classList.add('dark'),
+        onLeaveBack: () => header.classList.remove('dark'),
+      });
+    });
+  }
+
+  // ---------- generic .rv reveal-on-scroll ----------
+  if (window.gsap && window.ScrollTrigger && !reduced) {
+    document.querySelectorAll('.rv').forEach(el => {
+      if (el.closest('.hero')) return; // hero handled in intro
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.95, ease: 'expo.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      });
+    });
+  }
+
+  // ---------- scroll progress thread ----------
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  //  MANIFESTO — stamps each statement in as it scrolls into view
+  // ====================================================================
+  function initManifesto() {
+    const lines = document.querySelectorAll('.manifesto-line');
+    if (!lines.length) return;
+
+    if (!window.gsap || !window.ScrollTrigger || reduced) {
+      lines.forEach(l => {
+        l.style.opacity = 1;
+        l.style.transform = 'none';
+        l.classList.add('is-visible');
+      });
+      return;
+    }
+
+    lines.forEach((line) => {
+      gsap.timeline({
+        scrollTrigger: { trigger: line, start: 'top 78%', once: true },
+        defaults: { ease: 'expo.out' },
+      })
+        .to(line, { y: 0, scale: 1, opacity: 1, duration: 1.1 })
+        .add(() => line.classList.add('is-visible'), '-=0.45');
+    });
+  }
+})();
+</script>
+
+<script>
+  // Brave (and any browser with no mail handler registered) silently does
+  // nothing on a mailto:. Copy the address on click as well, so the click
+  // always produces something useful. Default is not prevented, so a working
+  // mail client still opens.
+  (() => {
+    const mail = document.querySelector('.f-mail');
+    if (!mail) return;
+    const label = mail.querySelector('.f-mail-label');
+    const addr = mail.dataset.email || 'support@greencube.app';
+    mail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(addr);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+      if (!label) return;
+      const original = label.textContent;
+      mail.classList.add('copied');
+      label.textContent = mail.dataset.copied || 'Address copied';
+      clearTimeout(mail._t);
+      mail._t = setTimeout(() => {
+        label.textContent = original;
+        mail.classList.remove('copied');
+      }, 1800);
+    });
+  })();
+</script>
+<script>
+  // The automatic redirect in vercel.json only fires while this cookie is
+  // absent, so clicking EN or ES is what turns the guess off. Without it, a
+  // Spanish-speaking browser would be bounced back to /es/ on every click of
+  // the EN link, which looks like the switcher is broken.
+  (() => {
+    document.querySelectorAll('a[hreflang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        document.cookie = 'gc_lang=' + a.getAttribute('hreflang') +
+          '; path=/; max-age=31536000; samesite=lax';
+      });
+    });
+  })();
+</script>
+<script>
+  // "No limits to hit". The section's inside sticks while you scroll through it:
+  // first the turtle appears on its own at the left; then it walks the full
+  // width to the right while the cards come in from the right edge and travel
+  // left past it, leaning like a slow wheel. Under reduced motion none of this
+  // runs and the row simply scrolls sideways.
+  (() => {
+    const sec = document.querySelector('.feat');
+    if (!sec || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const wrap = sec.querySelector('.track-wrap');
+    const track = sec.querySelector('.track');
+    const cards = [...track.children];
+    const guide = sec.querySelector('.guide');
+    const body = guide.querySelector('.gbody');
+    const turtle = body.querySelector('.turtle');
+    sec.classList.add('pin-on');
+
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    let W = 0, tw = 0, intro = 0, outro = 0, lastY = scrollY, idle = 0, queued = false;
+
+    const measure = () => {
+      W = wrap.clientWidth;
+      tw = track.scrollWidth;
+      intro = innerHeight * 0.4;
+      outro = innerHeight * 0.3;
+      sec.style.height = (innerHeight + intro + tw + outro) + 'px';
+      paint();
+    };
+
+    const paint = () => {
+      queued = false;
+      const s = clamp(-sec.getBoundingClientRect().top, 0, intro + tw + outro);
+
+      // the turtle appears first, before anything moves
+      const shown = clamp((s + innerHeight * 0.25) / (intro * 0.8), 0, 1);
+      body.style.opacity = shown;
+
+      // then the walk and the row share one clock
+      const along = clamp(s - intro, 0, tw);
+      track.style.transform = `translateX(${W - along}px)`;
+      const room = guide.clientWidth - body.clientWidth;
+      body.style.translate = `${room * (along / tw)}px ${(1 - shown) * 12}px`;
+
+      const mid = innerWidth / 2;
+      cards.forEach((c) => {
+        const b = c.getBoundingClientRect();
+        const off = clamp((b.left + b.width / 2 - mid) / innerWidth, -1, 1);
+        c.style.transform = `translateY(${off * off * 46}px) rotate(${off * 7}deg)`;
+      });
+    };
+
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      if (y !== lastY) {
+        turtle.classList.toggle('back', y < lastY);
+        turtle.classList.add('walking');
+        clearTimeout(idle);
+        idle = setTimeout(() => turtle.classList.remove('walking'), 160);
+        lastY = y;
+      }
+      if (!queued) { queued = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    measure();
+  })();
+</script>
+<script src="/tier-quiz.js" defer></script>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+  // the two toys and the gentle reveal
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = !reduce && 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .15 }) : null;
+    document.querySelectorAll('.gcwhy .w-sec .w > *, .gcwhy .w-end .w > *').forEach((el) => { if (io) { el.classList.add('w-in'); io.observe(el); } });
+
+    // 1. who stops first: the free cloud plan locks at 10, GreenCube keeps counting
+    const race = document.querySelector('.w-race');
+    if (race) {
+      const CAP = 10;
+      let n = 0;
+      const $ = (id) => document.getElementById(id);
+      const pop = (el) => { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); };
+      const paint = () => {
+        const c = Math.min(n, CAP);
+        $('n-cloud').textContent = c;
+        $('b-cloud').style.width = (c / CAP * 100) + '%';
+        $('l-cloud').textContent = n >= CAP ? race.dataset.locked : race.dataset.left.replace('{n}', CAP - c);
+        $('lane-cloud').classList.toggle('locked', n >= CAP);
+        $('n-gc').textContent = n;
+      };
+      $('w-send').addEventListener('click', () => {
+        n += 1;
+        if (n <= CAP) pop($('n-cloud'));
+        pop($('n-gc'));
+        paint();
+      });
+      paint();
+    }
+
+    // 2. the Wi-Fi switch: the cloud answer needs it, GreenCube's does not
+    const sw = document.getElementById('w-wifi');
+    const net = document.querySelector('.w-net');
+    if (sw && net) {
+      sw.addEventListener('click', () => {
+        const on = sw.getAttribute('aria-checked') !== 'true';
+        sw.setAttribute('aria-checked', String(on));
+        const a = document.getElementById('a-cloud');
+        a.innerHTML = on ? net.dataset.ok : '<span class="w-spin" aria-hidden="true"></span>' + net.dataset.err;
+        a.classList.toggle('err', !on);
+      });
+    }
+  })();
+</script>
+<script>
+  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
+  (() => {
+    const box = document.getElementById('w-chat');
+    if (!box) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const asks = [...document.querySelectorAll('.w-ask')];
+    let run = 0, stopGame = () => {};
+
+    function snake(root) {
+      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
+      const W = 12, Hh = 9, S = 20;
+      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
+      let body, dir, next, food, pts, timer = null;
+      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
+      const draw = () => {
+        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
+        g.fillStyle = 'rgba(26,26,26,.04)';
+        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
+        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
+        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
+      };
+      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
+      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
+      const tick = () => {
+        dir = next;
+        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
+        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
+          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
+        }
+        body.unshift(h);
+        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
+        draw();
+      };
+      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
+      function key(e) {
+        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
+        if (d && timer) { e.preventDefault(); turn(d); }
+      }
+      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
+      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
+      let sx, sy;
+      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      cv.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
+      }, { passive: true });
+      reset();
+      stopGame = stop;
+    }
+
+    function deck(root) {
+      const cards = JSON.parse(root.dataset.cards);
+      let i = 0;
+      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
+      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
+      const show = () => {
+        flip.classList.remove('flipped');
+        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
+        pos.textContent = (i + 1) + ' / ' + cards.length;
+        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
+      };
+      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
+      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
+      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
+      prev.disabled = true;
+    }
+
+    function themes(root) {
+      const dv = root.querySelector('.w-dv');
+      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
+        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
+        dv.dataset.theme = b.dataset.t;
+      }));
+    }
+
+    function play(btn) {
+      const id = ++run;
+      stopGame(); stopGame = () => {};
+      asks.forEach((b) => b.classList.toggle('on', b === btn));
+      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
+      const text = tpl.dataset.ask;
+      box.innerHTML = '';
+      const me = document.createElement('p');
+      me.className = 'w-msg me';
+      box.appendChild(me);
+      let i = 0;
+      const answer = () => {
+        if (id !== run) return;
+        const ai = document.createElement('div');
+        ai.className = 'w-msg ai';
+        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
+        box.appendChild(ai);
+        setTimeout(() => {
+          if (id !== run) return;
+          ai.innerHTML = '';
+          ai.appendChild(tpl.content.cloneNode(true));
+          ai.querySelectorAll('.w-game').forEach(snake);
+          ai.querySelectorAll('.w-deck').forEach(deck);
+          if (ai.querySelector('.w-dv')) themes(ai);
+        }, reduce ? 0 : 700);
+      };
+      if (reduce) { me.textContent = text; answer(); return; }
+      const type = () => {
+        if (id !== run) return;
+        me.innerHTML = '';
+        me.append(text.slice(0, i));
+        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
+        if (i++ < text.length) setTimeout(type, 26);
+        else { me.textContent = text; setTimeout(answer, 250); }
+      };
+      type();
+    }
+    asks.forEach((b) => b.addEventListener('click', () => play(b)));
+    const sec = document.getElementById('can');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
+      io.observe(sec);
+    } else play(asks[0]);
+  })();
+</script>
+<script>
+  // money: months slider -> subscription total vs GreenCube once
+  (() => {
+    const r = document.getElementById('m-range');
+    if (!r) return;
+    // i18n:begin (generated: python i18n/i18n.py scripts, words in i18n/scripts.json)
+    const TT = {"en":["en-IE","month","months"],"es":["es-ES","mes","meses"],"pt-br":["pt-BR","mês","meses"],"fr":["fr-FR","mois","mois"]};
+    const L = (document.documentElement.lang || 'en').toLowerCase(); const S = TT[L] || TT[L.slice(0, 2)] || TT.en;
+    const LOC = S;
+    // i18n:end
+    const fmt = new Intl.NumberFormat(LOC[0], { style: 'currency', currency: 'EUR', maximumFractionDigits: 2, minimumFractionDigits: 0 });
+    const MONTH = 20, ONCE = 9.99, MAX = 36 * MONTH;
+    const $ = (id) => document.getElementById(id);
+    const paint = () => {
+      const m = +r.value, sub = m * MONTH;
+      $('m-n').textContent = m + ' ' + (m === 1 ? LOC[1] : LOC[2]);
+      $('m-sub').style.width = (sub / MAX * 100) + '%';
+      $('m-gc').style.width = Math.max(ONCE / MAX * 100, 1.6) + '%';
+      $('m-sub-n').textContent = fmt.format(sub);
+      $('m-gc-n').textContent = fmt.format(ONCE);
+      $('m-keep').textContent = fmt.format(Math.max(0, sub - ONCE));
+      r.style.setProperty('--p', ((m - 1) / 35 * 100) + '%');
+    };
+    r.addEventListener('input', paint);
+    paint();
+  })();
+</script>
+<script src="/src.js" defer></script>
+<script src="/send-to-pc.js" defer></script>
+</body>
+</html>

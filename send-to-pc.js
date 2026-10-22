@@ -3,34 +3,11 @@
 // email, notes...) with the phone's own share menu. Nothing is collected: the phone sends it.
 // Used by /buy (the phone step of the fit check) and the homepage (a phones-only line under the CTA).
 (() => {
-  const LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
-  const TT = {
-    es: {
-        text: 'GreenCube, la IA que funciona en tu propio PC. Ábrelo en tu ordenador:',
-        url: 'https://greencube.app/es',
-        copied: 'Enlace copiado. Pégalo donde lo veas en tu PC.',
-        sent: 'Listo. Ábrelo cuando estés en tu PC.',
-        line: '¿Estás en el móvil?',
-        link: 'Envíalo a tu PC',
-      },
-    en: {
-        text: 'GreenCube, the AI that runs on your own PC. Open this on your computer:',
-        url: 'https://greencube.app',
-        copied: "Link copied. Paste it somewhere you'll see on your PC.",
-        sent: "Done. Open it when you're at your PC.",
-        line: 'On your phone?',
-        link: 'Send it to your PC',
-      },
-    pt: {
-        text: 'GreenCube, a IA que roda no seu próprio PC. Abra isto no seu computador:',
-        url: 'https://greencube.app/pt/',
-        copied: 'Link copiado. Cole em algum lugar que você veja no seu PC.',
-        sent: 'Pronto. Abra quando estiver no seu PC.',
-        line: 'Está no celular?',
-        link: 'Envie para o seu PC',
-      },
-  };
-  const T = TT[LANG] || TT.en;
+  // i18n:begin (generated: python i18n/i18n.py scripts, words in i18n/scripts.json)
+  const TT = {"en":{"text":"GreenCube, the AI that runs on your own PC. Open this on your computer:","url":"https://greencube.app","copied":"Link copied. Paste it somewhere you'll see on your PC.","sent":"Done. Open it when you're at your PC.","line":"On your phone?","link":"Send it to your PC"},"es":{"text":"GreenCube, la IA que funciona en tu propio PC. Ábrelo en tu ordenador:","url":"https://greencube.app/es","copied":"Enlace copiado. Pégalo donde lo veas en tu PC.","sent":"Listo. Ábrelo cuando estés en tu PC.","line":"¿Estás en el móvil?","link":"Envíalo a tu PC"},"pt-br":{"text":"GreenCube, a IA que roda no seu próprio PC. Abra isto no seu computador:","url":"https://greencube.app/pt/","copied":"Link copiado. Cole em algum lugar que você veja no seu PC.","sent":"Pronto. Abra quando estiver no seu PC.","line":"Está no celular?","link":"Envie para o seu PC"},"fr":{"text":"GreenCube, l'IA qui tourne sur votre propre PC. Ouvrez ceci sur votre ordinateur :","url":"https://greencube.app/fr/","copied":"Lien copié. Collez-le là où vous le verrez sur votre PC.","sent":"C'est fait. Ouvrez-le quand vous serez sur votre PC.","line":"Sur votre téléphone ?","link":"Envoyez-le sur votre PC"}};
+  const L = (document.documentElement.lang || 'en').toLowerCase(); const S = TT[L] || TT[L.slice(0, 2)] || TT.en;
+  const T = S;
+  // i18n:end
 
   const isPhone = () => {
     const ua = navigator.userAgentData;

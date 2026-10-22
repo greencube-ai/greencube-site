@@ -27,11 +27,22 @@ LANGS = {
     'nl': ('NL', 'nl', 'nl_NL', 'nl', 'nl-NL'),
     'pl': ('PL', 'pl', 'pl_PL', 'pl', 'pl-PL'),
     'tr': ('TR', 'tr', 'tr_TR', 'tr', 'tr-TR'),
-    'ja': ('日本語', 'ja', 'ja_JP', 'ja', 'ja-JP'),
-    'ko': ('한국어', 'ko', 'ko_KR', 'ko', 'ko-KR'),
+    'ru': ('RU', 'ru', 'ru_RU', 'ru', 'ru-RU'),
+    'uk': ('UK', 'uk', 'uk_UA', 'auto', 'uk-UA'),
+    'ar': ('AR', 'ar', 'ar_AR', 'auto', 'ar'),
+    'hi': ('HI', 'hi', 'hi_IN', 'auto', 'hi-IN'),
+    'id': ('ID', 'id', 'id_ID', 'id', 'id-ID'),
+    'vi': ('VI', 'vi', 'vi_VN', 'vi', 'vi-VN'),
+    'th': ('TH', 'th', 'th_TH', 'th', 'th-TH'),
+    'ja': ('JA', 'ja', 'ja_JP', 'ja', 'ja-JP'),
+    'ko': ('KO', 'ko', 'ko_KR', 'ko', 'ko-KR'),
+    'zh': ('中文', 'zh-CN', 'zh_CN', 'zh', 'zh-CN'),
+    'zh-tw': ('繁體', 'zh-TW', 'zh_TW', 'zh-TW', 'zh-TW'),
 }
 NAMES = {'en': 'English', 'es': 'Español', 'pt': 'Português', 'fr': 'Français', 'de': 'Deutsch', 'it': 'Italiano',
-         'nl': 'Nederlands', 'pl': 'Polski', 'tr': 'Türkçe', 'ja': '日本語', 'ko': '한국어'}
+         'nl': 'Nederlands', 'pl': 'Polski', 'tr': 'Türkçe', 'ru': 'Русский', 'uk': 'Українська', 'ar': 'العربية',
+         'hi': 'हिन्दी', 'id': 'Bahasa Indonesia', 'vi': 'Tiếng Việt', 'th': 'ไทย', 'ja': '日本語', 'ko': '한국어',
+         'zh': '简体中文', 'zh-tw': '繁體中文'}
 
 
 def read(p):
@@ -86,8 +97,13 @@ def swap(s, lang, loose=False):
 
 
 def dictionary(lang):
-    p = os.path.join(ROOT, 'i18n', lang + '.json')
-    return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+    """i18n/_common.json (links and codes every language keeps) + i18n/<lang>.json (the words)."""
+    d = {}
+    for name in ('_common', lang):
+        p = os.path.join(ROOT, 'i18n', name + '.json')
+        if os.path.exists(p):
+            d.update(json.load(open(p, encoding='utf-8')))
+    return d
 
 
 def cmd_todo(lang, pages):
@@ -208,7 +224,7 @@ def cmd_switcher():
             s = re.sub(r'<details class="lang-pick">.*?</details>|<a href="[^"]*" class="lang" hreflang="[^"]*">[^<]*</a>',
                        lambda m: head, s, count=1, flags=re.S)
             foot = ''.join(f'<a href="{path(l, page)}" hreflang="{l}"' + (' aria-current="true"' if l == lang else '')
-                           + f'>{LANGS[l][0] if len(LANGS[l][0]) <= 2 else l.upper()}</a>' for l in langs)
+                           + f'>{LANGS[l][0]}</a>' for l in langs)
             s = re.sub(r'(<div class="f-lang">).*?(</div>)', lambda m: m.group(1) + foot + m.group(2), s, count=1, flags=re.S)
             if 'id="lang-pick-css"' not in s:
                 s = s.replace('</head>', SWITCH_CSS + '\n</head>', 1)
@@ -242,6 +258,43 @@ def cmd_redirects():
     print(len(new), 'language redirects')
 
 
+PICK = "const L = (document.documentElement.lang || 'en').toLowerCase(); const S = TT[L] || TT[L.slice(0, 2)] || TT.en;"
+
+
+def table(part):
+    data = json.load(open(os.path.join(ROOT, 'i18n', 'scripts.json'), encoding='utf-8'))
+    key = lambda l: LANGS[l][1].lower() if l in LANGS else l   # tables are keyed by <html lang>, lower case
+    return json.dumps({key(l): v[part] for l, v in data.items() if part in v}, ensure_ascii=False, separators=(',', ':'))
+
+
+def between(s, begin, end, body):
+    """Replace the generated block between two marker lines (kept), indenting `body` like the begin marker."""
+    i, j = s.index(begin), s.index(end)
+    ind = s[s.rindex('\n', 0, i) + 1:i]
+    return s[:i + len(begin)] + '\n' + ''.join(ind + l + '\n' for l in body.split('\n')) + ind + s[j:]
+
+
+def cmd_scripts():
+    """Words inside the shared scripts come from i18n/scripts.json, one entry per language."""
+    B, E = '// i18n:begin (generated: python i18n/i18n.py scripts, words in i18n/scripts.json)', '// i18n:end'
+    quiz = ('const TT = ' + table('quiz') + ';\n' + PICK + '\n'
+            "const f = (t, o) => t.replace(/\\{(\\w+)\\}/g, (_, k) => o[k]);\n"
+            'const T = { about: (v) => f(S.about, { v }), builtIn: S.builtIn, miss: S.miss, noIdea: S.noIdea,\n'
+            '  guessedRam: S.guessedRam, ram: (n) => f(S.ram, { n }),\n'
+            '  withMem: (card, extra, mem) => f(S.withMem, { card, extra, mem }), sized: (v) => f(S.sized, { v }),\n'
+            '  none: (mem) => f(S.none, { mem }), guessed: (mem) => f(S.guessed, { mem }),\n'
+            '  builtInSpec: (mem) => f(S.builtInSpec, { mem }), mac: S.mac, feels: S.feels };')
+    dl = 'const TT = ' + table('dl') + ';\n' + PICK + '\nconst W = S;'
+    months = 'const TT = ' + table('months') + ';\n' + PICK + '\nconst LOC = S;'
+    jobs = {'tier-quiz.js': quiz, 'send-to-pc.js': 'const TT = ' + table('stp') + ';\n' + PICK + '\nconst T = S;',
+            'download.html': dl, 'es/download.html': dl, 'index.html': months, 'es/index.html': months}
+    for f, body in jobs.items():
+        p = os.path.join(ROOT, f)
+        s = open(p, encoding='utf-8').read()
+        open(p, 'w', encoding='utf-8', newline='\n').write(between(s, B, E, body))
+    print('scripts:', ', '.join(jobs))
+
+
 def cmd_sitemap():
     """List every translated main page in sitemap.xml (English and Spanish entries are kept as they are)."""
     import datetime
@@ -267,6 +320,8 @@ if __name__ == '__main__':
     c, args = sys.argv[1], sys.argv[2:]
     if c == 'sitemap':
         cmd_sitemap()
+    elif c == 'scripts':
+        cmd_scripts()
     if c == 'todo':
         cmd_todo(args[0], args[1:])
     elif c == 'build':

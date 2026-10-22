@@ -208,6 +208,52 @@
       "permanent": false
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "fr(-[A-Za-z]+)?([;,].*)?"
+        }
+      ],
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "gc_lang"
+        },
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless).*"
+        }
+      ],
+      "destination": "/fr/",
+      "permanent": false
+    },
+    {
+      "source": "/:page(ai-environmental-impact|buy|download|how-much-water-does-ai-use|mission|what-you-get|your-data)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "fr(-[A-Za-z]+)?([;,].*)?"
+        }
+      ],
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "gc_lang"
+        },
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless).*"
+        }
+      ],
+      "destination": "/fr/:page",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "has": [
         {

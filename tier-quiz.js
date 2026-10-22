@@ -4,46 +4,16 @@
 (() => {
   const game = document.getElementById('game');
   if (!game) return;
-  const LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
-
-  const TT = {};
-  TT.es = {
-    about: (v) => 'unos ' + v + ' GB', builtIn: 'integrada',
-    miss: 'No está en nuestra lista. ¿Cuánta memoria tiene?', noIdea: 'Ni idea',
-    guessedRam: 'RAM que tuvimos que adivinar', ram: (n) => n + ' GB de RAM',
-    withMem: (card, extra, mem) => '<b>' + card + '</b>' + extra + ', con <b>' + mem + '</b>.',
-    sized: (v) => ', unos ' + v + ' GB',
-    none: (mem) => '<b>Sin tarjeta gráfica aparte</b>, con <b>' + mem + '</b>.',
-    guessed: (mem) => 'Supusimos <b>sin tarjeta gráfica</b>, con <b>' + mem + '</b>. Si tienes una, irá mejor que esto.',
-    builtInSpec: (mem) => '<b>Gráficos integrados</b>, con <b>' + mem + '</b>.',
-    mac: 'Eso es lo que sería tu Mac. Hoy GreenCube es solo para Windows; la versión para Mac está en camino.',
-    feels: { seed: 'Lenta, pero llega.', sprout: 'Va bien. No es rápida.', bloom: 'Dejas de notar la espera.', thrive: 'El único límite es tu ordenador.' }
-  };
-  TT.en = {
-    about: (v) => 'about ' + v + ' GB', builtIn: 'built in',
-    miss: 'Not on our list. How much memory does it have?', noIdea: 'No idea',
-    guessedRam: 'RAM we had to guess at', ram: (n) => n + ' GB of RAM',
-    withMem: (card, extra, mem) => '<b>' + card + '</b>' + extra + ', with <b>' + mem + '</b>.',
-    sized: (v) => ', about ' + v + ' GB',
-    none: (mem) => '<b>No separate graphics card</b>, with <b>' + mem + '</b>.',
-    guessed: (mem) => 'We assumed <b>no graphics card</b>, with <b>' + mem + '</b>. If you do have one, it is better than this.',
-    builtInSpec: (mem) => '<b>Built-in graphics</b>, with <b>' + mem + '</b>.',
-    mac: 'That is what a Mac of yours would be. GreenCube is Windows only today, and the Mac version is on the way.',
-    feels: { seed: 'Slow, but it gets there.', sprout: 'Works well. Not fast.', bloom: 'You stop noticing the wait.', thrive: 'Your computer is the only limit.' }
-  };
-  TT.pt = {
-    about: (v) => 'cerca de ' + v + ' GB', builtIn: 'integrada',
-    miss: 'Não está na nossa lista. Quanta memória ela tem?', noIdea: 'Não faço ideia',
-    guessedRam: 'RAM que tivemos que adivinhar', ram: (n) => n + ' GB de RAM',
-    withMem: (card, extra, mem) => '<b>' + card + '</b>' + extra + ', com <b>' + mem + '</b>.',
-    sized: (v) => ', cerca de ' + v + ' GB',
-    none: (mem) => '<b>Sem placa de vídeo separada</b>, com <b>' + mem + '</b>.',
-    guessed: (mem) => 'Supomos <b>sem placa de vídeo</b>, com <b>' + mem + '</b>. Se você tiver uma, vai ser melhor do que isso.',
-    builtInSpec: (mem) => '<b>Gráficos integrados</b>, com <b>' + mem + '</b>.',
-    mac: 'É isso que o seu Mac seria. Hoje o GreenCube é só para Windows; a versão para Mac está a caminho.',
-    feels: { seed: 'Lenta, mas chega lá.', sprout: 'Funciona bem. Não é rápida.', bloom: 'Você para de notar a espera.', thrive: 'O único limite é o seu computador.' }
-  };
-  const T = TT[LANG] || TT.en;
+  // i18n:begin (generated: python i18n/i18n.py scripts, words in i18n/scripts.json)
+  const TT = {"en":{"about":"about {v} GB","builtIn":"built in","miss":"Not on our list. How much memory does it have?","noIdea":"No idea","guessedRam":"RAM we had to guess at","ram":"{n} GB of RAM","withMem":"<b>{card}</b>{extra}, with <b>{mem}</b>.","sized":", about {v} GB","none":"<b>No separate graphics card</b>, with <b>{mem}</b>.","guessed":"We assumed <b>no graphics card</b>, with <b>{mem}</b>. If you do have one, it is better than this.","builtInSpec":"<b>Built-in graphics</b>, with <b>{mem}</b>.","mac":"That is what a Mac of yours would be. GreenCube is Windows only today, and the Mac version is on the way.","feels":{"seed":"Slow, but it gets there.","sprout":"Works well. Not fast.","bloom":"You stop noticing the wait.","thrive":"Your computer is the only limit."}},"es":{"about":"unos {v} GB","builtIn":"integrada","miss":"No está en nuestra lista. ¿Cuánta memoria tiene?","noIdea":"Ni idea","guessedRam":"RAM que tuvimos que adivinar","ram":"{n} GB de RAM","withMem":"<b>{card}</b>{extra}, con <b>{mem}</b>.","sized":", unos {v} GB","none":"<b>Sin tarjeta gráfica aparte</b>, con <b>{mem}</b>.","guessed":"Supusimos <b>sin tarjeta gráfica</b>, con <b>{mem}</b>. Si tienes una, irá mejor que esto.","builtInSpec":"<b>Gráficos integrados</b>, con <b>{mem}</b>.","mac":"Eso es lo que sería tu Mac. Hoy GreenCube es solo para Windows; la versión para Mac está en camino.","feels":{"seed":"Lenta, pero llega.","sprout":"Va bien. No es rápida.","bloom":"Dejas de notar la espera.","thrive":"El único límite es tu ordenador."}},"pt-br":{"about":"cerca de {v} GB","builtIn":"integrada","miss":"Não está na nossa lista. Quanta memória ela tem?","noIdea":"Não faço ideia","guessedRam":"RAM que tivemos que adivinhar","ram":"{n} GB de RAM","withMem":"<b>{card}</b>{extra}, com <b>{mem}</b>.","sized":", cerca de {v} GB","none":"<b>Sem placa de vídeo separada</b>, com <b>{mem}</b>.","guessed":"Supomos <b>sem placa de vídeo</b>, com <b>{mem}</b>. Se você tiver uma, vai ser melhor do que isso.","builtInSpec":"<b>Gráficos integrados</b>, com <b>{mem}</b>.","mac":"É isso que o seu Mac seria. Hoje o GreenCube é só para Windows; a versão para Mac está a caminho.","feels":{"seed":"Lenta, mas chega lá.","sprout":"Funciona bem. Não é rápida.","bloom":"Você para de notar a espera.","thrive":"O único limite é o seu computador."}},"fr":{"about":"environ {v} Go","builtIn":"intégrée","miss":"Pas dans notre liste. Combien de mémoire a-t-elle ?","noIdea":"Aucune idée","guessedRam":"RAM que nous avons dû deviner","ram":"{n} Go de RAM","withMem":"<b>{card}</b>{extra}, avec <b>{mem}</b>.","sized":", environ {v} Go","none":"<b>Pas de carte graphique séparée</b>, avec <b>{mem}</b>.","guessed":"Nous avons supposé <b>sans carte graphique</b>, avec <b>{mem}</b>. Si vous en avez une, ce sera mieux que ça.","builtInSpec":"<b>Graphismes intégrés</b>, avec <b>{mem}</b>.","mac":"Voilà ce que serait votre Mac. GreenCube n'existe que sur Windows aujourd'hui ; la version Mac arrive.","feels":{"seed":"Lente, mais elle y arrive.","sprout":"Ça marche bien. Pas rapide.","bloom":"Vous ne remarquez plus l'attente.","thrive":"Votre ordinateur est la seule limite."}}};
+  const L = (document.documentElement.lang || 'en').toLowerCase(); const S = TT[L] || TT[L.slice(0, 2)] || TT.en;
+  const f = (t, o) => t.replace(/\{(\w+)\}/g, (_, k) => o[k]);
+  const T = { about: (v) => f(S.about, { v }), builtIn: S.builtIn, miss: S.miss, noIdea: S.noIdea,
+    guessedRam: S.guessedRam, ram: (n) => f(S.ram, { n }),
+    withMem: (card, extra, mem) => f(S.withMem, { card, extra, mem }), sized: (v) => f(S.sized, { v }),
+    none: (mem) => f(S.none, { mem }), guessed: (mem) => f(S.guessed, { mem }),
+    builtInSpec: (mem) => f(S.builtInSpec, { mem }), mac: S.mac, feels: S.feels };
+  // i18n:end
 
   // Graphics cards with their memory. Coarse buckets are all the tier needs
   // (under 4 GB, 4 to 7, 8 and up); anything missing can be entered by size.

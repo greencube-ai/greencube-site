@@ -25,6 +25,7 @@
   <link rel="alternate" hreflang="en" href="https://greencube.app/" />
   <link rel="alternate" hreflang="es" href="https://greencube.app/es/" />
   <link rel="alternate" hreflang="pt-BR" href="https://greencube.app/pt/" />
+  <link rel="alternate" hreflang="fr" href="https://greencube.app/fr/" />
   <link rel="alternate" hreflang="x-default" href="https://greencube.app/" />
 
   <script type="application/ld+json">
@@ -1388,7 +1389,7 @@
     <a href="/buy">Download</a>
   </nav>
   <div class="head-right">
-    <details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/" hreflang="en" lang="en" aria-current="true">English</a><a href="/es/" hreflang="es" lang="es">Español</a><a href="/pt/" hreflang="pt" lang="pt-BR">Português</a></div></details>
+    <details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/" hreflang="en" lang="en" aria-current="true">English</a><a href="/es/" hreflang="es" lang="es">Español</a><a href="/pt/" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/" hreflang="fr" lang="fr">Français</a></div></details>
     <a href="/buy" class="nav-cta">Get GreenCube</a>
   </div>
 </header>
@@ -2008,7 +2009,7 @@
         <a href="https://legal.greencube.app/privacy">Privacy</a>
         <a href="https://legal.greencube.app/terms">Terms</a>
       </div>
-      <div class="f-lang"><a href="/" hreflang="en" aria-current="true">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a></div>
+      <div class="f-lang"><a href="/" hreflang="en" aria-current="true">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr">FR</a></div>
     </div>
   </div>
 </footer>
@@ -2407,8 +2408,11 @@
   (() => {
     const r = document.getElementById('m-range');
     if (!r) return;
-    const LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
-    const LOC = { es: ['es-ES', 'mes', 'meses'], pt: ['pt-BR', 'mês', 'meses'] }[LANG] || ['en-IE', 'month', 'months'];
+    // i18n:begin (generated: python i18n/i18n.py scripts, words in i18n/scripts.json)
+    const TT = {"en":["en-IE","month","months"],"es":["es-ES","mes","meses"],"pt-br":["pt-BR","mês","meses"],"fr":["fr-FR","mois","mois"]};
+    const L = (document.documentElement.lang || 'en').toLowerCase(); const S = TT[L] || TT[L.slice(0, 2)] || TT.en;
+    const LOC = S;
+    // i18n:end
     const fmt = new Intl.NumberFormat(LOC[0], { style: 'currency', currency: 'EUR', maximumFractionDigits: 2, minimumFractionDigits: 0 });
     const MONTH = 20, ONCE = 9.99, MAX = 36 * MONTH;
     const $ = (id) => document.getElementById(id);
