@@ -617,6 +617,17 @@
   .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
   @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
 </style>
+<style id="lang-pick-css">
+    .lang-pick { position: relative; }
+    .lang-pick > summary { list-style: none; cursor: pointer; }
+    .lang-pick > summary::-webkit-details-marker { display: none; }
+    .lang-pick .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid;
+      grid-template-columns: repeat(2, minmax(110px, 1fr)); gap: 2px; padding: 8px; border-radius: 14px;
+      background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+    .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
+    .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
+    footer .f-lang { flex-wrap: wrap; }
+  </style>
 </head>
 <body>
 
@@ -630,7 +641,7 @@
   <div class="head-right">
     <nav class="header-nav" aria-label="Primary">
     </nav>
-    <a href="/buy" class="lang" hreflang="en">EN</a>
+    <details class="lang-pick"><summary class="lang" aria-label="Language">ES</summary><div class="lang-list"><a href="/buy" hreflang="en" lang="en">English</a><a href="/es/buy" hreflang="es" lang="es" aria-current="true">Español</a></div></details>
   </div>
 </header>
 
@@ -825,10 +836,7 @@
         <a href="https://legal.greencube.app/es/privacy">Privacidad</a>
         <a href="https://legal.greencube.app/es/terms">Términos</a>
       </div>
-      <div class="f-lang">
-        <a href="/buy" hreflang="en">EN</a>
-        <a href="/es/buy" aria-current="true" hreflang="es">ES</a>
-      </div>
+      <div class="f-lang"><a href="/buy" hreflang="en">EN</a><a href="/es/buy" hreflang="es" aria-current="true">ES</a></div>
     </div>
   </div>
 </footer>

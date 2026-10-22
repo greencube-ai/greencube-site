@@ -24,6 +24,7 @@
   <link rel="canonical" href="https://greencube.app/es/" />
   <link rel="alternate" hreflang="en" href="https://greencube.app/" />
   <link rel="alternate" hreflang="es" href="https://greencube.app/es/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://greencube.app/pt/" />
   <link rel="alternate" hreflang="x-default" href="https://greencube.app/" />
 
   <script type="application/ld+json">
@@ -1358,6 +1359,17 @@
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/es/", "inLanguage": "es"}</script>
+<style id="lang-pick-css">
+    .lang-pick { position: relative; }
+    .lang-pick > summary { list-style: none; cursor: pointer; }
+    .lang-pick > summary::-webkit-details-marker { display: none; }
+    .lang-pick .lang-list { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid;
+      grid-template-columns: repeat(2, minmax(110px, 1fr)); gap: 2px; padding: 8px; border-radius: 14px;
+      background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+    .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
+    .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
+    footer .f-lang { flex-wrap: wrap; }
+  </style>
 </head>
 <body>
 
@@ -1376,7 +1388,7 @@
     <a href="/es/buy">Descargar</a>
   </nav>
   <div class="head-right">
-    <a href="/" class="lang" hreflang="en">EN</a>
+    <details class="lang-pick"><summary class="lang" aria-label="Language">ES</summary><div class="lang-list"><a href="/" hreflang="en" lang="en">English</a><a href="/es/" hreflang="es" lang="es" aria-current="true">Español</a><a href="/pt/" hreflang="pt" lang="pt-BR">Português</a></div></details>
     <a href="/es/buy" class="nav-cta">Consigue GreenCube</a>
   </div>
 </header>
@@ -1996,10 +2008,7 @@
         <a href="https://legal.greencube.app/es/privacy">Privacidad</a>
         <a href="https://legal.greencube.app/es/terms">Términos</a>
       </div>
-      <div class="f-lang">
-        <a href="/" hreflang="en">EN</a>
-        <a href="/es/" aria-current="true" hreflang="es">ES</a>
-      </div>
+      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es" aria-current="true">ES</a><a href="/pt/" hreflang="pt">PT</a></div>
     </div>
   </div>
 </footer>
@@ -2398,13 +2407,14 @@
   (() => {
     const r = document.getElementById('m-range');
     if (!r) return;
-    const es = document.documentElement.lang === 'es';
-    const fmt = new Intl.NumberFormat(es ? 'es-ES' : 'en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2, minimumFractionDigits: 0 });
+    const LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+    const LOC = { es: ['es-ES', 'mes', 'meses'], pt: ['pt-BR', 'mês', 'meses'] }[LANG] || ['en-IE', 'month', 'months'];
+    const fmt = new Intl.NumberFormat(LOC[0], { style: 'currency', currency: 'EUR', maximumFractionDigits: 2, minimumFractionDigits: 0 });
     const MONTH = 20, ONCE = 9.99, MAX = 36 * MONTH;
     const $ = (id) => document.getElementById(id);
     const paint = () => {
       const m = +r.value, sub = m * MONTH;
-      $('m-n').textContent = m + (es ? (m === 1 ? ' mes' : ' meses') : (m === 1 ? ' month' : ' months'));
+      $('m-n').textContent = m + ' ' + (m === 1 ? LOC[1] : LOC[2]);
       $('m-sub').style.width = (sub / MAX * 100) + '%';
       $('m-gc').style.width = Math.max(ONCE / MAX * 100, 1.6) + '%';
       $('m-sub-n').textContent = fmt.format(sub);

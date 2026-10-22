@@ -1,12 +1,13 @@
-// The two-question tier check, as it runs on the home page (EN and ES).
+// The two-question tier check, as it runs on the home page (every language in TT below).
 // Same cards, same rule and same reveal as what-you-get.html; the words follow
 // <html lang>. The tier rule mirrors perf_tier_from in the app (docs/TIERS.md).
 (() => {
   const game = document.getElementById('game');
   if (!game) return;
-  const es = document.documentElement.lang === 'es';
+  const LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
 
-  const T = es ? {
+  const TT = {};
+  TT.es = {
     about: (v) => 'unos ' + v + ' GB', builtIn: 'integrada',
     miss: 'No está en nuestra lista. ¿Cuánta memoria tiene?', noIdea: 'Ni idea',
     guessedRam: 'RAM que tuvimos que adivinar', ram: (n) => n + ' GB de RAM',
@@ -17,7 +18,8 @@
     builtInSpec: (mem) => '<b>Gráficos integrados</b>, con <b>' + mem + '</b>.',
     mac: 'Eso es lo que sería tu Mac. Hoy GreenCube es solo para Windows; la versión para Mac está en camino.',
     feels: { seed: 'Lenta, pero llega.', sprout: 'Va bien. No es rápida.', bloom: 'Dejas de notar la espera.', thrive: 'El único límite es tu ordenador.' }
-  } : {
+  };
+  TT.en = {
     about: (v) => 'about ' + v + ' GB', builtIn: 'built in',
     miss: 'Not on our list. How much memory does it have?', noIdea: 'No idea',
     guessedRam: 'RAM we had to guess at', ram: (n) => n + ' GB of RAM',
@@ -29,6 +31,19 @@
     mac: 'That is what a Mac of yours would be. GreenCube is Windows only today, and the Mac version is on the way.',
     feels: { seed: 'Slow, but it gets there.', sprout: 'Works well. Not fast.', bloom: 'You stop noticing the wait.', thrive: 'Your computer is the only limit.' }
   };
+  TT.pt = {
+    about: (v) => 'cerca de ' + v + ' GB', builtIn: 'integrada',
+    miss: 'Não está na nossa lista. Quanta memória ela tem?', noIdea: 'Não faço ideia',
+    guessedRam: 'RAM que tivemos que adivinhar', ram: (n) => n + ' GB de RAM',
+    withMem: (card, extra, mem) => '<b>' + card + '</b>' + extra + ', com <b>' + mem + '</b>.',
+    sized: (v) => ', cerca de ' + v + ' GB',
+    none: (mem) => '<b>Sem placa de vídeo separada</b>, com <b>' + mem + '</b>.',
+    guessed: (mem) => 'Supomos <b>sem placa de vídeo</b>, com <b>' + mem + '</b>. Se você tiver uma, vai ser melhor do que isso.',
+    builtInSpec: (mem) => '<b>Gráficos integrados</b>, com <b>' + mem + '</b>.',
+    mac: 'É isso que o seu Mac seria. Hoje o GreenCube é só para Windows; a versão para Mac está a caminho.',
+    feels: { seed: 'Lenta, mas chega lá.', sprout: 'Funciona bem. Não é rápida.', bloom: 'Você para de notar a espera.', thrive: 'O único limite é o seu computador.' }
+  };
+  const T = TT[LANG] || TT.en;
 
   // Graphics cards with their memory. Coarse buckets are all the tier needs
   // (under 4 GB, 4 to 7, 8 and up); anything missing can be entered by size.
