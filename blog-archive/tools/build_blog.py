@@ -378,22 +378,22 @@ SHOW = 6  # titles shown per topic before "Show all"
 # the best posts per topic, shown first under short plain names; every other post sits behind "Show all"
 PICKS = {'en': {
     'pc': [('best-local-ai-models', 'Best AI models to run on your PC'), ('hardware-for-local-ai', 'What PC you need for AI'),
-           ('best-small-llm', 'Best small AI models'), ('offline-ai-setup-windows', 'Set up offline AI on Windows'),
-           ('ai-without-internet', 'AI without internet'), ('best-laptop-ai-assistant', 'AI on a laptop')],
+           ('best-small-llm', 'Best small AI models'), ('local-ai-chatbot-windows', 'Offline AI on Windows'),
+           ('offline-ai-mac', 'Offline AI on Mac'), ('best-laptop-ai-assistant', 'AI on a laptop')],
     'study': [('best-ai-for-students', 'Best AI for students'), ('study-guide-from-pdf', 'Turn a PDF into a study guide'),
               ('flashcards-from-pdf', 'Make flashcards from a PDF'), ('notebooklm-alternatives', 'NotebookLM alternatives'),
               ('offline-ai-for-students', 'Offline AI for students'), ('ai-study-planner-offline', 'Plan your study week with AI')],
     'limits': [('unlimited-ai', 'AI with no usage limits'), ('ai-without-subscription', 'AI without a subscription'),
-               ('no-rate-limit-ai', 'AI with no rate limits'), ('lifetime-ai-software', 'Pay once, keep it')],
+               ('chatgpt-free-limits', 'ChatGPT free limits'), ('lifetime-ai-software', 'Pay once, keep it')],
     'tools': [('best-offline-ai-chatbot', 'Best offline AI chatbots'), ('best-ai-desktop-apps', 'Best AI desktop apps'),
               ('ollama-vs-lm-studio', 'Ollama vs LM Studio'), ('lm-studio-alternatives', 'LM Studio alternatives'),
-              ('local-ai-vs-chatgpt', 'Local AI vs ChatGPT'), ('chatgpt-alternatives-5', 'ChatGPT alternatives')],
+              ('chatgpt-offline', 'ChatGPT offline?'), ('private-ai-assistant', 'Most private AI assistant')],
 }}
 # the blog home asks the questions students ask; each tile opens the post that answers it
 QUESTIONS = {'en': [('best-ai-for-students', 'Best AI for students?'), ('study-guide-from-pdf', 'PDF to a study guide?'),
                     ('unlimited-ai', 'AI with no limits?'), ('ollama-vs-lm-studio', 'Ollama or LM Studio?'),
                     ('hardware-for-local-ai', 'What PC do I need?'), ('flashcards-from-pdf', 'Flashcards from a PDF?'),
-                    ('ai-without-subscription', 'AI without a subscription?'), ('chatgpt-alternatives-5', 'ChatGPT alternatives?')]}
+                    ('ai-without-subscription', 'AI without a subscription?'), ('chatgpt-offline', 'ChatGPT offline?')]}
 GUIDE_WORDS = {'en': dict(lib='Library', lib_sub='All {n} guides, A to Z.')}
 
 def topic_sections(lang, rest, L):
