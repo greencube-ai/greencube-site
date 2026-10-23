@@ -1,0 +1,75 @@
+<!--meta
+{
+ "title": "Best local AI model for your PC, by RAM and VRAM (measured)",
+ "description": "The best local AI model is the biggest one that fits whole on your graphics card with room to spare. Which model for 8 GB and 16 GB laptops and for 4, 6, 8 and 12 GB cards, with real speeds for Gemma 4 E2B, E4B and 12B measured on {{pcs}} PCs.",
+ "date": "2026-08-15",
+ "modified": "2026-10-23",
+ "kind": "guide",
+ "stat": "+1.5 GB",
+ "teaser": "Which local AI model fits your PC, by RAM and VRAM, with measured speeds.",
+ "rank": 24,
+ "lang": "en",
+ "alt": "mejor-modelo-ia-local",
+ "faq": [
+  {"q": "What is the best local AI model?", "a": "The biggest model that fits whole on your graphics card with about 1.5 GB to spare. A smaller model fully on the card beats a bigger one that spills into RAM: in our test, a model with part of it off an 8 GB card ran 6 times slower."},
+  {"q": "What is the best local AI model for a laptop without a graphics card?", "a": "A small one. Gemma 4 E2B (2.6 GB) wrote 14 to 18 tokens a second on a 16 GB laptop and 5 to 7 on an 8 GB laptop in real chats; the bigger E4B took 112 seconds for an answer E2B gave in 20."},
+  {"q": "What is the best local AI model for an 8 GB graphics card?", "a": "A model of about 4 to 5 GB, like Gemma 4 E4B (4.2 GB): it wrote 56 to 72 tokens a second on 8 GB gaming cards. A 12-billion-parameter model fit for short questions but crashed in long chats."},
+  {"q": "How do I know if a model fits my graphics card?", "a": "Take the model file's size and add about 1.5 GB for the conversation and Windows. If that's less than your card's dedicated GPU memory (Task Manager, Performance, GPU), it fits."},
+  {"q": "Do I need to pick a model myself?", "a": "In free apps like LM Studio, Jan or Ollama, yes. GreenCube reads your card and RAM and picks the model that fits for you."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Short answer:</strong> the best local AI model for <em>your</em> PC is the <strong>biggest one that fits whole on your graphics card, with about 1.5 GB to spare</strong>. No card? A <strong>small model</strong> in your RAM. A smaller model fully on the card beats a bigger one that spills over: we measured spilling at <strong>6 times slower</strong>. Below, the pick for each kind of PC, with speeds we measured on {{pcs}} real PCs.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1.5 GB</b><span>model file plus about 1.5 GB must fit in your VRAM</span></div>
+<div class="stat p"><b>6&times;</b><span>slower when part of the model doesn't fit on the card</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>real PCs we measured, laptops to gaming desktops</span></div>
+</div>
+
+<h2>The best model for your PC</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Your PC</th><th>Model size that fits</th><th>What we measured</th></tr></thead>
+<tbody>
+<tr><td>8 GB laptop, no graphics card</td><td>Small, about 2&ndash;3 GB (Gemma 4 E2B, 2.6 GB)</td><td><b>5&ndash;7</b> tokens/s in real chats; close other apps first</td></tr>
+<tr><td>16 GB laptop, no graphics card</td><td>Small for speed; about 4 GB works but slowly</td><td>E2B <b>14&ndash;18</b> tokens/s; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>4 GB graphics card</td><td>About 2&ndash;3 GB fits whole; 4 GB spills</td><td>E4B (4.2 GB, partly in RAM) about <b>20</b> tokens/s on a GTX 1650</td></tr>
+<tr><td>6 GB graphics card</td><td>About 4&ndash;4.5 GB</td><td>E4B <b>35&ndash;38</b> tokens/s on a GTX 1660 Super</td></tr>
+<tr><td>8 GB graphics card</td><td>About 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> on recent cards (about 11 on an old RX 580)</td></tr>
+<tr><td>12 GB+ graphics card</td><td>About 6&ndash;10 GB: 12B-class models</td><td>E4B <b>50&ndash;55</b> on 12 GB; 12B needs 10 GB+ for long chats</td></tr>
+</tbody>
+</table></div>
+<p>Every card with its own page: <a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> Or type your card into <a href="/blog/can-my-pc-run-ai#checker">the checker</a>.</p>
+
+<h2>Why "fits" matters more than "biggest"</h2>
+<div class="card p">
+<h3>Spill over and it's slower than no card at all</h3>
+<p>On an 8 GB RX 5700 XT, Gemma 4 12B wrote 35.6 tokens a second fully on the card, 5.9 with part of it off the card, and 4.3 with even less on it: slower than a smaller model running with no card. <a href="/blog/how-much-vram-for-ai">The full VRAM test</a>.</p>
+</div>
+<div class="card y">
+<h3>Fits for one question, crashes in a long chat</h3>
+<p>The same 12B model fit the 8 GB card for a short question, then crashed every time the chat grew: the conversation needs room too. That's what the 1.5 GB of headroom is for.</p>
+</div>
+<div class="card g">
+<h3>Small is often good enough</h3>
+<p>On a 16 GB laptop, Gemma 4 E2B gave a complete study answer in 20 seconds and got 5 of 5 quick fact checks right; E4B explained better but took 112 seconds. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, measured</a>.</p>
+</div>
+
+<h2>The models we measured</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>File size</th><th>Best on</th><th>Licence</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>Laptops, 8&ndash;16 GB RAM</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>Graphics cards with 6 GB or more</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>about 6.4 GB</td><td>Graphics cards with 10&ndash;12 GB or more</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>These are the files GreenCube ships and the only ones we've timed, so they're the only ones we give speeds for. Other model families follow the same rule: check the file size, add about 1.5 GB, compare with your VRAM. <a href="/blog/gemma-4-requirements">Gemma 4 requirements in detail</a>.</p>
+
+<h2>How to check your VRAM</h2>
+<ol class="steps">
+<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
+<li>Go to <strong>Performance</strong>, then <strong>GPU</strong>.</li>
+<li><strong>Dedicated GPU memory</strong> is your VRAM. No dedicated memory? Use a small model in RAM.</li>
+</ol>
+<p>Rather not pick at all? GreenCube reads your card and RAM and chooses the model that fits, with room to spare. Free apps like LM Studio, Jan and Ollama let you choose yourself: <a href="/blog/best-offline-ai-chatbot">12 apps compared</a>.</p>

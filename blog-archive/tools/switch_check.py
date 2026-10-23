@@ -24,11 +24,17 @@ def status(url):
     except Exception as e:
         return 0, None, str(e)
 
+import json
+# old posts merged into another page answer with a permanent redirect to it (vercel.json)
+MOVED = {HOST + r['source']: r['destination'] for r in json.load(open('vercel.json', encoding='utf-8'))['redirects']
+         if r['source'].startswith('/blog/') and any(h.get('value') == 'blog.greencube.app' for h in r.get('has', []))}
 ours = re.findall(r'<loc>([^<]+)</loc>', open('blog/sitemap.xml', encoding='utf-8').read())
 old = [l.strip() for l in open('blog-archive/old-sitemap-urls.txt', encoding='utf-8') if l.strip()]
 bad = 0
 for u in sorted(set(ours + old)):
     code, loc, body = status(u)
+    if u in MOVED and code in (301, 308) and (loc or '').rstrip('/').endswith(MOVED[u]):
+        continue
     if code != 200:
         bad += 1; print('NOT 200', code, u, loc or '')
     elif 'babylovegrowth' in body.lower():

@@ -78,6 +78,11 @@ CHECKED = {
 # search (noindex) and out of the sitemap until honest, dated fact tables replace them after 14 Nov (Hector, 2026-10-19)
 NOINDEX = {'ollama-vs-greencube', 'claude-vs-greencube', 'greencube-vs-claude', 'chatgpt-vs-greencube',
            'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals', 'gemini-vs-greencube'}
+# Old posts merged into a stronger page on the same search (2026-10-23): not built, out of the sitemap and lists;
+# vercel.json sends their address to the target with a permanent redirect, so their ranking signals carry over
+MERGED = {'offline-ai-setup-windows': 'local-ai-chatbot-windows', 'install-local-ai': 'local-ai-chatbot-windows',
+          'ai-without-internet': 'best-offline-ai-chatbot', 'best-private-ai': 'private-ai-assistant',
+          'no-rate-limit-ai': 'unlimited-ai'}
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
@@ -209,7 +214,10 @@ def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', 
            .replace('{{LD}}', '\n'.join(f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)))
     if any(url.endswith('/' + slug) for slug in NOINDEX):
         top = top.replace('<link rel="canonical"', '<meta name="robots" content="noindex, follow" />\n  <link rel="canonical"', 1)
-    return HAN_GAP.sub('', CJK_GAP.sub(r'\1', top + content + bottom))
+    out = HAN_GAP.sub('', CJK_GAP.sub(r'\1', top + content + bottom))
+    for old, new in MERGED.items():  # link straight to the page a merged post now redirects to
+        out = re.sub(r'(/blog/)' + re.escape(old) + r'(?=["#?])', r'\g<1>' + new, out)
+    return out
 
 CJK_GAP = re.compile(r'([。、！？：；）])[ ]+')  # Chinese and Japanese put no space after their own punctuation (a joined fragment brings one)
 HAN_GAP = re.compile(r'(?<=[一-鿿]) (?=[约約] ?\d)')  # nor before 'about' when it lands after a word ('每秒 约 20' -> '每秒约 20')
@@ -219,6 +227,8 @@ listing = []
 for p in idx:
     slug = p['slug']
     if slug in OWN_TITLES:  # rewritten as our own tested post at the same address; that version is built below
+        continue
+    if slug in MERGED:
         continue
     raw = open(f'{SRC}/posts/{slug}.html', encoding='utf-8').read()
     kinds = facts.notes_for(p['title'] + '\n' + raw + '\n' + '\n'.join(f['q'] + ' ' + f['a'] for f in p['faq']))

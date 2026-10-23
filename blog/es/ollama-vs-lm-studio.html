@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ollama vs LM Studio: diferencias y cuál va más rápido (2026) | Blog de GreenCube</title>
+  <meta name="description" content="Ollama frente a LM Studio, según sus propias páginas: código abierto frente a cerrado, línea de comandos frente a app de escritorio, requisitos en Mac con Intel y Windows, qué envía cada uno a internet y qué decide la velocidad. Y la opción que elige el modelo por ti." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Ollama vs LM Studio: diferencias y cuál va más rápido (2026) | Blog de GreenCube" />
+  <meta property="og:description" content="Ollama frente a LM Studio, según sus propias páginas: código abierto frente a cerrado, línea de comandos frente a app de escritorio, requisitos en Mac con Intel y Windows, qué envía cada uno a internet y qué decide la velocidad. Y la opción que elige el modelo por ti." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/es/ollama-vs-lm-studio" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/es/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ollama-vs-lm-studio" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Ollama vs LM Studio: diferencias y cuál va más rápido (2026)", "description": "Ollama frente a LM Studio, según sus propias páginas: código abierto frente a cerrado, línea de comandos frente a app de escritorio, requisitos en Mac con Intel y Windows, qué envía cada uno a internet y qué decide la velocidad. Y la opción que elige el modelo por ti.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "es", "mainEntityOfPage": "https://blog.greencube.app/blog/es/ollama-vs-lm-studio", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/es/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué va más rápido, Ollama o LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "En el mismo PC, con el mismo modelo y los mismos ajustes, la velocidad la marca sobre todo tu hardware: los dos usan por debajo motores abiertos de la familia de llama.cpp. Lo que más cambia la velocidad es si el modelo cabe entero en tu tarjeta gráfica. No hemos medido las dos apps una al lado de otra, así que no diremos cuál es más rápida."}}, {"@type": "Question", "name": "¿Qué diferencia hay entre Ollama y LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "Ollama es de código abierto (MIT), pensado en torno a la línea de comandos y una API local, con ventana de chat en Windows y Mac desde julio de 2025. LM Studio es una app de escritorio de código cerrado con ventana de chat, buscador de modelos y servidor local estilo OpenAI, gratis también para el trabajo."}}, {"@type": "Question", "name": "¿Cuál es mejor para empezar, Ollama o LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "LM Studio, si quieres buscar y descargar modelos en una ventana. Ollama es más sencillo para programadores que quieren un servicio en segundo plano y una API. Si prefieres no elegir modelo, GreenCube (Windows, 9,99 € una vez) elige uno para tu PC."}}, {"@type": "Question", "name": "¿Ollama o LM Studio funcionan en un Mac con Intel?", "acceptedAnswer": {"@type": "Answer", "text": "La documentación de Ollama incluye los Mac con Intel, solo con el procesador, en macOS 14 o posterior. LM Studio necesita un Mac con chip de Apple."}}, {"@type": "Question", "name": "¿Ollama y LM Studio envían datos a internet?", "acceptedAnswer": {"@type": "Answer", "text": "LM Studio dice que no transmite mensajes ni documentos cuando funciona en local y que no tiene telemetría; comprobar actualizaciones y descargar modelos sí sale a internet. Ollama dice que no ve tus prompts en local, pero puede recoger metadatos limitados del dispositivo y del uso. Los dos pueden usar modelos en la nube si los eliges."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/es/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/es/ai-environmental-impact">La IA y el planeta</a>
+    <a href="https://greencube.app/es/your-data">Tus datos</a>
+    <a href="https://greencube.app/es/mission">Nuestra misión</a>
+    <a href="/blog/es" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">ES</summary><div class="lang-list"><a href="/blog/ollama-vs-lm-studio" hreflang="en" lang="en">English</a><a href="/blog/es/ollama-vs-lm-studio" hreflang="es" lang="es" aria-current="true">Español</a></div></details><a href="https://greencube.app/es/buy" class="nav-cta">Consigue GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/es">Blog de GreenCube</a></p>
+<h1>Ollama vs LM Studio: diferencias y cuál va más rápido (2026)</h1>
+<p class="byline">Por <a href="/blog/es/hector-gras">Hector Gras</a> &middot; 23 de octubre de 2026</p>
+<div class="answer"><p><strong>Respuesta corta:</strong> <strong>Ollama</strong> es de código abierto (MIT) y pensado para programadores: línea de comandos, API local y, desde julio de 2025, una ventana de chat sencilla. <strong>LM Studio</strong> es una app de escritorio de código cerrado, con ventana de chat completa, buscador de modelos y servidor local, gratis también para el trabajo. La <strong>velocidad</strong> la marca sobre todo tu hardware y que el modelo quepa en tu tarjeta gráfica, no cuál de los dos elijas.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>la licencia de Ollama; LM Studio es de código cerrado</span></div>
+<div class="stat y"><b>Mac con Intel</b><span>solo Ollama lo sigue incluyendo (solo procesador, macOS 14+)</span></div>
+<div class="stat p"><b>6&times;</b><span>más lento en cualquier app cuando el modelo se sale de tu tarjeta gráfica</span></div>
+</div>
+
+<h2>Ollama frente a LM Studio, uno al lado del otro</h2>
+<p>Según la web, la documentación y la página de privacidad de cada app, comprobado el 21 y el 23 de octubre de 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>Licencia</strong></td><td>Código abierto, MIT (<a href="https://ollama.com/download" rel="noopener">web</a>)</td><td>Código cerrado; gratis, también para el trabajo (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td><strong>Cómo se usa</strong></td><td>Línea de comandos y API local; ventana de chat en Windows y Mac desde julio de 2025 (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>App de escritorio con chat, búsqueda y descarga de modelos, y servidor local estilo OpenAI</td></tr>
+<tr><td><strong>Windows</strong></td><td>Sí</td><td>Sí; el procesador necesita AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">requisitos</a>)</td></tr>
+<tr><td><strong>Mac</strong></td><td>Chip de Apple con GPU, o Intel solo con procesador; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">documentación</a>)</td><td>Solo chip de Apple; macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>Sí</td><td>Sí</td></tr>
+<tr><td><strong>Tus PDF</strong></td><td>Arrastrar texto o PDF</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">documentación</a>)</td></tr>
+<tr><td><strong>Qué sale a internet</strong></td><td>No ve los prompts en local; puede recoger metadatos limitados del dispositivo y del uso (<a href="https://ollama.com/privacy" rel="noopener">privacidad</a>)</td><td>No envía mensajes ni documentos en local, sin telemetría; actualizaciones y descargas de modelos sí salen (<a href="https://lmstudio.ai/app-privacy" rel="noopener">privacidad</a>)</td></tr>
+<tr><td><strong>Opción en la nube</strong></td><td>Planes en la nube desde 20 $ al mes (<a href="https://ollama.com/pricing" rel="noopener">precios</a>)</td><td>Modelos en la nube y búsqueda web de pago como extras</td></tr>
+</tbody>
+</table></div>
+
+<h2>¿Cuál va más rápido?</h2>
+<p>Los dos usan por debajo motores abiertos de la familia de llama.cpp, así que en el mismo PC, con el mismo archivo de modelo y los mismos ajustes, el hardware decide casi toda la velocidad. No hemos medido las dos apps una al lado de otra, así que no daremos un ganador. Lo que sí hemos medido, con GreenCube en 10 PCs, es lo que más mueve la velocidad:</p>
+<ul>
+<li><strong>Si el modelo cabe en la tarjeta gráfica.</strong> El mismo modelo 12B escribía 35,6 tokens por segundo entero en una tarjeta de 8 GB y 5,9 con parte fuera: <a href="/blog/es/cuanta-vram-para-ia">6 veces más lento</a>.</li>
+<li><strong>Tarjeta frente a procesador.</strong> La misma IA en el mismo sobremesa: 5 tokens por segundo con el procesador, 72 con una RX 5700 XT.</li>
+<li><strong>Lo nueva que es la tarjeta.</strong> Cuatro tarjetas de 8 GB fueron de unos 11 a 72 tokens por segundo con el mismo modelo.</li>
+</ul>
+<p>Así que, en cualquiera de las dos, elige un modelo que quepa en tu VRAM con unos 1,5 GB de margen: <a href="/blog/es/mejor-modelo-ia-local">qué modelo cabe en tu PC</a>.</p>
+
+<h2>¿Cuál te conviene?</h2>
+<div class="expect">
+<div class="g"><h4>Eres programador</h4><p>Ollama: código abierto, un servicio en segundo plano y una API a la que se conectan otras herramientas.</p></div>
+<div class="b"><h4>Quieres una ventana y un buscador de modelos</h4><p>LM Studio: buscar, descargar y chatear sin terminal.</p></div>
+<div class="y"><h4>Tienes un Mac con Intel</h4><p>Ollama, solo con el procesador. LM Studio no se instala.</p></div>
+<div class="p"><h4>No quieres elegir modelos</h4><p>GreenCube (Windows, 9,99&nbsp;&euro; una vez) mira tu tarjeta y tu RAM y elige el modelo que cabe. <a href="/blog/es/alternativas-a-lm-studio">Más alternativas a LM Studio</a>.</p></div>
+</div>
+
+<h2>Cómo lo comprobamos</h2>
+<p>Leímos la web, la documentación, los requisitos y la página de privacidad de Ollama y LM Studio el 21 y el 23 de octubre de 2026 y enlazamos cada dato. Las velocidades de esta página son de nuestras propias pruebas con GreenCube, no de estas dos apps. Hacemos GreenCube, así que nos ceñimos a datos que cualquiera puede comprobar.</p>
+<h2>Preguntas</h2>
+<div class="faq">
+<details><summary>¿Qué va más rápido, Ollama o LM Studio?</summary><p>En el mismo PC, con el mismo modelo y los mismos ajustes, la velocidad la marca sobre todo tu hardware: los dos usan por debajo motores abiertos de la familia de llama.cpp. Lo que más cambia la velocidad es si el modelo cabe entero en tu tarjeta gráfica. No hemos medido las dos apps una al lado de otra, así que no diremos cuál es más rápida.</p></details>
+<details><summary>¿Qué diferencia hay entre Ollama y LM Studio?</summary><p>Ollama es de código abierto (MIT), pensado en torno a la línea de comandos y una API local, con ventana de chat en Windows y Mac desde julio de 2025. LM Studio es una app de escritorio de código cerrado con ventana de chat, buscador de modelos y servidor local estilo OpenAI, gratis también para el trabajo.</p></details>
+<details><summary>¿Cuál es mejor para empezar, Ollama o LM Studio?</summary><p>LM Studio, si quieres buscar y descargar modelos en una ventana. Ollama es más sencillo para programadores que quieren un servicio en segundo plano y una API. Si prefieres no elegir modelo, GreenCube (Windows, 9,99 € una vez) elige uno para tu PC.</p></details>
+<details><summary>¿Ollama o LM Studio funcionan en un Mac con Intel?</summary><p>La documentación de Ollama incluye los Mac con Intel, solo con el procesador, en macOS 14 o posterior. LM Studio necesita un Mac con chip de Apple.</p></details>
+<details><summary>¿Ollama y LM Studio envían datos a internet?</summary><p>LM Studio dice que no transmite mensajes ni documentos cuando funciona en local y que no tiene telemetría; comprobar actualizaciones y descargar modelos sí sale a internet. Ollama dice que no ve tus prompts en local, pero puede recoger metadatos limitados del dispositivo y del uso. Los dos pueden usar modelos en la nube si los eliges.</p></details>
+</div>
+
+<div class="cta-box"><h3>Tu propia IA, en tu propio PC</h3><p>GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro;, un solo pago.</p><a class="cta" href="https://greencube.app/es/buy">Consigue GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/es/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Una IA que es <em>tuya,</em> no alquilada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Producto</h3>
+        <ul>
+          <li><a href="https://greencube.app/es/buy">Consigue GreenCube</a></li>
+          <li><a href="https://greencube.app/es/what-you-get">¿Funcionará en mi ordenador?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Aprende</h3>
+        <ul>
+          <li><a href="/blog/es">Blog</a></li>
+          <li><a href="https://greencube.app/es/your-data">Tus datos</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT y tus datos (EN)</a></li>
+          <li><a href="https://greencube.app/es/ai-environmental-impact">La IA y el planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="https://greencube.app/es/mission">Nuestra misión</a></li>
+          <li><a href="mailto:support@greencube.app">Contacto</a></li>
+          <li><a href="https://legal.greencube.app/es/privacy">Política de privacidad</a></li>
+          <li><a href="https://legal.greencube.app/es/terms">Términos de uso</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Hecho en España.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
