@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "AI na laptopie bez karty graficznej: czy grafika Intela pomaga?",
+ "description": "Uruchomiliśmy AI na laptopie bez karty graficznej, na procesorze i na grafice Intela. Prędkość czatu prawie się nie zmieniła, czytanie przyspieszyło 1,3 raza, a obrazy ponad 4 razy.",
+ "date": "2026-10-18",
+ "stat": "4&times;",
+ "teaser": "Czat: mniej więcej tak samo. Obrazy: 4 razy szybciej.",
+ "rank": 7,
+ "lang": "pl",
+ "alt": "ai-on-laptop-without-gpu",
+ "faq": [
+  {"q": "Czy zintegrowana grafika przyspiesza AI?", "a": "Przy czacie ledwo: na naszym laptopie z 16 GB odpowiedź pisała się w obu przypadkach z prędkością około 14 tokenów na sekundę. Przy czytaniu długiego wklejonego tekstu było około 1,3 raza szybciej, a przy tworzeniu obrazów ponad 4 razy szybciej."},
+  {"q": "Czy zintegrowana grafika może spowolnić AI?", "a": "Czasem tak. Z jednym małym modelem pisanie na grafice Intela było o 29% wolniejsze niż na procesorze; z większym o 26% szybsze. Zależy to od modelu i laptopa, dlatego GreenCube testuje twój laptop i wybiera."},
+  {"q": "Czy laptop bez karty graficznej wystarczy do AI?", "a": "Do czatu i nauki tak: laptop z 16 GB pisze z małym modelem szybciej, niż czytasz. Obrazy też działają, ale każdy trwa 2–3 minuty."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Krótka odpowiedź:</strong> przy czacie <strong>ledwo</strong>. Przy czytaniu długiego tekstu <strong>trochę</strong>. Przy obrazach <strong>bardzo</strong>: ponad 4 razy szybciej.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>tokenów na sekundę przy czacie, z grafiką Intela lub bez</span></div>
+<div class="stat b"><b>1,3&times;</b><span>szybciej przy czytaniu długiego wklejonego tekstu</span></div>
+<div class="stat p"><b>4&times;</b><span>szybciej przy tworzeniu obrazów</span></div>
+</div>
+
+<h2>Test</h2>
+<p>Jeden laptop: Intel Core Ultra 5 125U, 16 GB RAM, bez karty graficznej, tylko z grafiką wbudowaną w procesor. Uruchomiliśmy to samo AI na procesorze i na grafice Intela, na zasilaczu, po dwa razy, we wrześniu i październiku 2026 r.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Zadanie</th><th>Procesor</th><th>Grafika Intela</th><th>Różnica</th></tr></thead>
+<tbody>
+<tr><td>Pisanie odpowiedzi (Gemma 4 E2B)</td><td>13,7&ndash;15,5 tokenów/s</td><td>14,4&ndash;14,5 tokenów/s</td><td><b>mniej więcej tak samo</b></td></tr>
+<tr><td>Czytanie wklejonego tekstu (Gemma 4 E2B)</td><td>160&ndash;167 tokenów/s</td><td>203&ndash;211 tokenów/s</td><td><b>1,3&times; szybciej</b></td></tr>
+<tr><td>Jeden obraz, 512 na 512</td><td>11 min 27 s</td><td>2 min 22 s &ndash; 2 min 38 s</td><td><b>ponad 4&times; szybciej</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Czego się dowiedzieliśmy</h2>
+
+<div class="card g">
+<h3>1. Prędkość czatu zależy od pamięci, nie od układu</h3>
+<p>Pisanie odpowiedzi ogranicza to, jak szybko laptop przepuszcza AI przez pamięć, a procesor i grafika Intela dzielą tę samą pamięć. Dlatego piszą mniej więcej w tym samym tempie.</p>
+</div>
+
+<div class="card y">
+<h3>2. Może być nawet wolniej</h3>
+<p>Ze starszym małym modelem (Phi-4 Mini) pisanie na grafice Intela było <strong>o 29% wolniejsze</strong>. Z większym (Gemma 4 E4B) <strong>o 26% szybsze</strong>. Ten sam laptop, odwrotne wyniki. Nie da się tego zgadnąć ze specyfikacji, więc GreenCube testuje twój laptop i używa tego, co jest szybsze.</p>
+</div>
+
+<div class="card p">
+<h3>3. Błyszczy przy obrazach</h3>
+<p>Tworzenie obrazu to ciężka matematyka, dokładnie ta, do której stworzono układy graficzne. Jedenaście i pół minuty spadło do około dwóch i pół.</p>
+</div>
+
+<h2>Co to znaczy dla ciebie?</h2>
+<div class="expect">
+<div class="g"><h4>Czat i nauka</h4><p>Laptop z 16 GB wystarczy. Pisze szybciej, niż czytasz.</p></div>
+<div class="b"><h4>Długie PDF-y</h4><p>Grafika czyta je trochę szybciej, więc pierwsza odpowiedź przychodzi wcześniej.</p></div>
+<div class="y"><h4>Obrazy</h4><p>Da się, około 2–3 minut na obraz. Komputer do gier robi to w niecałą minutę.</p></div>
+<div class="p"><h4>Bateria</h4><p>W naszych testach na baterii i na zasilaczu prędkość czatu była mniej więcej taka sama.</p></div>
+</div>
+
+<p>Chcesz pełny obraz, z komputerami do gier? <a href="/blog/can-my-pc-run-ai">Tutaj zmierzyliśmy {{pcs}} komputerów.</a></p>

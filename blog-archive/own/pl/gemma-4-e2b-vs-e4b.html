@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Gemma 4 E2B kontra E4B na laptopie: mały i duży model AI, zmierzone",
+ "description": "Gemma 4 E2B kontra E4B (i Phi-4 Mini) na laptopie z 16 GB bez karty graficznej: 20 sekund wobec 112 na tę samą odpowiedź. Co daje większy model i kiedy warto czekać.",
+ "date": "2026-10-18",
+ "stat": "20 s",
+ "teaser": "Mały: 20 sekund. Duży: 112. Oto co tracisz.",
+ "rank": 8,
+ "lang": "pl",
+ "alt": "gemma-4-e2b-vs-e4b",
+ "faq": [
+  {"q": "Czy większy model AI jest zawsze lepszy?", "a": "Jego odpowiedzi są zwykle trochę lepsze, ale na laptopie bez karty graficznej jest dużo wolniejszy. W naszym teście większy model (Gemma 4 E4B) dał najlepsze wyjaśnienie, ale potrzebował 112 sekund; mały (Gemma 4 E2B) dał dobrą odpowiedź w 20."},
+  {"q": "Czy małe modele AI mylą się w faktach?", "a": "W naszych pięciu szybkich pytaniach o fakty (matematyka, przeliczanie jednostek, daty, nauka) żaden z dwóch małych modeli się nie pomylił. Słabym punktem małego było liczenie: czasem zapowiadał określoną liczbę elementów, a wypisywał inną."},
+  {"q": "Którego modelu AI używać na moim komputerze?", "a": "Na laptopie bez karty graficznej małego modelu. Na komputerze z kartą graficzną większy też działa szybko (56–72 tokenów na sekundę na kartach z 8 GB), więc używaj jego. GreenCube wybiera za ciebie na podstawie twojego komputera."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Krótka odpowiedź:</strong> na laptopie bez karty graficznej <strong>wygrywa mały model</strong>: dobra odpowiedź w 20 sekund zamiast trochę lepszej w prawie 2 minuty. Z kartą graficzną bierz duży: tam też jest szybki.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 s</b><span>mały model (Gemma 4 E2B), pełna odpowiedź</span></div>
+<div class="stat b"><b>28 s</b><span>starszy mały model (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 s</b><span>większy model (Gemma 4 E4B), najlepsze wyjaśnienie</span></div>
+</div>
+
+<h2>Test</h2>
+<p>Jeden laptop z 16 GB (Intel Core Ultra 5, bez karty graficznej), sam procesor. Jedno typowe zadanie do nauki: wyjaśnij fotosyntezę czternastolatkowi, a potem napisz o niej trzy pytania egzaminacyjne. Mierzyliśmy do końca odpowiedzi, we wrześniu 2026 r.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>Rozmiar</th><th>Czas do pełnej odpowiedzi</th><th>Co wyszło</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 s</b></td><td>Pełna, dobrze napisana, trzy różne pytania egzaminacyjne</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 s</b></td><td>Pełna i poprawna, ale jedno pytanie egzaminacyjne się powtórzyło</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 s</b></td><td>Pełna, najlepsze wyjaśnienie</td></tr>
+</tbody>
+</table></div>
+
+<h2>Czego się dowiedzieliśmy</h2>
+
+<div class="card g">
+<h3>1. Mały wystarczy do nauki</h3>
+<p>Zadaliśmy też pięć szybkich pytań o fakty: matematyka, przeliczanie jednostek, daty i nauka. <strong>Żaden z małych modeli się nie pomylił.</strong> Mała Gemma bez proszenia pokazała nawet drugi sposób na obliczenie procentu.</p>
+</div>
+
+<div class="card y">
+<h3>2. Jego słaby punkt: liczenie</h3>
+<p>Dwa razy mały model powiedział „oto 5”, a potem wypisał inną liczbę. Dlatego GreenCube każe mu teraz najpierw policzyć, a dopiero potem napisać liczbę. W takich drobiazgach większy model jest pewniejszy.</p>
+</div>
+
+<div class="card b">
+<h3>3. Z kartą graficzną to zupełnie inna historia</h3>
+<p>Ten sam większy model pisze <strong>56–72 tokenów na sekundę</strong> na kartach do gier z 8 GB, 7–9 razy szybciej niż na tym laptopie. Na komputerze do gier dostajesz lepsze odpowiedzi bez czekania.</p>
+</div>
+
+<h2>Który na twój komputer?</h2>
+<div class="expect">
+<div class="g"><h4>Laptop bez karty</h4><p>Mały model. Szybkie odpowiedzi, wystarczająco dobre do nauki, pisania i pytań.</p></div>
+<div class="b"><h4>Komputer do gier</h4><p>Większy model. Lepsze odpowiedzi i wciąż szybciej, niż czytasz.</p></div>
+<div class="y"><h4>Prosisz o listę?</h4><p>Jeśli mówi „oto 5”, rzuć okiem, czy na pewno jest 5. To jedyna wpadka małego modelu.</p></div>
+<div class="p"><h4>Nie chcesz o tym myśleć?</h4><p>GreenCube sprawdza twój komputer i wybiera za ciebie.</p></div>
+</div>
+
+<p>Zobacz, jak szybki jest każdy rodzaj komputera: <a href="/blog/can-my-pc-run-ai">tutaj zmierzyliśmy {{pcs}} komputerów</a>.</p>

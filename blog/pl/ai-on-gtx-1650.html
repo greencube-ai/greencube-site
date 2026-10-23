@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Czy GTX 1650 uruchomi AI? Zmierzone: około 20 tokenów na sekundę | Blog GreenCube</title>
+  <meta name="description" content="Prawdziwy test: model Gemma 4 E4B pisał około 20 tokenów na sekundę na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM. Co to znaczy dla czatu, nauki i obrazów." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Czy GTX 1650 uruchomi AI? Zmierzone: około 20 tokenów na sekundę | Blog GreenCube" />
+  <meta property="og:description" content="Prawdziwy test: model Gemma 4 E4B pisał około 20 tokenów na sekundę na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM. Co to znaczy dla czatu, nauki i obrazów." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/pl/ai-on-gtx-1650" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/pl/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-en-gtx-1650" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-gtx-1650" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-gtx-1650" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Czy GTX 1650 uruchomi AI? Zmierzone: około 20 tokenów na sekundę", "description": "Prawdziwy test: model Gemma 4 E4B pisał około 20 tokenów na sekundę na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM. Co to znaczy dla czatu, nauki i obrazów.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "pl", "mainEntityOfPage": "https://blog.greencube.app/blog/pl/ai-on-gtx-1650", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/pl/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Czy GTX 1650 uruchomi AI lokalnie?", "acceptedAnswer": {"@type": "Answer", "text": "Tak. Na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM model Gemma 4 E4B pisał około 20 tokenów na sekundę. Szybciej, niż czytasz."}}, {"@type": "Question", "name": "Czy GTX 1650 stworzy obrazy AI?", "acceptedAnswer": {"@type": "Answer", "text": "Bardzo prawdopodobnie tak, ale nie zmierzyliśmy jeszcze czasu obrazu na tej karcie. Gdy to zrobimy, wynik pojawi się tutaj."}}, {"@type": "Question", "name": "Czy GTX 1650 uruchomi Gemma 4 12B?", "acceptedAnswer": {"@type": "Answer", "text": "Niezbyt komfortowo. GreenCube proponuje większy model Gemma 4 12B tylko na kartach z 10 GB VRAM lub więcej, a ta ma 4. Na karcie AMD RX 5700 XT z 8 GB odpowiadał na krótkie pytania, a potem wysypał się w długim czacie."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/pl/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/pl/ai-environmental-impact">AI i planeta</a>
+    <a href="https://greencube.app/pl/your-data">Twoje dane</a>
+    <a href="https://greencube.app/pl/mission">Nasza misja</a>
+    <a href="/blog/pl" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">PL</summary><div class="lang-list"><a href="/blog/ai-on-gtx-1650" hreflang="en" lang="en">English</a><a href="/blog/es/ia-en-gtx-1650" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-gtx-1650" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-gtx-1650" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-gtx-1650" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-gtx-1650" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-gtx-1650" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-gtx-1650" hreflang="pl" lang="pl" aria-current="true">Polski</a></div></details><a href="https://greencube.app/pl/buy" class="nav-cta">Kup GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/pl">Blog GreenCube</a></p>
+<h1>Czy GTX 1650 uruchomi AI? Zmierzone: około 20 tokenów na sekundę</h1>
+<p class="byline">Autor: <a href="/blog/pl/hector-gras">Hector Gras</a> &middot; 1 października 2026</p>
+<div class="answer"><p><strong>Tak.</strong> Na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM model Gemma 4 E4B pisał około 20 tokenów na sekundę. Szybciej, niż czytasz.</p></div>
+<div class="stats">
+<div class="stat g"><b>około 20</b><span>tokenów na sekundę z modelem Gemma 4 E4B</span></div>
+</div>
+<h2>Co to znaczy w praktyce</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Zadanie</th><th>Czas na tym komputerze</th></tr></thead>
+<tbody>
+<tr><td>Napisanie zwykłej odpowiedzi (400 tokenów, około pół strony)</td><td><b>20 s</b></td></tr>
+<tr><td>Przeczytanie długiego dokumentu, który mu dajesz (5 000 tokenów, około 6 stron)</td><td><b>0:13–3:28 min</b></td></tr>
+</tbody>
+</table></div>
+<p>Obliczone z prędkości zmierzonych na tym komputerze: czas to długość podzielona przez prędkość, a prawdziwa odpowiedź potrzebuje jeszcze chwili na rozruch. Dla skali: większość ludzi czyta około 4 słów na sekundę (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), więc samo przeczytanie odpowiedzi o długości 400 tokenów zajmuje ci ponad minutę.</p>
+<h2>Co zmierzyliśmy</h2>
+<p><strong>Pisanie</strong> to tempo, w jakim AI wystukuje odpowiedź, w tokenach na sekundę; token to kawałek słowa, a po polsku jedno słowo zajmuje zwykle jeden lub dwa. <strong>Czytanie</strong> to tempo, w jakim przyswaja to, co mu dajesz: twoje pytanie, wklejony tekst albo PDF. Czytanie jest zawsze dużo szybsze niż pisanie, bo AI może czytać wiele tokenów naraz, ale pisać musi je po kolei.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Co</th><th>Działało na</th><th>Wynik</th><th>Zmierzono</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E4B</td><td>karta graficzna, częściowo w RAM</td><td><b>około 20</b> tokenów na sekundę przy pisaniu &middot; 24–395 przy czytaniu</td><td>23 września 2026</td></tr>
+<tr><td>Gemma 4 E4B (drugi PC)*</td><td>karta graficzna, częściowo w RAM</td><td><b>8–25</b> tokenów na sekundę przy pisaniu &middot; 32–301 przy czytaniu</td><td>1 października 2026</td></tr>
+</tbody>
+</table></div>
+<p>Jak zmierzono każdą liczbę: <a href="/blog/pl/how-we-measure-ai-speed">Więcej o tym, jak mierzymy</a></p><ol class="src"><li>Prawdziwe czaty w GreenCube 0.1.40 i 0.1.42: prędkość każdej odpowiedzi od 100 tokenów w górę, odczytana z logu aplikacji. Zakres pomija najwolniejszą i najszybszą dziesiątą część.</li></ol>
+<p>Gdy mamy kilka pomiarów, podajemy zakres: prędkość trochę się waha między pomiarami na tym samym komputerze. * Ten tester zadawał głównie krótkie pytania, więc liczą się też odpowiedzi poniżej 100 tokenów. Krótkie odpowiedzi mierzą się trochę wolniej.</p>
+<h2>Co to oznacza</h2>
+<div class="card b">
+<h3>Nie wszystko mieści się na karcie</h3>
+<p>Gemma 4 E4B to plik o rozmiarze 4,2 GB, a karta ma 4 GB, więc nie mieści się w całości i część leży w zwykłej pamięci (RAM). Każde pisane słowo musi sięgać do tej części dużo wolniejszą drogą, więc tempo spada i się waha. Mimo to pisze około 20 tokenów na sekundę. Czytanie wklejonego tekstu wahało się z dnia na dzień między 24 a 395 tokenów na sekundę, najpewniej dlatego, że karta była pełna.</p>
+</div>
+<div class="card g">
+<h3>Drugi PC z tą samą kartą</h3>
+<p>Karta GTX 1650 innego testera uruchomiła Gemma 4 E4B w GreenCube 0.1.42: pisała 8–25 tokenów na sekundę, a czytał z prędkością 32–301. Większość jego odpowiedzi była krótka, a krótkie odpowiedzi mierzą się wolniej niż długie: najdłuższa wypadła blisko górnej granicy tego zakresu.</p>
+</div>
+<div class="card y">
+<h3>Większy model Gemma 4 12B</h3>
+<p>Niezbyt komfortowo. GreenCube proponuje większy model Gemma 4 12B tylko na kartach z 10 GB VRAM lub więcej, a ta ma 4. Na karcie AMD RX 5700 XT z 8 GB odpowiadał na krótkie pytania, a potem wysypał się w długim czacie.</p>
+</div>
+<div class="card p">
+<h3>Obrazy</h3>
+<p>Bardzo prawdopodobnie tak, ale nie zmierzyliśmy jeszcze czasu obrazu na tej karcie. Gdy to zrobimy, wynik pojawi się tutaj. Obraz korzysta z własnego AI o rozmiarze około 6 GB i wymaga dużo więcej obliczeń niż odpowiedź na czacie, więc grafika liczy się tu jeszcze bardziej.</p>
+</div>
+<h2>Jak wypada w porównaniu</h2>
+<p>Spośród 8 komputerów, które zmierzyliśmy z modelem Gemma 4 E4B, ten jest <strong>na miejscu 7</strong> pod względem prędkości pisania. <a href="/blog/pl/ai-on-gtx-1660-super">GTX 1660 Super</a> pisze 37–38, czyli około 90% szybciej. <a href="/blog/pl/ai-on-rx-580">RX 580</a> pisze 10–11, więc ten jest około 90% szybciej.</p>
+<h2>Komputer z testu</h2>
+<p>Prywatny komputer prawdziwego testera, używany tak jak zawsze, a nie maszyna laboratoryjna:</p>
+<ul>
+<li>Komputer stacjonarny</li>
+<li><strong>Karta graficzna:</strong> NVIDIA GTX 1650</li>
+<li><strong>Pamięć karty (VRAM):</strong> 4 GB</li>
+<li><strong>RAM:</strong> 16 GB</li>
+<li><strong>Procesor:</strong> 16 wątków</li>
+</ul>
+<h2>Sprawdź swój komputer</h2>
+<p>Nie wiesz, co masz w komputerze? To zajmuje 30 sekund:</p>
+<ol class="steps">
+<li>Naciśnij <strong>Ctrl + Shift + Esc</strong>, żeby otworzyć Menedżera zadań.</li>
+<li>Przejdź do <strong>Wydajność</strong>.</li>
+<li>Kliknij <strong>Pamięć</strong>: liczba w prawym górnym rogu to twoja RAM.</li>
+<li>Kliknij <strong>GPU</strong>: nazwa w prawym górnym rogu to twoja karta, a <strong>Dedykowana pamięć GPU</strong> to twoja VRAM. Widzisz tylko grafikę Intela lub AMD bez dedykowanej pamięci? To znaczy, że nie masz osobnej karty.</li>
+</ol>
+<p>Potem znajdź najbardziej podobną kartę w <a href="/blog/pl/can-my-pc-run-ai">pełnej tabeli</a>. Ta sama karta z większą ilością VRAM zmieści większe AI; nowsza karta tej samej wielkości jest zwykle szybsza.</p>
+<h2>Inne komputery, które zmierzyliśmy</h2>
+<ul>
+<li><a href="/blog/pl/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-rtx-5060">RTX 5060</a>: 56 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-rtx-3060">RTX 3060</a>: 53–55 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-rx-6600">RX 6600</a>: 42–44 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-intel-core-ultra-5-laptop">laptop z Intel Core Ultra 5</a>: 14–18 tokenów na sekundę (Gemma 4 E2B)</li>
+<li><a href="/blog/pl/ai-on-rx-580">RX 580</a>: 10–11 tokenów na sekundę (Gemma 4 E4B)</li>
+<li><a href="/blog/pl/ai-on-intel-iris-xe-laptop">laptop z Intel Iris Xe</a>: 5–7 tokenów na sekundę (Gemma 4 E2B)</li>
+</ul>
+<p><a href="/blog/pl/can-my-pc-run-ai">Czy mój komputer uruchomi AI?</a> Wszystkie 10 komputery w jednej tabeli i jak będzie działać twój.</p>
+<h2>Pytania</h2>
+<div class="faq">
+<details><summary>Czy GTX 1650 uruchomi AI lokalnie?</summary><p>Tak. Na komputerze stacjonarnym z kartą NVIDIA GTX 1650 (4 GB) i 16 GB RAM model Gemma 4 E4B pisał około 20 tokenów na sekundę. Szybciej, niż czytasz.</p></details>
+<details><summary>Czy GTX 1650 stworzy obrazy AI?</summary><p>Bardzo prawdopodobnie tak, ale nie zmierzyliśmy jeszcze czasu obrazu na tej karcie. Gdy to zrobimy, wynik pojawi się tutaj.</p></details>
+<details><summary>Czy GTX 1650 uruchomi Gemma 4 12B?</summary><p>Niezbyt komfortowo. GreenCube proponuje większy model Gemma 4 12B tylko na kartach z 10 GB VRAM lub więcej, a ta ma 4. Na karcie AMD RX 5700 XT z 8 GB odpowiadał na krótkie pytania, a potem wysypał się w długim czacie.</p></details>
+</div>
+
+<div class="cta-box"><h3>Twoje własne AI, na twoim własnym komputerze</h3><p>GreenCube działa na twoim komputerze: bez limitów użycia, bez subskrypcji, działa bez internetu. 9,99&nbsp;&euro;, płatne raz.</p><a class="cta" href="https://greencube.app/pl/buy">Kup GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/pl/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI, które jest <em>twoje,</em> nie wynajmowane.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produkt</h3>
+        <ul>
+          <li><a href="https://greencube.app/pl/buy">Kup GreenCube</a></li>
+          <li><a href="https://greencube.app/pl/what-you-get">Czy zadziała na moim komputerze?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Poczytaj</h3>
+        <ul>
+          <li><a href="/blog/pl">Blog</a></li>
+          <li><a href="https://greencube.app/pl/your-data">Twoje dane</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT i twoje dane (EN)</a></li>
+          <li><a href="https://greencube.app/pl/ai-environmental-impact">AI i planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Firma</h3>
+        <ul>
+          <li><a href="https://greencube.app/pl/mission">Nasza misja</a></li>
+          <li><a href="mailto:support@greencube.app">Kontakt</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Polityka prywatności (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Warunki korzystania (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Zrobione w Hiszpanii.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

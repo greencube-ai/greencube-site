@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Czy mój komputer uruchomi AI? Zmierzyliśmy {{pcs}} prawdziwych komputerów do gier i laptopów",
+ "description": "Czy twój komputer uruchomi AI lokalnie? Prawdziwe prędkości z {{pcs}} komputerów, od GTX 1650 po RTX 2080 Ti i laptopy bez karty graficznej, oraz co oznaczają twoja karta, VRAM i RAM.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PC",
+ "teaser": "Prawdziwe prędkości na {{pcs}} komputerach do gier i laptopach.",
+ "rank": 1,
+ "lang": "pl",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "Czy AI na moim komputerze działa z kartą graficzną AMD?", "a": "Tak. Zmierzyliśmy karty AMD (RX 5700 XT, RX 6600, RX 580) tak samo jak karty NVIDIA. GreenCube korzysta z Vulkana, który działa na obu."},
+  {"q": "Ile VRAM potrzebuję do AI?", "a": "Nie jest wymagana, ale 4 GB lub więcej robi dużą różnicę. Na naszych komputerach testowych GTX 1650 z 4 GB pisała około 20 tokenów na sekundę, a RTX 5060 z 8 GB około 56. Z większą ilością VRAM na karcie mieści się większe AI."},
+  {"q": "Czy AI działa na laptopie bez karty graficznej?", "a": "Tak. Laptop z 16 GB i samą grafiką Intela pisał z małym AI od 14 do 18 tokenów na sekundę, szybciej, niż czytasz. Laptop z 8 GB też działa, wolniej, i nie potrafi tworzyć obrazów."},
+  {"q": "Czy więcej RAM przyspiesza AI?", "a": "Samo w sobie nie. Na komputerze stacjonarnym z 48 GB RAM to samo AI działało 14 razy szybciej na karcie graficznej z 8 GB niż na procesorze. RAM ma znaczenie, gdy nie masz karty; z kartą najbardziej liczy się VRAM."},
+  {"q": "Czy potrzebuję internetu, żeby uruchomić AI na komputerze?", "a": "Tylko raz, żeby pobrać aplikację i AI oraz ją aktywować. Potem czat działa całkowicie bez internetu."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Krótka odpowiedź: tak.</strong> Jeśli twój komputer uruchamia gry, uruchomi też AI. Zmierzyliśmy {{pcs}} prawdziwych komputerów: stacjonarne do gier, od starej GTX 1650 po RTX 2080 Ti, oraz dwa laptopy w ogóle bez karty graficznej. Na każdym działał czat z AI uruchomionym w całości na komputerze: bez internetu, bez subskrypcji. Zmienia się tylko prędkość.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>szybciej na karcie graficznej niż na procesorze, ten sam PC, to samo AI</span></div>
+<div class="stat b"><b>20</b><span>tokenów na sekundę na GTX 1650 z 4 GB. Szybciej, niż czytasz.</span></div>
+<div class="stat p"><b>8&ndash;9 s</b><span>na obraz na RTX 2080 Ti, po załadowaniu</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Liczby</h2>
+
+<p>„Pisze” to tempo, w jakim AI wystukuje odpowiedź, w tokenach na sekundę. Token to kawałek słowa: po polsku jedno słowo zajmuje zwykle jeden lub dwa. Większość ludzi czyta około 4 słów na sekundę (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), więc od około 8 tokenów na sekundę AI pisze już szybciej, niż nadążają twoje oczy.</p>
+
+<!--pcs:table-->
+
+<p>Kliknij kartę graficzną, żeby zobaczyć jej pełny test.</p>
+
+<p>Zmierzone w GreenCube we wrześniu i październiku 2026 r., w prawdziwych czatach i we własnych testach prędkości GreenCube. Prędkość trochę się waha między pomiarami na tym samym komputerze, więc gdy mamy ich kilka, podajemy zakres. <a href="/blog/how-we-measure-ai-speed">Jak mierzymy i wszystkie dane</a>.</p>
+
+<h2>Czego się dowiedzieliśmy</h2>
+
+<div class="card g">
+<h3>1. Karta graficzna robi ciężką robotę, jak w grze</h3>
+<p>Na komputerze stacjonarnym z RX 5700 XT to samo AI pisało <strong>5 tokenów na sekundę na procesorze i 72 na karcie graficznej</strong>. AI to głównie ten rodzaj matematyki, do którego stworzono karty graficzne. Każda karta z ostatnich lat bardzo pomaga, nawet stara GTX 1650 z 4 GB.</p>
+</div>
+
+<div class="card b">
+<h3>2. VRAM decyduje, jak duże AI się zmieści</h3>
+<p>Żeby działać z pełną prędkością, AI musi zmieścić się we własnej pamięci karty (VRAM). Ten komputer miał 48 GB RAM, a i tak nie uratowało to większego modelu: AI z 12 miliardami parametrów zmieściło się na karcie z 8 GB na jedno krótkie pytanie, a potem się wysypało, gdy rozmowa się wydłużyła, przy prawie pełnej karcie. <strong>W AI VRAM wygrywa z RAM.</strong> Ale VRAM to nie prędkość: cztery karty z 8 GB, które zmierzyliśmy, pisały od około 11 tokenów na sekundę (RX 580) do 72 (RX 5700 XT). Dlatego GreenCube sprawdza twoją kartę i wybiera AI, które się zmieści, a nie po prostu największe.</p>
+</div>
+
+<div class="card y">
+<h3>3. Brak karty graficznej? I tak działa</h3>
+<p>Zwykły laptop z 16 GB i samą grafiką Intela pisał z mniejszym AI od 14 do 18 tokenów na sekundę i skończył pełną odpowiedź (wyjaśnienie plus trzy pytania egzaminacyjne) w około 20 sekund. Spokojnie wystarczy do nauki i pisania. Laptop z 8 GB też działa, z prędkością 5–7 tokenów na sekundę w prawdziwych czatach, jeśli inne aplikacje zostawią mu trochę wolnej pamięci.</p>
+</div>
+
+<div class="card p">
+<h3>4. Obrazy to ciężki kaliber</h3>
+<p>Stworzenie obrazu jest dużo cięższe niż czat. <strong>Od 8 do 9 sekund</strong> na RTX 2080 Ti z 11 GB (pierwszy zajął 83 podczas ładowania), <strong>28 sekund</strong> na RTX 3060 z 12 GB, około minuty na RX 6600 z 8 GB, półtorej minuty na GTX 1660 Super z 6 GB i około <strong>dwóch i pół minuty</strong> na laptopie z 16 GB. Laptop z 8 GB w ogóle nie stworzy obrazu: samo AI do obrazów potrzebuje około 7 GB.</p>
+</div>
+
+<h2 id="by-hand">Sprawdź swój komputer w 30 sekund</h2>
+<ol class="steps">
+<li>Naciśnij <strong>Ctrl + Shift + Esc</strong>, żeby otworzyć Menedżera zadań.</li>
+<li>Przejdź do <strong>Wydajność</strong>.</li>
+<li>Kliknij <strong>Pamięć</strong>: liczba w prawym górnym rogu to twoja RAM.</li>
+<li>Kliknij <strong>GPU</strong>: nazwa w prawym górnym rogu to twoja karta, a <strong>Dedykowana pamięć GPU</strong> to twoja VRAM. Widzisz tylko grafikę Intela? To znaczy, że nie masz osobnej karty.</li>
+</ol>
+
+<h2>Jak będzie działać twój komputer</h2>
+<div class="expect">
+<div class="g"><h4>Karta z 6 GB lub więcej</h4><p>Szybko na większości kart z ostatnich lat: od 37 do 76 tokenów na sekundę w naszych testach, wielokrotnie szybciej, niż czytasz, i obrazy w kilka sekund lub do półtorej minuty. Jeden wyjątek: stara RX 580 pisała około 11, wciąż szybciej, niż czytasz.</p></div>
+<div class="b"><h4>Karta z 4 GB, 16 GB RAM</h4><p>Dobrze. Około 20 tokenów na sekundę w naszym teście.</p></div>
+<div class="y"><h4>Bez karty, 16 GB RAM</h4><p>W porządku do czatu i nauki, z mniejszym AI. Obrazy trwają kilka minut.</p></div>
+<div class="p"><h4>Bez karty, 8 GB RAM</h4><p>Działa do czatu, powoli. Najpierw zamknij inne aplikacje. Bez obrazów.</p></div>
+</div>
+
+<h2>Po co w ogóle AI na własnym komputerze?</h2>
+<p>Bo jest twoje. Bez limitów wiadomości, bez miesięcznej subskrypcji i działa dalej bez internetu: w pociągu, w górach albo w bibliotece z fatalnym Wi-Fi. Nie pokona największych AI w chmurze we wszystkim, ale do nauki, pisania, streszczania i codziennych pytań AI na twojej własnej karcie w zupełności wystarczy, i nigdy się nie kończy.</p>
