@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>हम असली PC पर AI की रफ़्तार कैसे मापते हैं, और अंदाज़ा क्यों नहीं लगाते | GreenCube ब्लॉग</title>
+  <meta name="description" content="GreenCube ब्लॉग की हर रफ़्तार 10 असली PC में से किसी एक से आती है. हम कैसे मापते हैं, हर टेस्ट किया गया PC, CSV में डेटा, और वह टेस्ट जो दिखाता है कि हम बाकी का अंदाज़ा क्यों नहीं लगाते." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="हम असली PC पर AI की रफ़्तार कैसे मापते हैं, और अंदाज़ा क्यों नहीं लगाते | GreenCube ब्लॉग" />
+  <meta property="og:description" content="GreenCube ब्लॉग की हर रफ़्तार 10 असली PC में से किसी एक से आती है. हम कैसे मापते हैं, हर टेस्ट किया गया PC, CSV में डेटा, और वह टेस्ट जो दिखाता है कि हम बाकी का अंदाज़ा क्यों नहीं लगाते." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "हम असली PC पर AI की रफ़्तार कैसे मापते हैं, और अंदाज़ा क्यों नहीं लगाते", "description": "GreenCube ब्लॉग की हर रफ़्तार 10 असली PC में से किसी एक से आती है. हम कैसे मापते हैं, हर टेस्ट किया गया PC, CSV में डेटा, और वह टेस्ट जो दिखाता है कि हम बाकी का अंदाज़ा क्यों नहीं लगाते.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "hi", "mainEntityOfPage": "https://blog.greencube.app/blog/hi/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hi/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "GreenCube की AI रफ़्तार की संख्याएँ कहाँ से आती हैं?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube चलाने वाले 10 असली PC से, जिन्हें असली चैट में, GreenCube के स्टार्टअप स्पीड टेस्ट से, llama.cpp के स्पीड टेस्ट से और एक तस्वीर टेस्ट से मापा गया. हर संख्या बताती है कि वह किससे आई."}}, {"@type": "Question", "name": "क्या ग्राफ़िक्स कार्ड की स्पेसिफ़िकेशन से AI की रफ़्तार का अंदाज़ा लगाया जा सकता है?", "acceptedAnswer": {"@type": "Answer", "text": "अभी भरोसेमंद तरीक़े से नहीं. मेमोरी बैंडविड्थ से अंदाज़ा लगाने पर हमारे अंदाज़े आम तौर पर 19% और 239% तक ग़लत निकले, इसलिए हम सिर्फ़ मापे गए कार्ड दिखाते हैं."}}, {"@type": "Question", "name": "क्या मैं डेटा डाउनलोड कर सकता हूँ?", "acceptedAnswer": {"@type": "Answer", "text": "हाँ: हर माप greencube-ai-speeds.csv में है, जिसका लिंक इस पेज पर है."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/hi/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/hi/ai-environmental-impact">AI और धरती</a>
+    <a href="https://greencube.app/hi/your-data">आपका डेटा</a>
+    <a href="https://greencube.app/hi/mission">हमारा मिशन</a>
+    <a href="/blog/hi" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">HI</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-we-measure-ai-speed" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-we-measure-ai-speed" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-we-measure-ai-speed" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></div></details><a href="https://greencube.app/hi/buy" class="nav-cta">GreenCube लें</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/hi">GreenCube ब्लॉग</a></p>
+<h1>हम असली PC पर AI की रफ़्तार कैसे मापते हैं, और अंदाज़ा क्यों नहीं लगाते</h1>
+<p class="byline">लेखक: <a href="/blog/hi/hector-gras">Hector Gras</a> &middot; 14 अक्टूबर 2026</p>
+<div class="answer"><p>इस ब्लॉग की हर रफ़्तार GreenCube चलाने वाले एक असली PC से आती है (अब तक 10 PC, 22 सितंबर 2026 और 14 अक्टूबर 2026 के बीच मापे गए). जिन कार्ड को हमने नहीं मापा, उनकी रफ़्तार का हम अंदाज़ा नहीं लगाते: जब हमने अपने कार्ड पर अंदाज़ों को परखा, तो आम अंदाज़ा 19% और सबसे बुरा 239% ग़लत निकला.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>असली PC मापे गए, डेस्कटॉप और लैपटॉप</span></div>
+<div class="stat b"><b>34</b><span>माप, सब नीचे की CSV में</span></div>
+<div class="stat y"><b>239%</b><span>रफ़्तार का सबसे बुरा अंदाज़ा कितना ग़लत था</span></div>
+</div>
+<h2>हम क्या मापते हैं</h2>
+<p>तीन चीज़ें, क्योंकि अपने PC पर AI इस्तेमाल करते समय आप यही महसूस करते हैं:</p>
+<ul>
+<li><strong>लिखने की रफ़्तार:</strong> AI कितनी तेज़ी से अपना जवाब टाइप करता है, प्रति सेकंड टोकन में. टोकन किसी शब्द का एक हिस्सा होता है, और एक शब्द में कितने टोकन होते हैं यह भाषा पर निर्भर करता है, इसलिए हम इन रफ़्तारों को शब्दों में नहीं बदलते. मोटे तौर पर: प्रति सेकंड कुछ टोकन पढ़ने की रफ़्तार के क़रीब हैं, दसियों टोकन उससे साफ़ तेज़.</li>
+<li><strong>पढ़ने की रफ़्तार:</strong> आप जो देते हैं उसे यह कितनी तेज़ी से लेता है: आपका सवाल, पेस्ट किया टेक्स्ट या PDF. यह हमेशा लिखने से बहुत तेज़ होती है, क्योंकि AI एक साथ कई टोकन पढ़ता है लेकिन उन्हें एक-एक करके लिखता है.</li>
+<li><strong>तस्वीर का समय:</strong> 512×512 की एक तस्वीर में कितना समय लगता है, क्लिक से तैयार तस्वीर तक.</li>
+</ul>
+<p>हम वही AI मापते हैं जो GreenCube देता है, वही फ़ाइलें जो हर यूज़र डाउनलोड करता है: चैट के लिए Google के Gemma 4 E2B (2.6 GB), Gemma 4 E4B (4.2 GB) और Gemma 4 12B (6.4 GB), और तस्वीरों के लिए Z-Image Turbo. कोई दूसरा AI, या वही AI किसी और तरह से कंप्रेस किया हुआ, अलग संख्याएँ देगा, इसलिए हम सिर्फ़ एक जैसी चीज़ों की तुलना करते हैं.</p>
+<h2>हम कैसे मापते हैं</h2>
+<p>चार तरीक़ों से, और ब्लॉग की हर संख्या बताती है कि वह किस तरीक़े से आई:</p>
+<div class="card g">
+<h3>असली चैट</h3>
+<p>GreenCube में असली चैट: 100 या ज़्यादा टोकन वाले हर जवाब की रफ़्तार, ऐप के लॉग से पढ़ी गई. रेंज सबसे धीमे और सबसे तेज़ दसवें हिस्से को छोड़ देती है.</p>
+<p>किसके लिए इस्तेमाल: <a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/hi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/hi/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/hi/ai-on-rx-580">RX 580</a>, <a href="/blog/hi/ai-on-intel-iris-xe-laptop">लैपटॉप (Intel Iris Xe)</a>.</p>
+</div>
+<div class="card b">
+<h3>GreenCube का स्टार्टअप टेस्ट</h3>
+<p>GreenCube का अपना स्पीड टेस्ट, जो यह ग्राफ़िक्स कार्ड और प्रोसेसर में से चुनने के लिए स्टार्टअप पर चलाता है: हर एक पर एक बार लिखा गया छोटा जवाब.</p>
+<p>किसके लिए इस्तेमाल: <a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/hi/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/hi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/hi/ai-on-rx-580">RX 580</a>, <a href="/blog/hi/ai-on-intel-iris-xe-laptop">लैपटॉप (Intel Iris Xe)</a>.</p>
+</div>
+<div class="card y">
+<h3>llama.cpp का स्पीड टेस्ट</h3>
+<p>llama.cpp का अपना स्पीड टेस्ट (llama-bench), वह इंजन जिस पर GreenCube चलता है, उन्हीं AI फ़ाइलों के साथ: 128 टोकन लिखे गए, 512 टोकन का टेक्स्ट पढ़ा गया.</p>
+<p>किसके लिए इस्तेमाल: <a href="/blog/hi/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/hi/ai-on-intel-core-ultra-5-laptop">लैपटॉप (Intel Core Ultra 5)</a>.</p>
+</div>
+<div class="card p">
+<h3>तस्वीर टेस्ट</h3>
+<p>GreenCube का तस्वीर इंजन (Z-Image Turbo), 512×512 पिक्सेल, 8 स्टेप, क्लिक से तैयार तस्वीर तक का समय.</p>
+<p>किसके लिए इस्तेमाल: <a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/hi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/hi/ai-on-intel-core-ultra-5-laptop">लैपटॉप (Intel Core Ultra 5)</a>.</p>
+</div>
+<p>असली चैट सबसे अच्छा सबूत है, क्योंकि आप यही महसूस करेंगे, इसलिए हर पेज की मुख्य संख्या जहाँ भी हो सके असली चैट से आती है. स्टार्टअप टेस्ट एक छोटा जवाब है, इसलिए हम इसे कार्ड बनाम प्रोसेसर की तुलना के लिए इस्तेमाल करते हैं (यह दोनों को एक ही तरह मापता है), और मुख्य संख्या के तौर पर सिर्फ़ वहाँ जहाँ टेस्टर ने कोई लंबा जवाब नहीं भेजा.</p>
+<h2>हमारे मापे सभी PC</h2>
+<p>असली टेस्टरों के अपने PC, जैसे वे आम तौर पर इस्तेमाल करते हैं, लैब मशीनें नहीं. हम उनके नाम प्रकाशित नहीं करते.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>प्रकार</th><th>VRAM</th><th>RAM</th><th>मुख्य संख्या कहाँ से</th><th>GreenCube</th><th>तारीख़</th><th>लिखना (टोकन/सेकंड)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>डेस्कटॉप</td><td>11 GB</td><td>128 GB</td><td>असली चैट</td><td>0.1.44</td><td>14 अक्टूबर 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>डेस्कटॉप</td><td>8 GB</td><td>48 GB</td><td>llama.cpp का स्पीड टेस्ट</td><td>–</td><td>22 सितंबर 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rtx-5060">RTX 5060</a></td><td>डेस्कटॉप</td><td>8 GB</td><td>32 GB</td><td>GreenCube का स्टार्टअप टेस्ट</td><td>0.1.42</td><td>1 अक्टूबर 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a></td><td>डेस्कटॉप</td><td>12 GB</td><td>32 GB</td><td>असली चैट</td><td>0.1.42–0.1.43</td><td>6 अक्टूबर 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-6600">RX 6600</a></td><td>डेस्कटॉप</td><td>8 GB</td><td>16 GB</td><td>असली चैट</td><td>0.1.42–0.1.44</td><td>9 अक्टूबर 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>डेस्कटॉप</td><td>6 GB</td><td>16 GB</td><td>असली चैट</td><td>0.1.42</td><td>1 अक्टूबर 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-gtx-1650">GTX 1650</a></td><td>डेस्कटॉप</td><td>4 GB</td><td>16 GB</td><td>असली चैट</td><td>0.1.40</td><td>23 सितंबर 2026</td><td><b>लगभग 20</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-intel-core-ultra-5-laptop">लैपटॉप (Intel Core Ultra 5)</a></td><td>लैपटॉप</td><td>–</td><td>16 GB</td><td>llama.cpp का स्पीड टेस्ट</td><td>–</td><td>28 सितंबर 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-580">RX 580</a></td><td>डेस्कटॉप</td><td>8 GB</td><td>16 GB</td><td>असली चैट</td><td>0.1.42</td><td>1 अक्टूबर 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-intel-iris-xe-laptop">लैपटॉप (Intel Iris Xe)</a></td><td>लैपटॉप</td><td>–</td><td>8 GB</td><td>असली चैट</td><td>0.1.42</td><td>4 अक्टूबर 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>संख्याएँ रेंज में क्यों आती हैं</h2>
+<ul>
+<li><strong>दूसरे ऐप.</strong> ब्राउज़र, गेम लॉन्चर या वीडियो कॉल वही मेमोरी और ग्राफ़िक्स कार्ड इस्तेमाल करते हैं.</li>
+<li><strong>पहली बार धीमी होती है.</strong> इंस्टॉल के बाद पहला जवाब, या पहली तस्वीर, में लोडिंग और कार्ड को तैयार करना शामिल है. जहाँ ज़रूरी हो हम यह बताते हैं (जैसे "लोड होते समय पहली में 83 सेकंड लगे").</li>
+<li><strong>छोटे जवाब धीमे मापे जाते हैं.</strong> हर जवाब की एक छोटी तय शुरुआत होती है, जो 20 टोकन के जवाब पर 400 टोकन वाले से ज़्यादा भारी पड़ती है. इसीलिए असली चैट की रेंज 100 या ज़्यादा टोकन वाले जवाब गिनती है, और जहाँ टेस्टर ने सिर्फ़ छोटे जवाब भेजे वहाँ हम बताते हैं.</li>
+<li><strong>हम चरम मान छोड़ देते हैं.</strong> असली चैट की रेंज 10वें से 90वें पर्सेंटाइल तक जाती है, इसलिए कोई एक अजीब जवाब इसे नहीं हिला सकता.</li>
+</ul>
+<h2>क्या किसी कार्ड की रफ़्तार उसकी स्पेसिफ़िकेशन से अंदाज़ा लगाई जा सकती है?</h2>
+<p>यह काम का होता: सैकड़ों कार्ड हैं और हमने 10 PC मापे हैं. आम तरीक़ा मेमोरी बैंडविड्थ है. हर टोकन लिखने के लिए AI अपना पूरा मॉडल कार्ड की मेमोरी से पढ़ता है, इसलिए सिद्धांत में रफ़्तार लगभग बैंडविड्थ ÷ मॉडल का आकार, गुणा कुछ एफ़िशिएंसी होती है. कई ऑनलाइन कैलकुलेटर ऐसे ही काम करते हैं.</p>
+<p>तो हमने इसे अपने डेटा पर परखा. हमने एक बार में एक कार्ड छिपाया, बाकियों से प्रति GB/सेकंड रफ़्तार निकाली, छिपे कार्ड की रफ़्तार उसकी बैंडविड्थ से अंदाज़ा लगाई (निर्माताओं की स्पेसिफ़िकेशन से, जो <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">TechPowerUp GPU डेटाबेस</a> में जमा हैं), और मापी गई रफ़्तार से तुलना की. सब पर वही AI (Gemma 4 E4B, पूरा कार्ड पर).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>कार्ड</th><th>मेमोरी बैंडविड्थ</th><th>मापा गया (टोकन/सेकंड)</th><th>अंदाज़ा</th><th>कितना ग़लत</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/सेकंड</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/सेकंड</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/सेकंड</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/सेकंड</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-6600">RX 6600</a></td><td>224 GB/सेकंड</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/सेकंड</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/hi/ai-on-rx-580">RX 580</a></td><td>256 GB/सेकंड</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>आम अंदाज़ा 19% ग़लत था. सबसे बुरा <a href="/blog/hi/ai-on-rx-580">RX 580</a> था: उसकी मेमोरी के हिसाब से प्रति सेकंड लगभग 36 टोकन होने चाहिए थे, लेकिन उसने 11 लिखे. उसके बिना टेस्ट दोबारा चलाएँ, तो बाकी अब भी 33% तक ग़लत निकलते हैं. नया AMD RX 6600 उलटी दिशा में गया, अपनी बैंडविड्थ से ज़्यादा तेज़; शायद इसकी एक वजह उसका बड़ा ऑन-चिप कैश है (AMD इसे Infinity Cache कहता है). हर मापी गई संख्या उस कार्ड की मुख्य संख्या है, इसलिए सब एक ही तरह के टेस्ट से नहीं हैं; इससे थोड़ा शोर जुड़ता है, लेकिन यह तीन गुना चूक की वजह नहीं हो सकता.</p>
+<p><strong>यह काफ़ी अच्छा नहीं है.</strong> जो अंदाज़ा किसी नए कार्ड पर 33% या पुराने पर 239% ग़लत हो सकता है, वह कुछ लोगों को बताएगा कि उनका PC ठीक है जबकि वह धीमा है, या उलटा. इसलिए चेकर और कार्ड के पेज सिर्फ़ वही कार्ड दिखाते हैं जो हमने मापे हैं, और साफ़ बताते हैं जब आपका उनमें से नहीं है. हम हर नए कार्ड के साथ यह टेस्ट दोबारा चलाते हैं, और अगर ग़लती छोटी हो गई, तो कोई भी अंदाज़ा दिखाने से पहले हम यहाँ बताएँगे.</p>
+<h2>हमने अभी क्या नहीं मापा</h2>
+<ul>
+<li>गेमिंग कार्ड वाला लैपटॉप.</li>
+<li>10 GB या ज़्यादा वाले कार्ड पर Gemma 4 12B.</li>
+<li><a href="/blog/hi/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/hi/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/hi/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/hi/ai-on-rx-580">RX 580</a> पर तस्वीरें.</li>
+<li>GreenCube के अलावा दूसरे AI, और Linux या Mac (GreenCube Windows के लिए है).</li>
+</ul>
+<h2>डेटा लें</h2>
+<p>इस पेज का हर माप, हर एक की एक पंक्ति, <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a> में है: PC, AI, वह कहाँ चला, लिखने और पढ़ने की रफ़्तार, तस्वीर का समय, कैसे मापा गया, GreenCube वर्ज़न और तारीख़. अगर आप इसे इस्तेमाल करें, तो कृपया "GreenCube, AI speed measurements on real PCs, 2026" का हवाला दें और इस पेज का लिंक दें.</p>
+<h2>अपना PC जोड़ें</h2>
+<p>पहले से GreenCube इस्तेमाल करते हैं? अपना लॉग <a href="mailto:support@greencube.app">support@greencube.app</a> पर भेजें. हम आपके PC को आपके नाम के बिना टेस्ट में जोड़ेंगे, और नए कार्ड को उसका अपना पेज मिलेगा. पता नहीं आपके PC में क्या है? <a href="/blog/hi/can-my-pc-run-ai#checker">यहाँ जाँचें</a>.</p>
+<h2>सवाल</h2>
+<div class="faq">
+<details><summary>GreenCube की AI रफ़्तार की संख्याएँ कहाँ से आती हैं?</summary><p>GreenCube चलाने वाले 10 असली PC से, जिन्हें असली चैट में, GreenCube के स्टार्टअप स्पीड टेस्ट से, llama.cpp के स्पीड टेस्ट से और एक तस्वीर टेस्ट से मापा गया. हर संख्या बताती है कि वह किससे आई.</p></details>
+<details><summary>क्या ग्राफ़िक्स कार्ड की स्पेसिफ़िकेशन से AI की रफ़्तार का अंदाज़ा लगाया जा सकता है?</summary><p>अभी भरोसेमंद तरीक़े से नहीं. मेमोरी बैंडविड्थ से अंदाज़ा लगाने पर हमारे अंदाज़े आम तौर पर 19% और 239% तक ग़लत निकले, इसलिए हम सिर्फ़ मापे गए कार्ड दिखाते हैं.</p></details>
+<details><summary>क्या मैं डेटा डाउनलोड कर सकता हूँ?</summary><p>हाँ: हर माप greencube-ai-speeds.csv में है, जिसका लिंक इस पेज पर है.</p></details>
+</div>
+
+<div class="cta-box"><h3>आपका अपना AI, आपके अपने PC पर</h3><p>GreenCube आपके कंप्यूटर पर चलता है: इस्तेमाल की कोई सीमा नहीं, कोई सब्सक्रिप्शन नहीं, बिना इंटरनेट के चलता है. &euro;9.99, एक बार.</p><a class="cta" href="https://greencube.app/hi/buy">GreenCube लें <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/hi/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI जो <em>आपका अपना,</em> किराए का नहीं.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>प्रोडक्ट</h3>
+        <ul>
+          <li><a href="https://greencube.app/hi/buy">GreenCube लें</a></li>
+          <li><a href="https://greencube.app/hi/what-you-get">क्या यह मेरे कंप्यूटर पर चलेगा?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>पढ़ें</h3>
+        <ul>
+          <li><a href="/blog/hi">Blog</a></li>
+          <li><a href="https://greencube.app/hi/your-data">आपका डेटा</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT और आपका डेटा (EN)</a></li>
+          <li><a href="https://greencube.app/hi/ai-environmental-impact">AI और धरती</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>कंपनी</h3>
+        <ul>
+          <li><a href="https://greencube.app/hi/mission">हमारा मिशन</a></li>
+          <li><a href="mailto:support@greencube.app">संपर्क</a></li>
+          <li><a href="https://legal.greencube.app/privacy">प्राइवेसी पॉलिसी (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">इस्तेमाल की शर्तें (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. स्पेन में बना.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
