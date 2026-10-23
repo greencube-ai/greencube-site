@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>我们如何在真实电脑上测 AI 速度，以及为什么不靠猜 | GreenCube 博客</title>
+  <meta name="description" content="GreenCube 博客上的每个速度都来自 10 台真实电脑之一。我们的测量方法、测过的每台电脑、CSV 数据，以及说明我们为什么不估算其余显卡的测试。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="我们如何在真实电脑上测 AI 速度，以及为什么不靠猜 | GreenCube 博客" />
+  <meta property="og:description" content="GreenCube 博客上的每个速度都来自 10 台真实电脑之一。我们的测量方法、测过的每台电脑、CSV 数据，以及说明我们为什么不估算其余显卡的测试。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "我们如何在真实电脑上测 AI 速度，以及为什么不靠猜", "description": "GreenCube 博客上的每个速度都来自 10 台真实电脑之一。我们的测量方法、测过的每台电脑、CSV 数据，以及说明我们为什么不估算其余显卡的测试。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "GreenCube 的 AI 速度数字从哪里来？", "acceptedAnswer": {"@type": "Answer", "text": "来自 10 台运行 GreenCube 的真实电脑，分别用真实聊天、GreenCube 的启动速度测试、llama.cpp 的速度测试和图片测试测得。每个数字都注明了来源。"}}, {"@type": "Question", "name": "能根据显卡参数估算 AI 速度吗？", "acceptedAnswer": {"@type": "Answer", "text": "目前还不可靠。根据显存带宽预测，我们的估算典型误差为 19%，最高达 239%，所以我们只显示实测过的显卡。"}}, {"@type": "Question", "name": "可以下载这些数据吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以：每次测量都在本页链接的 greencube-ai-speeds.csv 里。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a>
+    <a href="https://greencube.app/zh/your-data">你的数据</a>
+    <a href="https://greencube.app/zh/mission">我们的使命</a>
+    <a href="/blog/zh" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">中文</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-we-measure-ai-speed" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-we-measure-ai-speed" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-we-measure-ai-speed" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-we-measure-ai-speed" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/how-we-measure-ai-speed" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/how-we-measure-ai-speed" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/how-we-measure-ai-speed" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/how-we-measure-ai-speed" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/how-we-measure-ai-speed" hreflang="zh-CN" lang="zh-CN" aria-current="true">简体中文</a></div></details><a href="https://greencube.app/zh/buy" class="nav-cta">获取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<h1>我们如何在真实电脑上测 AI 速度，以及为什么不靠猜</h1>
+<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月14日</p>
+<div class="answer"><p>这个博客上的每个速度都来自一台运行 GreenCube 的真实电脑：目前共 10 台，测于 2026年9月22日 到 2026年10月14日 之间。我们不估算没测过的显卡的速度：用已有的显卡检验估算方法时，典型误差为 19%，最差的偏差达 239%。</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>实测的真实电脑，台式机和笔记本</span></div>
+<div class="stat b"><b>34</b><span>次测量，全部在下面的 CSV 里</span></div>
+<div class="stat y"><b>239%</b><span>最差的一次速度估算的误差</span></div>
+</div>
+<h2>我们测什么</h2>
+<p>三样东西，因为这是你在自己电脑上用 AI 时能感受到的：</p>
+<ul>
+<li><strong>输出速度：</strong>AI 打出回答的速度，单位是每秒 token 数。token 是词的片段，而每个词对应多少 token 因语言而异，所以我们不把这些速度换算成字数。粗略地说，每秒几个 token 大约相当于阅读速度，每秒几十个 token 就明显更快。</li>
+<li><strong>读取速度：</strong>它接收你给的内容（问题、粘贴的文字或 PDF）的速度。读取总是比输出快得多，因为 AI 可以一次读很多 token，但只能一个一个地写。</li>
+<li><strong>生成图片的时间：</strong>一张 512×512 的图片从点击到完成需要多久。</li>
+</ul>
+<p>我们测的是 GreenCube 自带的 AI，也就是每位用户下载的同一批文件：用于聊天的 Google Gemma 4 E2B（2.6 GB）、Gemma 4 E4B（4.2 GB）和 Gemma 4 12B（6.4 GB），以及用于图片的 Z-Image Turbo。换一个 AI，或者同一个 AI 用了不同的压缩方式，数字都会不同，所以我们只做同类比较。</p>
+<h2>我们怎么测</h2>
+<p>共有四种方式，博客上每个数字都会注明来自哪一种：</p>
+<div class="card g">
+<h3>真实聊天</h3>
+<p>GreenCube 中的真实聊天：从应用日志里读取每个 100 个 token 及以上回答的速度。范围去掉了最慢和最快的各十分之一。</p>
+<p>用于: <a href="/blog/zh/ai-on-rtx-2080-ti">RTX 2080 Ti</a>，<a href="/blog/zh/ai-on-rtx-3060">RTX 3060</a>，<a href="/blog/zh/ai-on-rx-6600">RX 6600</a>，<a href="/blog/zh/ai-on-gtx-1660-super">GTX 1660 Super</a>，<a href="/blog/zh/ai-on-gtx-1650">GTX 1650</a>，<a href="/blog/zh/ai-on-rx-580">RX 580</a>，<a href="/blog/zh/ai-on-intel-iris-xe-laptop">Intel Iris Xe 笔记本电脑</a>.</p>
+</div>
+<div class="card b">
+<h3>GreenCube 启动测试</h3>
+<p>GreenCube 自带的速度测试，启动时运行，用来在显卡和 CPU 之间做选择：各写一次短回答。</p>
+<p>用于: <a href="/blog/zh/ai-on-rtx-2080-ti">RTX 2080 Ti</a>，<a href="/blog/zh/ai-on-rtx-5060">RTX 5060</a>，<a href="/blog/zh/ai-on-rtx-3060">RTX 3060</a>，<a href="/blog/zh/ai-on-rx-6600">RX 6600</a>，<a href="/blog/zh/ai-on-gtx-1660-super">GTX 1660 Super</a>，<a href="/blog/zh/ai-on-rx-580">RX 580</a>，<a href="/blog/zh/ai-on-intel-iris-xe-laptop">Intel Iris Xe 笔记本电脑</a>.</p>
+</div>
+<div class="card y">
+<h3>llama.cpp 速度测试</h3>
+<p>llama.cpp 自带的速度测试（llama-bench），GreenCube 使用的就是这个引擎，AI 文件相同：输出 128 个 token，读取一段 512 个 token 的文字。</p>
+<p>用于: <a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a>，<a href="/blog/zh/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 笔记本电脑</a>.</p>
+</div>
+<div class="card p">
+<h3>图片测试</h3>
+<p>GreenCube 的图片引擎（Z-Image Turbo），512×512 像素，8 步，从点击计时到图片完成。</p>
+<p>用于: <a href="/blog/zh/ai-on-rtx-2080-ti">RTX 2080 Ti</a>，<a href="/blog/zh/ai-on-rtx-3060">RTX 3060</a>，<a href="/blog/zh/ai-on-rx-6600">RX 6600</a>，<a href="/blog/zh/ai-on-gtx-1660-super">GTX 1660 Super</a>，<a href="/blog/zh/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 笔记本电脑</a>.</p>
+</div>
+<p>真实聊天是最好的证据，因为这正是你会感受到的，所以只要有真实聊天的数据，每页的主要数字就来自真实聊天。启动测试只是一个短回答，所以我们用它来比较显卡和 CPU（两者用同样的方式计时），只有在测试者没有发送长回答时才把它作为主要数字。</p>
+<h2>我们测过的每台电脑</h2>
+<p>真实测试者自己日常使用的电脑，不是实验室机器。我们不公开他们的名字。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>电脑</th><th>类型</th><th>显存</th><th>内存</th><th>主要数字来源</th><th>GreenCube</th><th>日期</th><th>输出（token/秒）</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/zh/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>台式机</td><td>11 GB</td><td>128 GB</td><td>真实聊天</td><td>0.1.44</td><td>2026年10月14日</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>台式机</td><td>8 GB</td><td>48 GB</td><td>llama.cpp 速度测试</td><td>–</td><td>2026年9月22日</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rtx-5060">RTX 5060</a></td><td>台式机</td><td>8 GB</td><td>32 GB</td><td>GreenCube 启动测试</td><td>0.1.42</td><td>2026年10月1日</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rtx-3060">RTX 3060</a></td><td>台式机</td><td>12 GB</td><td>32 GB</td><td>真实聊天</td><td>0.1.42–0.1.43</td><td>2026年10月6日</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-6600">RX 6600</a></td><td>台式机</td><td>8 GB</td><td>16 GB</td><td>真实聊天</td><td>0.1.42–0.1.44</td><td>2026年10月9日</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>台式机</td><td>6 GB</td><td>16 GB</td><td>真实聊天</td><td>0.1.42</td><td>2026年10月1日</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-gtx-1650">GTX 1650</a></td><td>台式机</td><td>4 GB</td><td>16 GB</td><td>真实聊天</td><td>0.1.40</td><td>2026年9月23日</td><td><b>约 20</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 笔记本电脑</a></td><td>笔记本电脑</td><td>–</td><td>16 GB</td><td>llama.cpp 速度测试</td><td>–</td><td>2026年9月28日</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-580">RX 580</a></td><td>台式机</td><td>8 GB</td><td>16 GB</td><td>真实聊天</td><td>0.1.42</td><td>2026年10月1日</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-intel-iris-xe-laptop">Intel Iris Xe 笔记本电脑</a></td><td>笔记本电脑</td><td>–</td><td>8 GB</td><td>真实聊天</td><td>0.1.42</td><td>2026年10月4日</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>为什么数字是一个范围</h2>
+<ul>
+<li><strong>其他应用。</strong>浏览器、游戏启动器或视频通话都在用同一块内存和显卡。</li>
+<li><strong>第一次更慢。</strong>安装后的第一个回答或第一张图片，包含了加载和准备显卡的时间。重要的地方我们都注明了（例如"第一张加载时用了 83 秒"）。</li>
+<li><strong>短回答测出来更慢。</strong>每个回答都有一小段固定的启动时间，对 20 个 token 的回答影响比对 400 个 token 的回答大。所以真实聊天的范围只计入 100 个 token 及以上的回答；如果测试者只发了短回答，我们会注明。</li>
+<li><strong>我们去掉极端值。</strong>真实聊天的范围取第 10 到第 90 百分位，所以一个异常的回答不会影响结果。</li>
+</ul>
+<h2>能根据参数猜出显卡的速度吗？</h2>
+<p>能的话会很方便：显卡有好几百款，而我们测了 10 台电脑。常见的做法是看显存带宽。AI 每输出一个 token，都要从显卡显存里把整个模型读一遍，所以理论上速度大约等于带宽除以模型大小，再乘以某个效率系数。很多在线计算器就是这么算的。</p>
+<p>所以我们用自己的数据检验了一下。每次隐藏一张显卡，用其他显卡算出每 GB/s 带宽对应的速度，再根据带宽（来自厂商规格，汇总在 <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">TechPowerUp GPU 数据库</a>）预测被隐藏的那张，然后和实测结果比较。所有显卡用的都是同一个 AI（Gemma 4 E4B，完整装在显卡上）。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>显卡</th><th>显存带宽</th><th>实测（token/秒）</th><th>预测</th><th>误差</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/zh/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/秒</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/秒</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/秒</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/秒</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-6600">RX 6600</a></td><td>224 GB/秒</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/秒</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/zh/ai-on-rx-580">RX 580</a></td><td>256 GB/秒</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>典型的估算误差为 19%。最差的是 <a href="/blog/zh/ai-on-rx-580">RX 580</a>：按显存推算应约为每秒 36 个 token，实际只有 11。去掉它重新算，其他显卡的误差仍高达 33%。较新的 AMD RX 6600 则相反，比带宽推算的更快；它较大的片上缓存（AMD 称为 Infinity Cache）可能是原因之一。每个实测数字都是那张显卡的主要数字，所以它们并非全部来自同一种测试；这会带来一些噪声，但解释不了三倍的偏差。</p>
+<p><strong>这不够好。</strong>在新显卡上可能偏差 33%、在老显卡上偏差 239% 的估算，会让一些人以为自己的电脑没问题，其实很慢，或者反过来。所以检测工具和显卡页面只显示我们实测过的显卡，你的显卡不在其中时也会明确告诉你。每测一张新显卡，我们都会重做这个测试；如果误差变小，我们会先在这里说明，再展示任何估算值。</p>
+<h2>我们还没测过的</h2>
+<ul>
+<li>带游戏显卡的笔记本电脑。</li>
+<li>在 10 GB 及以上显卡上的 Gemma 4 12B。</li>
+<li>在 <a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a>、<a href="/blog/zh/ai-on-rtx-5060">RTX 5060</a>、<a href="/blog/zh/ai-on-gtx-1650">GTX 1650</a>、<a href="/blog/zh/ai-on-rx-580">RX 580</a> 上生成图片。</li>
+<li>GreenCube 自带之外的其他 AI，以及 Linux 或 Mac（GreenCube 只支持 Windows）。</li>
+</ul>
+<h2>获取数据</h2>
+<p>本页的每一次测量都在 <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a> 里，一行一条：电脑、AI、运行在哪里、输出和读取速度、生成图片的时间、测量方式、GreenCube 版本和日期。如果你使用这些数据，请引用"GreenCube, AI speed measurements on real PCs, 2026"并链接到本页。</p>
+<h2>加入你的电脑</h2>
+<p>已经在用 GreenCube？把日志发到 <a href="mailto:support@greencube.app">support@greencube.app</a>。我们会把你的电脑加入测试（不署名），新显卡还会有自己的页面。不确定你的电脑配置？<a href="/blog/zh/can-my-pc-run-ai#checker">在这里查看</a>。</p>
+<h2>常见问题</h2>
+<div class="faq">
+<details><summary>GreenCube 的 AI 速度数字从哪里来？</summary><p>来自 10 台运行 GreenCube 的真实电脑，分别用真实聊天、GreenCube 的启动速度测试、llama.cpp 的速度测试和图片测试测得。每个数字都注明了来源。</p></details>
+<details><summary>能根据显卡参数估算 AI 速度吗？</summary><p>目前还不可靠。根据显存带宽预测，我们的估算典型误差为 19%，最高达 239%，所以我们只显示实测过的显卡。</p></details>
+<details><summary>可以下载这些数据吗？</summary><p>可以：每次测量都在本页链接的 greencube-ai-speeds.csv 里。</p></details>
+</div>
+
+<div class="cta-box"><h3>属于你自己的 AI，就在你的电脑上</h3><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh/buy">获取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">属于 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>产品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/buy">获取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh/what-you-get">我的电脑能跑吗？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>了解更多</h3>
+        <ul>
+          <li><a href="/blog/zh">Blog</a></li>
+          <li><a href="https://greencube.app/zh/your-data">你的数据</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 与你的数据 (EN)</a></li>
+          <li><a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/mission">我们的使命</a></li>
+          <li><a href="mailto:support@greencube.app">联系我们</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隐私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用条款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙制造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

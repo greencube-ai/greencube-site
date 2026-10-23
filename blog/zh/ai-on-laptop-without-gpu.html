@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>没有显卡的笔记本电脑跑 AI：Intel 集成显卡有用吗？| GreenCube 博客</title>
+  <meta name="description" content="我们在一台没有显卡的笔记本电脑上，分别用 CPU 和 Intel 集成显卡运行 AI。聊天速度几乎不变，读取快 1.3 倍，生成图片快 4 倍以上。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="没有显卡的笔记本电脑跑 AI：Intel 集成显卡有用吗？| GreenCube 博客" />
+  <meta property="og:description" content="我们在一台没有显卡的笔记本电脑上，分别用 CPU 和 Intel 集成显卡运行 AI。聊天速度几乎不变，读取快 1.3 倍，生成图片快 4 倍以上。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh/ai-on-laptop-without-gpu" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-portatil-sin-tarjeta-grafica" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "没有显卡的笔记本电脑跑 AI：Intel 集成显卡有用吗？", "description": "我们在一台没有显卡的笔记本电脑上，分别用 CPU 和 Intel 集成显卡运行 AI。聊天速度几乎不变，读取快 1.3 倍，生成图片快 4 倍以上。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/ai-on-laptop-without-gpu", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "集成显卡能让 AI 更快吗？", "acceptedAnswer": {"@type": "Answer", "text": "对聊天来说几乎没用。在我们的 16 GB 笔记本电脑上，两种方式输出回答都是每秒约 14 个 token。读取粘贴的长文字快约 1.3 倍，生成图片快 4 倍以上。"}}, {"@type": "Question", "name": "集成显卡会让 AI 变慢吗？", "acceptedAnswer": {"@type": "Answer", "text": "有时会。用小模型时，Intel 集成显卡的输出比 CPU 慢 29%；用更大的模型时反而快 26%。这取决于模型和笔记本电脑，所以 GreenCube 会在你的笔记本上实测后再选。"}}, {"@type": "Question", "name": "没有显卡的笔记本电脑够用来跑 AI 吗？", "acceptedAnswer": {"@type": "Answer", "text": "聊天和学习够用。16 GB 笔记本电脑用小模型输出得比你读得还快。也能生成图片，但每张要 2 到 3 分钟。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a>
+    <a href="https://greencube.app/zh/your-data">你的数据</a>
+    <a href="https://greencube.app/zh/mission">我们的使命</a>
+    <a href="/blog/zh" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">中文</summary><div class="lang-list"><a href="/blog/ai-on-laptop-without-gpu" hreflang="en" lang="en">English</a><a href="/blog/es/ia-portatil-sin-tarjeta-grafica" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-laptop-without-gpu" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-laptop-without-gpu" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-laptop-without-gpu" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-laptop-without-gpu" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-laptop-without-gpu" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-laptop-without-gpu" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ai-on-laptop-without-gpu" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ai-on-laptop-without-gpu" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/ai-on-laptop-without-gpu" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ai-on-laptop-without-gpu" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ai-on-laptop-without-gpu" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ai-on-laptop-without-gpu" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ai-on-laptop-without-gpu" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/ai-on-laptop-without-gpu" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/ai-on-laptop-without-gpu" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/ai-on-laptop-without-gpu" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/ai-on-laptop-without-gpu" hreflang="zh-CN" lang="zh-CN" aria-current="true">简体中文</a></div></details><a href="https://greencube.app/zh/buy" class="nav-cta">获取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<h1>没有显卡的笔记本电脑跑 AI：Intel 集成显卡有用吗？</h1>
+<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<div class="answer"><p><strong>简短回答：</strong>聊天<strong>几乎没区别</strong>，读长文字<strong>快一点</strong>，生成图片<strong>差别很大</strong>：快 4 倍以上。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>聊天时每秒 token 数，有没有 Intel 集成显卡都差不多</span></div>
+<div class="stat b"><b>1.3&times;</b><span>读取你粘贴的长文字更快</span></div>
+<div class="stat p"><b>4&times;</b><span>生成图片更快</span></div>
+</div>
+
+<h2>测试</h2>
+<p>一台笔记本电脑：Intel Core Ultra 5 125U，16 GB 内存，没有显卡，只有芯片内置的图形单元。我们插着电源，在 CPU 和 Intel 集成显卡上各运行同一个 AI 两次，时间是 2026 年 9 月和 10 月。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>任务</th><th>CPU</th><th>Intel 集成显卡</th><th>差别</th></tr></thead>
+<tbody>
+<tr><td>输出回答（Gemma 4 E2B）</td><td>13.7&ndash;15.5 token/秒</td><td>14.4&ndash;14.5 token/秒</td><td><b>差不多</b></td></tr>
+<tr><td>读取粘贴的文字（Gemma 4 E2B）</td><td>160&ndash;167 token/秒</td><td>203&ndash;211 token/秒</td><td><b>快 1.3&times;</b></td></tr>
+<tr><td>一张 512 x 512 的图片</td><td>11 分 27 秒</td><td>2 分 22 秒&ndash;2 分 38 秒</td><td><b>快 4&times; 以上</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>我们发现了什么</h2>
+
+<div class="card g">
+<h3>1. 聊天速度取决于内存，而不是芯片</h3>
+<p>输出回答的速度受限于笔记本电脑在内存里搬运 AI 的速度。CPU 和 Intel 集成显卡共用同一块内存，所以输出速度差不多。</p>
+</div>
+
+<div class="card y">
+<h3>2. 甚至可能更慢</h3>
+<p>用一个较老的小模型（Phi-4 Mini）时，Intel 集成显卡的输出<strong>慢了 29%</strong>；用更大的模型（Gemma 4 E4B）时却<strong>快了 26%</strong>。同一台笔记本电脑，结果相反。光看参数猜不出来，所以 GreenCube 会在你的笔记本上实测，然后用更快的那个。</p>
+</div>
+
+<div class="card p">
+<h3>3. 它真正擅长的：图片</h3>
+<p>生成图片是繁重的计算，正是图形芯片擅长的那类。十一分半缩短到大约两分半。</p>
+</div>
+
+<h2>这对你意味着什么？</h2>
+<div class="expect">
+<div class="g"><h4>聊天和学习</h4><p>16 GB 笔记本电脑就够了。它输出得比你读得还快。</p></div>
+<div class="b"><h4>长 PDF</h4><p>集成显卡读取稍快，所以第一个回答来得早一点。</p></div>
+<div class="y"><h4>图片</h4><p>可以，每张约 2 到 3 分钟。游戏电脑不到一分钟就能完成。</p></div>
+<div class="p"><h4>电池</h4><p>在我们的测试中，用电池和插电时的聊天速度差不多。</p></div>
+</div>
+
+<p>想看包括游戏电脑在内的全貌？<a href="/blog/zh/can-my-pc-run-ai">我们在这里测了 10 台电脑</a>。</p>
+<h2>常见问题</h2>
+<div class="faq">
+<details><summary>集成显卡能让 AI 更快吗？</summary><p>对聊天来说几乎没用。在我们的 16 GB 笔记本电脑上，两种方式输出回答都是每秒约 14 个 token。读取粘贴的长文字快约 1.3 倍，生成图片快 4 倍以上。</p></details>
+<details><summary>集成显卡会让 AI 变慢吗？</summary><p>有时会。用小模型时，Intel 集成显卡的输出比 CPU 慢 29%；用更大的模型时反而快 26%。这取决于模型和笔记本电脑，所以 GreenCube 会在你的笔记本上实测后再选。</p></details>
+<details><summary>没有显卡的笔记本电脑够用来跑 AI 吗？</summary><p>聊天和学习够用。16 GB 笔记本电脑用小模型输出得比你读得还快。也能生成图片，但每张要 2 到 3 分钟。</p></details>
+</div>
+
+<div class="cta-box"><h3>属于你自己的 AI，就在你的电脑上</h3><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh/buy">获取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">属于 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>产品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/buy">获取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh/what-you-get">我的电脑能跑吗？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>了解更多</h3>
+        <ul>
+          <li><a href="/blog/zh">Blog</a></li>
+          <li><a href="https://greencube.app/zh/your-data">你的数据</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 与你的数据 (EN)</a></li>
+          <li><a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/mission">我们的使命</a></li>
+          <li><a href="mailto:support@greencube.app">联系我们</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隐私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用条款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙制造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

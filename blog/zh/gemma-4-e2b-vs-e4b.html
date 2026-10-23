@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>笔记本电脑上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 实测对比 | GreenCube 博客</title>
+  <meta name="description" content="在没有显卡的 16 GB 笔记本电脑上对比 Gemma 4 E2B 和 E4B（以及 Phi-4 Mini）：同一个回答，20 秒对 112 秒。更大的模型能给你什么，什么时候值得等。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="笔记本电脑上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 实测对比 | GreenCube 博客" />
+  <meta property="og:description" content="在没有显卡的 16 GB 笔记本电脑上对比 Gemma 4 E2B 和 E4B（以及 Phi-4 Mini）：同一个回答，20 秒对 112 秒。更大的模型能给你什么，什么时候值得等。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh/gemma-4-e2b-vs-e4b" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "笔记本电脑上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 实测对比", "description": "在没有显卡的 16 GB 笔记本电脑上对比 Gemma 4 E2B 和 E4B（以及 Phi-4 Mini）：同一个回答，20 秒对 112 秒。更大的模型能给你什么，什么时候值得等。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "更大的 AI 模型总是更好吗？", "acceptedAnswer": {"@type": "Answer", "text": "回答通常会好一点，但在没有显卡的笔记本电脑上慢得多。在我们的测试中，大模型（Gemma 4 E4B）讲解得最好，但用了 112 秒；小模型（Gemma 4 E2B）20 秒就给出了不错的回答。"}}, {"@type": "Question", "name": "小 AI 模型会答错事实吗？", "acceptedAnswer": {"@type": "Answer", "text": "在我们的五道简短事实题（计算、单位换算、日期、科学）里，两个小模型一道都没错。小模型的弱点是数数：有时说了一个数量，列出来的却是另一个数量。"}}, {"@type": "Question", "name": "我的电脑应该用哪个 AI 模型？", "acceptedAnswer": {"@type": "Answer", "text": "没有显卡的笔记本电脑用小模型。有显卡的电脑上大模型也跑得很快（8 GB 显卡上每秒 56 到 72 个 token），就用它。GreenCube 会根据你的电脑帮你选。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a>
+    <a href="https://greencube.app/zh/your-data">你的数据</a>
+    <a href="https://greencube.app/zh/mission">我们的使命</a>
+    <a href="/blog/zh" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">中文</summary><div class="lang-list"><a href="/blog/gemma-4-e2b-vs-e4b" hreflang="en" lang="en">English</a><a href="/blog/es/gemma-4-e2b-vs-e4b" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-e2b-vs-e4b" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-e2b-vs-e4b" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-e2b-vs-e4b" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/gemma-4-e2b-vs-e4b" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/gemma-4-e2b-vs-e4b" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/gemma-4-e2b-vs-e4b" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/gemma-4-e2b-vs-e4b" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/gemma-4-e2b-vs-e4b" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/gemma-4-e2b-vs-e4b" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/gemma-4-e2b-vs-e4b" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/gemma-4-e2b-vs-e4b" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/gemma-4-e2b-vs-e4b" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/gemma-4-e2b-vs-e4b" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/gemma-4-e2b-vs-e4b" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/gemma-4-e2b-vs-e4b" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/gemma-4-e2b-vs-e4b" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/gemma-4-e2b-vs-e4b" hreflang="zh-CN" lang="zh-CN" aria-current="true">简体中文</a></div></details><a href="https://greencube.app/zh/buy" class="nav-cta">获取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<h1>笔记本电脑上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 实测对比</h1>
+<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<div class="answer"><p><strong>简短回答：</strong>在没有显卡的笔记本电脑上，<strong>小模型胜出</strong>：20 秒得到一个不错的回答，而不是等近 2 分钟得到一个稍好一点的回答。如果你有显卡，就用大的：在显卡上它也很快。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 秒</b><span>小模型（Gemma 4 E2B），完整回答</span></div>
+<div class="stat b"><b>28 秒</b><span>较老的小模型（Phi-4 Mini）</span></div>
+<div class="stat p"><b>112 秒</b><span>大模型（Gemma 4 E4B），讲解最好</span></div>
+</div>
+
+<h2>测试</h2>
+<p>一台 16 GB 笔记本电脑（Intel Core Ultra 5，没有显卡），只用 CPU。一个典型的学习请求：给 14 岁的孩子讲解光合作用，然后出三道测验题。我们计时到回答完成，时间是 2026 年 9 月。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>模型</th><th>大小</th><th>完成回答用时</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 秒</b></td><td>完整、写得好、三道题各不相同</td></tr>
+<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 秒</b></td><td>完整且正确，但有一道题重复</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 秒</b></td><td>完整，讲解最好</td></tr>
+</tbody>
+</table></div>
+
+<h2>我们发现了什么</h2>
+
+<div class="card g">
+<h3>1. 学习用小模型就够了</h3>
+<p>我们还问了五道简短的事实题：计算、单位换算、日期和科学。<strong>小模型一道都没答错。</strong>小 Gemma 甚至在没要求的情况下，主动给出了另一种算百分比的方法。</p>
+</div>
+
+<div class="card y">
+<h3>2. 它的弱点：数数</h3>
+<p>有两次，小模型说“这里有 5 点”，结果列出来的少了或多了。所以现在 GreenCube 会让它在写数字之前先数一遍。在这种小细节上，大模型更可靠。</p>
+</div>
+
+<div class="card b">
+<h3>3. 有显卡，情况就不一样了</h3>
+<p>同一个大模型在 8 GB 游戏显卡上<strong>每秒输出 56 到 72 个 token</strong>，比这台笔记本电脑快 7 到 9 倍。在游戏电脑上，你不用等就能得到更好的回答。</p>
+</div>
+
+<h2>哪个适合你的电脑？</h2>
+<div class="expect">
+<div class="g"><h4>无显卡的笔记本电脑</h4><p>小模型。回答快，学习、写作和提问都够好。</p></div>
+<div class="b"><h4>游戏电脑</h4><p>大模型。回答更好，而且仍然比你读得快。</p></div>
+<div class="y"><h4>需要列清单？</h4><p>如果它说“这里有 5 点”，检查一下是不是真有 5 点。这是小模型唯一会犯的错。</p></div>
+<div class="p"><h4>不想操心？</h4><p>GreenCube 会检查你的电脑并帮你选。</p></div>
+</div>
+
+<p>看看每种电脑有多快：<a href="/blog/zh/can-my-pc-run-ai">我们在这里测了 10 台电脑</a>。</p>
+<h2>常见问题</h2>
+<div class="faq">
+<details><summary>更大的 AI 模型总是更好吗？</summary><p>回答通常会好一点，但在没有显卡的笔记本电脑上慢得多。在我们的测试中，大模型（Gemma 4 E4B）讲解得最好，但用了 112 秒；小模型（Gemma 4 E2B）20 秒就给出了不错的回答。</p></details>
+<details><summary>小 AI 模型会答错事实吗？</summary><p>在我们的五道简短事实题（计算、单位换算、日期、科学）里，两个小模型一道都没错。小模型的弱点是数数：有时说了一个数量，列出来的却是另一个数量。</p></details>
+<details><summary>我的电脑应该用哪个 AI 模型？</summary><p>没有显卡的笔记本电脑用小模型。有显卡的电脑上大模型也跑得很快（8 GB 显卡上每秒 56 到 72 个 token），就用它。GreenCube 会根据你的电脑帮你选。</p></details>
+</div>
+
+<div class="cta-box"><h3>属于你自己的 AI，就在你的电脑上</h3><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh/buy">获取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">属于 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>产品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/buy">获取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh/what-you-get">我的电脑能跑吗？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>了解更多</h3>
+        <ul>
+          <li><a href="/blog/zh">Blog</a></li>
+          <li><a href="https://greencube.app/zh/your-data">你的数据</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 与你的数据 (EN)</a></li>
+          <li><a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/mission">我们的使命</a></li>
+          <li><a href="mailto:support@greencube.app">联系我们</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隐私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用条款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙制造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

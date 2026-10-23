@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>用 AI 把 PDF 做成抽认卡：我们离线生成，逐张核对 | GreenCube 博客</title>
+  <meta name="description" content="我们在一台普通笔记本电脑上、不联网，用 AI 把两长章内容做成抽认卡：花了多久、逐张核对后有多少张正确、它在哪里出错，以及免费的替代工具。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="用 AI 把 PDF 做成抽认卡：我们离线生成，逐张核对 | GreenCube 博客" />
+  <meta property="og:description" content="我们在一台普通笔记本电脑上、不联网，用 AI 把两长章内容做成抽认卡：花了多久、逐张核对后有多少张正确、它在哪里出错，以及免费的替代工具。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh/flashcards-from-pdf" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/flashcards-con-ia-desde-pdf" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/flashcards-from-pdf" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "用 AI 把 PDF 做成抽认卡：我们离线生成，逐张核对", "description": "我们在一台普通笔记本电脑上、不联网，用 AI 把两长章内容做成抽认卡：花了多久、逐张核对后有多少张正确、它在哪里出错，以及免费的替代工具。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-08-22", "dateModified": "2026-10-19", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/flashcards-from-pdf", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "不联网能用 AI 把 PDF 做成抽认卡吗？", "acceptedAnswer": {"@type": "Answer", "text": "能，用在你电脑上运行的 AI。在我们的测试中，GreenCube 在一台没有显卡、没有联网的 16 GB 笔记本电脑上，约 5 分钟把一章约 4,800 词的内容做成了 18 张抽认卡和一份学习指南。"}}, {"@type": "Question", "name": "AI 做的抽认卡可靠吗？", "acceptedAnswer": {"@type": "Answer", "text": "大部分可靠，但不是全部。在我们手工核对的 36 张里，小 AI 正确 21 张、部分正确 6 张、错误 5 张、重复 4 张；大 AI 正确 30 张、部分正确 4 张、错误 2 张、没有重复。错误集中在章节里跳跃不同时期的部分，所以学习前先核对一下。"}}, {"@type": "Question", "name": "能用和 PDF 不同的语言生成抽认卡吗？", "acceptedAnswer": {"@type": "Answer", "text": "能。我们让它根据一章英文内容生成西班牙语抽认卡，18 张全部是西班牙语：正确 11 张、部分正确 4 张、没有错误、重复 3 张。"}}, {"@type": "Question", "name": "把 PDF 做成 AI 抽认卡，最好的免费应用是哪个？", "acceptedAnswer": {"@type": "Answer", "text": "如果你不介意上传 PDF，NotebookLM 可以免费生成抽认卡，能导出为 CSV，并标注原文出处。如果你不想上传到任何地方，或者碰到了上限，就需要一个在你自己电脑上运行的 AI。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a>
+    <a href="https://greencube.app/zh/your-data">你的数据</a>
+    <a href="https://greencube.app/zh/mission">我们的使命</a>
+    <a href="/blog/zh" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">中文</summary><div class="lang-list"><a href="/blog/flashcards-from-pdf" hreflang="en" lang="en">English</a><a href="/blog/es/flashcards-con-ia-desde-pdf" hreflang="es" lang="es">Español</a><a href="/blog/pt/flashcards-from-pdf" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/flashcards-from-pdf" hreflang="fr" lang="fr">Français</a><a href="/blog/de/flashcards-from-pdf" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/flashcards-from-pdf" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/flashcards-from-pdf" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/flashcards-from-pdf" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/flashcards-from-pdf" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/flashcards-from-pdf" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/flashcards-from-pdf" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/flashcards-from-pdf" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/flashcards-from-pdf" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/flashcards-from-pdf" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/flashcards-from-pdf" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/flashcards-from-pdf" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/flashcards-from-pdf" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/flashcards-from-pdf" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/flashcards-from-pdf" hreflang="zh-CN" lang="zh-CN" aria-current="true">简体中文</a></div></details><a href="https://greencube.app/zh/buy" class="nav-cta">获取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<h1>用 AI 把 PDF 做成抽认卡：我们离线生成，逐张核对</h1>
+<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年8月22日</p>
+<div class="answer"><p><strong>简短回答：可以，在一台普通笔记本电脑上每章约 5 分钟，不用联网。</strong>我们给 GreenCube 两长章内容，让它生成考试用的抽认卡：每章都得到了 18 张卡和一份学习指南。然后我们把 36 张卡逐张和原文核对。大部分是对的，但不是全部，而且错误恰好集中在章节跳跃不同时期的地方。下面是具体是哪些卡，以及免费的替代工具。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>5 分钟</b><span>每章约 4,800 词，学习指南加 18 张抽认卡，16 GB 笔记本电脑</span></div>
+<div class="stat b"><b>36 张中 30 张</b><span>大 AI 生成的正确抽认卡（小 AI 是 21 张），手工核对</span></div>
+<div class="stat p"><b>0</b><span>上传到任何地方的文件</span></div>
+</div>
+
+<h2>测试</h2>
+
+<p>两长章内容，就是考试会考的那种：<strong>西班牙第二共和国</strong>（西班牙文，约 4,800 词）和<strong>工业革命</strong>（英文，约 4,700 词）。每章我们都输入了学生会打的话：“把这个主题做成考试用的抽认卡”（用西班牙语），英文那章则同样的话再加上“用西班牙语”。</p>
+<p>我们在 2026 年 10 月 19 日用真实的 GreenCube 应用（当前版本的测试副本）运行，电脑是一台 16 GB 笔记本，Intel Core Ultra 5 加集成显卡，没有独立显卡，插着电源，处于离线状态。使用小 AI Gemma 4 E2B，它在这类笔记本电脑上运行得很顺畅。</p>
+
+<h2>结果</h2>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>章节</th><th>用时</th><th>卡片</th><th>正确</th><th>部分正确</th><th>错误</th><th>重复</th></tr></thead>
+<tbody>
+<tr><td>第二共和国（西班牙文）</td><td><b>4 分 57 秒</b></td><td>18</td><td><b>10</b></td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>工业革命（英文 &rarr; 西班牙语）</td><td><b>4 分 52 秒</b></td><td>18</td><td><b>11</b></td><td>4</td><td>0</td><td>3</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>大 AI 表现更好。</strong>我们用 GreenCube 在 16 GB 笔记本电脑上提供的大 AI Gemma 4 E4B 重复了测试：<strong>36 张中 30 张正确</strong>，部分正确 4 张，错误 2 张，没有重复。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>章节</th><th>AI</th><th>正确</th><th>部分正确</th><th>错误</th><th>重复</th></tr></thead>
+<tbody>
+<tr><td>第二共和国</td><td>E2B（小）</td><td>10</td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>第二共和国</td><td>E4B（大）</td><td><b>15</b></td><td>1</td><td>2</td><td>0</td></tr>
+<tr><td>工业革命</td><td>E2B（小）</td><td>11</td><td>4</td><td>0</td><td>3</td></tr>
+<tr><td>工业革命</td><td>E4B（大）</td><td><b>15</b></td><td>3</td><td>0</td><td>0</td></tr>
+</tbody>
+</table></div>
+<p>我们没有公布 E4B 的用时：这次测试中，一个应用缺陷让它在生成卡片之前把学习指南重写了好几遍。下个版本已经修复，我们会重新计时。</p>
+
+<p>“正确”指卡片内容和章节一致。“部分正确”指要点对了，但添加或改动了细节。“错误”指章节说的是别的内容。每张卡我们都在原文里找到了它所依据的句子来核对。</p>
+
+<h2>它做对了什么</h2>
+
+<div class="card g">
+<h3>日期和关键事实，提取得干净利落</h3>
+<p>“西班牙共和国是什么时候宣布成立的？”&rarr;“1931 年 4 月 14 日”。“塞缪尔·克朗普顿在 1779 年发明了什么？”&rarr;“走锭纺纱机”。“哪个左翼联盟赢得了 1936 年的选举？”&rarr;“人民阵线”。关于日期、人名和发明的卡片最可靠（这里是从西班牙语卡片翻译过来的）。</p>
+</div>
+
+<div class="card b">
+<h3>英文章节，生成另一种语言的抽认卡</h3>
+<p>我们给它英文的工业革命章节，让它用西班牙语出卡：18 张全是西班牙语，一张错的都没有。如果你用一种语言的笔记、论文或书学习，再用另一种语言复习，这很方便。</p>
+</div>
+
+<h2>它在哪里出错</h2>
+
+<div class="card p">
+<h3>章节在不同时期之间跳跃时</h3>
+<p>第二共和国那章包含了西班牙国旗和国徽从 19 世纪以来的历史。几乎所有错误都出在这里：一张卡说第二共和国的国旗上有“Constitución”字样，而原文说的是 19 世纪 20 年代的一面旗帜。另一张卡说共和国一直延续到内战开始，而章节本身写的是延续到 1939 年 4 月 1 日。</p>
+</div>
+
+<div class="card y">
+<h3>编造的细节和偶尔的重复</h3>
+<p>有些卡片要点对了，但添加了原文没有的内容（把一种纱线说成“结实的”，或者说阿克赖特“开创了纺织业”），有的术语翻错了（轧棉机不是“纺纱机”），有的只是换个说法重复了前面的卡片。另外在测试中，写出来的学习指南在卡片之前停在了半句话；应用团队已经找到原因，下个版本已修复。</p>
+</div>
+
+<p><strong>实用结论：</strong>可以用，但学习之前先核对，尤其是混合了不同时期日期的章节。核对 18 张卡只要几分钟，仍然比手写快得多。</p>
+
+<h2>其他免费制作 AI 抽认卡的方法</h2>
+
+<p>这些都是在线运行的：你要把 PDF 上传到它们的网站。信息来自它们自己的页面，2026 年 10 月；我们没有测量它们的质量。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>工具</th><th>免费</th><th>会上传你的 PDF 吗？</th></tr></thead>
+<tbody>
+<tr><td><strong>NotebookLM</strong>（Google）</td><td>是：根据你的文档生成抽认卡和测验，可导出为 CSV，并标注原文出处（<a href="https://support.google.com/notebooklm/answer/16958963?hl=en" rel="noopener">Google</a>）</td><td>会，上传到 Google</td></tr>
+<tr><td><strong>SlideSpeak</strong></td><td>是，PDF 最多 50 页，不用注册，可导出到 Anki 或 Quizlet（<a href="https://slidespeak.co/free-tools/create-flashcards-from-pdf" rel="noopener">SlideSpeak</a>）</td><td>会</td></tr>
+<tr><td><strong>Flashcards.world</strong></td><td>不注册最多 10 张卡（<a href="https://flashcards.world/pdf-to-flashcards/" rel="noopener">Flashcards.world</a>）</td><td>会</td></tr>
+<tr><td><strong>GreenCube</strong>（在你的电脑上）</td><td>9.99 欧元一次付清，不限量；还能就这一章聊天、总结和回答问题</td><td><b>不会</b>：一切都留在你的电脑上</td></tr>
+</tbody>
+</table></div>
+
+<p>如果你不介意把笔记上传到 Google，NotebookLM 是功能很完整的免费选择。如果你希望笔记永远不离开自己的电脑、不想受限，或者在网络不好的地方学习，就需要一个在你自己电脑上运行的 AI。各个 AI 如何处理你上传的内容，我们在<a href="/blog/zh/ai-that-doesnt-train-on-your-data">哪个 AI 不用你的聊天训练？</a>里核实过。</p>
+
+<h2>怎样从 PDF 得到好的抽认卡</h2>
+<ul>
+<li><strong>一次一章。</strong>一章能得到 18 张相当聚焦的卡；整本书会让它们变得稀释。</li>
+<li><strong>核对涉及其他时期日期的卡片。</strong>那是它最容易出错的地方。</li>
+<li><strong>删掉重复和含糊的卡</strong>（“牛头刨床是什么？”&rarr;“一种用于机床发展的机器”），留下能让你思考的卡。</li>
+<li><strong>也让它出考试题</strong>，然后不看答案作答：在<a href="/blog/zh/ai-to-study-from-pdf">我们的 PDF 问答测试</a>中，它 12 个答对 11 个，每个约 15 秒。</li>
+</ul>
+
+<p>你的电脑能跑吗？<a href="/blog/zh/can-my-pc-run-ai#checker">30 秒查一查</a>：有显卡的话比这台笔记本电脑快得多。</p>
+<h2>常见问题</h2>
+<div class="faq">
+<details><summary>不联网能用 AI 把 PDF 做成抽认卡吗？</summary><p>能，用在你电脑上运行的 AI。在我们的测试中，GreenCube 在一台没有显卡、没有联网的 16 GB 笔记本电脑上，约 5 分钟把一章约 4,800 词的内容做成了 18 张抽认卡和一份学习指南。</p></details>
+<details><summary>AI 做的抽认卡可靠吗？</summary><p>大部分可靠，但不是全部。在我们手工核对的 36 张里，小 AI 正确 21 张、部分正确 6 张、错误 5 张、重复 4 张；大 AI 正确 30 张、部分正确 4 张、错误 2 张、没有重复。错误集中在章节里跳跃不同时期的部分，所以学习前先核对一下。</p></details>
+<details><summary>能用和 PDF 不同的语言生成抽认卡吗？</summary><p>能。我们让它根据一章英文内容生成西班牙语抽认卡，18 张全部是西班牙语：正确 11 张、部分正确 4 张、没有错误、重复 3 张。</p></details>
+<details><summary>把 PDF 做成 AI 抽认卡，最好的免费应用是哪个？</summary><p>如果你不介意上传 PDF，NotebookLM 可以免费生成抽认卡，能导出为 CSV，并标注原文出处。如果你不想上传到任何地方，或者碰到了上限，就需要一个在你自己电脑上运行的 AI。</p></details>
+</div>
+
+<div class="cta-box"><h3>属于你自己的 AI，就在你的电脑上</h3><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh/buy">获取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">属于 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>产品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/buy">获取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh/what-you-get">我的电脑能跑吗？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>了解更多</h3>
+        <ul>
+          <li><a href="/blog/zh">Blog</a></li>
+          <li><a href="https://greencube.app/zh/your-data">你的数据</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 与你的数据 (EN)</a></li>
+          <li><a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/mission">我们的使命</a></li>
+          <li><a href="mailto:support@greencube.app">联系我们</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隐私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用条款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙制造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

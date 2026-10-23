@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "在你电脑上离线生成 AI 图片：一张要多久",
+ "description": "我们在 12 GB 显卡、Intel 集成显卡笔记本电脑和笔记本 CPU 上计时了本地 AI 图片生成：每张 28 秒到 11 分钟。你的电脑需要什么。",
+ "date": "2026-10-18",
+ "stat": "28 秒",
+ "teaser": "取决于你的电脑，从 28 秒到 11 分钟。",
+ "rank": 5,
+ "lang": "zh",
+ "alt": "local-ai-image-generator-speed",
+ "faq": [
+  {"q": "在自己电脑上用 AI 生成一张图片要多久？", "a": "在我们的测试中，一张 512 x 512 的图片在 12 GB 显卡的台式机上要 28 秒，在用 Intel 集成显卡的 16 GB 笔记本电脑上约两分半，在同一台笔记本只用 CPU 时约十一分半。"},
+  {"q": "没有显卡的笔记本电脑能生成 AI 图片吗？", "a": "有 16 GB 内存就可以。Intel 集成显卡比只用 CPU 快约 4 倍。8 GB 内存不行：光是生成图片的 AI 就需要约 7 GB。"},
+  {"q": "生成 AI 图片时需要关掉其他应用吗？", "a": "在 16 GB 笔记本电脑上不需要：即使开着代码编辑器和浏览器，图片也在同样的时间内完成。关键是 Windows 能给它腾出约 7 GB。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>简短回答：</strong>显卡好的游戏电脑约<strong>半分钟</strong>，普通 16 GB 笔记本电脑<strong>2 到 3 分钟</strong>，8 GB 笔记本电脑不能生成。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>28 秒</b><span>在 12 GB 显卡的台式机上</span></div>
+<div class="stat b"><b>2.5 分钟</b><span>在用 Intel 集成显卡的 16 GB 笔记本电脑上</span></div>
+<div class="stat p"><b>11.5 分钟</b><span>同一台笔记本只用 CPU</span></div>
+</div>
+
+<h2>测试</h2>
+<p>每台电脑都用同一个生成图片的 AI（GreenCube 里的 Z-Image Turbo），一张 512 x 512 的图片，8 步。我们从点击按钮计时到图片完成，时间是 2026 年 9 月和 10 月。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>电脑</th><th>用什么运行</th><th>每张用时</th></tr></thead>
+<tbody>
+<tr><td>台式机，12 GB 显卡，32 GB 内存</td><td>显卡</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 秒</b></td></tr>
+<tr><td>Core Ultra 5 笔记本电脑，16 GB</td><td>Intel 集成显卡</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 分 22 秒&ndash;2 分 38 秒</b></td></tr>
+<tr><td>同一台笔记本电脑</td><td>仅用 CPU</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 分 27 秒</b></td></tr>
+<tr><td>8 GB 笔记本电脑</td><td>&mdash;</td><td><b>不能</b></td></tr>
+</tbody>
+</table></div>
+<p>条形表示速度：越长越快。</p>
+
+<h2>我们发现了什么</h2>
+
+<div class="card g">
+<h3>1. 任何图形芯片都帮大忙</h3>
+<p>即使是笔记本电脑里内置的小图形芯片，也让图片生成比只用 CPU <strong>快了约 4 倍</strong>。真正的显卡还要再快 5 倍。</p>
+</div>
+
+<div class="card b">
+<h3>2. 它需要约 7 GB 空间</h3>
+<p>运行时，生成图片的 AI 会向 Windows 要约 7 GB。这就是 8 GB 笔记本电脑做不到的原因，也是 GreenCube 在开始前先检查空间够不够、而不是中途崩溃的原因。</p>
+</div>
+
+<div class="card y">
+<h3>3. 其他应用几乎没影响</h3>
+<p>在 16 GB 笔记本电脑上，我们开着代码编辑器和浏览器，甚至故意占用 4 GB，生成同一张图片：每次都是约 2 分钟。Windows 会自己把闲置的东西挪开。</p>
+</div>
+
+<h2>你的电脑用起来会怎样</h2>
+<div class="expect">
+<div class="g"><h4>显卡</h4><p>每张不到一分钟。多生成几张，挑最好的。</p></div>
+<div class="b"><h4>无显卡的 16 GB 笔记本电脑</h4><p>2 到 3 分钟。生成几张没问题：让它生成一张，你继续学习。</p></div>
+<div class="y"><h4>8 GB 笔记本电脑</h4><p>不能生成图片，但聊天和学习可以。</p></div>
+<div class="p"><h4>任何情况下都没有上限</h4><p>没人数你生成了多少张。唯一的限制是你愿意等多久。</p></div>
+</div>

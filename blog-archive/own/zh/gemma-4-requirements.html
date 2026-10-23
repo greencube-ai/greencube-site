@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Gemma 4 配置要求：本地运行需要什么样的电脑",
+ "description": "Gemma 4 E2B、E4B 和 12B 的配置要求，在真实电脑上实测：每个需要多少内存和显存，在笔记本电脑和游戏显卡上跑多快。",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "从 8 GB 笔记本电脑到游戏电脑：哪个 Gemma 4 适合你的电脑。",
+ "rank": 2,
+ "lang": "zh",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "本地运行 Gemma 4 的最低配置是什么？", "a": "最小的 Gemma 4 E2B（2.6 GB 文件）在一台 8 GB 内存、没有显卡的笔记本电脑上就能运行，真实聊天中每秒 5 到 7 个 token。启动时需要几 GB 的空闲内存。"},
+  {"q": "Gemma 4 E4B 需要多少显存？", "a": "E4B 是一个 4.2 GB 的文件，可以完整装进 6 GB 显卡，在 GTX 1660 Super 上每秒输出 35 到 38 个 token。在 8 GB 显卡上是 56 到 72 个。没有显卡时，16 GB 内存也能运行，每秒约 8 个 token。"},
+  {"q": "Gemma 4 12B 能在 8 GB 显卡上运行吗？", "a": "回答一个短问题可以：在 RX 5700 XT 上每秒 20 到 35 个 token。但对话一长就崩溃了，因为显卡几乎没有剩余空间。我们建议至少 10 GB 显存。"},
+  {"q": "Gemma 4 可以免费使用吗？", "a": "可以。Google 以 Apache 2.0 许可证发布了包括 E2B 和 E4B 在内的 Gemma 4，允许商业使用。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>简短回答：</strong>小巧的 <strong>Gemma 4 E2B</strong> 在 <strong>8 GB 笔记本电脑</strong>上就能跑。<strong>E4B</strong> 需要 16 GB 内存，或者在任何 <strong>6 GB 及以上的显卡</strong>上飞快运行。<strong>12B</strong> 要进行真正的对话，需要 <strong>10 GB 以上显存</strong>。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>内存就够跑 Gemma 4 E2B，不需要显卡</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>E4B 在 8 GB 游戏显卡上每秒 token 数</span></div>
+<div class="stat p"><b>10 GB</b><span>显存达到这个数，我们才放心让 12B 跑长对话</span></div>
+</div>
+
+<h2>Gemma 4 配置要求一览</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>模型</th><th>文件大小</th><th>我们建议的最低配置</th><th>最适合</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>8 GB 内存，无显卡</td><td>笔记本电脑</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>16 GB 内存，或 6 GB 显卡</td><td>游戏电脑、16 GB 笔记本电脑</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6.2 GB</td><td>10 GB 以上显存</td><td>12 GB 及以上的显卡</td></tr>
+</tbody>
+</table></div>
+
+<h2>实测速度</h2>
+<p>每个模型输出回答的速度，单位是每秒 token 数（token 是词的片段）。2026 年 9 月和 10 月用 GreenCube 测得。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>电脑</th><th>模型</th><th>输出（token/秒）</th></tr></thead>
+<tbody>
+<tr><td>台式机，AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>台式机，NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>台式机，12 GB 显卡</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>台式机，NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>台式机，AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b>（仅限短对话）</td></tr>
+<tr><td>台式机，NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>约 20</b></td></tr>
+<tr><td>笔记本电脑，Intel Core Ultra 5，16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>同一台笔记本电脑</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>笔记本电脑，Intel Iris Xe，8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>我们发现了什么</h2>
+
+<div class="card g">
+<h3>1. E2B 是笔记本电脑的模型</h3>
+<p>在没有显卡的 16 GB 笔记本电脑上，它约 20 秒就给出一个完整的学习回答，E4B 则用了 112 秒。五道简短的事实核查题，它一道都没错。<a href="/blog/gemma-4-e2b-vs-e4b">E2B 和 E4B 实测对比。</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B 是游戏电脑的模型</h3>
+<p>整个模型放进显卡后，E4B 比在笔记本电脑上<strong>快 7 到 9 倍</strong>，回答也更好。任何 6 GB 及以上的显卡都行。</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B 需要真正的显存，不只是内存</h3>
+<p>在 8 GB 显卡上，12B 回答一个短问题没问题，但对话一变长每次都崩溃。那台电脑有 48 GB 内存，也没用。<a href="/blog/how-much-vram-for-ai">为什么模型必须装进显卡。</a></p>
+</div>
+
+<h2>哪个 Gemma 4 适合你的电脑？</h2>
+<div class="expect">
+<div class="g"><h4>8 GB 笔记本电脑</h4><p>E2B。先关掉其他应用。</p></div>
+<div class="b"><h4>无显卡的 16 GB 笔记本电脑</h4><p>要速度就选 E2B。E4B 能用，但慢。</p></div>
+<div class="y"><h4>6&ndash;8 GB 显卡的游戏电脑</h4><p>E4B，全部放在显卡上。</p></div>
+<div class="p"><h4>12 GB 及以上的显卡</h4><p>E4B 很快；12B 也可以考虑了。</p></div>
+</div>
+
+<p>Gemma 4 由 Google 以 Apache 2.0 许可证发布。GreenCube 会自动为你的电脑选对版本。<a href="/blog/can-my-pc-run-ai">查看我们测过的全部 {{pcs}} 台电脑。</a></p>
