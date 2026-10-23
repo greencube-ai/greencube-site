@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Dizüstünde Gemma 4 E2B ve E4B: küçük ve büyük yapay zekâ modeli, ölçüldü",
+ "description": "Ekran kartı olmayan 16 GB'lık bir dizüstünde Gemma 4 E2B ve E4B (ve Phi-4 Mini): aynı yanıt için 20 saniyeye karşı 112. Büyük model sana ne kazandırır ve beklemeye ne zaman değer.",
+ "date": "2026-10-18",
+ "stat": "20 sn",
+ "teaser": "Küçük: 20 saniye. Büyük: 112. Kaybettiğin şey bu.",
+ "rank": 8,
+ "lang": "tr",
+ "alt": "gemma-4-e2b-vs-e4b",
+ "faq": [
+  {"q": "Daha büyük bir yapay zekâ modeli her zaman daha mı iyi?", "a": "Yanıtları genellikle biraz daha iyidir, ama ekran kartı olmayan bir dizüstünde çok daha yavaştır. Testimizde büyük model (Gemma 4 E4B) en iyi açıklamayı verdi ama 112 saniye sürdü; küçük olan (Gemma 4 E2B) 20 saniyede iyi bir yanıt verdi."},
+  {"q": "Küçük yapay zekâ modelleri bilgileri yanlış mı verir?", "a": "Beş hızlı bilgi sorumuzda (matematik, birim dönüştürme, tarihler, bilim) iki küçük modelden hiçbiri hata yapmadı. Küçüğün zayıf noktası saymaktı: bazen bir öğe sayısı söyleyip başka sayıda öğe listeledi."},
+  {"q": "PC'mde hangi yapay zekâ modelini kullanmalıyım?", "a": "Ekran kartı olmayan bir dizüstünde küçük bir model. Ekran kartlı bir PC'de büyük model de hızlı çalışır (8 GB'lık kartlarda saniyede 56 ila 72 token), o yüzden onu kullan. GreenCube PC'ne göre senin için seçer."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> ekran kartı olmayan bir dizüstünde <strong>küçük model kazanır</strong>: neredeyse 2 dakikada biraz daha iyi bir yanıt yerine 20 saniyede iyi bir yanıt. Ekran kartın varsa büyüğünü al: orada o da hızlı.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 sn</b><span>küçük model (Gemma 4 E2B), tam yanıt</span></div>
+<div class="stat b"><b>28 sn</b><span>eski küçük model (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 sn</b><span>büyük model (Gemma 4 E4B), en iyi açıklama</span></div>
+</div>
+
+<h2>Test</h2>
+<p>16 GB'lık bir dizüstü (Intel Core Ultra 5, ekran kartı yok), yalnızca işlemci. Tipik bir ders çalışma isteği: fotosentezi 14 yaşındaki birine anlat, sonra bu konuda üç sınav sorusu yaz. Yanıt bitene kadar süre tuttuk, Eylül 2026'da.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>Boyut</th><th>Tam yanıta kadar süre</th><th>Ne çıktı</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 sn</b></td><td>Eksiksiz, iyi yazılmış, üç farklı sınav sorusu</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 sn</b></td><td>Eksiksiz ve doğru, ama bir sınav sorusunu tekrarladı</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 sn</b></td><td>Eksiksiz, en iyi açıklama</td></tr>
+</tbody>
+</table></div>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Ders çalışmak için küçük olan yeterli</h3>
+<p>Ayrıca beş hızlı bilgi sorusu da sorduk: matematik, birim dönüştürme, tarihler ve bilim. <strong>Küçük modellerden hiçbiri hata yapmadı.</strong> Küçük Gemma, istenmeden bir yüzdeyi hesaplamanın ikinci bir yolunu bile gösterdi.</p>
+</div>
+
+<div class="card y">
+<h3>2. Zayıf noktası: saymak</h3>
+<p>Küçük model iki kez "işte 5 tane" deyip ardından farklı sayıda öğe listeledi. Bu yüzden GreenCube artık ona sayıyı yazmadan önce saymasını söylüyor. Bu tür küçük şeylerde büyük model daha güvenlidir.</p>
+</div>
+
+<div class="card b">
+<h3>3. Ekran kartıyla durum bambaşka</h3>
+<p>Aynı büyük model 8 GB'lık oyun kartlarında <strong>saniyede 56 ila 72 token</strong> yazıyor; bu dizüstüne göre 7 ila 9 kat hızlı. Bir oyun bilgisayarında daha iyi yanıtları beklemeden alırsın.</p>
+</div>
+
+<h2>PC'n için hangisi?</h2>
+<div class="expect">
+<div class="g"><h4>Kartsız dizüstü</h4><p>Küçük model. Hızlı yanıtlar; ders çalışmak, yazmak ve soru sormak için yeterince iyi.</p></div>
+<div class="b"><h4>Oyun bilgisayarı</h4><p>Büyük model. Daha iyi yanıtlar ve yine de okuma hızından daha hızlı.</p></div>
+<div class="y"><h4>Liste mi istiyorsun?</h4><p>"İşte 5 tane" derse, gerçekten 5 tane olduğuna bir göz at. Küçük modelin tek kaydığı yer bu.</p></div>
+<div class="p"><h4>Bununla uğraşmak istemiyor musun?</h4><p>GreenCube PC'ni kontrol eder ve senin için seçer.</p></div>
+</div>
+
+<p>Her tür PC'nin ne kadar hızlı olduğuna bak: <a href="/blog/can-my-pc-run-ai">burada {{pcs}} PC ölçtük</a>.</p>

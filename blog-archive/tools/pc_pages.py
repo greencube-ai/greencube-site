@@ -51,10 +51,11 @@ def hl(pc, lang):
 def secs(r, lang):
     """8–9 s, 28 s, 2:02–2:38 min"""
     r = [round(r[0]), round(r[1])]
+    s, m = WD[lang].get('units', ['s', 'min'])
     if r[1] < 90:
-        return f'{r[0]} s' if r[0] == r[1] else f'{r[0]}–{r[1]} s'
+        return f'{r[0]} {s}' if r[0] == r[1] else f'{r[0]}–{r[1]} {s}'
     mm = lambda t: f'{t // 60}:{t % 60:02d}'
-    return f'{mm(r[0])} min' if r[0] == r[1] else f'{mm(r[0])}–{mm(r[1])} min'
+    return f'{mm(r[0])} {m}' if r[0] == r[1] else f'{mm(r[0])}–{mm(r[1])} {m}'
 
 def times(tokens, speeds, lang):
     """How long `tokens` take at a measured speed range: the slow end of the speed gives the long time."""
@@ -351,6 +352,7 @@ def checker(lang):
             'picLaptop': {'chip': next(r['picture'] for r in pictures(lap) if r['on'] == 'chip'),
                           'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None,
             'builtin': WD[lang]['builtin'], 'T': WD[lang]['checker_js']}
+    if 'units' in WD[lang]: data['U'] = WD[lang]['units']
     T = WD[lang]['checker']
     return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'
             f'<p class="chk-detect" id="chk-detect">{T["nojs"]}</p>\n'

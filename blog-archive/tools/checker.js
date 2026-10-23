@@ -5,6 +5,7 @@
 (function () {
   var D = /*DATA*/null;
   var T = D.T;  // this language's words, from words/<lang>.json
+  var U = D.U || ['s', 'min'];  // seconds and minutes, where a language abbreviates them differently
   function F(k, o) { return T[k].replace(/\{(\w+)\}/g, function (_, x) { return o[x]; }); }
   var box = document.getElementById('chk');
   if (!box) return;
@@ -26,8 +27,8 @@
   function rng(r, approx) { var s = r[0] === r[1] ? n(r[0]) : n(r[0]) + '–' + n(r[1]); return approx ? F('about', { x: s }) : s; }
   function secs(r) {
     var mm = function (t) { return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); };
-    if (r[1] < 90) return r[0] === r[1] ? r[0] + ' s' : r[0] + '–' + r[1] + ' s';
-    return r[0] === r[1] ? mm(r[0]) + ' min' : mm(r[0]) + '–' + mm(r[1]) + ' min';
+    if (r[1] < 90) return r[0] === r[1] ? r[0] + ' ' + U[0] : r[0] + '–' + r[1] + ' ' + U[0];
+    return r[0] === r[1] ? mm(r[0]) + ' ' + U[1] : mm(r[0]) + '–' + mm(r[1]) + ' ' + U[1];
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function a(m) { return '<a href="' + m.url + '">' + esc(m.name) + '</a>'; }

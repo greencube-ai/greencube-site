@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "PC'mde yapay zekâ çalışır mı? {{pcs}} gerçek oyun bilgisayarı ve dizüstüyü ölçtük",
+ "description": "PC'nde yapay zekâ yerelde çalışır mı? GTX 1650'den RTX 2080 Ti'ye ve ekran kartı olmayan dizüstülere kadar {{pcs}} PC'den gerçek hızlar, ayrıca ekran kartının, VRAM'in ve RAM'in ne anlama geldiği.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PC",
+ "teaser": "{{pcs}} oyun bilgisayarı ve dizüstüde gerçek hızlar.",
+ "rank": 1,
+ "lang": "tr",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "PC'mdeki yapay zekâ AMD ekran kartıyla çalışır mı?", "a": "Evet. NVIDIA kartlarının yanı sıra AMD kartlarını da (RX 5700 XT, RX 6600, RX 580) ölçtük. GreenCube, ikisinde de çalışan Vulkan'ı kullanır."},
+  {"q": "Yapay zekâ için ne kadar VRAM gerekir?", "a": "Zorunlu değil, ama 4 GB veya fazlası büyük fark yaratır. Test PC'lerimizde 4 GB'lık bir GTX 1650 saniyede yaklaşık 20 token, 8 GB'lık bir RTX 5060 yaklaşık 56 token yazdı. Daha fazla VRAM, karta daha büyük bir yapay zekânın sığmasını sağlar."},
+  {"q": "Ekran kartı olmayan bir dizüstünde yapay zekâ çalışır mı?", "a": "Evet. Yalnızca Intel grafikli 16 GB'lık bir dizüstü, küçük bir yapay zekâyla saniyede 14 ila 18 token yazdı; bu senin okuma hızından fazla. 8 GB'lık bir dizüstü de çalışır, daha yavaş, ve görsel oluşturamaz."},
+  {"q": "Daha fazla RAM yapay zekâyı hızlandırır mı?", "a": "Tek başına hayır. 48 GB RAM'li bir masaüstünde aynı yapay zekâ, 8 GB'lık ekran kartına geçince işlemciye göre 14 kat hızlı çalıştı. Kartın yoksa RAM önemlidir; kartın varsa en çok VRAM önemlidir."},
+  {"q": "PC'mde yapay zekâ çalıştırmak için internet gerekir mi?", "a": "Yalnızca bir kez, uygulamayı ve yapay zekâyı indirmek ve etkinleştirmek için. Sonrasında sohbet hiç internet olmadan çalışır."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt: evet.</strong> PC'nde oyun çalışıyorsa yapay zekâ da çalışır. {{pcs}} gerçek PC ölçtük: eski bir GTX 1650'den RTX 2080 Ti'ye kadar oyun masaüstüleri ve hiç ekran kartı olmayan iki dizüstü. Hepsinde, tamamen PC üzerinde çalışan bir yapay zekâyla sohbet edildi: internetsiz, aboneliksiz. Değişen tek şey hız.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>ekran kartında işlemciden daha hızlı, aynı PC, aynı yapay zekâ</span></div>
+<div class="stat b"><b>20</b><span>4 GB'lık bir GTX 1650'de saniyede token. Senin okuma hızından fazla.</span></div>
+<div class="stat p"><b>8&ndash;9 sn</b><span>RTX 2080 Ti'de görsel başına, yüklendikten sonra</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Sayılar</h2>
+
+<p>"Yazma", yapay zekânın yanıtını ne kadar hızlı yazdığıdır, saniyedeki token sayısıyla. Token bir kelime parçasıdır: Türkçede bir kelime çoğu zaman birkaç token tutar. Çoğu insan saniyede yaklaşık 4 kelime okur (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>); yani saniyede yaklaşık 8 tokendan itibaren yapay zekâ, gözlerinin yetişebileceğinden daha hızlı yazar.</p>
+
+<!--pcs:table-->
+
+<p>Tam testini görmek için bir ekran kartına tıkla.</p>
+
+<p>GreenCube ile Eylül ve Ekim 2026'da, gerçek sohbetlerde ve GreenCube'un kendi hız testlerinde ölçüldü. Hız aynı PC'de ölçümden ölçüme biraz değişir, bu yüzden birden fazla ölçümümüz olduğunda aralığı veriyoruz. <a href="/blog/how-we-measure-ai-speed">Nasıl ölçtüğümüz ve tüm veriler</a>.</p>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Ağır işi ekran kartı yapar, tıpkı bir oyundaki gibi</h3>
+<p>RX 5700 XT'li masaüstünde aynı yapay zekâ <strong>işlemcide saniyede 5, ekran kartında 72 token</strong> yazdı. Yapay zekâ çoğunlukla ekran kartlarının yapıldığı türden bir matematiktir. Son birkaç yılın herhangi bir kartı, eski 4 GB'lık bir GTX 1650 bile, çok büyük fark yaratır.</p>
+</div>
+
+<div class="card b">
+<h3>2. Ne kadar büyük bir yapay zekânın sığacağına VRAM karar verir</h3>
+<p>Tam hızda çalışması için yapay zekânın kartın kendi belleğine (VRAM) sığması gerekir. O masaüstünde 48 GB RAM vardı ve bu, daha büyük bir modeli kurtarmadı: 12 milyar parametreli bir yapay zekâ kısa bir soru için 8 GB'lık karta sığdı, sohbet uzar uzamaz kart neredeyse doluyken çöktü. <strong>Yapay zekâ için VRAM, RAM'den önemlidir.</strong> Ama VRAM hız demek değildir: ölçtüğümüz dört 8 GB'lık kart saniyede yaklaşık 11 tokendan (RX 580) 72 tokena (RX 5700 XT) kadar yazdı. Bu yüzden GreenCube kartını kontrol eder ve en büyüğünü değil, sığan bir yapay zekâyı seçer.</p>
+</div>
+
+<div class="card y">
+<h3>3. Ekran kartı yok mu? Yine de çalışır</h3>
+<p>Yalnızca Intel grafikli sıradan bir 16 GB'lık dizüstü, daha küçük yapay zekâyla saniyede 14 ila 18 token yazdı ve tam bir yanıtı (bir açıklama ve üç sınav sorusu) yaklaşık 20 saniyede bitirdi. Ders çalışmak ve yazmak için gayet yeterli. 8 GB'lık bir dizüstü de, diğer uygulamalar biraz boş bellek bırakırsa, gerçek sohbetlerde saniyede 5 ila 7 tokenla çalışır.</p>
+</div>
+
+<div class="card p">
+<h3>4. Görseller işin ağır kısmı</h3>
+<p>Bir görsel oluşturmak sohbetten çok daha ağırdır. 11 GB'lık bir RTX 2080 Ti'de <strong>8 ila 9 saniye</strong> (ilki yüklenirken 83 saniye sürdü), 12 GB'lık bir RTX 3060'ta <strong>28 saniye</strong>, 8 GB'lık bir RX 6600'de yaklaşık bir dakika, 6 GB'lık bir GTX 1660 Super'de bir buçuk dakika ve 16 GB'lık dizüstünde yaklaşık <strong>iki buçuk dakika</strong>. 8 GB'lık bir dizüstü hiç görsel oluşturamaz: görsel yapay zekâsı tek başına yaklaşık 7 GB ister.</p>
+</div>
+
+<h2 id="by-hand">PC'ni 30 saniyede kontrol et</h2>
+<ol class="steps">
+<li>Görev Yöneticisi'ni açmak için <strong>Ctrl + Shift + Esc</strong> tuşlarına bas.</li>
+<li><strong>Performans</strong> sekmesine git.</li>
+<li><strong>Bellek</strong>'e tıkla: sağ üstteki sayı senin RAM'in.</li>
+<li><strong>GPU</strong>'ya tıkla: sağ üstteki ad senin kartın, <strong>Ayrılmış GPU belleği</strong> de VRAM'in. Yalnızca Intel grafik mi görüyorsun? O zaman ayrı bir kartın yok.</li>
+</ol>
+
+<h2>PC'n nasıl hissettirecek</h2>
+<div class="expect">
+<div class="g"><h4>6 GB veya üzeri kart</h4><p>Son yılların kartlarının çoğunda hızlı: testlerimizde saniyede 37 ila 76 token, okuma hızının kat kat üstünde, görseller de saniyeler ile bir buçuk dakika arasında. Bir istisna: eski bir RX 580 yaklaşık 11 yazdı, yine de okuma hızından fazla.</p></div>
+<div class="b"><h4>4 GB kart, 16 GB RAM</h4><p>İyi. Testimizde saniyede yaklaşık 20 token.</p></div>
+<div class="y"><h4>Kart yok, 16 GB RAM</h4><p>Daha küçük bir yapay zekâyla sohbet ve ders çalışma için yeterli. Görseller birkaç dakika sürer.</p></div>
+<div class="p"><h4>Kart yok, 8 GB RAM</h4><p>Sohbet için çalışır, yavaşça. Önce diğer uygulamaları kapat. Görsel yok.</p></div>
+</div>
+
+<h2>Neden kendi PC'nde yapay zekâ?</h2>
+<p>Çünkü senin. Mesaj sınırı yok, aylık abonelik yok ve internetsiz de çalışmaya devam eder: trende, dağda ya da Wi-Fi'ı berbat bir kütüphanede. En büyük bulut yapay zekâlarını her konuda geçemez, ama ders çalışmak, yazmak, özetlemek ve günlük sorular için kendi kartındaki bir yapay zekâ fazlasıyla yeterli ve asla bitmez.</p>

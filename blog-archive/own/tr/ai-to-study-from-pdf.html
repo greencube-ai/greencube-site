@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "PDF'ten yapay zekâyla ders çalışmak: 3 uzun belge hakkında 12 soru sorduk",
+ "description": "Kendi dizüstünde PDF'lerinden ders çalışan bir yapay zekâyı test ettik: 3 uzun belge hakkında 12 soru, yaklaşık 15 saniyede 12'de 11 doğru. Tam çalışma notları daha uzun sürer.",
+ "date": "2026-10-18",
+ "stat": "11/12",
+ "teaser": "12'de 11 doğru, soru başına yaklaşık 15 saniye.",
+ "rank": 3,
+ "lang": "tr",
+ "alt": "ai-to-study-from-pdf",
+ "faq": [
+  {"q": "Yapay zekâ uzun bir PDF hakkındaki soruları yanıtlayabilir mi?", "a": "Evet. Testimizde 16 GB'lık bir dizüstündeki küçük bir yapay zekâ, üç uzun belgenin derinlerine gömülü bilgiler hakkındaki 12 sorunun 11'ini doğru yanıtladı; soru başına medyan süre 15 saniyeydi."},
+  {"q": "PDF'in dilinden farklı bir dilde soru sorabilir miyim?", "a": "Evet. Test sorularımızdan biri İngilizce bir belge hakkında İspanyolca soruldu ve doğru yanıtlandı."},
+  {"q": "Bütün bir PDF'in yapay zekâyla çalışma notu ne kadar sürer?", "a": "Ekran kartı olmayan 16 GB'lık bir dizüstünde, yaklaşık 5.000 kelimelik bir belge için yaklaşık 15 dakika, iki katı uzunluktaki biri için yaklaşık 29 dakika; çünkü yapay zekânın her bölümü okuması gerekir. Belirli sorular çok daha hızlıdır."},
+  {"q": "Kaç PDF'le ders çalışabileceğim konusunda bir sınır var mı?", "a": "Kendi PC'nde çalışan bir yapay zekâyla hayır: dosyalarını sayan bir şey yok. Bulut yapay zekâlarının ücretsiz planları dosya yüklemeyi sınırlar."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> <strong>belirli sorularda</strong> ("Watt'ı kim finanse etti?", "hangi yılda…?") kendi dizüstündeki bir yapay zekâ <strong>her biri yaklaşık 15 saniyede 12'de 11 doğru</strong> yaptı. Bütün bir bölümün <strong>tam çalışma notu</strong> daha yavaştır: dizüstünde yaklaşık 15 dakika.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>11/12</b><span>uzun belgelerin derinlerindeki bilgilerle ilgili doğru yanıtlanan soru</span></div>
+<div class="stat b"><b>15 sn</b><span>16 GB'lık bir dizüstünde soru başına medyan</span></div>
+<div class="stat y"><b>~15 dk</b><span>5.000 kelimelik bir belgenin tam çalışma notu için</span></div>
+</div>
+
+<h2>Test</h2>
+<p>Bir öğrencinin çalışabileceği üç uzun belge: Sanayi Devrimi (İngilizce, yaklaşık 5.000 kelime), İkinci İspanya Cumhuriyeti (İspanyolca, yaklaşık 5.000 kelime) ve mitokondri (İngilizce, yaklaşık iki katı uzunlukta). İçlerine gömülü küçük bilgiler hakkında 12 soru sorduk; biri İngilizce bir metin hakkında İspanyolca soruldu. Ekim 2026, ekran kartı olmayan 16 GB'lık bir dizüstü, küçük yapay zekâ (Gemma 4 E2B) ve tek bir modelin şansı olmadığını kontrol etmek için başka bir aileden ikinci bir yapay zekâ.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Yapay zekâ</th><th>Yeniden yapmadan önce</th><th>Sonra</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>5/12 doğru, medyan 78 sn</td><td class="spd"><span class="bar" style="--w:92%"></span><b>11/12 doğru, medyan 15 sn</b></td></tr>
+<tr><td>İkinci bir yapay zekâ (Mellum 2)</td><td>8/12 doğru, medyan 108 sn</td><td class="spd"><span class="bar" style="--w:92%"></span><b>11/12 doğru, medyan 21 sn</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Belirli sorular sor</h3>
+<p>Eski yöntem belgeye göz gezdiriyor ve çoğu zaman belgede geçtiği halde "belgede bundan bahsedilmiyor" diyordu. Artık GreenCube sorundaki en nadir kelimeleri içeren paragrafları bulur ve onlardan yanıtlar. Aynı yapay zekâ, <strong>iki kattan fazla doğru yanıt, 5 kat daha hızlı</strong>.</p>
+</div>
+
+<div class="card b">
+<h3>2. Bazen hâlâ yanılıyor</h3>
+<p>Gemma'nın tek hatası: hücrenin kalsiyumu nerede depoladığı sorulunca hücrenin yanlış bölümünü söyledi. Sınavda önemli olan her şeyde yanıtı notlarınla karşılaştır.</p>
+</div>
+
+<div class="card y">
+<h3>3. Tam çalışma notları kasıtlı olarak zaman alır</h3>
+<p>Bütün belgenin notu, her bölümü okumak demek: dizüstünde 5.000 kelime için yaklaşık 15 dakika, iki katı için 29 dakika. 4 ila 5 kat hızlı bir sürüm denedik, ama yoğun biyoloji metninde bölümün başladığı temelleri kaçırıyordu. Daha yavaş ve eksiksiz olanı tuttuk.</p>
+</div>
+
+<h2>Yapay zekâyla PDF'ten nasıl ders çalışılır</h2>
+<ol class="steps">
+<li><strong>Önce soru sor.</strong> "X'e ne sebep oldu?", "Y'yi tanımla", "1785'te ne oldu?" Hızlı ve doğru.</li>
+<li><strong>Tam notu mola verdiğinde başlat.</strong> Dizüstünde, sen yemek yerken çalışsın.</li>
+<li><strong>Notu bilgi kartlarına dönüştür</strong> ve kendini sına.</li>
+<li><strong>Sınav için kritik olan her şeyi</strong> notlarından ya da PDF'ten kontrol et.</li>
+</ol>
+
+<p>Kendi PC'nin ne kadar hızlı olduğunu öğrenmek ister misin? <a href="/blog/can-my-pc-run-ai">Burada {{pcs}} PC ölçtük.</a></p>

@@ -9,7 +9,7 @@ import json, os, re, sys
 DIR = os.path.join(os.path.dirname(__file__), 'words')
 EN = json.load(open(os.path.join(DIR, 'en.json'), encoding='utf-8'))
 OPTIONAL = {'an', 'The', 'm'}  # grammar helpers a language may not need
-NOT_TEXT = {'pcs', 'shell'}    # per-language extras, not translations of English
+NOT_TEXT = {'pcs', 'shell', 'units'}  # per-language extras, not translations of English
 bad = 0
 
 def walk(e, o, where, lang):

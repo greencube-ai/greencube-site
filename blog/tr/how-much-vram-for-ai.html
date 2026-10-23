@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı | GreenCube blogu</title>
+  <meta name="description" content="Yapay zekâ için ne kadar VRAM gerekir? Ölçtük: ekran kartından taşan bir model 6 kat yavaş çalışır ve uzun sohbetlerde çöker. Sığan bir model nasıl seçilir." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı | GreenCube blogu" />
+  <meta property="og:description" content="Yapay zekâ için ne kadar VRAM gerekir? Ölçtük: ekran kartından taşan bir model 6 kat yavaş çalışır ve uzun sohbetlerde çöker. Sığan bir model nasıl seçilir." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı", "description": "Yapay zekâ için ne kadar VRAM gerekir? Ölçtük: ekran kartından taşan bir model 6 kat yavaş çalışır ve uzun sohbetlerde çöker. Sığan bir model nasıl seçilir.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "tr", "mainEntityOfPage": "https://blog.greencube.app/blog/tr/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/tr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Bir yapay zekâ modeli VRAM'e sığmazsa ne olur?", "acceptedAnswer": {"@type": "Answer", "text": "Sığmayan kısım normal bellekten çalışır ve her şey yavaşlar. 8 GB'lık kartımızda katmanlarının 28'i kartta olan bir model, hepsi kartta olduğunda yazdığı saniyede 35,6 token yerine 5,9 token yazdı: 6 kat daha yavaş."}}, {"@type": "Question", "name": "Kartımın yükleyebildiği en büyük yapay zekâ modelini mi çalıştırmalıyım?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır. Sohbete yer bırak. 12 milyar parametreli bir model kısa bir soru için 8 GB'lık bir karta sığdı, sohbet uzayınca çöktü. Bol yer bırakarak sığan daha küçük bir model daha hızlıydı ve hiç çökmedi."}}, {"@type": "Question", "name": "Ne kadar VRAM boş bırakmalıyım?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube kartın yaklaşık 1,5 GB'ını sohbet ve Windows için boş bırakır. Bu yer olmadan 4 GB'lık bir kartın belleği ilk mesajda tükendi."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/tr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/tr/ai-environmental-impact">Yapay zekâ ve gezegen</a>
+    <a href="https://greencube.app/tr/your-data">Verilerin</a>
+    <a href="https://greencube.app/tr/mission">Misyonumuz</a>
+    <a href="/blog/tr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">TR</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-much-vram-for-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-much-vram-for-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-much-vram-for-ai" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></div></details><a href="https://greencube.app/tr/buy" class="nav-cta">GreenCube'u al</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/tr">GreenCube blogu</a></p>
+<h1>Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı</h1>
+<p class="byline">Yazar: <a href="/blog/tr/hector-gras">Hector Gras</a> &middot; 18 Ekim 2026</p>
+<div class="answer"><p><strong>Kısa yanıt:</strong> tamamen ekran kartının belleğine (VRAM) sığan bir yapay zekâ hızlıdır. Taşan bir yapay zekâ <strong>kartı hiç kullanmamaktan bile yavaştır</strong> ve çökebilir. Küçük ve tamamen kartta olan, büyük ve yarısı kartta olanı yener.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>model tamamen karttayken saniyede token</span></div>
+<div class="stat p"><b>5,9</b><span>bir kısmı kartın dışında kalınca: 6 kat daha yavaş</span></div>
+<div class="stat y"><b>Çökme</b><span>kıl payı sığan bir model uzun bir sohbetle karşılaşınca</span></div>
+</div>
+
+<h2>Test</h2>
+<p>AMD RX 5700 XT (8 GB VRAM) ve 48 GB RAM'li bir masaüstü. 12 milyar parametreli bir model (Gemma 4 12B, yaklaşık 6,2 GB) yükledik ve az ya da çok kısmını karta koyduk; hepsi Eylül 2026'da tek bir oturumda.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelin ne kadarı karttaydı</th><th>Yazma (token/sn)</th></tr></thead>
+<tbody>
+<tr><td>Tamamı</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 katmanı</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 katmanı</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Karşılaştırma için: daha küçük bir model (Gemma 4 E4B), yalnızca işlemcide</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Aynı küçük model, tamamı kartta</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Ya hep ya hiç</h3>
+<p>Modelin yalnızca bir kısmını kartın dışında bırakmak onu <strong>6 kat yavaşlattı</strong>. 20 katman karttayken, hiç kart kullanmadan çalışan daha küçük bir modelden bile yavaştı. Yarısı kartta olmak iki dünyanın da en kötüsü.</p>
+</div>
+
+<div class="card p">
+<h3>2. En büyük, en iyi değil</h3>
+<p>12B modeli kısa bir soru için 8 GB'lık karta tamamen sığdı. Sohbet uzadıkça her seferinde çöktü: kartta sohbet için neredeyse hiç yer kalmamıştı. Küçük modelin yaklaşık 3 GB boş yeri vardı ve saniyede 63 ila 72 tokenla çalıştı.</p>
+</div>
+
+<div class="card b">
+<h3>3. Yer bırak</h3>
+<p>4 GB'lık bir GTX 1650'de 4,2 GB'lık bir model 3,9 GB'lık karta sıkıştırıldı ve daha ilk mesaj "yeterli bellek yok" hatasıyla başarısız oldu. GreenCube artık sohbet ve Windows için <strong>kartın yaklaşık 1,5 GB'ını boş</strong> tutuyor.</p>
+</div>
+
+<h2>Kartın için model nasıl seçilir</h2>
+<div class="expect">
+<div class="g"><h4>VRAM'ini kontrol et</h4><p>Görev Yöneticisi &rarr; Performans &rarr; GPU &rarr; Ayrılmış GPU belleği.</p></div>
+<div class="b"><h4>Model boyutu + 1,5 GB</h4><p>Model dosyası artı yaklaşık 1,5 GB bu sayıya sığmalı.</p></div>
+<div class="y"><h4>Emin değilsen küçüğünü seç</h4><p>Tamamen kartta olan küçük bir model, yarısı kartta olan büyük bir modeli yener.</p></div>
+<div class="p"><h4>Ya da uygulama seçsin</h4><p>GreenCube kartını okur ve bol yer bırakarak sığan bir model seçer.</p></div>
+</div>
+
+<p>GTX 1650'den RTX 5060'a 10 PC'de gerçek hızlar: <a href="/blog/tr/can-my-pc-run-ai">buradan bak</a>.</p>
+<h2>Sorular</h2>
+<div class="faq">
+<details><summary>Bir yapay zekâ modeli VRAM&#x27;e sığmazsa ne olur?</summary><p>Sığmayan kısım normal bellekten çalışır ve her şey yavaşlar. 8 GB&#x27;lık kartımızda katmanlarının 28&#x27;i kartta olan bir model, hepsi kartta olduğunda yazdığı saniyede 35,6 token yerine 5,9 token yazdı: 6 kat daha yavaş.</p></details>
+<details><summary>Kartımın yükleyebildiği en büyük yapay zekâ modelini mi çalıştırmalıyım?</summary><p>Hayır. Sohbete yer bırak. 12 milyar parametreli bir model kısa bir soru için 8 GB&#x27;lık bir karta sığdı, sohbet uzayınca çöktü. Bol yer bırakarak sığan daha küçük bir model daha hızlıydı ve hiç çökmedi.</p></details>
+<details><summary>Ne kadar VRAM boş bırakmalıyım?</summary><p>GreenCube kartın yaklaşık 1,5 GB&#x27;ını sohbet ve Windows için boş bırakır. Bu yer olmadan 4 GB&#x27;lık bir kartın belleği ilk mesajda tükendi.</p></details>
+</div>
+
+<div class="cta-box"><h3>Kendi yapay zekân, kendi PC'nde</h3><p>GreenCube bilgisayarında çalışır: kullanım sınırı yok, abonelik yok, internetsiz çalışır. 9,99&nbsp;&euro;, tek seferlik ödeme.</p><a class="cta" href="https://greencube.app/tr/buy">GreenCube'u al <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/tr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Senin olan <em>yapay zekâ,</em> kiralık değil.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Ürün</h3>
+        <ul>
+          <li><a href="https://greencube.app/tr/buy">GreenCube'u al</a></li>
+          <li><a href="https://greencube.app/tr/what-you-get">Bilgisayarımda çalışır mı?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Öğren</h3>
+        <ul>
+          <li><a href="/blog/tr">Blog</a></li>
+          <li><a href="https://greencube.app/tr/your-data">Verilerin</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT ve verilerin (EN)</a></li>
+          <li><a href="https://greencube.app/tr/ai-environmental-impact">Yapay zekâ ve gezegen</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Şirket</h3>
+        <ul>
+          <li><a href="https://greencube.app/tr/mission">Misyonumuz</a></li>
+          <li><a href="mailto:support@greencube.app">İletişim</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Gizlilik politikası (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Kullanım koşulları (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. İspanya'da yapıldı.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

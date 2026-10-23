@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Yapay zekâ hızını gerçek PC&#x27;lerde nasıl ölçüyoruz ve neden tahmin etmiyoruz | GreenCube blogu</title>
+  <meta name="description" content="GreenCube blogundaki her hız, 10 gerçek PC&#x27;den birinden geliyor. Nasıl ölçtüğümüz, test ettiğimiz her PC, CSV olarak veriler ve gerisini neden tahmin etmediğimizi gösteren test." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Yapay zekâ hızını gerçek PC&#x27;lerde nasıl ölçüyoruz ve neden tahmin etmiyoruz | GreenCube blogu" />
+  <meta property="og:description" content="GreenCube blogundaki her hız, 10 gerçek PC&#x27;den birinden geliyor. Nasıl ölçtüğümüz, test ettiğimiz her PC, CSV olarak veriler ve gerisini neden tahmin etmediğimizi gösteren test." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Yapay zekâ hızını gerçek PC'lerde nasıl ölçüyoruz ve neden tahmin etmiyoruz", "description": "GreenCube blogundaki her hız, 10 gerçek PC'den birinden geliyor. Nasıl ölçtüğümüz, test ettiğimiz her PC, CSV olarak veriler ve gerisini neden tahmin etmediğimizi gösteren test.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "tr", "mainEntityOfPage": "https://blog.greencube.app/blog/tr/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/tr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "GreenCube'un yapay zekâ hız sayıları nereden geliyor?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube çalıştıran 10 gerçek PC'den; gerçek sohbetlerde, GreenCube'un açılış hız testiyle, llama.cpp'nin hız testiyle ve bir görsel testiyle ölçüldü. Her sayı hangisinden geldiğini söyler."}}, {"@type": "Question", "name": "Yapay zekâ hızı bir ekran kartının özelliklerinden tahmin edilebilir mi?", "acceptedAnswer": {"@type": "Answer", "text": "Henüz güvenilir şekilde değil. Bellek bant genişliğinden tahmin ettiğimizde tahminlerimiz tipik olarak %19, en fazla %239 sapıyordu; bu yüzden yalnızca ölçtüğümüz kartları gösteriyoruz."}}, {"@type": "Question", "name": "Verileri indirebilir miyim?", "acceptedAnswer": {"@type": "Answer", "text": "Evet: her ölçüm bu sayfada bağlantısı verilen greencube-ai-speeds.csv dosyasında."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/tr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/tr/ai-environmental-impact">Yapay zekâ ve gezegen</a>
+    <a href="https://greencube.app/tr/your-data">Verilerin</a>
+    <a href="https://greencube.app/tr/mission">Misyonumuz</a>
+    <a href="/blog/tr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">TR</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></div></details><a href="https://greencube.app/tr/buy" class="nav-cta">GreenCube'u al</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/tr">GreenCube blogu</a></p>
+<h1>Yapay zekâ hızını gerçek PC&#x27;lerde nasıl ölçüyoruz ve neden tahmin etmiyoruz</h1>
+<p class="byline">Yazar: <a href="/blog/tr/hector-gras">Hector Gras</a> &middot; 14 Ekim 2026</p>
+<div class="answer"><p>Bu blogdaki her hız, GreenCube çalıştıran gerçek bir PC&#x27;den geliyor: şimdiye kadar 10 PC, 22 Eylül 2026 ile 14 Ekim 2026 arasında ölçüldü. Ölçmediğimiz kartların hızını tahmin etmiyoruz: elimizdeki kartlarda tahminleri test ettiğimizde, tipik tahmin %19, en kötüsü %239 sapıyordu.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>ölçülen gerçek PC, masaüstü ve dizüstü</span></div>
+<div class="stat b"><b>34</b><span>ölçüm, hepsi aşağıdaki CSV'de</span></div>
+<div class="stat y"><b>239%</b><span>en kötü hız tahmininin sapma oranı</span></div>
+</div>
+<h2>Ne ölçüyoruz</h2>
+<p>Üç şey, çünkü kendi PC'nde bir yapay zekâ kullanırken hissettiğin şeyler bunlar:</p>
+<ul>
+<li><strong>Yazma hızı:</strong> yapay zekânın yanıtını ne kadar hızlı yazdığı, saniyedeki token sayısıyla. Token bir kelime parçasıdır (Türkçede bir kelime çoğu zaman birkaç token tutar) ve bir insan saniyede yaklaşık 8 token okur; bunun üstündeki her şey senin okuma hızından daha hızlı çıkar.</li>
+<li><strong>Okuma hızı:</strong> ona verdiğin şeyi ne kadar hızlı aldığı: sorun, yapıştırdığın bir metin ya da bir PDF. Yazmadan her zaman çok daha hızlıdır, çünkü yapay zekâ birçok tokenı aynı anda okur ama tek tek yazar.</li>
+<li><strong>Görsel süresi:</strong> 512×512'lik bir görselin tıklamadan bitmiş görsele kadar ne kadar sürdüğü.</li>
+</ul>
+<p>GreenCube'un sunduğu yapay zekâları, her kullanıcının indirdiği aynı dosyaları ölçüyoruz: sohbet için Google'ın Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB) ve Gemma 4 12B (6,4 GB) modelleri, görseller için Z-Image Turbo. Başka bir yapay zekâ ya da aynısının farklı sıkıştırılmış hali başka sayılar verirdi, bu yüzden yalnızca karşılaştırılabilir olanları karşılaştırıyoruz.</p>
+<h2>Nasıl ölçüyoruz</h2>
+<p>Dört şekilde; blogdaki her sayı hangisinden geldiğini söyler:</p>
+<div class="card g">
+<h3>Gerçek sohbetler</h3>
+<p>GreenCube içindeki gerçek sohbetler: 100 token ve üzeri her yanıtın hızı, uygulamanın günlüğünden okundu. Aralık en yavaş ve en hızlı onda biri dışarıda bırakır.</p>
+<p>Kullanıldığı yer: <a href="/blog/tr/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/tr/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/tr/ai-on-rx-6600">RX 6600</a>, <a href="/blog/tr/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/tr/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/tr/ai-on-rx-580">RX 580</a>, <a href="/blog/tr/ai-on-intel-iris-xe-laptop">Intel Iris Xe grafikli dizüstü</a>.</p>
+</div>
+<div class="card b">
+<h3>GreenCube'un açılış testi</h3>
+<p>GreenCube&#x27;nin kendi hız testi; açılışta ekran kartı ile işlemci arasında seçim yapmak için çalıştırır: her birinde bir kez yazılan kısa bir yanıt.</p>
+<p>Kullanıldığı yer: <a href="/blog/tr/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/tr/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/tr/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/tr/ai-on-rx-6600">RX 6600</a>, <a href="/blog/tr/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/tr/ai-on-rx-580">RX 580</a>, <a href="/blog/tr/ai-on-intel-iris-xe-laptop">Intel Iris Xe grafikli dizüstü</a>.</p>
+</div>
+<div class="card y">
+<h3>llama.cpp'nin hız testi</h3>
+<p>GreenCube&#x27;un üzerinde çalıştığı motor olan llama.cpp&#x27;nin kendi hız testi (llama-bench), aynı yapay zekâ dosyalarıyla: 128 token yazıldı, 512 tokenlık bir metin okundu.</p>
+<p>Kullanıldığı yer: <a href="/blog/tr/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/tr/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 işlemcili dizüstü</a>.</p>
+</div>
+<div class="card p">
+<h3>Görsel testi</h3>
+<p>GreenCube&#x27;un görsel motoru (Z-Image Turbo), 512×512 piksel, 8 adım, tıklamadan bitmiş görsele kadar süre ölçüldü.</p>
+<p>Kullanıldığı yer: <a href="/blog/tr/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/tr/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/tr/ai-on-rx-6600">RX 6600</a>, <a href="/blog/tr/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/tr/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 işlemcili dizüstü</a>.</p>
+</div>
+<p>Gerçek sohbetler en iyi kanıttır, çünkü senin hissedeceğin şey odur; bu yüzden her sayfadaki ana sayı, elimizde olduğu sürece gerçek sohbetlerden gelir. Açılış testi tek bir kısa yanıttır, bu yüzden onu kart ile işlemci karşılaştırması için (ikisini de aynı şekilde ölçer) ve ana sayı olarak yalnızca bir test kullanıcısı uzun yanıt göndermediyse kullanırız.</p>
+<h2>Ölçtüğümüz her PC</h2>
+<p>Gerçek test kullanıcılarının kendi PC'leri, her zaman nasıl kullanıyorlarsa öyle; laboratuvar makineleri değil. İsimlerini yayınlamıyoruz.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Tür</th><th>VRAM</th><th>RAM</th><th>Ana sayının kaynağı</th><th>GreenCube</th><th>Tarih</th><th>Yazma (token/sn)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/tr/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Masaüstü</td><td>11 GB</td><td>128 GB</td><td>Gerçek sohbetler</td><td>0.1.44</td><td>14 Ekim 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Masaüstü</td><td>8 GB</td><td>48 GB</td><td>llama.cpp&#x27;nin hız testi</td><td>–</td><td>22 Eylül 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rtx-5060">RTX 5060</a></td><td>Masaüstü</td><td>8 GB</td><td>32 GB</td><td>GreenCube&#x27;un açılış testi</td><td>0.1.42</td><td>1 Ekim 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rtx-3060">RTX 3060</a></td><td>Masaüstü</td><td>12 GB</td><td>32 GB</td><td>Gerçek sohbetler</td><td>0.1.42–0.1.43</td><td>6 Ekim 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-6600">RX 6600</a></td><td>Masaüstü</td><td>8 GB</td><td>16 GB</td><td>Gerçek sohbetler</td><td>0.1.42–0.1.44</td><td>9 Ekim 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Masaüstü</td><td>6 GB</td><td>16 GB</td><td>Gerçek sohbetler</td><td>0.1.42</td><td>1 Ekim 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-gtx-1650">GTX 1650</a></td><td>Masaüstü</td><td>4 GB</td><td>16 GB</td><td>Gerçek sohbetler</td><td>0.1.40</td><td>23 Eylül 2026</td><td><b>yaklaşık 20</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 işlemcili dizüstü</a></td><td>Dizüstü</td><td>–</td><td>16 GB</td><td>llama.cpp&#x27;nin hız testi</td><td>–</td><td>28 Eylül 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-580">RX 580</a></td><td>Masaüstü</td><td>8 GB</td><td>16 GB</td><td>Gerçek sohbetler</td><td>0.1.42</td><td>1 Ekim 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-intel-iris-xe-laptop">Intel Iris Xe grafikli dizüstü</a></td><td>Dizüstü</td><td>–</td><td>8 GB</td><td>Gerçek sohbetler</td><td>0.1.42</td><td>4 Ekim 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Sayılar neden aralık olarak veriliyor</h2>
+<ul>
+<li><strong>Diğer uygulamalar.</strong> Bir tarayıcı, bir oyun başlatıcısı ya da bir görüntülü arama aynı belleği ve aynı ekran kartını kullanır.</li>
+<li><strong>İlk sefer daha yavaştır.</strong> Kurulumdan sonraki ilk yanıt ya da ilk görsel, kartın yüklenmesini ve hazırlanmasını içerir. Önemli olduğu yerde bunu belirtiyoruz (örneğin "ilki yüklenirken 83 sn sürdü").</li>
+<li><strong>Kısa yanıtlar daha yavaş ölçülür.</strong> Her yanıtın küçük, sabit bir başlangıç süresi vardır; bu da 20 tokenlık bir yanıtta 400 tokenlık bir yanıttan daha fazla ağırlık taşır. Bu yüzden gerçek sohbet aralıkları 100 token ve üzeri yanıtları sayar, bir test kullanıcısı yalnızca kısa yanıtlar gönderdiyse bunu belirtiriz.</li>
+<li><strong>Uç değerleri dışarıda bırakıyoruz.</strong> Gerçek sohbet aralıkları 10. ile 90. yüzdelik arasındadır, böylece tek bir garip yanıt onları kaydıramaz.</li>
+</ul>
+<h2>Bir kartın hızı özelliklerinden tahmin edilebilir mi?</h2>
+<p>Kullanışlı olurdu: yüzlerce kart var ve biz 10 PC ölçtük. Olağan yöntem bellek bant genişliğidir. Her tokenı yazmak için yapay zekâ modelin tamamını kartın belleğinden okur, yani teoride hız kabaca bant genişliğinin model boyutuna bölünmesi, çarpı bir verimlilik payıdır. Birçok çevrimiçi hesaplayıcı böyle çalışır.</p>
+<p>Biz de bunu kendi verilerimizle test ettik. Her seferinde bir kartı gizledik, diğerlerinden GB/s başına hızı hesapladık, gizlenen kartı bant genişliğinden tahmin ettik (üreticilerin <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">TechPowerUp GPU veritabanında</a> toplanan özelliklerinden) ve ölçtüğümüzle karşılaştırdık. Hepsinde aynı yapay zekâ (Gemma 4 E4B, tamamı kartta).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Kart</th><th>Bellek bant genişliği</th><th>Ölçülen (token/sn)</th><th>Tahmin</th><th>Sapma</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/tr/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/s</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/s</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/s</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/s</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-6600">RX 6600</a></td><td>224 GB/s</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/s</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/tr/ai-on-rx-580">RX 580</a></td><td>256 GB/s</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>Tipik tahmin %19 saptı. En kötüsü <a href="/blog/tr/ai-on-rx-580">RX 580</a> oldu: belleğine bakılırsa saniyede yaklaşık 36 token beklenirdi, ama 11 yazdı. Testi onsuz tekrarlayınca diğerleri hâlâ en fazla %33 sapıyor. Daha yeni AMD RX 6600 ters yöne gitti, bant genişliğinin gösterdiğinden daha hızlı; çip üzerindeki büyük önbelleği (AMD buna Infinity Cache diyor) bunun bir nedeni olabilir. Ölçülen her sayı o kartın ana sayısıdır, yani hepsi aynı tür testten gelmiyor; bu biraz gürültü ekler, ama üç kat sapmayı açıklayamaz.</p>
+<p><strong>Bu yeterince iyi değil.</strong> Modern bir kartta %33, eski bir kartta %239 sapabilen bir tahmin, bazı insanlara PC'leri yavaşken iyi olduğunu ya da tam tersini söylerdi. Bu yüzden kontrol aracı ve kart sayfaları yalnızca ölçtüğümüz kartları gösterir ve seninki onlardan biri değilse bunu açıkça söyler. Bu testi her yeni kartla tekrarlıyoruz; hata küçülürse, tek bir tahmin göstermeden önce bunu burada söyleyeceğiz.</p>
+<h2>Henüz ölçmediklerimiz</h2>
+<ul>
+<li>Oyun ekran kartlı bir dizüstü.</li>
+<li>10 GB veya üzeri bir kartta Gemma 4 12B.</li>
+<li>Şu kartlarda görseller: <a href="/blog/tr/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/tr/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/tr/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/tr/ai-on-rx-580">RX 580</a>.</li>
+<li>GreenCube'un sunduklarından başka yapay zekâlar ve Linux veya Mac (GreenCube Windows içindir).</li>
+</ul>
+<h2>Verileri indir</h2>
+<p>Bu sayfadaki her ölçüm, her satıra bir tane, <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a> dosyasında: PC, yapay zekâ, nerede çalıştığı, yazma ve okuma hızları, görsel süreleri, nasıl ölçüldüğü, GreenCube sürümü ve tarih. Kullanırsan lütfen "GreenCube, gerçek PC'lerde yapay zekâ hızı ölçümleri, 2026" diye kaynak göster ve bu sayfaya bağlantı ver.</p>
+<h2>PC'ni ekle</h2>
+<p>GreenCube'u zaten kullanıyor musun? Günlüğünü <a href="mailto:support@greencube.app">support@greencube.app</a> adresine gönder. PC'ni adın olmadan testlere ekleriz ve yeni bir kart kendi sayfasını alır. PC'nde ne olduğunu bilmiyor musun? <a href="/blog/tr/can-my-pc-run-ai#checker">Buradan kontrol et</a>.</p>
+<h2>Sorular</h2>
+<div class="faq">
+<details><summary>GreenCube&#x27;un yapay zekâ hız sayıları nereden geliyor?</summary><p>GreenCube çalıştıran 10 gerçek PC&#x27;den; gerçek sohbetlerde, GreenCube&#x27;un açılış hız testiyle, llama.cpp&#x27;nin hız testiyle ve bir görsel testiyle ölçüldü. Her sayı hangisinden geldiğini söyler.</p></details>
+<details><summary>Yapay zekâ hızı bir ekran kartının özelliklerinden tahmin edilebilir mi?</summary><p>Henüz güvenilir şekilde değil. Bellek bant genişliğinden tahmin ettiğimizde tahminlerimiz tipik olarak %19, en fazla %239 sapıyordu; bu yüzden yalnızca ölçtüğümüz kartları gösteriyoruz.</p></details>
+<details><summary>Verileri indirebilir miyim?</summary><p>Evet: her ölçüm bu sayfada bağlantısı verilen greencube-ai-speeds.csv dosyasında.</p></details>
+</div>
+
+<div class="cta-box"><h3>Kendi yapay zekân, kendi PC'nde</h3><p>GreenCube bilgisayarında çalışır: kullanım sınırı yok, abonelik yok, internetsiz çalışır. 9,99&nbsp;&euro;, tek seferlik ödeme.</p><a class="cta" href="https://greencube.app/tr/buy">GreenCube'u al <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/tr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Senin olan <em>yapay zekâ,</em> kiralık değil.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Ürün</h3>
+        <ul>
+          <li><a href="https://greencube.app/tr/buy">GreenCube'u al</a></li>
+          <li><a href="https://greencube.app/tr/what-you-get">Bilgisayarımda çalışır mı?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Öğren</h3>
+        <ul>
+          <li><a href="/blog/tr">Blog</a></li>
+          <li><a href="https://greencube.app/tr/your-data">Verilerin</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT ve verilerin (EN)</a></li>
+          <li><a href="https://greencube.app/tr/ai-environmental-impact">Yapay zekâ ve gezegen</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Şirket</h3>
+        <ul>
+          <li><a href="https://greencube.app/tr/mission">Misyonumuz</a></li>
+          <li><a href="mailto:support@greencube.app">İletişim</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Gizlilik politikası (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Kullanım koşulları (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. İspanya'da yapıldı.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

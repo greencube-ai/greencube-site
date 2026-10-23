@@ -1,0 +1,107 @@
+<!--meta
+{
+ "title": "PDF'ten yapay zekâyla bilgi kartları: internetsiz hazırladık ve her kartı kontrol ettik",
+ "description": "İki uzun bölümü normal bir dizüstündeki yapay zekâyla, internetsiz bilgi kartlarına dönüştürdük: ne kadar sürdü, tek tek kontrol ettiğimizde kaç kart doğruydu, nerede kaydı ve ücretsiz alternatifler.",
+ "date": "2026-08-22",
+ "modified": "2026-10-19",
+ "kind": "guide",
+ "stat": "5 dk",
+ "teaser": "Elle kontrol edilmiş 72 bilgi kartı: kaçı doğruydu ve nerede kayıyor.",
+ "lang": "tr",
+ "alt": "flashcards-from-pdf",
+ "faq": [
+  {"q": "İnternetsiz bir PDF'ten yapay zekâyla bilgi kartı hazırlayabilir miyim?", "a": "Evet, bilgisayarında çalışan bir yapay zekâyla. Testimizde GreenCube, yaklaşık 4.800 kelimelik bir bölümü ekran kartı olmayan 16 GB'lık bir dizüstünde, bağlantı olmadan yaklaşık 5 dakikada 18 bilgi kartına ve bir çalışma notuna dönüştürdü."},
+  {"q": "Yapay zekânın hazırladığı bilgi kartları güvenilir mi?", "a": "Çoğunlukla, ama hepsi değil. Elle kontrol ettiğimiz 36 karttan küçük yapay zekâyla 21'i doğru, 6'sı kısmen doğru, 5'i yanlış ve 4'ü tekrardı; büyük olanla 30'u doğru, 4'ü kısmen, 2'si yanlış ve hiç tekrar yoktu. Hatalar bölümün dönemler arasında atladığı kısımda toplandı, bu yüzden onlarla çalışmadan önce kontrol et."},
+  {"q": "PDF'ten farklı bir dilde bilgi kartı hazırlayabilir mi?", "a": "Evet. İngilizce bir bölümden İspanyolca bilgi kartları istedik ve 18'inin hepsi İspanyolca çıktı: 11'i doğru, 4'ü kısmen doğru, hiçbiri yanlış değil ve 3'ü tekrar."},
+  {"q": "PDF'ten yapay zekâyla bilgi kartı hazırlamak için en iyi ücretsiz uygulama hangisi?", "a": "PDF'i yüklemek seni rahatsız etmiyorsa NotebookLM ücretsiz bilgi kartları hazırlar, onları CSV olarak dışa aktarır ve özgün metni gösterir. Hiçbir yere yüklemek istemiyorsan ya da sınırlara takılıyorsan, kendi PC'nde bir yapay zekâya ihtiyacın var."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt: evet, normal bir dizüstünde bölüm başına yaklaşık 5 dakikada, internetsiz.</strong> GreenCube'a iki uzun bölüm verdik ve sınav için bilgi kartları istedik: her biri 18 kart ve bir çalışma notuyla geldi. Sonra 36 kartın hepsini tek tek özgün metinle karşılaştırdık. Çoğu doğruydu ama hepsi değil, ve hatalar tam da bölümün dönemler arasında atladığı yerde toplandı. İşte hangileri ve ücretsiz alternatifler.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>5 dk</b><span>yaklaşık 4.800 kelimelik bölüm başına, not artı 18 bilgi kartı, 16 GB'lık bir dizüstünde</span></div>
+<div class="stat b"><b>36'da 30</b><span>büyük yapay zekâyla doğru bilgi kartı (küçüğüyle 21), elle kontrol edildi</span></div>
+<div class="stat p"><b>0</b><span>herhangi bir yere yüklenen dosya</span></div>
+</div>
+
+<h2>Test</h2>
+
+<p>Sınavda çıkan türden iki uzun bölüm: <strong>İkinci İspanya Cumhuriyeti</strong> (İspanyolca, yaklaşık 4.800 kelime) ve <strong>Sanayi Devrimi</strong> (İngilizce, yaklaşık 4.700 kelime). Her biri için bir öğrencinin yazacağını yazdık: "bu konudan sınav için bilgi kartları hazırla" (İspanyolca), İngilizce bölüm için de aynısı artı "İspanyolca".</p>
+<p>19 Ekim 2026'da gerçek GreenCube uygulamasında (güncel sürümünün bir test kopyası), Intel Core Ultra 5 ve dahili grafikli, ekran kartı olmayan, prize takılı ve çevrim dışı 16 GB'lık bir dizüstünde çalıştırdık. Küçük yapay zekâyla, Gemma 4 E2B; böyle bir dizüstünde rahat çalışan model.</p>
+
+<h2>Sonuçlar</h2>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Bölüm</th><th>Süre</th><th>Kart</th><th>Doğru</th><th>Kısmen</th><th>Yanlış</th><th>Tekrar</th></tr></thead>
+<tbody>
+<tr><td>İkinci Cumhuriyet (İspanyolca)</td><td><b>4 dk 57 sn</b></td><td>18</td><td><b>10</b></td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>Sanayi Devrimi (İngilizce &rarr; İspanyolca)</td><td><b>4 dk 52 sn</b></td><td>18</td><td><b>11</b></td><td>4</td><td>0</td><td>3</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>Büyük yapay zekâ daha iyi.</strong> Testi, GreenCube'un 16 GB'lık dizüstülerde sunduğu büyük yapay zekâ Gemma 4 E4B ile tekrarladık: <strong>36 kartın 30'u doğru</strong>, 4'ü kısmen, 2'si yanlış ve hiç tekrar yok.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Bölüm</th><th>Yapay zekâ</th><th>Doğru</th><th>Kısmen</th><th>Yanlış</th><th>Tekrar</th></tr></thead>
+<tbody>
+<tr><td>İkinci Cumhuriyet</td><td>E2B (küçük)</td><td>10</td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>İkinci Cumhuriyet</td><td>E4B (büyük)</td><td><b>15</b></td><td>1</td><td>2</td><td>0</td></tr>
+<tr><td>Sanayi Devrimi</td><td>E2B (küçük)</td><td>11</td><td>4</td><td>0</td><td>3</td></tr>
+<tr><td>Sanayi Devrimi</td><td>E4B (büyük)</td><td><b>15</b></td><td>3</td><td>0</td><td>0</td></tr>
+</tbody>
+</table></div>
+<p>E4B'nin süresini yayımlamıyoruz: bu testte bir uygulama hatası, kartlardan önce notu birkaç kez yeniden yazmasına yol açtı. Bir sonraki sürüm için düzeltildi ve süreyi yeniden ölçeceğiz.</p>
+
+<p>"Doğru", kartın bölümün söylediğini söylemesi demek. "Kısmen", ana noktayı yakalayıp bir ayrıntıyı eklemesi ya da değiştirmesi demek. "Yanlış", bölümün başka bir şey söylemesi demek. Her kartı, geldiği cümleyi özgün metinde bularak kontrol ettik.</p>
+
+<h2>Neyi doğru yaptı</h2>
+
+<div class="card g">
+<h3>Tarihler ve temel bilgiler, temiz bir şekilde çıkarılmış</h3>
+<p>"İspanya Cumhuriyeti ne zaman ilan edildi?" &rarr; "14 Nisan 1931". "Samuel Crompton 1779'da neyi icat etti?" &rarr; "Mule eğirme makinesini". "1936 seçimlerini hangi sol koalisyon kazandı?" &rarr; "Halk Cephesi". Tarihler, isimler ve icatlarla ilgili kartlar en güvenilir olanlardı (burada İspanyolca kartlardan çevrildi).</p>
+</div>
+
+<div class="card b">
+<h3>İngilizce bir bölüm, başka bir dilde bilgi kartları</h3>
+<p>Sanayi Devrimi bölümünü İngilizce verdik ve kartları İspanyolca istedik: 18'inin hepsi İspanyolca çıktı ve hiçbiri yanlış değildi. Bir dilde notlardan, makalelerden ya da kitaplardan çalışıp başka bir dilde tekrar ediyorsan işe yarar.</p>
+</div>
+
+<h2>Nerede kaydı</h2>
+
+<div class="card p">
+<h3>Bölüm dönemler arasında atladığında</h3>
+<p>İkinci Cumhuriyet bölümü, İspanya bayrağının ve armasının 1800'lerden itibaren tarihini de içeriyor. Hataların neredeyse hepsi oradaydı: bir kart İkinci Cumhuriyet bayrağında "Constitución" sloganı olduğunu söylüyor, oysa metin 1820'lerden bir bayraktan bahsediyor. Bir başkası Cumhuriyet'in İç Savaş başlayana kadar sürdüğünü söylüyor, oysa bölümün kendisi 1 Nisan 1939'a kadar sürdüğünü söylüyor.</p>
+</div>
+
+<div class="card y">
+<h3>Uydurulmuş ayrıntılar ve ara sıra bir tekrar</h3>
+<p>Bazı kartlar ana noktayı yakalıyor ama metnin söylemediği bir şey ekliyor (bir ipliği "sağlam" diye nitelemek ya da Arkwright'ın "tekstil sanayisini başlattığını" söylemek), bir terimi kötü çeviriyor (çırçır makinesi bir "eğirme makinesi" değildir) ya da önceki bir kartı başka kelimelerle tekrarlıyor. Ayrıca testlerde yazılı çalışma notu kartlardan önce cümlenin ortasında kesildi; uygulama ekibi nedenini buldu ve bir sonraki sürüm için düzeltildi.</p>
+</div>
+
+<p><strong>Pratik sonuç:</strong> kullan, ama çalışmadan önce kontrol et, özellikle farklı dönemlerden tarihleri karıştıran bölümlerde. 18 kartı kontrol etmek birkaç dakika sürer; yine de elle yazmaktan çok daha hızlı.</p>
+
+<h2>Ücretsiz yapay zekâ bilgi kartı hazırlamanın diğer yolları</h2>
+
+<p>Bunların hepsi çevrim içi çalışır: PDF'ini onların sitesine yüklersin. Bilgiler kendi sayfalarından, Ekim 2026; kalitelerini ölçmedik.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Araç</th><th>Ücretsiz</th><th>PDF'ini yüklüyor mu?</th></tr></thead>
+<tbody>
+<tr><td><strong>NotebookLM</strong> (Google)</td><td>Evet: belgelerinden bilgi kartları ve testler, CSV olarak dışa aktarılabilir, özgün metni gösterir (<a href="https://support.google.com/notebooklm/answer/16958963?hl=en" rel="noopener">Google</a>)</td><td>Evet, Google'a</td></tr>
+<tr><td><strong>SlideSpeak</strong></td><td>Evet, 50 sayfaya kadar PDF'ler, hesap gerekmez, Anki ya da Quizlet'e aktarır (<a href="https://slidespeak.co/free-tools/create-flashcards-from-pdf" rel="noopener">SlideSpeak</a>)</td><td>Evet</td></tr>
+<tr><td><strong>Flashcards.world</strong></td><td>Kayıt olmadan 10 karta kadar (<a href="https://flashcards.world/pdf-to-flashcards/" rel="noopener">Flashcards.world</a>)</td><td>Evet</td></tr>
+<tr><td><strong>GreenCube</strong> (PC'nde)</td><td>Tek seferlik 9,99 &euro;, sınır yok; bölüm hakkında sohbet de eder, özetler ve soruları yanıtlar</td><td><b>Hayır</b>: her şey bilgisayarında kalır</td></tr>
+</tbody>
+</table></div>
+
+<p>Notlarını Google'a yüklemek seni rahatsız etmiyorsa NotebookLM çok eksiksiz, ücretsiz bir seçenek. Bilgisayarından hiç çıkmamalarını tercih ediyorsan, sınır istemiyorsan ya da iyi bir bağlantı olmadan çalışıyorsan, kendi PC'nde bir yapay zekâya ihtiyacın var. Her yapay zekânın yüklediklerinle ne yaptığını <a href="/blog/ai-that-doesnt-train-on-your-data">Hangi yapay zekâ sohbetlerinle eğitim yapmıyor?</a> yazısında kontrol ettik.</p>
+
+<h2>Bir PDF'ten iyi bilgi kartları nasıl alınır</h2>
+<ul>
+<li><strong>Her seferinde bir bölüm.</strong> Bir bölüm oldukça odaklı 18 kart verir; bütün bir kitap onları sulandırır.</li>
+<li><strong>Başka dönemlerden tarihlerle ilgili kartları kontrol et.</strong> En çok orada kayıyor.</li>
+<li><strong>Tekrarları ve belirsiz olanları sil</strong> ("Şekillendirme makinesi nedir?" &rarr; "Takım tezgâhlarının geliştirilmesinde kullanılan bir makine") ve seni düşündürenleri tut.</li>
+<li><strong>Sınav tarzı sorular da iste</strong> ve bakmadan yanıtla: <a href="/blog/ai-to-study-from-pdf">PDF soruları testimizde</a> 12'de 11'i, her birini yaklaşık 15 saniyede doğru yaptı.</li>
+</ul>
+
+<p>Bilgisayarında çalışır mı? <a href="/blog/can-my-pc-run-ai#checker">30 saniyede kontrol et</a>: bir ekran kartıyla bu dizüstüdekinden çok daha hızlı.</p>

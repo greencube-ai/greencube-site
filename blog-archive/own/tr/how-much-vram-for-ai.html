@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı",
+ "description": "Yapay zekâ için ne kadar VRAM gerekir? Ölçtük: ekran kartından taşan bir model 6 kat yavaş çalışır ve uzun sohbetlerde çöker. Sığan bir model nasıl seçilir.",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "VRAM'den taşarsa 6 kat yavaşlar.",
+ "rank": 6,
+ "lang": "tr",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "Bir yapay zekâ modeli VRAM'e sığmazsa ne olur?", "a": "Sığmayan kısım normal bellekten çalışır ve her şey yavaşlar. 8 GB'lık kartımızda katmanlarının 28'i kartta olan bir model, hepsi kartta olduğunda yazdığı saniyede 35,6 token yerine 5,9 token yazdı: 6 kat daha yavaş."},
+  {"q": "Kartımın yükleyebildiği en büyük yapay zekâ modelini mi çalıştırmalıyım?", "a": "Hayır. Sohbete yer bırak. 12 milyar parametreli bir model kısa bir soru için 8 GB'lık bir karta sığdı, sohbet uzayınca çöktü. Bol yer bırakarak sığan daha küçük bir model daha hızlıydı ve hiç çökmedi."},
+  {"q": "Ne kadar VRAM boş bırakmalıyım?", "a": "GreenCube kartın yaklaşık 1,5 GB'ını sohbet ve Windows için boş bırakır. Bu yer olmadan 4 GB'lık bir kartın belleği ilk mesajda tükendi."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> tamamen ekran kartının belleğine (VRAM) sığan bir yapay zekâ hızlıdır. Taşan bir yapay zekâ <strong>kartı hiç kullanmamaktan bile yavaştır</strong> ve çökebilir. Küçük ve tamamen kartta olan, büyük ve yarısı kartta olanı yener.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>model tamamen karttayken saniyede token</span></div>
+<div class="stat p"><b>5,9</b><span>bir kısmı kartın dışında kalınca: 6 kat daha yavaş</span></div>
+<div class="stat y"><b>Çökme</b><span>kıl payı sığan bir model uzun bir sohbetle karşılaşınca</span></div>
+</div>
+
+<h2>Test</h2>
+<p>AMD RX 5700 XT (8 GB VRAM) ve 48 GB RAM'li bir masaüstü. 12 milyar parametreli bir model (Gemma 4 12B, yaklaşık 6,2 GB) yükledik ve az ya da çok kısmını karta koyduk; hepsi Eylül 2026'da tek bir oturumda.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelin ne kadarı karttaydı</th><th>Yazma (token/sn)</th></tr></thead>
+<tbody>
+<tr><td>Tamamı</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 katmanı</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 katmanı</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Karşılaştırma için: daha küçük bir model (Gemma 4 E4B), yalnızca işlemcide</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Aynı küçük model, tamamı kartta</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Ya hep ya hiç</h3>
+<p>Modelin yalnızca bir kısmını kartın dışında bırakmak onu <strong>6 kat yavaşlattı</strong>. 20 katman karttayken, hiç kart kullanmadan çalışan daha küçük bir modelden bile yavaştı. Yarısı kartta olmak iki dünyanın da en kötüsü.</p>
+</div>
+
+<div class="card p">
+<h3>2. En büyük, en iyi değil</h3>
+<p>12B modeli kısa bir soru için 8 GB'lık karta tamamen sığdı. Sohbet uzadıkça her seferinde çöktü: kartta sohbet için neredeyse hiç yer kalmamıştı. Küçük modelin yaklaşık 3 GB boş yeri vardı ve saniyede 63 ila 72 tokenla çalıştı.</p>
+</div>
+
+<div class="card b">
+<h3>3. Yer bırak</h3>
+<p>4 GB'lık bir GTX 1650'de 4,2 GB'lık bir model 3,9 GB'lık karta sıkıştırıldı ve daha ilk mesaj "yeterli bellek yok" hatasıyla başarısız oldu. GreenCube artık sohbet ve Windows için <strong>kartın yaklaşık 1,5 GB'ını boş</strong> tutuyor.</p>
+</div>
+
+<h2>Kartın için model nasıl seçilir</h2>
+<div class="expect">
+<div class="g"><h4>VRAM'ini kontrol et</h4><p>Görev Yöneticisi &rarr; Performans &rarr; GPU &rarr; Ayrılmış GPU belleği.</p></div>
+<div class="b"><h4>Model boyutu + 1,5 GB</h4><p>Model dosyası artı yaklaşık 1,5 GB bu sayıya sığmalı.</p></div>
+<div class="y"><h4>Emin değilsen küçüğünü seç</h4><p>Tamamen kartta olan küçük bir model, yarısı kartta olan büyük bir modeli yener.</p></div>
+<div class="p"><h4>Ya da uygulama seçsin</h4><p>GreenCube kartını okur ve bol yer bırakarak sığan bir model seçer.</p></div>
+</div>
+
+<p>GTX 1650'den RTX 5060'a {{pcs}} PC'de gerçek hızlar: <a href="/blog/can-my-pc-run-ai">buradan bak</a>.</p>

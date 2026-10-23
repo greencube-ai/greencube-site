@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "PC'nde yerel yapay zekâ görsel oluşturucu: bir görsel ne kadar sürer",
+ "description": "Yerel bir yapay zekâ görsel oluşturucusunun süresini 12 GB'lık bir ekran kartında, Intel grafikli bir dizüstünde ve bir dizüstü işlemcisinde ölçtük: görsel başına 28 saniyeden 11 dakikaya. PC'nin nelere ihtiyacı var.",
+ "date": "2026-10-18",
+ "stat": "28 sn",
+ "teaser": "PC'ne göre 28 saniyeden 11 dakikaya.",
+ "rank": 5,
+ "lang": "tr",
+ "alt": "local-ai-image-generator-speed",
+ "faq": [
+  {"q": "PC'mde yapay zekâ ile bir görsel oluşturmak ne kadar sürer?", "a": "Testlerimizde 512'ye 512'lik bir görsel, 12 GB ekran kartlı bir masaüstünde 28 saniye, Intel grafiğini kullanan 16 GB'lık bir dizüstünde yaklaşık iki buçuk dakika ve aynı dizüstünün yalnızca işlemcisinde yaklaşık on bir buçuk dakika sürdü."},
+  {"q": "Ekran kartı olmayan bir dizüstünde yapay zekâ görselleri oluşturabilir miyim?", "a": "Evet, 16 GB RAM'i varsa. Dahili Intel grafik, yalnızca işlemciye göre yaklaşık 4 kat hızlıydı. 8 GB RAM ile çalışmaz: görsel yapay zekâsı tek başına yaklaşık 7 GB ister."},
+  {"q": "Yapay zekâ görselleri oluşturmak için diğer uygulamaları kapatmam gerekir mi?", "a": "16 GB'lık bir dizüstünde hayır. Bir kod düzenleyici ve tarayıcı açıkken görsel aynı sürede oluştu. Önemli olan, Windows'un ona yaklaşık 7 GB ayırabilmesi."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> iyi bir ekran kartlı oyun bilgisayarında yaklaşık <strong>yarım dakika</strong>. Sıradan 16 GB'lık bir dizüstünde <strong>2 ila 3 dakika</strong>. 8 GB'lık bir dizüstünde çalışmaz.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>28 sn</b><span>12 GB ekran kartlı bir masaüstünde</span></div>
+<div class="stat b"><b>2,5 dk</b><span>Intel grafiğini kullanan 16 GB'lık bir dizüstünde</span></div>
+<div class="stat p"><b>11,5 dk</b><span>aynı dizüstünün yalnızca işlemcisinde</span></div>
+</div>
+
+<h2>Test</h2>
+<p>Her PC'de aynı görsel yapay zekâsı (GreenCube içinde Z-Image Turbo), 512'ye 512'lik bir görsel, 8 adım. Düğmeye basıştan bitmiş görsele kadar, Eylül ve Ekim 2026'da süre tuttuk.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>İşi ne yaptı</th><th>Görsel başına süre</th></tr></thead>
+<tbody>
+<tr><td>Masaüstü, 12 GB kart, 32 GB RAM</td><td>Ekran kartı</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 sn</b></td></tr>
+<tr><td>Dizüstü, Core Ultra 5, 16 GB</td><td>Dahili Intel grafik</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 dk 22 sn &ndash; 2 dk 38 sn</b></td></tr>
+<tr><td>Aynı dizüstü</td><td>Yalnızca işlemci</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 dk 27 sn</b></td></tr>
+<tr><td>Dizüstü, 8 GB</td><td>&mdash;</td><td><b>Olmaz</b></td></tr>
+</tbody>
+</table></div>
+<p>Çubuklar hızı gösterir: daha uzun, daha hızlı demek.</p>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Her grafik çok yardımcı olur</h3>
+<p>Dizüstüne gömülü küçük grafik çipi bile görselleri yalnızca işlemciye göre <strong>yaklaşık 4 kat hızlı</strong> yaptı. Gerçek bir ekran kartı bunun üstüne 5 kat daha hızlıdır.</p>
+</div>
+
+<div class="card b">
+<h3>2. Yaklaşık 7 GB yere ihtiyaç duyar</h3>
+<p>Görsel yapay zekâsı çalışırken Windows'tan yaklaşık 7 GB ister. 8 GB'lık bir dizüstünün bunu yapamamasının ve GreenCube'un yarıda çökmek yerine başlamadan önce yer olup olmadığını kontrol etmesinin nedeni bu.</p>
+</div>
+
+<div class="card y">
+<h3>3. Diğer uygulamaların pek önemi yok</h3>
+<p>16 GB'lık dizüstünde aynı görseli bir kod düzenleyici ve tarayıcı açıkken, hatta bilerek 4 GB doldurulmuşken oluşturduk. Her seferinde yaklaşık 2 dakika sürdü. Windows boşta olanı kenara çeker.</p>
+</div>
+
+<h2>PC'n nasıl hissettirecek</h2>
+<div class="expect">
+<div class="g"><h4>Ekran kartı</h4><p>Görsel başına bir dakikanın altında. Çok sayıda oluştur ve en iyisini seç.</p></div>
+<div class="b"><h4>16 GB dizüstü, kart yok</h4><p>2 ila 3 dakika. Birkaç görsel için yeterli; birini başlat ve ders çalışmaya devam et.</p></div>
+<div class="y"><h4>8 GB dizüstü</h4><p>Görsel yok. Sohbet ve ders çalışma yine çalışır.</p></div>
+<div class="p"><h4>Her durumda sınır yok</h4><p>Görsellerini sayan bir şey yok. Tek sınır, ne kadar beklemek istediğin.</p></div>
+</div>

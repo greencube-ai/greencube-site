@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Ekran kartı olmayan dizüstünde yapay zekâ: Intel grafik işe yarar mı?",
+ "description": "Ekran kartı olmayan bir dizüstünde, işlemcide ve Intel grafikte yapay zekâ çalıştırdık. Sohbet hızı neredeyse değişmedi, okuma 1,3 kat, görseller 4 kattan fazla hızlandı.",
+ "date": "2026-10-18",
+ "stat": "4&times;",
+ "teaser": "Sohbet: aşağı yukarı aynı. Görseller: 4 kat hızlı.",
+ "rank": 7,
+ "lang": "tr",
+ "alt": "ai-on-laptop-without-gpu",
+ "faq": [
+  {"q": "Dahili grafik yapay zekâyı hızlandırır mı?", "a": "Sohbette neredeyse hiç: 16 GB'lık dizüstümüzde yanıt iki durumda da saniyede yaklaşık 14 tokenla yazıldı. Uzun yapıştırılmış metni okumada yaklaşık 1,3 kat, görsel oluşturmada 4 kattan fazla hızlıydı."},
+  {"q": "Dahili grafik yapay zekâyı yavaşlatabilir mi?", "a": "Bazen. Küçük bir modelle yazma, Intel grafikte işlemciye göre %29 daha yavaştı; daha büyük bir modelle %26 daha hızlıydı. Model ve dizüstüne bağlı; bu yüzden GreenCube senin dizüstünü test eder ve seçer."},
+  {"q": "Ekran kartı olmayan bir dizüstü yapay zekâ için yeterli mi?", "a": "Sohbet ve ders çalışma için evet: 16 GB'lık bir dizüstü küçük bir modelle senin okuma hızından hızlı yazar. Görseller de çalışır, ama her biri 2 ila 3 dakika sürer."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> sohbette <strong>neredeyse hiç</strong>. Uzun metin okumada <strong>biraz</strong>. Görsellerde <strong>çok</strong>: 4 kattan fazla hızlı.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>sohbette saniyede token, Intel grafikle ya da onsuz</span></div>
+<div class="stat b"><b>1,3&times;</b><span>yapıştırdığın uzun metni okumada daha hızlı</span></div>
+<div class="stat p"><b>4&times;</b><span>görsel oluşturmada daha hızlı</span></div>
+</div>
+
+<h2>Test</h2>
+<p>Bir dizüstü: Intel Core Ultra 5 125U, 16 GB RAM, ekran kartı yok, yalnızca çipe gömülü grafik. Aynı yapay zekâyı işlemcide ve Intel grafikte, prize takılıyken, her birini iki kez, Eylül ve Ekim 2026'da çalıştırdık.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Görev</th><th>İşlemci</th><th>Intel grafik</th><th>Fark</th></tr></thead>
+<tbody>
+<tr><td>Yanıt yazma (Gemma 4 E2B)</td><td>13,7&ndash;15,5 token/sn</td><td>14,4&ndash;14,5 token/sn</td><td><b>aşağı yukarı aynı</b></td></tr>
+<tr><td>Yapıştırılmış metni okuma (Gemma 4 E2B)</td><td>160&ndash;167 token/sn</td><td>203&ndash;211 token/sn</td><td><b>1,3&times; daha hızlı</b></td></tr>
+<tr><td>Bir görsel, 512'ye 512</td><td>11 dk 27 sn</td><td>2 dk 22 sn &ndash; 2 dk 38 sn</td><td><b>4&times;'ten fazla hızlı</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Öğrendiklerimiz</h2>
+
+<div class="card g">
+<h3>1. Sohbet hızı çipten değil, bellekten gelir</h3>
+<p>Bir yanıt yazmak, dizüstünün yapay zekâyı belleğinden ne kadar hızlı geçirebildiğiyle sınırlıdır ve işlemci ile Intel grafik aynı belleği paylaşır. Bu yüzden aşağı yukarı aynı hızda yazarlar.</p>
+</div>
+
+<div class="card y">
+<h3>2. Hatta daha yavaş olabilir</h3>
+<p>Daha eski küçük bir modelle (Phi-4 Mini) Intel grafikte yazma <strong>%29 daha yavaştı</strong>. Daha büyük bir modelle (Gemma 4 E4B) <strong>%26 daha hızlıydı</strong>. Aynı dizüstü, zıt sonuçlar. Özelliklerden tahmin edilemez, bu yüzden GreenCube dizüstünü test eder ve hangisi hızlıysa onu kullanır.</p>
+</div>
+
+<div class="card p">
+<h3>3. Asıl parladığı yer görseller</h3>
+<p>Bir görsel oluşturmak ağır bir matematiktir, grafik çiplerinin yapıldığı türden. On bir buçuk dakika yaklaşık iki buçuk dakikaya indi.</p>
+</div>
+
+<h2>Peki bu senin için ne demek?</h2>
+<div class="expect">
+<div class="g"><h4>Sohbet ve ders çalışma</h4><p>16 GB'lık bir dizüstü yeterli. Senin okuma hızından hızlı yazar.</p></div>
+<div class="b"><h4>Uzun PDF'ler</h4><p>Grafik onları biraz daha hızlı okur, bu yüzden ilk yanıt daha erken gelir.</p></div>
+<div class="y"><h4>Görseller</h4><p>Mümkün, her biri yaklaşık 2 ila 3 dakika. Bir oyun bilgisayarı bunu bir dakikanın altında yapar.</p></div>
+<div class="p"><h4>Pil</h4><p>Testlerimizde pilde ve prizde sohbet hızı aşağı yukarı aynıydı.</p></div>
+</div>
+
+<p>Oyun bilgisayarları dahil tam tabloyu mu istiyorsun? <a href="/blog/can-my-pc-run-ai">Burada {{pcs}} PC ölçtük.</a></p>
