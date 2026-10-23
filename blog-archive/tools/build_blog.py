@@ -82,7 +82,8 @@ NOINDEX = {'ollama-vs-greencube', 'claude-vs-greencube', 'greencube-vs-claude', 
 # vercel.json sends their address to the target with a permanent redirect, so their ranking signals carry over
 MERGED = {'offline-ai-setup-windows': 'local-ai-chatbot-windows', 'install-local-ai': 'local-ai-chatbot-windows',
           'ai-without-internet': 'best-offline-ai-chatbot', 'best-private-ai': 'private-ai-assistant',
-          'no-rate-limit-ai': 'unlimited-ai'}
+          'no-rate-limit-ai': 'unlimited-ai', 'local-ai-models-explained': 'best-local-ai-models',
+          'best-private-chat-ai': 'private-ai-assistant', 'local-ai-vs-chatgpt': 'chatgpt-offline'}
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
