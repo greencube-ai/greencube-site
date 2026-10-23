@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Draait AI op mijn pc? We hebben {{pcs}} echte gaming-pc's en laptops gemeten",
+ "description": "Draait AI lokaal op je pc? Echte snelheden van {{pcs}} pc's, van een GTX 1650 tot een RTX 2080 Ti en laptops zonder videokaart, en wat je videokaart, VRAM en RAM betekenen.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} pc's",
+ "teaser": "Echte snelheden op {{pcs}} gaming-pc's en laptops.",
+ "rank": 1,
+ "lang": "nl",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "Werkt AI op mijn pc met een AMD-videokaart?", "a": "Ja. We hebben AMD-kaarten (RX 5700 XT, RX 6600, RX 580) gemeten, net als NVIDIA-kaarten. GreenCube gebruikt Vulkan, dat op allebei werkt."},
+  {"q": "Hoeveel VRAM heb ik nodig voor AI?", "a": "Niets is verplicht, maar 4 GB of meer maakt een groot verschil. Op onze test-pc's schreef een GTX 1650 met 4 GB ongeveer 20 tokens per seconde en een RTX 5060 met 8 GB ongeveer 56. Met meer VRAM past een grotere AI op de kaart."},
+  {"q": "Draait AI op een laptop zonder videokaart?", "a": "Ja. Een laptop met 16 GB en alleen Intel-graphics schreef met een kleine AI 14 tot 18 tokens per seconde, sneller dan je leest. Een laptop met 8 GB werkt ook, langzamer, en kan geen afbeeldingen maken."},
+  {"q": "Maakt meer RAM AI sneller?", "a": "Niet op zichzelf. Op een desktop-pc met 48 GB RAM draaide dezelfde AI 14 keer zo snel zodra hij op de videokaart van 8 GB stond als op de processor. RAM telt als je geen kaart hebt; met een kaart telt vooral VRAM."},
+  {"q": "Heb ik internet nodig om AI op mijn pc te draaien?", "a": "Maar één keer, om de app en de AI te downloaden en te activeren. Daarna werkt chatten helemaal zonder internet."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kort antwoord: ja.</strong> Als je pc games draait, kan hij AI draaien. We hebben {{pcs}} echte pc's gemeten: gaming-desktops van een oude GTX 1650 tot een RTX 2080 Ti, en twee laptops zonder videokaart. Op elk ervan chatte een AI die helemaal op de pc draaide: zonder internet, zonder abonnement. Het enige wat verandert, is de snelheid.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>sneller op de videokaart dan op de processor, zelfde pc, zelfde AI</span></div>
+<div class="stat b"><b>20</b><span>tokens per seconde op een GTX 1650 met 4 GB. Sneller dan je leest.</span></div>
+<div class="stat p"><b>8&ndash;9 s</b><span>per afbeelding op een RTX 2080 Ti, eenmaal geladen</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>De cijfers</h2>
+
+<p>"Schrijft" is hoe snel de AI zijn antwoord typt, in tokens per seconde. Een token is een stukje woord: in het Nederlands neemt een woord er meestal een of twee in. De meeste mensen lezen ongeveer 4 woorden per seconde (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), dus vanaf ongeveer 8 tokens per seconde schrijft de AI al sneller dan je ogen kunnen bijhouden.</p>
+
+<!--pcs:table-->
+
+<p>Klik op een videokaart om de volledige test te zien.</p>
+
+<p>Gemeten met GreenCube in september en oktober 2026, in echte chats en in de eigen snelheidstests van GreenCube. Snelheden schommelen een beetje tussen metingen op dezelfde pc, dus waar we er meerdere hebben, tonen we het bereik. <a href="/blog/how-we-measure-ai-speed">Hoe we meten, en alle data</a>.</p>
+
+<h2>Wat we hebben geleerd</h2>
+
+<div class="card g">
+<h3>1. Je videokaart doet het zware werk, net als in een game</h3>
+<p>Op de desktop met de RX 5700 XT schreef dezelfde AI <strong>5 tokens per seconde op de processor en 72 op de videokaart</strong>. AI is vooral het soort rekenwerk waarvoor videokaarten gemaakt zijn. Elke kaart van de laatste jaren helpt enorm, zelfs een oude GTX 1650 met 4 GB.</p>
+</div>
+
+<div class="card b">
+<h3>2. VRAM bepaalt hoe groot de AI mag zijn</h3>
+<p>Om op volle snelheid te draaien, moet de AI in het eigen geheugen van de kaart (VRAM) passen. Die desktop had 48 GB RAM, en dat redde een groter model niet: een AI met 12 miljard parameters paste op de kaart van 8 GB voor één korte vraag en liep daarna vast zodra de chat langer werd, met de kaart bijna vol. <strong>Voor AI wint VRAM van RAM.</strong> Maar VRAM is geen snelheid: vier kaarten met 8 GB die we maten, schreven van ongeveer 11 tokens per seconde (RX 580) tot 72 (RX 5700 XT). Daarom checkt GreenCube je kaart en kiest het een AI die past, niet gewoon de grootste.</p>
+</div>
+
+<div class="card y">
+<h3>3. Geen videokaart? Werkt toch</h3>
+<p>Een gewone laptop met 16 GB en alleen Intel-graphics schreef met de kleinere AI 14 tot 18 tokens per seconde en had een volledig antwoord (een uitleg plus drie examenvragen) in ongeveer 20 seconden klaar. Prima om mee te studeren en te schrijven. Een laptop met 8 GB werkt ook, met 5 tot 7 tokens per seconde in echte chats, als andere apps wat geheugen vrijlaten.</p>
+</div>
+
+<div class="card p">
+<h3>4. Afbeeldingen zijn het zware werk</h3>
+<p>Een afbeelding maken is veel zwaarder dan chatten. <strong>8 tot 9 seconden</strong> op een RTX 2080 Ti met 11 GB (de eerste kostte 83 tijdens het laden), <strong>28 seconden</strong> op een RTX 3060 met 12 GB, ongeveer een minuut op een RX 6600 met 8 GB, anderhalve minuut op een GTX 1660 Super met 6 GB en ongeveer <strong>tweeënhalve minuut</strong> op de laptop met 16 GB. Een laptop met 8 GB kan helemaal geen afbeeldingen maken: alleen de beeld-AI heeft al zo'n 7 GB nodig.</p>
+</div>
+
+<h2 id="by-hand">Check je pc in 30 seconden</h2>
+<ol class="steps">
+<li>Druk op <strong>Ctrl + Shift + Esc</strong> om Taakbeheer te openen.</li>
+<li>Ga naar <strong>Prestaties</strong>.</li>
+<li>Klik op <strong>Geheugen</strong>: het getal rechtsboven is je RAM.</li>
+<li>Klik op <strong>GPU</strong>: de naam rechtsboven is je kaart, en <strong>Toegewezen GPU-geheugen</strong> is je VRAM. Zie je alleen Intel-graphics? Dan heb je geen aparte kaart.</li>
+</ol>
+
+<h2>Hoe je pc zal aanvoelen</h2>
+<div class="expect">
+<div class="g"><h4>Kaart met 6 GB of meer</h4><p>Snel op de meeste kaarten van de laatste jaren: 37 tot 76 tokens per seconde in onze tests, vele malen sneller dan je leest, en afbeeldingen in seconden tot anderhalve minuut. Eén uitzondering: een oude RX 580 schreef ongeveer 11, nog steeds sneller dan je leest.</p></div>
+<div class="b"><h4>Kaart met 4 GB, 16 GB RAM</h4><p>Goed. Ongeveer 20 tokens per seconde in onze test.</p></div>
+<div class="y"><h4>Geen kaart, 16 GB RAM</h4><p>Prima voor chatten en studeren, met een kleinere AI. Afbeeldingen duren een paar minuten.</p></div>
+<div class="p"><h4>Geen kaart, 8 GB RAM</h4><p>Werkt voor chatten, langzaam. Sluit eerst andere apps. Geen afbeeldingen.</p></div>
+</div>
+
+<h2>Waarom AI op je eigen pc?</h2>
+<p>Omdat hij van jou is. Geen berichtlimieten, geen maandabonnement, en hij blijft werken zonder internet: in de trein, in de bergen of in een bibliotheek met belabberde wifi. Hij verslaat de grootste cloud-AI's niet in alles, maar voor studeren, schrijven, samenvatten en alledaagse vragen is een AI op je eigen kaart ruim genoeg, en hij raakt nooit op.</p>

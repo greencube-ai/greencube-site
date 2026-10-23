@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hoe we AI-snelheid meten op echte pc&#x27;s, en waarom we niet gokken | GreenCube-blog</title>
+  <meta name="description" content="Elke snelheid op de GreenCube-blog komt van een van 10 echte pc&#x27;s. Hoe we meten, elke geteste pc, de data als CSV en de test die laat zien waarom we de rest niet schatten." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Hoe we AI-snelheid meten op echte pc&#x27;s, en waarom we niet gokken | GreenCube-blog" />
+  <meta property="og:description" content="Elke snelheid op de GreenCube-blog komt van een van 10 echte pc&#x27;s. Hoe we meten, elke geteste pc, de data als CSV en de test die laat zien waarom we de rest niet schatten." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Hoe we AI-snelheid meten op echte pc's, en waarom we niet gokken", "description": "Elke snelheid op de GreenCube-blog komt van een van 10 echte pc's. Hoe we meten, elke geteste pc, de data als CSV en de test die laat zien waarom we de rest niet schatten.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "nl", "mainEntityOfPage": "https://blog.greencube.app/blog/nl/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/nl/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Waar komen de AI-snelheden van GreenCube vandaan?", "acceptedAnswer": {"@type": "Answer", "text": "Van 10 echte pc's met GreenCube, gemeten in echte chats, met de opstarttest van GreenCube, met de snelheidstest van llama.cpp en met een afbeeldingstest. Elk getal zegt waar het vandaan komt."}}, {"@type": "Question", "name": "Kun je AI-snelheid schatten uit de specificaties van een videokaart?", "acceptedAnswer": {"@type": "Answer", "text": "Nog niet betrouwbaar. Bij voorspellingen uit de geheugenbandbreedte zaten onze schattingen er doorgaans 19% en tot 239% naast, dus we tonen alleen kaarten die we hebben gemeten."}}, {"@type": "Question", "name": "Kan ik de data downloaden?", "acceptedAnswer": {"@type": "Answer", "text": "Ja: elke meting staat in greencube-ai-speeds.csv, gelinkt op deze pagina."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/nl/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/nl/ai-environmental-impact">AI &amp; de planeet</a>
+    <a href="https://greencube.app/nl/your-data">Je gegevens</a>
+    <a href="https://greencube.app/nl/mission">Onze missie</a>
+    <a href="/blog/nl" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">NL</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl" aria-current="true">Nederlands</a></div></details><a href="https://greencube.app/nl/buy" class="nav-cta">Haal GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/nl">GreenCube-blog</a></p>
+<h1>Hoe we AI-snelheid meten op echte pc&#x27;s, en waarom we niet gokken</h1>
+<p class="byline">Door <a href="/blog/nl/hector-gras">Hector Gras</a> &middot; 14 oktober 2026</p>
+<div class="answer"><p>Elke snelheid op deze blog komt van een echte pc met GreenCube: tot nu toe 10 pc&#x27;s, gemeten tussen 22 september 2026 en 14 oktober 2026. We schatten geen snelheden voor kaarten die we niet hebben gemeten: toen we schattingen testten op de kaarten die we wel hebben, zat de typische er 19% naast en de slechtste 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>echte pc's gemeten, desktops en laptops</span></div>
+<div class="stat b"><b>34</b><span>metingen, allemaal in de CSV hieronder</span></div>
+<div class="stat y"><b>239%</b><span>zo ver zat de slechtste snelheidsschatting ernaast</span></div>
+</div>
+<h2>Wat we meten</h2>
+<p>Drie dingen, omdat je die merkt als je een AI op je eigen pc gebruikt:</p>
+<ul>
+<li><strong>Schrijfsnelheid:</strong> hoe snel de AI zijn antwoord typt, in tokens per seconde. Een token is een stukje woord (in het Nederlands neemt een woord er meestal een of twee in), en je leest ongeveer 8 tokens per seconde, dus alles daarboven komt sneller dan je kunt lezen.</li>
+<li><strong>Leessnelheid:</strong> hoe snel hij opneemt wat je geeft: je vraag, een geplakte tekst of een pdf. Dat gaat altijd veel sneller dan schrijven, omdat de AI veel tokens tegelijk leest maar ze een voor een schrijft.</li>
+<li><strong>Tijd per afbeelding:</strong> hoe lang één afbeelding van 512×512 duurt, van de klik tot de afgewerkte afbeelding.</li>
+</ul>
+<p>We meten de AI's die met GreenCube meekomen, dezelfde bestanden die elke gebruiker downloadt: Google's Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB) en Gemma 4 12B (6,4 GB) voor chatten, en Z-Image Turbo voor afbeeldingen. Een andere AI, of dezelfde anders gecomprimeerd, zou andere getallen geven, dus we vergelijken alleen wat vergelijkbaar is.</p>
+<h2>Hoe we meten</h2>
+<p>Op vier manieren, en elk getal op de blog zegt waar het vandaan komt:</p>
+<div class="card g">
+<h3>Echte chats</h3>
+<p>Echte chats in GreenCube: de snelheid van elk antwoord van 100 tokens of meer, uitgelezen uit het log van de app. Het bereik laat het traagste en het snelste tiende weg.</p>
+<p>Gebruikt voor: <a href="/blog/nl/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/nl/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/nl/ai-on-rx-6600">RX 6600</a>, <a href="/blog/nl/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/nl/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/nl/ai-on-rx-580">RX 580</a>, <a href="/blog/nl/ai-on-intel-iris-xe-laptop">laptop met Intel Iris Xe</a>.</p>
+</div>
+<div class="card b">
+<h3>De opstarttest van GreenCube</h3>
+<p>De eigen snelheidstest van GreenCube, die het bij het opstarten doet om te kiezen tussen videokaart en processor: één kort antwoord, één keer op elk geschreven.</p>
+<p>Gebruikt voor: <a href="/blog/nl/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/nl/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/nl/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/nl/ai-on-rx-6600">RX 6600</a>, <a href="/blog/nl/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/nl/ai-on-rx-580">RX 580</a>, <a href="/blog/nl/ai-on-intel-iris-xe-laptop">laptop met Intel Iris Xe</a>.</p>
+</div>
+<div class="card y">
+<h3>De snelheidstest van llama.cpp</h3>
+<p>De eigen snelheidstest van llama.cpp (llama-bench), de engine waarop GreenCube draait, met dezelfde AI-bestanden: 128 tokens geschreven, een tekst van 512 tokens gelezen.</p>
+<p>Gebruikt voor: <a href="/blog/nl/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/nl/ai-on-intel-core-ultra-5-laptop">laptop met Intel Core Ultra 5</a>.</p>
+</div>
+<div class="card p">
+<h3>Afbeeldingstest</h3>
+<p>De beeldengine van GreenCube (Z-Image Turbo), 512×512 pixels, 8 stappen, getimed van de klik tot de afgewerkte afbeelding.</p>
+<p>Gebruikt voor: <a href="/blog/nl/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/nl/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/nl/ai-on-rx-6600">RX 6600</a>, <a href="/blog/nl/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/nl/ai-on-intel-core-ultra-5-laptop">laptop met Intel Core Ultra 5</a>.</p>
+</div>
+<p>Echte chats zijn het beste bewijs, omdat je precies dat gaat merken, dus het hoofdgetal op elke pagina komt uit echte chats zodra we die hebben. De opstarttest is één kort antwoord, dus die gebruiken we voor de vergelijking tussen kaart en processor (die meet beide op dezelfde manier), en alleen als hoofdgetal als een tester geen lange antwoorden stuurde.</p>
+<h2>Elke pc die we hebben gemeten</h2>
+<p>De eigen pc's van echte testers, gebruikt zoals ze ze altijd gebruiken, geen labmachines. Hun namen publiceren we niet.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Pc</th><th>Type</th><th>VRAM</th><th>RAM</th><th>Hoofdgetal uit</th><th>GreenCube</th><th>Datum</th><th>Schrijft (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/nl/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Desktop-pc</td><td>11 GB</td><td>128 GB</td><td>Echte chats</td><td>0.1.44</td><td>14 oktober 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Desktop-pc</td><td>8 GB</td><td>48 GB</td><td>De snelheidstest van llama.cpp</td><td>–</td><td>22 september 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rtx-5060">RTX 5060</a></td><td>Desktop-pc</td><td>8 GB</td><td>32 GB</td><td>De opstarttest van GreenCube</td><td>0.1.42</td><td>1 oktober 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rtx-3060">RTX 3060</a></td><td>Desktop-pc</td><td>12 GB</td><td>32 GB</td><td>Echte chats</td><td>0.1.42–0.1.43</td><td>6 oktober 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-6600">RX 6600</a></td><td>Desktop-pc</td><td>8 GB</td><td>16 GB</td><td>Echte chats</td><td>0.1.42–0.1.44</td><td>9 oktober 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Desktop-pc</td><td>6 GB</td><td>16 GB</td><td>Echte chats</td><td>0.1.42</td><td>1 oktober 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-gtx-1650">GTX 1650</a></td><td>Desktop-pc</td><td>4 GB</td><td>16 GB</td><td>Echte chats</td><td>0.1.40</td><td>23 september 2026</td><td><b>ongeveer 20</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-intel-core-ultra-5-laptop">laptop met Intel Core Ultra 5</a></td><td>Laptop</td><td>–</td><td>16 GB</td><td>De snelheidstest van llama.cpp</td><td>–</td><td>28 september 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-580">RX 580</a></td><td>Desktop-pc</td><td>8 GB</td><td>16 GB</td><td>Echte chats</td><td>0.1.42</td><td>1 oktober 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-intel-iris-xe-laptop">laptop met Intel Iris Xe</a></td><td>Laptop</td><td>–</td><td>8 GB</td><td>Echte chats</td><td>0.1.42</td><td>4 oktober 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Waarom de getallen bereiken zijn</h2>
+<ul>
+<li><strong>Andere apps.</strong> Een browser, een game-launcher of een videogesprek gebruikt hetzelfde geheugen en dezelfde videokaart.</li>
+<li><strong>De eerste keer is trager.</strong> Het eerste antwoord na de installatie, of de eerste afbeelding, bevat het laden en klaarzetten van de kaart. Waar het ertoe doet, zeggen we dat (bijvoorbeeld "de eerste kostte 83 s tijdens het laden").</li>
+<li><strong>Korte antwoorden meten trager.</strong> Elk antwoord heeft een kleine vaste start, die zwaarder weegt bij een antwoord van 20 tokens dan bij een van 400. Daarom tellen de bereiken uit echte chats antwoorden van 100 tokens of meer, en melden we het als een tester alleen korte stuurde.</li>
+<li><strong>We laten de uitschieters weg.</strong> De bereiken uit echte chats lopen van het 10e tot het 90e percentiel, dus één vreemd antwoord kan ze niet verschuiven.</li>
+</ul>
+<h2>Kun je de snelheid van een kaart raden uit de specificaties?</h2>
+<p>Dat zou handig zijn: er zijn honderden kaarten en we hebben 10 pc's gemeten. De gebruikelijke manier is de geheugenbandbreedte. Om elke token te schrijven, leest de AI zijn hele model uit het geheugen van de kaart, dus in theorie is de snelheid ruwweg de bandbreedte gedeeld door de modelgrootte, keer een zekere efficiëntie. Veel online calculators werken zo.</p>
+<p>Dus we hebben het op onze eigen data getest. We verstopten telkens één kaart, berekenden de snelheid per GB/s uit de andere, voorspelden de verstopte kaart uit zijn bandbreedte (uit de specificaties van de fabrikanten, verzameld in de <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">GPU-database van TechPowerUp</a>) en vergeleken dat met wat we maten. Overal dezelfde AI (Gemma 4 E4B, helemaal op de kaart).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Kaart</th><th>Geheugenbandbreedte</th><th>Gemeten (tokens/s)</th><th>Voorspeld</th><th>Afwijking</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/nl/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/s</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/s</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/s</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/s</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-6600">RX 6600</a></td><td>224 GB/s</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/s</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/nl/ai-on-rx-580">RX 580</a></td><td>256 GB/s</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>De typische schatting zat er 19% naast. De slechtste was de <a href="/blog/nl/ai-on-rx-580">RX 580</a>: het geheugen doet ongeveer 36 tokens per seconde verwachten, maar hij schreef er 11. Doe de test opnieuw zonder hem en de andere zitten er nog steeds tot 33% naast. De nieuwere AMD RX 6600 ging de andere kant op, sneller dan de bandbreedte doet vermoeden; de grote cache op de chip (AMD noemt die Infinity Cache) kan daar een deel van de reden zijn. Elk gemeten getal is het hoofdgetal van die kaart, dus ze komen niet allemaal uit hetzelfde soort test; dat voegt wat ruis toe, maar verklaart geen afwijking van drie keer.</p>
+<p><strong>Dat is niet goed genoeg.</strong> Een gok die er op een moderne kaart 33% naast kan zitten, of op een oudere 239%, zou sommige mensen vertellen dat hun pc prima is terwijl hij traag is, of andersom. Dus de check en de kaartpagina's tonen alleen kaarten die we hebben gemeten, en zeggen duidelijk wanneer de jouwe daar niet bij zit. We doen deze test opnieuw bij elke nieuwe kaart, en als de fout klein wordt, zeggen we dat hier voordat we ook maar één schatting tonen.</p>
+<h2>Wat we nog niet hebben gemeten</h2>
+<ul>
+<li>Een laptop met een gaming-videokaart.</li>
+<li>Gemma 4 12B op een kaart met 10 GB of meer.</li>
+<li>Afbeeldingen op de <a href="/blog/nl/ai-on-rx-5700-xt">RX 5700 XT</a>, de <a href="/blog/nl/ai-on-rtx-5060">RTX 5060</a>, de <a href="/blog/nl/ai-on-gtx-1650">GTX 1650</a>, de <a href="/blog/nl/ai-on-rx-580">RX 580</a>.</li>
+<li>Andere AI's dan die met GreenCube meekomen, en Linux of Mac (GreenCube is voor Windows).</li>
+</ul>
+<h2>Download de data</h2>
+<p>Elke meting op deze pagina, één per rij, staat in <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: de pc, de AI, waar hij draaide, schrijf- en leessnelheden, tijden per afbeelding, hoe er gemeten is, de GreenCube-versie en de datum. Als je ze gebruikt, vermeld dan "GreenCube, metingen van AI-snelheid op echte pc's, 2026" en link naar deze pagina.</p>
+<h2>Voeg je pc toe</h2>
+<p>Gebruik je GreenCube al? Stuur je log naar <a href="mailto:support@greencube.app">support@greencube.app</a>. We voegen je pc toe aan de tests, zonder je naam, en een nieuwe kaart krijgt een eigen pagina. Weet je niet wat er in je pc zit? <a href="/blog/nl/can-my-pc-run-ai#checker">Check het hier</a>.</p>
+<h2>Vragen</h2>
+<div class="faq">
+<details><summary>Waar komen de AI-snelheden van GreenCube vandaan?</summary><p>Van 10 echte pc&#x27;s met GreenCube, gemeten in echte chats, met de opstarttest van GreenCube, met de snelheidstest van llama.cpp en met een afbeeldingstest. Elk getal zegt waar het vandaan komt.</p></details>
+<details><summary>Kun je AI-snelheid schatten uit de specificaties van een videokaart?</summary><p>Nog niet betrouwbaar. Bij voorspellingen uit de geheugenbandbreedte zaten onze schattingen er doorgaans 19% en tot 239% naast, dus we tonen alleen kaarten die we hebben gemeten.</p></details>
+<details><summary>Kan ik de data downloaden?</summary><p>Ja: elke meting staat in greencube-ai-speeds.csv, gelinkt op deze pagina.</p></details>
+</div>
+
+<div class="cta-box"><h3>Je eigen AI, op je eigen pc</h3><p>GreenCube draait op je computer: geen gebruikslimieten, geen abonnement, werkt zonder internet. &euro;9,99, één keer betaald.</p><a class="cta" href="https://greencube.app/nl/buy">Haal GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/nl/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI die van <em>jou is,</em> niet gehuurd.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="https://greencube.app/nl/buy">Haal GreenCube</a></li>
+          <li><a href="https://greencube.app/nl/what-you-get">Draait hij op mijn computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Leren</h3>
+        <ul>
+          <li><a href="/blog/nl">Blog</a></li>
+          <li><a href="https://greencube.app/nl/your-data">Je gegevens</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; je gegevens (EN)</a></li>
+          <li><a href="https://greencube.app/nl/ai-environmental-impact">AI &amp; de planeet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Bedrijf</h3>
+        <ul>
+          <li><a href="https://greencube.app/nl/mission">Onze missie</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Privacybeleid (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Gebruiksvoorwaarden (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Gemaakt in Spanje.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
