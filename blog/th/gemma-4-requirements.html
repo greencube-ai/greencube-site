@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้ | บล็อก GreenCube</title>
+  <meta name="description" content="สเปกที่ Gemma 4 E2B, E4B และ 12B ต้องการ วัดบนคอมจริง แต่ละตัวต้องใช้ RAM และ VRAM เท่าไร และรันเร็วแค่ไหนบนแล็ปท็อปและการ์ดจอเกมมิ่ง" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้ | บล็อก GreenCube" />
+  <meta property="og:description" content="สเปกที่ Gemma 4 E2B, E4B และ 12B ต้องการ วัดบนคอมจริง แต่ละตัวต้องใช้ RAM และ VRAM เท่าไร และรันเร็วแค่ไหนบนแล็ปท็อปและการ์ดจอเกมมิ่ง" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/th/gemma-4-requirements" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/th/gemma-4-requirements" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/requisitos-gemma-4" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-requirements" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-requirements" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/gemma-4-requirements" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/gemma-4-requirements" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/gemma-4-requirements" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/gemma-4-requirements" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/gemma-4-requirements" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/gemma-4-requirements" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/gemma-4-requirements" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/gemma-4-requirements" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/gemma-4-requirements" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/gemma-4-requirements" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้", "description": "สเปกที่ Gemma 4 E2B, E4B และ 12B ต้องการ วัดบนคอมจริง แต่ละตัวต้องใช้ RAM และ VRAM เท่าไร และรันเร็วแค่ไหนบนแล็ปท็อปและการ์ดจอเกมมิ่ง", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "th", "mainEntityOfPage": "https://blog.greencube.app/blog/th/gemma-4-requirements", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/th/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "สเปกขั้นต่ำในการรัน Gemma 4 ในเครื่องคืออะไร?", "acceptedAnswer": {"@type": "Answer", "text": "ตัวที่เล็กที่สุด Gemma 4 E2B (ไฟล์ 2.6 GB) รันได้บนแล็ปท็อป RAM 8 GB ที่ไม่มีการ์ดจอ ที่ 5 ถึง 7 โทเคนต่อวินาทีในแชตจริง ต้องมีหน่วยความจำว่างสักสอง GB เพื่อเริ่มทำงาน"}}, {"@type": "Question", "name": "Gemma 4 E4B ต้องใช้ VRAM เท่าไร?", "acceptedAnswer": {"@type": "Answer", "text": "E4B เป็นไฟล์ 4.2 GB ลงบนการ์ดจอ 6 GB ได้ทั้งหมด โดยเขียนได้ 35 ถึง 38 โทเคนต่อวินาทีบน GTX 1660 Super บนการ์ด 8 GB ได้ 56 ถึง 72 และรันได้โดยไม่มีการ์ดบน RAM 16 GB ที่ราว 8 โทเคนต่อวินาที"}}, {"@type": "Question", "name": "Gemma 4 12B รันบนการ์ดจอ 8 GB ได้ไหม?", "acceptedAnswer": {"@type": "Answer", "text": "สำหรับคำถามสั้นหนึ่งข้อ ได้ 20 ถึง 35 โทเคนต่อวินาทีบน RX 5700 XT แต่มันแครชเมื่อบทสนทนายาวขึ้น เพราะการ์ดแทบไม่เหลือที่ เราอยากให้มี VRAM อย่างน้อย 10 GB สำหรับตัวนี้"}}, {"@type": "Question", "name": "Gemma 4 ใช้ฟรีไหม?", "acceptedAnswer": {"@type": "Answer", "text": "ฟรี Google ปล่อย Gemma 4 รวมถึง E2B และ E4B ภายใต้สัญญาอนุญาต Apache 2.0 ซึ่งอนุญาตให้ใช้เชิงพาณิชย์ได้"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/th/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/th/ai-environmental-impact">AI กับโลก</a>
+    <a href="https://greencube.app/th/your-data">ข้อมูลของคุณ</a>
+    <a href="https://greencube.app/th/mission">พันธกิจของเรา</a>
+    <a href="/blog/th" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">TH</summary><div class="lang-list"><a href="/blog/gemma-4-requirements" hreflang="en" lang="en">English</a><a href="/blog/es/requisitos-gemma-4" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-requirements" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-requirements" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-requirements" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/gemma-4-requirements" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/gemma-4-requirements" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/gemma-4-requirements" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/gemma-4-requirements" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/gemma-4-requirements" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/gemma-4-requirements" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/gemma-4-requirements" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/gemma-4-requirements" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/gemma-4-requirements" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/gemma-4-requirements" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/gemma-4-requirements" hreflang="th" lang="th" aria-current="true">ไทย</a></div></details><a href="https://greencube.app/th/buy" class="nav-cta">ซื้อ GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/th">บล็อก GreenCube</a></p>
+<h1>สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้</h1>
+<p class="byline">เขียนโดย <a href="/blog/th/hector-gras">Hector Gras</a> &middot; 18 ตุลาคม 2026</p>
+<div class="answer"><p><strong>คำตอบสั้นๆ:</strong> <strong>Gemma 4 E2B</strong> ตัวเล็กรันได้บน <strong>แล็ปท็อป 8 GB</strong> <strong>E4B</strong> ต้องการ RAM 16 GB หรือจะบินได้บน <strong>การ์ดจอ 6 GB ขึ้นไป</strong> รุ่นไหนก็ได้ ส่วน <strong>12B</strong> ต้องมี <strong>VRAM 10 GB ขึ้นไป</strong> ถึงจะคุยยาวได้จริง</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>RAM แค่นี้ก็พอสำหรับ Gemma 4 E2B ไม่ต้องมีการ์ดจอ</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>โทเคนต่อวินาทีสำหรับ E4B บนการ์ดเกมมิ่ง 8 GB</span></div>
+<div class="stat p"><b>10 GB</b><span>VRAM ขั้นต่ำก่อนที่เราจะไว้ใจ 12B ในแชตยาว</span></div>
+</div>
+
+<h2>สเปก Gemma 4 แบบสรุป</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>โมเดล</th><th>ขนาดไฟล์</th><th>ขั้นต่ำที่เราแนะนำ</th><th>เหมาะที่สุดกับ</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>RAM 8 GB ไม่ต้องมีการ์ด</td><td>แล็ปท็อป</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>RAM 16 GB หรือการ์ด 6 GB</td><td>คอมเล่นเกม แล็ปท็อป 16 GB</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6.2 GB</td><td>VRAM 10 GB ขึ้นไป</td><td>การ์ด 12 GB ขึ้นไป</td></tr>
+</tbody>
+</table></div>
+
+<h2>ความเร็วที่วัดได้</h2>
+<p>แต่ละตัวเขียนคำตอบได้เร็วแค่ไหน เป็นโทเคนต่อวินาที (โทเคนคือชิ้นส่วนของคำ) วัดด้วย GreenCube ในเดือนกันยายนและตุลาคม 2026</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>คอม</th><th>โมเดล</th><th>การเขียน (โทเคน/วินาที)</th></tr></thead>
+<tbody>
+<tr><td>คอมตั้งโต๊ะ AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ การ์ดจอ 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (แชตสั้นเท่านั้น)</td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>ราว 20</b></td></tr>
+<tr><td>แล็ปท็อป Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>แล็ปท็อปเครื่องเดียวกัน</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>แล็ปท็อป Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>สิ่งที่เราได้เรียนรู้</h2>
+
+<div class="card g">
+<h3>1. E2B คือโมเดลสำหรับแล็ปท็อป</h3>
+<p>บนแล็ปท็อป 16 GB ที่ไม่มีการ์ดจอ มันตอบคำถามเรียนครบถ้วนในราว 20 วินาที ขณะที่ E4B ใช้ 112 วินาที ในการเช็กข้อเท็จจริงสั้นๆ ห้าข้อ มันไม่ผิดเลย <a href="/blog/th/gemma-4-e2b-vs-e4b">E2B กับ E4B วัดจริง</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B คือโมเดลสำหรับคอมเล่นเกม</h3>
+<p>เมื่อโมเดลทั้งตัวอยู่บนการ์ดจอ E4B <strong>เร็วกว่าบนแล็ปท็อป 7 ถึง 9 เท่า</strong> และคำตอบก็ดีกว่า การ์ด 6 GB ขึ้นไปรุ่นไหนก็ทำได้</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B ต้องการ VRAM จริงๆ ไม่ใช่แค่ RAM</h3>
+<p>บนการ์ด 8 GB โมเดล 12B ตอบคำถามสั้นหนึ่งข้อได้ดี แล้วแครชทุกครั้งที่แชตยาวขึ้น คอมเครื่องนั้นมี RAM 48 GB แต่ก็ไม่ช่วย <a href="/blog/th/how-much-vram-for-ai">ทำไมโมเดลต้องลงบนการ์ดให้หมด</a></p>
+</div>
+
+<h2>Gemma 4 ตัวไหนเหมาะกับคอมของคุณ?</h2>
+<div class="expect">
+<div class="g"><h4>แล็ปท็อป 8 GB</h4><p>E2B ปิดแอปอื่นก่อน</p></div>
+<div class="b"><h4>แล็ปท็อป 16 GB ไม่มีการ์ด</h4><p>E2B ถ้าต้องการความเร็ว E4B ใช้ได้แต่ช้า</p></div>
+<div class="y"><h4>คอมเล่นเกม การ์ด 6&ndash;8 GB</h4><p>E4B อยู่บนการ์ดทั้งหมด</p></div>
+<div class="p"><h4>การ์ด 12 GB ขึ้นไป</h4><p>E4B เร็ว และ 12B ก็เริ่มเป็นตัวเลือกได้</p></div>
+</div>
+
+<p>Gemma 4 เผยแพร่โดย Google ภายใต้สัญญาอนุญาต Apache 2.0 GreenCube เลือกตัวที่เหมาะกับคอมของคุณให้อัตโนมัติ <a href="/blog/th/can-my-pc-run-ai">ดูคอมทั้ง 10 เครื่องที่เราวัด</a></p>
+<h2>คำถาม</h2>
+<div class="faq">
+<details><summary>สเปกขั้นต่ำในการรัน Gemma 4 ในเครื่องคืออะไร?</summary><p>ตัวที่เล็กที่สุด Gemma 4 E2B (ไฟล์ 2.6 GB) รันได้บนแล็ปท็อป RAM 8 GB ที่ไม่มีการ์ดจอ ที่ 5 ถึง 7 โทเคนต่อวินาทีในแชตจริง ต้องมีหน่วยความจำว่างสักสอง GB เพื่อเริ่มทำงาน</p></details>
+<details><summary>Gemma 4 E4B ต้องใช้ VRAM เท่าไร?</summary><p>E4B เป็นไฟล์ 4.2 GB ลงบนการ์ดจอ 6 GB ได้ทั้งหมด โดยเขียนได้ 35 ถึง 38 โทเคนต่อวินาทีบน GTX 1660 Super บนการ์ด 8 GB ได้ 56 ถึง 72 และรันได้โดยไม่มีการ์ดบน RAM 16 GB ที่ราว 8 โทเคนต่อวินาที</p></details>
+<details><summary>Gemma 4 12B รันบนการ์ดจอ 8 GB ได้ไหม?</summary><p>สำหรับคำถามสั้นหนึ่งข้อ ได้ 20 ถึง 35 โทเคนต่อวินาทีบน RX 5700 XT แต่มันแครชเมื่อบทสนทนายาวขึ้น เพราะการ์ดแทบไม่เหลือที่ เราอยากให้มี VRAM อย่างน้อย 10 GB สำหรับตัวนี้</p></details>
+<details><summary>Gemma 4 ใช้ฟรีไหม?</summary><p>ฟรี Google ปล่อย Gemma 4 รวมถึง E2B และ E4B ภายใต้สัญญาอนุญาต Apache 2.0 ซึ่งอนุญาตให้ใช้เชิงพาณิชย์ได้</p></details>
+</div>
+
+<div class="cta-box"><h3>AI ของคุณเอง บนคอมของคุณเอง</h3><p>GreenCube รันบนคอมพิวเตอร์ของคุณ ไม่จำกัดการใช้งาน ไม่ต้องสมัครสมาชิก ใช้ได้โดยไม่ต้องต่อเน็ต &euro;9.99 จ่ายครั้งเดียว</p><a class="cta" href="https://greencube.app/th/buy">ซื้อ GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/th/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI ที่เป็น <em>ของคุณ</em> ไม่ใช่ของเช่า</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>ผลิตภัณฑ์</h3>
+        <ul>
+          <li><a href="https://greencube.app/th/buy">ซื้อ GreenCube</a></li>
+          <li><a href="https://greencube.app/th/what-you-get">คอมพิวเตอร์ของฉันรันได้ไหม?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>เรียนรู้</h3>
+        <ul>
+          <li><a href="/blog/th">Blog</a></li>
+          <li><a href="https://greencube.app/th/your-data">ข้อมูลของคุณ</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT กับข้อมูลของคุณ (EN)</a></li>
+          <li><a href="https://greencube.app/th/ai-environmental-impact">AI กับโลก</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>บริษัท</h3>
+        <ul>
+          <li><a href="https://greencube.app/th/mission">พันธกิจของเรา</a></li>
+          <li><a href="mailto:support@greencube.app">ติดต่อ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">นโยบายความเป็นส่วนตัว (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">ข้อกำหนดการใช้งาน (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. ผลิตในสเปน</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

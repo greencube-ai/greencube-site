@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้",
+ "description": "สเปกที่ Gemma 4 E2B, E4B และ 12B ต้องการ วัดบนคอมจริง แต่ละตัวต้องใช้ RAM และ VRAM เท่าไร และรันเร็วแค่ไหนบนแล็ปท็อปและการ์ดจอเกมมิ่ง",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "ตั้งแต่แล็ปท็อป 8 GB ถึงคอมเล่นเกม: Gemma 4 ตัวไหนเหมาะกับเครื่องคุณ",
+ "rank": 2,
+ "lang": "th",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "สเปกขั้นต่ำในการรัน Gemma 4 ในเครื่องคืออะไร?", "a": "ตัวที่เล็กที่สุด Gemma 4 E2B (ไฟล์ 2.6 GB) รันได้บนแล็ปท็อป RAM 8 GB ที่ไม่มีการ์ดจอ ที่ 5 ถึง 7 โทเคนต่อวินาทีในแชตจริง ต้องมีหน่วยความจำว่างสักสอง GB เพื่อเริ่มทำงาน"},
+  {"q": "Gemma 4 E4B ต้องใช้ VRAM เท่าไร?", "a": "E4B เป็นไฟล์ 4.2 GB ลงบนการ์ดจอ 6 GB ได้ทั้งหมด โดยเขียนได้ 35 ถึง 38 โทเคนต่อวินาทีบน GTX 1660 Super บนการ์ด 8 GB ได้ 56 ถึง 72 และรันได้โดยไม่มีการ์ดบน RAM 16 GB ที่ราว 8 โทเคนต่อวินาที"},
+  {"q": "Gemma 4 12B รันบนการ์ดจอ 8 GB ได้ไหม?", "a": "สำหรับคำถามสั้นหนึ่งข้อ ได้ 20 ถึง 35 โทเคนต่อวินาทีบน RX 5700 XT แต่มันแครชเมื่อบทสนทนายาวขึ้น เพราะการ์ดแทบไม่เหลือที่ เราอยากให้มี VRAM อย่างน้อย 10 GB สำหรับตัวนี้"},
+  {"q": "Gemma 4 ใช้ฟรีไหม?", "a": "ฟรี Google ปล่อย Gemma 4 รวมถึง E2B และ E4B ภายใต้สัญญาอนุญาต Apache 2.0 ซึ่งอนุญาตให้ใช้เชิงพาณิชย์ได้"}
+ ]
+}
+-->
+<div class="answer"><p><strong>คำตอบสั้นๆ:</strong> <strong>Gemma 4 E2B</strong> ตัวเล็กรันได้บน <strong>แล็ปท็อป 8 GB</strong> <strong>E4B</strong> ต้องการ RAM 16 GB หรือจะบินได้บน <strong>การ์ดจอ 6 GB ขึ้นไป</strong> รุ่นไหนก็ได้ ส่วน <strong>12B</strong> ต้องมี <strong>VRAM 10 GB ขึ้นไป</strong> ถึงจะคุยยาวได้จริง</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>RAM แค่นี้ก็พอสำหรับ Gemma 4 E2B ไม่ต้องมีการ์ดจอ</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>โทเคนต่อวินาทีสำหรับ E4B บนการ์ดเกมมิ่ง 8 GB</span></div>
+<div class="stat p"><b>10 GB</b><span>VRAM ขั้นต่ำก่อนที่เราจะไว้ใจ 12B ในแชตยาว</span></div>
+</div>
+
+<h2>สเปก Gemma 4 แบบสรุป</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>โมเดล</th><th>ขนาดไฟล์</th><th>ขั้นต่ำที่เราแนะนำ</th><th>เหมาะที่สุดกับ</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>RAM 8 GB ไม่ต้องมีการ์ด</td><td>แล็ปท็อป</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>RAM 16 GB หรือการ์ด 6 GB</td><td>คอมเล่นเกม แล็ปท็อป 16 GB</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6.2 GB</td><td>VRAM 10 GB ขึ้นไป</td><td>การ์ด 12 GB ขึ้นไป</td></tr>
+</tbody>
+</table></div>
+
+<h2>ความเร็วที่วัดได้</h2>
+<p>แต่ละตัวเขียนคำตอบได้เร็วแค่ไหน เป็นโทเคนต่อวินาที (โทเคนคือชิ้นส่วนของคำ) วัดด้วย GreenCube ในเดือนกันยายนและตุลาคม 2026</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>คอม</th><th>โมเดล</th><th>การเขียน (โทเคน/วินาที)</th></tr></thead>
+<tbody>
+<tr><td>คอมตั้งโต๊ะ AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ การ์ดจอ 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>คอมตั้งโต๊ะ AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (แชตสั้นเท่านั้น)</td></tr>
+<tr><td>คอมตั้งโต๊ะ NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>ราว 20</b></td></tr>
+<tr><td>แล็ปท็อป Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>แล็ปท็อปเครื่องเดียวกัน</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>แล็ปท็อป Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>สิ่งที่เราได้เรียนรู้</h2>
+
+<div class="card g">
+<h3>1. E2B คือโมเดลสำหรับแล็ปท็อป</h3>
+<p>บนแล็ปท็อป 16 GB ที่ไม่มีการ์ดจอ มันตอบคำถามเรียนครบถ้วนในราว 20 วินาที ขณะที่ E4B ใช้ 112 วินาที ในการเช็กข้อเท็จจริงสั้นๆ ห้าข้อ มันไม่ผิดเลย <a href="/blog/gemma-4-e2b-vs-e4b">E2B กับ E4B วัดจริง</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B คือโมเดลสำหรับคอมเล่นเกม</h3>
+<p>เมื่อโมเดลทั้งตัวอยู่บนการ์ดจอ E4B <strong>เร็วกว่าบนแล็ปท็อป 7 ถึง 9 เท่า</strong> และคำตอบก็ดีกว่า การ์ด 6 GB ขึ้นไปรุ่นไหนก็ทำได้</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B ต้องการ VRAM จริงๆ ไม่ใช่แค่ RAM</h3>
+<p>บนการ์ด 8 GB โมเดล 12B ตอบคำถามสั้นหนึ่งข้อได้ดี แล้วแครชทุกครั้งที่แชตยาวขึ้น คอมเครื่องนั้นมี RAM 48 GB แต่ก็ไม่ช่วย <a href="/blog/how-much-vram-for-ai">ทำไมโมเดลต้องลงบนการ์ดให้หมด</a></p>
+</div>
+
+<h2>Gemma 4 ตัวไหนเหมาะกับคอมของคุณ?</h2>
+<div class="expect">
+<div class="g"><h4>แล็ปท็อป 8 GB</h4><p>E2B ปิดแอปอื่นก่อน</p></div>
+<div class="b"><h4>แล็ปท็อป 16 GB ไม่มีการ์ด</h4><p>E2B ถ้าต้องการความเร็ว E4B ใช้ได้แต่ช้า</p></div>
+<div class="y"><h4>คอมเล่นเกม การ์ด 6&ndash;8 GB</h4><p>E4B อยู่บนการ์ดทั้งหมด</p></div>
+<div class="p"><h4>การ์ด 12 GB ขึ้นไป</h4><p>E4B เร็ว และ 12B ก็เริ่มเป็นตัวเลือกได้</p></div>
+</div>
+
+<p>Gemma 4 เผยแพร่โดย Google ภายใต้สัญญาอนุญาต Apache 2.0 GreenCube เลือกตัวที่เหมาะกับคอมของคุณให้อัตโนมัติ <a href="/blog/can-my-pc-run-ai">ดูคอมทั้ง {{pcs}} เครื่องที่เราวัด</a></p>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AI ต้องใช้ VRAM เท่าไร? ทำไมโมเดลต้องลงบนการ์ดจอให้หมด | บล็อก GreenCube</title>
+  <meta name="description" content="AI ต้องใช้ VRAM เท่าไร? เราวัดแล้ว โมเดลที่ล้นออกจากการ์ดจอรันช้าลง 6 เท่า และแครชในแชตยาว วิธีเลือกโมเดลที่ลงได้พอดี" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="AI ต้องใช้ VRAM เท่าไร? ทำไมโมเดลต้องลงบนการ์ดจอให้หมด | บล็อก GreenCube" />
+  <meta property="og:description" content="AI ต้องใช้ VRAM เท่าไร? เราวัดแล้ว โมเดลที่ล้นออกจากการ์ดจอรันช้าลง 6 เท่า และแครชในแชตยาว วิธีเลือกโมเดลที่ลงได้พอดี" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/th/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/th/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI ต้องใช้ VRAM เท่าไร? ทำไมโมเดลต้องลงบนการ์ดจอให้หมด", "description": "AI ต้องใช้ VRAM เท่าไร? เราวัดแล้ว โมเดลที่ล้นออกจากการ์ดจอรันช้าลง 6 เท่า และแครชในแชตยาว วิธีเลือกโมเดลที่ลงได้พอดี", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "th", "mainEntityOfPage": "https://blog.greencube.app/blog/th/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/th/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "จะเกิดอะไรขึ้นถ้าโมเดล AI ลงใน VRAM ไม่หมด?", "acceptedAnswer": {"@type": "Answer", "text": "ส่วนที่ลงไม่ได้จะรันจากหน่วยความจำปกติ และทุกอย่างช้าลง บนการ์ด 8 GB ของเรา โมเดลที่มี 28 เลเยอร์อยู่บนการ์ดเขียนได้ 5.9 โทเคนต่อวินาที แทนที่จะเป็น 35.6 เมื่ออยู่บนการ์ดทั้งหมด ช้าลง 6 เท่า"}}, {"@type": "Question", "name": "ควรรันโมเดล AI ที่ใหญ่ที่สุดที่การ์ดโหลดได้ไหม?", "acceptedAnswer": {"@type": "Answer", "text": "ไม่ควร ให้เหลือที่ไว้สำหรับบทสนทนา โมเดล 12 พันล้านพารามิเตอร์ลงบนการ์ด 8 GB ได้สำหรับคำถามสั้น แล้วก็แครชเมื่อแชตยาวขึ้น โมเดลที่เล็กกว่าซึ่งลงได้โดยยังเหลือที่ เร็วกว่าและไม่เคยแครช"}}, {"@type": "Question", "name": "ควรเหลือ VRAM ว่างไว้เท่าไร?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube เหลือที่บนการ์ดไว้ราว 1.5 GB สำหรับบทสนทนาและสำหรับ Windows ถ้าไม่มีที่ตรงนี้ การ์ด 4 GB หน่วยความจำเต็มตั้งแต่ข้อความแรก"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/th/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/th/ai-environmental-impact">AI กับโลก</a>
+    <a href="https://greencube.app/th/your-data">ข้อมูลของคุณ</a>
+    <a href="https://greencube.app/th/mission">พันธกิจของเรา</a>
+    <a href="/blog/th" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">TH</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-much-vram-for-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-much-vram-for-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-much-vram-for-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-much-vram-for-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-much-vram-for-ai" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-much-vram-for-ai" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-much-vram-for-ai" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-much-vram-for-ai" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/how-much-vram-for-ai" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/how-much-vram-for-ai" hreflang="th" lang="th" aria-current="true">ไทย</a></div></details><a href="https://greencube.app/th/buy" class="nav-cta">ซื้อ GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/th">บล็อก GreenCube</a></p>
+<h1>AI ต้องใช้ VRAM เท่าไร? ทำไมโมเดลต้องลงบนการ์ดจอให้หมด</h1>
+<p class="byline">เขียนโดย <a href="/blog/th/hector-gras">Hector Gras</a> &middot; 18 ตุลาคม 2026</p>
+<div class="answer"><p><strong>คำตอบสั้นๆ:</strong> AI ที่ลงในหน่วยความจำของการ์ดจอ (VRAM) ได้ทั้งหมดจะเร็ว ส่วนตัวที่ล้นออกมา <strong>ช้ากว่าการไม่ใช้การ์ดเลย</strong> และอาจแครช ตัวเล็กที่อยู่บนการ์ดทั้งหมดชนะตัวใหญ่ที่อยู่บนการ์ดแค่ครึ่งเดียว</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35.6</b><span>โทเคนต่อวินาที เมื่อโมเดลอยู่บนการ์ดทั้งหมด</span></div>
+<div class="stat p"><b>5.9</b><span>เมื่อบางส่วนอยู่นอกการ์ด ช้าลง 6 เท่า</span></div>
+<div class="stat y"><b>แครช</b><span>เมื่อโมเดลที่แทบไม่พอดีเจอแชตยาว</span></div>
+</div>
+
+<h2>การทดสอบ</h2>
+<p>คอมตั้งโต๊ะที่ใช้ AMD RX 5700 XT (VRAM 8 GB) และ RAM 48 GB เราโหลดโมเดล 12 พันล้านพารามิเตอร์ (Gemma 4 12B ราว 6.2 GB) แล้ววางมันบนการ์ดมากบ้างน้อยบ้าง ทั้งหมดในเซสชันเดียว เดือนกันยายน 2026</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>ส่วนของโมเดลที่อยู่บนการ์ด</th><th>การเขียน (โทเคน/วินาที)</th></tr></thead>
+<tbody>
+<tr><td>ทั้งหมด</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
+<tr><td>28 เลเยอร์</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
+<tr><td>20 เลเยอร์</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
+<tr><td><em>เพื่อเปรียบเทียบ: โมเดลที่เล็กกว่า (Gemma 4 E4B) บนซีพียูอย่างเดียว</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
+<tr><td><em>โมเดลเล็กตัวเดียวกัน อยู่บนการ์ดทั้งหมด</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>สิ่งที่เราได้เรียนรู้</h2>
+
+<div class="card g">
+<h3>1. ทั้งหมดหรือไม่ก็ไม่เอาเลย</h3>
+<p>แค่ให้บางส่วนของโมเดลอยู่นอกการ์ด มันก็ <strong>ช้าลง 6 เท่า</strong> เมื่อมี 20 เลเยอร์บนการ์ด มันช้ากว่าโมเดลเล็กที่รันโดยไม่มีการ์ดเลยด้วยซ้ำ ครึ่งๆ กลางๆ คือแย่ที่สุดของทั้งสองทาง</p>
+</div>
+
+<div class="card p">
+<h3>2. ใหญ่ที่สุดไม่ใช่ดีที่สุด</h3>
+<p>โมเดล 12B ลงบนการ์ด 8 GB ได้ทั้งหมดจริง สำหรับคำถามสั้นหนึ่งข้อ แต่พอแชตยาวขึ้น มันแครชทุกครั้ง เพราะการ์ดแทบไม่เหลือที่ให้บทสนทนา โมเดลที่เล็กกว่ามีที่เหลือราว 3 GB และรันได้ 63 ถึง 72 โทเคนต่อวินาที</p>
+</div>
+
+<div class="card b">
+<h3>3. เหลือที่ไว้</h3>
+<p>บน GTX 1650 4 GB โมเดล 4.2 GB ถูกยัดลงบนการ์ดที่มีที่ 3.9 GB และข้อความแรกสุดก็ล้มเหลวด้วยข้อความ "หน่วยความจำไม่พอ" ตอนนี้ GreenCube จึงเก็บ <strong>ที่ว่างบนการ์ดไว้ราว 1.5 GB</strong> สำหรับแชตและสำหรับ Windows</p>
+</div>
+
+<h2>วิธีเลือกโมเดลให้เหมาะกับการ์ดของคุณ</h2>
+<div class="expect">
+<div class="g"><h4>เช็ก VRAM ของคุณ</h4><p>Task Manager &rarr; Performance &rarr; GPU &rarr; Dedicated GPU memory (หน่วยความจำ GPU เฉพาะ)</p></div>
+<div class="b"><h4>ขนาดโมเดล + 1.5 GB</h4><p>ไฟล์โมเดลบวกอีกราว 1.5 GB ควรไม่เกินตัวเลขนั้น</p></div>
+<div class="y"><h4>ถ้าไม่แน่ใจ เลือกตัวเล็กกว่า</h4><p>โมเดลเล็กที่อยู่บนการ์ดทั้งหมดชนะตัวใหญ่ที่อยู่บนการ์ดครึ่งเดียว</p></div>
+<div class="p"><h4>หรือให้แอปเลือก</h4><p>GreenCube อ่านการ์ดของคุณแล้วเลือกโมเดลที่ลงได้โดยยังเหลือที่</p></div>
+</div>
+
+<p>ความเร็วจริงบนคอม 10 เครื่อง ตั้งแต่ GTX 1650 ถึง RTX 5060: <a href="/blog/th/can-my-pc-run-ai">ดูได้ที่นี่</a></p>
+<h2>คำถาม</h2>
+<div class="faq">
+<details><summary>จะเกิดอะไรขึ้นถ้าโมเดล AI ลงใน VRAM ไม่หมด?</summary><p>ส่วนที่ลงไม่ได้จะรันจากหน่วยความจำปกติ และทุกอย่างช้าลง บนการ์ด 8 GB ของเรา โมเดลที่มี 28 เลเยอร์อยู่บนการ์ดเขียนได้ 5.9 โทเคนต่อวินาที แทนที่จะเป็น 35.6 เมื่ออยู่บนการ์ดทั้งหมด ช้าลง 6 เท่า</p></details>
+<details><summary>ควรรันโมเดล AI ที่ใหญ่ที่สุดที่การ์ดโหลดได้ไหม?</summary><p>ไม่ควร ให้เหลือที่ไว้สำหรับบทสนทนา โมเดล 12 พันล้านพารามิเตอร์ลงบนการ์ด 8 GB ได้สำหรับคำถามสั้น แล้วก็แครชเมื่อแชตยาวขึ้น โมเดลที่เล็กกว่าซึ่งลงได้โดยยังเหลือที่ เร็วกว่าและไม่เคยแครช</p></details>
+<details><summary>ควรเหลือ VRAM ว่างไว้เท่าไร?</summary><p>GreenCube เหลือที่บนการ์ดไว้ราว 1.5 GB สำหรับบทสนทนาและสำหรับ Windows ถ้าไม่มีที่ตรงนี้ การ์ด 4 GB หน่วยความจำเต็มตั้งแต่ข้อความแรก</p></details>
+</div>
+
+<div class="cta-box"><h3>AI ของคุณเอง บนคอมของคุณเอง</h3><p>GreenCube รันบนคอมพิวเตอร์ของคุณ ไม่จำกัดการใช้งาน ไม่ต้องสมัครสมาชิก ใช้ได้โดยไม่ต้องต่อเน็ต &euro;9.99 จ่ายครั้งเดียว</p><a class="cta" href="https://greencube.app/th/buy">ซื้อ GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/th/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI ที่เป็น <em>ของคุณ</em> ไม่ใช่ของเช่า</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>ผลิตภัณฑ์</h3>
+        <ul>
+          <li><a href="https://greencube.app/th/buy">ซื้อ GreenCube</a></li>
+          <li><a href="https://greencube.app/th/what-you-get">คอมพิวเตอร์ของฉันรันได้ไหม?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>เรียนรู้</h3>
+        <ul>
+          <li><a href="/blog/th">Blog</a></li>
+          <li><a href="https://greencube.app/th/your-data">ข้อมูลของคุณ</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT กับข้อมูลของคุณ (EN)</a></li>
+          <li><a href="https://greencube.app/th/ai-environmental-impact">AI กับโลก</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>บริษัท</h3>
+        <ul>
+          <li><a href="https://greencube.app/th/mission">พันธกิจของเรา</a></li>
+          <li><a href="mailto:support@greencube.app">ติดต่อ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">นโยบายความเป็นส่วนตัว (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">ข้อกำหนดการใช้งาน (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. ผลิตในสเปน</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
