@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡 | GreenCube 部落格</title>
+  <meta name="description" content="AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡 | GreenCube 部落格" />
+  <meta property="og:description" content="AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡", "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AI 模型裝不進顯示記憶體會怎樣？", "acceptedAnswer": {"@type": "Answer", "text": "裝不下的部分會在普通記憶體裡執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒輸出 5.9 個 token，而全部放在顯示卡上時是 35.6 個：慢了 6 倍。"}}, {"@type": "Question", "name": "應該執行顯示卡能載入的最大 AI 模型嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不應該。給對話留出空間。一個 120 億引數的模型在 8 GB 顯示卡上回答短問題沒問題，但對話一長就崩潰了。一個裝得下還有富餘的小模型更快，而且從沒崩潰過。"}}, {"@type": "Question", "name": "應該留出多少顯示記憶體？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube 會在顯示卡上留出約 1.5 GB 給對話和 Windows。沒有這部分空間時，一張 4 GB 顯示卡在第一條訊息時就記憶體不足了。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh-tw/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a>
+    <a href="https://greencube.app/zh-tw/your-data">你的資料</a>
+    <a href="https://greencube.app/zh-tw/mission">我們的使命</a>
+    <a href="/blog/zh-tw" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">繁體</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-much-vram-for-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-much-vram-for-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-much-vram-for-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-much-vram-for-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-much-vram-for-ai" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-much-vram-for-ai" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-much-vram-for-ai" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-much-vram-for-ai" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/how-much-vram-for-ai" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/how-much-vram-for-ai" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/how-much-vram-for-ai" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/how-much-vram-for-ai" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/how-much-vram-for-ai" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="/blog/zh-tw/how-much-vram-for-ai" hreflang="zh-TW" lang="zh-TW" aria-current="true">繁體中文</a></div></details><a href="https://greencube.app/zh-tw/buy" class="nav-cta">獲取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<h1>AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡</h1>
+<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<div class="answer"><p><strong>簡短回答：</strong>能完整裝進顯示卡顯示記憶體（VRAM）的 AI 跑得很快。溢位的 AI <strong>比完全不用顯示卡還慢</strong>，還可能崩潰。小而全部在顯示卡上，勝過大而只有一半在顯示卡上。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35.6</b><span>整個模型都在顯示卡上時每秒 token 數</span></div>
+<div class="stat p"><b>5.9</b><span>有一部分不在顯示卡上時：慢 6 倍</span></div>
+<div class="stat y"><b>崩潰</b><span>一個剛好裝下的模型遇上長對話時</span></div>
+</div>
+
+<h2>測試</h2>
+<p>一臺配 AMD RX 5700 XT（8 GB 顯示記憶體）和 48 GB 記憶體的桌上型電腦。我們載入了一個 120 億引數的模型（Gemma 4 12B，約 6.2 GB），並把它放在顯示卡上的部分調多調少，全部在 2026 年 9 月的同一次測試中完成。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>模型有多少放在顯示卡上</th><th>輸出（token/秒）</th></tr></thead>
+<tbody>
+<tr><td>全部</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
+<tr><td>28 層</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
+<tr><td>20 層</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
+<tr><td><em>對比：較小的模型（Gemma 4 E4B）只用 CPU</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
+<tr><td><em>同一個小模型，全部在顯示卡上</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>我們發現了什麼</h2>
+
+<div class="card g">
+<h3>1. 要麼全部，要麼沒用</h3>
+<p>只要有一部分模型不在顯示卡上，速度就<strong>慢了 6 倍</strong>。放 20 層在顯示卡上時，它甚至比完全不用顯示卡的小模型還慢。一半在顯示卡上，等於集兩邊之短。</p>
+</div>
+
+<div class="card p">
+<h3>2. 最大的不一定最好</h3>
+<p>12B 模型確實能完整裝進 8 GB 顯示卡，但只夠回答一個短問題。對話一變長，每次都崩潰：顯示卡幾乎沒有給對話留下空間。較小的模型有約 3 GB 富餘，每秒跑 63 到 72 個 token。</p>
+</div>
+
+<div class="card b">
+<h3>3. 留出空間</h3>
+<p>在一張 4 GB 的 GTX 1650 上，一個 4.2 GB 的模型被硬塞進 3.9 GB 的可用空間，第一條訊息就報“記憶體不足”失敗了。現在 GreenCube 會<strong>在顯示卡上留出約 1.5 GB</strong> 給對話和 Windows。</p>
+</div>
+
+<h2>如何為你的顯示卡挑模型</h2>
+<div class="expect">
+<div class="g"><h4>檢視你的顯示記憶體</h4><p>工作管理員 &rarr; 效能 &rarr; GPU &rarr; 專用 GPU 記憶體。</p></div>
+<div class="b"><h4>模型大小 + 1.5 GB</h4><p>模型檔案加上約 1.5 GB，應該小於那個數字。</p></div>
+<div class="y"><h4>拿不準就選小的</h4><p>全部在顯示卡上的小模型，勝過只有一半在顯示卡上的大模型。</p></div>
+<div class="p"><h4>或者讓應用程式來選</h4><p>GreenCube 會讀取你的顯示卡，選一個裝得下還有富餘的模型。</p></div>
+</div>
+
+<p>從 GTX 1650 到 RTX 5060，10 臺電腦的真實速度：<a href="/blog/zh-tw/can-my-pc-run-ai">在這裡檢視</a>。</p>
+<h2>常見問題</h2>
+<div class="faq">
+<details><summary>AI 模型裝不進顯示記憶體會怎樣？</summary><p>裝不下的部分會在普通記憶體裡執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒輸出 5.9 個 token，而全部放在顯示卡上時是 35.6 個：慢了 6 倍。</p></details>
+<details><summary>應該執行顯示卡能載入的最大 AI 模型嗎？</summary><p>不應該。給對話留出空間。一個 120 億引數的模型在 8 GB 顯示卡上回答短問題沒問題，但對話一長就崩潰了。一個裝得下還有富餘的小模型更快，而且從沒崩潰過。</p></details>
+<details><summary>應該留出多少顯示記憶體？</summary><p>GreenCube 會在顯示卡上留出約 1.5 GB 給對話和 Windows。沒有這部分空間時，一張 4 GB 顯示卡在第一條訊息時就記憶體不足了。</p></details>
+</div>
+
+<div class="cta-box"><h3>屬於你自己的 AI，就在你的電腦上</h3><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh-tw/buy">獲取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh-tw/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">屬於 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>產品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh-tw/what-you-get">我的電腦能跑嗎？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>瞭解更多</h3>
+        <ul>
+          <li><a href="/blog/zh-tw">Blog</a></li>
+          <li><a href="https://greencube.app/zh-tw/your-data">你的資料</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 與你的資料 (EN)</a></li>
+          <li><a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/mission">我們的使命</a></li>
+          <li><a href="mailto:support@greencube.app">聯絡我們</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隱私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用條款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙製造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

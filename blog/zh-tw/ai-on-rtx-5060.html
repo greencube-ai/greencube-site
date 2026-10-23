@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>RTX 5060 能跑 AI 嗎？實測：每秒 56 個 token | GreenCube 部落格</title>
+  <meta name="description" content="真實測試：在一臺配備 NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。這對聊天、學習和圖片意味著什麼。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="RTX 5060 能跑 AI 嗎？實測：每秒 56 個 token | GreenCube 部落格" />
+  <meta property="og:description" content="真實測試：在一臺配備 NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。這對聊天、學習和圖片意味著什麼。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh-tw/ai-on-rtx-5060" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh-tw/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-en-rtx-5060" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-rtx-5060" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "RTX 5060 能跑 AI 嗎？實測：每秒 56 個 token", "description": "真實測試：在一臺配備 NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。這對聊天、學習和圖片意味著什麼。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/ai-on-rtx-5060", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "RTX 5060 能在本地執行 AI 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。在一臺配備 NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。回答出來的速度比你讀得還快。"}}, {"@type": "Question", "name": "RTX 5060 能生成 AI 圖片嗎？", "acceptedAnswer": {"@type": "Answer", "text": "很可能可以，但我們還沒在這張顯示卡上測過生成圖片的時間。測了之後，數字會放在這裡。"}}, {"@type": "Question", "name": "AI 在 RTX 5060 上更快，還是在 CPU 上更快？", "acceptedAnswer": {"@type": "Answer", "text": "顯示卡快得多：顯示卡每秒 55.9 個 token，CPU 每秒 12.1 個，快約 4.6 倍。"}}, {"@type": "Question", "name": "RTX 5060 能執行 Gemma 4 12B 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不太寬裕。GreenCube 只在顯示記憶體 10 GB 及以上的顯示卡上推薦更大的 Gemma 4 12B，而這張顯示卡只有 8 GB。在 8 GB 的 AMD RX 5700 XT 上，它能回答短問題，但在長對話中崩潰了。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh-tw/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a>
+    <a href="https://greencube.app/zh-tw/your-data">你的資料</a>
+    <a href="https://greencube.app/zh-tw/mission">我們的使命</a>
+    <a href="/blog/zh-tw" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">繁體</summary><div class="lang-list"><a href="/blog/ai-on-rtx-5060" hreflang="en" lang="en">English</a><a href="/blog/es/ia-en-rtx-5060" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-rtx-5060" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-rtx-5060" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-rtx-5060" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-rtx-5060" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-rtx-5060" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-rtx-5060" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ai-on-rtx-5060" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ai-on-rtx-5060" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/ai-on-rtx-5060" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ai-on-rtx-5060" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ai-on-rtx-5060" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ai-on-rtx-5060" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ai-on-rtx-5060" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/ai-on-rtx-5060" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/ai-on-rtx-5060" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/ai-on-rtx-5060" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/ai-on-rtx-5060" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="/blog/zh-tw/ai-on-rtx-5060" hreflang="zh-TW" lang="zh-TW" aria-current="true">繁體中文</a></div></details><a href="https://greencube.app/zh-tw/buy" class="nav-cta">獲取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<h1>RTX 5060 能跑 AI 嗎？實測：每秒 56 個 token</h1>
+<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月1日</p>
+<div class="answer"><p><strong>可以。在一臺配備</strong> NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。回答出來的速度比你讀得還快。</p></div>
+<div class="stats">
+<div class="stat g"><b>56</b><span>Gemma 4 E4B 每秒 token 數</span></div>
+<div class="stat b"><b>4.6×</b><span>顯示卡比 CPU 快</span></div>
+</div>
+<h2>實際用起來怎麼樣</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>任務</th><th>在這臺電腦上的用時</th></tr></thead>
+<tbody>
+<tr><td>寫一個普通的回答（400 個 token）</td><td><b>7 秒</b></td></tr>
+</tbody>
+</table></div>
+<p>根據這臺電腦實測的速度推算：時間等於長度除以速度，實際回答開始前還要花一點準備時間。作為參考，英語讀者大多每秒讀約 4 個單詞（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>）。中文的 token 數和字數之間沒有固定比例，所以這裡不做換算。一個 400 個 token 的回答，光是讀一遍也要花上不少時間。</p>
+<h2>我們測到的結果</h2>
+<p><strong>輸出</strong>是 AI 打出回答的速度，單位是每秒 token 數；token 是詞的片段。<strong>讀取</strong>是它接收你給的內容（問題、貼上的文字或 PDF）的速度。讀取總是比輸出快得多，因為 AI 可以一次讀很多 token，但只能一個一個地寫。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>專案</th><th>執行在</th><th>結果</th><th>測量方式</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E4B</td><td>顯示卡</td><td><b>55.9</b> token/秒 輸出</td><td>2026年10月1日</td></tr>
+<tr><td>Gemma 4 E4B</td><td>僅用 CPU</td><td><b>12.1</b> token/秒 輸出</td><td>2026年10月1日</td></tr>
+</tbody>
+</table></div>
+<p>每個數字的測量方式：<a href="/blog/zh-tw/how-we-measure-ai-speed">瞭解更多測量方法</a></p><ol class="src"><li>GreenCube 0.1.42 自帶的速度測試，啟動時執行，用來在顯示卡和 CPU 之間做選擇：各寫一次短回答。</li></ol>
+<p>多次測量的結果用範圍表示：同一臺電腦每次執行的速度都會略有不同。</p>
+<h2>這意味著什麼</h2>
+<div class="card g">
+<h3>幹活的是顯示卡</h3>
+<p>同一臺電腦、同一個 AI（Gemma 4 E4B）：僅用 CPU 每秒 12.1 個 token，用顯示卡每秒 55.9 個 token，<strong>快約 4.6 倍</strong>。顯示卡天生就是為遊戲同時處理成千上萬個小計算而設計的，而執行 AI 大部分也是這類計算。GreenCube 啟動時會把兩者都測一遍，然後用更快的那個。</p>
+</div>
+<div class="card b">
+<h3>整個 AI 都裝進了顯示卡</h3>
+<p>Gemma 4 E4B 檔案大小為 4.2 GB，顯示卡自帶 8 GB 顯示記憶體（VRAM）。整個模型都放得下，還給對話留了空間，所以顯示卡不用等電腦裡更慢的記憶體。這是它跑得這麼快的最大原因。</p>
+</div>
+<div class="card y">
+<h3>更大的 Gemma 4 12B</h3>
+<p>不太寬裕。GreenCube 只在顯示記憶體 10 GB 及以上的顯示卡上推薦更大的 Gemma 4 12B，而這張顯示卡只有 8 GB。在 8 GB 的 AMD RX 5700 XT 上，它能回答短問題，但在長對話中崩潰了。</p>
+</div>
+<div class="card p">
+<h3>圖片</h3>
+<p>很可能可以，但我們還沒在這張顯示卡上測過生成圖片的時間。測了之後，數字會放在這裡。生成圖片使用約 6 GB 的專用 AI，計算量比聊天回答大得多，所以這裡顯示卡的差距更明顯。</p>
+</div>
+<h2>橫向對比</h2>
+<p>在用 Gemma 4 E4B 測過的 8 臺電腦中，這臺的輸出速度排<strong>第 3 名</strong>。<a href="/blog/zh-tw/ai-on-rx-5700-xt">RX 5700 XT</a> 每秒輸出 63–72 個 token，快約 20%。<a href="/blog/zh-tw/ai-on-rtx-3060">RTX 3060</a> 每秒輸出 53–55 個 token，這臺快約 5%。</p>
+<p>我們測了 4 張 8 GB 的顯示卡，差距很大：</p>
+<ul>
+<li><a href="/blog/zh-tw/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 token/秒</li>
+<li><strong>RTX 5060</strong>: 56 token/秒（啟動測試）</li>
+<li><a href="/blog/zh-tw/ai-on-rx-6600">RX 6600</a>: 42–44 token/秒</li>
+<li><a href="/blog/zh-tw/ai-on-rx-580">RX 580</a>: 10–11 token/秒</li>
+</ul>
+<p>能裝下哪個 AI 由顯示記憶體決定，跑多快由顯示卡新舊決定。</p>
+<h2>測試電腦</h2>
+<p>一位真實測試者自己日常使用的電腦，不是實驗室機器：</p>
+<ul>
+<li>桌上型電腦</li>
+<li><strong>顯示卡:</strong> NVIDIA RTX 5060</li>
+<li><strong>顯示記憶體（VRAM）:</strong> 8 GB</li>
+<li><strong>記憶體:</strong> 32 GB</li>
+<li><strong>處理器:</strong> 16 執行緒</li>
+</ul>
+<h2>檢視你自己的電腦</h2>
+<p>不確定你的電腦配置？30 秒就能查到：</p>
+<ol class="steps">
+<li>按 <strong>Ctrl + Shift + Esc</strong> 開啟工作管理員。</li>
+<li>進入<strong>效能</strong>。</li>
+<li>點選<strong>記憶體</strong>：右上角的數字就是你的記憶體。</li>
+<li>點選 <strong>GPU</strong>：右上角的名稱就是你的顯示卡，<strong>專用 GPU 記憶體</strong>就是你的顯示記憶體。只看到沒有專用記憶體的 Intel 或 AMD 顯示卡？那就說明你沒有獨立顯示卡。</li>
+</ol>
+<p>然後在<a href="/blog/zh-tw/can-my-pc-run-ai">完整表格</a>裡找最接近的顯示卡。同一款顯示卡顯示記憶體更大，能裝下更大的 AI；同樣顯示記憶體的新顯示卡通常更快。</p>
+<h2>我們測過的其他電腦</h2>
+<ul>
+<li><a href="/blog/zh-tw/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-rtx-3060">RTX 3060</a>: 53–55 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-rx-6600">RX 6600</a>: 42–44 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-gtx-1650">GTX 1650</a>: 約 20 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 筆電</a>: 14–18 token/秒 (Gemma 4 E2B)</li>
+<li><a href="/blog/zh-tw/ai-on-rx-580">RX 580</a>: 10–11 token/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/zh-tw/ai-on-intel-iris-xe-laptop">Intel Iris Xe 筆電</a>: 5–7 token/秒 (Gemma 4 E2B)</li>
+</ul>
+<p><a href="/blog/zh-tw/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a> 全部 10 臺電腦彙總在一張表裡，以及你的電腦用起來會怎樣。</p>
+<h2>常見問題</h2>
+<div class="faq">
+<details><summary>RTX 5060 能在本地執行 AI 嗎？</summary><p>可以。在一臺配備 NVIDIA RTX 5060（8 GB）和 32 GB 記憶體的桌上型電腦上，Gemma 4 E4B 每秒輸出 56 個 token。回答出來的速度比你讀得還快。</p></details>
+<details><summary>RTX 5060 能生成 AI 圖片嗎？</summary><p>很可能可以，但我們還沒在這張顯示卡上測過生成圖片的時間。測了之後，數字會放在這裡。</p></details>
+<details><summary>AI 在 RTX 5060 上更快，還是在 CPU 上更快？</summary><p>顯示卡快得多：顯示卡每秒 55.9 個 token，CPU 每秒 12.1 個，快約 4.6 倍。</p></details>
+<details><summary>RTX 5060 能執行 Gemma 4 12B 嗎？</summary><p>不太寬裕。GreenCube 只在顯示記憶體 10 GB 及以上的顯示卡上推薦更大的 Gemma 4 12B，而這張顯示卡只有 8 GB。在 8 GB 的 AMD RX 5700 XT 上，它能回答短問題，但在長對話中崩潰了。</p></details>
+</div>
+
+<div class="cta-box"><h3>屬於你自己的 AI，就在你的電腦上</h3><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh-tw/buy">獲取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh-tw/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">屬於 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>產品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh-tw/what-you-get">我的電腦能跑嗎？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>瞭解更多</h3>
+        <ul>
+          <li><a href="/blog/zh-tw">Blog</a></li>
+          <li><a href="https://greencube.app/zh-tw/your-data">你的資料</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 與你的資料 (EN)</a></li>
+          <li><a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/mission">我們的使命</a></li>
+          <li><a href="mailto:support@greencube.app">聯絡我們</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隱私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用條款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙製造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

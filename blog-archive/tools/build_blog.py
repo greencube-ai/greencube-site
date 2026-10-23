@@ -209,9 +209,10 @@ def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', 
            .replace('{{LD}}', '\n'.join(f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)))
     if any(url.endswith('/' + slug) for slug in NOINDEX):
         top = top.replace('<link rel="canonical"', '<meta name="robots" content="noindex, follow" />\n  <link rel="canonical"', 1)
-    return CJK_GAP.sub(r'\1', top + content + bottom)
+    return HAN_GAP.sub('', CJK_GAP.sub(r'\1', top + content + bottom))
 
 CJK_GAP = re.compile(r'([。、！？：；）])[ ]+')  # Chinese and Japanese put no space after their own punctuation (a joined fragment brings one)
+HAN_GAP = re.compile(r'(?<=[一-鿿]) (?=[约約] ?\d)')  # nor before 'about' when it lands after a word ('每秒 约 20' -> '每秒约 20')
 
 report = []
 listing = []

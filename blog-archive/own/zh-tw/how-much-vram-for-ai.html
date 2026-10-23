@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡",
+ "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "溢位顯示記憶體，速度慢 6 倍。",
+ "rank": 6,
+ "lang": "zh-tw",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "AI 模型裝不進顯示記憶體會怎樣？", "a": "裝不下的部分會在普通記憶體裡執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒輸出 5.9 個 token，而全部放在顯示卡上時是 35.6 個：慢了 6 倍。"},
+  {"q": "應該執行顯示卡能載入的最大 AI 模型嗎？", "a": "不應該。給對話留出空間。一個 120 億引數的模型在 8 GB 顯示卡上回答短問題沒問題，但對話一長就崩潰了。一個裝得下還有富餘的小模型更快，而且從沒崩潰過。"},
+  {"q": "應該留出多少顯示記憶體？", "a": "GreenCube 會在顯示卡上留出約 1.5 GB 給對話和 Windows。沒有這部分空間時，一張 4 GB 顯示卡在第一條訊息時就記憶體不足了。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>簡短回答：</strong>能完整裝進顯示卡顯示記憶體（VRAM）的 AI 跑得很快。溢位的 AI <strong>比完全不用顯示卡還慢</strong>，還可能崩潰。小而全部在顯示卡上，勝過大而只有一半在顯示卡上。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35.6</b><span>整個模型都在顯示卡上時每秒 token 數</span></div>
+<div class="stat p"><b>5.9</b><span>有一部分不在顯示卡上時：慢 6 倍</span></div>
+<div class="stat y"><b>崩潰</b><span>一個剛好裝下的模型遇上長對話時</span></div>
+</div>
+
+<h2>測試</h2>
+<p>一臺配 AMD RX 5700 XT（8 GB 顯示記憶體）和 48 GB 記憶體的桌上型電腦。我們載入了一個 120 億引數的模型（Gemma 4 12B，約 6.2 GB），並把它放在顯示卡上的部分調多調少，全部在 2026 年 9 月的同一次測試中完成。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>模型有多少放在顯示卡上</th><th>輸出（token/秒）</th></tr></thead>
+<tbody>
+<tr><td>全部</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
+<tr><td>28 層</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
+<tr><td>20 層</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
+<tr><td><em>對比：較小的模型（Gemma 4 E4B）只用 CPU</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
+<tr><td><em>同一個小模型，全部在顯示卡上</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>我們發現了什麼</h2>
+
+<div class="card g">
+<h3>1. 要麼全部，要麼沒用</h3>
+<p>只要有一部分模型不在顯示卡上，速度就<strong>慢了 6 倍</strong>。放 20 層在顯示卡上時，它甚至比完全不用顯示卡的小模型還慢。一半在顯示卡上，等於集兩邊之短。</p>
+</div>
+
+<div class="card p">
+<h3>2. 最大的不一定最好</h3>
+<p>12B 模型確實能完整裝進 8 GB 顯示卡，但只夠回答一個短問題。對話一變長，每次都崩潰：顯示卡幾乎沒有給對話留下空間。較小的模型有約 3 GB 富餘，每秒跑 63 到 72 個 token。</p>
+</div>
+
+<div class="card b">
+<h3>3. 留出空間</h3>
+<p>在一張 4 GB 的 GTX 1650 上，一個 4.2 GB 的模型被硬塞進 3.9 GB 的可用空間，第一條訊息就報“記憶體不足”失敗了。現在 GreenCube 會<strong>在顯示卡上留出約 1.5 GB</strong> 給對話和 Windows。</p>
+</div>
+
+<h2>如何為你的顯示卡挑模型</h2>
+<div class="expect">
+<div class="g"><h4>檢視你的顯示記憶體</h4><p>工作管理員 &rarr; 效能 &rarr; GPU &rarr; 專用 GPU 記憶體。</p></div>
+<div class="b"><h4>模型大小 + 1.5 GB</h4><p>模型檔案加上約 1.5 GB，應該小於那個數字。</p></div>
+<div class="y"><h4>拿不準就選小的</h4><p>全部在顯示卡上的小模型，勝過只有一半在顯示卡上的大模型。</p></div>
+<div class="p"><h4>或者讓應用程式來選</h4><p>GreenCube 會讀取你的顯示卡，選一個裝得下還有富餘的模型。</p></div>
+</div>
+
+<p>從 GTX 1650 到 RTX 5060，{{pcs}} 臺電腦的真實速度：<a href="/blog/can-my-pc-run-ai">在這裡檢視</a>。</p>
