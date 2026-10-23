@@ -1,0 +1,96 @@
+<!--meta
+{
+ "title": "Windows 10・11でオフラインAI：PCに必要なもの、{{pcs}}台で計測",
+ "description": "インターネットなしでWindows 10や11でローカルAIチャットボットを動かす：必要なメモリとグラフィックボード、{{pcs}}台のWindows PCで測った実際の速さ、オフラインで動くアプリ、そしてPCから何も出ていかないことの確かめ方。",
+ "date": "2026-10-23",
+ "kind": "guide",
+ "stat": "{{pcs}}台",
+ "teaser": "WindowsでオフラインAIを使うのに必要なものと、実際のPC{{pcs}}台での速さ。",
+ "rank": 16,
+ "lang": "ja",
+ "alt": "local-ai-chatbot-windows",
+ "faq": [
+  {"q": "Windows 11でAIをオフラインで使えますか？", "a": "使えます。GreenCube、LM Studio、Jan、Ollama、GPT4AllなどのアプリはAIモデルを自分のPCで動かします。アプリとモデルのダウンロードに一度だけインターネットが必要で、その後はWi-Fiを切ってもチャットできます。"},
+  {"q": "オフラインAIはWindows 10で動きますか？", "a": "動きます。GreenCube、Jan、MstyはWindows 10を対応OSとしています。MicrosoftはWindows 10のサポートを2025年10月14日に終了しました。AIは動き続けますが、拡張セキュリティ更新に登録しない限り、PCにセキュリティ更新は届きません。"},
+  {"q": "Windows PCでローカルAIを動かすにはメモリがどれくらい必要ですか？", "a": "小さなモデルなら8 GBで足ります。8 GBのノートPCは実際のチャットで毎秒5〜7トークン、だいたい読む速さで書きました。16 GBなら快適で、グラフィックボードなしの16 GBノートPCは毎秒14〜18トークンでした。"},
+  {"q": "WindowsのローカルAIチャットボットにグラフィックボードは必要ですか？", "a": "必要ありませんが、大きく効きます。6 GB以上のカードを積んだゲーミングPCでは、ほとんどのカードで毎秒37〜76トークンを計測しました。同じPCのCPUだけの場合の何倍もの速さです。画像を作るにはグラフィックボードか16 GBのメモリが必要です。"},
+  {"q": "Windows用の無料オフラインAIはありますか？", "a": "あります。LM Studio、Jan、Ollama、GPT4All、AnythingLLMは無料で、モデルは自分で選んでダウンロードします。GreenCubeは9.99ユーロの買い切りで、PCに合うモデルを自動で選びます。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：</strong>Windows 10か11で<strong>メモリ8 GB</strong>のPCなら、インターネットなしでローカルAIチャットボットを動かせます。<strong>16 GBかゲーミング用グラフィックボード</strong>があれば快適です。アプリとモデルを一度ダウンロードすれば、あとはWi-Fiを切っても動きます。実際のWindows PC{{pcs}}台で計測しました。8 GBのノートPCではおよそ読む速さ、ゲーミングPCではそれよりずっと速くなります。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>{{pcs}}</b><span>台の実際のWindows PCで計測、ノートPCとゲーミングPC</span></div>
+<div class="stat b"><b>8 GB</b><span>のメモリで始められる、グラフィックボードなしで</span></div>
+<div class="stat p"><b>0</b><span>最初のダウンロード後に必要なインターネット</span></div>
+</div>
+
+<h2>Windows PCに必要なもの</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>最低限</th><th>快適</th></tr></thead>
+<tbody>
+<tr><td><strong>Windows</strong></td><td>Windows 10（64ビット）</td><td>Windows 11</td></tr>
+<tr><td><strong>メモリ</strong></td><td>8 GB、ほかのアプリは閉じる</td><td>16 GB以上</td></tr>
+<tr><td><strong>グラフィックボード</strong></td><td>不要</td><td>ここ数年の6 GB以上のカードならどれでも</td></tr>
+<tr><td><strong>ディスク容量</strong></td><td>小さなモデルで約3 GB</td><td>大きめのモデルと画像で約11 GB</td></tr>
+<tr><td><strong>インターネット</strong></td><td colspan="2">一度だけ、アプリとモデルのダウンロードに</td></tr>
+</tbody>
+</table></div>
+<p>自分のPCの中身がわからない？<strong>Ctrl + Shift + Esc</strong>を押して<strong>パフォーマンス</strong>を開き、<strong>メモリ</strong>と<strong>GPU</strong>を見てください。または<a href="/blog/can-my-pc-run-ai#checker">チェッカー</a>にカード名を入れれば、あなたのと同じような実際のPCで何がどれくらいの速さで動くかがわかります。</p>
+
+<h2>実際のWindows PCでの速さ</h2>
+<p>数字はすべて2026年9月と10月に実際のWindows PCで動かしたGreenCubeのもので、ほとんどが実際のチャットです。トークンは単語のかけらです。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>あなたのWindows PC</th><th>書く速さ</th><th>画像1枚（512×512）</th></tr></thead>
+<tbody>
+<tr><td>8 GBノートPC、グラフィックボードなし</td><td>毎秒<b>5&ndash;7</b>トークン、およそ読む速さ</td><td>作れない（約7 GBの空きが必要）</td></tr>
+<tr><td>16 GBノートPC、グラフィックボードなし</td><td>毎秒<b>14&ndash;18</b>トークン</td><td><b>2&ndash;2.5分</b></td></tr>
+<tr><td>6 GB以上のカードを積んだゲーミングPC</td><td>ほとんどのカードで毎秒<b>37&ndash;76</b>トークン</td><td><b>8&ndash;89秒</b></td></tr>
+</tbody>
+</table></div>
+<p>例外として、古いAMD RX 580は毎秒約11トークンでしたが、それでも読むより速い速さです。各カードの専用ページは<a href="/blog/can-my-pc-run-ai">自分のPCでAIは動く？</a>にあります。</p>
+
+<div class="card g">
+<h3>仕事の大半はグラフィックボードがこなす</h3>
+<p>同じWindows PCで、同じAIが<strong>CPUでは毎秒5トークン、RX 5700 XTでは72トークン</strong>を書きました。AIを動かすのは、まさにグラフィックボードが得意とする種類の計算なので、最近のゲーミング用カードなら大きな差が出ます。どれだけ大きなAIが載るかを決めるのは、メモリではなくカードのメモリ（VRAM）です。<a href="/blog/how-much-vram-for-ai">モデルがカードに収まる必要がある理由</a>。</p>
+</div>
+<div class="card y">
+<h3>グラフィックボードがない？勉強とチャットなら十分</h3>
+<p>Intelのグラフィックスだけの普通の16 GBノートPCが、説明と試験問題3問からなる勉強用の回答を、約20秒で書き終えました。8 GBのノートPCでも、ほかのアプリがメモリを空けていれば、遅くはなりますが動きます。<a href="/blog/run-ai-on-8gb-ram">8 GBでのテスト</a>。</p>
+</div>
+
+<h2>WindowsでAIをオフラインで動かすアプリ</h2>
+<p>各アプリの公式サイトによる、2026年10月21日時点の情報です。ほかのアプリは自分たちのPCで計測していないので、この表は速さを比べていません。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>アプリ</th><th>Windows</th><th>価格</th><th>モデルを選んでくれる？</th><th>PDFを読める</th></tr></thead>
+<tbody>
+<tr><td><strong>GreenCube</strong></td><td>Windows 10と11</td><td>9.99ユーロの買い切り</td><td>はい、カードとメモリに合わせて</td><td>はい</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>AVX2対応のCPU</td><td>無料</td><td>いいえ、一覧から自分で選ぶ</td><td>はい</td></tr>
+<tr><td><strong>Jan</strong></td><td>Windows 10以降</td><td>無料、オープンソース</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Windows、2025年7月からチャット画面あり</td><td>自分のPCでは無料</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>GPT4All</strong></td><td>Windows（ARM PCは非対応）</td><td>無料、オープンソース</td><td>いいえ</td><td>はい、LocalDocsで</td></tr>
+<tr><td><strong>AnythingLLM</strong></td><td>Windows</td><td>デスクトップ版は無料</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>Msty</strong></td><td>Windows 10と11</td><td>無料プランあり</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>KoboldCpp</strong></td><td>.exe一つ、チャットはブラウザで</td><td>無料、オープンソース</td><td>いいえ</td><td>テキストのみ</td></tr>
+</tbody>
+</table></div>
+<p>それぞれがインターネットに何を送るか、Macやスマホのアプリもあわせて見たい場合は、<a href="/blog/best-offline-ai-chatbot">オフラインAIチャットボット12本の比較</a>をどうぞ。</p>
+
+<h2>Windows 10とWindows 11、どっち？</h2>
+<p>AIの動き方はどちらでも同じです。大事なのはメモリとグラフィックボードで、Windowsのバージョンではありません。一つ知っておきたいのは、MicrosoftがWindows 10のサポートを2025年10月14日に終了したことです。拡張セキュリティ更新に登録しない限り、Windows 10のPCにはセキュリティ更新が届きません。オフラインAIならチャットはいずれにせよPCの中に残りますが、Windowsを最新に保つのはやはり大事です。</p>
+
+<h2>何も外に出ていないことの確かめ方</h2>
+<ol class="steps">
+<li><strong>機内モードをオンにする</strong>（またはケーブルを抜く）。最初のダウンロード後にチャットして、答えが返ってくればAIはあなたのPCで動いています。</li>
+<li><strong>ネットワークを見る：</strong><strong>Windows + R</strong>を押して<strong>resmon</strong>と入力し、ネットワークのタブを開きます。チャット中にデータを送ったり受け取ったりしているプログラムがすべて表示されます。</li>
+<li><strong>アプリが何を送ると言っているかを読む。</strong>GreenCubeの場合：有効化のために一度ログインし、AIとその更新をダウンロードします。オンライン検索（起動するたびにオフ）は検索語を検索エンジンに送ります。それ以外は何もありません。「あなたのチャット、ファイル、メモリー、画像を私たちが受け取ることは決してありません。」</li>
+</ol>
+
+<h2>WindowsのオフラインAIにできないこと</h2>
+<ul>
+<li><strong>今日のニュース。</strong>モデルが知っているのは学習で覚えたことです。新しい出来事にはウェブ検索が必要で、その部分はインターネットを通ります。</li>
+<li><strong>あらゆる面で最大級のクラウドAIに勝つこと。</strong>PCに収まるモデルは勉強、文章、日常の質問には十分ですが、最大級のクラウドモデルは最も難しい問題ではまだ上です。</li>
+<li><strong>どのPCでも速いこと。</strong>働くのはあなたのPCです。8 GBのノートPCはおよそ読む速さ、ゲーミングPCはずっと速くなります。</li>
+</ul>
+<p>勉強に使うなら、<a href="/blog/offline-ai-for-students">オフラインAIが学生にできること</a>で、PDF、まとめ、フラッシュカードの時間を見られます。</p>

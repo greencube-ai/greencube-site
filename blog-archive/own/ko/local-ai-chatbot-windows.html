@@ -1,0 +1,96 @@
+<!--meta
+{
+ "title": "Windows 10·11에서 오프라인 AI: 내 PC에 필요한 것, PC {{pcs}}대에서 측정",
+ "description": "인터넷 없이 Windows 10이나 11에서 로컬 AI 챗봇 쓰기: 필요한 RAM과 그래픽카드, Windows PC {{pcs}}대에서 측정한 실제 속도, 오프라인으로 되는 앱, 그리고 PC 밖으로 아무것도 나가지 않는지 확인하는 방법.",
+ "date": "2026-10-23",
+ "kind": "guide",
+ "stat": "{{pcs}}대",
+ "teaser": "Windows에서 오프라인 AI를 쓰는 데 필요한 것과 실제 PC {{pcs}}대에서의 속도.",
+ "rank": 16,
+ "lang": "ko",
+ "alt": "local-ai-chatbot-windows",
+ "faq": [
+  {"q": "Windows 11에서 AI를 오프라인으로 쓸 수 있나요?", "a": "네. GreenCube, LM Studio, Jan, Ollama, GPT4All 같은 앱은 AI 모델을 내 PC에서 직접 돌립니다. 앱과 모델을 내려받을 때 한 번만 인터넷이 필요하고, 그 뒤로는 와이파이를 꺼도 채팅이 됩니다."},
+  {"q": "오프라인 AI가 Windows 10에서도 되나요?", "a": "됩니다. GreenCube, Jan, Msty는 Windows 10을 지원한다고 밝힙니다. Microsoft는 2025년 10월 14일에 Windows 10 지원을 끝냈습니다. AI는 계속 돌아가지만, 확장 보안 업데이트에 가입하지 않으면 PC에 보안 업데이트가 오지 않습니다."},
+  {"q": "Windows PC에서 로컬 AI를 돌리려면 RAM이 얼마나 필요한가요?", "a": "작은 모델이라면 8 GB면 됩니다. 저희 8 GB 노트북은 실제 채팅에서 초당 5~7토큰, 대략 읽는 속도로 썼습니다. 16 GB면 넉넉합니다. 그래픽카드 없는 저희 16 GB 노트북은 초당 14~18토큰이었습니다."},
+  {"q": "Windows에서 로컬 AI 챗봇에 그래픽카드가 필요한가요?", "a": "필요하지 않지만 큰 도움이 됩니다. 6 GB 이상 카드를 단 게이밍 PC에서는 대부분의 카드에서 초당 37~76토큰을 측정했습니다. 같은 PC를 CPU만으로 돌릴 때보다 몇 배 빠릅니다. 이미지를 만들려면 그래픽카드나 16 GB RAM이 필요합니다."},
+  {"q": "Windows용 무료 오프라인 AI가 있나요?", "a": "있습니다. LM Studio, Jan, Ollama, GPT4All, AnythingLLM은 무료이고, 모델은 직접 골라 내려받습니다. GreenCube는 9.99유로 한 번 결제로, 내 PC에 맞는 모델을 알아서 고릅니다."}
+ ]
+}
+-->
+<div class="answer"><p><strong>짧은 답:</strong> Windows 10이나 11에 <strong>RAM 8 GB</strong>인 PC라면 인터넷 없이 로컬 AI 챗봇을 돌릴 수 있고, <strong>16 GB나 게이밍 그래픽카드</strong>가 있으면 넉넉합니다. 앱과 모델을 한 번 내려받으면 그 뒤로는 와이파이를 꺼도 됩니다. 실제 Windows PC {{pcs}}대에서 측정했습니다. 8 GB 노트북에서는 대략 읽는 속도, 게이밍 PC에서는 훨씬 빠릅니다.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>{{pcs}}</b><span>대의 실제 Windows PC를 측정, 노트북과 게이밍 PC</span></div>
+<div class="stat b"><b>8 GB</b><span>RAM으로 시작 가능, 그래픽카드 없이</span></div>
+<div class="stat p"><b>0</b><span>첫 다운로드 뒤에 필요한 인터넷</span></div>
+</div>
+
+<h2>내 Windows PC에 필요한 것</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>최소</th><th>넉넉하게</th></tr></thead>
+<tbody>
+<tr><td><strong>Windows</strong></td><td>Windows 10(64비트)</td><td>Windows 11</td></tr>
+<tr><td><strong>RAM</strong></td><td>8 GB, 다른 앱은 닫기</td><td>16 GB 이상</td></tr>
+<tr><td><strong>그래픽카드</strong></td><td>필요 없음</td><td>최근 몇 년 사이의 6 GB 이상 카드면 무엇이든</td></tr>
+<tr><td><strong>디스크 공간</strong></td><td>작은 모델에 약 3 GB</td><td>더 큰 모델과 이미지에 약 11 GB</td></tr>
+<tr><td><strong>인터넷</strong></td><td colspan="2">한 번, 앱과 모델을 내려받을 때</td></tr>
+</tbody>
+</table></div>
+<p>내 PC 사양을 모르겠다면? <strong>Ctrl + Shift + Esc</strong>를 눌러 <strong>성능</strong>을 열고 <strong>메모리</strong>와 <strong>GPU</strong>를 보세요. 아니면 <a href="/blog/can-my-pc-run-ai#checker">확인 도구</a>에 카드 이름을 넣으면, 내 것과 비슷한 실제 PC에서 무엇이 얼마나 빠르게 돌아가는지 알려 줍니다.</p>
+
+<h2>실제 Windows PC에서의 속도</h2>
+<p>모든 숫자는 2026년 9월과 10월에 실제 Windows PC에서 돌린 GreenCube의 결과이고, 대부분 실제 채팅입니다. 토큰은 단어의 조각입니다.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>내 Windows PC</th><th>쓰는 속도</th><th>이미지 1장(512×512)</th></tr></thead>
+<tbody>
+<tr><td>8 GB 노트북, 그래픽카드 없음</td><td>초당 <b>5&ndash;7</b>토큰, 대략 읽는 속도</td><td>불가(약 7 GB 여유가 필요)</td></tr>
+<tr><td>16 GB 노트북, 그래픽카드 없음</td><td>초당 <b>14&ndash;18</b>토큰</td><td><b>2&ndash;2.5분</b></td></tr>
+<tr><td>6 GB 이상 카드의 게이밍 PC</td><td>대부분의 카드에서 초당 <b>37&ndash;76</b>토큰</td><td><b>8&ndash;89초</b></td></tr>
+</tbody>
+</table></div>
+<p>예외: 오래된 AMD RX 580은 초당 약 11토큰이었지만 그래도 읽는 것보다 빠릅니다. 카드별 전용 페이지는 <a href="/blog/can-my-pc-run-ai">내 PC로 AI를 돌릴 수 있을까?</a>에 있습니다.</p>
+
+<div class="card g">
+<h3>일의 대부분은 그래픽카드가 한다</h3>
+<p>같은 Windows PC에서 같은 AI가 <strong>CPU에서는 초당 5토큰, RX 5700 XT에서는 72토큰</strong>을 썼습니다. AI를 돌리는 일은 대부분 그래픽카드가 잘하는 종류의 계산이라, 최근 게이밍 카드라면 큰 차이가 납니다. 얼마나 큰 AI가 들어가는지는 RAM이 아니라 카드 메모리(VRAM)가 정합니다: <a href="/blog/how-much-vram-for-ai">모델이 카드에 들어가야 하는 이유</a>.</p>
+</div>
+<div class="card y">
+<h3>그래픽카드가 없다면? 공부와 채팅에는 충분</h3>
+<p>Intel 그래픽만 있는 평범한 16 GB 노트북이 설명과 시험 문제 3개로 된 공부용 답변을 약 20초 만에 끝냈습니다. 8 GB 노트북에서도 다른 앱이 메모리를 비워 두면 더 느리지만 돌아갑니다: <a href="/blog/run-ai-on-8gb-ram">8 GB 테스트</a>.</p>
+</div>
+
+<h2>Windows에서 AI를 오프라인으로 돌리는 앱</h2>
+<p>각 앱의 공식 사이트 기준, 2026년 10월 21일 확인. 다른 앱은 저희 PC에서 측정하지 않았기 때문에 이 표는 속도를 비교하지 않습니다.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>앱</th><th>Windows</th><th>가격</th><th>모델을 골라 주나?</th><th>PDF 읽기</th></tr></thead>
+<tbody>
+<tr><td><strong>GreenCube</strong></td><td>Windows 10과 11</td><td>9.99유로 한 번</td><td>예, 카드와 RAM에 맞춰</td><td>예</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>AVX2를 지원하는 CPU</td><td>무료</td><td>아니요, 목록에서 직접 선택</td><td>예</td></tr>
+<tr><td><strong>Jan</strong></td><td>Windows 10 이상</td><td>무료, 오픈 소스</td><td>아니요</td><td>예</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Windows, 2025년 7월부터 채팅 창</td><td>내 PC에서 무료</td><td>아니요</td><td>예</td></tr>
+<tr><td><strong>GPT4All</strong></td><td>Windows(ARM PC 제외)</td><td>무료, 오픈 소스</td><td>아니요</td><td>예, LocalDocs로</td></tr>
+<tr><td><strong>AnythingLLM</strong></td><td>Windows</td><td>데스크톱 버전 무료</td><td>아니요</td><td>예</td></tr>
+<tr><td><strong>Msty</strong></td><td>Windows 10과 11</td><td>무료 요금제</td><td>아니요</td><td>예</td></tr>
+<tr><td><strong>KoboldCpp</strong></td><td>.exe 하나, 채팅은 브라우저에서</td><td>무료, 오픈 소스</td><td>아니요</td><td>텍스트만</td></tr>
+</tbody>
+</table></div>
+<p>각 앱이 인터넷으로 무엇을 보내는지, Mac과 휴대폰 앱까지 보고 싶다면 <a href="/blog/best-offline-ai-chatbot">오프라인 AI 챗봇 12개 비교</a>를 보세요.</p>
+
+<h2>Windows 10과 Windows 11, 어느 쪽?</h2>
+<p>AI는 둘 다에서 똑같이 돌아갑니다. 중요한 건 RAM과 그래픽카드이지 Windows 버전이 아닙니다. 알아 둘 점이 하나 있습니다. Microsoft가 2025년 10월 14일에 Windows 10 지원을 끝냈기 때문에, 확장 보안 업데이트에 가입하지 않으면 Windows 10 PC에는 보안 업데이트가 오지 않습니다. 오프라인 AI는 어느 쪽이든 채팅을 PC 안에 두지만, Windows를 최신으로 유지하는 건 여전히 좋습니다.</p>
+
+<h2>아무것도 나가지 않는지 확인하는 법</h2>
+<ol class="steps">
+<li><strong>비행기 모드를 켭니다</strong>(또는 케이블을 뽑습니다). 첫 다운로드 뒤에 채팅해서 답이 오면 AI가 내 PC에서 돌고 있는 것입니다.</li>
+<li><strong>네트워크를 봅니다:</strong> <strong>Windows + R</strong>을 누르고 <strong>resmon</strong>을 입력한 뒤 네트워크 탭을 엽니다. 채팅하는 동안 데이터를 보내거나 받는 프로그램이 모두 보입니다.</li>
+<li><strong>앱이 무엇을 보낸다고 하는지 읽습니다.</strong> GreenCube의 경우: 활성화를 위해 한 번 로그인하고, AI와 업데이트를 내려받으며, 온라인 검색(켤 때마다 꺼짐)은 검색어를 검색 엔진에 보냅니다. 그 밖에는 없습니다: "저희는 여러분의 채팅, 파일, 기억, 이미지를 받지 않습니다."</li>
+</ol>
+
+<h2>Windows 오프라인 AI가 못 하는 것</h2>
+<ul>
+<li><strong>오늘의 뉴스.</strong> 모델은 학습 때 배운 것만 압니다. 새로운 소식은 웹 검색이 필요하고, 그 부분은 인터넷을 거칩니다.</li>
+<li><strong>모든 면에서 가장 큰 클라우드 AI를 이기기.</strong> PC에 들어가는 모델은 공부, 글쓰기, 일상 질문에 좋지만, 가장 어려운 문제에서는 가장 큰 클라우드 모델이 아직 더 강합니다.</li>
+<li><strong>어떤 PC에서나 빠르기.</strong> 일하는 건 내 PC입니다. 8 GB 노트북은 대략 읽는 속도, 게이밍 PC는 훨씬 빠릅니다.</li>
+</ul>
+<p>공부용이라면 <a href="/blog/offline-ai-for-students">오프라인 AI가 학생에게 해 주는 것</a>에서 PDF, 요약, 플래시카드에 걸리는 시간을 보세요.</p>

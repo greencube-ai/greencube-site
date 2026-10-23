@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Windows 10・11でオフラインAI：PCに必要なもの、10台で計測 | GreenCubeブログ</title>
+  <meta name="description" content="インターネットなしでWindows 10や11でローカルAIチャットボットを動かす：必要なメモリとグラフィックボード、10台のWindows PCで測った実際の速さ、オフラインで動くアプリ、そしてPCから何も出ていかないことの確かめ方。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Windows 10・11でオフラインAI：PCに必要なもの、10台で計測 | GreenCubeブログ" />
+  <meta property="og:description" content="インターネットなしでWindows 10や11でローカルAIチャットボットを動かす：必要なメモリとグラフィックボード、10台のWindows PCで測った実際の速さ、オフラインで動くアプリ、そしてPCから何も出ていかないことの確かめ方。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ja/local-ai-chatbot-windows" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ja/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-sin-internet-windows" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/local-ai-chatbot-windows" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/local-ai-chatbot-windows" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Windows 10・11でオフラインAI：PCに必要なもの、10台で計測", "description": "インターネットなしでWindows 10や11でローカルAIチャットボットを動かす：必要なメモリとグラフィックボード、10台のWindows PCで測った実際の速さ、オフラインで動くアプリ、そしてPCから何も出ていかないことの確かめ方。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "ja", "mainEntityOfPage": "https://blog.greencube.app/blog/ja/local-ai-chatbot-windows", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ja/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Windows 11でAIをオフラインで使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "使えます。GreenCube、LM Studio、Jan、Ollama、GPT4AllなどのアプリはAIモデルを自分のPCで動かします。アプリとモデルのダウンロードに一度だけインターネットが必要で、その後はWi-Fiを切ってもチャットできます。"}}, {"@type": "Question", "name": "オフラインAIはWindows 10で動きますか？", "acceptedAnswer": {"@type": "Answer", "text": "動きます。GreenCube、Jan、MstyはWindows 10を対応OSとしています。MicrosoftはWindows 10のサポートを2025年10月14日に終了しました。AIは動き続けますが、拡張セキュリティ更新に登録しない限り、PCにセキュリティ更新は届きません。"}}, {"@type": "Question", "name": "Windows PCでローカルAIを動かすにはメモリがどれくらい必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "小さなモデルなら8 GBで足ります。8 GBのノートPCは実際のチャットで毎秒5〜7トークン、だいたい読む速さで書きました。16 GBなら快適で、グラフィックボードなしの16 GBノートPCは毎秒14〜18トークンでした。"}}, {"@type": "Question", "name": "WindowsのローカルAIチャットボットにグラフィックボードは必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "必要ありませんが、大きく効きます。6 GB以上のカードを積んだゲーミングPCでは、ほとんどのカードで毎秒37〜76トークンを計測しました。同じPCのCPUだけの場合の何倍もの速さです。画像を作るにはグラフィックボードか16 GBのメモリが必要です。"}}, {"@type": "Question", "name": "Windows用の無料オフラインAIはありますか？", "acceptedAnswer": {"@type": "Answer", "text": "あります。LM Studio、Jan、Ollama、GPT4All、AnythingLLMは無料で、モデルは自分で選んでダウンロードします。GreenCubeは9.99ユーロの買い切りで、PCに合うモデルを自動で選びます。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ja/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a>
+    <a href="https://greencube.app/ja/your-data">あなたのデータ</a>
+    <a href="https://greencube.app/ja/mission">私たちのミッション</a>
+    <a href="/blog/ja" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">JA</summary><div class="lang-list"><a href="/blog/local-ai-chatbot-windows" hreflang="en" lang="en">English</a><a href="/blog/es/ia-sin-internet-windows" hreflang="es" lang="es">Español</a><a href="/blog/pt/local-ai-chatbot-windows" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/local-ai-chatbot-windows" hreflang="fr" lang="fr">Français</a><a href="/blog/de/local-ai-chatbot-windows" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/local-ai-chatbot-windows" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/local-ai-chatbot-windows" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/local-ai-chatbot-windows" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/local-ai-chatbot-windows" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/local-ai-chatbot-windows" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/local-ai-chatbot-windows" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/local-ai-chatbot-windows" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/local-ai-chatbot-windows" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/local-ai-chatbot-windows" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/local-ai-chatbot-windows" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/local-ai-chatbot-windows" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/local-ai-chatbot-windows" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="/blog/ko/local-ai-chatbot-windows" hreflang="ko" lang="ko">한국어</a></div></details><a href="https://greencube.app/ja/buy" class="nav-cta">GreenCubeを入手</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
+<h1>Windows 10・11でオフラインAI：PCに必要なもの、10台で計測</h1>
+<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
+<div class="answer"><p><strong>短い答え：</strong>Windows 10か11で<strong>メモリ8 GB</strong>のPCなら、インターネットなしでローカルAIチャットボットを動かせます。<strong>16 GBかゲーミング用グラフィックボード</strong>があれば快適です。アプリとモデルを一度ダウンロードすれば、あとはWi-Fiを切っても動きます。実際のWindows PC10台で計測しました。8 GBのノートPCではおよそ読む速さ、ゲーミングPCではそれよりずっと速くなります。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>10</b><span>台の実際のWindows PCで計測、ノートPCとゲーミングPC</span></div>
+<div class="stat b"><b>8 GB</b><span>のメモリで始められる、グラフィックボードなしで</span></div>
+<div class="stat p"><b>0</b><span>最初のダウンロード後に必要なインターネット</span></div>
+</div>
+
+<h2>Windows PCに必要なもの</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>最低限</th><th>快適</th></tr></thead>
+<tbody>
+<tr><td><strong>Windows</strong></td><td>Windows 10（64ビット）</td><td>Windows 11</td></tr>
+<tr><td><strong>メモリ</strong></td><td>8 GB、ほかのアプリは閉じる</td><td>16 GB以上</td></tr>
+<tr><td><strong>グラフィックボード</strong></td><td>不要</td><td>ここ数年の6 GB以上のカードならどれでも</td></tr>
+<tr><td><strong>ディスク容量</strong></td><td>小さなモデルで約3 GB</td><td>大きめのモデルと画像で約11 GB</td></tr>
+<tr><td><strong>インターネット</strong></td><td colspan="2">一度だけ、アプリとモデルのダウンロードに</td></tr>
+</tbody>
+</table></div>
+<p>自分のPCの中身がわからない？<strong>Ctrl + Shift + Esc</strong>を押して<strong>パフォーマンス</strong>を開き、<strong>メモリ</strong>と<strong>GPU</strong>を見てください。または<a href="/blog/ja/can-my-pc-run-ai#checker">チェッカー</a>にカード名を入れれば、あなたのと同じような実際のPCで何がどれくらいの速さで動くかがわかります。</p>
+
+<h2>実際のWindows PCでの速さ</h2>
+<p>数字はすべて2026年9月と10月に実際のWindows PCで動かしたGreenCubeのもので、ほとんどが実際のチャットです。トークンは単語のかけらです。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>あなたのWindows PC</th><th>書く速さ</th><th>画像1枚（512×512）</th></tr></thead>
+<tbody>
+<tr><td>8 GBノートPC、グラフィックボードなし</td><td>毎秒<b>5&ndash;7</b>トークン、およそ読む速さ</td><td>作れない（約7 GBの空きが必要）</td></tr>
+<tr><td>16 GBノートPC、グラフィックボードなし</td><td>毎秒<b>14&ndash;18</b>トークン</td><td><b>2&ndash;2.5分</b></td></tr>
+<tr><td>6 GB以上のカードを積んだゲーミングPC</td><td>ほとんどのカードで毎秒<b>37&ndash;76</b>トークン</td><td><b>8&ndash;89秒</b></td></tr>
+</tbody>
+</table></div>
+<p>例外として、古いAMD RX 580は毎秒約11トークンでしたが、それでも読むより速い速さです。各カードの専用ページは<a href="/blog/ja/can-my-pc-run-ai">自分のPCでAIは動く？</a>にあります。</p>
+
+<div class="card g">
+<h3>仕事の大半はグラフィックボードがこなす</h3>
+<p>同じWindows PCで、同じAIが<strong>CPUでは毎秒5トークン、RX 5700 XTでは72トークン</strong>を書きました。AIを動かすのは、まさにグラフィックボードが得意とする種類の計算なので、最近のゲーミング用カードなら大きな差が出ます。どれだけ大きなAIが載るかを決めるのは、メモリではなくカードのメモリ（VRAM）です。<a href="/blog/ja/how-much-vram-for-ai">モデルがカードに収まる必要がある理由</a>。</p>
+</div>
+<div class="card y">
+<h3>グラフィックボードがない？勉強とチャットなら十分</h3>
+<p>Intelのグラフィックスだけの普通の16 GBノートPCが、説明と試験問題3問からなる勉強用の回答を、約20秒で書き終えました。8 GBのノートPCでも、ほかのアプリがメモリを空けていれば、遅くはなりますが動きます。<a href="/blog/ja/run-ai-on-8gb-ram">8 GBでのテスト</a>。</p>
+</div>
+
+<h2>WindowsでAIをオフラインで動かすアプリ</h2>
+<p>各アプリの公式サイトによる、2026年10月21日時点の情報です。ほかのアプリは自分たちのPCで計測していないので、この表は速さを比べていません。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>アプリ</th><th>Windows</th><th>価格</th><th>モデルを選んでくれる？</th><th>PDFを読める</th></tr></thead>
+<tbody>
+<tr><td><strong>GreenCube</strong></td><td>Windows 10と11</td><td>9.99ユーロの買い切り</td><td>はい、カードとメモリに合わせて</td><td>はい</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>AVX2対応のCPU</td><td>無料</td><td>いいえ、一覧から自分で選ぶ</td><td>はい</td></tr>
+<tr><td><strong>Jan</strong></td><td>Windows 10以降</td><td>無料、オープンソース</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Windows、2025年7月からチャット画面あり</td><td>自分のPCでは無料</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>GPT4All</strong></td><td>Windows（ARM PCは非対応）</td><td>無料、オープンソース</td><td>いいえ</td><td>はい、LocalDocsで</td></tr>
+<tr><td><strong>AnythingLLM</strong></td><td>Windows</td><td>デスクトップ版は無料</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>Msty</strong></td><td>Windows 10と11</td><td>無料プランあり</td><td>いいえ</td><td>はい</td></tr>
+<tr><td><strong>KoboldCpp</strong></td><td>.exe一つ、チャットはブラウザで</td><td>無料、オープンソース</td><td>いいえ</td><td>テキストのみ</td></tr>
+</tbody>
+</table></div>
+<p>それぞれがインターネットに何を送るか、Macやスマホのアプリもあわせて見たい場合は、<a href="/blog/ja/best-offline-ai-chatbot">オフラインAIチャットボット12本の比較</a>をどうぞ。</p>
+
+<h2>Windows 10とWindows 11、どっち？</h2>
+<p>AIの動き方はどちらでも同じです。大事なのはメモリとグラフィックボードで、Windowsのバージョンではありません。一つ知っておきたいのは、MicrosoftがWindows 10のサポートを2025年10月14日に終了したことです。拡張セキュリティ更新に登録しない限り、Windows 10のPCにはセキュリティ更新が届きません。オフラインAIならチャットはいずれにせよPCの中に残りますが、Windowsを最新に保つのはやはり大事です。</p>
+
+<h2>何も外に出ていないことの確かめ方</h2>
+<ol class="steps">
+<li><strong>機内モードをオンにする</strong>（またはケーブルを抜く）。最初のダウンロード後にチャットして、答えが返ってくればAIはあなたのPCで動いています。</li>
+<li><strong>ネットワークを見る：</strong><strong>Windows + R</strong>を押して<strong>resmon</strong>と入力し、ネットワークのタブを開きます。チャット中にデータを送ったり受け取ったりしているプログラムがすべて表示されます。</li>
+<li><strong>アプリが何を送ると言っているかを読む。</strong>GreenCubeの場合：有効化のために一度ログインし、AIとその更新をダウンロードします。オンライン検索（起動するたびにオフ）は検索語を検索エンジンに送ります。それ以外は何もありません。「あなたのチャット、ファイル、メモリー、画像を私たちが受け取ることは決してありません。」</li>
+</ol>
+
+<h2>WindowsのオフラインAIにできないこと</h2>
+<ul>
+<li><strong>今日のニュース。</strong>モデルが知っているのは学習で覚えたことです。新しい出来事にはウェブ検索が必要で、その部分はインターネットを通ります。</li>
+<li><strong>あらゆる面で最大級のクラウドAIに勝つこと。</strong>PCに収まるモデルは勉強、文章、日常の質問には十分ですが、最大級のクラウドモデルは最も難しい問題ではまだ上です。</li>
+<li><strong>どのPCでも速いこと。</strong>働くのはあなたのPCです。8 GBのノートPCはおよそ読む速さ、ゲーミングPCはずっと速くなります。</li>
+</ul>
+<p>勉強に使うなら、<a href="/blog/ja/offline-ai-for-students">オフラインAIが学生にできること</a>で、PDF、まとめ、フラッシュカードの時間を見られます。</p>
+<h2>よくある質問</h2>
+<div class="faq">
+<details><summary>Windows 11でAIをオフラインで使えますか？</summary><p>使えます。GreenCube、LM Studio、Jan、Ollama、GPT4AllなどのアプリはAIモデルを自分のPCで動かします。アプリとモデルのダウンロードに一度だけインターネットが必要で、その後はWi-Fiを切ってもチャットできます。</p></details>
+<details><summary>オフラインAIはWindows 10で動きますか？</summary><p>動きます。GreenCube、Jan、MstyはWindows 10を対応OSとしています。MicrosoftはWindows 10のサポートを2025年10月14日に終了しました。AIは動き続けますが、拡張セキュリティ更新に登録しない限り、PCにセキュリティ更新は届きません。</p></details>
+<details><summary>Windows PCでローカルAIを動かすにはメモリがどれくらい必要ですか？</summary><p>小さなモデルなら8 GBで足ります。8 GBのノートPCは実際のチャットで毎秒5〜7トークン、だいたい読む速さで書きました。16 GBなら快適で、グラフィックボードなしの16 GBノートPCは毎秒14〜18トークンでした。</p></details>
+<details><summary>WindowsのローカルAIチャットボットにグラフィックボードは必要ですか？</summary><p>必要ありませんが、大きく効きます。6 GB以上のカードを積んだゲーミングPCでは、ほとんどのカードで毎秒37〜76トークンを計測しました。同じPCのCPUだけの場合の何倍もの速さです。画像を作るにはグラフィックボードか16 GBのメモリが必要です。</p></details>
+<details><summary>Windows用の無料オフラインAIはありますか？</summary><p>あります。LM Studio、Jan、Ollama、GPT4All、AnythingLLMは無料で、モデルは自分で選んでダウンロードします。GreenCubeは9.99ユーロの買い切りで、PCに合うモデルを自動で選びます。</p></details>
+</div>
+
+<div class="cta-box"><h3>自分だけのAIを、自分のPCで</h3><p>GreenCubeはあなたのPCで動きます。使用制限なし、サブスクなし、インターネットなしでも使えます。&euro;9.99の買い切りです。</p><a class="cta" href="https://greencube.app/ja/buy">GreenCubeを入手 <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ja/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">あなたのものになる <em>AI、</em> レンタルではない。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>製品</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/buy">GreenCubeを入手</a></li>
+          <li><a href="https://greencube.app/ja/what-you-get">自分のパソコンで動く？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>読みもの</h3>
+        <ul>
+          <li><a href="/blog/ja">Blog</a></li>
+          <li><a href="https://greencube.app/ja/your-data">あなたのデータ</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPTとあなたのデータ (EN)</a></li>
+          <li><a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>会社</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/mission">私たちのミッション</a></li>
+          <li><a href="mailto:support@greencube.app">お問い合わせ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">プライバシーポリシー (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">利用規約 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. スペイン製。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!--meta
+{
+ "title": "ChatGPTはオフラインで使える？使えません。でもネットなしで動くものはあります（2026年）",
+ "description": "ChatGPTにオフラインモードはありません。モデルがOpenAIのサーバーで動くので、アプリもデスクトップ版もインターネットが必要です。オフラインで動くのは、OpenAIのオープンモデルgpt-oss-20bとローカルAIアプリ。必要なメモリと計測した速さもまとめました。",
+ "date": "2026-10-23",
+ "kind": "guide",
+ "stat": "0",
+ "teaser": "ChatGPTにオフラインモードはありません。ネットなしで動くものと、PCに必要なもの。",
+ "rank": 27,
+ "lang": "ja",
+ "alt": "chatgpt-offline",
+ "faq": [
+  {"q": "ChatGPTはオフラインで使えますか？", "a": "使えません。ChatGPTはOpenAIのサーバーで動いています。ウェブ版、スマホアプリ、WindowsとMacのアプリはどれも接続が必要です。OpenAIはオフラインモードもオフラインインストーラーも提供していません。"},
+  {"q": "ChatGPTの公式オフライン版はありますか？", "a": "ChatGPTそのものにはありません。OpenAIで一番近いのはgpt-oss-20bで、Apache 2.0ライセンスのオープンウェイトモデルです。約16 GBのメモリがあるコンピューターで、OllamaやLM Studioなどのアプリを使って動きます。ChatGPTと同じモデルではありません。"},
+  {"q": "ChatGPTのオフライン代わりで一番いいのは？", "a": "AIモデルを自分のPCで動かすアプリです。LM Studio、Jan、Ollama、GPT4Allは無料（モデルは自分で選ぶ）で、GreenCubeは9.99ユーロの買い切りでPCに合うモデルを選びます。最初のダウンロード後はWi-Fiを切っても動きます。"},
+  {"q": "ChatGPTのオフライン代わりはどれくらい速い？", "a": "PCによります。私たちのテストでGreenCubeは、8 GBのノートPCで毎秒5〜7トークン（およそ読む速さ）、16 GBのノートPCで14〜18、6 GB以上のカードを積んだほとんどのゲーミングPCで37〜76トークンを書きました。"},
+  {"q": "ストアの「ChatGPTオフライン」アプリは本物？", "a": "注意してください。オフラインで動くとしてChatGPTの名前を使うアプリはOpenAI製ではありません。ネットなしで動くなら、端末上で別のモデルを動かしています。誰が作り、どのモデルを使っているかを確認しましょう。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：使えません。</strong>ChatGPTはOpenAIのサーバーで動いているので、ウェブ版、スマホアプリ、デスクトップアプリのどれもインターネットが必要で、オフラインモードはありません。オフラインで<strong>動く</strong>のは、自分のコンピューターで動くAIモデルです。OpenAIのオープンモデル<strong>gpt-oss-20b</strong>（メモリ約16 GB）や、モデルを一度ダウンロードすればWi-Fiを切っても動くLM Studio、Jan、Ollama、GreenCubeなどのアプリです。</p></div>
+
+<div class="stats">
+<div class="stat p"><b>0</b><span>ChatGPTのオフラインモード：モデルはOpenAIのサーバーで動く</span></div>
+<div class="stat y"><b>16 GB</b><span>のメモリ、OpenAIのオープンモデルgpt-oss-20bに必要</span></div>
+<div class="stat g"><b>8 GB</b><span>でノートPCの小さなローカルモデルには十分（計測済み）</span></div>
+</div>
+
+<h2>ChatGPTがオフラインで動かない理由</h2>
+<p>ChatGPTに入力すると、メッセージはOpenAIのデータセンターに送られ、そこでモデルが答えを書いて送り返します。WindowsとMacのアプリはそのサービスへの窓であって、モデルのコピーではありません。接続がなければ、端末の中に答えられるものは何もないのです。</p>
+<p>名前に「ChatGPT」と「オフライン」が入ったアプリには気をつけてください。OpenAI製ではありません。本当にネットなしで動くなら、スマホやPCで別のモデルを動かしています。</p>
+
+<h2>ネットなしで動くもの</h2>
+<div class="card b">
+<h3>OpenAIのオープンモデル：gpt-oss-20b</h3>
+<p>2025年8月、OpenAIはApache 2.0ライセンスのオープンウェイトモデルgpt-ossを公開しました。小さいほうのgpt-oss-20bは約16 GBのメモリがあるコンピューターで（<a href="https://openai.com/index/introducing-gpt-oss/" rel="noopener">OpenAI</a>）、OllamaやLM Studioなどのアプリで動きます。OpenAI製ですがChatGPTではありません。別のモデルで、ウェブ検索もアカウントの記憶もありません。私たちのPCでは計測していません。</p>
+</div>
+<div class="card g">
+<h3>ローカルAIアプリ</h3>
+<p>モデルを一度ダウンロードしてPCで動かすアプリです。<strong>LM Studio</strong>、<strong>Jan</strong>、<strong>Ollama</strong>、<strong>GPT4All</strong>は無料でモデルを選べます。<strong>GreenCube</strong>（Windows、9.99ユーロの買い切り）はPCに合うモデルを選び、PDFや写真も読み、画像も作ります。<a href="/blog/best-offline-ai-chatbot">オフラインアプリ12本の比較</a>。</p>
+</div>
+
+<h2>必要なものと速さ</h2>
+<p>実際のPC{{pcs}}台でGreenCubeを使って計測（モデル：GoogleのGemma 4 E2BとE4B）：</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>あなたのPC</th><th>書く速さ</th><th>体感</th></tr></thead>
+<tbody>
+<tr><td>8 GBノートPC、グラフィックボードなし</td><td>毎秒<b>5&ndash;7</b>トークン</td><td>およそ読む速さ</td></tr>
+<tr><td>16 GBノートPC、グラフィックボードなし</td><td>毎秒<b>14&ndash;18</b>トークン</td><td>読むより速い</td></tr>
+<tr><td>6 GB以上のカードを積んだゲーミングPC</td><td>ほとんどのカードで毎秒<b>37&ndash;76</b>トークン</td><td>読むよりずっと速い</td></tr>
+</tbody>
+</table></div>
+<p>あなたのカードの場合：<a href="/blog/can-my-pc-run-ai#checker">自分のPCでAIは動く？</a> Windowsなら：<a href="/blog/local-ai-chatbot-windows">オフラインAIにPCが必要なもの</a>。</p>
+
+<h2>ChatGPTかオフラインAIか：正直な比較</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>ChatGPT</th><th>自分のPCのAI</th></tr></thead>
+<tbody>
+<tr><td><strong>ネットなしで動く</strong></td><td>いいえ</td><td>はい、一度ダウンロードすれば</td></tr>
+<tr><td><strong>最も難しい問題での強さ</strong></td><td>強い：モデルがずっと大きい</td><td>勉強、文章、日常には十分</td></tr>
+<tr><td><strong>今日のニュース</strong></td><td>はい、検索で</td><td>いいえ（モデルが学んだことだけ）</td></tr>
+<tr><td><strong>ファイルと画像の上限（無料）</strong></td><td>制限あり（<a href="/blog/chatgpt-free-limits">詳細</a>）</td><td>なし</td></tr>
+<tr><td><strong>チャットの行き先</strong></td><td>OpenAIのサーバー</td><td>どこにも行かない：あなたのPC</td></tr>
+<tr><td><strong>価格</strong></td><td>無料、またはPlusで月20ドル</td><td>無料アプリ、またはGreenCube 9.99ユーロの買い切り</td></tr>
+</tbody>
+</table></div>
+<p>両方を使う人も多いです。オンラインで一番強いモデルが必要なときはChatGPT、電車の中やWi-Fiの弱い図書館、アップロードしたくないノートにはオフラインAI、という使い分けです。</p>
