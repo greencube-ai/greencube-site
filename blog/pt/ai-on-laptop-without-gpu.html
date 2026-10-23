@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Rodar IA num notebook sem placa de vídeo: os gráficos Intel ajudam? | Blog do GreenCube</title>
+  <meta name="description" content="Rodamos IA num notebook sem placa de vídeo, no processador e nos gráficos Intel. A velocidade do chat quase não mudou, a leitura ficou 1,3 vez mais rápida e as imagens mais de 4 vezes mais rápidas." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Rodar IA num notebook sem placa de vídeo: os gráficos Intel ajudam? | Blog do GreenCube" />
+  <meta property="og:description" content="Rodamos IA num notebook sem placa de vídeo, no processador e nos gráficos Intel. A velocidade do chat quase não mudou, a leitura ficou 1,3 vez mais rápida e as imagens mais de 4 vezes mais rápidas." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-portatil-sin-tarjeta-grafica" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Rodar IA num notebook sem placa de vídeo: os gráficos Intel ajudam?", "description": "Rodamos IA num notebook sem placa de vídeo, no processador e nos gráficos Intel. A velocidade do chat quase não mudou, a leitura ficou 1,3 vez mais rápida e as imagens mais de 4 vezes mais rápidas.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "pt-BR", "mainEntityOfPage": "https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/pt/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Os gráficos integrados deixam a IA mais rápida?", "acceptedAnswer": {"@type": "Answer", "text": "Para conversar, quase nada: no nosso notebook de 16 GB a resposta foi escrita a cerca de 14 tokens por segundo das duas formas. Para ler um texto longo colado, foi cerca de 1,3 vez mais rápido, e para criar imagens, mais de 4 vezes mais rápido."}}, {"@type": "Question", "name": "Os gráficos integrados podem deixar a IA mais lenta?", "acceptedAnswer": {"@type": "Answer", "text": "Às vezes. Com um modelo pequeno, a escrita ficou 29% mais lenta nos gráficos Intel do que no processador; com um maior, ficou 26% mais rápida. Depende do modelo e do notebook, e por isso o GreenCube testa o seu notebook e escolhe."}}, {"@type": "Question", "name": "Um notebook sem placa de vídeo serve para IA?", "acceptedAnswer": {"@type": "Answer", "text": "Para conversar e estudar, sim: um notebook de 16 GB escreve mais rápido do que você lê com um modelo pequeno. Imagens também funcionam, mas levam de 2 a 3 minutos cada."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/pt/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a>
+    <a href="https://greencube.app/pt/your-data">Seus dados</a>
+    <a href="https://greencube.app/pt/mission">Nossa missão</a>
+    <a href="/blog/pt" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">PT</summary><div class="lang-list"><a href="/blog/ai-on-laptop-without-gpu" hreflang="en" lang="en">English</a><a href="/blog/es/ia-portatil-sin-tarjeta-grafica" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-laptop-without-gpu" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português</a></div></details><a href="https://greencube.app/pt/buy" class="nav-cta">Quero o GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
+<h1>Rodar IA num notebook sem placa de vídeo: os gráficos Intel ajudam?</h1>
+<p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 18 de outubro de 2026</p>
+<div class="answer"><p><strong>Resposta curta:</strong> para conversar, <strong>quase nada</strong>. Para ler textos longos, <strong>um pouco</strong>. Para imagens, <strong>muito</strong>: mais de 4 vezes mais rápido.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>tokens por segundo no chat, com ou sem os gráficos Intel</span></div>
+<div class="stat b"><b>1,3&times;</b><span>mais rápido para ler textos longos que você cola</span></div>
+<div class="stat p"><b>4&times;</b><span>mais rápido para criar imagens</span></div>
+</div>
+
+<h2>O teste</h2>
+<p>Um notebook: Intel Core Ultra 5 125U, 16 GB de RAM, sem placa de vídeo, só com os gráficos que vêm dentro do chip. Rodamos a mesma IA no processador e nos gráficos Intel, ligado na tomada, duas vezes cada, em setembro e outubro de 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Tarefa</th><th>Processador</th><th>Gráficos Intel</th><th>Diferença</th></tr></thead>
+<tbody>
+<tr><td>Escrever uma resposta (Gemma 4 E2B)</td><td>13,7&ndash;15,5 tokens/s</td><td>14,4&ndash;14,5 tokens/s</td><td><b>quase igual</b></td></tr>
+<tr><td>Ler um texto colado (Gemma 4 E2B)</td><td>160&ndash;167 tokens/s</td><td>203&ndash;211 tokens/s</td><td><b>1,3&times; mais rápido</b></td></tr>
+<tr><td>Uma imagem, 512 por 512</td><td>11 min 27 s</td><td>2 min 22 s &ndash; 2 min 38 s</td><td><b>mais de 4&times; mais rápido</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>O que aprendemos</h2>
+
+<div class="card g">
+<h3>1. A velocidade do chat vem da memória, não do chip</h3>
+<p>Escrever uma resposta é limitado pela rapidez com que o notebook consegue passar a IA pela memória, e o processador e os gráficos Intel dividem a mesma memória. Por isso os dois escrevem mais ou menos na mesma velocidade.</p>
+</div>
+
+<div class="card y">
+<h3>2. Pode até ficar mais lento</h3>
+<p>Com um modelo pequeno mais antigo (Phi-4 Mini), a escrita ficou <strong>29% mais lenta</strong> nos gráficos Intel. Com um maior (Gemma 4 E4B), ficou <strong>26% mais rápida</strong>. Mesmo notebook, resultados opostos. Não dá para adivinhar pelas especificações, então o GreenCube testa o seu notebook e usa o que for mais rápido.</p>
+</div>
+
+<div class="card p">
+<h3>3. Nas imagens é que eles brilham</h3>
+<p>Criar uma imagem é cálculo pesado, do tipo para o qual os chips gráficos são feitos. Onze minutos e meio caíram para cerca de dois e meio.</p>
+</div>
+
+<h2>E o que isso significa para você?</h2>
+<div class="expect">
+<div class="g"><h4>Conversar e estudar</h4><p>Um notebook de 16 GB dá conta. Ele escreve mais rápido do que você lê.</p></div>
+<div class="b"><h4>PDFs longos</h4><p>Os gráficos leem um pouco mais rápido, então a primeira resposta chega antes.</p></div>
+<div class="y"><h4>Imagens</h4><p>Dá, com cerca de 2 a 3 minutos cada. Um PC gamer faz isso em menos de um minuto.</p></div>
+<div class="p"><h4>Bateria</h4><p>Nos nossos testes, na bateria e na tomada a velocidade do chat foi praticamente a mesma.</p></div>
+</div>
+
+<p>Quer ver o quadro completo, com PCs gamer também? <a href="/blog/pt/can-my-pc-run-ai">Medimos 10 PCs aqui.</a></p>
+<h2>Perguntas</h2>
+<div class="faq">
+<details><summary>Os gráficos integrados deixam a IA mais rápida?</summary><p>Para conversar, quase nada: no nosso notebook de 16 GB a resposta foi escrita a cerca de 14 tokens por segundo das duas formas. Para ler um texto longo colado, foi cerca de 1,3 vez mais rápido, e para criar imagens, mais de 4 vezes mais rápido.</p></details>
+<details><summary>Os gráficos integrados podem deixar a IA mais lenta?</summary><p>Às vezes. Com um modelo pequeno, a escrita ficou 29% mais lenta nos gráficos Intel do que no processador; com um maior, ficou 26% mais rápida. Depende do modelo e do notebook, e por isso o GreenCube testa o seu notebook e escolhe.</p></details>
+<details><summary>Um notebook sem placa de vídeo serve para IA?</summary><p>Para conversar e estudar, sim: um notebook de 16 GB escreve mais rápido do que você lê com um modelo pequeno. Imagens também funcionam, mas levam de 2 a 3 minutos cada.</p></details>
+</div>
+
+<div class="cta-box"><h3>Sua própria IA, no seu próprio PC</h3><p>O GreenCube roda no seu computador: sem limites de uso, sem assinatura e sem precisar de internet. &euro;9,99, um único pagamento.</p><a class="cta" href="https://greencube.app/pt/buy">Quero o GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/pt/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">IA que é <em>sua,</em> não alugada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/buy">Quero o GreenCube</a></li>
+          <li><a href="https://greencube.app/pt/what-you-get">Vai rodar no meu computador?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Aprenda</h3>
+        <ul>
+          <li><a href="/blog/pt">Blog</a></li>
+          <li><a href="https://greencube.app/pt/your-data">Seus dados</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT e seus dados (EN)</a></li>
+          <li><a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/mission">Nossa missão</a></li>
+          <li><a href="mailto:support@greencube.app">Contato</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidade (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termos de uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Feito na Espanha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

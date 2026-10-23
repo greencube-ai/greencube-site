@@ -1,0 +1,382 @@
+{
+ "num_sep": [
+  ",",
+  "."
+ ],
+ "about": "about {x}",
+ "months": [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+ ],
+ "date_day": "{d} {month} {y}",
+ "date_month": "{month} {y}",
+ "the": {
+  "desktop": "the",
+  "laptop": "the"
+ },
+ "art": {
+  "desktop": "a",
+  "laptop": "a"
+ },
+ "list_sep": ", ",
+ "where_laptop": "a laptop with no graphics card ({chip}) and {ram} GB of RAM",
+ "where_desktop": "a desktop with an {vendor} {gpu} ({vram} GB) and {ram} GB of RAM",
+ "read_fast_above": 6,
+ "answer": "Yes. On {where}, {eng} wrote {sp} tokens a second. {tail}",
+ "answer_fast": "You read about 5, so answers come out faster than you can read them.",
+ "answer_ok": "You read about 5, so answers come out at about reading speed.",
+ "pic_where": {
+  "card": "the graphics card",
+  "cpu": "the processor alone",
+  "chip": "the built-in Intel graphics"
+ },
+ "pic_part": "{t} on {where}{first}",
+ "pic_join": ", and ",
+ "pic_yes": "Yes. One picture (512×512) took {parts}.",
+ "pic_no_laptop": "No. The picture AI needs about 7 GB of memory to itself, more than {an} {ram} GB laptop can free up. Chat and study work fine.",
+ "pic_unknown": "Very likely, but we haven't timed a picture on this card yet. When we do, the number goes here.",
+ "big_crash": "Only for short chats. The bigger {name} ({gb} GB) wrote {writes} tokens a second on a short question, but once the chat reached {crash} tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with {floor} GB or more.",
+ "big_fits": "It should. {name} is a {gb} GB file and this card has {vram} GB, which leaves room for a long conversation too. We haven't measured it on this card yet.",
+ "big_ref": " On an 8 GB {ref} it answered short questions, then crashed in a long chat.",
+ "big_no": "Not comfortably. GreenCube suggests the bigger {name} only on cards with {floor} GB or more of VRAM, and this one has {vram}.{tail}",
+ "ins_card_h": "The graphics card does the work",
+ "ins_card": "Same PC, same AI ({eng}): {cpu} tokens a second on the processor alone, {card} on the graphics card, about <strong>{x} times faster</strong>. A graphics card is built to do thousands of small sums at once for games, and running an AI is mostly that same kind of maths. GreenCube times both when it starts and uses the faster one.",
+ "ins_fits_h": "The whole AI fits on the card",
+ "ins_fits": "{name} is a {gb} GB file and the card has {vram} GB of its own memory (VRAM). All of it fits, with room left for the conversation, so the card never waits for the slower memory in the rest of the PC. That is the biggest reason it runs this fast.",
+ "ins_slow_cmp": " For comparison, other {v} GB cards we measured write {l} with the same AI.",
+ "ins_slow_h": "It fits, but this card is slow at AI",
+ "ins_slow": "{name} ({gb} GB) fits whole in the card's {vram} GB, yet it writes only {hs} tokens a second. Older cards are much slower at this kind of maths, and more memory does not change that.{cmp} It still writes faster than you read, so chat and study work; it just feels slower than a newer card.",
+ "ins_split_swing": " Reading what you paste swung between {lo} and {hi} tokens a second from one day to the next, most likely because the card was full.",
+ "ins_split_h": "Not all of it fits on the card",
+ "ins_split": "{name} is a {gb} GB file and the card has {vram} GB, so it does not fit whole and part of it sits in the normal memory (RAM). Every word it writes has to reach that part over a much slower path, so speed drops and moves around. It still writes {hs} tokens a second.{swing}",
+ "ins_cpu_cmp": " The bigger {name} works too, at {writes}: smarter, but you will feel the wait on long answers.",
+ "ins_cpu_chip": " GreenCube's startup test also tried the built-in Intel graphics for writing: {chip}, against {cpu} on the processor, so it writes on the processor here.",
+ "ins_cpu_h": "No graphics card? It still works",
+ "ins_cpu": "With no graphics card, the AI runs on the processor. It is slower than on a gaming PC, but the smaller {name} still writes {hs} tokens a second, enough to study, summarise and write with.{cmp}{chip}",
+ "ins_second_short": " Most of its answers were short, and short answers measure slower than long ones: its longest came near the top of that range.",
+ "ins_second_reads": ", and read at {reads}",
+ "ins_second_h": "A second PC with the same card",
+ "ins_second": "Another tester's {gpu} ran {eng} in GreenCube {v}: it wrote {writes} tokens a second{reads}.{short}",
+ "ins_big_h": "The bigger {name}",
+ "ins_pic_why": " A picture uses its own AI of about 6 GB and far more maths than a chat answer, so the graphics matter even more here.",
+ "ins_pic_h": "Pictures",
+ "feel_answer": "Write a normal answer ({n} tokens, about 300 words)",
+ "feel_doc": "Read a long document you give it ({n} tokens, about 7 pages)",
+ "feel_on": {
+  "card": "",
+  "cpu": ", processor alone",
+  "chip": ", built-in graphics"
+ },
+ "feel_pic": "Make a picture (512×512{on})",
+ "feel_first": " (first: {f} s)",
+ "feel_note": "<p>Worked out from the speeds measured on this PC: time is length divided by speed, and a real answer also spends a moment getting started. For scale, most people read about 4 words a second (<a href=\"{url}\" rel=\"noopener\">Brysbaert, 2019</a>), so a {n}-token answer takes you over a minute just to read.</p>\n",
+ "second_pc": " (second PC)",
+ "rw_intro": "<p><strong>Writing</strong> is how fast the AI types its answer, in tokens a second; a token is about three quarters of an English word. <strong>Reading</strong> is how fast it takes in what you give it: your question, a pasted text or a PDF. Reading is always much faster than writing, because the AI can read many tokens at once but has to write them one by one.</p>\n",
+ "more_how": "More on how we measure",
+ "short_note": " * This tester mostly asked short questions, so answers under 100 tokens are counted too. Short answers measure a little slower.",
+ "times_as_fast": "about {x} times as fast",
+ "pct_faster": "about {p}% faster",
+ "startup_tag": " (startup test)",
+ "cmp_rank": "Of the {n} PCs we measured with {e}, this one is <strong>number {k}</strong> for writing speed.",
+ "cmp_up": "{The} {link} writes {hl}{tag}, {f}.",
+ "cmp_up_same": "{The} {link} writes {hl}{tag}, about the same.",
+ "cmp_dn": "{The} {link} writes {hl}{tag}, so this one is {f}.",
+ "cmp_dn_same": "{The} {link} writes {hl}{tag}, so this one is about as fast.",
+ "cmp_peers": "<p>We measured {n} cards with {v} GB, and they are far apart:</p>\n<ul>\n{items}</ul>\n<p>Memory decides which AI fits. How new the card is decides how fast it runs.</p>\n",
+ "pc_title": "Can {a} run AI? Measured: {sp} tokens a second",
+ "pc_desc": "Real test: {eng} wrote {sp} tokens a second on {where}. What it means for chat, study and pictures.",
+ "faq_cpu": "On the card, by far: {card} tokens a second against {cpu} on the processor, about {x} times faster.",
+ "stat_tps": "tokens a second with {eng}",
+ "stat_x": "faster on the card than on the processor",
+ "stat_pic": "to make a picture",
+ "stat_with": "with {eng}",
+ "stat_short": " (short chats only)",
+ "spec_laptop": "built-in Intel graphics only",
+ "threads": "threads",
+ "pc_lead": "A real tester's own PC, used the way they normally use it, not a lab machine:",
+ "check_lead": "<p>Not sure what your PC has? It takes 30 seconds:</p>\n",
+ "check_tail": "<p>Then find the closest card in <a href=\"{hub}\">the full table</a>. The same card with more VRAM can fit a bigger AI; a newer card of the same size is usually faster.</p>\n",
+ "table_head": [
+  "PC",
+  "Graphics",
+  "RAM",
+  "AI model",
+  "Writes (tokens/s)"
+ ],
+ "nopic_join": ", the ",
+ "and": " and ",
+ "pc": {
+  "on": {
+   "card": "graphics card",
+   "cpu": "processor only",
+   "chip": "built-in Intel graphics",
+   "split": "graphics card, overflowing into RAM"
+  },
+  "kind": {
+   "desktop": "Desktop",
+   "laptop": "Laptop"
+  },
+  "tps": "tokens a second",
+  "writes": "writing",
+  "reads": "reading",
+  "pic": "Picture (512×512)",
+  "first": "the first took {f} s while it loaded",
+  "h_feel": "What that means in practice",
+  "h_meas": "What we measured",
+  "h_mean": "What it means",
+  "h_cmp": "How it compares",
+  "h_pc": "The test PC",
+  "h_check": "Check your own PC",
+  "h_more": "Other PCs we measured",
+  "th": [
+   "What",
+   "Ran on",
+   "Result",
+   "Measured"
+  ],
+  "th_feel": [
+   "Task",
+   "Time on this PC"
+  ],
+  "how": "How each number was measured:",
+  "ranges": "Where we have several runs we show the range: speeds move a little between runs on the same PC.",
+  "spec": [
+   "Graphics",
+   "Graphics memory (VRAM)",
+   "RAM",
+   "Processor"
+  ],
+  "none": "none (no separate graphics card)",
+  "all": "All {n} PCs in one table, and what your PC will feel like",
+  "hub_t": "Can my PC run AI?",
+  "q_run": "Can {a} run AI locally?",
+  "q_pic": "Can {a} make AI pictures?",
+  "q_cpu": "Is AI faster on the {n} or on the processor?",
+  "q_big": "Can {a} run Gemma 4 12B?"
+ },
+ "check_steps": "<ol class=\"steps\">\n<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>\n<li>Go to <strong>Performance</strong>.</li>\n<li>Click <strong>Memory</strong>: the number at the top right is your RAM.</li>\n<li>Click <strong>GPU</strong>: the name at the top right is your card, and <strong>Dedicated GPU memory</strong> is your VRAM. Only see Intel or AMD graphics with no dedicated memory? Then you have no separate card.</li>\n</ol>\n",
+ "checker": {
+  "h": "Will AI run on your PC?",
+  "lead": "Type your graphics card and pick your RAM: you get what runs, how fast it ran on real PCs, and what we haven't measured yet.",
+  "card": "Your graphics card",
+  "ph": "Start typing, e.g. 3060, RX 6600, Iris",
+  "none": "I don't have a separate card",
+  "vram": "Card memory (VRAM)",
+  "ram": "RAM",
+  "more": "32 GB or more",
+  "help": "Not sure what you have? <a href=\"#by-hand\">Check in Task Manager</a>, it takes 30 seconds.",
+  "priv": "This runs in your browser. Nothing about your PC is sent anywhere.",
+  "nojs": "Turn on JavaScript to use the checker, or read the table below."
+ },
+ "checker_js": {
+  "other_card": "Another card with {v} GB",
+  "laptop": " Laptop",
+  "dec": ".",
+  "about": "about {x}",
+  "startup": " (startup test)",
+  "tps": " tokens a second",
+  "miss": "Not in our list. How much memory does it have?",
+  "chat_h": "Chat and study",
+  "chat_fits": "{e4b} ({e4bgb} GB) fits whole on your {v} GB card, with room for the conversation. That is what makes chat fast. The smaller {e2b} fits too.",
+  "chat_part": "{e4b} is {e4bgb} GB, a little more than your {v} GB card holds, so part of it runs from RAM and it is slower than on a bigger card. The smaller {e2b} ({e2bgb} GB) fits on the card whole.",
+  "chat_8gb": " With 8 GB of RAM, close other apps while you use it.",
+  "chat_small_card": "Your {v} GB card is too small to hold the AI, so it runs on your processor. ",
+  "chat_nocard": "No card needed: the AI runs on your processor, with the built-in graphics helping it read. ",
+  "chat_both": "Both {e2b} and the bigger {e4b} work; E2B is the quicker one.",
+  "chat_slow": "It works with the smaller {e2b} on your processor, slowly. Close other apps first: with 8 GB, other programs leave the AI little room.",
+  "speed_m_h": "Speed (measured)",
+  "speed_m": "Measured on a real {name}: {speed} with {eng}. You read about 5. <a href=\"{url}\">See the full test &rarr;</a>",
+  "speed_u_h": "Speed (not measured yet)",
+  "speed_u": "We haven't measured your card yet. ",
+  "speed_same": "Cards with {v} GB we did measure: ",
+  "speed_close": "The closest cards we measured: ",
+  "speed_why": "Speed depends on how new the card is, not just its memory, so we won't guess a number for yours (<a href=\"{url}\">why</a>).",
+  "speed_laptop": " The laptop version of a card is usually slower than the desktop one with the same name.",
+  "speed_h": "Speed",
+  "speed_lap": "The closest PC we measured: the {link} ({ram} GB of RAM, no card) wrote {speed} with {eng}. You read about 5.",
+  "big_h": "The bigger AI ({name})",
+  "big_fits": "It is {gb} GB and your card has {v}, so it fits with room for long chats. GreenCube suggests it on cards with {floor} GB or more. We haven't measured it on a {v} GB card yet.",
+  "big_short": "Short chats only. On an 8 GB {link} it wrote {writes} tokens a second, then crashed once the chat got long. GreenCube only suggests it on cards with {floor} GB or more.",
+  "big_no": "It needs a graphics card with {floor} GB or more.",
+  "pic_h": "Pictures",
+  "pic_m": "Measured on a real {name}: one picture in {t}.",
+  "pic_m_first": "Measured on a real {name}: one picture in {t} (the first took {f} s while it loaded).",
+  "pic_no8": "The picture AI needs about 7 GB of memory to itself, more than an 8 GB PC can free up.",
+  "pic_maybe8": "Not tested on a PC with 8 GB of RAM: the picture AI needs about 7 GB of memory while it loads.",
+  "pic_8": "On the {n} cards with 8 GB or more we timed, a picture took {lo} to {hi} s.",
+  "pic_6": "On a 6 GB {link} a picture took {t}. On another 6 GB card there was no room left, so GreenCube made it on the processor instead, which takes minutes.",
+  "pic_untimed": "Not timed on a {v} GB card yet. If the card is full, GreenCube makes the picture on the processor instead, which takes minutes.",
+  "pic_laptop": "Yes, slowly: on our 16 GB laptop a picture took {chip} with the built-in Intel graphics and {cpu} on the processor alone.",
+  "wait_vram": "How much memory does your card have?",
+  "wait_ram": "Now pick your RAM.",
+  "head": "Yes, your PC can run AI.",
+  "send": "Already using GreenCube? Send your log to <a href=\"mailto:support@greencube.app\">support@greencube.app</a> and we'll add your PC to the tests, with its own page if it's a new card.",
+  "det_mac": "Your browser says this is a Mac. GreenCube is for Windows PCs, so this checker can't help yet.",
+  "det_found": "Your browser says your graphics are: <strong>{name}</strong>. Not right? Type yours below.",
+  "det_builtin": "Your browser only sees built-in graphics: <strong>{name}</strong>. Many gaming laptops show the built-in chip here even when they also have a gaming card. If yours has one, type it below.",
+  "det_hidden": "Your browser hides which card you have{said}. Type it below.",
+  "det_said": " (it says <strong>{name}</strong>)",
+  "det_none": "Type your graphics card and pick your RAM.",
+  "or": " or "
+ },
+ "method": {
+  "title": "How we measure AI speed on real PCs, and why we don't guess",
+  "desc": "Every speed on the GreenCube blog comes from one of {n} real PCs. How we measure, every PC we tested, the data as a CSV, and the test that shows why we don't estimate the rest.",
+  "ans": "Every speed on this blog comes from a real PC running GreenCube: {n} PCs so far, measured between {d0} and {d1}. We don't estimate speeds for cards we haven't measured: when we tested estimates on the cards we have, the typical one was off by {med}% and the worst by {worst}%.",
+  "s1": "real PCs measured, desktops and laptops",
+  "s2": "measurements, all in the CSV below",
+  "s3": "how far off the worst speed estimate was",
+  "h_what": "What we measure",
+  "what": "<p>Three things, because they are what you feel when you use an AI on your own PC:</p>\n<ul>\n<li><strong>Writing speed:</strong> how fast the AI types its answer, in tokens a second. A token is about three quarters of an English word, and most people read about 5 tokens a second, so anything above that comes out faster than you can read.</li>\n<li><strong>Reading speed:</strong> how fast it takes in what you give it: your question, a pasted text or a PDF. It is always much faster than writing, because the AI reads many tokens at once but writes them one by one.</li>\n<li><strong>Picture time:</strong> how long one 512×512 picture takes, from the click to the finished image.</li>\n</ul>\n<p>We measure the AIs GreenCube ships, the same files every user downloads: Google's {e2b} ({e2bgb} GB), {e4b} ({e4bgb} GB) and {b12} ({b12gb} GB) for chat, and Z-Image Turbo for pictures. A different AI, or the same one compressed differently, would give different numbers, so we only compare like with like.</p>\n",
+  "h_how": "How we measure",
+  "how_lead": "Four ways, and every number on the blog says which one it came from:",
+  "names": {
+   "app": "Real chats",
+   "app-test": "GreenCube's startup test",
+   "bench": "llama.cpp's speed test",
+   "picture": "Picture test"
+  },
+  "used": "Used for",
+  "how_tail": "<p>Real chats are the best evidence, because that is what you will feel, so the main number on every page comes from real chats whenever we have them. The startup test is one short answer, so we use it for the card-versus-processor comparison (it times both the same way), and as the main number only where a tester sent no long answers.</p>\n",
+  "h_pcs": "Every PC we measured",
+  "pcs_lead": "Real testers' own PCs, used the way they normally use them, not lab machines. We don't publish their names.",
+  "th_pcs": [
+   "PC",
+   "Type",
+   "VRAM",
+   "RAM",
+   "Main number from",
+   "GreenCube",
+   "Date",
+   "Writes (tokens/s)"
+  ],
+  "ranges": "<h2>Why the numbers come as ranges</h2>\n<ul>\n<li><strong>Other apps.</strong> A browser, a game launcher or a video call uses the same memory and graphics card.</li>\n<li><strong>The first time is slower.</strong> The first answer after installing, or the first picture, includes loading and setting up the card. We say so where it matters (for example \"the first took 83 s while it loaded\").</li>\n<li><strong>Short answers measure slower.</strong> Every answer has a small fixed start, which weighs more on a 20-token reply than on a 400-token one. That is why real-chat ranges count answers of 100 tokens or more, and we flag it where a tester only sent short ones.</li>\n<li><strong>We leave out the extremes.</strong> Real-chat ranges go from the 10th to the 90th percentile, so one odd answer cannot move them.</li>\n</ul>\n",
+  "h_est": "Can you guess a card's speed from its specs?",
+  "est": "<p>It would be handy: there are hundreds of cards and we have measured {n} PCs. The usual way is memory bandwidth. To write each token, the AI reads its whole model from the card's memory, so in theory speed is roughly bandwidth divided by model size, times some efficiency. Many online calculators work like this.</p>\n<p>So we tested it on our own data. We hid one card at a time, worked out the speed per GB/s from the others, predicted the hidden card from its bandwidth (from the makers' specs, collected in the <a href=\"{specs}\" rel=\"noopener\">TechPowerUp GPU database</a>), and compared with what we measured. Same AI on all of them ({e4b}, whole on the card).</p>\n",
+  "th_est": [
+   "Card",
+   "Memory bandwidth",
+   "Measured (tokens/s)",
+   "Predicted",
+   "Off by"
+  ],
+  "est_res": "<p>The typical estimate was off by {med}%. The worst was the {worst_link}: its memory suggests about {pred} tokens a second, but it wrote {meas}. Run the test again without it and the others are still off by up to {rest}%. The newer AMD RX 6600 went the other way, faster than its bandwidth suggests; its large on-chip cache (AMD calls it Infinity Cache) may be part of why. Each measured number is that card's main number, so they don't all come from the same kind of test; that adds some noise, but it can't explain missing by three times.</p>\n",
+  "bad": "<strong>That is not good enough.</strong> A guess that can be {rest}% off on a modern card, or {worst}% on an older one, would tell some people their PC is fine when it is slow, or the other way round. So the checker and the card pages only ever show cards we measured, and say clearly when yours isn't one of them. We run this test again with every new card, and if the error gets small, we will say so here before we show a single estimate.",
+  "good": "Good enough to show estimates, clearly marked as estimates.",
+  "gaps": "<h2>What we haven't measured yet</h2>\n<ul>\n<li>A laptop with a gaming card.</li>\n<li>{b12} on a card with 10 GB or more.</li>\n<li>Pictures on the {nopic}.</li>\n<li>Other AIs than the ones GreenCube ships, and Linux or Mac (GreenCube is for Windows).</li>\n</ul>\n",
+  "data": "<h2>Get the data</h2>\n<p>Every measurement on this page, one row each, is in <a href=\"/blog/{csv}\" download>{csv}</a>: the PC, the AI, where it ran, writing and reading speeds, picture times, how it was measured, the GreenCube version and the date. If you use it, please cite \"GreenCube, AI speed measurements on real PCs, {year}\" and link to this page.</p>\n<h2>Add your PC</h2>\n<p>Already using GreenCube? Send your log to <a href=\"mailto:support@greencube.app\">support@greencube.app</a>. We add your PC to the tests, without your name, and a new card gets its own page. Not sure what your PC has? <a href=\"{hub}#checker\">Check it here</a>.</p>\n",
+  "faq": [
+   [
+    "Where do GreenCube's AI speed numbers come from?",
+    "From {n} real PCs running GreenCube, measured in real chats, with GreenCube's startup speed test, with llama.cpp's speed test and with a picture test. Every number says which."
+   ],
+   [
+    "Can you estimate AI speed from a graphics card's specs?",
+    "Not reliably yet. Predicting from memory bandwidth, our estimates were typically {med}% off and up to {worst}% off, so we only show cards we measured."
+   ],
+   [
+    "Can I download the data?",
+    "Yes: every measurement is in {csv}, linked on this page."
+   ]
+  ]
+ },
+ "methods": {
+  "app": "Real chats in GreenCube {v}: the speed of every answer of 100 tokens or more, read from the app's log. The range leaves out the slowest and the fastest tenth.",
+  "app-test": "GreenCube {v}'s own speed test, which it runs at startup to choose between the graphics card and the processor: a short answer written once on each.",
+  "bench": "llama.cpp's own speed test (llama-bench), the engine GreenCube runs on, with the same AI files: 128 tokens written, a 512-token text read.",
+  "picture": "GreenCube's picture engine (Z-Image Turbo), 512×512 pixels, 8 steps, timed from the click to the finished picture."
+ },
+ "builtin": "Only built-in graphics (Intel or AMD, no separate card)",
+ "pcs": {
+  "rtx-2080-ti": {
+   "art": "an"
+  },
+  "rx-5700-xt": {
+   "art": "an"
+  },
+  "rtx-5060": {
+   "art": "an"
+  },
+  "rtx-3060": {
+   "art": "an"
+  },
+  "rx-6600": {
+   "art": "an"
+  },
+  "gtx-1660-super": {
+   "art": "a"
+  },
+  "gtx-1650": {
+   "art": "a"
+  },
+  "rx-580": {
+   "art": "an"
+  },
+  "intel-core-ultra-5-laptop": {
+   "name": "Intel Core Ultra 5 laptop",
+   "label": "Intel graphics only (Core Ultra 5)",
+   "art": "an"
+  },
+  "intel-iris-xe-laptop": {
+   "name": "Intel Iris Xe laptop",
+   "label": "Intel Iris Xe only",
+   "art": "an"
+  }
+ },
+ "post": {
+  "kicker": "GreenCube blog",
+  "home": "/blog",
+  "questions": "Questions",
+  "cta_h": "Your own AI, on your own PC",
+  "cta_a": "Get GreenCube",
+  "cta_url": "https://greencube.app/buy",
+  "cta_p": "GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.",
+  "by": "By"
+ },
+ "author": {
+  "title": "Hector Gras | GreenCube blog",
+  "desc": "Hector Gras builds GreenCube and tests how AI really runs on real PCs, from 8 GB laptops to gaming PCs.",
+  "kicker": "GreenCube blog",
+  "role": "Founder of GreenCube",
+  "bio": [
+   "I build GreenCube, the AI you own: it runs on your own PC, with no limits.",
+   "I also test how AI really runs on real machines, from cheap 8 GB laptops to gaming PCs. Every number on this blog comes from those tests: what we measured, on which PC, and when. When a new result comes in, the post gets updated."
+  ],
+  "tests": "My tests",
+  "contact": "Questions or a PC we should test? Write to"
+ },
+ "list": {
+  "title": "GreenCube blog: AI on your own PC, tested",
+  "desc": "Short, tested answers about running AI on your own gaming PC or laptop, and using it to study.",
+  "kicker": "GreenCube blog",
+  "h1": "AI on <em>your own</em> PC.",
+  "lede": "Real tests. Short answers.",
+  "go": "See the tests",
+  "tests": "Our tests",
+  "tests_sub": "Real numbers from real PCs.",
+  "guides": "Guides",
+  "start": "Start here",
+  "read": "Read the test",
+  "topics": {
+   "pc": "Your PC",
+   "study": "Studying",
+   "limits": "Limits and price",
+   "tools": "Apps and alternatives",
+   "more": "More"
+  },
+  "more": "Show all {n}",
+  "base": "/blog/",
+  "nudge": "Will it run on my PC?",
+  "nudge_url": "https://greencube.app/#game"
+ }
+}

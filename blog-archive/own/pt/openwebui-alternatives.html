@@ -1,0 +1,99 @@
+<!--meta
+{
+ "title": "Alternativas ao Open WebUI: 11 opções conferidas, do LibreChat ao LM Studio (outubro de 2026)",
+ "description": "LibreChat, Onyx, LobeHub, AnythingLLM, Chatbox, LM Studio, Jan, Msty, text-generation-webui, a interface web do próprio llama.cpp e GreenCube: licença, preço, como instalar cada um e se precisa de um motor separado, segundo as próprias páginas.",
+ "date": "2026-09-15",
+ "modified": "2026-10-21",
+ "kind": "guide",
+ "stat": "11",
+ "teaser": "11 alternativas ao Open WebUI: licença, preço, instalação e se precisam de um motor separado, conferidos.",
+ "rank": 15,
+ "lang": "pt",
+ "alt": "openwebui-alternatives",
+ "faq": [
+  {"q": "Qual é a melhor alternativa ao Open WebUI?", "a": "Depende do motivo da troca. Para uma página de chat auto-hospedada para uma equipe: LibreChat (MIT, Docker). Para buscar nos documentos da sua empresa: Onyx. Para uma pessoa num só computador, sem Docker: LM Studio, Jan, Msty ou text-generation-webui, que rodam os modelos eles mesmos. O GreenCube (Windows, €9,99 uma única vez) escolhe sozinho o modelo para o seu PC."},
+  {"q": "O Open WebUI ainda é open source?", "a": "A licença dele agora é a \"Open WebUI License\": termos no estilo BSD mais uma cláusula que proíbe remover ou substituir a marca, a menos que você tenha 50 usuários ou menos em 30 dias corridos, permissão por escrito ou uma licença empresarial. O código lançado antes mantém a licença original."},
+  {"q": "Existe alternativa ao Open WebUI sem Docker?", "a": "Sim. LM Studio, Jan, Msty, Chatbox e GreenCube se instalam como apps normais; o text-generation-webui tem versões portáteis que você descompacta e roda; o servidor do llama.cpp tem a própria página de chat na web."},
+  {"q": "Quais alternativas ao Open WebUI rodam os modelos elas mesmas?", "a": "LM Studio, Jan, text-generation-webui, llama.cpp e GreenCube rodam modelos sem motor separado. LibreChat, Onyx, LobeHub e Chatbox se conectam a um motor como o Ollama, ou a APIs na nuvem."},
+  {"q": "Qual alternativa é melhor para uma equipe?", "a": "O LibreChat (MIT) tem login multiusuário com OAuth2, LDAP e e-mail, além de um painel de administração. O Onyx acrescenta busca nos documentos da sua empresa; o plano Business custa 20 dólares por usuário por mês. A versão Docker do AnythingLLM também aceita vários usuários."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Resposta curta: depende do motivo pelo qual você está deixando o Open WebUI.</strong> Para uma página de chat auto-hospedada para uma equipe, o LibreChat (MIT, Docker) é a troca mais próxima; o Onyx acrescenta busca nos documentos da sua empresa. Se é só você num computador e você não quer Docker nem um motor separado, LM Studio, Jan, Msty e text-generation-webui rodam os modelos eles mesmos. O GreenCube (Windows, &euro;9,99 uma única vez) também, e escolhe o modelo que cabe no seu PC.</p></div>
+
+<div class="stats">
+<div class="stat p"><b>11</b><span>alternativas conferidas nas próprias páginas, 21 de outubro de 2026</span></div>
+<div class="stat y"><b>50</b><span>usuários: acima disso, a licença do Open WebUI exige manter a marca</span></div>
+<div class="stat g"><b>5</b><span>das 11 rodam os modelos elas mesmas, sem motor separado</span></div>
+</div>
+
+<h2>Por que as pessoas procuram uma alternativa ao Open WebUI</h2>
+
+<p>O Open WebUI é uma página de chat auto-hospedada que você instala com pip (Python 3.11) ou Docker, e que normalmente fica em cima de um motor como o Ollama ou de uma API compatível com a OpenAI (<a href="https://docs.openwebui.com/getting-started/" rel="noopener">documentação</a>). Ele é capaz: lê documentos, pode rodar "totalmente offline" e tem um app de desktop com um motor llama.cpp embutido opcional (<a href="https://github.com/open-webui/open-webui" rel="noopener">GitHub</a>). As pessoas procuram outra coisa por três motivos que ouvimos mais:</p>
+
+<ul>
+<li><strong>A licença.</strong> Agora é a "Open WebUI License": termos no estilo BSD mais uma cláusula que proíbe remover ou substituir a marca "Open WebUI", a menos que você tenha 50 usuários finais ou menos em quaisquer 30 dias corridos, permissão por escrito ou uma licença empresarial (<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" rel="noopener">LICENSE</a>).</li>
+<li><strong>A instalação.</strong> Um servidor, Docker ou um ambiente Python, mais um motor separado para os modelos.</li>
+<li><strong>O encaixe.</strong> Algumas pessoas querem algo maior (busca na empresa, permissões), outras algo menor (um app num PC).</li>
+</ul>
+
+<h2>As 11 alternativas, lado a lado</h2>
+
+<p>Cada fato vem do site, da documentação ou da página no GitHub do próprio projeto, com link em cada linha, lidos em 21 de outubro de 2026. Quando uma página não diz, escrevemos "não informado". Não fizemos benchmarks desses apps uns contra os outros.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>App</th><th>O que é</th><th>Licença e preço</th><th>Como instalar</th><th>Roda os modelos ele mesmo?</th><th>Seus documentos</th></tr></thead>
+<tbody>
+<tr><td><strong>LibreChat</strong> (<a href="https://github.com/LibreChat-AI/LibreChat" rel="noopener">GitHub</a>)</td><td>Página de chat auto-hospedada para muitos provedores de IA; login multiusuário (OAuth2, LDAP, e-mail) e painel de administração</td><td>MIT, grátis</td><td>Docker (cerca de 5 minutos, segundo a documentação), npm ou Helm; "não é um app de desktop nativo" (<a href="https://www.librechat.ai/docs" rel="noopener">documentação</a>)</td><td>Não: conecta-se a APIs na nuvem ou a motores locais como Ollama e koboldcpp</td><td>Sim, chat com arquivos e busca em arquivos</td></tr>
+<tr><td><strong>Onyx</strong> (<a href="https://github.com/onyx-dot-app/onyx" rel="noopener">GitHub</a>)</td><td>Chat com IA mais busca nos documentos e apps da sua equipe</td><td>Community Edition MIT, grátis; Business 20 dólares por usuário por mês, anual (<a href="https://onyx.app/pricing" rel="noopener">preços</a>)</td><td>Script de instalação, Docker, Kubernetes; um modo Lite com menos de 1 GB não indexa documentos</td><td>Não: conecta-se a Ollama, vLLM e outros, ou a APIs na nuvem</td><td>Sim, é a função principal; pode rodar totalmente isolado da internet (<a href="https://onyx.app" rel="noopener">site</a>)</td></tr>
+<tr><td><strong>LobeHub</strong> (antigo LobeChat, <a href="https://github.com/lobehub/lobehub" rel="noopener">GitHub</a>)</td><td>Plataforma de agentes e chat, auto-hospedada ou hospedada</td><td>LobeHub Community License (Apache 2.0 com condições extras para derivados); planos hospedados a partir de grátis (<a href="https://lobehub.com/pricing" rel="noopener">preços</a>)</td><td>Docker, ou implantação com um clique em hospedagens na nuvem</td><td>Não: conecta-se a provedores de IA</td><td>Não descrito nas páginas que lemos</td></tr>
+<tr><td><strong>AnythingLLM</strong> (<a href="https://github.com/Mintplex-Labs/anything-llm" rel="noopener">GitHub</a>)</td><td>Chat com os seus documentos; app de desktop ou servidor para equipes</td><td>MIT, desktop grátis</td><td>Instalador de desktop (Windows, Mac, Linux), ou Docker para vários usuários</td><td>Conecta-se a muitos provedores, locais (Ollama, LM Studio) e na nuvem</td><td>Sim: PDF, TXT, DOCX</td></tr>
+<tr><td><strong>Chatbox</strong> (<a href="https://github.com/chatboxai/chatbox" rel="noopener">GitHub</a>)</td><td>Cliente de chat para desktop e celular, para muitos modelos de IA</td><td>Community Edition GPL-3.0; planos hospedados de Lite, 3,99 dólares, a Pro+, 39,99 dólares por mês (<a href="https://chatboxai.app/pricing" rel="noopener">preços</a>)</td><td>Instalador para Windows, Mac, Linux; apps para iPhone e Android</td><td>Não: APIs na nuvem, o serviço hospedado dele ou o Ollama para modelos locais</td><td>Sim, uma base de conhecimento local</td></tr>
+<tr><td><strong>LM Studio</strong> (<a href="https://lmstudio.ai" rel="noopener">site</a>)</td><td>App de desktop com chat e um servidor local no estilo OpenAI</td><td>Grátis, também para trabalho; código fechado</td><td>Instalador; no Windows precisa de AVX2, no Mac de chip Apple (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">requisitos</a>)</td><td>Sim</td><td>Sim: PDF, DOCX, TXT</td></tr>
+<tr><td><strong>Jan</strong> (<a href="https://github.com/janhq/jan" rel="noopener">GitHub</a>)</td><td>App de chat para desktop, mais um servidor local compatível com a OpenAI</td><td>Apache 2.0, grátis</td><td>Instalador para Windows, Mac, Linux</td><td>Sim; modelos na nuvem opcionais</td><td>Sim: PDF, arquivos do Office</td></tr>
+<tr><td><strong>Msty</strong> (<a href="https://msty.ai/products/studio/" rel="noopener">site</a>)</td><td>App de desktop que junta motores locais e modelos na nuvem</td><td>Plano grátis; Aurum 149 dólares por ano ou 349 dólares uma única vez (<a href="https://msty.ai/pricing" rel="noopener">preços</a>); licença não informada</td><td>Instalador para Windows, Mac, Linux</td><td>Usa motores locais (MLX, llama.cpp, Ollama) e provedores hospedados</td><td>Sim, Knowledge Stacks</td></tr>
+<tr><td><strong>text-generation-webui</strong> (agora "textgen", <a href="https://github.com/oobabooga/textgen" rel="noopener">GitHub</a>)</td><td>Interface web local para modelos, com uma API compatível com OpenAI e Anthropic</td><td>AGPL-3.0, grátis</td><td>Versão portátil: descompacte e rode; ou scripts de um clique, Conda, Docker</td><td>Sim: llama.cpp, ExLlamaV3, Transformers e outros</td><td>Sim: anexos PDF, DOCX e de texto</td></tr>
+<tr><td><strong>Servidor do llama.cpp</strong> (<a href="https://github.com/ggml-org/llama.cpp" rel="noopener">GitHub</a>)</td><td>O próprio motor; o servidor dele inclui uma página de chat no navegador</td><td>MIT, grátis</td><td>Script de instalação, binários prontos, Docker ou compilar a partir do código</td><td>Sim</td><td>Não informado</td></tr>
+<tr><td><strong>GreenCube</strong> (<a href="https://greencube.app" rel="noopener">site</a>)</td><td>App de desktop para uma pessoa: chat, estudo a partir de PDFs, código, imagens</td><td>&euro;9,99 uma única vez; código fechado</td><td>Instalador para Windows 10 e 11; sem servidor nem Docker</td><td>Sim, e escolhe o modelo que cabe no seu PC</td><td>Sim: PDFs, anotações, fotos</td></tr>
+</tbody>
+</table></div>
+
+<h2>Qual combina com você?</h2>
+
+<div class="card b">
+<h3>Uma página de chat para uma equipe, auto-hospedada</h3>
+<p>O <strong>LibreChat</strong> é a troca mais próxima: licença MIT, Docker, login multiusuário e painel de administração, conectando-se a APIs na nuvem ou ao seu próprio motor. O <strong>Onyx</strong>, se a função principal é responder perguntas a partir dos documentos e apps da sua empresa (Community Edition MIT, ou 20 dólares por usuário por mês na versão hospedada). A versão Docker do <strong>AnythingLLM</strong>, se o que você mais precisa é conversar com documentos. O <strong>LobeHub</strong>, se você quer agentes e não se importa com as condições da licença dele.</p>
+</div>
+
+<div class="card g">
+<h3>Só você, num computador, sem Docker</h3>
+<p>O <strong>LM Studio</strong> e o <strong>Jan</strong> se instalam como apps normais e rodam os modelos eles mesmos; os dois também podem servir uma API local no estilo OpenAI para outras ferramentas. O <strong>Msty</strong> mistura motores locais e modelos na nuvem. O <strong>GreenCube</strong> (Windows) escolhe e baixa o modelo que cabe no seu PC, lê PDFs e fotos e cria imagens, por &euro;9,99 uma única vez.</p>
+</div>
+
+<div class="card y">
+<h3>Você gosta de mexer e quer controle total</h3>
+<p>O <strong>text-generation-webui</strong> aceita vários back ends (llama.cpp, ExLlamaV3, Transformers) e diz que roda com "zero telemetria". O servidor do próprio <strong>llama.cpp</strong> dá uma página de chat no navegador sem mais nada por cima. O KoboldCpp, um único .exe construído sobre o llama.cpp, é outra opção (<a href="https://github.com/LostRuins/koboldcpp" rel="noopener">GitHub</a>).</p>
+</div>
+
+<div class="card p">
+<h3>Você quer o mesmo chat no celular</h3>
+<p>O <strong>Chatbox</strong> tem apps para desktop e celular e pode usar o Ollama para modelos locais. O próprio Open WebUI pode ser adicionado à tela inicial do celular como um app web.</p>
+</div>
+
+<h2>Qual a velocidade dos modelos locais num PC comum?</h2>
+
+<p>Seja qual for a interface, a velocidade vem do seu hardware: o modelo roda na sua placa de vídeo ou no processador. Medimos o GreenCube em {{pcs}} PCs reais (não medimos os outros apps nas mesmas máquinas):</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Seu PC</th><th>Escreve</th></tr></thead>
+<tbody>
+<tr><td>Notebook de 8 GB, sem placa de vídeo</td><td><b>5&ndash;7</b> tokens/s, perto do ritmo de leitura</td></tr>
+<tr><td>Notebook de 16 GB, sem placa de vídeo</td><td><b>14&ndash;18</b> tokens/s</td></tr>
+<tr><td>PC gamer com placa de 6 GB ou mais</td><td><b>37&ndash;76</b> tokens/s na maioria das placas</td></tr>
+</tbody>
+</table></div>
+
+<p>Os números de cada placa estão em <a href="/blog/can-my-pc-run-ai#checker">Meu PC roda IA?</a>, e os dados brutos em <a href="/blog/how-we-measure-ai-speed">como medimos</a>. Para apps de desktop comparados por privacidade e pelo que vai para a internet, veja <a href="/blog/best-offline-ai-chatbot">a nossa comparação de 12 chatbots de IA offline</a>.</p>
+
+<h2>Como conferimos</h2>
+<p>Em 21 de outubro de 2026, lemos a página no GitHub, a documentação, a página de preços e a licença de cada projeto, e não análises ou outras listas, e colocamos o link da página de onde vem cada fato. Quando as páginas se contradiziam (o selo no README do LobeHub diz Apache 2.0, o arquivo LICENSE acrescenta condições), ficamos com o arquivo de licença. Nós fazemos o GreenCube, então nos limitamos a fatos que qualquer pessoa pode conferir e não ranqueamos os apps. Vamos conferir de novo todo mês e atualizar a data no topo.</p>

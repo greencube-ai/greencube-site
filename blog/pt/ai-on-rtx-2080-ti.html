@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Uma RTX 2080 Ti roda IA? Medido: 65–71 tokens por segundo | Blog do GreenCube</title>
+  <meta name="description" content="Teste real: o Gemma 4 E4B escreveu 65–71 tokens por segundo em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM. O que isso significa para conversar, estudar e criar imagens." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Uma RTX 2080 Ti roda IA? Medido: 65–71 tokens por segundo | Blog do GreenCube" />
+  <meta property="og:description" content="Teste real: o Gemma 4 E4B escreveu 65–71 tokens por segundo em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM. O que isso significa para conversar, estudar e criar imagens." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/pt/ai-on-rtx-2080-ti" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/pt/ai-on-rtx-2080-ti" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-rtx-2080-ti" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-en-rtx-2080-ti" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-rtx-2080-ti" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-rtx-2080-ti" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Uma RTX 2080 Ti roda IA? Medido: 65–71 tokens por segundo", "description": "Teste real: o Gemma 4 E4B escreveu 65–71 tokens por segundo em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM. O que isso significa para conversar, estudar e criar imagens.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "pt-BR", "mainEntityOfPage": "https://blog.greencube.app/blog/pt/ai-on-rtx-2080-ti", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/pt/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Dá para rodar IA localmente em uma RTX 2080 Ti?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM, o Gemma 4 E4B escreveu 65–71 tokens por segundo. Mais rápido do que você lê."}}, {"@type": "Question", "name": "Dá para criar imagens com IA em uma RTX 2080 Ti?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Uma imagem (512×512) levou 8–9 s com a placa de vídeo (a primeira levou 83 s enquanto carregava)."}}, {"@type": "Question", "name": "A IA é mais rápida na RTX 2080 Ti ou no processador?", "acceptedAnswer": {"@type": "Answer", "text": "Na placa, de longe: 75,6 tokens por segundo contra 13,5 no processador, cerca de 5,6 vezes mais rápido."}}, {"@type": "Question", "name": "Dá para rodar o Gemma 4 12B em uma RTX 2080 Ti?", "acceptedAnswer": {"@type": "Answer", "text": "Deve rodar. O Gemma 4 12B ocupa 6,4 GB e esta placa tem 11 GB, então sobra espaço também para uma conversa longa. Ainda não medimos nesta placa."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/pt/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a>
+    <a href="https://greencube.app/pt/your-data">Seus dados</a>
+    <a href="https://greencube.app/pt/mission">Nossa missão</a>
+    <a href="/blog/pt" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">PT</summary><div class="lang-list"><a href="/blog/ai-on-rtx-2080-ti" hreflang="en" lang="en">English</a><a href="/blog/es/ia-en-rtx-2080-ti" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-rtx-2080-ti" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português</a></div></details><a href="https://greencube.app/pt/buy" class="nav-cta">Quero o GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
+<h1>Uma RTX 2080 Ti roda IA? Medido: 65–71 tokens por segundo</h1>
+<p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 14 de outubro de 2026</p>
+<div class="answer"><p><strong>Sim.</strong> Em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM, o Gemma 4 E4B escreveu 65–71 tokens por segundo. Mais rápido do que você lê.</p></div>
+<div class="stats">
+<div class="stat g"><b>65–71</b><span>tokens por segundo com o Gemma 4 E4B</span></div>
+<div class="stat b"><b>5,6×</b><span>mais rápido na placa que no processador</span></div>
+<div class="stat p"><b>8–9 s</b><span>para criar uma imagem</span></div>
+</div>
+<h2>O que isso significa na prática</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Tarefa</th><th>Tempo neste PC</th></tr></thead>
+<tbody>
+<tr><td>Escrever uma resposta normal (400 tokens, meia página)</td><td><b>6 s</b></td></tr>
+<tr><td>Ler um documento longo que você passa para ela (5.000 tokens, umas 6 páginas)</td><td><b>3–4 s</b></td></tr>
+<tr><td>Criar uma imagem (512×512)</td><td><b>8–9 s (a primeira: 83 s)</b></td></tr>
+</tbody>
+</table></div>
+<p>Calculado a partir das velocidades medidas neste PC: o tempo é o tamanho dividido pela velocidade, e uma resposta real ainda leva um instante para começar. Para ter uma ideia, uma pessoa lê umas 4 palavras por segundo (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), então só ler uma resposta de 400 tokens já leva mais de um minuto.</p>
+<h2>O que medimos</h2>
+<p><strong>Escrever</strong> é a velocidade com que a IA digita a resposta, em tokens por segundo; um token é um pedaço de palavra, e em português cada palavra costuma ocupar um ou dois. <strong>Ler</strong> é a velocidade com que ela absorve o que você passa: sua pergunta, um texto colado ou um PDF. Ler é sempre muito mais rápido que escrever, porque a IA consegue ler muitos tokens de uma vez, mas precisa escrevê-los um por um.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>O quê</th><th>Rodou em</th><th>Resultado</th><th>Medido</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E4B</td><td>placa de vídeo</td><td><b>65–71</b> tokens por segundo escrevendo &middot; 1.380–1.800 lendo</td><td>14 de outubro de 2026 <sup>1</sup></td></tr>
+<tr><td>Gemma 4 E4B</td><td>placa de vídeo</td><td><b>75,6</b> tokens por segundo escrevendo</td><td>14 de outubro de 2026 <sup>2</sup></td></tr>
+<tr><td>Gemma 4 E4B</td><td>só processador</td><td><b>13,5</b> tokens por segundo escrevendo</td><td>14 de outubro de 2026 <sup>2</sup></td></tr>
+<tr><td>Imagem (512×512)</td><td>placa de vídeo</td><td><b>8–9 s</b> (a primeira levou 83 s enquanto carregava)</td><td>12 de outubro de 2026 <sup>3</sup></td></tr>
+</tbody>
+</table></div>
+<p>Como cada número foi medido: <a href="/blog/pt/how-we-measure-ai-speed">Mais sobre como medimos</a></p><ol class="src"><li>Conversas reais no GreenCube 0.1.44: a velocidade de cada resposta de 100 tokens ou mais, tirada do log do app. A faixa deixa de fora o décimo mais lento e o mais rápido.</li><li>O teste de velocidade do próprio GreenCube 0.1.44, que ele faz ao iniciar para escolher entre a placa de vídeo e o processador: uma resposta curta escrita uma vez em cada um.</li><li>O motor de imagens do GreenCube (Z-Image Turbo), 512×512 pixels e 8 passos, cronometrado do clique até a imagem pronta.</li></ol>
+<p>Quando temos várias medições, mostramos a faixa: a velocidade varia um pouco entre medições no mesmo PC.</p>
+<h2>O que significa</h2>
+<div class="card g">
+<h3>A placa de vídeo faz o trabalho</h3>
+<p>Mesmo PC, mesma IA (Gemma 4 E4B): 13,5 tokens por segundo só com o processador e 75,6 com a placa de vídeo, cerca de <strong>5,6 vezes mais rápido</strong>. Uma placa de vídeo é feita para fazer milhares de contas pequenas ao mesmo tempo nos jogos, e rodar uma IA é basicamente esse mesmo tipo de cálculo. O GreenCube cronometra os dois ao iniciar e usa o mais rápido.</p>
+</div>
+<div class="card b">
+<h3>A IA inteira cabe na placa</h3>
+<p>O Gemma 4 E4B ocupa 4,2 GB e a placa tem 11 GB de memória própria (VRAM). Ele cabe inteiro, com espaço de sobra para a conversa, então a placa nunca espera pela memória mais lenta do resto do PC. Esse é o principal motivo de ser tão rápido.</p>
+</div>
+<div class="card y">
+<h3>O maior, Gemma 4 12B</h3>
+<p>Deve rodar. O Gemma 4 12B ocupa 6,4 GB e esta placa tem 11 GB, então sobra espaço também para uma conversa longa. Ainda não medimos nesta placa.</p>
+</div>
+<div class="card p">
+<h3>Imagens</h3>
+<p>Sim. Uma imagem (512×512) levou 8–9 s com a placa de vídeo (a primeira levou 83 s enquanto carregava). Uma imagem usa uma IA própria, de uns 6 GB, e muito mais contas que uma resposta de chat, então aqui a placa de vídeo importa ainda mais.</p>
+</div>
+<h2>Como se compara</h2>
+<p>Dos 8 PCs que medimos com o Gemma 4 E4B, este é o <strong>número 1</strong> em velocidade de escrita. A <a href="/blog/pt/ai-on-rx-5700-xt">RX 5700 XT</a> escreve 63–72, então este é mais ou menos igual.</p>
+<h2>O PC do teste</h2>
+<p>O PC de um testador real, usado como ele usa no dia a dia, não uma máquina de laboratório:</p>
+<ul>
+<li>PC de mesa</li>
+<li><strong>Placa de vídeo:</strong> NVIDIA RTX 2080 Ti</li>
+<li><strong>Memória de vídeo (VRAM):</strong> 11 GB</li>
+<li><strong>RAM:</strong> 128 GB</li>
+<li><strong>Processador:</strong> 32 threads</li>
+</ul>
+<h2>Confira o seu PC</h2>
+<p>Não sabe o que seu PC tem? Leva 30 segundos:</p>
+<ol class="steps">
+<li>Pressione <strong>Ctrl + Shift + Esc</strong> para abrir o Gerenciador de Tarefas.</li>
+<li>Vá em <strong>Desempenho</strong>.</li>
+<li>Clique em <strong>Memória</strong>: o número no canto superior direito é a sua RAM.</li>
+<li>Clique em <strong>GPU</strong>: o nome no canto superior direito é a sua placa, e <strong>Memória dedicada da GPU</strong> é a sua VRAM. Só aparecem gráficos Intel ou AMD sem memória dedicada? Então você não tem placa separada.</li>
+</ol>
+<p>Depois procure a placa mais parecida na <a href="/blog/pt/can-my-pc-run-ai">tabela completa</a>. A mesma placa com mais VRAM comporta uma IA maior; uma placa mais nova do mesmo tamanho costuma ser mais rápida.</p>
+<h2>Outros PCs que medimos</h2>
+<ul>
+<li><a href="/blog/pt/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-rtx-5060">RTX 5060</a>: 56 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-rtx-3060">RTX 3060</a>: 53–55 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-rx-6600">RX 6600</a>: 42–44 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-gtx-1650">GTX 1650</a>: cerca de 20 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-intel-core-ultra-5-laptop">notebook com Intel Core Ultra 5</a>: 14–18 tokens por segundo (Gemma 4 E2B)</li>
+<li><a href="/blog/pt/ai-on-rx-580">RX 580</a>: 10–11 tokens por segundo (Gemma 4 E4B)</li>
+<li><a href="/blog/pt/ai-on-intel-iris-xe-laptop">notebook com Intel Iris Xe</a>: 5–7 tokens por segundo (Gemma 4 E2B)</li>
+</ul>
+<p><a href="/blog/pt/can-my-pc-run-ai">Meu PC roda IA?</a> Os 10 PCs numa tabela, e como o seu vai se sair.</p>
+<h2>Perguntas</h2>
+<div class="faq">
+<details><summary>Dá para rodar IA localmente em uma RTX 2080 Ti?</summary><p>Sim. Em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM, o Gemma 4 E4B escreveu 65–71 tokens por segundo. Mais rápido do que você lê.</p></details>
+<details><summary>Dá para criar imagens com IA em uma RTX 2080 Ti?</summary><p>Sim. Uma imagem (512×512) levou 8–9 s com a placa de vídeo (a primeira levou 83 s enquanto carregava).</p></details>
+<details><summary>A IA é mais rápida na RTX 2080 Ti ou no processador?</summary><p>Na placa, de longe: 75,6 tokens por segundo contra 13,5 no processador, cerca de 5,6 vezes mais rápido.</p></details>
+<details><summary>Dá para rodar o Gemma 4 12B em uma RTX 2080 Ti?</summary><p>Deve rodar. O Gemma 4 12B ocupa 6,4 GB e esta placa tem 11 GB, então sobra espaço também para uma conversa longa. Ainda não medimos nesta placa.</p></details>
+</div>
+
+<div class="cta-box"><h3>Sua própria IA, no seu próprio PC</h3><p>O GreenCube roda no seu computador: sem limites de uso, sem assinatura e sem precisar de internet. &euro;9,99, um único pagamento.</p><a class="cta" href="https://greencube.app/pt/buy">Quero o GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/pt/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">IA que é <em>sua,</em> não alugada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/buy">Quero o GreenCube</a></li>
+          <li><a href="https://greencube.app/pt/what-you-get">Vai rodar no meu computador?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Aprenda</h3>
+        <ul>
+          <li><a href="/blog/pt">Blog</a></li>
+          <li><a href="https://greencube.app/pt/your-data">Seus dados</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT e seus dados (EN)</a></li>
+          <li><a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/mission">Nossa missão</a></li>
+          <li><a href="mailto:support@greencube.app">Contato</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidade (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termos de uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Feito na Espanha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

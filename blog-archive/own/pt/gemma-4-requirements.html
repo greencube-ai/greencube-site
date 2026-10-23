@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Requisitos do Gemma 4: que PC você precisa para rodar localmente",
+ "description": "Requisitos do Gemma 4 E2B, E4B e 12B, medidos em PCs reais: quanta RAM e VRAM cada um precisa, e a velocidade em notebooks e em placas de vídeo gamer.",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "De um notebook de 8 GB a um PC gamer: qual Gemma 4 cabe no seu.",
+ "rank": 2,
+ "lang": "pt",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "Quais são os requisitos mínimos para rodar o Gemma 4 localmente?", "a": "O menor, Gemma 4 E2B (um arquivo de 2,6 GB), rodou num notebook com 8 GB de RAM e sem placa de vídeo, a 5 a 7 tokens por segundo em conversas reais. Ele precisa de alguns GB de memória livre para abrir."},
+  {"q": "Quanta VRAM o Gemma 4 E4B precisa?", "a": "O E4B é um arquivo de 4,2 GB. Ele cabe inteiro numa placa de vídeo de 6 GB, onde escreveu 35 a 38 tokens por segundo numa GTX 1660 Super. Em placas de 8 GB, escreveu de 56 a 72. Também roda sem placa com 16 GB de RAM, a cerca de 8 tokens por segundo."},
+  {"q": "O Gemma 4 12B roda numa placa de vídeo de 8 GB?", "a": "Para uma pergunta curta, sim: 20 a 35 tokens por segundo numa RX 5700 XT. Mas ele travou assim que a conversa ficou mais longa, porque a placa quase não tinha espaço sobrando. Para ele, queremos pelo menos 10 GB de VRAM."},
+  {"q": "O Gemma 4 é gratuito?", "a": "Sim. O Google lançou o Gemma 4, incluindo E2B e E4B, sob a licença Apache 2.0, que permite uso comercial."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Resposta curta:</strong> o pequeno <strong>Gemma 4 E2B</strong> roda num <strong>notebook de 8 GB</strong>. O <strong>E4B</strong> pede 16 GB de RAM, ou voa em qualquer <strong>placa de vídeo de 6 GB ou mais</strong>. O <strong>12B</strong> precisa de <strong>10 GB ou mais de VRAM</strong> para aguentar uma conversa de verdade.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>de RAM bastam para o Gemma 4 E2B, sem placa de vídeo</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>tokens por segundo do E4B em placas gamer de 8 GB</span></div>
+<div class="stat p"><b>10 GB</b><span>de VRAM antes de confiarmos no 12B numa conversa longa</span></div>
+</div>
+
+<h2>Requisitos do Gemma 4 num relance</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelo</th><th>Tamanho do arquivo</th><th>Mínimo que sugerimos</th><th>Melhor em</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>8 GB de RAM, sem placa</td><td>Notebooks</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>16 GB de RAM, ou uma placa de 6 GB</td><td>PCs gamer, notebooks de 16 GB</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6,2 GB</td><td>10 GB ou mais de VRAM</td><td>Placas de 12 GB ou mais</td></tr>
+</tbody>
+</table></div>
+
+<h2>Velocidades medidas</h2>
+<p>A rapidez com que cada um escreve a resposta, em tokens por segundo (um token é um pedaço de palavra; em português, você lê uns 8 por segundo). Medido com o GreenCube em setembro e outubro de 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Modelo</th><th>Escreve (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>PC de mesa, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>PC de mesa, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>PC de mesa, placa de vídeo de 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>PC de mesa, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>PC de mesa, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (só conversas curtas)</td></tr>
+<tr><td>PC de mesa, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>cerca de 20</b></td></tr>
+<tr><td>Notebook, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>O mesmo notebook</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>Notebook, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>O que aprendemos</h2>
+
+<div class="card g">
+<h3>1. O E2B é o modelo dos notebooks</h3>
+<p>Num notebook de 16 GB sem placa de vídeo, ele terminou uma resposta completa de estudo em cerca de 20 segundos, enquanto o E4B levou 112. Em cinco perguntas rápidas de fatos, não errou nenhuma. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, medido.</a></p>
+</div>
+
+<div class="card b">
+<h3>2. O E4B é o modelo dos PCs gamer</h3>
+<p>Quando o modelo inteiro fica na placa de vídeo, o E4B é <strong>de 7 a 9 vezes mais rápido</strong> do que num notebook, e as respostas são melhores. Qualquer placa de 6 GB ou mais dá conta.</p>
+</div>
+
+<div class="card p">
+<h3>3. O 12B precisa de VRAM de verdade, não só de RAM</h3>
+<p>Numa placa de 8 GB, o 12B respondeu bem uma pergunta curta e depois travou todas as vezes que a conversa cresceu. Aquele PC tinha 48 GB de RAM, e isso não ajudou. <a href="/blog/how-much-vram-for-ai">Por que o modelo tem que caber na sua placa.</a></p>
+</div>
+
+<h2>Qual Gemma 4 para o seu PC?</h2>
+<div class="expect">
+<div class="g"><h4>Notebook de 8 GB</h4><p>E2B. Feche outros apps antes.</p></div>
+<div class="b"><h4>Notebook de 16 GB, sem placa</h4><p>E2B pela velocidade. O E4B funciona, mas é lento.</p></div>
+<div class="y"><h4>PC gamer, placa de 6&ndash;8 GB</h4><p>E4B, inteiro na placa.</p></div>
+<div class="p"><h4>Placa de 12 GB ou mais</h4><p>O E4B é rápido; o 12B vira uma opção.</p></div>
+</div>
+
+<p>O Gemma 4 é lançado pelo Google sob a licença Apache 2.0. O GreenCube escolhe o certo para o seu PC automaticamente. <a href="/blog/can-my-pc-run-ai">Veja todos os {{pcs}} PCs que medimos.</a></p>

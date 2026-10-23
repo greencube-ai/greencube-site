@@ -13,8 +13,13 @@ from datetime import date
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'i18n'))
 import facts
 import pc_pages
+from i18n import LANGS as SITE_LANGS, NAMES  # the main site's languages: (menu label, html lang, ...), and their own names
+WD = pc_pages.WD  # words/<lang>.json: every word the blog shows, one file per language
+BLOG_LANGS = [l for l in SITE_LANGS if l in WD]  # a language is on the blog once its words file exists
+def html_lang(lang): return SITE_LANGS[lang][1]
 
 SRC, OUT = 'blog-archive', 'blog'
 HOST = 'https://blog.greencube.app'
@@ -155,29 +160,48 @@ def esc(s): return html.escape(s, quote=True)
 HEAD = open(os.path.join(os.path.dirname(__file__), 'blog_shell.html'), encoding='utf-8').read()
 shell_top, shell_bottom = HEAD.split('<!-- CONTENT -->')
 
-# the Spanish shell: same page, Spanish menu and footer pointing at the /es/ pages
-ES = HEAD
-for p in ('ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
-    ES = ES.replace(f'href="https://greencube.app/{p}"', f'href="https://greencube.app/es/{p}"')
-for a, b in [('<html lang="en">', '<html lang="es">'), ('href="https://greencube.app/" class="brand"', 'href="https://greencube.app/es/" class="brand"'),
-             ('href="https://greencube.app/" class="brand-lock"', 'href="https://greencube.app/es/" class="brand-lock"'),
-             ('>AI &amp; the planet<', '>La IA y el planeta<'), ('>Your data<', '>Tus datos<'),
-             ('>Our mission<', '>Nuestra misión<'), ('<a href="/blog" class="on">', '<a href="/blog/es" class="on">'), ('<li><a href="/blog">', '<li><a href="/blog/es">'),
-             ('>Get GreenCube<', '>Consigue GreenCube<'), ("AI that's <em>owned,</em> not rented.", 'Una IA que es <em>tuya,</em> no alquilada.'),
-             ('<h3>Product</h3>', '<h3>Producto</h3>'), ('<h3>Learn</h3>', '<h3>Aprende</h3>'), ('<h3>Company</h3>', '<h3>Empresa</h3>'),
-             ('>Will it run on my computer?<', '>¿Funcionará en mi ordenador?<'), ('>ChatGPT &amp; your data<', '>ChatGPT y tus datos (EN)<'),
-             ('>Contact<', '>Contacto<'), ('legal.greencube.app/privacy">Privacy policy<', 'legal.greencube.app/es/privacy">Política de privacidad<'),
-             ('legal.greencube.app/terms">Terms of use<', 'legal.greencube.app/es/terms">Términos de uso<'), ('Made in Spain.', 'Hecho en España.')]:
-    assert a in ES, a
-    ES = ES.replace(a, b)
-SHELLS = {'en': (shell_top, shell_bottom), 'es': tuple(ES.split('<!-- CONTENT -->'))}
-MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+# every other language: the same page, its own menu and footer words (words/<lang>.json "shell"), links to its own pages
+def shell_words(lang):
+    """Menu and footer words: Spanish has its own list; the others take the main site's own translations (i18n/<lang>.json)."""
+    if 'shell' in WD[lang]: return WD[lang]['shell']
+    d = json.load(open(os.path.join(os.path.dirname(__file__), '..', '..', 'i18n', f'{lang}.json'), encoding='utf-8'))
+    pairs = [(f'>{k}<', f'>{d[k]}<') for k in ('AI &amp; the planet', 'Your data', 'Our mission', 'Get GreenCube',
+                                               'Will it run on my computer?', 'ChatGPT &amp; your data', 'Contact', 'Privacy policy', 'Terms of use')]
+    pairs += [(f'<h3>{k}</h3>', f'<h3>{d[k]}</h3>') for k in ('Product', 'Learn', 'Company')]
+    ai = d["AI that's"]
+    pairs.append(("AI that's <em>owned,</em> not rented.", f"{ai} <em>{d['owned,']}</em> {d['not rented.']}"))
+    made = next(v for k, v in d.items() if k.endswith('Edunexis SL. Made in Spain.'))
+    pairs.append(('Made in Spain.', made.split('Edunexis SL. ', 1)[1]))
+    return pairs
 
-def fecha(iso):
-    d = date.fromisoformat(iso[:10]); return f'{d.day} de {MESES[d.month - 1]} de {d.year}'
+def make_shell(lang):
+    s = HEAD
+    if lang != 'en':
+        for p in ('ai-environmental-impact', 'your-data', 'mission', 'buy', 'what-you-get'):
+            s = s.replace(f'href="https://greencube.app/{p}"', f'href="https://greencube.app/{lang}/{p}"')
+        for a, b in [('<html lang="en">', f'<html lang="{html_lang(lang)}">'),
+                     ('href="https://greencube.app/" class="brand"', f'href="https://greencube.app/{lang}/" class="brand"'),
+                     ('href="https://greencube.app/" class="brand-lock"', f'href="https://greencube.app/{lang}/" class="brand-lock"'),
+                     ('<a href="/blog" class="on">', f'<a href="/blog/{lang}" class="on">'), ('<li><a href="/blog">', f'<li><a href="/blog/{lang}">')] + shell_words(lang):
+            assert a in s, (lang, a)
+            s = s.replace(a, b)
+    return tuple(s.split('<!-- CONTENT -->'))
+SHELLS = {lang: make_shell(lang) for lang in BLOG_LANGS}
+
+CODE_OF = {v[1]: k for k, v in SITE_LANGS.items()}  # html lang -> our code
+
+def lang_menu(lang, alts):
+    """The header's language menu, listing only the languages this page exists in (from its hreflang links)."""
+    have = [(CODE_OF[h], u.replace(HOST, '')) for h, u in alts if h != 'x-default']
+    if len(have) < 2: return ''
+    items = ''.join(f'<a href="{u}" hreflang="{SITE_LANGS[l][1]}" lang="{SITE_LANGS[l][1]}"' + (' aria-current="true"' if l == lang else '')
+                    + f'>{NAMES[l]}</a>' for l, u in have)
+    return (f'<details class="lang-pick"><summary class="lang" aria-label="Language">{SITE_LANGS[lang][0]}</summary>'
+            f'<div class="lang-list">{items}</div></details>')
 
 def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', alts=()):
     top, bottom = SHELLS[lang]
+    top = top.replace('<!-- LANGS -->', lang_menu(lang, alts))
     links = ''.join(f'\n  <link rel="alternate" hreflang="{l}" href="{u}" />' for l, u in alts)
     top = (top.replace('<link rel="canonical" href="{{URL}}" />', '<link rel="canonical" href="{{URL}}" />' + links)
            .replace('{{TITLE}}', esc(title)).replace('{{DESC}}', esc(desc))
@@ -235,32 +259,15 @@ for p in idx:
 # ---------- our own posts: blog-archive/own/<slug>.html, a <!--meta {json} --> block then the body ----------
 #     Spanish ones live in blog-archive/own/es/ and are served at /blog/es/<slug>; "alt" in the meta names the
 #     other language's slug, which links the pair with hreflang (x-default = English).
-WORDS = {
-    'en': dict(kicker='GreenCube blog', home='/blog', questions='Questions', other='Leer en español', date=nice_date,
-               cta_h='Your own AI, on your own PC', cta_a='Get GreenCube', cta_url='https://greencube.app/buy',
-               cta_p='GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.'),
-    'es': dict(kicker='Blog de GreenCube', home='/blog/es', questions='Preguntas', other='Read in English', date=fecha,
-               cta_h='Tu propia IA, en tu propio PC', cta_a='Consigue GreenCube', cta_url='https://greencube.app/es/buy',
-               cta_p='GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro;, un solo pago.'),
-}
-def post_url(lang, slug): return f'{HOST}/blog/{slug}' if lang == 'en' else f'{HOST}/blog/es/{slug}'
+def date_in(lang): return lambda iso: pc_pages.date(iso[:10], lang)
+WORDS = {lang: dict(WD[lang]['post'], date=date_in(lang)) for lang in BLOG_LANGS}
+def post_url(lang, slug): return HOST + pc_pages.blog_path(lang, slug)
 AUTHOR = 'Hector Gras'  # our own tested posts are his; the archived BabyLoveGrowth posts stay signed GreenCube
 def author_url(lang): return post_url(lang, 'hector-gras')
-WORDS['en']['by'], WORDS['es']['by'] = 'By', 'Por'
-AUTHOR_PAGE = {
-    'en': dict(title='Hector Gras | GreenCube blog', desc='Hector Gras builds GreenCube and tests how AI really runs on real PCs, from 8 GB laptops to gaming PCs.',
-               kicker='GreenCube blog', role='Founder of GreenCube',
-               bio=['I build GreenCube, the AI you own: it runs on your own PC, with no limits.',
-                    'I also test how AI really runs on real machines, from cheap 8 GB laptops to gaming PCs. Every number on this blog comes from those tests: what we measured, on which PC, and when. When a new result comes in, the post gets updated.'],
-               tests='My tests', contact='Questions or a PC we should test? Write to'),
-    'es': dict(title='Hector Gras | Blog de GreenCube', desc='Hector Gras hace GreenCube y prueba cómo funciona de verdad la IA en PCs reales, de portátiles de 8 GB a PCs gaming.',
-               kicker='Blog de GreenCube', role='Fundador de GreenCube',
-               bio=['Hago GreenCube, la IA que es tuya: funciona en tu propio PC y sin límites.',
-                    'También pruebo cómo funciona de verdad la IA en máquinas reales, de portátiles baratos de 8 GB a PCs gaming. Cada número de este blog sale de esas pruebas: qué medimos, en qué PC y cuándo. Cuando llega un resultado nuevo, el artículo se actualiza.'],
-               tests='Mis pruebas', contact='¿Dudas o un PC que deberíamos probar? Escribe a'),
-}
+AUTHOR_PAGE = {lang: WD[lang]['author'] for lang in BLOG_LANGS}
 own = []
-for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
+for lang in BLOG_LANGS:
+    folder = f'{SRC}/own' if lang == 'en' else f'{SRC}/own/{lang}'
     for fn in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
         if fn.endswith('.html'):
             raw = open(f'{folder}/{fn}', encoding='utf-8').read()
@@ -270,25 +277,41 @@ for lang, folder in (('en', f'{SRC}/own'), ('es', f'{SRC}/own/es')):
             meta = json.loads(m.group(1).replace('{{pcs}}', str(pc_pages.count())))
             own.append((lang, fn[:-5], meta, body))
     own += [(lang, s, m, b) for s, m, b in pc_pages.pages(lang)]  # one page per measured PC, written from data/pcs.json
-os.makedirs(f'{OUT}/es', exist_ok=True)
-listing_es = []
+# a post and its translations share one key, the English slug: other languages name it in "alt"
+def group_key(lang, slug, meta): return slug if lang == 'en' else meta.get('alt', slug)
+groups = {}
+for lang, slug, meta, body in own:
+    groups.setdefault(group_key(lang, slug, meta), {})[lang] = post_url(lang, slug)
+listings = {lang: [] for lang in BLOG_LANGS}
 own_meta = {}
+
+def localize_links(body, lang):
+    """A translated post is written with the English links; point each one at this language's page when it exists."""
+    if lang in ('en', 'es'): return body  # English needs nothing; the Spanish posts carry their own links
+    def blog(m):
+        g = groups.get(m.group(1), {})
+        return f'href="{g[lang].replace(HOST, "")}{m.group(2) or ""}"' if lang in g else m.group(0)
+    def site(m):
+        p = m.group(1) or ''
+        if not p: return f'href="https://greencube.app/{lang}/{m.group(2) or ""}"'
+        return f'href="https://greencube.app/{lang}/{p}{m.group(2) or ""}"' if os.path.exists(f'{lang}/{p}.html') else m.group(0)
+    body = re.sub(r'href="/blog/([a-z0-9-]+)(#[^"]*)?"', blog, body)
+    return re.sub(r'href="https://greencube\.app/?([a-z0-9-]*)(#[^"]*)?"', site, body)
+
 for lang, slug, meta, body in own:
     W = WORDS[lang]
+    body = localize_links(body, lang)
     title, desc, published = meta['title'], meta['description'], meta['date']
     url = post_url(lang, slug)
-    alts, other_link = (), ''
-    if meta.get('alt'):
-        olang = 'es' if lang == 'en' else 'en'
-        ourl = post_url(olang, meta['alt'])
-        en_url, es_url = (url, ourl) if lang == 'en' else (ourl, url)
-        alts = (('en', en_url), ('es', es_url), ('x-default', en_url))
-        other_link = f' &middot; <a href="{ourl.replace(HOST, "")}" hreflang="{olang}" lang="{olang}">{W["other"]}</a>'
+    group = groups[group_key(lang, slug, meta)]
+    alts = ()
+    if len(group) > 1:
+        alts = tuple((html_lang(l), group[l]) for l in BLOG_LANGS if l in group) + ((('x-default', group['en']),) if 'en' in group else ())
     faq = [(f['q'], f['a']) for f in meta.get('faq', [])]
     ld = [{
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
         'image': 'https://greencube.app/og.jpg', 'datePublished': published, 'dateModified': meta.get('modified', published),
-        'inLanguage': meta.get('lang', 'en'), 'mainEntityOfPage': url,
+        'inLanguage': html_lang(lang), 'mainEntityOfPage': url,
         'author': {'@type': 'Person', 'name': AUTHOR, 'url': author_url(lang)},
         'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
                       'logo': {'@type': 'ImageObject', 'url': 'https://greencube.app/icon-512.png'}},
@@ -301,16 +324,19 @@ for lang, slug, meta, body in own:
                     + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq) + '\n</div>\n')
     content = (
         f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}{other_link}</p>\n'
+        f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}</p>\n'
         + body + faq_html +
         f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
         f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
-    path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/es/{slug}.html'
+    path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/{lang}/{slug}.html'
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts))
-    (listing if lang == 'en' else listing_es).append((slug, title, desc, published, meta.get('modified', published)))
+    (listing if lang == 'en' else listings[lang]).append((slug, title, desc, published, meta.get('modified', published)))
     own_meta[(lang, slug)] = meta
-listing.sort(key=lambda l: l[3], reverse=True)
-listing_es.sort(key=lambda l: l[3], reverse=True)
+listings['en'] = listing
+for ls in listings.values():
+    ls.sort(key=lambda l: l[3], reverse=True)
+def home_url(lang): return f'{HOST}/blog' if lang == 'en' else f'{HOST}/blog/{lang}'
 
 # ---------- the list pages: short hero, "start here" cards, then one short list of titles per topic ----------
 TOPICS = [  # (key, tint class, words in the slug that put a post there); first match wins
@@ -333,22 +359,7 @@ def topic_of(slug):
     for key, tint, words in TOPICS:
         if any(w in slug for w in words): return key, tint
     return 'more', 'p'
-LIST_WORDS = {
-    'en': dict(title='GreenCube blog: AI on your own PC, tested',
-               desc='Short, tested answers about running AI on your own gaming PC or laptop, and using it to study.',
-               kicker='GreenCube blog', h1='AI on <em>your own</em> PC.', lede='Real tests. Short answers.', go='See the tests', tests='Our tests', tests_sub='Real numbers from real PCs.', guides='Guides',
-               other='<a href="/blog/es" hreflang="es" lang="es">En español</a>', start='Start here', read='Read the test',
-               topics={'pc': 'Your PC', 'study': 'Studying', 'limits': 'Limits and price', 'tools': 'Apps and alternatives', 'more': 'More'},
-               more='Show all {n}', base='/blog/',
-               nudge='Will it run on my PC?', nudge_url='https://greencube.app/#game'),
-    'es': dict(title='Blog de GreenCube: la IA en tu propio PC, probada',
-               desc='Respuestas cortas y probadas sobre usar IA en tu propio PC gaming o portátil, y sobre estudiar con ella.',
-               kicker='Blog de GreenCube', h1='La IA, en <em>tu propio</em> PC.', lede='Pruebas reales. Respuestas cortas.', go='Ver las pruebas', tests='Nuestras pruebas', tests_sub='Números reales de PCs reales.', guides='Guías',
-               other='<a href="/blog" hreflang="en" lang="en">In English</a>', start='Empieza aquí', read='Leer la prueba',
-               topics={'pc': 'Tu PC', 'study': 'Estudiar', 'limits': 'Límites y precio', 'tools': 'Apps y alternativas', 'more': 'Más'},
-               more='Ver los {n}', base='/blog/es/',
-               nudge='¿Funcionará en mi PC?', nudge_url='https://greencube.app/es/#game'),
-}
+LIST_WORDS = {lang: WD[lang]['list'] for lang in BLOG_LANGS}
 SHOW = 6  # titles shown per topic before "Show all"
 # the best posts per topic, shown first under short plain names; every other post sits behind "Show all"
 PICKS = {'en': {
@@ -420,7 +431,7 @@ def list_page(lang, entries, url, path):
                   f'<ul class="library">{books}</ul></section>\n')
     content = (
         '<article class="list hub">\n'
-        f'<section class="hub-hero"><p class="kicker">{L["kicker"]} &middot; {L["other"]}</p><h1>{L["h1"]}</h1><p class="lede">{L["lede"]}</p>'
+        f'<section class="hub-hero"><p class="kicker">{L["kicker"]}</p><h1>{L["h1"]}</h1><p class="lede">{L["lede"]}</p>'
         f'<p class="hub-btns"><a class="cta" href="#tests">{L["go"]} <span aria-hidden="true">&darr;</span></a>'
         f'<a class="hub-ghost" href="{L["nudge_url"]}">{L["nudge"]}</a></p></section>\n'
         + (f'<section class="hub-sec" id="tests"><h2>{L["tests"]}</h2><p class="hub-sub">{L["tests_sub"]}</p>'
@@ -428,15 +439,24 @@ def list_page(lang, entries, url, path):
         + guides
         + '</article>\n')
     open(path, 'w', encoding='utf-8').write(page(L['title'], L['desc'], url, 'https://greencube.app/og.jpg',
-        [{'@context': 'https://schema.org', '@type': 'Blog', 'name': L['kicker'], 'url': url, 'inLanguage': lang}],
-        content, og_type='website', lang=lang,
-        alts=(('en', f'{HOST}/blog'), ('es', f'{HOST}/blog/es'), ('x-default', f'{HOST}/blog')) if listing_es else ()))
+        [{'@context': 'https://schema.org', '@type': 'Blog', 'name': L['kicker'], 'url': url, 'inLanguage': html_lang(lang)}],
+        content, og_type='website', lang=lang, alts=all_langs(home_url, [l for l in BLOG_LANGS if listings[l]])))
+
+def all_langs(url_of, langs):
+    """hreflang links for a page that exists in every language listed, English as the default"""
+    if len(langs) < 2: return ()
+    return tuple((html_lang(l), url_of(l)) for l in langs) + (('x-default', url_of('en')),)
+
+def mine_of(lang):
+    return sorted([e for e in listings[lang] if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') != 'pc'],
+                  key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
 
 # ---------- the author page, one per language ----------
-for lang, entries in (('en', listing), ('es', listing_es)):
+authors = [l for l in BLOG_LANGS if mine_of(l)]
+for lang in authors:
+    entries = listings[lang]
     A, W = AUTHOR_PAGE[lang], WORDS[lang]
-    mine = sorted([e for e in entries if (lang, e[0]) in own_meta and own_meta[(lang, e[0])].get('kind') != 'pc'], key=lambda e: own_meta[(lang, e[0])].get('rank', 99))
-    if not mine: continue
+    mine = mine_of(lang)
     url = author_url(lang)
     items = ''.join(f'<li><a href="{post_url(lang, s).replace(HOST, "")}"><h3>{esc(t)}</h3><p>{esc(own_meta[(lang, s)].get("teaser", d))}</p></a></li>'
                     for s, t, d, *_ in mine)
@@ -444,15 +464,16 @@ for lang, entries in (('en', listing), ('es', listing_es)):
                f'<h1>{AUTHOR}</h1><p class="hub-sub">{A["role"]}</p>' + ''.join(f'<p>{x}</p>' for x in A['bio'])
                + f'<p>{A["contact"]} <a href="mailto:support@greencube.app">support@greencube.app</a>.</p>'
                f'<h2 class="hub-h" style="margin-top:36px !important">{A["tests"]}</h2><ul class="library">{items}</ul></section>\n</article>\n')
-    ld = [{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': url, 'inLanguage': lang,
+    ld = [{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': url, 'inLanguage': html_lang(lang),
            'mainEntity': {'@type': 'Person', 'name': AUTHOR, 'url': url, 'jobTitle': A['role'],
                           'worksFor': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'}}}]
-    path = f'{OUT}/hector-gras.html' if lang == 'en' else f'{OUT}/es/hector-gras.html'
+    path = f'{OUT}/hector-gras.html' if lang == 'en' else f'{OUT}/{lang}/hector-gras.html'
     open(path, 'w', encoding='utf-8').write(page(A['title'], A['desc'], url, 'https://greencube.app/og.jpg', ld, content,
-        og_type='profile', lang=lang, alts=(('en', author_url('en')), ('es', author_url('es')), ('x-default', author_url('en')))))
+        og_type='profile', lang=lang, alts=all_langs(author_url, authors)))
 
-if listing_es:
-    list_page('es', listing_es, f'{HOST}/blog/es', f'{OUT}/es/index.html')
+for lang in BLOG_LANGS[1:]:
+    if listings[lang]:
+        list_page(lang, listings[lang], home_url(lang), f'{OUT}/{lang}/index.html')
 list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 
 open(f'{OUT}/{pc_pages.CSV_NAME}', 'w', encoding='utf-8', newline='').write(pc_pages.csv_text())  # every measurement, for anyone to download
@@ -460,9 +481,11 @@ open(f'{OUT}/{pc_pages.CSV_NAME}', 'w', encoding='utf-8', newline='').write(pc_p
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing if s not in NOINDEX] + \
-       [f'  <url><loc>{author_url(lg)}</loc><lastmod>{max(e[4] for e in ls)}</lastmod></url>' for lg, ls in (('en', listing), ('es', listing_es)) if ls] + \
-       ([f'  <url><loc>{HOST}/blog/es</loc><lastmod>{max(l[4] for l in listing_es)}</lastmod></url>'] if listing_es else []) + \
-       [f'  <url><loc>{HOST}/blog/es/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing_es]
+       [f'  <url><loc>{author_url(lg)}</loc><lastmod>{max(e[4] for e in listings[lg])}</lastmod></url>' for lg in authors]
+for lg in BLOG_LANGS[1:]:
+    if listings[lg]:
+        urls += [f'  <url><loc>{home_url(lg)}</loc><lastmod>{max(l[4] for l in listings[lg])}</lastmod></url>'] + \
+                [f'  <url><loc>{post_url(lg, s)}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listings[lg]]
 open(f'{OUT}/sitemap.xml', 'w', encoding='utf-8').write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + '\n'.join(urls) + '\n</urlset>\n')
 

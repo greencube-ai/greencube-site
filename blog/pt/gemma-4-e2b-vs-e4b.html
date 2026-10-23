@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gemma 4 E2B vs E4B num notebook: modelo de IA pequeno vs grande, medido | Blog do GreenCube</title>
+  <meta name="description" content="Gemma 4 E2B vs E4B (e Phi-4 Mini) num notebook de 16 GB sem placa de vídeo: 20 segundos contra 112 para a mesma resposta. O que o modelo maior entrega, e quando vale a espera." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Gemma 4 E2B vs E4B num notebook: modelo de IA pequeno vs grande, medido | Blog do GreenCube" />
+  <meta property="og:description" content="Gemma 4 E2B vs E4B (e Phi-4 Mini) num notebook de 16 GB sem placa de vídeo: 20 segundos contra 112 para a mesma resposta. O que o modelo maior entrega, e quando vale a espera." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Gemma 4 E2B vs E4B num notebook: modelo de IA pequeno vs grande, medido", "description": "Gemma 4 E2B vs E4B (e Phi-4 Mini) num notebook de 16 GB sem placa de vídeo: 20 segundos contra 112 para a mesma resposta. O que o modelo maior entrega, e quando vale a espera.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "pt-BR", "mainEntityOfPage": "https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/pt/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Um modelo de IA maior é sempre melhor?", "acceptedAnswer": {"@type": "Answer", "text": "As respostas costumam ser um pouco melhores, mas num notebook sem placa de vídeo ele é muito mais lento. No nosso teste, o modelo maior (Gemma 4 E4B) deu a melhor explicação, mas levou 112 segundos; o pequeno (Gemma 4 E2B) deu uma boa resposta em 20."}}, {"@type": "Question", "name": "Modelos de IA pequenos erram fatos?", "acceptedAnswer": {"@type": "Answer", "text": "Nas nossas cinco perguntas rápidas de fatos (matemática, conversão de unidades, datas, ciência), nenhum dos dois modelos pequenos errou. O ponto fraco do pequeno foi contar: às vezes ele anunciava um número de itens e depois listava outro."}}, {"@type": "Question", "name": "Qual modelo de IA devo usar no meu PC?", "acceptedAnswer": {"@type": "Answer", "text": "Num notebook sem placa de vídeo, um modelo pequeno. Num PC com placa de vídeo, o maior também roda rápido (56 a 72 tokens por segundo em placas de 8 GB), então use esse. O GreenCube escolhe por você com base no seu PC."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/pt/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a>
+    <a href="https://greencube.app/pt/your-data">Seus dados</a>
+    <a href="https://greencube.app/pt/mission">Nossa missão</a>
+    <a href="/blog/pt" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">PT</summary><div class="lang-list"><a href="/blog/gemma-4-e2b-vs-e4b" hreflang="en" lang="en">English</a><a href="/blog/es/gemma-4-e2b-vs-e4b" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-e2b-vs-e4b" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português</a></div></details><a href="https://greencube.app/pt/buy" class="nav-cta">Quero o GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
+<h1>Gemma 4 E2B vs E4B num notebook: modelo de IA pequeno vs grande, medido</h1>
+<p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 18 de outubro de 2026</p>
+<div class="answer"><p><strong>Resposta curta:</strong> num notebook sem placa de vídeo, o <strong>modelo pequeno ganha</strong>: uma boa resposta em 20 segundos em vez de uma um pouco melhor em quase 2 minutos. Com placa de vídeo, fique com o grande: lá ele também é rápido.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 s</b><span>modelo pequeno (Gemma 4 E2B), resposta completa</span></div>
+<div class="stat b"><b>28 s</b><span>modelo pequeno mais antigo (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 s</b><span>modelo maior (Gemma 4 E4B), a melhor explicação</span></div>
+</div>
+
+<h2>O teste</h2>
+<p>Um notebook de 16 GB (Intel Core Ultra 5, sem placa de vídeo), só no processador. Um pedido típico de estudo: explicar a fotossíntese para alguém de 14 anos e depois escrever três perguntas de prova sobre o assunto. Cronometramos até a resposta terminar, em setembro de 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelo</th><th>Tamanho</th><th>Tempo até a resposta completa</th><th>O que saiu</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 s</b></td><td>Completa, bem escrita, três perguntas de prova diferentes</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 s</b></td><td>Completa e correta, mas repetiu uma pergunta de prova</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 s</b></td><td>Completa, a melhor explicação</td></tr>
+</tbody>
+</table></div>
+
+<h2>O que aprendemos</h2>
+
+<div class="card g">
+<h3>1. O pequeno dá conta para estudar</h3>
+<p>Também fizemos cinco perguntas rápidas de fatos: matemática, conversão de unidades, datas e ciência. <strong>Nenhum dos modelos pequenos errou.</strong> O Gemma pequeno até mostrou, sem ninguém pedir, uma segunda forma de calcular uma porcentagem.</p>
+</div>
+
+<div class="card y">
+<h3>2. O ponto fraco dele: contar</h3>
+<p>Duas vezes, o modelo pequeno disse "aqui estão 5" e depois listou outro número. Por isso o GreenCube agora pede que ele conte antes de escrever o número. Detalhes assim são onde um modelo maior é mais seguro.</p>
+</div>
+
+<div class="card b">
+<h3>3. Com placa de vídeo, a história é outra</h3>
+<p>Esse mesmo modelo maior escreve a <strong>56 a 72 tokens por segundo</strong> em placas gamer de 8 GB, de 7 a 9 vezes mais rápido do que neste notebook. Num PC gamer você tem as respostas melhores sem a espera.</p>
+</div>
+
+<h2>Qual usar no seu PC?</h2>
+<div class="expect">
+<div class="g"><h4>Notebook sem placa</h4><p>Modelo pequeno. Respostas rápidas, boas o bastante para estudar, escrever e tirar dúvidas.</p></div>
+<div class="b"><h4>PC gamer</h4><p>Modelo maior. Respostas melhores, e ainda mais rápido do que você lê.</p></div>
+<div class="y"><h4>Pediu uma lista?</h4><p>Se ele disser "aqui estão 5", confira se são 5 mesmo. É o único deslize do modelo pequeno.</p></div>
+<div class="p"><h4>Não quer pensar nisso?</h4><p>O GreenCube confere o seu PC e escolhe por você.</p></div>
+</div>
+
+<p>Veja a velocidade de cada tipo de PC: <a href="/blog/pt/can-my-pc-run-ai">medimos 10 PCs aqui</a>.</p>
+<h2>Perguntas</h2>
+<div class="faq">
+<details><summary>Um modelo de IA maior é sempre melhor?</summary><p>As respostas costumam ser um pouco melhores, mas num notebook sem placa de vídeo ele é muito mais lento. No nosso teste, o modelo maior (Gemma 4 E4B) deu a melhor explicação, mas levou 112 segundos; o pequeno (Gemma 4 E2B) deu uma boa resposta em 20.</p></details>
+<details><summary>Modelos de IA pequenos erram fatos?</summary><p>Nas nossas cinco perguntas rápidas de fatos (matemática, conversão de unidades, datas, ciência), nenhum dos dois modelos pequenos errou. O ponto fraco do pequeno foi contar: às vezes ele anunciava um número de itens e depois listava outro.</p></details>
+<details><summary>Qual modelo de IA devo usar no meu PC?</summary><p>Num notebook sem placa de vídeo, um modelo pequeno. Num PC com placa de vídeo, o maior também roda rápido (56 a 72 tokens por segundo em placas de 8 GB), então use esse. O GreenCube escolhe por você com base no seu PC.</p></details>
+</div>
+
+<div class="cta-box"><h3>Sua própria IA, no seu próprio PC</h3><p>O GreenCube roda no seu computador: sem limites de uso, sem assinatura e sem precisar de internet. &euro;9,99, um único pagamento.</p><a class="cta" href="https://greencube.app/pt/buy">Quero o GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/pt/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">IA que é <em>sua,</em> não alugada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/buy">Quero o GreenCube</a></li>
+          <li><a href="https://greencube.app/pt/what-you-get">Vai rodar no meu computador?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Aprenda</h3>
+        <ul>
+          <li><a href="/blog/pt">Blog</a></li>
+          <li><a href="https://greencube.app/pt/your-data">Seus dados</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT e seus dados (EN)</a></li>
+          <li><a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/mission">Nossa missão</a></li>
+          <li><a href="mailto:support@greencube.app">Contato</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidade (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termos de uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Feito na Espanha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

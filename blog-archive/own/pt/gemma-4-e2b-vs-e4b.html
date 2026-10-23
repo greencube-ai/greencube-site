@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Gemma 4 E2B vs E4B num notebook: modelo de IA pequeno vs grande, medido",
+ "description": "Gemma 4 E2B vs E4B (e Phi-4 Mini) num notebook de 16 GB sem placa de vídeo: 20 segundos contra 112 para a mesma resposta. O que o modelo maior entrega, e quando vale a espera.",
+ "date": "2026-10-18",
+ "stat": "20 s",
+ "teaser": "Pequeno: 20 segundos. Grande: 112. Veja o que você perde.",
+ "rank": 8,
+ "lang": "pt",
+ "alt": "gemma-4-e2b-vs-e4b",
+ "faq": [
+  {"q": "Um modelo de IA maior é sempre melhor?", "a": "As respostas costumam ser um pouco melhores, mas num notebook sem placa de vídeo ele é muito mais lento. No nosso teste, o modelo maior (Gemma 4 E4B) deu a melhor explicação, mas levou 112 segundos; o pequeno (Gemma 4 E2B) deu uma boa resposta em 20."},
+  {"q": "Modelos de IA pequenos erram fatos?", "a": "Nas nossas cinco perguntas rápidas de fatos (matemática, conversão de unidades, datas, ciência), nenhum dos dois modelos pequenos errou. O ponto fraco do pequeno foi contar: às vezes ele anunciava um número de itens e depois listava outro."},
+  {"q": "Qual modelo de IA devo usar no meu PC?", "a": "Num notebook sem placa de vídeo, um modelo pequeno. Num PC com placa de vídeo, o maior também roda rápido (56 a 72 tokens por segundo em placas de 8 GB), então use esse. O GreenCube escolhe por você com base no seu PC."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Resposta curta:</strong> num notebook sem placa de vídeo, o <strong>modelo pequeno ganha</strong>: uma boa resposta em 20 segundos em vez de uma um pouco melhor em quase 2 minutos. Com placa de vídeo, fique com o grande: lá ele também é rápido.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 s</b><span>modelo pequeno (Gemma 4 E2B), resposta completa</span></div>
+<div class="stat b"><b>28 s</b><span>modelo pequeno mais antigo (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 s</b><span>modelo maior (Gemma 4 E4B), a melhor explicação</span></div>
+</div>
+
+<h2>O teste</h2>
+<p>Um notebook de 16 GB (Intel Core Ultra 5, sem placa de vídeo), só no processador. Um pedido típico de estudo: explicar a fotossíntese para alguém de 14 anos e depois escrever três perguntas de prova sobre o assunto. Cronometramos até a resposta terminar, em setembro de 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelo</th><th>Tamanho</th><th>Tempo até a resposta completa</th><th>O que saiu</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 s</b></td><td>Completa, bem escrita, três perguntas de prova diferentes</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 s</b></td><td>Completa e correta, mas repetiu uma pergunta de prova</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 s</b></td><td>Completa, a melhor explicação</td></tr>
+</tbody>
+</table></div>
+
+<h2>O que aprendemos</h2>
+
+<div class="card g">
+<h3>1. O pequeno dá conta para estudar</h3>
+<p>Também fizemos cinco perguntas rápidas de fatos: matemática, conversão de unidades, datas e ciência. <strong>Nenhum dos modelos pequenos errou.</strong> O Gemma pequeno até mostrou, sem ninguém pedir, uma segunda forma de calcular uma porcentagem.</p>
+</div>
+
+<div class="card y">
+<h3>2. O ponto fraco dele: contar</h3>
+<p>Duas vezes, o modelo pequeno disse "aqui estão 5" e depois listou outro número. Por isso o GreenCube agora pede que ele conte antes de escrever o número. Detalhes assim são onde um modelo maior é mais seguro.</p>
+</div>
+
+<div class="card b">
+<h3>3. Com placa de vídeo, a história é outra</h3>
+<p>Esse mesmo modelo maior escreve a <strong>56 a 72 tokens por segundo</strong> em placas gamer de 8 GB, de 7 a 9 vezes mais rápido do que neste notebook. Num PC gamer você tem as respostas melhores sem a espera.</p>
+</div>
+
+<h2>Qual usar no seu PC?</h2>
+<div class="expect">
+<div class="g"><h4>Notebook sem placa</h4><p>Modelo pequeno. Respostas rápidas, boas o bastante para estudar, escrever e tirar dúvidas.</p></div>
+<div class="b"><h4>PC gamer</h4><p>Modelo maior. Respostas melhores, e ainda mais rápido do que você lê.</p></div>
+<div class="y"><h4>Pediu uma lista?</h4><p>Se ele disser "aqui estão 5", confira se são 5 mesmo. É o único deslize do modelo pequeno.</p></div>
+<div class="p"><h4>Não quer pensar nisso?</h4><p>O GreenCube confere o seu PC e escolhe por você.</p></div>
+</div>
+
+<p>Veja a velocidade de cada tipo de PC: <a href="/blog/can-my-pc-run-ai">medimos {{pcs}} PCs aqui</a>.</p>

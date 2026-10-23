@@ -1,0 +1,107 @@
+<!--meta
+{
+ "title": "Flashcards com IA a partir de um PDF: criamos offline e conferimos cada cartão",
+ "description": "Transformamos dois capítulos longos em flashcards com uma IA num notebook comum, sem internet: quanto tempo levou, quantos cartões estavam certos quando conferimos um por um, onde ela erra e as alternativas grátis.",
+ "date": "2026-08-22",
+ "modified": "2026-10-19",
+ "kind": "guide",
+ "stat": "5 min",
+ "teaser": "72 flashcards conferidos à mão: quantos estavam certos, e onde ela erra.",
+ "lang": "pt",
+ "alt": "flashcards-from-pdf",
+ "faq": [
+  {"q": "Dá para criar flashcards com IA a partir de um PDF sem internet?", "a": "Sim, com uma IA que roda no seu computador. No nosso teste, o GreenCube transformou um capítulo de umas 4.800 palavras em 18 flashcards e um guia de estudo em cerca de 5 minutos, num notebook de 16 GB sem placa de vídeo e sem conexão."},
+  {"q": "Os flashcards feitos por IA são confiáveis?", "a": "A maioria, mas não todos. Dos 36 cartões que conferimos à mão, com a IA pequena 21 estavam certos, 6 parcialmente certos, 5 errados e 4 repetidos; com a maior, 30 certos, 4 parcialmente, 2 errados e nenhum repetido. Os erros se concentraram na parte do capítulo que salta entre épocas, então confira antes de estudar com eles."},
+  {"q": "Ela consegue criar flashcards num idioma diferente do PDF?", "a": "Sim. Pedimos flashcards em espanhol a partir de um capítulo em inglês e os 18 saíram em espanhol: 11 certos, 4 parcialmente certos, nenhum errado e 3 repetidos."},
+  {"q": "Qual é o melhor app grátis para criar flashcards com IA a partir de um PDF?", "a": "Se você não se importa de enviar o PDF, o NotebookLM cria flashcards de graça, exporta em CSV e cita o texto original. Se você não quer enviá-lo para lugar nenhum ou esbarra nos limites, precisa de uma IA no seu próprio PC."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Resposta curta: sim, em cerca de 5 minutos por capítulo num notebook comum, sem internet.</strong> Demos ao GreenCube dois capítulos longos e pedimos flashcards para a prova: cada um voltou com 18 cartões e um guia de estudo. Depois conferimos os 36 cartões um por um com o texto original. A maioria estava certa, mas não todos, e os erros se concentraram exatamente onde o capítulo salta entre épocas. Veja quais foram, e as alternativas grátis.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>5 min</b><span>por capítulo de umas 4.800 palavras, guia mais 18 flashcards, num notebook de 16 GB</span></div>
+<div class="stat b"><b>30 de 36</b><span>flashcards certos com a IA maior (21 com a pequena), conferidos à mão</span></div>
+<div class="stat p"><b>0</b><span>arquivos enviados para qualquer lugar</span></div>
+</div>
+
+<h2>O teste</h2>
+
+<p>Dois capítulos longos, do tipo que cai em prova: <strong>a Segunda República Espanhola</strong> (em espanhol, cerca de 4.800 palavras) e <strong>a Revolução Industrial</strong> (em inglês, cerca de 4.700 palavras). Para cada um, digitamos o que um estudante digitaria: "faça flashcards deste tema para a prova" (em espanhol) e, para o capítulo em inglês, o mesmo mais "em espanhol".</p>
+<p>Rodamos em 19 de outubro de 2026 no app real do GreenCube (uma cópia de teste da versão atual), num notebook de 16 GB com Intel Core Ultra 5 e os gráficos integrados, sem placa de vídeo, ligado na tomada e offline. Com a IA pequena, o Gemma 4 E2B, a que roda com folga num notebook como este.</p>
+
+<h2>Os resultados</h2>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Capítulo</th><th>Tempo</th><th>Cartões</th><th>Certos</th><th>Parcialmente</th><th>Errados</th><th>Repetidos</th></tr></thead>
+<tbody>
+<tr><td>Segunda República (espanhol)</td><td><b>4 min 57 s</b></td><td>18</td><td><b>10</b></td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>Revolução Industrial (inglês &rarr; espanhol)</td><td><b>4 min 52 s</b></td><td>18</td><td><b>11</b></td><td>4</td><td>0</td><td>3</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>A IA maior se sai melhor.</strong> Repetimos o teste com o Gemma 4 E4B, a IA maior que o GreenCube oferece em notebooks de 16 GB: <strong>30 de 36 cartões certos</strong>, 4 parcialmente, 2 errados e nenhum repetido.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Capítulo</th><th>IA</th><th>Certos</th><th>Parcialmente</th><th>Errados</th><th>Repetidos</th></tr></thead>
+<tbody>
+<tr><td>Segunda República</td><td>E2B (pequena)</td><td>10</td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>Segunda República</td><td>E4B (maior)</td><td><b>15</b></td><td>1</td><td>2</td><td>0</td></tr>
+<tr><td>Revolução Industrial</td><td>E2B (pequena)</td><td>11</td><td>4</td><td>0</td><td>3</td></tr>
+<tr><td>Revolução Industrial</td><td>E4B (maior)</td><td><b>15</b></td><td>3</td><td>0</td><td>0</td></tr>
+</tbody>
+</table></div>
+<p>Não publicamos o tempo do E4B: neste teste, um bug do app o fez reescrever o guia várias vezes antes dos cartões. Isso está corrigido para a próxima versão, e vamos cronometrar de novo.</p>
+
+<p>"Certo" significa que o cartão diz o que o capítulo diz. "Parcialmente" significa que ele acerta o ponto principal, mas acrescenta ou muda um detalhe. "Errado" significa que o capítulo diz outra coisa. Conferimos cada cartão encontrando no texto original a frase de onde ele saiu.</p>
+
+<h2>O que ela acertou</h2>
+
+<div class="card g">
+<h3>Datas e fatos-chave, extraídos com limpeza</h3>
+<p>"Quando foi proclamada a República Espanhola?" &rarr; "14 de abril de 1931". "O que Samuel Crompton inventou em 1779?" &rarr; "A mule (máquina de fiar)". "Qual coalizão de esquerda venceu a eleição de 1936?" &rarr; "A Frente Popular". Os cartões sobre datas, nomes e invenções foram os mais confiáveis (traduzidos aqui a partir dos cartões em espanhol).</p>
+</div>
+
+<div class="card b">
+<h3>Um capítulo em inglês, flashcards em outro idioma</h3>
+<p>Demos a ela o capítulo da Revolução Industrial em inglês e pedimos os cartões em espanhol: os 18 saíram em espanhol, e nenhum estava errado. Útil se você estuda com anotações, artigos ou livros num idioma e revisa em outro.</p>
+</div>
+
+<h2>Onde ela errou</h2>
+
+<div class="card p">
+<h3>Quando o capítulo salta entre épocas</h3>
+<p>O capítulo da Segunda República inclui a história da bandeira e do brasão da Espanha desde o século XIX. Foi ali que estiveram quase todos os erros: um cartão diz que a bandeira da Segunda República trazia o lema "Constitución", quando o texto fala de uma bandeira da década de 1820. Outro diz que a República durou até o começo da Guerra Civil, quando o próprio capítulo diz que ela durou até 1º de abril de 1939.</p>
+</div>
+
+<div class="card y">
+<h3>Detalhes inventados e uma ou outra repetição</h3>
+<p>Alguns cartões acertam o ponto principal, mas acrescentam algo que o texto não diz (chamar um fio de "resistente" ou dizer que Arkwright "iniciou a indústria têxtil"), traduzem mal um termo (um descaroçador de algodão não é uma "máquina de fiar") ou repetem um cartão anterior com outras palavras. E, nos testes, o guia de estudo escrito parou no meio de uma frase antes dos cartões; a equipe do app encontrou a causa, e isso está corrigido para a próxima versão.</p>
+</div>
+
+<p><strong>A lição prática:</strong> use os cartões, mas confira antes de estudar, principalmente em capítulos que misturam datas de épocas diferentes. Conferir 18 cartões leva alguns minutos, o que ainda é muito mais rápido do que escrevê-los à mão.</p>
+
+<h2>Outras formas de criar flashcards com IA de graça</h2>
+
+<p>Todas estas rodam online: você envia o seu PDF para o site delas. Fatos das próprias páginas, outubro de 2026; não medimos a qualidade delas.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Ferramenta</th><th>Grátis</th><th>Envia o seu PDF?</th></tr></thead>
+<tbody>
+<tr><td><strong>NotebookLM</strong> (Google)</td><td>Sim: flashcards e testes a partir dos seus documentos, exportáveis em CSV, citando o texto original (<a href="https://support.google.com/notebooklm/answer/16958963?hl=en" rel="noopener">Google</a>)</td><td>Sim, para o Google</td></tr>
+<tr><td><strong>SlideSpeak</strong></td><td>Sim, PDFs de até 50 páginas, sem conta, exporta para Anki ou Quizlet (<a href="https://slidespeak.co/free-tools/create-flashcards-from-pdf" rel="noopener">SlideSpeak</a>)</td><td>Sim</td></tr>
+<tr><td><strong>Flashcards.world</strong></td><td>Até 10 cartões sem cadastro (<a href="https://flashcards.world/pdf-to-flashcards/" rel="noopener">Flashcards.world</a>)</td><td>Sim</td></tr>
+<tr><td><strong>GreenCube</strong> (no seu PC)</td><td>&euro;9,99 uma única vez, sem limites; ele também conversa, resume e responde perguntas sobre o capítulo</td><td><b>Não</b>: tudo fica no seu computador</td></tr>
+</tbody>
+</table></div>
+
+<p>Se você não se importa de enviar as suas anotações ao Google, o NotebookLM é uma opção grátis bem completa. Se prefere que elas nunca saiam do seu computador, não quer limites ou estuda sem uma boa conexão, precisa de uma IA no seu próprio PC. Conferimos o que cada IA faz com o que você envia em <a href="/blog/ai-that-doesnt-train-on-your-data">Qual IA não treina com as suas conversas?</a></p>
+
+<h2>Como conseguir bons flashcards de um PDF</h2>
+<ul>
+<li><strong>Um capítulo de cada vez.</strong> Um capítulo rende 18 cartões bem focados; um livro inteiro os dilui.</li>
+<li><strong>Confira os cartões sobre datas de outras épocas.</strong> É onde ela mais erra.</li>
+<li><strong>Apague os repetidos e os vagos</strong> ("O que é a plaina limadora?" &rarr; "Uma máquina usada no desenvolvimento das máquinas-ferramenta") e fique com os que fazem você pensar.</li>
+<li><strong>Peça também perguntas no estilo da prova</strong> e responda sem olhar: no <a href="/blog/ai-to-study-from-pdf">nosso teste de perguntas sobre PDFs</a>, ela acertou 11 de 12, em cerca de 15 segundos cada.</li>
+</ul>
+
+<p>Vai rodar no seu computador? <a href="/blog/can-my-pc-run-ai#checker">Confira em 30 segundos</a>: com placa de vídeo, é muito mais rápido do que neste notebook.</p>
