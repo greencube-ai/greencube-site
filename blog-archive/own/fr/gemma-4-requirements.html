@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Configuration requise pour Gemma 4 : quel PC pour le faire tourner en local",
+ "description": "Configuration requise pour Gemma 4 E2B, E4B et 12B, mesurée sur de vrais PC : combien de RAM et de VRAM il faut à chacun, et à quelle vitesse il tourne sur des portables et des cartes graphiques gamer.",
+ "date": "2026-10-18",
+ "stat": "8 Go",
+ "teaser": "D'un portable de 8 Go à un PC gamer : quel Gemma 4 tient sur le vôtre.",
+ "rank": 2,
+ "lang": "fr",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "Quelle est la configuration minimale pour faire tourner Gemma 4 en local ?", "a": "Le plus petit, Gemma 4 E2B (un fichier de 2,6 Go), a tourné sur un portable avec 8 Go de RAM et sans carte graphique, à 5 à 7 tokens par seconde en conversations réelles. Il lui faut quelques Go de mémoire libre pour démarrer."},
+  {"q": "Combien de VRAM faut-il pour Gemma 4 E4B ?", "a": "E4B est un fichier de 4,2 Go. Il tient entièrement sur une carte graphique de 6 Go, où il a écrit 35 à 38 tokens par seconde sur une GTX 1660 Super. Sur des cartes de 8 Go, il a écrit 56 à 72. Il tourne aussi sans carte avec 16 Go de RAM, à environ 8 tokens par seconde."},
+  {"q": "Gemma 4 12B peut-il tourner sur une carte graphique de 8 Go ?", "a": "Pour une question courte, oui : 20 à 35 tokens par seconde sur une RX 5700 XT. Mais il a planté dès que la conversation s'est allongée, parce que la carte n'avait presque plus de place. Pour lui, nous voudrions au moins 10 Go de VRAM."},
+  {"q": "Gemma 4 est-il gratuit ?", "a": "Oui. Google a publié Gemma 4, E2B et E4B compris, sous licence Apache 2.0, qui autorise l'usage commercial."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Réponse courte :</strong> le petit <strong>Gemma 4 E2B</strong> tourne sur un <strong>portable de 8 Go</strong>. <strong>E4B</strong> demande 16 Go de RAM, ou file sur n'importe quelle <strong>carte graphique de 6 Go ou plus</strong>. <strong>12B</strong> a besoin de <strong>10 Go de VRAM ou plus</strong> pour tenir une vraie conversation.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 Go</b><span>de RAM suffisent pour Gemma 4 E2B, sans carte graphique</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>tokens par seconde pour E4B sur des cartes gamer de 8 Go</span></div>
+<div class="stat p"><b>10 Go</b><span>de VRAM avant que nous fassions confiance au 12B pour une longue conversation</span></div>
+</div>
+
+<h2>La configuration requise pour Gemma 4 en un coup d'œil</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modèle</th><th>Taille du fichier</th><th>Minimum que nous conseillons</th><th>Idéal sur</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 Go</td><td>8 Go de RAM, sans carte</td><td>Portables</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 Go</td><td>16 Go de RAM, ou une carte de 6 Go</td><td>PC gamer, portables de 16 Go</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6,2 Go</td><td>10 Go de VRAM ou plus</td><td>Cartes de 12 Go ou plus</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vitesses mesurées</h2>
+<p>La vitesse à laquelle chacun écrit sa réponse, en tokens par seconde (un token est un morceau de mot ; en français, vous en lisez environ 8 par seconde). Mesuré avec GreenCube en septembre et octobre 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Modèle</th><th>Écrit (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>PC de bureau, NVIDIA RTX 5060 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>PC de bureau, carte graphique de 12 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1660 Super 6 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (conversations courtes seulement)</td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1650 4 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>environ 20</b></td></tr>
+<tr><td>Portable, Intel Core Ultra 5, 16 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Le même portable</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>Portable, Intel Iris Xe, 8 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. E2B est le modèle des portables</h3>
+<p>Sur un portable de 16 Go sans carte graphique, il a terminé une réponse complète de révision en environ 20 secondes, là où E4B en a mis 112. Sur cinq petites questions de faits, il ne s'est jamais trompé. <a href="/blog/gemma-4-e2b-vs-e4b">E2B contre E4B, mesuré.</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B est le modèle des PC gamer</h3>
+<p>Dès que tout le modèle est sur une carte graphique, E4B est <strong>7 à 9 fois plus rapide</strong> que sur un portable, et ses réponses sont meilleures. N'importe quelle carte de 6 Go ou plus fait l'affaire.</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B a besoin de vraie VRAM, pas seulement de RAM</h3>
+<p>Sur une carte de 8 Go, 12B a bien répondu à une question courte, puis a planté chaque fois que la conversation grandissait. Ce PC avait 48 Go de RAM, et ça n'a pas aidé. <a href="/blog/how-much-vram-for-ai">Pourquoi le modèle doit tenir sur votre carte.</a></p>
+</div>
+
+<h2>Quel Gemma 4 pour votre PC ?</h2>
+<div class="expect">
+<div class="g"><h4>Portable de 8 Go</h4><p>E2B. Fermez d'abord les autres applis.</p></div>
+<div class="b"><h4>Portable de 16 Go, sans carte</h4><p>E2B pour la vitesse. E4B fonctionne, mais lentement.</p></div>
+<div class="y"><h4>PC gamer, carte de 6 à 8 Go</h4><p>E4B, entièrement sur la carte.</p></div>
+<div class="p"><h4>Carte de 12 Go ou plus</h4><p>E4B va vite ; 12B devient une option.</p></div>
+</div>
+
+<p>Gemma 4 est publié par Google sous licence Apache 2.0. GreenCube choisit automatiquement le bon pour votre PC. <a href="/blog/can-my-pc-run-ai">Voir les {{pcs}} PC que nous avons mesurés.</a></p>

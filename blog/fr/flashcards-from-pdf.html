@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Flashcards IA à partir d&#x27;un PDF : nous les avons faites hors ligne et vérifié chaque carte | Blog GreenCube</title>
+  <meta name="description" content="Nous avons transformé deux longs chapitres en flashcards avec une IA sur un portable ordinaire, sans internet : combien de temps ça a pris, combien de cartes étaient justes une fois vérifiées une par une, où elle se trompe, et les alternatives gratuites." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Flashcards IA à partir d&#x27;un PDF : nous les avons faites hors ligne et vérifié chaque carte | Blog GreenCube" />
+  <meta property="og:description" content="Nous avons transformé deux longs chapitres en flashcards avec une IA sur un portable ordinaire, sans internet : combien de temps ça a pris, combien de cartes étaient justes une fois vérifiées une par une, où elle se trompe, et les alternatives gratuites." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/fr/flashcards-from-pdf" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/fr/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/flashcards-con-ia-desde-pdf" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/flashcards-from-pdf" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/flashcards-from-pdf" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Flashcards IA à partir d'un PDF : nous les avons faites hors ligne et vérifié chaque carte", "description": "Nous avons transformé deux longs chapitres en flashcards avec une IA sur un portable ordinaire, sans internet : combien de temps ça a pris, combien de cartes étaient justes une fois vérifiées une par une, où elle se trompe, et les alternatives gratuites.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-08-22", "dateModified": "2026-10-19", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/flashcards-from-pdf", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Peut-on faire des flashcards IA à partir d'un PDF sans internet ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, avec une IA qui tourne sur votre ordinateur. Dans notre test, GreenCube a transformé un chapitre d'environ 4 800 mots en 18 flashcards et une fiche de révision en environ 5 minutes, sur un portable de 16 Go sans carte graphique et sans connexion."}}, {"@type": "Question", "name": "Les flashcards faites par une IA sont-elles fiables ?", "acceptedAnswer": {"@type": "Answer", "text": "En grande partie, mais pas toutes. Sur 36 cartes vérifiées à la main, avec la petite IA, 21 étaient justes, 6 en partie justes, 5 fausses et 4 en double ; avec la plus grande, 30 justes, 4 en partie, 2 fausses et aucun doublon. Les erreurs se concentraient dans la partie du chapitre qui saute d'une époque à l'autre, donc vérifiez-les avant de réviser avec."}}, {"@type": "Question", "name": "Peut-elle faire des flashcards dans une autre langue que le PDF ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Nous avons demandé des flashcards en espagnol à partir d'un chapitre en anglais et les 18 sont sorties en espagnol : 11 justes, 4 en partie justes, aucune fausse et 3 en double."}}, {"@type": "Question", "name": "Quelle est la meilleure appli gratuite pour faire des flashcards IA à partir d'un PDF ?", "acceptedAnswer": {"@type": "Answer", "text": "Si ça ne vous dérange pas d'envoyer le PDF, NotebookLM fait des flashcards gratuitement, les exporte en CSV et cite le texte d'origine. Si vous ne voulez l'envoyer nulle part ou que vous butez sur les limites, il vous faut une IA sur votre propre PC."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/fr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a>
+    <a href="https://greencube.app/fr/your-data">Vos données</a>
+    <a href="https://greencube.app/fr/mission">Notre mission</a>
+    <a href="/blog/fr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">FR</summary><div class="lang-list"><a href="/blog/flashcards-from-pdf" hreflang="en" lang="en">English</a><a href="/blog/es/flashcards-con-ia-desde-pdf" hreflang="es" lang="es">Español</a><a href="/blog/pt/flashcards-from-pdf" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/flashcards-from-pdf" hreflang="fr" lang="fr" aria-current="true">Français</a></div></details><a href="https://greencube.app/fr/buy" class="nav-cta">Obtenir GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
+<h1>Flashcards IA à partir d&#x27;un PDF : nous les avons faites hors ligne et vérifié chaque carte</h1>
+<p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 22 août 2026</p>
+<div class="answer"><p><strong>Réponse courte : oui, en environ 5 minutes par chapitre sur un portable ordinaire, sans internet.</strong> Nous avons donné deux longs chapitres à GreenCube en demandant des flashcards pour l'examen : chacun est revenu avec 18 cartes et une fiche de révision. Puis nous avons vérifié les 36 cartes une par une avec le texte d'origine. La plupart étaient justes, mais pas toutes, et les erreurs se concentraient précisément là où le chapitre saute d'une époque à l'autre. Voici lesquelles, et les alternatives gratuites.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>5 min</b><span>par chapitre d'environ 4 800 mots, fiche plus 18 flashcards, sur un portable de 16 Go</span></div>
+<div class="stat b"><b>30 sur 36</b><span>flashcards justes avec la plus grande IA (21 avec la petite), vérifiées à la main</span></div>
+<div class="stat p"><b>0</b><span>fichier envoyé où que ce soit</span></div>
+</div>
+
+<h2>Le test</h2>
+
+<p>Deux longs chapitres, du genre qui tombe à l'examen : <strong>la Seconde République espagnole</strong> (en espagnol, environ 4 800 mots) et <strong>la révolution industrielle</strong> (en anglais, environ 4 700 mots). Pour chacun, nous avons tapé ce qu'un étudiant taperait : « fais-moi des flashcards de ce sujet pour l'examen » (en espagnol) et, pour le chapitre en anglais, la même chose plus « en espagnol ».</p>
+<p>Nous l'avons fait le 19 octobre 2026 dans la vraie appli GreenCube (une copie de test de sa version actuelle), sur un portable de 16 Go avec un Intel Core Ultra 5 et sa puce graphique intégrée, sans carte graphique, sur secteur et hors ligne. Avec la petite IA, Gemma 4 E2B, celle qui tourne confortablement sur un portable comme celui-ci.</p>
+
+<h2>Les résultats</h2>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Chapitre</th><th>Temps</th><th>Cartes</th><th>Justes</th><th>En partie</th><th>Fausses</th><th>Doublons</th></tr></thead>
+<tbody>
+<tr><td>Seconde République (espagnol)</td><td><b>4 min 57 s</b></td><td>18</td><td><b>10</b></td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>Révolution industrielle (anglais &rarr; espagnol)</td><td><b>4 min 52 s</b></td><td>18</td><td><b>11</b></td><td>4</td><td>0</td><td>3</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>La plus grande IA fait mieux.</strong> Nous avons refait le test avec Gemma 4 E4B, la plus grande IA que GreenCube propose sur les portables de 16 Go : <strong>30 cartes justes sur 36</strong>, 4 en partie, 2 fausses et aucun doublon.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Chapitre</th><th>IA</th><th>Justes</th><th>En partie</th><th>Fausses</th><th>Doublons</th></tr></thead>
+<tbody>
+<tr><td>Seconde République</td><td>E2B (petite)</td><td>10</td><td>2</td><td>5</td><td>1</td></tr>
+<tr><td>Seconde République</td><td>E4B (plus grande)</td><td><b>15</b></td><td>1</td><td>2</td><td>0</td></tr>
+<tr><td>Révolution industrielle</td><td>E2B (petite)</td><td>11</td><td>4</td><td>0</td><td>3</td></tr>
+<tr><td>Révolution industrielle</td><td>E4B (plus grande)</td><td><b>15</b></td><td>3</td><td>0</td><td>0</td></tr>
+</tbody>
+</table></div>
+<p>Nous ne publions pas le temps d'E4B : dans ce test, un bug de l'appli lui a fait réécrire la fiche plusieurs fois avant les cartes. C'est corrigé pour la prochaine version, et nous le chronométrerons à nouveau.</p>
+
+<p>« Juste » signifie que la carte dit ce que dit le chapitre. « En partie » signifie qu'elle saisit l'idée principale mais ajoute ou change un détail. « Fausse » signifie que le chapitre dit autre chose. Nous avons vérifié chaque carte en retrouvant dans le texte d'origine la phrase d'où elle venait.</p>
+
+<h2>Ce qu'elle a bien fait</h2>
+
+<div class="card g">
+<h3>Les dates et les faits clés, extraits proprement</h3>
+<p>« Quand la République espagnole a-t-elle été proclamée ? » &rarr; « Le 14 avril 1931 ». « Qu'a inventé Samuel Crompton en 1779 ? » &rarr; « La mule-jenny ». « Quelle coalition de gauche a gagné les élections de 1936 ? » &rarr; « Le Front populaire ». Les cartes sur les dates, les noms et les inventions étaient les plus fiables (traduites ici à partir des cartes en espagnol).</p>
+</div>
+
+<div class="card b">
+<h3>Un chapitre en anglais, des flashcards dans une autre langue</h3>
+<p>Nous lui avons donné le chapitre sur la révolution industrielle en anglais en demandant les cartes en espagnol : les 18 sont sorties en espagnol, et aucune n'était fausse. Pratique si vous travaillez à partir de notes, d'articles ou de livres dans une langue et révisez dans une autre.</p>
+</div>
+
+<h2>Où elle s'est trompée</h2>
+
+<div class="card p">
+<h3>Quand le chapitre saute d'une époque à l'autre</h3>
+<p>Le chapitre sur la Seconde République inclut l'histoire du drapeau et des armoiries de l'Espagne depuis le XIXe siècle. C'est là que se trouvaient presque toutes les erreurs : une carte dit que le drapeau de la Seconde République portait la devise « Constitución », alors que le texte parle d'un drapeau des années 1820. Une autre dit que la République a duré jusqu'au début de la guerre civile, alors que le chapitre lui-même dit qu'elle a duré jusqu'au 1er avril 1939.</p>
+</div>
+
+<div class="card y">
+<h3>Des détails inventés et quelques doublons</h3>
+<p>Certaines cartes saisissent l'idée principale mais ajoutent quelque chose que le texte ne dit pas (qualifier un fil de « solide », ou dire qu'Arkwright « a lancé l'industrie textile »), traduisent mal un terme (une égreneuse de coton n'est pas une « machine à filer ») ou répètent une carte précédente en d'autres mots. Et pendant les tests, la fiche écrite s'est arrêtée au milieu d'une phrase avant les cartes ; l'équipe de l'appli a trouvé la cause, et c'est corrigé pour la prochaine version.</p>
+</div>
+
+<p><strong>À retenir en pratique :</strong> utilisez-les, mais vérifiez-les avant de réviser, surtout pour les chapitres qui mélangent des dates de différentes époques. Vérifier 18 cartes prend quelques minutes, ce qui reste bien plus rapide que de les écrire à la main.</p>
+
+<h2>D'autres façons de faire des flashcards IA gratuitement</h2>
+
+<p>Toutes celles-ci fonctionnent en ligne : vous envoyez votre PDF sur leur site. Faits tirés de leurs propres pages, octobre 2026 ; nous n'avons pas mesuré leur qualité.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Outil</th><th>Gratuit</th><th>Envoie votre PDF ?</th></tr></thead>
+<tbody>
+<tr><td><strong>NotebookLM</strong> (Google)</td><td>Oui : flashcards et quiz à partir de vos documents, exportables en CSV, avec citation du texte d'origine (<a href="https://support.google.com/notebooklm/answer/16958963?hl=en" rel="noopener">Google</a>)</td><td>Oui, à Google</td></tr>
+<tr><td><strong>SlideSpeak</strong></td><td>Oui, PDF jusqu'à 50 pages, sans compte, export vers Anki ou Quizlet (<a href="https://slidespeak.co/free-tools/create-flashcards-from-pdf" rel="noopener">SlideSpeak</a>)</td><td>Oui</td></tr>
+<tr><td><strong>Flashcards.world</strong></td><td>Jusqu'à 10 cartes sans inscription (<a href="https://flashcards.world/pdf-to-flashcards/" rel="noopener">Flashcards.world</a>)</td><td>Oui</td></tr>
+<tr><td><strong>GreenCube</strong> (sur votre PC)</td><td>9,99&nbsp;&euro; en une fois, sans limites ; il discute aussi, résume et répond aux questions sur le chapitre</td><td><b>Non</b> : tout reste sur votre ordinateur</td></tr>
+</tbody>
+</table></div>
+
+<p>Si envoyer vos notes à Google ne vous dérange pas, NotebookLM est une option gratuite très complète. Si vous préférez qu'elles ne quittent jamais votre ordinateur, ne voulez pas de limites ou révisez sans bonne connexion, il vous faut une IA sur votre propre PC. Nous avons vérifié ce que chaque IA fait de vos fichiers dans <a href="/blog/fr/ai-that-doesnt-train-on-your-data">Quelle IA ne s'entraîne pas sur vos conversations ?</a></p>
+
+<h2>Comment obtenir de bonnes flashcards à partir d'un PDF</h2>
+<ul>
+<li><strong>Un chapitre à la fois.</strong> Un chapitre donne 18 cartes assez ciblées ; un livre entier les dilue.</li>
+<li><strong>Vérifiez les cartes sur des dates d'autres époques.</strong> C'est là qu'elle se trompe le plus.</li>
+<li><strong>Supprimez les doublons et les cartes vagues</strong> (« Qu'est-ce que l'étau-limeur ? » &rarr; « Une machine utilisée dans le développement des machines-outils ») et gardez celles qui vous font réfléchir.</li>
+<li><strong>Demandez aussi des questions type examen</strong> et répondez-y sans regarder : dans <a href="/blog/fr/ai-to-study-from-pdf">notre test de questions sur PDF</a>, elle a eu 11 bonnes réponses sur 12, en environ 15 secondes chacune.</li>
+</ul>
+
+<p>Est-ce que ça tournera sur votre ordinateur ? <a href="/blog/fr/can-my-pc-run-ai#checker">Vérifiez en 30 secondes</a> : avec une carte graphique, c'est bien plus rapide que sur ce portable.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Peut-on faire des flashcards IA à partir d&#x27;un PDF sans internet ?</summary><p>Oui, avec une IA qui tourne sur votre ordinateur. Dans notre test, GreenCube a transformé un chapitre d&#x27;environ 4 800 mots en 18 flashcards et une fiche de révision en environ 5 minutes, sur un portable de 16 Go sans carte graphique et sans connexion.</p></details>
+<details><summary>Les flashcards faites par une IA sont-elles fiables ?</summary><p>En grande partie, mais pas toutes. Sur 36 cartes vérifiées à la main, avec la petite IA, 21 étaient justes, 6 en partie justes, 5 fausses et 4 en double ; avec la plus grande, 30 justes, 4 en partie, 2 fausses et aucun doublon. Les erreurs se concentraient dans la partie du chapitre qui saute d&#x27;une époque à l&#x27;autre, donc vérifiez-les avant de réviser avec.</p></details>
+<details><summary>Peut-elle faire des flashcards dans une autre langue que le PDF ?</summary><p>Oui. Nous avons demandé des flashcards en espagnol à partir d&#x27;un chapitre en anglais et les 18 sont sorties en espagnol : 11 justes, 4 en partie justes, aucune fausse et 3 en double.</p></details>
+<details><summary>Quelle est la meilleure appli gratuite pour faire des flashcards IA à partir d&#x27;un PDF ?</summary><p>Si ça ne vous dérange pas d&#x27;envoyer le PDF, NotebookLM fait des flashcards gratuitement, les exporte en CSV et cite le texte d&#x27;origine. Si vous ne voulez l&#x27;envoyer nulle part ou que vous butez sur les limites, il vous faut une IA sur votre propre PC.</p></details>
+</div>
+
+<div class="cta-box"><h3>Votre propre IA, sur votre propre PC</h3><p>GreenCube tourne sur votre ordinateur : sans limite d'utilisation, sans abonnement et sans internet. 9,99&nbsp;&euro;, en un seul paiement.</p><a class="cta" href="https://greencube.app/fr/buy">Obtenir GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/fr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Une IA qui est <em>possédée,</em> pas louée.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produit</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/buy">Obtenir GreenCube</a></li>
+          <li><a href="https://greencube.app/fr/what-you-get">Est-ce que ça tourne sur mon ordinateur ?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Apprendre</h3>
+        <ul>
+          <li><a href="/blog/fr">Blog</a></li>
+          <li><a href="https://greencube.app/fr/your-data">Vos données</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT et vos données (EN)</a></li>
+          <li><a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Entreprise</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/mission">Notre mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Politique de confidentialité (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Conditions d'utilisation (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Fait en Espagne.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

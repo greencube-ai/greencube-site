@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Gemma 4 E2B vs E4B sur un portable : petit ou grand modèle d'IA, mesuré",
+ "description": "Gemma 4 E2B vs E4B (et Phi-4 Mini) sur un portable de 16 Go sans carte graphique : 20 secondes contre 112 pour la même réponse. Ce qu'apporte le plus grand modèle, et quand l'attente en vaut la peine.",
+ "date": "2026-10-18",
+ "stat": "20 s",
+ "teaser": "Petit : 20 secondes. Grand : 112. Voici ce que vous perdez.",
+ "rank": 8,
+ "lang": "fr",
+ "alt": "gemma-4-e2b-vs-e4b",
+ "faq": [
+  {"q": "Un modèle d'IA plus grand est-il toujours meilleur ?", "a": "Ses réponses sont souvent un peu meilleures, mais sur un portable sans carte graphique il est beaucoup plus lent. Dans notre test, le plus grand modèle (Gemma 4 E4B) a donné la meilleure explication mais a pris 112 secondes ; le petit (Gemma 4 E2B) a donné une bonne réponse en 20."},
+  {"q": "Les petits modèles d'IA se trompent-ils sur les faits ?", "a": "Sur nos cinq petites questions de faits (maths, conversion d'unités, dates, sciences), aucun des deux petits modèles ne s'est trompé. Le point faible du petit, c'était compter : il annonçait parfois un nombre d'éléments puis en listait un autre."},
+  {"q": "Quel modèle d'IA utiliser sur mon PC ?", "a": "Sur un portable sans carte graphique, un petit modèle. Sur un PC avec carte graphique, le plus grand tourne vite aussi (56 à 72 tokens par seconde sur des cartes de 8 Go), alors utilisez-le. GreenCube choisit pour vous selon votre PC."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Réponse courte :</strong> sur un portable sans carte graphique, le <strong>petit modèle gagne</strong> : une bonne réponse en 20 secondes au lieu d'une réponse un peu meilleure en presque 2 minutes. Avec une carte graphique, prenez le grand : là aussi, il va vite.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 s</b><span>petit modèle (Gemma 4 E2B), réponse complète</span></div>
+<div class="stat b"><b>28 s</b><span>ancien petit modèle (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 s</b><span>plus grand modèle (Gemma 4 E4B), la meilleure explication</span></div>
+</div>
+
+<h2>Le test</h2>
+<p>Un portable de 16 Go (Intel Core Ultra 5, sans carte graphique), processeur seul. Une demande typique de révision : expliquer la photosynthèse à quelqu'un de 14 ans, puis écrire trois questions d'examen dessus. Nous avons chronométré jusqu'à la fin de la réponse, en septembre 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modèle</th><th>Taille</th><th>Temps jusqu'à la réponse complète</th><th>Ce qui est sorti</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 Go</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 s</b></td><td>Complète, bien écrite, trois questions d'examen différentes</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 Go</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 s</b></td><td>Complète et juste, mais une question d'examen en double</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 Go</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 s</b></td><td>Complète, la meilleure explication</td></tr>
+</tbody>
+</table></div>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. Le petit suffit pour réviser</h3>
+<p>Nous avons aussi posé cinq petites questions de faits : maths, conversion d'unités, dates et sciences. <strong>Aucun des petits modèles ne s'est trompé.</strong> Le petit Gemma a même montré, sans qu'on le lui demande, une deuxième façon de calculer un pourcentage.</p>
+</div>
+
+<div class="card y">
+<h3>2. Son point faible : compter</h3>
+<p>Deux fois, le petit modèle a dit « en voici 5 » puis en a listé un autre nombre. GreenCube lui demande donc maintenant de compter avant d'écrire le nombre. C'est sur ce genre de détail qu'un modèle plus grand est plus sûr.</p>
+</div>
+
+<div class="card b">
+<h3>3. Avec une carte graphique, c'est une autre histoire</h3>
+<p>Ce même grand modèle écrit à <strong>56 à 72 tokens par seconde</strong> sur des cartes gamer de 8 Go, 7 à 9 fois plus vite que sur ce portable. Sur un PC gamer, vous avez les meilleures réponses sans l'attente.</p>
+</div>
+
+<h2>Lequel pour votre PC ?</h2>
+<div class="expect">
+<div class="g"><h4>Portable sans carte</h4><p>Le petit modèle. Des réponses rapides, assez bonnes pour réviser, écrire et poser des questions.</p></div>
+<div class="b"><h4>PC gamer</h4><p>Le grand modèle. De meilleures réponses, et toujours plus vite que vous ne lisez.</p></div>
+<div class="y"><h4>Vous demandez une liste ?</h4><p>S'il dit « en voici 5 », vérifiez d'un coup d'œil qu'il y en a bien 5. C'est le seul faux pas du petit modèle.</p></div>
+<div class="p"><h4>Vous ne voulez pas y penser ?</h4><p>GreenCube examine votre PC et choisit pour vous.</p></div>
+</div>
+
+<p>Voyez la vitesse de chaque type de PC : <a href="/blog/can-my-pc-run-ai">nous avons mesuré {{pcs}} PC ici</a>.</p>

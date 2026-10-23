@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Mon PC peut-il faire tourner une IA ? Nous avons mesuré {{pcs}} vrais PC gamer et portables",
+ "description": "Votre PC peut-il faire tourner une IA en local ? Des vitesses réelles sur {{pcs}} PC, d'une GTX 1650 à une RTX 2080 Ti et des portables sans carte graphique, et ce que votre carte graphique, la VRAM et la RAM changent.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PC",
+ "teaser": "Des vitesses réelles sur {{pcs}} PC gamer et portables.",
+ "rank": 1,
+ "lang": "fr",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "L'IA sur mon PC fonctionne-t-elle avec une carte graphique AMD ?", "a": "Oui. Nous avons mesuré des cartes AMD (RX 5700 XT, RX 6600, RX 580) comme des cartes NVIDIA. GreenCube utilise Vulkan, qui fonctionne sur les deux."},
+  {"q": "De combien de VRAM ai-je besoin pour faire tourner une IA ?", "a": "Aucune n'est obligatoire, mais 4 Go ou plus font une grosse différence. Sur nos PC de test, une GTX 1650 de 4 Go a écrit environ 20 tokens par seconde et une RTX 5060 de 8 Go environ 56. Plus de VRAM permet de faire tenir une IA plus grande sur la carte."},
+  {"q": "Peut-on faire tourner une IA sur un portable sans carte graphique ?", "a": "Oui. Un portable de 16 Go avec seulement une puce graphique Intel a écrit de 14 à 18 tokens par seconde avec une petite IA, plus vite que vous ne lisez. Un portable de 8 Go fonctionne aussi, plus lentement, et ne peut pas créer d'images."},
+  {"q": "Plus de RAM rend-elle l'IA plus rapide ?", "a": "Pas à elle seule. Sur un PC de bureau avec 48 Go de RAM, la même IA a tourné 14 fois plus vite une fois sur la carte graphique de 8 Go que sur le processeur. La RAM compte quand vous n'avez pas de carte ; avec une carte, c'est la VRAM qui compte le plus."},
+  {"q": "Ai-je besoin d'internet pour faire tourner une IA sur mon PC ?", "a": "Une seule fois, pour télécharger l'appli et l'IA et pour l'activer. Ensuite, discuter fonctionne sans aucune connexion."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Réponse courte : oui.</strong> Si votre PC fait tourner des jeux, il peut faire tourner une IA. Nous avons mesuré {{pcs}} vrais PC : des PC gamer de bureau, d'une vieille GTX 1650 à une RTX 2080 Ti, et deux portables sans aucune carte graphique. Tous ont discuté avec une IA qui tournait entièrement sur le PC : sans internet, sans abonnement. La seule chose qui change, c'est la vitesse.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>plus rapide sur la carte graphique que sur le processeur, même PC, même IA</span></div>
+<div class="stat b"><b>20</b><span>tokens par seconde sur une GTX 1650 de 4 Go. Plus vite que vous ne lisez.</span></div>
+<div class="stat p"><b>8&ndash;9 s</b><span>par image sur une RTX 2080 Ti, une fois chargée</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Les chiffres</h2>
+
+<p>« Écrit », c'est la vitesse à laquelle l'IA tape sa réponse, en tokens par seconde. Un token est un morceau de mot : en français, un mot en occupe généralement un ou deux. On lit environ 4 mots par seconde (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), donc à partir d'environ 8 tokens par seconde, l'IA écrit déjà plus vite que vos yeux ne suivent.</p>
+
+<!--pcs:table-->
+
+<p>Cliquez sur une carte graphique pour voir son test complet.</p>
+
+<p>Mesuré avec GreenCube en septembre et octobre 2026, en conversations réelles et avec les tests de vitesse de GreenCube. La vitesse varie un peu d'une mesure à l'autre sur le même PC, donc quand nous en avons plusieurs, nous donnons la fourchette. <a href="/blog/how-we-measure-ai-speed">Notre méthode, et toutes les données</a>.</p>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. Votre carte graphique fait le gros du travail, comme dans un jeu</h3>
+<p>Sur le PC de bureau avec la RX 5700 XT, la même IA a écrit <strong>5 tokens par seconde sur le processeur et 72 sur la carte graphique</strong>. Une IA, c'est surtout le genre de calcul pour lequel les cartes graphiques sont faites. N'importe quelle carte de ces dernières années aide énormément, même une vieille GTX 1650 de 4 Go.</p>
+</div>
+
+<div class="card b">
+<h3>2. La VRAM décide de la taille de l'IA qui tient</h3>
+<p>Pour tourner à pleine vitesse, l'IA doit tenir dans la mémoire propre de la carte (la VRAM). Ce PC de bureau avait 48 Go de RAM, et ça n'a pas sauvé un modèle plus grand : une IA de 12 milliards de paramètres a tenu sur la carte de 8 Go le temps d'une question courte, puis a planté dès que la conversation s'est allongée, avec la carte presque pleine. <strong>Pour l'IA, la VRAM compte plus que la RAM.</strong> Mais la VRAM ne fait pas la vitesse : quatre cartes de 8 Go que nous avons mesurées ont écrit d'environ 11 tokens par seconde (RX 580) à 72 (RX 5700 XT). C'est pourquoi GreenCube examine votre carte et choisit une IA qui y tient, pas simplement la plus grande.</p>
+</div>
+
+<div class="card y">
+<h3>3. Pas de carte graphique ? Ça marche quand même</h3>
+<p>Un portable ordinaire de 16 Go, avec seulement une puce graphique Intel, a écrit de 14 à 18 tokens par seconde avec la plus petite IA, et a terminé une réponse complète (une explication et trois questions d'examen) en environ 20 secondes. Largement suffisant pour réviser et écrire. Un portable de 8 Go fonctionne aussi, à 5 à 7 tokens par seconde en conversations réelles, si les autres applis lui laissent un peu de mémoire libre.</p>
+</div>
+
+<div class="card p">
+<h3>4. Les images, c'est le plus lourd</h3>
+<p>Créer une image est bien plus lourd que discuter. <strong>De 8 à 9 secondes</strong> sur une RTX 2080 Ti de 11 Go (la première a pris 83 pendant le chargement), <strong>28 secondes</strong> sur une RTX 3060 de 12 Go, environ une minute sur une RX 6600 de 8 Go, une minute et demie sur une GTX 1660 Super de 6 Go et environ <strong>2 minutes et demie</strong> sur le portable de 16 Go. Un portable de 8 Go ne peut pas créer d'images du tout : l'IA d'images à elle seule a besoin d'environ 7 Go.</p>
+</div>
+
+<h2 id="by-hand">Vérifiez votre PC en 30 secondes</h2>
+<ol class="steps">
+<li>Appuyez sur <strong>Ctrl + Maj + Échap</strong> pour ouvrir le Gestionnaire des tâches.</li>
+<li>Allez dans <strong>Performances</strong>.</li>
+<li>Cliquez sur <strong>Mémoire</strong> : le chiffre en haut à droite, c'est votre RAM.</li>
+<li>Cliquez sur <strong>GPU</strong> : le nom en haut à droite, c'est votre carte, et la <strong>Mémoire GPU dédiée</strong>, c'est votre VRAM. Vous ne voyez qu'une puce graphique Intel ? Alors vous n'avez pas de carte séparée.</li>
+</ol>
+
+<h2>Ce que donnera votre PC</h2>
+<div class="expect">
+<div class="g"><h4>Carte de 6 Go ou plus</h4><p>Rapide sur la plupart des cartes de ces dernières années : de 37 à 76 tokens par seconde dans nos tests, bien plus vite que vous ne lisez, et des images en quelques secondes ou jusqu'à une minute et demie. Une exception : une vieille RX 580 a écrit environ 11, toujours plus vite que vous ne lisez.</p></div>
+<div class="b"><h4>Carte de 4 Go, 16 Go de RAM</h4><p>Bien. Environ 20 tokens par seconde dans notre test.</p></div>
+<div class="y"><h4>Sans carte, 16 Go de RAM</h4><p>Très bien pour discuter et réviser, avec une IA plus petite. Les images prennent quelques minutes.</p></div>
+<div class="p"><h4>Sans carte, 8 Go de RAM</h4><p>Fonctionne pour discuter, lentement. Fermez d'abord les autres applis. Pas d'images.</p></div>
+</div>
+
+<h2>Pourquoi faire tourner une IA sur votre propre PC ?</h2>
+<p>Parce qu'elle vous appartient. Pas de limite de messages, pas d'abonnement mensuel, et elle continue de fonctionner sans internet : dans le train, à la montagne ou dans une bibliothèque au Wi-Fi catastrophique. Elle ne battra pas les plus grandes IA du cloud en tout, mais pour réviser, écrire, résumer et les questions de tous les jours, une IA sur votre propre carte suffit largement, et elle ne s'épuise jamais.</p>

@@ -20,7 +20,7 @@
     var m = c.kind === 'laptop' ? c.model.replace(' Laptop', T.laptop) : c.model;
     return { NVIDIA: 'NVIDIA GeForce ', AMD: 'AMD Radeon ', Intel: 'Intel ' }[c.vendor] + m;
   }
-  function sizes(c) { return c.kind === 'none' ? '' : c.vrams.join(T.or) + ' GB'; }
+  function sizes(c) { return c.kind === 'none' ? '' : c.vrams.join(T.or) + ' ' + T.gb; }
 
   function n(x) { return String(x).replace('.', T.dec); }
   function rng(r, approx) { var s = r[0] === r[1] ? n(r[0]) : n(r[0]) + '–' + n(r[1]); return approx ? F('about', { x: s }) : s; }
@@ -89,7 +89,7 @@
       }).join('');
     } else {
       hits.innerHTML = '<div class="chk-miss"><b>' + T.miss + '</b><div class="chk-sizes">'
-        + [2, 4, 6, 8, 10, 12, 16, 20, 24].map(function (v) { return '<button type="button" data-other="' + v + '">' + v + ' GB</button>'; }).join('') + '</div></div>';
+        + [2, 4, 6, 8, 10, 12, 16, 20, 24].map(function (v) { return '<button type="button" data-other="' + v + '">' + v + ' ' + T.gb + '</button>'; }).join('') + '</div></div>';
     }
     inp.setAttribute('aria-expanded', hits.innerHTML ? 'true' : 'false');
   }
@@ -123,7 +123,7 @@
     var v = state.card.vrams;
     state.vram = v.length === 1 ? v[0] : null;
     vbox.hidden = v.length === 1;
-    vbox.querySelector('.chk-opts').innerHTML = v.map(function (x) { return '<button type="button" data-v="' + x + '">' + x + ' GB</button>'; }).join('');
+    vbox.querySelector('.chk-opts').innerHTML = v.map(function (x) { return '<button type="button" data-v="' + x + '">' + x + ' ' + T.gb + '</button>'; }).join('');
     show();
   }
   vbox.addEventListener('click', function (e) {
@@ -170,7 +170,7 @@
     else if (gpu) {
       var p = peers(v);
       out.push(['maybe', T.speed_u_h, T.speed_u + (p.same ? f('speed_same') : T.speed_close)
-        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' GB)') + ', ' + speed(x); }).join('; ') + '. '
+        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + ', ' + speed(x); }).join('; ') + '. '
         + f('speed_why', { url: D.method }) + (c.kind === 'laptop' ? T.speed_laptop : '')]);
     } else {
       var l = laptopFor(R);

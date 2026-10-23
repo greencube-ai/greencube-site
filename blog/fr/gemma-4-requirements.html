@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Configuration requise pour Gemma 4 : quel PC pour le faire tourner en local | Blog GreenCube</title>
+  <meta name="description" content="Configuration requise pour Gemma 4 E2B, E4B et 12B, mesurée sur de vrais PC : combien de RAM et de VRAM il faut à chacun, et à quelle vitesse il tourne sur des portables et des cartes graphiques gamer." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Configuration requise pour Gemma 4 : quel PC pour le faire tourner en local | Blog GreenCube" />
+  <meta property="og:description" content="Configuration requise pour Gemma 4 E2B, E4B et 12B, mesurée sur de vrais PC : combien de RAM et de VRAM il faut à chacun, et à quelle vitesse il tourne sur des portables et des cartes graphiques gamer." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/fr/gemma-4-requirements" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/fr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/requisitos-gemma-4" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-requirements" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Configuration requise pour Gemma 4 : quel PC pour le faire tourner en local", "description": "Configuration requise pour Gemma 4 E2B, E4B et 12B, mesurée sur de vrais PC : combien de RAM et de VRAM il faut à chacun, et à quelle vitesse il tourne sur des portables et des cartes graphiques gamer.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/gemma-4-requirements", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quelle est la configuration minimale pour faire tourner Gemma 4 en local ?", "acceptedAnswer": {"@type": "Answer", "text": "Le plus petit, Gemma 4 E2B (un fichier de 2,6 Go), a tourné sur un portable avec 8 Go de RAM et sans carte graphique, à 5 à 7 tokens par seconde en conversations réelles. Il lui faut quelques Go de mémoire libre pour démarrer."}}, {"@type": "Question", "name": "Combien de VRAM faut-il pour Gemma 4 E4B ?", "acceptedAnswer": {"@type": "Answer", "text": "E4B est un fichier de 4,2 Go. Il tient entièrement sur une carte graphique de 6 Go, où il a écrit 35 à 38 tokens par seconde sur une GTX 1660 Super. Sur des cartes de 8 Go, il a écrit 56 à 72. Il tourne aussi sans carte avec 16 Go de RAM, à environ 8 tokens par seconde."}}, {"@type": "Question", "name": "Gemma 4 12B peut-il tourner sur une carte graphique de 8 Go ?", "acceptedAnswer": {"@type": "Answer", "text": "Pour une question courte, oui : 20 à 35 tokens par seconde sur une RX 5700 XT. Mais il a planté dès que la conversation s'est allongée, parce que la carte n'avait presque plus de place. Pour lui, nous voudrions au moins 10 Go de VRAM."}}, {"@type": "Question", "name": "Gemma 4 est-il gratuit ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Google a publié Gemma 4, E2B et E4B compris, sous licence Apache 2.0, qui autorise l'usage commercial."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/fr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a>
+    <a href="https://greencube.app/fr/your-data">Vos données</a>
+    <a href="https://greencube.app/fr/mission">Notre mission</a>
+    <a href="/blog/fr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">FR</summary><div class="lang-list"><a href="/blog/gemma-4-requirements" hreflang="en" lang="en">English</a><a href="/blog/es/requisitos-gemma-4" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-requirements" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-requirements" hreflang="fr" lang="fr" aria-current="true">Français</a></div></details><a href="https://greencube.app/fr/buy" class="nav-cta">Obtenir GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
+<h1>Configuration requise pour Gemma 4 : quel PC pour le faire tourner en local</h1>
+<p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 18 octobre 2026</p>
+<div class="answer"><p><strong>Réponse courte :</strong> le petit <strong>Gemma 4 E2B</strong> tourne sur un <strong>portable de 8 Go</strong>. <strong>E4B</strong> demande 16 Go de RAM, ou file sur n'importe quelle <strong>carte graphique de 6 Go ou plus</strong>. <strong>12B</strong> a besoin de <strong>10 Go de VRAM ou plus</strong> pour tenir une vraie conversation.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 Go</b><span>de RAM suffisent pour Gemma 4 E2B, sans carte graphique</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>tokens par seconde pour E4B sur des cartes gamer de 8 Go</span></div>
+<div class="stat p"><b>10 Go</b><span>de VRAM avant que nous fassions confiance au 12B pour une longue conversation</span></div>
+</div>
+
+<h2>La configuration requise pour Gemma 4 en un coup d'œil</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modèle</th><th>Taille du fichier</th><th>Minimum que nous conseillons</th><th>Idéal sur</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 Go</td><td>8 Go de RAM, sans carte</td><td>Portables</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 Go</td><td>16 Go de RAM, ou une carte de 6 Go</td><td>PC gamer, portables de 16 Go</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6,2 Go</td><td>10 Go de VRAM ou plus</td><td>Cartes de 12 Go ou plus</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vitesses mesurées</h2>
+<p>La vitesse à laquelle chacun écrit sa réponse, en tokens par seconde (un token est un morceau de mot ; en français, vous en lisez environ 8 par seconde). Mesuré avec GreenCube en septembre et octobre 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Modèle</th><th>Écrit (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>PC de bureau, NVIDIA RTX 5060 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>PC de bureau, carte graphique de 12 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1660 Super 6 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (conversations courtes seulement)</td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1650 4 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>environ 20</b></td></tr>
+<tr><td>Portable, Intel Core Ultra 5, 16 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Le même portable</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>Portable, Intel Iris Xe, 8 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. E2B est le modèle des portables</h3>
+<p>Sur un portable de 16 Go sans carte graphique, il a terminé une réponse complète de révision en environ 20 secondes, là où E4B en a mis 112. Sur cinq petites questions de faits, il ne s'est jamais trompé. <a href="/blog/fr/gemma-4-e2b-vs-e4b">E2B contre E4B, mesuré.</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B est le modèle des PC gamer</h3>
+<p>Dès que tout le modèle est sur une carte graphique, E4B est <strong>7 à 9 fois plus rapide</strong> que sur un portable, et ses réponses sont meilleures. N'importe quelle carte de 6 Go ou plus fait l'affaire.</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B a besoin de vraie VRAM, pas seulement de RAM</h3>
+<p>Sur une carte de 8 Go, 12B a bien répondu à une question courte, puis a planté chaque fois que la conversation grandissait. Ce PC avait 48 Go de RAM, et ça n'a pas aidé. <a href="/blog/fr/how-much-vram-for-ai">Pourquoi le modèle doit tenir sur votre carte.</a></p>
+</div>
+
+<h2>Quel Gemma 4 pour votre PC ?</h2>
+<div class="expect">
+<div class="g"><h4>Portable de 8 Go</h4><p>E2B. Fermez d'abord les autres applis.</p></div>
+<div class="b"><h4>Portable de 16 Go, sans carte</h4><p>E2B pour la vitesse. E4B fonctionne, mais lentement.</p></div>
+<div class="y"><h4>PC gamer, carte de 6 à 8 Go</h4><p>E4B, entièrement sur la carte.</p></div>
+<div class="p"><h4>Carte de 12 Go ou plus</h4><p>E4B va vite ; 12B devient une option.</p></div>
+</div>
+
+<p>Gemma 4 est publié par Google sous licence Apache 2.0. GreenCube choisit automatiquement le bon pour votre PC. <a href="/blog/fr/can-my-pc-run-ai">Voir les 10 PC que nous avons mesurés.</a></p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Quelle est la configuration minimale pour faire tourner Gemma 4 en local ?</summary><p>Le plus petit, Gemma 4 E2B (un fichier de 2,6 Go), a tourné sur un portable avec 8 Go de RAM et sans carte graphique, à 5 à 7 tokens par seconde en conversations réelles. Il lui faut quelques Go de mémoire libre pour démarrer.</p></details>
+<details><summary>Combien de VRAM faut-il pour Gemma 4 E4B ?</summary><p>E4B est un fichier de 4,2 Go. Il tient entièrement sur une carte graphique de 6 Go, où il a écrit 35 à 38 tokens par seconde sur une GTX 1660 Super. Sur des cartes de 8 Go, il a écrit 56 à 72. Il tourne aussi sans carte avec 16 Go de RAM, à environ 8 tokens par seconde.</p></details>
+<details><summary>Gemma 4 12B peut-il tourner sur une carte graphique de 8 Go ?</summary><p>Pour une question courte, oui : 20 à 35 tokens par seconde sur une RX 5700 XT. Mais il a planté dès que la conversation s&#x27;est allongée, parce que la carte n&#x27;avait presque plus de place. Pour lui, nous voudrions au moins 10 Go de VRAM.</p></details>
+<details><summary>Gemma 4 est-il gratuit ?</summary><p>Oui. Google a publié Gemma 4, E2B et E4B compris, sous licence Apache 2.0, qui autorise l&#x27;usage commercial.</p></details>
+</div>
+
+<div class="cta-box"><h3>Votre propre IA, sur votre propre PC</h3><p>GreenCube tourne sur votre ordinateur : sans limite d'utilisation, sans abonnement et sans internet. 9,99&nbsp;&euro;, en un seul paiement.</p><a class="cta" href="https://greencube.app/fr/buy">Obtenir GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/fr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Une IA qui est <em>possédée,</em> pas louée.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produit</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/buy">Obtenir GreenCube</a></li>
+          <li><a href="https://greencube.app/fr/what-you-get">Est-ce que ça tourne sur mon ordinateur ?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Apprendre</h3>
+        <ul>
+          <li><a href="/blog/fr">Blog</a></li>
+          <li><a href="https://greencube.app/fr/your-data">Vos données</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT et vos données (EN)</a></li>
+          <li><a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Entreprise</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/mission">Notre mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Politique de confidentialité (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Conditions d'utilisation (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Fait en Espagne.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -25,6 +25,7 @@ def tx(lang, key, **f):
     s = WD[lang][key]
     return s.format(**f) if f else s
 def mid(r): return (r[0] + r[1]) / 2
+def gb(lang): return WD[lang]['gb']  # 'GB', 'Go', 'ГБ'
 
 def blog_path(lang, slug): return f'/blog/{slug}' if lang == 'en' else f'/blog/{lang}/{slug}'
 def hub_path(lang): return blog_path(lang, HUB.get(lang, HUB['en']))
@@ -75,7 +76,7 @@ def name(pc, lang, art=False):
     return f'{a} {n}' if a else n
 
 def label(pc, lang):
-    return words_for(pc, lang).get('label') or f'{pc["vendor"]} {pc["gpu"]}, {pc["vram"]} GB'
+    return words_for(pc, lang).get('label') or f'{pc["vendor"]} {pc["gpu"]}, {pc["vram"]} {gb(lang)}'
 
 def an(n): return 'an' if str(n).startswith(('8', '11', '18')) else 'a'
 def text_runs(pc): return [r for r in pc['runs'] if 'engine' in r]
@@ -295,7 +296,7 @@ def pages(lang):
         body += f'<h2>{L["h_mean"]}</h2>\n' + ''.join(f'<div class="card {t}">\n<h3>{esc(hd)}</h3>\n<p>{x}</p>\n</div>\n' for t, hd, x in insights(pc, lang))
         body += f'<h2>{L["h_cmp"]}</h2>\n' + compare(pc, lang)
         spec = (tx(lang, 'spec_laptop') if pc['kind'] == 'laptop' else f'{pc["vendor"]} {pc["gpu"]}',
-                L['none'] if not pc['vram'] else f'{pc["vram"]} GB', f'{pc["ram"]} GB', pc['cpu'].replace('threads', tx(lang, 'threads')))
+                L['none'] if not pc['vram'] else f'{pc["vram"]} {gb(lang)}', f'{pc["ram"]} {gb(lang)}', pc['cpu'].replace('threads', tx(lang, 'threads')))
         body += (f'<h2>{L["h_pc"]}</h2>\n<p>' + tx(lang, 'pc_lead')
                  + f'</p>\n<ul>\n<li>{L["kind"][pc["kind"]]}</li>\n' + ''.join(f'<li><strong>{k}:</strong> {esc(v)}</li>\n' for k, v in zip(L['spec'], spec)) + '</ul>\n')
         body += f'<h2>{L["h_check"]}</h2>\n' + tx(lang, 'check_lead') + WD[lang]['check_steps'] + tx(lang, 'check_tail', hub=hub)
@@ -318,7 +319,7 @@ def table(lang):
         g = esc(label(p, lang))
         if p.get('slug'): g = f'<a href="{page_path(p, lang)}">{g}</a>'
         lo = '' if h['on'] in ('card', 'split') else ' lo'
-        rows.append(f'<tr><td>{L["kind"][p["kind"]]}</td><td>{g}</td><td>{p["ram"]} GB</td><td>{ENG[h["engine"]]["name"]}</td>'
+        rows.append(f'<tr><td>{L["kind"][p["kind"]]}</td><td>{g}</td><td>{p["ram"]} {gb(lang)}</td><td>{ENG[h["engine"]]["name"]}</td>'
                     f'<td class="spd"><span class="bar{lo}" style="--w:{round(100 * h["writes"][1] / top)}%"></span><b>{hl(p, lang)}</b></td></tr>')
     return ('<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in WD[lang]['table_head']) + '</tr></thead>\n<tbody>\n'
             + '\n'.join(rows) + '\n</tbody>\n</table></div>')
@@ -358,8 +359,8 @@ def checker(lang):
             f'aria-autocomplete="list" aria-expanded="false" aria-controls="chk-hits" /><div class="chk-hits" id="chk-hits" role="listbox"></div></div>'
             f'<button type="button" class="chk-quiet" id="chk-none">{T["none"]}</button></div>\n'
             f'<div class="chk-q" id="chk-vram" hidden><span>{T["vram"]}</span><div class="chk-opts"></div></div>\n'
-            f'<div class="chk-q" id="chk-ram"><span>{T["ram"]}</span><div class="chk-opts"><button type="button" data-ram="8">8 GB</button>'
-            f'<button type="button" data-ram="16">16 GB</button><button type="button" data-ram="32">{T["more"]}</button></div></div>\n'
+            f'<div class="chk-q" id="chk-ram"><span>{T["ram"]}</span><div class="chk-opts"><button type="button" data-ram="8">8 {gb(lang)}</button>'
+            f'<button type="button" data-ram="16">16 {gb(lang)}</button><button type="button" data-ram="32">{T["more"]}</button></div></div>\n'
             f'<p class="chk-help">{T["help"]}</p>\n<div id="chk-out" aria-live="polite"></div>\n<p class="chk-priv">{T["priv"]}</p>\n</section>\n'
             '<script>' + JS.replace('/*DATA*/null', json.dumps(data, ensure_ascii=False).replace('</', r'<\/')) + '</script>\n')
 
@@ -429,13 +430,13 @@ def method_page(lang):
         b += (f'<div class="card {tint}">\n<h3>{M["names"][m]}</h3>\n<p>{esc(WD[lang]["methods"][m].replace(" {v}", ""))}</p>\n'
               + (f'<p>{M["used"]}: {on}.</p>\n' if on else '') + '</div>\n')
     b += M['how_tail']
-    rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{L["kind"][p["kind"]]}</td><td>{str(p["vram"]) + " GB" if p["vram"] else "–"}</td><td>{p["ram"]} GB</td>'
+    rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{L["kind"][p["kind"]]}</td><td>{str(p["vram"]) + " " + gb(lang) if p["vram"] else "–"}</td><td>{p["ram"]} {gb(lang)}</td>'
                    f'<td>{esc(M["names"][headline(p)["method"]])}</td><td>{headline(p).get("v", "–")}</td><td>{date(headline(p)["date"], lang)}</td><td><b>{hl(p, lang)}</b></td></tr>\n'
                    for p in pcs)
     b += (f'<h2>{M["h_pcs"]}</h2>\n<p>{M["pcs_lead"]}</p>\n<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_pcs'])
           + '</tr></thead>\n<tbody>\n' + rows + '</tbody>\n</table></div>\n')
     b += M['ranges']
-    t_rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{p["bw"]} GB/s</td><td>{num(round(m), lang)}</td><td>{num(round(pr), lang)}</td>'
+    t_rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{p["bw"]} {gb(lang)}/s</td><td>{num(round(m), lang)}</td><td>{num(round(pr), lang)}</td>'
                      f'<td><b>{"+" if er > 0 else "−"}{round(abs(er) * 100)}%</b></td></tr>\n' for p, m, pr, er in H['rows'])
     b += (f'<h2>{M["h_est"]}</h2>\n' + M['est'].format(**f) + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_est'])
           + '</tr></thead>\n<tbody>\n' + t_rows + '</tbody>\n</table></div>\n' + M['est_res'].format(**f)

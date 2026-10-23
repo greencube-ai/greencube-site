@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Combien de VRAM faut-il pour l&#x27;IA ? Pourquoi le modèle doit tenir sur votre GPU | Blog GreenCube</title>
+  <meta name="description" content="Combien de VRAM faut-il pour l&#x27;IA ? Nous l&#x27;avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Combien de VRAM faut-il pour l&#x27;IA ? Pourquoi le modèle doit tenir sur votre GPU | Blog GreenCube" />
+  <meta property="og:description" content="Combien de VRAM faut-il pour l&#x27;IA ? Nous l&#x27;avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Combien de VRAM faut-il pour l'IA ? Pourquoi le modèle doit tenir sur votre GPU", "description": "Combien de VRAM faut-il pour l'IA ? Nous l'avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Que se passe-t-il si un modèle d'IA ne tient pas dans la VRAM ?", "acceptedAnswer": {"@type": "Answer", "text": "La partie qui ne tient pas tourne depuis la mémoire normale, et tout ralentit. Sur notre carte de 8 Go, un modèle avec 28 de ses couches sur la carte a écrit à 5,9 tokens par seconde au lieu de 35,6 avec toutes ses couches : 6 fois plus lent."}}, {"@type": "Question", "name": "Faut-il faire tourner le plus grand modèle d'IA que ma carte peut charger ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Laissez de la place pour la conversation. Un modèle de 12 milliards de paramètres a tenu sur une carte de 8 Go pour une question courte, puis a planté dès que la conversation s'est allongée. Un modèle plus petit qui tient avec de la marge était plus rapide et n'a jamais planté."}}, {"@type": "Question", "name": "Combien de VRAM faut-il laisser libre ?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube laisse environ 1,5 Go de la carte libre pour la conversation et pour Windows. Sans cette marge, une carte de 4 Go a manqué de mémoire dès le premier message."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/fr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a>
+    <a href="https://greencube.app/fr/your-data">Vos données</a>
+    <a href="https://greencube.app/fr/mission">Notre mission</a>
+    <a href="/blog/fr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">FR</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr" aria-current="true">Français</a></div></details><a href="https://greencube.app/fr/buy" class="nav-cta">Obtenir GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
+<h1>Combien de VRAM faut-il pour l&#x27;IA ? Pourquoi le modèle doit tenir sur votre GPU</h1>
+<p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 18 octobre 2026</p>
+<div class="answer"><p><strong>Réponse courte :</strong> une IA qui tient entièrement dans la mémoire de votre carte graphique (la VRAM) est rapide. Une IA qui déborde est <strong>plus lente que si vous n'utilisiez pas la carte du tout</strong>, et peut planter. Plus petite et entièrement sur la carte vaut mieux que plus grande et à moitié dessus.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>tokens par seconde avec tout le modèle sur la carte</span></div>
+<div class="stat p"><b>5,9</b><span>avec une partie hors de la carte : 6 fois plus lent</span></div>
+<div class="stat y"><b>Plantage</b><span>quand un modèle qui tient tout juste rencontre une longue conversation</span></div>
+</div>
+
+<h2>Le test</h2>
+<p>Un PC de bureau avec une AMD RX 5700 XT (8 Go de VRAM) et 48 Go de RAM. Nous avons chargé un modèle de 12 milliards de paramètres (Gemma 4 12B, environ 6,2 Go) et en avons mis plus ou moins sur la carte, le tout en une seule séance en septembre 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Quelle part du modèle était sur la carte</th><th>Écrit (tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>Tout</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 de ses couches</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 de ses couches</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Pour comparer : un modèle plus petit (Gemma 4 E4B) sur le processeur seul</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Ce modèle plus petit, entièrement sur la carte</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. Tout ou rien</h3>
+<p>Laisser seulement une partie du modèle hors de la carte l'a rendu <strong>6 fois plus lent</strong>. Avec 20 couches sur la carte, il était plus lent qu'un modèle plus petit tournant sans carte du tout. À moitié sur la carte, c'est le pire des deux mondes.</p>
+</div>
+
+<div class="card p">
+<h3>2. Le plus grand n'est pas le meilleur</h3>
+<p>Le modèle 12B tenait bien entièrement sur la carte de 8 Go, le temps d'une question courte. À mesure que la conversation s'allongeait, il a planté à chaque fois : la carte n'avait presque plus de place pour la conversation. Le modèle plus petit avait environ 3 Go de marge et tournait à 63 à 72 tokens par seconde.</p>
+</div>
+
+<div class="card b">
+<h3>3. Laissez de la place</h3>
+<p>Sur une GTX 1650 de 4 Go, un modèle de 4,2 Go a été casé de force sur une carte de 3,9 Go, et le tout premier message a échoué avec « mémoire insuffisante ». GreenCube garde maintenant environ <strong>1,5 Go de la carte libre</strong> pour la conversation et pour Windows.</p>
+</div>
+
+<h2>Comment choisir un modèle pour votre carte</h2>
+<div class="expect">
+<div class="g"><h4>Vérifiez votre VRAM</h4><p>Gestionnaire des tâches &rarr; Performances &rarr; GPU &rarr; Mémoire GPU dédiée.</p></div>
+<div class="b"><h4>Taille du modèle + 1,5 Go</h4><p>Le fichier du modèle plus environ 1,5 Go doit tenir dans ce chiffre.</p></div>
+<div class="y"><h4>Dans le doute, prenez plus petit</h4><p>Un modèle plus petit entièrement sur la carte bat un plus grand à moitié dessus.</p></div>
+<div class="p"><h4>Ou laissez l'appli choisir</h4><p>GreenCube lit votre carte et choisit un modèle qui tient avec de la marge.</p></div>
+</div>
+
+<p>Des vitesses réelles sur 10 PC, d'une GTX 1650 à une RTX 2080 Ti : <a href="/blog/fr/can-my-pc-run-ai">voyez-les ici</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Que se passe-t-il si un modèle d&#x27;IA ne tient pas dans la VRAM ?</summary><p>La partie qui ne tient pas tourne depuis la mémoire normale, et tout ralentit. Sur notre carte de 8 Go, un modèle avec 28 de ses couches sur la carte a écrit à 5,9 tokens par seconde au lieu de 35,6 avec toutes ses couches : 6 fois plus lent.</p></details>
+<details><summary>Faut-il faire tourner le plus grand modèle d&#x27;IA que ma carte peut charger ?</summary><p>Non. Laissez de la place pour la conversation. Un modèle de 12 milliards de paramètres a tenu sur une carte de 8 Go pour une question courte, puis a planté dès que la conversation s&#x27;est allongée. Un modèle plus petit qui tient avec de la marge était plus rapide et n&#x27;a jamais planté.</p></details>
+<details><summary>Combien de VRAM faut-il laisser libre ?</summary><p>GreenCube laisse environ 1,5 Go de la carte libre pour la conversation et pour Windows. Sans cette marge, une carte de 4 Go a manqué de mémoire dès le premier message.</p></details>
+</div>
+
+<div class="cta-box"><h3>Votre propre IA, sur votre propre PC</h3><p>GreenCube tourne sur votre ordinateur : sans limite d'utilisation, sans abonnement et sans internet. 9,99&nbsp;&euro;, en un seul paiement.</p><a class="cta" href="https://greencube.app/fr/buy">Obtenir GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/fr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Une IA qui est <em>possédée,</em> pas louée.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produit</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/buy">Obtenir GreenCube</a></li>
+          <li><a href="https://greencube.app/fr/what-you-get">Est-ce que ça tourne sur mon ordinateur ?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Apprendre</h3>
+        <ul>
+          <li><a href="/blog/fr">Blog</a></li>
+          <li><a href="https://greencube.app/fr/your-data">Vos données</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT et vos données (EN)</a></li>
+          <li><a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Entreprise</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/mission">Notre mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Politique de confidentialité (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Conditions d'utilisation (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Fait en Espagne.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Générateur d&#x27;images IA en local sur votre PC : combien de temps prend une image | Blog GreenCube</title>
+  <meta name="description" content="Nous avons chronométré un générateur d&#x27;images IA en local sur une carte graphique de 12 Go, un portable avec puce graphique Intel et un processeur de portable : de 28 secondes à 11 minutes par image. Ce qu&#x27;il faut à votre PC." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Générateur d&#x27;images IA en local sur votre PC : combien de temps prend une image | Blog GreenCube" />
+  <meta property="og:description" content="Nous avons chronométré un générateur d&#x27;images IA en local sur une carte graphique de 12 Go, un portable avec puce graphique Intel et un processeur de portable : de 28 secondes à 11 minutes par image. Ce qu&#x27;il faut à votre PC." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/fr/local-ai-image-generator-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/fr/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/generar-imagenes-ia-local" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/local-ai-image-generator-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Générateur d'images IA en local sur votre PC : combien de temps prend une image", "description": "Nous avons chronométré un générateur d'images IA en local sur une carte graphique de 12 Go, un portable avec puce graphique Intel et un processeur de portable : de 28 secondes à 11 minutes par image. Ce qu'il faut à votre PC.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/local-ai-image-generator-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Combien de temps faut-il pour créer une image IA sur mon PC ?", "acceptedAnswer": {"@type": "Answer", "text": "Dans nos tests, une image de 512 sur 512 a pris 28 secondes sur un PC de bureau avec une carte graphique de 12 Go, environ 2 minutes et demie sur un portable de 16 Go avec sa puce graphique Intel, et environ 11 minutes et demie avec le processeur seul du même portable."}}, {"@type": "Question", "name": "Peut-on créer des images IA sur un portable sans carte graphique ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, s'il a 16 Go de RAM. La puce graphique Intel intégrée a été environ 4 fois plus rapide que le processeur seul. Avec 8 Go de RAM, ça ne marche pas : l'IA d'images a besoin d'environ 7 Go à elle seule."}}, {"@type": "Question", "name": "Faut-il fermer les autres applis pour créer des images IA ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas sur un portable de 16 Go. Avec un éditeur de code et un navigateur ouverts, l'image a pris le même temps. Ce qui compte, c'est que Windows puisse lui réserver environ 7 Go."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/fr/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a>
+    <a href="https://greencube.app/fr/your-data">Vos données</a>
+    <a href="https://greencube.app/fr/mission">Notre mission</a>
+    <a href="/blog/fr" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">FR</summary><div class="lang-list"><a href="/blog/local-ai-image-generator-speed" hreflang="en" lang="en">English</a><a href="/blog/es/generar-imagenes-ia-local" hreflang="es" lang="es">Español</a><a href="/blog/pt/local-ai-image-generator-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/local-ai-image-generator-speed" hreflang="fr" lang="fr" aria-current="true">Français</a></div></details><a href="https://greencube.app/fr/buy" class="nav-cta">Obtenir GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
+<h1>Générateur d&#x27;images IA en local sur votre PC : combien de temps prend une image</h1>
+<p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 18 octobre 2026</p>
+<div class="answer"><p><strong>Réponse courte :</strong> sur un PC gamer avec une carte graphique correcte, environ <strong>une demi-minute</strong>. Sur un portable ordinaire de 16 Go, <strong>2 à 3 minutes</strong>. Sur un portable de 8 Go, ça ne marche pas.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>28 s</b><span>sur un PC de bureau avec une carte graphique de 12 Go</span></div>
+<div class="stat b"><b>2,5 min</b><span>sur un portable de 16 Go avec sa puce graphique Intel</span></div>
+<div class="stat p"><b>11,5 min</b><span>avec le processeur seul du même portable</span></div>
+</div>
+
+<h2>Le test</h2>
+<p>La même IA d'images sur chaque PC (Z-Image Turbo, dans GreenCube), une image de 512 sur 512, 8 étapes. Nous avons chronométré du clic sur le bouton à l'image terminée, en septembre et octobre 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Ce qui a fait le travail</th><th>Temps par image</th></tr></thead>
+<tbody>
+<tr><td>PC de bureau, carte de 12 Go, 32 Go de RAM</td><td>Carte graphique</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 s</b></td></tr>
+<tr><td>Portable, Core Ultra 5, 16 Go</td><td>Puce graphique Intel intégrée</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
+<tr><td>Le même portable</td><td>Processeur seul</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 min 27 s</b></td></tr>
+<tr><td>Portable, 8 Go</td><td>&mdash;</td><td><b>Impossible</b></td></tr>
+</tbody>
+</table></div>
+<p>Les barres montrent la vitesse : plus elles sont longues, plus c'est rapide.</p>
+
+<h2>Ce que nous avons appris</h2>
+
+<div class="card g">
+<h3>1. N'importe quelle puce graphique aide beaucoup</h3>
+<p>Même la petite puce graphique intégrée au portable a rendu les images <strong>environ 4 fois plus rapides</strong> que le processeur seul. Une vraie carte graphique est encore 5 fois plus rapide par-dessus.</p>
+</div>
+
+<div class="card b">
+<h3>2. Il lui faut environ 7 Go de place</h3>
+<p>L'IA d'images demande à Windows environ 7 Go pendant qu'elle travaille. C'est pourquoi un portable de 8 Go n'y arrive pas, et pourquoi GreenCube vérifie qu'il y a de la place avant de commencer, au lieu de planter en plein milieu.</p>
+</div>
+
+<div class="card y">
+<h3>3. Vos autres applis comptent peu</h3>
+<p>Sur le portable de 16 Go, nous avons créé la même image avec un éditeur de code et un navigateur ouverts, et même avec 4 Go occupés exprès. Ça a pris environ 2 minutes à chaque fois. Windows met de côté ce qui ne sert pas.</p>
+</div>
+
+<h2>Ce que donnera votre PC</h2>
+<div class="expect">
+<div class="g"><h4>Carte graphique</h4><p>Moins d'une minute par image. Créez-en plein et gardez la meilleure.</p></div>
+<div class="b"><h4>Portable de 16 Go, sans carte</h4><p>2 à 3 minutes. Très bien pour quelques images ; lancez-en une et continuez à réviser.</p></div>
+<div class="y"><h4>Portable de 8 Go</h4><p>Pas d'images. Discuter et réviser fonctionnent toujours.</p></div>
+<div class="p"><h4>Aucune limite, dans tous les cas</h4><p>Rien ne compte vos images. La seule limite, c'est le temps que vous voulez attendre.</p></div>
+</div>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Combien de temps faut-il pour créer une image IA sur mon PC ?</summary><p>Dans nos tests, une image de 512 sur 512 a pris 28 secondes sur un PC de bureau avec une carte graphique de 12 Go, environ 2 minutes et demie sur un portable de 16 Go avec sa puce graphique Intel, et environ 11 minutes et demie avec le processeur seul du même portable.</p></details>
+<details><summary>Peut-on créer des images IA sur un portable sans carte graphique ?</summary><p>Oui, s&#x27;il a 16 Go de RAM. La puce graphique Intel intégrée a été environ 4 fois plus rapide que le processeur seul. Avec 8 Go de RAM, ça ne marche pas : l&#x27;IA d&#x27;images a besoin d&#x27;environ 7 Go à elle seule.</p></details>
+<details><summary>Faut-il fermer les autres applis pour créer des images IA ?</summary><p>Pas sur un portable de 16 Go. Avec un éditeur de code et un navigateur ouverts, l&#x27;image a pris le même temps. Ce qui compte, c&#x27;est que Windows puisse lui réserver environ 7 Go.</p></details>
+</div>
+
+<div class="cta-box"><h3>Votre propre IA, sur votre propre PC</h3><p>GreenCube tourne sur votre ordinateur : sans limite d'utilisation, sans abonnement et sans internet. 9,99&nbsp;&euro;, en un seul paiement.</p><a class="cta" href="https://greencube.app/fr/buy">Obtenir GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/fr/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Une IA qui est <em>possédée,</em> pas louée.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produit</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/buy">Obtenir GreenCube</a></li>
+          <li><a href="https://greencube.app/fr/what-you-get">Est-ce que ça tourne sur mon ordinateur ?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Apprendre</h3>
+        <ul>
+          <li><a href="/blog/fr">Blog</a></li>
+          <li><a href="https://greencube.app/fr/your-data">Vos données</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT et vos données (EN)</a></li>
+          <li><a href="https://greencube.app/fr/ai-environmental-impact">L'IA et la planète</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Entreprise</h3>
+        <ul>
+          <li><a href="https://greencube.app/fr/mission">Notre mission</a></li>
+          <li><a href="mailto:support@greencube.app">Contact</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Politique de confidentialité (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Conditions d'utilisation (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Fait en Espagne.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
