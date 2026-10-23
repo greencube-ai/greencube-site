@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "AI trên laptop không có card đồ họa: đồ họa Intel có giúp gì không?",
+ "description": "Chúng tôi chạy AI trên laptop không có card đồ họa, trên bộ xử lý và trên đồ họa Intel. Tốc độ chat gần như không đổi, đọc nhanh hơn 1,3 lần và tạo ảnh nhanh hơn hơn 4 lần.",
+ "date": "2026-10-18",
+ "stat": "4&times;",
+ "teaser": "Chat: gần như như nhau. Ảnh: nhanh gấp 4 lần.",
+ "rank": 7,
+ "lang": "vi",
+ "alt": "ai-on-laptop-without-gpu",
+ "faq": [
+  {"q": "Đồ họa tích hợp có làm AI nhanh hơn không?", "a": "Với chat thì gần như không: trên laptop 16 GB của chúng tôi, câu trả lời được viết khoảng 14 token mỗi giây ở cả hai cách. Đọc văn bản dài dán vào nhanh hơn khoảng 1,3 lần, còn tạo ảnh nhanh hơn hơn 4 lần."},
+  {"q": "Đồ họa tích hợp có thể làm AI chậm đi không?", "a": "Đôi khi có. Với một mô hình nhỏ, viết trên đồ họa Intel chậm hơn 29% so với bộ xử lý; với một mô hình lớn hơn thì nhanh hơn 26%. Điều này phụ thuộc vào mô hình và laptop, nên GreenCube thử trên laptop của bạn rồi tự chọn."},
+  {"q": "Laptop không có card đồ họa có đủ cho AI không?", "a": "Với chat và học thì có: laptop 16 GB viết nhanh hơn bạn đọc với một mô hình nhỏ. Ảnh cũng tạo được, nhưng mỗi ảnh mất 2 đến 3 phút."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Trả lời ngắn:</strong> với chat thì <strong>gần như không</strong>. Với đọc văn bản dài thì <strong>một chút</strong>. Với ảnh thì <strong>rất nhiều</strong>: nhanh hơn hơn 4 lần.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>token mỗi giây khi chat, có hay không có đồ họa Intel</span></div>
+<div class="stat b"><b>1,3&times;</b><span>nhanh hơn khi đọc văn bản dài bạn dán vào</span></div>
+<div class="stat p"><b>4&times;</b><span>nhanh hơn khi tạo ảnh</span></div>
+</div>
+
+<h2>Bài thử</h2>
+<p>Một laptop: Intel Core Ultra 5 125U, RAM 16 GB, không card đồ họa, chỉ có đồ họa tích hợp trong chip. Chúng tôi chạy cùng một AI trên bộ xử lý và trên đồ họa Intel, cắm sạc, mỗi cách hai lần, trong tháng 9 và tháng 10 năm 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Việc</th><th>Bộ xử lý</th><th>Đồ họa Intel</th><th>Khác biệt</th></tr></thead>
+<tbody>
+<tr><td>Viết câu trả lời (Gemma 4 E2B)</td><td>13,7&ndash;15,5 token/giây</td><td>14,4&ndash;14,5 token/giây</td><td><b>gần như bằng nhau</b></td></tr>
+<tr><td>Đọc văn bản dán vào (Gemma 4 E2B)</td><td>160&ndash;167 token/giây</td><td>203&ndash;211 token/giây</td><td><b>nhanh hơn 1,3&times;</b></td></tr>
+<tr><td>Một ảnh, 512 x 512</td><td>11 phút 27 giây</td><td>2 phút 22 giây &ndash; 2 phút 38 giây</td><td><b>nhanh hơn hơn 4&times;</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Những gì chúng tôi rút ra</h2>
+
+<div class="card g">
+<h3>1. Tốc độ chat đến từ bộ nhớ, không phải từ chip</h3>
+<p>Việc viết câu trả lời bị giới hạn bởi tốc độ laptop đẩy AI qua bộ nhớ của nó, mà bộ xử lý và đồ họa Intel dùng chung một bộ nhớ. Vì vậy hai bên viết với tốc độ gần như nhau.</p>
+</div>
+
+<div class="card y">
+<h3>2. Thậm chí có thể chậm hơn</h3>
+<p>Với một mô hình nhỏ đời cũ (Phi-4 Mini), viết trên đồ họa Intel <strong>chậm hơn 29%</strong>. Với một mô hình lớn hơn (Gemma 4 E4B), <strong>nhanh hơn 26%</strong>. Cùng laptop, kết quả ngược nhau. Không thể đoán từ thông số, nên GreenCube thử trên laptop của bạn và dùng cái nào nhanh hơn.</p>
+</div>
+
+<div class="card p">
+<h3>3. Nơi nó thực sự tỏa sáng: ảnh</h3>
+<p>Tạo ảnh là toán nặng, đúng loại mà chip đồ họa được làm ra để tính. Mười một phút rưỡi giảm xuống còn khoảng hai phút rưỡi.</p>
+</div>
+
+<h2>Vậy điều này nghĩa là gì với bạn?</h2>
+<div class="expect">
+<div class="g"><h4>Chat và học</h4><p>Laptop 16 GB là đủ. Nó viết nhanh hơn bạn đọc.</p></div>
+<div class="b"><h4>PDF dài</h4><p>Đồ họa đọc chúng nhanh hơn một chút, nên câu trả lời đầu tiên đến sớm hơn.</p></div>
+<div class="y"><h4>Ảnh</h4><p>Làm được, mỗi ảnh khoảng 2 đến 3 phút. Một máy chơi game làm việc đó trong chưa tới một phút.</p></div>
+<div class="p"><h4>Pin</h4><p>Trong các bài thử của chúng tôi, tốc độ chat khi dùng pin và khi cắm sạc gần như bằng nhau.</p></div>
+</div>
+
+<p>Muốn xem toàn cảnh, kể cả máy chơi game? <a href="/blog/can-my-pc-run-ai">Chúng tôi đã đo {{pcs}} máy ở đây.</a></p>

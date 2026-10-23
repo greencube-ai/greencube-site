@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Máy mình có chạy được AI không? Chúng tôi đã đo {{pcs}} máy chơi game và laptop thật",
+ "description": "Máy bạn có chạy AI cục bộ được không? Tốc độ thật trên {{pcs}} máy, từ GTX 1650 đến RTX 2080 Ti và laptop không có card đồ họa, cùng ý nghĩa của card đồ họa, VRAM và RAM.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} máy",
+ "teaser": "Tốc độ thật trên {{pcs}} máy chơi game và laptop.",
+ "rank": 1,
+ "lang": "vi",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "AI trên máy tôi có chạy với card đồ họa AMD không?", "a": "Có. Ngoài card NVIDIA, chúng tôi còn đo card AMD (RX 5700 XT, RX 6600, RX 580). GreenCube dùng Vulkan, chạy được trên cả hai."},
+  {"q": "Cần bao nhiêu VRAM cho AI?", "a": "Không bắt buộc, nhưng từ 4 GB trở lên tạo khác biệt lớn. Trên các máy thử của chúng tôi, GTX 1650 4 GB viết khoảng 20 token mỗi giây, còn RTX 5060 8 GB khoảng 56. VRAM nhiều hơn giúp AI lớn hơn nằm gọn trên card."},
+  {"q": "AI có chạy trên laptop không có card đồ họa không?", "a": "Có. Một laptop 16 GB chỉ có đồ họa Intel viết 14 đến 18 token mỗi giây với một AI nhỏ, nhanh hơn tốc độ bạn đọc. Laptop 8 GB cũng chạy, chậm hơn, và không tạo được ảnh."},
+  {"q": "RAM nhiều hơn có làm AI nhanh hơn không?", "a": "Tự nó thì không. Trên một máy bàn có 48 GB RAM, cùng một AI chạy nhanh gấp 14 lần khi chuyển sang card đồ họa 8 GB so với chạy trên bộ xử lý. Không có card thì RAM quan trọng; có card thì VRAM quan trọng nhất."},
+  {"q": "Có cần internet để chạy AI trên máy không?", "a": "Chỉ một lần, để tải và kích hoạt ứng dụng cùng AI. Sau đó chat chạy hoàn toàn không cần internet."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Trả lời ngắn: có.</strong> Nếu máy bạn chơi được game, nó chạy được AI. Chúng tôi đã đo {{pcs}} máy thật: máy bàn chơi game từ GTX 1650 cũ đến RTX 2080 Ti, và hai laptop hoàn toàn không có card đồ họa. Tất cả đều chạy được chat với một AI chạy hoàn toàn trên máy: không internet, không thuê bao. Thứ duy nhất thay đổi là tốc độ.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>nhanh hơn trên card đồ họa so với bộ xử lý, cùng máy, cùng AI</span></div>
+<div class="stat b"><b>20</b><span>token mỗi giây trên GTX 1650 4 GB. Nhanh hơn bạn đọc.</span></div>
+<div class="stat p"><b>8&ndash;9 giây</b><span>mỗi ảnh trên RTX 2080 Ti, sau khi tải xong</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Các con số</h2>
+
+<p>"Viết" là tốc độ AI gõ câu trả lời, tính bằng token mỗi giây. Token là một mảnh của từ, và số token trong một từ tiếng Việt thay đổi khá nhiều, nên chúng tôi không đổi các tốc độ này ra số từ. Đại khái: vài token mỗi giây gần bằng tốc độ đọc, còn vài chục token mỗi giây thì nhanh hơn hẳn mắt bạn theo kịp.</p>
+
+<!--pcs:table-->
+
+<p>Bấm vào một card đồ họa để xem bài thử đầy đủ của nó.</p>
+
+<p>Đo bằng GreenCube trong tháng 9 và tháng 10 năm 2026, qua các cuộc chat thật và bài kiểm tra tốc độ của chính GreenCube. Tốc độ thay đổi một chút giữa các lần đo trên cùng một máy, nên khi có nhiều lần đo chúng tôi ghi một khoảng. <a href="/blog/how-we-measure-ai-speed">Cách chúng tôi đo và toàn bộ dữ liệu</a>.</p>
+
+<h2>Những gì chúng tôi rút ra</h2>
+
+<div class="card g">
+<h3>1. Card đồ họa làm phần nặng, giống như trong game</h3>
+<p>Trên máy bàn có RX 5700 XT, cùng một AI viết <strong>5 token mỗi giây trên bộ xử lý và 72 trên card đồ họa</strong>. AI phần lớn là kiểu toán mà card đồ họa được làm ra để tính. Bất kỳ card nào của vài năm gần đây, kể cả GTX 1650 4 GB đời cũ, cũng tạo khác biệt rất lớn.</p>
+</div>
+
+<div class="card b">
+<h3>2. VRAM quyết định AI lớn đến đâu thì vừa</h3>
+<p>Để chạy hết tốc độ, AI phải nằm gọn trong bộ nhớ riêng của card (VRAM). Máy bàn đó có 48 GB RAM, nhưng điều đó không cứu được mô hình lớn hơn: một AI 12 tỷ tham số vừa trên card 8 GB với một câu hỏi ngắn, rồi bị crash ngay khi cuộc chat dài ra, lúc card gần đầy. <strong>Với AI, VRAM quan trọng hơn RAM.</strong> Nhưng VRAM không phải là tốc độ: bốn card 8 GB chúng tôi đo viết từ khoảng 11 token mỗi giây (RX 580) đến 72 (RX 5700 XT). Vì vậy GreenCube kiểm tra card của bạn và chọn AI vừa với nó, chứ không chọn cái lớn nhất.</p>
+</div>
+
+<div class="card y">
+<h3>3. Không có card đồ họa? Vẫn chạy</h3>
+<p>Một laptop 16 GB bình thường chỉ có đồ họa Intel viết 14 đến 18 token mỗi giây với AI nhỏ hơn và hoàn thành một câu trả lời đầy đủ (một phần giải thích và ba câu hỏi trắc nghiệm) trong khoảng 20 giây. Như vậy là đủ để học và viết. Laptop 8 GB cũng chạy, ở mức 5 đến 7 token mỗi giây trong chat thật, nếu các ứng dụng khác chừa lại chút bộ nhớ trống.</p>
+</div>
+
+<div class="card p">
+<h3>4. Ảnh là phần nặng</h3>
+<p>Tạo một ảnh nặng hơn chat rất nhiều. Trên RTX 2080 Ti 11 GB, <strong>8 đến 9 giây</strong> (ảnh đầu tiên mất 83 giây khi đang tải), trên RTX 3060 12 GB <strong>28 giây</strong>, trên RX 6600 8 GB khoảng một phút, trên GTX 1660 Super 6 GB một phút rưỡi, và trên laptop 16 GB khoảng <strong>hai phút rưỡi</strong>. Laptop 8 GB hoàn toàn không tạo được ảnh: riêng AI tạo ảnh đã cần khoảng 7 GB.</p>
+</div>
+
+<h2 id="by-hand">Kiểm tra máy bạn trong 30 giây</h2>
+<ol class="steps">
+<li>Nhấn <strong>Ctrl + Shift + Esc</strong> để mở Task Manager (Trình quản lý tác vụ).</li>
+<li>Vào <strong>Performance</strong> (Hiệu suất).</li>
+<li>Bấm <strong>Memory</strong> (Bộ nhớ): con số lớn ở trên cùng là RAM của bạn.</li>
+<li>Bấm <strong>GPU</strong>: tên ở trên cùng là card của bạn, và <strong>Dedicated GPU memory</strong> (Bộ nhớ GPU chuyên dụng) là VRAM của bạn. Chỉ thấy đồ họa Intel? Vậy là bạn không có card rời.</li>
+</ol>
+
+<h2>Máy bạn sẽ chạy thế nào</h2>
+<div class="expect">
+<div class="g"><h4>Card từ 6 GB trở lên</h4><p>Nhanh trên hầu hết card của vài năm gần đây: 37 đến 76 token mỗi giây trong bài thử của chúng tôi, nhanh gấp nhiều lần tốc độ đọc, và ảnh mất từ vài giây đến một phút rưỡi. Một ngoại lệ: RX 580 cũ viết khoảng 11, vẫn nhanh hơn đọc.</p></div>
+<div class="b"><h4>Card 4 GB, RAM 16 GB</h4><p>Tốt. Khoảng 20 token mỗi giây trong bài thử của chúng tôi.</p></div>
+<div class="y"><h4>Không card, RAM 16 GB</h4><p>Đủ cho chat và học với AI nhỏ hơn. Ảnh mất vài phút.</p></div>
+<div class="p"><h4>Không card, RAM 8 GB</h4><p>Chạy được để chat, chậm. Đóng các ứng dụng khác trước. Không tạo ảnh.</p></div>
+</div>
+
+<h2>Vì sao nên có AI trên máy của mình?</h2>
+<p>Vì nó là của bạn. Không giới hạn tin nhắn, không thuê bao hằng tháng, và nó vẫn chạy khi không có internet: trên tàu, trên núi hay trong thư viện có Wi-Fi tệ. Nó sẽ không thắng các AI đám mây lớn nhất ở mọi việc, nhưng để học, viết, tóm tắt và hỏi đáp hằng ngày, một AI trên card của chính bạn là quá đủ, và nó không bao giờ hết lượt.</p>

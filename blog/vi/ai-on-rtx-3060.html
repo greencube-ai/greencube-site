@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>RTX 3060 có chạy được AI không? Đo được: 53–55 token mỗi giây | Blog GreenCube</title>
+  <meta name="description" content="Thử nghiệm thật: Gemma 4 E4B viết 53–55 token mỗi giây trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB. Ý nghĩa với chat, học tập và tạo ảnh." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="RTX 3060 có chạy được AI không? Đo được: 53–55 token mỗi giây | Blog GreenCube" />
+  <meta property="og:description" content="Thử nghiệm thật: Gemma 4 E4B viết 53–55 token mỗi giây trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB. Ý nghĩa với chat, học tập và tạo ảnh." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/vi/ai-on-rtx-3060" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/vi/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-en-rtx-3060" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ai-on-rtx-3060" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-rtx-3060" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "RTX 3060 có chạy được AI không? Đo được: 53–55 token mỗi giây", "description": "Thử nghiệm thật: Gemma 4 E4B viết 53–55 token mỗi giây trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB. Ý nghĩa với chat, học tập và tạo ảnh.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-06", "dateModified": "2026-10-06", "inLanguage": "vi", "mainEntityOfPage": "https://blog.greencube.app/blog/vi/ai-on-rtx-3060", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/vi/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "RTX 3060 có chạy được AI trên máy không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB, Gemma 4 E4B viết 53–55 token mỗi giây. Nhanh hơn tốc độ bạn đọc."}}, {"@type": "Question", "name": "RTX 3060 có tạo được ảnh AI không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Một ảnh (512×512) mất 28 giây trên card đồ họa."}}, {"@type": "Question", "name": "AI chạy nhanh hơn trên RTX 3060 hay trên bộ xử lý?", "acceptedAnswer": {"@type": "Answer", "text": "Trên card, chênh lệch lớn: 49,6–55,4 token mỗi giây so với 6,7–7,3 trên bộ xử lý, nhanh khoảng 7,5 lần."}}, {"@type": "Question", "name": "RTX 3060 có chạy được Gemma 4 12B không?", "acceptedAnswer": {"@type": "Answer", "text": "Nên chạy được. Gemma 4 12B là tệp 6,4 GB và card này có 12 GB, nên vẫn còn chỗ cho cả cuộc trò chuyện dài. Chúng tôi chưa đo nó trên card này."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/vi/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/vi/ai-environmental-impact">AI &amp; hành tinh</a>
+    <a href="https://greencube.app/vi/your-data">Dữ liệu của bạn</a>
+    <a href="https://greencube.app/vi/mission">Sứ mệnh</a>
+    <a href="/blog/vi" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">VI</summary><div class="lang-list"><a href="/blog/ai-on-rtx-3060" hreflang="en" lang="en">English</a><a href="/blog/es/ia-en-rtx-3060" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-rtx-3060" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-rtx-3060" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-rtx-3060" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-rtx-3060" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-rtx-3060" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-rtx-3060" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ai-on-rtx-3060" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ai-on-rtx-3060" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/ai-on-rtx-3060" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ai-on-rtx-3060" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ai-on-rtx-3060" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ai-on-rtx-3060" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ai-on-rtx-3060" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a></div></details><a href="https://greencube.app/vi/buy" class="nav-cta">Mua GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
+<h1>RTX 3060 có chạy được AI không? Đo được: 53–55 token mỗi giây</h1>
+<p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 6 tháng 10, 2026</p>
+<div class="answer"><p><strong>Có.</strong> Trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB, Gemma 4 E4B viết 53–55 token mỗi giây. Nhanh hơn tốc độ bạn đọc.</p></div>
+<div class="stats">
+<div class="stat g"><b>53–55</b><span>token mỗi giây với Gemma 4 E4B</span></div>
+<div class="stat b"><b>7,5×</b><span>nhanh hơn trên card so với bộ xử lý</span></div>
+<div class="stat p"><b>28 giây</b><span>để tạo một ảnh</span></div>
+</div>
+<h2>Trên thực tế nghĩa là gì</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Việc</th><th>Thời gian trên máy này</th></tr></thead>
+<tbody>
+<tr><td>Viết một câu trả lời bình thường (400 token, khoảng nửa trang)</td><td><b>7–8 giây</b></td></tr>
+<tr><td>Đọc một tài liệu dài bạn đưa vào (5.000 token, khoảng 5 trang)</td><td><b>4–5 giây</b></td></tr>
+<tr><td>Tạo một ảnh (512×512)</td><td><b>28 giây</b></td></tr>
+</tbody>
+</table></div>
+<p>Tính từ tốc độ đo trên máy này: thời gian là độ dài chia cho tốc độ, và một câu trả lời thật còn cần một chút để bắt đầu. Để dễ hình dung, câu trả lời 400 token dài khoảng nửa trang, và phần lớn mọi người đọc khoảng 4 từ mỗi giây (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>).</p>
+<h2>Chúng tôi đã đo gì</h2>
+<p><strong>Viết</strong> là tốc độ AI gõ câu trả lời, tính bằng token mỗi giây; token là một mảnh của từ. <strong>Đọc</strong> là tốc độ nó tiếp nhận những gì bạn đưa: câu hỏi, đoạn văn bạn dán hoặc một tệp PDF. Đọc luôn nhanh hơn viết rất nhiều, vì AI có thể đọc nhiều token cùng lúc nhưng phải viết từng token một.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Cái gì</th><th>Chạy trên</th><th>Kết quả</th><th>Ngày đo</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E4B</td><td>card đồ họa</td><td><b>52,6–55,3</b> token mỗi giây viết &middot; 1.044–1.362 đọc</td><td>6 tháng 10, 2026 <sup>1</sup></td></tr>
+<tr><td>Gemma 4 E4B</td><td>card đồ họa</td><td><b>49,6–55,4</b> token mỗi giây viết</td><td>6 tháng 10, 2026 <sup>2</sup></td></tr>
+<tr><td>Gemma 4 E4B</td><td>chỉ bộ xử lý</td><td><b>6,7–7,3</b> token mỗi giây viết</td><td>6 tháng 10, 2026 <sup>2</sup></td></tr>
+<tr><td>Ảnh (512×512)</td><td>card đồ họa</td><td><b>28 giây</b></td><td>3 tháng 10, 2026 <sup>3</sup></td></tr>
+</tbody>
+</table></div>
+<p>Cách đo từng con số: <a href="/blog/vi/how-we-measure-ai-speed">Xem thêm cách chúng tôi đo</a></p><ol class="src"><li>Chat thật trong GreenCube 0.1.42–0.1.43: tốc độ của mọi câu trả lời từ 100 token trở lên, đọc từ nhật ký của ứng dụng. Khoảng này bỏ đi một phần mười chậm nhất và nhanh nhất.</li><li>Bài kiểm tra tốc độ của chính GreenCube 0.1.42–0.1.43, chạy khi khởi động để chọn giữa card đồ họa và bộ xử lý: một câu trả lời ngắn được viết một lần trên mỗi bên.</li><li>Engine tạo ảnh của GreenCube (Z-Image Turbo), 512×512 pixel, 8 bước, tính giờ từ lúc bấm đến khi ảnh xong.</li></ol>
+<p>Khi có nhiều lần đo, chúng tôi ghi khoảng: tốc độ thay đổi một chút giữa các lần đo trên cùng một máy.</p>
+<h2>Điều đó nghĩa là gì</h2>
+<div class="card g">
+<h3>Card đồ họa làm phần việc</h3>
+<p>Cùng máy, cùng AI (Gemma 4 E4B): 6,7–7,3 token mỗi giây chỉ với bộ xử lý, 49,6–55,4 trên card đồ họa, nhanh hơn <strong>khoảng 7,5 lần</strong>. Card đồ họa được làm ra để tính hàng nghìn phép tính nhỏ cùng lúc cho game, và chạy AI phần lớn cũng là kiểu toán đó. GreenCube đo cả hai khi khởi động và dùng cái nhanh hơn.</p>
+</div>
+<div class="card b">
+<h3>Toàn bộ AI nằm gọn trên card</h3>
+<p>Gemma 4 E4B là tệp 4,2 GB và card có 12 GB bộ nhớ riêng (VRAM). Toàn bộ nằm gọn, còn dư chỗ cho cuộc trò chuyện, nên card không bao giờ phải chờ bộ nhớ chậm hơn ở phần còn lại của máy. Đó là lý do lớn nhất khiến nó chạy nhanh như vậy.</p>
+</div>
+<div class="card y">
+<h3>Gemma 4 12B lớn hơn</h3>
+<p>Nên chạy được. Gemma 4 12B là tệp 6,4 GB và card này có 12 GB, nên vẫn còn chỗ cho cả cuộc trò chuyện dài. Chúng tôi chưa đo nó trên card này.</p>
+</div>
+<div class="card p">
+<h3>Ảnh</h3>
+<p>Có. Một ảnh (512×512) mất 28 giây trên card đồ họa. Tạo ảnh dùng một AI riêng khoảng 6 GB và tốn nhiều phép tính hơn hẳn một câu trả lời chat, nên đồ họa ở đây càng quan trọng hơn.</p>
+</div>
+<h2>So với các máy khác</h2>
+<p>Trong 8 máy chúng tôi đo với Gemma 4 E4B, máy này đứng <strong>thứ 4</strong> về tốc độ viết. <a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a> viết 56 (kiểm tra khởi động), nhanh hơn khoảng 5%. <a href="/blog/vi/ai-on-rx-6600">RX 6600</a> viết 42–44, nên máy này nhanh hơn khoảng 25%.</p>
+<h2>Máy thử nghiệm</h2>
+<p>Máy riêng của một người thử thật, dùng theo cách họ vẫn dùng, không phải máy phòng thí nghiệm:</p>
+<ul>
+<li>Máy bàn</li>
+<li><strong>Đồ họa:</strong> NVIDIA RTX 3060</li>
+<li><strong>Bộ nhớ đồ họa (VRAM):</strong> 12 GB</li>
+<li><strong>RAM:</strong> 32 GB</li>
+<li><strong>Bộ xử lý:</strong> 12 luồng</li>
+</ul>
+<h2>Kiểm tra máy của bạn</h2>
+<p>Không chắc máy bạn có gì? Chỉ mất 30 giây:</p>
+<ol class="steps">
+<li>Nhấn <strong>Ctrl + Shift + Esc</strong> để mở Task Manager (Trình quản lý tác vụ).</li>
+<li>Vào <strong>Performance</strong> (Hiệu suất).</li>
+<li>Bấm <strong>Memory</strong> (Bộ nhớ): con số lớn ở trên cùng là RAM của bạn.</li>
+<li>Bấm <strong>GPU</strong>: tên ở trên cùng là card của bạn, và <strong>Dedicated GPU memory</strong> (Bộ nhớ GPU chuyên dụng) là VRAM của bạn. Chỉ thấy đồ họa Intel hoặc AMD không có bộ nhớ riêng? Vậy là bạn không có card rời.</li>
+</ol>
+<p>Sau đó tìm card gần nhất trong <a href="/blog/vi/can-my-pc-run-ai">bảng đầy đủ</a>. Cùng một card nhưng VRAM nhiều hơn chứa được AI lớn hơn; card mới hơn cùng dung lượng thường nhanh hơn.</p>
+<h2>Các máy khác chúng tôi đã đo</h2>
+<ul>
+<li><a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a>: 56 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-rx-6600">RX 6600</a>: 42–44 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-gtx-1650">GTX 1650</a>: khoảng 20 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a>: 14–18 token mỗi giây (Gemma 4 E2B)</li>
+<li><a href="/blog/vi/ai-on-rx-580">RX 580</a>: 10–11 token mỗi giây (Gemma 4 E4B)</li>
+<li><a href="/blog/vi/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>: 5–7 token mỗi giây (Gemma 4 E2B)</li>
+</ul>
+<p><a href="/blog/vi/can-my-pc-run-ai">Máy mình có chạy được AI không?</a> Cả 10 máy trong một bảng, và máy bạn sẽ chạy thế nào.</p>
+<h2>Câu hỏi</h2>
+<div class="faq">
+<details><summary>RTX 3060 có chạy được AI trên máy không?</summary><p>Có. Trên máy bàn có NVIDIA RTX 3060 (12 GB) và RAM 32 GB, Gemma 4 E4B viết 53–55 token mỗi giây. Nhanh hơn tốc độ bạn đọc.</p></details>
+<details><summary>RTX 3060 có tạo được ảnh AI không?</summary><p>Có. Một ảnh (512×512) mất 28 giây trên card đồ họa.</p></details>
+<details><summary>AI chạy nhanh hơn trên RTX 3060 hay trên bộ xử lý?</summary><p>Trên card, chênh lệch lớn: 49,6–55,4 token mỗi giây so với 6,7–7,3 trên bộ xử lý, nhanh khoảng 7,5 lần.</p></details>
+<details><summary>RTX 3060 có chạy được Gemma 4 12B không?</summary><p>Nên chạy được. Gemma 4 12B là tệp 6,4 GB và card này có 12 GB, nên vẫn còn chỗ cho cả cuộc trò chuyện dài. Chúng tôi chưa đo nó trên card này.</p></details>
+</div>
+
+<div class="cta-box"><h3>AI của riêng bạn, trên máy của riêng bạn</h3><p>GreenCube chạy trên máy tính của bạn: không giới hạn sử dụng, không thuê bao, chạy không cần internet. &euro;9,99, trả một lần.</p><a class="cta" href="https://greencube.app/vi/buy">Mua GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/vi/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI thuộc về <em>bạn,</em> không phải thuê.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Sản phẩm</h3>
+        <ul>
+          <li><a href="https://greencube.app/vi/buy">Mua GreenCube</a></li>
+          <li><a href="https://greencube.app/vi/what-you-get">Máy mình có chạy được không?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Tìm hiểu</h3>
+        <ul>
+          <li><a href="/blog/vi">Blog</a></li>
+          <li><a href="https://greencube.app/vi/your-data">Dữ liệu của bạn</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; dữ liệu của bạn (EN)</a></li>
+          <li><a href="https://greencube.app/vi/ai-environmental-impact">AI &amp; hành tinh</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Công ty</h3>
+        <ul>
+          <li><a href="https://greencube.app/vi/mission">Sứ mệnh</a></li>
+          <li><a href="mailto:support@greencube.app">Liên hệ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Chính sách quyền riêng tư (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Điều khoản sử dụng (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Sản xuất tại Tây Ban Nha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

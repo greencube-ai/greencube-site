@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cách chúng tôi đo tốc độ AI trên máy thật, và vì sao chúng tôi không đoán | Blog GreenCube</title>
+  <meta name="description" content="Mọi tốc độ trên blog GreenCube đều đến từ một trong 10 máy thật. Cách chúng tôi đo, mọi máy đã thử, dữ liệu dạng CSV, và bài thử cho thấy vì sao chúng tôi không ước tính phần còn lại." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Cách chúng tôi đo tốc độ AI trên máy thật, và vì sao chúng tôi không đoán | Blog GreenCube" />
+  <meta property="og:description" content="Mọi tốc độ trên blog GreenCube đều đến từ một trong 10 máy thật. Cách chúng tôi đo, mọi máy đã thử, dữ liệu dạng CSV, và bài thử cho thấy vì sao chúng tôi không ước tính phần còn lại." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/vi/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/vi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Cách chúng tôi đo tốc độ AI trên máy thật, và vì sao chúng tôi không đoán", "description": "Mọi tốc độ trên blog GreenCube đều đến từ một trong 10 máy thật. Cách chúng tôi đo, mọi máy đã thử, dữ liệu dạng CSV, và bài thử cho thấy vì sao chúng tôi không ước tính phần còn lại.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "vi", "mainEntityOfPage": "https://blog.greencube.app/blog/vi/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/vi/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Các con số tốc độ AI của GreenCube đến từ đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Từ 10 máy thật chạy GreenCube, đo trong chat thật, bằng bài kiểm tra tốc độ khởi động của GreenCube, bằng bài đo tốc độ của llama.cpp và bằng bài thử tạo ảnh. Mỗi con số đều ghi cách đo."}}, {"@type": "Question", "name": "Có ước tính được tốc độ AI từ thông số card đồ họa không?", "acceptedAnswer": {"@type": "Answer", "text": "Chưa đáng tin. Dự đoán từ băng thông bộ nhớ, ước tính của chúng tôi thường lệch 19% và có khi tới 239%, nên chúng tôi chỉ hiển thị các card đã đo."}}, {"@type": "Question", "name": "Tôi có tải được dữ liệu không?", "acceptedAnswer": {"@type": "Answer", "text": "Có: mọi lần đo đều nằm trong greencube-ai-speeds.csv, có link trên trang này."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/vi/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/vi/ai-environmental-impact">AI &amp; hành tinh</a>
+    <a href="https://greencube.app/vi/your-data">Dữ liệu của bạn</a>
+    <a href="https://greencube.app/vi/mission">Sứ mệnh</a>
+    <a href="/blog/vi" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">VI</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-we-measure-ai-speed" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-we-measure-ai-speed" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-we-measure-ai-speed" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-we-measure-ai-speed" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/how-we-measure-ai-speed" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a></div></details><a href="https://greencube.app/vi/buy" class="nav-cta">Mua GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
+<h1>Cách chúng tôi đo tốc độ AI trên máy thật, và vì sao chúng tôi không đoán</h1>
+<p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 14 tháng 10, 2026</p>
+<div class="answer"><p>Mọi tốc độ trên blog này đều đến từ một máy thật chạy GreenCube: đến nay là 10 máy, đo trong khoảng từ 22 tháng 9, 2026 đến 14 tháng 10, 2026. Chúng tôi không ước tính tốc độ cho card chưa đo: khi thử các ước tính trên những card đã có, ước tính thông thường lệch 19% và tệ nhất lệch 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>máy thật đã đo, máy bàn và laptop</span></div>
+<div class="stat b"><b>34</b><span>lần đo, tất cả trong tệp CSV bên dưới</span></div>
+<div class="stat y"><b>239%</b><span>mức lệch của ước tính tốc độ tệ nhất</span></div>
+</div>
+<h2>Chúng tôi đo gì</h2>
+<p>Ba thứ, vì đó là những gì bạn cảm nhận khi dùng AI trên máy của mình:</p>
+<ul>
+<li><strong>Tốc độ viết:</strong> AI gõ câu trả lời nhanh đến đâu, tính bằng token mỗi giây. Token là một mảnh của từ, và số token trong một từ khác nhau theo ngôn ngữ, nên chúng tôi không đổi các tốc độ này ra số từ. Đại khái: vài token mỗi giây gần bằng tốc độ đọc, vài chục token mỗi giây nhanh hơn hẳn.</li>
+<li><strong>Tốc độ đọc:</strong> nó tiếp nhận những gì bạn đưa nhanh đến đâu: câu hỏi, đoạn văn dán vào hoặc tệp PDF. Luôn nhanh hơn viết rất nhiều, vì AI đọc nhiều token cùng lúc nhưng viết từng token một.</li>
+<li><strong>Thời gian tạo ảnh:</strong> một ảnh 512×512 mất bao lâu, từ lúc bấm đến khi ảnh xong.</li>
+</ul>
+<p>Chúng tôi đo các AI mà GreenCube cung cấp, đúng những tệp mà mọi người dùng tải về: Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB) và Gemma 4 12B (6,4 GB) của Google cho chat, và Z-Image Turbo cho ảnh. Một AI khác, hoặc cùng AI nhưng nén theo cách khác, sẽ cho số khác, nên chúng tôi chỉ so sánh những thứ tương đương.</p>
+<h2>Cách chúng tôi đo</h2>
+<p>Bốn cách, và mỗi con số trên blog đều ghi nó đến từ cách nào:</p>
+<div class="card g">
+<h3>Chat thật</h3>
+<p>Chat thật trong GreenCube: tốc độ của mọi câu trả lời từ 100 token trở lên, đọc từ nhật ký của ứng dụng. Khoảng này bỏ đi một phần mười chậm nhất và nhanh nhất.</p>
+<p>Dùng cho: <a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/vi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/vi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/vi/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/vi/ai-on-rx-580">RX 580</a>, <a href="/blog/vi/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>.</p>
+</div>
+<div class="card b">
+<h3>Bài kiểm tra khởi động của GreenCube</h3>
+<p>Bài kiểm tra tốc độ của chính GreenCube, chạy khi khởi động để chọn giữa card đồ họa và bộ xử lý: một câu trả lời ngắn được viết một lần trên mỗi bên.</p>
+<p>Dùng cho: <a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/vi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/vi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/vi/ai-on-rx-580">RX 580</a>, <a href="/blog/vi/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>.</p>
+</div>
+<div class="card y">
+<h3>Bài đo tốc độ của llama.cpp</h3>
+<p>Bài đo tốc độ của chính llama.cpp (llama-bench), engine mà GreenCube dùng, với cùng các tệp AI: viết 128 token, đọc một đoạn 512 token.</p>
+<p>Dùng cho: <a href="/blog/vi/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/vi/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a>.</p>
+</div>
+<div class="card p">
+<h3>Bài thử tạo ảnh</h3>
+<p>Engine tạo ảnh của GreenCube (Z-Image Turbo), 512×512 pixel, 8 bước, tính giờ từ lúc bấm đến khi ảnh xong.</p>
+<p>Dùng cho: <a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/vi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/vi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/vi/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a>.</p>
+</div>
+<p>Chat thật là bằng chứng tốt nhất, vì đó là thứ bạn sẽ cảm nhận, nên con số chính trên mỗi trang đến từ chat thật bất cứ khi nào có. Bài kiểm tra khởi động chỉ là một câu trả lời ngắn, nên chúng tôi dùng nó để so card với bộ xử lý (nó đo cả hai theo cùng một cách), và chỉ dùng làm con số chính khi người thử không gửi câu trả lời dài nào.</p>
+<h2>Mọi máy chúng tôi đã đo</h2>
+<p>Máy riêng của những người thử thật, dùng theo cách họ vẫn dùng, không phải máy phòng thí nghiệm. Chúng tôi không công bố tên họ.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Máy</th><th>Loại</th><th>VRAM</th><th>RAM</th><th>Con số chính từ</th><th>GreenCube</th><th>Ngày</th><th>Viết (token/giây)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Máy bàn</td><td>11 GB</td><td>128 GB</td><td>Chat thật</td><td>0.1.44</td><td>14 tháng 10, 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Máy bàn</td><td>8 GB</td><td>48 GB</td><td>Bài đo tốc độ của llama.cpp</td><td>–</td><td>22 tháng 9, 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a></td><td>Máy bàn</td><td>8 GB</td><td>32 GB</td><td>Bài kiểm tra khởi động của GreenCube</td><td>0.1.42</td><td>1 tháng 10, 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rtx-3060">RTX 3060</a></td><td>Máy bàn</td><td>12 GB</td><td>32 GB</td><td>Chat thật</td><td>0.1.42–0.1.43</td><td>6 tháng 10, 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-6600">RX 6600</a></td><td>Máy bàn</td><td>8 GB</td><td>16 GB</td><td>Chat thật</td><td>0.1.42–0.1.44</td><td>9 tháng 10, 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Máy bàn</td><td>6 GB</td><td>16 GB</td><td>Chat thật</td><td>0.1.42</td><td>1 tháng 10, 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-gtx-1650">GTX 1650</a></td><td>Máy bàn</td><td>4 GB</td><td>16 GB</td><td>Chat thật</td><td>0.1.40</td><td>23 tháng 9, 2026</td><td><b>khoảng 20</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a></td><td>Laptop</td><td>–</td><td>16 GB</td><td>Bài đo tốc độ của llama.cpp</td><td>–</td><td>28 tháng 9, 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-580">RX 580</a></td><td>Máy bàn</td><td>8 GB</td><td>16 GB</td><td>Chat thật</td><td>0.1.42</td><td>1 tháng 10, 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a></td><td>Laptop</td><td>–</td><td>8 GB</td><td>Chat thật</td><td>0.1.42</td><td>4 tháng 10, 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Vì sao các con số là một khoảng</h2>
+<ul>
+<li><strong>Ứng dụng khác.</strong> Trình duyệt, trình chạy game hay cuộc gọi video dùng chung bộ nhớ và card đồ họa.</li>
+<li><strong>Lần đầu chậm hơn.</strong> Câu trả lời đầu tiên sau khi cài, hoặc ảnh đầu tiên, gồm cả việc tải và chuẩn bị card. Chúng tôi ghi rõ ở chỗ cần thiết (ví dụ "lần đầu mất 83 giây khi đang tải").</li>
+<li><strong>Câu trả lời ngắn đo ra chậm hơn.</strong> Mỗi câu trả lời có một khoảng khởi đầu cố định nhỏ, chiếm tỷ trọng lớn hơn ở câu 20 token so với câu 400 token. Vì vậy khoảng của chat thật chỉ tính câu trả lời từ 100 token trở lên, và chúng tôi ghi chú khi người thử chỉ gửi câu ngắn.</li>
+<li><strong>Chúng tôi bỏ các giá trị cực đoan.</strong> Khoảng của chat thật đi từ phân vị thứ 10 đến thứ 90, nên một câu trả lời bất thường không thể làm lệch nó.</li>
+</ul>
+<h2>Có đoán được tốc độ card từ thông số không?</h2>
+<p>Nếu được thì tiện: có hàng trăm card và chúng tôi mới đo 10 máy. Cách thông thường là dựa vào băng thông bộ nhớ. Để viết mỗi token, AI đọc toàn bộ mô hình từ bộ nhớ card, nên về lý thuyết tốc độ xấp xỉ băng thông chia cho kích thước mô hình, nhân với một hệ số hiệu suất. Nhiều công cụ tính online làm như vậy.</p>
+<p>Vì vậy chúng tôi thử nó trên dữ liệu của mình. Chúng tôi giấu từng card một, tính tốc độ trên mỗi GB/giây từ các card còn lại, dự đoán card bị giấu từ băng thông của nó (theo thông số nhà sản xuất, tổng hợp trong <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">cơ sở dữ liệu GPU của TechPowerUp</a>), rồi so với số đo thật. Cùng một AI trên tất cả (Gemma 4 E4B, nằm trọn trên card).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Card</th><th>Băng thông bộ nhớ</th><th>Đo được (token/giây)</th><th>Dự đoán</th><th>Lệch</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/vi/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/giây</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/giây</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/giây</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/giây</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-6600">RX 6600</a></td><td>224 GB/giây</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/giây</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/vi/ai-on-rx-580">RX 580</a></td><td>256 GB/giây</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>Ước tính thông thường lệch 19%. Tệ nhất là <a href="/blog/vi/ai-on-rx-580">RX 580</a>: bộ nhớ của nó gợi ý khoảng 36 token mỗi giây, nhưng nó viết 11. Chạy lại bài thử mà bỏ nó ra thì các card còn lại vẫn lệch tới 33%. AMD RX 6600 mới hơn lại lệch theo hướng ngược, nhanh hơn băng thông của nó gợi ý; bộ nhớ đệm lớn trên chip (AMD gọi là Infinity Cache) có thể là một phần lý do. Mỗi con số đo được là con số chính của card đó, nên không phải tất cả đều từ cùng một kiểu bài thử; điều đó thêm chút nhiễu, nhưng không thể giải thích mức lệch gấp ba.</p>
+<p><strong>Như vậy là chưa đủ tốt.</strong> Một con số đoán có thể lệch 33% trên card hiện đại, hoặc 239% trên card cũ, sẽ khiến một số người tưởng máy mình ổn trong khi nó chậm, hoặc ngược lại. Vì vậy công cụ kiểm tra và các trang card chỉ hiển thị card chúng tôi đã đo, và nói rõ khi card của bạn không nằm trong số đó. Chúng tôi chạy lại bài thử này với mỗi card mới, và nếu sai số trở nên nhỏ, chúng tôi sẽ nói ở đây trước khi hiển thị bất kỳ ước tính nào.</p>
+<h2>Những gì chúng tôi chưa đo</h2>
+<ul>
+<li>Laptop có card gaming.</li>
+<li>Gemma 4 12B trên card 10 GB trở lên.</li>
+<li>Tạo ảnh trên <a href="/blog/vi/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/vi/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/vi/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/vi/ai-on-rx-580">RX 580</a>.</li>
+<li>Các AI khác ngoài những AI GreenCube cung cấp, và Linux hoặc Mac (GreenCube dành cho Windows).</li>
+</ul>
+<h2>Lấy dữ liệu</h2>
+<p>Mọi lần đo trên trang này, mỗi lần một dòng, nằm trong <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: máy, AI, chạy ở đâu, tốc độ viết và đọc, thời gian tạo ảnh, cách đo, phiên bản GreenCube và ngày. Nếu bạn dùng, vui lòng ghi nguồn "GreenCube, AI speed measurements on real PCs, 2026" và dẫn link tới trang này.</p>
+<h2>Thêm máy của bạn</h2>
+<p>Đang dùng GreenCube rồi? Gửi nhật ký của bạn tới <a href="mailto:support@greencube.app">support@greencube.app</a>. Chúng tôi thêm máy bạn vào bài thử, không kèm tên bạn, và card mới sẽ có trang riêng. Không chắc máy bạn có gì? <a href="/blog/vi/can-my-pc-run-ai#checker">Kiểm tra ở đây</a>.</p>
+<h2>Câu hỏi</h2>
+<div class="faq">
+<details><summary>Các con số tốc độ AI của GreenCube đến từ đâu?</summary><p>Từ 10 máy thật chạy GreenCube, đo trong chat thật, bằng bài kiểm tra tốc độ khởi động của GreenCube, bằng bài đo tốc độ của llama.cpp và bằng bài thử tạo ảnh. Mỗi con số đều ghi cách đo.</p></details>
+<details><summary>Có ước tính được tốc độ AI từ thông số card đồ họa không?</summary><p>Chưa đáng tin. Dự đoán từ băng thông bộ nhớ, ước tính của chúng tôi thường lệch 19% và có khi tới 239%, nên chúng tôi chỉ hiển thị các card đã đo.</p></details>
+<details><summary>Tôi có tải được dữ liệu không?</summary><p>Có: mọi lần đo đều nằm trong greencube-ai-speeds.csv, có link trên trang này.</p></details>
+</div>
+
+<div class="cta-box"><h3>AI của riêng bạn, trên máy của riêng bạn</h3><p>GreenCube chạy trên máy tính của bạn: không giới hạn sử dụng, không thuê bao, chạy không cần internet. &euro;9,99, trả một lần.</p><a class="cta" href="https://greencube.app/vi/buy">Mua GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/vi/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI thuộc về <em>bạn,</em> không phải thuê.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Sản phẩm</h3>
+        <ul>
+          <li><a href="https://greencube.app/vi/buy">Mua GreenCube</a></li>
+          <li><a href="https://greencube.app/vi/what-you-get">Máy mình có chạy được không?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Tìm hiểu</h3>
+        <ul>
+          <li><a href="/blog/vi">Blog</a></li>
+          <li><a href="https://greencube.app/vi/your-data">Dữ liệu của bạn</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; dữ liệu của bạn (EN)</a></li>
+          <li><a href="https://greencube.app/vi/ai-environmental-impact">AI &amp; hành tinh</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Công ty</h3>
+        <ul>
+          <li><a href="https://greencube.app/vi/mission">Sứ mệnh</a></li>
+          <li><a href="mailto:support@greencube.app">Liên hệ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Chính sách quyền riêng tư (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Điều khoản sử dụng (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Sản xuất tại Tây Ban Nha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Gemma 4 E2B và E4B trên laptop: mô hình AI nhỏ và lớn, đo thực tế",
+ "description": "Gemma 4 E2B và E4B (cùng Phi-4 Mini) trên laptop 16 GB không có card đồ họa: 20 giây so với 112 cho cùng một câu trả lời. Mô hình lớn hơn mang lại gì, và khi nào đáng để chờ.",
+ "date": "2026-10-18",
+ "stat": "20 giây",
+ "teaser": "Nhỏ: 20 giây. Lớn: 112. Đây là cái giá bạn trả.",
+ "rank": 8,
+ "lang": "vi",
+ "alt": "gemma-4-e2b-vs-e4b",
+ "faq": [
+  {"q": "Mô hình AI lớn hơn có luôn tốt hơn không?", "a": "Câu trả lời của nó thường tốt hơn một chút, nhưng trên laptop không có card đồ họa thì nó chậm hơn nhiều. Trong bài thử của chúng tôi, mô hình lớn (Gemma 4 E4B) giải thích hay nhất nhưng mất 112 giây; mô hình nhỏ (Gemma 4 E2B) cho câu trả lời tốt trong 20 giây."},
+  {"q": "Mô hình AI nhỏ có hay sai kiến thức không?", "a": "Trong năm câu hỏi kiến thức nhanh của chúng tôi (toán, đổi đơn vị, ngày tháng, khoa học), không mô hình nhỏ nào sai. Điểm yếu của mô hình nhỏ là đếm: đôi khi nó nói một số mục rồi lại liệt kê số mục khác."},
+  {"q": "Tôi nên dùng mô hình AI nào trên máy mình?", "a": "Trên laptop không có card đồ họa, dùng mô hình nhỏ. Trên máy có card đồ họa, mô hình lớn cũng chạy nhanh (56 đến 72 token mỗi giây trên card 8 GB), nên hãy dùng nó. GreenCube tự chọn cho bạn dựa trên máy của bạn."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Trả lời ngắn:</strong> trên laptop không có card đồ họa, <strong>mô hình nhỏ thắng</strong>: một câu trả lời tốt trong 20 giây thay vì một câu tốt hơn chút ít trong gần 2 phút. Nếu bạn có card đồ họa, hãy dùng mô hình lớn: ở đó nó cũng nhanh.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 giây</b><span>mô hình nhỏ (Gemma 4 E2B), câu trả lời đầy đủ</span></div>
+<div class="stat b"><b>28 giây</b><span>mô hình nhỏ đời cũ (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 giây</b><span>mô hình lớn (Gemma 4 E4B), giải thích hay nhất</span></div>
+</div>
+
+<h2>Bài thử</h2>
+<p>Một laptop 16 GB (Intel Core Ultra 5, không card đồ họa), chỉ bộ xử lý. Một yêu cầu học tập điển hình: giải thích quang hợp cho một bạn 14 tuổi, rồi viết ba câu hỏi trắc nghiệm về nó. Chúng tôi tính giờ đến khi câu trả lời xong, trong tháng 9 năm 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Mô hình</th><th>Dung lượng</th><th>Thời gian đến khi trả lời xong</th><th>Kết quả</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 giây</b></td><td>Đầy đủ, viết tốt, ba câu hỏi khác nhau</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 giây</b></td><td>Đầy đủ và đúng, nhưng lặp lại một câu hỏi</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 giây</b></td><td>Đầy đủ, giải thích hay nhất</td></tr>
+</tbody>
+</table></div>
+
+<h2>Những gì chúng tôi rút ra</h2>
+
+<div class="card g">
+<h3>1. Để học, mô hình nhỏ là đủ</h3>
+<p>Chúng tôi cũng hỏi năm câu kiến thức nhanh: toán, đổi đơn vị, ngày tháng và khoa học. <strong>Không mô hình nhỏ nào sai câu nào.</strong> Gemma nhỏ thậm chí tự chỉ thêm cách thứ hai để tính phần trăm mà không cần ai hỏi.</p>
+</div>
+
+<div class="card y">
+<h3>2. Điểm yếu của nó: đếm</h3>
+<p>Hai lần, mô hình nhỏ nói "đây là 5 mục" rồi liệt kê một số mục khác. Vì vậy giờ GreenCube bảo nó đếm trước khi viết con số. Với những chi tiết nhỏ kiểu này, mô hình lớn an toàn hơn.</p>
+</div>
+
+<div class="card b">
+<h3>3. Với card đồ họa thì khác hẳn</h3>
+<p>Cùng mô hình lớn đó viết <strong>56 đến 72 token mỗi giây</strong> trên card gaming 8 GB, nhanh gấp 7 đến 9 lần so với trên laptop này. Trên máy chơi game, bạn có câu trả lời tốt hơn mà không phải chờ.</p>
+</div>
+
+<h2>Máy bạn hợp với cái nào?</h2>
+<div class="expect">
+<div class="g"><h4>Laptop không card</h4><p>Mô hình nhỏ. Trả lời nhanh, đủ tốt để học, viết và hỏi đáp.</p></div>
+<div class="b"><h4>Máy chơi game</h4><p>Mô hình lớn. Câu trả lời tốt hơn, và vẫn nhanh hơn bạn đọc.</p></div>
+<div class="y"><h4>Cần một danh sách?</h4><p>Nếu nó nói "đây là 5 mục", hãy kiểm tra có đúng 5 không. Đó là chỗ duy nhất mô hình nhỏ bị sai.</p></div>
+<div class="p"><h4>Không muốn bận tâm?</h4><p>GreenCube kiểm tra máy bạn và chọn giúp bạn.</p></div>
+</div>
+
+<p>Xem từng loại máy nhanh đến đâu: <a href="/blog/can-my-pc-run-ai">chúng tôi đã đo {{pcs}} máy ở đây</a>.</p>
