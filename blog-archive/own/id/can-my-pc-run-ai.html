@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Bisakah PC-ku menjalankan AI? Kami mengukur {{pcs}} PC gaming dan laptop sungguhan",
+ "description": "Bisakah PC-mu menjalankan AI secara lokal? Kecepatan nyata dari {{pcs}} PC, dari GTX 1650 sampai RTX 2080 Ti dan laptop tanpa kartu grafis, plus arti kartu grafis, VRAM, dan RAM.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PC",
+ "teaser": "Kecepatan nyata di {{pcs}} PC gaming dan laptop.",
+ "rank": 1,
+ "lang": "id",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "Apakah AI di PC-ku jalan dengan kartu grafis AMD?", "a": "Ya. Kami mengukur kartu AMD (RX 5700 XT, RX 6600, RX 580) selain kartu NVIDIA. GreenCube memakai Vulkan, yang jalan di keduanya."},
+  {"q": "Berapa VRAM yang dibutuhkan untuk AI?", "a": "Tidak wajib, tapi 4 GB atau lebih membuat perbedaan besar. Di PC uji kami, GTX 1650 dengan 4 GB menulis sekitar 20 token per detik, dan RTX 5060 dengan 8 GB sekitar 56. VRAM yang lebih besar membuat AI yang lebih besar muat di kartu."},
+  {"q": "Apakah AI jalan di laptop tanpa kartu grafis?", "a": "Ya. Laptop 16 GB dengan grafis Intel saja menulis 14 sampai 18 token per detik dengan AI kecil, lebih cepat daripada kamu membaca. Laptop 8 GB juga jalan, lebih lambat, dan tidak bisa membuat gambar."},
+  {"q": "Apakah RAM lebih besar membuat AI lebih cepat?", "a": "Tidak dengan sendirinya. Di desktop dengan RAM 48 GB, AI yang sama berjalan 14 kali lebih cepat begitu pindah ke kartu grafis 8 GB dibanding di prosesor. Tanpa kartu, RAM penting; dengan kartu, VRAM yang paling penting."},
+  {"q": "Apakah aku butuh internet untuk menjalankan AI di PC-ku?", "a": "Hanya sekali, untuk mengunduh dan mengaktifkan aplikasi dan AI-nya. Setelah itu chat berjalan tanpa internet sama sekali."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Jawaban singkat: ya.</strong> Kalau PC-mu bisa main game, PC-mu bisa menjalankan AI. Kami mengukur {{pcs}} PC sungguhan: desktop gaming dari GTX 1650 lama sampai RTX 2080 Ti, dan dua laptop tanpa kartu grafis sama sekali. Semuanya menjalankan chat dengan AI yang sepenuhnya berjalan di PC itu sendiri: tanpa internet, tanpa langganan. Yang berubah hanya kecepatannya.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>lebih cepat di kartu grafis daripada di prosesor, PC sama, AI sama</span></div>
+<div class="stat b"><b>20</b><span>token per detik di GTX 1650 4 GB. Lebih cepat daripada kamu membaca.</span></div>
+<div class="stat p"><b>8&ndash;9 detik</b><span>per gambar di RTX 2080 Ti, setelah dimuat</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Angkanya</h2>
+
+<p>"Menulis" adalah seberapa cepat AI mengetik jawabannya, dalam token per detik. Token adalah potongan kata: satu kata bahasa Indonesia sering terdiri dari dua token atau lebih. Kebanyakan orang membaca sekitar 4 kata per detik (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), jadi mulai sekitar 8 token per detik AI menulis lebih cepat daripada yang bisa diikuti matamu.</p>
+
+<!--pcs:table-->
+
+<p>Klik kartu grafis untuk melihat tes lengkapnya.</p>
+
+<p>Diukur dengan GreenCube pada September dan Oktober 2026, dalam chat nyata dan tes kecepatan GreenCube sendiri. Kecepatan sedikit berubah antar pengukuran di PC yang sama, jadi kalau kami punya lebih dari satu pengukuran, kami berikan rentangnya. <a href="/blog/how-we-measure-ai-speed">Cara kami mengukur dan semua datanya</a>.</p>
+
+<h2>Yang kami pelajari</h2>
+
+<div class="card g">
+<h3>1. Kartu grafis yang mengerjakan bagian berat, seperti di game</h3>
+<p>Di desktop dengan RX 5700 XT, AI yang sama menulis <strong>5 token per detik di prosesor dan 72 di kartu grafis</strong>. AI sebagian besar adalah jenis matematika yang memang menjadi tujuan kartu grafis dibuat. Kartu apa pun dari beberapa tahun terakhir, bahkan GTX 1650 4 GB yang lama, membuat perbedaan besar.</p>
+</div>
+
+<div class="card b">
+<h3>2. VRAM menentukan seberapa besar AI yang muat</h3>
+<p>Supaya berjalan dengan kecepatan penuh, AI harus muat di memori kartu itu sendiri (VRAM). Desktop itu punya RAM 48 GB, dan itu tidak menyelamatkan model yang lebih besar: AI 12 miliar parameter muat di kartu 8 GB untuk pertanyaan pendek, lalu crash begitu chat jadi lebih panjang, dengan kartu hampir penuh. <strong>Untuk AI, VRAM lebih penting daripada RAM.</strong> Tapi VRAM bukan kecepatan: empat kartu 8 GB yang kami ukur menulis dari sekitar 11 token per detik (RX 580) sampai 72 (RX 5700 XT). Itulah kenapa GreenCube memeriksa kartumu dan memilih AI yang muat, bukan yang terbesar.</p>
+</div>
+
+<div class="card y">
+<h3>3. Tidak ada kartu grafis? Tetap jalan</h3>
+<p>Laptop 16 GB biasa dengan grafis Intel saja menulis 14 sampai 18 token per detik dengan AI yang lebih kecil, dan menyelesaikan satu jawaban lengkap (penjelasan dan tiga soal kuis) dalam sekitar 20 detik. Itu cukup untuk belajar dan menulis. Laptop 8 GB juga jalan, dengan 5 sampai 7 token per detik di chat nyata, kalau aplikasi lain menyisakan sedikit memori kosong.</p>
+</div>
+
+<div class="card p">
+<h3>4. Gambar adalah bagian yang berat</h3>
+<p>Membuat gambar jauh lebih berat daripada chat. Di RTX 2080 Ti 11 GB, <strong>8 sampai 9 detik</strong> (yang pertama butuh 83 detik saat memuat), di RTX 3060 12 GB <strong>28 detik</strong>, di RX 6600 8 GB sekitar satu menit, di GTX 1660 Super 6 GB satu setengah menit, dan di laptop 16 GB sekitar <strong>dua setengah menit</strong>. Laptop 8 GB sama sekali tidak bisa membuat gambar: AI gambar sendiri butuh sekitar 7 GB.</p>
+</div>
+
+<h2 id="by-hand">Cek PC-mu dalam 30 detik</h2>
+<ol class="steps">
+<li>Tekan <strong>Ctrl + Shift + Esc</strong> untuk membuka Task Manager.</li>
+<li>Buka <strong>Performance</strong> (Kinerja).</li>
+<li>Klik <strong>Memory</strong> (Memori): angka di kanan atas adalah RAM-mu.</li>
+<li>Klik <strong>GPU</strong>: nama di kanan atas adalah kartumu, dan <strong>Dedicated GPU memory</strong> (Memori GPU khusus) adalah VRAM-mu. Hanya melihat grafis Intel? Berarti kamu tidak punya kartu terpisah.</li>
+</ol>
+
+<h2>Bagaimana rasanya di PC-mu</h2>
+<div class="expect">
+<div class="g"><h4>Kartu 6 GB atau lebih</h4><p>Cepat di kebanyakan kartu beberapa tahun terakhir: 37 sampai 76 token per detik di tes kami, berkali-kali lipat kecepatan membaca, dan gambar dalam hitungan detik sampai satu setengah menit. Satu pengecualian: RX 580 lama menulis sekitar 11, tetap lebih cepat daripada membaca.</p></div>
+<div class="b"><h4>Kartu 4 GB, RAM 16 GB</h4><p>Bagus. Sekitar 20 token per detik di tes kami.</p></div>
+<div class="y"><h4>Tanpa kartu, RAM 16 GB</h4><p>Cukup untuk chat dan belajar dengan AI yang lebih kecil. Gambar butuh beberapa menit.</p></div>
+<div class="p"><h4>Tanpa kartu, RAM 8 GB</h4><p>Jalan untuk chat, pelan. Tutup aplikasi lain dulu. Tidak bisa gambar.</p></div>
+</div>
+
+<h2>Kenapa AI di PC-mu sendiri?</h2>
+<p>Karena itu milikmu. Tidak ada batas pesan, tidak ada langganan bulanan, dan tetap jalan tanpa internet: di kereta, di gunung, atau di perpustakaan dengan Wi-Fi yang buruk. AI ini tidak akan mengalahkan AI cloud terbesar dalam segala hal, tapi untuk belajar, menulis, merangkum, dan pertanyaan sehari-hari, AI di kartumu sendiri lebih dari cukup, dan tidak pernah habis.</p>

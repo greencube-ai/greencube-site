@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu | Blog GreenCube</title>
+  <meta name="description" content="Berapa VRAM yang dibutuhkan untuk AI? Kami mengukurnya: model yang meluber keluar dari kartu grafis berjalan 6 kali lebih lambat dan crash di chat panjang. Cara memilih yang muat." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu | Blog GreenCube" />
+  <meta property="og:description" content="Berapa VRAM yang dibutuhkan untuk AI? Kami mengukurnya: model yang meluber keluar dari kartu grafis berjalan 6 kali lebih lambat dan crash di chat panjang. Cara memilih yang muat." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/id/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/id/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu", "description": "Berapa VRAM yang dibutuhkan untuk AI? Kami mengukurnya: model yang meluber keluar dari kartu grafis berjalan 6 kali lebih lambat dan crash di chat panjang. Cara memilih yang muat.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "id", "mainEntityOfPage": "https://blog.greencube.app/blog/id/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/id/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Apa yang terjadi kalau model AI tidak muat di VRAM?", "acceptedAnswer": {"@type": "Answer", "text": "Bagian yang tidak muat berjalan dari memori biasa, dan semuanya melambat. Di kartu 8 GB kami, model dengan 28 lapisannya di kartu menulis 5,9 token per detik, bukan 35,6 seperti saat semua lapisannya di kartu: 6 kali lebih lambat."}}, {"@type": "Question", "name": "Haruskah aku menjalankan model AI terbesar yang bisa dimuat kartuku?", "acceptedAnswer": {"@type": "Answer", "text": "Tidak. Sisakan ruang untuk percakapan. Model 12 miliar parameter muat di kartu 8 GB untuk pertanyaan pendek, lalu crash begitu chat jadi lebih panjang. Model lebih kecil yang muat dengan ruang tersisa lebih cepat dan tidak pernah crash."}}, {"@type": "Question", "name": "Berapa VRAM yang sebaiknya dibiarkan kosong?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube menyisakan sekitar 1,5 GB kartu kosong untuk percakapan dan untuk Windows. Tanpa ruang itu, kartu 4 GB kehabisan memori di pesan pertama."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/id/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/id/ai-environmental-impact">AI &amp; planet</a>
+    <a href="https://greencube.app/id/your-data">Datamu</a>
+    <a href="https://greencube.app/id/mission">Misi kami</a>
+    <a href="/blog/id" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">ID</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-much-vram-for-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-much-vram-for-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-much-vram-for-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-much-vram-for-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-much-vram-for-ai" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-much-vram-for-ai" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-much-vram-for-ai" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-much-vram-for-ai" hreflang="id" lang="id" aria-current="true">Indonesia</a></div></details><a href="https://greencube.app/id/buy" class="nav-cta">Dapatkan GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/id">Blog GreenCube</a></p>
+<h1>Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu</h1>
+<p class="byline">Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 18 Oktober 2026</p>
+<div class="answer"><p><strong>Jawaban singkat:</strong> AI yang muat utuh di memori kartu grafismu (VRAM) itu cepat. Yang meluber justru <strong>lebih lambat daripada tidak memakai kartu sama sekali</strong>, dan bisa crash. Lebih kecil dan utuh di kartu lebih baik daripada lebih besar dan setengahnya di kartu.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>token per detik dengan seluruh model di kartu</span></div>
+<div class="stat p"><b>5,9</b><span>dengan sebagian tidak di kartu: 6 kali lebih lambat</span></div>
+<div class="stat y"><b>Crash</b><span>saat model yang hampir tidak muat bertemu chat panjang</span></div>
+</div>
+
+<h2>Tesnya</h2>
+<p>Desktop dengan AMD RX 5700 XT (VRAM 8 GB) dan RAM 48 GB. Kami memuat model 12 miliar parameter (Gemma 4 12B, sekitar 6,2 GB) dan menaruh lebih banyak atau lebih sedikit bagiannya di kartu, semua dalam satu sesi pada September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Berapa bagian model yang ada di kartu</th><th>Menulis (token/detik)</th></tr></thead>
+<tbody>
+<tr><td>Semuanya</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 lapisannya</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 lapisannya</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Sebagai perbandingan: model lebih kecil (Gemma 4 E4B) di prosesor saja</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Model kecil itu, semuanya di kartu</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Yang kami pelajari</h2>
+
+<div class="card g">
+<h3>1. Semua atau tidak sama sekali</h3>
+<p>Membiarkan sebagian kecil model di luar kartu membuatnya <strong>6 kali lebih lambat</strong>. Dengan 20 lapisan di kartu, ia lebih lambat daripada model yang lebih kecil yang berjalan tanpa kartu sama sekali. Setengah di kartu adalah yang terburuk dari dua dunia.</p>
+</div>
+
+<div class="card p">
+<h3>2. Terbesar bukan berarti terbaik</h3>
+<p>Model 12B memang muat utuh di kartu 8 GB, untuk satu pertanyaan pendek. Begitu chat bertambah, ia crash setiap kali: kartu hampir tidak punya ruang tersisa untuk percakapan. Model yang lebih kecil punya sisa sekitar 3 GB dan berjalan 63 sampai 72 token per detik.</p>
+</div>
+
+<div class="card b">
+<h3>3. Sisakan ruang</h3>
+<p>Di GTX 1650 4 GB, model 4,2 GB dijejalkan ke kartu 3,9 GB, dan pesan pertama langsung gagal dengan "memori tidak cukup". GreenCube sekarang menyisakan <strong>sekitar 1,5 GB kartu kosong</strong> untuk chat dan untuk Windows.</p>
+</div>
+
+<h2>Cara memilih model untuk kartumu</h2>
+<div class="expect">
+<div class="g"><h4>Cek VRAM-mu</h4><p>Task Manager &rarr; Performance &rarr; GPU &rarr; Dedicated GPU memory.</p></div>
+<div class="b"><h4>Ukuran model + 1,5 GB</h4><p>File model ditambah sekitar 1,5 GB harus muat di angka itu.</p></div>
+<div class="y"><h4>Ragu? Pilih yang lebih kecil</h4><p>Model kecil yang utuh di kartu lebih baik daripada yang besar setengahnya di kartu.</p></div>
+<div class="p"><h4>Atau biarkan aplikasi memilih</h4><p>GreenCube membaca kartumu dan memilih model yang muat dengan ruang tersisa.</p></div>
+</div>
+
+<p>Kecepatan nyata di 10 PC, dari GTX 1650 sampai RTX 5060: <a href="/blog/id/can-my-pc-run-ai">lihat di sini</a>.</p>
+<h2>Pertanyaan</h2>
+<div class="faq">
+<details><summary>Apa yang terjadi kalau model AI tidak muat di VRAM?</summary><p>Bagian yang tidak muat berjalan dari memori biasa, dan semuanya melambat. Di kartu 8 GB kami, model dengan 28 lapisannya di kartu menulis 5,9 token per detik, bukan 35,6 seperti saat semua lapisannya di kartu: 6 kali lebih lambat.</p></details>
+<details><summary>Haruskah aku menjalankan model AI terbesar yang bisa dimuat kartuku?</summary><p>Tidak. Sisakan ruang untuk percakapan. Model 12 miliar parameter muat di kartu 8 GB untuk pertanyaan pendek, lalu crash begitu chat jadi lebih panjang. Model lebih kecil yang muat dengan ruang tersisa lebih cepat dan tidak pernah crash.</p></details>
+<details><summary>Berapa VRAM yang sebaiknya dibiarkan kosong?</summary><p>GreenCube menyisakan sekitar 1,5 GB kartu kosong untuk percakapan dan untuk Windows. Tanpa ruang itu, kartu 4 GB kehabisan memori di pesan pertama.</p></details>
+</div>
+
+<div class="cta-box"><h3>AI milikmu sendiri, di PC-mu sendiri</h3><p>GreenCube berjalan di komputermu: tanpa batas pemakaian, tanpa langganan, jalan tanpa internet. &euro;9,99, bayar sekali.</p><a class="cta" href="https://greencube.app/id/buy">Dapatkan GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/id/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI yang jadi <em>milikmu,</em> bukan sewaan.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produk</h3>
+        <ul>
+          <li><a href="https://greencube.app/id/buy">Dapatkan GreenCube</a></li>
+          <li><a href="https://greencube.app/id/what-you-get">Apakah bisa jalan di komputerku?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Pelajari</h3>
+        <ul>
+          <li><a href="/blog/id">Blog</a></li>
+          <li><a href="https://greencube.app/id/your-data">Datamu</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; datamu (EN)</a></li>
+          <li><a href="https://greencube.app/id/ai-environmental-impact">AI &amp; planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Perusahaan</h3>
+        <ul>
+          <li><a href="https://greencube.app/id/mission">Misi kami</a></li>
+          <li><a href="mailto:support@greencube.app">Kontak</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Kebijakan privasi (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Ketentuan penggunaan (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Dibuat di Spanyol.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

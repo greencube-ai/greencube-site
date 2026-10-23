@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu",
+ "description": "Berapa VRAM yang dibutuhkan untuk AI? Kami mengukurnya: model yang meluber keluar dari kartu grafis berjalan 6 kali lebih lambat dan crash di chat panjang. Cara memilih yang muat.",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "Meluber dari VRAM, jadi 6 kali lebih lambat.",
+ "rank": 6,
+ "lang": "id",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "Apa yang terjadi kalau model AI tidak muat di VRAM?", "a": "Bagian yang tidak muat berjalan dari memori biasa, dan semuanya melambat. Di kartu 8 GB kami, model dengan 28 lapisannya di kartu menulis 5,9 token per detik, bukan 35,6 seperti saat semua lapisannya di kartu: 6 kali lebih lambat."},
+  {"q": "Haruskah aku menjalankan model AI terbesar yang bisa dimuat kartuku?", "a": "Tidak. Sisakan ruang untuk percakapan. Model 12 miliar parameter muat di kartu 8 GB untuk pertanyaan pendek, lalu crash begitu chat jadi lebih panjang. Model lebih kecil yang muat dengan ruang tersisa lebih cepat dan tidak pernah crash."},
+  {"q": "Berapa VRAM yang sebaiknya dibiarkan kosong?", "a": "GreenCube menyisakan sekitar 1,5 GB kartu kosong untuk percakapan dan untuk Windows. Tanpa ruang itu, kartu 4 GB kehabisan memori di pesan pertama."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Jawaban singkat:</strong> AI yang muat utuh di memori kartu grafismu (VRAM) itu cepat. Yang meluber justru <strong>lebih lambat daripada tidak memakai kartu sama sekali</strong>, dan bisa crash. Lebih kecil dan utuh di kartu lebih baik daripada lebih besar dan setengahnya di kartu.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>token per detik dengan seluruh model di kartu</span></div>
+<div class="stat p"><b>5,9</b><span>dengan sebagian tidak di kartu: 6 kali lebih lambat</span></div>
+<div class="stat y"><b>Crash</b><span>saat model yang hampir tidak muat bertemu chat panjang</span></div>
+</div>
+
+<h2>Tesnya</h2>
+<p>Desktop dengan AMD RX 5700 XT (VRAM 8 GB) dan RAM 48 GB. Kami memuat model 12 miliar parameter (Gemma 4 12B, sekitar 6,2 GB) dan menaruh lebih banyak atau lebih sedikit bagiannya di kartu, semua dalam satu sesi pada September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Berapa bagian model yang ada di kartu</th><th>Menulis (token/detik)</th></tr></thead>
+<tbody>
+<tr><td>Semuanya</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 lapisannya</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 lapisannya</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Sebagai perbandingan: model lebih kecil (Gemma 4 E4B) di prosesor saja</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Model kecil itu, semuanya di kartu</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Yang kami pelajari</h2>
+
+<div class="card g">
+<h3>1. Semua atau tidak sama sekali</h3>
+<p>Membiarkan sebagian kecil model di luar kartu membuatnya <strong>6 kali lebih lambat</strong>. Dengan 20 lapisan di kartu, ia lebih lambat daripada model yang lebih kecil yang berjalan tanpa kartu sama sekali. Setengah di kartu adalah yang terburuk dari dua dunia.</p>
+</div>
+
+<div class="card p">
+<h3>2. Terbesar bukan berarti terbaik</h3>
+<p>Model 12B memang muat utuh di kartu 8 GB, untuk satu pertanyaan pendek. Begitu chat bertambah, ia crash setiap kali: kartu hampir tidak punya ruang tersisa untuk percakapan. Model yang lebih kecil punya sisa sekitar 3 GB dan berjalan 63 sampai 72 token per detik.</p>
+</div>
+
+<div class="card b">
+<h3>3. Sisakan ruang</h3>
+<p>Di GTX 1650 4 GB, model 4,2 GB dijejalkan ke kartu 3,9 GB, dan pesan pertama langsung gagal dengan "memori tidak cukup". GreenCube sekarang menyisakan <strong>sekitar 1,5 GB kartu kosong</strong> untuk chat dan untuk Windows.</p>
+</div>
+
+<h2>Cara memilih model untuk kartumu</h2>
+<div class="expect">
+<div class="g"><h4>Cek VRAM-mu</h4><p>Task Manager &rarr; Performance &rarr; GPU &rarr; Dedicated GPU memory.</p></div>
+<div class="b"><h4>Ukuran model + 1,5 GB</h4><p>File model ditambah sekitar 1,5 GB harus muat di angka itu.</p></div>
+<div class="y"><h4>Ragu? Pilih yang lebih kecil</h4><p>Model kecil yang utuh di kartu lebih baik daripada yang besar setengahnya di kartu.</p></div>
+<div class="p"><h4>Atau biarkan aplikasi memilih</h4><p>GreenCube membaca kartumu dan memilih model yang muat dengan ruang tersisa.</p></div>
+</div>
+
+<p>Kecepatan nyata di {{pcs}} PC, dari GTX 1650 sampai RTX 5060: <a href="/blog/can-my-pc-run-ai">lihat di sini</a>.</p>

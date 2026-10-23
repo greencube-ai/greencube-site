@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cara kami mengukur kecepatan AI di PC sungguhan, dan kenapa kami tidak menebak | Blog GreenCube</title>
+  <meta name="description" content="Setiap kecepatan di blog GreenCube berasal dari salah satu dari 10 PC sungguhan. Cara kami mengukur, setiap PC yang kami tes, data dalam CSV, dan tes yang menunjukkan kenapa kami tidak memperkirakan sisanya." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Cara kami mengukur kecepatan AI di PC sungguhan, dan kenapa kami tidak menebak | Blog GreenCube" />
+  <meta property="og:description" content="Setiap kecepatan di blog GreenCube berasal dari salah satu dari 10 PC sungguhan. Cara kami mengukur, setiap PC yang kami tes, data dalam CSV, dan tes yang menunjukkan kenapa kami tidak memperkirakan sisanya." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/id/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/id/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Cara kami mengukur kecepatan AI di PC sungguhan, dan kenapa kami tidak menebak", "description": "Setiap kecepatan di blog GreenCube berasal dari salah satu dari 10 PC sungguhan. Cara kami mengukur, setiap PC yang kami tes, data dalam CSV, dan tes yang menunjukkan kenapa kami tidak memperkirakan sisanya.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "id", "mainEntityOfPage": "https://blog.greencube.app/blog/id/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/id/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Dari mana angka kecepatan AI GreenCube berasal?", "acceptedAnswer": {"@type": "Answer", "text": "Dari 10 PC sungguhan yang menjalankan GreenCube, diukur dalam chat nyata, dengan tes kecepatan awal GreenCube, dengan tes kecepatan llama.cpp, dan dengan tes gambar. Setiap angka menyebutkan caranya."}}, {"@type": "Question", "name": "Bisakah kecepatan AI diperkirakan dari spesifikasi kartu grafis?", "acceptedAnswer": {"@type": "Answer", "text": "Belum secara andal. Memprediksi dari bandwidth memori, perkiraan kami biasanya meleset 19% dan sampai 239%, jadi kami hanya menampilkan kartu yang sudah kami ukur."}}, {"@type": "Question", "name": "Bisakah aku mengunduh datanya?", "acceptedAnswer": {"@type": "Answer", "text": "Bisa: setiap pengukuran ada di greencube-ai-speeds.csv, tautannya di halaman ini."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/id/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/id/ai-environmental-impact">AI &amp; planet</a>
+    <a href="https://greencube.app/id/your-data">Datamu</a>
+    <a href="https://greencube.app/id/mission">Misi kami</a>
+    <a href="/blog/id" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">ID</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-we-measure-ai-speed" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-we-measure-ai-speed" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/how-we-measure-ai-speed" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/how-we-measure-ai-speed" hreflang="id" lang="id" aria-current="true">Indonesia</a></div></details><a href="https://greencube.app/id/buy" class="nav-cta">Dapatkan GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/id">Blog GreenCube</a></p>
+<h1>Cara kami mengukur kecepatan AI di PC sungguhan, dan kenapa kami tidak menebak</h1>
+<p class="byline">Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 14 Oktober 2026</p>
+<div class="answer"><p>Setiap kecepatan di blog ini berasal dari PC sungguhan yang menjalankan GreenCube: sejauh ini 10 PC, diukur antara 22 September 2026 dan 14 Oktober 2026. Kami tidak memperkirakan kecepatan untuk kartu yang belum kami ukur: saat kami menguji perkiraan pada kartu yang kami punya, perkiraan yang umum meleset 19% dan yang terburuk 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>PC sungguhan yang diukur, desktop dan laptop</span></div>
+<div class="stat b"><b>34</b><span>pengukuran, semuanya di CSV di bawah</span></div>
+<div class="stat y"><b>239%</b><span>seberapa jauh perkiraan kecepatan terburuk meleset</span></div>
+</div>
+<h2>Apa yang kami ukur</h2>
+<p>Tiga hal, karena itulah yang kamu rasakan saat memakai AI di PC-mu sendiri:</p>
+<ul>
+<li><strong>Kecepatan menulis:</strong> seberapa cepat AI mengetik jawabannya, dalam token per detik. Token adalah potongan kata, dan kebanyakan orang membaca sekitar 8 token per detik dalam bahasa Indonesia, jadi apa pun di atas itu keluar lebih cepat daripada yang bisa kamu baca.</li>
+<li><strong>Kecepatan membaca:</strong> seberapa cepat ia menerima apa yang kamu berikan: pertanyaanmu, teks yang ditempel, atau PDF. Selalu jauh lebih cepat daripada menulis, karena AI membaca banyak token sekaligus tapi menulisnya satu per satu.</li>
+<li><strong>Waktu gambar:</strong> berapa lama satu gambar 512×512, dari klik sampai gambar jadi.</li>
+</ul>
+<p>Kami mengukur AI yang dipakai GreenCube, file yang sama yang diunduh setiap pengguna: Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB), dan Gemma 4 12B (6,4 GB) dari Google untuk chat, dan Z-Image Turbo untuk gambar. AI lain, atau AI yang sama dengan kompresi berbeda, akan memberi angka lain, jadi kami hanya membandingkan yang setara.</p>
+<h2>Cara kami mengukur</h2>
+<p>Empat cara, dan setiap angka di blog menyebutkan asalnya:</p>
+<div class="card g">
+<h3>Chat nyata</h3>
+<p>Chat nyata di GreenCube: kecepatan setiap jawaban 100 token atau lebih, dibaca dari log aplikasi. Rentangnya membuang sepersepuluh yang paling lambat dan paling cepat.</p>
+<p>Dipakai untuk: <a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/id/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/id/ai-on-rx-6600">RX 6600</a>, <a href="/blog/id/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/id/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/id/ai-on-rx-580">RX 580</a>, <a href="/blog/id/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>.</p>
+</div>
+<div class="card b">
+<h3>Tes awal GreenCube</h3>
+<p>Tes kecepatan GreenCube sendiri, yang dijalankan saat mulai untuk memilih antara kartu grafis dan prosesor: jawaban pendek yang ditulis sekali di masing-masing.</p>
+<p>Dipakai untuk: <a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/id/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/id/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/id/ai-on-rx-6600">RX 6600</a>, <a href="/blog/id/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/id/ai-on-rx-580">RX 580</a>, <a href="/blog/id/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>.</p>
+</div>
+<div class="card y">
+<h3>Tes kecepatan llama.cpp</h3>
+<p>Tes kecepatan llama.cpp sendiri (llama-bench), mesin yang menjalankan GreenCube, dengan file AI yang sama: 128 token ditulis, teks 512 token dibaca.</p>
+<p>Dipakai untuk: <a href="/blog/id/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/id/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a>.</p>
+</div>
+<div class="card p">
+<h3>Tes gambar</h3>
+<p>Mesin gambar GreenCube (Z-Image Turbo), 512×512 piksel, 8 langkah, diukur dari klik sampai gambar jadi.</p>
+<p>Dipakai untuk: <a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/id/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/id/ai-on-rx-6600">RX 6600</a>, <a href="/blog/id/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/id/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a>.</p>
+</div>
+<p>Chat nyata adalah bukti terbaik, karena itulah yang akan kamu rasakan, jadi angka utama di setiap halaman berasal dari chat nyata kapan pun ada. Tes awal hanya satu jawaban pendek, jadi kami memakainya untuk perbandingan kartu dengan prosesor (ia mengukur keduanya dengan cara yang sama), dan sebagai angka utama hanya kalau penguji tidak mengirim jawaban panjang.</p>
+<h2>Semua PC yang kami ukur</h2>
+<p>PC milik penguji sungguhan, dipakai seperti biasanya, bukan mesin lab. Kami tidak memublikasikan nama mereka.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Jenis</th><th>VRAM</th><th>RAM</th><th>Angka utama dari</th><th>GreenCube</th><th>Tanggal</th><th>Menulis (token/detik)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Desktop</td><td>11 GB</td><td>128 GB</td><td>Chat nyata</td><td>0.1.44</td><td>14 Oktober 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Desktop</td><td>8 GB</td><td>48 GB</td><td>Tes kecepatan llama.cpp</td><td>–</td><td>22 September 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rtx-5060">RTX 5060</a></td><td>Desktop</td><td>8 GB</td><td>32 GB</td><td>Tes awal GreenCube</td><td>0.1.42</td><td>1 Oktober 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rtx-3060">RTX 3060</a></td><td>Desktop</td><td>12 GB</td><td>32 GB</td><td>Chat nyata</td><td>0.1.42–0.1.43</td><td>6 Oktober 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-6600">RX 6600</a></td><td>Desktop</td><td>8 GB</td><td>16 GB</td><td>Chat nyata</td><td>0.1.42–0.1.44</td><td>9 Oktober 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Desktop</td><td>6 GB</td><td>16 GB</td><td>Chat nyata</td><td>0.1.42</td><td>1 Oktober 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-gtx-1650">GTX 1650</a></td><td>Desktop</td><td>4 GB</td><td>16 GB</td><td>Chat nyata</td><td>0.1.40</td><td>23 September 2026</td><td><b>sekitar 20</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-intel-core-ultra-5-laptop">laptop Intel Core Ultra 5</a></td><td>Laptop</td><td>–</td><td>16 GB</td><td>Tes kecepatan llama.cpp</td><td>–</td><td>28 September 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-580">RX 580</a></td><td>Desktop</td><td>8 GB</td><td>16 GB</td><td>Chat nyata</td><td>0.1.42</td><td>1 Oktober 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a></td><td>Laptop</td><td>–</td><td>8 GB</td><td>Chat nyata</td><td>0.1.42</td><td>4 Oktober 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Kenapa angkanya berupa rentang</h2>
+<ul>
+<li><strong>Aplikasi lain.</strong> Browser, launcher game, atau video call memakai memori dan kartu grafis yang sama.</li>
+<li><strong>Pertama kali lebih lambat.</strong> Jawaban pertama setelah instalasi, atau gambar pertama, termasuk memuat dan menyiapkan kartu. Kami menyebutnya di tempat yang penting (misalnya "yang pertama butuh 83 detik saat memuat").</li>
+<li><strong>Jawaban pendek terukur lebih lambat.</strong> Setiap jawaban punya awal tetap yang kecil, yang lebih berat untuk balasan 20 token daripada 400 token. Karena itu rentang chat nyata menghitung jawaban 100 token atau lebih, dan kami menandainya kalau penguji hanya mengirim jawaban pendek.</li>
+<li><strong>Kami membuang nilai ekstrem.</strong> Rentang chat nyata dari persentil ke-10 sampai ke-90, jadi satu jawaban aneh tidak bisa menggesernya.</li>
+</ul>
+<h2>Bisakah kecepatan kartu ditebak dari spesifikasinya?</h2>
+<p>Itu akan praktis: ada ratusan kartu dan kami sudah mengukur 10 PC. Cara yang biasa adalah bandwidth memori. Untuk menulis setiap token, AI membaca seluruh modelnya dari memori kartu, jadi secara teori kecepatannya kira-kira bandwidth dibagi ukuran model, dikali efisiensi tertentu. Banyak kalkulator online bekerja seperti ini.</p>
+<p>Jadi kami mengujinya pada data kami sendiri. Kami menyembunyikan satu kartu setiap kali, menghitung kecepatan per GB/detik dari kartu lain, memprediksi kartu yang disembunyikan dari bandwidth-nya (dari spesifikasi pabrikan, yang dikumpulkan di <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">database GPU TechPowerUp</a>), lalu membandingkannya dengan yang kami ukur. AI yang sama di semuanya (Gemma 4 E4B, utuh di kartu).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Kartu</th><th>Bandwidth memori</th><th>Diukur (token/detik)</th><th>Prediksi</th><th>Meleset</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/detik</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/detik</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/detik</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/detik</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-6600">RX 6600</a></td><td>224 GB/detik</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/detik</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/id/ai-on-rx-580">RX 580</a></td><td>256 GB/detik</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>Perkiraan yang umum meleset 19%. Yang terburuk adalah <a href="/blog/id/ai-on-rx-580">RX 580</a>: memorinya menunjukkan sekitar 36 token per detik, tapi ia menulis 11. Ulangi tes tanpa kartu itu dan sisanya masih meleset sampai 33%. AMD RX 6600 yang lebih baru meleset ke arah sebaliknya, lebih cepat daripada yang ditunjukkan bandwidth-nya; cache besar di chip-nya (AMD menyebutnya Infinity Cache) mungkin salah satu alasannya. Setiap angka terukur adalah angka utama kartu itu, jadi tidak semuanya dari jenis tes yang sama; itu menambah sedikit gangguan, tapi tidak bisa menjelaskan meleset sampai tiga kali lipat.</p>
+<p><strong>Itu belum cukup baik.</strong> Tebakan yang bisa meleset 33% di kartu modern, atau 239% di kartu yang lebih tua, akan memberi tahu sebagian orang bahwa PC mereka baik-baik saja padahal lambat, atau sebaliknya. Jadi pengecek dan halaman kartu hanya menampilkan kartu yang sudah kami ukur, dan menyebutkan dengan jelas kalau kartumu tidak termasuk. Kami mengulangi tes ini dengan setiap kartu baru, dan kalau kesalahannya mengecil, kami akan menyebutkannya di sini sebelum menampilkan satu perkiraan pun.</p>
+<h2>Yang belum kami ukur</h2>
+<ul>
+<li>Laptop dengan kartu gaming.</li>
+<li>Gemma 4 12B di kartu dengan 10 GB atau lebih.</li>
+<li>Gambar di <a href="/blog/id/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/id/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/id/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/id/ai-on-rx-580">RX 580</a>.</li>
+<li>AI selain yang dipakai GreenCube, dan Linux atau Mac (GreenCube untuk Windows).</li>
+</ul>
+<h2>Ambil datanya</h2>
+<p>Setiap pengukuran di halaman ini, satu baris masing-masing, ada di <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: PC, AI, tempat ia berjalan, kecepatan menulis dan membaca, waktu gambar, cara mengukurnya, versi GreenCube, dan tanggal. Kalau kamu memakainya, mohon sebut "GreenCube, AI speed measurements on real PCs, 2026" dan tautkan ke halaman ini.</p>
+<h2>Tambahkan PC-mu</h2>
+<p>Sudah memakai GreenCube? Kirim log-mu ke <a href="mailto:support@greencube.app">support@greencube.app</a>. Kami menambahkan PC-mu ke tes, tanpa namamu, dan kartu baru mendapat halamannya sendiri. Tidak yakin isi PC-mu? <a href="/blog/id/can-my-pc-run-ai#checker">Cek di sini</a>.</p>
+<h2>Pertanyaan</h2>
+<div class="faq">
+<details><summary>Dari mana angka kecepatan AI GreenCube berasal?</summary><p>Dari 10 PC sungguhan yang menjalankan GreenCube, diukur dalam chat nyata, dengan tes kecepatan awal GreenCube, dengan tes kecepatan llama.cpp, dan dengan tes gambar. Setiap angka menyebutkan caranya.</p></details>
+<details><summary>Bisakah kecepatan AI diperkirakan dari spesifikasi kartu grafis?</summary><p>Belum secara andal. Memprediksi dari bandwidth memori, perkiraan kami biasanya meleset 19% dan sampai 239%, jadi kami hanya menampilkan kartu yang sudah kami ukur.</p></details>
+<details><summary>Bisakah aku mengunduh datanya?</summary><p>Bisa: setiap pengukuran ada di greencube-ai-speeds.csv, tautannya di halaman ini.</p></details>
+</div>
+
+<div class="cta-box"><h3>AI milikmu sendiri, di PC-mu sendiri</h3><p>GreenCube berjalan di komputermu: tanpa batas pemakaian, tanpa langganan, jalan tanpa internet. &euro;9,99, bayar sekali.</p><a class="cta" href="https://greencube.app/id/buy">Dapatkan GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/id/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">AI yang jadi <em>milikmu,</em> bukan sewaan.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produk</h3>
+        <ul>
+          <li><a href="https://greencube.app/id/buy">Dapatkan GreenCube</a></li>
+          <li><a href="https://greencube.app/id/what-you-get">Apakah bisa jalan di komputerku?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Pelajari</h3>
+        <ul>
+          <li><a href="/blog/id">Blog</a></li>
+          <li><a href="https://greencube.app/id/your-data">Datamu</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; datamu (EN)</a></li>
+          <li><a href="https://greencube.app/id/ai-environmental-impact">AI &amp; planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Perusahaan</h3>
+        <ul>
+          <li><a href="https://greencube.app/id/mission">Misi kami</a></li>
+          <li><a href="mailto:support@greencube.app">Kontak</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Kebijakan privasi (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Ketentuan penggunaan (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Dibuat di Spanyol.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
