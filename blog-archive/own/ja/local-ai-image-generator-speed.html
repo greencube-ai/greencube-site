@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "自分のPCでオフラインのAI画像生成：1枚に何秒かかる？",
+ "description": "12 GBのグラフィックボード、IntelグラフィックスのノートPC、ノートPCのCPUで、ローカルのAI画像生成の時間を計測しました。1枚28秒から11分まで。PCに必要なもの。",
+ "date": "2026-10-18",
+ "stat": "28秒",
+ "teaser": "PCによって28秒から11分まで。",
+ "rank": 5,
+ "lang": "ja",
+ "alt": "local-ai-image-generator-speed",
+ "faq": [
+  {"q": "自分のPCでAI画像を作るのにどれくらいかかりますか？", "a": "テストでは、512 x 512の画像が、12 GBのグラフィックボードのデスクトップPCで28秒、Intelグラフィックスの16 GBのノートPCで約2分半、同じノートPCのCPUだけでは約11分半でした。"},
+  {"q": "グラフィックボードのないノートPCでAI画像は作れますか？", "a": "RAMが16 GBあれば作れます。内蔵のIntelグラフィックスはCPUだけより約4倍速いです。RAM 8 GBでは作れません。画像生成AIだけで約7 GB必要だからです。"},
+  {"q": "AI画像を作るときは他のアプリを閉じる必要がありますか？", "a": "16 GBのノートPCでは不要でした。コードエディターとブラウザを開いていても、画像は同じ時間で完成しました。大事なのは、Windowsが約7 GBを確保できることです。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：</strong>良いグラフィックボードのゲーミングPCなら約<strong>30秒</strong>、普通の16 GBのノートPCなら<strong>2〜3分</strong>、8 GBのノートPCでは作れません。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>28秒</b><span>12 GBのグラフィックボードのデスクトップPCで</span></div>
+<div class="stat b"><b>2.5分</b><span>Intelグラフィックスの16 GBのノートPCで</span></div>
+<div class="stat p"><b>11.5分</b><span>同じノートPCのCPUだけで</span></div>
+</div>
+
+<h2>テスト</h2>
+<p>すべてのPCで同じ画像生成AI（GreenCubeのZ-Image Turbo）を使い、512 x 512の画像1枚、8ステップ。ボタンを押してから画像が完成するまでを計測しました。2026年9月と10月です。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>動かしたもの</th><th>1枚あたりの時間</th></tr></thead>
+<tbody>
+<tr><td>デスクトップPC、12 GBのカード、RAM 32 GB</td><td>グラフィックボード</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28秒</b></td></tr>
+<tr><td>Core Ultra 5のノートPC、16 GB</td><td>内蔵のIntelグラフィックス</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2分22秒&ndash;2分38秒</b></td></tr>
+<tr><td>同じノートPC</td><td>CPUのみ</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11分27秒</b></td></tr>
+<tr><td>8 GBのノートPC</td><td>&mdash;</td><td><b>不可</b></td></tr>
+</tbody>
+</table></div>
+<p>バーは速さを表します。長いほど速いです。</p>
+
+<h2>わかったこと</h2>
+
+<div class="card g">
+<h3>1. どんなグラフィックスでも大きく効く</h3>
+<p>ノートPCに内蔵された小さなグラフィックスチップでも、CPUだけに比べて画像生成が<strong>約4倍速く</strong>なりました。本物のグラフィックボードは、さらにその5倍速いです。</p>
+</div>
+
+<div class="card b">
+<h3>2. 約7 GBの空きが必要</h3>
+<p>動作中、画像生成AIはWindowsに約7 GBを要求します。8 GBのノートPCで作れないのはこのためで、GreenCubeが途中でクラッシュする代わりに、始める前に空きがあるか確認するのもこのためです。</p>
+</div>
+
+<div class="card y">
+<h3>3. 他のアプリはほとんど影響しない</h3>
+<p>16 GBのノートPCで、コードエディターとブラウザを開いたまま、さらにわざと4 GBを占有した状態でも同じ画像を作りました。どれも約2分でした。使われていないものは、Windowsが自分で退避させます。</p>
+</div>
+
+<h2>あなたのPCでの使用感</h2>
+<div class="expect">
+<div class="g"><h4>グラフィックボード</h4><p>1枚1分未満。たくさん作って一番良いものを選べます。</p></div>
+<div class="b"><h4>カードなしの16 GBのノートPC</h4><p>2〜3分。数枚なら十分です。1枚頼んで、勉強を続けられます。</p></div>
+<div class="y"><h4>8 GBのノートPC</h4><p>画像は作れませんが、チャットと勉強は使えます。</p></div>
+<div class="p"><h4>どの場合も上限なし</h4><p>誰も画像の枚数を数えません。制限は、どれだけ待てるかだけです。</p></div>
+</div>

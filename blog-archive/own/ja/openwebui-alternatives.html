@@ -1,0 +1,99 @@
+<!--meta
+{
+ "title": "Open WebUIの代替：LibreChatからLM Studioまで11個を確認（2026年10月）",
+ "description": "LibreChat、Onyx、LobeHub、AnythingLLM、Chatbox、LM Studio、Jan、Msty、text-generation-webui、llama.cpp自身のウェブUI、GreenCube：ライセンス、料金、インストール方法、別のエンジンが必要か。各プロジェクトのページから。",
+ "date": "2026-09-15",
+ "modified": "2026-10-21",
+ "kind": "guide",
+ "stat": "11",
+ "teaser": "Open WebUIの代替11個：ライセンス、料金、インストール、別のエンジンが必要かを確認。",
+ "rank": 15,
+ "lang": "ja",
+ "alt": "openwebui-alternatives",
+ "faq": [
+  {"q": "Open WebUIの代替で一番良いのは？", "a": "やめる理由によります。チーム向けのセルフホストのチャットページならLibreChat（MIT、Docker）。社内文書の検索ならOnyx。1台のコンピューターで1人で、Dockerなしなら、モデルを自分で動かすLM Studio、Jan、Msty、text-generation-webui。GreenCube（Windows、9.99ユーロの買い切り）はPCに合うモデルを自動で選びます。"},
+  {"q": "Open WebUIは今もオープンソースですか？", "a": "ライセンスは今\"Open WebUI License\"です。BSD形式の条件に加え、30日間の利用者が50人以下である場合、書面の許可がある場合、またはエンタープライズライセンスがある場合を除き、ブランド表示を削除・置換してはならないという条項があります。以前に公開されたコードは元のライセンスのままです。"},
+  {"q": "Dockerなしで使えるOpen WebUIの代替はありますか？", "a": "あります。LM Studio、Jan、Msty、Chatbox、GreenCubeは普通のアプリのようにインストールでき、text-generation-webuiには解凍して実行するポータブル版があり、llama.cppのサーバーには独自のウェブチャットページがあります。"},
+  {"q": "モデルを自分で動かすOpen WebUIの代替はどれですか？", "a": "LM Studio、Jan、text-generation-webui、llama.cpp、GreenCubeは、別のエンジンなしでモデルを動かします。LibreChat、Onyx、LobeHub、ChatboxはOllamaなどのエンジンやクラウドのAPIに接続します。"},
+  {"q": "チーム向けに一番良い代替は？", "a": "LibreChat（MIT）はOAuth2、LDAP、メールでの複数ユーザーログインと管理パネルがあります。Onyxは社内文書の横断検索を加え、Businessプランは1ユーザー月20ドルです。AnythingLLMのDocker版も複数ユーザーに対応しています。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：Open WebUIをやめる理由によります。</strong>チーム向けのセルフホストのチャットページなら、一番近い乗り換え先はLibreChat（MIT、Docker）で、Onyxは社内文書の横断検索を加えます。1台のコンピューターで自分だけ、Dockerや別のエンジンを使いたくないなら、LM Studio、Jan、Msty、text-generation-webuiがモデルを自分で動かします。GreenCube（Windows、9.99ユーロの買い切り）も同様で、PCに合うモデルを選びます。</p></div>
+
+<div class="stats">
+<div class="stat p"><b>11</b><span>各プロジェクトのページで確認した代替。2026年10月21日</span></div>
+<div class="stat y"><b>50</b><span>ユーザー：これを超えると、Open WebUIのライセンスはブランド表示の維持を求めます</span></div>
+<div class="stat g"><b>5</b><span>11個のうち、別のエンジンなしでモデルを動かすもの</span></div>
+</div>
+
+<h2>Open WebUIの代替が探される理由</h2>
+
+<p>Open WebUIは、pip（Python 3.11）かDockerでインストールするセルフホストのチャットページで、普通はOllamaやOpenAI互換APIなどのエンジンの上で動きます（<a href="https://docs.openwebui.com/getting-started/" rel="noopener">ドキュメント</a>）。高機能で、文書を読み、「完全にオフラインで」動かせ、llama.cppエンジンを任意で内蔵したデスクトップアプリもあります（<a href="https://github.com/open-webui/open-webui" rel="noopener">GitHub</a>）。他を探す理由としてよく聞くのは3つです：</p>
+
+<ul>
+<li><strong>ライセンス。</strong>今は"Open WebUI License"です。BSD形式の条件に加え、30日間のエンドユーザーが50人以下である場合、書面の許可がある場合、またはエンタープライズライセンスがある場合を除き、"Open WebUI"のブランド表示を削除・置換してはならないという条項があります（<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" rel="noopener">LICENSE</a>）。</li>
+<li><strong>セットアップ。</strong>サーバー、DockerかPython環境、さらにモデル用の別のエンジンが必要です。</li>
+<li><strong>用途の合わなさ。</strong>もっと大きいもの（全社検索、権限管理）が欲しい人もいれば、もっと小さいもの（1台のPCに1つのアプリ）が欲しい人もいます。</li>
+</ul>
+
+<h2>代替11個の比較</h2>
+
+<p>すべての情報は、各行にリンクしたプロジェクト自身のサイト、ドキュメント、GitHubページから、2026年10月21日に読んだものです。ページに記載がないものは「記載なし」と書いています。これらのアプリ同士のベンチマークは取っていません。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>アプリ</th><th>何か</th><th>ライセンスと料金</th><th>インストール方法</th><th>モデルを自分で動かす？</th><th>自分の文書</th></tr></thead>
+<tbody>
+<tr><td><strong>LibreChat</strong>（<a href="https://github.com/LibreChat-AI/LibreChat" rel="noopener">GitHub</a>）</td><td>多くのAIプロバイダー向けのセルフホストのチャットページ。複数ユーザーログイン（OAuth2、LDAP、メール）と管理パネル</td><td>MIT、無料</td><td>Docker（ドキュメントによれば約5分）、npm、Helm。「ネイティブのデスクトップアプリではない」（<a href="https://www.librechat.ai/docs" rel="noopener">ドキュメント</a>）</td><td>いいえ：クラウドAPIや、Ollama、koboldcppなどのローカルエンジンに接続</td><td>はい、ファイルとのチャットとファイル検索</td></tr>
+<tr><td><strong>Onyx</strong>（<a href="https://github.com/onyx-dot-app/onyx" rel="noopener">GitHub</a>）</td><td>AIチャットと、チームの文書やアプリの横断検索</td><td>Community EditionはMIT、無料。Businessは1ユーザー月20ドル、年払い（<a href="https://onyx.app/pricing" rel="noopener">料金</a>）</td><td>インストールスクリプト、Docker、Kubernetes。1 GB未満のLiteモードは文書をインデックスできません</td><td>いいえ：Ollama、vLLMなど、またはクラウドAPIに接続</td><td>はい、主な用途。完全にネットワークから切り離して動かせます（<a href="https://onyx.app" rel="noopener">サイト</a>）</td></tr>
+<tr><td><strong>LobeHub</strong>（旧LobeChat、<a href="https://github.com/lobehub/lobehub" rel="noopener">GitHub</a>）</td><td>エージェントとチャットのプラットフォーム、セルフホストまたはホスト型</td><td>LobeHub Community License（派生物に追加条件のあるApache 2.0）。ホスト型プランは無料から（<a href="https://lobehub.com/pricing" rel="noopener">料金</a>）</td><td>Docker、またはクラウドホストへのワンクリックデプロイ</td><td>いいえ：AIプロバイダーに接続</td><td>読んだページには記載なし</td></tr>
+<tr><td><strong>AnythingLLM</strong>（<a href="https://github.com/Mintplex-Labs/anything-llm" rel="noopener">GitHub</a>）</td><td>文書とのチャット。デスクトップアプリまたはチーム用サーバー</td><td>MIT、デスクトップは無料</td><td>デスクトップのインストーラー（Windows、Mac、Linux）、または複数ユーザー向けにDocker</td><td>ローカル（Ollama、LM Studio）とクラウドの多くのプロバイダーに接続</td><td>はい：PDF、TXT、DOCX</td></tr>
+<tr><td><strong>Chatbox</strong>（<a href="https://github.com/chatboxai/chatbox" rel="noopener">GitHub</a>）</td><td>多くのAIモデル向けのデスクトップとスマホのチャットクライアント</td><td>Community EditionはGPL-3.0。ホスト型プランはLite月3.99ドルからPro+月39.99ドル（<a href="https://chatboxai.app/pricing" rel="noopener">料金</a>）</td><td>Windows、Mac、Linuxのインストーラー。iPhoneとAndroidのアプリ</td><td>いいえ：クラウドAPI、自社のホスト型サービス、ローカルモデルにはOllama</td><td>はい、ローカルのナレッジベース</td></tr>
+<tr><td><strong>LM Studio</strong>（<a href="https://lmstudio.ai" rel="noopener">サイト</a>）</td><td>チャットとローカルのOpenAI形式サーバーを持つデスクトップアプリ</td><td>無料、仕事でも可。クローズドソース</td><td>インストーラー。WindowsはAVX2、MacはAppleチップが必要（<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">動作環境</a>）</td><td>はい</td><td>はい：PDF、DOCX、TXT</td></tr>
+<tr><td><strong>Jan</strong>（<a href="https://github.com/janhq/jan" rel="noopener">GitHub</a>）</td><td>デスクトップのチャットアプリと、ローカルのOpenAI互換サーバー</td><td>Apache 2.0、無料</td><td>Windows、Mac、Linuxのインストーラー</td><td>はい。クラウドモデルも任意で</td><td>はい：PDF、Officeファイル</td></tr>
+<tr><td><strong>Msty</strong>（<a href="https://msty.ai/products/studio/" rel="noopener">サイト</a>）</td><td>ローカルエンジンとクラウドモデルをまとめるデスクトップアプリ</td><td>無料プランあり。Aurumは年149ドルか買い切り349ドル（<a href="https://msty.ai/pricing" rel="noopener">料金</a>）。ライセンスは記載なし</td><td>Windows、Mac、Linuxのインストーラー</td><td>ローカルエンジン（MLX、llama.cpp、Ollama）とホスト型プロバイダーを使用</td><td>はい、Knowledge Stacks</td></tr>
+<tr><td><strong>text-generation-webui</strong>（現在は"textgen"、<a href="https://github.com/oobabooga/textgen" rel="noopener">GitHub</a>）</td><td>モデル用のローカルのウェブUI、OpenAI/Anthropic互換API付き</td><td>AGPL-3.0、無料</td><td>ポータブル版：解凍して実行。またはワンクリックスクリプト、Conda、Docker</td><td>はい：llama.cpp、ExLlamaV3、Transformersなど</td><td>はい：PDF、DOCX、テキストの添付</td></tr>
+<tr><td><strong>llama.cppサーバー</strong>（<a href="https://github.com/ggml-org/llama.cpp" rel="noopener">GitHub</a>）</td><td>エンジンそのもの。サーバーにブラウザのチャットページが付属</td><td>MIT、無料</td><td>インストールスクリプト、ビルド済みバイナリ、Docker、またはソースからビルド</td><td>はい</td><td>記載なし</td></tr>
+<tr><td><strong>GreenCube</strong>（<a href="https://greencube.app" rel="noopener">サイト</a>）</td><td>1人用のデスクトップアプリ：チャット、PDFで勉強、コード、画像</td><td>9.99ユーロの買い切り。クローズドソース</td><td>Windows 10と11のインストーラー。サーバーやDockerは不要</td><td>はい。PCに合うモデルを選びます</td><td>はい：PDF、ノート、写真</td></tr>
+</tbody>
+</table></div>
+
+<h2>あなたに合うのは？</h2>
+
+<div class="card b">
+<h3>チーム向けのセルフホストのチャットページ</h3>
+<p><strong>LibreChat</strong>が一番近い乗り換え先です。MITライセンス、Docker、複数ユーザーログインと管理パネルがあり、クラウドAPIや自前のエンジンに接続します。主な用途が社内の文書やアプリからの回答なら<strong>Onyx</strong>（MITのCommunity Edition、またはホスト型で1ユーザー月20ドル）。文書とのチャットが一番の目的なら<strong>AnythingLLM</strong>のDocker版。エージェントが欲しく、ライセンスの条件を気にしないなら<strong>LobeHub</strong>。</p>
+</div>
+
+<div class="card g">
+<h3>1台のコンピューターで自分だけ、Dockerなし</h3>
+<p><strong>LM Studio</strong>と<strong>Jan</strong>は普通のアプリのようにインストールでき、モデルを自分で動かします。どちらも他のツール向けにローカルのOpenAI形式APIを提供できます。<strong>Msty</strong>はローカルエンジンとクラウドモデルを組み合わせます。<strong>GreenCube</strong>（Windows）はPCに合うモデルを選んでダウンロードし、PDFや写真を読み、画像も作ります。9.99ユーロの買い切りです。</p>
+</div>
+
+<div class="card y">
+<h3>いじるのが好きで、完全に制御したい</h3>
+<p><strong>text-generation-webui</strong>は複数のバックエンド（llama.cpp、ExLlamaV3、Transformers）に対応し、「テレメトリーゼロ」で動くとしています。<strong>llama.cpp</strong>自身のサーバーは、余計なもののないブラウザのチャットページを提供します。llama.cppをもとにした単一の.exeであるKoboldCppも選択肢です（<a href="https://github.com/LostRuins/koboldcpp" rel="noopener">GitHub</a>）。</p>
+</div>
+
+<div class="card p">
+<h3>スマホでも同じチャットを使いたい</h3>
+<p><strong>Chatbox</strong>にはデスクトップとスマホのアプリがあり、ローカルモデルにOllamaを使えます。Open WebUI自体も、ウェブアプリとしてスマホのホーム画面に追加できます。</p>
+</div>
+
+<h2>普通のPCでローカルモデルはどれくらい速い？</h2>
+
+<p>どのインターフェースを選んでも、速さはハードウェアで決まります。モデルはグラフィックボードかCPUで動くからです。実際のPC{{pcs}}台でGreenCubeを計測しました（同じマシンで他のアプリは計測していません）：</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>あなたのPC</th><th>書き出し</th></tr></thead>
+<tbody>
+<tr><td>グラフィックボードなしの8 GBのノートPC</td><td><b>5&ndash;7</b> トークン/秒、およそ読む速さ</td></tr>
+<tr><td>グラフィックボードなしの16 GBのノートPC</td><td><b>14&ndash;18</b> トークン/秒</td></tr>
+<tr><td>6 GB以上のカードのゲーミングPC</td><td>ほとんどのカードで<b>37&ndash;76</b> トークン/秒</td></tr>
+</tbody>
+</table></div>
+
+<p>各カードの数字は<a href="/blog/can-my-pc-run-ai#checker">自分のPCでAIは動く？</a>に、生データは<a href="/blog/how-we-measure-ai-speed">計測方法</a>にあります。デスクトップアプリをプライバシーやオンラインになるものの観点で比べたいなら、<a href="/blog/best-offline-ai-chatbot">オフラインAIチャットボット12個の比較</a>をご覧ください。</p>
+
+<h2>確認方法</h2>
+<p>2026年10月21日に、レビューや他のリストではなく、各プロジェクト自身のGitHubページ、ドキュメント、料金ページ、ライセンスを読み、各情報の出典ページにリンクしました。ページ同士が食い違う場合（LobeHubのREADMEのバッジはApache 2.0ですが、LICENSEファイルは条件を加えています）は、ライセンスファイルに従いました。私たちはGreenCubeを作っているので、誰でも確認できる事実だけに絞り、アプリの順位付けはしていません。毎月確認し直し、上の日付を更新します。</p>

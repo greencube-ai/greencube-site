@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>グラフィックボードなしのノートPCでAI：Intelグラフィックスは役に立つ？| GreenCubeブログ</title>
+  <meta name="description" content="グラフィックボードのないノートPCで、CPUとIntelグラフィックスの両方でAIを動かしました。チャットの速さはほぼ同じ、読み込みは1.3倍、画像生成は4倍以上速くなりました。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="グラフィックボードなしのノートPCでAI：Intelグラフィックスは役に立つ？| GreenCubeブログ" />
+  <meta property="og:description" content="グラフィックボードのないノートPCで、CPUとIntelグラフィックスの両方でAIを動かしました。チャットの速さはほぼ同じ、読み込みは1.3倍、画像生成は4倍以上速くなりました。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ja/ai-on-laptop-without-gpu" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ja/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-portatil-sin-tarjeta-grafica" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/ai-on-laptop-without-gpu" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-laptop-without-gpu" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "グラフィックボードなしのノートPCでAI：Intelグラフィックスは役に立つ？", "description": "グラフィックボードのないノートPCで、CPUとIntelグラフィックスの両方でAIを動かしました。チャットの速さはほぼ同じ、読み込みは1.3倍、画像生成は4倍以上速くなりました。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ja", "mainEntityOfPage": "https://blog.greencube.app/blog/ja/ai-on-laptop-without-gpu", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ja/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "内蔵グラフィックスでAIは速くなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "チャットではほとんど変わりません。16 GBのノートPCでは、どちらでも回答は毎秒約14トークンで書き出されました。貼り付けた長い文章の読み込みは約1.3倍、画像生成は4倍以上速くなりました。"}}, {"@type": "Question", "name": "内蔵グラフィックスでAIが遅くなることはありますか？", "acceptedAnswer": {"@type": "Answer", "text": "あります。小さいモデルでは、Intelグラフィックスでの書き出しはCPUより29%遅くなりました。一方、大きいモデルでは26%速くなりました。モデルとノートPCによって違うので、GreenCubeはあなたのノートPCで試してから選びます。"}}, {"@type": "Question", "name": "グラフィックボードのないノートPCでAIは十分使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "チャットと勉強なら十分です。16 GBのノートPCは、小さいモデルで読むより速く書き出します。画像も作れますが、1枚2〜3分かかります。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ja/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a>
+    <a href="https://greencube.app/ja/your-data">あなたのデータ</a>
+    <a href="https://greencube.app/ja/mission">私たちのミッション</a>
+    <a href="/blog/ja" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">JA</summary><div class="lang-list"><a href="/blog/ai-on-laptop-without-gpu" hreflang="en" lang="en">English</a><a href="/blog/es/ia-portatil-sin-tarjeta-grafica" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-laptop-without-gpu" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-laptop-without-gpu" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-laptop-without-gpu" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-laptop-without-gpu" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-laptop-without-gpu" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-laptop-without-gpu" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ai-on-laptop-without-gpu" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ai-on-laptop-without-gpu" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/ai-on-laptop-without-gpu" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ai-on-laptop-without-gpu" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ai-on-laptop-without-gpu" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ai-on-laptop-without-gpu" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ai-on-laptop-without-gpu" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/ai-on-laptop-without-gpu" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/ai-on-laptop-without-gpu" hreflang="ja" lang="ja" aria-current="true">日本語</a></div></details><a href="https://greencube.app/ja/buy" class="nav-cta">GreenCubeを入手</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
+<h1>グラフィックボードなしのノートPCでAI：Intelグラフィックスは役に立つ？</h1>
+<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<div class="answer"><p><strong>短い答え：</strong>チャットでは<strong>ほとんど変わりません</strong>。長い文章の読み込みでは<strong>少し速く</strong>なります。画像では<strong>大きく違い</strong>、4倍以上速くなります。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>チャットでの毎秒トークン数。Intelグラフィックスの有無でほぼ同じ</span></div>
+<div class="stat b"><b>1.3&times;</b><span>貼り付けた長い文章の読み込みが速くなる</span></div>
+<div class="stat p"><b>4&times;</b><span>画像の生成が速くなる</span></div>
+</div>
+
+<h2>テスト</h2>
+<p>ノートPC 1台。Intel Core Ultra 5 125U、RAM 16 GB、グラフィックボードなしで、チップに内蔵されたグラフィックスだけです。電源につないだ状態で、同じAIをCPUとIntelグラフィックスでそれぞれ2回ずつ動かしました。2026年9月と10月です。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>作業</th><th>CPU</th><th>Intelグラフィックス</th><th>差</th></tr></thead>
+<tbody>
+<tr><td>回答の書き出し（Gemma 4 E2B）</td><td>13.7&ndash;15.5 トークン/秒</td><td>14.4&ndash;14.5 トークン/秒</td><td><b>ほぼ同じ</b></td></tr>
+<tr><td>貼り付けた文章の読み込み（Gemma 4 E2B）</td><td>160&ndash;167 トークン/秒</td><td>203&ndash;211 トークン/秒</td><td><b>1.3&times;速い</b></td></tr>
+<tr><td>512 x 512の画像1枚</td><td>11分27秒</td><td>2分22秒&ndash;2分38秒</td><td><b>4&times;以上速い</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>わかったこと</h2>
+
+<div class="card g">
+<h3>1. チャットの速さはチップではなくメモリで決まる</h3>
+<p>回答の書き出しは、ノートPCがAIをメモリからどれだけ速く送れるかで制限されます。CPUとIntelグラフィックスは同じメモリを共有しているので、書き出しの速さはほぼ同じになります。</p>
+</div>
+
+<div class="card y">
+<h3>2. 遅くなることさえある</h3>
+<p>古い小さいモデル（Phi-4 Mini）では、Intelグラフィックスでの書き出しが<strong>29%遅く</strong>なりました。一方、大きいモデル（Gemma 4 E4B）では<strong>26%速く</strong>なりました。同じノートPCで逆の結果です。スペックからは予想できないので、GreenCubeはあなたのノートPCで試して、速いほうを使います。</p>
+</div>
+
+<div class="card p">
+<h3>3. 本当に効くのは画像</h3>
+<p>画像生成は、グラフィックスチップが得意とする重い計算です。11分半が約2分半になりました。</p>
+</div>
+
+<h2>あなたにとっての意味</h2>
+<div class="expect">
+<div class="g"><h4>チャットと勉強</h4><p>16 GBのノートPCで十分です。読むより速く書き出します。</p></div>
+<div class="b"><h4>長いPDF</h4><p>グラフィックスのほうが少し速く読み込むので、最初の答えが早く出ます。</p></div>
+<div class="y"><h4>画像</h4><p>作れます。1枚約2〜3分。ゲーミングPCなら1分もかかりません。</p></div>
+<div class="p"><h4>バッテリー</h4><p>テストでは、バッテリー駆動でも電源接続時でもチャットの速さはほぼ同じでした。</p></div>
+</div>
+
+<p>ゲーミングPCも含めた全体像は？<a href="/blog/ja/can-my-pc-run-ai">PC10台の計測結果はこちら</a></p>
+<h2>よくある質問</h2>
+<div class="faq">
+<details><summary>内蔵グラフィックスでAIは速くなりますか？</summary><p>チャットではほとんど変わりません。16 GBのノートPCでは、どちらでも回答は毎秒約14トークンで書き出されました。貼り付けた長い文章の読み込みは約1.3倍、画像生成は4倍以上速くなりました。</p></details>
+<details><summary>内蔵グラフィックスでAIが遅くなることはありますか？</summary><p>あります。小さいモデルでは、Intelグラフィックスでの書き出しはCPUより29%遅くなりました。一方、大きいモデルでは26%速くなりました。モデルとノートPCによって違うので、GreenCubeはあなたのノートPCで試してから選びます。</p></details>
+<details><summary>グラフィックボードのないノートPCでAIは十分使えますか？</summary><p>チャットと勉強なら十分です。16 GBのノートPCは、小さいモデルで読むより速く書き出します。画像も作れますが、1枚2〜3分かかります。</p></details>
+</div>
+
+<div class="cta-box"><h3>自分だけのAIを、自分のPCで</h3><p>GreenCubeはあなたのPCで動きます。使用制限なし、サブスクなし、インターネットなしでも使えます。&euro;9.99の買い切りです。</p><a class="cta" href="https://greencube.app/ja/buy">GreenCubeを入手 <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ja/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">あなたのものになる <em>AI、</em> レンタルではない。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>製品</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/buy">GreenCubeを入手</a></li>
+          <li><a href="https://greencube.app/ja/what-you-get">自分のパソコンで動く？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>読みもの</h3>
+        <ul>
+          <li><a href="/blog/ja">Blog</a></li>
+          <li><a href="https://greencube.app/ja/your-data">あなたのデータ</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPTとあなたのデータ (EN)</a></li>
+          <li><a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>会社</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/mission">私たちのミッション</a></li>
+          <li><a href="mailto:support@greencube.app">お問い合わせ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">プライバシーポリシー (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">利用規約 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. スペイン製。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

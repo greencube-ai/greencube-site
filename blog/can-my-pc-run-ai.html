@@ -31,6 +31,7 @@
   <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/can-my-pc-run-ai" />
   <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/can-my-pc-run-ai" />
   <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/can-my-pc-run-ai" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/can-my-pc-run-ai" />
   <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/can-my-pc-run-ai" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
@@ -52,7 +53,7 @@
     <a href="https://greencube.app/mission">Our mission</a>
     <a href="/blog" class="on">Blog</a>
   </nav>
-  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/blog/can-my-pc-run-ai" hreflang="en" lang="en" aria-current="true">English</a><a href="/blog/es/ia-en-mi-pc" hreflang="es" lang="es">Español</a><a href="/blog/pt/can-my-pc-run-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/can-my-pc-run-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/can-my-pc-run-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/can-my-pc-run-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/can-my-pc-run-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/can-my-pc-run-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/can-my-pc-run-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/can-my-pc-run-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/can-my-pc-run-ai" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/can-my-pc-run-ai" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/can-my-pc-run-ai" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/can-my-pc-run-ai" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/can-my-pc-run-ai" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/can-my-pc-run-ai" hreflang="th" lang="th">ไทย</a></div></details><a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a></div>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/blog/can-my-pc-run-ai" hreflang="en" lang="en" aria-current="true">English</a><a href="/blog/es/ia-en-mi-pc" hreflang="es" lang="es">Español</a><a href="/blog/pt/can-my-pc-run-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/can-my-pc-run-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/can-my-pc-run-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/can-my-pc-run-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/can-my-pc-run-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/can-my-pc-run-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/can-my-pc-run-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/can-my-pc-run-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/can-my-pc-run-ai" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/can-my-pc-run-ai" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/can-my-pc-run-ai" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/can-my-pc-run-ai" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/can-my-pc-run-ai" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/can-my-pc-run-ai" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/can-my-pc-run-ai" hreflang="ja" lang="ja">日本語</a></div></details><a href="https://greencube.app/buy" class="nav-cta">Get GreenCube</a></div>
 </header>
 
 <main>
@@ -265,7 +266,7 @@
     else if (gpu) {
       var p = peers(v);
       out.push(['maybe', T.speed_u_h, T.speed_u + (p.same ? f('speed_same') : T.speed_close)
-        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + (D.C || ', ') + speed(x); }).join(D.SC || '; ') + '. '
+        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + (D.C || ', ') + speed(x); }).join(D.SC || '; ') + (D.ST || '. ')
         + f('speed_why', { url: D.method }) + (c.kind === 'laptop' ? T.speed_laptop : '')]);
     } else {
       var l = laptopFor(R);
@@ -299,7 +300,7 @@
     var r = rows(state.card, state.vram, state.ram);
     out.innerHTML = '<p class="chk-head">' + T.head + '</p>'
       + '<ul class="chk-rows">' + r.map(function (x) {
-          return '<li class="chk-' + x[0] + '"><span class="chk-ico" aria-hidden="true">' + ICON[x[0]] + '</span><div><h4>' + x[1] + '</h4><p>' + x[2] + '</p></div></li>';
+          return '<li class="chk-' + x[0] + '"><span class="chk-ico" aria-hidden="true">' + ICON[x[0]] + '</span><div><h4>' + x[1] + '</h4><p>' + x[2].replace(/([。、！？：；）]) +/g, '$1') + '</p></div></li>';  // no space after Chinese or Japanese punctuation
         }).join('') + '</ul>'
       + '<p class="chk-send">' + T.send + '</p>';
   }

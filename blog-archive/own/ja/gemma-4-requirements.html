@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Gemma 4の必要スペック：ローカルで動かすのに必要なPC",
+ "description": "Gemma 4 E2B、E4B、12Bの必要スペックを実際のPCで計測。それぞれに必要なRAMとVRAM、ノートPCとゲーミング用グラフィックボードでの速さ。",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "8 GBのノートPCからゲーミングPCまで：あなたのPCに合うGemma 4。",
+ "rank": 2,
+ "lang": "ja",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "Gemma 4をローカルで動かす最低スペックは？", "a": "一番小さいGemma 4 E2B（2.6 GBのファイル）は、RAM 8 GBでグラフィックボードのないノートPCで、実際のチャットで毎秒5〜7トークンで動きました。起動には2 GBほどの空きメモリが必要です。"},
+  {"q": "Gemma 4 E4Bに必要なVRAMは？", "a": "E4Bは4.2 GBのファイルです。6 GBのグラフィックボードに丸ごと収まり、GTX 1660 Superで毎秒35〜38トークン書き出しました。8 GBのカードでは56〜72です。カードなしでもRAM 16 GBで毎秒約8トークンで動きます。"},
+  {"q": "Gemma 4 12Bは8 GBのグラフィックボードで動きますか？", "a": "短い質問1つなら動きます。RX 5700 XTで毎秒20〜35トークンでした。でも会話が長くなるとクラッシュしました。カードにほとんど余裕がなかったからです。少なくとも10 GBのVRAMが欲しいところです。"},
+  {"q": "Gemma 4は無料で使えますか？", "a": "はい。GoogleはE2BとE4Bを含むGemma 4を、商用利用も認めるApache 2.0ライセンスで公開しています。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：</strong>小さい<strong>Gemma 4 E2B</strong>は<strong>8 GBのノートPC</strong>で動きます。<strong>E4B</strong>はRAM 16 GBが欲しく、<strong>6 GB以上のグラフィックボード</strong>ならどれでも快適です。<strong>12B</strong>で本格的な会話をするには<strong>10 GB以上のVRAM</strong>が必要です。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>Gemma 4 E2BにはRAM 8 GBで十分。グラフィックボード不要</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>8 GBのゲーミング用カードでのE4Bの毎秒トークン数</span></div>
+<div class="stat p"><b>10 GB</b><span>長いチャットで12Bを信頼できるVRAMの目安</span></div>
+</div>
+
+<h2>Gemma 4の必要スペック一覧</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>モデル</th><th>ファイルサイズ</th><th>推奨の最低限</th><th>向いているPC</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>RAM 8 GB、カードなし</td><td>ノートPC</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>RAM 16 GB、または6 GBのカード</td><td>ゲーミングPC、16 GBのノートPC</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6.2 GB</td><td>VRAM 10 GB以上</td><td>12 GB以上のカード</td></tr>
+</tbody>
+</table></div>
+
+<h2>実測速度</h2>
+<p>それぞれが回答を書き出す速さで、1秒あたりのトークン数です（トークンは単語の断片）。2026年9月と10月にGreenCubeで計測しました。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>モデル</th><th>書き出し（トークン/秒）</th></tr></thead>
+<tbody>
+<tr><td>デスクトップPC、AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>デスクトップPC、NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>デスクトップPC、12 GBのグラフィックボード</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>デスクトップPC、NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>デスクトップPC、AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b>（短いチャットのみ）</td></tr>
+<tr><td>デスクトップPC、NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>約20</b></td></tr>
+<tr><td>ノートPC、Intel Core Ultra 5、16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>同じノートPC</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>ノートPC、Intel Iris Xe、8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>わかったこと</h2>
+
+<div class="card g">
+<h3>1. E2BはノートPC向け</h3>
+<p>グラフィックボードのない16 GBのノートPCで、勉強の完全な回答を約20秒で返しました。E4Bは112秒でした。短い事実確認5問では1問も間違えませんでした。<a href="/blog/gemma-4-e2b-vs-e4b">E2BとE4Bの実測比較</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4BはゲーミングPC向け</h3>
+<p>モデル全体がグラフィックボードに載ると、E4Bは<strong>ノートPCの7〜9倍速く</strong>、回答もより良くなります。6 GB以上のカードならどれでも大丈夫です。</p>
+</div>
+
+<div class="card p">
+<h3>3. 12BにはRAMではなく本物のVRAMが必要</h3>
+<p>8 GBのカードで、12Bは短い質問1つには問題なく答えましたが、チャットが長くなるたびにクラッシュしました。そのPCにはRAMが48 GBありましたが、役に立ちませんでした。<a href="/blog/how-much-vram-for-ai">モデルをカードに収めるべき理由</a></p>
+</div>
+
+<h2>あなたのPCに合うGemma 4は？</h2>
+<div class="expect">
+<div class="g"><h4>8 GBのノートPC</h4><p>E2B。先に他のアプリを閉じてください。</p></div>
+<div class="b"><h4>カードなしの16 GBのノートPC</h4><p>速さならE2B。E4Bも動きますが遅いです。</p></div>
+<div class="y"><h4>6&ndash;8 GBのカードのゲーミングPC</h4><p>E4Bを丸ごとカードに。</p></div>
+<div class="p"><h4>12 GB以上のカード</h4><p>E4Bが速く、12Bも選択肢になります。</p></div>
+</div>
+
+<p>Gemma 4はGoogleがApache 2.0ライセンスで公開しています。GreenCubeはPCに合うものを自動で選びます。<a href="/blog/can-my-pc-run-ai">計測したPC{{pcs}}台をすべて見る</a></p>

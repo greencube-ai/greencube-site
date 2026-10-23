@@ -335,7 +335,7 @@ def pages(lang):
         body += f'<h2>{L["h_check"]}</h2>\n' + tx(lang, 'check_lead') + WD[lang]['check_steps'] + tx(lang, 'check_tail', hub=hub)
         others = ''.join(f'<li>{link(o, lang)}: {hl(o, lang)} {after(lang, hl(o, lang), L["tps"])} ({ENG[headline(o)["engine"]]["name"]})</li>\n' for o in ranked() if o is not pc)
         body += (f'<h2>{L["h_more"]}</h2>\n<ul>\n{others}</ul>\n'
-                 f'<p><a href="{hub}">{L["hub_t"]}</a> {fmt(lang, L["all"], n=count())}.</p>\n')
+                 f'<p><a href="{hub}">{L["hub_t"]}</a> {fmt(lang, L["all"], n=count())}{WD[lang].get("stop", ".").strip()}</p>\n')
         out.append((pc_slug(pc, lang), meta, body))
     return out + [method_page(lang)]
 
@@ -387,6 +387,7 @@ def checker(lang):
     if 'units' in WD[lang]: data['U'] = WD[lang]['units']
     if WD[lang]['list_sep'] != ', ': data['C'] = WD[lang]['list_sep']  # the language's own comma ('، ', '，')
     if 'semi' in WD[lang]: data['SC'] = WD[lang]['semi']
+    if 'stop' in WD[lang]: data['ST'] = WD[lang]['stop']  # what ends a sentence the checker builds ('。')
     if lang in PLURAL: data['P'] = PLURAL[lang]
     T = WD[lang]['checker']
     return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'

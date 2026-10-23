@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>RTX 5060でAIは動く？実測：毎秒56トークン | GreenCubeブログ</title>
+  <meta name="description" content="実測テスト：NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。チャット、勉強、画像にとっての意味。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="RTX 5060でAIは動く？実測：毎秒56トークン | GreenCubeブログ" />
+  <meta property="og:description" content="実測テスト：NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。チャット、勉強、画像にとっての意味。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ja/ai-on-rtx-5060" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ja/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ia-en-rtx-5060" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/ai-on-rtx-5060" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ai-on-rtx-5060" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "RTX 5060でAIは動く？実測：毎秒56トークン", "description": "実測テスト：NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。チャット、勉強、画像にとっての意味。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "ja", "mainEntityOfPage": "https://blog.greencube.app/blog/ja/ai-on-rtx-5060", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ja/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "RTX 5060でAIをローカルで動かせますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。読むより速く答えが出てきます。"}}, {"@type": "Question", "name": "RTX 5060でAI画像を作れますか？", "acceptedAnswer": {"@type": "Answer", "text": "おそらく可能ですが、このカードでの画像生成はまだ計測していません。計測したら、ここに数字を載せます。"}}, {"@type": "Question", "name": "AIはRTX 5060とCPUのどちらが速いですか？", "acceptedAnswer": {"@type": "Answer", "text": "カードのほうが圧倒的に速いです。CPUの毎秒12.1トークンに対し、カードでは毎秒55.9トークン、約4.6倍です。"}}, {"@type": "Question", "name": "RTX 5060でGemma 4 12Bは動きますか？", "acceptedAnswer": {"@type": "Answer", "text": "快適ではありません。GreenCubeが大きいGemma 4 12Bを勧めるのはVRAMが10 GB以上のカードだけで、このカードは8 GBです。8 GBのAMD RX 5700 XTでは、短い質問には答えましたが、長いチャットでクラッシュしました。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ja/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a>
+    <a href="https://greencube.app/ja/your-data">あなたのデータ</a>
+    <a href="https://greencube.app/ja/mission">私たちのミッション</a>
+    <a href="/blog/ja" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">JA</summary><div class="lang-list"><a href="/blog/ai-on-rtx-5060" hreflang="en" lang="en">English</a><a href="/blog/es/ia-en-rtx-5060" hreflang="es" lang="es">Español</a><a href="/blog/pt/ai-on-rtx-5060" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ai-on-rtx-5060" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ai-on-rtx-5060" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ai-on-rtx-5060" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ai-on-rtx-5060" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ai-on-rtx-5060" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ai-on-rtx-5060" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ai-on-rtx-5060" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/ai-on-rtx-5060" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ai-on-rtx-5060" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ai-on-rtx-5060" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ai-on-rtx-5060" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ai-on-rtx-5060" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/ai-on-rtx-5060" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/ai-on-rtx-5060" hreflang="ja" lang="ja" aria-current="true">日本語</a></div></details><a href="https://greencube.app/ja/buy" class="nav-cta">GreenCubeを入手</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
+<h1>RTX 5060でAIは動く？実測：毎秒56トークン</h1>
+<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月1日</p>
+<div class="answer"><p><strong>はい。NVIDIA</strong> RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。読むより速く答えが出てきます。</p></div>
+<div class="stats">
+<div class="stat g"><b>56</b><span>Gemma 4 E4Bでの毎秒トークン数</span></div>
+<div class="stat b"><b>4.6×</b><span>CPUよりカードのほうが速い</span></div>
+</div>
+<h2>実際の使用感</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>作業</th><th>このPCでの時間</th></tr></thead>
+<tbody>
+<tr><td>普通の回答を書く（400トークン）</td><td><b>7 秒</b></td></tr>
+</tbody>
+</table></div>
+<p>このPCで計測した速度から算出しました。時間は長さ÷速度で、実際の回答では書き始めるまでに少し時間もかかります。目安として、英語の場合、多くの人が読む速さは1秒に約4語です（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>）。日本語ではトークン数と文字数の関係が一定ではないため、ここでは換算していません。400トークンの回答は、読むだけでもそれなりに時間がかかります。</p>
+<h2>計測結果</h2>
+<p><strong>書き出し</strong>は、AIが回答を打ち出す速さで、1秒あたりのトークン数で表します。トークンは単語の断片です。<strong>読み込み</strong>は、渡したもの（質問、貼り付けた文章、PDF）を取り込む速さです。AIは多くのトークンを一度に読めますが、書くときは1つずつなので、読み込みは常に書き出しよりずっと速くなります。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>項目</th><th>実行場所</th><th>結果</th><th>計測方法</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E4B</td><td>グラフィックボード</td><td><b>55.9</b> トークン/秒 書き出し</td><td>2026年10月1日</td></tr>
+<tr><td>Gemma 4 E4B</td><td>CPUのみ</td><td><b>12.1</b> トークン/秒 書き出し</td><td>2026年10月1日</td></tr>
+</tbody>
+</table></div>
+<p>各数値の計測方法：<a href="/blog/ja/how-we-measure-ai-speed">計測方法の詳細</a></p><ol class="src"><li>GreenCube 0.1.42自身の速度テスト。起動時にグラフィックボードとCPUのどちらを使うか選ぶために実行し、それぞれで短い回答を1回書き出します。</li></ol>
+<p>複数回計測したものは範囲で示しています。同じPCでも、回ごとに速度が少し変わるためです。</p>
+<h2>その意味</h2>
+<div class="card g">
+<h3>仕事をするのはグラフィックボード</h3>
+<p>同じPC、同じAI（Gemma 4 E4B）で、CPUのみでは毎秒12.1トークン、グラフィックボードでは毎秒55.9トークン、<strong>約4.6倍の速さ</strong>です。グラフィックボードはゲームのために何千もの小さな計算を同時にこなすよう作られていて、AIの実行もほとんどが同じ種類の計算です。GreenCubeは起動時に両方の速さを測り、速いほうを使います。</p>
+</div>
+<div class="card b">
+<h3>AI全体がカードに収まる</h3>
+<p>Gemma 4 E4Bは4.2 GBのファイルで、カードには専用のメモリ（VRAM）が8 GBあります。全体が収まり、会話用の余裕も残るので、カードがPCの他の遅いメモリを待つことがありません。これがこの速さの一番の理由です。</p>
+</div>
+<div class="card y">
+<h3>大きいGemma 4 12B</h3>
+<p>快適ではありません。GreenCubeが大きいGemma 4 12Bを勧めるのはVRAMが10 GB以上のカードだけで、このカードは8 GBです。8 GBのAMD RX 5700 XTでは、短い質問には答えましたが、長いチャットでクラッシュしました。</p>
+</div>
+<div class="card p">
+<h3>画像</h3>
+<p>おそらく可能ですが、このカードでの画像生成はまだ計測していません。計測したら、ここに数字を載せます。画像には約6 GBの専用AIを使い、チャットの回答よりはるかに多くの計算をするので、ここではグラフィックスの差がさらに大きく出ます。</p>
+</div>
+<h2>他との比較</h2>
+<p>Gemma 4 E4Bで計測した8台のPCのうち、このPCの書き出し速度は<strong>3位</strong>です。<a href="/blog/ja/ai-on-rx-5700-xt">RX 5700 XT</a>は毎秒63–72トークンで、約20%速いです。<a href="/blog/ja/ai-on-rtx-3060">RTX 3060</a>は毎秒53–55トークンなので、このPCは約5%速いです。</p>
+<p>8 GBのカードを4枚計測しましたが、速さには大きな差があります：</p>
+<ul>
+<li><a href="/blog/ja/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 トークン/秒</li>
+<li><strong>RTX 5060</strong>: 56 トークン/秒（起動時テスト）</li>
+<li><a href="/blog/ja/ai-on-rx-6600">RX 6600</a>: 42–44 トークン/秒</li>
+<li><a href="/blog/ja/ai-on-rx-580">RX 580</a>: 10–11 トークン/秒</li>
+</ul>
+<p>どのAIが収まるかはメモリで決まり、どれだけ速く動くかはカードの新しさで決まります。</p>
+<h2>テストに使ったPC</h2>
+<p>実験室のマシンではなく、実際のテスターが普段どおりに使っている自分のPCです：</p>
+<ul>
+<li>デスクトップPC</li>
+<li><strong>グラフィックス:</strong> NVIDIA RTX 5060</li>
+<li><strong>グラフィックスメモリ（VRAM）:</strong> 8 GB</li>
+<li><strong>RAM:</strong> 32 GB</li>
+<li><strong>CPU:</strong> 16 スレッド</li>
+</ul>
+<h2>自分のPCを確認する</h2>
+<p>自分のPCの構成がわからない？30秒で確認できます：</p>
+<ol class="steps">
+<li><strong>Ctrl + Shift + Esc</strong>を押して、タスク マネージャーを開きます。</li>
+<li><strong>パフォーマンス</strong>を開きます。</li>
+<li><strong>メモリ</strong>をクリック：右上の数字がRAMです。</li>
+<li><strong>GPU</strong>をクリック：右上の名前がカード名で、<strong>専用 GPU メモリ</strong>がVRAMです。専用メモリのないIntelやAMDのグラフィックスしか表示されない場合は、独立したカードはありません。</li>
+</ol>
+<p>次に、<a href="/blog/ja/can-my-pc-run-ai">全体の表</a>でいちばん近いカードを探してください。同じカードでもVRAMが多ければ大きいAIが収まり、同じ容量なら新しいカードのほうがたいてい速く動きます。</p>
+<h2>計測した他のPC</h2>
+<ul>
+<li><a href="/blog/ja/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-rtx-3060">RTX 3060</a>: 53–55 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-rx-6600">RX 6600</a>: 42–44 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-gtx-1660-super">GTX 1660 Super</a>: 37–38 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-gtx-1650">GTX 1650</a>: 約20 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-intel-core-ultra-5-laptop">Intel Core Ultra 5 ノートPC</a>: 14–18 トークン/秒 (Gemma 4 E2B)</li>
+<li><a href="/blog/ja/ai-on-rx-580">RX 580</a>: 10–11 トークン/秒 (Gemma 4 E4B)</li>
+<li><a href="/blog/ja/ai-on-intel-iris-xe-laptop">Intel Iris Xe ノートPC</a>: 5–7 トークン/秒 (Gemma 4 E2B)</li>
+</ul>
+<p><a href="/blog/ja/can-my-pc-run-ai">自分のPCでAIは動く？</a> 10台すべてのPCを1つの表に。自分のPCでの使用感も。</p>
+<h2>よくある質問</h2>
+<div class="faq">
+<details><summary>RTX 5060でAIをローカルで動かせますか？</summary><p>はい。NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Gemma 4 E4Bは毎秒56トークンで書き出しました。読むより速く答えが出てきます。</p></details>
+<details><summary>RTX 5060でAI画像を作れますか？</summary><p>おそらく可能ですが、このカードでの画像生成はまだ計測していません。計測したら、ここに数字を載せます。</p></details>
+<details><summary>AIはRTX 5060とCPUのどちらが速いですか？</summary><p>カードのほうが圧倒的に速いです。CPUの毎秒12.1トークンに対し、カードでは毎秒55.9トークン、約4.6倍です。</p></details>
+<details><summary>RTX 5060でGemma 4 12Bは動きますか？</summary><p>快適ではありません。GreenCubeが大きいGemma 4 12Bを勧めるのはVRAMが10 GB以上のカードだけで、このカードは8 GBです。8 GBのAMD RX 5700 XTでは、短い質問には答えましたが、長いチャットでクラッシュしました。</p></details>
+</div>
+
+<div class="cta-box"><h3>自分だけのAIを、自分のPCで</h3><p>GreenCubeはあなたのPCで動きます。使用制限なし、サブスクなし、インターネットなしでも使えます。&euro;9.99の買い切りです。</p><a class="cta" href="https://greencube.app/ja/buy">GreenCubeを入手 <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ja/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">あなたのものになる <em>AI、</em> レンタルではない。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>製品</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/buy">GreenCubeを入手</a></li>
+          <li><a href="https://greencube.app/ja/what-you-get">自分のパソコンで動く？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>読みもの</h3>
+        <ul>
+          <li><a href="/blog/ja">Blog</a></li>
+          <li><a href="https://greencube.app/ja/your-data">あなたのデータ</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPTとあなたのデータ (EN)</a></li>
+          <li><a href="https://greencube.app/ja/ai-environmental-impact">AIと地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>会社</h3>
+        <ul>
+          <li><a href="https://greencube.app/ja/mission">私たちのミッション</a></li>
+          <li><a href="mailto:support@greencube.app">お問い合わせ</a></li>
+          <li><a href="https://legal.greencube.app/privacy">プライバシーポリシー (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">利用規約 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. スペイン製。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

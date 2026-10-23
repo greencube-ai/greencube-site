@@ -184,7 +184,7 @@
     else if (gpu) {
       var p = peers(v);
       out.push(['maybe', T.speed_u_h, T.speed_u + (p.same ? f('speed_same') : T.speed_close)
-        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + (D.C || ', ') + speed(x); }).join(D.SC || '; ') + '. '
+        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + (D.C || ', ') + speed(x); }).join(D.SC || '; ') + (D.ST || '. ')
         + f('speed_why', { url: D.method }) + (c.kind === 'laptop' ? T.speed_laptop : '')]);
     } else {
       var l = laptopFor(R);
@@ -218,7 +218,7 @@
     var r = rows(state.card, state.vram, state.ram);
     out.innerHTML = '<p class="chk-head">' + T.head + '</p>'
       + '<ul class="chk-rows">' + r.map(function (x) {
-          return '<li class="chk-' + x[0] + '"><span class="chk-ico" aria-hidden="true">' + ICON[x[0]] + '</span><div><h4>' + x[1] + '</h4><p>' + x[2] + '</p></div></li>';
+          return '<li class="chk-' + x[0] + '"><span class="chk-ico" aria-hidden="true">' + ICON[x[0]] + '</span><div><h4>' + x[1] + '</h4><p>' + x[2].replace(/([。、！？：；）]) +/g, '$1') + '</p></div></li>';  // no space after Chinese or Japanese punctuation
         }).join('') + '</ul>'
       + '<p class="chk-send">' + T.send + '</p>';
   }
