@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Lokaler KI-Bildgenerator auf deinem PC: Wie lange ein Bild dauert | GreenCube-Blog</title>
+  <meta name="description" content="Wir haben einen lokalen KI-Bildgenerator gestoppt, auf einer Grafikkarte mit 12 GB, auf einem Laptop mit Intel-Grafik und auf einem Laptop-Prozessor: 28 Sekunden bis 11 Minuten pro Bild. Was dein PC braucht." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Lokaler KI-Bildgenerator auf deinem PC: Wie lange ein Bild dauert | GreenCube-Blog" />
+  <meta property="og:description" content="Wir haben einen lokalen KI-Bildgenerator gestoppt, auf einer Grafikkarte mit 12 GB, auf einem Laptop mit Intel-Grafik und auf einem Laptop-Prozessor: 28 Sekunden bis 11 Minuten pro Bild. Was dein PC braucht." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/de/local-ai-image-generator-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/de/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/generar-imagenes-ia-local" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/local-ai-image-generator-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/local-ai-image-generator-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Lokaler KI-Bildgenerator auf deinem PC: Wie lange ein Bild dauert", "description": "Wir haben einen lokalen KI-Bildgenerator gestoppt, auf einer Grafikkarte mit 12 GB, auf einem Laptop mit Intel-Grafik und auf einem Laptop-Prozessor: 28 Sekunden bis 11 Minuten pro Bild. Was dein PC braucht.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "de", "mainEntityOfPage": "https://blog.greencube.app/blog/de/local-ai-image-generator-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/de/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Wie lange dauert ein KI-Bild auf meinem PC?", "acceptedAnswer": {"@type": "Answer", "text": "In unseren Tests dauerte ein Bild mit 512 mal 512 auf einem Desktop-PC mit 12-GB-Grafikkarte 28 Sekunden, auf einem Laptop mit 16 GB und seiner Intel-Grafik etwa zweieinhalb Minuten und nur mit dem Prozessor desselben Laptops etwa elfeinhalb Minuten."}}, {"@type": "Question", "name": "Kann ich auf einem Laptop ohne Grafikkarte KI-Bilder erstellen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, wenn er 16 GB RAM hat. Die integrierte Intel-Grafik war etwa 4-mal so schnell wie der Prozessor allein. Mit 8 GB RAM geht es nicht: Die Bild-KI braucht allein etwa 7 GB."}}, {"@type": "Question", "name": "Muss ich andere Apps schließen, um KI-Bilder zu erstellen?", "acceptedAnswer": {"@type": "Answer", "text": "Auf einem Laptop mit 16 GB nicht. Mit offenem Code-Editor und Browser dauerte das Bild genauso lange. Wichtig ist, dass Windows etwa 7 GB dafür freihalten kann."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/de/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a>
+    <a href="https://greencube.app/de/your-data">Deine Daten</a>
+    <a href="https://greencube.app/de/mission">Unsere Mission</a>
+    <a href="/blog/de" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">DE</summary><div class="lang-list"><a href="/blog/local-ai-image-generator-speed" hreflang="en" lang="en">English</a><a href="/blog/es/generar-imagenes-ia-local" hreflang="es" lang="es">Español</a><a href="/blog/pt/local-ai-image-generator-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/local-ai-image-generator-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/local-ai-image-generator-speed" hreflang="de" lang="de" aria-current="true">Deutsch</a></div></details><a href="https://greencube.app/de/buy" class="nav-cta">GreenCube holen</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/de">GreenCube-Blog</a></p>
+<h1>Lokaler KI-Bildgenerator auf deinem PC: Wie lange ein Bild dauert</h1>
+<p class="byline">Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 18. Oktober 2026</p>
+<div class="answer"><p><strong>Kurze Antwort:</strong> auf einem Gaming-PC mit ordentlicher Grafikkarte etwa <strong>eine halbe Minute</strong>. Auf einem normalen Laptop mit 16 GB <strong>2 bis 3 Minuten</strong>. Auf einem Laptop mit 8 GB geht es nicht.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>28 s</b><span>auf einem Desktop-PC mit 12-GB-Grafikkarte</span></div>
+<div class="stat b"><b>2,5 min</b><span>auf einem Laptop mit 16 GB und Intel-Grafik</span></div>
+<div class="stat p"><b>11,5 min</b><span>nur mit dem Prozessor desselben Laptops</span></div>
+</div>
+
+<h2>Der Test</h2>
+<p>Dieselbe Bild-KI auf jedem PC (Z-Image Turbo, in GreenCube), ein Bild mit 512 mal 512, 8 Schritte. Wir haben vom Klick auf den Knopf bis zum fertigen Bild gestoppt, im September und Oktober 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Was die Arbeit machte</th><th>Zeit pro Bild</th></tr></thead>
+<tbody>
+<tr><td>Desktop-PC, 12-GB-Karte, 32 GB RAM</td><td>Grafikkarte</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 s</b></td></tr>
+<tr><td>Laptop, Core Ultra 5, 16 GB</td><td>Integrierte Intel-Grafik</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
+<tr><td>Derselbe Laptop</td><td>Nur Prozessor</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 min 27 s</b></td></tr>
+<tr><td>Laptop, 8 GB</td><td>&mdash;</td><td><b>Geht nicht</b></td></tr>
+</tbody>
+</table></div>
+<p>Die Balken zeigen das Tempo: länger heißt schneller.</p>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Jede Grafik hilft viel</h3>
+<p>Sogar der kleine, im Laptop eingebaute Grafikchip machte Bilder <strong>etwa 4-mal so schnell</strong> wie der Prozessor allein. Eine echte Grafikkarte ist noch einmal 5-mal so schnell.</p>
+</div>
+
+<div class="card b">
+<h3>2. Sie braucht etwa 7 GB Platz</h3>
+<p>Die Bild-KI fordert von Windows etwa 7 GB, während sie arbeitet. Deshalb schafft es ein Laptop mit 8 GB nicht, und deshalb prüft GreenCube vor dem Start, ob Platz ist, statt mittendrin abzustürzen.</p>
+</div>
+
+<div class="card y">
+<h3>3. Deine anderen Apps sind kaum wichtig</h3>
+<p>Auf dem Laptop mit 16 GB haben wir dasselbe Bild mit offenem Code-Editor und Browser erstellt, und sogar mit absichtlich belegten 4 GB. Es dauerte jedes Mal etwa 2 Minuten. Windows räumt Ungenutztes beiseite.</p>
+</div>
+
+<h2>Wie sich dein PC anfühlen wird</h2>
+<div class="expect">
+<div class="g"><h4>Grafikkarte</h4><p>Unter einer Minute pro Bild. Mach viele und nimm das beste.</p></div>
+<div class="b"><h4>Laptop mit 16 GB, ohne Karte</h4><p>2 bis 3 Minuten. Gut für ein paar Bilder; starte eins und lern weiter.</p></div>
+<div class="y"><h4>Laptop mit 8 GB</h4><p>Keine Bilder. Chatten und Lernen funktionieren weiterhin.</p></div>
+<div class="p"><h4>So oder so ohne Limit</h4><p>Nichts zählt deine Bilder. Die einzige Grenze ist, wie lange du warten willst.</p></div>
+</div>
+<h2>Fragen</h2>
+<div class="faq">
+<details><summary>Wie lange dauert ein KI-Bild auf meinem PC?</summary><p>In unseren Tests dauerte ein Bild mit 512 mal 512 auf einem Desktop-PC mit 12-GB-Grafikkarte 28 Sekunden, auf einem Laptop mit 16 GB und seiner Intel-Grafik etwa zweieinhalb Minuten und nur mit dem Prozessor desselben Laptops etwa elfeinhalb Minuten.</p></details>
+<details><summary>Kann ich auf einem Laptop ohne Grafikkarte KI-Bilder erstellen?</summary><p>Ja, wenn er 16 GB RAM hat. Die integrierte Intel-Grafik war etwa 4-mal so schnell wie der Prozessor allein. Mit 8 GB RAM geht es nicht: Die Bild-KI braucht allein etwa 7 GB.</p></details>
+<details><summary>Muss ich andere Apps schließen, um KI-Bilder zu erstellen?</summary><p>Auf einem Laptop mit 16 GB nicht. Mit offenem Code-Editor und Browser dauerte das Bild genauso lange. Wichtig ist, dass Windows etwa 7 GB dafür freihalten kann.</p></details>
+</div>
+
+<div class="cta-box"><h3>Deine eigene KI, auf deinem eigenen PC</h3><p>GreenCube läuft auf deinem Computer: ohne Nutzungslimits, ohne Abo, auch ohne Internet. 9,99&nbsp;&euro;, einmal bezahlt.</p><a class="cta" href="https://greencube.app/de/buy">GreenCube holen <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/de/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">KI, die <em>gekauft,</em> nicht gemietet.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produkt</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/buy">GreenCube holen</a></li>
+          <li><a href="https://greencube.app/de/what-you-get">Läuft sie auf meinem Computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Lernen</h3>
+        <ul>
+          <li><a href="/blog/de">Blog</a></li>
+          <li><a href="https://greencube.app/de/your-data">Deine Daten</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; deine Daten (EN)</a></li>
+          <li><a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Unternehmen</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/mission">Unsere Mission</a></li>
+          <li><a href="mailto:support@greencube.app">Kontakt</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Datenschutzerklärung (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Nutzungsbedingungen (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

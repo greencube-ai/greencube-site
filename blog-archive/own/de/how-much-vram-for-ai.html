@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss",
+ "description": "Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt.",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "Läuft der VRAM über, wird es 6-mal langsamer.",
+ "rank": 6,
+ "lang": "de",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "Was passiert, wenn ein KI-Modell nicht in den VRAM passt?", "a": "Der Teil, der nicht passt, läuft aus dem normalen Arbeitsspeicher, und alles wird langsamer. Auf unserer Karte mit 8 GB schrieb ein Modell mit 28 seiner Schichten auf der Karte 5,9 Tokens pro Sekunde statt 35,6 mit allen: 6-mal langsamer."},
+  {"q": "Soll ich das größte KI-Modell laufen lassen, das meine Karte laden kann?", "a": "Nein. Lass Platz für das Gespräch. Ein Modell mit 12 Milliarden Parametern passte für eine kurze Frage auf eine Karte mit 8 GB und stürzte dann ab, sobald der Chat länger wurde. Ein kleineres Modell mit Luft war schneller und stürzte nie ab."},
+  {"q": "Wie viel VRAM sollte ich frei lassen?", "a": "GreenCube lässt etwa 1,5 GB der Karte für das Gespräch und für Windows frei. Ohne diesen Platz ging einer Karte mit 4 GB schon bei der ersten Nachricht der Speicher aus."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kurze Antwort:</strong> Eine KI, die komplett in den Speicher deiner Grafikkarte (VRAM) passt, ist schnell. Eine, die überläuft, ist <strong>langsamer, als wenn du die Karte gar nicht nutzt</strong>, und kann abstürzen. Kleiner und ganz auf der Karte schlägt größer und halb drauf.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>Tokens pro Sekunde mit dem ganzen Modell auf der Karte</span></div>
+<div class="stat p"><b>5,9</b><span>wenn ein Teil nicht auf der Karte liegt: 6-mal langsamer</span></div>
+<div class="stat y"><b>Absturz</b><span>wenn ein Modell, das gerade so passt, auf einen langen Chat trifft</span></div>
+</div>
+
+<h2>Der Test</h2>
+<p>Ein Desktop-PC mit einer AMD RX 5700 XT (8 GB VRAM) und 48 GB RAM. Wir haben ein Modell mit 12 Milliarden Parametern geladen (Gemma 4 12B, etwa 6,2 GB) und mehr oder weniger davon auf die Karte gelegt, alles in einer Sitzung im September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Wie viel des Modells auf der Karte lag</th><th>Schreibt (Tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>Alles</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 seiner Schichten</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 seiner Schichten</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Zum Vergleich: ein kleineres Modell (Gemma 4 E4B) nur auf dem Prozessor</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Dieses kleinere Modell, ganz auf der Karte</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Alles oder nichts</h3>
+<p>Schon ein Teil des Modells außerhalb der Karte machte es <strong>6-mal langsamer</strong>. Mit 20 Schichten auf der Karte war es langsamer als ein kleineres Modell ganz ohne Karte. Halb auf der Karte ist das Schlechteste aus beiden Welten.</p>
+</div>
+
+<div class="card p">
+<h3>2. Das größte ist nicht das beste</h3>
+<p>Das 12B-Modell passte für eine kurze Frage komplett auf die Karte mit 8 GB. Als der Chat wuchs, stürzte es jedes Mal ab: Die Karte hatte kaum noch Platz für das Gespräch. Das kleinere Modell hatte etwa 3 GB Luft und lief mit 63 bis 72 Tokens pro Sekunde.</p>
+</div>
+
+<div class="card b">
+<h3>3. Lass Platz</h3>
+<p>Auf einer GTX 1650 mit 4 GB wurde ein Modell mit 4,2 GB auf eine Karte mit 3,9 GB gequetscht, und schon die allererste Nachricht scheiterte mit „nicht genug Speicher“. GreenCube hält jetzt etwa <strong>1,5 GB der Karte frei</strong> für den Chat und für Windows.</p>
+</div>
+
+<h2>So wählst du ein Modell für deine Karte</h2>
+<div class="expect">
+<div class="g"><h4>Prüf deinen VRAM</h4><p>Task-Manager &rarr; Leistung &rarr; GPU &rarr; Dedizierter GPU-Speicher.</p></div>
+<div class="b"><h4>Modellgröße + 1,5 GB</h4><p>Die Modelldatei plus etwa 1,5 GB sollte in diese Zahl passen.</p></div>
+<div class="y"><h4>Im Zweifel kleiner</h4><p>Ein kleineres Modell ganz auf der Karte schlägt ein größeres halb drauf.</p></div>
+<div class="p"><h4>Oder lass die App wählen</h4><p>GreenCube liest deine Karte aus und wählt ein Modell, das mit Luft passt.</p></div>
+</div>
+
+<p>Echte Geschwindigkeiten auf {{pcs}} PCs, von einer GTX 1650 bis zu einer RTX 2080 Ti: <a href="/blog/can-my-pc-run-ai">hier ansehen</a>.</p>

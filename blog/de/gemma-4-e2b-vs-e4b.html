@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gemma 4 E2B vs. E4B auf einem Laptop: kleines gegen großes KI-Modell, gemessen | GreenCube-Blog</title>
+  <meta name="description" content="Gemma 4 E2B vs. E4B (und Phi-4 Mini) auf einem Laptop mit 16 GB ohne Grafikkarte: 20 Sekunden gegen 112 für dieselbe Antwort. Was das größere Modell bringt, und wann sich das Warten lohnt." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Gemma 4 E2B vs. E4B auf einem Laptop: kleines gegen großes KI-Modell, gemessen | GreenCube-Blog" />
+  <meta property="og:description" content="Gemma 4 E2B vs. E4B (und Phi-4 Mini) auf einem Laptop mit 16 GB ohne Grafikkarte: 20 Sekunden gegen 112 für dieselbe Antwort. Was das größere Modell bringt, und wann sich das Warten lohnt." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Gemma 4 E2B vs. E4B auf einem Laptop: kleines gegen großes KI-Modell, gemessen", "description": "Gemma 4 E2B vs. E4B (und Phi-4 Mini) auf einem Laptop mit 16 GB ohne Grafikkarte: 20 Sekunden gegen 112 für dieselbe Antwort. Was das größere Modell bringt, und wann sich das Warten lohnt.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "de", "mainEntityOfPage": "https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/de/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ist ein größeres KI-Modell immer besser?", "acceptedAnswer": {"@type": "Answer", "text": "Seine Antworten sind meist etwas besser, aber auf einem Laptop ohne Grafikkarte ist es viel langsamer. In unserem Test gab das größere Modell (Gemma 4 E4B) die beste Erklärung, brauchte aber 112 Sekunden; das kleine (Gemma 4 E2B) gab in 20 eine gute Antwort."}}, {"@type": "Question", "name": "Liegen kleine KI-Modelle bei Fakten falsch?", "acceptedAnswer": {"@type": "Answer", "text": "Bei unseren fünf kurzen Faktenfragen (Mathe, Einheiten umrechnen, Daten, Naturwissenschaft) lag keines der beiden kleinen Modelle falsch. Die Schwäche des kleinen war Zählen: Es kündigte manchmal eine Anzahl an und listete dann eine andere auf."}}, {"@type": "Question", "name": "Welches KI-Modell soll ich auf meinem PC nutzen?", "acceptedAnswer": {"@type": "Answer", "text": "Auf einem Laptop ohne Grafikkarte ein kleines Modell. Auf einem PC mit Grafikkarte läuft auch das größere schnell (56 bis 72 Tokens pro Sekunde auf 8-GB-Karten), also nimm das. GreenCube wählt passend zu deinem PC für dich."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/de/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a>
+    <a href="https://greencube.app/de/your-data">Deine Daten</a>
+    <a href="https://greencube.app/de/mission">Unsere Mission</a>
+    <a href="/blog/de" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">DE</summary><div class="lang-list"><a href="/blog/gemma-4-e2b-vs-e4b" hreflang="en" lang="en">English</a><a href="/blog/es/gemma-4-e2b-vs-e4b" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-e2b-vs-e4b" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-e2b-vs-e4b" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-e2b-vs-e4b" hreflang="de" lang="de" aria-current="true">Deutsch</a></div></details><a href="https://greencube.app/de/buy" class="nav-cta">GreenCube holen</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/de">GreenCube-Blog</a></p>
+<h1>Gemma 4 E2B vs. E4B auf einem Laptop: kleines gegen großes KI-Modell, gemessen</h1>
+<p class="byline">Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 18. Oktober 2026</p>
+<div class="answer"><p><strong>Kurze Antwort:</strong> Auf einem Laptop ohne Grafikkarte <strong>gewinnt das kleine Modell</strong>: eine gute Antwort in 20 Sekunden statt einer etwas besseren in fast 2 Minuten. Mit Grafikkarte nimm das große: Dort ist es auch schnell.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 s</b><span>kleines Modell (Gemma 4 E2B), komplette Antwort</span></div>
+<div class="stat b"><b>28 s</b><span>älteres kleines Modell (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 s</b><span>größeres Modell (Gemma 4 E4B), die beste Erklärung</span></div>
+</div>
+
+<h2>Der Test</h2>
+<p>Ein Laptop mit 16 GB (Intel Core Ultra 5, ohne Grafikkarte), nur Prozessor. Eine typische Lernanfrage: Erklär einem 14-Jährigen die Fotosynthese und schreib dann drei Prüfungsfragen dazu. Wir haben bis zum Ende der Antwort gestoppt, im September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modell</th><th>Größe</th><th>Zeit bis zur vollständigen Antwort</th><th>Was herauskam</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 s</b></td><td>Vollständig, gut geschrieben, drei verschiedene Prüfungsfragen</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 s</b></td><td>Vollständig und richtig, aber eine Prüfungsfrage doppelt</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 s</b></td><td>Vollständig, die beste Erklärung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Zum Lernen reicht das kleine</h3>
+<p>Wir haben außerdem fünf kurze Faktenfragen gestellt: Mathe, Einheiten umrechnen, Daten und Naturwissenschaft. <strong>Keines der kleinen Modelle lag falsch.</strong> Das kleine Gemma zeigte sogar ungefragt einen zweiten Weg, einen Prozentsatz auszurechnen.</p>
+</div>
+
+<div class="card y">
+<h3>2. Seine Schwäche: Zählen</h3>
+<p>Zweimal sagte das kleine Modell „hier sind 5“ und listete dann eine andere Anzahl auf. Deshalb sagt GreenCube ihm jetzt, erst zu zählen und dann die Zahl zu schreiben. Bei solchen Kleinigkeiten ist ein größeres Modell sicherer.</p>
+</div>
+
+<div class="card b">
+<h3>3. Mit Grafikkarte sieht es ganz anders aus</h3>
+<p>Dasselbe größere Modell schreibt auf Gaming-Karten mit 8 GB <strong>56 bis 72 Tokens pro Sekunde</strong>, 7- bis 9-mal so schnell wie auf diesem Laptop. Auf einem Gaming-PC bekommst du die besseren Antworten ohne Wartezeit.</p>
+</div>
+
+<h2>Welches für deinen PC?</h2>
+<div class="expect">
+<div class="g"><h4>Laptop ohne Karte</h4><p>Kleines Modell. Schnelle Antworten, gut genug zum Lernen, Schreiben und für Fragen.</p></div>
+<div class="b"><h4>Gaming-PC</h4><p>Größeres Modell. Bessere Antworten, und trotzdem schneller, als du liest.</p></div>
+<div class="y"><h4>Du willst eine Liste?</h4><p>Wenn es „hier sind 5“ sagt, schau kurz, ob es wirklich 5 sind. Das ist der eine Ausrutscher des kleinen Modells.</p></div>
+<div class="p"><h4>Keine Lust, darüber nachzudenken?</h4><p>GreenCube prüft deinen PC und wählt für dich.</p></div>
+</div>
+
+<p>Sieh, wie schnell jede Art von PC ist: <a href="/blog/de/can-my-pc-run-ai">Hier haben wir 10 PCs gemessen</a>.</p>
+<h2>Fragen</h2>
+<div class="faq">
+<details><summary>Ist ein größeres KI-Modell immer besser?</summary><p>Seine Antworten sind meist etwas besser, aber auf einem Laptop ohne Grafikkarte ist es viel langsamer. In unserem Test gab das größere Modell (Gemma 4 E4B) die beste Erklärung, brauchte aber 112 Sekunden; das kleine (Gemma 4 E2B) gab in 20 eine gute Antwort.</p></details>
+<details><summary>Liegen kleine KI-Modelle bei Fakten falsch?</summary><p>Bei unseren fünf kurzen Faktenfragen (Mathe, Einheiten umrechnen, Daten, Naturwissenschaft) lag keines der beiden kleinen Modelle falsch. Die Schwäche des kleinen war Zählen: Es kündigte manchmal eine Anzahl an und listete dann eine andere auf.</p></details>
+<details><summary>Welches KI-Modell soll ich auf meinem PC nutzen?</summary><p>Auf einem Laptop ohne Grafikkarte ein kleines Modell. Auf einem PC mit Grafikkarte läuft auch das größere schnell (56 bis 72 Tokens pro Sekunde auf 8-GB-Karten), also nimm das. GreenCube wählt passend zu deinem PC für dich.</p></details>
+</div>
+
+<div class="cta-box"><h3>Deine eigene KI, auf deinem eigenen PC</h3><p>GreenCube läuft auf deinem Computer: ohne Nutzungslimits, ohne Abo, auch ohne Internet. 9,99&nbsp;&euro;, einmal bezahlt.</p><a class="cta" href="https://greencube.app/de/buy">GreenCube holen <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/de/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">KI, die <em>gekauft,</em> nicht gemietet.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produkt</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/buy">GreenCube holen</a></li>
+          <li><a href="https://greencube.app/de/what-you-get">Läuft sie auf meinem Computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Lernen</h3>
+        <ul>
+          <li><a href="/blog/de">Blog</a></li>
+          <li><a href="https://greencube.app/de/your-data">Deine Daten</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; deine Daten (EN)</a></li>
+          <li><a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Unternehmen</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/mission">Unsere Mission</a></li>
+          <li><a href="mailto:support@greencube.app">Kontakt</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Datenschutzerklärung (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Nutzungsbedingungen (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

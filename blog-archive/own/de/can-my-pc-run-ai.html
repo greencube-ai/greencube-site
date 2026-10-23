@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Läuft KI auf meinem PC? Wir haben {{pcs}} echte Gaming-PCs und Laptops gemessen",
+ "description": "Läuft KI lokal auf deinem PC? Echte Geschwindigkeiten von {{pcs}} PCs, von einer GTX 1650 bis zu einer RTX 2080 Ti und Laptops ohne Grafikkarte, und was deine Grafikkarte, VRAM und RAM bedeuten.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PCs",
+ "teaser": "Echte Geschwindigkeiten auf {{pcs}} Gaming-PCs und Laptops.",
+ "rank": 1,
+ "lang": "de",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "Funktioniert KI auf meinem PC mit einer AMD-Grafikkarte?", "a": "Ja. Wir haben AMD-Karten (RX 5700 XT, RX 6600, RX 580) genauso gemessen wie NVIDIA-Karten. GreenCube nutzt Vulkan, das auf beiden läuft."},
+  {"q": "Wie viel VRAM brauche ich für KI?", "a": "Keinen zwingend, aber 4 GB oder mehr machen einen großen Unterschied. Auf unseren Test-PCs schrieb eine GTX 1650 mit 4 GB etwa 20 Tokens pro Sekunde und eine RTX 5060 mit 8 GB etwa 56. Mit mehr VRAM passt eine größere KI auf die Karte."},
+  {"q": "Läuft KI auf einem Laptop ohne Grafikkarte?", "a": "Ja. Ein Laptop mit 16 GB und nur Intel-Grafik schrieb mit einer kleinen KI 14 bis 18 Tokens pro Sekunde, schneller, als du liest. Ein Laptop mit 8 GB funktioniert auch, langsamer, und kann keine Bilder erstellen."},
+  {"q": "Macht mehr RAM die KI schneller?", "a": "Nicht für sich allein. Auf einem Desktop-PC mit 48 GB RAM lief dieselbe KI 14-mal so schnell, sobald sie auf der Grafikkarte mit 8 GB lag, wie auf dem Prozessor. RAM zählt, wenn du keine Karte hast; mit Karte zählt vor allem der VRAM."},
+  {"q": "Brauche ich Internet, um KI auf meinem PC laufen zu lassen?", "a": "Nur einmal, um die App und die KI herunterzuladen und sie zu aktivieren. Danach funktioniert der Chat ganz ohne Internet."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kurze Antwort: ja.</strong> Wenn auf deinem PC Spiele laufen, läuft auch KI. Wir haben {{pcs}} echte PCs gemessen: Gaming-Desktops von einer alten GTX 1650 bis zu einer RTX 2080 Ti, und zwei Laptops ganz ohne Grafikkarte. Auf jedem lief ein Chat mit einer KI komplett auf dem PC: ohne Internet, ohne Abo. Das Einzige, was sich ändert, ist das Tempo.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>schneller auf der Grafikkarte als auf dem Prozessor, gleicher PC, gleiche KI</span></div>
+<div class="stat b"><b>20</b><span>Tokens pro Sekunde auf einer GTX 1650 mit 4 GB. Schneller, als du liest.</span></div>
+<div class="stat p"><b>8&ndash;9 s</b><span>pro Bild auf einer RTX 2080 Ti, sobald geladen</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>Die Zahlen</h2>
+
+<p>„Schreibt“ heißt, wie schnell die KI ihre Antwort tippt, in Tokens pro Sekunde. Ein Token ist ein Stück Wort: Im Deutschen braucht ein Wort meist ein bis zwei. Die meisten Menschen lesen etwa 4 Wörter pro Sekunde (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), also schreibt die KI ab etwa 8 Tokens pro Sekunde schneller, als deine Augen mitkommen.</p>
+
+<!--pcs:table-->
+
+<p>Klick auf eine Grafikkarte, um ihren ganzen Test zu sehen.</p>
+
+<p>Gemessen mit GreenCube im September und Oktober 2026, in echten Chats und in GreenCubes eigenen Tempotests. Das Tempo schwankt zwischen Messungen auf demselben PC etwas, also zeigen wir den Bereich, wo wir mehrere Messungen haben. <a href="/blog/how-we-measure-ai-speed">Wie wir messen, und alle Daten</a>.</p>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Die Grafikkarte macht die schwere Arbeit, wie in einem Spiel</h3>
+<p>Auf dem Desktop-PC mit der RX 5700 XT schrieb dieselbe KI <strong>5 Tokens pro Sekunde auf dem Prozessor und 72 auf der Grafikkarte</strong>. KI ist größtenteils genau die Art von Mathe, für die Grafikkarten gebaut sind. Jede Karte der letzten Jahre hilft enorm, sogar eine alte GTX 1650 mit 4 GB.</p>
+</div>
+
+<div class="card b">
+<h3>2. Der VRAM entscheidet, wie groß die KI sein kann</h3>
+<p>Damit die KI mit vollem Tempo läuft, muss sie in den eigenen Speicher der Karte (VRAM) passen. Dieser Desktop hatte 48 GB RAM, und das hat ein größeres Modell nicht gerettet: Eine KI mit 12 Milliarden Parametern passte für eine kurze Frage auf die Karte mit 8 GB und stürzte dann ab, sobald der Chat länger wurde, mit fast voller Karte. <strong>Für KI schlägt VRAM den RAM.</strong> VRAM ist aber nicht Tempo: Vier Karten mit 8 GB, die wir gemessen haben, schrieben zwischen etwa 11 Tokens pro Sekunde (RX 580) und 72 (RX 5700 XT). Deshalb prüft GreenCube deine Karte und wählt eine KI, die passt, nicht einfach die größte.</p>
+</div>
+
+<div class="card y">
+<h3>3. Keine Grafikkarte? Geht trotzdem</h3>
+<p>Ein normaler Laptop mit 16 GB und nur Intel-Grafik schrieb mit der kleineren KI 14 bis 18 Tokens pro Sekunde und war mit einer ganzen Antwort (eine Erklärung plus drei Prüfungsfragen) in etwa 20 Sekunden fertig. Zum Lernen und Schreiben völlig ausreichend. Ein Laptop mit 8 GB funktioniert auch, mit 5 bis 7 Tokens pro Sekunde in echten Chats, wenn andere Apps ihm etwas freien Speicher lassen.</p>
+</div>
+
+<div class="card p">
+<h3>4. Bilder sind die schwere Kost</h3>
+<p>Ein Bild zu erstellen ist viel aufwendiger als Chatten. <strong>8 bis 9 Sekunden</strong> auf einer RTX 2080 Ti mit 11 GB (das erste dauerte 83, während es lud), <strong>28 Sekunden</strong> auf einer RTX 3060 mit 12 GB, etwa eine Minute auf einer RX 6600 mit 8 GB, anderthalb Minuten auf einer GTX 1660 Super mit 6 GB und etwa <strong>zweieinhalb Minuten</strong> auf dem Laptop mit 16 GB. Ein Laptop mit 8 GB kann gar keine Bilder erstellen: Die Bild-KI allein braucht etwa 7 GB.</p>
+</div>
+
+<h2 id="by-hand">Prüf deinen PC in 30 Sekunden</h2>
+<ol class="steps">
+<li>Drück <strong>Strg + Umschalt + Esc</strong>, um den Task-Manager zu öffnen.</li>
+<li>Geh zu <strong>Leistung</strong>.</li>
+<li>Klick auf <strong>Arbeitsspeicher</strong>: Die Zahl oben rechts ist dein RAM.</li>
+<li>Klick auf <strong>GPU</strong>: Der Name oben rechts ist deine Karte, und <strong>Dedizierter GPU-Speicher</strong> ist dein VRAM. Du siehst nur Intel-Grafik? Dann hast du keine separate Karte.</li>
+</ol>
+
+<h2>Wie sich dein PC anfühlen wird</h2>
+<div class="expect">
+<div class="g"><h4>Karte mit 6 GB oder mehr</h4><p>Schnell auf den meisten Karten der letzten Jahre: 37 bis 76 Tokens pro Sekunde in unseren Tests, viel schneller, als du liest, und Bilder in Sekunden bis anderthalb Minuten. Eine Ausnahme: Eine alte RX 580 schrieb etwa 11, immer noch schneller, als du liest.</p></div>
+<div class="b"><h4>Karte mit 4 GB, 16 GB RAM</h4><p>Gut. Etwa 20 Tokens pro Sekunde in unserem Test.</p></div>
+<div class="y"><h4>Keine Karte, 16 GB RAM</h4><p>Gut zum Chatten und Lernen, mit einer kleineren KI. Bilder dauern ein paar Minuten.</p></div>
+<div class="p"><h4>Keine Karte, 8 GB RAM</h4><p>Funktioniert zum Chatten, langsam. Schließ vorher andere Apps. Keine Bilder.</p></div>
+</div>
+
+<h2>Warum überhaupt KI auf dem eigenen PC?</h2>
+<p>Weil sie dir gehört. Keine Nachrichtenlimits, kein Monatsabo, und sie funktioniert auch ohne Internet weiter: im Zug, auf dem Berg oder in einer Bibliothek mit miserablem WLAN. Sie schlägt die größten Cloud-KIs nicht in allem, aber zum Lernen, Schreiben, Zusammenfassen und für Alltagsfragen reicht eine KI auf deiner eigenen Karte mehr als aus, und sie geht nie aus.</p>

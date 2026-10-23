@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "KI auf einem Laptop ohne Grafikkarte: Hilft die Intel-Grafik?",
+ "description": "Wir haben KI auf einem Laptop ohne Grafikkarte laufen lassen, auf dem Prozessor und auf der Intel-Grafik. Das Chat-Tempo änderte sich kaum, Lesen wurde 1,3-mal so schnell und Bilder über 4-mal so schnell.",
+ "date": "2026-10-18",
+ "stat": "4&times;",
+ "teaser": "Chat: etwa gleich. Bilder: 4-mal so schnell.",
+ "rank": 7,
+ "lang": "de",
+ "alt": "ai-on-laptop-without-gpu",
+ "faq": [
+  {"q": "Macht integrierte Grafik KI schneller?", "a": "Beim Chatten kaum: Auf unserem Laptop mit 16 GB wurde die Antwort in beiden Fällen mit etwa 14 Tokens pro Sekunde geschrieben. Beim Lesen langer eingefügter Texte war es etwa 1,3-mal so schnell, beim Erstellen von Bildern über 4-mal so schnell."},
+  {"q": "Kann integrierte Grafik KI langsamer machen?", "a": "Manchmal. Mit einem kleinen Modell wurde das Schreiben auf der Intel-Grafik 29 % langsamer als auf dem Prozessor; mit einem größeren 26 % schneller. Es hängt vom Modell und vom Laptop ab, deshalb testet GreenCube deinen Laptop und entscheidet."},
+  {"q": "Reicht ein Laptop ohne Grafikkarte für KI?", "a": "Zum Chatten und Lernen ja: Ein Laptop mit 16 GB schreibt mit einem kleinen Modell schneller, als du liest. Bilder gehen auch, dauern aber je 2 bis 3 Minuten."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kurze Antwort:</strong> beim Chatten <strong>kaum</strong>. Beim Lesen langer Texte <strong>ein bisschen</strong>. Bei Bildern <strong>sehr</strong>: über 4-mal so schnell.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>~14</b><span>Tokens pro Sekunde beim Chatten, mit oder ohne Intel-Grafik</span></div>
+<div class="stat b"><b>1,3&times;</b><span>schneller beim Lesen langer Texte, die du einfügst</span></div>
+<div class="stat p"><b>4&times;</b><span>schneller beim Erstellen von Bildern</span></div>
+</div>
+
+<h2>Der Test</h2>
+<p>Ein Laptop: Intel Core Ultra 5 125U, 16 GB RAM, keine Grafikkarte, nur die im Chip eingebaute Grafik. Wir haben dieselbe KI auf dem Prozessor und auf der Intel-Grafik laufen lassen, am Netzteil, je zweimal, im September und Oktober 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Aufgabe</th><th>Prozessor</th><th>Intel-Grafik</th><th>Unterschied</th></tr></thead>
+<tbody>
+<tr><td>Eine Antwort schreiben (Gemma 4 E2B)</td><td>13,7&ndash;15,5 Tokens/s</td><td>14,4&ndash;14,5 Tokens/s</td><td><b>etwa gleich</b></td></tr>
+<tr><td>Eingefügten Text lesen (Gemma 4 E2B)</td><td>160&ndash;167 Tokens/s</td><td>203&ndash;211 Tokens/s</td><td><b>1,3&times; schneller</b></td></tr>
+<tr><td>Ein Bild, 512 mal 512</td><td>11 min 27 s</td><td>2 min 22 s &ndash; 2 min 38 s</td><td><b>über 4&times; schneller</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Das Chat-Tempo kommt vom Speicher, nicht vom Chip</h3>
+<p>Beim Schreiben einer Antwort bremst, wie schnell der Laptop die KI durch seinen Speicher schieben kann, und Prozessor und Intel-Grafik teilen sich denselben Speicher. Also schreiben beide etwa gleich schnell.</p>
+</div>
+
+<div class="card y">
+<h3>2. Es kann sogar langsamer sein</h3>
+<p>Mit einem älteren kleinen Modell (Phi-4 Mini) wurde das Schreiben auf der Intel-Grafik <strong>29 % langsamer</strong>. Mit einem größeren (Gemma 4 E4B) wurde es <strong>26 % schneller</strong>. Gleicher Laptop, gegensätzliche Ergebnisse. Aus den Daten kann man das nicht erraten, also testet GreenCube deinen Laptop und nimmt, was schneller ist.</p>
+</div>
+
+<div class="card p">
+<h3>3. Bei Bildern glänzt sie</h3>
+<p>Ein Bild zu erstellen ist schwere Mathe, genau die Art, für die Grafikchips gebaut sind. Aus elfeinhalb Minuten wurden etwa zweieinhalb.</p>
+</div>
+
+<h2>Was heißt das für dich?</h2>
+<div class="expect">
+<div class="g"><h4>Chatten und Lernen</h4><p>Ein Laptop mit 16 GB reicht. Er schreibt schneller, als du liest.</p></div>
+<div class="b"><h4>Lange PDFs</h4><p>Die Grafik liest sie etwas schneller, also kommt die erste Antwort früher.</p></div>
+<div class="y"><h4>Bilder</h4><p>Möglich, etwa 2 bis 3 Minuten pro Bild. Ein Gaming-PC schafft es in unter einer Minute.</p></div>
+<div class="p"><h4>Akku</h4><p>In unseren Tests war das Chat-Tempo mit Akku und am Netzteil etwa gleich.</p></div>
+</div>
+
+<p>Du willst das ganze Bild, auch mit Gaming-PCs? <a href="/blog/can-my-pc-run-ai">Hier haben wir {{pcs}} PCs gemessen.</a></p>

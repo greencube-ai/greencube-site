@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss | GreenCube-Blog</title>
+  <meta name="description" content="Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss | GreenCube-Blog" />
+  <meta property="og:description" content="Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss", "description": "Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "de", "mainEntityOfPage": "https://blog.greencube.app/blog/de/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/de/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was passiert, wenn ein KI-Modell nicht in den VRAM passt?", "acceptedAnswer": {"@type": "Answer", "text": "Der Teil, der nicht passt, läuft aus dem normalen Arbeitsspeicher, und alles wird langsamer. Auf unserer Karte mit 8 GB schrieb ein Modell mit 28 seiner Schichten auf der Karte 5,9 Tokens pro Sekunde statt 35,6 mit allen: 6-mal langsamer."}}, {"@type": "Question", "name": "Soll ich das größte KI-Modell laufen lassen, das meine Karte laden kann?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Lass Platz für das Gespräch. Ein Modell mit 12 Milliarden Parametern passte für eine kurze Frage auf eine Karte mit 8 GB und stürzte dann ab, sobald der Chat länger wurde. Ein kleineres Modell mit Luft war schneller und stürzte nie ab."}}, {"@type": "Question", "name": "Wie viel VRAM sollte ich frei lassen?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube lässt etwa 1,5 GB der Karte für das Gespräch und für Windows frei. Ohne diesen Platz ging einer Karte mit 4 GB schon bei der ersten Nachricht der Speicher aus."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/de/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a>
+    <a href="https://greencube.app/de/your-data">Deine Daten</a>
+    <a href="https://greencube.app/de/mission">Unsere Mission</a>
+    <a href="/blog/de" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">DE</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de" aria-current="true">Deutsch</a></div></details><a href="https://greencube.app/de/buy" class="nav-cta">GreenCube holen</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/de">GreenCube-Blog</a></p>
+<h1>Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss</h1>
+<p class="byline">Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 18. Oktober 2026</p>
+<div class="answer"><p><strong>Kurze Antwort:</strong> Eine KI, die komplett in den Speicher deiner Grafikkarte (VRAM) passt, ist schnell. Eine, die überläuft, ist <strong>langsamer, als wenn du die Karte gar nicht nutzt</strong>, und kann abstürzen. Kleiner und ganz auf der Karte schlägt größer und halb drauf.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>Tokens pro Sekunde mit dem ganzen Modell auf der Karte</span></div>
+<div class="stat p"><b>5,9</b><span>wenn ein Teil nicht auf der Karte liegt: 6-mal langsamer</span></div>
+<div class="stat y"><b>Absturz</b><span>wenn ein Modell, das gerade so passt, auf einen langen Chat trifft</span></div>
+</div>
+
+<h2>Der Test</h2>
+<p>Ein Desktop-PC mit einer AMD RX 5700 XT (8 GB VRAM) und 48 GB RAM. Wir haben ein Modell mit 12 Milliarden Parametern geladen (Gemma 4 12B, etwa 6,2 GB) und mehr oder weniger davon auf die Karte gelegt, alles in einer Sitzung im September 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Wie viel des Modells auf der Karte lag</th><th>Schreibt (Tokens/s)</th></tr></thead>
+<tbody>
+<tr><td>Alles</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 seiner Schichten</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 seiner Schichten</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Zum Vergleich: ein kleineres Modell (Gemma 4 E4B) nur auf dem Prozessor</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Dieses kleinere Modell, ganz auf der Karte</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Was wir gelernt haben</h2>
+
+<div class="card g">
+<h3>1. Alles oder nichts</h3>
+<p>Schon ein Teil des Modells außerhalb der Karte machte es <strong>6-mal langsamer</strong>. Mit 20 Schichten auf der Karte war es langsamer als ein kleineres Modell ganz ohne Karte. Halb auf der Karte ist das Schlechteste aus beiden Welten.</p>
+</div>
+
+<div class="card p">
+<h3>2. Das größte ist nicht das beste</h3>
+<p>Das 12B-Modell passte für eine kurze Frage komplett auf die Karte mit 8 GB. Als der Chat wuchs, stürzte es jedes Mal ab: Die Karte hatte kaum noch Platz für das Gespräch. Das kleinere Modell hatte etwa 3 GB Luft und lief mit 63 bis 72 Tokens pro Sekunde.</p>
+</div>
+
+<div class="card b">
+<h3>3. Lass Platz</h3>
+<p>Auf einer GTX 1650 mit 4 GB wurde ein Modell mit 4,2 GB auf eine Karte mit 3,9 GB gequetscht, und schon die allererste Nachricht scheiterte mit „nicht genug Speicher“. GreenCube hält jetzt etwa <strong>1,5 GB der Karte frei</strong> für den Chat und für Windows.</p>
+</div>
+
+<h2>So wählst du ein Modell für deine Karte</h2>
+<div class="expect">
+<div class="g"><h4>Prüf deinen VRAM</h4><p>Task-Manager &rarr; Leistung &rarr; GPU &rarr; Dedizierter GPU-Speicher.</p></div>
+<div class="b"><h4>Modellgröße + 1,5 GB</h4><p>Die Modelldatei plus etwa 1,5 GB sollte in diese Zahl passen.</p></div>
+<div class="y"><h4>Im Zweifel kleiner</h4><p>Ein kleineres Modell ganz auf der Karte schlägt ein größeres halb drauf.</p></div>
+<div class="p"><h4>Oder lass die App wählen</h4><p>GreenCube liest deine Karte aus und wählt ein Modell, das mit Luft passt.</p></div>
+</div>
+
+<p>Echte Geschwindigkeiten auf 10 PCs, von einer GTX 1650 bis zu einer RTX 2080 Ti: <a href="/blog/de/can-my-pc-run-ai">hier ansehen</a>.</p>
+<h2>Fragen</h2>
+<div class="faq">
+<details><summary>Was passiert, wenn ein KI-Modell nicht in den VRAM passt?</summary><p>Der Teil, der nicht passt, läuft aus dem normalen Arbeitsspeicher, und alles wird langsamer. Auf unserer Karte mit 8 GB schrieb ein Modell mit 28 seiner Schichten auf der Karte 5,9 Tokens pro Sekunde statt 35,6 mit allen: 6-mal langsamer.</p></details>
+<details><summary>Soll ich das größte KI-Modell laufen lassen, das meine Karte laden kann?</summary><p>Nein. Lass Platz für das Gespräch. Ein Modell mit 12 Milliarden Parametern passte für eine kurze Frage auf eine Karte mit 8 GB und stürzte dann ab, sobald der Chat länger wurde. Ein kleineres Modell mit Luft war schneller und stürzte nie ab.</p></details>
+<details><summary>Wie viel VRAM sollte ich frei lassen?</summary><p>GreenCube lässt etwa 1,5 GB der Karte für das Gespräch und für Windows frei. Ohne diesen Platz ging einer Karte mit 4 GB schon bei der ersten Nachricht der Speicher aus.</p></details>
+</div>
+
+<div class="cta-box"><h3>Deine eigene KI, auf deinem eigenen PC</h3><p>GreenCube läuft auf deinem Computer: ohne Nutzungslimits, ohne Abo, auch ohne Internet. 9,99&nbsp;&euro;, einmal bezahlt.</p><a class="cta" href="https://greencube.app/de/buy">GreenCube holen <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/de/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">KI, die <em>gekauft,</em> nicht gemietet.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produkt</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/buy">GreenCube holen</a></li>
+          <li><a href="https://greencube.app/de/what-you-get">Läuft sie auf meinem Computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Lernen</h3>
+        <ul>
+          <li><a href="/blog/de">Blog</a></li>
+          <li><a href="https://greencube.app/de/your-data">Deine Daten</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT &amp; deine Daten (EN)</a></li>
+          <li><a href="https://greencube.app/de/ai-environmental-impact">KI &amp; der Planet</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Unternehmen</h3>
+        <ul>
+          <li><a href="https://greencube.app/de/mission">Unsere Mission</a></li>
+          <li><a href="mailto:support@greencube.app">Kontakt</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Datenschutzerklärung (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Nutzungsbedingungen (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Made in Spain.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
