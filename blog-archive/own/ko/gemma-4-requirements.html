@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Gemma 4 요구 사양: 로컬에서 돌리려면 어떤 PC가 필요할까",
+ "description": "Gemma 4 E2B, E4B, 12B의 요구 사양을 실제 PC에서 측정했습니다. 각각에 필요한 RAM과 VRAM, 노트북과 게이밍 그래픽카드에서의 속도.",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "8 GB 노트북부터 게이밍 PC까지: 내 PC에 맞는 Gemma 4.",
+ "rank": 2,
+ "lang": "ko",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "Gemma 4를 로컬에서 돌리기 위한 최소 사양은?", "a": "가장 작은 Gemma 4 E2B(2.6 GB 파일)는 RAM 8 GB에 그래픽카드 없는 노트북에서, 실제 채팅 기준 초당 5~7 토큰으로 돌아갔습니다. 시작하려면 2 GB 정도의 빈 메모리가 필요합니다."},
+  {"q": "Gemma 4 E4B에는 VRAM이 얼마나 필요한가요?", "a": "E4B는 4.2 GB 파일입니다. 6 GB 그래픽카드에 통째로 들어가며, GTX 1660 Super에서 초당 35~38 토큰을 출력했습니다. 8 GB 카드에서는 56~72였습니다. 카드 없이 RAM 16 GB에서도 초당 약 8 토큰으로 돌아갑니다."},
+  {"q": "Gemma 4 12B가 8 GB 그래픽카드에서 돌아가나요?", "a": "짧은 질문 하나라면 됩니다. RX 5700 XT에서 초당 20~35 토큰이었습니다. 하지만 대화가 길어지자 다운됐습니다. 카드에 여유가 거의 없었기 때문입니다. 최소 10 GB의 VRAM을 권합니다."},
+  {"q": "Gemma 4는 무료로 쓸 수 있나요?", "a": "네. Google은 E2B와 E4B를 포함한 Gemma 4를 상업적 이용도 허용하는 Apache 2.0 라이선스로 공개했습니다."}
+ ]
+}
+-->
+<div class="answer"><p><strong>짧은 답:</strong> 작은 <strong>Gemma 4 E2B</strong>는 <strong>8 GB 노트북</strong>에서 돌아갑니다. <strong>E4B</strong>는 RAM 16 GB가 필요하고, <strong>6 GB 이상의 그래픽카드</strong>라면 어떤 것이든 쌩쌩 돌아갑니다. <strong>12B</strong>로 제대로 대화하려면 <strong>VRAM 10 GB 이상</strong>이 필요합니다.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>Gemma 4 E2B에는 RAM 8 GB면 충분. 그래픽카드 불필요</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>8 GB 게이밍 카드에서 E4B의 초당 토큰 수</span></div>
+<div class="stat p"><b>10 GB</b><span>긴 채팅에서 12B를 믿을 수 있는 VRAM 기준</span></div>
+</div>
+
+<h2>Gemma 4 요구 사양 한눈에 보기</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>모델</th><th>파일 크기</th><th>권장 최소 사양</th><th>잘 맞는 PC</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>RAM 8 GB, 카드 없음</td><td>노트북</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>RAM 16 GB, 또는 6 GB 카드</td><td>게이밍 PC, 16 GB 노트북</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6.2 GB</td><td>VRAM 10 GB 이상</td><td>12 GB 이상 카드</td></tr>
+</tbody>
+</table></div>
+
+<h2>실측 속도</h2>
+<p>각 모델이 답을 쓰는 속도로, 초당 토큰 수입니다(토큰은 단어의 조각). 2026년 9월과 10월에 GreenCube로 측정했습니다.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>모델</th><th>출력(토큰/초)</th></tr></thead>
+<tbody>
+<tr><td>데스크톱, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>데스크톱, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>데스크톱, 12 GB 그래픽카드</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>데스크톱, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>데스크톱, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b>(짧은 채팅만)</td></tr>
+<tr><td>데스크톱, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>약 20</b></td></tr>
+<tr><td>노트북, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>같은 노트북</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>노트북, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>알게 된 것</h2>
+
+<div class="card g">
+<h3>1. E2B는 노트북용</h3>
+<p>그래픽카드 없는 16 GB 노트북에서 공부용 완전한 답을 약 20초 만에 냈습니다. E4B는 112초였습니다. 짧은 사실 확인 다섯 문제에서는 하나도 틀리지 않았습니다. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B 실측 비교</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B는 게이밍 PC용</h3>
+<p>모델 전체가 그래픽카드에 올라가면 E4B는 <strong>노트북보다 7~9배 빠르고</strong>, 답도 더 좋습니다. 6 GB 이상 카드면 어떤 것이든 됩니다.</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B에는 RAM이 아니라 진짜 VRAM이 필요합니다</h3>
+<p>8 GB 카드에서 12B는 짧은 질문 하나에는 잘 답했지만, 채팅이 길어질 때마다 다운됐습니다. 그 PC에는 RAM이 48 GB 있었지만 소용없었습니다. <a href="/blog/how-much-vram-for-ai">모델이 카드에 다 들어가야 하는 이유</a></p>
+</div>
+
+<h2>내 PC에는 어떤 Gemma 4?</h2>
+<div class="expect">
+<div class="g"><h4>8 GB 노트북</h4><p>E2B. 먼저 다른 앱을 닫으세요.</p></div>
+<div class="b"><h4>카드 없는 16 GB 노트북</h4><p>속도를 원하면 E2B. E4B도 되지만 느립니다.</p></div>
+<div class="y"><h4>6&ndash;8 GB 카드 게이밍 PC</h4><p>E4B를 카드에 통째로.</p></div>
+<div class="p"><h4>12 GB 이상 카드</h4><p>E4B가 빠르고, 12B도 선택지가 됩니다.</p></div>
+</div>
+
+<p>Gemma 4는 Google이 Apache 2.0 라이선스로 공개했습니다. GreenCube는 내 PC에 맞는 것을 자동으로 고릅니다. <a href="/blog/can-my-pc-run-ai">측정한 PC {{pcs}}대 모두 보기</a></p>

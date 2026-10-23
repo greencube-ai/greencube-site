@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "AI에 필요한 VRAM은? 모델이 그래픽카드에 다 들어가야 하는 이유",
+ "description": "AI에 필요한 VRAM을 실측했습니다. 그래픽카드에서 넘친 모델은 6배 느려지고, 긴 채팅에서 다운됩니다. 들어가는 모델 고르는 법.",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "VRAM에서 넘치면 6배 느려집니다.",
+ "rank": 6,
+ "lang": "ko",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "AI 모델이 VRAM에 다 들어가지 않으면 어떻게 되나요?", "a": "들어가지 않은 부분은 일반 메모리에서 돌아가고, 전체가 느려집니다. 8 GB 카드에서 레이어 28개를 카드에 올린 모델은 초당 5.9 토큰으로, 전부 올렸을 때의 35.6보다 6배 느렸습니다."},
+  {"q": "카드에 올릴 수 있는 가장 큰 AI 모델을 써야 하나요?", "a": "아닙니다. 대화를 위한 여유를 남기세요. 120억 파라미터 모델은 8 GB 카드에 짧은 질문까지는 들어갔지만, 채팅이 길어지자 다운됐습니다. 여유 있게 들어가는 더 작은 모델이 더 빨랐고 한 번도 다운되지 않았습니다."},
+  {"q": "VRAM은 얼마나 비워 둬야 하나요?", "a": "GreenCube는 대화와 Windows를 위해 카드의 약 1.5 GB를 비워 둡니다. 이 여유가 없으면 4 GB 카드는 첫 메시지에서 메모리가 부족했습니다."}
+ ]
+}
+-->
+<div class="answer"><p><strong>짧은 답:</strong> 그래픽카드 메모리(VRAM)에 통째로 들어가는 AI는 빠릅니다. 넘치는 AI는 <strong>카드를 아예 안 쓰는 것보다 느려지고</strong>, 다운될 수도 있습니다. 작아도 카드에 전부 올라가는 쪽이, 커도 절반만 올라가는 쪽을 이깁니다.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35.6</b><span>모델 전체가 카드에 있을 때의 초당 토큰 수</span></div>
+<div class="stat p"><b>5.9</b><span>일부가 카드 밖에 있을 때. 6배 느림</span></div>
+<div class="stat y"><b>다운</b><span>겨우 들어가는 모델이 긴 채팅을 만났을 때</span></div>
+</div>
+
+<h2>테스트</h2>
+<p>AMD RX 5700 XT(VRAM 8 GB)와 RAM 48 GB 데스크톱. 120억 파라미터 모델(Gemma 4 12B, 약 6.2 GB)을 불러와 카드에 올리는 양을 바꿔 봤습니다. 모두 2026년 9월의 한 세션에서입니다.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>카드에 올린 모델의 양</th><th>출력(토큰/초)</th></tr></thead>
+<tbody>
+<tr><td>전부</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
+<tr><td>레이어 28개</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
+<tr><td>레이어 20개</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
+<tr><td><em>비교: 더 작은 모델(Gemma 4 E4B)을 CPU만으로</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
+<tr><td><em>같은 작은 모델을 카드에 전부</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>알게 된 것</h2>
+
+<div class="card g">
+<h3>1. 전부 아니면 소용없음</h3>
+<p>모델의 일부만 카드 밖에 둬도 <strong>6배 느려졌습니다</strong>. 레이어 20개를 카드에 올린 상태에서는 카드를 전혀 안 쓰는 작은 모델보다 느렸습니다. 절반만 카드에 올리는 건 양쪽의 나쁜 점만 모은 셈입니다.</p>
+</div>
+
+<div class="card p">
+<h3>2. 가장 큰 게 가장 좋은 건 아닙니다</h3>
+<p>12B 모델은 8 GB 카드에 통째로 들어가긴 했습니다. 짧은 질문 하나까지는요. 채팅이 길어지자 매번 다운됐습니다. 카드에 대화를 위한 여유가 거의 남지 않았기 때문입니다. 더 작은 모델은 약 3 GB의 여유가 있었고 초당 63~72 토큰으로 돌아갔습니다.</p>
+</div>
+
+<div class="card b">
+<h3>3. 여유를 남기세요</h3>
+<p>4 GB GTX 1650에서 4.2 GB 모델을 3.9 GB 카드에 밀어 넣었더니, 첫 메시지부터 "메모리가 부족합니다"로 실패했습니다. 지금 GreenCube는 채팅과 Windows를 위해 <strong>카드의 약 1.5 GB를 비워 둡니다</strong>.</p>
+</div>
+
+<h2>내 카드에 맞는 모델 고르는 법</h2>
+<div class="expect">
+<div class="g"><h4>VRAM 확인</h4><p>작업 관리자 &rarr; 성능 &rarr; GPU &rarr; 전용 GPU 메모리.</p></div>
+<div class="b"><h4>모델 크기 + 1.5 GB</h4><p>모델 파일에 약 1.5 GB를 더한 값이 그 숫자 안에 들어가야 합니다.</p></div>
+<div class="y"><h4>애매하면 작은 쪽</h4><p>카드에 전부 올라가는 작은 모델이, 절반만 올라가는 큰 모델을 이깁니다.</p></div>
+<div class="p"><h4>아니면 앱에 맡기기</h4><p>GreenCube가 카드를 읽고, 여유 있게 들어가는 모델을 고릅니다.</p></div>
+</div>
+
+<p>GTX 1650부터 RTX 5060까지, PC {{pcs}}대의 실제 속도: <a href="/blog/can-my-pc-run-ai">여기서 보기</a></p>

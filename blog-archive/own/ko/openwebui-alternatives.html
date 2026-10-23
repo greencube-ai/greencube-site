@@ -1,0 +1,99 @@
+<!--meta
+{
+ "title": "Open WebUI 대안: LibreChat부터 LM Studio까지 11개 확인(2026년 10월)",
+ "description": "LibreChat, Onyx, LobeHub, AnythingLLM, Chatbox, LM Studio, Jan, Msty, text-generation-webui, llama.cpp 자체 웹 UI, GreenCube: 라이선스, 가격, 설치 방법, 별도 엔진이 필요한지. 각 프로젝트의 페이지에서.",
+ "date": "2026-09-15",
+ "modified": "2026-10-21",
+ "kind": "guide",
+ "stat": "11",
+ "teaser": "Open WebUI 대안 11개: 라이선스, 가격, 설치, 별도 엔진 필요 여부 확인.",
+ "rank": 15,
+ "lang": "ko",
+ "alt": "openwebui-alternatives",
+ "faq": [
+  {"q": "Open WebUI 대안 중 가장 좋은 건?", "a": "떠나는 이유에 달려 있습니다. 팀용 셀프 호스팅 채팅 페이지라면 LibreChat(MIT, Docker). 회사 문서 검색이라면 Onyx. 컴퓨터 한 대에서 혼자, Docker 없이라면 모델을 직접 돌리는 LM Studio, Jan, Msty, text-generation-webui. GreenCube(Windows, 9.99유로 한 번)는 내 PC에 맞는 모델을 알아서 고릅니다."},
+  {"q": "Open WebUI는 아직 오픈 소스인가요?", "a": "라이선스가 이제 \"Open WebUI License\"입니다. BSD 방식의 조건에, 30일 동안 사용자가 50명 이하이거나, 서면 허가가 있거나, 기업 라이선스가 있는 경우가 아니면 브랜드 표시를 지우거나 바꿀 수 없다는 조항이 더해졌습니다. 그 전에 공개된 코드는 원래 라이선스를 유지합니다."},
+  {"q": "Docker 없는 Open WebUI 대안이 있나요?", "a": "있습니다. LM Studio, Jan, Msty, Chatbox, GreenCube는 일반 앱처럼 설치되고, text-generation-webui에는 압축을 풀어 실행하는 포터블 버전이 있으며, llama.cpp 서버에는 자체 웹 채팅 페이지가 있습니다."},
+  {"q": "모델을 직접 돌리는 Open WebUI 대안은?", "a": "LM Studio, Jan, text-generation-webui, llama.cpp, GreenCube는 별도 엔진 없이 모델을 돌립니다. LibreChat, Onyx, LobeHub, Chatbox는 Ollama 같은 엔진이나 클라우드 API에 연결합니다."},
+  {"q": "팀에 가장 좋은 대안은?", "a": "LibreChat(MIT)은 OAuth2, LDAP, 이메일 다중 사용자 로그인과 관리자 패널이 있습니다. Onyx는 회사 문서 전체 검색을 더하며, Business 플랜은 사용자당 월 20달러입니다. AnythingLLM의 Docker 버전도 다중 사용자를 지원합니다."}
+ ]
+}
+-->
+<div class="answer"><p><strong>짧은 답: Open WebUI를 떠나는 이유에 달려 있습니다.</strong> 팀용 셀프 호스팅 채팅 페이지라면 가장 가까운 대체품은 LibreChat(MIT, Docker)이고, Onyx는 회사 문서 전체 검색을 더합니다. 컴퓨터 한 대에서 나 혼자 쓰고, Docker나 별도 엔진이 싫다면 LM Studio, Jan, Msty, text-generation-webui가 모델을 직접 돌립니다. GreenCube(Windows, 9.99유로 한 번)도 마찬가지이고, 내 PC에 맞는 모델을 고릅니다.</p></div>
+
+<div class="stats">
+<div class="stat p"><b>11</b><span>각 프로젝트의 페이지로 확인한 대안. 2026년 10월 21일</span></div>
+<div class="stat y"><b>50</b><span>사용자: 이를 넘으면 Open WebUI 라이선스는 브랜드 유지를 요구합니다</span></div>
+<div class="stat g"><b>5</b><span>11개 중 별도 엔진 없이 모델을 직접 돌리는 것</span></div>
+</div>
+
+<h2>사람들이 Open WebUI 대안을 찾는 이유</h2>
+
+<p>Open WebUI는 pip(Python 3.11)이나 Docker로 설치하는 셀프 호스팅 채팅 페이지로, 보통 Ollama나 OpenAI 호환 API 같은 엔진 위에서 돌아갑니다(<a href="https://docs.openwebui.com/getting-started/" rel="noopener">문서</a>). 기능이 많아서 문서를 읽고, "완전히 오프라인으로" 돌릴 수 있으며, llama.cpp 엔진을 선택적으로 내장한 데스크톱 앱도 있습니다(<a href="https://github.com/open-webui/open-webui" rel="noopener">GitHub</a>). 다른 걸 찾는 이유로 가장 자주 듣는 건 세 가지입니다:</p>
+
+<ul>
+<li><strong>라이선스.</strong> 이제 "Open WebUI License"입니다. BSD 방식의 조건에, 30일 동안 최종 사용자가 50명 이하이거나, 서면 허가가 있거나, 기업 라이선스가 있는 경우가 아니면 "Open WebUI" 브랜드 표시를 지우거나 바꿀 수 없다는 조항이 더해졌습니다(<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" rel="noopener">LICENSE</a>).</li>
+<li><strong>설치.</strong> 서버, Docker나 Python 환경, 그리고 모델용 별도 엔진이 필요합니다.</li>
+<li><strong>용도.</strong> 더 큰 것(회사 전체 검색, 권한 관리)을 원하는 사람도 있고, 더 작은 것(PC 한 대에 앱 하나)을 원하는 사람도 있습니다.</li>
+</ul>
+
+<h2>대안 11개 비교</h2>
+
+<p>모든 정보는 각 행에 링크한 프로젝트의 웹사이트, 문서, GitHub 페이지에서 2026년 10월 21일에 읽은 것입니다. 페이지에 없는 내용은 "명시 안 됨"이라고 적었습니다. 이 앱들끼리 벤치마크를 하지는 않았습니다.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>앱</th><th>무엇인가</th><th>라이선스와 가격</th><th>설치 방법</th><th>모델을 직접 돌리나?</th><th>내 문서</th></tr></thead>
+<tbody>
+<tr><td><strong>LibreChat</strong>(<a href="https://github.com/LibreChat-AI/LibreChat" rel="noopener">GitHub</a>)</td><td>여러 AI 제공자를 위한 셀프 호스팅 채팅 페이지. 다중 사용자 로그인(OAuth2, LDAP, 이메일)과 관리자 패널</td><td>MIT, 무료</td><td>Docker(문서에 따르면 약 5분), npm 또는 Helm. "네이티브 데스크톱 앱이 아님"(<a href="https://www.librechat.ai/docs" rel="noopener">문서</a>)</td><td>아니요: 클라우드 API나 Ollama, koboldcpp 같은 로컬 엔진에 연결</td><td>예, 파일과 채팅, 파일 검색</td></tr>
+<tr><td><strong>Onyx</strong>(<a href="https://github.com/onyx-dot-app/onyx" rel="noopener">GitHub</a>)</td><td>AI 채팅과 팀 문서·앱 전체 검색</td><td>Community Edition은 MIT, 무료. Business는 사용자당 월 20달러, 연간 결제(<a href="https://onyx.app/pricing" rel="noopener">가격</a>)</td><td>설치 스크립트, Docker, Kubernetes. 1 GB 미만의 Lite 모드는 문서를 색인하지 못함</td><td>아니요: Ollama, vLLM 등이나 클라우드 API에 연결</td><td>예, 주된 용도. 네트워크와 완전히 분리해 돌릴 수 있음(<a href="https://onyx.app" rel="noopener">사이트</a>)</td></tr>
+<tr><td><strong>LobeHub</strong>(옛 LobeChat, <a href="https://github.com/lobehub/lobehub" rel="noopener">GitHub</a>)</td><td>에이전트와 채팅 플랫폼, 셀프 호스팅 또는 호스팅</td><td>LobeHub Community License(파생물에 추가 조건이 있는 Apache 2.0). 호스팅 플랜은 무료부터(<a href="https://lobehub.com/pricing" rel="noopener">가격</a>)</td><td>Docker, 또는 클라우드 호스트에 원클릭 배포</td><td>아니요: AI 제공자에 연결</td><td>읽은 페이지에 설명 없음</td></tr>
+<tr><td><strong>AnythingLLM</strong>(<a href="https://github.com/Mintplex-Labs/anything-llm" rel="noopener">GitHub</a>)</td><td>내 문서와 채팅. 데스크톱 앱 또는 팀 서버</td><td>MIT, 데스크톱 무료</td><td>데스크톱 설치 프로그램(Windows, Mac, Linux), 또는 다중 사용자용 Docker</td><td>로컬(Ollama, LM Studio)과 클라우드의 여러 제공자에 연결</td><td>예: PDF, TXT, DOCX</td></tr>
+<tr><td><strong>Chatbox</strong>(<a href="https://github.com/chatboxai/chatbox" rel="noopener">GitHub</a>)</td><td>여러 AI 모델을 위한 데스크톱·모바일 채팅 클라이언트</td><td>Community Edition은 GPL-3.0. 호스팅 플랜은 Lite 월 3.99달러부터 Pro+ 월 39.99달러까지(<a href="https://chatboxai.app/pricing" rel="noopener">가격</a>)</td><td>Windows, Mac, Linux 설치 프로그램. iPhone과 Android 앱</td><td>아니요: 클라우드 API, 자체 호스팅 서비스, 로컬 모델은 Ollama</td><td>예, 로컬 지식 베이스</td></tr>
+<tr><td><strong>LM Studio</strong>(<a href="https://lmstudio.ai" rel="noopener">사이트</a>)</td><td>채팅과 로컬 OpenAI 방식 서버를 갖춘 데스크톱 앱</td><td>무료, 업무용도 가능. 비공개 소스</td><td>설치 프로그램. Windows는 AVX2, Mac은 Apple 칩 필요(<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">요구 사양</a>)</td><td>예</td><td>예: PDF, DOCX, TXT</td></tr>
+<tr><td><strong>Jan</strong>(<a href="https://github.com/janhq/jan" rel="noopener">GitHub</a>)</td><td>데스크톱 채팅 앱과 로컬 OpenAI 호환 서버</td><td>Apache 2.0, 무료</td><td>Windows, Mac, Linux 설치 프로그램</td><td>예. 클라우드 모델도 선택 가능</td><td>예: PDF, Office 파일</td></tr>
+<tr><td><strong>Msty</strong>(<a href="https://msty.ai/products/studio/" rel="noopener">사이트</a>)</td><td>로컬 엔진과 클라우드 모델을 한데 모은 데스크톱 앱</td><td>무료 플랜 있음. Aurum은 연 149달러 또는 한 번 349달러(<a href="https://msty.ai/pricing" rel="noopener">가격</a>). 라이선스 명시 안 됨</td><td>Windows, Mac, Linux 설치 프로그램</td><td>로컬 엔진(MLX, llama.cpp, Ollama)과 호스팅 제공자 사용</td><td>예, Knowledge Stacks</td></tr>
+<tr><td><strong>text-generation-webui</strong>(현재 "textgen", <a href="https://github.com/oobabooga/textgen" rel="noopener">GitHub</a>)</td><td>모델용 로컬 웹 UI, OpenAI/Anthropic 호환 API 포함</td><td>AGPL-3.0, 무료</td><td>포터블 버전: 압축 풀고 실행. 또는 원클릭 스크립트, Conda, Docker</td><td>예: llama.cpp, ExLlamaV3, Transformers 등</td><td>예: PDF, DOCX, 텍스트 첨부</td></tr>
+<tr><td><strong>llama.cpp 서버</strong>(<a href="https://github.com/ggml-org/llama.cpp" rel="noopener">GitHub</a>)</td><td>엔진 그 자체. 서버에 브라우저 채팅 페이지 포함</td><td>MIT, 무료</td><td>설치 스크립트, 미리 빌드된 바이너리, Docker, 또는 소스에서 빌드</td><td>예</td><td>명시 안 됨</td></tr>
+<tr><td><strong>GreenCube</strong>(<a href="https://greencube.app" rel="noopener">사이트</a>)</td><td>한 사람을 위한 데스크톱 앱: 채팅, PDF로 공부, 코드, 이미지</td><td>9.99유로 한 번. 비공개 소스</td><td>Windows 10과 11 설치 프로그램. 서버나 Docker 불필요</td><td>예, 그리고 내 PC에 맞는 모델을 고름</td><td>예: PDF, 노트, 사진</td></tr>
+</tbody>
+</table></div>
+
+<h2>나에게 맞는 건?</h2>
+
+<div class="card b">
+<h3>팀용 셀프 호스팅 채팅 페이지</h3>
+<p><strong>LibreChat</strong>이 가장 가까운 대체품입니다. MIT 라이선스, Docker, 다중 사용자 로그인과 관리자 패널이 있고, 클라우드 API나 내 엔진에 연결합니다. 주된 일이 회사 문서와 앱에서 답을 찾는 것이라면 <strong>Onyx</strong>(MIT Community Edition, 또는 호스팅으로 사용자당 월 20달러). 문서와의 채팅이 가장 중요하다면 <strong>AnythingLLM</strong>의 Docker 버전. 에이전트를 원하고 라이선스 조건이 괜찮다면 <strong>LobeHub</strong>.</p>
+</div>
+
+<div class="card g">
+<h3>컴퓨터 한 대에서 나 혼자, Docker 없이</h3>
+<p><strong>LM Studio</strong>와 <strong>Jan</strong>은 일반 앱처럼 설치되고 모델을 직접 돌립니다. 둘 다 다른 도구를 위해 로컬 OpenAI 방식 API도 제공할 수 있습니다. <strong>Msty</strong>는 로컬 엔진과 클라우드 모델을 섞어 씁니다. <strong>GreenCube</strong>(Windows)는 내 PC에 맞는 모델을 골라 내려받고, PDF와 사진을 읽고, 이미지도 만들며, 9.99유로 한 번 결제입니다.</p>
+</div>
+
+<div class="card y">
+<h3>만지작거리는 걸 좋아하고 완전히 제어하고 싶다면</h3>
+<p><strong>text-generation-webui</strong>는 여러 백엔드(llama.cpp, ExLlamaV3, Transformers)를 지원하고 "텔레메트리 없이" 돌아간다고 합니다. <strong>llama.cpp</strong> 자체 서버는 군더더기 없는 브라우저 채팅 페이지를 줍니다. llama.cpp 기반의 단일 .exe인 KoboldCpp도 선택지입니다(<a href="https://github.com/LostRuins/koboldcpp" rel="noopener">GitHub</a>).</p>
+</div>
+
+<div class="card p">
+<h3>같은 채팅을 휴대폰에서도 쓰고 싶다면</h3>
+<p><strong>Chatbox</strong>는 데스크톱과 휴대폰 앱이 있고, 로컬 모델에 Ollama를 쓸 수 있습니다. Open WebUI 자체도 웹 앱으로 휴대폰 홈 화면에 추가할 수 있습니다.</p>
+</div>
+
+<h2>평범한 PC에서 로컬 모델은 얼마나 빠를까?</h2>
+
+<p>어떤 인터페이스를 고르든 속도는 하드웨어에서 나옵니다. 모델은 그래픽카드나 CPU에서 돌아가니까요. 실제 PC {{pcs}}대에서 GreenCube를 측정했습니다(같은 기기에서 다른 앱은 측정하지 않았습니다):</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>내 PC</th><th>출력</th></tr></thead>
+<tbody>
+<tr><td>그래픽카드 없는 8 GB 노트북</td><td><b>5&ndash;7</b> 토큰/초, 대략 읽는 속도</td></tr>
+<tr><td>그래픽카드 없는 16 GB 노트북</td><td><b>14&ndash;18</b> 토큰/초</td></tr>
+<tr><td>6 GB 이상 카드의 게이밍 PC</td><td>대부분의 카드에서 <b>37&ndash;76</b> 토큰/초</td></tr>
+</tbody>
+</table></div>
+
+<p>카드별 숫자는 <a href="/blog/can-my-pc-run-ai#checker">내 PC에서 AI가 돌아갈까?</a>에, 원본 데이터는 <a href="/blog/how-we-measure-ai-speed">측정 방법</a>에 있습니다. 개인정보와 온라인으로 나가는 것 기준으로 데스크톱 앱을 비교하려면 <a href="/blog/best-offline-ai-chatbot">오프라인 AI 챗봇 12개 비교</a>를 보세요.</p>
+
+<h2>확인 방법</h2>
+<p>2026년 10월 21일, 리뷰나 다른 목록이 아니라 각 프로젝트의 GitHub 페이지, 문서, 가격 페이지, 라이선스를 직접 읽고, 각 정보의 출처 페이지를 링크했습니다. 페이지끼리 맞지 않을 때(LobeHub README 배지는 Apache 2.0이지만 LICENSE 파일은 조건을 더함)는 라이선스 파일을 따랐습니다. 저희가 GreenCube를 만들기 때문에, 누구나 확인할 수 있는 사실만 담았고 앱 순위는 매기지 않았습니다. 매달 다시 확인하고 위의 날짜를 업데이트합니다.</p>

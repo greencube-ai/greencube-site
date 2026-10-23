@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>노트북에서 Gemma 4 E2B vs E4B: 작은 AI와 큰 AI를 실측 | GreenCube 블로그</title>
+  <meta name="description" content="그래픽카드 없는 16 GB 노트북에서 Gemma 4 E2B와 E4B(그리고 Phi-4 Mini) 비교. 같은 답에 20초 대 112초. 큰 모델로 무엇을 얻고, 언제 기다릴 가치가 있을까." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="노트북에서 Gemma 4 E2B vs E4B: 작은 AI와 큰 AI를 실측 | GreenCube 블로그" />
+  <meta property="og:description" content="그래픽카드 없는 16 GB 노트북에서 Gemma 4 E2B와 E4B(그리고 Phi-4 Mini) 비교. 같은 답에 20초 대 112초. 큰 모델로 무엇을 얻고, 언제 기다릴 가치가 있을까." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ko/gemma-4-e2b-vs-e4b" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ko/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "노트북에서 Gemma 4 E2B vs E4B: 작은 AI와 큰 AI를 실측", "description": "그래픽카드 없는 16 GB 노트북에서 Gemma 4 E2B와 E4B(그리고 Phi-4 Mini) 비교. 같은 답에 20초 대 112초. 큰 모델로 무엇을 얻고, 언제 기다릴 가치가 있을까.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ko", "mainEntityOfPage": "https://blog.greencube.app/blog/ko/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ko/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "큰 AI 모델이 항상 더 좋은가요?", "acceptedAnswer": {"@type": "Answer", "text": "답은 대개 조금 더 좋지만, 그래픽카드 없는 노트북에서는 훨씬 느립니다. 테스트에서 큰 모델(Gemma 4 E4B)이 가장 좋은 설명을 했지만 112초가 걸렸고, 작은 모델(Gemma 4 E2B)은 20초 만에 좋은 답을 냈습니다."}}, {"@type": "Question", "name": "작은 AI 모델은 사실을 틀리나요?", "acceptedAnswer": {"@type": "Answer", "text": "짧은 사실 확인 다섯 문제(계산, 단위 변환, 날짜, 과학)에서 작은 모델 두 개 모두 하나도 틀리지 않았습니다. 작은 쪽의 약점은 세기입니다. 어떤 개수를 말해 놓고 다른 개수의 항목을 나열한 적이 있습니다."}}, {"@type": "Question", "name": "내 PC에서는 어떤 AI 모델을 써야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "그래픽카드 없는 노트북이라면 작은 모델. 그래픽카드가 있는 PC라면 큰 모델도 빠르게 돌아가니(8 GB 카드에서 초당 56~72 토큰) 그쪽을 쓰세요. GreenCube가 PC에 맞춰 골라 줍니다."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ko/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ko/ai-environmental-impact">AI와 지구</a>
+    <a href="https://greencube.app/ko/your-data">내 데이터</a>
+    <a href="https://greencube.app/ko/mission">우리의 미션</a>
+    <a href="/blog/ko" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">KO</summary><div class="lang-list"><a href="/blog/gemma-4-e2b-vs-e4b" hreflang="en" lang="en">English</a><a href="/blog/es/gemma-4-e2b-vs-e4b" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-e2b-vs-e4b" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-e2b-vs-e4b" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-e2b-vs-e4b" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/gemma-4-e2b-vs-e4b" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/gemma-4-e2b-vs-e4b" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/gemma-4-e2b-vs-e4b" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/gemma-4-e2b-vs-e4b" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/gemma-4-e2b-vs-e4b" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/gemma-4-e2b-vs-e4b" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/gemma-4-e2b-vs-e4b" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/gemma-4-e2b-vs-e4b" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/gemma-4-e2b-vs-e4b" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/gemma-4-e2b-vs-e4b" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/gemma-4-e2b-vs-e4b" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/gemma-4-e2b-vs-e4b" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/gemma-4-e2b-vs-e4b" hreflang="ko" lang="ko" aria-current="true">한국어</a></div></details><a href="https://greencube.app/ko/buy" class="nav-cta">GreenCube 구매</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ko">GreenCube 블로그</a></p>
+<h1>노트북에서 Gemma 4 E2B vs E4B: 작은 AI와 큰 AI를 실측</h1>
+<p class="byline">글쓴이 <a href="/blog/ko/hector-gras">Hector Gras</a> &middot; 2026년 10월 18일</p>
+<div class="answer"><p><strong>짧은 답:</strong> 그래픽카드 없는 노트북에서는 <strong>작은 모델이 이깁니다</strong>. 2분 가까이 기다려 조금 더 좋은 답을 받는 대신, 20초 만에 좋은 답을 받습니다. 그래픽카드가 있다면 큰 쪽을 쓰세요. 카드 위에서는 그것도 빠르니까요.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20초</b><span>작은 모델(Gemma 4 E2B), 완전한 답</span></div>
+<div class="stat b"><b>28초</b><span>오래된 작은 모델(Phi-4 Mini)</span></div>
+<div class="stat p"><b>112초</b><span>큰 모델(Gemma 4 E4B), 가장 좋은 설명</span></div>
+</div>
+
+<h2>테스트</h2>
+<p>16 GB 노트북(Intel Core Ultra 5, 그래픽카드 없음), CPU만. 전형적인 공부 요청: 14살에게 광합성을 설명하고, 확인 문제 세 개를 써 줘. 답이 끝날 때까지 쟀습니다. 2026년 9월입니다.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>모델</th><th>크기</th><th>답 완성까지</th><th>결과</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20초</b></td><td>완전하고 잘 씀, 문제 세 개 모두 다름</td></tr>
+<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28초</b></td><td>완전하고 정확하지만 한 문제가 중복</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112초</b></td><td>완전함, 가장 좋은 설명</td></tr>
+</tbody>
+</table></div>
+
+<h2>알게 된 것</h2>
+
+<div class="card g">
+<h3>1. 공부라면 작은 쪽으로 충분합니다</h3>
+<p>계산, 단위 변환, 날짜, 과학의 짧은 사실 확인 문제도 다섯 개 냈습니다. <strong>작은 모델은 하나도 틀리지 않았습니다</strong>. 작은 Gemma는 부탁하지도 않았는데 퍼센트를 구하는 다른 방법까지 보여 줬습니다.</p>
+</div>
+
+<div class="card y">
+<h3>2. 약점: 세기</h3>
+<p>작은 모델은 두 번, "다섯 가지를 들겠습니다"라고 해 놓고 모자라거나 넘치게 나열했습니다. 그래서 지금 GreenCube는 숫자를 쓰기 전에 세어 보라고 지시합니다. 이런 작은 부분에서는 큰 모델이 더 안전합니다.</p>
+</div>
+
+<div class="card b">
+<h3>3. 그래픽카드가 있으면 얘기가 달라집니다</h3>
+<p>같은 큰 모델이 8 GB 게이밍 카드에서는 <strong>초당 56~72 토큰</strong>을 출력합니다. 이 노트북보다 7~9배 빨라서, 게이밍 PC라면 기다리지 않고 더 좋은 답을 받습니다.</p>
+</div>
+
+<h2>내 PC에는 어느 쪽?</h2>
+<div class="expect">
+<div class="g"><h4>카드 없는 노트북</h4><p>작은 모델. 빠른 답으로 공부, 글쓰기, 질문에 충분합니다.</p></div>
+<div class="b"><h4>게이밍 PC</h4><p>큰 모델. 답이 더 좋고, 그래도 읽는 속도보다 빠릅니다.</p></div>
+<div class="y"><h4>목록이 필요하다면?</h4><p>"다섯 가지"라고 하면 정말 다섯 개인지 확인하세요. 작은 모델이 실수하는 건 그것뿐입니다.</p></div>
+<div class="p"><h4>신경 쓰기 싫다면?</h4><p>GreenCube가 PC를 확인하고 골라 줍니다.</p></div>
+</div>
+
+<p>PC별 속도는? <a href="/blog/ko/can-my-pc-run-ai">PC 10대의 측정 결과는 여기에</a></p>
+<h2>자주 묻는 질문</h2>
+<div class="faq">
+<details><summary>큰 AI 모델이 항상 더 좋은가요?</summary><p>답은 대개 조금 더 좋지만, 그래픽카드 없는 노트북에서는 훨씬 느립니다. 테스트에서 큰 모델(Gemma 4 E4B)이 가장 좋은 설명을 했지만 112초가 걸렸고, 작은 모델(Gemma 4 E2B)은 20초 만에 좋은 답을 냈습니다.</p></details>
+<details><summary>작은 AI 모델은 사실을 틀리나요?</summary><p>짧은 사실 확인 다섯 문제(계산, 단위 변환, 날짜, 과학)에서 작은 모델 두 개 모두 하나도 틀리지 않았습니다. 작은 쪽의 약점은 세기입니다. 어떤 개수를 말해 놓고 다른 개수의 항목을 나열한 적이 있습니다.</p></details>
+<details><summary>내 PC에서는 어떤 AI 모델을 써야 하나요?</summary><p>그래픽카드 없는 노트북이라면 작은 모델. 그래픽카드가 있는 PC라면 큰 모델도 빠르게 돌아가니(8 GB 카드에서 초당 56~72 토큰) 그쪽을 쓰세요. GreenCube가 PC에 맞춰 골라 줍니다.</p></details>
+</div>
+
+<div class="cta-box"><h3>내 PC에서 돌아가는 나만의 AI</h3><p>GreenCube는 내 컴퓨터에서 돌아갑니다. 사용 제한 없음, 구독 없음, 인터넷 없이도 작동. &euro;9.99, 한 번 결제.</p><a class="cta" href="https://greencube.app/ko/buy">GreenCube 받기 <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ko/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">당신의 것인 <em>AI,</em> 빌리는 게 아님.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>제품</h3>
+        <ul>
+          <li><a href="https://greencube.app/ko/buy">GreenCube 구매</a></li>
+          <li><a href="https://greencube.app/ko/what-you-get">내 컴퓨터에서 돌아가나요?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>읽을거리</h3>
+        <ul>
+          <li><a href="/blog/ko">Blog</a></li>
+          <li><a href="https://greencube.app/ko/your-data">내 데이터</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT와 내 데이터 (EN)</a></li>
+          <li><a href="https://greencube.app/ko/ai-environmental-impact">AI와 지구</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>회사</h3>
+        <ul>
+          <li><a href="https://greencube.app/ko/mission">우리의 미션</a></li>
+          <li><a href="mailto:support@greencube.app">문의</a></li>
+          <li><a href="https://legal.greencube.app/privacy">개인정보 처리방침 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">이용약관 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 스페인에서 만듦.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
