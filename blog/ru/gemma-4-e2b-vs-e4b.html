@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gemma 4 E2B против E4B на ноутбуке: маленькая и большая модель ИИ, измерено | Блог GreenCube</title>
+  <meta name="description" content="Gemma 4 E2B против E4B (и Phi-4 Mini) на ноутбуке с 16 ГБ без видеокарты: 20 секунд против 112 на один и тот же ответ. Что даёт большая модель и когда стоит подождать." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Gemma 4 E2B против E4B на ноутбуке: маленькая и большая модель ИИ, измерено | Блог GreenCube" />
+  <meta property="og:description" content="Gemma 4 E2B против E4B (и Phi-4 Mini) на ноутбуке с 16 ГБ без видеокарты: 20 секунд против 112 на один и тот же ответ. Что даёт большая модель и когда стоит подождать." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Gemma 4 E2B против E4B на ноутбуке: маленькая и большая модель ИИ, измерено", "description": "Gemma 4 E2B против E4B (и Phi-4 Mini) на ноутбуке с 16 ГБ без видеокарты: 20 секунд против 112 на один и тот же ответ. Что даёт большая модель и когда стоит подождать.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ru", "mainEntityOfPage": "https://blog.greencube.app/blog/ru/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ru/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Модель ИИ побольше всегда лучше?", "acceptedAnswer": {"@type": "Answer", "text": "Её ответы обычно немного лучше, но на ноутбуке без видеокарты она гораздо медленнее. В нашем тесте большая модель (Gemma 4 E4B) дала лучшее объяснение, но заняла 112 секунд; маленькая (Gemma 4 E2B) дала хороший ответ за 20 секунд."}}, {"@type": "Question", "name": "Ошибаются ли маленькие модели ИИ в фактах?", "acceptedAnswer": {"@type": "Answer", "text": "В наших пяти быстрых вопросах на факты (математика, перевод единиц, даты, наука) ни одна из двух маленьких моделей не ошиблась. Слабое место маленькой — счёт: иногда она называла одно число пунктов, а перечисляла другое."}}, {"@type": "Question", "name": "Какую модель ИИ мне использовать на своём ПК?", "acceptedAnswer": {"@type": "Answer", "text": "На ноутбуке без видеокарты — маленькую. На ПК с видеокартой большая модель тоже работает быстро (56–72 токена в секунду на видеокартах с 8 ГБ), так что берите её. GreenCube выбирает за вас по вашему ПК."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ru/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a>
+    <a href="https://greencube.app/ru/your-data">Ваши данные</a>
+    <a href="https://greencube.app/ru/mission">Наша миссия</a>
+    <a href="/blog/ru" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">RU</summary><div class="lang-list"><a href="/blog/gemma-4-e2b-vs-e4b" hreflang="en" lang="en">English</a><a href="/blog/es/gemma-4-e2b-vs-e4b" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-e2b-vs-e4b" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-e2b-vs-e4b" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-e2b-vs-e4b" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/gemma-4-e2b-vs-e4b" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/gemma-4-e2b-vs-e4b" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/gemma-4-e2b-vs-e4b" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/gemma-4-e2b-vs-e4b" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/gemma-4-e2b-vs-e4b" hreflang="ru" lang="ru" aria-current="true">Русский</a></div></details><a href="https://greencube.app/ru/buy" class="nav-cta">Купить GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<h1>Gemma 4 E2B против E4B на ноутбуке: маленькая и большая модель ИИ, измерено</h1>
+<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 18 октября 2026 г.</p>
+<div class="answer"><p><strong>Короткий ответ:</strong> на ноутбуке без видеокарты <strong>побеждает маленькая модель</strong>: хороший ответ за 20 секунд вместо чуть лучшего почти за 2 минуты. Если у вас есть видеокарта, берите большую: там она тоже быстрая.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>20 с</b><span>маленькая модель (Gemma 4 E2B), полный ответ</span></div>
+<div class="stat b"><b>28 с</b><span>старая маленькая модель (Phi-4 Mini)</span></div>
+<div class="stat p"><b>112 с</b><span>большая модель (Gemma 4 E4B), лучшее объяснение</span></div>
+</div>
+
+<h2>Тест</h2>
+<p>Ноутбук с 16 ГБ (Intel Core Ultra 5, без видеокарты), только процессор. Типичный учебный запрос: объясни фотосинтез 14-летнему, а потом напиши три вопроса для теста по нему. Мы засекали время до конца ответа, в сентябре 2026 года.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Модель</th><th>Размер</th><th>Время до полного ответа</th><th>Что получилось</th></tr></thead>
+<tbody>
+<tr><td>Gemma 4 E2B</td><td>2,6 ГБ</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 с</b></td><td>Полный, хорошо написанный ответ, три разных вопроса для теста</td></tr>
+<tr><td>Phi-4 Mini</td><td>2,5 ГБ</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 с</b></td><td>Полный и верный, но повторила один вопрос для теста</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 ГБ</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 с</b></td><td>Полный, лучшее объяснение</td></tr>
+</tbody>
+</table></div>
+
+<h2>Что мы узнали</h2>
+
+<div class="card g">
+<h3>1. Для учёбы хватает маленькой</h3>
+<p>Мы задали и пять быстрых вопросов на факты: математика, перевод единиц, даты и наука. <strong>Ни одна из маленьких моделей не ошиблась.</strong> Маленькая Gemma даже без просьбы показала второй способ посчитать процент.</p>
+</div>
+
+<div class="card y">
+<h3>2. Её слабое место: счёт</h3>
+<p>Дважды маленькая модель сказала «вот 5» и перечислила другое число пунктов. Поэтому теперь GreenCube просит её сначала посчитать, а потом писать число. В таких мелочах большая модель надёжнее.</p>
+</div>
+
+<div class="card b">
+<h3>3. С видеокартой всё иначе</h3>
+<p>Та же большая модель пишет <strong>56–72 токена в секунду</strong> на игровых видеокартах с 8 ГБ — в 7–9 раз быстрее, чем на этом ноутбуке. На игровом ПК вы получаете ответы получше без ожидания.</p>
+</div>
+
+<h2>Какая подойдёт вашему ПК?</h2>
+<div class="expect">
+<div class="g"><h4>Ноутбук без видеокарты</h4><p>Маленькая модель. Быстрые ответы, достаточно хорошие для учёбы, письма и вопросов.</p></div>
+<div class="b"><h4>Игровой ПК</h4><p>Большая модель. Ответы получше и всё равно быстрее, чем вы читаете.</p></div>
+<div class="y"><h4>Нужен список?</h4><p>Если она говорит «вот 5», проверьте, что их действительно 5. Это единственное, в чём маленькая модель ошибалась.</p></div>
+<div class="p"><h4>Не хотите в этом разбираться?</h4><p>GreenCube проверяет ваш ПК и выбирает за вас.</p></div>
+</div>
+
+<p>Посмотрите, насколько быстр каждый тип ПК: <a href="/blog/ru/can-my-pc-run-ai">здесь мы измерили 10 ПК</a>.</p>
+<h2>Вопросы</h2>
+<div class="faq">
+<details><summary>Модель ИИ побольше всегда лучше?</summary><p>Её ответы обычно немного лучше, но на ноутбуке без видеокарты она гораздо медленнее. В нашем тесте большая модель (Gemma 4 E4B) дала лучшее объяснение, но заняла 112 секунд; маленькая (Gemma 4 E2B) дала хороший ответ за 20 секунд.</p></details>
+<details><summary>Ошибаются ли маленькие модели ИИ в фактах?</summary><p>В наших пяти быстрых вопросах на факты (математика, перевод единиц, даты, наука) ни одна из двух маленьких моделей не ошиблась. Слабое место маленькой — счёт: иногда она называла одно число пунктов, а перечисляла другое.</p></details>
+<details><summary>Какую модель ИИ мне использовать на своём ПК?</summary><p>На ноутбуке без видеокарты — маленькую. На ПК с видеокартой большая модель тоже работает быстро (56–72 токена в секунду на видеокартах с 8 ГБ), так что берите её. GreenCube выбирает за вас по вашему ПК.</p></details>
+</div>
+
+<div class="cta-box"><h3>Ваш собственный ИИ на вашем собственном ПК</h3><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro;, оплата один раз.</p><a class="cta" href="https://greencube.app/ru/buy">Купить GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ru/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ИИ, который <em>ваш,</em> не арендованный.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Продукт</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/buy">Купить GreenCube</a></li>
+          <li><a href="https://greencube.app/ru/what-you-get">Пойдёт ли на моём компьютере?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Почитать</h3>
+        <ul>
+          <li><a href="/blog/ru">Blog</a></li>
+          <li><a href="https://greencube.app/ru/your-data">Ваши данные</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT и ваши данные (EN)</a></li>
+          <li><a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Компания</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/mission">Наша миссия</a></li>
+          <li><a href="mailto:support@greencube.app">Контакты</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Политика конфиденциальности (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Условия использования (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Сделано в Испании.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ corrected number changes everywhere at once. A PC with no measured speed gets no
 live in words/<lang>.json (the same keys in every language); this file only decides which sentence fits and fills in
 the numbers.
 """
-import json, os, html
+import json, os, html, re
 
 SRC = os.path.join(os.path.dirname(__file__), '..')
 DATA = json.load(open(f'{SRC}/data/pcs.json', encoding='utf-8'))
@@ -21,9 +21,36 @@ ANSWER, DOC = 400, 5000  # tokens in a normal answer, and in a long document (ab
 READ_URL = 'https://doi.org/10.1016/j.jml.2019.104047'
 
 def esc(s): return html.escape(s, quote=True)
+# Plural rules for languages whose words change with the number ("1 токен, 2 токена, 5 токенов").
+# A template picks a form with {x|one|few|many|other}: the word only, chosen from the number in {x}.
+PLURAL = {'ru': 'east-slavic', 'uk': 'east-slavic'}
+
+def plural(lang, v):
+    """Which form a number takes: 0 one, 1 few, 2 many, 3 other (fractions). Uses the last number in v ('5–7', 'около 20')."""
+    th, dec = WD[lang]['num_sep']
+    nums = re.findall(r'\d+(?:' + re.escape(dec) + r'\d+)?', str(v).replace(th, ''))
+    if not nums or dec in nums[-1]: return 3
+    n = int(nums[-1])
+    if n % 10 == 1 and n % 100 != 11: return 0
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14: return 1
+    return 2
+
+def fmt(lang, s, **f):
+    """str.format, plus the {x|one|few|many|other} plural forms for languages in PLURAL."""
+    if lang in PLURAL:
+        s = re.sub(r'\{(\w+)\|([^{}]*)\}', lambda m: m[2].split('|')[plural(lang, f[m[1]])], s)
+    out = s.format(**f)
+    if s.startswith('{') and s.rstrip()[-1:] in '.?!':  # a sentence that opens with a name ('ноутбук с …') starts with a capital
+        out = re.sub(r'^((?:<[^>]*>)*)([^\W\d_])', lambda m: m[1] + m[2].upper(), out, count=1)
+    return out
+
+def after(lang, n, s):
+    """A word that follows a number ('tokens a second'), with {_|one|few|many|other} picked from that number."""
+    return re.sub(r'\{_\|([^{}]*)\}', lambda m: m[1].split('|')[plural(lang, n)], s) if lang in PLURAL else s
+
 def tx(lang, key, **f):
     s = WD[lang][key]
-    return s.format(**f) if f else s
+    return fmt(lang, s, **f) if f else s
 def mid(r): return (r[0] + r[1]) / 2
 def gb(lang): return WD[lang]['gb']  # 'GB', 'Go', 'ГБ'
 
@@ -212,7 +239,8 @@ def measured_table(pc, lang):
     rows = []
     for r in pc['runs']:
         if 'engine' in r:
-            res = f'<b>{rng(r["writes"], lang, r.get("approx"))}</b> {L["tps"]} {L["writes"]}'
+            sp = rng(r["writes"], lang, r.get("approx"))
+            res = f'<b>{sp}</b> {after(lang, sp, L["tps"])} {L["writes"]}'
             if r.get('reads'):
                 res += f' &middot; {rng(r["reads"], lang)} {L["reads"]}'
             what = ENG[r['engine']]['name'] + (tx(lang, 'second_pc') if r.get('second') else '') + ('*' if r.get('short') else '')
@@ -254,7 +282,7 @@ def compare(pc, lang):
     out = '<p>' + ' '.join(parts) + '</p>\n'
     peers = [p for p in order if p['vram'] == pc['vram'] and p['kind'] == 'desktop']
     if pc['kind'] == 'desktop' and len(peers) >= 3:
-        items = ''.join(f'<li>{link(p, lang) if p is not pc else "<strong>" + esc(name(p, lang)) + "</strong>"}: {hl(p, lang)} {WD[lang]["pc"]["tps"]}{tag(p)}</li>\n' for p in peers)
+        items = ''.join(f'<li>{link(p, lang) if p is not pc else "<strong>" + esc(name(p, lang)) + "</strong>"}: {hl(p, lang)} {after(lang, hl(p, lang), WD[lang]["pc"]["tps"])}{tag(p)}</li>\n' for p in peers)
         out += tx(lang, 'cmp_peers', n=len(peers), v=pc['vram'], items=items)
     return out
 
@@ -297,13 +325,13 @@ def pages(lang):
         body += f'<h2>{L["h_mean"]}</h2>\n' + ''.join(f'<div class="card {t}">\n<h3>{esc(hd)}</h3>\n<p>{x}</p>\n</div>\n' for t, hd, x in insights(pc, lang))
         body += f'<h2>{L["h_cmp"]}</h2>\n' + compare(pc, lang)
         spec = (tx(lang, 'spec_laptop') if pc['kind'] == 'laptop' else f'{pc["vendor"]} {pc["gpu"]}',
-                L['none'] if not pc['vram'] else f'{pc["vram"]} {gb(lang)}', f'{pc["ram"]} {gb(lang)}', pc['cpu'].replace('threads', tx(lang, 'threads')))
+                L['none'] if not pc['vram'] else f'{pc["vram"]} {gb(lang)}', f'{pc["ram"]} {gb(lang)}', re.sub(r'(\d+) threads', lambda m: f"{m[1]} {after(lang, m[1], tx(lang, 'threads'))}", pc['cpu']))
         body += (f'<h2>{L["h_pc"]}</h2>\n<p>' + tx(lang, 'pc_lead')
                  + f'</p>\n<ul>\n<li>{L["kind"][pc["kind"]]}</li>\n' + ''.join(f'<li><strong>{k}:</strong> {esc(v)}</li>\n' for k, v in zip(L['spec'], spec)) + '</ul>\n')
         body += f'<h2>{L["h_check"]}</h2>\n' + tx(lang, 'check_lead') + WD[lang]['check_steps'] + tx(lang, 'check_tail', hub=hub)
-        others = ''.join(f'<li>{link(o, lang)}: {hl(o, lang)} {L["tps"]} ({ENG[headline(o)["engine"]]["name"]})</li>\n' for o in ranked() if o is not pc)
+        others = ''.join(f'<li>{link(o, lang)}: {hl(o, lang)} {after(lang, hl(o, lang), L["tps"])} ({ENG[headline(o)["engine"]]["name"]})</li>\n' for o in ranked() if o is not pc)
         body += (f'<h2>{L["h_more"]}</h2>\n<ul>\n{others}</ul>\n'
-                 f'<p><a href="{hub}">{L["hub_t"]}</a> {L["all"].format(n=count())}.</p>\n')
+                 f'<p><a href="{hub}">{L["hub_t"]}</a> {fmt(lang, L["all"], n=count())}.</p>\n')
         out.append((pc_slug(pc, lang), meta, body))
     return out + [method_page(lang)]
 
@@ -353,6 +381,7 @@ def checker(lang):
                           'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None,
             'builtin': WD[lang]['builtin'], 'T': WD[lang]['checker_js']}
     if 'units' in WD[lang]: data['U'] = WD[lang]['units']
+    if lang in PLURAL: data['P'] = PLURAL[lang]
     T = WD[lang]['checker']
     return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'
             f'<p class="chk-detect" id="chk-detect">{T["nojs"]}</p>\n'
@@ -421,11 +450,11 @@ def method_page(lang):
              b12=ENG[BIG]['name'], b12gb=num(ENG[BIG]['gb'], lang), specs=SPECS_URL, csv=CSV_NAME, year=dates[-1][:4], hub=hub,
              worst_link=link(H['worst'][0], lang), pred=num(round(H['worst'][2]), lang), meas=num(round(H['worst'][1]), lang),
              nopic=WD[lang]['nopic_join'].join(link(p, lang) for p in nopic))
-    b = f'<div class="answer"><p>{esc(M["ans"].format(**f))}</p></div>\n'
+    b = f'<div class="answer"><p>{esc(fmt(lang, M["ans"], **f))}</p></div>\n'
     b += ('<div class="stats">\n' + f'<div class="stat g"><b>{count()}</b><span>{M["s1"]}</span></div>\n'
           + f'<div class="stat b"><b>{sum(len(p["runs"]) for p in PCS)}</b><span>{M["s2"]}</span></div>\n'
           + f'<div class="stat y"><b>{H["worst_pct"]}%</b><span>{M["s3"]}</span></div>\n</div>\n')
-    b += f'<h2>{M["h_what"]}</h2>\n' + M['what'].format(**f)
+    b += f'<h2>{M["h_what"]}</h2>\n' + fmt(lang, M['what'], **f)
     b += f'<h2>{M["h_how"]}</h2>\n<p>{M["how_lead"]}</p>\n'
     for m, tint in (('app', 'g'), ('app-test', 'b'), ('bench', 'y'), ('picture', 'p')):
         on = ', '.join(link(p, lang) for p in pcs if any(r['method'] == m for r in p['runs']))
@@ -438,12 +467,12 @@ def method_page(lang):
     b += (f'<h2>{M["h_pcs"]}</h2>\n<p>{M["pcs_lead"]}</p>\n<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_pcs'])
           + '</tr></thead>\n<tbody>\n' + rows + '</tbody>\n</table></div>\n')
     b += M['ranges']
-    t_rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{p["bw"]} {gb(lang)}/s</td><td>{num(round(m), lang)}</td><td>{num(round(pr), lang)}</td>'
+    t_rows = ''.join(f'<tr><td>{link(p, lang)}</td><td>{p["bw"]} {gb(lang)}/{WD[lang].get("units", ["s"])[0]}</td><td>{num(round(m), lang)}</td><td>{num(round(pr), lang)}</td>'
                      f'<td><b>{"+" if er > 0 else "−"}{round(abs(er) * 100)}%</b></td></tr>\n' for p, m, pr, er in H['rows'])
-    b += (f'<h2>{M["h_est"]}</h2>\n' + M['est'].format(**f) + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_est'])
-          + '</tr></thead>\n<tbody>\n' + t_rows + '</tbody>\n</table></div>\n' + M['est_res'].format(**f)
-          + f'<p>{(M["good"] if H["good"] else M["bad"]).format(**f)}</p>\n')
-    b += M['gaps'].format(**f) + M['data'].format(**f)
-    meta = {'title': M['title'], 'description': M['desc'].format(**f), 'date': dates[-1], 'lang': lang, 'kind': 'pc',
-            'alt': METHOD_SLUG['en'], 'faq': [{'q': q, 'a': a.format(**f)} for q, a in M['faq']]}
+    b += (f'<h2>{M["h_est"]}</h2>\n' + fmt(lang, M['est'], **f) + '<div class="tbl-wrap"><table>\n<thead><tr>' + ''.join(f'<th>{t}</th>' for t in M['th_est'])
+          + '</tr></thead>\n<tbody>\n' + t_rows + '</tbody>\n</table></div>\n' + fmt(lang, M['est_res'], **f)
+          + f'<p>{fmt(lang, M["good"] if H["good"] else M["bad"], **f)}</p>\n')
+    b += fmt(lang, M['gaps'], **f) + fmt(lang, M['data'], **f)
+    meta = {'title': M['title'], 'description': fmt(lang, M['desc'], **f), 'date': dates[-1], 'lang': lang, 'kind': 'pc',
+            'alt': METHOD_SLUG['en'], 'faq': [{'q': q, 'a': fmt(lang, a, **f)} for q, a in M['faq']]}
     return METHOD_SLUG.get(lang, METHOD_SLUG['en']), meta, b

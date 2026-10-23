@@ -30,6 +30,8 @@ def walk(e, o, where, lang):
         pe, po = set(re.findall(r'\{(\w+)\}', e)), set(re.findall(r'\{(\w+)\}', o))
         if po - pe or (pe - po) - OPTIONAL:
             bad += 1; print(lang, where, 'placeholders differ:', sorted(pe), sorted(po))
+        for x, forms in re.findall(r'\{(\w+)\|([^{}]*)\}', o):  # plural forms {x|one|few|many|other}; {_|...} follows a number
+            if (x not in pe and x != '_') or len(forms.split('|')) != 4: bad += 1; print(lang, where, 'bad plural:', x, forms)
         te, to = sorted(re.findall(r'</?(\w+)', e)), sorted(re.findall(r'</?(\w+)', o))
         if te != to: bad += 1; print(lang, where, 'tags differ:', te, to)
         glue = lambda x: bool(re.match(r'[\s,;:.]', x))  # a fragment that attaches to the text before it

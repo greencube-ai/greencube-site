@@ -6,7 +6,18 @@
   var D = /*DATA*/null;
   var T = D.T;  // this language's words, from words/<lang>.json
   var U = D.U || ['s', 'min'];  // seconds and minutes, where a language abbreviates them differently
-  function F(k, o) { return T[k].replace(/\{(\w+)\}/g, function (_, x) { return o[x]; }); }
+  // {x|one|few|many|other} picks the word form for the number in {x}, for languages whose words change with it
+  function P(v) {
+    var m = String(v).replace(/[  ]/g, '').match(/\d+(?:[.,]\d+)?/g);
+    if (!m || /[.,]/.test(m[m.length - 1])) return 3;
+    var n = +m[m.length - 1];
+    if (n % 10 === 1 && n % 100 !== 11) return 0;
+    return n % 10 >= 2 && n % 10 <= 4 && !(n % 100 >= 12 && n % 100 <= 14) ? 1 : 2;
+  }
+  function F(k, o) {
+    var s = D.P ? T[k].replace(/\{(\w+)\|([^{}]*)\}/g, function (_, x, w) { return w.split('|')[P(o[x])]; }) : T[k];
+    return s.replace(/\{(\w+)\}/g, function (_, x) { return o[x]; });
+  }
   var box = document.getElementById('chk');
   if (!box) return;
   var inp = document.getElementById('chk-in'), hits = document.getElementById('chk-hits'), noCard = document.getElementById('chk-none');
@@ -33,7 +44,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function a(m) { return '<a href="' + m.url + '">' + esc(m.name) + '</a>'; }
   function tag(m) { return m.test ? T.startup : ''; }
-  function speed(m) { return rng(m.writes, m.approx) + T.tps + tag(m); }
+  function speed(m) { var s = rng(m.writes, m.approx); return s + (D.P ? T.tps.replace(/\{_\|([^{}]*)\}/, function (_, w) { return w.split('|')[P(s)]; }) : T.tps) + tag(m); }
 
   /* ---------- what the browser says the graphics are ---------- */
   function renderer() {

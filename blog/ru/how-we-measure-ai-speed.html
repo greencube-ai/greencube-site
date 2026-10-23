@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Как мы измеряем скорость ИИ на реальных ПК и почему не гадаем | Блог GreenCube</title>
+  <meta name="description" content="Каждая скорость в блоге GreenCube получена на одном из 10 реальных ПК. Как мы измеряем, все протестированные ПК, данные в CSV и тест, который показывает, почему мы не оцениваем остальное." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Как мы измеряем скорость ИИ на реальных ПК и почему не гадаем | Блог GreenCube" />
+  <meta property="og:description" content="Каждая скорость в блоге GreenCube получена на одном из 10 реальных ПК. Как мы измеряем, все протестированные ПК, данные в CSV и тест, который показывает, почему мы не оцениваем остальное." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Как мы измеряем скорость ИИ на реальных ПК и почему не гадаем", "description": "Каждая скорость в блоге GreenCube получена на одном из 10 реальных ПК. Как мы измеряем, все протестированные ПК, данные в CSV и тест, который показывает, почему мы не оцениваем остальное.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "ru", "mainEntityOfPage": "https://blog.greencube.app/blog/ru/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ru/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Откуда берутся числа скорости ИИ в GreenCube?", "acceptedAnswer": {"@type": "Answer", "text": "С 10 реальных ПК с GreenCube, измеренных в реальных чатах, стартовым тестом скорости GreenCube, тестом скорости llama.cpp и тестом изображений. У каждого числа указано, каким способом."}}, {"@type": "Question", "name": "Можно ли оценить скорость ИИ по характеристикам видеокарты?", "acceptedAnswer": {"@type": "Answer", "text": "Пока ненадёжно. При предсказании по пропускной способности памяти наши оценки обычно ошибались на 19% и до 239%, поэтому мы показываем только измеренные видеокарты."}}, {"@type": "Question", "name": "Можно ли скачать данные?", "acceptedAnswer": {"@type": "Answer", "text": "Да: каждый замер есть в greencube-ai-speeds.csv, ссылка на этой странице."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ru/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a>
+    <a href="https://greencube.app/ru/your-data">Ваши данные</a>
+    <a href="https://greencube.app/ru/mission">Наша миссия</a>
+    <a href="/blog/ru" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">RU</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru" aria-current="true">Русский</a></div></details><a href="https://greencube.app/ru/buy" class="nav-cta">Купить GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<h1>Как мы измеряем скорость ИИ на реальных ПК и почему не гадаем</h1>
+<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 14 октября 2026 г.</p>
+<div class="answer"><p>Каждая скорость в этом блоге получена на реальном ПК с GreenCube (пока это 10 ПК, измеренных с 22 сентября 2026 г. по 14 октября 2026 г.). Мы не оцениваем скорость видеокарт, которые не измеряли: когда мы проверили оценки на имеющихся видеокартах, типичная ошиблась на 19%, а худшая — на 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>реальные ПК: настольные и ноутбуки</span></div>
+<div class="stat b"><b>34</b><span>замеры, все есть в CSV ниже</span></div>
+<div class="stat y"><b>239%</b><span>на столько ошиблась худшая оценка скорости</span></div>
+</div>
+<h2>Что мы измеряем</h2>
+<p>Три вещи, потому что именно их вы чувствуете, когда пользуетесь ИИ на своём ПК:</p>
+<ul>
+<li><strong>Скорость написания:</strong> как быстро ИИ печатает ответ, в токенах в секунду. Токен — это кусочек слова; по-русски большинство людей читает около 8 токенов в секунду, так что всё, что выше, появляется быстрее, чем вы успеваете читать.</li>
+<li><strong>Скорость чтения:</strong> как быстро он воспринимает то, что вы ему даёте: ваш вопрос, вставленный текст или PDF. Она всегда намного выше скорости написания, потому что ИИ читает много токенов сразу, а пишет их по одному.</li>
+<li><strong>Время на изображение:</strong> сколько занимает одно изображение 512×512, от нажатия до готовой картинки.</li>
+</ul>
+<p>Мы измеряем ИИ, которые поставляет GreenCube, — те же файлы, что скачивает каждый пользователь: Gemma 4 E2B (2,6 ГБ), Gemma 4 E4B (4,2 ГБ) и Gemma 4 12B (6,4 ГБ) от Google для чата и Z-Image Turbo для изображений. Другой ИИ или тот же, но сжатый иначе, дал бы другие числа, поэтому мы сравниваем только сопоставимое.</p>
+<h2>Как мы измеряем</h2>
+<p>Четырьмя способами, и у каждого числа в блоге указано, каким из них оно получено:</p>
+<div class="card g">
+<h3>Реальные чаты</h3>
+<p>Реальные чаты в GreenCube: скорость каждого ответа от 100 токенов, взятая из журнала приложения. Диапазон отбрасывает самую медленную и самую быструю десятую часть.</p>
+<p>Для чего используется: <a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ru/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ru/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ru/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/ru/ai-on-rx-580">RX 580</a>, <a href="/blog/ru/ai-on-intel-iris-xe-laptop">ноутбук с Intel Iris Xe</a>.</p>
+</div>
+<div class="card b">
+<h3>Стартовый тест GreenCube</h3>
+<p>Собственный тест скорости GreenCube, который он запускает при старте, чтобы выбрать между видеокартой и процессором: короткий ответ, написанный по разу на каждом.</p>
+<p>Для чего используется: <a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ru/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/ru/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ru/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ru/ai-on-rx-580">RX 580</a>, <a href="/blog/ru/ai-on-intel-iris-xe-laptop">ноутбук с Intel Iris Xe</a>.</p>
+</div>
+<div class="card y">
+<h3>Тест скорости llama.cpp</h3>
+<p>Собственный тест скорости llama.cpp (llama-bench) — движка, на котором работает GreenCube, — с теми же файлами ИИ: написано 128 токенов, прочитан текст из 512 токенов.</p>
+<p>Для чего используется: <a href="/blog/ru/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/ru/ai-on-intel-core-ultra-5-laptop">ноутбук с Intel Core Ultra 5</a>.</p>
+</div>
+<div class="card p">
+<h3>Тест изображений</h3>
+<p>Движок изображений GreenCube (Z-Image Turbo), 512×512 пикселей, 8 шагов, время от нажатия до готового изображения.</p>
+<p>Для чего используется: <a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/ru/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/ru/ai-on-rx-6600">RX 6600</a>, <a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/ru/ai-on-intel-core-ultra-5-laptop">ноутбук с Intel Core Ultra 5</a>.</p>
+</div>
+<p>Реальные чаты — лучшее доказательство, потому что именно это вы и почувствуете, поэтому главное число на каждой странице берётся из реальных чатов, когда они у нас есть. Стартовый тест — это один короткий ответ, поэтому мы используем его для сравнения видеокарты с процессором (он замеряет оба одинаково) и как главное число только там, где тестировщик не прислал длинных ответов.</p>
+<h2>Все ПК, которые мы измерили</h2>
+<p>Собственные ПК реальных тестировщиков, которыми они пользуются как обычно, а не лабораторные машины. Их имена мы не публикуем.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>ПК</th><th>Тип</th><th>VRAM</th><th>ОЗУ</th><th>Главное число из</th><th>GreenCube</th><th>Дата</th><th>Написание (ток/с)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>Настольный ПК</td><td>11 ГБ</td><td>128 ГБ</td><td>Реальные чаты</td><td>0.1.44</td><td>14 октября 2026 г.</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>Настольный ПК</td><td>8 ГБ</td><td>48 ГБ</td><td>Тест скорости llama.cpp</td><td>–</td><td>22 сентября 2026 г.</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rtx-5060">RTX 5060</a></td><td>Настольный ПК</td><td>8 ГБ</td><td>32 ГБ</td><td>Стартовый тест GreenCube</td><td>0.1.42</td><td>1 октября 2026 г.</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rtx-3060">RTX 3060</a></td><td>Настольный ПК</td><td>12 ГБ</td><td>32 ГБ</td><td>Реальные чаты</td><td>0.1.42–0.1.43</td><td>6 октября 2026 г.</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-6600">RX 6600</a></td><td>Настольный ПК</td><td>8 ГБ</td><td>16 ГБ</td><td>Реальные чаты</td><td>0.1.42–0.1.44</td><td>9 октября 2026 г.</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>Настольный ПК</td><td>6 ГБ</td><td>16 ГБ</td><td>Реальные чаты</td><td>0.1.42</td><td>1 октября 2026 г.</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-gtx-1650">GTX 1650</a></td><td>Настольный ПК</td><td>4 ГБ</td><td>16 ГБ</td><td>Реальные чаты</td><td>0.1.40</td><td>23 сентября 2026 г.</td><td><b>около 20</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-intel-core-ultra-5-laptop">ноутбук с Intel Core Ultra 5</a></td><td>Ноутбук</td><td>–</td><td>16 ГБ</td><td>Тест скорости llama.cpp</td><td>–</td><td>28 сентября 2026 г.</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-580">RX 580</a></td><td>Настольный ПК</td><td>8 ГБ</td><td>16 ГБ</td><td>Реальные чаты</td><td>0.1.42</td><td>1 октября 2026 г.</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-intel-iris-xe-laptop">ноутбук с Intel Iris Xe</a></td><td>Ноутбук</td><td>–</td><td>8 ГБ</td><td>Реальные чаты</td><td>0.1.42</td><td>4 октября 2026 г.</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>Почему числа даны диапазонами</h2>
+<ul>
+<li><strong>Другие приложения.</strong> Браузер, игровой лаунчер или видеозвонок используют ту же память и видеокарту.</li>
+<li><strong>Первый раз медленнее.</strong> Первый ответ после установки или первое изображение включают загрузку и настройку видеокарты. Мы говорим об этом там, где это важно (например, «первое заняло 83 с, пока загружалось»).</li>
+<li><strong>Короткие ответы измеряются медленнее.</strong> У каждого ответа есть небольшой фиксированный старт, который весит больше в ответе из 20 токенов, чем в ответе из 400. Поэтому диапазоны реальных чатов учитывают ответы от 100 токенов, и мы отмечаем, если тестировщик присылал только короткие.</li>
+<li><strong>Мы отбрасываем крайние значения.</strong> Диапазоны реальных чатов идут от 10-го до 90-го процентиля, так что один странный ответ не может их сдвинуть.</li>
+</ul>
+<h2>Можно ли угадать скорость видеокарты по её характеристикам?</h2>
+<p>Это было бы удобно: видеокарт сотни, а мы измерили 10 ПК. Обычный способ — пропускная способность памяти. Чтобы написать каждый токен, ИИ читает всю модель из памяти видеокарты, так что в теории скорость примерно равна пропускной способности, делённой на размер модели, с поправкой на эффективность. Так работают многие онлайн-калькуляторы.</p>
+<p>Поэтому мы проверили это на своих данных. Мы скрывали по одной видеокарте, вычисляли скорость на ГБ/с по остальным, предсказывали скрытую видеокарту по её пропускной способности (из характеристик производителей, собранных в <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">базе видеокарт TechPowerUp</a>) и сравнивали с тем, что измерили. Один и тот же ИИ на всех (Gemma 4 E4B, целиком на видеокарте).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Видеокарта</th><th>Пропускная способность памяти</th><th>Измерено (ток/с)</th><th>Предсказано</th><th>Ошибка</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 ГБ/с</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 ГБ/с</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rtx-5060">RTX 5060</a></td><td>448 ГБ/с</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rtx-3060">RTX 3060</a></td><td>360 ГБ/с</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-6600">RX 6600</a></td><td>224 ГБ/с</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 ГБ/с</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/ru/ai-on-rx-580">RX 580</a></td><td>256 ГБ/с</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>Типичная оценка ошибалась на 19%. Хуже всего — <a href="/blog/ru/ai-on-rx-580">RX 580</a>: по её памяти выходит около 36 токенов в секунду, а она писала 11. Если повторить тест без неё, остальные всё равно ошибаются до 33%. Более новая AMD RX 6600 ушла в другую сторону — она быстрее, чем предполагает её пропускная способность; возможно, отчасти дело в большом кэше на чипе (AMD называет его Infinity Cache). Каждое измеренное число — главное число этой видеокарты, так что не все они получены одним и тем же тестом; это добавляет немного шума, но не может объяснить ошибку в три раза.</p>
+<p><strong>Этого недостаточно.</strong> Оценка, которая может ошибаться на 33% на современной видеокарте или на 239% на старой, говорила бы одним людям, что их ПК в порядке, когда он медленный, или наоборот. Поэтому проверка и страницы видеокарт показывают только видеокарты, которые мы измерили, и ясно говорят, если вашей среди них нет. Мы повторяем этот тест с каждой новой видеокартой, и если ошибка станет маленькой, скажем об этом здесь, прежде чем покажем хоть одну оценку.</p>
+<h2>Что мы ещё не измерили</h2>
+<ul>
+<li>Ноутбук с игровой видеокартой.</li>
+<li>Gemma 4 12B на видеокарте с 10 ГБ и больше.</li>
+<li>Изображения на <a href="/blog/ru/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/ru/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/ru/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/ru/ai-on-rx-580">RX 580</a>.</li>
+<li>Другие ИИ, кроме тех, что поставляет GreenCube, а также Linux и Mac (GreenCube работает на Windows).</li>
+</ul>
+<h2>Скачать данные</h2>
+<p>Каждый замер с этой страницы, по одной строке, есть в <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: ПК, ИИ, где он работал, скорости написания и чтения, время на изображения, способ измерения, версия GreenCube и дата. Если используете эти данные, пожалуйста, указывайте источник «GreenCube, AI speed measurements on real PCs, 2026» и ставьте ссылку на эту страницу.</p>
+<h2>Добавьте свой ПК</h2>
+<p>Уже пользуетесь GreenCube? Пришлите свой журнал на <a href="mailto:support@greencube.app">support@greencube.app</a>. Мы добавим ваш ПК в тесты без вашего имени, а новая видеокарта получит собственную страницу. Не знаете, что у вас в ПК? <a href="/blog/ru/can-my-pc-run-ai#checker">Проверьте здесь</a>.</p>
+<h2>Вопросы</h2>
+<div class="faq">
+<details><summary>Откуда берутся числа скорости ИИ в GreenCube?</summary><p>С 10 реальных ПК с GreenCube, измеренных в реальных чатах, стартовым тестом скорости GreenCube, тестом скорости llama.cpp и тестом изображений. У каждого числа указано, каким способом.</p></details>
+<details><summary>Можно ли оценить скорость ИИ по характеристикам видеокарты?</summary><p>Пока ненадёжно. При предсказании по пропускной способности памяти наши оценки обычно ошибались на 19% и до 239%, поэтому мы показываем только измеренные видеокарты.</p></details>
+<details><summary>Можно ли скачать данные?</summary><p>Да: каждый замер есть в greencube-ai-speeds.csv, ссылка на этой странице.</p></details>
+</div>
+
+<div class="cta-box"><h3>Ваш собственный ИИ на вашем собственном ПК</h3><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro;, оплата один раз.</p><a class="cta" href="https://greencube.app/ru/buy">Купить GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ru/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ИИ, который <em>ваш,</em> не арендованный.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Продукт</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/buy">Купить GreenCube</a></li>
+          <li><a href="https://greencube.app/ru/what-you-get">Пойдёт ли на моём компьютере?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Почитать</h3>
+        <ul>
+          <li><a href="/blog/ru">Blog</a></li>
+          <li><a href="https://greencube.app/ru/your-data">Ваши данные</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT и ваши данные (EN)</a></li>
+          <li><a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Компания</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/mission">Наша миссия</a></li>
+          <li><a href="mailto:support@greencube.app">Контакты</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Политика конфиденциальности (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Условия использования (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Сделано в Испании.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

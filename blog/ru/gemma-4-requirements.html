@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Системные требования Gemma 4: какой ПК нужен, чтобы запустить её локально | Блог GreenCube</title>
+  <meta name="description" content="Требования Gemma 4 для E2B, E4B и 12B, измеренные на реальных ПК: сколько ОЗУ и видеопамяти нужно каждой и как быстро она работает на ноутбуках и игровых видеокартах." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Системные требования Gemma 4: какой ПК нужен, чтобы запустить её локально | Блог GreenCube" />
+  <meta property="og:description" content="Требования Gemma 4 для E2B, E4B и 12B, измеренные на реальных ПК: сколько ОЗУ и видеопамяти нужно каждой и как быстро она работает на ноутбуках и игровых видеокартах." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ru/gemma-4-requirements" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ru/gemma-4-requirements" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/requisitos-gemma-4" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/gemma-4-requirements" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/gemma-4-requirements" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/gemma-4-requirements" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/gemma-4-requirements" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/gemma-4-requirements" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/gemma-4-requirements" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/gemma-4-requirements" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/gemma-4-requirements" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Системные требования Gemma 4: какой ПК нужен, чтобы запустить её локально", "description": "Требования Gemma 4 для E2B, E4B и 12B, измеренные на реальных ПК: сколько ОЗУ и видеопамяти нужно каждой и как быстро она работает на ноутбуках и игровых видеокартах.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ru", "mainEntityOfPage": "https://blog.greencube.app/blog/ru/gemma-4-requirements", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ru/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Каковы минимальные требования для локального запуска Gemma 4?", "acceptedAnswer": {"@type": "Answer", "text": "Самая маленькая, Gemma 4 E2B (файл на 2,6 ГБ), работала на ноутбуке с 8 ГБ ОЗУ без видеокарты со скоростью 5–7 токенов в секунду в реальных чатах. Для запуска ей нужно несколько ГБ свободной памяти."}}, {"@type": "Question", "name": "Сколько видеопамяти нужно Gemma 4 E4B?", "acceptedAnswer": {"@type": "Answer", "text": "E4B — это файл на 4,2 ГБ. Он целиком помещается на видеокарту с 6 ГБ, где на GTX 1660 Super модель писала 35–38 токенов в секунду. На видеокартах с 8 ГБ — 56–72. Без видеокарты она тоже работает при 16 ГБ ОЗУ, примерно 8 токенов в секунду."}}, {"@type": "Question", "name": "Запустится ли Gemma 4 12B на видеокарте с 8 ГБ?", "acceptedAnswer": {"@type": "Answer", "text": "Для одного короткого вопроса да: 20–35 токенов в секунду на RX 5700 XT. Но она падала, как только разговор становился длиннее, потому что на видеокарте почти не оставалось места. Мы бы хотели для неё хотя бы 10 ГБ видеопамяти."}}, {"@type": "Question", "name": "Gemma 4 можно использовать бесплатно?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Google выпустила Gemma 4, включая E2B и E4B, под лицензией Apache 2.0, которая разрешает коммерческое использование."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ru/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a>
+    <a href="https://greencube.app/ru/your-data">Ваши данные</a>
+    <a href="https://greencube.app/ru/mission">Наша миссия</a>
+    <a href="/blog/ru" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">RU</summary><div class="lang-list"><a href="/blog/gemma-4-requirements" hreflang="en" lang="en">English</a><a href="/blog/es/requisitos-gemma-4" hreflang="es" lang="es">Español</a><a href="/blog/pt/gemma-4-requirements" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/gemma-4-requirements" hreflang="fr" lang="fr">Français</a><a href="/blog/de/gemma-4-requirements" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/gemma-4-requirements" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/gemma-4-requirements" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/gemma-4-requirements" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/gemma-4-requirements" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/gemma-4-requirements" hreflang="ru" lang="ru" aria-current="true">Русский</a></div></details><a href="https://greencube.app/ru/buy" class="nav-cta">Купить GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<h1>Системные требования Gemma 4: какой ПК нужен, чтобы запустить её локально</h1>
+<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 18 октября 2026 г.</p>
+<div class="answer"><p><strong>Короткий ответ:</strong> маленькая <strong>Gemma 4 E2B</strong> работает на <strong>ноутбуке с 8 ГБ</strong>. <strong>E4B</strong> хочет 16 ГБ ОЗУ или летает на любой <strong>видеокарте от 6 ГБ</strong>. <strong>12B</strong> нужно <strong>от 10 ГБ видеопамяти</strong>, чтобы выдержать настоящий разговор.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 ГБ</b><span>ОЗУ достаточно для Gemma 4 E2B, видеокарта не нужна</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>токена в секунду у E4B на игровых видеокартах с 8 ГБ</span></div>
+<div class="stat p"><b>10 ГБ</b><span>видеопамяти — с этого мы бы доверили 12B долгий чат</span></div>
+</div>
+
+<h2>Требования Gemma 4 коротко</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Модель</th><th>Размер файла</th><th>Минимум, который мы советуем</th><th>Лучше всего на</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 ГБ</td><td>8 ГБ ОЗУ, без видеокарты</td><td>Ноутбуках</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 ГБ</td><td>16 ГБ ОЗУ или видеокарта с 6 ГБ</td><td>Игровых ПК, ноутбуках с 16 ГБ</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6,2 ГБ</td><td>От 10 ГБ видеопамяти</td><td>Видеокартах с 12 ГБ и больше</td></tr>
+</tbody>
+</table></div>
+
+<h2>Измеренная скорость</h2>
+<p>Как быстро каждая пишет ответ, в токенах в секунду (токен — это кусочек слова; по-русски вы читаете около 8 в секунду). Измерено в GreenCube в сентябре и октябре 2026 года.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>ПК</th><th>Модель</th><th>Написание (ток/с)</th></tr></thead>
+<tbody>
+<tr><td>Настольный, AMD RX 5700 XT 8 ГБ</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>Настольный, NVIDIA RTX 5060 8 ГБ</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>Настольный, видеокарта 12 ГБ</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>Настольный, NVIDIA GTX 1660 Super 6 ГБ</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>Настольный, AMD RX 5700 XT 8 ГБ</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (только короткие чаты)</td></tr>
+<tr><td>Настольный, NVIDIA GTX 1650 4 ГБ</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>около 20</b></td></tr>
+<tr><td>Ноутбук, Intel Core Ultra 5, 16 ГБ</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Тот же ноутбук</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>Ноутбук, Intel Iris Xe, 8 ГБ</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Что мы узнали</h2>
+
+<div class="card g">
+<h3>1. E2B — модель для ноутбуков</h3>
+<p>На ноутбуке с 16 ГБ без видеокарты она закончила полный учебный ответ примерно за 20 секунд, а E4B понадобилось 112. В пяти быстрых проверках фактов она не ошиблась ни разу. <a href="/blog/ru/gemma-4-e2b-vs-e4b">E2B против E4B, измерено.</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B — модель для игровых ПК</h3>
+<p>Когда вся модель лежит на видеокарте, E4B <strong>в 7–9 раз быстрее</strong>, чем на ноутбуке, а её ответы лучше. Для этого подойдёт любая видеокарта от 6 ГБ.</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B нужна настоящая видеопамять, а не просто ОЗУ</h3>
+<p>На видеокарте с 8 ГБ модель 12B нормально ответила на один короткий вопрос, а потом падала каждый раз, когда чат разрастался. У того ПК было 48 ГБ ОЗУ, и это не помогло. <a href="/blog/ru/how-much-vram-for-ai">Почему модель должна помещаться на видеокарту.</a></p>
+</div>
+
+<h2>Какая Gemma 4 подойдёт вашему ПК?</h2>
+<div class="expect">
+<div class="g"><h4>Ноутбук с 8 ГБ</h4><p>E2B. Сначала закройте другие приложения.</p></div>
+<div class="b"><h4>Ноутбук с 16 ГБ, без видеокарты</h4><p>E2B ради скорости. E4B работает, но медленно.</p></div>
+<div class="y"><h4>Игровой ПК, видеокарта 6&ndash;8 ГБ</h4><p>E4B, целиком на видеокарте.</p></div>
+<div class="p"><h4>Видеокарта от 12 ГБ</h4><p>E4B быстрая; 12B становится вариантом.</p></div>
+</div>
+
+<p>Gemma 4 выпущена Google под лицензией Apache 2.0. GreenCube сам выбирает подходящую для вашего ПК. <a href="/blog/ru/can-my-pc-run-ai">Смотрите все 10 ПК, которые мы измерили.</a></p>
+<h2>Вопросы</h2>
+<div class="faq">
+<details><summary>Каковы минимальные требования для локального запуска Gemma 4?</summary><p>Самая маленькая, Gemma 4 E2B (файл на 2,6 ГБ), работала на ноутбуке с 8 ГБ ОЗУ без видеокарты со скоростью 5–7 токенов в секунду в реальных чатах. Для запуска ей нужно несколько ГБ свободной памяти.</p></details>
+<details><summary>Сколько видеопамяти нужно Gemma 4 E4B?</summary><p>E4B — это файл на 4,2 ГБ. Он целиком помещается на видеокарту с 6 ГБ, где на GTX 1660 Super модель писала 35–38 токенов в секунду. На видеокартах с 8 ГБ — 56–72. Без видеокарты она тоже работает при 16 ГБ ОЗУ, примерно 8 токенов в секунду.</p></details>
+<details><summary>Запустится ли Gemma 4 12B на видеокарте с 8 ГБ?</summary><p>Для одного короткого вопроса да: 20–35 токенов в секунду на RX 5700 XT. Но она падала, как только разговор становился длиннее, потому что на видеокарте почти не оставалось места. Мы бы хотели для неё хотя бы 10 ГБ видеопамяти.</p></details>
+<details><summary>Gemma 4 можно использовать бесплатно?</summary><p>Да. Google выпустила Gemma 4, включая E2B и E4B, под лицензией Apache 2.0, которая разрешает коммерческое использование.</p></details>
+</div>
+
+<div class="cta-box"><h3>Ваш собственный ИИ на вашем собственном ПК</h3><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro;, оплата один раз.</p><a class="cta" href="https://greencube.app/ru/buy">Купить GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ru/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ИИ, который <em>ваш,</em> не арендованный.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Продукт</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/buy">Купить GreenCube</a></li>
+          <li><a href="https://greencube.app/ru/what-you-get">Пойдёт ли на моём компьютере?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Почитать</h3>
+        <ul>
+          <li><a href="/blog/ru">Blog</a></li>
+          <li><a href="https://greencube.app/ru/your-data">Ваши данные</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT и ваши данные (EN)</a></li>
+          <li><a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Компания</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/mission">Наша миссия</a></li>
+          <li><a href="mailto:support@greencube.app">Контакты</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Политика конфиденциальности (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Условия использования (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Сделано в Испании.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
