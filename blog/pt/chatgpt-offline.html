@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Dá para usar o ChatGPT offline? Não, mas isto funciona sem internet (2026) | Blog do GreenCube</title>
+  <meta name="description" content="O ChatGPT não tem modo offline: o app e a versão para desktop precisam de internet, porque o modelo roda nos servidores da OpenAI. O que funciona offline: o modelo aberto gpt-oss-20b da própria OpenAI e apps de IA local, com a RAM necessária e velocidades medidas." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Dá para usar o ChatGPT offline? Não, mas isto funciona sem internet (2026) | Blog do GreenCube" />
+  <meta property="og:description" content="O ChatGPT não tem modo offline: o app e a versão para desktop precisam de internet, porque o modelo roda nos servidores da OpenAI. O que funciona offline: o modelo aberto gpt-oss-20b da própria OpenAI e apps de IA local, com a RAM necessária e velocidades medidas." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/pt/chatgpt-offline" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/pt/chatgpt-offline" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/chatgpt-offline" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/chatgpt-sin-internet" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/chatgpt-offline" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/chatgpt-offline" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/chatgpt-offline" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Dá para usar o ChatGPT offline? Não, mas isto funciona sem internet (2026)", "description": "O ChatGPT não tem modo offline: o app e a versão para desktop precisam de internet, porque o modelo roda nos servidores da OpenAI. O que funciona offline: o modelo aberto gpt-oss-20b da própria OpenAI e apps de IA local, com a RAM necessária e velocidades medidas.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "pt-BR", "mainEntityOfPage": "https://blog.greencube.app/blog/pt/chatgpt-offline", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/pt/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Dá para usar o ChatGPT offline?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O ChatGPT roda nos servidores da OpenAI, então o site, o app de celular e os apps para Windows e Mac precisam de conexão. A OpenAI não oferece modo offline nem instalador offline."}}, {"@type": "Question", "name": "Existe uma versão oficial do ChatGPT offline?", "acceptedAnswer": {"@type": "Answer", "text": "Do ChatGPT em si, não. O mais próximo da OpenAI é o gpt-oss-20b, um modelo de pesos abertos sob a licença Apache 2.0 que roda num computador com uns 16 GB de memória, com apps como Ollama ou LM Studio. Não é o mesmo modelo do ChatGPT."}}, {"@type": "Question", "name": "Qual a melhor alternativa ao ChatGPT offline?", "acceptedAnswer": {"@type": "Answer", "text": "Um app que roda um modelo de IA no seu próprio PC: LM Studio, Jan, Ollama e GPT4All são grátis (você escolhe o modelo); o GreenCube custa €9,99 uma vez e escolhe o modelo para o seu PC. Depois do primeiro download funcionam com o Wi-Fi desligado."}}, {"@type": "Question", "name": "Qual a velocidade de uma alternativa offline ao ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "Depende do PC. Nos nossos testes o GreenCube escreveu de 5 a 7 tokens por segundo num notebook de 8 GB (mais ou menos a velocidade de leitura), de 14 a 18 num de 16 GB, e de 37 a 76 na maioria dos PCs gamer com placa de 6 GB ou mais."}}, {"@type": "Question", "name": "Os apps 'ChatGPT offline' das lojas são de verdade?", "acceptedAnswer": {"@type": "Answer", "text": "Cuidado: apps que usam o nome ChatGPT para funcionar offline não são da OpenAI. Se um funciona sem internet, ele roda outro modelo no seu aparelho; veja quem faz e qual modelo usa."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/pt/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a>
+    <a href="https://greencube.app/pt/your-data">Seus dados</a>
+    <a href="https://greencube.app/pt/mission">Nossa missão</a>
+    <a href="/blog/pt" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">PT</summary><div class="lang-list"><a href="/blog/chatgpt-offline" hreflang="en" lang="en">English</a><a href="/blog/es/chatgpt-sin-internet" hreflang="es" lang="es">Español</a><a href="/blog/pt/chatgpt-offline" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português</a><a href="/blog/fr/chatgpt-offline" hreflang="fr" lang="fr">Français</a></div></details><a href="https://greencube.app/pt/buy" class="nav-cta">Quero o GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
+<h1>Dá para usar o ChatGPT offline? Não, mas isto funciona sem internet (2026)</h1>
+<p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 23 de outubro de 2026</p>
+<div class="answer"><p><strong>Resposta curta: não.</strong> O ChatGPT roda nos servidores da OpenAI, então o site, o app de celular e os apps de desktop precisam de internet; não existe modo offline. O que <strong>funciona</strong> offline é um modelo de IA rodando no seu próprio computador: o modelo aberto <strong>gpt-oss-20b</strong> da própria OpenAI (precisa de uns 16 GB de memória) ou apps como LM Studio, Jan, Ollama e GreenCube, que baixam um modelo uma vez e depois funcionam com o Wi-Fi desligado.</p></div>
+
+<div class="stats">
+<div class="stat p"><b>0</b><span>modos offline no ChatGPT: o modelo roda nos servidores da OpenAI</span></div>
+<div class="stat y"><b>16 GB</b><span>de memória para o gpt-oss-20b, o modelo aberto da OpenAI</span></div>
+<div class="stat g"><b>8 GB</b><span>bastam para um modelo local pequeno num notebook (medido)</span></div>
+</div>
+
+<h2>Por que o ChatGPT não funciona offline</h2>
+<p>Quando você escreve no ChatGPT, a mensagem vai até os data centers da OpenAI, um modelo escreve a resposta lá e ela volta. Os apps para Windows e Mac são uma janela para esse mesmo serviço, não uma cópia do modelo. Sem conexão, não há nada no seu aparelho para responder.</p>
+<p>Cuidado com apps de loja que colocam "ChatGPT" e "offline" no nome: não são da OpenAI. Se algum realmente funciona offline, está rodando outro modelo no seu celular ou PC.</p>
+
+<h2>O que funciona sem internet</h2>
+<div class="card b">
+<h3>O modelo aberto da própria OpenAI: gpt-oss-20b</h3>
+<p>Em agosto de 2025 a OpenAI lançou o gpt-oss, modelos de pesos abertos sob a licença Apache 2.0. O menor, gpt-oss-20b, roda num computador com uns 16 GB de memória (<a href="https://openai.com/index/introducing-gpt-oss/" rel="noopener">OpenAI</a>), com apps como Ollama ou LM Studio. É da OpenAI, mas não é o ChatGPT: outro modelo, sem busca na web nem memória da sua conta. Não o medimos nos nossos PCs.</p>
+</div>
+<div class="card g">
+<h3>Um app de IA local</h3>
+<p>Apps que baixam um modelo uma vez e o rodam no seu PC: <strong>LM Studio</strong>, <strong>Jan</strong>, <strong>Ollama</strong> e <strong>GPT4All</strong> são grátis e deixam você escolher o modelo; o <strong>GreenCube</strong> (Windows, &euro;9,99 uma vez) escolhe o modelo que cabe no seu PC e ainda lê PDFs e fotos e gera imagens. <a href="/blog/pt/best-offline-ai-chatbot">12 apps offline comparados</a>.</p>
+</div>
+
+<h2>Do que você precisa, e a velocidade</h2>
+<p>Medido com o GreenCube em 10 PCs reais (modelos: Gemma 4 E2B e E4B, do Google):</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Seu PC</th><th>Escreve</th><th>Parece</th></tr></thead>
+<tbody>
+<tr><td>Notebook de 8 GB, sem placa de vídeo</td><td><b>5&ndash;7</b> tokens/s</td><td>mais ou menos a velocidade de leitura</td></tr>
+<tr><td>Notebook de 16 GB, sem placa de vídeo</td><td><b>14&ndash;18</b> tokens/s</td><td>mais rápido que você lê</td></tr>
+<tr><td>PC gamer com placa de 6 GB ou mais</td><td><b>37&ndash;76</b> tokens/s na maioria das placas</td><td>muitas vezes mais rápido que você lê</td></tr>
+</tbody>
+</table></div>
+<p>Sua placa exata: <a href="/blog/pt/can-my-pc-run-ai#checker">Meu PC roda IA?</a> No Windows: <a href="/blog/pt/local-ai-chatbot-windows">do que seu PC precisa para rodar IA offline</a>.</p>
+
+<h2>ChatGPT ou IA offline: a troca honesta</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>ChatGPT</th><th>IA no seu PC</th></tr></thead>
+<tbody>
+<tr><td><strong>Funciona sem internet</strong></td><td>Não</td><td>Sim, depois de um download</td></tr>
+<tr><td><strong>Força nos problemas mais difíceis</strong></td><td>Maior: modelos muito maiores</td><td>Boa para estudo, escrita e o dia a dia</td></tr>
+<tr><td><strong>Notícias de hoje</strong></td><td>Sim, com busca</td><td>Não (só o que o modelo aprendeu)</td></tr>
+<tr><td><strong>Limites de arquivos e imagens (grátis)</strong></td><td>Com limite (<a href="/blog/pt/chatgpt-free-limits">detalhes</a>)</td><td>Nenhum</td></tr>
+<tr><td><strong>Seus chats vão para</strong></td><td>Os servidores da OpenAI</td><td>Lugar nenhum: seu PC</td></tr>
+<tr><td><strong>Preço</strong></td><td>Grátis, ou US$ 20 por mês no Plus</td><td>Apps grátis, ou GreenCube &euro;9,99 uma vez</td></tr>
+</tbody>
+</table></div>
+<p>Muita gente usa os dois: o ChatGPT quando está online e precisa do modelo mais forte, e uma IA offline no ônibus, numa biblioteca com Wi-Fi ruim ou para anotações que prefere não enviar.</p>
+<h2>Perguntas</h2>
+<div class="faq">
+<details><summary>Dá para usar o ChatGPT offline?</summary><p>Não. O ChatGPT roda nos servidores da OpenAI, então o site, o app de celular e os apps para Windows e Mac precisam de conexão. A OpenAI não oferece modo offline nem instalador offline.</p></details>
+<details><summary>Existe uma versão oficial do ChatGPT offline?</summary><p>Do ChatGPT em si, não. O mais próximo da OpenAI é o gpt-oss-20b, um modelo de pesos abertos sob a licença Apache 2.0 que roda num computador com uns 16 GB de memória, com apps como Ollama ou LM Studio. Não é o mesmo modelo do ChatGPT.</p></details>
+<details><summary>Qual a melhor alternativa ao ChatGPT offline?</summary><p>Um app que roda um modelo de IA no seu próprio PC: LM Studio, Jan, Ollama e GPT4All são grátis (você escolhe o modelo); o GreenCube custa €9,99 uma vez e escolhe o modelo para o seu PC. Depois do primeiro download funcionam com o Wi-Fi desligado.</p></details>
+<details><summary>Qual a velocidade de uma alternativa offline ao ChatGPT?</summary><p>Depende do PC. Nos nossos testes o GreenCube escreveu de 5 a 7 tokens por segundo num notebook de 8 GB (mais ou menos a velocidade de leitura), de 14 a 18 num de 16 GB, e de 37 a 76 na maioria dos PCs gamer com placa de 6 GB ou mais.</p></details>
+<details><summary>Os apps &#x27;ChatGPT offline&#x27; das lojas são de verdade?</summary><p>Cuidado: apps que usam o nome ChatGPT para funcionar offline não são da OpenAI. Se um funciona sem internet, ele roda outro modelo no seu aparelho; veja quem faz e qual modelo usa.</p></details>
+</div>
+
+<div class="cta-box"><h3>Sua própria IA, no seu próprio PC</h3><p>O GreenCube roda no seu computador: sem limites de uso, sem assinatura e sem precisar de internet. &euro;9,99, um único pagamento.</p><a class="cta" href="https://greencube.app/pt/buy">Quero o GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/pt/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">IA que é <em>sua,</em> não alugada.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/buy">Quero o GreenCube</a></li>
+          <li><a href="https://greencube.app/pt/what-you-get">Vai rodar no meu computador?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Aprenda</h3>
+        <ul>
+          <li><a href="/blog/pt">Blog</a></li>
+          <li><a href="https://greencube.app/pt/your-data">Seus dados</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT e seus dados (EN)</a></li>
+          <li><a href="https://greencube.app/pt/ai-environmental-impact">A IA e o planeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="https://greencube.app/pt/mission">Nossa missão</a></li>
+          <li><a href="mailto:support@greencube.app">Contato</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Política de privacidade (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termos de uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Feito na Espanha.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
