@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Скільки відеопам&#x27;яті потрібно для ШІ? Чому модель має вміщуватися на відеокарту | Блог GreenCube</title>
+  <meta name="description" content="Скільки відеопам&#x27;яті потрібно для ШІ? Ми виміряли: модель, яка не вміщується на відеокарту, працює вшестеро повільніше й падає в довгих чатах. Як вибрати ту, що вміститься." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Скільки відеопам&#x27;яті потрібно для ШІ? Чому модель має вміщуватися на відеокарту | Блог GreenCube" />
+  <meta property="og:description" content="Скільки відеопам&#x27;яті потрібно для ШІ? Ми виміряли: модель, яка не вміщується на відеокарту, працює вшестеро повільніше й падає в довгих чатах. Як вибрати ту, що вміститься." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Скільки відеопам'яті потрібно для ШІ? Чому модель має вміщуватися на відеокарту", "description": "Скільки відеопам'яті потрібно для ШІ? Ми виміряли: модель, яка не вміщується на відеокарту, працює вшестеро повільніше й падає в довгих чатах. Як вибрати ту, що вміститься.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "uk", "mainEntityOfPage": "https://blog.greencube.app/blog/uk/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/uk/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Що буде, якщо модель ШІ не вміщується у відеопам'ять?", "acceptedAnswer": {"@type": "Answer", "text": "Частина, яка не вмістилася, працює зі звичайної пам'яті, і все сповільнюється. На нашій відеокарті з 8 ГБ модель, у якої на відеокарті було 28 шарів, писала 5,9 токена за секунду замість 35,6 з усіма шарами: ушестеро повільніше."}}, {"@type": "Question", "name": "Чи варто запускати найбільшу модель ШІ, яку може завантажити моя відеокарта?", "acceptedAnswer": {"@type": "Answer", "text": "Ні. Залиште місце для розмови. Модель на 12 мільярдів параметрів умістилася на відеокарту з 8 ГБ для короткого запитання, а потім упала, коли чат став довшим. Менша модель, яка вміщується із запасом, була швидшою і жодного разу не впала."}}, {"@type": "Question", "name": "Скільки відеопам'яті лишати вільною?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube лишає близько 1,5 ГБ відеокарти вільними для розмови і для Windows. Без цього запасу відеокарті з 4 ГБ забракло пам'яті на першому ж повідомленні."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/uk/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/uk/ai-environmental-impact">ШІ і планета</a>
+    <a href="https://greencube.app/uk/your-data">Ваші дані</a>
+    <a href="https://greencube.app/uk/mission">Наша місія</a>
+    <a href="/blog/uk" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">UK</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-much-vram-for-ai" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-much-vram-for-ai" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-much-vram-for-ai" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-much-vram-for-ai" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-much-vram-for-ai" hreflang="uk" lang="uk" aria-current="true">Українська</a></div></details><a href="https://greencube.app/uk/buy" class="nav-cta">Придбати GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/uk">Блог GreenCube</a></p>
+<h1>Скільки відеопам&#x27;яті потрібно для ШІ? Чому модель має вміщуватися на відеокарту</h1>
+<p class="byline">Автор: <a href="/blog/uk/hector-gras">Hector Gras</a> &middot; 18 жовтня 2026 р.</p>
+<div class="answer"><p><strong>Коротка відповідь:</strong> ШІ, який повністю вміщується в пам'ять відеокарти (відеопам'ять, VRAM), працює швидко. Той, що не вміщується, <strong>повільніший, ніж узагалі без відеокарти</strong>, і може впасти. Менша модель повністю на відеокарті краща за більшу наполовину.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>токена за секунду, коли вся модель на відеокарті</span></div>
+<div class="stat p"><b>5,9</b><span>коли частина її не на відеокарті: ушестеро повільніше</span></div>
+<div class="stat y"><b>Падіння</b><span>коли модель, яка ледве вміщується, зустрічає довгий чат</span></div>
+</div>
+
+<h2>Тест</h2>
+<p>Настільний ПК з AMD RX 5700 XT (8 ГБ відеопам'яті) і 48 ГБ ОЗП. Ми завантажили модель на 12 мільярдів параметрів (Gemma 4 12B, близько 6,2 ГБ) і розміщували на відеокарті більшу чи меншу її частину, усе в одній сесії у вересні 2026 року.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Яка частина моделі була на відеокарті</th><th>Написання (ток/с)</th></tr></thead>
+<tbody>
+<tr><td>Уся</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 шарів</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 шарів</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Для порівняння: менша модель (Gemma 4 E4B) лише на процесорі</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Та сама менша модель, повністю на відеокарті</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Що ми дізналися</h2>
+
+<div class="card g">
+<h3>1. Усе або нічого</h3>
+<p>Варто було залишити поза відеокартою лише частину моделі, і вона стала <strong>ушестеро повільнішою</strong>. З 20 шарами на відеокарті вона була повільнішою за меншу модель узагалі без відеокарти. Наполовину на відеокарті — найгірше з двох світів.</p>
+</div>
+
+<div class="card p">
+<h3>2. Найбільша — не найкраща</h3>
+<p>Модель 12B справді повністю вмістилася на відеокарту з 8 ГБ — для одного короткого запитання. Коли чат зростав, вона щоразу падала: на відеокарті майже не лишалося місця для розмови. Менша модель мала близько 3 ГБ запасу й працювала зі швидкістю 63–72 токени за секунду.</p>
+</div>
+
+<div class="card b">
+<h3>3. Лишайте запас</h3>
+<p>На GTX 1650 з 4 ГБ модель на 4,2 ГБ утиснули на відеокарту з 3,9 ГБ, і вже перше повідомлення завершилося помилкою «недостатньо пам'яті». Тепер GreenCube тримає <strong>близько 1,5 ГБ відеокарти вільними</strong> для чату і для Windows.</p>
+</div>
+
+<h2>Як вибрати модель для своєї відеокарти</h2>
+<div class="expect">
+<div class="g"><h4>Перевірте відеопам'ять</h4><p>Диспетчер завдань &rarr; Продуктивність &rarr; Графічний процесор &rarr; Виділена пам'ять графічного процесора.</p></div>
+<div class="b"><h4>Розмір моделі + 1,5 ГБ</h4><p>Файл моделі плюс близько 1,5 ГБ мають уміщуватися в це число.</p></div>
+<div class="y"><h4>Сумніваєтеся — беріть меншу</h4><p>Менша модель повністю на відеокарті краща за більшу наполовину.</p></div>
+<div class="p"><h4>Або нехай вибере застосунок</h4><p>GreenCube дивиться на вашу відеокарту й вибирає модель, яка вміщується із запасом.</p></div>
+</div>
+
+<p>Реальна швидкість на 10 ПК, від GTX 1650 до RTX 5060: <a href="/blog/uk/can-my-pc-run-ai">дивіться тут</a>.</p>
+<h2>Запитання</h2>
+<div class="faq">
+<details><summary>Що буде, якщо модель ШІ не вміщується у відеопам&#x27;ять?</summary><p>Частина, яка не вмістилася, працює зі звичайної пам&#x27;яті, і все сповільнюється. На нашій відеокарті з 8 ГБ модель, у якої на відеокарті було 28 шарів, писала 5,9 токена за секунду замість 35,6 з усіма шарами: ушестеро повільніше.</p></details>
+<details><summary>Чи варто запускати найбільшу модель ШІ, яку може завантажити моя відеокарта?</summary><p>Ні. Залиште місце для розмови. Модель на 12 мільярдів параметрів умістилася на відеокарту з 8 ГБ для короткого запитання, а потім упала, коли чат став довшим. Менша модель, яка вміщується із запасом, була швидшою і жодного разу не впала.</p></details>
+<details><summary>Скільки відеопам&#x27;яті лишати вільною?</summary><p>GreenCube лишає близько 1,5 ГБ відеокарти вільними для розмови і для Windows. Без цього запасу відеокарті з 4 ГБ забракло пам&#x27;яті на першому ж повідомленні.</p></details>
+</div>
+
+<div class="cta-box"><h3>Ваш власний ШІ на вашому власному ПК</h3><p>GreenCube працює на вашому комп'ютері: без обмежень, без підписки, без інтернету. 9,99&nbsp;&euro;, оплата один раз.</p><a class="cta" href="https://greencube.app/uk/buy">Придбати GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/uk/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ШІ, який <em>ваш,</em> не орендований.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Продукт</h3>
+        <ul>
+          <li><a href="https://greencube.app/uk/buy">Придбати GreenCube</a></li>
+          <li><a href="https://greencube.app/uk/what-you-get">Чи піде на моєму комп'ютері?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Почитати</h3>
+        <ul>
+          <li><a href="/blog/uk">Blog</a></li>
+          <li><a href="https://greencube.app/uk/your-data">Ваші дані</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT і ваші дані (EN)</a></li>
+          <li><a href="https://greencube.app/uk/ai-environmental-impact">ШІ і планета</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Компанія</h3>
+        <ul>
+          <li><a href="https://greencube.app/uk/mission">Наша місія</a></li>
+          <li><a href="mailto:support@greencube.app">Контакти</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Політика конфіденційності (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Умови використання (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Зроблено в Іспанії.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>
