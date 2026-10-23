@@ -9,8 +9,10 @@
   // {x|one|few|many|other} picks the word form for the number in {x}, for languages whose words change with it
   function P(v) {
     var m = String(v).replace(/[  ]/g, '').match(/\d+(?:[.,]\d+)?/g);
-    if (!m || /[.,]/.test(m[m.length - 1])) return 3;
+    var ar = D.P === 'arabic';  // Arabic: one|two|few|many|other (1, 2, 3–10, 11–99, 100+ and fractions)
+    if (!m || /[.,]/.test(m[m.length - 1])) return ar ? 4 : 3;
     var n = +m[m.length - 1];
+    if (ar) return n === 1 ? 0 : n === 2 ? 1 : n % 100 >= 3 && n % 100 <= 10 ? 2 : n % 100 >= 11 ? 3 : 4;
     if (n % 10 === 1 && n % 100 !== 11) return 0;
     return n % 10 >= 2 && n % 10 <= 4 && !(n % 100 >= 12 && n % 100 <= 14) ? 1 : 2;
   }
@@ -182,7 +184,7 @@
     else if (gpu) {
       var p = peers(v);
       out.push(['maybe', T.speed_u_h, T.speed_u + (p.same ? f('speed_same') : T.speed_close)
-        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + ', ' + speed(x); }).join('; ') + '. '
+        + p.list.map(function (x) { return a(x) + (p.same ? '' : ' (' + x.vram + ' ' + T.gb + ')') + (D.C || ', ') + speed(x); }).join(D.SC || '; ') + '. '
         + f('speed_why', { url: D.method }) + (c.kind === 'laptop' ? T.speed_laptop : '')]);
     } else {
       var l = laptopFor(R);

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>كيف نقيس سرعة الذكاء الاصطناعي على حواسيب حقيقية، ولماذا لا نخمّن | مدونة GreenCube</title>
+  <meta name="description" content="كل سرعة في مدونة GreenCube مأخوذة من أحد 10 حواسيب حقيقية. كيف نقيس، وكل حاسوب اختبرناه، والبيانات بصيغة CSV، والاختبار الذي يبيّن لماذا لا نقدّر الباقي." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="كيف نقيس سرعة الذكاء الاصطناعي على حواسيب حقيقية، ولماذا لا نخمّن | مدونة GreenCube" />
+  <meta property="og:description" content="كل سرعة في مدونة GreenCube مأخوذة من أحد 10 حواسيب حقيقية. كيف نقيس، وكل حاسوب اختبرناه، والبيانات بصيغة CSV، والاختبار الذي يبيّن لماذا لا نقدّر الباقي." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/how-we-measure-ai-speed" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-we-measure-ai-speed" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "كيف نقيس سرعة الذكاء الاصطناعي على حواسيب حقيقية، ولماذا لا نخمّن", "description": "كل سرعة في مدونة GreenCube مأخوذة من أحد 10 حواسيب حقيقية. كيف نقيس، وكل حاسوب اختبرناه، والبيانات بصيغة CSV، والاختبار الذي يبيّن لماذا لا نقدّر الباقي.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "inLanguage": "ar", "mainEntityOfPage": "https://blog.greencube.app/blog/ar/how-we-measure-ai-speed", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ar/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "من أين تأتي أرقام سرعة الذكاء الاصطناعي في GreenCube؟", "acceptedAnswer": {"@type": "Answer", "text": "من 10 حواسيب حقيقية تشغّل GreenCube، قيست في محادثات حقيقية، وباختبار التشغيل في GreenCube، وباختبار السرعة في llama.cpp، وباختبار للصور. كل رقم يذكر طريقته."}}, {"@type": "Question", "name": "هل يمكن تقدير سرعة الذكاء الاصطناعي من مواصفات بطاقة الرسومات؟", "acceptedAnswer": {"@type": "Answer", "text": "ليس بشكل موثوق بعد. عند التوقع من عرض نطاق الذاكرة، أخطأت تقديراتنا عادةً بنسبة 19% ووصل الخطأ إلى 239%، لذا لا نعرض إلا البطاقات التي قسناها."}}, {"@type": "Question", "name": "هل يمكنني تنزيل البيانات؟", "acceptedAnswer": {"@type": "Answer", "text": "نعم: كل قياس موجود في greencube-ai-speeds.csv، ورابطه في هذه الصفحة."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ar/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ar/ai-environmental-impact">الذكاء الاصطناعي والكوكب</a>
+    <a href="https://greencube.app/ar/your-data">بياناتك</a>
+    <a href="https://greencube.app/ar/mission">مهمتنا</a>
+    <a href="/blog/ar" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">AR</summary><div class="lang-list"><a href="/blog/how-we-measure-ai-speed" hreflang="en" lang="en">English</a><a href="/blog/es/como-medimos-la-velocidad-de-la-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-we-measure-ai-speed" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-we-measure-ai-speed" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-we-measure-ai-speed" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-we-measure-ai-speed" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/how-we-measure-ai-speed" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/how-we-measure-ai-speed" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/how-we-measure-ai-speed" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/how-we-measure-ai-speed" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/how-we-measure-ai-speed" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/how-we-measure-ai-speed" hreflang="ar" lang="ar" aria-current="true">العربية</a></div></details><a href="https://greencube.app/ar/buy" class="nav-cta">احصل على GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ar">مدونة GreenCube</a></p>
+<h1>كيف نقيس سرعة الذكاء الاصطناعي على حواسيب حقيقية، ولماذا لا نخمّن</h1>
+<p class="byline">بقلم <a href="/blog/ar/hector-gras">Hector Gras</a> &middot; 14 أكتوبر 2026</p>
+<div class="answer"><p>كل سرعة في هذه المدونة مأخوذة من حاسوب حقيقي يشغّل GreenCube (حتى الآن 10 حواسيب، قيست بين 22 سبتمبر 2026 و14 أكتوبر 2026). لا نقدّر سرعات البطاقات التي لم نقسها: حين اختبرنا التقديرات على البطاقات التي لدينا، أخطأ التقدير المعتاد بنسبة 19% وأسوأها بنسبة 239%.</p></div>
+<div class="stats">
+<div class="stat g"><b>10</b><span>حواسيب حقيقية قسناها، مكتبية ومحمولة</span></div>
+<div class="stat b"><b>34</b><span>قياسات، كلها في ملف CSV أدناه</span></div>
+<div class="stat y"><b>239%</b><span>مقدار خطأ أسوأ تقدير للسرعة</span></div>
+</div>
+<h2>ما الذي نقيسه</h2>
+<p>ثلاثة أشياء، لأنها ما تشعر به حين تستخدم ذكاءً اصطناعيًا على حاسوبك:</p>
+<ul>
+<li><strong>سرعة الكتابة:</strong> مدى سرعة الذكاء الاصطناعي في كتابة إجابته، بالتوكن في الثانية. التوكن جزء من كلمة، وأي سرعة تفوق سرعة قراءتك تظهر أسرع مما تستطيع قراءته.</li>
+<li><strong>سرعة القراءة:</strong> مدى سرعة استيعابه لما تعطيه: سؤالك، أو نص ملصق، أو ملف PDF. هي دائمًا أسرع بكثير من الكتابة، لأن الذكاء الاصطناعي يقرأ توكنات كثيرة دفعة واحدة لكنه يكتبها واحدًا تلو الآخر.</li>
+<li><strong>زمن الصورة:</strong> كم تستغرق صورة واحدة بحجم 512×512، من النقرة حتى الصورة النهائية.</li>
+</ul>
+<p>نقيس نماذج الذكاء الاصطناعي التي يوزعها GreenCube، وهي الملفات نفسها التي ينزّلها كل مستخدم: Gemma 4 E2B (2.6 GB) وGemma 4 E4B (4.2 GB) وGemma 4 12B (6.4 GB) من Google للمحادثة، وZ-Image Turbo للصور. ذكاء اصطناعي مختلف، أو الذكاء نفسه مضغوطًا بطريقة مختلفة، سيعطي أرقامًا مختلفة، لذا لا نقارن إلا المتماثل.</p>
+<h2>كيف نقيس</h2>
+<p>بأربع طرق، وكل رقم في المدونة يذكر من أيها جاء:</p>
+<div class="card g">
+<h3>محادثات حقيقية</h3>
+<p>محادثات حقيقية في GreenCube: سرعة كل إجابة من 100 توكن أو أكثر، مأخوذة من سجل التطبيق. يستبعد النطاق العُشر الأبطأ والعُشر الأسرع.</p>
+<p>يُستخدم لـ: <a href="/blog/ar/ai-on-rtx-2080-ti">RTX 2080 Ti</a>، <a href="/blog/ar/ai-on-rtx-3060">RTX 3060</a>، <a href="/blog/ar/ai-on-rx-6600">RX 6600</a>، <a href="/blog/ar/ai-on-gtx-1660-super">GTX 1660 Super</a>، <a href="/blog/ar/ai-on-gtx-1650">GTX 1650</a>، <a href="/blog/ar/ai-on-rx-580">RX 580</a>، <a href="/blog/ar/ai-on-intel-iris-xe-laptop">حاسوب محمول برسومات Intel Iris Xe</a>.</p>
+</div>
+<div class="card b">
+<h3>اختبار التشغيل في GreenCube</h3>
+<p>اختبار السرعة الخاص بـ GreenCube، الذي يشغّله عند البدء ليختار بين بطاقة الرسومات والمعالج: إجابة قصيرة تُكتب مرة على كل منهما.</p>
+<p>يُستخدم لـ: <a href="/blog/ar/ai-on-rtx-2080-ti">RTX 2080 Ti</a>، <a href="/blog/ar/ai-on-rtx-5060">RTX 5060</a>، <a href="/blog/ar/ai-on-rtx-3060">RTX 3060</a>، <a href="/blog/ar/ai-on-rx-6600">RX 6600</a>، <a href="/blog/ar/ai-on-gtx-1660-super">GTX 1660 Super</a>، <a href="/blog/ar/ai-on-rx-580">RX 580</a>، <a href="/blog/ar/ai-on-intel-iris-xe-laptop">حاسوب محمول برسومات Intel Iris Xe</a>.</p>
+</div>
+<div class="card y">
+<h3>اختبار السرعة في llama.cpp</h3>
+<p>اختبار السرعة الخاص بـ llama.cpp (llama-bench)، المحرك الذي يعمل عليه GreenCube، بملفات الذكاء الاصطناعي نفسها: كتابة 128 توكنًا، وقراءة نص من 512 توكنًا.</p>
+<p>يُستخدم لـ: <a href="/blog/ar/ai-on-rx-5700-xt">RX 5700 XT</a>، <a href="/blog/ar/ai-on-intel-core-ultra-5-laptop">حاسوب محمول بمعالج Intel Core Ultra 5</a>.</p>
+</div>
+<div class="card p">
+<h3>اختبار الصور</h3>
+<p>محرك الصور في GreenCube (Z-Image Turbo)، بحجم 512×512 بكسل، 8 خطوات، مع قياس الزمن من النقرة حتى الصورة النهائية.</p>
+<p>يُستخدم لـ: <a href="/blog/ar/ai-on-rtx-2080-ti">RTX 2080 Ti</a>، <a href="/blog/ar/ai-on-rtx-3060">RTX 3060</a>، <a href="/blog/ar/ai-on-rx-6600">RX 6600</a>، <a href="/blog/ar/ai-on-gtx-1660-super">GTX 1660 Super</a>، <a href="/blog/ar/ai-on-intel-core-ultra-5-laptop">حاسوب محمول بمعالج Intel Core Ultra 5</a>.</p>
+</div>
+<p>المحادثات الحقيقية هي أفضل دليل، لأنها ما ستشعر به فعلًا، لذا يأتي الرقم الرئيسي في كل صفحة من محادثات حقيقية متى توفرت. اختبار التشغيل إجابة قصيرة واحدة، لذا نستخدمه لمقارنة البطاقة بالمعالج (فهو يقيس الاثنين بالطريقة نفسها)، ورقمًا رئيسيًا فقط حيث لم يرسل المختبِر إجابات طويلة.</p>
+<h2>كل الحواسيب التي قسناها</h2>
+<p>حواسيب مختبِرين حقيقيين، يستخدمونها كما يستخدمونها عادةً، لا أجهزة مختبر. لا ننشر أسماءهم.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>الحاسوب</th><th>النوع</th><th>VRAM</th><th>RAM</th><th>الرقم الرئيسي من</th><th>GreenCube</th><th>التاريخ</th><th>الكتابة (توكن/ث)</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ar/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>حاسوب مكتبي</td><td>11 GB</td><td>128 GB</td><td>محادثات حقيقية</td><td>0.1.44</td><td>14 أكتوبر 2026</td><td><b>65–71</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>حاسوب مكتبي</td><td>8 GB</td><td>48 GB</td><td>اختبار السرعة في llama.cpp</td><td>–</td><td>22 سبتمبر 2026</td><td><b>63–72</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rtx-5060">RTX 5060</a></td><td>حاسوب مكتبي</td><td>8 GB</td><td>32 GB</td><td>اختبار التشغيل في GreenCube</td><td>0.1.42</td><td>1 أكتوبر 2026</td><td><b>56</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rtx-3060">RTX 3060</a></td><td>حاسوب مكتبي</td><td>12 GB</td><td>32 GB</td><td>محادثات حقيقية</td><td>0.1.42–0.1.43</td><td>6 أكتوبر 2026</td><td><b>53–55</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-6600">RX 6600</a></td><td>حاسوب مكتبي</td><td>8 GB</td><td>16 GB</td><td>محادثات حقيقية</td><td>0.1.42–0.1.44</td><td>9 أكتوبر 2026</td><td><b>42–44</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>حاسوب مكتبي</td><td>6 GB</td><td>16 GB</td><td>محادثات حقيقية</td><td>0.1.42</td><td>1 أكتوبر 2026</td><td><b>37–38</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-gtx-1650">GTX 1650</a></td><td>حاسوب مكتبي</td><td>4 GB</td><td>16 GB</td><td>محادثات حقيقية</td><td>0.1.40</td><td>23 سبتمبر 2026</td><td><b>نحو 20</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-intel-core-ultra-5-laptop">حاسوب محمول بمعالج Intel Core Ultra 5</a></td><td>حاسوب محمول</td><td>–</td><td>16 GB</td><td>اختبار السرعة في llama.cpp</td><td>–</td><td>28 سبتمبر 2026</td><td><b>14–18</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-580">RX 580</a></td><td>حاسوب مكتبي</td><td>8 GB</td><td>16 GB</td><td>محادثات حقيقية</td><td>0.1.42</td><td>1 أكتوبر 2026</td><td><b>10–11</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-intel-iris-xe-laptop">حاسوب محمول برسومات Intel Iris Xe</a></td><td>حاسوب محمول</td><td>–</td><td>8 GB</td><td>محادثات حقيقية</td><td>0.1.42</td><td>4 أكتوبر 2026</td><td><b>5–7</b></td></tr>
+</tbody>
+</table></div>
+<h2>لماذا تأتي الأرقام نطاقات</h2>
+<ul>
+<li><strong>تطبيقات أخرى.</strong> المتصفح أو مشغّل الألعاب أو مكالمة الفيديو تستخدم الذاكرة وبطاقة الرسومات نفسيهما.</li>
+<li><strong>المرة الأولى أبطأ.</strong> الإجابة الأولى بعد التثبيت، أو الصورة الأولى، تشمل التحميل وتهيئة البطاقة. نذكر ذلك حيث يهم (مثلًا «استغرقت الأولى 83 ث أثناء التحميل»).</li>
+<li><strong>الإجابات القصيرة تُقاس أبطأ.</strong> لكل إجابة بداية ثابتة صغيرة، وزنها في رد من 20 توكنًا أكبر منه في رد من 400. لهذا تشمل نطاقات المحادثات الحقيقية الإجابات التي فيها 100 توكن أو أكثر، وننبّه حيث لم يرسل المختبِر إلا إجابات قصيرة.</li>
+<li><strong>نستبعد القيم المتطرفة.</strong> نطاقات المحادثات الحقيقية تمتد من المئين العاشر إلى التسعين، فلا تستطيع إجابة شاذة واحدة أن تحركها.</li>
+</ul>
+<h2>هل يمكن تخمين سرعة بطاقة من مواصفاتها؟</h2>
+<p>سيكون ذلك مفيدًا: هناك مئات البطاقات وقد قسنا 10 حواسيب. الطريقة المعتادة هي عرض نطاق الذاكرة. لكتابة كل توكن، يقرأ الذكاء الاصطناعي نموذجه كاملًا من ذاكرة البطاقة، فنظريًا تساوي السرعة تقريبًا عرض النطاق مقسومًا على حجم النموذج، مضروبًا في معامل كفاءة. كثير من الحاسبات على الإنترنت تعمل هكذا.</p>
+<p>فاختبرنا ذلك على بياناتنا. أخفينا بطاقة واحدة في كل مرة، وحسبنا السرعة لكل GB/ث من البقية، وتوقعنا البطاقة المخفية من عرض نطاقها (من مواصفات الشركات المصنعة، المجموعة في <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">قاعدة بيانات TechPowerUp للبطاقات</a>)، وقارنّا بما قسناه. الذكاء الاصطناعي نفسه على كل البطاقات (Gemma 4 E4B، كاملًا على البطاقة).</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>البطاقة</th><th>عرض نطاق الذاكرة</th><th>المقيس (توكن/ث)</th><th>المتوقع</th><th>الخطأ</th></tr></thead>
+<tbody>
+<tr><td><a href="/blog/ar/ai-on-rtx-2080-ti">RTX 2080 Ti</a></td><td>616 GB/ث</td><td>68</td><td>79</td><td><b>+17%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-5700-xt">RX 5700 XT</a></td><td>448 GB/ث</td><td>68</td><td>55</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rtx-5060">RTX 5060</a></td><td>448 GB/ث</td><td>56</td><td>57</td><td><b>+1%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rtx-3060">RTX 3060</a></td><td>360 GB/ث</td><td>54</td><td>44</td><td><b>−19%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-6600">RX 6600</a></td><td>224 GB/ث</td><td>43</td><td>26</td><td><b>−41%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-gtx-1660-super">GTX 1660 Super</a></td><td>336 GB/ث</td><td>38</td><td>43</td><td><b>+14%</b></td></tr>
+<tr><td><a href="/blog/ar/ai-on-rx-580">RX 580</a></td><td>256 GB/ث</td><td>11</td><td>36</td><td><b>+239%</b></td></tr>
+</tbody>
+</table></div>
+<p>أخطأ التقدير المعتاد بنسبة 19%. وكان الأسوأ <a href="/blog/ar/ai-on-rx-580">RX 580</a>: ذاكرتها توحي بنحو 36 توكنًا في الثانية، لكنها كتبت 11. أعد الاختبار من دونها وتبقى البقية تخطئ بما يصل إلى 33%. وذهبت AMD RX 6600 الأحدث في الاتجاه المعاكس، أسرع مما يوحي به عرض نطاقها؛ وقد يكون جزء من السبب ذاكرتها المؤقتة الكبيرة على الشريحة (تسميها AMD Infinity Cache). كل رقم مقيس هو الرقم الرئيسي لتلك البطاقة، فليست كلها من النوع نفسه من الاختبار؛ هذا يضيف بعض التشويش، لكنه لا يفسر خطأً بثلاثة أضعاف.</p>
+<p><strong>هذا غير كافٍ.</strong> تخمين قد يخطئ بنسبة 33% على بطاقة حديثة، أو 239% على بطاقة أقدم، سيقول لبعض الناس إن حاسوبهم جيد وهو بطيء، أو العكس. لذا لا يعرض الفاحص وصفحات البطاقات إلا البطاقات التي قسناها، ويقولان بوضوح حين لا تكون بطاقتك منها. نعيد هذا الاختبار مع كل بطاقة جديدة، وإن صغر الخطأ سنقول ذلك هنا قبل أن نعرض أي تقدير.</p>
+<h2>ما لم نقسه بعد</h2>
+<ul>
+<li>حاسوب محمول فيه بطاقة ألعاب.</li>
+<li>Gemma 4 12B على بطاقة فيها 10 GB أو أكثر.</li>
+<li>الصور على <a href="/blog/ar/ai-on-rx-5700-xt">RX 5700 XT</a>، <a href="/blog/ar/ai-on-rtx-5060">RTX 5060</a>، <a href="/blog/ar/ai-on-gtx-1650">GTX 1650</a>، <a href="/blog/ar/ai-on-rx-580">RX 580</a>.</li>
+<li>نماذج ذكاء اصطناعي غير التي يوزعها GreenCube، ونظاما Linux وMac (GreenCube مخصص لـ Windows).</li>
+</ul>
+<h2>احصل على البيانات</h2>
+<p>كل قياس في هذه الصفحة، كل واحد في سطر، موجود في <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a>: الحاسوب، والذكاء الاصطناعي، ومكان تشغيله، وسرعتا الكتابة والقراءة، وأزمنة الصور، وطريقة القياس، وإصدار GreenCube، والتاريخ. إن استخدمته، فاذكر المصدر «GreenCube, AI speed measurements on real PCs, 2026» وضع رابطًا إلى هذه الصفحة.</p>
+<h2>أضف حاسوبك</h2>
+<p>تستخدم GreenCube من قبل؟ أرسل سجلك إلى <a href="mailto:support@greencube.app">support@greencube.app</a>. سنضيف حاسوبك إلى الاختبارات من دون اسمك، والبطاقة الجديدة تحصل على صفحة خاصة بها. لا تعرف ما في حاسوبك؟ <a href="/blog/ar/can-my-pc-run-ai#checker">افحصه هنا</a>.</p>
+<h2>أسئلة</h2>
+<div class="faq">
+<details><summary>من أين تأتي أرقام سرعة الذكاء الاصطناعي في GreenCube؟</summary><p>من 10 حواسيب حقيقية تشغّل GreenCube، قيست في محادثات حقيقية، وباختبار التشغيل في GreenCube، وباختبار السرعة في llama.cpp، وباختبار للصور. كل رقم يذكر طريقته.</p></details>
+<details><summary>هل يمكن تقدير سرعة الذكاء الاصطناعي من مواصفات بطاقة الرسومات؟</summary><p>ليس بشكل موثوق بعد. عند التوقع من عرض نطاق الذاكرة، أخطأت تقديراتنا عادةً بنسبة 19% ووصل الخطأ إلى 239%، لذا لا نعرض إلا البطاقات التي قسناها.</p></details>
+<details><summary>هل يمكنني تنزيل البيانات؟</summary><p>نعم: كل قياس موجود في greencube-ai-speeds.csv، ورابطه في هذه الصفحة.</p></details>
+</div>
+
+<div class="cta-box"><h3>ذكاؤك الاصطناعي الخاص، على حاسوبك الخاص</h3><p>يعمل GreenCube على حاسوبك: بلا حدود للاستخدام، وبلا اشتراك، ويعمل دون إنترنت. 9.99&nbsp;&euro;، تُدفع مرة واحدة.</p><a class="cta" href="https://greencube.app/ar/buy">احصل على GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ar/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ذكاء اصطناعي <em>ملكك،</em> لا مستأجَر.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>المنتج</h3>
+        <ul>
+          <li><a href="https://greencube.app/ar/buy">احصل على GreenCube</a></li>
+          <li><a href="https://greencube.app/ar/what-you-get">هل سيعمل على حاسوبي؟</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>تعلّم</h3>
+        <ul>
+          <li><a href="/blog/ar">Blog</a></li>
+          <li><a href="https://greencube.app/ar/your-data">بياناتك</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT وبياناتك (EN)</a></li>
+          <li><a href="https://greencube.app/ar/ai-environmental-impact">الذكاء الاصطناعي والكوكب</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>الشركة</h3>
+        <ul>
+          <li><a href="https://greencube.app/ar/mission">مهمتنا</a></li>
+          <li><a href="mailto:support@greencube.app">تواصل معنا</a></li>
+          <li><a href="https://legal.greencube.app/privacy">سياسة الخصوصية (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">شروط الاستخدام (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. صُنع في إسبانيا.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

@@ -23,14 +23,18 @@ READ_URL = 'https://doi.org/10.1016/j.jml.2019.104047'
 def esc(s): return html.escape(s, quote=True)
 # Plural rules for languages whose words change with the number ("1 токен, 2 токена, 5 токенов").
 # A template picks a form with {x|one|few|many|other}: the word only, chosen from the number in {x}.
-PLURAL = {'ru': 'east-slavic', 'uk': 'east-slavic'}
+# Arabic has five: {x|one|two|few|many|other} (1, 2, 3–10, 11–99, 100+ and fractions).
+PLURAL = {'ru': 'east-slavic', 'uk': 'east-slavic', 'ar': 'arabic'}
 
 def plural(lang, v):
-    """Which form a number takes: 0 one, 1 few, 2 many, 3 other (fractions). Uses the last number in v ('5–7', 'около 20')."""
+    """Which form a number takes, as an index into the forms. Uses the last number in v ('5–7', 'около 20')."""
     th, dec = WD[lang]['num_sep']
+    arabic = PLURAL[lang] == 'arabic'
     nums = re.findall(r'\d+(?:' + re.escape(dec) + r'\d+)?', str(v).replace(th, ''))
-    if not nums or dec in nums[-1]: return 3
+    if not nums or dec in nums[-1]: return 4 if arabic else 3
     n = int(nums[-1])
+    if arabic:
+        return 0 if n == 1 else 1 if n == 2 else 2 if 3 <= n % 100 <= 10 else 3 if 11 <= n % 100 <= 99 else 4
     if n % 10 == 1 and n % 100 != 11: return 0
     if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14: return 1
     return 2
@@ -381,6 +385,8 @@ def checker(lang):
                           'cpu': next(r['picture'] for r in pictures(lap) if r['on'] == 'cpu')} if lap else None,
             'builtin': WD[lang]['builtin'], 'T': WD[lang]['checker_js']}
     if 'units' in WD[lang]: data['U'] = WD[lang]['units']
+    if WD[lang]['list_sep'] != ', ': data['C'] = WD[lang]['list_sep']  # the language's own comma ('، ', '，')
+    if 'semi' in WD[lang]: data['SC'] = WD[lang]['semi']
     if lang in PLURAL: data['P'] = PLURAL[lang]
     T = WD[lang]['checker']
     return (f'<section class="chk" id="chk">\n<h2 id="checker">{T["h"]}</h2>\n<p class="chk-lead">{T["lead"]}</p>\n'
@@ -457,7 +463,7 @@ def method_page(lang):
     b += f'<h2>{M["h_what"]}</h2>\n' + fmt(lang, M['what'], **f)
     b += f'<h2>{M["h_how"]}</h2>\n<p>{M["how_lead"]}</p>\n'
     for m, tint in (('app', 'g'), ('app-test', 'b'), ('bench', 'y'), ('picture', 'p')):
-        on = ', '.join(link(p, lang) for p in pcs if any(r['method'] == m for r in p['runs']))
+        on = WD[lang]['list_sep'].join(link(p, lang) for p in pcs if any(r['method'] == m for r in p['runs']))
         b += (f'<div class="card {tint}">\n<h3>{M["names"][m]}</h3>\n<p>{esc(WD[lang]["methods"][m].replace(" {v}", ""))}</p>\n'
               + (f'<p>{M["used"]}: {on}.</p>\n' if on else '') + '</div>\n')
     b += M['how_tail']

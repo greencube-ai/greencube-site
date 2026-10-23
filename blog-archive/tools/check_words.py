@@ -9,7 +9,7 @@ import json, os, re, sys
 DIR = os.path.join(os.path.dirname(__file__), 'words')
 EN = json.load(open(os.path.join(DIR, 'en.json'), encoding='utf-8'))
 OPTIONAL = {'an', 'The', 'm'}  # grammar helpers a language may not need
-NOT_TEXT = {'pcs', 'shell', 'units'}  # per-language extras, not translations of English
+NOT_TEXT = {'pcs', 'shell', 'units', 'semi'}  # per-language extras, not translations of English
 bad = 0
 
 def walk(e, o, where, lang):
@@ -31,10 +31,10 @@ def walk(e, o, where, lang):
         if po - pe or (pe - po) - OPTIONAL:
             bad += 1; print(lang, where, 'placeholders differ:', sorted(pe), sorted(po))
         for x, forms in re.findall(r'\{(\w+)\|([^{}]*)\}', o):  # plural forms {x|one|few|many|other}; {_|...} follows a number
-            if (x not in pe and x != '_') or len(forms.split('|')) != 4: bad += 1; print(lang, where, 'bad plural:', x, forms)
+            if (x not in pe and x != '_') or len(forms.split('|')) != (5 if lang == 'ar' else 4): bad += 1; print(lang, where, 'bad plural:', x, forms)
         te, to = sorted(re.findall(r'</?(\w+)', e)), sorted(re.findall(r'</?(\w+)', o))
         if te != to: bad += 1; print(lang, where, 'tags differ:', te, to)
-        glue = lambda x: bool(re.match(r'[\s,;:.]', x))  # a fragment that attaches to the text before it
+        glue = lambda x: bool(re.match(r'[\s,;:.،，、。]', x))  # a fragment that attaches to the text before it
         if e.endswith('\n') != o.endswith('\n') or glue(e) != glue(o):
             bad += 1; print(lang, where, 'leading space or trailing newline differs')
 
