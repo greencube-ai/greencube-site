@@ -1,0 +1,96 @@
+<!--meta
+{
+ "title": "IA offline su Windows 10 e 11: cosa serve al tuo PC, misurato su {{pcs}} PC",
+ "description": "Usare un chatbot di IA locale su Windows 10 o 11 senza internet: quanta RAM e quale scheda grafica servono, velocità reali misurate su {{pcs}} PC Windows, quali app funzionano offline e come controllare che nulla esca dal tuo PC.",
+ "date": "2026-10-23",
+ "kind": "guide",
+ "stat": "{{pcs}} PC",
+ "teaser": "Cosa serve per usare l'IA offline su Windows e quanto va veloce su {{pcs}} PC reali.",
+ "rank": 16,
+ "lang": "it",
+ "alt": "local-ai-chatbot-windows",
+ "faq": [
+  {"q": "Posso usare l'IA offline su Windows 11?", "a": "Sì. App come GreenCube, LM Studio, Jan, Ollama e GPT4All fanno girare il modello di IA sul tuo PC. Ti serve internet una volta per scaricare l'app e il modello; dopo, la chat funziona con il Wi-Fi spento."},
+  {"q": "L'IA offline funziona su Windows 10?", "a": "Sì. GreenCube, Jan e Msty indicano Windows 10 come supportato. Microsoft ha chiuso il supporto di Windows 10 il 14 ottobre 2025: l'IA continua a girare, ma il tuo PC non riceve più aggiornamenti di sicurezza, a meno che tu non ti iscriva agli aggiornamenti estesi."},
+  {"q": "Quanta RAM serve per l'IA locale su un PC Windows?", "a": "8 GB bastano con un modello piccolo: il nostro portatile da 8 GB scriveva da 5 a 7 token al secondo in chat reali, più o meno la velocità di lettura. 16 GB sono comodi: il nostro portatile da 16 GB senza scheda grafica scriveva da 14 a 18."},
+  {"q": "Serve una scheda grafica per un chatbot di IA locale su Windows?", "a": "No, ma aiuta molto. Su PC da gaming con una scheda da 6 GB o più abbiamo misurato da 37 a 76 token al secondo sulla maggior parte delle schede, molte volte più veloce degli stessi PC con il solo processore. Per le immagini serve una scheda grafica o 16 GB di RAM."},
+  {"q": "Esiste un'IA offline gratis per Windows?", "a": "Sì: LM Studio, Jan, Ollama, GPT4All e AnythingLLM sono gratuiti, e il modello lo scegli e lo scarichi tu. GreenCube costa 9,99 € una volta e sceglie per te il modello adatto al tuo PC."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Risposta breve:</strong> qualsiasi PC con Windows 10 o 11 e <strong>8 GB di RAM</strong> può far girare un chatbot di IA locale senza internet, e con <strong>16 GB o una scheda grafica da gaming</strong> è comodo. Scarichi l'app e il modello una volta; dopo, funziona con il Wi-Fi spento. L'abbiamo misurato su {{pcs}} PC Windows reali: da circa la velocità di lettura su un portatile da 8 GB a molto più veloce su un PC da gaming.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>{{pcs}}</b><span>PC Windows reali misurati, portatili e PC da gaming</span></div>
+<div class="stat b"><b>8 GB</b><span>di RAM bastano per iniziare, senza scheda grafica</span></div>
+<div class="stat p"><b>0</b><span>internet necessario dopo il primo download</span></div>
+</div>
+
+<h2>Cosa serve al tuo PC Windows</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Minimo</th><th>Comodo</th></tr></thead>
+<tbody>
+<tr><td><strong>Windows</strong></td><td>Windows 10 (64 bit)</td><td>Windows 11</td></tr>
+<tr><td><strong>RAM</strong></td><td>8 GB, altre app chiuse</td><td>16 GB o più</td></tr>
+<tr><td><strong>Scheda grafica</strong></td><td>Non serve</td><td>Qualsiasi scheda da 6 GB o più degli ultimi anni</td></tr>
+<tr><td><strong>Spazio su disco</strong></td><td>Circa 3 GB per un modello piccolo</td><td>Circa 11 GB per un modello più grande e le immagini</td></tr>
+<tr><td><strong>Internet</strong></td><td colspan="2">Una volta, per scaricare l'app e il modello</td></tr>
+</tbody>
+</table></div>
+<p>Non sai cosa c'è nel tuo PC? Premi <strong>Ctrl + Maiusc + Esc</strong>, apri <strong>Prestazioni</strong> e guarda <strong>Memoria</strong> e <strong>GPU</strong>. Oppure scrivi la tua scheda nel <a href="/blog/can-my-pc-run-ai#checker">nostro verificatore</a>: ti dice cosa gira e a che velocità su un PC reale come il tuo.</p>
+
+<h2>Quanto va veloce su PC Windows reali</h2>
+<p>Tutti i numeri vengono da GreenCube su PC Windows reali a settembre e ottobre 2026, quasi sempre in chat reali. Un token è un pezzo di parola; in italiano ne leggi circa 8 al secondo.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Il tuo PC Windows</th><th>Scrive</th><th>Un'immagine (512×512)</th></tr></thead>
+<tbody>
+<tr><td>Portatile da 8 GB, senza scheda grafica</td><td><b>5&ndash;7</b> token/s, circa la velocità di lettura</td><td>non riesce (servono circa 7 GB liberi)</td></tr>
+<tr><td>Portatile da 16 GB, senza scheda grafica</td><td><b>14&ndash;18</b> token/s</td><td><b>2&ndash;2,5 min</b></td></tr>
+<tr><td>PC da gaming con una scheda da 6 GB o più</td><td><b>37&ndash;76</b> token/s sulla maggior parte delle schede</td><td><b>8&ndash;89 s</b></td></tr>
+</tbody>
+</table></div>
+<p>L'eccezione: una vecchia AMD RX 580 scriveva circa 11 token al secondo, comunque più veloce di quanto leggi. Ogni scheda, con la sua pagina, è in <a href="/blog/can-my-pc-run-ai">Il mio PC può far girare l'IA?</a></p>
+
+<div class="card g">
+<h3>Il grosso del lavoro lo fa la scheda grafica</h3>
+<p>Sullo stesso PC Windows, la stessa IA scriveva <strong>5 token al secondo sul processore e 72 su una RX 5700 XT</strong>. Far girare un'IA è soprattutto il tipo di calcolo per cui è fatta una scheda grafica, quindi qualsiasi scheda da gaming recente fa una differenza enorme. Quanto può essere grande l'IA lo decide la memoria della scheda (VRAM), non la tua RAM: <a href="/blog/how-much-vram-for-ai">perché il modello deve stare nella scheda</a>.</p>
+</div>
+<div class="card y">
+<h3>Niente scheda grafica? Per studiare e chattare va bene</h3>
+<p>Un normale portatile da 16 GB con sola grafica Intel ha completato una risposta di studio intera, una spiegazione più tre domande d'esame, in circa 20 secondi. Su un portatile da 8 GB funziona anche, più lentamente, se le altre app lasciano memoria libera: <a href="/blog/run-ai-on-8gb-ram">il nostro test con 8 GB</a>.</p>
+</div>
+
+<h2>Le app che fanno girare l'IA offline su Windows</h2>
+<p>Secondo il sito di ogni app, verificato il 21 ottobre 2026. Non abbiamo cronometrato le altre app sui nostri PC, quindi questa tabella non confronta la velocità.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>App</th><th>Windows</th><th>Prezzo</th><th>Sceglie il modello per te?</th><th>Legge i tuoi PDF</th></tr></thead>
+<tbody>
+<tr><td><strong>GreenCube</strong></td><td>Windows 10 e 11</td><td>9,99&nbsp;&euro; una volta</td><td>Sì, in base alla tua scheda e alla RAM</td><td>Sì</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>Processore con AVX2</td><td>Gratis</td><td>No, scegli da una lista</td><td>Sì</td></tr>
+<tr><td><strong>Jan</strong></td><td>Windows 10 o successivo</td><td>Gratis, open source</td><td>No</td><td>Sì</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Windows; finestra di chat da luglio 2025</td><td>Gratis sul tuo PC</td><td>No</td><td>Sì</td></tr>
+<tr><td><strong>GPT4All</strong></td><td>Windows (non sui PC ARM)</td><td>Gratis, open source</td><td>No</td><td>Sì, con LocalDocs</td></tr>
+<tr><td><strong>AnythingLLM</strong></td><td>Windows</td><td>Versione desktop gratis</td><td>No</td><td>Sì</td></tr>
+<tr><td><strong>Msty</strong></td><td>Windows 10 e 11</td><td>Piano gratuito</td><td>No</td><td>Sì</td></tr>
+<tr><td><strong>KoboldCpp</strong></td><td>Un solo .exe, chat nel browser</td><td>Gratis, open source</td><td>No</td><td>Solo testo</td></tr>
+</tbody>
+</table></div>
+<p>Vuoi vedere cosa manda in rete ognuna, più le app per Mac e telefono? Guarda <a href="/blog/best-offline-ai-chatbot">il nostro confronto di 12 chatbot di IA offline</a>.</p>
+
+<h2>Windows 10 o Windows 11?</h2>
+<p>L'IA gira uguale su entrambi: contano la RAM e la scheda grafica, non la versione di Windows. Una cosa da sapere: Microsoft ha chiuso il supporto di Windows 10 il 14 ottobre 2025, quindi un PC con Windows 10 non riceve più aggiornamenti di sicurezza, a meno che tu non ti iscriva agli aggiornamenti estesi. Un'IA offline tiene comunque le tue chat sul tuo PC, ma tenere Windows aggiornato resta utile.</p>
+
+<h2>Come controllare che non esca nulla</h2>
+<ol class="steps">
+<li><strong>Attiva la modalità aereo</strong> (o stacca il cavo) dopo il primo download e chatta. Se risponde, l'IA gira sul tuo PC.</li>
+<li><strong>Guarda la rete:</strong> premi <strong>Windows + R</strong>, scrivi <strong>resmon</strong> e apri la scheda di rete. Elenca ogni programma che invia o riceve dati mentre chatti.</li>
+<li><strong>Leggi cosa dice l'app di inviare.</strong> In GreenCube: accedi una volta per attivarla, scarica l'IA e i suoi aggiornamenti, e la ricerca online (spenta a ogni avvio) invia termini di ricerca ai motori. Nient'altro: «Non riceviamo mai le tue chat, i tuoi file, i tuoi ricordi o le tue immagini.»</li>
+</ol>
+
+<h2>Cosa non fa un'IA offline su Windows</h2>
+<ul>
+<li><strong>Le notizie di oggi.</strong> Il modello sa ciò che ha imparato durante l'addestramento. Per l'attualità serve una ricerca web, e quella parte passa da internet.</li>
+<li><strong>Battere in tutto le IA cloud più grandi.</strong> I modelli che stanno in un PC vanno bene per studiare, scrivere e le domande di tutti i giorni, ma i modelli cloud più grandi restano più forti sui problemi più difficili.</li>
+<li><strong>Andare veloce su qualsiasi PC.</strong> Il lavoro lo fa il tuo PC: un portatile da 8 GB va circa alla velocità di lettura, un PC da gaming molto più veloce.</li>
+</ul>
+<p>Per studiare? Guarda <a href="/blog/offline-ai-for-students">cosa fa l'IA offline per gli studenti</a>, con i tempi per PDF, schede di ripasso e flashcard.</p>
