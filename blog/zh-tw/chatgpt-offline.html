@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ChatGPT 能離線用嗎？不能，但這些不聯網也能用（2026）| GreenCube 部落格</title>
+  <meta name="description" content="ChatGPT 沒有離線模式：應用程式和桌面版都需要聯網，因為模型執行在 OpenAI 的伺服器上。能離線用的是：OpenAI 的開放模型 gpt-oss-20b 和本地 AI 應用程式，附所需記憶體和實測速度。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="ChatGPT 能離線用嗎？不能，但這些不聯網也能用（2026）| GreenCube 部落格" />
+  <meta property="og:description" content="ChatGPT 沒有離線模式：應用程式和桌面版都需要聯網，因為模型執行在 OpenAI 的伺服器上。能離線用的是：OpenAI 的開放模型 gpt-oss-20b 和本地 AI 應用程式，附所需記憶體和實測速度。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh-tw/chatgpt-offline" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh-tw/chatgpt-offline" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/chatgpt-offline" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/chatgpt-sin-internet" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/chatgpt-offline" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/chatgpt-offline" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/chatgpt-offline" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/chatgpt-offline" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/chatgpt-offline" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/chatgpt-offline" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/chatgpt-offline" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/chatgpt-offline" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/chatgpt-offline" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/chatgpt-offline" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/chatgpt-offline" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/chatgpt-offline" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/chatgpt-offline" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/chatgpt-offline" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/chatgpt-offline" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/chatgpt-offline" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/chatgpt-offline" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/chatgpt-offline" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/chatgpt-offline" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ChatGPT 能離線用嗎？不能，但這些不聯網也能用（2026）", "description": "ChatGPT 沒有離線模式：應用程式和桌面版都需要聯網，因為模型執行在 OpenAI 的伺服器上。能離線用的是：OpenAI 的開放模型 gpt-oss-20b 和本地 AI 應用程式，附所需記憶體和實測速度。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/chatgpt-offline", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "ChatGPT 能離線用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不能。ChatGPT 執行在 OpenAI 的伺服器上：網站、手機應用程式以及 Windows 和 Mac 應用程式都需要聯網。OpenAI 既沒有離線模式，也沒有離線安裝包。"}}, {"@type": "Question", "name": "有官方的離線版 ChatGPT 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT 本身沒有。OpenAI 最接近的是 gpt-oss-20b，一個採用 Apache 2.0 許可的開放權重模型，能在約 16 GB 記憶體的電腦上透過 Ollama 或 LM Studio 等應用程式執行。它和 ChatGPT 不是同一個模型。"}}, {"@type": "Question", "name": "ChatGPT 最好的離線替代品是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "一個在你自己電腦上執行 AI 模型的應用程式：LM Studio、Jan、Ollama 和 GPT4All 免費（模型自己選）；GreenCube 一次付清 9.99 歐元，會按你的電腦挑模型。首次下載後，關掉 Wi-Fi 也能用。"}}, {"@type": "Question", "name": "ChatGPT 的離線替代品有多快？", "acceptedAnswer": {"@type": "Answer", "text": "看你的電腦。在我們的測試裡，GreenCube 在 8 GB 筆電上每秒寫 5 到 7 個 token（大約閱讀速度），在 16 GB 筆電上 14 到 18 個，在大多數顯示卡 6 GB 以上的遊戲電腦上 37 到 76 個。"}}, {"@type": "Question", "name": "應用程式商店裡的“ChatGPT 離線版”是真的嗎？", "acceptedAnswer": {"@type": "Answer", "text": "要小心：用 ChatGPT 名字號稱離線能用的應用程式都不是 OpenAI 做的。如果哪個真能不聯網用，它是在你的裝置上執行別的模型；查一下是誰做的、用的是哪個模型。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh-tw/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a>
+    <a href="https://greencube.app/zh-tw/your-data">你的資料</a>
+    <a href="https://greencube.app/zh-tw/mission">我們的使命</a>
+    <a href="/blog/zh-tw" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">繁體</summary><div class="lang-list"><a href="/blog/chatgpt-offline" hreflang="en" lang="en">English</a><a href="/blog/es/chatgpt-sin-internet" hreflang="es" lang="es">Español</a><a href="/blog/pt/chatgpt-offline" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/chatgpt-offline" hreflang="fr" lang="fr">Français</a><a href="/blog/de/chatgpt-offline" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/chatgpt-offline" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/chatgpt-offline" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/chatgpt-offline" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/chatgpt-offline" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/chatgpt-offline" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/chatgpt-offline" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/chatgpt-offline" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/chatgpt-offline" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/chatgpt-offline" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/chatgpt-offline" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/chatgpt-offline" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/chatgpt-offline" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/chatgpt-offline" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/chatgpt-offline" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="/blog/zh-tw/chatgpt-offline" hreflang="zh-TW" lang="zh-TW" aria-current="true">繁體中文</a></div></details><a href="https://greencube.app/zh-tw/buy" class="nav-cta">獲取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<h1>ChatGPT 能離線用嗎？不能，但這些不聯網也能用（2026）</h1>
+<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
+<div class="answer"><p><strong>簡短回答：不能。</strong>ChatGPT 執行在 OpenAI 的伺服器上，所以網站、手機應用程式和桌面應用程式都需要聯網，沒有離線模式。離線<strong>能用</strong>的，是在你自己電腦上執行的 AI 模型：OpenAI 的開放模型 <strong>gpt-oss-20b</strong>（約 16 GB 記憶體），或者 LM Studio、Jan、Ollama 和 GreenCube 這類應用程式，下載一次模型後關掉 Wi-Fi 也能用。</p></div>
+
+<div class="stats">
+<div class="stat p"><b>0</b><span>ChatGPT 的離線模式：模型執行在 OpenAI 的伺服器上</span></div>
+<div class="stat y"><b>16 GB</b><span>記憶體，OpenAI 開放模型 gpt-oss-20b 所需</span></div>
+<div class="stat g"><b>8 GB</b><span>就夠在筆電上跑一個小的本地模型（實測）</span></div>
+</div>
+
+<h2>為什麼 ChatGPT 不能離線用</h2>
+<p>你在 ChatGPT 裡打字時，訊息會發到 OpenAI 的資料中心，那裡的模型寫出回答再發回來。Windows 和 Mac 應用程式只是通向這個服務的視窗，不是模型的副本。沒有網路，你的裝置上就沒有任何東西能回答你。</p>
+<p>小心名字裡帶“ChatGPT”和“離線”的應用程式：它們不是 OpenAI 做的。如果哪個真能不聯網用，它是在你的手機或電腦上執行別的模型。</p>
+
+<h2>不聯網能用什麼</h2>
+<div class="card b">
+<h3>OpenAI 的開放模型：gpt-oss-20b</h3>
+<p>2025 年 8 月，OpenAI 釋出了 gpt-oss，採用 Apache 2.0 許可的開放權重模型。較小的 gpt-oss-20b 能在約 16 GB 記憶體的電腦上執行（<a href="https://openai.com/index/introducing-gpt-oss/" rel="noopener">OpenAI</a>），透過 Ollama 或 LM Studio 等應用程式。它來自 OpenAI，但不是 ChatGPT：模型不同，沒有網頁搜尋，也沒有你帳號的記憶。我們沒有在自己的電腦上給它計時。</p>
+</div>
+<div class="card g">
+<h3>本地 AI 應用程式</h3>
+<p>下載一次模型、在你電腦上執行的應用程式：<strong>LM Studio</strong>、<strong>Jan</strong>、<strong>Ollama</strong> 和 <strong>GPT4All</strong> 免費，可以自己選模型；<strong>GreenCube</strong>（Windows，一次付清 9.99 歐元）會挑適合你電腦的模型，還能讀 PDF 和照片、生成圖片。<a href="/blog/zh-tw/best-offline-ai-chatbot">12 款離線應用程式對比</a>。</p>
+</div>
+
+<h2>你需要什麼，有多快</h2>
+<p>用 GreenCube 在 10 臺真實電腦上實測（模型：Google 的 Gemma 4 E2B 和 E4B）：</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>你的電腦</th><th>輸出速度</th><th>感覺</th></tr></thead>
+<tbody>
+<tr><td>8 GB 筆電，沒有顯示卡</td><td><b>5&ndash;7</b> token/秒</td><td>大約閱讀速度</td></tr>
+<tr><td>16 GB 筆電，沒有顯示卡</td><td><b>14&ndash;18</b> token/秒</td><td>比你讀得快</td></tr>
+<tr><td>顯示卡 6 GB 以上的遊戲電腦</td><td>大多數顯示卡上 <b>37&ndash;76</b> token/秒</td><td>比你讀得快得多</td></tr>
+</tbody>
+</table></div>
+<p>你的具體顯示卡：<a href="/blog/zh-tw/can-my-pc-run-ai#checker">我的電腦能跑 AI 嗎？</a> Windows 上：<a href="/blog/zh-tw/local-ai-chatbot-windows">離線 AI 需要你的電腦有什麼</a>。</p>
+
+<h2>ChatGPT 還是離線 AI：老實說的取捨</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>ChatGPT</th><th>你電腦上的 AI</th></tr></thead>
+<tbody>
+<tr><td><strong>不聯網能用</strong></td><td>不能</td><td>能，下載一次之後</td></tr>
+<tr><td><strong>最難問題上的實力</strong></td><td>更強：模型大得多</td><td>學習、寫作和日常夠用</td></tr>
+<tr><td><strong>今天的新聞</strong></td><td>能，靠搜尋</td><td>不能（只知道模型學過的）</td></tr>
+<tr><td><strong>檔案和圖片限制（免費）</strong></td><td>有限制（<a href="/blog/zh-tw/chatgpt-free-limits">詳情</a>）</td><td>沒有</td></tr>
+<tr><td><strong>你的聊天去了哪</strong></td><td>OpenAI 的伺服器</td><td>哪兒也不去：你的電腦</td></tr>
+<tr><td><strong>價格</strong></td><td>免費，或 Plus 每月 20 美元</td><td>免費應用程式，或 GreenCube 一次付清 9.99 歐元</td></tr>
+</tbody>
+</table></div>
+<p>很多人兩個都用：聯網又需要最強模型時用 ChatGPT；在火車上、在 Wi-Fi 很差的圖書館裡，或者處理不想上傳的筆記時，用離線 AI。</p>
+<h2>常見問題</h2>
+<div class="faq">
+<details><summary>ChatGPT 能離線用嗎？</summary><p>不能。ChatGPT 執行在 OpenAI 的伺服器上：網站、手機應用程式以及 Windows 和 Mac 應用程式都需要聯網。OpenAI 既沒有離線模式，也沒有離線安裝包。</p></details>
+<details><summary>有官方的離線版 ChatGPT 嗎？</summary><p>ChatGPT 本身沒有。OpenAI 最接近的是 gpt-oss-20b，一個採用 Apache 2.0 許可的開放權重模型，能在約 16 GB 記憶體的電腦上透過 Ollama 或 LM Studio 等應用程式執行。它和 ChatGPT 不是同一個模型。</p></details>
+<details><summary>ChatGPT 最好的離線替代品是什麼？</summary><p>一個在你自己電腦上執行 AI 模型的應用程式：LM Studio、Jan、Ollama 和 GPT4All 免費（模型自己選）；GreenCube 一次付清 9.99 歐元，會按你的電腦挑模型。首次下載後，關掉 Wi-Fi 也能用。</p></details>
+<details><summary>ChatGPT 的離線替代品有多快？</summary><p>看你的電腦。在我們的測試裡，GreenCube 在 8 GB 筆電上每秒寫 5 到 7 個 token（大約閱讀速度），在 16 GB 筆電上 14 到 18 個，在大多數顯示卡 6 GB 以上的遊戲電腦上 37 到 76 個。</p></details>
+<details><summary>應用程式商店裡的“ChatGPT 離線版”是真的嗎？</summary><p>要小心：用 ChatGPT 名字號稱離線能用的應用程式都不是 OpenAI 做的。如果哪個真能不聯網用，它是在你的裝置上執行別的模型；查一下是誰做的、用的是哪個模型。</p></details>
+</div>
+
+<div class="cta-box"><h3>屬於你自己的 AI，就在你的電腦上</h3><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99，一次付清。</p><a class="cta" href="https://greencube.app/zh-tw/buy">獲取 GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh-tw/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">屬於 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>產品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh-tw/what-you-get">我的電腦能跑嗎？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>瞭解更多</h3>
+        <ul>
+          <li><a href="/blog/zh-tw">Blog</a></li>
+          <li><a href="https://greencube.app/zh-tw/your-data">你的資料</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 與你的資料 (EN)</a></li>
+          <li><a href="https://greencube.app/zh-tw/ai-environmental-impact">AI 與地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh-tw/mission">我們的使命</a></li>
+          <li><a href="mailto:support@greencube.app">聯絡我們</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隱私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用條款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙製造。</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

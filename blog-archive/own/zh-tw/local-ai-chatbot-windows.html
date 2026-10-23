@@ -1,0 +1,96 @@
+<!--meta
+{
+ "title": "在 Windows 10 和 11 上離線用 AI：你的電腦需要什麼，{{pcs}} 臺電腦實測",
+ "description": "不聯網在 Windows 10 或 11 上執行本地 AI 聊天機器人：需要多少記憶體和什麼顯示卡，{{pcs}} 臺 Windows 電腦上測出的真實速度，哪些應用程式能離線用，以及怎麼確認沒有任何東西離開你的電腦。",
+ "date": "2026-10-23",
+ "kind": "guide",
+ "stat": "{{pcs}} 臺",
+ "teaser": "在 Windows 上離線用 AI 需要什麼，以及在 {{pcs}} 臺真實電腦上有多快。",
+ "rank": 16,
+ "lang": "zh-tw",
+ "alt": "local-ai-chatbot-windows",
+ "faq": [
+  {"q": "Windows 11 上能離線用 AI 嗎？", "a": "能。GreenCube、LM Studio、Jan、Ollama 和 GPT4All 這類應用程式會在你自己的電腦上執行 AI 模型。下載應用程式和模型時需要聯網一次，之後關掉 Wi-Fi 也能聊天。"},
+  {"q": "離線 AI 能在 Windows 10 上用嗎？", "a": "能。GreenCube、Jan 和 Msty 都寫明支援 Windows 10。微軟已在 2025 年 10 月 14 日停止支援 Windows 10：AI 照樣能跑，但除非你加入擴充套件安全更新，否則電腦不會再收到安全更新。"},
+  {"q": "在 Windows 電腦上跑本地 AI 需要多少記憶體？", "a": "用小模型 8 GB 就夠：我們的 8 GB 筆電在真實聊天中每秒寫 5 到 7 個 token，大約是閱讀速度。16 GB 比較寬裕：我們沒有顯示卡的 16 GB 筆電每秒寫 14 到 18 個。"},
+  {"q": "在 Windows 上跑本地 AI 聊天機器人需要顯示卡嗎？", "a": "不需要，但幫助很大。在顯示記憶體 6 GB 以上的遊戲電腦上，我們在大多數顯示卡上測到每秒 37 到 76 個 token，是同一臺電腦只用處理器時的好幾倍。生成圖片需要顯示卡或 16 GB 記憶體。"},
+  {"q": "有免費的 Windows 離線 AI 嗎？", "a": "有：LM Studio、Jan、Ollama、GPT4All 和 AnythingLLM 都免費，模型由你自己挑選和下載。GreenCube 一次付清 9.99 歐元，會自動挑選適合你電腦的模型。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>簡短回答：</strong>任何裝著 Windows 10 或 11、有 <strong>8 GB 記憶體</strong>的電腦，都能不聯網執行本地 AI 聊天機器人；有 <strong>16 GB 或一塊遊戲顯示卡</strong>就很寬裕。應用程式和模型只需下載一次，之後關掉 Wi-Fi 也能用。我們在 {{pcs}} 臺真實 Windows 電腦上測過：從 8 GB 筆電上大約閱讀速度，到遊戲電腦上快得多。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>{{pcs}}</b><span>臺真實 Windows 電腦實測，筆電和遊戲電腦</span></div>
+<div class="stat b"><b>8 GB</b><span>記憶體就能起步，不需要顯示卡</span></div>
+<div class="stat p"><b>0</b><span>首次下載後需要的網路</span></div>
+</div>
+
+<h2>你的 Windows 電腦需要什麼</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>最低</th><th>寬裕</th></tr></thead>
+<tbody>
+<tr><td><strong>Windows</strong></td><td>Windows 10（64 位）</td><td>Windows 11</td></tr>
+<tr><td><strong>記憶體</strong></td><td>8 GB，關掉其他應用程式</td><td>16 GB 或以上</td></tr>
+<tr><td><strong>顯示卡</strong></td><td>不需要</td><td>近幾年任何 6 GB 以上的顯示卡</td></tr>
+<tr><td><strong>硬碟空間</strong></td><td>小模型約 3 GB</td><td>大一點的模型加圖片約 11 GB</td></tr>
+<tr><td><strong>網路</strong></td><td colspan="2">一次，用來下載應用程式和模型</td></tr>
+</tbody>
+</table></div>
+<p>不知道電腦裡有什麼？按 <strong>Ctrl + Shift + Esc</strong>，開啟<strong>效能</strong>，看<strong>記憶體</strong>和 <strong>GPU</strong>。或者在<a href="/blog/can-my-pc-run-ai#checker">我們的檢測工具</a>裡輸入你的顯示卡：它會告訴你在一臺和你差不多的真實電腦上能跑什麼、跑多快。</p>
+
+<h2>在真實 Windows 電腦上有多快</h2>
+<p>所有數字都來自 2026 年 9 月和 10 月在真實 Windows 電腦上執行的 GreenCube，大多是真實聊天。token 是詞的一小塊。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>你的 Windows 電腦</th><th>輸出速度</th><th>一張圖片（512×512）</th></tr></thead>
+<tbody>
+<tr><td>8 GB 筆電，沒有顯示卡</td><td><b>5&ndash;7</b> token/秒，大約閱讀速度</td><td>做不了（需要約 7 GB 空閒）</td></tr>
+<tr><td>16 GB 筆電，沒有顯示卡</td><td><b>14&ndash;18</b> token/秒</td><td><b>2&ndash;2.5 分鐘</b></td></tr>
+<tr><td>顯示卡 6 GB 以上的遊戲電腦</td><td>大多數顯示卡上 <b>37&ndash;76</b> token/秒</td><td><b>8&ndash;89 秒</b></td></tr>
+</tbody>
+</table></div>
+<p>例外：一塊老的 AMD RX 580 每秒寫約 11 個 token，仍比你讀得快。每塊顯示卡都有自己的頁面，見<a href="/blog/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a></p>
+
+<div class="card g">
+<h3>大部分活是顯示卡幹的</h3>
+<p>在同一臺 Windows 電腦上，同一個 AI <strong>用處理器每秒寫 5 個 token，用 RX 5700 XT 每秒寫 72 個</strong>。執行 AI 主要就是顯示卡最擅長的那類計算，所以任何一塊較新的遊戲顯示卡都會帶來巨大差別。能裝下多大的 AI，取決於顯示卡的顯示記憶體（VRAM），不是你的記憶體：<a href="/blog/how-much-vram-for-ai">為什麼模型必須放得進顯示卡</a>。</p>
+</div>
+<div class="card y">
+<h3>沒有顯示卡？學習和聊天夠用</h3>
+<p>一臺只有 Intel 核顯的普通 16 GB 筆電，約 20 秒就寫完了一個完整的學習回答：一段講解加三道考題。8 GB 筆電也能用，慢一些，前提是其他應用程式留出空閒記憶體：<a href="/blog/run-ai-on-8gb-ram">我們的 8 GB 測試</a>。</p>
+</div>
+
+<h2>能在 Windows 上離線執行 AI 的應用程式</h2>
+<p>根據各應用程式自己的網站，2026 年 10 月 21 日核對。我們沒有在自己的電腦上給其他應用程式計時，所以這張表不比較速度。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>應用程式</th><th>Windows</th><th>價格</th><th>會幫你選模型嗎？</th><th>能讀你的 PDF</th></tr></thead>
+<tbody>
+<tr><td><strong>GreenCube</strong></td><td>Windows 10 和 11</td><td>一次付清 9.99 歐元</td><td>會，按你的顯示卡和記憶體</td><td>能</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>支援 AVX2 的處理器</td><td>免費</td><td>不會，你從列表裡選</td><td>能</td></tr>
+<tr><td><strong>Jan</strong></td><td>Windows 10 或更新</td><td>免費，開源</td><td>不會</td><td>能</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Windows；2025 年 7 月起有聊天視窗</td><td>在你的電腦上免費</td><td>不會</td><td>能</td></tr>
+<tr><td><strong>GPT4All</strong></td><td>Windows（不支援 ARM 電腦）</td><td>免費，開源</td><td>不會</td><td>能，用 LocalDocs</td></tr>
+<tr><td><strong>AnythingLLM</strong></td><td>Windows</td><td>桌面版免費</td><td>不會</td><td>能</td></tr>
+<tr><td><strong>Msty</strong></td><td>Windows 10 和 11</td><td>有免費版</td><td>不會</td><td>能</td></tr>
+<tr><td><strong>KoboldCpp</strong></td><td>一個 .exe，在瀏覽器裡聊天</td><td>免費，開源</td><td>不會</td><td>只有文字</td></tr>
+</tbody>
+</table></div>
+<p>想看每個應用程式會往網上發什麼，以及 Mac 和手機應用程式？見<a href="/blog/best-offline-ai-chatbot">我們對 12 款離線 AI 聊天機器人的對比</a>。</p>
+
+<h2>Windows 10 還是 Windows 11？</h2>
+<p>AI 在兩者上跑得一樣：關鍵是記憶體和顯示卡，不是 Windows 版本。有一點要知道：微軟已在 2025 年 10 月 14 日停止支援 Windows 10，所以除非你加入擴充套件安全更新，Windows 10 電腦不會再收到安全更新。離線 AI 無論如何都把聊天留在你的電腦上，但保持 Windows 更新仍然是好事。</p>
+
+<h2>怎麼確認什麼都沒發出去</h2>
+<ol class="steps">
+<li><strong>開啟飛航模式</strong>（或拔掉網線），在首次下載之後聊幾句。如果它能回答，AI 就在你的電腦上執行。</li>
+<li><strong>看網路：</strong>按 <strong>Windows + R</strong>，輸入 <strong>resmon</strong>，開啟網路標籤頁。它會列出你聊天時每個在傳送或接收資料的程式。</li>
+<li><strong>讀一讀應用程式自己說會傳送什麼。</strong>GreenCube 是這樣：啟用時登入一次，它會下載 AI 和自身更新，聯網搜尋（每次啟動都是關閉的）會把搜尋詞發給搜尋引擎。除此之外什麼都沒有：“我們從不會收到你的聊天、檔案、記憶或圖片。”</li>
+</ol>
+
+<h2>Windows 上的離線 AI 做不到什麼</h2>
+<ul>
+<li><strong>今天的新聞。</strong>模型只知道訓練時學到的東西。要了解最新情況得用網頁搜尋，而那一部分要經過網路。</li>
+<li><strong>在所有方面勝過最大的雲端 AI。</strong>能裝進電腦的模型在學習、寫作和日常問題上很好用，但最難的問題上最大的雲端模型仍然更強。</li>
+<li><strong>在任何電腦上都很快。</strong>幹活的是你的電腦：8 GB 筆電大約是閱讀速度，遊戲電腦快得多。</li>
+</ul>
+<p>用來學習？見<a href="/blog/offline-ai-for-students">離線 AI 能為學生做什麼</a>，有 PDF、學習筆記和字卡的用時。</p>
