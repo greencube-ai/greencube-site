@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "L'IA gira sul mio PC? Abbiamo misurato {{pcs}} PC da gaming e portatili reali",
+ "description": "L'IA gira in locale sul tuo PC? Velocità reali da {{pcs}} PC, da una GTX 1650 a una RTX 2080 Ti e portatili senza scheda grafica, e cosa contano scheda grafica, VRAM e RAM.",
+ "date": "2026-10-18",
+ "stat": "{{pcs}} PC",
+ "teaser": "Velocità reali su {{pcs}} PC da gaming e portatili.",
+ "rank": 1,
+ "lang": "it",
+ "alt": "can-my-pc-run-ai",
+ "faq": [
+  {"q": "L'IA sul mio PC funziona con una scheda grafica AMD?", "a": "Sì. Abbiamo misurato schede AMD (RX 5700 XT, RX 6600, RX 580) oltre alle NVIDIA. GreenCube usa Vulkan, che funziona su entrambe."},
+  {"q": "Quanta VRAM serve per l'IA?", "a": "Non ne serve per forza, ma 4 GB o più fanno una grande differenza. Sui nostri PC di test, una GTX 1650 da 4 GB ha scritto circa 20 token al secondo e una RTX 5060 da 8 GB circa 56. Con più VRAM sulla scheda ci sta un'IA più grande."},
+  {"q": "L'IA gira su un portatile senza scheda grafica?", "a": "Sì. Un portatile da 16 GB con sola grafica Intel ha scritto da 14 a 18 token al secondo con una IA piccola, più veloce di quanto leggi. Funziona anche uno da 8 GB, più lentamente, e non può creare immagini."},
+  {"q": "Più RAM rende l'IA più veloce?", "a": "Non da sola. Su un PC fisso con 48 GB di RAM, la stessa IA è andata 14 volte più veloce una volta sulla scheda grafica da 8 GB rispetto al processore. La RAM conta se non hai una scheda; con una scheda, conta soprattutto la VRAM."},
+  {"q": "Serve internet per usare l'IA sul mio PC?", "a": "Solo una volta, per scaricare l'app e l'IA e per attivarla. Dopo, la chat funziona senza internet."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Risposta breve: sì.</strong> Se il tuo PC fa girare i giochi, fa girare anche l'IA. Abbiamo misurato {{pcs}} PC reali: PC fissi da gaming, da una vecchia GTX 1650 a una RTX 2080 Ti, e due portatili senza nessuna scheda grafica. Su ognuno ha chattato un'IA che girava tutta sul PC: senza internet, senza abbonamento. L'unica cosa che cambia è la velocità.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>14&times;</b><span>più veloce sulla scheda grafica che sul processore, stesso PC, stessa IA</span></div>
+<div class="stat b"><b>20</b><span>token al secondo su una GTX 1650 da 4 GB. Più veloce di quanto leggi.</span></div>
+<div class="stat p"><b>8&ndash;9 s</b><span>per immagine su una RTX 2080 Ti, una volta caricata</span></div>
+</div>
+
+<!--pcs:checker-->
+
+<h2>I numeri</h2>
+
+<p>"Scrive" è la velocità con cui l'IA digita la risposta, in token al secondo. Un token è un pezzo di parola: in italiano una parola ne occupa di solito uno o due. Una persona legge circa 4 parole al secondo (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), quindi da circa 8 token al secondo in su l'IA scrive più veloce di quanto i tuoi occhi riescano a seguire.</p>
+
+<!--pcs:table-->
+
+<p>Clicca su una scheda grafica per vedere il suo test completo.</p>
+
+<p>Misurato con GreenCube a settembre e ottobre 2026, in chat reali e nei test di velocità di GreenCube. La velocità cambia un po' da una misura all'altra sullo stesso PC, quindi quando ne abbiamo diverse mostriamo l'intervallo. <a href="/blog/how-we-measure-ai-speed">Come misuriamo, e tutti i dati</a>.</p>
+
+<h2>Cosa abbiamo imparato</h2>
+
+<div class="card g">
+<h3>1. La scheda grafica fa il lavoro pesante, come in un gioco</h3>
+<p>Sul PC fisso con la RX 5700 XT, la stessa IA ha scritto <strong>5 token al secondo sul processore e 72 sulla scheda grafica</strong>. L'IA è soprattutto il tipo di matematica per cui sono fatte le schede grafiche. Qualsiasi scheda degli ultimi anni aiuta tantissimo, anche una vecchia GTX 1650 da 4 GB.</p>
+</div>
+
+<div class="card b">
+<h3>2. La VRAM decide quanto grande può essere l'IA</h3>
+<p>Per andare a piena velocità, l'IA deve stare nella memoria propria della scheda (la VRAM). Quel PC fisso aveva 48 GB di RAM, e non è servito per un modello più grande: un'IA da 12 miliardi di parametri è entrata nella scheda da 8 GB per una domanda breve, poi si è bloccata appena la chat si è allungata, con la scheda quasi piena. <strong>Per l'IA, la VRAM batte la RAM.</strong> Però la VRAM non è velocità: quattro schede da 8 GB che abbiamo misurato hanno scritto da circa 11 token al secondo (RX 580) a 72 (RX 5700 XT). Per questo GreenCube controlla la tua scheda e sceglie un'IA che ci sta, non semplicemente la più grande.</p>
+</div>
+
+<div class="card y">
+<h3>3. Niente scheda grafica? Funziona lo stesso</h3>
+<p>Un normale portatile da 16 GB con sola grafica Intel ha scritto da 14 a 18 token al secondo con l'IA più piccola e ha finito una risposta completa (una spiegazione più tre domande d'esame) in circa 20 secondi. Va benissimo per studiare e scrivere. Funziona anche un portatile da 8 GB, a 5-7 token al secondo nelle chat reali, se le altre app gli lasciano un po' di memoria libera.</p>
+</div>
+
+<div class="card p">
+<h3>4. Le immagini sono la parte pesante</h3>
+<p>Creare un'immagine è molto più pesante che chattare. <strong>Da 8 a 9 secondi</strong> su una RTX 2080 Ti da 11 GB (la prima ha richiesto 83 mentre caricava), <strong>28 secondi</strong> su una RTX 3060 da 12 GB, circa un minuto su una RX 6600 da 8 GB, un minuto e mezzo su una GTX 1660 Super da 6 GB e circa <strong>2 minuti e mezzo</strong> sul portatile da 16 GB. Un portatile da 8 GB non può creare immagini: solo l'IA delle immagini ha bisogno di circa 7 GB.</p>
+</div>
+
+<h2 id="by-hand">Controlla il tuo PC in 30 secondi</h2>
+<ol class="steps">
+<li>Premi <strong>Ctrl + Maiusc + Esc</strong> per aprire Gestione attività.</li>
+<li>Vai su <strong>Prestazioni</strong>.</li>
+<li>Clicca su <strong>Memoria</strong>: il numero in alto a destra è la tua RAM.</li>
+<li>Clicca su <strong>GPU</strong>: il nome in alto a destra è la tua scheda, e <strong>Memoria GPU dedicata</strong> è la tua VRAM. Vedi solo grafica Intel? Allora non hai una scheda separata.</li>
+</ol>
+
+<h2>Come andrà il tuo PC</h2>
+<div class="expect">
+<div class="g"><h4>Scheda da 6 GB o più</h4><p>Veloce sulla maggior parte delle schede degli ultimi anni: da 37 a 76 token al secondo nei nostri test, molto più veloce di quanto leggi, e immagini in pochi secondi o fino a un minuto e mezzo. Un'eccezione: una vecchia RX 580 ha scritto circa 11, comunque più veloce di quanto leggi.</p></div>
+<div class="b"><h4>Scheda da 4 GB, 16 GB di RAM</h4><p>Bene. Circa 20 token al secondo nel nostro test.</p></div>
+<div class="y"><h4>Senza scheda, 16 GB di RAM</h4><p>Va bene per chattare e studiare, con un'IA più piccola. Le immagini richiedono un paio di minuti.</p></div>
+<div class="p"><h4>Senza scheda, 8 GB di RAM</h4><p>Funziona per chattare, lentamente. Chiudi prima le altre app. Niente immagini.</p></div>
+</div>
+
+<h2>Perché far girare l'IA sul tuo PC?</h2>
+<p>Perché è tua. Nessun limite di messaggi, nessun abbonamento mensile, e continua a funzionare senza internet: in treno, in montagna o in una biblioteca con un Wi-Fi pessimo. Non batterà le IA cloud più grandi in tutto, ma per studiare, scrivere, riassumere e le domande di tutti i giorni, un'IA sulla tua scheda è più che sufficiente, e non finisce mai.</p>

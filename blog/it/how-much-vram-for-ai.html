@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Quanta VRAM serve per l&#x27;IA? Perché il modello deve stare nella tua GPU | Blog di GreenCube</title>
+  <meta name="description" content="Quanta VRAM serve per l&#x27;IA? L&#x27;abbiamo misurato: un modello che esce dalla scheda grafica va 6 volte più lento e si blocca nelle chat lunghe. Come sceglierne uno che ci stia." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Quanta VRAM serve per l&#x27;IA? Perché il modello deve stare nella tua GPU | Blog di GreenCube" />
+  <meta property="og:description" content="Quanta VRAM serve per l&#x27;IA? L&#x27;abbiamo misurato: un modello che esce dalla scheda grafica va 6 volte più lento e si blocca nelle chat lunghe. Come sceglierne uno che ci stia." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/how-much-vram-for-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Quanta VRAM serve per l'IA? Perché il modello deve stare nella tua GPU", "description": "Quanta VRAM serve per l'IA? L'abbiamo misurato: un modello che esce dalla scheda grafica va 6 volte più lento e si blocca nelle chat lunghe. Come sceglierne uno che ci stia.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "it", "mainEntityOfPage": "https://blog.greencube.app/blog/it/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/it/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Cosa succede se un modello di IA non sta nella VRAM?", "acceptedAnswer": {"@type": "Answer", "text": "La parte che non ci sta gira dalla memoria normale, e tutto rallenta. Sulla nostra scheda da 8 GB, un modello con 28 dei suoi strati sulla scheda ha scritto a 5,9 token al secondo invece di 35,6 con tutti: 6 volte più lento."}}, {"@type": "Question", "name": "Devo usare il modello di IA più grande che la mia scheda riesce a caricare?", "acceptedAnswer": {"@type": "Answer", "text": "No. Lascia spazio per la conversazione. Un modello da 12 miliardi di parametri è entrato in una scheda da 8 GB per una domanda breve, poi si è bloccato appena la chat si è allungata. Un modello più piccolo che ci stava con margine è stato più veloce e non si è mai bloccato."}}, {"@type": "Question", "name": "Quanta VRAM devo lasciare libera?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube lascia libero circa 1,5 GB della scheda per la conversazione e per Windows. Senza quel margine, una scheda da 4 GB è rimasta senza memoria al primo messaggio."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/it/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/it/ai-environmental-impact">L'IA e il pianeta</a>
+    <a href="https://greencube.app/it/your-data">I tuoi dati</a>
+    <a href="https://greencube.app/it/mission">La nostra missione</a>
+    <a href="/blog/it" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">IT</summary><div class="lang-list"><a href="/blog/how-much-vram-for-ai" hreflang="en" lang="en">English</a><a href="/blog/es/cuanta-vram-para-ia" hreflang="es" lang="es">Español</a><a href="/blog/pt/how-much-vram-for-ai" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/how-much-vram-for-ai" hreflang="fr" lang="fr">Français</a><a href="/blog/de/how-much-vram-for-ai" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/how-much-vram-for-ai" hreflang="it" lang="it" aria-current="true">Italiano</a></div></details><a href="https://greencube.app/it/buy" class="nav-cta">Prendi GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/it">Blog di GreenCube</a></p>
+<h1>Quanta VRAM serve per l&#x27;IA? Perché il modello deve stare nella tua GPU</h1>
+<p class="byline">Di <a href="/blog/it/hector-gras">Hector Gras</a> &middot; 18 ottobre 2026</p>
+<div class="answer"><p><strong>Risposta breve:</strong> un'IA che sta tutta nella memoria della tua scheda grafica (la VRAM) è veloce. Una che ne esce è <strong>più lenta che non usare affatto la scheda</strong>, e può bloccarsi. Più piccola e tutta sulla scheda batte più grande e a metà.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>token al secondo con tutto il modello sulla scheda</span></div>
+<div class="stat p"><b>5,9</b><span>con una parte fuori dalla scheda: 6 volte più lento</span></div>
+<div class="stat y"><b>Blocco</b><span>quando un modello che ci sta a malapena incontra una chat lunga</span></div>
+</div>
+
+<h2>Il test</h2>
+<p>Un PC fisso con una AMD RX 5700 XT (8 GB di VRAM) e 48 GB di RAM. Abbiamo caricato un modello da 12 miliardi di parametri (Gemma 4 12B, circa 6,2 GB) e ne abbiamo messo più o meno sulla scheda, tutto in una sessione a settembre 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Quanto del modello era sulla scheda</th><th>Scrive (token/s)</th></tr></thead>
+<tbody>
+<tr><td>Tutto</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 dei suoi strati</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 dei suoi strati</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Per confronto: un modello più piccolo (Gemma 4 E4B) solo sul processore</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Quel modello più piccolo, tutto sulla scheda</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Cosa abbiamo imparato</h2>
+
+<div class="card g">
+<h3>1. Tutto o niente</h3>
+<p>Tenere anche solo una parte del modello fuori dalla scheda lo ha reso <strong>6 volte più lento</strong>. Con 20 strati sulla scheda era più lento di un modello più piccolo che girava senza scheda. Metà sulla scheda è il peggio di entrambi i mondi.</p>
+</div>
+
+<div class="card p">
+<h3>2. Il più grande non è il migliore</h3>
+<p>Il modello 12B è entrato tutto nella scheda da 8 GB, per una domanda breve. Man mano che la chat cresceva, si è bloccato ogni volta: la scheda non aveva quasi più spazio per la conversazione. Il modello più piccolo aveva circa 3 GB di margine e andava a 63-72 token al secondo.</p>
+</div>
+
+<div class="card b">
+<h3>3. Lascia spazio</h3>
+<p>Su una GTX 1650 da 4 GB, un modello da 4,2 GB è stato schiacciato in una scheda da 3,9 GB, e il primissimo messaggio è fallito con "memoria insufficiente". Ora GreenCube tiene libero circa <strong>1,5 GB della scheda</strong> per la chat e per Windows.</p>
+</div>
+
+<h2>Come scegliere un modello per la tua scheda</h2>
+<div class="expect">
+<div class="g"><h4>Controlla la tua VRAM</h4><p>Gestione attività &rarr; Prestazioni &rarr; GPU &rarr; Memoria GPU dedicata.</p></div>
+<div class="b"><h4>Dimensione del modello + 1,5 GB</h4><p>Il file del modello più circa 1,5 GB deve stare in quel numero.</p></div>
+<div class="y"><h4>Nel dubbio, più piccolo</h4><p>Un modello più piccolo tutto sulla scheda batte uno più grande a metà.</p></div>
+<div class="p"><h4>O lascia scegliere all'app</h4><p>GreenCube legge la tua scheda e sceglie un modello che ci sta con margine.</p></div>
+</div>
+
+<p>Velocità reali su 10 PC, da una GTX 1650 a una RTX 2080 Ti: <a href="/blog/it/can-my-pc-run-ai">guardale qui</a>.</p>
+<h2>Domande</h2>
+<div class="faq">
+<details><summary>Cosa succede se un modello di IA non sta nella VRAM?</summary><p>La parte che non ci sta gira dalla memoria normale, e tutto rallenta. Sulla nostra scheda da 8 GB, un modello con 28 dei suoi strati sulla scheda ha scritto a 5,9 token al secondo invece di 35,6 con tutti: 6 volte più lento.</p></details>
+<details><summary>Devo usare il modello di IA più grande che la mia scheda riesce a caricare?</summary><p>No. Lascia spazio per la conversazione. Un modello da 12 miliardi di parametri è entrato in una scheda da 8 GB per una domanda breve, poi si è bloccato appena la chat si è allungata. Un modello più piccolo che ci stava con margine è stato più veloce e non si è mai bloccato.</p></details>
+<details><summary>Quanta VRAM devo lasciare libera?</summary><p>GreenCube lascia libero circa 1,5 GB della scheda per la conversazione e per Windows. Senza quel margine, una scheda da 4 GB è rimasta senza memoria al primo messaggio.</p></details>
+</div>
+
+<div class="cta-box"><h3>La tua IA, sul tuo PC</h3><p>GreenCube gira sul tuo computer: nessun limite d'uso, nessun abbonamento, funziona senza internet. 9,99&nbsp;&euro;, pagati una volta.</p><a class="cta" href="https://greencube.app/it/buy">Prendi GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/it/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">Un'IA che è <em>tua,</em> non in affitto.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Prodotto</h3>
+        <ul>
+          <li><a href="https://greencube.app/it/buy">Prendi GreenCube</a></li>
+          <li><a href="https://greencube.app/it/what-you-get">Funzionerà sul mio computer?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Approfondisci</h3>
+        <ul>
+          <li><a href="/blog/it">Blog</a></li>
+          <li><a href="https://greencube.app/it/your-data">I tuoi dati</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT e i tuoi dati (EN)</a></li>
+          <li><a href="https://greencube.app/it/ai-environmental-impact">L'IA e il pianeta</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Azienda</h3>
+        <ul>
+          <li><a href="https://greencube.app/it/mission">La nostra missione</a></li>
+          <li><a href="mailto:support@greencube.app">Contatti</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Informativa sulla privacy (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Termini d'uso (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Fatto in Spagna.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

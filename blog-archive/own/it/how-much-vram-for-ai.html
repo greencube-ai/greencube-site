@@ -1,0 +1,65 @@
+<!--meta
+{
+ "title": "Quanta VRAM serve per l'IA? Perché il modello deve stare nella tua GPU",
+ "description": "Quanta VRAM serve per l'IA? L'abbiamo misurato: un modello che esce dalla scheda grafica va 6 volte più lento e si blocca nelle chat lunghe. Come sceglierne uno che ci stia.",
+ "date": "2026-10-18",
+ "stat": "6&times;",
+ "teaser": "Esci dalla VRAM e diventa 6 volte più lento.",
+ "rank": 6,
+ "lang": "it",
+ "alt": "how-much-vram-for-ai",
+ "faq": [
+  {"q": "Cosa succede se un modello di IA non sta nella VRAM?", "a": "La parte che non ci sta gira dalla memoria normale, e tutto rallenta. Sulla nostra scheda da 8 GB, un modello con 28 dei suoi strati sulla scheda ha scritto a 5,9 token al secondo invece di 35,6 con tutti: 6 volte più lento."},
+  {"q": "Devo usare il modello di IA più grande che la mia scheda riesce a caricare?", "a": "No. Lascia spazio per la conversazione. Un modello da 12 miliardi di parametri è entrato in una scheda da 8 GB per una domanda breve, poi si è bloccato appena la chat si è allungata. Un modello più piccolo che ci stava con margine è stato più veloce e non si è mai bloccato."},
+  {"q": "Quanta VRAM devo lasciare libera?", "a": "GreenCube lascia libero circa 1,5 GB della scheda per la conversazione e per Windows. Senza quel margine, una scheda da 4 GB è rimasta senza memoria al primo messaggio."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Risposta breve:</strong> un'IA che sta tutta nella memoria della tua scheda grafica (la VRAM) è veloce. Una che ne esce è <strong>più lenta che non usare affatto la scheda</strong>, e può bloccarsi. Più piccola e tutta sulla scheda batte più grande e a metà.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>35,6</b><span>token al secondo con tutto il modello sulla scheda</span></div>
+<div class="stat p"><b>5,9</b><span>con una parte fuori dalla scheda: 6 volte più lento</span></div>
+<div class="stat y"><b>Blocco</b><span>quando un modello che ci sta a malapena incontra una chat lunga</span></div>
+</div>
+
+<h2>Il test</h2>
+<p>Un PC fisso con una AMD RX 5700 XT (8 GB di VRAM) e 48 GB di RAM. Abbiamo caricato un modello da 12 miliardi di parametri (Gemma 4 12B, circa 6,2 GB) e ne abbiamo messo più o meno sulla scheda, tutto in una sessione a settembre 2026.</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>Quanto del modello era sulla scheda</th><th>Scrive (token/s)</th></tr></thead>
+<tbody>
+<tr><td>Tutto</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
+<tr><td>28 dei suoi strati</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
+<tr><td>20 dei suoi strati</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
+<tr><td><em>Per confronto: un modello più piccolo (Gemma 4 E4B) solo sul processore</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
+<tr><td><em>Quel modello più piccolo, tutto sulla scheda</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Cosa abbiamo imparato</h2>
+
+<div class="card g">
+<h3>1. Tutto o niente</h3>
+<p>Tenere anche solo una parte del modello fuori dalla scheda lo ha reso <strong>6 volte più lento</strong>. Con 20 strati sulla scheda era più lento di un modello più piccolo che girava senza scheda. Metà sulla scheda è il peggio di entrambi i mondi.</p>
+</div>
+
+<div class="card p">
+<h3>2. Il più grande non è il migliore</h3>
+<p>Il modello 12B è entrato tutto nella scheda da 8 GB, per una domanda breve. Man mano che la chat cresceva, si è bloccato ogni volta: la scheda non aveva quasi più spazio per la conversazione. Il modello più piccolo aveva circa 3 GB di margine e andava a 63-72 token al secondo.</p>
+</div>
+
+<div class="card b">
+<h3>3. Lascia spazio</h3>
+<p>Su una GTX 1650 da 4 GB, un modello da 4,2 GB è stato schiacciato in una scheda da 3,9 GB, e il primissimo messaggio è fallito con "memoria insufficiente". Ora GreenCube tiene libero circa <strong>1,5 GB della scheda</strong> per la chat e per Windows.</p>
+</div>
+
+<h2>Come scegliere un modello per la tua scheda</h2>
+<div class="expect">
+<div class="g"><h4>Controlla la tua VRAM</h4><p>Gestione attività &rarr; Prestazioni &rarr; GPU &rarr; Memoria GPU dedicata.</p></div>
+<div class="b"><h4>Dimensione del modello + 1,5 GB</h4><p>Il file del modello più circa 1,5 GB deve stare in quel numero.</p></div>
+<div class="y"><h4>Nel dubbio, più piccolo</h4><p>Un modello più piccolo tutto sulla scheda batte uno più grande a metà.</p></div>
+<div class="p"><h4>O lascia scegliere all'app</h4><p>GreenCube legge la tua scheda e sceglie un modello che ci sta con margine.</p></div>
+</div>
+
+<p>Velocità reali su {{pcs}} PC, da una GTX 1650 a una RTX 2080 Ti: <a href="/blog/can-my-pc-run-ai">guardale qui</a>.</p>

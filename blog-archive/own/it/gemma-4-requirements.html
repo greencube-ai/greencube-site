@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "Requisiti di Gemma 4: che PC serve per usarlo in locale",
+ "description": "Requisiti di Gemma 4 E2B, E4B e 12B, misurati su PC reali: quanta RAM e VRAM serve a ciascuno, e quanto va veloce su portatili e schede grafiche da gaming.",
+ "date": "2026-10-18",
+ "stat": "8 GB",
+ "teaser": "Da un portatile da 8 GB a un PC da gaming: quale Gemma 4 ci sta nel tuo.",
+ "rank": 2,
+ "lang": "it",
+ "alt": "gemma-4-requirements",
+ "faq": [
+  {"q": "Quali sono i requisiti minimi per usare Gemma 4 in locale?", "a": "Il più piccolo, Gemma 4 E2B (un file da 2,6 GB), ha girato su un portatile con 8 GB di RAM e senza scheda grafica, a 5-7 token al secondo nelle chat reali. Per partire gli servono un paio di GB di memoria libera."},
+  {"q": "Quanta VRAM serve a Gemma 4 E4B?", "a": "E4B è un file da 4,2 GB. Sta tutto in una scheda grafica da 6 GB, dove ha scritto da 35 a 38 token al secondo su una GTX 1660 Super. Su schede da 8 GB ha scritto da 56 a 72. Gira anche senza scheda con 16 GB di RAM, a circa 8 token al secondo."},
+  {"q": "Gemma 4 12B gira su una scheda grafica da 8 GB?", "a": "Per una domanda breve sì: da 20 a 35 token al secondo su una RX 5700 XT. Ma si è bloccato appena la conversazione si è allungata, perché la scheda non aveva quasi più spazio. Per lui vorremmo almeno 10 GB di VRAM."},
+  {"q": "Gemma 4 è gratuito?", "a": "Sì. Google ha rilasciato Gemma 4, inclusi E2B ed E4B, con licenza Apache 2.0, che permette l'uso commerciale."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Risposta breve:</strong> il piccolo <strong>Gemma 4 E2B</strong> gira su un <strong>portatile da 8 GB</strong>. <strong>E4B</strong> vuole 16 GB di RAM, o vola su qualsiasi <strong>scheda grafica da 6 GB in su</strong>. <strong>12B</strong> ha bisogno di <strong>10 GB di VRAM o più</strong> per reggere una vera conversazione.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>8 GB</b><span>di RAM bastano per Gemma 4 E2B, senza scheda grafica</span></div>
+<div class="stat b"><b>56&ndash;72</b><span>token al secondo per E4B su schede da gaming da 8 GB</span></div>
+<div class="stat p"><b>10 GB</b><span>di VRAM prima di fidarci del 12B in una chat lunga</span></div>
+</div>
+
+<h2>I requisiti di Gemma 4 in breve</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modello</th><th>Dimensione del file</th><th>Minimo che consigliamo</th><th>Ideale su</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>8 GB di RAM, senza scheda</td><td>Portatili</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>16 GB di RAM, o una scheda da 6 GB</td><td>PC da gaming, portatili da 16 GB</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>6,2 GB</td><td>10 GB di VRAM o più</td><td>Schede da 12 GB o più</td></tr>
+</tbody>
+</table></div>
+
+<h2>Velocità misurate</h2>
+<p>Quanto velocemente ciascuno scrive la risposta, in token al secondo (un token è un pezzo di parola; in italiano ne leggi circa 8 al secondo). Misurato con GreenCube a settembre e ottobre 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC</th><th>Modello</th><th>Scrive (token/s)</th></tr></thead>
+<tbody>
+<tr><td>PC fisso, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
+<tr><td>PC fisso, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
+<tr><td>PC fisso, scheda grafica da 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
+<tr><td>PC fisso, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
+<tr><td>PC fisso, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (solo chat brevi)</td></tr>
+<tr><td>PC fisso, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>circa 20</b></td></tr>
+<tr><td>Portatile, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
+<tr><td>Lo stesso portatile</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
+<tr><td>Portatile, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Cosa abbiamo imparato</h2>
+
+<div class="card g">
+<h3>1. E2B è il modello per i portatili</h3>
+<p>Su un portatile da 16 GB senza scheda grafica ha finito una risposta di studio completa in circa 20 secondi, dove E4B ne ha impiegati 112. In cinque domande veloci sui fatti non ha mai sbagliato. <a href="/blog/gemma-4-e2b-vs-e4b">E2B contro E4B, misurato.</a></p>
+</div>
+
+<div class="card b">
+<h3>2. E4B è il modello per i PC da gaming</h3>
+<p>Appena tutto il modello sta su una scheda grafica, E4B è <strong>da 7 a 9 volte più veloce</strong> che su un portatile, e le sue risposte sono migliori. Va bene qualsiasi scheda da 6 GB in su.</p>
+</div>
+
+<div class="card p">
+<h3>3. 12B ha bisogno di vera VRAM, non solo di RAM</h3>
+<p>Su una scheda da 8 GB, 12B ha risposto bene a una domanda breve, poi si è bloccato ogni volta che la chat cresceva. Quel PC aveva 48 GB di RAM, e non è servito. <a href="/blog/how-much-vram-for-ai">Perché il modello deve stare nella tua scheda.</a></p>
+</div>
+
+<h2>Quale Gemma 4 per il tuo PC?</h2>
+<div class="expect">
+<div class="g"><h4>Portatile da 8 GB</h4><p>E2B. Chiudi prima le altre app.</p></div>
+<div class="b"><h4>Portatile da 16 GB, senza scheda</h4><p>E2B per la velocità. E4B funziona, ma è lento.</p></div>
+<div class="y"><h4>PC da gaming, scheda da 6-8 GB</h4><p>E4B, tutto sulla scheda.</p></div>
+<div class="p"><h4>Scheda da 12 GB o più</h4><p>E4B è veloce; 12B diventa un'opzione.</p></div>
+</div>
+
+<p>Gemma 4 è rilasciato da Google con licenza Apache 2.0. GreenCube sceglie da solo quello giusto per il tuo PC. <a href="/blog/can-my-pc-run-ai">Guarda tutti i {{pcs}} PC che abbiamo misurato.</a></p>
