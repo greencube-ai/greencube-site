@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡", "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡", "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AI 模型裝不進顯示記憶體會怎樣？", "acceptedAnswer": {"@type": "Answer", "text": "裝不下的部分會在普通記憶體裡執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒輸出 5.9 個 token，而全部放在顯示卡上時是 35.6 個：慢了 6 倍。"}}, {"@type": "Question", "name": "應該執行顯示卡能載入的最大 AI 模型嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不應該。給對話留出空間。一個 120 億引數的模型在 8 GB 顯示卡上回答短問題沒問題，但對話一長就崩潰了。一個裝得下還有富餘的小模型更快，而且從沒崩潰過。"}}, {"@type": "Question", "name": "應該留出多少顯示記憶體？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube 會在顯示卡上留出約 1.5 GB 給對話和 Windows。沒有這部分空間時，一張 4 GB 顯示卡在第一條訊息時就記憶體不足了。"}}]}</script>
 </head>
 <body>
@@ -63,7 +63,7 @@
 <article>
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡</h1>
-<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
 <div class="answer"><p><strong>簡短回答：</strong>能完整裝進顯示卡顯示記憶體（VRAM）的 AI 跑得很快。溢位的 AI <strong>比完全不用顯示卡還慢</strong>，還可能崩潰。小而全部在顯示卡上，勝過大而只有一半在顯示卡上。</p></div>
 
 <div class="stats">

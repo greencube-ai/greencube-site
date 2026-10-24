@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI에 필요한 VRAM은? 모델이 그래픽카드에 다 들어가야 하는 이유", "description": "AI에 필요한 VRAM을 실측했습니다. 그래픽카드에서 넘친 모델은 6배 느려지고, 긴 채팅에서 다운됩니다. 들어가는 모델 고르는 법.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ko", "mainEntityOfPage": "https://blog.greencube.app/blog/ko/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ko/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI에 필요한 VRAM은? 모델이 그래픽카드에 다 들어가야 하는 이유", "description": "AI에 필요한 VRAM을 실측했습니다. 그래픽카드에서 넘친 모델은 6배 느려지고, 긴 채팅에서 다운됩니다. 들어가는 모델 고르는 법.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "ko", "mainEntityOfPage": "https://blog.greencube.app/blog/ko/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ko/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AI 모델이 VRAM에 다 들어가지 않으면 어떻게 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "들어가지 않은 부분은 일반 메모리에서 돌아가고, 전체가 느려집니다. 8 GB 카드에서 레이어 28개를 카드에 올린 모델은 초당 5.9 토큰으로, 전부 올렸을 때의 35.6보다 6배 느렸습니다."}}, {"@type": "Question", "name": "카드에 올릴 수 있는 가장 큰 AI 모델을 써야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "아닙니다. 대화를 위한 여유를 남기세요. 120억 파라미터 모델은 8 GB 카드에 짧은 질문까지는 들어갔지만, 채팅이 길어지자 다운됐습니다. 여유 있게 들어가는 더 작은 모델이 더 빨랐고 한 번도 다운되지 않았습니다."}}, {"@type": "Question", "name": "VRAM은 얼마나 비워 둬야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube는 대화와 Windows를 위해 카드의 약 1.5 GB를 비워 둡니다. 이 여유가 없으면 4 GB 카드는 첫 메시지에서 메모리가 부족했습니다."}}]}</script>
 </head>
 <body>
@@ -63,7 +63,7 @@
 <article>
 <p class="kicker"><a href="/blog/ko">GreenCube 블로그</a></p>
 <h1>AI에 필요한 VRAM은? 모델이 그래픽카드에 다 들어가야 하는 이유</h1>
-<p class="byline">글쓴이 <a href="/blog/ko/hector-gras">Hector Gras</a> &middot; 2026년 10월 18일</p>
+<p class="byline">글쓴이 <a href="/blog/ko/hector-gras">Hector Gras</a> &middot; 2026년 10월 23일</p>
 <div class="answer"><p><strong>짧은 답:</strong> 그래픽카드 메모리(VRAM)에 통째로 들어가는 AI는 빠릅니다. 넘치는 AI는 <strong>카드를 아예 안 쓰는 것보다 느려지고</strong>, 다운될 수도 있습니다. 작아도 카드에 전부 올라가는 쪽이, 커도 절반만 올라가는 쪽을 이깁니다.</p></div>
 
 <div class="stats">

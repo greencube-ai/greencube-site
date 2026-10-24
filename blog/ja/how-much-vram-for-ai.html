@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AIに必要なVRAMは？モデルをグラフィックボードに収めるべき理由", "description": "AIに必要なVRAMを実測しました。グラフィックボードからはみ出したモデルは6倍遅くなり、長いチャットでクラッシュします。収まるモデルの選び方。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-18", "dateModified": "2026-10-18", "inLanguage": "ja", "mainEntityOfPage": "https://blog.greencube.app/blog/ja/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ja/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AIに必要なVRAMは？モデルをグラフィックボードに収めるべき理由", "description": "AIに必要なVRAMを実測しました。グラフィックボードからはみ出したモデルは6倍遅くなり、長いチャットでクラッシュします。収まるモデルの選び方。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "ja", "mainEntityOfPage": "https://blog.greencube.app/blog/ja/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ja/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AIモデルがVRAMに収まらないとどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "収まらない部分は通常のメモリから動き、全体が遅くなります。8 GBのカードでは、28層をカードに載せたモデルは毎秒5.9トークンで、全層を載せたときの35.6より6倍遅くなりました。"}}, {"@type": "Question", "name": "カードに読み込める一番大きいAIモデルを使うべきですか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。会話のための余裕を残してください。120億パラメータのモデルは8 GBのカードに短い質問なら収まりましたが、チャットが長くなるとクラッシュしました。余裕を持って収まる小さいモデルのほうが速く、一度もクラッシュしませんでした。"}}, {"@type": "Question", "name": "VRAMはどれくらい空けておくべきですか？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCubeは、会話とWindowsのためにカードの約1.5 GBを空けておきます。この余裕がないと、4 GBのカードは最初のメッセージでメモリ不足になりました。"}}]}</script>
 </head>
 <body>
@@ -63,7 +63,7 @@
 <article>
 <p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
 <h1>AIに必要なVRAMは？モデルをグラフィックボードに収めるべき理由</h1>
-<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月18日</p>
+<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
 <div class="answer"><p><strong>短い答え：</strong>グラフィックボードのメモリ（VRAM）に丸ごと収まるAIは速く動きます。はみ出したAIは<strong>カードを使わないより遅くなり</strong>、クラッシュすることもあります。小さくて全部カードに載るほうが、大きくて半分しか載らないより勝ります。</p></div>
 
 <div class="stats">
