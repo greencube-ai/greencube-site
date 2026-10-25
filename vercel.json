@@ -38,6 +38,41 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/blog/:slug.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://blog.greencube.app/blog/:slug>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/blog/es/:slug.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://blog.greencube.app/blog/es/:slug>; rel=\"canonical\""
+        }
+      ]
     }
   ],
   "redirects": [

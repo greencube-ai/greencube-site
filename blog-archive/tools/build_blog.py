@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'i18n'))
 import facts
 import pc_pages
+import to_md
 from i18n import LANGS as SITE_LANGS, NAMES  # the main site's languages: (menu label, html lang, ...), and their own names
 WD = pc_pages.WD  # words/<lang>.json: every word the blog shows, one file per language
 BLOG_LANGS = [l for l in SITE_LANGS if l in WD]  # a language is on the blog once its words file exists
@@ -218,10 +219,11 @@ def lang_menu(lang, alts):
     return (f'<details class="lang-pick"><summary class="lang" aria-label="Language">{SITE_LANGS[lang][0]}</summary>'
             f'<div class="lang-list">{items}</div></details>')
 
-def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', alts=()):
+def page(title, desc, url, og_image, ld, content, og_type='article', lang='en', alts=(), md=False):
     top, bottom = SHELLS[lang]
     top = top.replace('<!-- LANGS -->', lang_menu(lang, alts))
     links = ''.join(f'\n  <link rel="alternate" hreflang="{l}" href="{u}" />' for l, u in alts)
+    if md: links += f'\n  <link rel="alternate" type="text/markdown" href="{url}.md" />'  # the same page as plain text, for AI agents
     top = (top.replace('<link rel="canonical" href="{{URL}}" />', '<link rel="canonical" href="{{URL}}" />' + links)
            .replace('{{TITLE}}', esc(title)).replace('{{DESC}}', esc(desc))
            .replace('{{URL}}', url).replace('{{OG_IMAGE}}', og_image).replace('{{OG_TYPE}}', og_type)
@@ -292,6 +294,7 @@ def post_url(lang, slug): return HOST + pc_pages.blog_path(lang, slug)
 AUTHOR = 'Hector Gras'  # our own tested posts are his; the archived BabyLoveGrowth posts stay signed GreenCube
 def author_url(lang): return post_url(lang, 'hector-gras')
 AUTHOR_PAGE = {lang: WD[lang]['author'] for lang in BLOG_LANGS}
+MD_LANGS = ('en', 'es')  # markdown copies for AI agents: our own English and Spanish pages only (Hector, 2026-10-25: "lean")
 own = []
 for lang in BLOG_LANGS:
     folder = f'{SRC}/own' if lang == 'en' else f'{SRC}/own/{lang}'
@@ -359,7 +362,11 @@ for lang, slug, meta, body in own:
         f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/{lang}/{slug}.html'
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts))
+    md = lang in MD_LANGS
+    open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts, md=md))
+    if md:  # a plain markdown copy at <address>.md (noindex via vercel.json, never in the sitemap)
+        open(path[:-5] + '.md', 'w', encoding='utf-8', newline='\n').write(
+            to_md.page(title, desc, url, body, published, meta.get('modified'), AUTHOR, faq))
     (listing if lang == 'en' else listings[lang]).append((slug, title, desc, published, meta.get('modified', published)))
     own_meta[(lang, slug)] = meta
 listings['en'] = listing
@@ -522,3 +529,9 @@ json.dump(report, open(f'{SRC}/build-report.json', 'w', encoding='utf-8'), inden
 mb = sum(os.path.getsize(f'{OUT}/images/{f}') for f in os.listdir(f'{OUT}/images')) / 1e6
 print(f'{len(listing)} posts, {len(os.listdir(OUT + "/images"))} images ({mb:.1f} MB), '
       f'{sum(1 for r in report if r["note"])} with an update note, {sum(1 for r in report if r["text_fixes"])} with text fixes')
+
+# llms.txt (site root, written by hand) must only point AI at blog pages that exist and are in search
+for path in sorted(set(re.findall(r'https://blog\.greencube\.app(/blog/[a-z0-9/-]+)(?![.\w/-])', open('llms.txt', encoding='utf-8').read()))):
+    slug = path.rstrip('/').split('/')[-1]
+    if not os.path.exists(f'{OUT}{path[5:]}.html') and not os.path.exists(f'{OUT}{path[5:]}/index.html') or slug in NOINDEX:
+        print(f'llms.txt problem: {path} is gone or not in search')
