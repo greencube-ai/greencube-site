@@ -77,7 +77,12 @@ CHECKED = {
 # Old "GreenCube vs X" pages written before our "test it first" rule: kept online for anyone with the link, but out of
 # search (noindex) and out of the sitemap until honest, dated fact tables replace them after 14 Nov (Hector, 2026-10-19)
 NOINDEX = {'ollama-vs-greencube', 'claude-vs-greencube', 'greencube-vs-claude', 'chatgpt-vs-greencube',
-           'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals', 'gemini-vs-greencube'}
+           'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals', 'gemini-vs-greencube',
+           # off-topic for gamer students, written by BabyLoveGrowth, ~0 clicks (Hector, 2026-10-25: "do A and B");
+           # none of them is among the topics Copilot cites us for (Bing AI Performance, 25 Oct)
+           'best-ai-for-lawyers', 'best-ai-for-researchers', 'best-ai-for-teachers', 'teacher-prompts-for-ai',
+           'school-ai-policy', 'ferpa-compliant-ai', 'hipaa-compliant-ai', 'gdpr-compliant-ai', 'offline-ai-for-business',
+           'air-gapped-ai', 'rag-vs-fine-tuning', 'llm-quantization', 'ai-for-homeschooling', 'best-ai-for-freelancers'}
 # Old posts merged into a stronger page on the same search (2026-10-23): not built, out of the sitemap and lists;
 # vercel.json sends their address to the target with a permanent redirect, so their ranking signals carry over
 MERGED = {'offline-ai-setup-windows': 'local-ai-chatbot-windows', 'install-local-ai': 'local-ai-chatbot-windows',
