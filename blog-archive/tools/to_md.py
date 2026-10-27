@@ -100,7 +100,7 @@ def blocks(n, base, depth=0):
                        + f'Interactive, on the page: {base}#{(h and h.attrs.get("id")) or k.attrs.get("id", "")}')
             continue
         if k.tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6'):
-            t = inline(k, base).strip()
+            t = inline(k, base).strip().replace('*', '')  # an italic word inside a heading is only styling
             if t: out.append('#' * int(k.tag[1]) + ' ' + t)
         elif k.tag == 'table':
             out += table(k, base)
@@ -140,7 +140,11 @@ def _wrap(k):
 def li(n, base, depth):
     head = Node('x', {}, None); head.kids = [k for k in n.kids if not (isinstance(k, Node) and k.tag in ('ul', 'ol'))]
     sub = Node('x', {}, None); sub.kids = [k for k in n.kids if isinstance(k, Node) and k.tag in ('ul', 'ol')]
-    text = ' '.join(blocks(head, base, depth)) if has_block(head) else inline(head, base).strip()
+    if has_block(head):  # a heading inside a list item reads as bold, not as a new section
+        text = ' '.join('**' + b.lstrip('#').strip() + '**' if b.startswith('#') else b for b in blocks(head, base, depth))
+    else:
+        text = inline(head, base).strip()
+    text = re.sub(r'^\*\*\d+\*\*\s*', '', text)  # a step number drawn on the page repeats the list's own number
     return text + ''.join('\n' + b for b in blocks(sub, base, depth + 1))
 
 

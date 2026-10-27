@@ -535,3 +535,16 @@ for path in sorted(set(re.findall(r'https://blog\.greencube\.app(/blog/[a-z0-9/-
     slug = path.rstrip('/').split('/')[-1]
     if not os.path.exists(f'{OUT}{path[5:]}.html') and not os.path.exists(f'{OUT}{path[5:]}/index.html') or slug in NOINDEX:
         print(f'llms.txt problem: {path} is gone or not in search')
+
+# markdown copies of the main site's long reads (English and Spanish), from the built pages' <main>
+for name in ('how-much-water-does-ai-use', 'ai-environmental-impact', 'does-chatgpt-train-on-your-data'):
+    for lang in MD_LANGS:
+        src = f'{name}.html' if lang == 'en' else f'{lang}/{name}.html'
+        if not os.path.exists(src): continue
+        h = open(src, encoding='utf-8').read()
+        title = html.unescape(re.search(r'<title>(.*?)</title>', h, re.S).group(1)).split(' | ')[0]
+        desc = html.unescape(re.search(r'<meta name="description" content="([^"]*)"', h).group(1))
+        url = re.search(r'<link rel="canonical" href="([^"]+)"', h).group(1)
+        pub, mod = (re.search(rf'"date{k}": *"([^"]+)"', h).group(1)[:10] for k in ('Published', 'Modified'))
+        open(src[:-5] + '.md', 'w', encoding='utf-8', newline='\n').write(
+            to_md.page(title, desc, url, re.search(r'<main[^>]*>(.*)</main>', h, re.S).group(1), pub, mod))
