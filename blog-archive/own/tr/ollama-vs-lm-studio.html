@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Ollama mı LM Studio mu: farkları ve hangisi daha hızlı (2026)",
+ "description": "Ollama ve LM Studio, kendi sayfalarından: açık kaynağa karşı kapalı kaynak, komut satırına karşı masaüstü uygulaması, Intel Mac ve Windows gereksinimleri, her birinin çevrim içine ne gönderdiği ve hızı neyin belirlediği. Ayrıca modeli senin yerine seçen seçenek.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "MIT'ye karşı kapalı kaynak",
+ "teaser": "Ollama ve LM Studio, kendi sayfalarında kontrol edildi: lisans, sistemler, gizlilik ve hız.",
+ "rank": 26,
+ "lang": "tr",
+ "alt": "ollama-vs-lm-studio",
+ "faq": [
+  {"q": "Ollama mı daha hızlı, LM Studio mu?", "a": "Aynı PC'de, aynı modelle ve aynı ayarlarla hızı çoğunlukla donanımın belirler: ikisi de altta llama.cpp ailesinden açık motorlar çalıştırır. Hızı en çok değiştiren şey, modelin tamamının ekran kartına sığıp sığmadığıdır. İki uygulamanın süresini yan yana ölçmedik, bu yüzden birinin daha hızlı olduğunu iddia etmeyeceğiz."},
+  {"q": "Ollama ile LM Studio arasındaki fark ne?", "a": "Ollama açık kaynaktır (MIT); bir komut satırı ve yerel bir API etrafında kuruludur ve Temmuz 2025'ten beri Windows ve Mac'te bir masaüstü sohbet penceresi de var. LM Studio kapalı kaynak bir masaüstü uygulamasıdır: sohbet penceresi, model arama ve yerel bir OpenAI tarzı sunucu; iş için de ücretsiz."},
+  {"q": "Yeni başlayanlar için hangisi daha iyi, Ollama mı LM Studio mu?", "a": "Modellere bir pencerede göz atıp indirmek istiyorsan LM Studio. Arka planda çalışan bir hizmet ve bir API isteyen geliştiriciler için Ollama daha basit. Hiç model seçmek istemiyorsan GreenCube (Windows, tek seferlik 9,99 €) PC'n için birini seçer."},
+  {"q": "Ollama ya da LM Studio Intel Mac'te çalışır mı?", "a": "Ollama'nın belgeleri Intel Mac'leri listeliyor: yalnızca işlemcide, macOS 14 veya daha yenisiyle. LM Studio, Apple çipli bir Mac ister."},
+  {"q": "Ollama ve LM Studio çevrim içine veri gönderir mi?", "a": "LM Studio, yerelde çalışırken hiçbir mesajın ya da belgenin gönderilmediğini ve telemetrisi olmadığını söylüyor; güncelleme kontrolleri ve model indirmeleri internete çıkar. Ollama, yerelde komutlarını görmediğini ama sınırlı cihaz ve kullanım üst verileri toplayabileceğini söylüyor. İkisi de, seçersen bulut modellerini kullanabilir."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> <strong>Ollama</strong> açık kaynaktır (MIT) ve geliştiriciler için yapılmıştır: bir komut satırı, yerel bir API ve Temmuz 2025'ten beri basit bir sohbet penceresi. <strong>LM Studio</strong> kapalı kaynak bir masaüstü uygulamasıdır; tam bir sohbet penceresi, model tarayıcısı ve yerel sunucusu var, iş için de ücretsiz. <strong>Hızı</strong> çoğunlukla donanımın ve modelin ekran kartına sığıp sığmadığı belirler, ikisinden hangisini seçtiğin değil.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>Ollama'nın lisansı; LM Studio kapalı kaynak</span></div>
+<div class="stat y"><b>Intel Mac</b><span>onu hâlâ yalnızca Ollama listeliyor (yalnızca işlemci, macOS 14+)</span></div>
+<div class="stat p"><b>6&times;</b><span>daha yavaş, hangi uygulamada olursa olsun, model ekran kartından taşınca</span></div>
+</div>
+
+<h2>Ollama ve LM Studio yan yana</h2>
+<p>Her uygulamanın kendi web sitesinden, belgelerinden ve gizlilik sayfasından; 21 ve 23 Ekim 2026'da kontrol edildi.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>Lisans</strong></td><td>Açık kaynak, MIT (<a href="https://ollama.com/download" rel="noopener">site</a>)</td><td>Kapalı kaynak; ücretsiz, iş için de (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td><strong>Nasıl kullanılır</strong></td><td>Komut satırı ve yerel API; Temmuz 2025'ten beri Windows ve Mac'te masaüstü sohbet penceresi (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Sohbet, model arama ve indirme ile yerel bir OpenAI tarzı sunucu içeren masaüstü uygulaması</td></tr>
+<tr><td><strong>Windows</strong></td><td>Evet</td><td>Evet; işlemcinin AVX2 desteklemesi gerekir (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">gereksinimler</a>)</td></tr>
+<tr><td><strong>Mac</strong></td><td>GPU ile Apple çipi ya da yalnızca işlemciyle Intel; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">belgeler</a>)</td><td>Yalnızca Apple çipi; macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>Evet</td><td>Evet</td></tr>
+<tr><td><strong>PDF'lerin</strong></td><td>Metin ya da PDF sürükleyip bırak</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">belgeler</a>)</td></tr>
+<tr><td><strong>Çevrim içine ne gider</strong></td><td>Yerel komutları görmez; sınırlı cihaz ve kullanım üst verileri toplayabilir (<a href="https://ollama.com/privacy" rel="noopener">gizlilik</a>)</td><td>Yerelde çalışırken mesaj ya da belge gönderilmez, telemetri yok; güncelleme kontrolleri ve model indirmeleri internete çıkar (<a href="https://lmstudio.ai/app-privacy" rel="noopener">gizlilik</a>)</td></tr>
+<tr><td><strong>Bulut seçeneği</strong></td><td>Ayda 20 $'dan başlayan bulut planları (<a href="https://ollama.com/pricing" rel="noopener">fiyatlar</a>)</td><td>Ek olarak ücretli bulut modelleri ve web araması</td></tr>
+</tbody>
+</table></div>
+
+<h2>Hangisi daha hızlı?</h2>
+<p>İkisi de altta llama.cpp ailesinden açık motorlar çalıştırır; bu yüzden aynı PC'de, aynı model dosyası ve aynı ayarlarla hızın çoğunu donanım belirler. İki uygulamanın süresini yan yana ölçmedik, bu yüzden bir kazanan ilan etmiyoruz. GreenCube ile {{pcs}} PC'de ölçtüğümüz şey ise hızı en çok neyin değiştirdiği:</p>
+<ul>
+<li><strong>Modelin ekran kartına sığıp sığmadığı.</strong> Aynı 12B model, tamamı 8 GB'lık bir karttayken saniyede 35,6 token, bir kısmı kartın dışındayken 5,9 token yazdı: <a href="/blog/how-much-vram-for-ai">6 kat daha yavaş</a>.</li>
+<li><strong>Kart mı, işlemci mi.</strong> Aynı masaüstünde aynı yapay zekâ: işlemcide saniyede 5 token, RX 5700 XT'de 72.</li>
+<li><strong>Kartın ne kadar yeni olduğu.</strong> Dört 8 GB'lık kart, aynı modelle saniyede yaklaşık 11 ile 72 token arasında yazdı.</li>
+</ul>
+<p>Yani hangi uygulamayı kullanırsan kullan, VRAM'ine yaklaşık 1,5 GB boş yer bırakarak sığan bir model seç: <a href="/blog/best-local-ai-models">PC'ne hangi model sığar</a>.</p>
+
+<h2>Hangisini seçmelisin?</h2>
+<div class="expect">
+<div class="g"><h4>Geliştiricisin</h4><p>Ollama: açık kaynak, arka planda çalışan bir hizmet ve diğer araçların bağlandığı bir API.</p></div>
+<div class="b"><h4>Bir pencere ve model tarayıcısı istiyorsun</h4><p>LM Studio: terminal olmadan göz at, indir ve sohbet et.</p></div>
+<div class="y"><h4>Intel Mac'in var</h4><p>Ollama, yalnızca işlemcide. LM Studio kurulmaz.</p></div>
+<div class="p"><h4>Model seçmek istemiyorsun</h4><p>GreenCube (Windows, tek seferlik 9,99 &euro;) kartını ve RAM'ini okur ve sığan modeli seçer. <a href="/blog/lm-studio-alternatives">Diğer LM Studio alternatifleri</a>.</p></div>
+</div>
+
+<h2>Nasıl kontrol ettik</h2>
+<p>21 ve 23 Ekim 2026'da Ollama'nın ve LM Studio'nun kendi web sitelerini, belgelerini, gereksinim ve gizlilik sayfalarını okuduk ve her bilginin bağlantısını verdik. Bu sayfadaki hızlar bu iki uygulamadan değil, kendi GreenCube testlerimizden geliyor. GreenCube'u biz yapıyoruz, bu yüzden herkesin kontrol edebileceği bilgilere bağlı kaldık.</p>

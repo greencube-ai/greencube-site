@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Ollama và LM Studio: khác nhau ở đâu và cái nào nhanh hơn (2026)",
+ "description": "So sánh Ollama và LM Studio theo chính trang của họ: mã nguồn mở hay mã nguồn đóng, dòng lệnh hay ứng dụng máy tính, yêu cầu với Mac Intel và Windows, mỗi bên gửi gì lên mạng, và điều gì quyết định tốc độ. Thêm lựa chọn tự chọn mô hình cho bạn.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "MIT vs mã đóng",
+ "teaser": "Ollama và LM Studio, kiểm tra trên chính trang của họ: giấy phép, hệ điều hành, quyền riêng tư và tốc độ.",
+ "rank": 26,
+ "lang": "vi",
+ "alt": "ollama-vs-lm-studio",
+ "faq": [
+  {"q": "Ollama hay LM Studio nhanh hơn?", "a": "Trên cùng một máy, với cùng mô hình và cùng cài đặt, tốc độ chủ yếu do phần cứng của bạn quyết định: cả hai đều chạy engine mở thuộc họ llama.cpp bên dưới. Điều thay đổi tốc độ nhiều nhất là mô hình có nằm trọn trên card đồ họa hay không. Chúng tôi chưa đo hai ứng dụng này cạnh nhau, nên sẽ không khẳng định cái nào nhanh hơn."},
+  {"q": "Ollama và LM Studio khác nhau thế nào?", "a": "Ollama là mã nguồn mở (MIT), xây dựng quanh dòng lệnh và một API cục bộ, có cửa sổ chat trên Windows và Mac từ tháng 7 năm 2025. LM Studio là ứng dụng máy tính mã nguồn đóng, có cửa sổ chat, tìm kiếm mô hình và một server cục bộ kiểu OpenAI, miễn phí kể cả cho công việc."},
+  {"q": "Người mới nên dùng Ollama hay LM Studio?", "a": "LM Studio, nếu bạn muốn duyệt và tải mô hình trong một cửa sổ. Ollama đơn giản hơn với lập trình viên cần một dịch vụ chạy nền và một API. Nếu bạn hoàn toàn không muốn tự chọn mô hình, GreenCube (Windows, €9,99 trả một lần) chọn giúp một mô hình hợp với máy bạn."},
+  {"q": "Ollama hay LM Studio có chạy trên Mac Intel không?", "a": "Tài liệu của Ollama có liệt kê Mac Intel, chỉ chạy trên bộ xử lý, với macOS 14 trở lên. LM Studio cần Mac có chip Apple."},
+  {"q": "Ollama và LM Studio có gửi dữ liệu lên mạng không?", "a": "LM Studio nói không có tin nhắn hay tài liệu nào được gửi đi khi chạy cục bộ và nó không có telemetry; việc kiểm tra cập nhật và tải mô hình thì cần lên mạng. Ollama nói nó không thấy nội dung bạn gõ khi chạy cục bộ nhưng có thể thu thập một ít metadata về thiết bị và cách dùng. Cả hai đều có thể dùng mô hình đám mây nếu bạn chọn."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Trả lời ngắn:</strong> <strong>Ollama</strong> là mã nguồn mở (MIT) và được làm cho lập trình viên: dòng lệnh, một API cục bộ, và từ tháng 7 năm 2025 có thêm một cửa sổ chat đơn giản. <strong>LM Studio</strong> là ứng dụng máy tính mã nguồn đóng, có cửa sổ chat đầy đủ, trình duyệt mô hình và server cục bộ, miễn phí kể cả cho công việc. <strong>Tốc độ</strong> chủ yếu do phần cứng của bạn và việc mô hình có vừa card đồ họa hay không quyết định, chứ không phải do bạn chọn cái nào trong hai.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>giấy phép của Ollama; LM Studio là mã nguồn đóng</span></div>
+<div class="stat y"><b>Mac Intel</b><span>chỉ Ollama còn liệt kê (chỉ bộ xử lý, macOS 14+)</span></div>
+<div class="stat p"><b>6&times;</b><span>chậm hơn trong bất kỳ ứng dụng nào khi mô hình tràn ra ngoài card đồ họa</span></div>
+</div>
+
+<h2>Ollama và LM Studio, đặt cạnh nhau</h2>
+<p>Lấy từ chính trang web, tài liệu và trang quyền riêng tư của mỗi ứng dụng, kiểm tra vào ngày 21 và 23 tháng 10, 2026.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>Giấy phép</strong></td><td>Mã nguồn mở, MIT (<a href="https://ollama.com/download" rel="noopener">trang</a>)</td><td>Mã nguồn đóng; miễn phí, kể cả cho công việc (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td><strong>Cách dùng</strong></td><td>Dòng lệnh và API cục bộ; cửa sổ chat trên Windows và Mac từ tháng 7 năm 2025 (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Ứng dụng máy tính có chat, tìm và tải mô hình, và server cục bộ kiểu OpenAI</td></tr>
+<tr><td><strong>Windows</strong></td><td>Có</td><td>Có; bộ xử lý cần hỗ trợ AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">yêu cầu</a>)</td></tr>
+<tr><td><strong>Mac</strong></td><td>Chip Apple có dùng GPU, hoặc Intel chỉ chạy trên bộ xử lý; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">tài liệu</a>)</td><td>Chỉ chip Apple; macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>Có</td><td>Có</td></tr>
+<tr><td><strong>PDF của bạn</strong></td><td>Kéo thả văn bản hoặc PDF</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">tài liệu</a>)</td></tr>
+<tr><td><strong>Những gì lên mạng</strong></td><td>Không thấy nội dung bạn gõ khi chạy cục bộ; có thể thu thập một ít metadata về thiết bị và cách dùng (<a href="https://ollama.com/privacy" rel="noopener">quyền riêng tư</a>)</td><td>Không gửi tin nhắn hay tài liệu khi chạy cục bộ, không có telemetry; kiểm tra cập nhật và tải mô hình thì lên mạng (<a href="https://lmstudio.ai/app-privacy" rel="noopener">quyền riêng tư</a>)</td></tr>
+<tr><td><strong>Tùy chọn đám mây</strong></td><td>Gói đám mây từ $20 mỗi tháng (<a href="https://ollama.com/pricing" rel="noopener">giá</a>)</td><td>Mô hình đám mây và tìm kiếm web trả phí, dạng tính năng thêm</td></tr>
+</tbody>
+</table></div>
+
+<h2>Cái nào nhanh hơn?</h2>
+<p>Cả hai đều chạy engine mở thuộc họ llama.cpp bên dưới, nên trên cùng một máy, với cùng tệp mô hình và cùng cài đặt, phần cứng quyết định phần lớn tốc độ. Chúng tôi chưa đo hai ứng dụng này cạnh nhau, nên sẽ không gọi tên bên thắng. Điều chúng tôi đã đo, trong GreenCube trên {{pcs}} máy, là những gì ảnh hưởng đến tốc độ nhiều nhất:</p>
+<ul>
+<li><strong>Mô hình có vừa card đồ họa không.</strong> Cùng một mô hình 12B viết 35,6 token mỗi giây khi nằm trọn trên card 8 GB, và 5,9 khi một phần nằm ngoài: <a href="/blog/how-much-vram-for-ai">chậm hơn 6 lần</a>.</li>
+<li><strong>Card hay bộ xử lý.</strong> Cùng AI trên cùng máy bàn: 5 token mỗi giây trên bộ xử lý, 72 trên RX 5700 XT.</li>
+<li><strong>Card mới đến đâu.</strong> Bốn card 8 GB cho từ khoảng 11 đến 72 token mỗi giây với cùng mô hình.</li>
+</ul>
+<p>Vì vậy, dùng ứng dụng nào cũng thế, hãy chọn mô hình vừa VRAM của bạn và còn dư khoảng 1,5 GB: <a href="/blog/best-local-ai-models">mô hình nào vừa máy bạn</a>.</p>
+
+<h2>Bạn nên chọn cái nào?</h2>
+<div class="expect">
+<div class="g"><h4>Bạn là lập trình viên</h4><p>Ollama: mã nguồn mở, một dịch vụ chạy nền và một API để các công cụ khác kết nối vào.</p></div>
+<div class="b"><h4>Bạn muốn một cửa sổ và trình duyệt mô hình</h4><p>LM Studio: duyệt, tải và chat mà không cần terminal.</p></div>
+<div class="y"><h4>Bạn có Mac Intel</h4><p>Ollama, chỉ chạy trên bộ xử lý. LM Studio không cài được.</p></div>
+<div class="p"><h4>Bạn không muốn tự chọn mô hình</h4><p>GreenCube (Windows, &euro;9,99 trả một lần) đọc card và RAM của bạn rồi chọn mô hình vừa. <a href="/blog/lm-studio-alternatives">Thêm các lựa chọn thay thế LM Studio</a>.</p></div>
+</div>
+
+<h2>Cách chúng tôi kiểm tra</h2>
+<p>Chúng tôi đọc chính trang web, tài liệu, trang yêu cầu hệ thống và trang quyền riêng tư của Ollama và LM Studio vào ngày 21 và 23 tháng 10, 2026, và gắn link cho từng thông tin. Tốc độ trong bài này đến từ bài thử GreenCube của chính chúng tôi, không phải từ hai ứng dụng này. Chúng tôi làm ra GreenCube, nên chỉ giữ những thông tin ai cũng kiểm tra được.</p>

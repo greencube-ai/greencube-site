@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "Het beste lokale AI-model voor je pc, op RAM en VRAM (gemeten)",
+ "description": "Het beste lokale AI-model is het grootste dat helemaal op je videokaart past, met ruimte over. Welk model voor laptops met 8 en 16 GB en voor kaarten van 4, 6, 8 en 12 GB, met echte snelheden van Gemma 4 E2B, E4B en 12B, gemeten op {{pcs}} pc's.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1,5 GB",
+ "teaser": "Welk lokaal AI-model op je pc past, op RAM en VRAM, met gemeten snelheden.",
+ "rank": 24,
+ "lang": "nl",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "Wat is het beste lokale AI-model?", "a": "Het grootste model dat helemaal op je videokaart past met ongeveer 1,5 GB over. Een kleiner model helemaal op de kaart wint van een groter model dat overloopt naar het RAM: in onze test draaide een model waarvan een deel naast een kaart van 8 GB stond 6 keer trager."},
+  {"q": "Wat is het beste lokale AI-model voor een laptop zonder videokaart?", "a": "Een klein model. Gemma 4 E2B (2,6 GB) schreef in echte chats 14 tot 18 tokens per seconde op een laptop met 16 GB en 5 tot 7 op een laptop met 8 GB; het grotere E4B deed 112 seconden over een antwoord dat E2B in 20 gaf."},
+  {"q": "Wat is het beste lokale AI-model voor een videokaart van 8 GB?", "a": "Een model van ongeveer 4 tot 5 GB, zoals Gemma 4 E4B (4,2 GB): het schreef 56 tot 72 tokens per seconde op gamingkaarten van 8 GB. Een model met 12 miljard parameters paste voor korte vragen, maar liep vast in lange chats."},
+  {"q": "Hoe weet ik of een model op mijn videokaart past?", "a": "Neem de grootte van het modelbestand en tel er ongeveer 1,5 GB bij op voor het gesprek en Windows. Is dat minder dan het toegewezen GPU-geheugen van je kaart (Taakbeheer, Prestaties, GPU), dan past het."},
+  {"q": "Moet ik zelf een model kiezen?", "a": "In gratis apps zoals LM Studio, Jan of Ollama wel. GreenCube leest je kaart en RAM uit en kiest voor jou het model dat past."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kort antwoord:</strong> het beste lokale AI-model voor <em>jouw</em> pc is het <strong>grootste dat helemaal op je videokaart past, met ongeveer 1,5 GB over</strong>. Geen kaart? Een <strong>klein model</strong> in je RAM. Een kleiner model helemaal op de kaart wint van een groter model dat overloopt: overlopen maten we als <strong>6 keer trager</strong>. Hieronder de keuze voor elk soort pc, met snelheden die we op {{pcs}} echte pc's hebben gemeten.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1,5 GB</b><span>het modelbestand plus ongeveer 1,5 GB moet in je VRAM passen</span></div>
+<div class="stat p"><b>6&times;</b><span>trager als een deel van het model niet op de kaart past</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>echte pc's die we hebben gemeten, van laptops tot gaming-desktops</span></div>
+</div>
+
+<h2>Het beste model voor je pc</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Jouw pc</th><th>Modelgrootte die past</th><th>Wat we hebben gemeten</th></tr></thead>
+<tbody>
+<tr><td>Laptop met 8 GB, geen videokaart</td><td>Klein, ongeveer 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> tokens/s in echte chats; sluit eerst andere apps</td></tr>
+<tr><td>Laptop met 16 GB, geen videokaart</td><td>Klein voor snelheid; ongeveer 4 GB werkt, maar traag</td><td>E2B <b>14&ndash;18</b> tokens/s; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Videokaart van 4 GB</td><td>Ongeveer 2&ndash;3 GB past helemaal; 4 GB loopt over</td><td>E4B (4,2 GB, deels in het RAM) ongeveer <b>20</b> tokens/s op een GTX 1650</td></tr>
+<tr><td>Videokaart van 6 GB</td><td>Ongeveer 4&ndash;4,5 GB</td><td>E4B <b>35&ndash;38</b> tokens/s op een GTX 1660 Super</td></tr>
+<tr><td>Videokaart van 8 GB</td><td>Ongeveer 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> op recente kaarten (ongeveer 11 op een oude RX 580)</td></tr>
+<tr><td>Videokaart vanaf 12 GB</td><td>Ongeveer 6&ndash;10 GB: modellen van de 12B-klasse</td><td>E4B <b>50&ndash;55</b> op 12 GB; 12B heeft minstens 10 GB nodig voor lange chats</td></tr>
+</tbody>
+</table></div>
+<p>Elke kaart met een eigen pagina: <a href="/blog/can-my-pc-run-ai">Draait AI op mijn pc?</a> Of typ je kaart in <a href="/blog/can-my-pc-run-ai#checker">de checker</a>.</p>
+
+<h2>Waarom "past" belangrijker is dan "het grootste"</h2>
+<div class="card p">
+<h3>Loopt het over, dan is het trager dan helemaal geen kaart</h3>
+<p>Op een RX 5700 XT met 8 GB schreef Gemma 4 12B 35,6 tokens per seconde helemaal op de kaart, 5,9 met een deel naast de kaart en 4,3 met nog minder erop: trager dan een kleiner model dat zonder kaart draait. <a href="/blog/how-much-vram-for-ai">De volledige VRAM-test</a>.</p>
+</div>
+<div class="card y">
+<h3>Past voor één vraag, loopt vast in een lange chat</h3>
+<p>Hetzelfde 12B-model paste voor een korte vraag op de kaart van 8 GB en liep daarna elke keer vast als de chat groeide: ook het gesprek heeft ruimte nodig. Daar is die 1,5 GB speling voor.</p>
+</div>
+<div class="card g">
+<h3>Klein is vaak goed genoeg</h3>
+<p>Op een laptop met 16 GB gaf Gemma 4 E2B in 20 seconden een volledig studieantwoord en had het 5 van de 5 snelle feitencontroles goed; E4B legde beter uit, maar deed er 112 seconden over. <a href="/blog/gemma-4-e2b-vs-e4b">E2B tegen E4B, gemeten</a>.</p>
+</div>
+
+<h2>De modellen die we hebben gemeten</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>Bestandsgrootte</th><th>Het best op</th><th>Licentie</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>Laptops, 8&ndash;16 GB RAM</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>Videokaarten met 6 GB of meer</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>ongeveer 6,4 GB</td><td>Videokaarten met 10&ndash;12 GB of meer</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>Dit zijn de bestanden die GreenCube meelevert en de enige die we hebben getimed, dus het zijn ook de enige waarvoor we snelheden geven. Andere modelfamilies volgen dezelfde regel: kijk naar de bestandsgrootte, tel er ongeveer 1,5 GB bij op en vergelijk met je VRAM. <a href="/blog/gemma-4-requirements">Systeemeisen van Gemma 4 in detail</a>.</p>
+
+<h2>Zo check je je VRAM</h2>
+<ol class="steps">
+<li>Druk op <strong>Ctrl + Shift + Esc</strong> om Taakbeheer te openen.</li>
+<li>Ga naar <strong>Prestaties</strong> en dan naar <strong>GPU</strong>.</li>
+<li><strong>Toegewezen GPU-geheugen</strong> is je VRAM. Geen toegewezen geheugen? Gebruik een klein model in het RAM.</li>
+</ol>
+<p>Wil je liever helemaal niet kiezen? GreenCube leest je kaart en RAM uit en kiest het model dat past, met ruimte over. Met gratis apps zoals LM Studio, Jan en Ollama kies je zelf: <a href="/blog/best-offline-ai-chatbot">12 apps vergeleken</a>.</p>

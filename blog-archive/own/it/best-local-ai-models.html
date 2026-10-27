@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "Il miglior modello di IA locale per il tuo PC, per RAM e VRAM (misurato)",
+ "description": "Il miglior modello di IA locale è il più grande che entra tutto nella tua scheda grafica con spazio di margine. Quale modello per portatili da 8 e 16 GB e per schede da 4, 6, 8 e 12 GB, con velocità reali di Gemma 4 E2B, E4B e 12B misurate su {{pcs}} PC.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1,5 GB",
+ "teaser": "Quale modello di IA locale sta nel tuo PC, per RAM e VRAM, con velocità misurate.",
+ "rank": 24,
+ "lang": "it",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "Qual è il miglior modello di IA locale?", "a": "Il modello più grande che entra tutto nella tua scheda grafica con circa 1,5 GB di margine. Un modello più piccolo tutto sulla scheda batte uno più grande che finisce in parte nella RAM: nel nostro test, un modello con una parte fuori da una scheda da 8 GB andava 6 volte più lento."},
+  {"q": "Qual è il miglior modello di IA locale per un portatile senza scheda grafica?", "a": "Uno piccolo. Gemma 4 E2B (2,6 GB) ha scritto da 14 a 18 token al secondo su un portatile da 16 GB e da 5 a 7 su un portatile da 8 GB, in chat reali; il più grande E4B ha impiegato 112 secondi per una risposta che E2B ha dato in 20."},
+  {"q": "Qual è il miglior modello di IA locale per una scheda grafica da 8 GB?", "a": "Un modello di circa 4-5 GB, come Gemma 4 E4B (4,2 GB): ha scritto da 56 a 72 token al secondo su schede da gaming da 8 GB. Un modello da 12 miliardi di parametri ci stava per le domande brevi, ma si bloccava nelle chat lunghe."},
+  {"q": "Come faccio a sapere se un modello sta nella mia scheda grafica?", "a": "Prendi la dimensione del file del modello e aggiungi circa 1,5 GB per la conversazione e per Windows. Se il risultato è minore della memoria GPU dedicata della tua scheda (Gestione attività, Prestazioni, GPU), ci sta."},
+  {"q": "Devo scegliere il modello da solo?", "a": "Nelle app gratuite come LM Studio, Jan o Ollama, sì. GreenCube legge la tua scheda e la tua RAM e sceglie per te il modello che ci sta."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Risposta breve:</strong> il miglior modello di IA locale per il <em>tuo</em> PC è il <strong>più grande che entra tutto nella tua scheda grafica, con circa 1,5 GB di margine</strong>. Niente scheda? Un <strong>modello piccolo</strong> nella tua RAM. Un modello più piccolo tutto sulla scheda batte uno più grande che ne esce: quando esce, lo abbiamo misurato <strong>6 volte più lento</strong>. Qui sotto, la scelta per ogni tipo di PC, con velocità che abbiamo misurato su {{pcs}} PC reali.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1,5 GB</b><span>il file del modello più circa 1,5 GB deve stare nella tua VRAM</span></div>
+<div class="stat p"><b>6&times;</b><span>più lento quando una parte del modello non entra nella scheda</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>PC reali che abbiamo misurato, dai portatili ai PC fissi da gaming</span></div>
+</div>
+
+<h2>Il miglior modello per il tuo PC</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Il tuo PC</th><th>Dimensione del modello che ci sta</th><th>Cosa abbiamo misurato</th></tr></thead>
+<tbody>
+<tr><td>Portatile da 8 GB, senza scheda grafica</td><td>Piccolo, circa 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> token/s in chat reali; prima chiudi le altre app</td></tr>
+<tr><td>Portatile da 16 GB, senza scheda grafica</td><td>Piccolo per la velocità; circa 4 GB funziona, ma lentamente</td><td>E2B <b>14&ndash;18</b> token/s; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Scheda grafica da 4 GB</td><td>Circa 2&ndash;3 GB ci stanno tutti; 4 GB escono</td><td>E4B (4,2 GB, in parte nella RAM) circa <b>20</b> token/s su una GTX 1650</td></tr>
+<tr><td>Scheda grafica da 6 GB</td><td>Circa 4&ndash;4,5 GB</td><td>E4B <b>35&ndash;38</b> token/s su una GTX 1660 Super</td></tr>
+<tr><td>Scheda grafica da 8 GB</td><td>Circa 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> sulle schede recenti (circa 11 su una vecchia RX 580)</td></tr>
+<tr><td>Scheda grafica da 12 GB in su</td><td>Circa 6&ndash;10 GB: modelli di classe 12B</td><td>E4B <b>50&ndash;55</b> su 12 GB; il 12B richiede almeno 10 GB per le chat lunghe</td></tr>
+</tbody>
+</table></div>
+<p>Ogni scheda con la sua pagina: <a href="/blog/can-my-pc-run-ai">L'IA gira sul mio PC?</a> Oppure scrivi la tua scheda nel <a href="/blog/can-my-pc-run-ai#checker">verificatore</a>.</p>
+
+<h2>Perché "ci sta" conta più di "il più grande"</h2>
+<div class="card p">
+<h3>Se esce dalla scheda, è più lento che senza scheda</h3>
+<p>Su una RX 5700 XT da 8 GB, Gemma 4 12B ha scritto 35,6 token al secondo tutto sulla scheda, 5,9 con una parte fuori dalla scheda e 4,3 con ancora meno sulla scheda: più lento di un modello più piccolo che gira senza scheda. <a href="/blog/how-much-vram-for-ai">Il test completo sulla VRAM</a>.</p>
+</div>
+<div class="card y">
+<h3>Ci sta per una domanda, si blocca in una chat lunga</h3>
+<p>Lo stesso modello 12B stava nella scheda da 8 GB per una domanda breve, poi si è bloccato ogni volta che la chat cresceva: anche la conversazione ha bisogno di spazio. Ecco a cosa serve il margine di 1,5 GB.</p>
+</div>
+<div class="card g">
+<h3>Spesso il piccolo basta</h3>
+<p>Su un portatile da 16 GB, Gemma 4 E2B ha dato una risposta di studio completa in 20 secondi e ha risposto bene a 5 controlli rapidi sui fatti su 5; E4B spiegava meglio, ma ha impiegato 112 secondi. <a href="/blog/gemma-4-e2b-vs-e4b">E2B contro E4B, misurati</a>.</p>
+</div>
+
+<h2>I modelli che abbiamo misurato</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modello</th><th>Dimensione del file</th><th>Ideale per</th><th>Licenza</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>Portatili, 8&ndash;16 GB di RAM</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>Schede grafiche da 6 GB o più</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>circa 6,4 GB</td><td>Schede grafiche da 10&ndash;12 GB o più</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>Questi sono i file che GreenCube include e gli unici che abbiamo cronometrato, quindi sono gli unici per cui diamo velocità. Le altre famiglie di modelli seguono la stessa regola: guarda la dimensione del file, aggiungi circa 1,5 GB e confronta con la tua VRAM. <a href="/blog/gemma-4-requirements">I requisiti di Gemma 4 nel dettaglio</a>.</p>
+
+<h2>Come controllare la tua VRAM</h2>
+<ol class="steps">
+<li>Premi <strong>Ctrl + Maiusc + Esc</strong> per aprire Gestione attività.</li>
+<li>Vai su <strong>Prestazioni</strong>, poi su <strong>GPU</strong>.</li>
+<li><strong>Memoria GPU dedicata</strong> è la tua VRAM. Niente memoria dedicata? Usa un modello piccolo nella RAM.</li>
+</ol>
+<p>Preferisci non scegliere affatto? GreenCube legge la tua scheda e la tua RAM e sceglie il modello che ci sta, con margine. Le app gratuite come LM Studio, Jan e Ollama ti lasciano scegliere da solo: <a href="/blog/best-offline-ai-chatbot">12 app a confronto</a>.</p>

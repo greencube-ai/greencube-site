@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "OllamaとLM Studioの違い、速いのはどっち？（2026年）",
+ "description": "OllamaとLM Studioを各公式ページで比較：オープンソースかクローズドソースか、コマンドラインかデスクトップアプリか、Intel MacとWindowsの動作要件、それぞれが何をオンラインに送るか、速さを決めるもの。モデルを選んでくれる選択肢も。",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "MIT対クローズド",
+ "teaser": "OllamaとLM Studioを公式ページで確認：ライセンス、対応OS、プライバシー、速さ。",
+ "rank": 26,
+ "lang": "ja",
+ "alt": "ollama-vs-lm-studio",
+ "faq": [
+  {"q": "OllamaとLM Studio、速いのはどちらですか？", "a": "同じPCで同じモデル、同じ設定なら、速さはほぼハードウェアで決まります。どちらも内部でllama.cpp系のオープンなエンジンを動かしているからです。速さを最も大きく変えるのは、モデルがグラフィックボードに丸ごと収まるかどうかです。2つのアプリを並べて計測してはいないので、どちらが速いとは言いません。"},
+  {"q": "OllamaとLM Studioの違いは何ですか？", "a": "Ollamaはオープンソース（MIT）で、コマンドラインとローカルAPIが中心です。2025年7月からはWindowsとMacにデスクトップのチャット画面もあります。LM Studioはクローズドソースのデスクトップアプリで、チャット画面、モデル検索、ローカルのOpenAI形式サーバーがあり、仕事でも無料で使えます。"},
+  {"q": "初心者にはOllamaとLM Studioのどちらが向いていますか？", "a": "画面の中でモデルを探してダウンロードしたいならLM Studio。バックグラウンドのサービスとAPIが欲しい開発者には、Ollamaのほうがシンプルです。モデルを選ぶこと自体をしたくないなら、GreenCube（Windows、9.99ユーロの買い切り）がPCに合うモデルを選びます。"},
+  {"q": "OllamaやLM StudioはIntel Macで動きますか？", "a": "OllamaのドキュメントにはIntel Macが載っています。CPUのみで、macOS 14以上です。LM StudioはAppleチップのMacが必要です。"},
+  {"q": "OllamaやLM Studioはデータをオンラインに送りますか？", "a": "LM Studioは、ローカルで動かしている間はメッセージも文書も送信されず、テレメトリーもないとしています。アップデートの確認とモデルのダウンロードはオンラインで行われます。Ollamaは、ローカルではプロンプトを見ないものの、デバイスと利用状況に関する限られたメタデータを収集する場合があるとしています。どちらも、自分で選べばクラウドのモデルを使えます。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：</strong><strong>Ollama</strong>はオープンソース（MIT）で、開発者向けに作られています。コマンドライン、ローカルAPI、そして2025年7月からはシンプルなチャット画面もあります。<strong>LM Studio</strong>はクローズドソースのデスクトップアプリで、本格的なチャット画面、モデルブラウザー、ローカルサーバーを備え、仕事でも無料で使えます。<strong>速さ</strong>は、2つのどちらを選ぶかではなく、主にハードウェアと、モデルがグラフィックボードに収まるかどうかで決まります。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>Ollamaのライセンス。LM Studioはクローズドソース</span></div>
+<div class="stat y"><b>Intel Mac</b><span>今も対応を記載しているのはOllamaだけ（CPUのみ、macOS 14以上）</span></div>
+<div class="stat p"><b>6&times;</b><span>モデルがグラフィックボードからはみ出したときの遅さ。どのアプリでも同じ</span></div>
+</div>
+
+<h2>OllamaとLM Studioの比較</h2>
+<p>各アプリの公式サイト、ドキュメント、プライバシーページから。2026年10月21日と23日に確認しました。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>ライセンス</strong></td><td>オープンソース、MIT（<a href="https://ollama.com/download" rel="noopener">サイト</a>）</td><td>クローズドソース。無料、仕事でも可（<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>）</td></tr>
+<tr><td><strong>使い方</strong></td><td>コマンドラインとローカルAPI。2025年7月からWindowsとMacにデスクトップのチャット画面も（<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>）</td><td>チャット、モデルの検索とダウンロード、ローカルのOpenAI形式サーバーを備えたデスクトップアプリ</td></tr>
+<tr><td><strong>Windows</strong></td><td>はい</td><td>はい。CPUがAVX2に対応している必要あり（<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">動作環境</a>）</td></tr>
+<tr><td><strong>Mac</strong></td><td>AppleチップならGPUを使用、IntelならCPUのみ。macOS 14以上（<a href="https://docs.ollama.com/macos" rel="noopener">ドキュメント</a>）</td><td>Appleチップのみ。macOS 14以上</td></tr>
+<tr><td><strong>Linux</strong></td><td>はい</td><td>はい</td></tr>
+<tr><td><strong>自分のPDF</strong></td><td>テキストやPDFをドラッグ＆ドロップ</td><td>PDF、DOCX、TXT（<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">ドキュメント</a>）</td></tr>
+<tr><td><strong>オンラインに出るもの</strong></td><td>ローカルのプロンプトは見ない。デバイスと利用状況の限られたメタデータを収集する場合あり（<a href="https://ollama.com/privacy" rel="noopener">プライバシー</a>）</td><td>ローカルではメッセージも文書も送信せず、テレメトリーなし。アップデートの確認とモデルのダウンロードはオンライン（<a href="https://lmstudio.ai/app-privacy" rel="noopener">プライバシー</a>）</td></tr>
+<tr><td><strong>クラウドの選択肢</strong></td><td>クラウドプランは月20ドルから（<a href="https://ollama.com/pricing" rel="noopener">料金</a>）</td><td>有料のクラウドモデルとウェブ検索を追加で利用可</td></tr>
+</tbody>
+</table></div>
+
+<h2>速いのはどっち？</h2>
+<p>どちらも内部でllama.cpp系のオープンなエンジンを動かしているので、同じPCで、同じモデルファイル、同じ設定なら、速さの大部分はハードウェアで決まります。2つのアプリを並べて計測してはいないので、勝者は決めません。実際に計測したのは、GreenCubeを使ったPC{{pcs}}台での、速さを最も大きく動かす要因です：</p>
+<ul>
+<li><strong>モデルがグラフィックボードに収まるか。</strong>同じ12Bモデルが、8 GBのカードに全部載せると毎秒35.6トークン、一部を外すと5.9で、<a href="/blog/how-much-vram-for-ai">6倍遅く</a>なりました。</li>
+<li><strong>カードかCPUか。</strong>同じデスクトップPCで同じAI：CPUで毎秒5トークン、RX 5700 XTで72。</li>
+<li><strong>カードの新しさ。</strong>同じモデルで、8 GBのカード4枚の速度は毎秒約11〜72トークンと大きく違いました。</li>
+</ul>
+<p>だから、どちらのアプリでも、VRAMに約1.5 GBの余裕を残して収まるモデルを選びましょう：<a href="/blog/best-local-ai-models">あなたのPCに合うモデル</a>。</p>
+
+<h2>どちらを選ぶべき？</h2>
+<div class="expect">
+<div class="g"><h4>開発者なら</h4><p>Ollama：オープンソースで、バックグラウンドのサービスと、他のツールがつながるAPIがあります。</p></div>
+<div class="b"><h4>画面とモデルブラウザーが欲しいなら</h4><p>LM Studio：ターミナルなしで、モデルを探し、ダウンロードし、チャットできます。</p></div>
+<div class="y"><h4>Intel Macを使っているなら</h4><p>Ollama（CPUのみ）。LM Studioはインストールできません。</p></div>
+<div class="p"><h4>モデルを選びたくないなら</h4><p>GreenCube（Windows、9.99ユーロの買い切り）がカードとRAMを読み取り、収まるモデルを選びます。<a href="/blog/lm-studio-alternatives">LM Studioの他の代替</a>。</p></div>
+</div>
+
+<h2>確認方法</h2>
+<p>OllamaとLM Studio自身のサイト、ドキュメント、動作環境、プライバシーページを2026年10月21日と23日に読み、それぞれの事実にリンクを付けました。このページの速度は、この2つのアプリではなく、私たち自身のGreenCubeのテストによるものです。私たちはGreenCubeを作っているので、誰でも確認できる事実だけに絞っています。</p>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>내 PC에 가장 좋은 로컬 AI 모델: RAM과 VRAM별로 실측 | GreenCube 블로그</title>
+  <meta name="description" content="가장 좋은 로컬 AI 모델은 그래픽카드에 여유 있게 통째로 들어가는 가장 큰 모델입니다. 8 GB와 16 GB 노트북, 4, 6, 8, 12 GB 카드별로 어떤 모델을 쓸지, 그리고 PC 10대에서 실측한 Gemma 4 E2B, E4B, 12B의 실제 속도." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="내 PC에 가장 좋은 로컬 AI 모델: RAM과 VRAM별로 실측 | GreenCube 블로그" />
+  <meta property="og:description" content="가장 좋은 로컬 AI 모델은 그래픽카드에 여유 있게 통째로 들어가는 가장 큰 모델입니다. 8 GB와 16 GB 노트북, 4, 6, 8, 12 GB 카드별로 어떤 모델을 쓸지, 그리고 PC 10대에서 실측한 Gemma 4 E2B, E4B, 12B의 실제 속도." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ko/best-local-ai-models" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ko/best-local-ai-models" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/best-local-ai-models" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/mejor-modelo-ia-local" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/best-local-ai-models" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/best-local-ai-models" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/best-local-ai-models" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/best-local-ai-models" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/best-local-ai-models" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/best-local-ai-models" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/best-local-ai-models" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/best-local-ai-models" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/best-local-ai-models" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/best-local-ai-models" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/best-local-ai-models" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/best-local-ai-models" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/best-local-ai-models" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/best-local-ai-models" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/best-local-ai-models" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/best-local-ai-models" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/best-local-ai-models" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/best-local-ai-models" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/best-local-ai-models" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "내 PC에 가장 좋은 로컬 AI 모델: RAM과 VRAM별로 실측", "description": "가장 좋은 로컬 AI 모델은 그래픽카드에 여유 있게 통째로 들어가는 가장 큰 모델입니다. 8 GB와 16 GB 노트북, 4, 6, 8, 12 GB 카드별로 어떤 모델을 쓸지, 그리고 PC 10대에서 실측한 Gemma 4 E2B, E4B, 12B의 실제 속도.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "inLanguage": "ko", "mainEntityOfPage": "https://blog.greencube.app/blog/ko/best-local-ai-models", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ko/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "가장 좋은 로컬 AI 모델은?", "acceptedAnswer": {"@type": "Answer", "text": "그래픽카드에 약 1.5 GB의 여유를 남기고 통째로 들어가는 가장 큰 모델입니다. 카드에 전부 올라가는 작은 모델이 RAM으로 넘치는 큰 모델을 이깁니다. 테스트에서 일부가 8 GB 카드 밖에 있던 모델은 6배 느렸습니다."}}, {"@type": "Question", "name": "그래픽카드 없는 노트북에 가장 좋은 로컬 AI 모델은?", "acceptedAnswer": {"@type": "Answer", "text": "작은 모델입니다. Gemma 4 E2B(2.6 GB)는 실제 채팅에서 16 GB 노트북에서 초당 14~18 토큰, 8 GB 노트북에서 5~7 토큰을 출력했습니다. 더 큰 E4B는 E2B가 20초 만에 낸 답에 112초가 걸렸습니다."}}, {"@type": "Question", "name": "8 GB 그래픽카드에 가장 좋은 로컬 AI 모델은?", "acceptedAnswer": {"@type": "Answer", "text": "약 4~5 GB 모델입니다. 예를 들어 Gemma 4 E4B(4.2 GB)는 8 GB 게이밍 카드에서 초당 56~72 토큰을 출력했습니다. 120억 파라미터 모델은 짧은 질문에는 들어갔지만 긴 채팅에서 다운됐습니다."}}, {"@type": "Question", "name": "모델이 내 그래픽카드에 들어가는지 어떻게 아나요?", "acceptedAnswer": {"@type": "Answer", "text": "모델 파일 크기에 대화와 Windows를 위한 약 1.5 GB를 더하세요. 그 값이 카드의 전용 GPU 메모리(작업 관리자, 성능, GPU)보다 작으면 들어갑니다."}}, {"@type": "Question", "name": "모델을 직접 골라야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "LM Studio, Jan, Ollama 같은 무료 앱에서는 그렇습니다. GreenCube는 그래픽카드와 RAM을 읽고 맞는 모델을 대신 골라 줍니다."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ko/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ko/ai-environmental-impact">AI와 지구</a>
+    <a href="https://greencube.app/ko/your-data">내 데이터</a>
+    <a href="https://greencube.app/ko/mission">우리의 미션</a>
+    <a href="/blog/ko" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">KO</summary><div class="lang-list"><a href="/blog/best-local-ai-models" hreflang="en" lang="en">English</a><a href="/blog/es/mejor-modelo-ia-local" hreflang="es" lang="es">Español</a><a href="/blog/pt/best-local-ai-models" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/best-local-ai-models" hreflang="fr" lang="fr">Français</a><a href="/blog/de/best-local-ai-models" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/best-local-ai-models" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/best-local-ai-models" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/best-local-ai-models" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/best-local-ai-models" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/best-local-ai-models" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/best-local-ai-models" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/best-local-ai-models" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/best-local-ai-models" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/best-local-ai-models" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/best-local-ai-models" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/best-local-ai-models" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/best-local-ai-models" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/best-local-ai-models" hreflang="ko" lang="ko" aria-current="true">한국어</a><a href="/blog/zh/best-local-ai-models" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="/blog/zh-tw/best-local-ai-models" hreflang="zh-TW" lang="zh-TW">繁體中文</a></div></details><a href="https://greencube.app/ko/buy" class="nav-cta">GreenCube 구매</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ko">GreenCube 블로그</a></p>
+<h1>내 PC에 가장 좋은 로컬 AI 모델: RAM과 VRAM별로 실측</h1>
+<p class="byline">글쓴이 <a href="/blog/ko/hector-gras">Hector Gras</a> &middot; 2026년 10월 28일</p>
+<div class="answer"><p><strong>짧은 답:</strong> <em>내</em> PC에 가장 좋은 로컬 AI 모델은 <strong>약 1.5 GB의 여유를 남기고 그래픽카드에 통째로 들어가는 가장 큰 모델</strong>입니다. 카드가 없다면? RAM에서 <strong>작은 모델</strong>을 돌리세요. 카드에 전부 올라가는 작은 모델이 넘치는 큰 모델을 이깁니다. 넘치면 <strong>6배 느려지는</strong> 것을 측정했습니다. 아래는 PC 종류별 추천과, 실제 PC 10대에서 측정한 속도입니다.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1.5 GB</b><span>모델 파일에 약 1.5 GB를 더한 값이 VRAM에 들어가야 함</span></div>
+<div class="stat p"><b>6&times;</b><span>모델 일부가 카드에 들어가지 않을 때 느려지는 정도</span></div>
+<div class="stat b"><b>10</b><span>측정한 실제 PC. 노트북부터 게이밍 데스크톱까지</span></div>
+</div>
+
+<h2>내 PC에 가장 좋은 모델</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>내 PC</th><th>들어가는 모델 크기</th><th>측정 결과</th></tr></thead>
+<tbody>
+<tr><td>그래픽카드 없는 8 GB 노트북</td><td>작은 모델, 약 2&ndash;3 GB(Gemma 4 E2B, 2.6 GB)</td><td>실제 채팅에서 <b>5&ndash;7</b> 토큰/초. 다른 앱은 먼저 닫기</td></tr>
+<tr><td>그래픽카드 없는 16 GB 노트북</td><td>속도를 원하면 작은 모델. 약 4 GB도 되지만 느림</td><td>E2B <b>14&ndash;18</b> 토큰/초, E4B <b>8&ndash;10</b></td></tr>
+<tr><td>4 GB 그래픽카드</td><td>약 2&ndash;3 GB면 통째로 들어감. 4 GB는 넘침</td><td>GTX 1650에서 E4B(4.2 GB, 일부는 RAM) 약 <b>20</b> 토큰/초</td></tr>
+<tr><td>6 GB 그래픽카드</td><td>약 4&ndash;4.5 GB</td><td>GTX 1660 Super에서 E4B <b>35&ndash;38</b> 토큰/초</td></tr>
+<tr><td>8 GB 그래픽카드</td><td>약 4&ndash;6 GB</td><td>최근 카드에서 E4B <b>56&ndash;72</b>(오래된 RX 580에서는 약 11)</td></tr>
+<tr><td>12 GB 이상 그래픽카드</td><td>약 6&ndash;10 GB: 12B급 모델</td><td>12 GB에서 E4B <b>50&ndash;55</b>. 12B로 긴 채팅을 하려면 10 GB 이상 필요</td></tr>
+</tbody>
+</table></div>
+<p>카드마다 따로 페이지가 있습니다: <a href="/blog/ko/can-my-pc-run-ai">내 PC에서 AI가 돌아갈까?</a> 아니면 <a href="/blog/ko/can-my-pc-run-ai#checker">검사기</a>에 카드 이름을 입력하세요.</p>
+
+<h2>왜 "가장 큰"보다 "들어가는"이 중요한가</h2>
+<div class="card p">
+<h3>넘치면 카드가 없을 때보다도 느림</h3>
+<p>8 GB RX 5700 XT에서 Gemma 4 12B는 카드에 전부 올라갔을 때 초당 35.6 토큰, 일부가 카드 밖에 있을 때 5.9 토큰, 카드에 더 적게 올렸을 때 4.3 토큰을 출력했습니다. 카드 없이 돌리는 더 작은 모델보다 느립니다. <a href="/blog/ko/how-much-vram-for-ai">VRAM 테스트 전체 보기</a>.</p>
+</div>
+<div class="card y">
+<h3>질문 하나에는 들어가도, 긴 채팅에서는 다운</h3>
+<p>같은 12B 모델은 짧은 질문까지는 8 GB 카드에 들어갔지만, 채팅이 길어질 때마다 다운됐습니다. 대화에도 공간이 필요하기 때문입니다. 1.5 GB의 여유는 그래서 남겨 둡니다.</p>
+</div>
+<div class="card g">
+<h3>작은 모델로 충분할 때가 많음</h3>
+<p>16 GB 노트북에서 Gemma 4 E2B는 완전한 공부용 답을 20초 만에 냈고, 짧은 사실 확인 5문제를 모두 맞혔습니다. E4B는 설명은 더 좋았지만 112초가 걸렸습니다. <a href="/blog/ko/gemma-4-e2b-vs-e4b">E2B vs E4B 실측</a>.</p>
+</div>
+
+<h2>측정한 모델</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>모델</th><th>파일 크기</th><th>잘 맞는 PC</th><th>라이선스</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>노트북, RAM 8&ndash;16 GB</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>6 GB 이상 그래픽카드</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>약 6.4 GB</td><td>10&ndash;12 GB 이상 그래픽카드</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>GreenCube가 제공하는 파일이자 저희가 시간을 잰 유일한 모델이라, 이 모델들의 속도만 적었습니다. 다른 모델 계열도 같은 규칙을 따릅니다. 파일 크기를 확인하고, 약 1.5 GB를 더하고, VRAM과 비교하세요. <a href="/blog/ko/gemma-4-requirements">Gemma 4 요구 사양 자세히 보기</a>.</p>
+
+<h2>VRAM 확인 방법</h2>
+<ol class="steps">
+<li><strong>Ctrl + Shift + Esc</strong>를 눌러 작업 관리자를 엽니다.</li>
+<li><strong>성능</strong>으로 간 다음 <strong>GPU</strong>를 클릭합니다.</li>
+<li><strong>전용 GPU 메모리</strong>가 VRAM입니다. 전용 메모리가 없다면? RAM에서 작은 모델을 쓰세요.</li>
+</ol>
+<p>직접 고르기 싫다면? GreenCube가 그래픽카드와 RAM을 읽고, 여유 있게 들어가는 모델을 고릅니다. LM Studio, Jan, Ollama 같은 무료 앱에서는 직접 고릅니다: <a href="/blog/ko/best-offline-ai-chatbot">앱 12개 비교</a>.</p>
+<h2>자주 묻는 질문</h2>
+<div class="faq">
+<details><summary>가장 좋은 로컬 AI 모델은?</summary><p>그래픽카드에 약 1.5 GB의 여유를 남기고 통째로 들어가는 가장 큰 모델입니다. 카드에 전부 올라가는 작은 모델이 RAM으로 넘치는 큰 모델을 이깁니다. 테스트에서 일부가 8 GB 카드 밖에 있던 모델은 6배 느렸습니다.</p></details>
+<details><summary>그래픽카드 없는 노트북에 가장 좋은 로컬 AI 모델은?</summary><p>작은 모델입니다. Gemma 4 E2B(2.6 GB)는 실제 채팅에서 16 GB 노트북에서 초당 14~18 토큰, 8 GB 노트북에서 5~7 토큰을 출력했습니다. 더 큰 E4B는 E2B가 20초 만에 낸 답에 112초가 걸렸습니다.</p></details>
+<details><summary>8 GB 그래픽카드에 가장 좋은 로컬 AI 모델은?</summary><p>약 4~5 GB 모델입니다. 예를 들어 Gemma 4 E4B(4.2 GB)는 8 GB 게이밍 카드에서 초당 56~72 토큰을 출력했습니다. 120억 파라미터 모델은 짧은 질문에는 들어갔지만 긴 채팅에서 다운됐습니다.</p></details>
+<details><summary>모델이 내 그래픽카드에 들어가는지 어떻게 아나요?</summary><p>모델 파일 크기에 대화와 Windows를 위한 약 1.5 GB를 더하세요. 그 값이 카드의 전용 GPU 메모리(작업 관리자, 성능, GPU)보다 작으면 들어갑니다.</p></details>
+<details><summary>모델을 직접 골라야 하나요?</summary><p>LM Studio, Jan, Ollama 같은 무료 앱에서는 그렇습니다. GreenCube는 그래픽카드와 RAM을 읽고 맞는 모델을 대신 골라 줍니다.</p></details>
+</div>
+
+<div class="cta-box"><h3>내 PC에서 돌아가는 나만의 AI</h3><p>GreenCube는 내 컴퓨터에서 돌아갑니다. 사용 제한 없음, 구독 없음, 인터넷 없이도 작동. &euro;9.99, 한 번 결제.</p><a class="cta" href="https://greencube.app/ko/buy">GreenCube 받기 <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ko/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">당신의 것인 <em>AI,</em> 빌리는 게 아님.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>제품</h3>
+        <ul>
+          <li><a href="https://greencube.app/ko/buy">GreenCube 구매</a></li>
+          <li><a href="https://greencube.app/ko/what-you-get">내 컴퓨터에서 돌아가나요?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>읽을거리</h3>
+        <ul>
+          <li><a href="/blog/ko">Blog</a></li>
+          <li><a href="https://greencube.app/ko/your-data">내 데이터</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT와 내 데이터 (EN)</a></li>
+          <li><a href="https://greencube.app/ko/ai-environmental-impact">AI와 지구</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>회사</h3>
+        <ul>
+          <li><a href="https://greencube.app/ko/mission">우리의 미션</a></li>
+          <li><a href="mailto:support@greencube.app">문의</a></li>
+          <li><a href="https://legal.greencube.app/privacy">개인정보 처리방침 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">이용약관 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 스페인에서 만듦.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

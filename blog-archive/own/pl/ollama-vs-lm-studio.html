@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Ollama kontra LM Studio: różnice i która aplikacja jest szybsza (2026)",
+ "description": "Ollama kontra LM Studio według ich własnych stron: open source kontra kod zamknięty, wiersz poleceń kontra aplikacja desktopowa, wymagania dla Maców z Intelem i Windows, co każda z nich wysyła do sieci i od czego zależy prędkość. Do tego opcja, która sama wybiera model za ciebie.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "MIT kontra zamknięty",
+ "teaser": "Ollama kontra LM Studio, sprawdzone na ich własnych stronach: licencja, systemy, prywatność i prędkość.",
+ "rank": 26,
+ "lang": "pl",
+ "alt": "ollama-vs-lm-studio",
+ "faq": [
+  {"q": "Co jest szybsze: Ollama czy LM Studio?", "a": "Na tym samym komputerze, z tym samym modelem i tymi samymi ustawieniami prędkość zależy głównie od sprzętu: pod spodem obie aplikacje działają na otwartych silnikach z rodziny llama.cpp. Najbardziej zmienia prędkość to, czy model mieści się w całości na karcie graficznej. Nie mierzyliśmy czasu obu aplikacji obok siebie, więc nie twierdzimy, że któraś jest szybsza."},
+  {"q": "Jaka jest różnica między Ollama a LM Studio?", "a": "Ollama ma otwarty kod (MIT) i opiera się na wierszu poleceń oraz lokalnym API; od lipca 2025 ma też okno czatu na Windows i Mac. LM Studio to aplikacja desktopowa z zamkniętym kodem, z oknem czatu, wyszukiwarką modeli i lokalnym serwerem w stylu OpenAI, za darmo także do pracy."},
+  {"q": "Co jest lepsze dla początkujących: Ollama czy LM Studio?", "a": "LM Studio, jeśli chcesz przeglądać i pobierać modele w okienku. Ollama jest prostszym wyborem dla programistów, którzy chcą usługi działającej w tle i API. Jeśli wolisz w ogóle nie wybierać modelu, GreenCube (Windows, 9,99 € jednorazowo) sam wybierze go dla twojego komputera."},
+  {"q": "Czy Ollama albo LM Studio działa na Macu z Intelem?", "a": "Dokumentacja Ollama wymienia Maki z Intelem, tylko na procesorze, z macOS 14 lub nowszym. LM Studio wymaga Maca z układem Apple."},
+  {"q": "Czy Ollama i LM Studio wysyłają dane do sieci?", "a": "LM Studio podaje, że przy działaniu lokalnym nie przesyła żadnych wiadomości ani dokumentów i nie ma telemetrii; sprawdzanie aktualizacji i pobieranie modeli trafia do sieci. Ollama podaje, że lokalnie nie widzi twoich promptów, ale może zbierać ograniczone metadane o urządzeniu i użyciu. Obie mogą korzystać z modeli w chmurze, jeśli je wybierzesz."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Krótka odpowiedź:</strong> <strong>Ollama</strong> to projekt open source (MIT) dla programistów: wiersz poleceń, lokalne API, a od lipca 2025 także proste okno czatu. <strong>LM Studio</strong> to aplikacja desktopowa z zamkniętym kodem, z pełnym oknem czatu, przeglądarką modeli i lokalnym serwerem, za darmo także do pracy. <strong>Prędkość</strong> zależy głównie od twojego sprzętu i od tego, czy model mieści się na karcie graficznej, a nie od tego, którą z tych dwóch aplikacji wybierzesz.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>licencja Ollama; LM Studio ma kod zamknięty</span></div>
+<div class="stat y"><b>Mac z Intelem</b><span>wymienia go już tylko Ollama (tylko procesor, macOS 14+)</span></div>
+<div class="stat p"><b>6&times;</b><span>wolniej w każdej aplikacji, gdy model wylewa się poza kartę graficzną</span></div>
+</div>
+
+<h2>Ollama kontra LM Studio w zestawieniu</h2>
+<p>Według własnej strony, dokumentacji i strony o prywatności każdej aplikacji, sprawdzone 21 i 23 października 2026 r.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>Licencja</strong></td><td>Open source, MIT (<a href="https://ollama.com/download" rel="noopener">strona</a>)</td><td>Kod zamknięty; za darmo, także do pracy (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td><strong>Jak się jej używa</strong></td><td>Wiersz poleceń i lokalne API; okno czatu na Windows i Mac od lipca 2025 (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Aplikacja desktopowa z czatem, wyszukiwaniem i pobieraniem modeli oraz lokalnym serwerem w stylu OpenAI</td></tr>
+<tr><td><strong>Windows</strong></td><td>Tak</td><td>Tak; procesor musi obsługiwać AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">wymagania</a>)</td></tr>
+<tr><td><strong>Mac</strong></td><td>Układ Apple z GPU albo Intel tylko z procesorem; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">dokumentacja</a>)</td><td>Tylko układ Apple; macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>Tak</td><td>Tak</td></tr>
+<tr><td><strong>Twoje PDF-y</strong></td><td>Przeciągnij i upuść tekst lub PDF-y</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">dokumentacja</a>)</td></tr>
+<tr><td><strong>Co trafia do sieci</strong></td><td>Nie widzi lokalnych promptów; może zbierać ograniczone metadane o urządzeniu i użyciu (<a href="https://ollama.com/privacy" rel="noopener">prywatność</a>)</td><td>Lokalnie nie wysyła wiadomości ani dokumentów, brak telemetrii; sprawdzanie aktualizacji i pobieranie modeli trafia do sieci (<a href="https://lmstudio.ai/app-privacy" rel="noopener">prywatność</a>)</td></tr>
+<tr><td><strong>Opcja w chmurze</strong></td><td>Plany w chmurze od 20 $ miesięcznie (<a href="https://ollama.com/pricing" rel="noopener">cennik</a>)</td><td>Płatne modele w chmurze i wyszukiwanie w sieci jako dodatki</td></tr>
+</tbody>
+</table></div>
+
+<h2>Która aplikacja jest szybsza?</h2>
+<p>Pod spodem obie działają na otwartych silnikach z rodziny llama.cpp, więc na tym samym komputerze, z tym samym plikiem modelu i tymi samymi ustawieniami o większości prędkości decyduje sprzęt. Nie mierzyliśmy czasu obu aplikacji obok siebie, więc nie wskazujemy zwycięzcy. Zmierzyliśmy natomiast, w GreenCube na {{pcs}} komputerach, co najbardziej wpływa na prędkość:</p>
+<ul>
+<li><strong>Czy model mieści się na karcie graficznej.</strong> Ten sam model 12B pisał 35,6 tokena na sekundę w całości na karcie z 8 GB i 5,9, gdy część była poza kartą: <a href="/blog/how-much-vram-for-ai">6 razy wolniej</a>.</li>
+<li><strong>Karta kontra procesor.</strong> To samo AI na tym samym komputerze stacjonarnym: 5 tokenów na sekundę na procesorze, 72 na RX 5700 XT.</li>
+<li><strong>Jak nowa jest karta.</strong> Cztery karty z 8 GB osiągały z tym samym modelem od około 11 do 72 tokenów na sekundę.</li>
+</ul>
+<p>Dlatego w każdej z tych aplikacji wybierz model, który mieści się w twojej VRAM z zapasem około 1,5 GB: <a href="/blog/best-local-ai-models">jaki model pasuje do twojego komputera</a>.</p>
+
+<h2>Co wybrać?</h2>
+<div class="expect">
+<div class="g"><h4>Jesteś programistą</h4><p>Ollama: open source, usługa działająca w tle i API, do którego podłączają się inne narzędzia.</p></div>
+<div class="b"><h4>Chcesz okna i przeglądarki modeli</h4><p>LM Studio: przeglądasz, pobierasz i czatujesz bez terminala.</p></div>
+<div class="y"><h4>Masz Maca z Intelem</h4><p>Ollama, tylko na procesorze. LM Studio się nie zainstaluje.</p></div>
+<div class="p"><h4>Nie chcesz wybierać modeli</h4><p>GreenCube (Windows, 9,99&nbsp;&euro; jednorazowo) odczytuje twoją kartę i RAM i wybiera model, który się zmieści. <a href="/blog/lm-studio-alternatives">Więcej alternatyw dla LM Studio</a>.</p></div>
+</div>
+
+<h2>Jak sprawdzaliśmy</h2>
+<p>21 i 23 października 2026 r. przeczytaliśmy własne strony, dokumentację, wymagania i strony o prywatności Ollama i LM Studio oraz podlinkowaliśmy każdy fakt. Prędkości na tej stronie pochodzą z naszych własnych testów GreenCube, a nie z tych dwóch aplikacji. Tworzymy GreenCube, więc trzymaliśmy się faktów, które każdy może sprawdzić.</p>

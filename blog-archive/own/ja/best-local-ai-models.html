@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "あなたのPCに最適なローカルAIモデル：RAMとVRAM別（実測）",
+ "description": "最適なローカルAIモデルは、グラフィックボードに余裕を持って丸ごと収まる一番大きいモデルです。8 GBと16 GBのノートPC、4、6、8、12 GBのカードにはどのモデルか。Gemma 4 E2B、E4B、12BをPC{{pcs}}台で計測した実際の速度付き。",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1.5 GB",
+ "teaser": "あなたのPCに収まるローカルAIモデルを、RAMとVRAM別に、実測の速度付きで。",
+ "rank": 24,
+ "lang": "ja",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "最適なローカルAIモデルはどれですか？", "a": "グラフィックボードに約1.5 GBの余裕を残して丸ごと収まる、一番大きいモデルです。全部カードに載る小さいモデルは、RAMにはみ出す大きいモデルに勝ります。私たちのテストでは、8 GBのカードから一部が外れたモデルは6倍遅くなりました。"},
+  {"q": "グラフィックボードのないノートPCに最適なローカルAIモデルは？", "a": "小さいモデルです。Gemma 4 E2B（2.6 GB）は実際のチャットで、16 GBのノートPCで毎秒14〜18トークン、8 GBのノートPCで5〜7トークンでした。大きいE4Bは、E2Bが20秒で出した答えに112秒かかりました。"},
+  {"q": "8 GBのグラフィックボードに最適なローカルAIモデルは？", "a": "Gemma 4 E4B（4.2 GB）のような約4〜5 GBのモデルです。8 GBのゲーミング向けカードで毎秒56〜72トークンでした。120億パラメータのモデルは短い質問なら収まりましたが、長いチャットでクラッシュしました。"},
+  {"q": "モデルがグラフィックボードに収まるかどうかは、どうやってわかりますか？", "a": "モデルのファイルサイズに、会話とWindowsのための約1.5 GBを足します。それがカードの専用 GPU メモリ（タスク マネージャー、パフォーマンス、GPU）より小さければ収まります。"},
+  {"q": "モデルは自分で選ぶ必要がありますか？", "a": "LM Studio、Jan、Ollamaのような無料アプリでは、はい。GreenCubeはカードとRAMを読み取り、収まるモデルを選んでくれます。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>短い答え：</strong><em>あなたの</em>PCに最適なローカルAIモデルは、<strong>グラフィックボードに約1.5 GBの余裕を残して丸ごと収まる、一番大きいモデル</strong>です。カードがない？それなら<strong>小さいモデル</strong>をRAMで。全部カードに載る小さいモデルは、はみ出す大きいモデルに勝ります。はみ出すと<strong>6倍遅く</strong>なることを計測しました。以下に、PCの種類ごとのおすすめと、実際のPC{{pcs}}台で計測した速度を載せます。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1.5 GB</b><span>モデルのファイルに約1.5 GBを足した量がVRAMに収まる必要あり</span></div>
+<div class="stat p"><b>6&times;</b><span>モデルの一部がカードに収まらないときの遅さ</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>計測した実際のPC。ノートPCからゲーミングPCまで</span></div>
+</div>
+
+<h2>あなたのPCに最適なモデル</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>あなたのPC</th><th>収まるモデルのサイズ</th><th>計測結果</th></tr></thead>
+<tbody>
+<tr><td>8 GBのノートPC、グラフィックボードなし</td><td>小さいモデル、約2&ndash;3 GB（Gemma 4 E2B、2.6 GB）</td><td>実際のチャットで<b>5&ndash;7</b> トークン/秒。先に他のアプリを閉じる</td></tr>
+<tr><td>16 GBのノートPC、グラフィックボードなし</td><td>速さなら小さいモデル。約4 GBも動くが遅い</td><td>E2B <b>14&ndash;18</b> トークン/秒、E4B <b>8&ndash;10</b></td></tr>
+<tr><td>4 GBのグラフィックボード</td><td>約2&ndash;3 GBなら丸ごと収まる。4 GBははみ出す</td><td>GTX 1650でE4B（4.2 GB、一部はRAM）約<b>20</b> トークン/秒</td></tr>
+<tr><td>6 GBのグラフィックボード</td><td>約4&ndash;4.5 GB</td><td>GTX 1660 SuperでE4B <b>35&ndash;38</b> トークン/秒</td></tr>
+<tr><td>8 GBのグラフィックボード</td><td>約4&ndash;6 GB</td><td>最近のカードでE4B <b>56&ndash;72</b>（古いRX 580では約11）</td></tr>
+<tr><td>12 GB以上のグラフィックボード</td><td>約6&ndash;10 GB：12Bクラスのモデル</td><td>12 GBでE4B <b>50&ndash;55</b>。長いチャットでは12Bに10 GB以上が必要</td></tr>
+</tbody>
+</table></div>
+<p>カードごとのページ：<a href="/blog/can-my-pc-run-ai">自分のPCでAIは動く？</a> または<a href="/blog/can-my-pc-run-ai#checker">チェッカー</a>にカード名を入力してください。</p>
+
+<h2>「一番大きい」より「収まる」が大事な理由</h2>
+<div class="card p">
+<h3>はみ出すと、カードなしより遅い</h3>
+<p>8 GBのRX 5700 XTで、Gemma 4 12Bは全部カードに載せると毎秒35.6トークン、一部をカードから外すと5.9、さらに載せる量を減らすと4.3でした。カードなしで動く小さいモデルより遅い数字です。<a href="/blog/how-much-vram-for-ai">VRAMテストの全容</a>。</p>
+</div>
+<div class="card y">
+<h3>質問1つなら収まるが、長いチャットでクラッシュ</h3>
+<p>同じ12Bモデルは、短い質問なら8 GBのカードに収まりましたが、チャットが長くなるたびにクラッシュしました。会話にも場所が必要なのです。1.5 GBの余裕はそのためです。</p>
+</div>
+<div class="card g">
+<h3>小さいモデルで十分なことが多い</h3>
+<p>16 GBのノートPCで、Gemma 4 E2Bは勉強用の完全な答えを20秒で出し、短い事実確認5問に5問とも正解しました。E4Bは説明がうまかったものの、112秒かかりました。<a href="/blog/gemma-4-e2b-vs-e4b">E2BとE4Bの実測比較</a>。</p>
+</div>
+
+<h2>計測したモデル</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>モデル</th><th>ファイルサイズ</th><th>向いているPC</th><th>ライセンス</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>ノートPC、RAM 8&ndash;16 GB</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>6 GB以上のグラフィックボード</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>約6.4 GB</td><td>10&ndash;12 GB以上のグラフィックボード</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>これらはGreenCubeに同梱しているファイルで、私たちが計測したのはこれだけなので、速度を載せているのもこれだけです。他のモデルファミリーも同じルールです：ファイルサイズを確認し、約1.5 GBを足して、VRAMと比べます。<a href="/blog/gemma-4-requirements">Gemma 4の動作要件の詳細</a>。</p>
+
+<h2>VRAMの確認方法</h2>
+<ol class="steps">
+<li><strong>Ctrl + Shift + Esc</strong>を押して、タスク マネージャーを開きます。</li>
+<li><strong>パフォーマンス</strong>から<strong>GPU</strong>を開きます。</li>
+<li><strong>専用 GPU メモリ</strong>がVRAMです。専用メモリがない場合は、小さいモデルをRAMで使いましょう。</li>
+</ol>
+<p>自分で選びたくない？GreenCubeがカードとRAMを読み取り、余裕を持って収まるモデルを選びます。LM Studio、Jan、Ollamaのような無料アプリでは、自分で選べます：<a href="/blog/best-offline-ai-chatbot">12のアプリを比較</a>。</p>

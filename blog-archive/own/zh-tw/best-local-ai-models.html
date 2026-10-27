@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "適合你電腦的最佳本地 AI 模型：按記憶體和顯示記憶體挑選（實測）",
+ "description": "最好的本地 AI 模型，是能完整裝進你的顯示卡、還留有餘量的最大那個。8 GB 和 16 GB 筆電，以及 4、6、8、12 GB 顯示卡分別該用哪個模型，附上 Gemma 4 E2B、E4B 和 12B 在 {{pcs}} 臺電腦上實測的真實速度。",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1.5 GB",
+ "teaser": "哪個本地 AI 模型適合你的電腦：按記憶體和顯示記憶體分，附實測速度。",
+ "rank": 24,
+ "lang": "zh-tw",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "最好的本地 AI 模型是哪個？", "a": "能完整裝進你的顯示卡、還剩約 1.5 GB 的最大模型。完全在顯示卡上的小模型，勝過溢位到記憶體的大模型：在我們的測試中，一個有部分不在 8 GB 顯示卡上的模型慢了 6 倍。"},
+  {"q": "沒有顯示卡的筆電，最好的本地 AI 模型是哪個？", "a": "小模型。在真實對話中，Gemma 4 E2B（2.6 GB）在 16 GB 筆電上每秒輸出 14 到 18 個 token，在 8 GB 筆電上每秒 5 到 7 個；同一個回答，E2B 用了 20 秒，更大的 E4B 用了 112 秒。"},
+  {"q": "8 GB 顯示卡最好的本地 AI 模型是哪個？", "a": "大約 4 到 5 GB 的模型，比如 Gemma 4 E4B（4.2 GB）：它在 8 GB 遊戲顯示卡上每秒輸出 56 到 72 個 token。一個 120 億參數的模型回答短問題時裝得下，但在長對話中崩潰了。"},
+  {"q": "怎麼知道一個模型能不能裝進我的顯示卡？", "a": "用模型檔案的大小，加上約 1.5 GB 留給對話和 Windows。如果結果小於你顯示卡的專用 GPU 記憶體（工作管理員、效能、GPU），就裝得下。"},
+  {"q": "需要我自己挑模型嗎？", "a": "在 LM Studio、Jan 或 Ollama 這樣的免費應用程式裡，需要。GreenCube 會讀取你的顯示卡和記憶體，替你挑選裝得下的模型。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>簡短回答：</strong>適合<em>你的</em>電腦的最佳本地 AI 模型，是<strong>能完整裝進你的顯示卡、還剩約 1.5 GB 的最大那個</strong>。沒有顯示卡？在記憶體裡跑一個<strong>小模型</strong>。完全在顯示卡上的小模型，勝過溢位的大模型：我們測得溢位會<strong>慢 6 倍</strong>。下面是每種電腦該選的模型，以及我們在 {{pcs}} 臺真實電腦上測到的速度。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1.5 GB</b><span>模型檔案加約 1.5 GB，必須裝得進你的顯示記憶體</span></div>
+<div class="stat p"><b>6&times;</b><span>模型有一部分裝不進顯示卡時，會慢這麼多</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>臺我們實測過的真實電腦，從筆電到遊戲桌上型電腦</span></div>
+</div>
+
+<h2>適合你電腦的最佳模型</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>你的電腦</th><th>裝得下的模型大小</th><th>我們測到的結果</th></tr></thead>
+<tbody>
+<tr><td>8 GB 筆電，無顯示卡</td><td>小模型，約 2&ndash;3 GB（Gemma 4 E2B，2.6 GB）</td><td>真實對話中 <b>5&ndash;7</b> token/秒；先關掉其他應用程式</td></tr>
+<tr><td>16 GB 筆電，無顯示卡</td><td>要速度就用小模型；約 4 GB 也能用，但慢</td><td>E2B <b>14&ndash;18</b> token/秒；E4B <b>8&ndash;10</b></td></tr>
+<tr><td>4 GB 顯示卡</td><td>約 2&ndash;3 GB 能完整裝下；4 GB 會溢位</td><td>E4B（4.2 GB，部分在記憶體裡）在 GTX 1650 上約 <b>20</b> token/秒</td></tr>
+<tr><td>6 GB 顯示卡</td><td>約 4&ndash;4.5 GB</td><td>E4B 在 GTX 1660 Super 上 <b>35&ndash;38</b> token/秒</td></tr>
+<tr><td>8 GB 顯示卡</td><td>約 4&ndash;6 GB</td><td>E4B 在較新的顯示卡上 <b>56&ndash;72</b>（在老的 RX 580 上約 11）</td></tr>
+<tr><td>12 GB 及以上顯示卡</td><td>約 6&ndash;10 GB：12B 級別的模型</td><td>E4B 在 12 GB 上 <b>50&ndash;55</b>；12B 要跑長對話需要 10 GB 以上</td></tr>
+</tbody>
+</table></div>
+<p>每張顯示卡都有自己的頁面：<a href="/blog/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a>或者在<a href="/blog/can-my-pc-run-ai#checker">檢測工具</a>裡輸入你的顯示卡。</p>
+
+<h2>為什麼“裝得下”比“最大”更重要</h2>
+<div class="card p">
+<h3>一旦溢位，比不用顯示卡還慢</h3>
+<p>在 8 GB 的 RX 5700 XT 上，Gemma 4 12B 完全在顯示卡上時每秒輸出 35.6 個 token，有一部分不在顯示卡上時是 5.9 個，放在顯示卡上的部分更少時只有 4.3 個：比不用顯示卡執行的小模型還慢。<a href="/blog/how-much-vram-for-ai">完整的顯示記憶體測試</a>。</p>
+</div>
+<div class="card y">
+<h3>回答一個問題裝得下，長對話就崩潰</h3>
+<p>同一個 12B 模型在 8 GB 顯示卡上回答短問題時裝得下，但對話一變長，每次都崩潰：對話也需要空間。那 1.5 GB 的餘量就是為此留的。</p>
+</div>
+<div class="card g">
+<h3>小模型往往就夠用</h3>
+<p>在 16 GB 筆電上，Gemma 4 E2B 20 秒就給出了完整的學習回答，5 道簡短事實題全部答對；E4B 講解得更好，但用了 112 秒。<a href="/blog/gemma-4-e2b-vs-e4b">E2B 和 E4B 實測對比</a>。</p>
+</div>
+
+<h2>我們實測過的模型</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>模型</th><th>檔案大小</th><th>最適合</th><th>授權條款</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>筆電，8&ndash;16 GB 記憶體</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>6 GB 及以上的顯示卡</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>約 6.4 GB</td><td>10&ndash;12 GB 及以上的顯示卡</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>這些是 GreenCube 自帶的模型檔案，也是我們唯一計過時的，所以我們只給出它們的速度。其他模型系列也遵循同樣的規則：看檔案大小，加約 1.5 GB，再和你的顯示記憶體比較。<a href="/blog/gemma-4-requirements">Gemma 4 配置要求詳解</a>。</p>
+
+<h2>如何檢視你的顯示記憶體</h2>
+<ol class="steps">
+<li>按 <strong>Ctrl + Shift + Esc</strong> 開啟工作管理員。</li>
+<li>進入<strong>效能</strong>，然後點選 <strong>GPU</strong>。</li>
+<li><strong>專用 GPU 記憶體</strong>就是你的顯示記憶體。沒有專用記憶體？那就在記憶體裡跑一個小模型。</li>
+</ol>
+<p>不想自己挑？GreenCube 會讀取你的顯示卡和記憶體，選一個裝得下還有餘量的模型。LM Studio、Jan 和 Ollama 這樣的免費應用程式讓你自己選：<a href="/blog/best-offline-ai-chatbot">12 款應用程式比較</a>。</p>

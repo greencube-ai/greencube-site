@@ -1,0 +1,63 @@
+<!--meta
+{
+ "title": "Ollama 和 LM Studio 对比：有什么区别，哪个更快（2026 年）",
+ "description": "Ollama 和 LM Studio 对比，信息来自它们自己的页面：开源还是闭源，命令行还是桌面应用，Intel Mac 和 Windows 的要求，各自会把什么发到网上，以及什么决定速度。另外还有一个替你挑选模型的选择。",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "MIT 对闭源",
+ "teaser": "Ollama 和 LM Studio，在它们自己的页面上核实：许可证、系统、隐私和速度。",
+ "rank": 26,
+ "lang": "zh",
+ "alt": "ollama-vs-lm-studio",
+ "faq": [
+  {"q": "Ollama 和 LM Studio 哪个更快？", "a": "在同一台电脑上，用同一个模型、同样的设置，速度主要由你的硬件决定：两者底层运行的都是开源的 llama.cpp 系列引擎。最影响速度的是模型能否完整装进你的显卡。我们没有把这两个应用放在一起计时，所以不会说哪个更快。"},
+  {"q": "Ollama 和 LM Studio 有什么区别？", "a": "Ollama 是开源的（MIT），围绕命令行和本地 API 打造，2025 年 7 月起在 Windows 和 Mac 上有桌面聊天窗口。LM Studio 是闭源的桌面应用，有聊天窗口、模型搜索和本地 OpenAI 式服务器，工作中也可免费使用。"},
+  {"q": "新手用 Ollama 还是 LM Studio 更好？", "a": "如果你想在窗口里浏览和下载模型，选 LM Studio。对想要后台服务和 API 的开发者来说，Ollama 更简单。如果你根本不想挑模型，GreenCube（Windows，一次付清 9.99 欧元）会为你的电脑选一个。"},
+  {"q": "Ollama 或 LM Studio 能在 Intel Mac 上用吗？", "a": "Ollama 的文档列出了 Intel Mac，只能用 CPU，需要 macOS 14 或更高版本。LM Studio 需要搭载 Apple 芯片的 Mac。"},
+  {"q": "Ollama 和 LM Studio 会把数据发到网上吗？", "a": "LM Studio 表示，在本地运行时不会传输任何消息或文档，也没有遥测；检查更新和下载模型会联网。Ollama 表示在本地它看不到你的提示词，但可能会收集有限的设备和使用元数据。如果你选择云端模型，两者也都能用。"}
+ ]
+}
+-->
+<div class="answer"><p><strong>简短回答：</strong><strong>Ollama</strong> 是开源的（MIT），为开发者打造：命令行、本地 API，以及 2025 年 7 月起的一个简单聊天窗口。<strong>LM Studio</strong> 是闭源的桌面应用，有完整的聊天窗口、模型浏览器和本地服务器，工作中也可免费使用。<strong>速度</strong>主要取决于你的硬件，以及模型能否装进你的显卡，而不是你选了这两个中的哪一个。</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>Ollama 的许可证；LM Studio 是闭源的</span></div>
+<div class="stat y"><b>Intel Mac</b><span>只有 Ollama 还列出了它（仅 CPU，macOS 14+）</span></div>
+<div class="stat p"><b>6&times;</b><span>模型溢出显卡时会慢这么多，用哪个应用都一样</span></div>
+</div>
+
+<h2>Ollama 和 LM Studio，并排比较</h2>
+<p>信息来自每个应用自己的网站、文档和隐私页面，核实于 2026 年 10 月 21 日和 23 日。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>许可证</strong></td><td>开源，MIT（<a href="https://ollama.com/download" rel="noopener">网站</a>）</td><td>闭源；免费，工作中也可用（<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>）</td></tr>
+<tr><td><strong>使用方式</strong></td><td>命令行和本地 API；2025 年 7 月起 Windows 和 Mac 上有桌面聊天窗口（<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>）</td><td>桌面应用，有聊天、模型搜索和下载，以及本地 OpenAI 式服务器</td></tr>
+<tr><td><strong>Windows</strong></td><td>是</td><td>是；处理器需要支持 AVX2（<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">系统要求</a>）</td></tr>
+<tr><td><strong>Mac</strong></td><td>Apple 芯片可用 GPU，Intel 只能用 CPU；macOS 14+（<a href="https://docs.ollama.com/macos" rel="noopener">文档</a>）</td><td>仅 Apple 芯片；macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>是</td><td>是</td></tr>
+<tr><td><strong>你的 PDF</strong></td><td>拖放文字或 PDF</td><td>PDF、DOCX、TXT（<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">文档</a>）</td></tr>
+<tr><td><strong>什么会联网</strong></td><td>看不到本地的提示词；可能收集有限的设备和使用元数据（<a href="https://ollama.com/privacy" rel="noopener">隐私</a>）</td><td>本地运行时不发送消息或文档，没有遥测；检查更新和下载模型会联网（<a href="https://lmstudio.ai/app-privacy" rel="noopener">隐私</a>）</td></tr>
+<tr><td><strong>云端选项</strong></td><td>云端套餐每月 20 美元起（<a href="https://ollama.com/pricing" rel="noopener">价格</a>）</td><td>付费云端模型和网页搜索，作为附加功能</td></tr>
+</tbody>
+</table></div>
+
+<h2>哪个更快？</h2>
+<p>两者底层运行的都是 llama.cpp 系列的开源引擎，所以在同一台电脑上，用同一个模型文件、同样的设置，速度大部分由硬件决定。我们没有把这两个应用放在一起计时，所以不会说谁赢。我们在 {{pcs}} 台电脑上用 GreenCube 实测过的，是最影响速度的几件事：</p>
+<ul>
+<li><strong>模型能否装进显卡。</strong>同一个 12B 模型完全在 8 GB 显卡上时每秒输出 35.6 个 token，有一部分不在显卡上时只有 5.9 个：<a href="/blog/how-much-vram-for-ai">慢了 6 倍</a>。</li>
+<li><strong>显卡还是处理器。</strong>同一台台式机上的同一个 AI：只用处理器每秒 5 个 token，用 RX 5700 XT 每秒 72 个。</li>
+<li><strong>显卡有多新。</strong>四张 8 GB 显卡跑同一个模型，从每秒约 11 个到 72 个 token 不等。</li>
+</ul>
+<p>所以无论用哪个应用，都要挑一个装进你的显存后还剩约 1.5 GB 的模型：<a href="/blog/best-local-ai-models">哪个模型适合你的电脑</a>。</p>
+
+<h2>该选哪个？</h2>
+<div class="expect">
+<div class="g"><h4>你是开发者</h4><p>Ollama：开源，有后台服务，还有能让其他工具接入的 API。</p></div>
+<div class="b"><h4>你想要窗口和模型浏览器</h4><p>LM Studio：不用终端，就能浏览、下载模型并聊天。</p></div>
+<div class="y"><h4>你用的是 Intel Mac</h4><p>Ollama，只能用处理器。LM Studio 装不上。</p></div>
+<div class="p"><h4>你不想自己挑模型</h4><p>GreenCube（Windows，一次付清 9.99 欧元）会读取你的显卡和内存，挑选装得下的模型。<a href="/blog/lm-studio-alternatives">更多 LM Studio 替代品</a>。</p></div>
+</div>
+
+<h2>我们怎么核实的</h2>
+<p>2026 年 10 月 21 日和 23 日，我们阅读了 Ollama 和 LM Studio 自己的网站、文档、系统要求和隐私页面，并为每条信息附上了链接。本页的速度来自我们自己的 GreenCube 测试，不是来自这两个应用。GreenCube 是我们做的，所以我们只写任何人都能核实的事实。</p>

@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "Model AI lokal terbaik untuk PC-mu, menurut RAM dan VRAM (diukur)",
+ "description": "Model AI lokal terbaik adalah model terbesar yang muat utuh di kartu grafismu dengan ruang tersisa. Model mana untuk laptop 8 GB dan 16 GB serta kartu 4, 6, 8, dan 12 GB, dengan kecepatan nyata Gemma 4 E2B, E4B, dan 12B yang diukur di {{pcs}} PC.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1,5 GB",
+ "teaser": "Model AI lokal mana yang cocok untuk PC-mu, menurut RAM dan VRAM, dengan kecepatan terukur.",
+ "rank": 24,
+ "lang": "id",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "Apa model AI lokal terbaik?", "a": "Model terbesar yang muat utuh di kartu grafismu dengan sisa sekitar 1,5 GB. Model lebih kecil yang utuh di kartu lebih baik daripada model lebih besar yang meluber ke RAM: dalam tes kami, model yang sebagiannya di luar kartu 8 GB berjalan 6 kali lebih lambat."},
+  {"q": "Apa model AI lokal terbaik untuk laptop tanpa kartu grafis?", "a": "Yang kecil. Gemma 4 E2B (2,6 GB) menulis 14 sampai 18 token per detik di laptop 16 GB dan 5 sampai 7 di laptop 8 GB dalam chat nyata; E4B yang lebih besar butuh 112 detik untuk jawaban yang diberikan E2B dalam 20 detik."},
+  {"q": "Apa model AI lokal terbaik untuk kartu grafis 8 GB?", "a": "Model sekitar 4 sampai 5 GB, seperti Gemma 4 E4B (4,2 GB): ia menulis 56 sampai 72 token per detik di kartu gaming 8 GB. Model 12 miliar parameter muat untuk pertanyaan pendek, tapi crash di chat panjang."},
+  {"q": "Bagaimana aku tahu sebuah model muat di kartu grafisku?", "a": "Ambil ukuran file model dan tambahkan sekitar 1,5 GB untuk percakapan dan Windows. Kalau hasilnya lebih kecil dari memori GPU khusus kartumu (Task Manager, Performance, GPU), berarti muat."},
+  {"q": "Apakah aku harus memilih model sendiri?", "a": "Di aplikasi gratis seperti LM Studio, Jan, atau Ollama, ya. GreenCube membaca kartu dan RAM-mu lalu memilihkan model yang muat untukmu."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Jawaban singkat:</strong> model AI lokal terbaik untuk PC <em>milikmu</em> adalah <strong>model terbesar yang muat utuh di kartu grafismu, dengan sisa sekitar 1,5 GB</strong>. Tidak punya kartu? <strong>Model kecil</strong> di RAM-mu. Model lebih kecil yang utuh di kartu lebih baik daripada model lebih besar yang meluber: kami mengukur luberan itu <strong>6 kali lebih lambat</strong>. Di bawah ini ada pilihan untuk setiap jenis PC, dengan kecepatan yang kami ukur di {{pcs}} PC sungguhan.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1,5 GB</b><span>file model ditambah sekitar 1,5 GB harus muat di VRAM-mu</span></div>
+<div class="stat p"><b>6&times;</b><span>lebih lambat saat sebagian model tidak muat di kartu</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>PC sungguhan yang kami ukur, dari laptop sampai desktop gaming</span></div>
+</div>
+
+<h2>Model terbaik untuk PC-mu</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC-mu</th><th>Ukuran model yang muat</th><th>Yang kami ukur</th></tr></thead>
+<tbody>
+<tr><td>Laptop 8 GB, tanpa kartu grafis</td><td>Kecil, sekitar 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> token/detik dalam chat nyata; tutup aplikasi lain dulu</td></tr>
+<tr><td>Laptop 16 GB, tanpa kartu grafis</td><td>Kecil demi kecepatan; sekitar 4 GB bisa jalan tapi lambat</td><td>E2B <b>14&ndash;18</b> token/detik; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Kartu grafis 4 GB</td><td>Sekitar 2&ndash;3 GB muat utuh; 4 GB meluber</td><td>E4B (4,2 GB, sebagian di RAM) sekitar <b>20</b> token/detik di GTX 1650</td></tr>
+<tr><td>Kartu grafis 6 GB</td><td>Sekitar 4&ndash;4,5 GB</td><td>E4B <b>35&ndash;38</b> token/detik di GTX 1660 Super</td></tr>
+<tr><td>Kartu grafis 8 GB</td><td>Sekitar 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> di kartu baru (sekitar 11 di RX 580 lama)</td></tr>
+<tr><td>Kartu grafis 12 GB+</td><td>Sekitar 6&ndash;10 GB: model kelas 12B</td><td>E4B <b>50&ndash;55</b> di 12 GB; 12B butuh 10 GB+ untuk chat panjang</td></tr>
+</tbody>
+</table></div>
+<p>Setiap kartu punya halamannya sendiri: <a href="/blog/can-my-pc-run-ai">Bisakah PC-ku menjalankan AI?</a> Atau ketik kartumu di <a href="/blog/can-my-pc-run-ai#checker">pemeriksa</a>.</p>
+
+<h2>Kenapa "muat" lebih penting daripada "terbesar"</h2>
+<div class="card p">
+<h3>Kalau meluber, lebih lambat daripada tanpa kartu sama sekali</h3>
+<p>Di RX 5700 XT 8 GB, Gemma 4 12B menulis 35,6 token per detik saat utuh di kartu, 5,9 saat sebagiannya di luar kartu, dan 4,3 saat bagian di kartu lebih sedikit lagi: lebih lambat daripada model lebih kecil yang berjalan tanpa kartu. <a href="/blog/how-much-vram-for-ai">Tes VRAM lengkap</a>.</p>
+</div>
+<div class="card y">
+<h3>Muat untuk satu pertanyaan, crash di chat panjang</h3>
+<p>Model 12B yang sama muat di kartu 8 GB untuk pertanyaan pendek, lalu crash setiap kali chat bertambah panjang: percakapan juga butuh ruang. Itulah gunanya sisa 1,5 GB tadi.</p>
+</div>
+<div class="card g">
+<h3>Kecil sering kali sudah cukup</h3>
+<p>Di laptop 16 GB, Gemma 4 E2B memberi jawaban belajar yang lengkap dalam 20 detik dan menjawab benar 5 dari 5 cek fakta singkat; E4B menjelaskan lebih baik tapi butuh 112 detik. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, diukur</a>.</p>
+</div>
+
+<h2>Model yang kami ukur</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>Ukuran file</th><th>Paling cocok di</th><th>Lisensi</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>Laptop, RAM 8&ndash;16 GB</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>Kartu grafis 6 GB atau lebih</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>sekitar 6,4 GB</td><td>Kartu grafis 10&ndash;12 GB atau lebih</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>Ini adalah file yang dibawa GreenCube dan satu-satunya yang sudah kami ukur waktunya, jadi hanya untuk file inilah kami memberi kecepatan. Keluarga model lain mengikuti aturan yang sama: cek ukuran file, tambahkan sekitar 1,5 GB, lalu bandingkan dengan VRAM-mu. <a href="/blog/gemma-4-requirements">Persyaratan Gemma 4 secara detail</a>.</p>
+
+<h2>Cara mengecek VRAM-mu</h2>
+<ol class="steps">
+<li>Tekan <strong>Ctrl + Shift + Esc</strong> untuk membuka Task Manager.</li>
+<li>Buka <strong>Performance</strong> (Kinerja), lalu <strong>GPU</strong>.</li>
+<li><strong>Dedicated GPU memory</strong> (Memori GPU khusus) adalah VRAM-mu. Tidak ada memori khusus? Pakai model kecil di RAM.</li>
+</ol>
+<p>Tidak mau memilih sama sekali? GreenCube membaca kartu dan RAM-mu lalu memilih model yang muat, dengan ruang tersisa. Aplikasi gratis seperti LM Studio, Jan, dan Ollama membiarkanmu memilih sendiri: <a href="/blog/best-offline-ai-chatbot">12 aplikasi dibandingkan</a>.</p>

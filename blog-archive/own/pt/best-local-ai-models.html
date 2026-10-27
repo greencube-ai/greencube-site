@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "Melhor modelo de IA local para o seu PC, por RAM e VRAM (medido)",
+ "description": "O melhor modelo de IA local é o maior que cabe inteiro na sua placa de vídeo, com folga. Qual modelo para notebooks de 8 GB e 16 GB e para placas de 4, 6, 8 e 12 GB, com velocidades reais do Gemma 4 E2B, E4B e 12B medidas em {{pcs}} PCs.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1,5 GB",
+ "teaser": "Qual modelo de IA local cabe no seu PC, por RAM e VRAM, com velocidades medidas.",
+ "rank": 24,
+ "lang": "pt",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "Qual é o melhor modelo de IA local?", "a": "O maior modelo que cabe inteiro na sua placa de vídeo com cerca de 1,5 GB de folga. Um modelo menor inteiro na placa ganha de um maior que transborda para a RAM: no nosso teste, um modelo com parte dele fora de uma placa de 8 GB rodou 6 vezes mais devagar."},
+  {"q": "Qual é o melhor modelo de IA local para um notebook sem placa de vídeo?", "a": "Um pequeno. O Gemma 4 E2B (2,6 GB) escreveu de 14 a 18 tokens por segundo num notebook de 16 GB e de 5 a 7 num notebook de 8 GB, em conversas reais; o E4B, maior, levou 112 segundos para uma resposta que o E2B deu em 20."},
+  {"q": "Qual é o melhor modelo de IA local para uma placa de vídeo de 8 GB?", "a": "Um modelo de cerca de 4 a 5 GB, como o Gemma 4 E4B (4,2 GB): ele escreveu de 56 a 72 tokens por segundo em placas gamer de 8 GB. Um modelo de 12 bilhões de parâmetros coube para perguntas curtas, mas travou em conversas longas."},
+  {"q": "Como sei se um modelo cabe na minha placa de vídeo?", "a": "Pegue o tamanho do arquivo do modelo e some cerca de 1,5 GB para a conversa e para o Windows. Se o total for menor que a memória dedicada da GPU da sua placa (Gerenciador de Tarefas, Desempenho, GPU), ele cabe."},
+  {"q": "Preciso escolher um modelo eu mesmo?", "a": "Em apps grátis como LM Studio, Jan ou Ollama, sim. O GreenCube lê a sua placa e a sua RAM e escolhe para você o modelo que cabe."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Resposta curta:</strong> o melhor modelo de IA local para o <em>seu</em> PC é o <strong>maior que cabe inteiro na sua placa de vídeo, com cerca de 1,5 GB de folga</strong>. Sem placa? Um <strong>modelo pequeno</strong> na sua RAM. Um modelo menor inteiro na placa ganha de um maior que transborda: medimos que transbordar deixa tudo <strong>6 vezes mais devagar</strong>. Abaixo, a escolha para cada tipo de PC, com velocidades que medimos em {{pcs}} PCs reais.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1,5 GB</b><span>o arquivo do modelo mais cerca de 1,5 GB precisa caber na sua VRAM</span></div>
+<div class="stat p"><b>6&times;</b><span>mais devagar quando parte do modelo não cabe na placa</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>PCs reais que medimos, de notebooks a PCs gamer</span></div>
+</div>
+
+<h2>O melhor modelo para o seu PC</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>O seu PC</th><th>Tamanho de modelo que cabe</th><th>O que medimos</th></tr></thead>
+<tbody>
+<tr><td>Notebook de 8 GB, sem placa de vídeo</td><td>Pequeno, cerca de 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> tokens/s em conversas reais; feche os outros apps antes</td></tr>
+<tr><td>Notebook de 16 GB, sem placa de vídeo</td><td>Pequeno, pela velocidade; cerca de 4 GB funciona, mas devagar</td><td>E2B <b>14&ndash;18</b> tokens/s; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Placa de vídeo de 4 GB</td><td>Cerca de 2&ndash;3 GB cabe inteiro; 4 GB transborda</td><td>E4B (4,2 GB, parte na RAM) cerca de <b>20</b> tokens/s numa GTX 1650</td></tr>
+<tr><td>Placa de vídeo de 6 GB</td><td>Cerca de 4&ndash;4,5 GB</td><td>E4B <b>35&ndash;38</b> tokens/s numa GTX 1660 Super</td></tr>
+<tr><td>Placa de vídeo de 8 GB</td><td>Cerca de 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> em placas recentes (cerca de 11 numa RX 580 antiga)</td></tr>
+<tr><td>Placa de vídeo de 12 GB+</td><td>Cerca de 6&ndash;10 GB: modelos da classe 12B</td><td>E4B <b>50&ndash;55</b> com 12 GB; o 12B precisa de 10 GB+ para conversas longas</td></tr>
+</tbody>
+</table></div>
+<p>Cada placa tem a sua própria página: <a href="/blog/can-my-pc-run-ai">Meu PC roda IA?</a> Ou digite a sua placa <a href="/blog/can-my-pc-run-ai#checker">no verificador</a>.</p>
+
+<h2>Por que "caber" importa mais que "ser o maior"</h2>
+<div class="card p">
+<h3>Transbordou, ficou mais lento do que sem placa nenhuma</h3>
+<p>Numa RX 5700 XT de 8 GB, o Gemma 4 12B escreveu 35,6 tokens por segundo inteiro na placa, 5,9 com parte dele fora da placa e 4,3 com menos ainda nela: mais devagar do que um modelo menor rodando sem placa. <a href="/blog/how-much-vram-for-ai">O teste completo de VRAM</a>.</p>
+</div>
+<div class="card y">
+<h3>Cabe para uma pergunta, trava numa conversa longa</h3>
+<p>O mesmo modelo 12B coube na placa de 8 GB para uma pergunta curta e depois travou todas as vezes que a conversa cresceu: a conversa também precisa de espaço. É para isso que servem os 1,5 GB de folga.</p>
+</div>
+<div class="card g">
+<h3>Pequeno muitas vezes basta</h3>
+<p>Num notebook de 16 GB, o Gemma 4 E2B deu uma resposta de estudo completa em 20 segundos e acertou 5 de 5 checagens rápidas de fatos; o E4B explicou melhor, mas levou 112 segundos. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, medidos</a>.</p>
+</div>
+
+<h2>Os modelos que medimos</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Modelo</th><th>Tamanho do arquivo</th><th>Melhor em</th><th>Licença</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>Notebooks, 8&ndash;16 GB de RAM</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>Placas de vídeo de 6 GB ou mais</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>cerca de 6,4 GB</td><td>Placas de vídeo de 10&ndash;12 GB ou mais</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>Esses são os arquivos que vêm com o GreenCube e os únicos que cronometramos, então são os únicos para os quais damos velocidades. Outras famílias de modelos seguem a mesma regra: veja o tamanho do arquivo, some cerca de 1,5 GB e compare com a sua VRAM. <a href="/blog/gemma-4-requirements">Os requisitos do Gemma 4 em detalhe</a>.</p>
+
+<h2>Como conferir a sua VRAM</h2>
+<ol class="steps">
+<li>Pressione <strong>Ctrl + Shift + Esc</strong> para abrir o Gerenciador de Tarefas.</li>
+<li>Vá em <strong>Desempenho</strong> e depois em <strong>GPU</strong>.</li>
+<li>A <strong>Memória dedicada da GPU</strong> é a sua VRAM. Sem memória dedicada? Use um modelo pequeno na RAM.</li>
+</ol>
+<p>Prefere nem escolher? O GreenCube lê a sua placa e a sua RAM e escolhe o modelo que cabe, com folga. Apps grátis como LM Studio, Jan e Ollama deixam você escolher sozinho: <a href="/blog/best-offline-ai-chatbot">12 apps comparados</a>.</p>

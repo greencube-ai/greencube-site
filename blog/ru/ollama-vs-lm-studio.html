@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ollama или LM Studio: в чём разница и что быстрее (2026) | Блог GreenCube</title>
+  <meta name="description" content="Ollama против LM Studio по их собственным страницам: открытый код против закрытого, командная строка против настольного приложения, требования для Mac на Intel и Windows, что каждое отправляет в сеть и от чего зависит скорость. Плюс вариант, который сам выбирает модель за вас." />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="Ollama или LM Studio: в чём разница и что быстрее (2026) | Блог GreenCube" />
+  <meta property="og:description" content="Ollama против LM Studio по их собственным страницам: открытый код против закрытого, командная строка против настольного приложения, требования для Mac на Intel и Windows, что каждое отправляет в сеть и от чего зависит скорость. Плюс вариант, который сам выбирает модель за вас." />
+  <meta property="og:url" content="https://blog.greencube.app/blog/ru/ollama-vs-lm-studio" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/ru/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/ollama-vs-lm-studio" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/ollama-vs-lm-studio" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Ollama или LM Studio: в чём разница и что быстрее (2026)", "description": "Ollama против LM Studio по их собственным страницам: открытый код против закрытого, командная строка против настольного приложения, требования для Mac на Intel и Windows, что каждое отправляет в сеть и от чего зависит скорость. Плюс вариант, который сам выбирает модель за вас.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "inLanguage": "ru", "mainEntityOfPage": "https://blog.greencube.app/blog/ru/ollama-vs-lm-studio", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/ru/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что быстрее, Ollama или LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "На одном и том же ПК с той же моделью и теми же настройками скорость в основном задаёт ваше железо: внутри оба работают на открытых движках семейства llama.cpp. Сильнее всего на скорость влияет то, помещается ли модель целиком на вашу видеокарту. Мы не замеряли эти два приложения рядом друг с другом, поэтому не будем утверждать, что одно из них быстрее."}}, {"@type": "Question", "name": "В чём разница между Ollama и LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "Ollama — открытый код (MIT), она построена вокруг командной строки и локального API, а с июля 2025 года у неё есть настольное окно чата на Windows и Mac. LM Studio — настольное приложение с закрытым кодом: окно чата, поиск моделей и локальный сервер в стиле OpenAI, бесплатно в том числе для работы."}}, {"@type": "Question", "name": "Что лучше для новичков, Ollama или LM Studio?", "acceptedAnswer": {"@type": "Answer", "text": "LM Studio, если вы хотите просматривать и скачивать модели в окне. Ollama проще для разработчиков, которым нужны фоновая служба и API. Если вы вообще не хотите выбирать модель, GreenCube (Windows, 9,99 € один раз) сам выберет её под ваш ПК."}}, {"@type": "Question", "name": "Работают ли Ollama и LM Studio на Mac с Intel?", "acceptedAnswer": {"@type": "Answer", "text": "В документации Ollama указаны Mac на Intel, только на процессоре, с macOS 14 или новее. LM Studio нужен Mac с чипом Apple."}}, {"@type": "Question", "name": "Отправляют ли Ollama и LM Studio данные в сеть?", "acceptedAnswer": {"@type": "Answer", "text": "LM Studio говорит, что при локальной работе никакие сообщения и документы не передаются и телеметрии нет; проверка обновлений и загрузка моделей идут через интернет. Ollama говорит, что не видит ваших запросов при локальной работе, но может собирать ограниченные метаданные об устройстве и использовании. Оба могут использовать облачные модели, если вы их выберете."}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/ru/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a>
+    <a href="https://greencube.app/ru/your-data">Ваши данные</a>
+    <a href="https://greencube.app/ru/mission">Наша миссия</a>
+    <a href="/blog/ru" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">RU</summary><div class="lang-list"><a href="/blog/ollama-vs-lm-studio" hreflang="en" lang="en">English</a><a href="/blog/es/ollama-vs-lm-studio" hreflang="es" lang="es">Español</a><a href="/blog/pt/ollama-vs-lm-studio" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/ollama-vs-lm-studio" hreflang="fr" lang="fr">Français</a><a href="/blog/de/ollama-vs-lm-studio" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/ollama-vs-lm-studio" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/ollama-vs-lm-studio" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/ollama-vs-lm-studio" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/ollama-vs-lm-studio" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/ollama-vs-lm-studio" hreflang="ru" lang="ru" aria-current="true">Русский</a><a href="/blog/uk/ollama-vs-lm-studio" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/ollama-vs-lm-studio" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/ollama-vs-lm-studio" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/ollama-vs-lm-studio" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/ollama-vs-lm-studio" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/ollama-vs-lm-studio" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/ollama-vs-lm-studio" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/ollama-vs-lm-studio" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/ollama-vs-lm-studio" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="/blog/zh-tw/ollama-vs-lm-studio" hreflang="zh-TW" lang="zh-TW">繁體中文</a></div></details><a href="https://greencube.app/ru/buy" class="nav-cta">Купить GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<h1>Ollama или LM Studio: в чём разница и что быстрее (2026)</h1>
+<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 28 октября 2026 г.</p>
+<div class="answer"><p><strong>Короткий ответ:</strong> <strong>Ollama</strong> — это открытый код (MIT), и она сделана для разработчиков: командная строка, локальный API и, с июля 2025 года, простое окно чата. <strong>LM Studio</strong> — настольное приложение с закрытым кодом, с полноценным окном чата, каталогом моделей и локальным сервером, бесплатное в том числе для работы. <strong>Скорость</strong> в основном задаёт ваше железо и то, помещается ли модель на видеокарту, а не то, какое из двух приложений вы выберете.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>MIT</b><span>лицензия Ollama; у LM Studio закрытый код</span></div>
+<div class="stat y"><b>Mac на Intel</b><span>его до сих пор указывает только Ollama (только процессор, macOS 14+)</span></div>
+<div class="stat p"><b>6&times;</b><span>медленнее в любом приложении, когда модель не помещается на видеокарту</span></div>
+</div>
+
+<h2>Ollama и LM Studio рядом</h2>
+<p>По собственным сайтам, документации и страницам о конфиденциальности каждого приложения, проверено 21 и 23 октября 2026 года.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
+<tbody>
+<tr><td><strong>Лицензия</strong></td><td>Открытый код, MIT (<a href="https://ollama.com/download" rel="noopener">сайт</a>)</td><td>Закрытый код; бесплатно, в том числе для работы (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td><strong>Как пользоваться</strong></td><td>Командная строка и локальный API; настольное окно чата на Windows и Mac с июля 2025 года (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Настольное приложение с чатом, поиском и загрузкой моделей и локальным сервером в стиле OpenAI</td></tr>
+<tr><td><strong>Windows</strong></td><td>Да</td><td>Да; процессору нужен AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">требования</a>)</td></tr>
+<tr><td><strong>Mac</strong></td><td>Чип Apple с ускорением на GPU или Intel только на процессоре; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">документация</a>)</td><td>Только чип Apple; macOS 14+</td></tr>
+<tr><td><strong>Linux</strong></td><td>Да</td><td>Да</td></tr>
+<tr><td><strong>Ваши PDF</strong></td><td>Перетаскивание текста или PDF</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">документация</a>)</td></tr>
+<tr><td><strong>Что уходит в сеть</strong></td><td>Не видит локальные запросы; может собирать ограниченные метаданные об устройстве и использовании (<a href="https://ollama.com/privacy" rel="noopener">конфиденциальность</a>)</td><td>При локальной работе сообщения и документы не отправляются, телеметрии нет; проверка обновлений и загрузка моделей идут через интернет (<a href="https://lmstudio.ai/app-privacy" rel="noopener">конфиденциальность</a>)</td></tr>
+<tr><td><strong>Облачный вариант</strong></td><td>Облачные планы от 20 $ в месяц (<a href="https://ollama.com/pricing" rel="noopener">цены</a>)</td><td>Платные облачные модели и веб-поиск как дополнения</td></tr>
+</tbody>
+</table></div>
+
+<h2>Что быстрее?</h2>
+<p>Внутри оба работают на открытых движках семейства llama.cpp, поэтому на одном и том же ПК, с тем же файлом модели и теми же настройками, большую часть скорости определяет железо. Мы не замеряли эти два приложения рядом друг с другом, поэтому не называем победителя. А вот что мы измерили в GreenCube на 10 ПК — что сильнее всего влияет на скорость:</p>
+<ul>
+<li><strong>Помещается ли модель на видеокарту.</strong> Одна и та же модель 12B писала 35,6 токена в секунду целиком на видеокарте с 8 ГБ и 5,9, когда часть её была вне видеокарты: <a href="/blog/ru/how-much-vram-for-ai">в 6 раз медленнее</a>.</li>
+<li><strong>Видеокарта или процессор.</strong> Один и тот же ИИ на одном и том же настольном ПК: 5 токенов в секунду на процессоре, 72 — на RX 5700 XT.</li>
+<li><strong>Насколько новая видеокарта.</strong> Четыре видеокарты с 8 ГБ на одной и той же модели давали примерно от 11 до 72 токенов в секунду.</li>
+</ul>
+<p>Так что в любом из двух приложений выбирайте модель, которая помещается в вашу видеопамять с запасом около 1,5 ГБ: <a href="/blog/ru/best-local-ai-models">какая модель подходит вашему ПК</a>.</p>
+
+<h2>Что выбрать?</h2>
+<div class="expect">
+<div class="g"><h4>Вы разработчик</h4><p>Ollama: открытый код, фоновая служба и API, к которому подключаются другие инструменты.</p></div>
+<div class="b"><h4>Вам нужны окно и каталог моделей</h4><p>LM Studio: просматривайте, скачивайте и общайтесь без терминала.</p></div>
+<div class="y"><h4>У вас Mac на Intel</h4><p>Ollama, только на процессоре. LM Studio не установится.</p></div>
+<div class="p"><h4>Вы не хотите выбирать модели</h4><p>GreenCube (Windows, 9,99 &euro; один раз) смотрит на вашу видеокарту и ОЗУ и выбирает модель, которая подходит. <a href="/blog/lm-studio-alternatives">Другие альтернативы LM Studio</a>.</p></div>
+</div>
+
+<h2>Как мы проверяли</h2>
+<p>21 и 23 октября 2026 года мы прочитали собственные сайты, документацию, требования и страницы о конфиденциальности Ollama и LM Studio и дали ссылку на каждый факт. Скорость на этой странице — из наших собственных тестов GreenCube, а не из этих двух приложений. GreenCube делаем мы, поэтому держались фактов, которые может проверить любой.</p>
+<h2>Вопросы</h2>
+<div class="faq">
+<details><summary>Что быстрее, Ollama или LM Studio?</summary><p>На одном и том же ПК с той же моделью и теми же настройками скорость в основном задаёт ваше железо: внутри оба работают на открытых движках семейства llama.cpp. Сильнее всего на скорость влияет то, помещается ли модель целиком на вашу видеокарту. Мы не замеряли эти два приложения рядом друг с другом, поэтому не будем утверждать, что одно из них быстрее.</p></details>
+<details><summary>В чём разница между Ollama и LM Studio?</summary><p>Ollama — открытый код (MIT), она построена вокруг командной строки и локального API, а с июля 2025 года у неё есть настольное окно чата на Windows и Mac. LM Studio — настольное приложение с закрытым кодом: окно чата, поиск моделей и локальный сервер в стиле OpenAI, бесплатно в том числе для работы.</p></details>
+<details><summary>Что лучше для новичков, Ollama или LM Studio?</summary><p>LM Studio, если вы хотите просматривать и скачивать модели в окне. Ollama проще для разработчиков, которым нужны фоновая служба и API. Если вы вообще не хотите выбирать модель, GreenCube (Windows, 9,99 € один раз) сам выберет её под ваш ПК.</p></details>
+<details><summary>Работают ли Ollama и LM Studio на Mac с Intel?</summary><p>В документации Ollama указаны Mac на Intel, только на процессоре, с macOS 14 или новее. LM Studio нужен Mac с чипом Apple.</p></details>
+<details><summary>Отправляют ли Ollama и LM Studio данные в сеть?</summary><p>LM Studio говорит, что при локальной работе никакие сообщения и документы не передаются и телеметрии нет; проверка обновлений и загрузка моделей идут через интернет. Ollama говорит, что не видит ваших запросов при локальной работе, но может собирать ограниченные метаданные об устройстве и использовании. Оба могут использовать облачные модели, если вы их выберете.</p></details>
+</div>
+
+<div class="cta-box"><h3>Ваш собственный ИИ на вашем собственном ПК</h3><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro;, оплата один раз.</p><a class="cta" href="https://greencube.app/ru/buy">Купить GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/ru/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">ИИ, который <em>ваш,</em> не арендованный.</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>Продукт</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/buy">Купить GreenCube</a></li>
+          <li><a href="https://greencube.app/ru/what-you-get">Пойдёт ли на моём компьютере?</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>Почитать</h3>
+        <ul>
+          <li><a href="/blog/ru">Blog</a></li>
+          <li><a href="https://greencube.app/ru/your-data">Ваши данные</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT и ваши данные (EN)</a></li>
+          <li><a href="https://greencube.app/ru/ai-environmental-impact">ИИ и планета</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>Компания</h3>
+        <ul>
+          <li><a href="https://greencube.app/ru/mission">Наша миссия</a></li>
+          <li><a href="mailto:support@greencube.app">Контакты</a></li>
+          <li><a href="https://legal.greencube.app/privacy">Политика конфиденциальности (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">Условия использования (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. Сделано в Испании.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+</body>
+</html>

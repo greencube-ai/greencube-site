@@ -1,0 +1,74 @@
+<!--meta
+{
+ "title": "PC'n için en iyi yerel yapay zekâ modeli, RAM ve VRAM'e göre (ölçüldü)",
+ "description": "En iyi yerel yapay zekâ modeli, boş yer bırakarak tamamı ekran kartına sığan en büyük modeldir. 8 GB ve 16 GB dizüstüler ile 4, 6, 8 ve 12 GB kartlar için hangi model; Gemma 4 E2B, E4B ve 12B için {{pcs}} PC'de ölçülen gerçek hızlarla.",
+ "date": "2026-10-28",
+ "kind": "guide",
+ "stat": "+1,5 GB",
+ "teaser": "PC'ne hangi yerel yapay zekâ modeli sığar, RAM ve VRAM'e göre, ölçülen hızlarla.",
+ "rank": 24,
+ "lang": "tr",
+ "alt": "best-local-ai-models",
+ "faq": [
+  {"q": "En iyi yerel yapay zekâ modeli hangisi?", "a": "Ekran kartına yaklaşık 1,5 GB boş yer bırakarak tamamen sığan en büyük model. Tamamı kartta olan daha küçük bir model, RAM'e taşan daha büyük bir modeli yener: testimizde bir kısmı 8 GB'lık kartın dışında kalan bir model 6 kat daha yavaş çalıştı."},
+  {"q": "Ekran kartı olmayan bir dizüstü için en iyi yerel yapay zekâ modeli hangisi?", "a": "Küçük bir model. Gemma 4 E2B (2,6 GB) gerçek sohbetlerde 16 GB'lık bir dizüstünde saniyede 14 ila 18, 8 GB'lık bir dizüstünde 5 ila 7 token yazdı; daha büyük E4B, E2B'nin 20 saniyede verdiği bir yanıt için 112 saniye harcadı."},
+  {"q": "8 GB'lık bir ekran kartı için en iyi yerel yapay zekâ modeli hangisi?", "a": "Yaklaşık 4–5 GB'lık bir model, örneğin Gemma 4 E4B (4,2 GB): 8 GB'lık oyun kartlarında saniyede 56 ila 72 token yazdı. 12 milyar parametreli bir model kısa sorular için sığdı ama uzun sohbetlerde çöktü."},
+  {"q": "Bir modelin ekran kartıma sığıp sığmadığını nasıl anlarım?", "a": "Model dosyasının boyutunu al ve sohbet ile Windows için yaklaşık 1,5 GB ekle. Sonuç, kartının ayrılmış GPU belleğinden (Görev Yöneticisi, Performans, GPU) azsa sığar."},
+  {"q": "Modeli kendim mi seçmem gerekiyor?", "a": "LM Studio, Jan ya da Ollama gibi ücretsiz uygulamalarda evet. GreenCube kartını ve RAM'ini okur ve sığan modeli senin için seçer."}
+ ]
+}
+-->
+<div class="answer"><p><strong>Kısa yanıt:</strong> <em>senin</em> PC'n için en iyi yerel yapay zekâ modeli, <strong>ekran kartına yaklaşık 1,5 GB boş yer bırakarak tamamen sığan en büyük modeldir</strong>. Ekran kartın yok mu? O zaman RAM'inde <strong>küçük bir model</strong>. Tamamı kartta olan daha küçük bir model, taşan daha büyük bir modeli yener: taşan modeli <strong>6 kat daha yavaş</strong> ölçtük. Aşağıda her PC türü için seçim var, {{pcs}} gerçek PC'de ölçtüğümüz hızlarla.</p></div>
+
+<div class="stats">
+<div class="stat g"><b>+1,5 GB</b><span>model dosyası artı yaklaşık 1,5 GB, VRAM'ine sığmalı</span></div>
+<div class="stat p"><b>6&times;</b><span>daha yavaş, modelin bir kısmı karta sığmayınca</span></div>
+<div class="stat b"><b>{{pcs}}</b><span>gerçek PC ölçüldü, dizüstülerden oyun masaüstlerine</span></div>
+</div>
+
+<h2>PC'n için en iyi model</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>PC'n</th><th>Sığan model boyutu</th><th>Ne ölçtük</th></tr></thead>
+<tbody>
+<tr><td>8 GB dizüstü, ekran kartı yok</td><td>Küçük, yaklaşık 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td>Gerçek sohbetlerde <b>5&ndash;7</b> token/sn; önce diğer uygulamaları kapat</td></tr>
+<tr><td>16 GB dizüstü, ekran kartı yok</td><td>Hız için küçük; yaklaşık 4 GB çalışır ama yavaş</td><td>E2B <b>14&ndash;18</b> token/sn; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>4 GB ekran kartı</td><td>Yaklaşık 2&ndash;3 GB tamamen sığar; 4 GB taşar</td><td>E4B (4,2 GB, bir kısmı RAM'de) GTX 1650'de yaklaşık <b>20</b> token/sn</td></tr>
+<tr><td>6 GB ekran kartı</td><td>Yaklaşık 4&ndash;4,5 GB</td><td>E4B, GTX 1660 Super'da <b>35&ndash;38</b> token/sn</td></tr>
+<tr><td>8 GB ekran kartı</td><td>Yaklaşık 4&ndash;6 GB</td><td>E4B, yeni kartlarda <b>56&ndash;72</b> (eski bir RX 580'de yaklaşık 11)</td></tr>
+<tr><td>12 GB+ ekran kartı</td><td>Yaklaşık 6&ndash;10 GB: 12B sınıfı modeller</td><td>E4B, 12 GB'ta <b>50&ndash;55</b>; 12B uzun sohbetler için 10 GB+ ister</td></tr>
+</tbody>
+</table></div>
+<p>Her kartın kendi sayfası var: <a href="/blog/can-my-pc-run-ai">PC'mde yapay zekâ çalışır mı?</a> Ya da kartını <a href="/blog/can-my-pc-run-ai#checker">kontrol aracımıza</a> yaz.</p>
+
+<h2>Neden sığması, en büyük olmasından daha önemli</h2>
+<div class="card p">
+<h3>Taşarsa hiç kart olmamasından bile yavaş</h3>
+<p>8 GB'lık bir RX 5700 XT'de Gemma 4 12B, tamamı karttayken saniyede 35,6 token, bir kısmı kartın dışındayken 5,9 token, kartta daha da azı varken 4,3 token yazdı: kart olmadan çalışan daha küçük bir modelden bile yavaş. <a href="/blog/how-much-vram-for-ai">VRAM testinin tamamı</a>.</p>
+</div>
+<div class="card y">
+<h3>Tek soruya sığar, uzun sohbette çöker</h3>
+<p>Aynı 12B model kısa bir soru için 8 GB'lık karta sığdı, sonra sohbet her uzadığında çöktü: sohbetin de yere ihtiyacı var. 1,5 GB'lık boş yer bunun için.</p>
+</div>
+<div class="card g">
+<h3>Küçük çoğu zaman yeterli</h3>
+<p>16 GB'lık bir dizüstünde Gemma 4 E2B, 20 saniyede eksiksiz bir ders çalışma yanıtı verdi ve 5 hızlı bilgi kontrolünün 5'ini de doğru yaptı; E4B daha iyi açıkladı ama 112 saniye sürdü. <a href="/blog/gemma-4-e2b-vs-e4b">E2B ve E4B, ölçüldü</a>.</p>
+</div>
+
+<h2>Ölçtüğümüz modeller</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Model</th><th>Dosya boyutu</th><th>En iyi olduğu yer</th><th>Lisans</th></tr></thead>
+<tbody>
+<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>8&ndash;16 GB RAM'li dizüstüler</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>6 GB veya daha fazla belleği olan ekran kartları</td><td>Apache 2.0</td></tr>
+<tr><td><b>Gemma 4 12B</b></td><td>yaklaşık 6,4 GB</td><td>10&ndash;12 GB veya daha fazla belleği olan ekran kartları</td><td>Apache 2.0</td></tr>
+</tbody>
+</table></div>
+<p>Bunlar GreenCube ile gelen dosyalar ve süresini ölçtüğümüz tek dosyalar; bu yüzden yalnızca onlar için hız veriyoruz. Diğer model aileleri de aynı kurala uyar: dosya boyutuna bak, yaklaşık 1,5 GB ekle, VRAM'inle karşılaştır. <a href="/blog/gemma-4-requirements">Ayrıntılı Gemma 4 gereksinimleri</a>.</p>
+
+<h2>VRAM'ini nasıl kontrol edersin</h2>
+<ol class="steps">
+<li>Görev Yöneticisi'ni açmak için <strong>Ctrl + Shift + Esc</strong> tuşlarına bas.</li>
+<li><strong>Performans</strong> sekmesine, sonra <strong>GPU</strong>'ya git.</li>
+<li><strong>Ayrılmış GPU belleği</strong> senin VRAM'in. Ayrılmış bellek yok mu? RAM'de küçük bir model kullan.</li>
+</ol>
+<p>Hiç seçmek istemiyor musun? GreenCube kartını ve RAM'ini okur ve boş yer bırakarak sığan modeli seçer. LM Studio, Jan ve Ollama gibi ücretsiz uygulamalar seçimi sana bırakır: <a href="/blog/best-offline-ai-chatbot">12 uygulama karşılaştırıldı</a>.</p>
