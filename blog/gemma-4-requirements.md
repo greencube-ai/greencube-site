@@ -18,7 +18,7 @@ Author: Hector Gras
 | --- | --- | --- | --- |
 | **Gemma 4 E2B** | 2.6 GB | 8 GB RAM, no card | Laptops |
 | **Gemma 4 E4B** | 4.2 GB | 16 GB RAM, or a 6 GB card | Gaming PCs, 16 GB laptops |
-| **Gemma 4 12B** | 6.2 GB | 10 GB+ VRAM | Cards with 12 GB or more |
+| **Gemma 4 12B** | 6.7 GB | 10 GB+ VRAM | Cards with 12 GB or more |
 
 ## Measured speeds
 

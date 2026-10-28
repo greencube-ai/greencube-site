@@ -14,7 +14,7 @@ Author: Hector Gras
 
 ## La prueba
 
-Un sobremesa con una AMD RX 5700 XT (8 GB de VRAM) y 48 GB de RAM. Cargamos un modelo de 12.000 millones de parámetros (Gemma 4 12B, unos 6,2 GB) y pusimos más o menos parte de él en la tarjeta, todo en la misma sesión, en septiembre de 2026.
+Un sobremesa con una AMD RX 5700 XT (8 GB de VRAM) y 48 GB de RAM. Cargamos un modelo de 12.000 millones de parámetros (Gemma 4 12B, unos 6,7 GB) y pusimos más o menos parte de él en la tarjeta, todo en la misma sesión, en septiembre de 2026.
 
 | Cuánto del modelo estaba en la tarjeta | Escribe (tokens/s) |
 | --- | --- |

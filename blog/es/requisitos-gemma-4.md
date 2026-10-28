@@ -18,7 +18,7 @@ Author: Hector Gras
 | --- | --- | --- | --- |
 | **Gemma 4 E2B** | 2,6 GB | 8 GB de RAM, sin tarjeta | Portátiles |
 | **Gemma 4 E4B** | 4,2 GB | 16 GB de RAM, o una tarjeta de 6 GB | PCs gaming, portátiles de 16 GB |
-| **Gemma 4 12B** | 6,2 GB | 10 GB de VRAM o más | Tarjetas de 12 GB o más |
+| **Gemma 4 12B** | 6,7 GB | 10 GB de VRAM o más | Tarjetas de 12 GB o más |
 
 ## Velocidades medidas
 

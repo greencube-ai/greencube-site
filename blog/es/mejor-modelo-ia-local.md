@@ -45,7 +45,7 @@ En un portátil de 16 GB, Gemma 4 E2B dio una respuesta de estudio completa en 2
 | --- | --- | --- | --- |
 | **Gemma 4 E2B** | 2,6 GB | Portátiles, 8–16 GB de RAM | Apache 2.0 |
 | **Gemma 4 E4B** | 4,2 GB | Tarjetas gráficas de 6 GB o más | Apache 2.0 |
-| **Gemma 4 12B** | unos 6,4 GB | Tarjetas gráficas de 10–12 GB o más | Apache 2.0 |
+| **Gemma 4 12B** | unos 6,7 GB | Tarjetas gráficas de 10–12 GB o más | Apache 2.0 |
 
 Son los archivos que distribuye GreenCube y los únicos que hemos cronometrado, así que son los únicos de los que damos velocidades. Las demás familias de modelos siguen la misma regla: mira el tamaño del archivo, súmale unos 1,5 GB y compáralo con tu VRAM. [Requisitos de Gemma 4 en detalle](https://blog.greencube.app/blog/es/requisitos-gemma-4).
 

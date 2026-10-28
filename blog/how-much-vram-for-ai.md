@@ -14,7 +14,7 @@ Author: Hector Gras
 
 ## The test
 
-A desktop with an AMD RX 5700 XT (8 GB of VRAM) and 48 GB of RAM. We loaded a 12-billion-parameter model (Gemma 4 12B, about 6.2 GB) and put more or less of it on the card, all in one session in September 2026.
+A desktop with an AMD RX 5700 XT (8 GB of VRAM) and 48 GB of RAM. We loaded a 12-billion-parameter model (Gemma 4 12B, about 6.7 GB) and put more or less of it on the card, all in one session in September 2026.
 
 | How much of the model was on the card | Writes (tokens/s) |
 | --- | --- |

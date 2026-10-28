@@ -45,7 +45,7 @@ On a 16 GB laptop, Gemma 4 E2B gave a complete study answer in 20 seconds and go
 | --- | --- | --- | --- |
 | **Gemma 4 E2B** | 2.6 GB | Laptops, 8–16 GB RAM | Apache 2.0 |
 | **Gemma 4 E4B** | 4.2 GB | Graphics cards with 6 GB or more | Apache 2.0 |
-| **Gemma 4 12B** | about 6.4 GB | Graphics cards with 10–12 GB or more | Apache 2.0 |
+| **Gemma 4 12B** | about 6.7 GB | Graphics cards with 10–12 GB or more | Apache 2.0 |
 
 These are the files GreenCube ships and the only ones we've timed, so they're the only ones we give speeds for. Other model families follow the same rule: check the file size, add about 1.5 GB, compare with your VRAM. [Gemma 4 requirements in detail](https://blog.greencube.app/blog/gemma-4-requirements).
 
