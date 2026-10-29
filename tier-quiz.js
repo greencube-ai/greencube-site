@@ -199,6 +199,10 @@
       const h = c.querySelector('h3');
       c.classList.toggle('yours', !!h && h.textContent.trim() === t.name);
     });
+    // and its column in the tier table
+    const heads = [...document.querySelectorAll('.tier-table thead th')];
+    const col = heads.findIndex((h) => h.querySelector('b') && h.querySelector('b').textContent.trim() === t.name);
+    document.querySelectorAll('.tier-table tr').forEach((r) => [...r.cells].forEach((c, i) => c.classList.toggle('yours', col > 0 && i === col)));
 
     show('rev');
     const n = $('r-name');
@@ -210,7 +214,7 @@
     state.ram = null; state.card = null; state.vram = 0; state.guessed = false;
     input.value = ''; shown = []; paint();
     game.classList.remove('lit');
-    document.querySelectorAll('.tier-card.yours, .flat-tier.yours').forEach((c) => c.classList.remove('yours'));
+    document.querySelectorAll('.tier-card.yours, .flat-tier.yours, .tier-table .yours').forEach((c) => c.classList.remove('yours'));
     game.style.setProperty('--mk', '#8EA674');
     show('ram');
   });

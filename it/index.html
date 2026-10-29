@@ -352,6 +352,17 @@
       overflow: hidden;
       background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
     }
+
+    /* ---------- ASCII wordmark footer ---------- */
+    .f-ascii {
+      margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
+      font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+      font-size: clamp(5px, 1.42vw, 17px); line-height: 1.05; color: #7E8A5A; opacity: .55; text-align: center;
+    }
+    .f-prompt { margin-top: 18px; text-align: center; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; color: var(--ink-mute); }
+    .f-prompt .cur { display: inline-block; width: .6em; height: 1.1em; vertical-align: -0.2em; background: #7E8A5A; animation: fBlink 1.1s steps(1) infinite; }
+    @keyframes fBlink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .f-prompt .cur { animation: none; } }
     .hero-landscape {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -537,12 +548,16 @@
     @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
     /* ---------- the tier table: the four cards, spelled out ---------- */
-    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
-    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tt-wrap { max-width: 1040px; margin: 44px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: var(--sans); font-size: 15.5px; }
     .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
     .tier-table tbody tr:last-child > * { border-bottom: 0; }
     .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th b { font-weight: 600; }
+    .tier-table thead th small { display: block; margin-top: 5px; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0; line-height: 1.35; color: var(--ink-mute); white-space: normal; }
+    .tier-table .yours { background: color-mix(in srgb, var(--tint, #8EA674) 16%, #fff); }
+    .tier-table thead th.yours { box-shadow: inset 0 4px 0 #4E5F3A; }
     .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
     .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
     .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
@@ -551,7 +566,7 @@
     .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
     .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
     .tier-table .yes svg { width: 16px; height: 16px; }
-    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+    .tt-note { max-width: 1040px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
 
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
@@ -838,7 +853,7 @@
     }
     .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
     .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
-    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-say { margin: 10px 0 0; padding: 0 6px; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.22; letter-spacing: -.018em; color: var(--forest); }
     .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
     .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
 
@@ -1048,13 +1063,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -1344,14 +1352,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="turtle-main">
   /* the mascot in the places everyone passes: hero, three steps, download */
   .gt svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1371,17 +1371,6 @@
   .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
 
 
-  /* hero: the turtle flies its little plane across the sky, behind the headline, now and then */
-  .hero-plane { position: absolute; z-index: 1; top: 13%; left: -240px; width: clamp(120px, 10vw, 170px); pointer-events: none; animation: hp-fly 46s linear 3s infinite; }
-  .hero-plane .hp-bob { animation: hp-bob 3s ease-in-out infinite; }
-  .hero-plane .hp-prop { transform-box: fill-box; transform-origin: center; animation: hp-prop .12s linear infinite alternate; }
-  .hero-plane .hp-scarf { transform-box: fill-box; transform-origin: right center; animation: hp-scarf .5s ease-in-out infinite alternate; }
-  @keyframes hp-fly { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(calc(100vw + 480px)); } }
-  @keyframes hp-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-  @keyframes hp-prop { from { transform: scaleY(1); } to { transform: scaleY(.15); } }
-  @keyframes hp-scarf { from { transform: rotate(-4deg); } to { transform: rotate(6deg) scaleX(1.08); } }
-  @media (max-width: 760px) { .hero-plane { top: 9%; width: 96px; } }
-  @media (prefers-reduced-motion: reduce) { .hero-plane { display: none; } }
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/it/", "inLanguage": "it"}</script>
@@ -1394,7 +1383,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1550,28 +1538,12 @@
     </ul>
     <div class="cta-row rv">
       <a href="/it/buy" class="cta-pill cta-primary"><span>Prendi GreenCube</span></a>
-      <a href="/it/#can" class="cta-pill cta-ghost">Guarda cosa fa <span class="arrow">→</span></a>
+      <a href="/it/#what" class="cta-pill cta-ghost">Guarda cosa fa <span class="arrow">→</span></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <div class="gt hero-plane" aria-hidden="true"><div class="hp-bob"><svg viewBox="0 0 200 110" aria-hidden="true" focusable="false">
-    <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path class="hp-scarf" d="M98,50 C84,46 74,52 62,46 C70,56 84,58 98,56 Z" fill="#FA9F75"/>
-      <path d="M24,40 L44,40 L54,62 L28,62 Z" fill="#FA9F75"/>
-      <path d="M22,66 C22,56 34,52 52,52 L150,52 C170,52 184,58 184,68 C184,78 170,84 150,84 L44,84 C30,84 22,76 22,66 Z" fill="#FAE289"/>
-      <path d="M96,52 C96,44 104,38 114,38 C124,38 132,44 132,52 Z" fill="#8EABE1" stroke-width="2"/>
-      <circle cx="114" cy="38" r="15" fill="#AFCB7C"/>
-      <g stroke="none"><circle cx="119" cy="36" r="2.6" fill="#1A1A1A"/><circle cx="126.5" cy="35.6" r="2" fill="#1A1A1A"/>
-        <circle cx="119.8" cy="35.2" r=".8" fill="#fff"/><ellipse cx="123" cy="42" rx="3.2" ry="1.8" fill="#FA9F75" opacity=".6"/></g>
-      <path d="M121,45 q2.2,1.6 4.4,0" fill="none" stroke-width="1.8"/>
-      <ellipse cx="104" cy="80" rx="42" ry="8" fill="#FA9F75"/>
-      <circle cx="160" cy="66" r="4" fill="#fff" stroke-width="2"/>
-      <rect x="184" y="62" width="6" height="8" rx="2" fill="#1A1A1A" stroke="none"/>
-      <ellipse class="hp-prop" cx="192" cy="66" rx="3" ry="18" fill="#DDD8CE" stroke-width="1.6"/>
-    </g>
-  </svg></div></div>
   <a href="/it/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1591,7 +1563,7 @@
         <span class="sec-eyebrow">Illimitata</span>
         <h2 class="sec-head">Nessun limite da raggiungere.</h2>
       </div>
-      <p class="sec-sub">Funziona sul tuo computer, quindi niente viene conteggiato. Ecco tutto quello che fa.</p>
+      <p class="sec-sub">Gira sul tuo PC, quindi niente viene contato.</p>
     </div>
     <div class="track-wrap">
       <div class="track">
@@ -1604,9 +1576,64 @@
             <path d="M47 61h28" stroke-width="3"/>
           </svg>
         </div>
-        <span class="make-kind">Chats</span>
-        <q>Interrogami di chimica organica finché non smetto di sbagliare.</q>
-        <span class="make-out">Nessun limite, nessun «torna tra 5 ore»</span>
+        <span class="make-kind">Chat</span>
+        <p class="make-say">Chiedi tutto il giorno.</p>
+        <span class="make-out">Nessun limite, nessun &laquo;torna più tardi&raquo;</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">Studio</span>
+        <p class="make-say">Flashcard e quiz dai tuoi appunti.</p>
+        <span class="make-out">Anche tabelle, checklist e linee del tempo</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">Slide</span>
+        <p class="make-say">Veri file PowerPoint.</p>
+        <span class="make-out">6 temi di colore tra cui scegliere</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M58 12v14h14"/>
+            <path d="M28 38h26" stroke-width="4"/>
+            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">Documenti</span>
+        <p class="make-say">Veri documenti Word.</p>
+        <span class="make-out">Temi e appunti, salvati in .docx</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">File</span>
+        <p class="make-say">Trascina PDF e foto.</p>
+        <span class="make-out">Quanti ne vuoi</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true">
@@ -1619,9 +1646,9 @@
             <path d="M68 50l-6 6 6 6M76 50l6 6-6 6" stroke="#FFFDF8" stroke-width="2.6"/>
           </svg>
         </div>
-        <span class="make-kind">Sessioni di programmazione</span>
-        <q>Fammi un gioco del serpente da giocare nel browser.</q>
-        <span class="make-out">Vai avanti per ore, non finisce niente</span>
+        <span class="make-kind">Programma</span>
+        <p class="make-say">Descrivi un'app. La costruisce.</p>
+        <span class="make-out">Programma per ore, non finisce niente</span>
       </article>
       <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
@@ -1633,53 +1660,11 @@
             <path d="M26 84l6-8M70 84l-6-8" />
           </svg>
         </div>
-        <span class="make-kind">Generazione di immagini</span>
-        <q>Un logo in pixel art per il mio clan.</q>
-        <span class="make-out">Quante ne vuoi, senza limite giornaliero</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
-            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M52 18v12h12" />
-            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
-          </svg>
-        </div>
-        <span class="make-kind">Allegati</span>
-        <q>Ecco la mia relazione di laboratorio. Cosa segnerebbe un professore severo?</q>
-        <span class="make-out">PDF, foto, screenshot, quanti ne vuoi</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
-            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
-            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M44 64v12M34 80h20"/>
-          </svg>
-        </div>
-        <span class="make-kind">Presentazioni</span>
-        <q>Dieci slide sulla Rivoluzione francese per il seminario di lunedì.</q>
-        <span class="make-out">Un vero file PowerPoint</span>
+        <span class="make-kind">Immagini</span>
+        <p class="make-say">Tutte le immagini che vuoi.</p>
+        <span class="make-out">Nessun limite giornaliero</span>
       </article>
       <article class="make t-sage">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
-            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
-            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
-            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
-            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
-          </svg>
-        </div>
-        <span class="make-kind">Studio</span>
-        <q>Trasforma questo PDF della lezione in flashcard e un quiz.</q>
-        <span class="make-out">Flashcard e un quiz, accanto alla chat</span>
-      </article>
-      <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
             <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
@@ -1689,8 +1674,24 @@
           </svg>
         </div>
         <span class="make-kind">Pagine web</span>
-        <q>Una pagina per il mio server Discord, con le regole e un link d'invito.</q>
-        <span class="make-out">Una pagina che puoi aprire e condividere</span>
+        <p class="make-say">Pagine web da aprire e condividere.</p>
+        <span class="make-out">Per un club, un progetto, un Discord</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">In arrivo</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/>
+            <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/>
+            <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/>
+            <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/>
+            <path d="M26 60v6l12 6M70 60v6l-12 6"/>
+            <circle cx="48" cy="78" r="10" fill="#8EABE1"/>
+            <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/>
+          </svg>
+        </div>
+        <span class="make-kind">Diagrammi</span>
+        <p class="make-say">Grafici, diagrammi di flusso, circuiti e cellule.</p>
+        <span class="make-out">Disegnati bene, pronti per i tuoi appunti</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true"><span class="fc-tag soon">In arrivo</span>
@@ -1702,8 +1703,8 @@
           </svg>
         </div>
         <span class="make-kind">Automazioni</span>
-        <q>Ogni mattina, riassumi la mia casella di posta e scrivi le bozze delle risposte.</q>
-        <span class="make-out">Funziona a orario mentre vai avanti con la tua giornata</span>
+        <p class="make-say">Compiti che si fanno da soli.</p>
+        <span class="make-out">Come riordinare la posta ogni mattina</span>
       </article>
       </div>
     </div>
@@ -1735,13 +1736,6 @@
 </section>
 
 <div class="gcwhy">
-<section class="w-sec" id="can">
-  <div class="w">
-    <span class="w-eyebrow">Cosa puoi fare</span>
-    <h2 class="w-h2">Tutto. <em>Sul tuo PC.</em></h2>
-    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>Fammi un gioco del serpente</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>Disegna una scrivania accogliente di notte, ad acquerello</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>Interrogami di biologia cellulare</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>Riassumi il mio PDF di 40 pagine</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>10 slide per lunedì</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>Perché il mio codice va in crash?</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · offline</span></div><div class="w-win-body" id="w-chat" data-score="Punti" data-play="▶ Gioca" data-again="Gioca ancora" data-over="Game over"></div></div></div><p class="w-try-fine">Un'anteprima di cose vere che fa GreenCube. Toccane un'altra.</p><template data-k="snake" data-ask="Fammi un gioco del serpente"><p>Fatto. Gioca proprio qui:</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="Gioco del serpente"></canvas><div class="w-game-ui"><span class="w-score">Punti 0</span><button type="button" class="w-btn w-play">▶ Gioca</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">Frecce o scorri per muoverti.</p></div></template><template data-k="image" data-ask="Disegna una scrivania accogliente di notte, ad acquerello"><p>Eccola:</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="Una scrivania accogliente di notte vicino a una finestra, con una lampada, un portatile, libri e una pianta, ad acquerello. Fatta da GreenCube."></picture></div><p class="w-img-cap">Fatta sul tuo PC. Nessun limite giornaliero.</p></template><template data-k="quiz" data-ask="Interrogami di biologia cellulare"><p>Ecco le tue flashcard. Girale, poi passa alla prossima:</p><div class="w-deck" data-cards="[[&quot;Cosa fa il mitocondrio?&quot;, &quot;Produce energia (ATP) per la cellula.&quot;], [&quot;Dove si trova il DNA della cellula?&quot;, &quot;Nel nucleo.&quot;], [&quot;Cosa producono i ribosomi?&quot;, &quot;Proteine.&quot;], [&quot;Cosa decide cosa entra ed esce dalla cellula?&quot;, &quot;La membrana cellulare.&quot;], [&quot;Vegetale o animale: quali cellule hanno la parete cellulare?&quot;, &quot;Le cellule vegetali.&quot;]]" data-hint="tocca per girare"><button type="button" class="w-flip"><span><em><span class="q">Cosa fa il mitocondrio?</span><small>tocca per girare</small></em><em class="a">Produce energia (ATP) per la cellula.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="Flashcard precedente">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="Flashcard successiva">&rarr;</button></div></div></template><template data-k="pdf" data-ask="Riassumi il mio PDF di 40 pagine"><p>40 pagine, in 6 punti:</p><ul><li>Lo studio testa una nuova batteria al sodio.</li><li>Si carica due volte più velocemente delle batterie al litio di oggi.</li><li>Regge 3.000 ricariche prima di perdere il 20% della capacità.</li><li>Il sodio costa meno ed è più facile da trovare del litio.</li><li>È più pesante, quindi è più adatta a case e autobus che ai telefoni.</li><li>Va ancora testata su larga scala prima che qualcuno possa venderla.</li></ul></template><template data-k="slides" data-ask="10 slide per lunedì"><p>La tua presentazione è pronta. Scegli uno stile:</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>La Rivoluzione francese</b><small>Dal 1789 al 1799</small></div><div class="w-sl"><b>Perché è iniziata</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>Salvia</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>Mandarino</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>Glicine</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>Gelsomino</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>Notte</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>Semplice</button></div></template><template data-k="bug" data-ask="Perché il mio codice va in crash?"><p>Il tuo ciclo non finisce mai: <b>i</b> non aumenta mai. Aggiungi <b>i += 1</b> alla riga 12 e funziona.</p></template>
-  </div>
-</section>
 
 <section class="w-sec w-center" id="money">
   <div class="w">
@@ -1844,70 +1838,26 @@
       </div>
     </div>
 
-    <div class="tier-row" id="tier-cards">
-      <article class="tier-card rv" style="--tint:#FAE289">
-        <span class="tier-n">Livello uno</span>
-        <h3>Seed</h3>
-        <p class="tier-spec">8 GB di RAM, senza scheda</p>
-        <ul class="tier-list">
-          <li>Funziona tutto, solo più lentamente</li>
-          <li>Pensato per stare in 8 GB</li>
-          <li>Pagine web disattivate all'inizio. Le immagini richiedono 12&nbsp;GB di RAM</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EA674">
-        <span class="tier-n">Livello due</span>
-        <h3>Sprout</h3>
-        <p class="tier-spec">16 GB di RAM, o 8 GB con scheda</p>
-        <ul class="tier-list">
-          <li>Velocità costante e comoda</li>
-          <li>Scrive presentazioni</li>
-          <li>Pagine web e immagini, avvisandoti prima dell'attesa</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#FA9F75">
-        <span class="tier-n">Livello tre</span>
-        <h3>Bloom</h3>
-        <p class="tier-spec">Scheda da 8 GB, o scheda + 16 GB di RAM</p>
-        <ul class="tier-list">
-          <li>Veloce, grazie alla scheda grafica</li>
-          <li>Pagine web e immagini, senza avviso di attesa</li>
-          <li>Legge chat e documenti più lunghi in una volta</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EABE1">
-        <span class="tier-n">Livello quattro</span>
-        <h3>Thrive</h3>
-        <p class="tier-spec">Scheda da 8 GB, 24 GB di RAM</p>
-        <ul class="tier-list">
-          <li>Il modello IA più grande che la tua scheda può contenere</li>
-          <li>Il più veloce dei quattro</li>
-          <li>Legge le chat e i documenti più lunghi</li>
-        </ul>
-      </article>
-    </div>
-
-
-    <div class="tt-wrap rv">
+    <div class="tt-wrap rv" id="tier-cards">
       <table class="tier-table">
-        <caption>Cosa fa ogni livello</caption>
+        <caption>Cosa fa GreenCube su ogni tipo di PC</caption>
         <thead>
-          <tr><th scope="col">Cosa fa</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+          <tr><th scope="col">Cosa fa</th><th scope="col" style="--tint:#FAE289"><i></i><b>Seed</b><small>8 GB di RAM, nessuna scheda grafica</small></th><th scope="col" style="--tint:#8EA674"><i></i><b>Sprout</b><small>16 GB di RAM, o 8 GB con una scheda da 4 GB</small></th><th scope="col" style="--tint:#FA9F75"><i></i><b>Bloom</b><small>Una scheda da 8 GB, o una da 4 GB con 16 GB di RAM</small></th><th scope="col" style="--tint:#8EABE1"><i></i><b>Thrive</b><small>Una scheda da 8 GB con 24 GB di RAM</small></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Velocità</th><td>Lenta, una parola alla volta</td><td>Costante</td><td>Veloce</td><td>La più veloce</td></tr>
-          <tr><th scope="row">Dimensione del modello IA</th><td>Piccolo</td><td>Medio</td><td>Medio</td><td>Il più grande che la tua scheda può contenere</td></tr>
-          <tr><th scope="row">Chat, documenti e foto</th><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Flashcard, quiz e file PowerPoint</th><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Presentazioni scritte dall'IA</th><td>Scrive un documento e poi lo salva come slide</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Pagine web</th><td>Disattivate all'inizio. Puoi attivarle</td><td>Chiede prima e ti dice quanto ci vorrà</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">App che programma</th><td>Fino a 8 file alla volta</td><td>Fino a 12 file</td><td>Fino a 24 file</td><td>Fino a 48 file</td></tr>
-          <tr><th scope="row">Generazione di immagini</th><td>Richiede 12&nbsp;GB di RAM</td><td>Chiede prima e ti dice quanto ci vorrà</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Quanto può leggere in una volta<small>Una chat, un documento o entrambi</small></th><td>Circa 3.000 parole</td><td>Circa 12.000 parole</td><td>Da circa 12.000 a 25.000 parole</td><td>50.000 parole o più</td></tr>
+          <tr><th scope="row">Velocità</th><td>Lenta, ma funziona</td><td>Costante</td><td>Veloce</td><td>La più veloce</td></tr>
+          <tr><th scope="row">Modello di IA</th><td>Gemma 4 E2B</td><td>Gemma 4 E4B</td><td>Gemma 4 E4B</td><td>Il più grande che la tua scheda può contenere</td></tr>
+          <tr><th scope="row">Chat, PDF e foto</th><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Flashcard, quiz e tabelle</th><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">File PowerPoint e Word</th><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Presentazioni scritte dall'IA</th><td>Create da un documento</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Pagine web</th><td>Spente all'inizio, puoi attivarle</td><td>Sì, dopo averti detto l'attesa</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Immagini</th><td>Richiede 12&nbsp;GB di RAM</td><td>Sì*, circa 2 minuti l'una</td><td>Sì*</td><td><span class="yes" aria-label="Sì"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">App che programma</th><td>Fino a 8 file</td><td>Fino a 12 file</td><td>Fino a 24 file</td><td>Fino a 48 file</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="tt-note rv">I numeri di parole sono indicativi: crescono con la memoria libera del tuo computer. Tutto il resto è un punto di partenza, non un blocco (le immagini richiedono 12&nbsp;GB di RAM). Impostazioni &rarr; Cosa può fare il tuo computer attiva o disattiva ogni funzione.</p>
+    <p class="tt-note rv">* Le immagini richiedono 12&nbsp;GB di RAM o più. Tempo per immagine misurato su un portatile da 16&nbsp;GB con grafica Intel. Quanto può leggere in una volta (una chat più i tuoi file) cresce con la memoria libera. Ogni livello è un punto di partenza, non un blocco: Impostazioni &rarr; Cosa può fare il tuo computer attiva o disattiva ogni parte.</p>
 
 
   </div>
@@ -1976,7 +1926,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="#top" class="brand-lock" aria-label="Home di GreenCube">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -1993,7 +1943,7 @@
         <h3>Prodotto</h3>
         <ul>
           <li><a href="/it/buy">Prendi GreenCube</a></li>
-          <li><a href="/it/#can">Cosa fa</a></li>
+          <li><a href="/it/#what">Cosa fa</a></li>
           <li><a href="/it/what-you-get">Funzionerà sul mio computer?</a></li>
         </ul>
       </nav>
@@ -2034,8 +1984,14 @@
         <a href="https://legal.greencube.app/privacy">Privacy</a>
         <a href="https://legal.greencube.app/terms">Termini</a>
       </div>
-      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr">FR</a><a href="/de/" hreflang="de">DE</a><a href="/it/" hreflang="it" aria-current="true">IT</a><a href="/nl/" hreflang="nl">NL</a><a href="/pl/" hreflang="pl">PL</a><a href="/tr/" hreflang="tr">TR</a><a href="/ru/" hreflang="ru">RU</a><a href="/uk/" hreflang="uk">UK</a><a href="/ar/" hreflang="ar">AR</a><a href="/hi/" hreflang="hi">HI</a><a href="/id/" hreflang="id">ID</a><a href="/vi/" hreflang="vi">VI</a><a href="/th/" hreflang="th">TH</a><a href="/ja/" hreflang="ja">JA</a><a href="/ko/" hreflang="ko">KO</a><a href="/zh/" hreflang="zh">中文</a><a href="/zh-tw/" hreflang="zh-tw">繁體</a></div>
     </div>
+    <pre class="f-ascii" aria-hidden="true"> ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗██╗   ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██║   ██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║██║     ██║   ██║██████╔╝█████╗
+██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; un'ia che possiedi. senza limiti <span class="cur"></span></p>
   </div>
 </footer>
 
@@ -2305,127 +2261,6 @@
         a.classList.toggle('err', !on);
       });
     }
-  })();
-</script>
-<script>
-  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
-  (() => {
-    const box = document.getElementById('w-chat');
-    if (!box) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const asks = [...document.querySelectorAll('.w-ask')];
-    let run = 0, stopGame = () => {};
-
-    function snake(root) {
-      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
-      const W = 12, Hh = 9, S = 20;
-      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
-      let body, dir, next, food, pts, timer = null;
-      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
-      const draw = () => {
-        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
-        g.fillStyle = 'rgba(26,26,26,.04)';
-        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
-        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
-        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
-      };
-      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
-      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
-      const tick = () => {
-        dir = next;
-        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
-        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
-          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
-        }
-        body.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
-        draw();
-      };
-      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
-      function key(e) {
-        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
-        if (d && timer) { e.preventDefault(); turn(d); }
-      }
-      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
-      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
-      let sx, sy;
-      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-      cv.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
-      }, { passive: true });
-      reset();
-      stopGame = stop;
-    }
-
-    function deck(root) {
-      const cards = JSON.parse(root.dataset.cards);
-      let i = 0;
-      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
-      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
-      const show = () => {
-        flip.classList.remove('flipped');
-        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
-        pos.textContent = (i + 1) + ' / ' + cards.length;
-        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
-      };
-      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
-      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
-      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
-      prev.disabled = true;
-    }
-
-    function themes(root) {
-      const dv = root.querySelector('.w-dv');
-      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
-        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
-        dv.dataset.theme = b.dataset.t;
-      }));
-    }
-
-    function play(btn) {
-      const id = ++run;
-      stopGame(); stopGame = () => {};
-      asks.forEach((b) => b.classList.toggle('on', b === btn));
-      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
-      const text = tpl.dataset.ask;
-      box.innerHTML = '';
-      const me = document.createElement('p');
-      me.className = 'w-msg me';
-      box.appendChild(me);
-      let i = 0;
-      const answer = () => {
-        if (id !== run) return;
-        const ai = document.createElement('div');
-        ai.className = 'w-msg ai';
-        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
-        box.appendChild(ai);
-        setTimeout(() => {
-          if (id !== run) return;
-          ai.innerHTML = '';
-          ai.appendChild(tpl.content.cloneNode(true));
-          ai.querySelectorAll('.w-game').forEach(snake);
-          ai.querySelectorAll('.w-deck').forEach(deck);
-          if (ai.querySelector('.w-dv')) themes(ai);
-        }, reduce ? 0 : 700);
-      };
-      if (reduce) { me.textContent = text; answer(); return; }
-      const type = () => {
-        if (id !== run) return;
-        me.innerHTML = '';
-        me.append(text.slice(0, i));
-        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
-        if (i++ < text.length) setTimeout(type, 26);
-        else { me.textContent = text; setTimeout(answer, 250); }
-      };
-      type();
-    }
-    asks.forEach((b) => b.addEventListener('click', () => play(b)));
-    const sec = document.getElementById('can');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
-      io.observe(sec);
-    } else play(asks[0]);
   })();
 </script>
 <script>

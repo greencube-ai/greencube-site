@@ -352,6 +352,17 @@
       overflow: hidden;
       background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
     }
+
+    /* ---------- ASCII wordmark footer ---------- */
+    .f-ascii {
+      margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
+      font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+      font-size: clamp(5px, 1.42vw, 17px); line-height: 1.05; color: #7E8A5A; opacity: .55; text-align: center;
+    }
+    .f-prompt { margin-top: 18px; text-align: center; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; color: var(--ink-mute); }
+    .f-prompt .cur { display: inline-block; width: .6em; height: 1.1em; vertical-align: -0.2em; background: #7E8A5A; animation: fBlink 1.1s steps(1) infinite; }
+    @keyframes fBlink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .f-prompt .cur { animation: none; } }
     .hero-landscape {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -537,12 +548,16 @@
     @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
     /* ---------- the tier table: the four cards, spelled out ---------- */
-    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
-    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tt-wrap { max-width: 1040px; margin: 44px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: var(--sans); font-size: 15.5px; }
     .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
     .tier-table tbody tr:last-child > * { border-bottom: 0; }
     .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th b { font-weight: 600; }
+    .tier-table thead th small { display: block; margin-top: 5px; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0; line-height: 1.35; color: var(--ink-mute); white-space: normal; }
+    .tier-table .yours { background: color-mix(in srgb, var(--tint, #8EA674) 16%, #fff); }
+    .tier-table thead th.yours { box-shadow: inset 0 4px 0 #4E5F3A; }
     .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
     .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
     .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
@@ -551,7 +566,7 @@
     .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
     .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
     .tier-table .yes svg { width: 16px; height: 16px; }
-    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+    .tt-note { max-width: 1040px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
 
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
@@ -838,7 +853,7 @@
     }
     .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
     .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
-    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-say { margin: 10px 0 0; padding: 0 6px; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.22; letter-spacing: -.018em; color: var(--forest); }
     .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
     .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
 
@@ -1048,13 +1063,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -1344,14 +1352,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="turtle-main">
   /* the mascot in the places everyone passes: hero, three steps, download */
   .gt svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1371,17 +1371,6 @@
   .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
 
 
-  /* hero: the turtle flies its little plane across the sky, behind the headline, now and then */
-  .hero-plane { position: absolute; z-index: 1; top: 13%; left: -240px; width: clamp(120px, 10vw, 170px); pointer-events: none; animation: hp-fly 46s linear 3s infinite; }
-  .hero-plane .hp-bob { animation: hp-bob 3s ease-in-out infinite; }
-  .hero-plane .hp-prop { transform-box: fill-box; transform-origin: center; animation: hp-prop .12s linear infinite alternate; }
-  .hero-plane .hp-scarf { transform-box: fill-box; transform-origin: right center; animation: hp-scarf .5s ease-in-out infinite alternate; }
-  @keyframes hp-fly { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(calc(100vw + 480px)); } }
-  @keyframes hp-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-  @keyframes hp-prop { from { transform: scaleY(1); } to { transform: scaleY(.15); } }
-  @keyframes hp-scarf { from { transform: rotate(-4deg); } to { transform: rotate(6deg) scaleX(1.08); } }
-  @media (max-width: 760px) { .hero-plane { top: 9%; width: 96px; } }
-  @media (prefers-reduced-motion: reduce) { .hero-plane { display: none; } }
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/ko/", "inLanguage": "ko"}</script>
@@ -1394,7 +1383,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1550,28 +1538,12 @@
     </ul>
     <div class="cta-row rv">
       <a href="/ko/buy" class="cta-pill cta-primary"><span>GreenCube 구매</span></a>
-      <a href="/ko/#can" class="cta-pill cta-ghost">기능 보기 <span class="arrow">→</span></a>
+      <a href="/ko/#what" class="cta-pill cta-ghost">기능 보기 <span class="arrow">→</span></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <div class="gt hero-plane" aria-hidden="true"><div class="hp-bob"><svg viewBox="0 0 200 110" aria-hidden="true" focusable="false">
-    <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path class="hp-scarf" d="M98,50 C84,46 74,52 62,46 C70,56 84,58 98,56 Z" fill="#FA9F75"/>
-      <path d="M24,40 L44,40 L54,62 L28,62 Z" fill="#FA9F75"/>
-      <path d="M22,66 C22,56 34,52 52,52 L150,52 C170,52 184,58 184,68 C184,78 170,84 150,84 L44,84 C30,84 22,76 22,66 Z" fill="#FAE289"/>
-      <path d="M96,52 C96,44 104,38 114,38 C124,38 132,44 132,52 Z" fill="#8EABE1" stroke-width="2"/>
-      <circle cx="114" cy="38" r="15" fill="#AFCB7C"/>
-      <g stroke="none"><circle cx="119" cy="36" r="2.6" fill="#1A1A1A"/><circle cx="126.5" cy="35.6" r="2" fill="#1A1A1A"/>
-        <circle cx="119.8" cy="35.2" r=".8" fill="#fff"/><ellipse cx="123" cy="42" rx="3.2" ry="1.8" fill="#FA9F75" opacity=".6"/></g>
-      <path d="M121,45 q2.2,1.6 4.4,0" fill="none" stroke-width="1.8"/>
-      <ellipse cx="104" cy="80" rx="42" ry="8" fill="#FA9F75"/>
-      <circle cx="160" cy="66" r="4" fill="#fff" stroke-width="2"/>
-      <rect x="184" y="62" width="6" height="8" rx="2" fill="#1A1A1A" stroke="none"/>
-      <ellipse class="hp-prop" cx="192" cy="66" rx="3" ry="18" fill="#DDD8CE" stroke-width="1.6"/>
-    </g>
-  </svg></div></div>
   <a href="/ko/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1591,7 +1563,7 @@
         <span class="sec-eyebrow">무제한</span>
         <h2 class="sec-head">부딪힐 제한이 없습니다.</h2>
       </div>
-      <p class="sec-sub">내 컴퓨터에서 실행되니 아무것도 카운트되지 않습니다. 할 수 있는 일은 다음과 같습니다.</p>
+      <p class="sec-sub">내 PC에서 돌아가니까, 아무것도 세지 않습니다.</p>
     </div>
     <div class="track-wrap">
       <div class="track">
@@ -1604,9 +1576,64 @@
             <path d="M47 61h28" stroke-width="3"/>
           </svg>
         </div>
-        <span class="make-kind">Chats</span>
-        <q>내가 안 틀릴 때까지 유기화학 문제 내줘.</q>
-        <span class="make-out">제한 없음, '5시간 후에 다시 오세요'도 없음</span>
+        <span class="make-kind">Chat</span>
+        <p class="make-say">하루 종일 물어보세요.</p>
+        <span class="make-out">제한 없음, &ldquo;나중에 다시 오세요&rdquo; 없음</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">공부</span>
+        <p class="make-say">노트로 만드는 플래시카드와 퀴즈.</p>
+        <span class="make-out">표, 체크리스트, 연표도</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">슬라이드</span>
+        <p class="make-say">진짜 PowerPoint 파일.</p>
+        <span class="make-out">고를 수 있는 6가지 색상 테마</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M58 12v14h14"/>
+            <path d="M28 38h26" stroke-width="4"/>
+            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">문서</span>
+        <p class="make-say">진짜 Word 문서.</p>
+        <span class="make-out">에세이와 노트를 .docx로 저장</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">파일</span>
+        <p class="make-say">PDF와 사진을 넣으세요.</p>
+        <span class="make-out">원하는 만큼</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true">
@@ -1620,8 +1647,8 @@
           </svg>
         </div>
         <span class="make-kind">코딩</span>
-        <q>브라우저에서 할 수 있는 스네이크 게임 만들어 줘.</q>
-        <span class="make-out">몇 시간이고 계속, 바닥나는 건 없음</span>
+        <p class="make-say">앱을 설명하면, 만들어 줍니다.</p>
+        <span class="make-out">몇 시간이고 코딩, 아무것도 바닥나지 않음</span>
       </article>
       <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
@@ -1633,53 +1660,11 @@
             <path d="M26 84l6-8M70 84l-6-8" />
           </svg>
         </div>
-        <span class="make-kind">이미지 생성</span>
-        <q>우리 게임 클랜용 픽셀 아트 로고.</q>
-        <span class="make-out">원하는 만큼, 하루 한도 없음</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
-            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M52 18v12h12" />
-            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
-          </svg>
-        </div>
-        <span class="make-kind">첨부 파일</span>
-        <q>내 실험 보고서야. 깐깐한 교수님이라면 어디서 감점할까?</q>
-        <span class="make-out">PDF, 사진, 스크린샷을 원하는 만큼</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
-            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
-            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M44 64v12M34 80h20"/>
-          </svg>
-        </div>
-        <span class="make-kind">발표 자료</span>
-        <q>월요일 세미나용 프랑스 혁명 슬라이드 10장.</q>
-        <span class="make-out">진짜 PowerPoint 파일</span>
+        <span class="make-kind">이미지</span>
+        <p class="make-say">원하는 만큼 그림을.</p>
+        <span class="make-out">하루 제한 없음</span>
       </article>
       <article class="make t-sage">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
-            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
-            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
-            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
-            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
-          </svg>
-        </div>
-        <span class="make-kind">공부</span>
-        <q>이 강의 PDF를 플래시카드와 퀴즈로 만들어 줘.</q>
-        <span class="make-out">카드와 퀴즈를 채팅 옆에</span>
-      </article>
-      <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
             <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
@@ -1689,8 +1674,24 @@
           </svg>
         </div>
         <span class="make-kind">웹페이지</span>
-        <q>규칙과 초대 링크가 있는 내 디스코드 서버 페이지.</q>
-        <span class="make-out">열고 공유할 수 있는 페이지</span>
+        <p class="make-say">열고 공유하는 웹페이지.</p>
+        <span class="make-out">동아리, 프로젝트, Discord용으로</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">출시 예정</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/>
+            <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/>
+            <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/>
+            <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/>
+            <path d="M26 60v6l12 6M70 60v6l-12 6"/>
+            <circle cx="48" cy="78" r="10" fill="#8EABE1"/>
+            <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/>
+          </svg>
+        </div>
+        <span class="make-kind">다이어그램</span>
+        <p class="make-say">그래프, 순서도, 회로, 세포.</p>
+        <span class="make-out">깔끔하게 그려져 노트에 바로</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true"><span class="fc-tag soon">출시 예정</span>
@@ -1702,8 +1703,8 @@
           </svg>
         </div>
         <span class="make-kind">자동화</span>
-        <q>매일 아침 받은편지함을 요약하고 답장 초안을 써 줘.</q>
-        <span class="make-out">하루를 보내는 동안 예약대로 실행</span>
+        <p class="make-say">알아서 돌아가는 작업.</p>
+        <span class="make-out">매일 아침 받은편지함 정리처럼</span>
       </article>
       </div>
     </div>
@@ -1735,13 +1736,6 @@
 </section>
 
 <div class="gcwhy">
-<section class="w-sec" id="can">
-  <div class="w">
-    <span class="w-eyebrow">할 수 있는 일</span>
-    <h2 class="w-h2">전부. <em>내 PC에서.</em></h2>
-    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>스네이크 게임 만들어 줘</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>밤의 아늑한 책상을 수채화로 그려 줘</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>세포생물학 퀴즈 내줘</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>40쪽짜리 PDF 요약해 줘</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>월요일용 슬라이드 10장</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>내 코드가 왜 멈추지?</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · 오프라인</span></div><div class="w-win-body" id="w-chat" data-score="점수" data-play="▶ 플레이" data-again="다시 하기" data-over="게임 오버"></div></div></div><p class="w-try-fine">GreenCube가 실제로 만드는 것들의 미리보기. 다른 것도 눌러 보세요.</p><template data-k="snake" data-ask="스네이크 게임 만들어 줘"><p>완성. 여기서 바로 해 보세요:</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="스네이크 게임"></canvas><div class="w-game-ui"><span class="w-score">점수 0</span><button type="button" class="w-btn w-play">▶ 플레이</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">방향키나 스와이프로 이동.</p></div></template><template data-k="image" data-ask="밤의 아늑한 책상을 수채화로 그려 줘"><p>여기 있어요:</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="창가에 놓인 밤의 아늑한 책상. 스탠드, 노트북, 책, 화분이 있는 수채화. GreenCube 제작."></picture></div><p class="w-img-cap">내 PC에서 제작. 하루 한도 없음.</p></template><template data-k="quiz" data-ask="세포생물학 퀴즈 내줘"><p>카드가 준비됐어요. 뒤집어 보고 다음 카드로:</p><div class="w-deck" data-cards="[[&quot;미토콘드리아는 무슨 일을 하나요?&quot;, &quot;세포에 필요한 에너지(ATP)를 만듭니다.&quot;], [&quot;세포의 DNA는 어디에 있나요?&quot;, &quot;핵 안에.&quot;], [&quot;리보솜은 무엇을 만드나요?&quot;, &quot;단백질.&quot;], [&quot;세포에 무엇이 드나들지 정하는 것은?&quot;, &quot;세포막.&quot;], [&quot;식물과 동물 중 세포벽이 있는 세포는?&quot;, &quot;식물 세포.&quot;]]" data-hint="눌러서 뒤집기"><button type="button" class="w-flip"><span><em><span class="q">미토콘드리아는 무슨 일을 하나요?</span><small>눌러서 뒤집기</small></em><em class="a">세포에 필요한 에너지(ATP)를 만듭니다.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="이전 카드">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="다음 카드">&rarr;</button></div></div></template><template data-k="pdf" data-ask="40쪽짜리 PDF 요약해 줘"><p>40쪽을 6가지 요점으로:</p><ul><li>이 연구는 나트륨으로 만든 새 배터리를 시험합니다.</li><li>지금의 리튬 배터리보다 두 배 빨리 충전됩니다.</li><li>용량이 20% 줄어들기 전까지 3,000번 충전할 수 있습니다.</li><li>나트륨은 리튬보다 싸고 구하기 쉽습니다.</li><li>더 무거워서 휴대폰보다는 집이나 버스에 어울립니다.</li><li>판매하려면 아직 대규모 시험이 더 필요합니다.</li></ul></template><template data-k="slides" data-ask="월요일용 슬라이드 10장"><p>발표 자료가 준비됐어요. 스타일을 고르세요:</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>프랑스 혁명</b><small>1789년부터 1799년까지</small></div><div class="w-sl"><b>시작된 이유</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>세이지</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>귤</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>등나무</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>재스민</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>밤</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>기본</button></div></template><template data-k="bug" data-ask="내 코드가 왜 멈추지?"><p>반복문이 끝나지 않아요: <b>i</b> 가 증가하지 않아요. 12번째 줄에 <b>i += 1</b> 를 추가하면 됩니다.</p></template>
-  </div>
-</section>
 
 <section class="w-sec w-center" id="money">
   <div class="w">
@@ -1844,70 +1838,26 @@
       </div>
     </div>
 
-    <div class="tier-row" id="tier-cards">
-      <article class="tier-card rv" style="--tint:#FAE289">
-        <span class="tier-n">1단계</span>
-        <h3>Seed</h3>
-        <p class="tier-spec">RAM 8 GB, 그래픽카드 없음</p>
-        <ul class="tier-list">
-          <li>다 되지만 느림</li>
-          <li>8 GB에 맞춘 크기</li>
-          <li>웹페이지는 처음엔 꺼짐. 이미지는 RAM 12&nbsp;GB 필요</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EA674">
-        <span class="tier-n">2단계</span>
-        <h3>Sprout</h3>
-        <p class="tier-spec">RAM 16 GB, 또는 그래픽카드와 8 GB</p>
-        <ul class="tier-list">
-          <li>안정적이고 편한 속도</li>
-          <li>발표 자료 작성</li>
-          <li>웹페이지와 이미지, 대기 시간 먼저 안내</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#FA9F75">
-        <span class="tier-n">3단계</span>
-        <h3>Bloom</h3>
-        <p class="tier-spec">8 GB 그래픽카드, 또는 그래픽카드 + RAM 16 GB</p>
-        <ul class="tier-list">
-          <li>그래픽카드 덕분에 빠름</li>
-          <li>웹페이지와 이미지, 대기 경고 없음</li>
-          <li>더 긴 채팅과 문서를 한 번에 읽음</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EABE1">
-        <span class="tier-n">4단계</span>
-        <h3>Thrive</h3>
-        <p class="tier-spec">8 GB 그래픽카드, RAM 24 GB</p>
-        <ul class="tier-list">
-          <li>그래픽카드에 들어가는 가장 큰 AI 모델</li>
-          <li>네 단계 중 가장 빠름</li>
-          <li>가장 긴 채팅과 문서를 읽음</li>
-        </ul>
-      </article>
-    </div>
-
-
-    <div class="tt-wrap rv">
+    <div class="tt-wrap rv" id="tier-cards">
       <table class="tier-table">
-        <caption>단계별 기능</caption>
+        <caption>PC 종류별로 GreenCube가 하는 일</caption>
         <thead>
-          <tr><th scope="col">기능</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+          <tr><th scope="col">기능</th><th scope="col" style="--tint:#FAE289"><i></i><b>Seed</b><small>RAM 8 GB, 그래픽카드 없음</small></th><th scope="col" style="--tint:#8EA674"><i></i><b>Sprout</b><small>RAM 16 GB, 또는 8 GB + 4 GB 카드</small></th><th scope="col" style="--tint:#FA9F75"><i></i><b>Bloom</b><small>8 GB 카드, 또는 4 GB 카드 + RAM 16 GB</small></th><th scope="col" style="--tint:#8EABE1"><i></i><b>Thrive</b><small>8 GB 카드 + RAM 24 GB</small></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">속도</th><td>느림, 한 단어씩</td><td>안정적</td><td>빠름</td><td>가장 빠름</td></tr>
-          <tr><th scope="row">AI 모델 크기</th><td>작음</td><td>중간</td><td>중간</td><td>그래픽카드에 들어가는 최대</td></tr>
-          <tr><th scope="row">채팅, 문서, 사진</th><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">플래시카드, 퀴즈, PowerPoint 파일</th><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">AI가 쓰는 발표 자료</th><td>문서를 쓰고 슬라이드로 저장</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">웹페이지</th><td>처음엔 꺼짐. 켤 수 있음</td><td>먼저 묻고 걸리는 시간을 알려 줌</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">만드는 앱</th><td>한 번에 최대 8개 파일</td><td>최대 12개 파일</td><td>최대 24개 파일</td><td>최대 48개 파일</td></tr>
-          <tr><th scope="row">이미지 생성</th><td>RAM 12&nbsp;GB 필요</td><td>먼저 묻고 걸리는 시간을 알려 줌</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">한 번에 읽을 수 있는 양<small>채팅, 문서, 또는 둘 다</small></th><td>약 3,000단어</td><td>약 12,000단어</td><td>약 12,000~25,000단어</td><td>50,000단어 이상</td></tr>
+          <tr><th scope="row">속도</th><td>느리지만 작동</td><td>안정적</td><td>빠름</td><td>가장 빠름</td></tr>
+          <tr><th scope="row">AI 모델</th><td>Gemma 4 E2B</td><td>Gemma 4 E4B</td><td>Gemma 4 E4B</td><td>카드에 들어가는 가장 큰 모델</td></tr>
+          <tr><th scope="row">채팅, PDF, 사진</th><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">플래시카드, 퀴즈, 표</th><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">PowerPoint와 Word 파일</th><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">AI가 쓰는 발표 자료</th><td>문서에서 만듦</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">웹페이지</th><td>처음엔 꺼짐, 켤 수 있음</td><td>예, 대기 시간을 알려준 뒤</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">이미지</th><td>RAM 12&nbsp;GB 필요</td><td>예*, 장당 약 2분</td><td>예*</td><td><span class="yes" aria-label="예"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">만드는 앱</th><td>최대 8개 파일</td><td>최대 12개 파일</td><td>최대 24개 파일</td><td>최대 48개 파일</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="tt-note rv">단어 수는 일반적인 값입니다. 컴퓨터의 여유 메모리가 많을수록 늘어납니다. 나머지는 출발점일 뿐 잠금이 아닙니다(이미지는 RAM 12&nbsp;GB 필요). 설정 &rarr; 내 컴퓨터가 할 수 있는 일에서 각각 켜고 끌 수 있습니다.</p>
+    <p class="tt-note rv">* 이미지는 RAM 12&nbsp;GB 이상이 필요합니다. 이미지당 시간은 Intel 그래픽 16&nbsp;GB 노트북에서 측정했습니다. 한 번에 읽을 수 있는 양(채팅과 파일)은 여유 메모리에 따라 늘어납니다. 각 등급은 출발점일 뿐 잠금이 아닙니다. 설정 &rarr; 내 컴퓨터가 할 수 있는 일에서 각각 켜고 끌 수 있습니다.</p>
 
 
   </div>
@@ -1976,7 +1926,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="#top" class="brand-lock" aria-label="GreenCube 홈">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -1993,7 +1943,7 @@
         <h3>제품</h3>
         <ul>
           <li><a href="/ko/buy">GreenCube 구매</a></li>
-          <li><a href="/ko/#can">기능</a></li>
+          <li><a href="/ko/#what">기능</a></li>
           <li><a href="/ko/what-you-get">내 컴퓨터에서 돌아가나요?</a></li>
         </ul>
       </nav>
@@ -2034,8 +1984,14 @@
         <a href="https://legal.greencube.app/privacy">개인정보</a>
         <a href="https://legal.greencube.app/terms">약관</a>
       </div>
-      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr">FR</a><a href="/de/" hreflang="de">DE</a><a href="/it/" hreflang="it">IT</a><a href="/nl/" hreflang="nl">NL</a><a href="/pl/" hreflang="pl">PL</a><a href="/tr/" hreflang="tr">TR</a><a href="/ru/" hreflang="ru">RU</a><a href="/uk/" hreflang="uk">UK</a><a href="/ar/" hreflang="ar">AR</a><a href="/hi/" hreflang="hi">HI</a><a href="/id/" hreflang="id">ID</a><a href="/vi/" hreflang="vi">VI</a><a href="/th/" hreflang="th">TH</a><a href="/ja/" hreflang="ja">JA</a><a href="/ko/" hreflang="ko" aria-current="true">KO</a><a href="/zh/" hreflang="zh">中文</a><a href="/zh-tw/" hreflang="zh-tw">繁體</a></div>
     </div>
+    <pre class="f-ascii" aria-hidden="true"> ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗██╗   ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██║   ██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║██║     ██║   ██║██████╔╝█████╗
+██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; 당신이 소유하는 ai. 제한 없음 <span class="cur"></span></p>
   </div>
 </footer>
 
@@ -2305,127 +2261,6 @@
         a.classList.toggle('err', !on);
       });
     }
-  })();
-</script>
-<script>
-  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
-  (() => {
-    const box = document.getElementById('w-chat');
-    if (!box) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const asks = [...document.querySelectorAll('.w-ask')];
-    let run = 0, stopGame = () => {};
-
-    function snake(root) {
-      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
-      const W = 12, Hh = 9, S = 20;
-      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
-      let body, dir, next, food, pts, timer = null;
-      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
-      const draw = () => {
-        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
-        g.fillStyle = 'rgba(26,26,26,.04)';
-        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
-        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
-        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
-      };
-      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
-      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
-      const tick = () => {
-        dir = next;
-        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
-        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
-          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
-        }
-        body.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
-        draw();
-      };
-      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
-      function key(e) {
-        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
-        if (d && timer) { e.preventDefault(); turn(d); }
-      }
-      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
-      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
-      let sx, sy;
-      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-      cv.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
-      }, { passive: true });
-      reset();
-      stopGame = stop;
-    }
-
-    function deck(root) {
-      const cards = JSON.parse(root.dataset.cards);
-      let i = 0;
-      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
-      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
-      const show = () => {
-        flip.classList.remove('flipped');
-        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
-        pos.textContent = (i + 1) + ' / ' + cards.length;
-        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
-      };
-      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
-      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
-      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
-      prev.disabled = true;
-    }
-
-    function themes(root) {
-      const dv = root.querySelector('.w-dv');
-      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
-        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
-        dv.dataset.theme = b.dataset.t;
-      }));
-    }
-
-    function play(btn) {
-      const id = ++run;
-      stopGame(); stopGame = () => {};
-      asks.forEach((b) => b.classList.toggle('on', b === btn));
-      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
-      const text = tpl.dataset.ask;
-      box.innerHTML = '';
-      const me = document.createElement('p');
-      me.className = 'w-msg me';
-      box.appendChild(me);
-      let i = 0;
-      const answer = () => {
-        if (id !== run) return;
-        const ai = document.createElement('div');
-        ai.className = 'w-msg ai';
-        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
-        box.appendChild(ai);
-        setTimeout(() => {
-          if (id !== run) return;
-          ai.innerHTML = '';
-          ai.appendChild(tpl.content.cloneNode(true));
-          ai.querySelectorAll('.w-game').forEach(snake);
-          ai.querySelectorAll('.w-deck').forEach(deck);
-          if (ai.querySelector('.w-dv')) themes(ai);
-        }, reduce ? 0 : 700);
-      };
-      if (reduce) { me.textContent = text; answer(); return; }
-      const type = () => {
-        if (id !== run) return;
-        me.innerHTML = '';
-        me.append(text.slice(0, i));
-        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
-        if (i++ < text.length) setTimeout(type, 26);
-        else { me.textContent = text; setTimeout(answer, 250); }
-      };
-      type();
-    }
-    asks.forEach((b) => b.addEventListener('click', () => play(b)));
-    const sec = document.getElementById('can');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
-      io.observe(sec);
-    } else play(asks[0]);
   })();
 </script>
 <script>

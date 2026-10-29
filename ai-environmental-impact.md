@@ -67,4 +67,4 @@ Want more? [How much water does AI use?](https://greencube.app/how-much-water-do
 
 ## AI on the PC you already have.
 
-[Get GreenCube, €9.99 →](https://greencube.app/buy) [See what it does](https://greencube.app/#can)
+[Get GreenCube, €9.99 →](https://greencube.app/buy) [See what it does](https://greencube.app/#what)

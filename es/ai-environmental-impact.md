@@ -67,4 +67,4 @@ No. Crece rápido, pero sigue siendo una parte pequeña de la energía del mundo
 
 ## IA en el PC que ya tienes.
 
-[Consigue GreenCube, 9,99 € →](https://greencube.app/es/buy) [Mira qué hace](https://greencube.app/es/#can)
+[Consigue GreenCube, 9,99 € →](https://greencube.app/es/buy) [Mira qué hace](https://greencube.app/es/#what)

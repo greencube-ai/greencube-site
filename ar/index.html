@@ -352,6 +352,17 @@
       overflow: hidden;
       background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
     }
+
+    /* ---------- ASCII wordmark footer ---------- */
+    .f-ascii {
+      margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
+      font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+      font-size: clamp(5px, 1.42vw, 17px); line-height: 1.05; color: #7E8A5A; opacity: .55; text-align: center;
+    }
+    .f-prompt { margin-top: 18px; text-align: center; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; color: var(--ink-mute); }
+    .f-prompt .cur { display: inline-block; width: .6em; height: 1.1em; vertical-align: -0.2em; background: #7E8A5A; animation: fBlink 1.1s steps(1) infinite; }
+    @keyframes fBlink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .f-prompt .cur { animation: none; } }
     .hero-landscape {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -537,12 +548,16 @@
     @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
     /* ---------- the tier table: the four cards, spelled out ---------- */
-    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
-    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tt-wrap { max-width: 1040px; margin: 44px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: var(--sans); font-size: 15.5px; }
     .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
     .tier-table tbody tr:last-child > * { border-bottom: 0; }
     .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th b { font-weight: 600; }
+    .tier-table thead th small { display: block; margin-top: 5px; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0; line-height: 1.35; color: var(--ink-mute); white-space: normal; }
+    .tier-table .yours { background: color-mix(in srgb, var(--tint, #8EA674) 16%, #fff); }
+    .tier-table thead th.yours { box-shadow: inset 0 4px 0 #4E5F3A; }
     .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
     .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
     .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
@@ -551,7 +566,7 @@
     .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
     .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
     .tier-table .yes svg { width: 16px; height: 16px; }
-    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+    .tt-note { max-width: 1040px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
 
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
@@ -838,7 +853,7 @@
     }
     .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
     .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
-    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-say { margin: 10px 0 0; padding: 0 6px; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.22; letter-spacing: -.018em; color: var(--forest); }
     .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
     .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
 
@@ -1048,13 +1063,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -1344,14 +1352,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="turtle-main">
   /* the mascot in the places everyone passes: hero, three steps, download */
   .gt svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1371,17 +1371,6 @@
   .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
 
 
-  /* hero: the turtle flies its little plane across the sky, behind the headline, now and then */
-  .hero-plane { position: absolute; z-index: 1; top: 13%; left: -240px; width: clamp(120px, 10vw, 170px); pointer-events: none; animation: hp-fly 46s linear 3s infinite; }
-  .hero-plane .hp-bob { animation: hp-bob 3s ease-in-out infinite; }
-  .hero-plane .hp-prop { transform-box: fill-box; transform-origin: center; animation: hp-prop .12s linear infinite alternate; }
-  .hero-plane .hp-scarf { transform-box: fill-box; transform-origin: right center; animation: hp-scarf .5s ease-in-out infinite alternate; }
-  @keyframes hp-fly { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(calc(100vw + 480px)); } }
-  @keyframes hp-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-  @keyframes hp-prop { from { transform: scaleY(1); } to { transform: scaleY(.15); } }
-  @keyframes hp-scarf { from { transform: rotate(-4deg); } to { transform: rotate(6deg) scaleX(1.08); } }
-  @media (max-width: 760px) { .hero-plane { top: 9%; width: 96px; } }
-  @media (prefers-reduced-motion: reduce) { .hero-plane { display: none; } }
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/ar/", "inLanguage": "ar"}</script>
@@ -1394,7 +1383,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1550,28 +1538,12 @@
     </ul>
     <div class="cta-row rv">
       <a href="/ar/buy" class="cta-pill cta-primary"><span>احصل على GreenCube</span></a>
-      <a href="/ar/#can" class="cta-pill cta-ghost">شاهد ما يفعله <span class="arrow">→</span></a>
+      <a href="/ar/#what" class="cta-pill cta-ghost">شاهد ما يفعله <span class="arrow">→</span></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <div class="gt hero-plane" aria-hidden="true"><div class="hp-bob"><svg viewBox="0 0 200 110" aria-hidden="true" focusable="false">
-    <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path class="hp-scarf" d="M98,50 C84,46 74,52 62,46 C70,56 84,58 98,56 Z" fill="#FA9F75"/>
-      <path d="M24,40 L44,40 L54,62 L28,62 Z" fill="#FA9F75"/>
-      <path d="M22,66 C22,56 34,52 52,52 L150,52 C170,52 184,58 184,68 C184,78 170,84 150,84 L44,84 C30,84 22,76 22,66 Z" fill="#FAE289"/>
-      <path d="M96,52 C96,44 104,38 114,38 C124,38 132,44 132,52 Z" fill="#8EABE1" stroke-width="2"/>
-      <circle cx="114" cy="38" r="15" fill="#AFCB7C"/>
-      <g stroke="none"><circle cx="119" cy="36" r="2.6" fill="#1A1A1A"/><circle cx="126.5" cy="35.6" r="2" fill="#1A1A1A"/>
-        <circle cx="119.8" cy="35.2" r=".8" fill="#fff"/><ellipse cx="123" cy="42" rx="3.2" ry="1.8" fill="#FA9F75" opacity=".6"/></g>
-      <path d="M121,45 q2.2,1.6 4.4,0" fill="none" stroke-width="1.8"/>
-      <ellipse cx="104" cy="80" rx="42" ry="8" fill="#FA9F75"/>
-      <circle cx="160" cy="66" r="4" fill="#fff" stroke-width="2"/>
-      <rect x="184" y="62" width="6" height="8" rx="2" fill="#1A1A1A" stroke="none"/>
-      <ellipse class="hp-prop" cx="192" cy="66" rx="3" ry="18" fill="#DDD8CE" stroke-width="1.6"/>
-    </g>
-  </svg></div></div>
   <a href="/ar/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1591,7 +1563,7 @@
         <span class="sec-eyebrow">بلا حدود</span>
         <h2 class="sec-head">لا حدود تصطدم بها.</h2>
       </div>
-      <p class="sec-sub">يعمل على حاسوبك، فلا شيء يُحتسب. إليك كل ما يفعله.</p>
+      <p class="sec-sub">يعمل على حاسوبك، فلا يُحسب شيء.</p>
     </div>
     <div class="track-wrap">
       <div class="track">
@@ -1604,9 +1576,64 @@
             <path d="M47 61h28" stroke-width="3"/>
           </svg>
         </div>
-        <span class="make-kind">Chats</span>
-        <q>اختبرني في الكيمياء العضوية حتى أتوقف عن الخطأ.</q>
-        <span class="make-out">بلا حدود، وبلا «عُد بعد 5 ساعات»</span>
+        <span class="make-kind">Chat</span>
+        <p class="make-say">اسأل طوال اليوم.</p>
+        <span class="make-out">بلا حدود، وبلا &laquo;عُد لاحقًا&raquo;</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">الدراسة</span>
+        <p class="make-say">بطاقات مراجعة واختبارات من ملاحظاتك.</p>
+        <span class="make-out">وأيضًا جداول وقوائم مهام وخطوط زمنية</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">الشرائح</span>
+        <p class="make-say">ملفات PowerPoint حقيقية.</p>
+        <span class="make-out">6 سمات ألوان للاختيار</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M58 12v14h14"/>
+            <path d="M28 38h26" stroke-width="4"/>
+            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">المستندات</span>
+        <p class="make-say">مستندات Word حقيقية.</p>
+        <span class="make-out">مقالات وملاحظات محفوظة بصيغة .docx</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">الملفات</span>
+        <p class="make-say">أضف ملفات PDF والصور.</p>
+        <span class="make-out">بقدر ما تريد</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true">
@@ -1620,8 +1647,8 @@
           </svg>
         </div>
         <span class="make-kind">البرمجة</span>
-        <q>اصنع لي لعبة الثعبان ألعبها في المتصفح.</q>
-        <span class="make-out">استمر لساعات، لا شيء ينفد</span>
+        <p class="make-say">صِف تطبيقًا، وهو يبنيه.</p>
+        <span class="make-out">برمج لساعات، لا شيء ينفد</span>
       </article>
       <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
@@ -1633,53 +1660,11 @@
             <path d="M26 84l6-8M70 84l-6-8" />
           </svg>
         </div>
-        <span class="make-kind">توليد الصور</span>
-        <q>شعار بأسلوب البكسل لفريقي في الألعاب.</q>
-        <span class="make-out">كما تشاء، بلا حد يومي</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
-            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M52 18v12h12" />
-            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
-          </svg>
-        </div>
-        <span class="make-kind">المرفقات</span>
-        <q>هذا تقرير المختبر. أين سيخصم أستاذ صارم الدرجات؟</q>
-        <span class="make-out">ملفات PDF وصور ولقطات شاشة، كما تشاء</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
-            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
-            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M44 64v12M34 80h20"/>
-          </svg>
-        </div>
-        <span class="make-kind">العروض التقديمية</span>
-        <q>عشر شرائح عن الثورة الفرنسية لندوة يوم الإثنين.</q>
-        <span class="make-out">ملف PowerPoint حقيقي</span>
+        <span class="make-kind">الصور</span>
+        <p class="make-say">صور بقدر ما تريد.</p>
+        <span class="make-out">بلا حصة يومية</span>
       </article>
       <article class="make t-sage">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
-            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
-            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
-            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
-            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
-          </svg>
-        </div>
-        <span class="make-kind">الدراسة</span>
-        <q>حوّل ملف المحاضرة هذا إلى بطاقات مراجعة واختبار.</q>
-        <span class="make-out">بطاقات واختبار بجانب المحادثة</span>
-      </article>
-      <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
             <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
@@ -1689,8 +1674,24 @@
           </svg>
         </div>
         <span class="make-kind">صفحات الويب</span>
-        <q>صفحة لخادمي على Discord، فيها القواعد ورابط دعوة.</q>
-        <span class="make-out">صفحة يمكنك فتحها ومشاركتها</span>
+        <p class="make-say">صفحات ويب تفتحها وتشاركها.</p>
+        <span class="make-out">لنادٍ أو مشروع أو خادم Discord</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">قريبًا</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/>
+            <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/>
+            <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/>
+            <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/>
+            <path d="M26 60v6l12 6M70 60v6l-12 6"/>
+            <circle cx="48" cy="78" r="10" fill="#8EABE1"/>
+            <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/>
+          </svg>
+        </div>
+        <span class="make-kind">المخططات</span>
+        <p class="make-say">رسوم بيانية ومخططات انسيابية ودوائر وخلايا.</p>
+        <span class="make-out">مرسومة بإتقان وجاهزة لملاحظاتك</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true"><span class="fc-tag soon">قريبًا</span>
@@ -1702,8 +1703,8 @@
           </svg>
         </div>
         <span class="make-kind">الأتمتة</span>
-        <q>كل صباح، لخّص بريدي الوارد واكتب مسودات الردود.</q>
-        <span class="make-out">يعمل وفق جدول بينما تكمل يومك</span>
+        <p class="make-say">مهام تعمل وحدها.</p>
+        <span class="make-out">مثل ترتيب بريدك كل صباح</span>
       </article>
       </div>
     </div>
@@ -1735,13 +1736,6 @@
 </section>
 
 <div class="gcwhy">
-<section class="w-sec" id="can">
-  <div class="w">
-    <span class="w-eyebrow">ما يمكنك فعله</span>
-    <h2 class="w-h2">كل شيء. <em>على حاسوبك.</em></h2>
-    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>اصنع لي لعبة الثعبان</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>ارسم مكتبًا دافئًا ليلًا بالألوان المائية</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>اختبرني في علم الخلية</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>لخّص ملف PDF من 40 صفحة</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>10 شرائح ليوم الإثنين</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>لماذا يتعطل الكود؟</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · دون اتصال</span></div><div class="w-win-body" id="w-chat" data-score="النتيجة" data-play="▶ العب" data-again="العب مجددًا" data-over="انتهت اللعبة"></div></div></div><p class="w-try-fine">لمحة عن أشياء حقيقية يصنعها GreenCube. اضغط على غيرها.</p><template data-k="snake" data-ask="اصنع لي لعبة الثعبان"><p>تم. العبها هنا مباشرة:</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="لعبة الثعبان"></canvas><div class="w-game-ui"><span class="w-score">النتيجة 0</span><button type="button" class="w-btn w-play">▶ العب</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">استخدم الأسهم أو اسحب للتحرك.</p></div></template><template data-k="image" data-ask="ارسم مكتبًا دافئًا ليلًا بالألوان المائية"><p>تفضّل:</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="مكتب دافئ ليلًا بجانب نافذة، عليه مصباح وحاسوب محمول وكتب ونبتة، بالألوان المائية. من صنع GreenCube."></picture></div><p class="w-img-cap">صُنعت على حاسوبك. بلا حد يومي.</p></template><template data-k="quiz" data-ask="اختبرني في علم الخلية"><p>هذه بطاقاتك. اقلبها ثم انتقل إلى التالية:</p><div class="w-deck" data-cards="[[&quot;ما وظيفة الميتوكوندريا؟&quot;, &quot;تنتج الطاقة (ATP) للخلية.&quot;], [&quot;أين يوجد الحمض النووي للخلية؟&quot;, &quot;في النواة.&quot;], [&quot;ماذا تصنع الريبوسومات؟&quot;, &quot;البروتينات.&quot;], [&quot;ما الذي يحدد ما يدخل الخلية ويخرج منها؟&quot;, &quot;غشاء الخلية.&quot;], [&quot;نباتية أم حيوانية: أي الخلايا لها جدار خلوي؟&quot;, &quot;الخلايا النباتية.&quot;]]" data-hint="اضغط للقلب"><button type="button" class="w-flip"><span><em><span class="q">ما وظيفة الميتوكوندريا؟</span><small>اضغط للقلب</small></em><em class="a">تنتج الطاقة (ATP) للخلية.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="البطاقة السابقة">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="البطاقة التالية">&rarr;</button></div></div></template><template data-k="pdf" data-ask="لخّص ملف PDF من 40 صفحة"><p>40 صفحة في 6 نقاط:</p><ul><li>تختبر الدراسة بطارية جديدة مصنوعة من الصوديوم.</li><li>تُشحن أسرع بمرتين من بطاريات الليثيوم الحالية.</li><li>تتحمل 3,000 شحنة قبل أن تفقد 20% من سعتها.</li><li>الصوديوم أرخص وأسهل في الحصول عليه من الليثيوم.</li><li>هي أثقل، لذا تناسب المنازل والحافلات أكثر من الهواتف.</li><li>ما زالت تحتاج إلى اختبار واسع قبل أن تُباع.</li></ul></template><template data-k="slides" data-ask="10 شرائح ليوم الإثنين"><p>عرضك جاهز. اختر نمطًا:</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>الثورة الفرنسية</b><small>من 1789 إلى 1799</small></div><div class="w-sl"><b>لماذا بدأت</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>مريمية</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>يوسفي</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>وستارية</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>ياسمين</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>ليل</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>بسيط</button></div></template><template data-k="bug" data-ask="لماذا يتعطل الكود؟"><p>الحلقة لا تنتهي أبدًا: <b>i</b> لا يزيد أبدًا. أضف <b>i += 1</b> في السطر 12 وسيعمل.</p></template>
-  </div>
-</section>
 
 <section class="w-sec w-center" id="money">
   <div class="w">
@@ -1844,70 +1838,26 @@
       </div>
     </div>
 
-    <div class="tier-row" id="tier-cards">
-      <article class="tier-card rv" style="--tint:#FAE289">
-        <span class="tier-n">الفئة الأولى</span>
-        <h3>Seed</h3>
-        <p class="tier-spec">8 GB RAM، بلا بطاقة</p>
-        <ul class="tier-list">
-          <li>كل شيء يعمل، لكن أبطأ</li>
-          <li>بحجم يناسب 8 GB</li>
-          <li>صفحات الويب معطّلة في البداية. الصور تحتاج 12&nbsp;GB RAM</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EA674">
-        <span class="tier-n">الفئة الثانية</span>
-        <h3>Sprout</h3>
-        <p class="tier-spec">16 GB RAM، أو 8 GB مع بطاقة</p>
-        <ul class="tier-list">
-          <li>سرعة ثابتة ومريحة</li>
-          <li>يكتب العروض التقديمية</li>
-          <li>صفحات الويب والصور، بعد إخبارك بمدة الانتظار</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#FA9F75">
-        <span class="tier-n">الفئة الثالثة</span>
-        <h3>Bloom</h3>
-        <p class="tier-spec">بطاقة 8 GB، أو بطاقة + 16 GB RAM</p>
-        <ul class="tier-list">
-          <li>سريع بفضل بطاقة الرسومات</li>
-          <li>صفحات الويب والصور، دون تنبيه انتظار</li>
-          <li>يقرأ محادثات ومستندات أطول دفعة واحدة</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EABE1">
-        <span class="tier-n">الفئة الرابعة</span>
-        <h3>Thrive</h3>
-        <p class="tier-spec">بطاقة 8 GB، و24 GB RAM</p>
-        <ul class="tier-list">
-          <li>أكبر نموذج ذكاء اصطناعي تتسع له بطاقتك</li>
-          <li>الأسرع بين الأربع</li>
-          <li>يقرأ أطول المحادثات والمستندات</li>
-        </ul>
-      </article>
-    </div>
-
-
-    <div class="tt-wrap rv">
+    <div class="tt-wrap rv" id="tier-cards">
       <table class="tier-table">
-        <caption>ما تفعله كل فئة</caption>
+        <caption>ما يفعله GreenCube على كل نوع من الحواسيب</caption>
         <thead>
-          <tr><th scope="col">ما يفعله</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+          <tr><th scope="col">ما يفعله</th><th scope="col" style="--tint:#FAE289"><i></i><b>Seed</b><small>8 GB RAM، بلا بطاقة رسومات</small></th><th scope="col" style="--tint:#8EA674"><i></i><b>Sprout</b><small>16 GB RAM، أو 8 GB مع بطاقة 4 GB</small></th><th scope="col" style="--tint:#FA9F75"><i></i><b>Bloom</b><small>بطاقة 8 GB، أو بطاقة 4 GB مع 16 GB RAM</small></th><th scope="col" style="--tint:#8EABE1"><i></i><b>Thrive</b><small>بطاقة 8 GB مع 24 GB RAM</small></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">السرعة</th><td>بطيء، كلمة بكلمة</td><td>ثابت</td><td>سريع</td><td>الأسرع</td></tr>
-          <tr><th scope="row">حجم نموذج الذكاء الاصطناعي</th><td>صغير</td><td>متوسط</td><td>متوسط</td><td>الأكبر الذي تتسع له بطاقتك</td></tr>
-          <tr><th scope="row">المحادثة والمستندات والصور</th><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">بطاقات مراجعة واختبارات وملفات PowerPoint</th><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">عروض يكتبها الذكاء الاصطناعي</th><td>يكتب مستندًا ثم يحفظه شرائح</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">صفحات الويب</th><td>معطّلة في البداية. يمكنك تشغيلها</td><td>يسأل أولًا ويخبرك كم سيستغرق</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">التطبيقات التي يبرمجها</th><td>حتى 8 ملفات في المرة</td><td>حتى 12 ملفًا</td><td>حتى 24 ملفًا</td><td>حتى 48 ملفًا</td></tr>
-          <tr><th scope="row">توليد الصور</th><td>يحتاج 12&nbsp;GB RAM</td><td>يسأل أولًا ويخبرك كم سيستغرق</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">كم يستطيع أن يقرأ دفعة واحدة<small>محادثة أو مستند أو كلاهما</small></th><td>نحو 3,000 كلمة</td><td>نحو 12,000 كلمة</td><td>نحو 12,000 إلى 25,000 كلمة</td><td>50,000 كلمة أو أكثر</td></tr>
+          <tr><th scope="row">السرعة</th><td>بطيء، لكنه يعمل</td><td>ثابت</td><td>سريع</td><td>الأسرع</td></tr>
+          <tr><th scope="row">نموذج الذكاء الاصطناعي</th><td>Gemma 4 E2B</td><td>Gemma 4 E4B</td><td>Gemma 4 E4B</td><td>أكبر نموذج تتسع له بطاقتك</td></tr>
+          <tr><th scope="row">الدردشة وملفات PDF والصور</th><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">بطاقات مراجعة واختبارات وجداول</th><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">ملفات PowerPoint وWord</th><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">عروض يكتبها الذكاء الاصطناعي</th><td>تُصنع من مستند</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">صفحات الويب</th><td>مطفأة في البداية، ويمكنك تشغيلها</td><td>نعم، بعد أن يخبرك بمدة الانتظار</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">الصور</th><td>يحتاج 12&nbsp;GB RAM</td><td>نعم*، نحو دقيقتين لكل صورة</td><td>نعم*</td><td><span class="yes" aria-label="نعم"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">التطبيقات التي يبرمجها</th><td>حتى 8 ملفات</td><td>حتى 12 ملفًا</td><td>حتى 24 ملفًا</td><td>حتى 48 ملفًا</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="tt-note rv">أعداد الكلمات تقريبية: تزداد كلما زادت الذاكرة الحرة في حاسوبك. كل ما عدا ذلك نقطة بداية وليس قفلًا (الصور تحتاج 12&nbsp;GB RAM). الإعدادات &rarr; ما يستطيع حاسوبك فعله تشغّل كل ميزة أو توقفها.</p>
+    <p class="tt-note rv">* الصور تحتاج 12&nbsp;GB RAM أو أكثر. وقت الصورة مقيس على حاسوب محمول 16&nbsp;GB برسومات Intel. ما يستطيع قراءته دفعة واحدة (دردشة مع ملفاتك) يزداد مع الذاكرة الحرة. كل مستوى نقطة بداية وليس قفلًا: الإعدادات &rarr; ما يستطيع حاسوبك فعله تشغّل كل جزء أو توقفه.</p>
 
 
   </div>
@@ -1976,7 +1926,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="#top" class="brand-lock" aria-label="صفحة GreenCube الرئيسية">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -1993,7 +1943,7 @@
         <h3>المنتج</h3>
         <ul>
           <li><a href="/ar/buy">احصل على GreenCube</a></li>
-          <li><a href="/ar/#can">ما يفعله</a></li>
+          <li><a href="/ar/#what">ما يفعله</a></li>
           <li><a href="/ar/what-you-get">هل سيعمل على حاسوبي؟</a></li>
         </ul>
       </nav>
@@ -2034,8 +1984,14 @@
         <a href="https://legal.greencube.app/privacy">الخصوصية</a>
         <a href="https://legal.greencube.app/terms">الشروط</a>
       </div>
-      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr">FR</a><a href="/de/" hreflang="de">DE</a><a href="/it/" hreflang="it">IT</a><a href="/nl/" hreflang="nl">NL</a><a href="/pl/" hreflang="pl">PL</a><a href="/tr/" hreflang="tr">TR</a><a href="/ru/" hreflang="ru">RU</a><a href="/uk/" hreflang="uk">UK</a><a href="/ar/" hreflang="ar" aria-current="true">AR</a><a href="/hi/" hreflang="hi">HI</a><a href="/id/" hreflang="id">ID</a><a href="/vi/" hreflang="vi">VI</a><a href="/th/" hreflang="th">TH</a><a href="/ja/" hreflang="ja">JA</a><a href="/ko/" hreflang="ko">KO</a><a href="/zh/" hreflang="zh">中文</a><a href="/zh-tw/" hreflang="zh-tw">繁體</a></div>
     </div>
+    <pre class="f-ascii" aria-hidden="true"> ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗██╗   ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██║   ██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║██║     ██║   ██║██████╔╝█████╗
+██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; ذكاء اصطناعي تملكه. بلا حدود <span class="cur"></span></p>
   </div>
 </footer>
 
@@ -2305,127 +2261,6 @@
         a.classList.toggle('err', !on);
       });
     }
-  })();
-</script>
-<script>
-  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
-  (() => {
-    const box = document.getElementById('w-chat');
-    if (!box) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const asks = [...document.querySelectorAll('.w-ask')];
-    let run = 0, stopGame = () => {};
-
-    function snake(root) {
-      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
-      const W = 12, Hh = 9, S = 20;
-      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
-      let body, dir, next, food, pts, timer = null;
-      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
-      const draw = () => {
-        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
-        g.fillStyle = 'rgba(26,26,26,.04)';
-        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
-        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
-        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
-      };
-      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
-      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
-      const tick = () => {
-        dir = next;
-        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
-        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
-          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
-        }
-        body.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
-        draw();
-      };
-      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
-      function key(e) {
-        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
-        if (d && timer) { e.preventDefault(); turn(d); }
-      }
-      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
-      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
-      let sx, sy;
-      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-      cv.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
-      }, { passive: true });
-      reset();
-      stopGame = stop;
-    }
-
-    function deck(root) {
-      const cards = JSON.parse(root.dataset.cards);
-      let i = 0;
-      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
-      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
-      const show = () => {
-        flip.classList.remove('flipped');
-        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
-        pos.textContent = (i + 1) + ' / ' + cards.length;
-        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
-      };
-      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
-      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
-      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
-      prev.disabled = true;
-    }
-
-    function themes(root) {
-      const dv = root.querySelector('.w-dv');
-      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
-        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
-        dv.dataset.theme = b.dataset.t;
-      }));
-    }
-
-    function play(btn) {
-      const id = ++run;
-      stopGame(); stopGame = () => {};
-      asks.forEach((b) => b.classList.toggle('on', b === btn));
-      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
-      const text = tpl.dataset.ask;
-      box.innerHTML = '';
-      const me = document.createElement('p');
-      me.className = 'w-msg me';
-      box.appendChild(me);
-      let i = 0;
-      const answer = () => {
-        if (id !== run) return;
-        const ai = document.createElement('div');
-        ai.className = 'w-msg ai';
-        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
-        box.appendChild(ai);
-        setTimeout(() => {
-          if (id !== run) return;
-          ai.innerHTML = '';
-          ai.appendChild(tpl.content.cloneNode(true));
-          ai.querySelectorAll('.w-game').forEach(snake);
-          ai.querySelectorAll('.w-deck').forEach(deck);
-          if (ai.querySelector('.w-dv')) themes(ai);
-        }, reduce ? 0 : 700);
-      };
-      if (reduce) { me.textContent = text; answer(); return; }
-      const type = () => {
-        if (id !== run) return;
-        me.innerHTML = '';
-        me.append(text.slice(0, i));
-        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
-        if (i++ < text.length) setTimeout(type, 26);
-        else { me.textContent = text; setTimeout(answer, 250); }
-      };
-      type();
-    }
-    asks.forEach((b) => b.addEventListener('click', () => play(b)));
-    const sec = document.getElementById('can');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
-      io.observe(sec);
-    } else play(asks[0]);
   })();
 </script>
 <script>

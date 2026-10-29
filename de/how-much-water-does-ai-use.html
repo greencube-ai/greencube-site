@@ -265,13 +265,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -455,14 +448,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="lang-pick-css">
     .lang-pick { position: relative; }
     .lang-pick > summary { list-style: none; cursor: pointer; }
@@ -472,7 +457,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -576,7 +560,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="/de/" class="brand-lock" aria-label="GreenCube Startseite">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -593,7 +577,7 @@
         <h3>Produkt</h3>
         <ul>
           <li><a href="/de/buy">GreenCube holen</a></li>
-          <li><a href="/de/#can">Was sie kann</a></li>
+          <li><a href="/de/#what">Was sie kann</a></li>
           <li><a href="/de/what-you-get">Läuft sie auf meinem Computer?</a></li>
         </ul>
       </nav>
@@ -634,7 +618,6 @@
         <a href="https://legal.greencube.app/privacy">Datenschutz</a>
         <a href="https://legal.greencube.app/terms">AGB</a>
       </div>
-      <div class="f-lang"><a href="/how-much-water-does-ai-use" hreflang="en">EN</a><a href="/es/how-much-water-does-ai-use" hreflang="es">ES</a><a href="/pt/how-much-water-does-ai-use" hreflang="pt">PT</a><a href="/fr/how-much-water-does-ai-use" hreflang="fr">FR</a><a href="/de/how-much-water-does-ai-use" hreflang="de" aria-current="true">DE</a><a href="/it/how-much-water-does-ai-use" hreflang="it">IT</a><a href="/nl/how-much-water-does-ai-use" hreflang="nl">NL</a><a href="/pl/how-much-water-does-ai-use" hreflang="pl">PL</a><a href="/tr/how-much-water-does-ai-use" hreflang="tr">TR</a><a href="/ru/how-much-water-does-ai-use" hreflang="ru">RU</a><a href="/uk/how-much-water-does-ai-use" hreflang="uk">UK</a><a href="/ar/how-much-water-does-ai-use" hreflang="ar">AR</a><a href="/hi/how-much-water-does-ai-use" hreflang="hi">HI</a><a href="/id/how-much-water-does-ai-use" hreflang="id">ID</a><a href="/vi/how-much-water-does-ai-use" hreflang="vi">VI</a><a href="/th/how-much-water-does-ai-use" hreflang="th">TH</a><a href="/ja/how-much-water-does-ai-use" hreflang="ja">JA</a><a href="/ko/how-much-water-does-ai-use" hreflang="ko">KO</a><a href="/zh/how-much-water-does-ai-use" hreflang="zh">中文</a><a href="/zh-tw/how-much-water-does-ai-use" hreflang="zh-tw">繁體</a></div>
     </div>
   </div>
 </footer>

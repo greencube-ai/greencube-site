@@ -333,13 +333,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -366,14 +359,6 @@
 </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="lang-pick-css">
     .lang-pick { position: relative; }
     .lang-pick > summary { list-style: none; cursor: pointer; }
@@ -383,7 +368,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -473,7 +457,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="/zh/" class="brand-lock" aria-label="GreenCube 首页">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -490,7 +474,7 @@
         <h3>产品</h3>
         <ul>
           <li><a href="/zh/buy">获取 GreenCube</a></li>
-          <li><a href="/zh/#can">功能</a></li>
+          <li><a href="/zh/#what">功能</a></li>
           <li><a href="/zh/what-you-get">我的电脑能跑吗？</a></li>
         </ul>
       </nav>
@@ -531,7 +515,6 @@
         <a href="https://legal.greencube.app/privacy">隐私</a>
         <a href="https://legal.greencube.app/terms">条款</a>
       </div>
-      <div class="f-lang"><a href="/what-you-get" hreflang="en">EN</a><a href="/es/what-you-get" hreflang="es">ES</a><a href="/pt/what-you-get" hreflang="pt">PT</a><a href="/fr/what-you-get" hreflang="fr">FR</a><a href="/de/what-you-get" hreflang="de">DE</a><a href="/it/what-you-get" hreflang="it">IT</a><a href="/nl/what-you-get" hreflang="nl">NL</a><a href="/pl/what-you-get" hreflang="pl">PL</a><a href="/tr/what-you-get" hreflang="tr">TR</a><a href="/ru/what-you-get" hreflang="ru">RU</a><a href="/uk/what-you-get" hreflang="uk">UK</a><a href="/ar/what-you-get" hreflang="ar">AR</a><a href="/hi/what-you-get" hreflang="hi">HI</a><a href="/id/what-you-get" hreflang="id">ID</a><a href="/vi/what-you-get" hreflang="vi">VI</a><a href="/th/what-you-get" hreflang="th">TH</a><a href="/ja/what-you-get" hreflang="ja">JA</a><a href="/ko/what-you-get" hreflang="ko">KO</a><a href="/zh/what-you-get" hreflang="zh" aria-current="true">中文</a><a href="/zh-tw/what-you-get" hreflang="zh-tw">繁體</a></div>
     </div>
   </div>
 </footer>

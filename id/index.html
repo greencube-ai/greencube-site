@@ -352,6 +352,17 @@
       overflow: hidden;
       background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
     }
+
+    /* ---------- ASCII wordmark footer ---------- */
+    .f-ascii {
+      margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
+      font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+      font-size: clamp(5px, 1.42vw, 17px); line-height: 1.05; color: #7E8A5A; opacity: .55; text-align: center;
+    }
+    .f-prompt { margin-top: 18px; text-align: center; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; color: var(--ink-mute); }
+    .f-prompt .cur { display: inline-block; width: .6em; height: 1.1em; vertical-align: -0.2em; background: #7E8A5A; animation: fBlink 1.1s steps(1) infinite; }
+    @keyframes fBlink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .f-prompt .cur { animation: none; } }
     .hero-landscape {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -537,12 +548,16 @@
     @media (max-width: 900px) { .tier-row { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .tier-row { grid-template-columns: 1fr; } .tiers { padding-bottom: 76px; } }
     /* ---------- the tier table: the four cards, spelled out ---------- */
-    .tt-wrap { max-width: 920px; margin: 56px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
-    .tier-table { width: 100%; min-width: 720px; border-collapse: collapse; font-family: var(--sans); font-size: 14.5px; }
+    .tt-wrap { max-width: 1040px; margin: 44px auto 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--paper-soft); }
+    .tier-table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: var(--sans); font-size: 15.5px; }
     .tier-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .tier-table th, .tier-table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.45; }
     .tier-table tbody tr:last-child > * { border-bottom: 0; }
     .tier-table thead th { background: #FBF8F0; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--forest); white-space: nowrap; }
+    .tier-table thead th b { font-weight: 600; }
+    .tier-table thead th small { display: block; margin-top: 5px; font-family: var(--sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0; line-height: 1.35; color: var(--ink-mute); white-space: normal; }
+    .tier-table .yours { background: color-mix(in srgb, var(--tint, #8EA674) 16%, #fff); }
+    .tier-table thead th.yours { box-shadow: inset 0 4px 0 #4E5F3A; }
     .tier-table thead th i { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; background: var(--tint); border: 1.6px solid rgba(26, 26, 26, .55); }
     .tier-table tbody th { width: 25%; font-weight: 600; color: var(--forest); }
     .tier-table tbody th small { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 500; color: var(--ink-mute); }
@@ -551,7 +566,7 @@
     .tier-table thead th:first-child { background: #FBF8F0; color: var(--ink-mute); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
     .tier-table .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(142, 166, 116, .18); color: #4E5F3A; }
     .tier-table .yes svg { width: 16px; height: 16px; }
-    .tt-note { max-width: 920px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+    .tt-note { max-width: 1040px; margin: 14px auto 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
 
 
     /* CTA row — soft pill email + filled pill + ghost pill, centered */
@@ -838,7 +853,7 @@
     }
     .fc-tag.soon { color: var(--m-wisteria-deep); background: #EEF2FB; }
     .make-kind { font-size: 11.5px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--c-deep); padding: 0 6px; }
-    .make q { display: block; margin-top: 8px; padding: 0 6px; font-family: var(--display); font-weight: 500; font-size: 16.5px; line-height: 1.35; letter-spacing: -.012em; color: var(--forest); quotes: '\201C' '\201D'; }
+    .make-say { margin: 10px 0 0; padding: 0 6px; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.22; letter-spacing: -.018em; color: var(--forest); }
     .make-out { margin-top: auto; padding: 14px 6px 0; font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 7px; align-items: baseline; }
     .make-out::before { content: '\2192'; color: var(--c-deep); font-weight: 600; }
 
@@ -1048,13 +1063,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss); color: var(--forest); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest); border-color: var(--forest); color: var(--paper); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -1344,14 +1352,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="turtle-main">
   /* the mascot in the places everyone passes: hero, three steps, download */
   .gt svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1371,17 +1371,6 @@
   .dl-turtle .tt-arm { animation: gt-wave 4s ease-in-out infinite; }
 
 
-  /* hero: the turtle flies its little plane across the sky, behind the headline, now and then */
-  .hero-plane { position: absolute; z-index: 1; top: 13%; left: -240px; width: clamp(120px, 10vw, 170px); pointer-events: none; animation: hp-fly 46s linear 3s infinite; }
-  .hero-plane .hp-bob { animation: hp-bob 3s ease-in-out infinite; }
-  .hero-plane .hp-prop { transform-box: fill-box; transform-origin: center; animation: hp-prop .12s linear infinite alternate; }
-  .hero-plane .hp-scarf { transform-box: fill-box; transform-origin: right center; animation: hp-scarf .5s ease-in-out infinite alternate; }
-  @keyframes hp-fly { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(calc(100vw + 480px)); } }
-  @keyframes hp-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-  @keyframes hp-prop { from { transform: scaleY(1); } to { transform: scaleY(.15); } }
-  @keyframes hp-scarf { from { transform: rotate(-4deg); } to { transform: rotate(6deg) scaleX(1.08); } }
-  @media (max-width: 760px) { .hero-plane { top: 9%; width: 96px; } }
-  @media (prefers-reduced-motion: reduce) { .hero-plane { display: none; } }
   @media (prefers-reduced-motion: reduce) { .gt *, .gt { animation: none !important; transition: none !important; } }
 </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "GreenCube", "alternateName": ["GreenCube AI"], "url": "https://greencube.app/id/", "inLanguage": "id"}</script>
@@ -1394,7 +1383,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1550,28 +1538,12 @@
     </ul>
     <div class="cta-row rv">
       <a href="/id/buy" class="cta-pill cta-primary"><span>Dapatkan GreenCube</span></a>
-      <a href="/id/#can" class="cta-pill cta-ghost">Lihat apa yang bisa dilakukan <span class="arrow">→</span></a>
+      <a href="/id/#what" class="cta-pill cta-ghost">Lihat apa yang bisa dilakukan <span class="arrow">→</span></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
-  <div class="gt hero-plane" aria-hidden="true"><div class="hp-bob"><svg viewBox="0 0 200 110" aria-hidden="true" focusable="false">
-    <g stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path class="hp-scarf" d="M98,50 C84,46 74,52 62,46 C70,56 84,58 98,56 Z" fill="#FA9F75"/>
-      <path d="M24,40 L44,40 L54,62 L28,62 Z" fill="#FA9F75"/>
-      <path d="M22,66 C22,56 34,52 52,52 L150,52 C170,52 184,58 184,68 C184,78 170,84 150,84 L44,84 C30,84 22,76 22,66 Z" fill="#FAE289"/>
-      <path d="M96,52 C96,44 104,38 114,38 C124,38 132,44 132,52 Z" fill="#8EABE1" stroke-width="2"/>
-      <circle cx="114" cy="38" r="15" fill="#AFCB7C"/>
-      <g stroke="none"><circle cx="119" cy="36" r="2.6" fill="#1A1A1A"/><circle cx="126.5" cy="35.6" r="2" fill="#1A1A1A"/>
-        <circle cx="119.8" cy="35.2" r=".8" fill="#fff"/><ellipse cx="123" cy="42" rx="3.2" ry="1.8" fill="#FA9F75" opacity=".6"/></g>
-      <path d="M121,45 q2.2,1.6 4.4,0" fill="none" stroke-width="1.8"/>
-      <ellipse cx="104" cy="80" rx="42" ry="8" fill="#FA9F75"/>
-      <circle cx="160" cy="66" r="4" fill="#fff" stroke-width="2"/>
-      <rect x="184" y="62" width="6" height="8" rx="2" fill="#1A1A1A" stroke="none"/>
-      <ellipse class="hp-prop" cx="192" cy="66" rx="3" ry="18" fill="#DDD8CE" stroke-width="1.6"/>
-    </g>
-  </svg></div></div>
   <a href="/id/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1591,7 +1563,7 @@
         <span class="sec-eyebrow">Tanpa batas</span>
         <h2 class="sec-head">Tidak ada batas yang menghalangi.</h2>
       </div>
-      <p class="sec-sub">Berjalan di komputermu sendiri, jadi tidak ada yang dihitung. Inilah semua yang bisa dilakukan.</p>
+      <p class="sec-sub">Berjalan di PC-mu sendiri, jadi tidak ada yang dihitung.</p>
     </div>
     <div class="track-wrap">
       <div class="track">
@@ -1604,9 +1576,64 @@
             <path d="M47 61h28" stroke-width="3"/>
           </svg>
         </div>
-        <span class="make-kind">Chats</span>
-        <q>Kuis aku soal kimia organik sampai aku tidak salah lagi.</q>
-        <span class="make-out">Tanpa batas, tanpa "kembali 5 jam lagi"</span>
+        <span class="make-kind">Chat</span>
+        <p class="make-say">Tanya seharian.</p>
+        <span class="make-out">Tanpa batas, tanpa &ldquo;coba lagi nanti&rdquo;</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">Belajar</span>
+        <p class="make-say">Flashcard dan kuis dari catatanmu.</p>
+        <span class="make-out">Juga tabel, daftar periksa, dan linimasa</span>
+      </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">Slide</span>
+        <p class="make-say">File PowerPoint sungguhan.</p>
+        <span class="make-out">6 tema warna untuk dipilih</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M58 12v14h14"/>
+            <path d="M28 38h26" stroke-width="4"/>
+            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">Dokumen</span>
+        <p class="make-say">Dokumen Word sungguhan.</p>
+        <span class="make-out">Esai dan catatan, disimpan sebagai .docx</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">File</span>
+        <p class="make-say">Masukkan PDF dan foto.</p>
+        <span class="make-out">Sebanyak yang kamu mau</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true">
@@ -1619,9 +1646,9 @@
             <path d="M68 50l-6 6 6 6M76 50l6 6-6 6" stroke="#FFFDF8" stroke-width="2.6"/>
           </svg>
         </div>
-        <span class="make-kind">Sesi coding</span>
-        <q>Buatkan aku game ular yang bisa dimainkan di browser.</q>
-        <span class="make-out">Lanjut berjam-jam, tidak ada yang habis</span>
+        <span class="make-kind">Coding</span>
+        <p class="make-say">Jelaskan aplikasinya. Ia yang membuatnya.</p>
+        <span class="make-out">Coding berjam-jam, tidak ada yang habis</span>
       </article>
       <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
@@ -1633,53 +1660,11 @@
             <path d="M26 84l6-8M70 84l-6-8" />
           </svg>
         </div>
-        <span class="make-kind">Pembuatan gambar</span>
-        <q>Logo pixel art untuk klan game-ku.</q>
-        <span class="make-out">Sebanyak yang kamu mau, tanpa jatah harian</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
-            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M52 18v12h12" />
-            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
-          </svg>
-        </div>
-        <span class="make-kind">Lampiran</span>
-        <q>Ini laporan praktikumku. Bagian mana yang akan dikurangi nilainya oleh dosen galak?</q>
-        <span class="make-out">PDF, foto, tangkapan layar, sebanyak yang kamu mau</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
-            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
-            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M44 64v12M34 80h20"/>
-          </svg>
-        </div>
-        <span class="make-kind">Presentasi</span>
-        <q>Sepuluh slide tentang Revolusi Prancis untuk seminar hari Senin.</q>
-        <span class="make-out">File PowerPoint sungguhan</span>
+        <span class="make-kind">Gambar</span>
+        <p class="make-say">Gambar sebanyak yang kamu mau.</p>
+        <span class="make-out">Tanpa jatah harian</span>
       </article>
       <article class="make t-sage">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
-            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
-            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
-            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
-            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
-          </svg>
-        </div>
-        <span class="make-kind">Belajar</span>
-        <q>Ubah PDF kuliah ini jadi flashcard dan kuis.</q>
-        <span class="make-out">Kartu dan kuis, di samping chat</span>
-      </article>
-      <article class="make t-tangerine">
         <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
             <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/>
@@ -1689,8 +1674,24 @@
           </svg>
         </div>
         <span class="make-kind">Halaman web</span>
-        <q>Halaman untuk server Discord-ku, dengan aturan dan link undangan.</q>
-        <span class="make-out">Halaman yang bisa kamu buka dan bagikan</span>
+        <p class="make-say">Halaman web untuk dibuka dan dibagikan.</p>
+        <span class="make-out">Untuk klub, proyek, atau Discord</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Segera hadir</span>
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/>
+            <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/>
+            <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/>
+            <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/>
+            <path d="M26 60v6l12 6M70 60v6l-12 6"/>
+            <circle cx="48" cy="78" r="10" fill="#8EABE1"/>
+            <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/>
+          </svg>
+        </div>
+        <span class="make-kind">Diagram</span>
+        <p class="make-say">Grafik, diagram alir, rangkaian listrik, dan sel.</p>
+        <span class="make-out">Digambar rapi, siap untuk catatanmu</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Segera hadir</span>
@@ -1702,8 +1703,8 @@
           </svg>
         </div>
         <span class="make-kind">Otomatisasi</span>
-        <q>Setiap pagi, rangkum kotak masukku dan buat draf balasannya.</q>
-        <span class="make-out">Berjalan sesuai jadwal sementara kamu menjalani harimu</span>
+        <p class="make-say">Tugas yang berjalan sendiri.</p>
+        <span class="make-out">Seperti merapikan kotak masukmu tiap pagi</span>
       </article>
       </div>
     </div>
@@ -1735,13 +1736,6 @@
 </section>
 
 <div class="gcwhy">
-<section class="w-sec" id="can">
-  <div class="w">
-    <span class="w-eyebrow">Yang bisa kamu lakukan</span>
-    <h2 class="w-h2">Semuanya. <em>Di PC-mu.</em></h2>
-    <div class="w-try"><div class="w-asks" role="list"><button type="button" class="w-ask" style="--c:var(--olive)" data-k="snake"><span class="e" aria-hidden="true">🎮</span>Buatkan aku game ular</button><button type="button" class="w-ask" style="--c:var(--clay)" data-k="image"><span class="e" aria-hidden="true">🎨</span>Gambar meja belajar yang nyaman di malam hari, cat air</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="quiz"><span class="e" aria-hidden="true">🧠</span>Kuis aku soal biologi sel</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="pdf"><span class="e" aria-hidden="true">📄</span>Ringkas PDF 40 halamanku</button><button type="button" class="w-ask" style="--c:var(--sun)" data-k="slides"><span class="e" aria-hidden="true">📊</span>10 slide untuk Senin</button><button type="button" class="w-ask" style="--c:var(--sky)" data-k="bug"><span class="e" aria-hidden="true">🛠️</span>Kenapa kodeku crash?</button></div><div class="w-win" aria-live="polite"><div class="w-win-top"><i></i><i></i><i></i><span>GreenCube · offline</span></div><div class="w-win-body" id="w-chat" data-score="Skor" data-play="▶ Main" data-again="Main lagi" data-over="Game over"></div></div></div><p class="w-try-fine">Contoh hal nyata yang dibuat GreenCube. Ketuk yang lain.</p><template data-k="snake" data-ask="Buatkan aku game ular"><p>Selesai. Mainkan langsung di sini:</p><div class="w-out w-game"><canvas class="w-snake-c" width="240" height="180" aria-label="Game ular"></canvas><div class="w-game-ui"><span class="w-score">Skor 0</span><button type="button" class="w-btn w-play">▶ Main</button></div><div class="w-pad"><button type="button" data-d="l">&larr;</button><button type="button" data-d="u">&uarr;</button><button type="button" data-d="d">&darr;</button><button type="button" data-d="r">&rarr;</button></div><p class="w-hint">Tombol panah atau geser untuk bergerak.</p></div></template><template data-k="image" data-ask="Gambar meja belajar yang nyaman di malam hari, cat air"><p>Ini dia:</p><div class="w-img"><picture><source srcset="/img/greencube-cozy-desk.webp" type="image/webp"><img src="/img/greencube-cozy-desk.jpg" width="512" height="512" loading="lazy" alt="Meja yang nyaman di malam hari dekat jendela, dengan lampu, laptop, buku, dan tanaman, dalam cat air. Dibuat oleh GreenCube."></picture></div><p class="w-img-cap">Dibuat di PC-mu. Tanpa batas harian.</p></template><template data-k="quiz" data-ask="Kuis aku soal biologi sel"><p>Ini kartumu. Balik kartunya, lalu lanjut ke berikutnya:</p><div class="w-deck" data-cards="[[&quot;Apa fungsi mitokondria?&quot;, &quot;Menghasilkan energi (ATP) untuk sel.&quot;], [&quot;Di mana DNA sel disimpan?&quot;, &quot;Di inti sel.&quot;], [&quot;Apa yang dibuat ribosom?&quot;, &quot;Protein.&quot;], [&quot;Apa yang menentukan apa yang masuk dan keluar sel?&quot;, &quot;Membran sel.&quot;], [&quot;Tumbuhan atau hewan: sel mana yang punya dinding sel?&quot;, &quot;Sel tumbuhan.&quot;]]" data-hint="ketuk untuk membalik"><button type="button" class="w-flip"><span><em><span class="q">Apa fungsi mitokondria?</span><small>ketuk untuk membalik</small></em><em class="a">Menghasilkan energi (ATP) untuk sel.</em></span></button><div class="w-deck-nav"><button type="button" class="prev" aria-label="Kartu sebelumnya">&larr;</button><span class="pos">1 / 5</span><button type="button" class="next" aria-label="Kartu berikutnya">&rarr;</button></div></div></template><template data-k="pdf" data-ask="Ringkas PDF 40 halamanku"><p>40 halaman, dalam 6 poin:</p><ul><li>Penelitian ini menguji baterai baru dari natrium.</li><li>Mengisi daya dua kali lebih cepat dari baterai litium saat ini.</li><li>Tahan 3.000 kali pengisian sebelum kehilangan 20% kapasitasnya.</li><li>Natrium lebih murah dan lebih mudah ditemukan daripada litium.</li><li>Lebih berat, jadi lebih cocok untuk rumah dan bus daripada ponsel.</li><li>Masih perlu diuji dalam skala besar sebelum bisa dijual.</li></ul></template><template data-k="slides" data-ask="10 slide untuk Senin"><p>Presentasimu sudah siap. Pilih gaya:</p><div class="w-dv" data-theme="sage"><div class="w-sl cover"><b>Revolusi Prancis</b><small>1789 sampai 1799</small></div><div class="w-sl"><b>Kenapa dimulai</b><i></i><i></i><i></i></div><div class="w-sl big"><b>1789</b></div></div><div class="w-themes"><button type="button" data-t="sage" class="on"><i style="--sw:#4E5F3A"></i>Sage</button><button type="button" data-t="tangerine"><i style="--sw:#A8492A"></i>Jeruk</button><button type="button" data-t="wisteria"><i style="--sw:#3D5E93"></i>Wisteria</button><button type="button" data-t="jasmine"><i style="--sw:#E9C54A"></i>Melati</button><button type="button" data-t="night"><i style="--sw:#0F120D"></i>Malam</button><button type="button" data-t="paper"><i style="--sw:#8EA674"></i>Polos</button></div></template><template data-k="bug" data-ask="Kenapa kodeku crash?"><p>Loop-mu tidak pernah berhenti: <b>i</b> tidak pernah naik. Tambahkan <b>i += 1</b> di baris 12 dan berhasil.</p></template>
-  </div>
-</section>
 
 <section class="w-sec w-center" id="money">
   <div class="w">
@@ -1844,70 +1838,26 @@
       </div>
     </div>
 
-    <div class="tier-row" id="tier-cards">
-      <article class="tier-card rv" style="--tint:#FAE289">
-        <span class="tier-n">Tingkat satu</span>
-        <h3>Seed</h3>
-        <p class="tier-spec">RAM 8 GB, tanpa kartu</p>
-        <ul class="tier-list">
-          <li>Semua berjalan, hanya lebih lambat</li>
-          <li>Dibuat muat di 8 GB</li>
-          <li>Halaman web awalnya mati. Gambar butuh RAM 12&nbsp;GB</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EA674">
-        <span class="tier-n">Tingkat dua</span>
-        <h3>Sprout</h3>
-        <p class="tier-spec">RAM 16 GB, atau 8 GB dengan kartu</p>
-        <ul class="tier-list">
-          <li>Kecepatan stabil dan nyaman</li>
-          <li>Menulis presentasi</li>
-          <li>Halaman web dan gambar, setelah memberi tahu waktu tunggunya</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#FA9F75">
-        <span class="tier-n">Tingkat tiga</span>
-        <h3>Bloom</h3>
-        <p class="tier-spec">Kartu 8 GB, atau kartu + RAM 16 GB</p>
-        <ul class="tier-list">
-          <li>Cepat, berkat kartu grafis</li>
-          <li>Halaman web dan gambar, tanpa peringatan menunggu</li>
-          <li>Membaca chat dan dokumen yang lebih panjang sekaligus</li>
-        </ul>
-      </article>
-      <article class="tier-card rv" style="--tint:#8EABE1">
-        <span class="tier-n">Tingkat empat</span>
-        <h3>Thrive</h3>
-        <p class="tier-spec">Kartu 8 GB, RAM 24 GB</p>
-        <ul class="tier-list">
-          <li>Model AI terbesar yang muat di kartumu</li>
-          <li>Paling cepat dari keempatnya</li>
-          <li>Membaca chat dan dokumen terpanjang</li>
-        </ul>
-      </article>
-    </div>
-
-
-    <div class="tt-wrap rv">
+    <div class="tt-wrap rv" id="tier-cards">
       <table class="tier-table">
-        <caption>Apa yang bisa dilakukan tiap tingkat</caption>
+        <caption>Apa yang dilakukan GreenCube di tiap jenis PC</caption>
         <thead>
-          <tr><th scope="col">Kemampuannya</th><th scope="col"><i style="--tint:#FAE289"></i>Seed</th><th scope="col"><i style="--tint:#8EA674"></i>Sprout</th><th scope="col"><i style="--tint:#FA9F75"></i>Bloom</th><th scope="col"><i style="--tint:#8EABE1"></i>Thrive</th></tr>
+          <tr><th scope="col">Kemampuannya</th><th scope="col" style="--tint:#FAE289"><i></i><b>Seed</b><small>RAM 8 GB, tanpa kartu grafis</small></th><th scope="col" style="--tint:#8EA674"><i></i><b>Sprout</b><small>RAM 16 GB, atau 8 GB dengan kartu 4 GB</small></th><th scope="col" style="--tint:#FA9F75"><i></i><b>Bloom</b><small>Kartu 8 GB, atau kartu 4 GB dengan RAM 16 GB</small></th><th scope="col" style="--tint:#8EABE1"><i></i><b>Thrive</b><small>Kartu 8 GB dengan RAM 24 GB</small></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Kecepatan</th><td>Lambat, kata demi kata</td><td>Stabil</td><td>Cepat</td><td>Tercepat</td></tr>
-          <tr><th scope="row">Ukuran model AI</th><td>Kecil</td><td>Sedang</td><td>Sedang</td><td>Terbesar yang muat di kartumu</td></tr>
-          <tr><th scope="row">Chat, dokumen, dan foto</th><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Flashcard, kuis, dan file PowerPoint</th><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Presentasi yang ditulis AI</th><td>Menulis dokumen, lalu menyimpannya sebagai slide</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Halaman web</th><td>Awalnya mati. Kamu bisa menyalakannya</td><td>Bertanya dulu dan memberi tahu berapa lama</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Aplikasi yang dibuatnya</th><td>Hingga 8 file sekaligus</td><td>Hingga 12 file</td><td>Hingga 24 file</td><td>Hingga 48 file</td></tr>
-          <tr><th scope="row">Pembuatan gambar</th><td>Butuh RAM 12&nbsp;GB</td><td>Bertanya dulu dan memberi tahu berapa lama</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
-          <tr><th scope="row">Berapa banyak yang bisa dibaca sekaligus<small>Chat, dokumen, atau keduanya</small></th><td>Sekitar 3.000 kata</td><td>Sekitar 12.000 kata</td><td>Sekitar 12.000 sampai 25.000 kata</td><td>50.000 kata atau lebih</td></tr>
+          <tr><th scope="row">Kecepatan</th><td>Lambat, tapi jalan</td><td>Stabil</td><td>Cepat</td><td>Tercepat</td></tr>
+          <tr><th scope="row">Model AI</th><td>Gemma 4 E2B</td><td>Gemma 4 E4B</td><td>Gemma 4 E4B</td><td>Yang terbesar yang muat di kartumu</td></tr>
+          <tr><th scope="row">Chat, PDF, dan foto</th><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Flashcard, kuis, dan tabel</th><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">File PowerPoint dan Word</th><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Presentasi yang ditulis AI</th><td>Dibuat dari dokumen</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Halaman web</th><td>Mati di awal, bisa kamu nyalakan</td><td>Ya, setelah memberi tahu lama tunggunya</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Gambar</th><td>Butuh RAM 12&nbsp;GB</td><td>Ya*, sekitar 2 menit per gambar</td><td>Ya*</td><td><span class="yes" aria-label="Ya"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg></span></td></tr>
+          <tr><th scope="row">Aplikasi yang dibuatnya</th><td>Hingga 8 file</td><td>Hingga 12 file</td><td>Hingga 24 file</td><td>Hingga 48 file</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="tt-note rv">Jumlah kata adalah perkiraan umum: bertambah sesuai memori kosong di komputermu. Selebihnya hanya titik awal, bukan kunci (gambar butuh RAM 12&nbsp;GB). Pengaturan &rarr; Kemampuan komputermu menyalakan atau mematikan masing-masing.</p>
+    <p class="tt-note rv">* Gambar butuh RAM 12&nbsp;GB atau lebih. Waktu per gambar diukur di laptop 16&nbsp;GB dengan grafis Intel. Seberapa banyak yang bisa dibaca sekaligus (chat plus file-mu) bertambah dengan memori kosong. Tiap tingkat adalah titik awal, bukan kunci: Pengaturan &rarr; Kemampuan komputermu menyalakan atau mematikan tiap bagian.</p>
 
 
   </div>
@@ -1976,7 +1926,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="#top" class="brand-lock" aria-label="Beranda GreenCube">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -1993,7 +1943,7 @@
         <h3>Produk</h3>
         <ul>
           <li><a href="/id/buy">Dapatkan GreenCube</a></li>
-          <li><a href="/id/#can">Kemampuannya</a></li>
+          <li><a href="/id/#what">Kemampuannya</a></li>
           <li><a href="/id/what-you-get">Apakah bisa jalan di komputerku?</a></li>
         </ul>
       </nav>
@@ -2034,8 +1984,14 @@
         <a href="https://legal.greencube.app/privacy">Privasi</a>
         <a href="https://legal.greencube.app/terms">Ketentuan</a>
       </div>
-      <div class="f-lang"><a href="/" hreflang="en">EN</a><a href="/es/" hreflang="es">ES</a><a href="/pt/" hreflang="pt">PT</a><a href="/fr/" hreflang="fr">FR</a><a href="/de/" hreflang="de">DE</a><a href="/it/" hreflang="it">IT</a><a href="/nl/" hreflang="nl">NL</a><a href="/pl/" hreflang="pl">PL</a><a href="/tr/" hreflang="tr">TR</a><a href="/ru/" hreflang="ru">RU</a><a href="/uk/" hreflang="uk">UK</a><a href="/ar/" hreflang="ar">AR</a><a href="/hi/" hreflang="hi">HI</a><a href="/id/" hreflang="id" aria-current="true">ID</a><a href="/vi/" hreflang="vi">VI</a><a href="/th/" hreflang="th">TH</a><a href="/ja/" hreflang="ja">JA</a><a href="/ko/" hreflang="ko">KO</a><a href="/zh/" hreflang="zh">中文</a><a href="/zh-tw/" hreflang="zh-tw">繁體</a></div>
     </div>
+    <pre class="f-ascii" aria-hidden="true"> ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗██╗   ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██║   ██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║██║     ██║   ██║██████╔╝█████╗
+██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; ai milikmu. tanpa batas <span class="cur"></span></p>
   </div>
 </footer>
 
@@ -2305,127 +2261,6 @@
         a.classList.toggle('err', !on);
       });
     }
-  })();
-</script>
-<script>
-  // what you can do: tap a request, watch it type, GreenCube answers; the answers can be played with
-  (() => {
-    const box = document.getElementById('w-chat');
-    if (!box) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const asks = [...document.querySelectorAll('.w-ask')];
-    let run = 0, stopGame = () => {};
-
-    function snake(root) {
-      const cv = root.querySelector('canvas'), g = cv.getContext('2d');
-      const W = 12, Hh = 9, S = 20;
-      const score = root.querySelector('.w-score'), btn = root.querySelector('.w-play');
-      let body, dir, next, food, pts, timer = null;
-      const place = () => { do { food = [Math.floor(Math.random() * W), Math.floor(Math.random() * Hh)]; } while (body.some((b) => b[0] === food[0] && b[1] === food[1])); };
-      const draw = () => {
-        g.fillStyle = '#EEF1E2'; g.fillRect(0, 0, cv.width, cv.height);
-        g.fillStyle = 'rgba(26,26,26,.04)';
-        for (let x = 0; x < W; x++) for (let y = 0; y < Hh; y++) if ((x + y) % 2) g.fillRect(x * S, y * S, S, S);
-        g.fillStyle = '#FA9F75'; g.beginPath(); g.arc(food[0] * S + S / 2, food[1] * S + S / 2, S / 2 - 3, 0, 7); g.fill();
-        body.forEach((b, i) => { g.fillStyle = i ? '#8EA674' : '#4E5F3A'; g.beginPath(); g.roundRect(b[0] * S + 1.5, b[1] * S + 1.5, S - 3, S - 3, 5); g.fill(); });
-      };
-      const reset = () => { body = [[4, 4], [3, 4], [2, 4]]; dir = next = [1, 0]; pts = 0; place(); score.textContent = box.dataset.score + ' 0'; draw(); };
-      const stop = () => { clearInterval(timer); timer = null; document.removeEventListener('keydown', key); };
-      const tick = () => {
-        dir = next;
-        const h = [body[0][0] + dir[0], body[0][1] + dir[1]];
-        if (h[0] < 0 || h[1] < 0 || h[0] >= W || h[1] >= Hh || body.some((b) => b[0] === h[0] && b[1] === h[1])) {
-          stop(); score.textContent = box.dataset.over + ' · ' + box.dataset.score + ' ' + pts; btn.textContent = box.dataset.again; btn.hidden = false; return;
-        }
-        body.unshift(h);
-        if (h[0] === food[0] && h[1] === food[1]) { pts++; score.textContent = box.dataset.score + ' ' + pts; place(); } else body.pop();
-        draw();
-      };
-      const turn = (d) => { const m = { u: [0, -1], d: [0, 1], l: [-1, 0], r: [1, 0] }[d]; if (m && (m[0] !== -dir[0] || m[1] !== -dir[1])) next = m; };
-      function key(e) {
-        const d = { ArrowUp: 'u', ArrowDown: 'd', ArrowLeft: 'l', ArrowRight: 'r', w: 'u', s: 'd', a: 'l', d: 'r' }[e.key];
-        if (d && timer) { e.preventDefault(); turn(d); }
-      }
-      btn.addEventListener('click', () => { reset(); btn.hidden = true; stop(); timer = setInterval(tick, 150); document.addEventListener('keydown', key); });
-      root.querySelectorAll('.w-pad button').forEach((b) => b.addEventListener('click', () => turn(b.dataset.d)));
-      let sx, sy;
-      cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-      cv.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) > 18) turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u'));
-      }, { passive: true });
-      reset();
-      stopGame = stop;
-    }
-
-    function deck(root) {
-      const cards = JSON.parse(root.dataset.cards);
-      let i = 0;
-      const flip = root.querySelector('.w-flip'), pos = root.querySelector('.pos');
-      const prev = root.querySelector('.prev'), next = root.querySelector('.next');
-      const show = () => {
-        flip.classList.remove('flipped');
-        setTimeout(() => { root.querySelector('.q').innerHTML = cards[i][0]; root.querySelector('.a').innerHTML = cards[i][1]; }, 150);
-        pos.textContent = (i + 1) + ' / ' + cards.length;
-        prev.disabled = i === 0; next.disabled = i === cards.length - 1;
-      };
-      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
-      prev.addEventListener('click', () => { if (i > 0) { i--; show(); } });
-      next.addEventListener('click', () => { if (i < cards.length - 1) { i++; show(); } });
-      prev.disabled = true;
-    }
-
-    function themes(root) {
-      const dv = root.querySelector('.w-dv');
-      root.querySelectorAll('.w-themes button').forEach((b) => b.addEventListener('click', () => {
-        root.querySelectorAll('.w-themes button').forEach((x) => x.classList.toggle('on', x === b));
-        dv.dataset.theme = b.dataset.t;
-      }));
-    }
-
-    function play(btn) {
-      const id = ++run;
-      stopGame(); stopGame = () => {};
-      asks.forEach((b) => b.classList.toggle('on', b === btn));
-      const tpl = document.querySelector('template[data-k="' + btn.dataset.k + '"]');
-      const text = tpl.dataset.ask;
-      box.innerHTML = '';
-      const me = document.createElement('p');
-      me.className = 'w-msg me';
-      box.appendChild(me);
-      let i = 0;
-      const answer = () => {
-        if (id !== run) return;
-        const ai = document.createElement('div');
-        ai.className = 'w-msg ai';
-        ai.innerHTML = '<span class="w-dots"><b></b><b></b><b></b></span>';
-        box.appendChild(ai);
-        setTimeout(() => {
-          if (id !== run) return;
-          ai.innerHTML = '';
-          ai.appendChild(tpl.content.cloneNode(true));
-          ai.querySelectorAll('.w-game').forEach(snake);
-          ai.querySelectorAll('.w-deck').forEach(deck);
-          if (ai.querySelector('.w-dv')) themes(ai);
-        }, reduce ? 0 : 700);
-      };
-      if (reduce) { me.textContent = text; answer(); return; }
-      const type = () => {
-        if (id !== run) return;
-        me.innerHTML = '';
-        me.append(text.slice(0, i));
-        const cur = document.createElement('span'); cur.className = 'cur'; me.appendChild(cur);
-        if (i++ < text.length) setTimeout(type, 26);
-        else { me.textContent = text; setTimeout(answer, 250); }
-      };
-      type();
-    }
-    asks.forEach((b) => b.addEventListener('click', () => play(b)));
-    const sec = document.getElementById('can');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!run) play(asks[0]); } }, { threshold: .35 });
-      io.observe(sec);
-    } else play(asks[0]);
   })();
 </script>
 <script>

@@ -353,13 +353,6 @@
       font-size: 13px; color: var(--ink-mute);
     }
     footer .f-legal { display: inline-flex; gap: 22px; flex-wrap: wrap; }
-    footer .f-lang { display: inline-flex; gap: 8px; align-items: center; }
-    footer .f-lang a {
-      padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
-    }
-    footer .f-lang a:hover { border-color: var(--moss, #7E8A5A); color: var(--forest, #1A1A1A); }
-    footer .f-lang a[aria-current="true"] { background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); color: var(--paper, #F5F1E8); }
 
     @media (max-width: 1100px) {
       footer .f-top { grid-template-columns: 1fr 1fr 1fr; }
@@ -520,14 +513,6 @@
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
-<style id="turtle-walk">
-  /* the turtle sits on the "GreenCube" word in the footer; a small hop on hover */
-  .f-brand { position: relative; }
-  .f-turtle { position: absolute; z-index: 1; top: -30px; left: 84px; width: 36px; pointer-events: none; transition: transform .45s cubic-bezier(.3,1.6,.45,1); }
-  .f-turtle img { display: block; width: 100%; height: auto; }
-  .f-brand:hover .f-turtle { transform: translateY(-5px) rotate(-4deg); }
-  @media (prefers-reduced-motion: reduce) { .f-turtle { transition: none; } }
-</style>
 <style id="lang-pick-css">
     .lang-pick { position: relative; }
     .lang-pick > summary { list-style: none; cursor: pointer; }
@@ -537,7 +522,6 @@
       background: var(--paper, #F5F1E8); border: 1px solid var(--line, rgba(0,0,0,.12)); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
-    footer .f-lang { flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -615,7 +599,7 @@
   <div class="w">
     <h2 class="w-h2">ШІ на ПК, <em>який у вас уже є.</em></h2>
     <a href="/uk/buy" class="w-cta">Придбати GreenCube, 9,99&nbsp;€ <span aria-hidden="true">&rarr;</span></a>
-    <a href="/uk/#can" class="alt">Що він уміє</a>
+    <a href="/uk/#what" class="alt">Що він уміє</a>
   </div>
 </section>
 </main>
@@ -636,7 +620,7 @@
 <footer>
   <div class="f-wrap">
     <div class="f-top">
-      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+      <div class="f-brand">
         <a href="/uk/" class="brand-lock" aria-label="Головна GreenCube">
           <span class="mark" aria-hidden="true"></span><span>GreenCube</span>
         </a>
@@ -653,7 +637,7 @@
         <h3>Продукт</h3>
         <ul>
           <li><a href="/uk/buy">Придбати GreenCube</a></li>
-          <li><a href="/uk/#can">Що він уміє</a></li>
+          <li><a href="/uk/#what">Що він уміє</a></li>
           <li><a href="/uk/what-you-get">Чи піде на моєму комп'ютері?</a></li>
         </ul>
       </nav>
@@ -694,7 +678,6 @@
         <a href="https://legal.greencube.app/privacy">Конфіденційність</a>
         <a href="https://legal.greencube.app/terms">Умови</a>
       </div>
-      <div class="f-lang"><a href="/ai-environmental-impact" hreflang="en">EN</a><a href="/es/ai-environmental-impact" hreflang="es">ES</a><a href="/pt/ai-environmental-impact" hreflang="pt">PT</a><a href="/fr/ai-environmental-impact" hreflang="fr">FR</a><a href="/de/ai-environmental-impact" hreflang="de">DE</a><a href="/it/ai-environmental-impact" hreflang="it">IT</a><a href="/nl/ai-environmental-impact" hreflang="nl">NL</a><a href="/pl/ai-environmental-impact" hreflang="pl">PL</a><a href="/tr/ai-environmental-impact" hreflang="tr">TR</a><a href="/ru/ai-environmental-impact" hreflang="ru">RU</a><a href="/uk/ai-environmental-impact" hreflang="uk" aria-current="true">UK</a><a href="/ar/ai-environmental-impact" hreflang="ar">AR</a><a href="/hi/ai-environmental-impact" hreflang="hi">HI</a><a href="/id/ai-environmental-impact" hreflang="id">ID</a><a href="/vi/ai-environmental-impact" hreflang="vi">VI</a><a href="/th/ai-environmental-impact" hreflang="th">TH</a><a href="/ja/ai-environmental-impact" hreflang="ja">JA</a><a href="/ko/ai-environmental-impact" hreflang="ko">KO</a><a href="/zh/ai-environmental-impact" hreflang="zh">中文</a><a href="/zh-tw/ai-environmental-impact" hreflang="zh-tw">繁體</a></div>
     </div>
   </div>
 </footer>
