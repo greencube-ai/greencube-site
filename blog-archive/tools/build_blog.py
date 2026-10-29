@@ -279,7 +279,7 @@ for p in idx:
         + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
         + body +
         '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
-        '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99, paid once.</p>'
+        '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p>'
         '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
