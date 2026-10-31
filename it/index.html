@@ -105,7 +105,7 @@
   <style>
     /* soft fade-in on load (no longer waits for the fonts) */
     html { background: #F5F1E8; }
-    body { animation: gc-page-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero .rv, .hero .rv-mask > * { opacity: 1; transform: none; }
     @keyframes gc-page-in { from { opacity: 0.01; } }  /* not 0: Chrome never records a first paint for a page that starts fully transparent */
     @media (prefers-reduced-motion: reduce) { body { animation: none; } }
   </style>
@@ -2017,21 +2017,11 @@
   setTimeout(start, 1200);
 
   // ---------- hero intro ----------
+  // the hero is visible from the first paint; without the library, nothing further down may stay hidden either
   function runIntro() {
-    if (!window.gsap || reduced) {
-      document.querySelectorAll('.rv-mask > *').forEach(el => el.style.transform = 'translateY(0)');
-      document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
-      return;
-    }
-    const heroLines = document.querySelectorAll('.hero h1 .rv-mask > *');
-    const heroTail = [
-      document.querySelector('.hero .lede'),
-      document.querySelector('.hero .hero-chips'),
-      document.querySelector('.hero .cta-row'),
-    ].filter(Boolean);
-    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.to(heroLines, { y: 0, duration: 1.05, stagger: 0.10 })
-      .to(heroTail, { y: 0, opacity: 1, duration: 0.85, stagger: 0.10 }, '-=0.55');
+    if (window.gsap && window.ScrollTrigger && !reduced) return;
+    document.querySelectorAll('.rv-mask > *').forEach(el => el.style.transform = 'translateY(0)');
+    document.querySelectorAll('.rv').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
   // ---------- header dark-state on scroll ----------
