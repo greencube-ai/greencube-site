@@ -152,6 +152,9 @@
 
   <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
 
 
@@ -640,6 +643,125 @@
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
   </style>
+  <style id="ad-page-css">
+    .rp-fly.enter .rp-ride { animation-duration: .81s; }
+    .rp-fly.land .rp-envbox { animation-duration: .35s; }
+    .rp-fly.out .rp-pap { animation-duration: .46s; }
+    .rp-fly.open .rp-flap { animation-duration: .42s; }
+    .rp-fly.enter:not(.land) .rp-rider { animation-duration: .39s; }
+    .rp-fly.land .rp-rider { animation-duration: .54s; }
+    .rp-fly.gone { animation-duration: .27s; }
+    .lt-letter.show .lt-paper-full > :nth-child(1) { transition-delay: .35s; }
+    .lt-letter.show .lt-paper-full > :nth-child(2) { transition-delay: .46s; }
+    .lt-letter.show .lt-paper-full > :nth-child(3) { transition-delay: .58s; }
+    .lt-letter.show .lt-paper-full > :nth-child(4) { transition-delay: .69s; }
+    .lt-letter .lt-after { transition: opacity .4s ease .8s; margin-top: 18px; }
+    /* anything but a Windows PC: the turtle and the truth, in place of the price and button */
+    .os-note { display: none; text-align: center; }
+    .order.not-windows > :not(.os-note) { display: none; }
+    .order.not-windows > .os-note { display: block; }
+    .os-note .turtle { display: block; width: 112px; height: auto; margin: 0 auto 14px; overflow: visible; }
+    .os-note h2 { font-family: var(--display, 'General Sans', sans-serif); font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
+    .os-note p { font-size: 15.5px; line-height: 1.55; color: var(--ink-soft, #545454); margin-top: 10px; }
+    .os-note .buy-btn { margin-top: 20px; }
+    .os-note [hidden] { display: none; }
+    .os-note .fit-skip { margin-top: 16px; }
+  </style>
+  <style id="ad-hero-css">
+    body { animation: none; }
+    main { max-width: 1280px; min-height: 100vh; padding: 96px 48px 40px; grid-template-columns: 1.15fr .85fr; gap: 40px; }
+    main::before { position: absolute; inset: 0 auto 0 50%; width: 100vw; margin-left: -50vw; z-index: -1;
+      background: radial-gradient(ellipse 75% 70% at 45% 42%, #FDF0B6 0%, #FAE289 52%, #E4C76B 100%); }
+    .pitch .nl { position: relative; display: inline-block; font-size: clamp(56px, 6.5vw, 100px); font-weight: 700; line-height: 1; letter-spacing: -.035em;
+      padding: .14em .16em .16em; margin: 0 0 18px -.16em; white-space: nowrap; color: #1A1F1B; }
+    .adline { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.25; letter-spacing: -.02em; color: #1A1F1B; }
+    .words { display: grid; overflow: hidden; font-size: 1.9em; font-weight: 700; letter-spacing: -.03em; line-height: 1.22; color: #47672F; }
+    .tail { display: block; }
+    .words > span { grid-area: 1 / 1; animation: word 10s cubic-bezier(.6,0,.2,1) infinite; }
+    .words > span:nth-child(2) { animation-delay: -7.5s; }
+    .words > span:nth-child(3) { animation-delay: -5s; }
+    .words > span:nth-child(4) { animation-delay: -2.5s; }
+    @keyframes word { 0%, 22% { transform: none; } 25% { transform: translateY(-125%); } 25.01%, 97% { transform: translateY(125%); } 100% { transform: none; } }
+    .pitch .lede { margin: 18px 0 0; font-size: 18.5px; color: #3D3F33; max-width: 40ch; }
+    .stage { position: relative; }
+    .order { position: relative; z-index: 3; }
+    .price { border-top: 0; padding-top: 4px; gap: 12px; }
+    .price .amount { font-size: 74px; font-weight: 700; }
+    .price .amount .cur { font-size: 74px; vertical-align: baseline; margin-right: 0; }
+    .price .once { font-family: var(--display); font-size: 40px; font-weight: 600; letter-spacing: -.02em; color: #1A1A1A; }
+    .for { font-size: 15.5px; font-weight: 500; color: #2C2C24; margin: 8px 0 14px; }
+    .buy-btn span:first-child { font-size: 19px; }
+    .ad-turtle { position: absolute; z-index: 4; right: 26px; top: -74px; width: 92px; animation: t-hop .6s cubic-bezier(.3,1.5,.5,1) 1.15s both; }
+    .ad-turtle svg { overflow: visible; }
+    .ad-turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: lt-wave 2.6s ease-in-out 1.8s infinite; }
+    @keyframes t-hop { from { opacity: 0; transform: translateY(70px) scale(.8); } to { opacity: 1; transform: none; } }
+    .stage:has(.not-windows) .ad-turtle { display: none; }
+    .scroll-cue { background: rgba(255,253,245,.72); }
+    @media (prefers-reduced-motion: reduce) {
+      .words > span, .ad-turtle, .ad-turtle .tt-arm { animation: none; }
+      .words > span + span { display: none; }
+    }
+  </style>
+  <style id="ad-hero-css-2">
+    .words > span { animation: word 14s cubic-bezier(.6,0,.2,1) infinite; }
+    .words > span:nth-child(2) { animation-delay: -12s; }
+    .words > span:nth-child(3) { animation-delay: -10s; }
+    .words > span:nth-child(4) { animation-delay: -8s; }
+    .words > span:nth-child(5) { animation-delay: -6s; }
+    .words > span:nth-child(6) { animation-delay: -4s; }
+    .words > span:nth-child(7) { animation-delay: -2s; }
+    @keyframes word { 0%, 12.4% { transform: none; } 14.28% { transform: translateY(-125%); } 14.29%, 98.1% { transform: translateY(125%); } 100% { transform: none; } }
+    /* the turtle climbs up from behind the card, walks along its top edge, stops and waves */
+    .ad-turtle { z-index: 2; top: -76px; right: auto; left: calc(100% - 122px); animation: t-rise .45s ease-out .7s both, t-walk 1.9s linear 1.1s both; }
+    @keyframes t-rise { from { opacity: 0; transform: translateY(90px); } to { opacity: 1; transform: none; } }
+    @keyframes t-walk { from { left: 20px; } to { left: calc(100% - 122px); } }
+    .ad-turtle .tt-leg { transform-box: fill-box; transform-origin: center; }
+    .ad-turtle .tt-leg.a { animation: t-step .24s ease-in-out 1.1s 8 alternate; }
+    .ad-turtle .tt-leg.b { animation: t-step .24s ease-in-out 1.22s 8 alternate-reverse; }
+    @keyframes t-step { from { transform: translate(-4px, 0); } to { transform: translate(5px, -5px); } }
+    .ad-turtle .tt-bob { animation: t-bob .24s ease-in-out 1.1s 8 alternate; }
+    @keyframes t-bob { to { transform: translateY(-3px); } }
+    .ad-turtle .tt-arm { animation: lt-wave 2.6s ease-in-out 3.1s infinite; }
+    @media (prefers-reduced-motion: reduce) { .ad-turtle, .ad-turtle .tt-leg, .ad-turtle .tt-bob, .ad-turtle .tt-arm { animation: none; } }
+    body:has(.fit-overlay.open) .ad-turtle { visibility: hidden; }
+  </style>
+  <style id="ad-hero-css-3">
+    /* the note is readable and its button ready right after the 2.2 s animation */
+    .lt-letter.show .lt-paper-full > :nth-child(1) { transition-delay: .08s; }
+    .lt-letter.show .lt-paper-full > :nth-child(2) { transition-delay: .12s; }
+    .lt-letter.show .lt-paper-full > :nth-child(3) { transition-delay: .16s; }
+    .lt-letter.show .lt-paper-full > :nth-child(4) { transition-delay: .2s; }
+    .lt-letter .lt-after { transition: opacity .25s ease .15s; }
+    .fit-card { max-height: calc(100dvh - 48px); }
+    .vat-note { color: var(--ink-soft, #545454); }
+    @media (max-width: 1040px) {
+      main { padding-left: 24px; padding-right: 24px; }
+      .price .amount, .price .amount .cur { font-size: 58px; }
+      .price .once { font-size: 32px; }
+      .price { flex-wrap: wrap; }
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; gap: 44px; padding-top: 104px; text-align: center; }
+      .pitch { text-align: center; }
+      .pitch .nl { margin-left: 0; }
+      .pitch .lede { margin-left: auto; margin-right: auto; }
+      .stage { max-width: 440px; width: 100%; margin: 26px auto 0; }
+      .order { text-align: left; }
+      .order .os-note { text-align: center; }
+    }
+    @media (max-width: 359px) { .pitch .nl { font-size: 48px; } }
+    @media (prefers-reduced-motion: reduce) { .words > span { animation: none; } }
+  </style>
+  <style id="ad-hero-cream">
+    main::before { background: radial-gradient(ellipse 55% 45% at 22% 22%, rgba(250,226,137,.13), transparent 60%), radial-gradient(ellipse 70% 55% at 85% 95%, rgba(142,166,116,.10), transparent 60%); }
+    .words > span:nth-child(1) { color: #E4703B; }
+    .words > span:nth-child(2) { color: #5B7FD4; }
+    .words > span:nth-child(3) { color: #6F8B52; }
+    .words > span:nth-child(4) { color: #C6952A; }
+    .words > span:nth-child(5) { color: #E4703B; }
+    .words > span:nth-child(6) { color: #5B7FD4; }
+    .words > span:nth-child(7) { color: #6F8B52; }
+  </style>
 </head>
 <body>
 
@@ -660,33 +782,42 @@
 <main>
   <!-- ===== left: the pitch ===== -->
   <section class="pitch">
-    <div class="eyebrow">One payment · yours forever</div>
-    <h1>Every AI is rented.<br>This one is <em>yours.</em></h1>
-    <p class="lede">
-      GreenCube runs on your own PC. No limits, no subscription, and it works offline. Pay once and it&rsquo;s yours.
-    </p>
-    <ul class="points">
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>No limits.</strong> Chat, code and make images as much as you want.</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Runs on your own PC.</strong> Works offline. Your chats stay on it.</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>One payment.</strong> No subscription, ever.</span></li>
-    </ul>
+    <h1 class="nl">NO LIMITS.</h1>
+    <p class="adline">Make as many <span class="words"><span>images</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">artifacts</span></span> <span class="tail">as you want.</span></p>
+    <p class="lede">An AI that runs on your own PC. It works offline and your chats stay on it.</p>
   </section>
 
   <!-- ===== right: order summary + buy ===== -->
+  <div class="stage">
+  <div class="ad-turtle" aria-hidden="true"><svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg></div>
   <section class="order" aria-label="Order summary">
-    <div class="order-head">
-      <span class="order-title">GreenCube</span>
-      <span class="order-tag">Lifetime</span>
-    </div>
-    <p class="order-sub">An AI with no limits, on your own PC.</p>
-
     <!-- One clear price. Stripe hosts the checkout; any VAT/sales tax is
          calculated and shown on their hosted page — we never compute, display,
          or collect tax ourselves. -->
     <div class="price">
       <span class="amount"><span class="cur">€</span>9.99</span>
-      <span class="meta">one-time payment<br>no subscription, ever</span>
+      <span class="once">once.</span>
     </div>
+    <p class="for">For Windows PCs. No subscription, ever.</p>
     <p class="vat-note">Tax included.</p>
     <!-- The licence is matched on email. Paying with one address and signing
          in with another is the commonest way a buyer gets locked out, so say
@@ -694,7 +825,7 @@
     <p class="vat-note">Pay with the same email you'll sign in with (Google or Microsoft).</p>
 
     <button class="buy-btn" id="buy-btn" type="button">
-      <span>Get GreenCube</span>
+      <span>Buy now</span>
       <span class="arrow" aria-hidden="true">→</span>
     </button>
     <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
@@ -706,6 +837,7 @@
       </div>
     </div>
   </section>
+  </div>
   <!-- main is a centred grid, so on a tall screen it filled the viewport and
        the whole "what you get" + FAQ section below looked like it did not
        exist. This cue tells people there is more and jumps them to it. -->
@@ -1051,10 +1183,10 @@
     // the envelope rides down with the turtle on top, lands, the turtle hops off, it opens, the paper comes out
     const at = (ms, fn) => ltTimers.push(setTimeout(fn, ms));
     at(30, () => rpFly.classList.add('enter'));
-    at(1100, () => rpFly.classList.add('land'));
-    at(1750, () => rpFly.classList.add('open'));
-    at(2150, () => rpFly.classList.add('out'));
-    at(2850, revealLetter);
+    at(850, () => rpFly.classList.add('land'));
+    at(1350, () => rpFly.classList.add('open'));
+    at(1660, () => rpFly.classList.add('out'));
+    at(2200, revealLetter);
   };
   function revealLetter() {
     ltTimers.splice(0).forEach(clearTimeout);
