@@ -1384,6 +1384,26 @@
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
   </style>
+  <style id="hero-flip">
+    .flip { display: inline-grid; justify-items: start; vertical-align: bottom; overflow: hidden; color: var(--moss, #7E8A5A); padding-bottom: .14em; margin-bottom: -.14em; transition: width .28s cubic-bezier(.4,0,.2,1); text-align: left; }
+    .flip > span { grid-area: 1 / 1; white-space: nowrap; transform: translateY(130%); }
+    .flip > span.on { transform: none; transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    .flip > span.out { transform: translateY(-130%); transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    .hero .rv-mask > * { padding-bottom: .04em; }
+    .flip > span:nth-child(1) { color: #E4703B; }
+    .flip > span:nth-child(2) { color: #5B7FD4; }
+    .flip > span:nth-child(3) { color: #6F8B52; }
+    .flip > span:nth-child(4) { color: #C6952A; }
+    .flip > span:nth-child(5) { color: #E4703B; }
+    .flip > span:nth-child(6) { color: #5B7FD4; }
+    .flip > span:nth-child(7) { color: #6F8B52; }
+    @media (min-width: 761px) {
+      .hero { padding-top: 20vh; }
+      .hero h1 { font-size: clamp(40px, 5.3vw, 78px); }
+    }
+    @media (max-width: 760px) { .hero h1 { font-size: clamp(36px, 11vw, 64px); } }
+    .hero .lede .why { margin-top: 0; }
+  </style>
 </head>
 <body>
 
@@ -1403,7 +1423,7 @@
   </nav>
   <div class="head-right">
     <details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/" hreflang="en" lang="en" aria-current="true">English</a><a href="/es/" hreflang="es" lang="es">Español</a><a href="/pt/" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/" hreflang="fr" lang="fr">Français</a><a href="/de/" hreflang="de" lang="de">Deutsch</a><a href="/it/" hreflang="it" lang="it">Italiano</a><a href="/nl/" hreflang="nl" lang="nl">Nederlands</a><a href="/pl/" hreflang="pl" lang="pl">Polski</a><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a><a href="/ru/" hreflang="ru" lang="ru">Русский</a><a href="/uk/" hreflang="uk" lang="uk">Українська</a><a href="/ar/" hreflang="ar" lang="ar">العربية</a><a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a><a href="/id/" hreflang="id" lang="id">Indonesia</a><a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/th/" hreflang="th" lang="th">ไทย</a><a href="/ja/" hreflang="ja" lang="ja">日本語</a><a href="/ko/" hreflang="ko" lang="ko">한국어</a><a href="/zh/" hreflang="zh" lang="zh-CN">简体中文</a><a href="/zh-tw/" hreflang="zh-tw" lang="zh-TW">繁體中文</a></div></details>
-    <a href="/buy" class="nav-cta">Get GreenCube</a>
+    <a href="/buy" class="nav-cta">Buy now</a>
   </div>
 </header>
 
@@ -1526,18 +1546,38 @@
   </svg>
   <div class="wrap">
     <h1>
-      <span class="rv-mask"><span>AI that's <em>yours.</em></span></span>
-      <span class="rv-mask"><span>No limits.</span></span>
+      <span class="rv-mask"><span>AI with <em>no limits.</em></span></span>
+      <span class="rv-mask"><span>Make as many <span class="flip" id="flip"><span class="on">images</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">artifacts</span></span></span></span>
     </h1>
-    <p class="lede rv"><strong>Unlimited chats, code, images and&nbsp;files.</strong><span class="why">It runs on your own PC, so nothing ever runs&nbsp;out.</span></p>
+    <script>
+    // The switching word. The line re-centres on each word, so a short word leaves no gap. Without this script: "images".
+    (() => {
+      const box = document.getElementById('flip');
+      const items = [...box.children];
+      const fit = () => { box.style.width = items.find((w) => w.classList.contains('on')).offsetWidth + 'px'; };
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      addEventListener('resize', fit);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let i = 0;
+      setInterval(() => {
+        items.forEach((w) => w.classList.remove('out'));
+        items[i].classList.replace('on', 'out');
+        i = (i + 1) % items.length;
+        items[i].classList.add('on');
+        fit();
+      }, 2000);
+    })();
+    </script>
+    <p class="lede rv"><span class="why">It runs on your own PC, so nothing ever runs&nbsp;out.</span></p>
     <ul class="hero-chips rv">
-      <li>Unlimited</li>
       <li>Private</li>
       <li>Works offline</li>
       <li>€9.99</li>
+      <li>15-day refund</li>
     </ul>
     <div class="cta-row rv">
-      <a href="/buy" class="cta-pill cta-primary"><span>Get GreenCube</span></a>
+      <a href="/buy" class="cta-pill cta-primary"><span>Buy now</span></a>
       <a href="/#what" class="cta-pill cta-ghost">See what it does <span class="arrow">→</span></a>
     </div>
   </div>
@@ -1903,7 +1943,7 @@
 <section class="w-end">
   <div class="w">
     <h2 class="w-h2">No limits. No subscription. <em>Yours.</em></h2>
-    <a href="/buy" class="w-cta">Get GreenCube, €9.99 <span aria-hidden="true">&rarr;</span></a>
+    <a href="/buy" class="w-cta">Buy now, €9.99 <span aria-hidden="true">&rarr;</span></a>
     <a href="/#game" class="alt">Check your PC first</a>
   </div>
 </section>
