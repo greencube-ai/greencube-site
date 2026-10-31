@@ -8,7 +8,7 @@
 const USD = new Set(['US', 'PR', 'GU', 'VI', 'AS', 'MP', 'UM', 'EC', 'SV', 'TL', 'FM', 'MH', 'PW', 'VG', 'TC', 'BQ']);
 
 const LANGS = 'es|pt|fr|de|it|nl|pl|tr|ru|uk|ar|hi|id|vi|th|ja|ko|zh|zh-tw';
-const PAGES = 'buy|what-you-get|download|mission|your-data|ai-environmental-impact|how-much-water-does-ai-use|does-chatgpt-train-on-your-data';
+const PAGES = 'buy|get|what-you-get|download|mission|your-data|ai-environmental-impact|how-much-water-does-ai-use|does-chatgpt-train-on-your-data';
 const PRICED = new RegExp(`^/(?:(${LANGS})(?:/|$))?(?:(?:${PAGES})/?)?$`);
 
 const SKIP = 'x-greencube-price';  // marks our own fetch of the page, so it is not swapped twice

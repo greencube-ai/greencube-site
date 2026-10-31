@@ -31,10 +31,11 @@
   };
 
   // returns true when the link was handed off (shared or copied)
-  const sendToPC = async () => {
+  const sendToPC = async (link) => {
+    const url = typeof link === 'string' ? link : T.url;  // it is also used as a click listener
     if (navigator.share) {
       try {
-        await navigator.share({title: 'GreenCube', text: T.text, url: T.url});
+        await navigator.share({title: 'GreenCube', text: T.text, url});
         toast(T.sent);
         return true;
       } catch (e) {
@@ -42,11 +43,11 @@
       }
     }
     try {
-      await navigator.clipboard.writeText(T.text + ' ' + T.url);
+      await navigator.clipboard.writeText(T.text + ' ' + url);
       toast(T.copied);
       return true;
     } catch (e) {
-      prompt(T.copied, T.url);
+      prompt(T.copied, url);
       return true;
     }
   };
