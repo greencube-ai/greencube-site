@@ -350,7 +350,7 @@
       justify-content: flex-start;
       text-align: center;
       overflow: hidden;
-      background: linear-gradient(180deg, #FBF8F0 0%, #F5F1E8 54%, #F0ECE3 100%);
+      background: linear-gradient(180deg, #CFE4EF 0%, #E3EFEE 34%, #F6F3DF 62%, #FBEFC9 100%);
     }
 
     /* ---------- ASCII wordmark footer ---------- */
@@ -373,10 +373,10 @@
     .gc-clouds-a { animation: gcDriftA 132s ease-in-out infinite alternate; }
     .gc-clouds-b { animation: gcDriftB 96s  ease-in-out infinite alternate; }
     .gc-birds    { animation: gcBirds  54s  ease-in-out infinite alternate; }
-    .gc-glow     { animation: gcBreathe 12s ease-in-out infinite; transform-box: view-box; transform-origin: 1090px 315px; }
+    .gc-glow     { animation: gcBreathe 12s ease-in-out infinite; transform-box: view-box; transform-origin: 1190px 450px; }
     @keyframes gcDriftA { from { transform: translateX(-30px); } to { transform: translateX(52px); } }
     @keyframes gcDriftB { from { transform: translateX(34px); }  to { transform: translateX(-38px); } }
-    @keyframes gcBirds  { from { transform: translate(-22px, 6px); } to { transform: translate(64px, -12px); } }
+    @keyframes gcBirds  { from { transform: translate(-14px, 6px); } to { transform: translate(22px, -8px); } }
     @keyframes gcBreathe { 0%, 100% { opacity: 0.86; transform: scale(1); } 50% { opacity: 1; transform: scale(1.045); } }
     @media (prefers-reduced-motion: reduce) {
       .gc-clouds-a, .gc-clouds-b, .gc-birds, .gc-glow { animation: none; }
@@ -1385,23 +1385,17 @@
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
   </style>
   <style id="hero-flip">
-    .flip { display: inline-grid; justify-items: start; vertical-align: bottom; overflow: hidden; color: var(--moss, #7E8A5A); padding-bottom: .14em; margin-bottom: -.14em; transition: width .28s cubic-bezier(.4,0,.2,1); text-align: left; }
+    .flip { display: inline-grid; justify-items: start; vertical-align: bottom; overflow: hidden; color: #2F6B45; padding-bottom: .14em; margin-bottom: -.14em; transition: width .28s cubic-bezier(.4,0,.2,1); text-align: left; }
     .flip > span { grid-area: 1 / 1; white-space: nowrap; transform: translateY(130%); }
     .flip > span.on { transform: none; transition: transform .28s cubic-bezier(.4,0,.2,1); }
     .flip > span.out { transform: translateY(-130%); transition: transform .28s cubic-bezier(.4,0,.2,1); }
     .hero .rv-mask > * { padding-bottom: .04em; }
-    .flip > span:nth-child(1) { color: #E4703B; }
-    .flip > span:nth-child(2) { color: #5B7FD4; }
-    .flip > span:nth-child(3) { color: #6F8B52; }
-    .flip > span:nth-child(4) { color: #C6952A; }
-    .flip > span:nth-child(5) { color: #E4703B; }
-    .flip > span:nth-child(6) { color: #5B7FD4; }
-    .flip > span:nth-child(7) { color: #6F8B52; }
     @media (min-width: 761px) {
       .hero { padding-top: 20vh; }
       .hero h1 { font-size: clamp(40px, 5.3vw, 78px); }
     }
     @media (max-width: 760px) { .hero h1 { font-size: clamp(36px, 11vw, 64px); } }
+    .hero h1 em { color: #1A1A1A; font-weight: 700; text-transform: uppercase; }
     .hero .lede .why { margin-top: 0; }
   </style>
 </head>
@@ -1459,9 +1453,8 @@
     </defs>
 
     <!-- sun -->
-    <g class="gc-glow"><circle cx="1090" cy="315" r="320" fill="url(#gcSun)" /></g>
-    <circle cx="1090" cy="315" r="55" fill="#FDF2CA" />
-    <circle cx="1090" cy="315" r="78" fill="none" stroke="#F7DC92" stroke-width="1.5" opacity="0.5" />
+    <g class="gc-glow"><circle cx="1190" cy="450" r="260" fill="url(#gcSun)" /></g>
+    <circle cx="1190" cy="450" r="50" fill="#FFE79A" />
 
     <!-- soft clouds — two banks drifting at different speeds -->
     <g class="gc-clouds-a" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.78">
@@ -1477,14 +1470,14 @@
 
     <!-- birds — kept clear of the centred headline column (~x430-1010); they used
          to fly straight through it but were too faint for anyone to notice -->
-    <g class="gc-birds" stroke="#5C663F" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
-      <path d="M148,252 q15,-13 30,0 q15,-13 30,0" />
-      <path d="M214,292 q11,-10 22,0 q11,-10 22,0" />
-      <path d="M264,236 q10,-9 20,0 q10,-9 20,0" opacity="0.8" />
-      <path d="M170,332 q9,-8 18,0 q9,-8 18,0" opacity="0.7" />
-      <path d="M306,288 q8,-7 16,0 q8,-7 16,0" opacity="0.55" />
-      <path d="M1232,208 q13,-11 26,0 q13,-11 26,0" opacity="0.85" />
-      <path d="M1302,250 q10,-9 20,0 q10,-9 20,0" opacity="0.7" />
+    <g class="gc-birds" stroke="#4C6A4E" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
+      <path d="M84,392 q15,-13 30,0 q15,-13 30,0" />
+      <path d="M150,432 q11,-10 22,0 q11,-10 22,0" />
+      <path d="M196,376 q10,-9 20,0 q10,-9 20,0" opacity="0.8" />
+      <path d="M104,466 q9,-8 18,0 q9,-8 18,0" opacity="0.7" />
+      <path d="M236,424 q8,-7 16,0 q8,-7 16,0" opacity="0.55" />
+      <path d="M1296,330 q13,-11 26,0 q13,-11 26,0" opacity="0.85" />
+      <path d="M1356,368 q10,-9 20,0 q10,-9 20,0" opacity="0.7" />
     </g>
 
     <!-- everything below is drawn, so it all takes the pencil pass together -->
@@ -1492,15 +1485,15 @@
     <!-- distant ridge — depth behind the hills, and a cool note against the warm
          green. Kept low and hazy so it reads as distance, not scenery. -->
     <path d="M-40,598 L60,568 L118,590 L186,556 L248,586 L322,562 L392,594 L470,558 L548,588 L628,568 L700,596 L784,564 L866,592 L944,556 L1026,588 L1108,566 L1190,594 L1272,560 L1354,588 L1440,568 L1480,566 L1480,740 L-40,740 Z" fill="#B6C7DF" opacity="0.46" />
-    <rect x="-40" y="540" width="1520" height="104" fill="url(#gcMist)" opacity="0.6" filter="url(#gcSoft)" />
+    <rect x="-40" y="540" width="1520" height="104" fill="url(#gcMist)" opacity="0.32" filter="url(#gcSoft)" />
 
     <!-- hill 1 (far) + haze -->
-    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#C6D4AE" />
-    <rect x="-40" y="598" width="1520" height="96" fill="url(#gcMist)" opacity="0.5" filter="url(#gcSoft)" />
+    <path d="M-40,606 C 260,562 520,618 780,590 C 1010,566 1240,610 1440,586 L1480,584 L1480,940 L-40,940 Z" fill="#CDE3AE" />
+    <rect x="-40" y="598" width="1520" height="96" fill="url(#gcMist)" opacity="0.22" filter="url(#gcSoft)" />
 
     <!-- hill 2 + distant pines -->
-    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#AEC191" />
-    <g fill="#9AB07F">
+    <path d="M-40,678 C 300,640 560,696 840,668 C 1090,642 1290,690 1440,666 L1480,664 L1480,940 L-40,940 Z" fill="#AFD088" />
+    <g fill="#8DB56E">
       <use href="#gcPine" x="120" y="650" width="15" height="22" />
       <use href="#gcPine" x="150" y="655" width="13" height="19" />
       <use href="#gcPine" x="184" y="652" width="14" height="20" />
@@ -1515,11 +1508,11 @@
       <use href="#gcPine" x="864" y="662" width="13" height="19" />
       <use href="#gcPine" x="1128" y="656" width="12" height="18" />
     </g>
-    <rect x="-40" y="670" width="1520" height="76" fill="url(#gcMist)" opacity="0.36" filter="url(#gcSoft)" />
+    <rect x="-40" y="670" width="1520" height="76" fill="url(#gcMist)" opacity="0.16" filter="url(#gcSoft)" />
 
     <!-- hill 3 + mid pines -->
-    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#8EA674" />
-    <g fill="#78905E">
+    <path d="M-40,748 C 280,718 560,766 820,746 C 1080,726 1300,762 1440,742 L1480,740 L1480,940 L-40,940 Z" fill="#86B868" />
+    <g fill="#659A50">
       <use href="#gcPine" x="356" y="716" width="24" height="34" />
       <use href="#gcPine" x="408" y="726" width="20" height="28" />
       <use href="#gcPine" x="452" y="720" width="22" height="31" />
@@ -1528,12 +1521,12 @@
       <use href="#gcPine" x="620" y="730" width="20" height="28" />
       <use href="#gcPine" x="1290" y="726" width="21" height="30" />
     </g>
-    <rect x="-40" y="742" width="1520" height="64" fill="url(#gcMist)" opacity="0.26" filter="url(#gcSoft)" />
+    <rect x="-40" y="742" width="1520" height="64" fill="url(#gcMist)" opacity="0.1" filter="url(#gcSoft)" />
 
     <!-- hill 4 (front) + foreground pines -->
-    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#6A8050" />
-    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FAE289" opacity="0.26" filter="url(#gcSoft)" />
-    <g fill="#4E5F3A">
+    <path d="M-40,812 C 340,790 620,830 900,812 C 1140,796 1320,824 1440,814 L1480,812 L1480,940 L-40,940 Z" fill="#5C9650" />
+    <ellipse cx="1180" cy="742" rx="640" ry="240" fill="#FFE99A" opacity="0.16" filter="url(#gcSoft)" />
+    <g fill="#2F6B45">
       <use href="#gcPine" x="66" y="756" width="34" height="52" />
       <use href="#gcPine" x="116" y="744" width="44" height="66" />
       <use href="#gcPine" x="184" y="762" width="30" height="46" />
@@ -1620,61 +1613,6 @@
         <p class="make-say">Ask all day.</p>
         <span class="make-out">No limit, no &ldquo;come back later&rdquo;</span>
       </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
-            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
-            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
-            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
-            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
-          </svg>
-        </div>
-        <span class="make-kind">Study</span>
-        <p class="make-say">Flashcards and quizzes from your notes.</p>
-        <span class="make-out">Also tables, checklists and timelines</span>
-      </article>
-      <article class="make t-tangerine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
-            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
-            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M44 64v12M34 80h20"/>
-          </svg>
-        </div>
-        <span class="make-kind">Slides</span>
-        <p class="make-say">Real PowerPoint files.</p>
-        <span class="make-out">6 colour themes to pick from</span>
-      </article>
-      <article class="make t-wisteria">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M58 12v14h14"/>
-            <path d="M28 38h26" stroke-width="4"/>
-            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
-          </svg>
-        </div>
-        <span class="make-kind">Documents</span>
-        <p class="make-say">Real Word documents.</p>
-        <span class="make-out">Essays and notes, saved as .docx</span>
-      </article>
-      <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
-            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
-            <path d="M52 18v12h12" />
-            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
-            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
-          </svg>
-        </div>
-        <span class="make-kind">Files</span>
-        <p class="make-say">Drop in PDFs and photos.</p>
-        <span class="make-out">As many as you like</span>
-      </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
@@ -1717,8 +1655,22 @@
         <p class="make-say">Web pages to open and share.</p>
         <span class="make-out">For a club, a project, a Discord</span>
       </article>
+      <article class="make t-tangerine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/>
+            <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/>
+            <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M44 64v12M34 80h20"/>
+          </svg>
+        </div>
+        <span class="make-kind">Slides</span>
+        <p class="make-say">Real PowerPoint files.</p>
+        <span class="make-out">6 colour themes to pick from</span>
+      </article>
       <article class="make t-jasmine">
-        <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Coming soon</span>
+        <div class="make-art" aria-hidden="true">
           <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
             <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/>
             <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/>
@@ -1732,6 +1684,47 @@
         <span class="make-kind">Diagrams</span>
         <p class="make-say">Graphs, flowcharts, circuits and cells.</p>
         <span class="make-out">Drawn neatly, ready for your notes</span>
+      </article>
+      <article class="make t-sage">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="18" width="46" height="58" rx="6" fill="#8EA674" transform="rotate(9 53 47)"/>
+            <rect x="20" y="20" width="46" height="58" rx="6" fill="#FFFDF8" transform="rotate(-6 43 49)"/>
+            <path d="M31 42c4-7 17-7 20 0" transform="rotate(-6 43 49)"/>
+            <path d="M34 56h16M37 63h10" stroke="#4E5F3A" stroke-width="3" opacity=".6" transform="rotate(-6 43 49)"/>
+            <path d="M41 30v4" stroke-width="3" transform="rotate(-6 43 49)"/>
+          </svg>
+        </div>
+        <span class="make-kind">Study</span>
+        <p class="make-say">Flashcards and quizzes from your notes.</p>
+        <span class="make-out">Also tables, checklists and timelines</span>
+      </article>
+      <article class="make t-wisteria">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M58 12v14h14"/>
+            <path d="M28 38h26" stroke-width="4"/>
+            <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/>
+          </svg>
+        </div>
+        <span class="make-kind">Documents</span>
+        <p class="make-say">Real Word documents.</p>
+        <span class="make-out">Essays and notes, saved as .docx</span>
+      </article>
+      <article class="make t-jasmine">
+        <div class="make-art" aria-hidden="true">
+          <svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/>
+            <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/>
+            <path d="M52 18v12h12" />
+            <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/>
+            <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/>
+          </svg>
+        </div>
+        <span class="make-kind">Files</span>
+        <p class="make-say">Drop in PDFs and photos.</p>
+        <span class="make-out">As many as you like</span>
       </article>
       <article class="make t-wisteria">
         <div class="make-art" aria-hidden="true"><span class="fc-tag soon">Coming soon</span>
