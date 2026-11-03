@@ -1270,6 +1270,13 @@
   function step(name) {
     if (onGet && location.pathname !== base + '/' + name) history.pushState({ gcStep: name }, '', base + '/' + name + location.search);
   }
+  // Open the connection to Stripe once someone opens the note, so checkout loads faster when they click.
+  // Only then, not on page load: visitors who never open the note never reach Stripe.
+  let warmed = false;
+  function warmCheckout() {
+    if (warmed) return; warmed = true;
+    const l = document.createElement('link'); l.rel = 'preconnect'; l.href = 'https://buy.stripe.com'; document.head.appendChild(l);
+  }
   function unstep() {
     if (onGet && location.pathname !== base) history.replaceState(null, '', base + location.search);
   }
@@ -1306,6 +1313,7 @@
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     step('note');
+    warmCheckout();
     void rpFly.offsetWidth;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { revealLetter(); return; }
     // the envelope rides down with the turtle on top, lands, the turtle hops off, it opens, the paper comes out
