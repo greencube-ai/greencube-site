@@ -150,12 +150,50 @@
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+
   <link rel="preload" href="/fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <style>
+/* Self-hosted fonts. Geist, Instrument Serif, JetBrains Mono: SIL Open Font License 1.1.
+   General Sans: Indian Type Foundry, ITF Free Font License (fontshare.com). Latin + Latin Extended only. */
+
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url('/fonts/geist-normal-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url('/fonts/geist-normal-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('/fonts/instrument-serif-italic-latin-ext-400.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('/fonts/instrument-serif-italic-latin-400.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('/fonts/instrument-serif-normal-latin-ext-400.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('/fonts/instrument-serif-normal-latin-400.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 500; font-display: swap;
+  src: url('/fonts/jetbrains-mono-normal-latin-ext-400.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 500; font-display: swap;
+  src: url('/fonts/jetbrains-mono-normal-latin-400.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: 'General Sans'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('/fonts/general-sans-400.woff2') format('woff2'); }
+
+@font-face { font-family: 'General Sans'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url('/fonts/general-sans-500.woff2') format('woff2'); }
+
+@font-face { font-family: 'General Sans'; font-style: normal; font-weight: 600; font-display: swap;
+  src: url('/fonts/general-sans-600.woff2') format('woff2'); }
+
+@font-face { font-family: 'General Sans'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url('/fonts/general-sans-700.woff2') format('woff2'); }
+  </style>
 
 
   <style>
@@ -248,6 +286,14 @@
       transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), border-color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
     .header-nav a:hover { color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
+      color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A);
+      padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(26,26,26,0.12), 0 6px 16px -10px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.14);
+      transition: transform 0.4s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), box-shadow 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; box-shadow: 0 2px 5px rgba(26,26,26,0.16), 0 14px 30px -12px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.16); }
 
     /* ============== layout ============== */
     main {
@@ -630,7 +676,45 @@
     @media (prefers-reduced-motion: reduce) { .rp-fly { display: none !important; } .fit-overlay.rp-mode .fit-card { opacity: 1; transform: none; pointer-events: auto; } }
 
   </style>
-  <link rel="stylesheet" href="/mobile.css" />
+  <style>
+/* Phone fixes shared by every page. Loaded last, so it only adjusts what the
+   page's own styles already do; nothing here applies above 640 px wide. */
+@media (max-width: 640px) {
+
+  /* Menu: one row you can swipe, instead of five links wrapping onto two
+     extra rows under the logo. The fade on the right says "there's more". */
+  header > .nav, header > .header-nav {
+    flex-wrap: nowrap; justify-content: flex-start; gap: 0;
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+            mask-image: linear-gradient(90deg, #000 82%, transparent);
+  }
+  header > .nav::-webkit-scrollbar, header > .header-nav::-webkit-scrollbar { display: none; }
+  header > .nav a, header > .header-nav a { flex: 0 0 auto; padding: 8px 11px; }
+
+  /* Logo, language and button on one row, also in Spanish ("Consigue
+     GreenCube" is long) and on small 360 px phones. */
+  header { column-gap: 10px; }
+  header:has(.nav-cta) > .brand { font-size: 17px; gap: 8px; }
+  header .head-right { gap: 6px; }
+  header .head-right .lang { padding-left: 8px; padding-right: 8px; }
+  header .nav-cta { font-size: 13px; padding: 8px 13px; }
+
+  /* Home: "Unlimited | Private | Works offline | €9.99" as two neat rows,
+     with the divider only between the two items of each row. */
+  .hero .hero-chips { display: grid; grid-template-columns: auto auto; justify-content: center; row-gap: 6px; }
+  .hero .hero-chips li { padding: 0 16px; text-align: center; }
+  .hero .hero-chips li:nth-child(odd)::before { display: none; }
+
+  /* Our mission: big statements got headline-tight lines; give them air. */
+  .w-big { line-height: 1.25; }
+  p.w-big[style] { line-height: 1.5; }
+
+  /* Small grey notes were too small and too faint to read on a phone. */
+  .w-fine, .w-try-fine, .tiny, .dl-status, .tt-note { font-size: 14px; color: #6B6455; }
+  .vat-note, .price .meta, .trust span, .dl-link .sub { font-size: 13.5px; color: #6B6455; }
+}
+  </style>
   <script src="/mobile.js" defer></script>
   <script src="/send-to-pc.js" defer></script>
 <style id="lang-pick-css">
@@ -683,6 +767,7 @@
     .words > span:nth-child(4) { animation-delay: -2.5s; }
     @keyframes word { 0%, 22% { transform: none; } 25% { transform: translateY(-125%); animation-timing-function: step-end; } 25.01%, 97% { transform: translateY(125%); } 100% { transform: none; } }
     .pitch .lede { margin: 18px 0 0; font-size: 18.5px; color: #3D3F33; max-width: 40ch; }
+    .pitch .nl .ai-with { display: block; font-size: .36em; letter-spacing: -.02em; line-height: 1.1; margin-bottom: .06em; }
     .stage { position: relative; }
     .order { position: relative; z-index: 3; }
     .price { border-top: 0; padding-top: 4px; gap: 12px; }
@@ -761,6 +846,15 @@
     .words > span:nth-child(5) { color: #E4703B; }
     .words > span:nth-child(6) { color: #5B7FD4; }
     .words > span:nth-child(7) { color: #6F8B52; }
+    /* the homepage menu: on narrower screens it drops onto its own row under the logo, as on the homepage */
+    @media (max-width: 1040px) {
+      header { flex-wrap: wrap; row-gap: 8px; }
+      .brand { order: 1; }
+      .head-right { order: 2; }
+      .header-nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; row-gap: 2px; gap: 0; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; }
+      .header-nav a { padding: 6px 8px; }
+      main { padding-top: 170px; }
+    }
       /* ---------- ASCII wordmark footer ---------- */
     .f-ascii {
       margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
@@ -782,17 +876,22 @@
     <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="/your-data">Your data</a>
+    <a href="/mission">Our mission</a>
+    <a href="/buy">Download</a>
+  </nav>
   <div class="head-right">
-    <nav class="header-nav" aria-label="Primary">
-    </nav>
     <details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/buy" hreflang="en" lang="en" aria-current="true">English</a><a href="/es/buy" hreflang="es" lang="es">Español</a><a href="/pt/buy" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/buy" hreflang="fr" lang="fr">Français</a><a href="/de/buy" hreflang="de" lang="de">Deutsch</a><a href="/it/buy" hreflang="it" lang="it">Italiano</a><a href="/nl/buy" hreflang="nl" lang="nl">Nederlands</a><a href="/pl/buy" hreflang="pl" lang="pl">Polski</a><a href="/tr/buy" hreflang="tr" lang="tr">Türkçe</a><a href="/ru/buy" hreflang="ru" lang="ru">Русский</a><a href="/uk/buy" hreflang="uk" lang="uk">Українська</a><a href="/ar/buy" hreflang="ar" lang="ar">العربية</a><a href="/hi/buy" hreflang="hi" lang="hi">हिन्दी</a><a href="/id/buy" hreflang="id" lang="id">Indonesia</a><a href="/vi/buy" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/th/buy" hreflang="th" lang="th">ไทย</a><a href="/ja/buy" hreflang="ja" lang="ja">日本語</a><a href="/ko/buy" hreflang="ko" lang="ko">한국어</a><a href="/zh/buy" hreflang="zh" lang="zh-CN">简体中文</a><a href="/zh-tw/buy" hreflang="zh-tw" lang="zh-TW">繁體中文</a></div></details>
+    <a href="/buy" class="nav-cta" id="nav-buy">Buy now</a>
   </div>
 </header>
 
 <main>
   <!-- ===== left: the pitch ===== -->
   <section class="pitch">
-    <h1 class="nl">NO LIMITS.</h1>
+    <h1 class="nl"><span class="ai-with">AI with</span> NO LIMITS.</h1>
     <p class="adline">Make as many <span class="words"><span>images</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">artifacts</span></span> <span class="tail">as you want.</span></p>
     <p class="lede">An AI that runs on your own PC. It works offline and your chats stay on it.</p>
   </section>
@@ -838,6 +937,7 @@
       <span>Buy now</span>
       <span class="arrow" aria-hidden="true">→</span>
     </button>
+    <noscript><a href="https://buy.stripe.com/4gMdRb3wh9BV2HUe4m3Nm02" style="display:block;text-align:center;margin-top:12px;text-decoration:underline">Go to checkout</a></noscript>
     <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
 
     <div class="trust">
@@ -846,7 +946,62 @@
         <span>Secure checkout by <strong>Stripe</strong>, card details never touch this page.</span>
       </div>
     </div>
+    <div class="os-note" id="os-note">
+      <svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg>
+      <h2 id="os-note-title"></h2>
+      <p id="os-note-sub"></p>
+      <button class="buy-btn" id="os-note-send" type="button" hidden><span>Send the link to my PC</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
+      <button class="fit-skip" id="os-note-anyway" type="button"></button>
+    </div>
   </section>
+  <script>
+  // Before first paint, so nobody on a Mac sees a price and then has it taken away. Unknown counts as Windows,
+  // and "anyway" always brings the normal page back: a guess must never stop someone with a Windows PC.
+  (() => {
+    const d = navigator.userAgentData;
+    const h = (((d && d.platform) || '') + ' ' + (navigator.platform || '') + ' ' + (navigator.userAgent || '')).toLowerCase();
+    const os = ((d && d.mobile) || /iphone|ipod|ipad|android|mobile/.test(h) || (/mac/.test(h) && (navigator.maxTouchPoints || 0) > 1)) ? 'phone'
+      : /win/.test(h) ? 'windows' : /mac|darwin/.test(h) ? 'mac' : /linux|cros|x11/.test(h) ? 'linux' : 'windows';
+    if (os === 'windows') return;
+    const order = document.querySelector('.order');
+    const title = document.getElementById('os-note-title');
+    const sub = document.getElementById('os-note-sub');
+    const anyway = document.getElementById('os-note-anyway');
+    if (os === 'phone') {
+      title.textContent = 'GreenCube runs on a Windows PC.';
+      sub.textContent = "It's an app for Windows 10 and 11, not for phones. You can buy now and sign in on your PC later with the same email.";
+      anyway.textContent = 'Buy now, set up on my PC \u2192';
+      const send = document.getElementById('os-note-send');
+      send.hidden = false;
+      send.addEventListener('click', () => { if (window.gcSendToPC) window.gcSendToPC('https://greencube.app/get'); });
+    } else {
+      title.textContent = os === 'mac' ? 'Coming soon for Mac.' : 'Coming soon for Linux.';
+      sub.textContent = 'For now, GreenCube only runs on Windows 10 and 11.';
+      anyway.textContent = 'I have a Windows PC, show me \u2192';
+    }
+    anyway.addEventListener('click', () => { order.classList.remove('not-windows'); document.getElementById('buy-btn').focus(); });
+    order.classList.add('not-windows');
+  })();
+  </script>
   </div>
   <!-- main is a centred grid, so on a tall screen it filled the viewport and
        the whole "what you get" + FAQ section below looked like it did not
@@ -869,7 +1024,11 @@
     </article>
     <article class="get">
       <h3>Code</h3>
-      <p>Describe an app, a site or a game and it builds it for you.</p>
+      <p>Describe an app or a game and it writes the code for you.</p>
+    </article>
+    <article class="get">
+      <h3>Websites</h3>
+      <p>Describe a site and it builds one you can open and click through.</p>
     </article>
     <article class="get">
       <h3>Make images</h3>
@@ -886,6 +1045,14 @@
     <article class="get">
       <h3>Slides</h3>
       <p>Ten slides on anything, as a real PowerPoint file.</p>
+    </article>
+    <article class="get">
+      <h3>Diagrams</h3>
+      <p>Ask for a diagram or a chart and it draws it for you.</p>
+    </article>
+    <article class="get">
+      <h3>Documents</h3>
+      <p>Reports, guides and essays as a finished document, in the style you pick.</p>
     </article>
   </div>
 
@@ -1052,68 +1219,11 @@
       <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
     </g>
   </svg></div>
-        <div class="lt-paper-full"><h2>A note from Hector</h2><p>I built GreenCube because I was tired of AI making me wait hours after hitting a limit. So I made one that runs on your own PC: no limits, nothing to set up.</p><p>Every PC is different. If GreenCube isn&rsquo;t right for you, you have 15 days to change your mind: email me and I&rsquo;ll refund you in full.</p><p class="sign">Hector<small>Founder and CEO, GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
-        <div class="lt-after"><p class="lt-next">Next: two quick questions to check it runs well on your PC.</p>
-        <button class="fit-cta" id="lt-go" type="button"><span>Start the quick check</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
-        <button class="fit-skip" id="lt-skip" type="button">Skip and go to checkout →</button></div>
+        <div class="lt-paper-full"><h2 id="fit-title">A note from Hector</h2><p>I built GreenCube because I was tired of AI making me wait hours after hitting a limit. So I made one that runs on your own PC: no limits, nothing to set up.</p><p>Every PC is different. If GreenCube isn&rsquo;t right for you, you have 15 days to change your mind: email me and I&rsquo;ll refund you in full.</p><p class="sign">Hector<small>Founder and CEO, GreenCube</small><a href="mailto:hector.gras@greencube.app">hector.gras@greencube.app</a></p></div>
+        <div class="lt-after"><button class="fit-cta" id="lt-go" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">&rarr;</span></button></div>
       </div>
     </div>
 
-    <!-- step 1: intro + RAM self-report -->
-    <div class="fit-step active" id="fit-step-intro">
-      <div class="fit-eyebrow">Quick check</div>
-      <h2 id="fit-title">Will it run well on your PC?</h2>
-      <p class="fit-sub">Two quick questions. You can skip both.</p>
-      <div class="fit-q">How much memory (RAM) do you have?</div>
-      <div class="fit-opts">
-        <button class="fit-opt" data-ram="8" type="button">8 GB</button>
-        <button class="fit-opt" data-ram="16" type="button">16 GB</button>
-        <button class="fit-opt" data-ram="32" type="button">32 GB or more</button>
-        <button class="fit-opt" data-ram="unsure" type="button">Not sure</button>
-      </div>
-      <button class="fit-skip" id="fit-skip" type="button">Skip and go to checkout →</button>
-    </div>
-
-    <!-- step 2: the graphics card, the other half of what names a tier. Memory
-         decides how much fits; a card the app can actually use decides how fast
-         it runs. Asking only about RAM could call a 16 GB gaming PC "Sprout"
-         when it is really Bloom, which undersells the machine in front of us. -->
-    <div class="fit-step" id="fit-step-gpu">
-      <div class="fit-eyebrow">Quick check</div>
-      <h2>Does it have a graphics card?</h2>
-      <p class="fit-sub">Like in a gaming PC. Most laptops don&rsquo;t have one, and that&rsquo;s fine.</p>
-      <div class="fit-q">Pick the closest.</div>
-      <div class="fit-opts">
-        <button class="fit-opt" data-gpu="strong" type="button">Yes, a strong one</button>
-        <button class="fit-opt" data-gpu="yes" type="button">Yes, a normal one</button>
-        <button class="fit-opt" data-gpu="no" type="button">No, built-in graphics</button>
-        <button class="fit-opt" data-gpu="unsure" type="button">Not sure</button>
-      </div>
-      <button class="fit-skip" id="fit-skip-gpu" type="button">Skip and go to checkout →</button>
-    </div>
-
-    <!-- step 0: shown FIRST when the visitor isn't on Windows -->
-    <div class="fit-step" id="fit-step-os">
-      <div class="fit-eyebrow">Heads up</div>
-      <h2 id="fit-os-title"></h2>
-      <p class="fit-sub" id="fit-os-sub"></p>
-      <button class="fit-cta" id="fit-os-primary" type="button"><span id="fit-os-primary-label"></span></button>
-      <button class="fit-share" id="fit-os-share" type="button" hidden><span id="fit-os-share-label"></span></button>
-      <button class="fit-skip" id="fit-os-secondary" type="button"></button>
-    </div>
-
-    <!-- step 3: verdict -->
-    <div class="fit-step" id="fit-step-result">
-      <div class="fit-verdict">
-        <div class="fit-tier" id="fit-tier"><span class="fit-tier-dot" aria-hidden="true"></span><span id="fit-tier-name"></span></div>
-        <h3 id="fit-headline"></h3>
-      </div>
-      <p class="fit-reassure" id="fit-reassure"></p>
-      <ul class="fit-gets" id="fit-gets"></ul>
-      <p class="fit-note">These are just defaults: you can change any of them in Settings. <a href="/what-you-get#tiers">See all four tiers →</a></p>
-      <p class="fit-help">Something wrong? Email <a href="mailto:support@greencube.app">support@greencube.app</a>. We&rsquo;ll fix it, or refund you in full within 15 days.</p>
-      <button class="fit-cta" id="fit-continue" type="button"><span>Continue to checkout</span><span class="arrow" aria-hidden="true">→</span></button>
-    </div>
   </div>
 </div>
 
@@ -1148,46 +1258,46 @@
   function goCheckout() {
     status.classList.remove('error');
     status.textContent = 'Opening secure checkout…';
+    step('checkout');
     location.href = checkoutUrl();
+  }
+
+  // Each step shows in Cloudflare Web Analytics as its own page (/get/note, /get/checkout; /buy/note, /buy/checkout),
+  // so we can see where visitors stop. Cloudflare's own counter records address changes; nothing else is sent
+  // and nothing is stored. vercel.json sends a reload of those back to /get or /buy.
+  const base = (location.pathname.match(/^\/(get|buy)(?=\/|$)/) || [''])[0];
+  const onGet = !!base && /^\/(get|buy)(\/(note|checkout))?\/?$/.test(location.pathname);
+  function step(name) {
+    if (onGet && location.pathname !== base + '/' + name) history.pushState({ gcStep: name }, '', base + '/' + name + location.search);
+  }
+  function unstep() {
+    if (onGet && location.pathname !== base) history.replaceState(null, '', base + location.search);
   }
 
   // Where this buyer came from (set by /src.js from the links they followed), as Stripe's client_reference_id:
   // letters, digits, - and _ only, at most 200. Shows on each payment in the Stripe dashboard.
   function checkoutUrl() {
-    const s = window.GC_SRC;
+    const s = window.GC_SRC || (location.pathname.startsWith('/get') ? { src: 'ad', lp: '/get' } : null);
     if (!s) return STRIPE_CHECKOUT_URL;
     const id = (s.src + '__' + s.lp).replace(/[^A-Za-z0-9_-]/g, '-').slice(0, 200);
     return STRIPE_CHECKOUT_URL + (STRIPE_CHECKOUT_URL.includes('?') ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(id);
   }
 
   // ====================================================================
-  //  FIT CHECK
-  //  Clicking "Get GreenCube" opens a warm, skippable check FIRST, so nobody
-  //  spends €9.99 on a machine that can't run the local AI. It NEVER blocks the
-  //  purchase — worst case it says "a bit slower" and points at the 15-day
-  //  refund. Two things a browser CAN judge honestly: the OS (GreenCube is
-  //  Windows-only) and RAM (asked directly — it's the real bottleneck for a
-  //  local model, and the ~4GB model must fit alongside the OS). We do NOT run
-  //  a browser speed benchmark: it measures the JS engine, not the hardware
-  //  (a phone out-scored an 11-core desktop), so it misled more than it helped.
-  //  The accurate speed test lives in the APP's first-run wizard.
+  //  THE NOTE
+  //  /get (ad clicks) and /buy are the same page: Get GreenCube, the note, checkout.
+  //  The two-question PC check is on the homepage.
   // ====================================================================
   const overlay = document.getElementById('fit-overlay');
-  const stepOs = document.getElementById('fit-step-os');
-  const stepIntro = document.getElementById('fit-step-intro');
-  const stepGpu = document.getElementById('fit-step-gpu');
-  const stepResult = document.getElementById('fit-step-result');
-  let selectedRam = null;
-  let selectedGpu = null;
-
 
   // ---------- the letter: first thing after "Get GreenCube" ----------
   const stepLetter = document.getElementById('fit-step-letter');
   const ltLetter = document.getElementById('lt-letter');
   const rpFly = document.getElementById('rp-fly');
   const ltTimers = [];
+  const setBehind = (off) => document.querySelectorAll('body > header, body > main, body > .detail, body > footer').forEach((el) => { el.inert = off; });
   const openLetter = () => {
-    [stepLetter, stepOs, stepIntro, stepResult].concat(typeof stepGpu !== 'undefined' ? [stepGpu] : []).forEach((s) => s.classList.remove('active'));
+    setBehind(true);
     ltTimers.splice(0).forEach(clearTimeout);
     ltLetter.classList.remove('show');
     stepLetter.classList.add('active');
@@ -1195,6 +1305,7 @@
     overlay.classList.add('rp-mode');
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    step('note');
     void rpFly.offsetWidth;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { revealLetter(); return; }
     // the envelope rides down with the turtle on top, lands, the turtle hops off, it opens, the paper comes out
@@ -1209,208 +1320,22 @@
     ltTimers.splice(0).forEach(clearTimeout);
     rpFly.classList.add('gone');
     overlay.classList.remove('rp-mode');
-    setTimeout(() => ltLetter.classList.add('show'), 60);
+    setTimeout(() => { ltLetter.classList.add('show'); document.getElementById('lt-go').focus({ preventScroll: true }); }, 60);
   }
 
-  const showStep = (el) => {
-    [stepLetter, stepOs, stepIntro, stepGpu, stepResult].forEach((s) => s.classList.remove('active'));
-    el.classList.add('active');
-  };
-  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; };
-
-  // GreenCube is a Windows desktop app. A Mac/Linux/phone visitor can't run it,
-  // so paying would just mean a refund — surface that BEFORE the RAM check, which
-  // otherwise happily ran a speed test on a phone as if it could install.
-  function detectOS() {
-    const uaData = navigator.userAgentData;
-    const hay = ((uaData && uaData.platform) || '') + ' ' + (navigator.platform || '') + ' ' + (navigator.userAgent || '');
-    const h = hay.toLowerCase();
-    const touch = (navigator.maxTouchPoints || 0) > 1;
-    if ((uaData && uaData.mobile) || /iphone|ipod|android|mobile/.test(h) || (/ipad/.test(h)) || (/mac/.test(h) && touch)) return 'mobile';
-    if (/win/.test(h)) return 'windows';
-    if (/mac|darwin/.test(h)) return 'mac';
-    if (/linux|cros|x11/.test(h)) return 'linux';
-    return 'unknown';
-  }
-
-  function setupOsStep(os) {
-    const title = document.getElementById('fit-os-title');
-    const sub = document.getElementById('fit-os-sub');
-    const primaryLabel = document.getElementById('fit-os-primary-label');
-    const primary = document.getElementById('fit-os-primary');
-    const secondary = document.getElementById('fit-os-secondary');
-    if (os === 'mobile') {
-      // Phone visitors very likely own a Windows PC and are just browsing, so
-      // stay encouraging — but make it unmistakable it's a PC app.
-      title.textContent = 'GreenCube runs on a Windows PC.';
-      sub.textContent = "It's an app for Windows 10 and 11, not for phones. You can buy now and sign in on your PC later with the same email.";
-      primaryLabel.textContent = 'Buy now, set up on my PC →';
-      primary.onclick = goCheckout;
-      secondary.textContent = 'Not now';
-      secondary.onclick = closeFit;
-      // the leak was "Not now": let them send the link to their PC instead (send-to-pc.js)
-      const share = document.getElementById('fit-os-share');
-      if (share && window.gcSendToPC) {
-        document.getElementById('fit-os-share-label').textContent = 'Send the link to my PC →';
-        share.hidden = false;
-        share.onclick = async () => { if (await window.gcSendToPC()) closeFit(); };
-      }
-    } else {
-      // On the very machine they'd use, and it won't run — so the safe default
-      // is NOT to buy. Prominent "got it", quiet escape hatch for dual-PC owners.
-      title.textContent = os === 'mac' ? "GreenCube doesn't run on Mac yet." : "GreenCube doesn't run on Linux yet.";
-      sub.textContent = 'For now it only runs on Windows 10 and 11. Mac and Linux versions are coming. Only buy if you also have a Windows PC.';
-      primaryLabel.textContent = 'Got it';
-      primary.onclick = closeFit;
-      secondary.textContent = 'I have a Windows PC, continue anyway →';
-      secondary.onclick = goCheckout;
-    }
-  }
-
-  const openFit = () => {
-    const os = detectOS();
-    if (os === 'windows' || os === 'unknown') {
-      showStep(stepIntro);
-    } else {
-      setupOsStep(os);
-      showStep(stepOs);
-    }
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
+  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; setBehind(false); unstep(); buyBtn.focus(); };
 
   buyBtn.addEventListener('click', openLetter);
+  document.getElementById('nav-buy').addEventListener('click', (e) => { e.preventDefault(); openLetter(); });
   rpFly.addEventListener('click', revealLetter);
-  document.getElementById('lt-go').addEventListener('click', openFit);
-  // Skipping the letter and the RAM check must not skip the "it's a Windows app" step:
-  // phone and Mac/Linux visitors still see it (with "Send the link to my PC"); Windows goes straight to checkout.
-  const skipToCheckout = () => {
-    const os = detectOS();
-    if (os === 'windows' || os === 'unknown') { goCheckout(); return; }
-    setupOsStep(os);
-    showStep(stepOs);
-  };
-  document.getElementById('lt-skip').addEventListener('click', skipToCheckout);
+  document.getElementById('lt-go').addEventListener('click', goCheckout);
   document.getElementById('fit-close').addEventListener('click', closeFit);
-  document.getElementById('fit-skip').addEventListener('click', goCheckout);
-  document.getElementById('fit-skip-gpu').addEventListener('click', goCheckout);
-  document.getElementById('fit-continue').addEventListener('click', goCheckout);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
+  // Back closes the note; coming back from Stripe shows /get as it first looked
+  addEventListener('popstate', () => { if (overlay.classList.contains('open')) closeFit(); });
+  addEventListener('pageshow', (e) => { if (e.persisted && overlay.classList.contains('open')) { status.textContent = ''; closeFit(); } });
 
-  document.querySelectorAll('[data-ram]').forEach((btn) => {
-    btn.addEventListener('click', () => { selectedRam = btn.getAttribute('data-ram'); showStep(stepGpu); });
-  });
-  document.querySelectorAll('[data-gpu]').forEach((btn) => {
-    btn.addEventListener('click', () => { selectedGpu = btn.getAttribute('data-gpu'); showResult(); });
-  });
-
-  // ====================================================================
-  //  WHICH TIER
-  //  The same four tiers the app itself uses (perf_tier_for, docs/TIERS.md):
-  //  memory decides how much FITS, a usable graphics card decides how FAST it
-  //  runs, and only the two together name the right one. The Apple Silicon
-  //  branch of that rule is irrelevant here — GreenCube is Windows-only.
-  //
-  //  Every line below describes a DEFAULT, never an entitlement. All four tiers
-  //  are the same app at the same price, and every capability named here is a
-  //  switch in Settings, which is why the copy says so rather than hiding it.
-  // ====================================================================
-  const TIERS = {
-    seed: {
-      mk: '#FAE289',
-      label: 'Tier one',
-      headline: 'Your computer is a Seed.',
-      reassure: 'It runs on 8 GB. Replies come a bit slower.',
-      gets: [
-        '<b>Unlimited answers</b>, documents, flashcards, quizzes and tables.',
-        '<b>Real PowerPoint files.</b>',
-        'Web pages are off by default (they would take minutes).'
-      ]
-    },
-    sprout: {
-      mk: '#8EA674',
-      label: 'Tier two',
-      headline: 'Your computer is a Sprout.',
-      reassure: 'It runs well. Not instant: without a graphics card, your processor writes every word.',
-      gets: [
-        '<b>The bigger AI model</b> (Gemma E4B).',
-        '<b>Slide decks the AI writes itself</b>, plus everything Seed gets.',
-        'Web pages, after telling you how long they will take.',
-        '<b>More memory lets it read more at once.</b>'
-      ]
-    },
-    bloom: {
-      mk: '#FA9F75',
-      label: 'Tier three',
-      headline: 'Your computer is a Bloom.',
-      reassure: 'With a graphics card, replies are fast.',
-      gets: [
-        '<b>Web pages, no waiting.</b>',
-        '<b>It looks at images itself</b>, not through a separate tool.',
-        'Long chats keep their thread.'
-      ]
-    },
-    thrive: {
-      mk: '#8EABE1',
-      label: 'Tier four',
-      headline: 'Your computer is a Thrive.',
-      reassure: 'The top tier: everything is on from the start.',
-      gets: [
-        '<b>The biggest AI model your PC can hold.</b>',
-        '<b>It reads as much as your memory allows.</b>',
-        'Nothing to switch on or confirm.'
-      ]
-    }
-  };
-
-  function tierFor(ram, gpu) {
-    // "Not sure" about the card counts as no card. That is the honest direction
-    // to round: a machine that turns out faster than promised is a good
-    // surprise, and the opposite is a refund.
-    const strongCard = gpu === 'strong';
-    const anyCard = gpu === 'strong' || gpu === 'yes';
-
-    let gb;
-    if (ram === '8') gb = 8;
-    else if (ram === '16') gb = 16;
-    else if (ram === '32') gb = 32;
-    else {
-      // Unsure: fall back to the little the browser can glimpse. deviceMemory is
-      // rounded and capped at 8, cores is a weak hint, so this only ever decides
-      // between "small" and "ordinary" — never the top tier.
-      const dm = navigator.deviceMemory || 0;
-      const cores = navigator.hardwareConcurrency || 0;
-      gb = (dm >= 8 || cores >= 8) ? 16 : 8;
-    }
-
-    // A strong card holds the weights itself, so it tiers on its own. An
-    // ordinary card cannot, so it needs the RAM behind it — and on a small
-    // machine it lifts you one step and no further. Mirrors perf_tier_from.
-    if (strongCard && gb >= 24) return 'thrive';
-    if (strongCard && gb >= 8) return 'bloom';
-    if (anyCard && gb >= 16) return 'bloom';
-    if (gb >= 12 || (anyCard && gb >= 8)) return 'sprout';
-    return 'seed';
-  }
-
-  function showResult() {
-    const t = TIERS[tierFor(selectedRam, selectedGpu)];
-
-    // No tick or warning icon: the tier name says the verdict in words, and a
-    // red-or-green badge on a checkout screen reads as pass/fail anxiety.
-    const badge = document.getElementById('fit-tier');
-    badge.style.setProperty('--tier-mk', t.mk);
-    document.getElementById('fit-tier-name').textContent = t.label;
-    document.getElementById('fit-headline').textContent = t.headline;
-    document.getElementById('fit-reassure').textContent = t.reassure;
-
-    const gets = document.getElementById('fit-gets');
-    gets.style.setProperty('--tier-mk', t.mk);
-    gets.innerHTML = t.gets.map((g) => '<li>' + g + '</li>').join('');
-
-    showStep(stepResult);
-  }
 })();
 </script>
 <script>
