@@ -156,6 +156,14 @@
       transition: color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), border-color 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
     }
     .header-nav a:hover { color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A); border-color: var(--forest, #1A1A1A); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
+      color: var(--paper, #F5F1E8); background: var(--forest, #1A1A1A);
+      padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(26,26,26,0.12), 0 6px 16px -10px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.14);
+      transition: transform 0.4s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), background 0.3s var(--ease-out, cubic-bezier(0.16,1,0.3,1)), box-shadow 0.5s var(--ease-out, cubic-bezier(0.16,1,0.3,1));
+    }
+    .nav-cta:hover { transform: translateY(-1px); background: #000; box-shadow: 0 2px 5px rgba(26,26,26,0.16), 0 14px 30px -12px rgba(26,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.16); }
 
     /* ============== layout ============== */
     main {
@@ -629,6 +637,7 @@
     .words > span:nth-child(4) { animation-delay: -2.5s; }
     @keyframes word { 0%, 22% { transform: none; } 25% { transform: translateY(-125%); animation-timing-function: step-end; } 25.01%, 97% { transform: translateY(125%); } 100% { transform: none; } }
     .pitch .lede { margin: 18px 0 0; font-size: 18.5px; color: #3D3F33; max-width: 40ch; }
+    .pitch .nl .ai-with { display: block; font-size: .36em; letter-spacing: -.02em; line-height: 1.1; margin-bottom: .06em; }
     .stage { position: relative; }
     .order { position: relative; z-index: 3; }
     .price { border-top: 0; padding-top: 4px; gap: 12px; }
@@ -707,6 +716,15 @@
     .words > span:nth-child(5) { color: #E4703B; }
     .words > span:nth-child(6) { color: #5B7FD4; }
     .words > span:nth-child(7) { color: #6F8B52; }
+    /* the homepage menu: on narrower screens it drops onto its own row under the logo, as on the homepage */
+    @media (max-width: 1040px) {
+      header { flex-wrap: wrap; row-gap: 8px; }
+      .brand { order: 1; }
+      .head-right { order: 2; }
+      .header-nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; row-gap: 2px; gap: 0; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; }
+      .header-nav a { padding: 6px 8px; }
+      main { padding-top: 170px; }
+    }
   </style>
 </head>
 <body>
@@ -718,17 +736,22 @@
     <span class="mark" aria-hidden="true"></span>
     <span>GreenCube</span>
   </a>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="/ai-environmental-impact">AI &amp; the planet</a>
+    <a href="/your-data">Your data</a>
+    <a href="/mission">Our mission</a>
+    <a href="/buy">Download</a>
+  </nav>
   <div class="head-right">
-    <nav class="header-nav" aria-label="Primary">
-    </nav>
     <details class="lang-pick"><summary class="lang" aria-label="Language">EN</summary><div class="lang-list"><a href="/buy" hreflang="en" lang="en" aria-current="true">English</a><a href="/es/buy" hreflang="es" lang="es">Español</a><a href="/pt/buy" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/buy" hreflang="fr" lang="fr">Français</a><a href="/de/buy" hreflang="de" lang="de">Deutsch</a><a href="/it/buy" hreflang="it" lang="it">Italiano</a><a href="/nl/buy" hreflang="nl" lang="nl">Nederlands</a><a href="/pl/buy" hreflang="pl" lang="pl">Polski</a><a href="/tr/buy" hreflang="tr" lang="tr">Türkçe</a><a href="/ru/buy" hreflang="ru" lang="ru">Русский</a><a href="/uk/buy" hreflang="uk" lang="uk">Українська</a><a href="/ar/buy" hreflang="ar" lang="ar">العربية</a><a href="/hi/buy" hreflang="hi" lang="hi">हिन्दी</a><a href="/id/buy" hreflang="id" lang="id">Indonesia</a><a href="/vi/buy" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/th/buy" hreflang="th" lang="th">ไทย</a><a href="/ja/buy" hreflang="ja" lang="ja">日本語</a><a href="/ko/buy" hreflang="ko" lang="ko">한국어</a><a href="/zh/buy" hreflang="zh" lang="zh-CN">简体中文</a><a href="/zh-tw/buy" hreflang="zh-tw" lang="zh-TW">繁體中文</a></div></details>
+    <a href="/buy" class="nav-cta" id="nav-buy">Buy now</a>
   </div>
 </header>
 
 <main>
   <!-- ===== left: the pitch ===== -->
   <section class="pitch">
-    <h1 class="nl">NO LIMITS.</h1>
+    <h1 class="nl"><span class="ai-with">AI with</span> NO LIMITS.</h1>
     <p class="adline">Make as many <span class="words"><span>images</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">artifacts</span></span> <span class="tail">as you want.</span></p>
     <p class="lede">An AI that runs on your own PC. It works offline and your chats stay on it.</p>
   </section>
@@ -861,7 +884,11 @@
     </article>
     <article class="get">
       <h3>Code</h3>
-      <p>Describe an app, a site or a game and it builds it for you.</p>
+      <p>Describe an app or a game and it writes the code for you.</p>
+    </article>
+    <article class="get">
+      <h3>Websites</h3>
+      <p>Describe a site and it builds one you can open and click through.</p>
     </article>
     <article class="get">
       <h3>Make images</h3>
@@ -878,6 +905,14 @@
     <article class="get">
       <h3>Slides</h3>
       <p>Ten slides on anything, as a real PowerPoint file.</p>
+    </article>
+    <article class="get">
+      <h3>Diagrams</h3>
+      <p>Ask for a diagram or a chart and it draws it for you.</p>
+    </article>
+    <article class="get">
+      <h3>Documents</h3>
+      <p>Reports, guides and essays as a finished document, in the style you pick.</p>
     </article>
   </div>
 
@@ -1142,6 +1177,7 @@
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; setBehind(false); unstep(); buyBtn.focus(); };
 
   buyBtn.addEventListener('click', openLetter);
+  document.getElementById('nav-buy').addEventListener('click', (e) => { e.preventDefault(); openLetter(); });
   rpFly.addEventListener('click', revealLetter);
   document.getElementById('lt-go').addEventListener('click', goCheckout);
   document.getElementById('fit-close').addEventListener('click', closeFit);
