@@ -1076,7 +1076,19 @@
   function goCheckout() {
     status.classList.remove('error');
     status.textContent = 'Opening secure checkout…';
+    step('checkout');
     location.href = checkoutUrl();
+  }
+
+  // Each step of the ad path shows in Cloudflare Web Analytics as its own page (/get/note, /get/checkout),
+  // so we can see where visitors stop. Cloudflare's own counter records address changes; nothing else is sent
+  // and nothing is stored. vercel.json sends a reload of /get/note or /get/checkout back to /get.
+  const onGet = /^\/get(\/(note|checkout))?\/?$/.test(location.pathname);
+  function step(name) {
+    if (onGet && location.pathname !== '/get/' + name) history.pushState({ gcStep: name }, '', '/get/' + name + location.search);
+  }
+  function unstep() {
+    if (onGet && location.pathname !== '/get') history.replaceState(null, '', '/get' + location.search);
   }
 
   // Where this buyer came from (set by /src.js from the links they followed), as Stripe's client_reference_id:
@@ -1109,6 +1121,7 @@
     overlay.classList.add('rp-mode');
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    step('note');
     void rpFly.offsetWidth;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { revealLetter(); return; }
     // the envelope rides down with the turtle on top, lands, the turtle hops off, it opens, the paper comes out
@@ -1126,7 +1139,7 @@
     setTimeout(() => { ltLetter.classList.add('show'); document.getElementById('lt-go').focus({ preventScroll: true }); }, 60);
   }
 
-  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; setBehind(false); buyBtn.focus(); };
+  const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; setBehind(false); unstep(); buyBtn.focus(); };
 
   buyBtn.addEventListener('click', openLetter);
   rpFly.addEventListener('click', revealLetter);
@@ -1134,6 +1147,9 @@
   document.getElementById('fit-close').addEventListener('click', closeFit);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFit(); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFit(); });
+  // Back closes the note; coming back from Stripe shows /get as it first looked
+  addEventListener('popstate', () => { if (overlay.classList.contains('open')) closeFit(); });
+  addEventListener('pageshow', (e) => { if (e.persisted && overlay.classList.contains('open')) { status.textContent = ''; closeFit(); } });
 
 })();
 </script>
