@@ -1150,6 +1150,18 @@
   function unstep() {
     if (onGet && location.pathname !== base) history.replaceState(null, '', base + location.search);
   }
+  // Two more counts, once per visit: /get/stayed after 15 seconds with the page on screen, /get/cards when the
+  // "What's included" cards scroll into view. Swapped in and straight back with replaceState, so Back is unchanged.
+  function mark(name) {
+    if (onGet && location.pathname === base) { history.replaceState(null, '', base + '/' + name + location.search); history.replaceState(null, '', base + location.search); }
+  }
+  let seen = 0;
+  const stay = setInterval(() => { if (document.visibilityState === 'visible' && ++seen >= 15) { clearInterval(stay); mark('stayed'); } }, 1000);
+  const cards = document.querySelector('.gets');
+  if (cards && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); mark('cards'); } }, { threshold: 0.25 });
+    io.observe(cards);
+  }
 
   // Where this buyer came from (set by /src.js from the links they followed), as Stripe's client_reference_id:
   // letters, digits, - and _ only, at most 200. Shows on each payment in the Stripe dashboard.
