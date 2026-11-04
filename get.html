@@ -1165,10 +1165,16 @@
 
   // Where this buyer came from (set by /src.js from the links they followed), as Stripe's client_reference_id:
   // letters, digits, - and _ only, at most 200. Shows on each payment in the Stripe dashboard.
+  // A visitor from a Google ad arrives with Google's click id in the address (gclid, or gbraid/wbraid). It goes last, as
+  // "__gclid-...", so the ad sales can be uploaded to Google Ads by hand (privacy policy, section 3). Nothing else is sent.
   function checkoutUrl() {
-    const s = window.GC_SRC || (location.pathname.startsWith('/get') ? { src: 'ad', lp: '/get' } : null);
+    const q = new URLSearchParams(location.search);
+    const kind = ['gclid', 'gbraid', 'wbraid'].find((k) => q.get(k));
+    const click = kind ? (kind + '-' + q.get(kind)).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 160) : '';
+    const s = window.GC_SRC || (location.pathname.startsWith('/get') || click ? { src: 'ad', lp: location.pathname.startsWith('/get') ? '/get' : '/buy' } : null);
     if (!s) return STRIPE_CHECKOUT_URL;
-    const id = (s.src + '__' + s.lp).replace(/[^A-Za-z0-9_-]/g, '-').slice(0, 200);
+    const tail = click ? '__' + click : '';
+    const id = (s.src + '__' + s.lp).replace(/[^A-Za-z0-9_-]/g, '-').slice(0, 200 - tail.length) + tail;
     return STRIPE_CHECKOUT_URL + (STRIPE_CHECKOUT_URL.includes('?') ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(id);
   }
 
