@@ -205,6 +205,8 @@ def make_shell(lang):
                      ('<a href="/blog" class="on">', f'<a href="/blog/{lang}" class="on">'), ('<li><a href="/blog">', f'<li><a href="/blog/{lang}">')] + shell_words(lang):
             assert a in s, (lang, a)
             s = s.replace(a, b)
+        if WD[lang].get('f_prompt'):  # the footer's prompt line, in the page's language
+            s = s.replace('&gt; ai you own. no limits <span', '&gt; ' + WD[lang]['f_prompt'] + ' <span')
     return tuple(s.split('<!-- CONTENT -->'))
 SHELLS = {lang: make_shell(lang) for lang in BLOG_LANGS}
 
