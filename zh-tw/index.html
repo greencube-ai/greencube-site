@@ -1384,6 +1384,35 @@
     .lang-pick .lang-list a { padding: 7px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink, #222); text-decoration: none; white-space: nowrap; }
     .lang-pick .lang-list a:hover, .lang-pick .lang-list a[aria-current="true"] { background: rgba(0,0,0,.06); }
   </style>
+  <style id="hero-calm">
+    /* calmer hero picture: no pine trees, no birds, no pencil grain, and the hills faded toward the sky,
+       so the scene stays but the headline and buttons lead */
+    .hero-landscape use[href="#gcPine"], .hero-landscape .gc-birds { display: none; }
+    .hero-landscape > g[filter*="gcPencil"] { filter: none; opacity: .62; }
+    .hero-landscape .gc-clouds-a, .hero-landscape .gc-clouds-b { opacity: .5; }
+  </style>
+  <style id="hero-hl">
+    /* the same rough yellow marker as the English homepage, behind the "No limits." line, swept in from the left */
+    .hero h1 .nl-mk { position: relative; isolation: isolate; }
+    .hero h1 .nl-mk::before {
+      content: ''; position: absolute; z-index: -1; left: -.07em; right: -.05em; top: .07em; bottom: .03em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23F9DD5E' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23F9DD5E' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23F4CF3A' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+      transform: rotate(-.8deg);
+      animation: hero-hl-in .6s cubic-bezier(.6,0,.2,1) .5s both;
+    }
+    @keyframes hero-hl-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .hero h1 .nl-mk::before { animation: none; } }
+  </style>
+  <style id="hero-what-css">
+    /* the line under the headline, with the key words marked in our colours */
+    .hero-what { max-width: 34ch; margin: 0 auto 28px; font-family: var(--sans); font-size: clamp(19px, 1.8vw, 26px); font-weight: 600; line-height: 1.5; color: var(--ink); letter-spacing: -.018em; }
+    .hero-what .mk { position: relative; isolation: isolate; white-space: nowrap; }
+    .hero-what .mk::before { content: ""; position: absolute; z-index: -1; left: -.12em; right: -.1em; top: .12em; bottom: .02em; background: no-repeat center / 100% 100%; transform: rotate(-1deg); animation: hero-hl-in .55s cubic-bezier(.6,0,.2,1) both; }
+    .hero-what .mk-sage::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23C9D8B4' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23C9D8B4' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23B3C799' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .hero-what .mk-peach::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23FBC3A6' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23FBC3A6' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23F4A986' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E"); animation-delay: 1s; }
+    .hero-what .mk-blue::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23C3D3F2' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23C3D3F2' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23A8BFEB' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E"); animation-delay: 1.2s; }
+    @media (prefers-reduced-motion: reduce) { .hero-what .mk::before { animation: none; } }
+  </style>
 </head>
 <body>
 
@@ -1527,9 +1556,9 @@
   <div class="wrap">
     <h1>
       <span class="rv-mask"><span>屬於 <em>你的 AI。</em></span></span>
-      <span class="rv-mask"><span>沒有限制。</span></span>
+      <span class="rv-mask"><span><span class="nl-mk">沒有限制。</span></span></span>
     </h1>
-    <p class="lede rv"><strong>聊天、程式碼、圖片和檔案，&nbsp;全都不限量。</strong><span class="why">它在你自己的電腦上執行，所以什麼都&nbsp;不會用完。</span></p>
+    <p class="hero-what rv">GreenCube 在你的電腦上執行 AI，而不是在雲端，所以它<span class="mk mk-sage">離線可用</span>、<span class="mk mk-peach">沒有限制</span>，而且<span class="mk mk-blue">100% 私密</span>。</p>
     <ul class="hero-chips rv">
       <li>不限量</li>
       <li>私密</li>
