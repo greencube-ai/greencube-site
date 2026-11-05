@@ -653,8 +653,8 @@
     /* graph-paper grid down the whole page */
     body {
       background:
-        linear-gradient(rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
-        linear-gradient(90deg, rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 37.5px 37.5px,
+        linear-gradient(90deg, rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 37.5px 37.5px,
         var(--paper, #F5F1E8);
     }
     footer { background: transparent; }
@@ -761,6 +761,71 @@
       .buy-btn, .nav-cta, .get, .get .ico { transition: none; }
     }
   </style>
+  <style id="refund-ul">
+    /* the refund promise right under Buy now */
+    .refund-line { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; font-size: 17px; font-weight: 500; line-height: 1.45; color: var(--ink, #1A1A1A); text-align: left; }
+    .refund-line svg { color: var(--moss, #7E8A5A); flex: 0 0 auto; }
+    .refund-line strong { position: relative; color: var(--ink, #1A1A1A); font-weight: 700; }
+    .refund-line strong::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.36em; height: .5em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E") no-repeat center / 100% 100%; animation: rf-ul-in .55s cubic-bezier(.6,0,.2,1) 1.2s both; }
+    @keyframes rf-ul-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .refund-line strong::after { animation: none; } }
+    /* the three check marks, with hand-drawn underlines under the bold words in sage, peach and blue */
+    .points li strong { position: relative; white-space: nowrap; }
+    .points li strong::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.34em; height: .5em; background: no-repeat center / 100% 100%; animation: pt-ul-in .55s cubic-bezier(.6,0,.2,1) both; }
+    .points li:nth-child(1) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .points li:nth-child(2) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .points li:nth-child(3) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1s; }
+    @keyframes pt-ul-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .points li strong::after { animation: none; } }
+  </style>
+  <style id="buy-same">
+    /* the same first screen as the English /buy page: big "AI with NO LIMITS." with the yellow marker, a rotating word, check marks, "€9.99 once." */
+    .pitch .nl { position: relative; display: inline-block; font-size: calc(clamp(56px, 6.5vw, 100px) * var(--nlf, 1)); font-weight: 700; line-height: 1; letter-spacing: -.035em;
+      padding: .14em .16em .16em; margin: 0 0 18px -.16em; white-space: nowrap; color: #1A1F1B; }
+    .pitch .nl .ai-with { display: block; font-size: calc(.36em / var(--nlf, 1)); letter-spacing: -.02em; line-height: 1.1; margin-bottom: .06em; }
+    .adline { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.25; letter-spacing: -.02em; color: #1A1F1B; }
+    .words { display: grid; overflow: hidden; font-size: 1.9em; font-weight: 700; letter-spacing: -.03em; line-height: 1.22; }
+    .lead, .tail { display: block; }
+    .words > span { grid-area: 1 / 1; animation: word 14s cubic-bezier(.6,0,.2,1) infinite; }
+    .words > span:nth-child(2) { animation-delay: -12s; }
+    .words > span:nth-child(3) { animation-delay: -10s; }
+    .words > span:nth-child(4) { animation-delay: -8s; }
+    .words > span:nth-child(5) { animation-delay: -6s; }
+    .words > span:nth-child(6) { animation-delay: -4s; }
+    .words > span:nth-child(7) { animation-delay: -2s; }
+    @keyframes word { 0%, 12.4% { transform: none; } 14.28% { transform: translateY(-125%); animation-timing-function: step-end; } 14.29%, 98.1% { transform: translateY(125%); } 100% { transform: none; } }
+    .words > span:nth-child(1), .words > span:nth-child(5) { color: #E4703B; }
+    .words > span:nth-child(2), .words > span:nth-child(6) { color: #5B7FD4; }
+    .words > span:nth-child(3), .words > span:nth-child(7) { color: #6F8B52; }
+    .words > span:nth-child(4) { color: #C6952A; }
+    .pitch .points { margin-top: 26px; gap: 15px; }
+    .pitch .points li { font-size: 17.5px; line-height: 1.5; }
+    .pitch .points li .tick { width: 24px; height: 24px; font-size: 13px; margin-top: 1px; }
+    .price { border-top: 0; padding-top: 4px; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+    .price .amount { font-size: 74px; font-weight: 700; }
+    .price .amount .cur { font-size: 74px; vertical-align: baseline; margin-right: 0; }
+    .price .once { font-family: var(--display); font-size: 40px; font-weight: 600; letter-spacing: -.02em; color: #1A1A1A; }
+    .for { font-size: 15.5px; font-weight: 500; color: #2C2C24; margin: 8px 0 14px; }
+    .vat-note { color: var(--ink-soft, #545454); }
+    .buy-btn span:first-child { font-size: 19px; }
+    @media (min-width: 901px) { .stage { transform: translateY(56px); } }
+    main { max-width: 1280px; padding: 96px 48px 40px; grid-template-columns: 1.15fr .85fr; gap: 40px; }
+    @media (max-width: 1040px) { main { padding-left: 24px; padding-right: 24px; } }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; gap: 44px; padding-top: 104px; text-align: center; } .pitch { text-align: center; } .stage { max-width: 440px; width: 100%; margin: 96px auto 0; } .order { text-align: left; } .order .os-note { text-align: center; } }
+    /* rough yellow marker behind NO LIMITS., swept in from the left */
+    .pitch .nl .hl { position: relative; isolation: isolate; }
+    .pitch .nl .hl::before {
+      content: ''; position: absolute; z-index: -1; left: -.07em; right: -.05em; top: .07em; bottom: .03em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23F9DD5E' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23F9DD5E' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23F4CF3A' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+      transform: rotate(-.8deg);
+      animation: hl-in .6s cubic-bezier(.6,0,.2,1) .25s both;
+    }
+    @keyframes hl-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (max-width: 1040px) { .price .amount, .price .amount .cur { font-size: 58px; } .price .once { font-size: 32px; } }
+    @media (max-width: 900px) { .pitch .nl { margin-left: 0; } .pitch .points { max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; } }
+    @media (max-width: 359px) { .pitch .nl { font-size: calc(48px * var(--nlf, 1)); } }
+    @media (prefers-reduced-motion: reduce) { .words > span { animation: none; } .words > span + span { display: none; } .pitch .nl .hl::before { animation: none; } }
+  </style>
 </head>
 <body>
 
@@ -781,11 +846,8 @@
 <main>
   <!-- ===== left: the pitch ===== -->
   <section class="pitch">
-    <div class="eyebrow">一次付费 · 永远归你</div>
-    <h1>所有 AI 都是租来的。<br>这个是 <em>你的 AI。</em></h1>
-    <p class="lede">
-      GreenCube 在你自己的电脑上运行。没有限制，无需订阅，还能离线用。付一次就归你。
-    </p>
+    <h1 class="nl" style="--nlf: 1.000"><span class="ai-with">AI，</span> <span class="hl">没有限制。</span></h1>
+    <p class="adline"><span class="lead">想做多少</span> <span class="words"><span>图片</span><span aria-hidden="true">PPT</span><span aria-hidden="true">图表</span><span aria-hidden="true">网站</span><span aria-hidden="true">闪卡</span><span aria-hidden="true">文档</span><span aria-hidden="true">互动作品</span></span> <span class="tail">都可以。</span></p>
     <ul class="points">
       <li><span class="tick" aria-hidden="true">✓</span><span><strong>没有限制。</strong> 想聊多少、写多少代码、生成多少图片都行。</span></li>
       <li><span class="tick" aria-hidden="true">✓</span><span><strong>在你的电脑上运行。</strong> 可离线使用。聊天留在电脑上。</span></li>
@@ -816,19 +878,15 @@
     </g>
   </svg></div>
   <section class="order" aria-label="Order summary">
-    <div class="order-head">
-      <span class="order-title">GreenCube</span>
-      <span class="order-tag">终身</span>
-    </div>
-    <p class="order-sub">没有限制的 AI，就在你的电脑上。</p>
 
     <!-- One clear price. Stripe hosts the checkout; any VAT/sales tax is
          calculated and shown on their hosted page — we never compute, display,
          or collect tax ourselves. -->
     <div class="price">
       <span class="amount"><span class="cur">€</span>9.99</span>
-      <span class="meta">一次性付款<br>永不订阅</span>
+      <span class="once">一次买断。</span>
     </div>
+    <p class="for">适用于 Windows 电脑。永不订阅。</p>
     <p class="vat-note">含税。</p>
     <!-- The licence is matched on email. Paying with one address and signing
          in with another is the commonest way a buyer gets locked out, so say
@@ -836,10 +894,11 @@
     <p class="vat-note">请用你之后登录的同一个邮箱付款（Google 或 Microsoft）。</p>
 
     <button class="buy-btn" id="buy-btn" type="button">
-      <span>获取 GreenCube</span>
+      <span>立即购买</span>
       <span class="arrow" aria-hidden="true">→</span>
     </button>
     <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
+    <p class="refund-line"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg><span>不适合你的电脑？ <strong>15 天内全额退款。</strong></span></p>
 
     <div class="trust">
       <div class="row">
@@ -1301,7 +1360,7 @@
     document.body.style.overflow = 'hidden';
   };
 
-  buyBtn.addEventListener('click', openLetter);
+  buyBtn.addEventListener('click', openFit);  // no note before checkout (it moved into the app's first run)
   rpFly.addEventListener('click', revealLetter);
   document.getElementById('lt-go').addEventListener('click', openFit);
   // Skipping the letter and the RAM check must not skip the "it's a Windows app" step:
@@ -1484,18 +1543,5 @@
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
 <script src="/src.js" defer></script>
 <script src="/magnet.js" defer></script>
-<script id="ico-in">
-/* feature icons: pop in and draw when the cards scroll into view (skipped with reduced motion or without IntersectionObserver) */
-(() => {
-  const g = document.querySelector('.gets');
-  if (!g || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  g.classList.add('anim');
-  const io = new IntersectionObserver((es) => {
-    let n = 0;
-    for (const e of es) if (e.isIntersecting) { e.target.style.setProperty('--d', (n++ * 0.09) + 's'); e.target.classList.add('in'); io.unobserve(e.target); }
-  }, {threshold: 0.4});
-  g.querySelectorAll('.get').forEach((c) => io.observe(c));
-})();
-</script>
 </body>
 </html>

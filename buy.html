@@ -869,8 +869,8 @@
     /* graph-paper grid down the whole page */
     body {
       background:
-        linear-gradient(rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
-        linear-gradient(90deg, rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 37.5px 37.5px,
+        linear-gradient(90deg, rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 37.5px 37.5px,
         var(--paper, #F5F1E8);
     }
     footer { background: transparent; }
@@ -976,6 +976,30 @@
       .buy-btn, .nav-cta, .get, .get .ico { transition: none; }
     }
   </style>
+  <style id="refund-ul">
+    /* the refund promise right under Buy now */
+    .refund-line { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; font-size: 17px; font-weight: 500; line-height: 1.45; color: var(--ink, #1A1A1A); text-align: left; }
+    .refund-line svg { color: var(--moss, #7E8A5A); flex: 0 0 auto; }
+    .refund-line strong { position: relative; color: var(--ink, #1A1A1A); font-weight: 700; }
+    .refund-line strong::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.36em; height: .5em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E") no-repeat center / 100% 100%; animation: rf-ul-in .55s cubic-bezier(.6,0,.2,1) 1.2s both; }
+    @keyframes rf-ul-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .refund-line strong::after { animation: none; } }
+    /* the three check marks, with hand-drawn underlines under the bold words in sage, peach and blue */
+    .points li strong { position: relative; white-space: nowrap; }
+    .points li strong::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.34em; height: .5em; background: no-repeat center / 100% 100%; animation: pt-ul-in .55s cubic-bezier(.6,0,.2,1) both; }
+    .points li:nth-child(1) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .points li:nth-child(2) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .points li:nth-child(3) strong::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1s; }
+    @keyframes pt-ul-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .points li strong::after { animation: none; } }
+  </style>
+  <style id="buy-points">
+    /* bigger check marks next to the big headline */
+    .pitch .points { margin-top: 26px; gap: 15px; }
+    .pitch .points li { font-size: 17.5px; line-height: 1.5; }
+    .pitch .points li .tick { width: 24px; height: 24px; font-size: 13px; margin-top: 1px; }
+    @media (max-width: 900px) { .pitch .points { max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; } }
+  </style>
 </head>
 <body>
 
@@ -1003,7 +1027,11 @@
   <section class="pitch">
     <h1 class="nl"><span class="ai-with">AI with</span> <span class="hl">NO LIMITS.</span></h1>
     <p class="adline">Make as many <span class="words"><span>images</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">artifacts</span></span> <span class="tail">as you want.</span></p>
-    <p class="lede">An AI that runs on your own PC. It works offline and your chats stay on it.</p>
+    <ul class="points">
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>No limits.</strong> Chat, code and make images as much as you want.</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Runs on your own PC.</strong> Works offline. Your chats stay on it.</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span><strong>One payment.</strong> No subscription, ever.</span></li>
+    </ul>
   </section>
 
   <!-- ===== right: order summary + buy ===== -->
@@ -1049,6 +1077,7 @@
     </button>
     <noscript><a href="https://buy.stripe.com/4gMdRb3wh9BV2HUe4m3Nm02" style="display:block;text-align:center;margin-top:12px;text-decoration:underline">Go to checkout</a></noscript>
     <p class="buy-status" id="buy-status" role="status" aria-live="polite"></p>
+    <p class="refund-line"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg><span>Not right for your PC? <strong>Full refund within 15 days.</strong></span></p>
 
     <div class="trust">
       <div class="row">
@@ -1470,8 +1499,9 @@
 
   const closeFit = () => { overlay.classList.remove('open'); document.body.style.overflow = ''; setBehind(false); unstep(); buyBtn.focus(); };
 
-  buyBtn.addEventListener('click', openLetter);
-  document.getElementById('nav-buy').addEventListener('click', (e) => { e.preventDefault(); openLetter(); });
+  buyBtn.addEventListener('pointerenter', warmCheckout);
+  buyBtn.addEventListener('click', goCheckout);  // no note before checkout (it moved into the app's first run)
+  document.getElementById('nav-buy').addEventListener('click', (e) => { e.preventDefault(); goCheckout(); });
   rpFly.addEventListener('click', revealLetter);
   document.getElementById('lt-go').addEventListener('click', goCheckout);
   document.getElementById('fit-close').addEventListener('click', closeFit);
@@ -1532,18 +1562,5 @@
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
 <script src="/src.js" defer></script>
 <script src="/magnet.js" defer></script>
-<script id="ico-in">
-/* feature icons: pop in and draw when the cards scroll into view (skipped with reduced motion or without IntersectionObserver) */
-(() => {
-  const g = document.querySelector('.gets');
-  if (!g || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  g.classList.add('anim');
-  const io = new IntersectionObserver((es) => {
-    let n = 0;
-    for (const e of es) if (e.isIntersecting) { e.target.style.setProperty('--d', (n++ * 0.09) + 's'); e.target.classList.add('in'); io.unobserve(e.target); }
-  }, {threshold: 0.4});
-  g.querySelectorAll('.get').forEach((c) => io.observe(c));
-})();
-</script>
 </body>
 </html>
