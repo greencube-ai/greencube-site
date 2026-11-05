@@ -1398,6 +1398,28 @@
     .hero h1 em { color: #1A1A1A; font-weight: 700; text-transform: uppercase; }
     .hero .lede .why { margin-top: 0; }
   </style>
+  <style id="hero-calm">
+    /* calmer hero picture: no pine trees, no birds, no pencil grain, and the hills faded toward the sky,
+       so the scene stays but the headline and buttons lead */
+    .hero-landscape use[href="#gcPine"], .hero-landscape .gc-birds { display: none; }
+    .hero-landscape > g[filter*="gcPencil"] { filter: none; opacity: .62; }
+    .hero-landscape .gc-clouds-a, .hero-landscape .gc-clouds-b { opacity: .5; }
+  </style>
+  <style id="hero-hl">
+    /* the same rough yellow marker as /get, behind "no limits." in the hero, swept in from the left */
+    .hero h1 em { position: relative; isolation: isolate; }
+    .hero h1 em::before {
+      content: ''; position: absolute; z-index: -1; left: -.07em; right: -.05em; top: .07em; bottom: .03em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23F9DD5E' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23F9DD5E' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23F4CF3A' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+      transform: rotate(-.8deg);
+      animation: hero-hl-in .6s cubic-bezier(.6,0,.2,1) .5s both;
+    }
+    @keyframes hero-hl-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .hero h1 em::before { animation: none; } }
+    /* the switching word: cream letters with an ink outline and an ink offset shadow (plain cream would vanish on the light sky) */
+    .hero .flip { color: #F5F1E8; }
+    .hero .flip > span { -webkit-text-stroke: .035em #1A1F1B; paint-order: stroke fill; text-shadow: .05em .055em 0 #1A1F1B; padding-right: .07em; }
+  </style>
 </head>
 <body>
 
@@ -2313,6 +2335,7 @@
   })();
 </script>
 <script src="/src.js" defer></script>
+<script src="/magnet.js" defer></script>
 <script src="/send-to-pc.js" defer></script>
 </body>
 </html>
