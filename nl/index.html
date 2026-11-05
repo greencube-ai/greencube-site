@@ -1413,6 +1413,22 @@
     .hero-what .mk-blue::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1.2s; }
     @media (prefers-reduced-motion: reduce) { .hero-what .mk::after { animation: none; } }
   </style>
+  <style id="hero-flip">
+    .flip { display: inline-grid; justify-items: start; vertical-align: bottom; overflow: hidden; color: #2F6B45; padding-bottom: .14em; margin-bottom: -.14em; transition: width .28s cubic-bezier(.4,0,.2,1); text-align: left; }
+    .flip > span { grid-area: 1 / 1; white-space: nowrap; transform: translateY(130%); }
+    .flip > span.on { transform: none; transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    .flip > span.out { transform: translateY(-130%); transition: transform .28s cubic-bezier(.4,0,.2,1); }
+    .hero .rv-mask > * { padding-bottom: .04em; }
+    @media (min-width: 761px) {
+      .hero { padding-top: 20vh; }
+      .hero h1 { font-size: clamp(40px, 5.3vw, 78px); }
+    }
+    @media (max-width: 760px) { .hero h1 { font-size: clamp(36px, 11vw, 64px); } }
+    .hero h1 em { color: #1A1A1A; font-weight: 700; text-transform: uppercase; }
+    .hero .lede .why { margin-top: 0; }
+    .hero .flip { color: #F5F1E8; }
+    .hero .flip > span { -webkit-text-stroke: .035em #1A1F1B; paint-order: stroke fill; text-shadow: .05em .055em 0 #1A1F1B; padding-right: .07em; }
+  </style>
 </head>
 <body>
 
@@ -1555,9 +1571,29 @@
   </svg>
   <div class="wrap">
     <h1>
-      <span class="rv-mask"><span>AI die van <em>jou is.</em></span></span>
-      <span class="rv-mask"><span><span class="nl-mk">Zonder limieten.</span></span></span>
+      <span class="rv-mask"><span>AI <em class="nl-mk">zonder limieten.</em></span></span>
+      <span class="rv-mask"><span>Maak <span class="flip" id="flip"><span class="on">afbeeldingen</span><span aria-hidden="true">PowerPoints</span><span aria-hidden="true">diagrammen</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documenten</span><span aria-hidden="true">artefacten</span></span> zoveel je wilt.</span></span>
     </h1>
+    <script>
+    // The switching word. The line re-centres on each word, so a short word leaves no gap. Without this script: "images".
+    (() => {
+      const box = document.getElementById('flip');
+      const items = [...box.children];
+      const fit = () => { box.style.width = items.find((w) => w.classList.contains('on')).offsetWidth + 'px'; };
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      addEventListener('resize', fit);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let i = 0;
+      setInterval(() => {
+        items.forEach((w) => w.classList.remove('out'));
+        items[i].classList.replace('on', 'out');
+        i = (i + 1) % items.length;
+        items[i].classList.add('on');
+        fit();
+      }, 2000);
+    })();
+    </script>
     <p class="hero-what rv">GreenCube draait de AI op je eigen pc in plaats van in de cloud, dus hij <span class="mk mk-sage">werkt offline</span>, <span class="mk mk-peach">zonder limieten</span> en is <span class="mk mk-blue">100% privé</span>.</p>
     <ul class="hero-chips rv">
       <li>Onbeperkt</li>
