@@ -89,7 +89,9 @@ NOINDEX = {'ollama-vs-greencube', 'claude-vs-greencube', 'greencube-vs-claude', 
 MERGED = {'offline-ai-setup-windows': 'local-ai-chatbot-windows', 'install-local-ai': 'local-ai-chatbot-windows',
           'ai-without-internet': 'best-offline-ai-chatbot', 'best-private-ai': 'private-ai-assistant',
           'no-rate-limit-ai': 'unlimited-ai', 'local-ai-models-explained': 'best-local-ai-models',
-          'best-private-chat-ai': 'private-ai-assistant', 'local-ai-vs-chatgpt': 'chatgpt-offline'}
+          'best-private-chat-ai': 'private-ai-assistant', 'local-ai-vs-chatgpt': 'chatgpt-offline',
+          # healthcare/HIPAA is not our field (trademark: we never market for health; Hector 2026-11-05)
+          'hipaa-compliant-ai': 'private-ai-assistant'}
 OWN_TITLES = {}
 for fn in os.listdir(f'{SRC}/own') if os.path.isdir(f'{SRC}/own') else []:
     if fn.endswith('.html'):
