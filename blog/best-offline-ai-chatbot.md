@@ -61,7 +61,7 @@ From each app's own privacy page or docs. These are their words, summarised; we 
 
 ### You're on Windows and don't want to choose models
 
-GreenCube looks at your graphics card and memory and downloads the AI that fits, so there's nothing to pick. It reads PDFs and photos, makes flashcards and study guides, and generates pictures. It costs €9.99 once. If you'd rather not pay and don't mind choosing a model from a list, LM Studio, Jan and GPT4All are free desktop apps. [What a Windows PC needs, measured](https://blog.greencube.app/blog/local-ai-chatbot-windows).
+GreenCube looks at your graphics card and memory and downloads the AI that fits, so there's nothing to pick. It reads PDFs and photos, makes flashcards and study guides, and generates pictures. It costs €9.99 once. If you'd rather not pay and don't mind choosing a model from a list, LM Studio, Jan and [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives) are free desktop apps. [What a Windows PC needs, measured](https://blog.greencube.app/blog/local-ai-chatbot-windows).
 
 ### You're on a Mac
 
@@ -73,7 +73,7 @@ PocketPal AI (iPhone and Android) and Atomic Chat (iPhone and Android) run model
 
 ### You're a developer, or want a server
 
-Ollama and llama.cpp are command-line engines with a local API; KoboldCpp is a single .exe with a browser chat. For a shared chat page for several people, Open WebUI or AnythingLLM's Docker version sit on top of an engine.
+Ollama and llama.cpp are command-line engines with a local API; KoboldCpp is a single .exe with a browser chat. For a shared chat page for several people, [Open WebUI](https://blog.greencube.app/blog/openwebui-alternatives) or AnythingLLM's Docker version sit on top of an engine.
 
 ## How fast is offline AI? What we measured
 

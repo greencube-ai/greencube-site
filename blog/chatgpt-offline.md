@@ -22,11 +22,11 @@ Watch out for app-store apps that put "ChatGPT" and "offline" in their name: the
 
 ### OpenAI's own open-weight model: gpt-oss-20b
 
-In August 2025 OpenAI released gpt-oss, open-weight models under the Apache 2.0 licence. The smaller one, gpt-oss-20b, runs on a computer with about 16 GB of memory ([OpenAI](https://openai.com/index/introducing-gpt-oss/)), through apps like Ollama or LM Studio. It's made by OpenAI, but it isn't ChatGPT: different model, no web search, no memory of your account. We haven't timed it on our PCs.
+In August 2025 OpenAI released gpt-oss, open-weight models under the Apache 2.0 licence. The smaller one, gpt-oss-20b, runs on a computer with about 16 GB of memory ([OpenAI](https://openai.com/index/introducing-gpt-oss/)), through apps like [Ollama or LM Studio](https://blog.greencube.app/blog/ollama-vs-lm-studio). It's made by OpenAI, but it isn't ChatGPT: different model, no web search, no memory of your account. We haven't timed it on our PCs.
 
 ### A local AI app
 
-Apps that download a model once and run it on your PC: **LM Studio**, **Jan**, **Ollama** and **GPT4All** are free and let you pick the model; **GreenCube** (Windows, €9.99 once) picks the model that fits your PC and also reads PDFs and photos and makes pictures. [12 offline apps compared](https://blog.greencube.app/blog/best-offline-ai-chatbot).
+Apps that download a model once and run it on your PC: **LM Studio**, **Jan**, **Ollama** and **[GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives)** are free and let you pick the model; **GreenCube** (Windows, €9.99 once) picks the model that fits your PC and also reads PDFs and photos and makes pictures. [12 offline apps compared](https://blog.greencube.app/blog/best-offline-ai-chatbot).
 
 ## What you need, and how fast it is
 

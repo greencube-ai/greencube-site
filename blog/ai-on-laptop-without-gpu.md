@@ -30,7 +30,7 @@ Writing an answer is limited by how fast the laptop can move the AI through its 
 
 ### 2. It can even be slower
 
-With an older small model (Phi-4 Mini), writing got **29% slower** on the Intel graphics. With a bigger one (Gemma 4 E4B) it got **26% faster**. Same laptop, opposite results. You can't guess it from the specs, so GreenCube tests your laptop and uses whichever is faster.
+With an older small model (Phi-4 Mini), writing got **29% slower** on the Intel graphics. With a bigger one ([Gemma 4 E4B](https://blog.greencube.app/blog/gemma-4-requirements)) it got **26% faster**. Same laptop, opposite results. You can't guess it from the specs, so GreenCube tests your laptop and uses whichever is faster.
 
 ### 3. Pictures are where it shines
 

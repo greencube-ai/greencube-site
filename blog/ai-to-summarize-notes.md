@@ -41,7 +41,7 @@ You don't want to upload your notes anywhere, you want to add as many chapters a
 
 ## How long summarizing takes on your own PC
 
-We measured it with GreenCube on a normal 16 GB laptop with no graphics card, using the small AI (Gemma 4 E2B), on long study documents. The details are in [our PDF study test](https://blog.greencube.app/blog/ai-to-study-from-pdf).
+We measured it with GreenCube on a normal 16 GB laptop with no graphics card, using the small AI ([Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), on long study documents. The details are in [our PDF study test](https://blog.greencube.app/blog/ai-to-study-from-pdf).
 
 | What you ask for | Measured time |
 | --- | --- |

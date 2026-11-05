@@ -43,7 +43,7 @@
 <p><strong>Statistic Callout:</strong> Industry observations from Hugging Face point to SLMs as the primary driver letting high-performing AI run on aging PCs and phones that could never handle a full-scale frontier model.</p>
 <p>Quantization is the other half of the story. It reduces the precision of a model&#x27;s numbers, typically from 16-bit down to 8-bit (int8) or even 4-bit (int4), cutting file size roughly in half or more with only a modest quality hit. You&#x27;ll see this packaged in a few common formats:</p>
 <ul>
-<li><strong>GGUF</strong>: the standard format for llama.cpp-style runtimes, popular because it bundles everything a runtime needs in one file</li>
+<li><strong><a href="/blog/gguf-vs-ggml">GGUF</a></strong>: the standard format for llama.cpp-style runtimes, popular because it bundles everything a runtime needs in one file</li>
 <li><strong>Safetensors</strong>: a format favored for its speed and safety when loading weights, common in the Hugging Face ecosystem</li>
 </ul>
 <p>The trade-off is straightforward: a 4-bit quantized model runs faster and fits in less memory, but it can stumble slightly on nuanced reasoning compared to its full-precision original. For chat, summarizing, and drafting, most people never notice the difference.</p>

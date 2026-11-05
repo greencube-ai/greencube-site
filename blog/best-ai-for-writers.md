@@ -48,7 +48,7 @@ OpenAI doesn't train on Business, Enterprise or API data by default ([checked](h
 
 ### Keep it on your machine
 
-An AI that runs on your own PC reads and writes locally: no upload, no retention, no reviewers. GreenCube drafts emails, essays and documents and makes PowerPoint files, offline, €9.99 once; free apps like LM Studio, Jan and GPT4All do it too if you're happy choosing a model.
+An AI that runs on your own PC reads and writes locally: no upload, no retention, no reviewers. GreenCube drafts emails, essays and documents and makes PowerPoint files, offline, €9.99 once; free apps like LM Studio, Jan and [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives) do it too if you're happy choosing a model.
 
 ## Writing assistant or general chatbot?
 

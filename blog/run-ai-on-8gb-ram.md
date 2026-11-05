@@ -14,7 +14,7 @@ Author: Hector Gras
 
 ## The test
 
-The weakest PC we've measured: a laptop with 8 GB of RAM, Intel Iris Xe graphics, no graphics card, on battery. Small model (Gemma 4 E2B), early October 2026.
+The weakest PC we've measured: a laptop with 8 GB of RAM, Intel Iris Xe graphics, no graphics card, on battery. Small model ([Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), early October 2026.
 
 | What | Result |
 | --- | --- |

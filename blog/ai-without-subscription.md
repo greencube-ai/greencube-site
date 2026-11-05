@@ -36,7 +36,7 @@ If you're at university and 18 or over, Google offers Google AI Plus free for a 
 
 ### 3. An AI that runs on your own PC
 
-The model is a file on your computer, so there's no server to pay for every month and no usage limits. GreenCube is €9.99 once and picks the AI that fits your PC by itself. There are also free apps for running AI on your computer, like LM Studio, Jan or GPT4All, where you choose and download the models yourself. They all have the same cost: your computer does the work.
+The model is a file on your computer, so there's no server to pay for every month and no usage limits. GreenCube is €9.99 once and picks the AI that fits your PC by itself. There are also free apps for running AI on your computer, like LM Studio, Jan or [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives), where you choose and download the models yourself. They all have the same cost: your computer does the work.
 
 ## What an AI on your PC does cost: time
 
