@@ -1,0 +1,43 @@
+<!--meta
+{"version": "0.1.47", "date": "2026-10-17", "title": "Meet the turtle, and flashcards worth studying",
+ "summary": "A turtle that plays while GreenCube works, flashcards that flip, proper Word documents, and cards written 2.6 times faster.",
+ "size": "15 changes"}
+-->
+<p>The turtle replaces the old status words and seconds counter, flashcards became real cards, and anything with a fixed shape (cards, decks, documents) got 2.6 times faster to write.</p>
+
+<div class="cl-shots">
+<a class="cl-shot" href="images/cl-048-flashcards-heart.png"><img src="images/cl-048-flashcards-heart.png" alt="A flashcard about the heart"/>Flashcards that flip, with shuffle and progress (shown in 0.1.48).</a>
+<a class="cl-shot" href="images/cl-047-document-volcanoes.png"><img src="images/cl-047-document-volcanoes.png" alt="A formal document about volcanoes"/>A proper document, ready to save as Word.</a>
+<a class="cl-shot" href="images/cl-047-turtle-reading.png"><img src="images/cl-047-turtle-reading.png" alt="The turtle on a skateboard"/>The turtle skates while GreenCube reads…</a>
+<a class="cl-shot" href="images/cl-047-turtle-writing.png"><img src="images/cl-047-turtle-writing.png" alt="The turtle writing with a pencil"/>…and writes with a pencil while the answer appears.</a>
+</div>
+
+<h2>What's new</h2>
+<ul>
+<li><strong>The turtle.</strong> A little turtle runs, skates, juggles and plays football while GreenCube works. It reads a book for your files, types on a laptop for the web, writes with a pencil while the answer appears, and stacks blocks while it builds cards. It stays still if you turn off motion in Windows.</li>
+<li><strong>Real flashcards.</strong> The question big on the front, the answer on the coloured back, with a progress bar, shuffle, start over, and the Space and arrow keys.</li>
+<li><strong>Proper documents.</strong> A clean page in the app and a tidy Word file with a serif title, real tables, quotes and page numbers. Letters come out as letters.</li>
+<li><strong>Images works like a chat.</strong> Ideas appear in the empty box (press Tab to use one) and your pictures wait in the Library.</li>
+</ul>
+
+<h2>What we fixed</h2>
+<h3>The engine checked the whole dictionary before every word</h3>
+<p>When GreenCube keeps an engine inside a fixed shape, it was checking all 262,144 possible words before each pick. Now it checks the engine's first choice, and the full list only if that choice doesn't fit. The text comes out byte for byte the same; the engine really runs faster.</p>
+<p class="cl-was">4.1 → 10.7 word pieces a second.</p>
+
+<h3>A thousand digits of pi, 37 times</h3>
+<p>Asked for 1,000 digits of pi, E2B wrote the same line 37 times and ran past 5 minutes. Now GreenCube spots the loop, keeps one copy and adds a note. The first version of the fix then cut a googol in half, because a long real number looked like a loop. We fixed that the same day.</p>
+<p class="cl-was">300 seconds → 56 seconds.</p>
+
+<h3>Documents opened with only their title</h3>
+<p>The document panel opened before the document was finished, so it showed a title and nothing else.</p>
+<div class="cl-shots">
+<a class="cl-shot" href="images/cl-047-problem-document-empty-before.png"><img src="images/cl-047-problem-document-empty-before.png" alt="Before the fix: a document showing only its title"/>Before: the title only.</a>
+<a class="cl-shot" href="images/cl-047-document-volcanoes.png"><img src="images/cl-047-document-volcanoes.png" alt="After the fix: the whole document"/>After: same request, the whole document.</a>
+</div>
+
+<h3>Leaving a chat mid-answer broke Send</h3>
+<p>Every chat then said "a response is being generated in another conversation" until you restarted the app. Our test robot reproduced it 3 times out of 3. Fixed.</p>
+
+<h3>"Saved" when nothing was saved</h3>
+<p>Sometimes a change to a letter or a deck came back in a slightly wrong shape. The change was dropped, but the chat still said "Saved". Now the app understands the other shapes, and when it really can't apply a change, it says so.</p>

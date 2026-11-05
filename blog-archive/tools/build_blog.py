@@ -126,6 +126,15 @@ def image(rel):
     sizes[rel] = (f'/blog/images/{out}', im.width, im.height)
     return sizes[rel]
 
+def img_tag(m):
+    """An <img> pointing at images/ in the archive: resized copy, real size, lazy (our own posts use it too)."""
+    tag = m.group(0)
+    src = re.search(r'src="([^"]+)"', tag).group(1)
+    if not src.startswith('images/'): return tag
+    path, w, h = image(src)
+    alt = re.search(r'alt="([^"]*)"', tag)
+    return f'<img src="{path}" alt="{alt.group(1) if alt else ""}" width="{w}" height="{h}" loading="lazy" decoding="async"/>'
+
 def cf_email(hexs):
     k = int(hexs[:2], 16)
     return ''.join(chr(int(hexs[i:i + 2], 16) ^ k) for i in range(2, len(hexs), 2))
@@ -309,6 +318,7 @@ for lang in BLOG_LANGS:
             body = (raw[m.end():].replace('<!--pcs:table-->', pc_pages.table(lang)).replace('<!--pcs:checker-->', pc_pages.checker(lang))
                     .replace('{{pcs}}', str(pc_pages.count())))
             meta = json.loads(m.group(1).replace('{{pcs}}', str(pc_pages.count())))
+            body = re.sub(r'<img[^>]*>', img_tag, body)  # screenshots in our own posts (the changelog)
             own.append((lang, fn[:-5], meta, body))
     own += [(lang, s, m, b) for s, m, b in pc_pages.pages(lang)]  # one page per measured PC, written from data/pcs.json
 # a post and its translations share one key, the English slug: other languages name it in "alt"
@@ -518,10 +528,76 @@ list_page('en', listing, f'{HOST}/blog', f'{OUT}/index.html')
 
 open(f'{OUT}/{pc_pages.CSV_NAME}', 'w', encoding='utf-8', newline='').write(pc_pages.csv_text())  # every measurement, for anyone to download
 
+# ---------- changelog: blog-archive/changelog/<version>.html (a <!--meta {json} --> block, then the body), one page per
+#     update at /blog/changelog/0-1-48, and a list of every update at /blog/changelog. Pictures open full size.
+CL_SRC = f'{SRC}/changelog'
+cl = []
+for fn in sorted(os.listdir(CL_SRC)) if os.path.isdir(CL_SRC) else []:
+    if fn.endswith('.html') and not fn.startswith('_'):
+        raw = open(f'{CL_SRC}/{fn}', encoding='utf-8').read()
+        m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
+        cl.append((json.loads(m.group(1)), raw[m.end():]))
+cl.sort(key=lambda x: [int(n) for n in x[0]['version'].split('.')], reverse=True)
+def cl_path(v): return '/blog/changelog/' + v.replace('.', '-')
+def cl_body(body):
+    body = re.sub(r'href="(images/[^"]+)"', lambda m: f'href="{image(m.group(1))[0]}"', body)
+    return re.sub(r'<img\b[^>]*>', img_tag, body)
+CL_VIEW = ('<div class="cl-view" role="dialog" aria-modal="true" aria-label="Picture" hidden>'
+           '<button type="button" class="cl-x" aria-label="Close">&times;</button>'
+           '<button type="button" class="cl-prev" aria-label="Previous picture">&lsaquo;</button>'
+           '<figure><img alt=""/><figcaption></figcaption><span class="cl-count"></span></figure>'
+           '<button type="button" class="cl-next" aria-label="Next picture">&rsaquo;</button></div>\n'
+           '<script>' + open(os.path.join(os.path.dirname(__file__), 'changelog_view.js'), encoding='utf-8').read() + '</script>\n')
+CL_CTA = ('<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>Every update reaches you inside the app: a message appears, '
+          'you click once, and it installs. GreenCube is &euro;9.99 (US$9.99), paid once.</p>'
+          '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n')
+CL_DOTS = ['#8EA674', '#FA9F75', '#8EABE1', '#E9C54A']  # the site's four pastels, one per update in turn
+cl_urls = []
+for i, (meta, body) in enumerate(cl):
+    v = meta['version']; url = HOST + cl_path(v)
+    older = cl[i + 1][0] if i + 1 < len(cl) else None
+    newer = cl[i - 1][0] if i > 0 else None
+    nav = ('<nav class="cl-nav" aria-label="Updates">'
+           + (f'<a href="{cl_path(older["version"])}">&larr; {esc(older["version"])}</a>' if older else '<span></span>')
+           + '<a href="/blog/changelog">All updates</a>'
+           + (f'<a href="{cl_path(newer["version"])}">{esc(newer["version"])} &rarr;</a>' if newer else '<span></span>') + '</nav>\n')
+    title = f'GreenCube {v}: {meta["title"]}'
+    ld = [{'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': meta['summary'],
+           'image': 'https://greencube.app/og.jpg', 'datePublished': meta['date'], 'dateModified': meta.get('modified', meta['date']),
+           'inLanguage': 'en', 'mainEntityOfPage': url,
+           'author': {'@type': 'Person', 'name': AUTHOR, 'url': author_url('en')},
+           'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
+                         'logo': {'@type': 'ImageObject', 'url': 'https://greencube.app/icon-512.png'}}}]
+    content = (f'<article class="cl-page" style="--dot:{CL_DOTS[i % 4]}">\n<a class="cl-back" href="/blog/changelog"><span aria-hidden="true">&larr;</span> All updates</a>\n'
+               f'<h1 class="cl-h1"><span class="cl-num">{esc(v)}</span><span class="cl-name">{esc(meta["title"])}</span></h1>\n'
+               f'<p class="byline">{nice_date(meta["date"])}' + (f' &middot; {esc(meta["size"])}' if meta.get('size') else '')
+               + f'</p>\n{cl_body(body)}\n{nav}{CL_CTA}</article>\n{CL_VIEW}')
+    os.makedirs(f'{OUT}/changelog', exist_ok=True)
+    open(f'{OUT}{cl_path(v)[5:]}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube changelog', meta['summary'], url, 'https://greencube.app/og.jpg', ld, content))
+    cl_urls.append(f'  <url><loc>{url}</loc><lastmod>{meta.get("modified", meta["date"])}</lastmod></url>')
+if cl:
+    rows = ''
+    for i, (meta, _) in enumerate(cl):
+        thumb = meta.get('thumb')
+        rows += (f'<li><a href="{cl_path(meta["version"])}" style="--dot:{CL_DOTS[i % 4]}"><span class="cl-v">{esc(meta["version"])}</span>'
+                 f'<span class="cl-t">{esc(meta["title"])}</span><span class="cl-s">{esc(meta["summary"])}</span><span class="cl-date">{nice_date(meta["date"])}</span>'
+                 + (img_tag(re.match(r'.*', f'<img src="images/{thumb}" alt=""/>')) if thumb else '') + '</a></li>\n')
+    start = open(f'{CL_SRC}/_start.html', encoding='utf-8').read() if os.path.exists(f'{CL_SRC}/_start.html') else ''
+    url = f'{HOST}/blog/changelog'
+    desc = (f'Every GreenCube update since September 2026: what is new, what broke and how we fixed it, with real screenshots and the numbers we measured.')
+    content = (f'<article class="cl-list">\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>Changelog</h1>\n'
+               f'<p class="cl-lede">Every GreenCube update, newest first: what you can do now, what broke and how we fixed it, '
+               f'and what we measured before and after. {len(cl)} updates since {nice_date(cl[-1][0]["date"])}.</p>\n'
+               f'<ol class="cl-rows">\n{rows}</ol>\n{start}{CL_CTA}</article>\n')
+    ld = [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'GreenCube changelog', 'description': desc, 'url': url, 'inLanguage': 'en'}]
+    open(f'{OUT}/changelog/index.html', 'w', encoding='utf-8').write(page('GreenCube changelog: every update | GreenCube blog', desc, url, 'https://greencube.app/og.jpg', ld, content, og_type='website'))
+    cl_urls.insert(0, f'  <url><loc>{url}</loc><lastmod>{max(m.get("modified", m["date"]) for m, _ in cl)}</lastmod></url>')
+
 # ---------- sitemap ----------
 urls = [f'  <url><loc>{HOST}/blog</loc><lastmod>{max(l[4] for l in listing)}</lastmod></url>'] + \
        [f'  <url><loc>{HOST}/blog/{s}</loc><lastmod>{m}</lastmod></url>' for s, _, _, _, m in listing if s not in NOINDEX] + \
        [f'  <url><loc>{author_url(lg)}</loc><lastmod>{max(e[4] for e in listings[lg])}</lastmod></url>' for lg in authors]
+urls += cl_urls
 for lg in BLOG_LANGS[1:]:
     if listings[lg]:
         urls += [f'  <url><loc>{home_url(lg)}</loc><lastmod>{max(l[4] for l in listings[lg])}</lastmod></url>'] + \

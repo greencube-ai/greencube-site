@@ -1,0 +1,30 @@
+<!--meta
+{"version": "0.1.46", "date": "2026-10-15", "title": "Online answers that read the whole page",
+ "summary": "Web answers read 2.5 times more of each page, upcoming games, the date from your clock, and pictures on smaller graphics cards.",
+ "size": "15 changes"}
+-->
+<p>With Online on, GreenCube now reads much more of each page it finds, so answers carry names, numbers and dates instead of "check this website". And a few things that never needed the web stopped using it.</p>
+
+<h2>What's new</h2>
+<ul>
+<li><strong>Web answers read 2.5 times more</strong> of each page they find.</li>
+<li><strong>Games coming up:</strong> what NBA, NFL, MLB or football games are on today, tonight, tomorrow or this weekend.</li>
+<li><strong>The date and time from your clock:</strong> today's date, the time and "how many days until Christmas", instantly.</li>
+<li><strong>Pictures on smaller graphics cards.</strong> If the card is full, GreenCube tries with less of it, then on the processor. Every picture is marked inside the file as made by AI.</li>
+</ul>
+
+<h2>What we fixed</h2>
+<h3>"Check this website" instead of an answer</h3>
+<p>The engine was getting about 2,000 characters of evidence, mostly search-result titles; the pages themselves barely reached it. We tried reading 2.5 times more from the same pages and judged every answer that changed without knowing which version wrote it. The longer read won on every engine. The honest cost is about 4 seconds more reading.</p>
+<p class="cl-was">Blind comparisons won by the longer read: E2B 21 to 8, E4B 14 to 3.</p>
+
+<h3>Today's date took 25 seconds</h3>
+<p>GreenCube was looking the date up on the web. It now reads your computer's clock.</p>
+<p class="cl-was">25 seconds → 0.0 seconds.</p>
+
+<h3>Every picture failed on a 6 GB graphics card</h3>
+<p>A tester's card was 50 MB short, so every single picture failed. Now the processor is the last step. It's slow, but you get your picture.</p>
+<p class="cl-was">The same picture on our laptop: 139 seconds on the graphics chip, 812 on the processor.</p>
+
+<h3>"The next eclipse will occur on April 8, 2024"</h3>
+<p>Dates that have already passed are now taken out of anything that calls them "next".</p>

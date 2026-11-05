@@ -1,0 +1,29 @@
+<!--meta
+{"version": "0.1.42", "date": "2026-09-30", "title": "Better answers, in your language",
+ "summary": "Answers in your language and at the right length, new chats that answer in seconds, and engines you already have found.",
+ "size": "72 changes"}
+-->
+<p>Ask in Spanish and get Spanish back. Ask something quick and get a quick answer. And a new chat no longer makes you wait half a minute for its first word.</p>
+
+<h2>What's new</h2>
+<ul>
+<li><strong>Your language, the right length.</strong> Ask in Spanish and everything comes back in Spanish, cards and quizzes too. A quick question gets a quick answer; "explain" gets the full explanation.</li>
+<li><strong>New chats answer in seconds</strong>, and engines that fit on your graphics card now run on it.</li>
+<li><strong>Engines you already have are found.</strong> GGUF files elsewhere on your PC show up in the picker, which has a search box.</li>
+<li><strong>Online search rebuilt.</strong> Pages that block robots are read privately on your own computer, and follow-ups like "¿y mañana?" work.</li>
+</ul>
+
+<h2>What we fixed</h2>
+<h3>A new chat waited half a minute before the first word</h3>
+<p>Every new chat re-read GreenCube's own instructions from scratch. Now they're read once, when the engine loads, and kept. The answers are the same, word for word.</p>
+<p class="cl-was">"Capital of Australia?" (E2B): 30.9 seconds → 4.0 seconds.</p>
+
+<h3>The graphics card sat idle</h3>
+<p>The engine runner says "-1" to mean "every layer fits on the card". Our code rounded -1 up to 0, so every engine that fit on a graphics card ran on the processor instead.</p>
+
+<h3>Engines copied their instructions into answers</h3>
+<p>We had told the engine to mention when GreenCube is offline, and small engines pasted "GreenCube is offline right now…" under 29 of 37 answers that didn't need it. The app now writes that note itself, only under weather, price, score or news questions.</p>
+
+<h3>50 seconds to answer "Canberra"</h3>
+<p>Some engine designs can't rewind, so they re-read the whole conversation on every message. GreenCube now keeps what they already read.</p>
+<p class="cl-was">Qwen3.5 4B: 50 seconds → 1.9 seconds.</p>

@@ -1,0 +1,62 @@
+<!--meta
+{"version": "0.1.48", "date": "2026-11-01", "title": "Websites in about a minute, and real drawings",
+ "summary": "Code tab websites with working buttons, graphs, circuits, atoms and cells drawn by code, 15 slide styles, and the app in 20 languages.",
+ "size": "139 changes"}
+-->
+<p>Our biggest update so far. Two things changed how GreenCube works: <strong>websites</strong> and <strong>drawings</strong> are now built by GreenCube's own code, and the AI engine only fills in the words. Both used to be written by the engine from scratch, and both often broke.</p>
+
+<div class="cl-shots three">
+<a class="cl-shot" href="images/cl-048-website-cafe.png"><img src="images/cl-048-website-cafe.png" alt="A cafe website built by GreenCube in the Code tab"/>A cafe's website, built in the Code tab in 55 seconds.</a>
+<a class="cl-shot" href="images/cl-048-website-peluqueria-es.png"><img src="images/cl-048-website-peluqueria-es.png" alt="A hair salon website in Spanish built by GreenCube"/>Asked in Spanish, built in Spanish.</a>
+<a class="cl-shot" href="images/cl-048-website-grooming-after-3-edits.png"><img src="images/cl-048-website-grooming-after-3-edits.png" alt="A dog grooming website after three changes"/>A dog-grooming site after three changes asked in plain words.</a>
+</div>
+<div class="cl-shots">
+<a class="cl-shot" href="images/cl-048-drawing-circuit.png"><img src="images/cl-048-drawing-circuit.png" alt="A circuit with a battery, a switch and two resistors in parallel"/>"A 9V battery, two resistors in parallel and a switch."</a>
+<a class="cl-shot" href="images/cl-048-drawing-graph-sin-cos-es.png"><img src="images/cl-048-drawing-graph-sin-cos-es.png" alt="Sine and cosine graph with the crossings marked"/>Sine and cosine, asked in Spanish, with the crossings marked.</a>
+<a class="cl-shot" href="images/cl-048-drawing-atom-chlorine-es.png"><img src="images/cl-048-drawing-atom-chlorine-es.png" alt="A Bohr model of a chlorine atom"/>A chlorine atom, electrons 2·8·7.</a>
+<a class="cl-shot" href="images/cl-048-drawing-plant-cell.png"><img src="images/cl-048-drawing-plant-cell.png" alt="A labelled plant cell"/>A plant cell with every part labelled.</a>
+<a class="cl-shot" href="images/cl-048-drawing-water-cycle.png"><img src="images/cl-048-drawing-water-cycle.png" alt="The water cycle as a diagram"/>The water cycle.</a>
+<a class="cl-shot" href="images/cl-048-flashcards-add-3-more.png"><img src="images/cl-048-flashcards-add-3-more.png" alt="A flashcard set about the planets"/>"Add 3 more cards": the set grows from 5 to 8.</a>
+</div>
+
+<h2>What's new</h2>
+<ul>
+<li><strong>Websites in the Code tab, in about a minute.</strong> Describe the business and get a one-page site whose buttons work. The engine fills in a short form (the business, the sections, the words) and GreenCube's code builds the page. Before handing it over, the app opens the site, presses every button and sends any dead one back for repair.</li>
+<li><strong>Real drawings in the chat:</strong> function graphs with zeros, turning points and crossings marked, series and parallel circuits, atoms up to krypton, animal and plant cells, flowcharts and cycles. They're drawn by code, so the labels are real text, in your language.</li>
+<li><strong>15 slide styles</strong> in five moods (Clean, Bold, Fun, School, Dark), a gallery that shows your own first slide in every style, and slides you can edit. <strong>8 document styles</strong>, in the app and in Word.</li>
+<li><strong>Typos are fixed before the engine reads them.</strong> Your message stays as you typed it.</li>
+<li><strong>"Add more" keeps the set.</strong> "Add 3 more" adds to the flashcards or quiz you already have, and a quiz never repeats a question.</li>
+<li><strong>Quicker with your files.</strong> Later questions about a document get the parts that answer them, photos are fully read before the answer, and a zip file is opened and every file inside is read.</li>
+<li><strong>The app in 20 languages</strong>, picked on first launch.</li>
+<li>Also: update offers in the middle of the screen, Stop works while the engine is still reading, and links in answers open in your browser.</li>
+</ul>
+
+<h2>What we fixed</h2>
+<h3>A website took a quarter of an hour, and the buttons didn't work</h3>
+<p>Our test robot asked E4B for "a website for my clothing brand". It took 16 minutes 37 seconds, wrote 7 files, and no button worked. Small engines also liked to write the file's own name ("script.js") as the first line of the script, and that one line stops the whole script: E2B did it on 6 sites out of 6. So we stopped asking a small engine to write a whole website. It fills in a short form, and GreenCube's code owns every button.</p>
+<p class="cl-was">16 min 37 s with dead buttons → 43–86 s with working buttons, on 10 requests we never built it on (E2B and E4B).</p>
+
+<h3>"Draw me a cell" got a broken web page</h3>
+<p>For days, every engine answered a cell diagram with a home-made web page of scattered circles, and a graph request with code to run instead of a graph. The image engine wasn't the answer either: the text on its pictures came out as nonsense. Now the engine writes its explanation, fills in a tiny form ("series circuit, battery, two bulbs"), and GreenCube draws the picture.</p>
+<div class="cl-shots">
+<a class="cl-shot" href="images/cl-048-problem-cell-as-webpage-before.png"><img src="images/cl-048-problem-cell-as-webpage-before.png" alt="Before the fix: a broken web page instead of a cell diagram"/>Before, 28 October: a broken web page.</a>
+<a class="cl-shot" href="images/cl-048-drawing-animal-cell.png"><img src="images/cl-048-drawing-animal-cell.png" alt="After the fix: a labelled animal cell"/>After: same request, same engine, four days later.</a>
+</div>
+<p class="cl-was">Drawings right on a fresh set of requests: E4B 28 of 36, E2B 27 of 36.</p>
+
+<h3>Long documents were cut in half by one quote mark</h3>
+<p>A document's text travels inside quote marks, and the first quote the engine forgot to mark ended the document mid-sentence. A Spanish essay stopped at word 521, on "un sistema de". Now only the real ending can close a document, and stray quotes are repaired in code.</p>
+<p class="cl-was">521 words, cut off → 1,173 words, whole.</p>
+
+<h3>A one-word bug, hiding since May</h3>
+<p>If you attached a photo of your notes and pressed Send before GreenCube had finished reading it, the engine got the picture with none of its text. The app looked the photo up by its id instead of its name, so it never waited. It waits now.</p>
+
+<h3>Typos made engines answer the wrong question</h3>
+<p>In our night test runs, typing mistakes caused 8 of 12 wrong answers. The new repair changed none of 71 clean questions and adds about 0.1–0.2 seconds to a clean message.</p>
+<p class="cl-was">Misspelt questions answered right (E2B): 264 → 269 of 284.</p>
+
+<h2>Tried and left out</h2>
+<ul>
+<li><strong>Faster pictures.</strong> 6 steps instead of 8 would save about 25 seconds, but in a blind test the 8-step picture won 3 times out of 3. Pictures stay as they are.</li>
+<li><strong>A newer engine runner for speed.</strong> No faster on our laptop; the gains are for NVIDIA and AMD graphics cards. We kept it up to date anyway.</li>
+</ul>
