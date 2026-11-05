@@ -1,0 +1,62 @@
+<!--meta
+{"version": "0.1.49", "date": "2026-11-05", "title": "Drawings that teach, and files read to the end",
+ "summary": "77 labelled school drawings right inside the answer, 11 ready-made tools, long files read to the last page, and real flashcard decks from your notes."}
+-->
+<p>This update is for students. Ask a school question and the drawing that explains it now appears right inside the answer, drawn by GreenCube's own code, so it comes out right on every engine. And when you ask about a long file, GreenCube now reads the whole thing instead of stopping at page 15.</p>
+
+<div class="cl-shots">
+<a class="cl-shot" href="images/cl-049-punnett.png"><img src="images/cl-049-punnett.png" alt="Two Punnett squares, F1 and F2, inside a chat answer in Spanish"/>A genetics cross: the F1 square, then the F2 with its 1 : 2 : 1 ratio.</a>
+<a class="cl-shot" href="images/cl-049-triangle.png"><img src="images/cl-049-triangle.png" alt="A labelled right triangle with sides 3, 4 and 5"/>A trig word problem gets its triangle, labelled in Spanish.</a>
+<a class="cl-shot" href="images/cl-049-supply-demand.png"><img src="images/cl-049-supply-demand.png" alt="A supply and demand graph where demand moves left"/>Supply and demand: which curve moves, and where the new price lands.</a>
+<a class="cl-shot" href="images/cl-049-circuit.png"><img src="images/cl-049-circuit.png" alt="An Ohm's law circuit with a battery and a resistor"/>Ohm's law, with the circuit beside the working.</a>
+<a class="cl-shot" href="images/cl-049-water-cycle.png"><img src="images/cl-049-water-cycle.png" alt="The water cycle as a four-step flowchart"/>The water cycle, step by step.</a>
+</div>
+
+<h2>What's new</h2>
+<ul>
+<li><strong>Drawings inside the answer.</strong> Drawings used to open in a side panel. Now they sit in the reply, where you're reading, and GreenCube adds one without being asked when a school question needs it ("explain the water cycle for my exam").</li>
+<li><strong>77 new labelled school drawings</strong>, labelled in English or Spanish:
+<ul>
+<li><em>The body:</em> heart, brain, skeleton, eye, ear, digestive system, lungs and airways, kidney, nephron, liver, pancreas, stomach, small-intestine villus, skin, tooth, neuron, nervous system, arm muscles, skeletal muscle, long bone, knee joint, spine, nose and throat, blood cells, artery, vein and capillary, and both reproductive systems.</li>
+<li><em>Cells and living things:</em> mitochondrion, chloroplast, DNA, chromosome, virus, sperm and egg cells, flower, leaf, root tip, stem, germinating seed, tree trunk, mushroom, fish, insect, frog, bird, spider and earthworm, next to the animal, plant and bacterial cells from before.</li>
+<li><em>Earth and space:</em> layers of the Earth, volcano, atmosphere, rock cycle, plate boundaries, a river's course, soil profile, the solar system, phases of the Moon, seasons, and solar and lunar eclipses.</li>
+<li><em>Physics and chemistry:</em> waves, convex and concave lenses, a concave mirror, a prism splitting light, a lever, a magnet's field, the electromagnetic spectrum, states of matter, a Bunsen burner and distillation.</li>
+<li><em>Maths:</em> parts of a triangle, a circle and a cube, types of angle, the right triangle (opposite, adjacent, hypotenuse), the unit circle, and parallel lines cut by a transversal.</li>
+</ul></li>
+<li><strong>Worked out by code, so the numbers are exact:</strong> Punnett squares from the cross in your question (one gene or two, with the ratio in the title, and the F2 under the F1), supply and demand showing which curve moves, function graphs with the highest and lowest points marked, Ohm's law and series and parallel circuits, the right triangle beside trig problems (a ladder, a ramp, a shadow), and mitosis against meiosis as a table.</li>
+<li><strong>Processes as flowcharts:</strong> the water, carbon and nitrogen cycles, mitosis, meiosis, the cell cycle, photosynthesis, the scientific method, and the butterfly and frog life cycles. Yes/no steps now branch, and boxes grow to fit their words.</li>
+<li><strong>Ready-made tools</strong>, working at once: calculator, unit converter, currency converter, countdown, timer, stopwatch, to-do list, tip splitter, password generator, VAT calculator and more.</li>
+<li><strong>Long files, read to the end</strong>, and <strong>real flashcard decks</strong> from your notes. Pictures of charts are read with each label next to its value.</li>
+<li><strong>Tables add up their own totals</strong>, and a website asked for in a sentence ("a one-pager for my bakery") is built as a website.</li>
+<li><strong>Code tab:</strong> GreenCube's notes while it builds ("the page reported an error, fixing it") appear above the code instead of inside it, and four new automatic repairs catch common breakages, like a button you asked for that went missing.</li>
+<li><strong>Files:</strong> click a file under your message to see everything GreenCube read from it, and a photo attached right after opening the app is now read instead of refused.</li>
+<li>Also: a copy button on every code box, the answer follows you when you switch from Spanish to English mid-chat, and no more "Let me know if you have any other questions!" endings or working written out twice.</li>
+</ul>
+
+<h2>What we fixed</h2>
+<p>All numbers come from our test robot on our test laptop (Intel Core Ultra with built-in graphics, 16 GB of memory, Windows 11), on 5 November.</p>
+
+<h3>Files were only read up to page 15</h3>
+<p>We asked about a fact on page 19 of a long document. Gemma E2B and E4B both answered "the document does not mention it", in every run since 31 October. The engines weren't at fault: since version 0.1, every attachment had been cut at 40,000 characters, about 15 pages. Now questions read the whole file.</p>
+<p class="cl-was">"Not in the document" → the right answer, on Gemma E2B (9 s) and Qwen3.5 4B (14 s).</p>
+
+<h3>Flashcards came back as a bullet list</h3>
+<p>Ask for flashcards from a document and you got bullet points, not cards you can flip. Now you get a real deck.</p>
+<p class="cl-was">A bullet list → decks of 12 and 6 cards on E2B and 21 and 16 on Qwen3.5 4B, from two documents.</p>
+
+<h3>A chart in a photo was misread</h3>
+<p>The picture reader listed every number on a bar chart, axis marks included, without saying which bar each one belonged to. Asked for the Maths score, Qwen answered 40, the top of the axis. It was 34. The reader now writes "Maths: 34, Biology: 28…".</p>
+<p class="cl-was">"Maths, 40" → "Maths, 34", on both E2B and Qwen.</p>
+
+<h3>The very first message was slow</h3>
+<p>After a new install, the first answer waited about 36 seconds before its first word. Most of that is the graphics driver getting ready the first time GreenCube ever runs (updates don't pay it again). But 22.9 seconds of it was the typo fixer warming up inside your message. It now gets ready while the app starts.</p>
+<p class="cl-was">Typo fixer inside the first message: 22.9 s → 4.1 s (E2B).</p>
+<p>To be fair about what this changes: if you type the moment the app opens, you still wait about as long (36 s before, about 33 s now), because that startup work is still running. Start typing after half a minute and you save about 19 s.</p>
+
+<h3>The calendar's "Add Task" button did nothing</h3>
+<p>A calendar built in the Code tab by Gemma E2B saved each new task in one list and drew the calendar from another, so the button seemed dead. It happened in every run since 24 October. GreenCube now spots two lists of the same thing and joins them.</p>
+<p class="cl-was">"Add Task" dead in every run → 3 of 3 buttons working in 4 of 4 runs (E2B).</p>
+<p>Asked next to "add a habit tracker", E2B and Qwen3.5 4B now put it in its own file with its own button, and it works (before, there was no habit button at all). On Qwen3.5 4B, a date saved as text broke every button of the calendar; GreenCube now turns it back into a date, and all of them work.</p>
+
+<h2>Tried and left out</h2>
+<p>We tried a note telling the engine to say first whether a student's own answer was right. Gemma E2B got worse at it (its score for judging fell from 4.67 to 4.08 out of 5) and began finding mistakes in correct answers. We took it out.</p>
