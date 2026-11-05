@@ -649,6 +649,118 @@
     @keyframes fBlink { 50% { opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .f-prompt .cur { animation: none; } }
   </style>
+  <style id="buy-look">
+    /* graph-paper grid down the whole page */
+    body {
+      background:
+        linear-gradient(rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(90deg, rgba(26,26,26,.06) 1px, transparent 1px) 0 0 / 28px 28px,
+        var(--paper, #F5F1E8);
+    }
+    footer { background: transparent; }
+
+    /* rough yellow marker behind the headline's key word, swept in from the left */
+    .pitch h1 em { position: relative; isolation: isolate; }
+    .pitch h1 em::before { content: ''; position: absolute; z-index: -1; left: -.07em; right: -.05em; top: .07em; bottom: .03em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23F9DD5E' d='M30 16C110 8 190 15 290 9C380 4 450 13 560 8C660 3 740 12 840 7C900 4 940 10 972 9L990 15L968 21L997 29L974 36L999 44L971 51L996 59L975 66L998 74L970 81L992 88L978 93C900 99 820 91 720 97C620 102 540 92 440 98C340 103 240 93 150 99C100 101 60 96 24 95L6 88L28 81L2 73L24 66L0 58L26 51L3 43L25 36L1 28L22 21L8 15Z'/%3E%3Cpath fill='%23F9DD5E' opacity='.75' d='M960 24L1000 22L1000 26L962 28ZM955 62L998 61L997 65L957 66ZM0 34L40 33L38 37L0 38ZM2 78L36 77L34 81L1 82Z'/%3E%3Cpath fill='%23F4CF3A' opacity='.45' d='M30 60C260 54 560 62 980 56L984 70C600 76 300 72 26 78Z'/%3E%3C/svg%3E") no-repeat center / 100% 100%; transform: rotate(-.8deg); animation: hl-in .6s cubic-bezier(.6,0,.2,1) .25s both; }
+    @keyframes hl-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+    /* the turtle sits on the order card and waves every 5 seconds */
+    .stage { position: relative; }
+    .stage > .order { position: relative; z-index: 3; }
+    .ad-turtle { position: absolute; z-index: 2; top: -76px; left: calc(100% - 122px); width: 92px; pointer-events: none; }
+    .ad-turtle svg { display: block; overflow: visible; width: 100%; height: auto; }
+    .ad-turtle .tt-leg, .ad-turtle .tt-bob { animation: none; }
+    .ad-turtle .tt-arm { transform-box: view-box; transform-origin: 88px 58px; animation: t-wave5 5s ease-in-out 1s infinite; }
+    @keyframes t-wave5 { 0%, 26%, 100% { transform: rotate(0); } 5% { transform: rotate(-30deg); } 10% { transform: rotate(4deg); } 15% { transform: rotate(-26deg); } 21% { transform: rotate(0); } }
+    @media (min-width: 901px) { .stage { transform: translateY(24px); } }
+    .stage:has(.not-windows) .ad-turtle { display: none; }
+    body:has(.fit-overlay.open) .ad-turtle { visibility: hidden; }
+
+    /* header: solid paper bar with an ink line, bigger logo, Buy now with a yellow offset shadow */
+    header, header.scrolled {
+      background: rgba(245, 241, 232, .92);
+      backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px);
+      border-bottom: 1.5px solid var(--forest, #1A1A1A); padding: 14px 32px;
+    }
+    .brand { font-size: 25px; }
+    .brand .mark { width: 19px; height: 19px; border-width: 3px; }
+    .header-nav a, .lang { border-color: rgba(26,26,26,.38); }
+    .nav-cta { font-size: 15px; padding: 10px 20px; box-shadow: 3px 3px 0 #F9DD5E; }
+    .nav-cta:hover { box-shadow: 4px 4px 0 #F9DD5E; }
+
+    /* feature cards: paper cards with an ink outline, an offset shadow and a coloured icon tile */
+    .get {
+      position: relative; background: #FFFDF7; border: 1.5px solid var(--forest, #1A1A1A); border-radius: 16px;
+      box-shadow: 4px 4px 0 var(--forest, #1A1A1A); padding: 22px 24px 22px 86px; min-height: 104px;
+      transition: transform .25s cubic-bezier(.2,.9,.3,1.3), box-shadow .25s;
+    }
+    .get:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--forest, #1A1A1A); }
+    .get .ico {
+      position: absolute; left: 22px; top: 22px; width: 48px; height: 48px; border-radius: 13px;
+      border: 1.5px solid var(--forest, #1A1A1A); display: grid; place-items: center; background: var(--tile);
+      transition: transform .3s cubic-bezier(.2,.9,.3,1.3);
+    }
+    .get:hover .ico { transform: rotate(-8deg) scale(1.06); }
+    .get .ico svg { width: 24px; height: 24px; fill: none; stroke: var(--forest, #1A1A1A); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .get:nth-child(4n+1) { --tile: #F9DD5E; }
+    .get:nth-child(4n+2) { --tile: #C9D8B4; }
+    .get:nth-child(4n+3) { --tile: #FBC3A6; }
+    .get:nth-child(4n+4) { --tile: #C3D3F2; }
+
+    /* icons: when the cards scroll into view each tile pops in and its icon draws itself, one card after another;
+       on hover the icon redraws and does its own move */
+    .gets.anim .get .ico { opacity: 0; transform: scale(.5) rotate(-14deg); }
+    .gets.anim .get .ico svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .gets.anim .get.in .ico { animation: tile-pop .6s cubic-bezier(.2,.9,.3,1.45) var(--d, 0s) forwards; }
+    .gets.anim .get.in .ico svg * { animation: ico-draw .9s cubic-bezier(.6,0,.2,1) calc(var(--d, 0s) + .2s) forwards; }
+    @keyframes tile-pop { to { opacity: 1; transform: none; } }
+    @keyframes ico-draw { to { stroke-dashoffset: 0; } }
+    .gets.anim .get.in:hover .ico { opacity: 1; transform: rotate(-8deg) scale(1.06); animation: none; }
+    .get:hover .ico svg * { stroke-dasharray: 1; animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both !important; }
+    @keyframes ico-redraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+    .get .ico svg, .get .ico svg * { transform-box: fill-box; transform-origin: center; }
+    .get:hover .ico-chat svg { animation: i-bob .7s ease-in-out; }
+    .get:hover .ico-code polyline:first-child { animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both, i-right .6s ease-in-out !important; }
+    .get:hover .ico-code polyline:last-child { animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both, i-left .6s ease-in-out !important; }
+    .get .ico-web { perspective: 120px; }
+    .get:hover .ico-web svg { animation: i-spin .9s cubic-bezier(.5,0,.3,1); }
+    .get:hover .ico-img circle { animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both, i-sun .7s cubic-bezier(.2,.9,.3,1.5) !important; }
+    .get:hover .ico-files circle, .get:hover .ico-files path:last-child { animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both, i-search .9s ease-in-out !important; }
+    .get:hover .ico-study svg { animation: i-toss .8s cubic-bezier(.3,.7,.4,1); }
+    .get:hover .ico-slides svg { animation: i-rise .6s cubic-bezier(.2,.9,.3,1.4); }
+    .get:hover .ico-diag rect:nth-of-type(2) { animation: ico-redraw .7s cubic-bezier(.6,0,.2,1) both, i-hop .6s cubic-bezier(.2,.9,.3,1.5) !important; }
+    .get:hover .ico-docs svg { animation: i-tilt .6s ease-in-out; }
+    @keyframes i-bob { 30% { transform: translateY(-3px) rotate(-6deg); } 60% { transform: translateY(1px) rotate(4deg); } }
+    @keyframes i-right { 50% { transform: translateX(3px); } }
+    @keyframes i-left { 50% { transform: translateX(-3px); } }
+    @keyframes i-spin { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
+    @keyframes i-sun { 0% { transform: translate(0, 4px) scale(.4); } 100% { transform: none; } }
+    @keyframes i-search { 25% { transform: translate(-2px, -2px); } 50% { transform: translate(2px, -1px); } 75% { transform: translate(0, 2px); } }
+    @keyframes i-toss { 40% { transform: translateY(-7px) rotate(-18deg); } 75% { transform: translateY(1px) rotate(4deg); } }
+    @keyframes i-rise { 0% { transform: scaleY(.3); } 100% { transform: none; } }
+    @keyframes i-hop { 40% { transform: translate(-3px, -4px); } }
+    @keyframes i-tilt { 30% { transform: rotate(-10deg); } 65% { transform: rotate(6deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .gets.anim .get .ico { opacity: 1; transform: none; animation: none; }
+      .gets.anim .get .ico svg *, .get:hover .ico svg, .get:hover .ico svg * { stroke-dashoffset: 0; animation: none !important; }
+    }
+
+    /* Buy button: leans toward the cursor when it comes close (/magnet.js), lifts and glows yellow on hover */
+    .buy-btn, .nav-cta { --mx: 0px; --my: 0px;
+      transition: transform .3s cubic-bezier(.2,.9,.3,1.3), scale .3s cubic-bezier(.2,.9,.3,1.3), background .3s, box-shadow .3s; }
+    .buy-btn > span:first-child { display: inline-block; transform: translate(calc(var(--mx) * .4), calc(var(--my) * .4)); transition: transform .3s cubic-bezier(.2,.9,.3,1.3); }
+    .buy-btn:hover { transform: translateY(-2px); scale: 1.02; background: var(--night-2);
+      box-shadow: 0 0 0 4px rgba(249, 221, 94, .7), 0 18px 40px -14px rgba(31, 36, 24, .55); }
+    .buy-btn:hover .arrow { transform: translateX(5px); }
+    .buy-btn:active { scale: .98; }
+    .buy-btn:disabled { transform: none; scale: 1; box-shadow: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pitch h1 em::before, .ad-turtle .tt-arm { animation: none; }
+      .buy-btn, .nav-cta, .get, .get .ico { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -682,6 +794,27 @@
   </section>
 
   <!-- ===== right: order summary + buy ===== -->
+  <div class="stage">
+  <div class="ad-turtle" aria-hidden="true"><svg class="turtle" viewBox="0 0 120 104" aria-hidden="true">
+    <g class="tt-bob" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse class="tt-leg a" cx="40" cy="91" rx="12" ry="8" fill="#AFCB7C"/>
+      <ellipse class="tt-leg b" cx="80" cy="92" rx="12" ry="8" fill="#AFCB7C"/>
+      <g transform="rotate(15 39 63) translate(15.4 11) scale(.55 .9)">
+        <path d="M20,78 C10,54 24,30 47,30 C62,30 69,44 67,60 C65,78 44,88 20,78 Z" fill="#6F8B52" vector-effect="non-scaling-stroke"/>
+        <path d="M27,71 C21,55 31,38 46,38 C57,38 61,48 59,60 C57,71 42,77 27,71 Z" fill="#8EA674" stroke-width="1.8" vector-effect="non-scaling-stroke"/>
+      </g>
+      <ellipse cx="68" cy="69" rx="24" ry="22" fill="#AFCB7C"/>
+      <ellipse cx="74" cy="73" rx="13" ry="15" fill="#F4ECD6" stroke-width="1.8"/>
+      <g class="tt-arm"><ellipse cx="92" cy="66" rx="6.5" ry="11" fill="#AFCB7C" transform="rotate(-35 92 66)"/></g>
+      <circle cx="80" cy="37" r="25" fill="#AFCB7C"/>
+      <g stroke="none">
+        <g class="tt-eyes"><circle cx="89" cy="34" r="3.4" fill="#1A1A1A"/><circle cx="101.5" cy="33.5" r="2.5" fill="#1A1A1A"/></g>
+        <circle cx="90.2" cy="32.8" r="1" fill="#fff"/>
+        <ellipse cx="95" cy="43" rx="4.5" ry="2.6" fill="#FA9F75" opacity=".6"/>
+      </g>
+      <path d="M92,47 q3,2.2 6,0" fill="none" stroke-width="2"/>
+    </g>
+  </svg></div>
   <section class="order" aria-label="Order summary">
     <div class="order-head">
       <span class="order-title">GreenCube</span>
@@ -715,6 +848,7 @@
       </div>
     </div>
   </section>
+  </div>
   <!-- main is a centred grid, so on a tall screen it filled the viewport and
        the whole "what you get" + FAQ section below looked like it did not
        exist. This cue tells people there is more and jumps them to it. -->
@@ -731,28 +865,49 @@
 
   <div class="gets">
     <article class="get">
+      <span class="ico ico-chat" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
       <h3>聊天和寫作</h3>
       <p>什麼都能問：論文、郵件、講解、計劃。想問多少問多少。</p>
     </article>
     <article class="get">
+      <span class="ico ico-code" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline pathLength="1" points="16 18 22 12 16 6"/><polyline pathLength="1" points="8 6 2 12 8 18"/></svg></span>
       <h3>程式設計</h3>
       <p>描述一個應用、網站或遊戲，它就幫你做出來。</p>
     </article>
     <article class="get">
+      <span class="ico ico-web" aria-hidden="true"><svg viewBox="0 0 24 24"><circle pathLength="1" cx="12" cy="12" r="10"/><path pathLength="1" d="M2 12h20"/><path pathLength="1" d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+      <h3>網站</h3>
+      <p>描述一個網站，它就能做出一個可以打開、點擊瀏覽的網站。</p>
+    </article>
+    <article class="get">
+      <span class="ico ico-img" aria-hidden="true"><svg viewBox="0 0 24 24"><rect pathLength="1" x="3" y="3" width="18" height="18" rx="2"/><circle pathLength="1" cx="9" cy="9" r="2"/><path pathLength="1" d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></span>
       <h3>生成圖片</h3>
       <p>logo、插畫、桌布。沒有每日上限。需要 12&nbsp;GB 記憶體。</p>
     </article>
     <article class="get">
+      <span class="ico ico-files" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path pathLength="1" d="M14 2v6h6"/><circle pathLength="1" cx="11.5" cy="14.5" r="2.5"/><path pathLength="1" d="M13.3 16.3 15 18"/></svg></span>
       <h3>讀取檔案</h3>
       <p>PDF、照片和截圖。總結、講解，或找到你要的那一句。</p>
     </article>
     <article class="get">
+      <span class="ico ico-study" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M22 10 12 5 2 10l10 5 10-5z"/><path pathLength="1" d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
       <h3>學習</h3>
       <p>把筆記或講義 PDF 變成閃卡和測驗。</p>
     </article>
     <article class="get">
+      <span class="ico ico-slides" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M2 3h20"/><path pathLength="1" d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path pathLength="1" d="m7 21 5-5 5 5"/></svg></span>
       <h3>幻燈片</h3>
       <p>任何主題的十頁幻燈片，真正的 PowerPoint 檔案。</p>
+    </article>
+    <article class="get">
+      <span class="ico ico-diag" aria-hidden="true"><svg viewBox="0 0 24 24"><rect pathLength="1" x="3" y="3" width="7" height="7" rx="1"/><rect pathLength="1" x="14" y="14" width="7" height="7" rx="1"/><path pathLength="1" d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
+      <h3>圖表</h3>
+      <p>想要示意圖或圖表，直接說，它幫你畫出來。</p>
+    </article>
+    <article class="get">
+      <span class="ico ico-docs" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path pathLength="1" d="M14 2v6h6"/><path pathLength="1" d="M16 13H8"/><path pathLength="1" d="M16 17H8"/><path pathLength="1" d="M10 9H8"/></svg></span>
+      <h3>文件</h3>
+      <p>報告、指南和文章，依你選的風格產生完整文件。</p>
     </article>
   </div>
 
@@ -1329,5 +1484,18 @@
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
 <script src="/src.js" defer></script>
 <script src="/magnet.js" defer></script>
+<script id="ico-in">
+/* feature icons: pop in and draw when the cards scroll into view (skipped with reduced motion or without IntersectionObserver) */
+(() => {
+  const g = document.querySelector('.gets');
+  if (!g || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  g.classList.add('anim');
+  const io = new IntersectionObserver((es) => {
+    let n = 0;
+    for (const e of es) if (e.isIntersecting) { e.target.style.setProperty('--d', (n++ * 0.09) + 's'); e.target.classList.add('in'); io.unobserve(e.target); }
+  }, {threshold: 0.4});
+  g.querySelectorAll('.get').forEach((c) => io.observe(c));
+})();
+</script>
 </body>
 </html>
