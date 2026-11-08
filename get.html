@@ -866,6 +866,11 @@
     .refund-line svg { color: var(--moss, #7E8A5A); flex: 0 0 auto; }
     .refund-line strong { position: relative; color: var(--ink, #1A1A1A); font-weight: 700; }
     .refund-line strong { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E") no-repeat left 100% / 100% .5em; padding-bottom: .34em; -webkit-box-decoration-break: clone; box-decoration-break: clone; animation: rf-ul-in .55s cubic-bezier(.6,0,.2,1) 1.2s both; }
+    /* English: the whole refund promise on ONE line; the text shrinks a little in narrow cards (phones keep two lines) */
+    .refund-line { container-type: inline-size; }
+    .refund-line > span { white-space: nowrap; font-size: min(17px, calc((100cqi - 36px) / 23.5)); }
+    .refund-line strong { white-space: nowrap; }
+    @container (max-width: 360px) { .refund-line > span { white-space: normal; font-size: 15px; } }
     @keyframes rf-ul-in { from { background-size: 0% .5em; } to { background-size: 100% .5em; } }
     @media (prefers-reduced-motion: reduce) { .refund-line strong { animation: none; } }
   </style>
