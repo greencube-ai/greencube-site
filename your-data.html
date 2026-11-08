@@ -430,6 +430,19 @@
     .w-online-out.on { background: color-mix(in srgb, var(--sky) 22%, #fff); color: var(--sky-deep); }
     @media (max-width: 820px) { .w-stay { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 520px) { .w-stay { grid-template-columns: 1fr; } }
+
+    .w-lede { font-size: 17px; color: var(--ink-soft); max-width: 60ch; margin-top: 14px; }
+    .w-ledger { margin: 36px 0 0; border-top: 2px solid var(--ink); }
+    .w-ledger .row { display: grid; grid-template-columns: 210px 190px 1fr; gap: 28px; padding: 22px 2px; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .w-ledger dt { font: 600 17px/1.3 var(--display); color: var(--ink); letter-spacing: -.01em; }
+    .w-ledger .st { display: flex; gap: 8px; align-items: baseline; font-size: 15px; font-weight: 600; color: var(--olive-deep); }
+    .w-ledger .st svg { flex: 0 0 auto; position: relative; top: 2px; }
+    .w-ledger dd { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
+    .w-ledger .how { display: block; margin-top: 6px; font-size: 13.5px; color: var(--ink-mute); }
+    .w-ledger code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; color: var(--ink); }
+    .w-ledger-meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+    .w-ledger-meta a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 760px) { .w-ledger .row { grid-template-columns: 1fr; gap: 6px; padding: 18px 2px; } }
   </style>
   <link rel="stylesheet" href="/mobile.css" />
   <script src="/mobile.js" defer></script>
@@ -493,11 +506,21 @@
   <div class="w">
     <span class="w-eyebrow">What goes online</span>
     <h2 class="w-h2">Only these four. <em>Nothing else.</em></h2>
-    <ol class="w-net-list"><li><b class="n">1</b><div><h3>Signing in, once</h3><p>Your email, to check you paid. Never a chat, a file or an image.</p></div></li><li><b class="n">2</b><div><h3>Downloading the AI</h3><p>The AI files come to your PC. They only travel one way.</p></div></li><li><b class="n">3</b><div><h3>Updates</h3><p>It checks for a newer version. It sends nothing about you.</p></div></li><li><b class="n">4</b><div><h3>Online, only if you turn it on</h3><p>Web searches go out, like any search. Online starts off every time you open GreenCube.</p></div></li></ol>
+    <ol class="w-net-list"><li><b class="n">1</b><div><h3>Your account</h3><p>You sign in once. While you&rsquo;re online, GreenCube keeps you signed in in the background. It sends your account, never a chat, a file or an image.</p></div></li><li><b class="n">2</b><div><h3>Downloading the AI</h3><p>The AI files come to your PC. They only travel one way.</p></div></li><li><b class="n">3</b><div><h3>Updates</h3><p>It checks for a newer version. It sends nothing about you.</p></div></li><li><b class="n">4</b><div><h3>Online, only if you turn it on</h3><p>Web searches go out, like any search. Online starts off every time you open GreenCube.</p></div></li></ol>
     <div class="w-online" data-off="Online is off: nothing leaves your PC." data-on="Online is on: web searches go out. Your chats still stay on your PC.">
       <button class="w-wifi" type="button" role="switch" aria-checked="false" id="w-online"><span class="sw" aria-hidden="true"></span>Online</button>
       <p class="w-online-out" id="w-online-out" aria-live="polite">Online is off: nothing leaves your PC.</p>
     </div>
+  </div>
+</section>
+
+<section class="w-sec" id="checked">
+  <div class="w">
+    <span class="w-eyebrow">Checked</span>
+    <h2 class="w-h2">Don&rsquo;t take our word. <em>Check it.</em></h2>
+    <p class="w-lede">What we promise, and how you can verify it yourself.</p>
+    <dl class="w-ledger"><div class="row"><dt>Windows installer</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Signed</span></div><dd>Signed by <code>EDUNEXIS, S.L.</code>, the company behind GreenCube. Microsoft verified our identity before issuing the certificate.<span class="how">How to check: right-click the installer, Properties, Digital Signatures.</span></dd></div><div class="row"><dt>Updates</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Signed</span></div><dd>Every update carries our signature. GreenCube checks it before installing, so nobody else can push an update to your PC.<span class="how">Checked by the app on every update.</span></dd></div><div class="row"><dt>Chats, files and pictures</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stay on your PC</span></div><dd>The AI runs on your computer. Nothing you write, open or make is sent to us or to anyone else.<span class="how">How to check: after the first download, turn off your wifi. Everything keeps working.</span></dd></div><div class="row"><dt>What we receive</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Your email</span></div><dd>Your email and whether you paid. No usage counts, no crash reports, nothing about your chats, files or pictures.</dd></div><div class="row"><dt>Payments</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stripe</span></div><dd>Stripe takes the payment. We never see your card number.</dd></div><div class="row"><dt>This website</dt><div class="st"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>No cookies</span></div><dd>No cookies and no ad trackers. We count visits with Cloudflare&rsquo;s cookie-free analytics.<span class="how">How to check: your browser&rsquo;s site settings show no cookies for greencube.app.</span></dd></div></dl>
+    <div class="w-ledger-meta"><span>Last checked 8 November 2026, GreenCube 0.1.49 for Windows.</span><span>Found a security problem? <a href="mailto:support@greencube.app">support@greencube.app</a></span></div>
   </div>
 </section>
 
