@@ -72,6 +72,7 @@
 <li><a href="#sources">Sources</a></li>
 <li><a href="#faq">FAQ</a></li>
 </ul>
+<p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
 <h2 id="the-math-behind-scale-zero-point-and-why-outliers-matter">The math behind scale, zero-point, and why outliers matter</h2>
 <p>Quantization maps a continuous range of floating-point values onto a small set of integers using an affine transform: <code>q = round(x / scale + zero_point)</code>, and dequantization reverses it with <code>x ≈ scale * (q - zero_point)</code>. The scale sets how much real-number range each integer step covers, and the zero-point shifts the range so it can represent asymmetric distributions, like activations that skew heavily positive after a ReLU or GELU.</p>
 <p>Symmetric quantization fixes the zero-point at zero and is simpler and faster on most kernels, but it wastes range when the underlying values are not centered. Asymmetric quantization adds a zero-point offset and represents skewed distributions more precisely, at the cost of a slightly more complex dequantization step. Weight distributions in transformers are close to symmetric, so symmetric quantization usually works for weights; activations are often asymmetric, which is one reason activation quantization is harder.</p>
@@ -157,7 +158,7 @@
 <li><a href="https://blog.greencube.app/blog/local-ai-chatbot-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
 </ul>
 
-<div class="cta-box"><h3>Your own AI, on your own PC</h3><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>
+<div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 
 </main>
@@ -206,7 +207,7 @@
 ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
 ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
-    <p class="f-prompt" aria-hidden="true">C:\&gt; ai you own. no limits <span class="cur"></span></p>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; you are infinite <span class="cur"></span></p>
 </div>
 </footer>
 <!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->

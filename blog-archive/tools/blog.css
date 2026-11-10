@@ -87,6 +87,28 @@ article td { color: var(--ink-soft); }
 .cta-box p { margin-bottom: 18px; }
 .cta { display: inline-flex; align-items: center; gap: 9px; background: var(--ink); color: var(--paper) !important; font-size: 15px; font-weight: 600; padding: 13px 24px; border-radius: 12px; text-decoration: none !important; transition: transform .3s var(--ease), background .3s var(--ease); }
 .cta:hover { transform: translateY(-2px); background: #000; }
+/* the bridge to the app: four drawn tiles of what it makes (the home page's own), or the four PC levels, then buttons;
+   one short line mid-post */
+.bridge-tiles { list-style: none; padding: 0 !important; margin: 14px 0 20px !important; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.bridge-tiles li { margin: 0 !important; text-align: center; }
+.bridge-tiles .t-sage { --c: #8EA674; } .bridge-tiles .t-wisteria { --c: #8EABE1; }
+.bridge-tiles .t-tangerine { --c: #FA9F75; } .bridge-tiles .t-jasmine { --c: #FAE289; }
+.bt-art { display: grid; place-items: center; aspect-ratio: 1 / 1; border-radius: 14px; margin-bottom: 7px;
+  background: radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--c) 40%, #fff) 0 18%, transparent 19%), color-mix(in srgb, var(--c) 30%, #FDFBF5);
+  transition: transform .35s var(--ease); }
+.bt-art svg { width: 62%; height: auto; }
+.bridge-tiles li:hover .bt-art { transform: translateY(-3px) rotate(-1.5deg); }
+.bt-name { font-size: 14px; font-weight: 600; }
+@media (max-width: 520px) { .bridge-tiles { grid-template-columns: repeat(2, 1fr); } }
+.bridge-tiers { list-style: none; padding: 0 !important; margin: 10px 0 18px !important; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.bridge-tiers li { margin: 0 !important; padding: 10px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; line-height: 1.35; }
+.bridge-tiers b { display: block; font-family: var(--display); font-size: 16px; }
+.bridge-tiers span { display: block; color: var(--ink-soft); margin: 2px 0 4px; }
+.bridge-tiers em { font-style: normal; font-weight: 600; }
+.bridge-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin: 0 !important; }
+.bridge-2 { font-size: 15px; font-weight: 600; color: var(--ink) !important; }
+.bridge-mid { margin: 30px 0; padding: 14px 18px; background: var(--paper-soft); border-left: 3px solid #8EA674; border-radius: 0 10px 10px 0; font-size: 16px; }
+.bridge-mid a { font-weight: 600; }
 
 /* the list page */
 .list .lede { font-size: 18px; color: var(--ink-soft); margin-bottom: 34px; }
@@ -299,7 +321,7 @@ footer .f-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid va
 /* ---------- ASCII wordmark footer ---------- */
 .f-ascii {
   margin: 44px 0 0; white-space: pre; overflow: hidden; user-select: none; direction: ltr;
-  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  font-family: Consolas, 'Cascadia Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace;
   font-size: clamp(5px, 1.42vw, 17px); line-height: 1.05; color: #7E8A5A; opacity: .55; text-align: center;
 }
 .f-prompt { margin-top: 18px; text-align: center; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; color: var(--ink-mute, #6B6B60); }

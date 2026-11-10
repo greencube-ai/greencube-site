@@ -104,6 +104,91 @@ def tested_box(slug):
     out = f'<aside class="tested"><strong>We tested this</strong><ul>{tested}</ul></aside>\n' if tested else ''
     return out + (f'<aside class="tested"><strong>We checked this</strong><ul>{checked}</ul></aside>\n' if checked else '')
 
+# ---------- the bridge to the app: each post ends with the box that fits why its reader came, and shows a real output ----------
+#     (Hector, 2026-11-09: the blog brings ~all search visits, but almost none reach /buy). Words: words/<lang>.json
+#     post.bridge.<group>; a language without them keeps its old cta_* box. Pictures are real GreenCube outputs.
+BRIDGE_OF = {  # English slug -> group; anything not listed falls to BRIDGE_RULES
+    'pc': ('best-laptop-ai-assistant', 'can-my-pc-run-ai', 'gemma-4-e2b-vs-e4b', 'gguf-vs-ggml', 'hardware-for-local-ai',
+           'how-much-vram-for-ai', 'llm-quantization', 'offline-ai-mac', 'run-ai-on-8gb-ram', 'gemma-4-requirements',
+           'best-local-ai-models', 'best-small-llm', 'llm-models', 'context-window-llm', 'how-does-local-ai-work',
+           'local-ai-image-generator-speed', 'local-ai-chatbot-windows', 'no-setup-ai', 'llama-3-vs-gemma'),
+    'limits': ('ai-without-subscription', 'chatgpt-free-limits', 'claude-usage-limit', 'unlimited-ai', 'lifetime-ai-software',
+               'best-ai-for-freelancers'),
+    'private': ('ai-that-doesnt-train-on-your-data', 'best-private-pdf-ai', 'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals',
+                'gdpr-compliant-ai', 'is-chatgpt-private', 'is-local-ai-safe', 'private-ai-assistant', 'private-document-ai',
+                'secure-ai-on-pc', 'ai-without-login', 'air-gapped-ai', 'ferpa-compliant-ai', 'offline-ai-security',
+                'offline-ai-for-business', 'offline-ai-for-travelers', 'why-offline-ai', 'chatgpt-offline',
+                'self-hosted-ai-assistant', 'ai-image-analysis-offline'),
+    'jobs': ('ai-for-homeschooling', 'ai-study-planner-offline', 'ai-to-study-from-pdf', 'best-ai-for-computer-science-students',
+             'best-ai-for-students', 'best-ai-for-teachers', 'flashcards-from-pdf', 'offline-ai-for-students', 'school-ai-policy',
+             'study-guide-from-pdf', 'teacher-prompts-for-ai', 'best-ai-for-writers', 'best-pdf-summarizer', 'ai-to-summarize-notes',
+             'best-ai-for-lawyers', 'best-ai-for-researchers'),
+    'about': ('hector-gras', 'how-we-measure-ai-speed'),
+}
+BRIDGE_OF = {s: g for g, slugs in BRIDGE_OF.items() for s in slugs}
+BRIDGE_RULES = [('pc', r'^ai-on-'), ('compare', r'alternatives|-vs-|^best-|^ollama|^gemini|^rag-')]
+# What it makes, readable in a blink (Hector, 10 Nov: "understand it in .1 seconds", mock-ups, not a real screenshot):
+# four of the home page's own drawn tiles, taken from each language's home page so drawing, colour and translated
+# label always match the site. Tiles are matched by their drawing (each language orders them differently).
+# Will-it-run readers get the four PC levels instead.
+BRIDGE_TILES = {'limits': ('Chat', 'Images', 'Slides', 'Code'), 'compare': ('Slides', 'Images', 'Diagrams', 'Web pages'),
+                'jobs': ('Slides', 'Diagrams', 'Study', 'Documents'), 'private': ('Chat', 'Files', 'Documents', 'Slides')}
+def _home_tiles(path):
+    s = open(path, encoding='utf-8').read(); i = s.find('id="what"'); j = s.find('</section>', i)
+    out = {}
+    for m in re.finditer(r'<article class="make (t-\w+)">(.*?)</article>', s[i:j], re.S):
+        svg = re.search(r'<svg.*?</svg>', m.group(2), re.S).group(0)
+        out[re.sub(r'\s+', ' ', svg)] = (m.group(1), re.search(r'make-kind">([^<]+)', m.group(2)).group(1).strip())
+    return out
+_EN_TILES = _home_tiles('index.html')
+def tiles_for(lang):
+    """English kind -> (tint class, drawing, label in this language)"""
+    t = _EN_TILES if lang == 'en' else _home_tiles(f'{lang}/index.html')
+    return {kind: (tint, svg, t[svg][1]) for svg, (tint, kind) in _EN_TILES.items() if svg in t}
+TILES = {}
+# where each group's main button goes (the second button goes to the other page)
+BRIDGE_URL = {'pc': ('what-you-get', 'buy'), 'limits': ('buy', 'what-you-get'), 'private': ('buy', 'your-data'),
+              'compare': ('buy', 'what-you-get'), 'jobs': ('buy', 'what-you-get'), 'about': ('buy', None)}
+
+def bridge_group(slug):
+    if slug in BRIDGE_OF: return BRIDGE_OF[slug]
+    for g, rx in BRIDGE_RULES:
+        if re.search(rx, slug): return g
+    return 'about'
+
+def site_url(lang, p):
+    return f'https://greencube.app/{p}' if lang == 'en' or not os.path.exists(f'{lang}/{p}.html') else f'https://greencube.app/{lang}/{p}'
+
+def bridge_box(lang, slug):
+    """The end-of-post box for this post's group, in this language (None if the language has no bridge words yet)."""
+    B = WD[lang]['post'].get('bridge')
+    if not B: return None
+    g = bridge_group(slug); w = B[g]; main, second = BRIDGE_URL[g]
+    fig = ''
+    if g in BRIDGE_TILES:
+        if lang not in TILES: TILES[lang] = tiles_for(lang)
+        T = TILES[lang]
+        fig = '<ul class="bridge-tiles">' + ''.join(
+            f'<li class="{tint}"><span class="bt-art" aria-hidden="true">{T[k][1]}</span><span class="bt-name">{T[k][2]}</span></li>'
+            for k, tint in zip([k for k in BRIDGE_TILES[g] if k in T], ('t-sage', 't-tangerine', 't-wisteria', 't-jasmine'))) + '</ul>'
+    elif g == 'pc':
+        fig = '<ul class="bridge-tiers">' + ''.join(f'<li><b>{n}</b><span>{need}</span><em>{does}</em></li>' for n, need, does in B['tiers']) + '</ul>'
+    two = f'<a class="bridge-2" href="{site_url(lang, second)}">{w["a2"]}</a>' if second and w.get('a2') else ''
+    return (f'\n<div class="cta-box bridge" data-group="{g}"><h3>{w["h"]}</h3>{fig}<p>{w["p"]}</p>'
+            f'<p class="bridge-btns"><a class="cta" href="{site_url(lang, main)}">{w["a"]} <span aria-hidden="true">&rarr;</span></a>{two}</p></div>\n')
+
+def bridge_mid(lang, slug, body):
+    """One short line once the post has answered its question: before its second <h2>, only in posts with 3 or more."""
+    B = WD[lang]['post'].get('bridge')
+    g = bridge_group(slug)
+    if not B or 'mid' not in B[g]: return body
+    heads = [m.start() for m in re.finditer(r'<h2\b', body)]
+    if len(heads) < 3: return body
+    w = B[g]
+    line = (f'<p class="bridge-mid">{w["mid"]} <a href="{site_url(lang, BRIDGE_URL[g][0])}">{w["mid_a"]}'
+            f' <span aria-hidden="true">&rarr;</span></a></p>\n')
+    return body[:heads[1]] + line + body[heads[1]:]
+
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
 shutil.copy(os.path.join(os.path.dirname(__file__), 'blog.css'), f'{OUT}/blog.css')
@@ -290,10 +375,7 @@ for p in idx:
         f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
         + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
-        + body +
-        '\n<div class="cta-box"><h3>Your own AI, on your own PC</h3>'
-        '<p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p>'
-        '<a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
+        + bridge_mid('en', slug, body) + bridge_box('en', slug) + '</article>\n')
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
     report.append({'slug': slug, 'note': kinds, 'text_fixes': [list(c) for c in ch1 + ch2 + ch3]})
@@ -371,9 +453,11 @@ for lang, slug, meta, body in own:
         f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}'
         + (f' &middot; {W["updated"]} {W["date"](meta["modified"])}' if meta.get('modified', published) != published else '')
         + '</p>\n'
-        + body + faq_html +
-        f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
-        f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n</article>\n')
+        + bridge_mid(lang, group_key(lang, slug, meta), body) + faq_html
+        + (bridge_box(lang, group_key(lang, slug, meta))
+           or f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
+              f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n')
+        + '</article>\n')
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/{lang}/{slug}.html'
     os.makedirs(os.path.dirname(path), exist_ok=True)
     md = lang in MD_LANGS
