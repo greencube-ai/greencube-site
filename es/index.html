@@ -2336,7 +2336,8 @@
 
       // then the walk and the row share one clock
       const along = clamp(s - intro, 0, tw);
-      track.style.transform = `translateX(${W - along}px)`;
+      const peek = Math.min(W * 0.22, tw);   // the first cards already show at the right edge on arrival (Hector 11 Nov)
+      track.style.transform = `translateX(${W - peek - along * (tw - peek) / tw}px)`;
       const room = guide.clientWidth - body.clientWidth;
       body.style.translate = `${room * (along / tw)}px ${(1 - shown) * 12}px`;
 

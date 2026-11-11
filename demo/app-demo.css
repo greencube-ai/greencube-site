@@ -178,18 +178,20 @@
 .gi-meta b { font-size: 16px; } .gi-meta p { font-size: 13.5px; color: #4A4740; line-height: 1.5; } .gi-meta small { font-size: 12px; color: var(--mute); line-height: 1.45; display: block; }
 @media (max-width: 860px) { .gi-big { grid-template-columns: 1fr; align-content: start; overflow-y: auto; padding-top: 50px; } }
 
-/* yellow "Click here" on the send button until the first message is sent */
+/* the turtle says "Click here" next to the send button, until the first message is sent */
 .gd-bar { position: relative; }
-.gd-click { position: absolute; right: -6px; bottom: calc(100% + 12px); z-index: 2; background: #F9DD5E; color: #1F1E1B; font-weight: 700; font-size: 13px; white-space: nowrap;
-  padding: 6px 12px; border-radius: 999px; box-shadow: 0 6px 16px -8px rgba(0,0,0,.35); pointer-events: none; animation: gd-bob 1.4s ease-in-out infinite; }
-.gd-click::after { content: ''; position: absolute; right: 18px; top: 100%; border: 7px solid transparent; border-top-color: #F9DD5E; }
+.gd-click { position: absolute; right: -10px; bottom: calc(100% + 8px); z-index: 2; display: flex; align-items: flex-end; gap: 2px; pointer-events: none; animation: gd-bob 1.6s ease-in-out infinite; }
+.gd-click b { position: relative; margin-bottom: 30px; background: #FDFBF5; color: #1F1E1B; font-size: 13.5px; font-weight: 700; white-space: nowrap; padding: 7px 13px; border-radius: 14px;
+  border: 1.5px solid #1F1E1B; box-shadow: 2px 3px 0 rgba(31,30,27,.18); }
+.gd-click b::after { content: ''; position: absolute; right: -9px; bottom: 8px; width: 12px; height: 12px; background: #FDFBF5; border-right: 1.5px solid #1F1E1B; border-bottom: 1.5px solid #1F1E1B; transform: rotate(-45deg); }
+.gd-click img { width: 54px; height: auto; transform: scaleX(-1); }
 @keyframes gd-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .gd-click { animation: none; } }
 
 /* "Try it" at the top of the hero, an arrow down to the demo */
 .try-it { display: inline-flex; flex-direction: column; align-items: center; gap: 0; margin: 14px auto 0; color: #2F6B45; text-decoration: none; }
-.try-it span { white-space: nowrap; font-family: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive; font-weight: 700; font-size: 21px; transform: rotate(-3deg); }
-.try-it svg { width: 30px; height: 46px; animation: gd-down 1.6s ease-in-out infinite; }
+.try-it span { white-space: nowrap; font-family: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive; font-weight: 700; font-size: 27px; transform: rotate(-3deg); }
+.try-it svg { width: 50px; height: 78px; animation: gd-down 1.6s ease-in-out infinite; }
 .try-it:hover span { text-decoration: underline; text-underline-offset: 4px; }
 @keyframes gd-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 .hero .cta-row { position: relative; }
