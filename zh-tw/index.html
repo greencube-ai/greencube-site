@@ -1680,7 +1680,7 @@
       if (hit.length) left = Math.max(left, ...hit.map((b) => b.right - h.left + 22));
       left = Math.min(left, h.width - tw - 16);
       for (let n = 0; n < 5 && (hit = hits()).length; n++) top = Math.max(top, ...hit.map((b) => b.bottom - h.top + 12));   // no room at the side: hang below the text
-      t.style.left = Math.round(left) + 'px'; t.style.top = Math.round(top) + 'px';
+      t.style.left = Math.round(left) + 'px'; t.style.top = Math.round(top + 5) + 'px';
     };
     place(); addEventListener('resize', place); addEventListener('load', place); if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
   })();

@@ -180,11 +180,11 @@
 
 /* the turtle says "Click here" next to the send button, until the first message is sent */
 .gd-bar { position: relative; }
-.gd-click { position: absolute; right: 16px; bottom: calc(100% - 7px); z-index: 2; display: flex; align-items: flex-end; gap: 4px; pointer-events: none; }
-.gd-click b { position: relative; margin-bottom: 30px; background: #FDFBF5; color: #1F1E1B; font-size: 13.5px; font-weight: 700; white-space: nowrap; padding: 7px 13px; border-radius: 14px;
+.gd-click { position: absolute; right: 14px; bottom: calc(100% - 10px); z-index: 2; display: flex; align-items: flex-end; gap: 4px; pointer-events: none; }
+.gd-click b { position: relative; margin-bottom: 46px; background: #FDFBF5; color: #1F1E1B; font-size: 16px; font-weight: 700; white-space: nowrap; padding: 7px 13px; border-radius: 14px;
   border: 1.5px solid #1F1E1B; box-shadow: 2px 3px 0 rgba(31,30,27,.18); animation: gd-bob 1.6s ease-in-out infinite; }
 .gd-click b::after { content: ''; position: absolute; right: -7px; bottom: 9px; width: 11px; height: 11px; background: #FDFBF5; border-right: 1.5px solid #1F1E1B; border-bottom: 1.5px solid #1F1E1B; transform: rotate(-45deg); }
-.gd-click img { width: 54px; height: auto; transform: scaleX(-1); }
+.gd-click img { width: 84px; height: auto; transform: scaleX(-1); }
 .gd-compose { position: relative; }
 @keyframes gd-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .gd-click { animation: none; } }
@@ -198,6 +198,16 @@
 .hero > .try-it { position: absolute; z-index: 6; margin: 0; align-items: flex-start; }
 .hero > .try-it svg.long { width: 60px; height: 150px; margin-left: 10px; }
 @media (max-width: 760px) { .hero .wrap > .try-it { position: static; margin: 10px auto 0; align-items: center; } .hero > .try-it svg.long { height: 60px; } }
-.pitch .try-it { display: flex; width: max-content; margin: 18px 0 0; }
 #try { scroll-margin-top: 90px; }
 @media (prefers-reduced-motion: reduce) { .try-it svg { animation: none; } }
+
+/* /get: "Try it right here" at the window's top-right corner, arrow into the window */
+.gd-try { width: max-content; position: absolute; z-index: 5; left: calc(100% + 10px); top: -6px; display: flex; flex-direction: column; align-items: flex-start; color: #2F6B45; pointer-events: none; }
+.gd-try span { font-family: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive; font-weight: 700; font-size: 30px; line-height: 1.1; transform: rotate(-4deg); white-space: nowrap; }
+.gd-try svg { width: 110px; height: 64px; margin-top: 2px; animation: gd-nudge2 1.8s ease-in-out infinite; }
+@keyframes gd-nudge2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-5px, 3px); } }
+@media (max-width: 1599px) { .gd .gd-head { margin-bottom: 84px; } .gd-try { left: auto; right: 10px; top: auto; bottom: calc(100% + 4px); flex-direction: row; align-items: flex-end; } .gd-try svg { width: 70px; height: 46px; transform: scaleX(-1) rotate(20deg); animation: none; } }
+@media (prefers-reduced-motion: reduce) { .gd-try svg { animation: none; } }
+
+.gd-wrap { position: relative; width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+.gd-wrap > .gd-win { width: 100%; }
