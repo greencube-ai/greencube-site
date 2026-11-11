@@ -1065,7 +1065,12 @@
       .price .amount, .price .amount .cur { font-size: 58px; } .price .once { font-size: 32px; }
       .for { margin: 4px 0 10px; }
     }
-    .pitch .lede { font-weight: 600; color: var(--forest, #1A1A1A); font-size: 19.5px; line-height: 1.55; max-width: 36ch; }
+    .pitch .lede { font-weight: 600; color: var(--forest, #1A1A1A); }
+    /* long translations: "one time." drops under the price in one piece; the refund promise wraps inside the card */
+    .price { flex-wrap: wrap; row-gap: 2px; } .price .once { white-space: nowrap; }
+    @media (min-width: 901px) { main { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .pitch .nl .hl { white-space: nowrap; } }
+    html:not([lang="en"]):not([lang="es"]) .refund-line > span, html:not([lang="en"]):not([lang="es"]) .refund-line strong { white-space: normal; }
+    html:not([lang="en"]):not([lang="es"]) .refund-line > span { font-size: 16px; }
     .pitch .lede .sc { position: relative; white-space: nowrap; }
     .pitch .lede .sc::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.32em; height: .5em;
       background: no-repeat center / 100% 100%; animation: sc-in .55s cubic-bezier(.6,0,.2,1) both; }
@@ -1230,6 +1235,17 @@
   <p class="rb-note">Some of these testers got GreenCube free.</p>
 </section>
 
+<script>
+// Long translated headlines shrink to fit their column (the price card keeps its width).
+(() => {
+  const nl = document.querySelector('.pitch .nl'), col = document.querySelector('.pitch');
+  if (!nl || !col) return;
+  const fit = () => { nl.style.fontSize = ''; if (innerWidth < 901) return;
+    const w = nl.offsetWidth, room = col.clientWidth;
+    if (w > room) nl.style.fontSize = Math.floor(parseFloat(getComputedStyle(nl).fontSize) * room / w) + 'px'; };
+  fit(); addEventListener('resize', fit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 <script>
 // The banner peeks at the bottom of the first screen on any desktop height (never trims into the header's room).
 (() => {
