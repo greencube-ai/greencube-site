@@ -1,6 +1,6 @@
-# Límite de ChatGPT gratis en 2026: ¿ya es ilimitado?
+# ¿ChatGPT gratis e ilimitado? Lo que sigue limitado en 2026
 
-> ¿ChatGPT gratis tiene límite de mensajes? Desde agosto de 2026 el chat de texto es ilimitado. Subir archivos y PDFs, crear imágenes y la voz siguen limitados.
+> ChatGPT gratis no tiene límite de texto desde agosto de 2026, pero archivos, imágenes y voz siguen limitados. Qué significa y cuál es la IA sin ningún límite de uso.
 
 Canonical: https://blog.greencube.app/blog/es/limite-chatgpt-gratis  
 Published: 2026-10-18  

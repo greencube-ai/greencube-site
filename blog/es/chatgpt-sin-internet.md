@@ -1,6 +1,6 @@
-# ¿ChatGPT funciona sin internet? No, pero esto sí funciona sin conexión (2026)
+# ¿ChatGPT sin internet? La IA que funciona sin conexión (2026)
 
-> ChatGPT no tiene modo sin conexión: la app y la versión de escritorio necesitan internet, porque el modelo funciona en los servidores de OpenAI. Lo que sí funciona sin internet: el modelo abierto gpt-oss-20b de la propia OpenAI y las apps de IA local, con la RAM que necesitas y velocidades medidas.
+> ChatGPT necesita internet. Así puedes tener una IA que funciona con el Wi-Fi apagado: gpt-oss-20b, el modelo abierto de OpenAI, o una app de IA local. Qué necesita tu PC y velocidades medidas.
 
 Canonical: https://blog.greencube.app/blog/es/chatgpt-sin-internet  
 Published: 2026-10-23  

@@ -1,6 +1,6 @@
-# ChatGPT free limits in 2026: is it unlimited now?
+# ChatGPT free and unlimited? What's still capped in 2026
 
-> Is ChatGPT free unlimited now? Text chat is, since August 2026. File uploads, images, voice and data analysis are still capped. What that means for studying.
+> Free ChatGPT has no text limit since August 2026, but files, images and voice are still capped. What that means, and the AI with no usage limits at all.
 
 Canonical: https://blog.greencube.app/blog/chatgpt-free-limits  
 Published: 2026-10-18  
