@@ -1038,6 +1038,43 @@
   <style id="rb-fit">
     /* the reviews banner peeks at the bottom of the first screen (Hector 11 Nov): the hero no longer fills the screen */
     @media (min-width: 901px) { main { min-height: 0; padding-bottom: 12px; } }
+    .pitch .lede .lead { font-family: var(--display); font-weight: 700; letter-spacing: -.015em; color: var(--forest, #1A1A1A); }
+    /* a bigger hero (Hector 11 Nov) */
+    @media (min-width: 901px) {
+      .pitch .nl { font-size: clamp(60px, 7.4vw, 118px); }
+      .adline { font-size: clamp(27px, 2.8vw, 41px); }
+      .pitch .lede { font-size: clamp(23px, 2.4vw, 31px); max-width: 33ch; }
+    }
+    /* FAQ: just the questions; click one to open it */
+    details.faq-item { padding: 0; }
+    details.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary h3 { margin: 0 !important; }
+    details.faq-item summary::after { content: '+'; flex: 0 0 auto; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+      background: #E7EFD9; color: var(--forest, #1A1A1A); font: 600 19px/1 var(--display); transition: transform .3s cubic-bezier(.16,1,.3,1); }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    details.faq-item summary:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    details.faq-item > p { padding: 0 24px 22px; margin: -4px 0 0; }
+    /* shorter desktop screens (laptops): a tighter hero so the reviews banner still peeks at the bottom */
+    @media (min-width: 901px) and (max-height: 820px) {
+      .pitch .nl { font-size: min(7.4vw, 11vh, 118px); margin-bottom: 8px; }
+      .adline { font-size: min(2.8vw, 4.3vh, 41px); }
+      .words { font-size: 1.6em; }
+      .pitch .lede { font-size: min(2.4vw, 3.5vh, 31px); margin-top: 10px; }
+      .order { padding-top: 22px; padding-bottom: 18px; }
+      .price .amount, .price .amount .cur { font-size: 58px; } .price .once { font-size: 32px; }
+      .for { margin: 4px 0 10px; }
+    }
+    .pitch .lede { font-weight: 600; color: var(--forest, #1A1A1A); font-size: 19.5px; line-height: 1.55; max-width: 36ch; }
+    .pitch .lede .sc { position: relative; white-space: nowrap; }
+    .pitch .lede .sc::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.32em; height: .5em;
+      background: no-repeat center / 100% 100%; animation: sc-in .55s cubic-bezier(.6,0,.2,1) both; }
+    .pitch .lede .sc-sage::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .pitch .lede .sc-yellow::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .pitch .lede .sc-peach::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .pitch .lede .sc-blue::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1s; }
+    @keyframes sc-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .pitch .lede .sc::after { animation: none; } }
   </style>
 </head>
 <body>
@@ -1066,11 +1103,7 @@
   <section class="pitch">
     <h1 class="nl"><span class="ai-with">An AI</span> <span class="hl">YOU OWN.</span></h1>
     <p class="adline">It makes your <span class="words"><span>PowerPoints</span><span aria-hidden="true">images</span><span aria-hidden="true">diagrams</span><span aria-hidden="true">websites</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">documents</span><span aria-hidden="true">apps</span></span></p>
-    <ul class="points">
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Runs on your own PC.</strong> Works offline once installed. Your chats stay on it.</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Pay once, it&rsquo;s yours.</strong> No subscription.</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>Use it as much as you want.</strong> Nothing is counted.</span></li>
-    </ul>
+    <p class="lede"><b class="lead">Your personal AI assistant.</b> It <span class="sc sc-peach">runs on your PC</span>, works <span class="sc sc-sage">fully offline</span>, is <span class="sc sc-blue">100% private</span> and has <span class="sc sc-yellow">no usage limits</span>.</p>
   </section>
 
   <!-- ===== right: order summary + buy ===== -->
@@ -1203,11 +1236,15 @@
   const rb = document.querySelector('.rb'), main = document.querySelector('main');
   if (!rb || !main || innerWidth < 901) return;
   const fit = () => {
-    main.style.paddingTop = ''; main.style.minHeight = '';
+    main.style.paddingTop = ''; main.style.minHeight = ''; rb.style.marginTop = '';
     // about 30% of the banner shows at the bottom of the first screen: tall screens push it down, short ones pull it up
     const want = innerHeight - rb.offsetHeight * 0.3, top = rb.getBoundingClientRect().top + scrollY;
-    if (top < want) main.style.minHeight = (main.offsetHeight + want - top) + 'px';
+    // tall screens: push the banner down to ~30%, splitting the room (1/3 above the headline, 2/3 above the banner), capped so no big gaps
+    if (top < want) { const extra = Math.min(want - top, 200); main.style.paddingTop = (parseFloat(getComputedStyle(main).paddingTop) + extra / 3) + 'px'; rb.style.marginTop = (extra * 2 / 3) + 'px'; }
     else if (top > want) main.style.paddingTop = Math.max(76, parseFloat(getComputedStyle(main).paddingTop) - (top - want)) + 'px';
+    // never let the price card reach into the banner
+    const card = document.querySelector('.order');
+    if (card) { const clash = card.getBoundingClientRect().bottom + 18 - rb.getBoundingClientRect().top; if (clash > 0) rb.style.marginTop = ((parseFloat(rb.style.marginTop) || 0) + clash) + 'px'; }
   };
   const again = () => { if (scrollY < 40) fit(); };  // re-check once layout settles, never while someone is reading below
   fit();
@@ -1275,30 +1312,30 @@
 
   <h2 style="margin-top:64px">Questions people ask before buying.</h2>
   <div class="faq-list">
-    <div class="faq-item">
-      <h3>Is it really one payment?</h3>
+    <details class="faq-item">
+      <summary><h3>Is it really one payment?</h3></summary>
       <p>Yes. &euro;9.99 once and it&rsquo;s yours. No subscription, no renewal, no second charge.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Will it run on my PC?</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>Will it run on my PC?</h3></summary>
       <p>If it runs Windows 10 or 11 and has 8 GB of RAM or more, yes. A graphics card makes it fast; without one it&rsquo;s slower, but it works. <a href="/#game">Check your PC in two questions</a>.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Do I need internet?</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>Do I need internet?</h3></summary>
       <p>Once, to sign in and download the AI. After that it works with no internet: on a plane, in a blackout, anywhere. It only goes online for updates, or if you switch Online on.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Why do I need an account?</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>Why do I need an account?</h3></summary>
       <p>Only to check that you paid. It never sees your chats, files or images.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Is it as smart as ChatGPT?</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>Is it as smart as ChatGPT?</h3></summary>
       <p>No. The biggest cloud AIs are smarter. GreenCube runs on your PC, works offline and is yours. That&rsquo;s the trade.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What if it&rsquo;s not for me?</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>What if it&rsquo;s not for me?</h3></summary>
       <p>You have 15 days to change your mind. Email <a href="mailto:support@greencube.app">support@greencube.app</a> and we&rsquo;ll refund you in full.</p>
-    </div>
+    </details>
   </div>
 
   <p class="closer">Not sure your PC can run it? <a href="/#game">Check it in two questions</a>.</p>

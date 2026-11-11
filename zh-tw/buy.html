@@ -414,6 +414,35 @@
     .detail .closer a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
     @media (max-width: 760px) { .gets { grid-template-columns: 1fr; } .detail { padding-top: 64px; } }
 
+    /* moving reviews banner under the hero: one row, every card the same size (real beta testers, exact words;
+       some got it free, said in the small note under the row) */
+    .scroll-cue { display: none; }
+    .rb { position: relative; z-index: 2; padding: 22px 0 6px; overflow: hidden; }
+    .rb-head { text-align: center; font-size: clamp(19px, 1.8vw, 23px); letter-spacing: -.015em; margin: 0 auto 16px; padding: 0 20px; }
+    .rb-head b { font-family: var(--display); font-weight: 600; color: var(--forest, #1A1A1A); }
+    .rb-note { text-align: center; font-size: 11.5px; font-weight: 400; color: var(--ink-mute, #8A836F); margin: 10px auto 0; padding: 0 20px; }
+    .rb-row { overflow: hidden; padding: 4px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .rb-track { display: flex; width: max-content; animation: rb-move 120s linear infinite; }
+    .rb-row:hover .rb-track, .rb-row:focus-within .rb-track { animation-play-state: paused; }
+    .rb-set { display: flex; gap: 16px; padding-right: 16px; align-items: stretch; }
+    @keyframes rb-move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .rb-card { flex: 0 0 auto; width: 340px; margin: 0; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--line);
+      background: var(--paper-soft, #FBF8F0); display: flex; flex-direction: column; justify-content: space-between; }
+    .rb-card blockquote { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink, #1A1A1A); }
+    /* shorter quotes: bigger, centred in the card, so every card looks full */
+    .rb-card.rb-m blockquote { font-size: 16px; } .rb-card.rb-s blockquote { font-size: 18px; line-height: 1.5; letter-spacing: -.01em; }
+    .rb-card blockquote::before { content: "“"; display: block; height: .5em; margin: -2px 0 8px; font-family: Georgia, serif; font-size: 46px; line-height: 1; color: var(--q, #8EA674); }
+    .rb-card:nth-child(4n+1) { --q: #8EA674; } .rb-card:nth-child(4n+2) { --q: #F28A5B; } .rb-card:nth-child(4n+3) { --q: #6F93D8; } .rb-card:nth-child(4n) { --q: #E2B53A; }
+    .rb-card figcaption { display: flex; align-items: center; gap: 9px; margin-top: 14px; font-family: var(--display); font-weight: 600; font-size: 13.5px; color: var(--forest, #1A1A1A); }
+    .rb-dot { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; color: #1F2418; background: #C6D9A8; }
+    .rb-card:nth-child(4n+2) .rb-dot { background: #FBC6A8; } .rb-card:nth-child(4n+3) .rb-dot { background: #C3D3F0; } .rb-card:nth-child(4n) .rb-dot { background: #FAE289; }
+    @media (max-width: 560px) { .rb-card { width: 280px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .rb-track { animation: none; } .rb-row { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+      .rb-set[aria-hidden] { display: none; }
+    }
+
+
     /* ============== footer ============== */
     footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 40px 0 48px; }
     footer .row {
@@ -1006,6 +1035,47 @@
     .pitch .points li .tick { width: 24px; height: 24px; font-size: 13px; margin-top: 1px; }
     @media (max-width: 900px) { .pitch .points { max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; } }
   </style>
+  <style id="rb-fit">
+    /* the reviews banner peeks at the bottom of the first screen (Hector 11 Nov): the hero no longer fills the screen */
+    @media (min-width: 901px) { main { min-height: 0; padding-bottom: 12px; } }
+    .pitch .lede .lead { font-family: var(--display); font-weight: 700; letter-spacing: -.015em; color: var(--forest, #1A1A1A); }
+    /* a bigger hero (Hector 11 Nov) */
+    @media (min-width: 901px) {
+      .pitch .nl { font-size: clamp(60px, 7.4vw, 118px); }
+      .adline { font-size: clamp(27px, 2.8vw, 41px); }
+      .pitch .lede { font-size: clamp(23px, 2.4vw, 31px); max-width: 33ch; }
+    }
+    /* FAQ: just the questions; click one to open it */
+    details.faq-item { padding: 0; }
+    details.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary h3 { margin: 0 !important; }
+    details.faq-item summary::after { content: '+'; flex: 0 0 auto; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+      background: #E7EFD9; color: var(--forest, #1A1A1A); font: 600 19px/1 var(--display); transition: transform .3s cubic-bezier(.16,1,.3,1); }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    details.faq-item summary:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    details.faq-item > p { padding: 0 24px 22px; margin: -4px 0 0; }
+    /* shorter desktop screens (laptops): a tighter hero so the reviews banner still peeks at the bottom */
+    @media (min-width: 901px) and (max-height: 820px) {
+      .pitch .nl { font-size: min(7.4vw, 11vh, 118px); margin-bottom: 8px; }
+      .adline { font-size: min(2.8vw, 4.3vh, 41px); }
+      .words { font-size: 1.6em; }
+      .pitch .lede { font-size: min(2.4vw, 3.5vh, 31px); margin-top: 10px; }
+      .order { padding-top: 22px; padding-bottom: 18px; }
+      .price .amount, .price .amount .cur { font-size: 58px; } .price .once { font-size: 32px; }
+      .for { margin: 4px 0 10px; }
+    }
+    .pitch .lede { font-weight: 600; color: var(--forest, #1A1A1A); font-size: 19.5px; line-height: 1.55; max-width: 36ch; }
+    .pitch .lede .sc { position: relative; white-space: nowrap; }
+    .pitch .lede .sc::after { content: ''; position: absolute; left: -.04em; right: -.04em; bottom: -.32em; height: .5em;
+      background: no-repeat center / 100% 100%; animation: sc-in .55s cubic-bezier(.6,0,.2,1) both; }
+    .pitch .lede .sc-sage::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .pitch .lede .sc-yellow::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .6s; }
+    .pitch .lede .sc-peach::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .pitch .lede .sc-blue::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1s; }
+    @keyframes sc-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @media (prefers-reduced-motion: reduce) { .pitch .lede .sc::after { animation: none; } }
+  </style>
 </head>
 <body>
 
@@ -1017,14 +1087,14 @@
     <span>GreenCube</span>
   </a>
   <nav class="header-nav" aria-label="Primary">
-    <a href="/ai-environmental-impact">AI 與地球</a>
-    <a href="/your-data">你的資料</a>
-    <a href="/mission">我們的使命</a>
-    <a href="/buy">下載</a>
+    <a href="/zh-tw/ai-environmental-impact">AI 與地球</a>
+    <a href="/zh-tw/your-data">你的資料</a>
+    <a href="/zh-tw/mission">我們的使命</a>
+    <a href="/zh-tw/buy">下載</a>
   </nav>
   <div class="head-right">
     <details class="lang-pick"><summary class="lang" aria-label="Language">繁體</summary><div class="lang-list"><a href="/buy" hreflang="en" lang="en">English</a><a href="/es/buy" hreflang="es" lang="es">Español</a><a href="/pt/buy" hreflang="pt" lang="pt-BR">Português</a><a href="/fr/buy" hreflang="fr" lang="fr">Français</a><a href="/de/buy" hreflang="de" lang="de">Deutsch</a><a href="/it/buy" hreflang="it" lang="it">Italiano</a><a href="/nl/buy" hreflang="nl" lang="nl">Nederlands</a><a href="/pl/buy" hreflang="pl" lang="pl">Polski</a><a href="/tr/buy" hreflang="tr" lang="tr">Türkçe</a><a href="/ru/buy" hreflang="ru" lang="ru">Русский</a><a href="/uk/buy" hreflang="uk" lang="uk">Українська</a><a href="/ar/buy" hreflang="ar" lang="ar">العربية</a><a href="/hi/buy" hreflang="hi" lang="hi">हिन्दी</a><a href="/id/buy" hreflang="id" lang="id">Indonesia</a><a href="/vi/buy" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/th/buy" hreflang="th" lang="th">ไทย</a><a href="/ja/buy" hreflang="ja" lang="ja">日本語</a><a href="/ko/buy" hreflang="ko" lang="ko">한국어</a><a href="/zh/buy" hreflang="zh" lang="zh-CN">简体中文</a><a href="/zh-tw/buy" hreflang="zh-tw" lang="zh-TW" aria-current="true">繁體中文</a></div></details>
-    <a href="/buy" class="nav-cta" id="nav-buy">立即購買</a>
+    <a href="/zh-tw/buy" class="nav-cta" id="nav-buy">立即購買</a>
   </div>
 </header>
 
@@ -1033,11 +1103,7 @@
   <section class="pitch">
     <h1 class="nl"><span class="ai-with">AI，</span> <span class="hl">歸你所有。</span></h1>
     <p class="adline">它幫你製作 <span class="words"><span>PowerPoints</span><span aria-hidden="true">圖片</span><span aria-hidden="true">圖解</span><span aria-hidden="true">網站</span><span aria-hidden="true">flashcards</span><span aria-hidden="true">文件</span><span aria-hidden="true">apps</span></span></p>
-    <ul class="points">
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>在你的電腦上執行。</strong> 安裝後可離線使用。聊天紀錄留在電腦上。</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>付一次，就歸你。</strong> 無需訂閱。</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span><strong>想用多少就用多少。</strong> 不計次數。</span></li>
-    </ul>
+    <p class="lede"><b class="lead">你的私人 AI 助理。</b> 它 <span class="sc sc-peach">在你的電腦上執行</span>，可以 <span class="sc sc-sage">完全離線使用</span>， <span class="sc sc-blue">100% 私密</span> ，而且 <span class="sc sc-yellow">沒有使用限制</span>.</p>
   </section>
 
   <!-- ===== right: order summary + buy ===== -->
@@ -1157,6 +1223,35 @@
   </a>
 </main>
 
+<!-- ===== beta testers, moving: the top of it shows on the first screen ===== -->
+<section class="rb" aria-label="聽聽我們的 Beta 測試者怎麼說">
+  <p class="rb-head"><b>聽聽我們的 Beta 測試者怎麼說。</b></p>
+    <div class="rb-row"><div class="rb-track"><div class="rb-set"><figure class="rb-card"><blockquote>I mainly use GreenCube for reading reports and preparing presentations. I can drop in a PDF, get a summary, and turn the main points into slides. It saves me a lot of time, tbh. Sometimes it misses a small detail, so I still double-check important stuff.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jeanluc Fael</figcaption></figure><figure class="rb-card"><blockquote>Honestly, I tried Ollama before GreenCube, but my laptop isn&rsquo;t the best and it kept crashing with bigger models. GreenCube was way easier to set up and has been solid for emails, PDFs, and quick slide outlines. I like that I paid once and can use it offline.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alonso Andreu</figcaption></figure><figure class="rb-card"><blockquote>I use GreenCube for studying and organising information. It&rsquo;s great for making quizzes, flashcards, and simple slides. It makes difficult topics much easier to understand. The only downside is that it can be a bit slow on older PCs, but the updates have been improving things.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">G</span>Gabriel Matamorros</figcaption></figure><figure class="rb-card rb-m"><blockquote>GreenCube has been really useful for studying. I upload lecture PDFs, ask it to explain things simply, and turn the notes into flashcards and quizzes. It&rsquo;s made revising way less boring.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Ilan Swedberg</figcaption></figure><figure class="rb-card rb-m"><blockquote>I&rsquo;m not very technical, so I was worried local AI would be complicated. GreenCube was surprisingly easy to use. I mostly use it for planning, messages, and organising my ideas. So far, so good.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Marcello Manuguerra</figcaption></figure><figure class="rb-card"><blockquote>I tried LM Studio before, but my PC couldn&rsquo;t really handle it. It would freeze or crash with longer documents. GreenCube made it way easier and smoother on my average laptop. It does use a fair bit of RAM, but that&rsquo;s just how local AI works.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Maximo Vuijst</figcaption></figure><figure class="rb-card"><blockquote>GreenCube has been great for emails, ideas, and presentations. I like that there&rsquo;s no subscription and I can use it whenever I need without worrying about limits. They seem to update it pretty often too, which is nice.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jorge Lopez</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube almost every day for studying. It explains topics in simple language and makes practice questions from my notes. The flashcards are especially useful before exams.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Iago</figcaption></figure><figure class="rb-card rb-m"><blockquote>I wanted an AI I could use while travelling, and GreenCube has been perfect. It works without internet, so I use it on flights and trains for notes, translations, and planning.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alvaro de Alburquerque</figcaption></figure><figure class="rb-card rb-m"><blockquote>I bought GreenCube mainly for PDFs. I can ask questions about a document and get a clear summary instead of scrolling through loads of pages. Really handy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">E</span>Eric Abad</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube mostly for coding. It helps me understand errors, explain code, and draft small scripts for very small projects. It&rsquo;s been handy for quick stuff, nothing too heavy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Javier Soriano</figcaption></figure></div><div class="rb-set" aria-hidden="true"><figure class="rb-card"><blockquote>I mainly use GreenCube for reading reports and preparing presentations. I can drop in a PDF, get a summary, and turn the main points into slides. It saves me a lot of time, tbh. Sometimes it misses a small detail, so I still double-check important stuff.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jeanluc Fael</figcaption></figure><figure class="rb-card"><blockquote>Honestly, I tried Ollama before GreenCube, but my laptop isn&rsquo;t the best and it kept crashing with bigger models. GreenCube was way easier to set up and has been solid for emails, PDFs, and quick slide outlines. I like that I paid once and can use it offline.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alonso Andreu</figcaption></figure><figure class="rb-card"><blockquote>I use GreenCube for studying and organising information. It&rsquo;s great for making quizzes, flashcards, and simple slides. It makes difficult topics much easier to understand. The only downside is that it can be a bit slow on older PCs, but the updates have been improving things.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">G</span>Gabriel Matamorros</figcaption></figure><figure class="rb-card rb-m"><blockquote>GreenCube has been really useful for studying. I upload lecture PDFs, ask it to explain things simply, and turn the notes into flashcards and quizzes. It&rsquo;s made revising way less boring.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Ilan Swedberg</figcaption></figure><figure class="rb-card rb-m"><blockquote>I&rsquo;m not very technical, so I was worried local AI would be complicated. GreenCube was surprisingly easy to use. I mostly use it for planning, messages, and organising my ideas. So far, so good.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Marcello Manuguerra</figcaption></figure><figure class="rb-card"><blockquote>I tried LM Studio before, but my PC couldn&rsquo;t really handle it. It would freeze or crash with longer documents. GreenCube made it way easier and smoother on my average laptop. It does use a fair bit of RAM, but that&rsquo;s just how local AI works.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Maximo Vuijst</figcaption></figure><figure class="rb-card"><blockquote>GreenCube has been great for emails, ideas, and presentations. I like that there&rsquo;s no subscription and I can use it whenever I need without worrying about limits. They seem to update it pretty often too, which is nice.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jorge Lopez</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube almost every day for studying. It explains topics in simple language and makes practice questions from my notes. The flashcards are especially useful before exams.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Iago</figcaption></figure><figure class="rb-card rb-m"><blockquote>I wanted an AI I could use while travelling, and GreenCube has been perfect. It works without internet, so I use it on flights and trains for notes, translations, and planning.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alvaro de Alburquerque</figcaption></figure><figure class="rb-card rb-m"><blockquote>I bought GreenCube mainly for PDFs. I can ask questions about a document and get a clear summary instead of scrolling through loads of pages. Really handy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">E</span>Eric Abad</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube mostly for coding. It helps me understand errors, explain code, and draft small scripts for very small projects. It&rsquo;s been handy for quick stuff, nothing too heavy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Javier Soriano</figcaption></figure></div></div></div>
+  <p class="rb-note">其中部分測試者免費獲得 GreenCube。</p>
+</section>
+
+<script>
+// The banner peeks at the bottom of the first screen on any desktop height (never trims into the header's room).
+(() => {
+  const rb = document.querySelector('.rb'), main = document.querySelector('main');
+  if (!rb || !main || innerWidth < 901) return;
+  const fit = () => {
+    main.style.paddingTop = ''; main.style.minHeight = ''; rb.style.marginTop = '';
+    // about 30% of the banner shows at the bottom of the first screen: tall screens push it down, short ones pull it up
+    const want = innerHeight - rb.offsetHeight * 0.3, top = rb.getBoundingClientRect().top + scrollY;
+    // tall screens: push the banner down to ~30%, splitting the room (1/3 above the headline, 2/3 above the banner), capped so no big gaps
+    if (top < want) { const extra = Math.min(want - top, 200); main.style.paddingTop = (parseFloat(getComputedStyle(main).paddingTop) + extra / 3) + 'px'; rb.style.marginTop = (extra * 2 / 3) + 'px'; }
+    else if (top > want) main.style.paddingTop = Math.max(76, parseFloat(getComputedStyle(main).paddingTop) - (top - want)) + 'px';
+    // never let the price card reach into the banner
+    const card = document.querySelector('.order');
+    if (card) { const clash = card.getBoundingClientRect().bottom + 18 - rb.getBoundingClientRect().top; if (clash > 0) rb.style.marginTop = ((parseFloat(rb.style.marginTop) || 0) + clash) + 'px'; }
+  };
+  const again = () => { if (scrollY < 40) fit(); };  // re-check once layout settles, never while someone is reading below
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(again);
+  addEventListener('load', again); setTimeout(again, 900); addEventListener('resize', again);
+})();
+</script>
 <!-- ===== what you get + buyer questions ===== -->
 <section class="detail" id="detail" aria-label="你能得到什麼和常見問題">
   <div class="eyebrow">包含內容</div>
@@ -1210,37 +1305,37 @@
     </article>
     <article class="get">
       <span class="ico ico-refund" aria-hidden=""><svg viewBox="0 0 24 24"><path pathLength="1" d="M12 2.5 4.5 5.5V11c0 4.5 3 8.2 7.5 10 4.5-1.8 7.5-5.5 7.5-10V5.5z"/><path pathLength="1" d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg></span>
-      <h3>15-day refund</h3>
+      <h3>15 天內退款</h3>
       <p>不適合你的電腦？15 天內寄 Email 給我們，全額退款，一毛不少。</p>
     </article>
   </div>
 
   <h2 style="margin-top:64px">購買前的常見問題。</h2>
   <div class="faq-list">
-    <div class="faq-item">
-      <h3>真的只付一次嗎？</h3>
+    <details class="faq-item">
+      <summary><h3>真的只付一次嗎？</h3></summary>
       <p>是的。&euro;9.99 一次就歸你。不訂閱，不續費，不會再扣第二次。</p>
-    </div>
-    <div class="faq-item">
-      <h3>我的電腦能跑嗎？</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>我的電腦能跑嗎？</h3></summary>
       <p>只要是 Windows 10 或 11，記憶體 8 GB 或以上，就能跑。有顯示卡會很快；沒有會慢一點，但能用。 <a href="/zh-tw/#game">用兩個問題檢查你的電腦</a>.</p>
-    </div>
-    <div class="faq-item">
-      <h3>需要聯網嗎？</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>需要聯網嗎？</h3></summary>
       <p>只需一次，用來登入和下載 AI。之後不聯網也能用：飛機上、停電時，哪裡都行。只有更新時，或你開啟 Online 時，才會聯網。</p>
-    </div>
-    <div class="faq-item">
-      <h3>為什麼需要賬號？</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>為什麼需要賬號？</h3></summary>
       <p>只用來確認你已付款。它永遠看不到你的聊天、檔案或圖片。</p>
-    </div>
-    <div class="faq-item">
-      <h3>它和 ChatGPT 一樣聰明嗎？</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>它和 ChatGPT 一樣聰明嗎？</h3></summary>
       <p>不。最大的雲端 AI 更聰明。GreenCube 在你的電腦上執行，能離線用，而且歸你所有。這就是取捨。</p>
-    </div>
-    <div class="faq-item">
-      <h3>如果不適合我呢？</h3>
+    </details>
+    <details class="faq-item">
+      <summary><h3>如果不適合我呢？</h3></summary>
       <p>你有 15 天可以反悔。發郵件到 <a href="mailto:support@greencube.app">support@greencube.app</a> 我們全額退款。</p>
-    </div>
+    </details>
   </div>
 
   <p class="closer">不確定你的電腦能不能跑？ <a href="/zh-tw/#game">兩個問題檢查一下</a>.</p>

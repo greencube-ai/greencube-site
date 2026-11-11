@@ -1404,11 +1404,29 @@
     .hero-what .mk { position: relative; white-space: nowrap; }
     .hero-what .mk::after { content: ""; position: absolute; left: -.04em; right: -.04em; bottom: -.3em; height: .5em; background: no-repeat center / 100% 100%; animation: hero-hl-in .55s cubic-bezier(.6,0,.2,1) both; }
     .hero-what .mk-sage::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%238FAE6E' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: .8s; }
+    .hero-what .mk-yellow::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23E2B53A' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1.4s; }
+    .hero-what .lead { font-family: var(--display); font-weight: 700; letter-spacing: -.015em; }
     .hero-what .mk-peach::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%23F29A6B' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1s; }
     .hero-what .mk-blue::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1.2s; }
     @media (prefers-reduced-motion: reduce) { .hero-what .mk::after { animation: none; } }
+
+    /* the app window under the hero buttons: its top peeks up from the bottom of the first screen */
+    .hero-shot { position: relative; z-index: 3; width: min(1080px, calc(100% - 48px)); margin: 56px auto 0; border-radius: 18px; overflow: hidden;
+      background: #FDFBF5; border: 1px solid rgba(26,26,26,.12); box-shadow: 0 2px 6px rgba(72,82,47,.10), 0 40px 90px -30px rgba(72,82,47,.45); }
+    .hero-shot img { display: block; width: 100%; height: auto; image-rendering: auto; }
+    @media (max-width: 900px) { .hero-shot { margin-top: 36px; border-radius: 12px; } }
+    /* the water badge sits under the buttons, above the app window (flex order), never on top of the screenshot */
+    .hero .wrap { order: 0; } .hero > .hero-water { order: 1; position: static; margin: 22px auto 0; } .hero-shot { order: 2; margin-top: 40px; }
+    @media (min-width: 901px) { body .hero { padding-top: max(104px, 11vh); } }
+    .hero-sun { position: absolute; left: 0; top: 0; width: 100%; height: 94vh; z-index: 0; pointer-events: none; display: block; }
+    @media (min-width: 901px) { .hero > .hero-water { position: absolute; left: 32px; top: calc(94vh - 92px); bottom: auto; margin: 0; } }
+    /* where the landscape ends, it fades into the page instead of a hard line */
+    .hero { padding-bottom: 260px; }
+    .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 640px; z-index: 1; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(245,241,232,0) 0%, rgba(245,241,232,.08) 12%, rgba(245,241,232,.2) 24%, rgba(245,241,232,.36) 36%,
+        rgba(245,241,232,.54) 48%, rgba(245,241,232,.72) 60%, rgba(245,241,232,.86) 72%, rgba(245,241,232,.95) 84%, #F5F1E8 100%); }
     /* the one line under the headline, bigger (Hector 10 Nov) */
-    .hero-what { max-width: 30ch; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.45; }
+    .hero-what { max-width: 34ch; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.45; }
   </style>
   <style id="hero-calm">
     /* calmer hero picture: no pine trees, no birds, no pencil grain, and the hills faded toward the sky,
@@ -1457,6 +1475,11 @@
 
 <!-- =========== HERO =========== -->
 <section class="hero" id="top">
+  <svg class="hero-sun" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="gcSunGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FDF3CE" /><stop offset="22%" stop-color="#FCEAA8" stop-opacity="0.66" /><stop offset="46%" stop-color="#FAE289" stop-opacity="0.42" /><stop offset="100%" stop-color="#FAE289" stop-opacity="0" /></radialGradient></defs>
+    <g class="gc-glow"><circle cx="1190" cy="450" r="260" fill="url(#gcSunGlow)" /></g>
+    <circle cx="1190" cy="450" r="50" fill="#FFE79A" />
+  </svg>
   <svg class="hero-landscape" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <radialGradient id="gcSun" cx="50%" cy="50%" r="50%">
@@ -1486,9 +1509,7 @@
       </symbol>
     </defs>
 
-    <!-- sun -->
-    <g class="gc-glow"><circle cx="1190" cy="450" r="260" fill="url(#gcSun)" /></g>
-    <circle cx="1190" cy="450" r="50" fill="#FFE79A" />
+    <!-- sun: in its own layer (.hero-sun) so it stays where it was on the first screen -->
 
     <!-- soft clouds — two banks drifting at different speeds -->
     <g class="gc-clouds-a" fill="#FDFBF5" filter="url(#gcSoft)" opacity="0.78">
@@ -1597,12 +1618,12 @@
       setInterval(next, 2000);
     })();
     </script>
-    <p class="hero-what rv">Hij <span class="mk mk-peach">draait op je pc</span>, werkt <span class="mk mk-sage">volledig offline</span> en is <span class="mk mk-blue">100% privé</span>.</p>
+    <p class="hero-what rv"><b class="lead">Je persoonlijke AI-assistent.</b> Hij <span class="mk mk-peach">draait op je pc</span>, werkt <span class="mk mk-sage">volledig offline</span>, is <span class="mk mk-blue">100% privé</span> en heeft <span class="mk mk-yellow">geen gebruikslimieten</span>.</p>
     <ul class="hero-chips rv">
       <li>100% privé</li>
       <li>Werkt offline</li>
       <li>€&nbsp;9,99</li>
-      <li>15-day refund</li>
+      <li>15 dagen geld terug</li>
     </ul>
     <div class="cta-row rv">
       <a href="/nl/buy" class="cta-pill cta-primary"><span>Nu kopen</span></a>
@@ -1612,6 +1633,10 @@
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
+  <!-- the app itself, peeking up from the bottom of the first screen (Hector 11 Nov). Real screenshot of the app home (recent chat titles blurred) -->
+  <figure class="hero-shot" aria-label="The GreenCube app">
+    <picture><source srcset="/img/app-home.webp" type="image/webp" /><img src="/img/app-home.jpg" alt="The GreenCube app home on a Windows PC: a chat box, your chats on the left, and the water you have saved" width="1916" height="1005" decoding="async" /></picture>
+  </figure>
   <a href="/nl/how-much-water-does-ai-use" class="hero-water">
     <span class="drop-wrap" aria-hidden="true">
       <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1622,6 +1647,21 @@
     <span class="arrow" aria-hidden="true">→</span>
   </a>
 </section>
+<script>
+// The water badge sits at the left edge, level with the Buy now / See what it does buttons.
+(() => {
+  const w = document.querySelector(".hero > .hero-water"), cta = document.querySelector(".hero .cta-row"), hero = document.querySelector(".hero");
+  if (!w || !cta || !hero) return;
+  const place = () => {
+    if (innerWidth < 901) { w.style.top = ""; return; }
+    const c = cta.getBoundingClientRect(), h = hero.getBoundingClientRect();
+    w.style.top = Math.round(c.top + c.height / 2 - h.top - w.offsetHeight / 2) + "px";
+  };
+  place();
+  addEventListener("load", place); addEventListener("resize", place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
 
 <!-- =========== 1 · NO LIMITS — the turtle walks across while everything it does goes by =========== -->
 <section class="sec feat" id="what" aria-label="Wat GreenCube doet">
