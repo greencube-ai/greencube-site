@@ -1414,6 +1414,20 @@
     .hero-chips a.cw { display: inline-flex; align-items: center; gap: 6px; color: #3D5E93; text-decoration: none; border-bottom: 1px dashed rgba(61,94,147,.5); }
     .hero-chips a.cw svg { width: 15px; height: 15px; flex: 0 0 auto; }
     .hero-chips a.cw:hover { border-bottom-style: solid; }
+    /* "0.1.50 is here" pill, top left under the logo: links to this update's changelog page */
+    .hero-new { display: inline-flex; align-items: center; gap: 9px; padding: 9px 17px 9px 14px; border-radius: 999px; font-size: 15.5px; font-weight: 700;
+      color: var(--ink, #1A1A1A); text-decoration: none; background: #FDFBF5; border: 1.5px solid rgba(26, 26, 26, .22);
+      box-shadow: 0 6px 18px -10px rgba(26, 26, 26, .35); animation: hn-pulse 2.6s ease-in-out infinite; transition: border-color .3s, transform .3s var(--ease-out); }
+    .hero-new::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #7E9A5C; flex: 0 0 auto; animation: hn-dot 2.6s ease-in-out infinite; }
+    .hero-new:hover { border-color: rgba(26, 26, 26, .45); transform: translateY(-1px); }
+    .hero-new .arrow { transition: transform .3s var(--ease-out); }
+    .hero-new:hover .arrow { transform: translateX(3px); }
+    @keyframes hn-pulse { 0%, 100% { box-shadow: 0 6px 18px -10px rgba(26,26,26,.35), 0 0 0 0 rgba(126,154,92,.0); } 50% { box-shadow: 0 6px 18px -10px rgba(26,26,26,.35), 0 0 0 6px rgba(126,154,92,.16); } }
+    @keyframes hn-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: .7; } }
+    @media (prefers-reduced-motion: reduce) { .hero-new, .hero-new::before { animation: none; } }
+    @media (min-width: 901px) { html body .hero { padding-top: max(122px, calc(11vh + 18px)); } }  /* room for the pill under the logo */
+    @media (min-width: 901px) { .hero > .hero-new { position: absolute; z-index: 6; top: 84px; left: 32px; } }
+    @media (max-width: 900px) { .hero > .hero-new { display: flex; width: max-content; margin: 0 auto 16px; position: relative; z-index: 6; } }
     /* the app window under the hero buttons: its top peeks up from the bottom of the first screen */
     .hero-shot { position: relative; z-index: 3; width: min(1080px, calc(100% - 48px)); margin: 56px auto 0; border-radius: 18px; overflow: hidden;
       background: #FDFBF5; border: 1px solid rgba(26,26,26,.12); box-shadow: 0 2px 6px rgba(72,82,47,.10), 0 40px 90px -30px rgba(72,82,47,.45); }
@@ -1479,6 +1493,7 @@
 
 <!-- =========== HERO =========== -->
 <section class="hero" id="top">
+  <a class="hero-new" href="https://blog.greencube.app/blog/changelog/0-1-50"><span>0.1.50</span><span>มาแล้ว</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
   <svg class="hero-sun" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs><radialGradient id="gcSunGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FDF3CE" /><stop offset="22%" stop-color="#FCEAA8" stop-opacity="0.66" /><stop offset="46%" stop-color="#FAE289" stop-opacity="0.42" /><stop offset="100%" stop-color="#FAE289" stop-opacity="0" /></radialGradient></defs>
     <g class="gc-glow"><circle cx="1190" cy="450" r="260" fill="url(#gcSunGlow)" /></g>
@@ -1643,6 +1658,22 @@
     <picture><source srcset="/img/app-home.webp" type="image/webp" /><img src="/img/app-home.jpg" alt="The GreenCube app home on a Windows PC: a chat box, your chats on the left, and the water you have saved" width="1916" height="1005" decoding="async" /></picture>
   </figure>
 </section>
+
+<script>
+// The "0.1.50 is here" pill sits right under the GreenCube logo, lined up with its left edge.
+(() => {
+  const n = document.querySelector(".hero > .hero-new"), b = document.querySelector("header .brand"), hero = document.querySelector(".hero");
+  if (!n || !b || !hero) return;
+  const place = () => {
+    if (innerWidth < 901) { n.style.top = n.style.left = ""; return; }
+    const r = b.getBoundingClientRect(), h = hero.getBoundingClientRect();
+    n.style.left = Math.round(r.left - h.left) + "px";
+    n.style.top = Math.round(r.bottom - h.top + 14) + "px";
+  };
+  place(); addEventListener("load", place); addEventListener("resize", place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
 
 <!-- =========== 1 · NO LIMITS — the turtle walks across while everything it does goes by =========== -->
 <section class="sec feat" id="what" aria-label="GreenCube ทำอะไรได้บ้าง">
