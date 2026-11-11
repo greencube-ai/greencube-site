@@ -1388,8 +1388,9 @@
   // Each step shows in Cloudflare Web Analytics as its own page (/get/note, /get/checkout; /buy/note, /buy/checkout),
   // so we can see where visitors stop. Cloudflare's own counter records address changes; nothing else is sent
   // and nothing is stored. vercel.json sends a reload of those back to /get or /buy.
-  const base = (location.pathname.match(/^\/(get|buy)(?=\/|$)/) || [''])[0];
-  const onGet = !!base && /^\/(get|buy)(\/(note|checkout))?\/?$/.test(location.pathname);
+  // Campaign landings /get/a and /get/b (Videos tab, 11 Nov) are this same page; their steps count under them (/get/a/note ...).
+  const base = (location.pathname.match(/^\/(get(\/[ab])?|buy)(?=\/|$)/) || [''])[0];
+  const onGet = !!base && /^\/(get(\/[ab])?|buy)(\/(note|checkout))?\/?$/.test(location.pathname);
   function step(name) {
     if (onGet && location.pathname !== base + '/' + name) history.pushState({ gcStep: name }, '', base + '/' + name + location.search);
   }
@@ -1424,7 +1425,7 @@
     const q = new URLSearchParams(location.search);
     const kind = ['gclid', 'gbraid', 'wbraid'].find((k) => q.get(k));
     const click = kind ? (kind + '-' + q.get(kind)).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 160) : '';
-    const s = window.GC_SRC || (location.pathname.startsWith('/get') || click ? { src: 'ad', lp: location.pathname.startsWith('/get') ? '/get' : '/buy' } : null);
+    const s = window.GC_SRC || (location.pathname.startsWith('/get') || click ? { src: 'ad', lp: location.pathname.startsWith('/get') ? (base || '/get') : '/buy' } : null);
     if (!s) return STRIPE_CHECKOUT_URL;
     const tail = click ? '__' + click : '';
     const id = (s.src + '__' + s.lp).replace(/[^A-Za-z0-9_-]/g, '-').slice(0, 200 - tail.length) + tail;

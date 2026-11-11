@@ -100,6 +100,11 @@
       "permanent": false
     },
     {
+      "source": "/get/:c(a|b)/:step(note|checkout|stayed|cards)",
+      "destination": "/get/:c",
+      "permanent": false
+    },
+    {
       "source": "/blog/local-ai-models-explained",
       "has": [
         {
@@ -1167,6 +1172,12 @@
       ],
       "destination": "https://greencube.app/:path*",
       "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/get/:c(a|b)",
+      "destination": "/get.html"
     }
   ]
 }
