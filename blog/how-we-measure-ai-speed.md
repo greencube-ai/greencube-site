@@ -20,7 +20,7 @@ Three things, because they are what you feel when you use an AI on your own PC:
 - **Reading speed:** how fast it takes in what you give it: your question, a pasted text or a PDF. It is always much faster than writing, because the AI reads many tokens at once but writes them one by one.
 - **Picture time:** how long one 512×512 picture takes, from the click to the finished image.
 
-We measure the AIs GreenCube ships, the same files every user downloads: Google's Gemma 4 E2B (2.6 GB), Gemma 4 E4B (4.2 GB) and Gemma 4 12B (6.4 GB) for chat, and Z-Image Turbo for pictures. A different AI, or the same one compressed differently, would give different numbers, so we only compare like with like.
+We measure the AIs GreenCube ships, the same files every user downloads: Google's Cube 2B (Gemma 4 E2B) (2.6 GB), Cube 4B (Gemma 4 E4B) (4.2 GB) and Cube 12B (Gemma 4 12B) (6.4 GB) for chat, and Z-Image Turbo for pictures. A different AI, or the same one compressed differently, would give different numbers, so we only compare like with like.
 
 ## How we measure
 
@@ -80,7 +80,7 @@ Real testers' own PCs, used the way they normally use them, not lab machines. We
 
 It would be handy: there are hundreds of cards and we have measured 10 PCs. The usual way is memory bandwidth. To write each token, the AI reads its whole model from the card's memory, so in theory speed is roughly bandwidth divided by model size, times some efficiency. Many online calculators work like this.
 
-So we tested it on our own data. We hid one card at a time, worked out the speed per GB/s from the others, predicted the hidden card from its bandwidth (from the makers' specs, collected in the [TechPowerUp GPU database](https://www.techpowerup.com/gpu-specs/)), and compared with what we measured. Same AI on all of them (Gemma 4 E4B, whole on the card).
+So we tested it on our own data. We hid one card at a time, worked out the speed per GB/s from the others, predicted the hidden card from its bandwidth (from the makers' specs, collected in the [TechPowerUp GPU database](https://www.techpowerup.com/gpu-specs/)), and compared with what we measured. Same AI on all of them (Cube 4B (Gemma 4 E4B), whole on the card).
 
 | Card | Memory bandwidth | Measured (tokens/s) | Predicted | Off by |
 | --- | --- | --- | --- | --- |
@@ -99,7 +99,7 @@ The typical estimate was off by 19%. The worst was the [RX 580](https://blog.gre
 ## What we haven't measured yet
 
 - A laptop with a gaming card.
-- Gemma 4 12B on a card with 10 GB or more.
+- Cube 12B (Gemma 4 12B) on a card with 10 GB or more.
 - Pictures on the [RX 5700 XT](https://blog.greencube.app/blog/ai-on-rx-5700-xt), the [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060), the [GTX 1650](https://blog.greencube.app/blog/ai-on-gtx-1650), the [RX 580](https://blog.greencube.app/blog/ai-on-rx-580).
 - Other AIs than the ones GreenCube ships, and Linux or Mac (GreenCube is for Windows).
 

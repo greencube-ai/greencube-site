@@ -22,16 +22,16 @@ Escribe tu tarjeta gráfica y elige tu RAM: verás qué funciona, a qué velocid
 
 | PC | Gráfica | RAM | IA | Escribe (tokens/s) |
 | --- | --- | --- | --- | --- |
-| Sobremesa | [NVIDIA RTX 2080 Ti, 11 GB](https://blog.greencube.app/blog/es/ia-en-rtx-2080-ti) | 128 GB | Gemma 4 E4B | **65–71** |
-| Sobremesa | [AMD RX 5700 XT, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt) | 48 GB | Gemma 4 E4B | **63–72** |
-| Sobremesa | [NVIDIA RTX 5060, 8 GB](https://blog.greencube.app/blog/es/ia-en-rtx-5060) | 32 GB | Gemma 4 E4B | **56** |
-| Sobremesa | [NVIDIA RTX 3060, 12 GB](https://blog.greencube.app/blog/es/ia-en-rtx-3060) | 32 GB | Gemma 4 E4B | **53–55** |
-| Sobremesa | [AMD RX 6600, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-6600) | 16 GB | Gemma 4 E4B | **42–44** |
-| Sobremesa | [NVIDIA GTX 1660 Super, 6 GB](https://blog.greencube.app/blog/es/ia-en-gtx-1660-super) | 16 GB | Gemma 4 E4B | **37–38** |
-| Sobremesa | [NVIDIA GTX 1650, 4 GB](https://blog.greencube.app/blog/es/ia-en-gtx-1650) | 16 GB | Gemma 4 E4B | **unos 20** |
-| Portátil | [Solo gráficos Intel (Core Ultra 5)](https://blog.greencube.app/blog/es/ia-en-portatil-intel-core-ultra-5) | 16 GB | Gemma 4 E2B | **14–18** |
-| Sobremesa | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-580) | 16 GB | Gemma 4 E4B | **10–11** |
-| Portátil | [Solo Intel Iris Xe](https://blog.greencube.app/blog/es/ia-en-portatil-intel-iris-xe) | 8 GB | Gemma 4 E2B | **5–7** |
+| Sobremesa | [NVIDIA RTX 2080 Ti, 11 GB](https://blog.greencube.app/blog/es/ia-en-rtx-2080-ti) | 128 GB | Cube 4B (Gemma 4 E4B) | **65–71** |
+| Sobremesa | [AMD RX 5700 XT, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt) | 48 GB | Cube 4B (Gemma 4 E4B) | **63–72** |
+| Sobremesa | [NVIDIA RTX 5060, 8 GB](https://blog.greencube.app/blog/es/ia-en-rtx-5060) | 32 GB | Cube 4B (Gemma 4 E4B) | **56** |
+| Sobremesa | [NVIDIA RTX 3060, 12 GB](https://blog.greencube.app/blog/es/ia-en-rtx-3060) | 32 GB | Cube 4B (Gemma 4 E4B) | **53–55** |
+| Sobremesa | [AMD RX 6600, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-6600) | 16 GB | Cube 4B (Gemma 4 E4B) | **42–44** |
+| Sobremesa | [NVIDIA GTX 1660 Super, 6 GB](https://blog.greencube.app/blog/es/ia-en-gtx-1660-super) | 16 GB | Cube 4B (Gemma 4 E4B) | **37–38** |
+| Sobremesa | [NVIDIA GTX 1650, 4 GB](https://blog.greencube.app/blog/es/ia-en-gtx-1650) | 16 GB | Cube 4B (Gemma 4 E4B) | **unos 20** |
+| Portátil | [Solo gráficos Intel (Core Ultra 5)](https://blog.greencube.app/blog/es/ia-en-portatil-intel-core-ultra-5) | 16 GB | Cube 2B (Gemma 4 E2B) | **14–18** |
+| Sobremesa | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-580) | 16 GB | Cube 4B (Gemma 4 E4B) | **10–11** |
+| Portátil | [Solo Intel Iris Xe](https://blog.greencube.app/blog/es/ia-en-portatil-intel-iris-xe) | 8 GB | Cube 2B (Gemma 4 E2B) | **5–7** |
 
 Pulsa una gráfica para ver su prueba completa.
 

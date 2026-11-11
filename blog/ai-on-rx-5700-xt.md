@@ -1,16 +1,16 @@
 # Can an RX 5700 XT run AI? Measured: 63–72 tokens a second
 
-> Real test: Gemma 4 E4B wrote 63–72 tokens a second on a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM. What it means for chat, study and pictures.
+> Real test: Cube 4B (Gemma 4 E4B) wrote 63–72 tokens a second on a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM. What it means for chat, study and pictures.
 
 Canonical: https://blog.greencube.app/blog/ai-on-rx-5700-xt  
 Published: 2026-09-22  
 Author: Hector Gras
 
-**Yes.** On a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM, Gemma 4 E4B wrote 63–72 tokens a second. You read about 5, so answers come out faster than you can read them.
+**Yes.** On a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM, Cube 4B (Gemma 4 E4B) wrote 63–72 tokens a second. You read about 5, so answers come out faster than you can read them.
 
-- **63–72** tokens a second with Gemma 4 E4B
+- **63–72** tokens a second with Cube 4B (Gemma 4 E4B)
 - **14×** faster on the card than on the processor
-- **20–36** with Gemma 4 12B (short chats only)
+- **20–36** with Cube 12B (Gemma 4 12B) (short chats only)
 
 ## What that means in practice
 
@@ -27,9 +27,9 @@ Worked out from the speeds measured on this PC: time is length divided by speed,
 
 | What | Ran on | Result | Measured |
 | --- | --- | --- | --- |
-| Gemma 4 E4B | graphics card | **63–72** tokens a second writing · 594–609 reading | 22 September 2026 |
-| Gemma 4 E4B | processor only | **5** tokens a second writing · 357 reading | 22 September 2026 |
-| Gemma 4 12B | graphics card | **20–36** tokens a second writing · 108–113 reading | 22 September 2026 |
+| Cube 4B (Gemma 4 E4B) | graphics card | **63–72** tokens a second writing · 594–609 reading | 22 September 2026 |
+| Cube 4B (Gemma 4 E4B) | processor only | **5** tokens a second writing · 357 reading | 22 September 2026 |
+| Cube 12B (Gemma 4 12B) | graphics card | **20–36** tokens a second writing · 108–113 reading | 22 September 2026 |
 
 How each number was measured: [More on how we measure](https://blog.greencube.app/blog/how-we-measure-ai-speed)
 
@@ -41,15 +41,15 @@ Where we have several runs we show the range: speeds move a little between runs 
 
 ### The graphics card does the work
 
-Same PC, same AI (Gemma 4 E4B): 5 tokens a second on the processor alone, 63–72 on the graphics card, about **14 times faster**. A graphics card is built to do thousands of small sums at once for games, and running an AI is mostly that same kind of maths. GreenCube times both when it starts and uses the faster one.
+Same PC, same AI (Cube 4B (Gemma 4 E4B)): 5 tokens a second on the processor alone, 63–72 on the graphics card, about **14 times faster**. A graphics card is built to do thousands of small sums at once for games, and running an AI is mostly that same kind of maths. GreenCube times both when it starts and uses the faster one.
 
 ### The whole AI fits on the card
 
-Gemma 4 E4B is a 4.2 GB file and the card has 8 GB of its own memory (VRAM). All of it fits, with room left for the conversation, so the card never waits for the slower memory in the rest of the PC. That is the biggest reason it runs this fast.
+Cube 4B (Gemma 4 E4B) is a 4.2 GB file and the card has 8 GB of its own memory (VRAM). All of it fits, with room left for the conversation, so the card never waits for the slower memory in the rest of the PC. That is the biggest reason it runs this fast.
 
-### The bigger Gemma 4 12B
+### The bigger Cube 12B (Gemma 4 12B)
 
-Only for short chats. The bigger Gemma 4 12B (6.4 GB) wrote 20–36 tokens a second on a short question, but once the chat reached 8,192 tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with 10 GB or more.
+Only for short chats. The bigger Cube 12B (Gemma 4 12B) (6.4 GB) wrote 20–36 tokens a second on a short question, but once the chat reached 8,192 tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with 10 GB or more.
 
 ### Pictures
 
@@ -57,7 +57,7 @@ Very likely, but we haven't timed a picture on this card yet. When we do, the nu
 
 ## How it compares
 
-Of the 8 PCs we measured with Gemma 4 E4B, this one is **number 2** for writing speed. The [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti) writes 65–71, about the same. The [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060) writes 56 (startup test), so this one is about 20% faster.
+Of the 8 PCs we measured with Cube 4B (Gemma 4 E4B), this one is **number 2** for writing speed. The [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti) writes 65–71, about the same. The [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060) writes 56 (startup test), so this one is about 20% faster.
 
 We measured 4 cards with 8 GB, and they are far apart:
 
@@ -91,15 +91,15 @@ Then find the closest card in [the full table](https://blog.greencube.app/blog/c
 
 ## Other PCs we measured
 
-- [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti): 65–71 tokens a second (Gemma 4 E4B)
-- [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060): 56 tokens a second (Gemma 4 E4B)
-- [RTX 3060](https://blog.greencube.app/blog/ai-on-rtx-3060): 53–55 tokens a second (Gemma 4 E4B)
-- [RX 6600](https://blog.greencube.app/blog/ai-on-rx-6600): 42–44 tokens a second (Gemma 4 E4B)
-- [GTX 1660 Super](https://blog.greencube.app/blog/ai-on-gtx-1660-super): 37–38 tokens a second (Gemma 4 E4B)
-- [GTX 1650](https://blog.greencube.app/blog/ai-on-gtx-1650): about 20 tokens a second (Gemma 4 E4B)
-- [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop): 14–18 tokens a second (Gemma 4 E2B)
-- [RX 580](https://blog.greencube.app/blog/ai-on-rx-580): 10–11 tokens a second (Gemma 4 E4B)
-- [Intel Iris Xe laptop](https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop): 5–7 tokens a second (Gemma 4 E2B)
+- [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti): 65–71 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060): 56 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RTX 3060](https://blog.greencube.app/blog/ai-on-rtx-3060): 53–55 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RX 6600](https://blog.greencube.app/blog/ai-on-rx-6600): 42–44 tokens a second (Cube 4B (Gemma 4 E4B))
+- [GTX 1660 Super](https://blog.greencube.app/blog/ai-on-gtx-1660-super): 37–38 tokens a second (Cube 4B (Gemma 4 E4B))
+- [GTX 1650](https://blog.greencube.app/blog/ai-on-gtx-1650): about 20 tokens a second (Cube 4B (Gemma 4 E4B))
+- [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop): 14–18 tokens a second (Cube 2B (Gemma 4 E2B))
+- [RX 580](https://blog.greencube.app/blog/ai-on-rx-580): 10–11 tokens a second (Cube 4B (Gemma 4 E4B))
+- [Intel Iris Xe laptop](https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop): 5–7 tokens a second (Cube 2B (Gemma 4 E2B))
 
 [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai) All 10 PCs in one table, and what your PC will feel like.
 
@@ -107,7 +107,7 @@ Then find the closest card in [the full table](https://blog.greencube.app/blog/c
 
 ### Can an RX 5700 XT run AI locally?
 
-Yes. On a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM, Gemma 4 E4B wrote 63–72 tokens a second. You read about 5, so answers come out faster than you can read them.
+Yes. On a desktop with an AMD RX 5700 XT (8 GB) and 48 GB of RAM, Cube 4B (Gemma 4 E4B) wrote 63–72 tokens a second. You read about 5, so answers come out faster than you can read them.
 
 ### Can an RX 5700 XT make AI pictures?
 
@@ -119,4 +119,4 @@ On the card, by far: 63–72 tokens a second against 5 on the processor, about 1
 
 ### Can an RX 5700 XT run Gemma 4 12B?
 
-Only for short chats. The bigger Gemma 4 12B (6.4 GB) wrote 20–36 tokens a second on a short question, but once the chat reached 8,192 tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with 10 GB or more.
+Only for short chats. The bigger Cube 12B (Gemma 4 12B) (6.4 GB) wrote 20–36 tokens a second on a short question, but once the chat reached 8,192 tokens (a long conversation) it crashed, with the card almost full. That is why GreenCube only suggests the 12B on cards with 10 GB or more.

@@ -20,7 +20,7 @@ Tres cosas, porque son lo que notas al usar una IA en tu propio PC:
 - **Velocidad de lectura:** lo rápido que asimila lo que le das: tu pregunta, un texto pegado o un PDF. Siempre es mucho más rápida que la escritura, porque la IA lee muchos tokens a la vez pero los escribe de uno en uno.
 - **Tiempo por imagen:** lo que tarda una imagen de 512×512, desde el clic hasta la imagen terminada.
 
-Medimos las IAs que trae GreenCube, los mismos archivos que descarga cualquier usuario: Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB) y Gemma 4 12B (6,4 GB) de Google para chatear, y Z-Image Turbo para las imágenes. Otra IA, o la misma comprimida de otra forma, daría otros números, así que solo comparamos lo comparable.
+Medimos las IAs que trae GreenCube, los mismos archivos que descarga cualquier usuario: Cube 2B (Gemma 4 E2B) (2,6 GB), Cube 4B (Gemma 4 E4B) (4,2 GB) y Cube 12B (Gemma 4 12B) (6,4 GB) de Google para chatear, y Z-Image Turbo para las imágenes. Otra IA, o la misma comprimida de otra forma, daría otros números, así que solo comparamos lo comparable.
 
 ## Cómo medimos
 
@@ -80,7 +80,7 @@ Los PCs de testers reales, usados como los usan siempre, no máquinas de laborat
 
 Sería práctico: hay cientos de tarjetas y hemos medido 10 PCs. Lo habitual es usar el ancho de banda de memoria. Para escribir cada token, la IA lee su modelo entero de la memoria de la tarjeta, así que en teoría la velocidad es más o menos el ancho de banda dividido entre el tamaño del modelo, por cierta eficiencia. Muchas calculadoras online funcionan así.
 
-Así que lo probamos con nuestros datos. Escondimos una tarjeta cada vez, calculamos la velocidad por GB/s con las demás, predijimos la escondida a partir de su ancho de banda (de las especificaciones de los fabricantes, recogidas en la [base de datos de TechPowerUp](https://www.techpowerup.com/gpu-specs/)) y lo comparamos con lo medido. La misma IA en todas (Gemma 4 E4B, entera en la tarjeta).
+Así que lo probamos con nuestros datos. Escondimos una tarjeta cada vez, calculamos la velocidad por GB/s con las demás, predijimos la escondida a partir de su ancho de banda (de las especificaciones de los fabricantes, recogidas en la [base de datos de TechPowerUp](https://www.techpowerup.com/gpu-specs/)) y lo comparamos con lo medido. La misma IA en todas (Cube 4B (Gemma 4 E4B), entera en la tarjeta).
 
 | Tarjeta | Ancho de banda | Medido (tokens/s) | Predicho | Error |
 | --- | --- | --- | --- | --- |
@@ -99,7 +99,7 @@ La estimación típica falló un 19%. La peor fue la [RX 580](https://blog.green
 ## Lo que aún no hemos medido
 
 - Un portátil con tarjeta gaming.
-- Gemma 4 12B en una tarjeta de 10 GB o más.
+- Cube 12B (Gemma 4 12B) en una tarjeta de 10 GB o más.
 - Imágenes en la [RX 5700 XT](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt), la [RTX 5060](https://blog.greencube.app/blog/es/ia-en-rtx-5060), la [GTX 1650](https://blog.greencube.app/blog/es/ia-en-gtx-1650), la [RX 580](https://blog.greencube.app/blog/es/ia-en-rx-580).
 - Otras IAs aparte de las que trae GreenCube, y Linux o Mac (GreenCube es para Windows).
 

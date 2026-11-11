@@ -1,14 +1,14 @@
 # ¿Puede una RTX 2080 Ti ejecutar IA? Medido: 65–71 tokens por segundo
 
-> Prueba real: Gemma 4 E4B escribía 65–71 tokens por segundo en un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM. Qué significa para chatear, estudiar e imágenes.
+> Prueba real: Cube 4B (Gemma 4 E4B) escribía 65–71 tokens por segundo en un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM. Qué significa para chatear, estudiar e imágenes.
 
 Canonical: https://blog.greencube.app/blog/es/ia-en-rtx-2080-ti  
 Published: 2026-10-14  
 Author: Hector Gras
 
-**Sí.** En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Gemma 4 E4B escribía 65–71 tokens por segundo. Más rápido de lo que lees.
+**Sí.** En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Cube 4B (Gemma 4 E4B) escribía 65–71 tokens por segundo. Más rápido de lo que lees.
 
-- **65–71** tokens por segundo con Gemma 4 E4B
+- **65–71** tokens por segundo con Cube 4B (Gemma 4 E4B)
 - **5,6×** más rápido en la tarjeta que en el procesador
 - **8–9 s** para crear una imagen
 
@@ -28,9 +28,9 @@ Calculado a partir de las velocidades medidas en este PC: el tiempo es la longit
 
 | Qué | Dónde | Resultado | Medido |
 | --- | --- | --- | --- |
-| Gemma 4 E4B | tarjeta gráfica | **65–71** tokens por segundo escribiendo · 1.380–1.800 leyendo | 14 de octubre de 2026 [1] |
-| Gemma 4 E4B | tarjeta gráfica | **75,6** tokens por segundo escribiendo | 14 de octubre de 2026 [2] |
-| Gemma 4 E4B | solo procesador | **13,5** tokens por segundo escribiendo | 14 de octubre de 2026 [2] |
+| Cube 4B (Gemma 4 E4B) | tarjeta gráfica | **65–71** tokens por segundo escribiendo · 1.380–1.800 leyendo | 14 de octubre de 2026 [1] |
+| Cube 4B (Gemma 4 E4B) | tarjeta gráfica | **75,6** tokens por segundo escribiendo | 14 de octubre de 2026 [2] |
+| Cube 4B (Gemma 4 E4B) | solo procesador | **13,5** tokens por segundo escribiendo | 14 de octubre de 2026 [2] |
 | Imagen (512×512) | tarjeta gráfica | **8–9 s** (la primera tardó 83 s mientras cargaba) | 12 de octubre de 2026 [3] |
 
 Cómo se midió cada número: [Más sobre cómo medimos](https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia)
@@ -45,15 +45,15 @@ Cuando tenemos varias pruebas damos el rango: la velocidad varía un poco entre 
 
 ### La tarjeta gráfica hace el trabajo
 
-Mismo PC, misma IA (Gemma 4 E4B): 13,5 tokens por segundo solo con el procesador y 75,6 con la tarjeta gráfica, unas **5,6 veces más rápido**. Una gráfica está hecha para hacer miles de cuentas pequeñas a la vez para los juegos, y una IA es sobre todo ese mismo tipo de cálculo. GreenCube cronometra las dos al arrancar y usa la más rápida.
+Mismo PC, misma IA (Cube 4B (Gemma 4 E4B)): 13,5 tokens por segundo solo con el procesador y 75,6 con la tarjeta gráfica, unas **5,6 veces más rápido**. Una gráfica está hecha para hacer miles de cuentas pequeñas a la vez para los juegos, y una IA es sobre todo ese mismo tipo de cálculo. GreenCube cronometra las dos al arrancar y usa la más rápida.
 
 ### La IA entera cabe en la tarjeta
 
-Gemma 4 E4B ocupa 4,2 GB y la tarjeta tiene 11 GB de memoria propia (VRAM). Cabe entera, con sitio de sobra para la conversación, así que la tarjeta nunca espera a la memoria más lenta del resto del PC. Esa es la razón principal de que vaya tan rápido.
+Cube 4B (Gemma 4 E4B) ocupa 4,2 GB y la tarjeta tiene 11 GB de memoria propia (VRAM). Cabe entera, con sitio de sobra para la conversación, así que la tarjeta nunca espera a la memoria más lenta del resto del PC. Esa es la razón principal de que vaya tan rápido.
 
-### La más grande, Gemma 4 12B
+### La más grande, Cube 12B (Gemma 4 12B)
 
-Debería. Gemma 4 12B ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.
+Debería. Cube 12B (Gemma 4 12B) ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.
 
 ### Imágenes
 
@@ -61,7 +61,7 @@ Sí. Una imagen (512×512) tardó 8–9 s con la tarjeta gráfica (la primera ta
 
 ## Cómo se compara
 
-De los 8 PCs que medimos con Gemma 4 E4B, este es el **número 1** en velocidad de escritura. La [RX 5700 XT](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt) escribe 63–72, así que este va más o menos igual.
+De los 8 PCs que medimos con Cube 4B (Gemma 4 E4B), este es el **número 1** en velocidad de escritura. La [RX 5700 XT](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt) escribe 63–72, así que este va más o menos igual.
 
 ## El PC de la prueba
 
@@ -86,15 +86,15 @@ Después busca la tarjeta más parecida en [la tabla completa](https://blog.gree
 
 ## Otros PCs que medimos
 
-- [RX 5700 XT](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt): 63–72 tokens por segundo (Gemma 4 E4B)
-- [RTX 5060](https://blog.greencube.app/blog/es/ia-en-rtx-5060): 56 tokens por segundo (Gemma 4 E4B)
-- [RTX 3060](https://blog.greencube.app/blog/es/ia-en-rtx-3060): 53–55 tokens por segundo (Gemma 4 E4B)
-- [RX 6600](https://blog.greencube.app/blog/es/ia-en-rx-6600): 42–44 tokens por segundo (Gemma 4 E4B)
-- [GTX 1660 Super](https://blog.greencube.app/blog/es/ia-en-gtx-1660-super): 37–38 tokens por segundo (Gemma 4 E4B)
-- [GTX 1650](https://blog.greencube.app/blog/es/ia-en-gtx-1650): unos 20 tokens por segundo (Gemma 4 E4B)
-- [portátil con Intel Core Ultra 5](https://blog.greencube.app/blog/es/ia-en-portatil-intel-core-ultra-5): 14–18 tokens por segundo (Gemma 4 E2B)
-- [RX 580](https://blog.greencube.app/blog/es/ia-en-rx-580): 10–11 tokens por segundo (Gemma 4 E4B)
-- [portátil con Intel Iris Xe](https://blog.greencube.app/blog/es/ia-en-portatil-intel-iris-xe): 5–7 tokens por segundo (Gemma 4 E2B)
+- [RX 5700 XT](https://blog.greencube.app/blog/es/ia-en-rx-5700-xt): 63–72 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [RTX 5060](https://blog.greencube.app/blog/es/ia-en-rtx-5060): 56 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [RTX 3060](https://blog.greencube.app/blog/es/ia-en-rtx-3060): 53–55 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [RX 6600](https://blog.greencube.app/blog/es/ia-en-rx-6600): 42–44 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [GTX 1660 Super](https://blog.greencube.app/blog/es/ia-en-gtx-1660-super): 37–38 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [GTX 1650](https://blog.greencube.app/blog/es/ia-en-gtx-1650): unos 20 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [portátil con Intel Core Ultra 5](https://blog.greencube.app/blog/es/ia-en-portatil-intel-core-ultra-5): 14–18 tokens por segundo (Cube 2B (Gemma 4 E2B))
+- [RX 580](https://blog.greencube.app/blog/es/ia-en-rx-580): 10–11 tokens por segundo (Cube 4B (Gemma 4 E4B))
+- [portátil con Intel Iris Xe](https://blog.greencube.app/blog/es/ia-en-portatil-intel-iris-xe): 5–7 tokens por segundo (Cube 2B (Gemma 4 E2B))
 
 [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/es/ia-en-mi-pc) Los 10 PCs en una tabla, y cómo irá el tuyo.
 
@@ -102,7 +102,7 @@ Después busca la tarjeta más parecida en [la tabla completa](https://blog.gree
 
 ### ¿Puede una RTX 2080 Ti ejecutar IA en local?
 
-Sí. En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Gemma 4 E4B escribía 65–71 tokens por segundo. Más rápido de lo que lees.
+Sí. En un sobremesa con una NVIDIA RTX 2080 Ti (11 GB) y 128 GB de RAM, Cube 4B (Gemma 4 E4B) escribía 65–71 tokens por segundo. Más rápido de lo que lees.
 
 ### ¿Puede una RTX 2080 Ti crear imágenes con IA?
 
@@ -114,4 +114,4 @@ En la tarjeta, de largo: 75,6 tokens por segundo frente a 13,5 en el procesador,
 
 ### ¿Puede una RTX 2080 Ti ejecutar Gemma 4 12B?
 
-Debería. Gemma 4 12B ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.
+Debería. Cube 12B (Gemma 4 12B) ocupa 6,4 GB y esta tarjeta tiene 11, así que queda sitio también para una conversación larga. Aún no la hemos medido con esta tarjeta.

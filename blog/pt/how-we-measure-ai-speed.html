@@ -77,7 +77,7 @@
 <li><strong>Velocidade de leitura:</strong> a rapidez com que ela absorve o que você passa: sua pergunta, um texto colado ou um PDF. É sempre muito mais rápida que a escrita, porque a IA lê muitos tokens de uma vez, mas escreve um por um.</li>
 <li><strong>Tempo por imagem:</strong> quanto leva uma imagem de 512×512, do clique até a imagem pronta.</li>
 </ul>
-<p>Medimos as IAs que vêm no GreenCube, os mesmos arquivos que todo usuário baixa: Gemma 4 E2B (2,6 GB), Gemma 4 E4B (4,2 GB) e Gemma 4 12B (6,4 GB), do Google, para conversar, e o Z-Image Turbo para as imagens. Outra IA, ou a mesma comprimida de outro jeito, daria outros números, então só comparamos o que é comparável.</p>
+<p>Medimos as IAs que vêm no GreenCube, os mesmos arquivos que todo usuário baixa: Cube 2B (Gemma 4 E2B) (2,6 GB), Cube 4B (Gemma 4 E4B) (4,2 GB) e Cube 12B (Gemma 4 12B) (6,4 GB), do Google, para conversar, e o Z-Image Turbo para as imagens. Outra IA, ou a mesma comprimida de outro jeito, daria outros números, então só comparamos o que é comparável.</p>
 <h2>Como medimos</h2>
 <p>De quatro formas, e cada número do blog diz de qual delas veio:</p>
 <div class="card g">
@@ -127,7 +127,7 @@
 </ul>
 <h2>Dá para adivinhar a velocidade de uma placa pelas especificações?</h2>
 <p>Seria prático: existem centenas de placas e medimos 10 PCs. O jeito mais comum é usar a largura de banda da memória. Para escrever cada token, a IA lê o modelo inteiro da memória da placa, então, em teoria, a velocidade é mais ou menos a largura de banda dividida pelo tamanho do modelo, vezes alguma eficiência. Muitas calculadoras online funcionam assim.</p>
-<p>Então testamos isso com os nossos dados. Escondemos uma placa por vez, calculamos a velocidade por GB/s com as outras, previmos a placa escondida a partir da largura de banda dela (das especificações dos fabricantes, reunidas no <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">banco de dados de GPUs do TechPowerUp</a>) e comparamos com o que medimos. A mesma IA em todas (Gemma 4 E4B, inteira na placa).</p>
+<p>Então testamos isso com os nossos dados. Escondemos uma placa por vez, calculamos a velocidade por GB/s com as outras, previmos a placa escondida a partir da largura de banda dela (das especificações dos fabricantes, reunidas no <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">banco de dados de GPUs do TechPowerUp</a>) e comparamos com o que medimos. A mesma IA em todas (Cube 4B (Gemma 4 E4B), inteira na placa).</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Placa</th><th>Largura de banda</th><th>Medido (tokens/s)</th><th>Previsto</th><th>Erro</th></tr></thead>
 <tbody>
@@ -145,7 +145,7 @@
 <h2>O que ainda não medimos</h2>
 <ul>
 <li>Um notebook com placa de vídeo gamer.</li>
-<li>O Gemma 4 12B numa placa de 10 GB ou mais.</li>
+<li>O Cube 12B (Gemma 4 12B) numa placa de 10 GB ou mais.</li>
 <li>Imagens na <a href="/blog/pt/ai-on-rx-5700-xt">RX 5700 XT</a>, na <a href="/blog/pt/ai-on-rtx-5060">RTX 5060</a>, na <a href="/blog/pt/ai-on-gtx-1650">GTX 1650</a>, na <a href="/blog/pt/ai-on-rx-580">RX 580</a>.</li>
 <li>Outras IAs além das que vêm no GreenCube, e Linux ou Mac (o GreenCube é para Windows).</li>
 </ul>

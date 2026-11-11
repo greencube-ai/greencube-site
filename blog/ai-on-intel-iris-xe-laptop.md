@@ -1,14 +1,14 @@
 # Can an Intel Iris Xe laptop run AI? Measured: 5–7 tokens a second
 
-> Real test: Gemma 4 E2B wrote 5–7 tokens a second on a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM. What it means for chat, study and pictures.
+> Real test: Cube 2B (Gemma 4 E2B) wrote 5–7 tokens a second on a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM. What it means for chat, study and pictures.
 
 Canonical: https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop  
 Published: 2026-10-04  
 Author: Hector Gras
 
-**Yes.** On a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM, Gemma 4 E2B wrote 5–7 tokens a second. You read about 5, so answers come out at about reading speed.
+**Yes.** On a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM, Cube 2B (Gemma 4 E2B) wrote 5–7 tokens a second. You read about 5, so answers come out at about reading speed.
 
-- **5–7** tokens a second with Gemma 4 E2B
+- **5–7** tokens a second with Cube 2B (Gemma 4 E2B)
 
 ## What that means in practice
 
@@ -25,9 +25,9 @@ Worked out from the speeds measured on this PC: time is length divided by speed,
 
 | What | Ran on | Result | Measured |
 | --- | --- | --- | --- |
-| Gemma 4 E2B | processor only | **5.3–7.3** tokens a second writing · 59–98 reading | 4 October 2026 [1] |
-| Gemma 4 E2B | processor only | **9.3** tokens a second writing | 4 October 2026 [2] |
-| Gemma 4 E2B | built-in Intel graphics | **5** tokens a second writing | 4 October 2026 [2] |
+| Cube 2B (Gemma 4 E2B) | processor only | **5.3–7.3** tokens a second writing · 59–98 reading | 4 October 2026 [1] |
+| Cube 2B (Gemma 4 E2B) | processor only | **9.3** tokens a second writing | 4 October 2026 [2] |
+| Cube 2B (Gemma 4 E2B) | built-in Intel graphics | **5** tokens a second writing | 4 October 2026 [2] |
 
 How each number was measured: [More on how we measure](https://blog.greencube.app/blog/how-we-measure-ai-speed)
 
@@ -40,7 +40,7 @@ Where we have several runs we show the range: speeds move a little between runs 
 
 ### No graphics card? It still works
 
-With no graphics card, the AI runs on the processor. It is slower than on a gaming PC, but the smaller Gemma 4 E2B still writes 5–7 tokens a second, enough to study, summarise and write with. GreenCube's startup test also tried the built-in Intel graphics for writing: 5, against 9.3 on the processor, so it writes on the processor here.
+With no graphics card, the AI runs on the processor. It is slower than on a gaming PC, but the smaller Cube 2B (Gemma 4 E2B) still writes 5–7 tokens a second, enough to study, summarise and write with. GreenCube's startup test also tried the built-in Intel graphics for writing: 5, against 9.3 on the processor, so it writes on the processor here.
 
 ### Pictures
 
@@ -48,7 +48,7 @@ No. The picture AI needs about 7 GB of memory to itself, more than an 8 GB lapto
 
 ## How it compares
 
-Of the 2 PCs we measured with Gemma 4 E2B, this one is **number 2** for writing speed. The [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop) writes 14–18, about 2.5 times as fast.
+Of the 2 PCs we measured with Cube 2B (Gemma 4 E2B), this one is **number 2** for writing speed. The [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop) writes 14–18, about 2.5 times as fast.
 
 ## The test PC
 
@@ -73,15 +73,15 @@ Then find the closest card in [the full table](https://blog.greencube.app/blog/c
 
 ## Other PCs we measured
 
-- [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti): 65–71 tokens a second (Gemma 4 E4B)
-- [RX 5700 XT](https://blog.greencube.app/blog/ai-on-rx-5700-xt): 63–72 tokens a second (Gemma 4 E4B)
-- [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060): 56 tokens a second (Gemma 4 E4B)
-- [RTX 3060](https://blog.greencube.app/blog/ai-on-rtx-3060): 53–55 tokens a second (Gemma 4 E4B)
-- [RX 6600](https://blog.greencube.app/blog/ai-on-rx-6600): 42–44 tokens a second (Gemma 4 E4B)
-- [GTX 1660 Super](https://blog.greencube.app/blog/ai-on-gtx-1660-super): 37–38 tokens a second (Gemma 4 E4B)
-- [GTX 1650](https://blog.greencube.app/blog/ai-on-gtx-1650): about 20 tokens a second (Gemma 4 E4B)
-- [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop): 14–18 tokens a second (Gemma 4 E2B)
-- [RX 580](https://blog.greencube.app/blog/ai-on-rx-580): 10–11 tokens a second (Gemma 4 E4B)
+- [RTX 2080 Ti](https://blog.greencube.app/blog/ai-on-rtx-2080-ti): 65–71 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RX 5700 XT](https://blog.greencube.app/blog/ai-on-rx-5700-xt): 63–72 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RTX 5060](https://blog.greencube.app/blog/ai-on-rtx-5060): 56 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RTX 3060](https://blog.greencube.app/blog/ai-on-rtx-3060): 53–55 tokens a second (Cube 4B (Gemma 4 E4B))
+- [RX 6600](https://blog.greencube.app/blog/ai-on-rx-6600): 42–44 tokens a second (Cube 4B (Gemma 4 E4B))
+- [GTX 1660 Super](https://blog.greencube.app/blog/ai-on-gtx-1660-super): 37–38 tokens a second (Cube 4B (Gemma 4 E4B))
+- [GTX 1650](https://blog.greencube.app/blog/ai-on-gtx-1650): about 20 tokens a second (Cube 4B (Gemma 4 E4B))
+- [Intel Core Ultra 5 laptop](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop): 14–18 tokens a second (Cube 2B (Gemma 4 E2B))
+- [RX 580](https://blog.greencube.app/blog/ai-on-rx-580): 10–11 tokens a second (Cube 4B (Gemma 4 E4B))
 
 [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai) All 10 PCs in one table, and what your PC will feel like.
 
@@ -89,7 +89,7 @@ Then find the closest card in [the full table](https://blog.greencube.app/blog/c
 
 ### Can an Intel Iris Xe laptop run AI locally?
 
-Yes. On a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM, Gemma 4 E2B wrote 5–7 tokens a second. You read about 5, so answers come out at about reading speed.
+Yes. On a laptop with no graphics card (Intel processor with Iris Xe graphics) and 8 GB of RAM, Cube 2B (Gemma 4 E2B) wrote 5–7 tokens a second. You read about 5, so answers come out at about reading speed.
 
 ### Can an Intel Iris Xe laptop make AI pictures?
 

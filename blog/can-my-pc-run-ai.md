@@ -22,16 +22,16 @@ Type your graphics card and pick your RAM: you get what runs, how fast it ran on
 
 | PC | Graphics | RAM | AI model | Writes (tokens/s) |
 | --- | --- | --- | --- | --- |
-| Desktop | [NVIDIA RTX 2080 Ti, 11 GB](https://blog.greencube.app/blog/ai-on-rtx-2080-ti) | 128 GB | Gemma 4 E4B | **65–71** |
-| Desktop | [AMD RX 5700 XT, 8 GB](https://blog.greencube.app/blog/ai-on-rx-5700-xt) | 48 GB | Gemma 4 E4B | **63–72** |
-| Desktop | [NVIDIA RTX 5060, 8 GB](https://blog.greencube.app/blog/ai-on-rtx-5060) | 32 GB | Gemma 4 E4B | **56** |
-| Desktop | [NVIDIA RTX 3060, 12 GB](https://blog.greencube.app/blog/ai-on-rtx-3060) | 32 GB | Gemma 4 E4B | **53–55** |
-| Desktop | [AMD RX 6600, 8 GB](https://blog.greencube.app/blog/ai-on-rx-6600) | 16 GB | Gemma 4 E4B | **42–44** |
-| Desktop | [NVIDIA GTX 1660 Super, 6 GB](https://blog.greencube.app/blog/ai-on-gtx-1660-super) | 16 GB | Gemma 4 E4B | **37–38** |
-| Desktop | [NVIDIA GTX 1650, 4 GB](https://blog.greencube.app/blog/ai-on-gtx-1650) | 16 GB | Gemma 4 E4B | **about 20** |
-| Laptop | [Intel graphics only (Core Ultra 5)](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop) | 16 GB | Gemma 4 E2B | **14–18** |
-| Desktop | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/ai-on-rx-580) | 16 GB | Gemma 4 E4B | **10–11** |
-| Laptop | [Intel Iris Xe only](https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop) | 8 GB | Gemma 4 E2B | **5–7** |
+| Desktop | [NVIDIA RTX 2080 Ti, 11 GB](https://blog.greencube.app/blog/ai-on-rtx-2080-ti) | 128 GB | Cube 4B (Gemma 4 E4B) | **65–71** |
+| Desktop | [AMD RX 5700 XT, 8 GB](https://blog.greencube.app/blog/ai-on-rx-5700-xt) | 48 GB | Cube 4B (Gemma 4 E4B) | **63–72** |
+| Desktop | [NVIDIA RTX 5060, 8 GB](https://blog.greencube.app/blog/ai-on-rtx-5060) | 32 GB | Cube 4B (Gemma 4 E4B) | **56** |
+| Desktop | [NVIDIA RTX 3060, 12 GB](https://blog.greencube.app/blog/ai-on-rtx-3060) | 32 GB | Cube 4B (Gemma 4 E4B) | **53–55** |
+| Desktop | [AMD RX 6600, 8 GB](https://blog.greencube.app/blog/ai-on-rx-6600) | 16 GB | Cube 4B (Gemma 4 E4B) | **42–44** |
+| Desktop | [NVIDIA GTX 1660 Super, 6 GB](https://blog.greencube.app/blog/ai-on-gtx-1660-super) | 16 GB | Cube 4B (Gemma 4 E4B) | **37–38** |
+| Desktop | [NVIDIA GTX 1650, 4 GB](https://blog.greencube.app/blog/ai-on-gtx-1650) | 16 GB | Cube 4B (Gemma 4 E4B) | **about 20** |
+| Laptop | [Intel graphics only (Core Ultra 5)](https://blog.greencube.app/blog/ai-on-intel-core-ultra-5-laptop) | 16 GB | Cube 2B (Gemma 4 E2B) | **14–18** |
+| Desktop | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/ai-on-rx-580) | 16 GB | Cube 4B (Gemma 4 E4B) | **10–11** |
+| Laptop | [Intel Iris Xe only](https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop) | 8 GB | Cube 2B (Gemma 4 E2B) | **5–7** |
 
 Click a graphics card to see its full test.
 
