@@ -1073,8 +1073,8 @@
   if (!rb || !main || innerWidth < 901) return;
   const fit = () => {
     main.style.paddingTop = ''; main.style.minHeight = '';
-    // about 40% of the banner shows at the bottom of the first screen: tall screens push it down, short ones pull it up
-    const want = innerHeight - rb.offsetHeight * 0.4, top = rb.getBoundingClientRect().top + scrollY;
+    // about 30% of the banner shows at the bottom of the first screen: tall screens push it down, short ones pull it up
+    const want = innerHeight - rb.offsetHeight * 0.3, top = rb.getBoundingClientRect().top + scrollY;
     if (top < want) main.style.minHeight = (main.offsetHeight + want - top) + 'px';
     else if (top > want) main.style.paddingTop = Math.max(76, parseFloat(getComputedStyle(main).paddingTop) - (top - want)) + 'px';
   };
