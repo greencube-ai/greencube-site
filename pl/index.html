@@ -1653,13 +1653,26 @@
     <div class="cta-row rv">
       <a href="/pl/buy" class="cta-pill cta-primary"><span>Kup teraz</span></a>
       <a href="/pl/#what" class="cta-pill cta-ghost">Zobacz, co potrafi <span class="arrow">→</span></a>
-      <a class="try-it" href="#try"><span>Wypróbuj</span><svg viewBox="0 0 40 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4C26 16 28 34 20 56"/><path d="M10 46l10 12 9-13"/></svg></a>
     </div>
+    <a class="try-it" href="#try"><span>Wypróbuj</span><svg class="long" viewBox="0 0 60 130" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4C40 30 46 70 30 120"/><path d="M19 106l11 15 12-14"/></svg></a>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
   <!-- the app itself, peeking up from the bottom of the first screen (Hector 11 Nov). Real screenshot of the app home (recent chat titles blurred) -->
+  <script>
+  // "Try it" starts just right of the chips (under the sun) and its arrow runs down past the buttons to the app
+  (() => {
+    const t = document.querySelector('.hero .try-it'), chips = document.querySelector('.hero .hero-chips'), wrap = document.querySelector('.hero .wrap');
+    if (!t || !chips || !wrap) return;
+    const place = () => {
+      if (innerWidth < 761) { t.style.left = t.style.top = ''; return; }
+      const c = chips.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+      t.style.left = Math.round(c.right - w.left + 18) + 'px'; t.style.top = Math.round(c.top - w.top - 8) + 'px';
+    };
+    place(); addEventListener('resize', place); addEventListener('load', place); if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  })();
+  </script>
   <div class="gd-home" id="try">
   <div class="gd-wrap">
   <div class="gd-win" id="gd">
