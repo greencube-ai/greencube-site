@@ -177,3 +177,24 @@
 .gi-x { position: absolute; top: 12px; left: 12px; font: inherit; font-size: 12.5px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(31,30,27,.18); background: #F8F5EE; cursor: pointer; z-index: 1; }
 .gi-meta b { font-size: 16px; } .gi-meta p { font-size: 13.5px; color: #4A4740; line-height: 1.5; } .gi-meta small { font-size: 12px; color: var(--mute); line-height: 1.45; display: block; }
 @media (max-width: 860px) { .gi-big { grid-template-columns: 1fr; align-content: start; overflow-y: auto; padding-top: 50px; } }
+
+/* yellow "Click here" on the send button until the first message is sent */
+.gd-bar { position: relative; }
+.gd-click { position: absolute; right: -6px; bottom: calc(100% + 12px); z-index: 2; background: #F9DD5E; color: #1F1E1B; font-weight: 700; font-size: 13px; white-space: nowrap;
+  padding: 6px 12px; border-radius: 999px; box-shadow: 0 6px 16px -8px rgba(0,0,0,.35); pointer-events: none; animation: gd-bob 1.4s ease-in-out infinite; }
+.gd-click::after { content: ''; position: absolute; right: 18px; top: 100%; border: 7px solid transparent; border-top-color: #F9DD5E; }
+@keyframes gd-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .gd-click { animation: none; } }
+
+/* "Try it" at the top of the hero, an arrow down to the demo */
+.try-it { display: inline-flex; flex-direction: column; align-items: center; gap: 0; margin: 14px auto 0; color: #2F6B45; text-decoration: none; }
+.try-it span { white-space: nowrap; font-family: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive; font-weight: 700; font-size: 21px; transform: rotate(-3deg); }
+.try-it svg { width: 30px; height: 46px; animation: gd-down 1.6s ease-in-out infinite; }
+.try-it:hover span { text-decoration: underline; text-underline-offset: 4px; }
+@keyframes gd-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.hero .cta-row { position: relative; }
+.hero .cta-row .try-it { position: absolute; left: calc(100% + 16px); top: -14px; margin: 0; }
+@media (max-width: 760px) { .hero .cta-row .try-it { position: static; margin: 10px auto 0; } }
+.pitch .try-it { display: flex; width: max-content; margin: 18px 0 0; }
+#try { scroll-margin-top: 90px; }
+@media (prefers-reduced-motion: reduce) { .try-it svg { animation: none; } }

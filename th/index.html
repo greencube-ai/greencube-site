@@ -1428,6 +1428,9 @@
     @media (min-width: 901px) { html body .hero { padding-top: max(122px, calc(11vh + 18px)); } }  /* room for the pill under the logo */
     @media (min-width: 901px) { .hero > .hero-new { position: absolute; z-index: 6; top: 84px; left: 32px; } }
     @media (max-width: 900px) { .hero > .hero-new { display: flex; width: max-content; margin: 0 auto 16px; position: relative; z-index: 6; } }
+    /* the clickable app under the hero (English home), in place of the screenshot */
+    .hero > .gd-home { order: 2; position: relative; z-index: 3; margin-top: 40px; width: 100%; }
+    .hero > .gd-home .gd-label { margin-top: 12px; }
     /* the app window under the hero buttons: its top peeks up from the bottom of the first screen */
     .hero-shot { position: relative; z-index: 3; width: min(1080px, calc(100% - 48px)); margin: 56px auto 0; border-radius: 18px; overflow: hidden;
       background: #FDFBF5; border: 1px solid rgba(26,26,26,.12); box-shadow: 0 2px 6px rgba(72,82,47,.10), 0 40px 90px -30px rgba(72,82,47,.45); }
@@ -1468,6 +1471,8 @@
     .hero .flip { color: #F5F1E8; }
     .hero .flip > span { -webkit-text-stroke: .035em #1A1F1B; paint-order: stroke fill; text-shadow: .05em .055em 0 #1A1F1B; padding-right: .07em; }
   </style>
+  <link rel="stylesheet" href="/demo/app-demo.css" />
+  <script src="/demo/app-demo.js" defer></script>
 </head>
 <body>
 
@@ -1648,15 +1653,50 @@
     <div class="cta-row rv">
       <a href="/th/buy" class="cta-pill cta-primary"><span>ซื้อเลย</span></a>
       <a href="/th/#what" class="cta-pill cta-ghost">ดูว่าทำอะไรได้บ้าง <span class="arrow">→</span></a>
+      <a class="try-it" href="#try"><span>ลองเลย</span><svg viewBox="0 0 40 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4C26 16 28 34 20 56"/><path d="M10 46l10 12 9-13"/></svg></a>
     </div>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
   <!-- the app itself, peeking up from the bottom of the first screen (Hector 11 Nov). Real screenshot of the app home (recent chat titles blurred) -->
-  <figure class="hero-shot" aria-label="The GreenCube app">
-    <picture><source srcset="/img/app-home.webp" type="image/webp" /><img src="/img/app-home.jpg" alt="The GreenCube app home on a Windows PC: a chat box, your chats on the left, and the water you have saved" width="1916" height="1005" decoding="async" /></picture>
-  </figure>
+  <div class="gd-home" id="try">
+  <div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+  </div>
 </section>
 
 <script>
