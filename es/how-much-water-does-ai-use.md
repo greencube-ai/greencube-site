@@ -3,7 +3,7 @@
 > Cuánta agua gasta una pregunta a una IA, por qué las estimaciones no coinciden y cómo cuenta GreenCube el agua que ahorras.
 
 Canonical: https://greencube.app/es/how-much-water-does-ai-use  
-Published: 2026-07-10 · Updated: 2026-10-07
+Published: 2026-07-10 · Updated: 2026-11-11
 
 La IA y el agua
 
@@ -17,7 +17,7 @@ Cómo ahorra agua GreenCube
 
 1. **La IA en la nube funciona en centros de datos** Se calientan, y muchos se enfrían evaporando agua dulce.
 2. **GreenCube funciona en tu PC** Tu ordenador se enfría con un ventilador. Tu pregunta no gasta agua de ningún centro de datos.
-3. **La app lo cuenta** Cada mensaje en GreenCube es uno que no necesitó esa agua: unos 15 mL cada uno.
+3. **La app lo cuenta** Cada mensaje en GreenCube es uno que no necesitó esa agua: unos 5 mL cada uno.
 
 [Mira exactamente cómo lo contamos ↓](https://greencube.app/es/how-much-water-does-ai-use#how-we-count)
 
@@ -83,7 +83,7 @@ Unos solo cuentan el agua para enfriar el centro de datos; otros también la que
 
 ### ¿Cómo cuenta GreenCube el agua ahorrada?
 
-15 mL por cada mensaje que envías en GreenCube, el punto medio del rango de UC Riverside. Es una estimación, y así lo decimos en la app.
+Unos 5 mL por cada respuesta que GreenCube hace en tu PC: la parte del centro de datos en la última estimación de UC Riverside. Las respuestas de antes del 11 de noviembre de 2026 siguen contando con nuestros 15 mL de antes. Es una estimación, y así lo decimos en la app.
 
 ### ¿GreenCube no gasta nada de agua?
 

@@ -3,7 +3,7 @@
 > How much water one AI question uses, why estimates disagree, and exactly how GreenCube counts the data-centre water you save.
 
 Canonical: https://greencube.app/how-much-water-does-ai-use  
-Published: 2026-07-10 · Updated: 2026-10-07
+Published: 2026-07-10 · Updated: 2026-11-11
 
 AI & water
 
@@ -17,7 +17,7 @@ How GreenCube saves water
 
 1. **Cloud AI runs in data centres** They get hot, and many cool down by evaporating fresh water.
 2. **GreenCube runs on your PC** Your computer cools itself with a fan. No data-centre water is used for your question.
-3. **The app counts it** Every message on GreenCube is one that didn’t need that water: about 15 mL each.
+3. **The app counts it** Every message on GreenCube is one that didn’t need that water: about 5 mL each.
 
 [See exactly how we count ↓](https://greencube.app/how-much-water-does-ai-use#how-we-count)
 
@@ -83,7 +83,7 @@ Some only count the cooling water in the data centre; others also count the wate
 
 ### How does GreenCube count water saved?
 
-15 mL for every message you send on GreenCube, the middle of UC Riverside’s range. It’s an estimate, and we say so in the app.
+About 5 mL for every answer GreenCube makes on your PC: the data-centre share of UC Riverside’s latest estimate. Answers from before 11 November 2026 stay at our old 15 mL. It’s an estimate, and we say so in the app.
 
 ### Does GreenCube use no water at all?
 
