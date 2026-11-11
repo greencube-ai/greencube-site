@@ -1410,6 +1410,10 @@
     .hero-what .mk-blue::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke' d='M3 6C22 4 40 8 62 5S104 3 128 6S170 8 197 4'/%3E%3Cpath fill='none' stroke='%237FA2E0' stroke-width='2.4' stroke-linecap='round' vector-effect='non-scaling-stroke' d='M8 10C36 8 66 12 96 9S152 8 192 10'/%3E%3C/svg%3E"); animation-delay: 1.2s; }
     @media (prefers-reduced-motion: reduce) { .hero-what .mk::after { animation: none; } }
 
+    /* the water link is the last hero chip (Hector 11 Nov): a blue drop, dashed underline, leads to the water page */
+    .hero-chips a.cw { display: inline-flex; align-items: center; gap: 6px; color: #3D5E93; text-decoration: none; border-bottom: 1px dashed rgba(61,94,147,.5); }
+    .hero-chips a.cw svg { width: 15px; height: 15px; flex: 0 0 auto; }
+    .hero-chips a.cw:hover { border-bottom-style: solid; }
     /* the app window under the hero buttons: its top peeks up from the bottom of the first screen */
     .hero-shot { position: relative; z-index: 3; width: min(1080px, calc(100% - 48px)); margin: 56px auto 0; border-radius: 18px; overflow: hidden;
       background: #FDFBF5; border: 1px solid rgba(26,26,26,.12); box-shadow: 0 2px 6px rgba(72,82,47,.10), 0 40px 90px -30px rgba(72,82,47,.45); }
@@ -1624,6 +1628,7 @@
       <li>Работает офлайн</li>
       <li>9,99&nbsp;€</li>
       <li>15 дней на возврат денег</li>
+      <li><a class="cw" href="/ru/how-much-water-does-ai-use"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s6 6.4 6 10.6a6 6 0 0 1-12 0c0-4.2 6-10.6 6-10.6z"/></svg>Экономит воду</a></li>
     </ul>
     <div class="cta-row rv">
       <a href="/ru/buy" class="cta-pill cta-primary"><span>Купить сейчас</span></a>
@@ -1637,31 +1642,7 @@
   <figure class="hero-shot" aria-label="The GreenCube app">
     <picture><source srcset="/img/app-home.webp" type="image/webp" /><img src="/img/app-home.jpg" alt="The GreenCube app home on a Windows PC: a chat box, your chats on the left, and the water you have saved" width="1916" height="1005" decoding="async" /></picture>
   </figure>
-  <a href="/ru/how-much-water-does-ai-use" class="hero-water">
-    <span class="drop-wrap" aria-hidden="true">
-      <svg class="drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2.7s6 6.4 6 10.6a6 6 0 0 1-12 0c0-4.2 6-10.6 6-10.6z"/>
-      </svg>
-    </span>
-    <span>Экономьте воду каждый раз, когда пользуетесь ИИ</span>
-    <span class="arrow" aria-hidden="true">→</span>
-  </a>
 </section>
-<script>
-// The water badge sits at the left edge, level with the Buy now / See what it does buttons.
-(() => {
-  const w = document.querySelector(".hero > .hero-water"), cta = document.querySelector(".hero .cta-row"), hero = document.querySelector(".hero");
-  if (!w || !cta || !hero) return;
-  const place = () => {
-    if (innerWidth < 901) { w.style.top = ""; return; }
-    const c = cta.getBoundingClientRect(), h = hero.getBoundingClientRect();
-    w.style.top = Math.round(c.top + c.height / 2 - h.top - w.offsetHeight / 2) + "px";
-  };
-  place();
-  addEventListener("load", place); addEventListener("resize", place);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-})();
-</script>
 
 <!-- =========== 1 · NO LIMITS — the turtle walks across while everything it does goes by =========== -->
 <section class="sec feat" id="what" aria-label="Что умеет GreenCube">
