@@ -285,6 +285,35 @@
     .detail .closer a { color: var(--forest, #1A1A1A); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
     @media (max-width: 760px) { .gets { grid-template-columns: 1fr; } .detail { padding-top: 64px; } }
 
+    /* moving reviews banner under the hero: one row, every card the same size (real beta testers, exact words;
+       some got it free, said in the small note under the row) */
+    .scroll-cue { display: none; }
+    .rb { position: relative; z-index: 2; padding: 22px 0 6px; overflow: hidden; }
+    .rb-head { text-align: center; font-size: clamp(19px, 1.8vw, 23px); letter-spacing: -.015em; margin: 0 auto 16px; padding: 0 20px; }
+    .rb-head b { font-family: var(--display); font-weight: 600; color: var(--forest, #1A1A1A); }
+    .rb-note { text-align: center; font-size: 11.5px; font-weight: 400; color: var(--ink-mute, #8A836F); margin: 10px auto 0; padding: 0 20px; }
+    .rb-row { overflow: hidden; padding: 4px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .rb-track { display: flex; width: max-content; animation: rb-move 120s linear infinite; }
+    .rb-row:hover .rb-track, .rb-row:focus-within .rb-track { animation-play-state: paused; }
+    .rb-set { display: flex; gap: 16px; padding-right: 16px; align-items: stretch; }
+    @keyframes rb-move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .rb-card { flex: 0 0 auto; width: 340px; margin: 0; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--line);
+      background: var(--paper-soft, #FBF8F0); display: flex; flex-direction: column; justify-content: space-between; }
+    .rb-card blockquote { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink, #1A1A1A); }
+    /* shorter quotes: bigger, centred in the card, so every card looks full */
+    .rb-card.rb-m blockquote { font-size: 16px; } .rb-card.rb-s blockquote { font-size: 18px; line-height: 1.5; letter-spacing: -.01em; }
+    .rb-card blockquote::before { content: "“"; display: block; height: .5em; margin: -2px 0 8px; font-family: Georgia, serif; font-size: 46px; line-height: 1; color: var(--q, #8EA674); }
+    .rb-card:nth-child(4n+1) { --q: #8EA674; } .rb-card:nth-child(4n+2) { --q: #F28A5B; } .rb-card:nth-child(4n+3) { --q: #6F93D8; } .rb-card:nth-child(4n) { --q: #E2B53A; }
+    .rb-card figcaption { display: flex; align-items: center; gap: 9px; margin-top: 14px; font-family: var(--display); font-weight: 600; font-size: 13.5px; color: var(--forest, #1A1A1A); }
+    .rb-dot { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; color: #1F2418; background: #C6D9A8; }
+    .rb-card:nth-child(4n+2) .rb-dot { background: #FBC6A8; } .rb-card:nth-child(4n+3) .rb-dot { background: #C3D3F0; } .rb-card:nth-child(4n) .rb-dot { background: #FAE289; }
+    @media (max-width: 560px) { .rb-card { width: 280px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .rb-track { animation: none; } .rb-row { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+      .rb-set[aria-hidden] { display: none; }
+    }
+
+
     /* ============== footer ============== */
     footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 40px 0 48px; }
     footer .row {
@@ -879,6 +908,10 @@
     @keyframes rf-ul-in { from { background-size: 0% .5em; } to { background-size: 100% .5em; } }
     @media (prefers-reduced-motion: reduce) { .refund-line strong { animation: none; } }
   </style>
+  <style id="rb-fit">
+    /* the reviews banner peeks at the bottom of the first screen (Hector 11 Nov): the hero no longer fills the screen */
+    @media (min-width: 901px) { main { min-height: 0; padding-bottom: 12px; } }
+  </style>
 </head>
 <body>
 
@@ -1026,6 +1059,29 @@
   </a>
 </main>
 
+<!-- ===== beta testers, moving: the top of it shows on the first screen ===== -->
+<section class="rb" aria-label="What our beta testers say">
+  <p class="rb-head"><b>What our beta testers say.</b></p>
+    <div class="rb-row"><div class="rb-track"><div class="rb-set"><figure class="rb-card"><blockquote>I mainly use GreenCube for reading reports and preparing presentations. I can drop in a PDF, get a summary, and turn the main points into slides. It saves me a lot of time, tbh. Sometimes it misses a small detail, so I still double-check important stuff.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jeanluc Fael</figcaption></figure><figure class="rb-card rb-m"><blockquote>Honestly, I tried Ollama before GreenCube, but my laptop isn&rsquo;t the best and it kept crashing with bigger models. GreenCube was way easier to set up and has been solid for emails, PDFs, and quick slide outlines.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alonso Andreu</figcaption></figure><figure class="rb-card"><blockquote>I use GreenCube for studying and organising information. It&rsquo;s great for making quizzes, flashcards, and simple slides. It makes difficult topics much easier to understand. The only downside is that it can be a bit slow on older PCs, but the updates have been improving things.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">G</span>Gabriel Matamorros</figcaption></figure><figure class="rb-card rb-m"><blockquote>GreenCube has been really useful for studying. I upload lecture PDFs, ask it to explain things simply, and turn the notes into flashcards and quizzes. It&rsquo;s made revising way less boring.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Ilan Swedberg</figcaption></figure><figure class="rb-card rb-m"><blockquote>I&rsquo;m not very technical, so I was worried local AI would be complicated. GreenCube was surprisingly easy to use. I mostly use it for planning, messages, and organising my ideas. So far, so good.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Marcello Manuguerra</figcaption></figure><figure class="rb-card"><blockquote>I tried LM Studio before, but my PC couldn&rsquo;t really handle it. It would freeze or crash with longer documents. GreenCube made it way easier and smoother on my average laptop. It does use a fair bit of RAM, but that&rsquo;s just how local AI works.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Maximo Vuijst</figcaption></figure><figure class="rb-card"><blockquote>GreenCube has been great for emails, ideas, and presentations. I like that there&rsquo;s no subscription and I can use it whenever I need without worrying about limits. They seem to update it pretty often too, which is nice.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jorge Lopez</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube almost every day for studying. It explains topics in simple language and makes practice questions from my notes. The flashcards are especially useful before exams.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Iago</figcaption></figure><figure class="rb-card rb-m"><blockquote>I wanted an AI I could use while travelling, and GreenCube has been perfect. It works without internet, so I use it on flights and trains for notes, translations, and planning.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alvaro de Alburquerque</figcaption></figure><figure class="rb-card rb-s"><blockquote>I can ask questions about a document and get a clear summary instead of scrolling through loads of pages. Really handy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">E</span>Eric Abad</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube mostly for coding. It helps me understand errors, explain code, and draft small scripts for very small projects. It&rsquo;s been handy for quick stuff, nothing too heavy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Javier Soriano</figcaption></figure></div><div class="rb-set" aria-hidden="true"><figure class="rb-card"><blockquote>I mainly use GreenCube for reading reports and preparing presentations. I can drop in a PDF, get a summary, and turn the main points into slides. It saves me a lot of time, tbh. Sometimes it misses a small detail, so I still double-check important stuff.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jeanluc Fael</figcaption></figure><figure class="rb-card rb-m"><blockquote>Honestly, I tried Ollama before GreenCube, but my laptop isn&rsquo;t the best and it kept crashing with bigger models. GreenCube was way easier to set up and has been solid for emails, PDFs, and quick slide outlines.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alonso Andreu</figcaption></figure><figure class="rb-card"><blockquote>I use GreenCube for studying and organising information. It&rsquo;s great for making quizzes, flashcards, and simple slides. It makes difficult topics much easier to understand. The only downside is that it can be a bit slow on older PCs, but the updates have been improving things.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">G</span>Gabriel Matamorros</figcaption></figure><figure class="rb-card rb-m"><blockquote>GreenCube has been really useful for studying. I upload lecture PDFs, ask it to explain things simply, and turn the notes into flashcards and quizzes. It&rsquo;s made revising way less boring.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Ilan Swedberg</figcaption></figure><figure class="rb-card rb-m"><blockquote>I&rsquo;m not very technical, so I was worried local AI would be complicated. GreenCube was surprisingly easy to use. I mostly use it for planning, messages, and organising my ideas. So far, so good.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Marcello Manuguerra</figcaption></figure><figure class="rb-card"><blockquote>I tried LM Studio before, but my PC couldn&rsquo;t really handle it. It would freeze or crash with longer documents. GreenCube made it way easier and smoother on my average laptop. It does use a fair bit of RAM, but that&rsquo;s just how local AI works.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">M</span>Maximo Vuijst</figcaption></figure><figure class="rb-card"><blockquote>GreenCube has been great for emails, ideas, and presentations. I like that there&rsquo;s no subscription and I can use it whenever I need without worrying about limits. They seem to update it pretty often too, which is nice.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Jorge Lopez</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube almost every day for studying. It explains topics in simple language and makes practice questions from my notes. The flashcards are especially useful before exams.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">I</span>Iago</figcaption></figure><figure class="rb-card rb-m"><blockquote>I wanted an AI I could use while travelling, and GreenCube has been perfect. It works without internet, so I use it on flights and trains for notes, translations, and planning.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">A</span>Alvaro de Alburquerque</figcaption></figure><figure class="rb-card rb-s"><blockquote>I can ask questions about a document and get a clear summary instead of scrolling through loads of pages. Really handy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">E</span>Eric Abad</figcaption></figure><figure class="rb-card rb-m"><blockquote>I use GreenCube mostly for coding. It helps me understand errors, explain code, and draft small scripts for very small projects. It&rsquo;s been handy for quick stuff, nothing too heavy.</blockquote><figcaption><span class="rb-dot" aria-hidden="true">J</span>Javier Soriano</figcaption></figure></div></div></div>
+  <p class="rb-note">Some of these testers got GreenCube free.</p>
+</section>
+
+<script>
+// The banner peeks at the bottom of the first screen on any desktop height (never trims into the header's room).
+(() => {
+  const rb = document.querySelector('.rb'), main = document.querySelector('main');
+  if (!rb || !main || innerWidth < 901) return;
+  const fit = () => {
+    main.style.paddingTop = ''; main.style.minHeight = '';
+    // about 40% of the banner shows at the bottom of the first screen: tall screens push it down, short ones pull it up
+    const want = innerHeight - rb.offsetHeight * 0.4, top = rb.getBoundingClientRect().top + scrollY;
+    if (top < want) main.style.minHeight = (main.offsetHeight + want - top) + 'px';
+    else if (top > want) main.style.paddingTop = Math.max(76, parseFloat(getComputedStyle(main).paddingTop) - (top - want)) + 'px';
+  };
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 <!-- ===== what you get + buyer questions ===== -->
 <section class="detail" id="detail" aria-label="What you get and common questions">
   <div class="eyebrow">What&rsquo;s included</div>
