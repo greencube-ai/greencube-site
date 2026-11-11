@@ -219,7 +219,7 @@
     send.setAttribute('aria-label', U.send); root.querySelector('.gd-ph .x').setAttribute('aria-label', U.close);
     set('.gd-hint span', U.hint, box); set('.gd-label', U.label, box);
     chips.innerHTML = JOBS.map((k) => '<button type="button" data-job="' + k + '">' + esc(U.chips[k]) + '</button>').join('');
-    if (!root.querySelector('.gd-click')) { const c = document.createElement('span'); c.className = 'gd-click'; c.innerHTML = '<b>' + esc(U.click_here) + '</b><img src="/img/turtle.svg" alt="" width="54" height="54"/>'; send.parentElement.appendChild(c); }
+    if (!root.querySelector('.gd-click')) { const c = document.createElement('span'); c.className = 'gd-click'; c.innerHTML = '<b>' + esc(U.click_here) + '</b><img src="/img/turtle.svg" alt="" width="54" height="54"/>'; send.closest('.gd-compose').appendChild(c); }
   }
   ready = fetch('/demo/i18n/' + lang + '.json').then((r) => r.json()).catch(() => fetch('/demo/i18n/en.json').then((r) => r.json())).then((t) => {
     T = t; U = t.ui; JOBS = ['slides', 'quiz', 'cards', 'diagram']; dress();

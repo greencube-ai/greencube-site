@@ -1654,21 +1654,33 @@
       <a href="/nl/buy" class="cta-pill cta-primary"><span>Nu kopen</span></a>
       <a href="/nl/#what" class="cta-pill cta-ghost">Zie wat hij doet <span class="arrow">→</span></a>
     </div>
-    <a class="try-it" href="#try"><span>Probeer het</span><svg class="long" viewBox="0 0 60 130" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4C40 30 46 70 30 120"/><path d="M19 106l11 15 12-14"/></svg></a>
   </div>
   <!-- direct child of .hero on purpose: .hero .wrap is position:relative, so
        anchoring here keeps the badge in the section corner rather than at the
        bottom of the centred text block -->
   <!-- the app itself, peeking up from the bottom of the first screen (Hector 11 Nov). Real screenshot of the app home (recent chat titles blurred) -->
+  <a class="try-it" href="#try"><span>Probeer het</span><svg class="long" viewBox="0 0 60 130" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4C40 30 46 70 30 120"/><path d="M19 106l11 15 12-14"/></svg></a>
   <script>
-  // "Try it" starts just right of the chips (under the sun) and its arrow runs down past the buttons to the app
+  // "Try it" hangs from the bottom of the sun (top right of the screen); its arrow points down to the app
   (() => {
-    const t = document.querySelector('.hero .try-it'), chips = document.querySelector('.hero .hero-chips'), wrap = document.querySelector('.hero .wrap');
-    if (!t || !chips || !wrap) return;
+    const t = document.querySelector('.hero > .try-it'), sun = document.querySelectorAll('.hero-sun circle'), hero = document.querySelector('.hero');
+    if (!t || !sun.length || !hero) return;
     const place = () => {
-      if (innerWidth < 761) { t.style.left = t.style.top = ''; return; }
-      const c = chips.getBoundingClientRect(), w = wrap.getBoundingClientRect();
-      t.style.left = Math.round(c.right - w.left + 18) + 'px'; t.style.top = Math.round(c.top - w.top - 8) + 'px';
+      if (innerWidth < 761) return;
+      const s = sun[sun.length - 1].getBoundingClientRect(), h = hero.getBoundingClientRect(), win = document.querySelector('.gd-win');
+      const lines = (el) => { if (!el) return []; const r = document.createRange(); r.selectNodeContents(el); return [...r.getClientRects()]; };
+      const parts = [...lines(document.querySelector('.hero h1')), ...lines(document.querySelector('.hero .hero-what'))];
+      ['.hero .hero-chips', '.hero .cta-row'].forEach((q) => { const e = document.querySelector(q); if (e) parts.push(e.getBoundingClientRect()); });
+      const tw = t.offsetWidth, th = t.offsetHeight;
+      let top = s.bottom - h.top + 26, left = s.left + s.width / 2 - h.left - 30;
+      if (win) top = Math.min(top, win.getBoundingClientRect().top - h.top - th - 6);
+      // keep clear of the headline, the line under it, the chips and the buttons
+      const hits = () => parts.filter((b) => b.width && b.top - h.top < top + th && b.bottom - h.top > top && b.left - h.left < left + tw + 12 && b.right - h.left > left - 12);
+      let hit = hits();
+      if (hit.length) left = Math.max(left, ...hit.map((b) => b.right - h.left + 22));
+      left = Math.min(left, h.width - tw - 16);
+      for (let n = 0; n < 5 && (hit = hits()).length; n++) top = Math.max(top, ...hit.map((b) => b.bottom - h.top + 12));   // no room at the side: hang below the text
+      t.style.left = Math.round(left) + 'px'; t.style.top = Math.round(top) + 'px';
     };
     place(); addEventListener('resize', place); addEventListener('load', place); if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
   })();
