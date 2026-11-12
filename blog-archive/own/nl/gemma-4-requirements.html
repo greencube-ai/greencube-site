@@ -16,64 +16,56 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Kort antwoord:</strong> de kleine <strong>Gemma 4 E2B</strong> draait op een <strong>laptop met 8 GB</strong>. <strong>E4B</strong> wil 16 GB RAM, of vliegt op elke <strong>videokaart vanaf 6 GB</strong>. <strong>12B</strong> heeft <strong>10 GB VRAM of meer</strong> nodig voor een echt gesprek.</p></div>
+<div class="answer"><p>De kleinste Gemma 4, E2B, draait op een laptop met 8 GB zonder videokaart. E4B wil 16 GB RAM, of een willekeurige videokaart van 6 GB of meer, en daarop is hij snel. Gemma 4 12B heeft minstens 10 GB VRAM nodig om een echt gesprek vol te houden.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>8 GB</b><span>RAM is genoeg voor Gemma 4 E2B, geen videokaart nodig</span></div>
-<div class="stat b"><b>56&ndash;72</b><span>tokens per seconde voor E4B op gamingkaarten met 8 GB</span></div>
-<div class="stat p"><b>10 GB</b><span>VRAM voordat we de 12B vertrouwen in een lange chat</span></div>
-</div>
+<p>Deze cijfers komen uit onze eigen tests. GreenCube, de app die ik bouw, draait op Gemma 4 (Cube 2B is gebouwd op Gemma 4 E2B en Cube 4B op Gemma 4 E4B), dus we hebben deze modellen in september en oktober 2026 getimed op {{pcs}} echte pc's. Gemma 4 zelf is gratis: Google bracht het uit onder de Apache 2.0-licentie, die commercieel gebruik toestaat.</p>
 
-<h2>Systeemeisen van Gemma 4 in één oogopslag</h2>
+<h2>De systeemeisen van Gemma 4 in één oogopslag</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Model</th><th>Bestandsgrootte</th><th>Minimum dat we aanraden</th><th>Het best op</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>8 GB RAM, geen kaart</td><td>Laptops</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>16 GB RAM, of een kaart van 6 GB</td><td>Gaming-pc's, laptops met 16 GB</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>6,7 GB</td><td>10 GB VRAM of meer</td><td>Kaarten met 12 GB of meer</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td>8 GB RAM, geen kaart</td><td>Laptops</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td>16 GB RAM, of een kaart van 6 GB</td><td>Gaming-pc's, laptops met 16 GB</td></tr>
+<tr><td>Gemma 4 12B</td><td>6,7 GB</td><td>10 GB VRAM of meer</td><td>Kaarten met 12 GB of meer</td></tr>
 </tbody>
 </table></div>
+<p>De bestandsgrootte is pas het begin. Terwijl je chat, heeft het gesprek ook geheugen nodig, dus houd er een paar GB extra vrij bovenop. Op een laptop met 8 GB betekent dat eerst andere apps sluiten.</p>
 
 <h2>Gemeten snelheden</h2>
-<p>Hoe snel elk model zijn antwoord schrijft, in tokens per seconde (een token is een stukje woord; in het Nederlands lees je er ongeveer 8 per seconde). Gemeten met GreenCube in september en oktober 2026.</p>
+<p>Zo snel schrijft elk model zijn antwoord, in tokens per seconde. Een token is ongeveer driekwart van een Engels woord, en de meeste mensen lezen er in het Engels zo'n 5 per seconde, dus alles daarboven voelt vlot.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Pc</th><th>Model</th><th>Schrijft (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Desktop-pc, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
-<tr><td>Desktop-pc, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
-<tr><td>Desktop-pc, videokaart van 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
-<tr><td>Desktop-pc, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
-<tr><td>Desktop-pc, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (alleen korte chats)</td></tr>
-<tr><td>Desktop-pc, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>ongeveer 20</b></td></tr>
-<tr><td>Laptop, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
-<tr><td>Dezelfde laptop</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
-<tr><td>Laptop, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>E4B</td><td><b>63&ndash;72</b></td></tr>
+<tr><td>Desktop, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td><b>56</b></td></tr>
+<tr><td>Desktop, videokaart van 12 GB</td><td>E4B</td><td><b>50&ndash;55</b></td></tr>
+<tr><td>Desktop, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td><b>35&ndash;38</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>12B</td><td><b>20&ndash;35</b> (alleen korte chats)</td></tr>
+<tr><td>Desktop, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td><b>ongeveer 20</b></td></tr>
+<tr><td>Laptop, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td><b>14&ndash;18</b></td></tr>
+<tr><td>Dezelfde laptop</td><td>E4B</td><td><b>8&ndash;10</b></td></tr>
+<tr><td>Laptop, Intel Iris Xe, 8 GB</td><td>E2B</td><td><b>5&ndash;7</b></td></tr>
 </tbody>
 </table></div>
 
-<h2>Wat we hebben geleerd</h2>
+<h2>Wat we leerden</h2>
+<h3>E2B is het laptopmodel</h3>
+<p>Op een laptop met 16 GB zonder videokaart had E2B een volledig studieantwoord klaar in ongeveer 20 seconden. E4B deed er 112 seconden over voor hetzelfde. E2B had ook alle vijf onze korte feitencontroles goed. De volledige vergelijking staat in <a href="/blog/gemma-4-e2b-vs-e4b">E2B tegen E4B, gemeten</a>.</p>
 
-<div class="card g">
-<h3>1. E2B is het laptopmodel</h3>
-<p>Op een laptop met 16 GB zonder videokaart had het een volledig studieantwoord in ongeveer 20 seconden klaar, waar E4B er 112 over deed. Bij vijf snelle feitenvragen had het er geen enkele fout. <a href="/blog/gemma-4-e2b-vs-e4b">E2B tegen E4B, gemeten.</a></p>
-</div>
+<h3>E4B is het model voor gaming-pc's</h3>
+<p>Zodra het hele model op een videokaart staat, is E4B 7 tot 9 keer sneller dan op een laptop, en zijn antwoorden zijn beter dan die van E2B. Elke kaart met 6 GB of meer kan hem helemaal bevatten.</p>
 
-<div class="card b">
-<h3>2. E4B is het gaming-pc-model</h3>
-<p>Zodra het hele model op een videokaart staat, is E4B <strong>7 tot 9 keer zo snel</strong> als op een laptop, en zijn de antwoorden beter. Elke kaart vanaf 6 GB kan het.</p>
-</div>
-
-<div class="card p">
-<h3>3. 12B heeft echte VRAM nodig, niet alleen RAM</h3>
-<p>Op een kaart van 8 GB beantwoordde 12B één korte vraag prima en liep het daarna elke keer vast als de chat groeide. Die pc had 48 GB RAM, en dat hielp niet. <a href="/blog/how-much-vram-for-ai">Waarom het model op je kaart moet passen.</a></p>
-</div>
+<h3>12B heeft echt VRAM nodig, niet alleen RAM</h3>
+<p>Op een kaart van 8 GB beantwoordde 12B één korte vraag prima en liep daarna elke keer vast als de chat langer werd. Die pc had 48 GB RAM, en dat hielp niet, want het model en het gesprek moeten allebei op de kaart passen. Daarover meer in <a href="/blog/how-much-vram-for-ai">waarom het model op je kaart moet passen</a>.</p>
 
 <h2>Welke Gemma 4 voor jouw pc?</h2>
-<div class="expect">
-<div class="g"><h4>Laptop met 8 GB</h4><p>E2B. Sluit eerst andere apps.</p></div>
-<div class="b"><h4>Laptop met 16 GB, geen kaart</h4><p>E2B voor de snelheid. E4B werkt, maar is traag.</p></div>
-<div class="y"><h4>Gaming-pc, kaart van 6 tot 8 GB</h4><p>E4B, helemaal op de kaart.</p></div>
-<div class="p"><h4>Kaart met 12 GB of meer</h4><p>E4B is snel; 12B wordt een optie.</p></div>
-</div>
-
-<p>Gemma 4 wordt door Google uitgebracht onder de Apache 2.0-licentie. GreenCube kiest automatisch de juiste voor je pc. <a href="/blog/can-my-pc-run-ai">Bekijk alle {{pcs}} pc's die we hebben gemeten.</a></p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Je pc</th><th>Gebruik</th></tr></thead>
+<tbody>
+<tr><td>Laptop met 8 GB</td><td>E2B, met andere apps gesloten</td></tr>
+<tr><td>Laptop met 16 GB, zonder videokaart</td><td>E2B voor snelheid; E4B werkt maar is traag</td></tr>
+<tr><td>Gaming-pc met een kaart van 6&ndash;8 GB</td><td>E4B, helemaal op de kaart</td></tr>
+<tr><td>Kaart van 12 GB of meer</td><td>E4B is snel; 12B wordt een optie</td></tr>
+</tbody>
+</table></div>
+<p>Kies je liever niet zelf, dan bekijkt GreenCube je pc en kiest het de juiste voor je. De snelheden van elke pc die we testten staan in <a href="/blog/can-my-pc-run-ai">Kan mijn pc AI draaien?</a></p>

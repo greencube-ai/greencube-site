@@ -15,51 +15,37 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Kort antwoord:</strong> een AI die helemaal in het geheugen van je videokaart (VRAM) past, is snel. Een die overloopt, is <strong>trager dan wanneer je de kaart helemaal niet gebruikt</strong>, en kan vastlopen. Kleiner en helemaal op de kaart wint van groter en half erop.</p></div>
+<div class="answer"><p>Je hebt genoeg VRAM nodig voor het hele model plus ongeveer 1,5 GB voor het gesprek en Windows. Een AI die helemaal in het geheugen van je videokaart past, is snel. Een die overloopt, kan uiteindelijk trager zijn dan wanneer je de kaart helemaal niet gebruikt, en kan vastlopen. Kleiner en helemaal op de kaart wint van groter en half erop.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>tokens per seconde met het hele model op de kaart</span></div>
-<div class="stat p"><b>5,9</b><span>met een deel ervan naast de kaart: 6 keer trager</span></div>
-<div class="stat y"><b>Vastlopen</b><span>als een model dat net past een lange chat tegenkomt</span></div>
-</div>
+<p>Dat hebben we niet uit een specificatieblad. We hebben het gemeten op een echte gaming-pc terwijl we GreenCube bouwden, de app die ik maak, en de resultaten veranderden hoe GreenCube een model kiest.</p>
 
 <h2>De test</h2>
-<p>Een desktop-pc met een AMD RX 5700 XT (8 GB VRAM) en 48 GB RAM. We laadden een model met 12 miljard parameters (Gemma 4 12B, ongeveer 6,7 GB) en zetten er meer of minder van op de kaart, alles in één sessie in september 2026.</p>
-
+<p>De pc was een desktop met een AMD RX 5700 XT (8 GB VRAM) en 48 GB RAM. We laadden een model met 12 miljard parameters (Gemma 4 12B, ongeveer 6,7 GB) en zetten er meer of minder van op de kaart, allemaal in één sessie in september 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Hoeveel van het model op de kaart stond</th><th>Schrijft (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Alles</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 van zijn lagen</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 van zijn lagen</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Ter vergelijking: een kleiner model (Gemma 4 E4B) op alleen de processor</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Dat kleinere model, helemaal op de kaart</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Alles</td><td><b>35,6</b></td></tr>
+<tr><td>28 van zijn lagen</td><td><b>5,9</b></td></tr>
+<tr><td>20 van zijn lagen</td><td><b>4,3</b></td></tr>
+<tr><td><em>Ter vergelijking: een kleiner model (Gemma 4 E4B) alleen op de processor</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Datzelfde kleinere model, helemaal op de kaart</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
-<h2>Wat we hebben geleerd</h2>
+<h2>Wat we leerden</h2>
+<h3>Het is bijna alles of niets</h3>
+<p>Alleen al een deel van het model naast de kaart maakte het 6 keer trager. Met 20 lagen op de kaart was het trager dan een kleiner model dat helemaal zonder kaart draaide. Half op de kaart geeft je het slechtste van twee werelden.</p>
 
-<div class="card g">
-<h3>1. Alles of niets</h3>
-<p>Alleen al een deel van het model naast de kaart maakte het <strong>6 keer trager</strong>. Met 20 lagen op de kaart was het trager dan een kleiner model dat helemaal zonder kaart draaide. Half op de kaart is het slechtste van twee werelden.</p>
-</div>
+<h3>Het grootste model dat laadt, is niet het beste</h3>
+<p>Het 12B-model paste wel helemaal op de kaart van 8 GB, voor één korte vraag. Naarmate de chat groeide, liep het elke keer vast, omdat de kaart bijna geen ruimte meer had voor het gesprek. Het kleinere model had ongeveer 3 GB over en draaide met 63 tot 72 tokens per seconde.</p>
 
-<div class="card p">
-<h3>2. De grootste is niet de beste</h3>
-<p>Het 12B-model paste wel helemaal op de kaart van 8 GB, voor één korte vraag. Toen de chat groeide, liep het elke keer vast: de kaart had bijna geen ruimte meer voor het gesprek. Het kleinere model had ongeveer 3 GB over en draaide met 63 tot 72 tokens per seconde.</p>
-</div>
-
-<div class="card b">
-<h3>3. Laat ruimte</h3>
-<p>Op een GTX 1650 met 4 GB werd een model van 4,2 GB op een kaart van 3,9 GB geperst, en het allereerste bericht mislukte met "niet genoeg geheugen". GreenCube houdt nu ongeveer <strong>1,5 GB van de kaart vrij</strong> voor de chat en voor Windows.</p>
-</div>
+<h3>Laat ruimte over</h3>
+<p>Op een GTX 1650 met 4 GB werd een model van 4,2 GB op een kaart van 3,9 GB geperst, en het allereerste bericht mislukte met "niet genoeg geheugen". Sindsdien houdt GreenCube ongeveer 1,5 GB van de kaart vrij voor de chat en voor Windows.</p>
 
 <h2>Zo kies je een model voor je kaart</h2>
-<div class="expect">
-<div class="g"><h4>Check je VRAM</h4><p>Taakbeheer &rarr; Prestaties &rarr; GPU &rarr; Toegewezen GPU-geheugen.</p></div>
-<div class="b"><h4>Modelgrootte + 1,5 GB</h4><p>Het modelbestand plus ongeveer 1,5 GB moet in dat getal passen.</p></div>
-<div class="y"><h4>Bij twijfel kleiner</h4><p>Een kleiner model helemaal op de kaart wint van een groter model half erop.</p></div>
-<div class="p"><h4>Of laat de app kiezen</h4><p>GreenCube leest je kaart uit en kiest een model dat er ruim op past.</p></div>
-</div>
-
-<p>Echte snelheden op {{pcs}} pc's, van een GTX 1650 tot een RTX 5060: <a href="/blog/can-my-pc-run-ai">bekijk ze hier</a>.</p>
+<ol class="steps">
+<li>Controleer je VRAM: Taakbeheer &rarr; Prestaties &rarr; GPU &rarr; Toegewezen GPU-geheugen.</li>
+<li>Tel ongeveer 1,5 GB op bij de bestandsgrootte van het model. Dat totaal moet in je VRAM passen.</li>
+<li>Twijfel je, kies dan kleiner. Een kleiner model helemaal op de kaart wint van een groter dat er half op staat.</li>
+</ol>
+<p>Reken je liever niet zelf, dan leest GreenCube je kaart uit en kiest het een model dat past, met ruimte over. Echte snelheden op {{pcs}} pc's, van een GTX 1650 tot een RTX 5060, staan in <a href="/blog/can-my-pc-run-ai">Kan mijn pc AI draaien?</a></p>

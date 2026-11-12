@@ -6,29 +6,29 @@ Canonical: https://blog.greencube.app/blog/es/requisitos-gemma-4
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** el pequeño **Gemma 4 E2B** funciona en un **portátil de 8 GB**. **E4B** quiere 16 GB de RAM, o vuela en cualquier **tarjeta gráfica de 6 GB o más**. **12B** necesita **10 GB de VRAM o más** para aguantar una conversación de verdad.
+El Gemma 4 más pequeño, E2B, funciona en un portátil de 8 GB sin tarjeta gráfica. E4B pide 16 GB de RAM, o cualquier tarjeta gráfica de 6 GB o más, donde va rápido. Gemma 4 12B necesita al menos 10 GB de VRAM para aguantar una conversación de verdad.
 
-- **8 GB** de RAM bastan para Gemma 4 E2B, sin tarjeta gráfica
-- **56–72** tokens por segundo de E4B en tarjetas gaming de 8 GB
-- **10 GB** de VRAM antes de fiarnos de 12B en un chat largo
+Estos números salen de nuestras propias pruebas. GreenCube, la app que hago, funciona con Gemma 4 (Cube 2B está basado en Gemma 4 E2B y Cube 4B en Gemma 4 E4B), así que hemos cronometrado estos modelos en 10 PCs reales, en septiembre y octubre de 2026. Gemma 4 en sí es gratis: Google lo publicó con licencia Apache 2.0, que permite el uso comercial.
 
 ## Requisitos de Gemma 4 de un vistazo
 
-| Modelo | Tamaño | Mínimo recomendado | Mejor en |
+| Modelo | Tamaño del archivo | Mínimo que recomendaríamos | Mejor en |
 | --- | --- | --- | --- |
-| **Gemma 4 E2B** | 2,6 GB | 8 GB de RAM, sin tarjeta | Portátiles |
-| **Gemma 4 E4B** | 4,2 GB | 16 GB de RAM, o una tarjeta de 6 GB | PCs gaming, portátiles de 16 GB |
-| **Gemma 4 12B** | 6,7 GB | 10 GB de VRAM o más | Tarjetas de 12 GB o más |
+| Gemma 4 E2B | 2,6 GB | 8 GB de RAM, sin tarjeta | Portátiles |
+| Gemma 4 E4B | 4,2 GB | 16 GB de RAM, o una tarjeta de 6 GB | PCs gaming, portátiles de 16 GB |
+| Gemma 4 12B | 6,7 GB | 10 GB de VRAM o más | Tarjetas de 12 GB o más |
+
+El tamaño del archivo es solo el principio. Mientras chateas, la conversación también ocupa memoria, así que deja un par de GB libres de margen. En un portátil de 8 GB eso significa cerrar antes otras apps.
 
 ## Velocidades medidas
 
-A qué velocidad escribe cada uno su respuesta, en tokens por segundo (un token es un trozo de palabra; a partir de unos 8 escribe más rápido de lo que lees). Medido con GreenCube en septiembre y octubre de 2026.
+Esta es la velocidad a la que cada modelo escribe su respuesta, en tokens por segundo. Un token son unos tres cuartos de una palabra en inglés, y la mayoría de la gente lee en inglés unos 5 por segundo, así que todo lo que pase de ahí se nota rápido.
 
 | PC | Modelo | Escribe (tokens/s) |
 | --- | --- | --- |
 | Sobremesa, AMD RX 5700 XT 8 GB | E4B | **63–72** |
 | Sobremesa, NVIDIA RTX 5060 8 GB | E4B | **56** |
-| Sobremesa, tarjeta de 12 GB | E4B | **50–55** |
+| Sobremesa, tarjeta gráfica de 12 GB | E4B | **50–55** |
 | Sobremesa, NVIDIA GTX 1660 Super 6 GB | E4B | **35–38** |
 | Sobremesa, AMD RX 5700 XT 8 GB | 12B | **20–35** (solo chats cortos) |
 | Sobremesa, NVIDIA GTX 1650 4 GB | E4B | **unos 20** |
@@ -38,37 +38,28 @@ A qué velocidad escribe cada uno su respuesta, en tokens por segundo (un token 
 
 ## Lo que aprendimos
 
-### 1. E2B es el modelo para portátiles
+### E2B es el modelo para portátiles
 
-En un portátil de 16 GB sin tarjeta gráfica terminó una respuesta completa de estudio en unos 20 segundos, donde E4B tardó 112. En cinco preguntas rápidas de datos no falló ninguna. [E2B contra E4B, medido.](https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b)
+En un portátil de 16 GB sin tarjeta gráfica, E2B terminó una respuesta completa de estudio en unos 20 segundos. E4B tardó 112 segundos en lo mismo. E2B además acertó nuestras cinco preguntas rápidas de datos. La comparación completa está en [E2B contra E4B, medido](https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b).
 
-### 2. E4B es el modelo para PCs gaming
+### E4B es el modelo para PCs gaming
 
-Cuando el modelo entero está en una tarjeta gráfica, E4B va **de 7 a 9 veces más rápido** que en un portátil, y sus respuestas son mejores. Cualquier tarjeta de 6 GB o más lo consigue.
+En cuanto el modelo entero está en una tarjeta gráfica, E4B va de 7 a 9 veces más rápido que en un portátil, y sus respuestas son mejores que las de E2B. Cualquier tarjeta de 6 GB o más lo aloja entero.
 
-### 3. 12B necesita VRAM de verdad, no solo RAM
+### 12B necesita VRAM de verdad, no solo RAM
 
-En una tarjeta de 8 GB, 12B contestó bien una pregunta corta y luego falló cada vez que el chat crecía. Ese PC tenía 48 GB de RAM y no le sirvieron. [Por qué el modelo tiene que caber en tu tarjeta.](https://blog.greencube.app/blog/es/cuanta-vram-para-ia)
+En una tarjeta de 8 GB, 12B contestó bien una pregunta corta y luego se cayó cada vez que el chat crecía. Ese PC tenía 48 GB de RAM y no le sirvieron de nada, porque el modelo y la conversación tienen que caber los dos en la tarjeta. Hay más sobre esto en [por qué el modelo tiene que caber en tu tarjeta](https://blog.greencube.app/blog/how-much-vram-for-ai).
 
 ## ¿Qué Gemma 4 para tu PC?
 
-#### Portátil de 8 GB
+| Tu PC | Usa |
+| --- | --- |
+| Portátil de 8 GB | E2B, con las demás apps cerradas |
+| Portátil de 16 GB, sin tarjeta gráfica | E2B para ir rápido; E4B funciona pero va lento |
+| PC gaming con tarjeta de 6–8 GB | E4B, entero en la tarjeta |
+| Tarjeta de 12 GB o más | E4B va rápido; 12B pasa a ser una opción |
 
-E2B. Cierra otras apps antes.
-
-#### Portátil de 16 GB sin tarjeta
-
-E2B para ir rápido. E4B funciona pero va lento.
-
-#### PC gaming, tarjeta de 6–8 GB
-
-E4B, entero en la tarjeta.
-
-#### Tarjeta de 12 GB o más
-
-E4B va rápido; 12B pasa a ser una opción.
-
-Google publica Gemma 4 con licencia Apache 2.0. GreenCube elige el adecuado para tu PC automáticamente. [Mira los 10 PCs que medimos.](https://blog.greencube.app/blog/es/ia-en-mi-pc)
+Si prefieres no elegir, GreenCube revisa tu PC y elige el adecuado por ti. Las velocidades de cada PC que probamos están en [¿Puede mi PC ejecutar IA?](https://blog.greencube.app/blog/can-my-pc-run-ai)
 
 ## FAQ
 

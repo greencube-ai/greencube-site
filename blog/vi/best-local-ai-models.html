@@ -64,61 +64,48 @@
 <p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
 <h1>Mô hình AI cục bộ tốt nhất cho máy bạn, theo RAM và VRAM (đo thực tế)</h1>
 <p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 28 tháng 10, 2026</p>
-<div class="answer"><p><strong>Trả lời ngắn:</strong> mô hình AI cục bộ tốt nhất cho máy <em>của bạn</em> là <strong>mô hình lớn nhất nằm trọn trên card đồ họa, còn dư khoảng 1,5 GB</strong>. Không có card? Dùng một <strong>mô hình nhỏ</strong> trong RAM. Mô hình nhỏ hơn nằm trọn trên card thắng mô hình lớn hơn bị tràn ra ngoài: chúng tôi đo được khi tràn thì <strong>chậm hơn 6 lần</strong>. Dưới đây là lựa chọn cho từng loại máy, với tốc độ chúng tôi đo trên 10 máy thật.</p></div>
+<div class="answer"><p>Mô hình AI cục bộ tốt nhất cho máy bạn là mô hình lớn nhất nằm trọn trên card đồ họa mà vẫn còn dư khoảng 1,5 GB. Nếu không có card đồ họa, hãy chọn một mô hình nhỏ chạy trong RAM. Một mô hình nhỏ hơn nằm trọn trên card thắng một mô hình lớn hơn bị tràn ra ngoài: khi một phần mô hình không vừa, chúng tôi đo được nó chạy chậm hơn 6 lần.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>+1,5 GB</b><span>tệp mô hình cộng khoảng 1,5 GB phải vừa VRAM của bạn</span></div>
-<div class="stat p"><b>6&times;</b><span>chậm hơn khi một phần mô hình không vừa card</span></div>
-<div class="stat b"><b>10</b><span>máy thật chúng tôi đã đo, từ laptop đến máy bàn chơi game</span></div>
-</div>
+<p>Dưới đây là lựa chọn cho từng loại máy, kèm tốc độ chúng tôi đo trên 10 máy thật. Có một điều cần biết trước: chúng tôi mới chỉ đo các mô hình Gemma 4 mà GreenCube dùng (tôi là người làm GreenCube), nên đó là những mô hình duy nhất tôi đưa ra tốc độ. Quy tắc chọn kích thước thì đúng với mọi dòng mô hình.</p>
 
-<h2>Mô hình tốt nhất cho máy bạn</h2>
+<h2>Mô hình tốt nhất cho máy của bạn</h2>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Máy của bạn</th><th>Cỡ mô hình vừa</th><th>Những gì chúng tôi đo</th></tr></thead>
+<thead><tr><th>Máy của bạn</th><th>Kích thước mô hình vừa</th><th>Chúng tôi đo được</th></tr></thead>
 <tbody>
-<tr><td>Laptop 8 GB, không có card đồ họa</td><td>Nhỏ, khoảng 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> token/giây trong chat thật; hãy đóng các ứng dụng khác trước</td></tr>
-<tr><td>Laptop 16 GB, không có card đồ họa</td><td>Nhỏ để có tốc độ; khoảng 4 GB vẫn chạy nhưng chậm</td><td>E2B <b>14&ndash;18</b> token/giây; E4B <b>8&ndash;10</b></td></tr>
-<tr><td>Card đồ họa 4 GB</td><td>Khoảng 2&ndash;3 GB vừa trọn; 4 GB bị tràn</td><td>E4B (4,2 GB, một phần trong RAM) khoảng <b>20</b> token/giây trên GTX 1650</td></tr>
+<tr><td>Laptop 8 GB, không có card đồ họa</td><td>Nhỏ, khoảng 2&ndash;3 GB (Gemma 4 E2B, 2,6 GB)</td><td><b>5&ndash;7</b> token/giây trong chat thật; đóng các ứng dụng khác trước</td></tr>
+<tr><td>Laptop 16 GB, không có card đồ họa</td><td>Nhỏ nếu cần tốc độ; khoảng 4 GB vẫn chạy nhưng chậm</td><td>E2B <b>14&ndash;18</b> token/giây; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Card đồ họa 4 GB</td><td>Khoảng 2&ndash;3 GB nằm trọn; 4 GB bị tràn</td><td>E4B (4,2 GB, một phần trong RAM) khoảng <b>20</b> token/giây trên GTX 1650</td></tr>
 <tr><td>Card đồ họa 6 GB</td><td>Khoảng 4&ndash;4,5 GB</td><td>E4B <b>35&ndash;38</b> token/giây trên GTX 1660 Super</td></tr>
-<tr><td>Card đồ họa 8 GB</td><td>Khoảng 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> trên các card gần đây (khoảng 11 trên RX 580 cũ)</td></tr>
-<tr><td>Card đồ họa 12 GB+</td><td>Khoảng 6&ndash;10 GB: mô hình cỡ 12B</td><td>E4B <b>50&ndash;55</b> trên card 12 GB; 12B cần 10 GB+ cho chat dài</td></tr>
+<tr><td>Card đồ họa 8 GB</td><td>Khoảng 4&ndash;6 GB</td><td>E4B <b>56&ndash;72</b> trên các card đời mới (khoảng 11 trên RX 580 đời cũ)</td></tr>
+<tr><td>Card đồ họa từ 12 GB</td><td>Khoảng 6&ndash;10 GB: mô hình cỡ 12B</td><td>E4B <b>50&ndash;55</b> trên card 12 GB; 12B cần từ 10 GB cho chat dài</td></tr>
 </tbody>
 </table></div>
-<p>Mỗi card có trang riêng: <a href="/blog/vi/can-my-pc-run-ai">Máy tôi có chạy được AI không?</a> Hoặc gõ tên card vào <a href="/blog/vi/can-my-pc-run-ai#checker">công cụ kiểm tra</a>.</p>
+<p>Mỗi card có trang riêng trong <a href="/blog/vi/can-my-pc-run-ai">Máy tôi có chạy được AI không?</a>, hoặc bạn có thể gõ tên card của mình vào <a href="/blog/vi/can-my-pc-run-ai#checker">công cụ kiểm tra</a>.</p>
 
 <p class="bridge-mid">Không chắc PC của bạn có đủ sức? <a href="https://greencube.app/vi/what-you-get">Xem máy của bạn chạy được gì <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Vì sao "vừa" quan trọng hơn "lớn nhất"</h2>
-<div class="card p">
-<h3>Tràn ra ngoài là còn chậm hơn không có card</h3>
-<p>Trên RX 5700 XT 8 GB, Gemma 4 12B viết 35,6 token mỗi giây khi nằm trọn trên card, 5,9 khi một phần nằm ngoài card, và 4,3 khi còn ít hơn nằm trên card: chậm hơn một mô hình nhỏ hơn chạy không có card. <a href="/blog/vi/how-much-vram-for-ai">Bài thử VRAM đầy đủ</a>.</p>
-</div>
-<div class="card y">
-<h3>Vừa với một câu hỏi, crash trong cuộc chat dài</h3>
-<p>Cùng mô hình 12B đó vừa card 8 GB với một câu hỏi ngắn, rồi lần nào cũng crash khi cuộc chat dài ra: cuộc trò chuyện cũng cần chỗ. Khoảng dư 1,5 GB là để dành cho việc đó.</p>
-</div>
-<div class="card g">
-<h3>Nhỏ thường là đủ</h3>
-<p>Trên laptop 16 GB, Gemma 4 E2B đưa ra một câu trả lời học tập đầy đủ trong 20 giây và đúng 5 trên 5 câu kiểm tra kiến thức nhanh; E4B giải thích tốt hơn nhưng mất 112 giây. <a href="/blog/vi/gemma-4-e2b-vs-e4b">E2B và E4B, đo thực tế</a>.</p>
-</div>
+<p>Khi một mô hình tràn ra khỏi card, nó có thể còn chậm hơn cả khi không có card. Trên RX 5700 XT 8 GB, Gemma 4 12B viết 35,6 token mỗi giây khi nằm trọn trên card, 5,9 khi một phần nằm ngoài card, và 4,3 khi phần nằm trên card còn ít hơn nữa. Con số cuối đó chậm hơn một mô hình nhỏ hơn chạy không cần card. Toàn bộ bài thử có trong <a href="/blog/vi/how-much-vram-for-ai">AI cần bao nhiêu VRAM</a>.</p>
+<p>Vừa cho một câu hỏi cũng không giống với vừa cho cả một cuộc chat. Cùng mô hình 12B đó vừa với card 8 GB cho một câu hỏi ngắn, rồi bị crash mỗi khi cuộc trò chuyện dài ra, vì cuộc trò chuyện cũng cần chỗ trên card. Khoảng dư 1,5 GB là để dành cho việc đó.</p>
+<p>Và mô hình nhỏ thường là đủ. Trên laptop 16 GB, Gemma 4 E2B đưa ra một câu trả lời học tập đầy đủ trong 20 giây và trả lời đúng 5 trên 5 câu kiểm tra kiến thức nhanh. E4B giải thích tốt hơn nhưng mất 112 giây. Xem thêm trong <a href="/blog/vi/gemma-4-e2b-vs-e4b">E2B và E4B, đo thực tế</a>.</p>
 
 <h2>Các mô hình chúng tôi đã đo</h2>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Mô hình</th><th>Dung lượng tệp</th><th>Hợp nhất với</th><th>Giấy phép</th></tr></thead>
+<thead><tr><th>Mô hình</th><th>Kích thước tệp</th><th>Hợp nhất với</th><th>Giấy phép</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>Laptop, RAM 8&ndash;16 GB</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>Card đồ họa từ 6 GB trở lên</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>khoảng 6,7 GB</td><td>Card đồ họa từ 10&ndash;12 GB trở lên</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td>Laptop, 8&ndash;16 GB RAM</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td>Card đồ họa từ 6 GB</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 12B</td><td>khoảng 6,7 GB</td><td>Card đồ họa từ 10&ndash;12 GB</td><td>Apache 2.0</td></tr>
 </tbody>
 </table></div>
-<p>Đây là các tệp đi kèm GreenCube và là những tệp duy nhất chúng tôi đã đo thời gian, nên chúng tôi chỉ đưa tốc độ cho chúng. Các họ mô hình khác cũng theo cùng quy tắc: xem dung lượng tệp, cộng khoảng 1,5 GB, rồi so với VRAM của bạn. <a href="/blog/vi/gemma-4-requirements">Yêu cầu chi tiết của Gemma 4</a>.</p>
+<p>Với bất kỳ mô hình nào khác, quy tắc vẫn vậy: lấy kích thước tệp, cộng khoảng 1,5 GB, rồi so với VRAM của bạn. Chi tiết về Gemma có trong <a href="/blog/vi/gemma-4-requirements">yêu cầu của Gemma 4</a>.</p>
 
-<h2>Cách kiểm tra VRAM</h2>
+<h2>Cách kiểm tra VRAM của bạn</h2>
 <ol class="steps">
-<li>Nhấn <strong>Ctrl + Shift + Esc</strong> để mở Task Manager (Trình quản lý tác vụ).</li>
-<li>Vào <strong>Performance</strong> (Hiệu suất), rồi <strong>GPU</strong>.</li>
-<li><strong>Dedicated GPU memory</strong> (bộ nhớ GPU riêng) là VRAM của bạn. Không có bộ nhớ riêng? Hãy dùng một mô hình nhỏ trong RAM.</li>
+<li>Nhấn Ctrl + Shift + Esc để mở Task Manager (Trình quản lý tác vụ).</li>
+<li>Vào Performance (Hiệu suất), rồi GPU.</li>
+<li>Xem Dedicated GPU memory (bộ nhớ GPU riêng): đó là VRAM của bạn. Nếu không có bộ nhớ riêng, hãy dùng một mô hình nhỏ trong RAM.</li>
 </ol>
-<p>Không muốn tự chọn? GreenCube đọc card và RAM của bạn rồi chọn mô hình vừa, còn dư chỗ. Các ứng dụng miễn phí như LM Studio, Jan và Ollama để bạn tự chọn: <a href="/blog/vi/best-offline-ai-chatbot">so sánh 12 ứng dụng</a>.</p>
+<p>Các ứng dụng miễn phí như LM Studio, Jan và Ollama cho bạn tự chọn mô hình (<a href="/blog/vi/best-offline-ai-chatbot">so sánh 12 ứng dụng</a>). Nếu bạn hoàn toàn không muốn chọn, GreenCube đọc card và RAM của bạn rồi chọn một mô hình vừa mà vẫn còn chỗ dư.</p>
 <h2>Câu hỏi</h2>
 <div class="faq">
 <details><summary>Mô hình AI cục bộ tốt nhất là gì?</summary><p>Mô hình lớn nhất nằm trọn trên card đồ họa mà còn dư khoảng 1,5 GB. Một mô hình nhỏ hơn nằm trọn trên card thắng một mô hình lớn hơn bị tràn sang RAM: trong bài thử của chúng tôi, một mô hình có một phần nằm ngoài card 8 GB chạy chậm hơn 6 lần.</p></details>

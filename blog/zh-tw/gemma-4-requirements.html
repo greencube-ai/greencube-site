@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Gemma 4 配置要求：本地執行需要什麼樣的電腦", "description": "Gemma 4 E2B、E4B 和 12B 的配置要求，在真實電腦上實測：每個需要多少記憶體和顯示記憶體，在筆電和遊戲顯示卡上跑多快。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/gemma-4-requirements", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "本地執行 Gemma 4 的最低配置是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "最小的 Gemma 4 E2B（2.6 GB 檔案）在一臺 8 GB 記憶體、沒有顯示卡的筆電上就能執行，真實聊天中每秒 5 到 7 個 token。啟動時需要幾 GB 的空閒記憶體。"}}, {"@type": "Question", "name": "Gemma 4 E4B 需要多少顯示記憶體？", "acceptedAnswer": {"@type": "Answer", "text": "E4B 是一個 4.2 GB 的檔案，可以完整裝進 6 GB 顯示卡，在 GTX 1660 Super 上每秒輸出 35 到 38 個 token。在 8 GB 顯示卡上是 56 到 72 個。沒有顯示卡時，16 GB 記憶體也能執行，每秒約 8 個 token。"}}, {"@type": "Question", "name": "Gemma 4 12B 能在 8 GB 顯示卡上執行嗎？", "acceptedAnswer": {"@type": "Answer", "text": "回答一個短問題可以：在 RX 5700 XT 上每秒 20 到 35 個 token。但對話一長就崩潰了，因為顯示卡幾乎沒有剩餘空間。我們建議至少 10 GB 顯示記憶體。"}}, {"@type": "Question", "name": "Gemma 4 可以免費使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。Google 以 Apache 2.0 授權條款釋出了包括 E2B 和 E4B 在內的 Gemma 4，允許商業使用。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在本地跑 Gemma 4 的最低需求是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "最小的 Gemma 4 E2B（2.6 GB 的檔案）在一台 8 GB 記憶體、沒有顯示卡的筆電上就能跑，實際聊天時每秒 5 到 7 個 token。啟動時需要幾 GB 的可用記憶體。"}}, {"@type": "Question", "name": "Gemma 4 E4B 需要多少顯示記憶體？", "acceptedAnswer": {"@type": "Answer", "text": "E4B 是 4.2 GB 的檔案，可以整個裝進 6 GB 的顯示卡，在 GTX 1660 Super 上每秒寫出 35 到 38 個 token。在 8 GB 的顯示卡上是 56 到 72 個。沒有顯示卡時，16 GB 記憶體也能跑，每秒約 8 個 token。"}}, {"@type": "Question", "name": "Gemma 4 12B 能在 8 GB 顯示卡上跑嗎？", "acceptedAnswer": {"@type": "Answer", "text": "問一個短問題可以：在 RX 5700 XT 上每秒 20 到 35 個 token。但對話一變長它就當掉了，因為顯示卡幾乎沒有剩餘空間。我們會希望至少有 10 GB 顯示記憶體。"}}, {"@type": "Question", "name": "Gemma 4 可以免費使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。Google 以 Apache 2.0 授權釋出了 Gemma 4，包括 E2B 和 E4B，允許商業使用。"}}]}</script>
 </head>
 <body>
 
@@ -64,74 +64,66 @@
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>Gemma 4 配置要求：本地執行需要什麼樣的電腦</h1>
 <p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>簡短回答：</strong>小巧的 <strong>Gemma 4 E2B</strong> 在 <strong>8 GB 筆電</strong>上就能跑。<strong>E4B</strong> 需要 16 GB 記憶體，或者在任何 <strong>6 GB 及以上的顯示卡</strong>上飛快執行。<strong>12B</strong> 要進行真正的對話，需要 <strong>10 GB 以上顯示記憶體</strong>。</p></div>
+<div class="answer"><p>最小的 Gemma 4，也就是 E2B，在沒有顯示卡的 8 GB 筆電上就能跑。E4B 需要 16 GB 記憶體，或任何 6 GB 以上的顯示卡，在顯示卡上跑得很快。Gemma 4 12B 則需要至少 10 GB 顯示記憶體，才撐得住一段真正的對話。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>8 GB</b><span>記憶體就夠跑 Gemma 4 E2B，不需要顯示卡</span></div>
-<div class="stat b"><b>56&ndash;72</b><span>E4B 在 8 GB 遊戲顯示卡上每秒 token 數</span></div>
-<div class="stat p"><b>10 GB</b><span>顯示記憶體達到這個數，我們才放心讓 12B 跑長對話</span></div>
-</div>
+<p>這些數字來自我們自己的測試。我在做的應用程式 GreenCube 就是用 Gemma 4（Cube 2B 以 Gemma 4 E2B 為基礎，Cube 4B 以 Gemma 4 E4B 為基礎），所以我們在 2026 年 9 月和 10 月，於 10 台真實電腦上替這些模型計過時。Gemma 4 本身是免費的：Google 以 Apache 2.0 授權釋出，允許商業使用。</p>
 
-<h2>Gemma 4 配置要求一覽</h2>
+<h2>Gemma 4 需求一覽</h2>
 <div class="tbl-wrap"><table>
-<thead><tr><th>模型</th><th>檔案大小</th><th>我們建議的最低配置</th><th>最適合</th></tr></thead>
+<thead><tr><th>模型</th><th>檔案大小</th><th>我們建議的最低配備</th><th>最適合</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>8 GB 記憶體，無顯示卡</td><td>筆電</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>16 GB 記憶體，或 6 GB 顯示卡</td><td>遊戲電腦、16 GB 筆電</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>6.7 GB</td><td>10 GB 以上顯示記憶體</td><td>12 GB 及以上的顯示卡</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td>8 GB 記憶體，不需顯示卡</td><td>筆電</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td>16 GB 記憶體，或 6 GB 顯示卡</td><td>遊戲電腦、16 GB 筆電</td></tr>
+<tr><td>Gemma 4 12B</td><td>6.7 GB</td><td>10 GB 以上顯示記憶體</td><td>12 GB 以上的顯示卡</td></tr>
 </tbody>
 </table></div>
+<p>檔案大小只是起點。聊天的時候，對話本身也要佔記憶體，所以還要多留幾 GB。在 8 GB 筆電上，這代表要先把其他應用程式關掉。</p>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
 <h2>實測速度</h2>
-<p>每個模型輸出回答的速度，單位是每秒 token 數（token 是詞的片段）。2026 年 9 月和 10 月用 GreenCube 測得。</p>
+<p>這是每個模型寫出回答的速度，單位是每秒 token 數。一個 token 大約是四分之三個英文單字，大多數人每秒讀大約 5 個，所以超過這個數字就會覺得很快。</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>電腦</th><th>模型</th><th>輸出（token/秒）</th></tr></thead>
+<thead><tr><th>電腦</th><th>模型</th><th>輸出速度（token/秒）</th></tr></thead>
 <tbody>
-<tr><td>桌上型電腦，AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
-<tr><td>桌上型電腦，NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
-<tr><td>桌上型電腦，12 GB 顯示卡</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
-<tr><td>桌上型電腦，NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
-<tr><td>桌上型電腦，AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b>（僅限短對話）</td></tr>
-<tr><td>桌上型電腦，NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>約 20</b></td></tr>
-<tr><td>筆電，Intel Core Ultra 5，16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
-<tr><td>同一臺筆電</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
-<tr><td>筆電，Intel Iris Xe，8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+<tr><td>桌機，AMD RX 5700 XT 8 GB</td><td>E4B</td><td><b>63&ndash;72</b></td></tr>
+<tr><td>桌機，NVIDIA RTX 5060 8 GB</td><td>E4B</td><td><b>56</b></td></tr>
+<tr><td>桌機，12 GB 顯示卡</td><td>E4B</td><td><b>50&ndash;55</b></td></tr>
+<tr><td>桌機，NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td><b>35&ndash;38</b></td></tr>
+<tr><td>桌機，AMD RX 5700 XT 8 GB</td><td>12B</td><td><b>20&ndash;35</b>（只限短對話）</td></tr>
+<tr><td>桌機，NVIDIA GTX 1650 4 GB</td><td>E4B</td><td><b>約 20</b></td></tr>
+<tr><td>筆電，Intel Core Ultra 5，16 GB</td><td>E2B</td><td><b>14&ndash;18</b></td></tr>
+<tr><td>同一台筆電</td><td>E4B</td><td><b>8&ndash;10</b></td></tr>
+<tr><td>筆電，Intel Iris Xe，8 GB</td><td>E2B</td><td><b>5&ndash;7</b></td></tr>
 </tbody>
 </table></div>
 
-<h2>我們發現了什麼</h2>
+<h2>我們學到了什麼</h2>
+<h3>E2B 是筆電用的模型</h3>
+<p>在沒有顯示卡的 16 GB 筆電上，E2B 大約 20 秒就寫完一個完整的課業回答。同樣的事 E4B 花了 112 秒。我們的五題快速事實查核，E2B 也全部答對。完整比較在 <a href="/blog/zh-tw/gemma-4-e2b-vs-e4b">E2B 與 E4B 實測比較</a>。</p>
 
-<div class="card g">
-<h3>1. E2B 是筆電的模型</h3>
-<p>在沒有顯示卡的 16 GB 筆電上，它約 20 秒就給出一個完整的學習回答，E4B 則用了 112 秒。五道簡短的事實核查題，它一道都沒錯。<a href="/blog/zh-tw/gemma-4-e2b-vs-e4b">E2B 和 E4B 實測對比。</a></p>
-</div>
+<h3>E4B 是遊戲電腦用的模型</h3>
+<p>一旦整個模型都放進顯示卡，E4B 比在筆電上快 7 到 9 倍，回答也比 E2B 好。任何 6 GB 以上的顯示卡都能完整裝下它。</p>
 
-<div class="card b">
-<h3>2. E4B 是遊戲電腦的模型</h3>
-<p>整個模型放進顯示卡後，E4B 比在筆電上<strong>快 7 到 9 倍</strong>，回答也更好。任何 6 GB 及以上的顯示卡都行。</p>
-</div>
+<h3>12B 需要真正的顯示記憶體，光有記憶體不夠</h3>
+<p>在 8 GB 的顯示卡上，12B 回答一個短問題沒問題，但每次對話一變長就當掉。那台電腦有 48 GB 記憶體，卻一點幫助都沒有，因為模型和對話都必須裝進顯示卡裡。更多說明請看 <a href="/blog/zh-tw/how-much-vram-for-ai">為什麼模型必須裝進你的顯示卡</a>。</p>
 
-<div class="card p">
-<h3>3. 12B 需要真正的顯示記憶體，不只是記憶體</h3>
-<p>在 8 GB 顯示卡上，12B 回答一個短問題沒問題，但對話一變長每次都崩潰。那臺電腦有 48 GB 記憶體，也沒用。<a href="/blog/zh-tw/how-much-vram-for-ai">為什麼模型必須裝進顯示卡。</a></p>
-</div>
-
-<h2>哪個 Gemma 4 適合你的電腦？</h2>
-<div class="expect">
-<div class="g"><h4>8 GB 筆電</h4><p>E2B。先關掉其他應用程式。</p></div>
-<div class="b"><h4>無顯示卡的 16 GB 筆電</h4><p>要速度就選 E2B。E4B 能用，但慢。</p></div>
-<div class="y"><h4>6&ndash;8 GB 顯示卡的遊戲電腦</h4><p>E4B，全部放在顯示卡上。</p></div>
-<div class="p"><h4>12 GB 及以上的顯示卡</h4><p>E4B 很快；12B 也可以考慮了。</p></div>
-</div>
-
-<p>Gemma 4 由 Google 以 Apache 2.0 授權條款釋出。GreenCube 會自動為你的電腦選對版本。<a href="/blog/zh-tw/can-my-pc-run-ai">檢視我們測過的全部 10 臺電腦。</a></p>
+<h2>你的電腦該用哪個 Gemma 4？</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th>你的電腦</th><th>建議使用</th></tr></thead>
+<tbody>
+<tr><td>8 GB 筆電</td><td>E2B，並把其他應用程式關掉</td></tr>
+<tr><td>16 GB 筆電，沒有顯示卡</td><td>要速度就用 E2B；E4B 也能跑，但很慢</td></tr>
+<tr><td>配備 6&ndash;8 GB 顯示卡的遊戲電腦</td><td>E4B，整個放在顯示卡上</td></tr>
+<tr><td>12 GB 以上的顯示卡</td><td>E4B 很快；12B 也成了一個選項</td></tr>
+</tbody>
+</table></div>
+<p>如果你不想自己選，GreenCube 會檢查你的電腦，替你挑好合適的那一個。我們測過的每台電腦的速度，都在 <a href="/blog/zh-tw/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a></p>
 <h2>常見問題</h2>
 <div class="faq">
-<details><summary>本地執行 Gemma 4 的最低配置是什麼？</summary><p>最小的 Gemma 4 E2B（2.6 GB 檔案）在一臺 8 GB 記憶體、沒有顯示卡的筆電上就能執行，真實聊天中每秒 5 到 7 個 token。啟動時需要幾 GB 的空閒記憶體。</p></details>
-<details><summary>Gemma 4 E4B 需要多少顯示記憶體？</summary><p>E4B 是一個 4.2 GB 的檔案，可以完整裝進 6 GB 顯示卡，在 GTX 1660 Super 上每秒輸出 35 到 38 個 token。在 8 GB 顯示卡上是 56 到 72 個。沒有顯示卡時，16 GB 記憶體也能執行，每秒約 8 個 token。</p></details>
-<details><summary>Gemma 4 12B 能在 8 GB 顯示卡上執行嗎？</summary><p>回答一個短問題可以：在 RX 5700 XT 上每秒 20 到 35 個 token。但對話一長就崩潰了，因為顯示卡幾乎沒有剩餘空間。我們建議至少 10 GB 顯示記憶體。</p></details>
-<details><summary>Gemma 4 可以免費使用嗎？</summary><p>可以。Google 以 Apache 2.0 授權條款釋出了包括 E2B 和 E4B 在內的 Gemma 4，允許商業使用。</p></details>
+<details><summary>在本地跑 Gemma 4 的最低需求是什麼？</summary><p>最小的 Gemma 4 E2B（2.6 GB 的檔案）在一台 8 GB 記憶體、沒有顯示卡的筆電上就能跑，實際聊天時每秒 5 到 7 個 token。啟動時需要幾 GB 的可用記憶體。</p></details>
+<details><summary>Gemma 4 E4B 需要多少顯示記憶體？</summary><p>E4B 是 4.2 GB 的檔案，可以整個裝進 6 GB 的顯示卡，在 GTX 1660 Super 上每秒寫出 35 到 38 個 token。在 8 GB 的顯示卡上是 56 到 72 個。沒有顯示卡時，16 GB 記憶體也能跑，每秒約 8 個 token。</p></details>
+<details><summary>Gemma 4 12B 能在 8 GB 顯示卡上跑嗎？</summary><p>問一個短問題可以：在 RX 5700 XT 上每秒 20 到 35 個 token。但對話一變長它就當掉了，因為顯示卡幾乎沒有剩餘空間。我們會希望至少有 10 GB 顯示記憶體。</p></details>
+<details><summary>Gemma 4 可以免費使用嗎？</summary><p>可以。Google 以 Apache 2.0 授權釋出了 Gemma 4，包括 E2B 和 E4B，允許商業使用。</p></details>
 </div>
 </article>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>

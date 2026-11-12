@@ -6,56 +6,48 @@ Canonical: https://blog.greencube.app/blog/es/mejor-modelo-ia-local
 Published: 2026-10-23  
 Author: Hector Gras
 
-**Respuesta corta:** el mejor modelo de IA local para *tu* PC es **el más grande que cabe entero en tu tarjeta gráfica, con unos 1,5 GB de margen**. ¿Sin tarjeta? Un **modelo pequeño** en tu RAM. Un modelo más pequeño entero en la tarjeta gana a uno más grande que se sale: lo medimos y salirse fue **6 veces más lento**. Abajo, la elección para cada tipo de PC, con velocidades medidas en 10 PCs reales.
+El mejor modelo de IA local para tu PC es el más grande que cabe entero en tu tarjeta gráfica con unos 1,5 GB de margen. Sin tarjeta gráfica, elige un modelo pequeño que funcione en tu RAM. Un modelo más pequeño entero en la tarjeta gana a uno más grande que se sale: cuando parte de un modelo no cabía, lo medimos 6 veces más lento.
 
-- **+1,5 GB** el archivo del modelo más unos 1,5 GB tienen que caber en tu VRAM
-- **6×** más lento cuando parte del modelo no cabe en la tarjeta
-- **10** PCs reales medidos, de portátiles a sobremesas gaming
+Abajo está la elección para cada tipo de PC, con velocidades que medimos en 10 PCs reales. Algo que conviene saber antes: solo hemos cronometrado los modelos Gemma 4 que trae GreenCube (yo hago GreenCube), así que son los únicos modelos de los que doy velocidades. La regla del tamaño vale para cualquier familia de modelos.
 
 ## El mejor modelo para tu PC
 
 | Tu PC | Tamaño de modelo que cabe | Lo que medimos |
 | --- | --- | --- |
-| Portátil de 8 GB, sin tarjeta gráfica | Pequeño, unos 2–3 GB (Gemma 4 E2B, 2,6 GB) | **5–7** tokens/s en chats reales; cierra antes las demás apps |
-| Portátil de 16 GB, sin tarjeta gráfica | Pequeño para ir rápido; unos 4 GB funciona pero lento | E2B **14–18** tokens/s; E4B **8–10** |
-| Tarjeta gráfica de 4 GB | Unos 2–3 GB caben enteros; 4 GB se sale | E4B (4,2 GB, en parte en RAM) unos **20** tokens/s en una GTX 1650 |
+| Portátil de 8 GB, sin tarjeta gráfica | Pequeño, de unos 2–3 GB (Gemma 4 E2B, 2,6 GB) | **5–7** tokens/s en chats reales; cierra antes otras apps |
+| Portátil de 16 GB, sin tarjeta gráfica | Pequeño para ir rápido; uno de unos 4 GB funciona, pero lento | E2B **14–18** tokens/s; E4B **8–10** |
+| Tarjeta gráfica de 4 GB | Unos 2–3 GB caben enteros; 4 GB se salen | E4B (4,2 GB, en parte en la RAM) unos **20** tokens/s en una GTX 1650 |
 | Tarjeta gráfica de 6 GB | Unos 4–4,5 GB | E4B **35–38** tokens/s en una GTX 1660 Super |
 | Tarjeta gráfica de 8 GB | Unos 4–6 GB | E4B **56–72** en tarjetas recientes (unos 11 en una RX 580 antigua) |
-| Tarjeta gráfica de 12 GB o más | Unos 6–10 GB: modelos tipo 12B | E4B **50–55** en 12 GB; el 12B necesita 10 GB o más para chats largos |
+| Tarjeta gráfica de 12 GB o más | Unos 6–10 GB: modelos de la clase 12B | E4B **50–55** en 12 GB; 12B necesita 10 GB o más para chats largos |
 
-Cada tarjeta con su propia página: [¿Puede mi PC ejecutar IA?](https://blog.greencube.app/blog/es/ia-en-mi-pc) O escribe tu tarjeta en [el comprobador](https://blog.greencube.app/blog/es/ia-en-mi-pc#checker).
+Cada tarjeta tiene su propia página en [¿Puede mi PC ejecutar IA?](https://blog.greencube.app/blog/can-my-pc-run-ai), o puedes escribir la tuya en [el comprobador](https://blog.greencube.app/blog/can-my-pc-run-ai#checker).
 
 ## Por qué "que quepa" importa más que "el más grande"
 
-### Si se sale, va más lento que sin tarjeta
+Cuando un modelo se sale de la tarjeta, puede acabar yendo más lento que sin tarjeta. En una RX 5700 XT de 8 GB, Gemma 4 12B escribía 35,6 tokens por segundo entero en la tarjeta, 5,9 con una parte fuera y 4,3 con todavía menos dentro. Ese último número es más lento que un modelo más pequeño funcionando sin tarjeta. La prueba completa está en [cuánta VRAM necesitas para la IA](https://blog.greencube.app/blog/how-much-vram-for-ai).
 
-En una RX 5700 XT de 8 GB, Gemma 4 12B escribía 35,6 tokens por segundo entero en la tarjeta, 5,9 con parte fuera y 4,3 con todavía menos dentro: más lento que un modelo pequeño sin tarjeta. [La prueba de VRAM completa](https://blog.greencube.app/blog/es/cuanta-vram-para-ia).
+Caber para una pregunta tampoco es lo mismo que caber para un chat. El mismo modelo 12B cupo en la tarjeta de 8 GB para una pregunta corta y luego se colgó cada vez que la conversación crecía, porque la conversación también necesita sitio en la tarjeta. Para eso es el margen de 1,5 GB.
 
-### Cabe para una pregunta, se cuelga en un chat largo
-
-El mismo 12B cupo en la tarjeta de 8 GB para una pregunta corta, y se colgó cada vez que el chat crecía: la conversación también necesita sitio. Para eso son los 1,5 GB de margen.
-
-### Lo pequeño a menudo basta
-
-En un portátil de 16 GB, Gemma 4 E2B dio una respuesta de estudio completa en 20 segundos y acertó 5 de 5 comprobaciones rápidas de datos; el E4B explicaba mejor pero tardó 112 segundos. [E2B frente a E4B, medido](https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b).
+Y a menudo lo pequeño basta. En un portátil de 16 GB, Gemma 4 E2B dio una respuesta de estudio completa en 20 segundos y acertó 5 de 5 preguntas rápidas de datos. E4B explicaba mejor, pero tardó 112 segundos. Hay más en [E2B contra E4B, medido](https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b).
 
 ## Los modelos que medimos
 
 | Modelo | Tamaño del archivo | Mejor en | Licencia |
 | --- | --- | --- | --- |
-| **Gemma 4 E2B** | 2,6 GB | Portátiles, 8–16 GB de RAM | Apache 2.0 |
-| **Gemma 4 E4B** | 4,2 GB | Tarjetas gráficas de 6 GB o más | Apache 2.0 |
-| **Gemma 4 12B** | unos 6,7 GB | Tarjetas gráficas de 10–12 GB o más | Apache 2.0 |
+| Gemma 4 E2B | 2,6 GB | Portátiles, 8–16 GB de RAM | Apache 2.0 |
+| Gemma 4 E4B | 4,2 GB | Tarjetas gráficas de 6 GB o más | Apache 2.0 |
+| Gemma 4 12B | unos 6,7 GB | Tarjetas gráficas de 10–12 GB o más | Apache 2.0 |
 
-Son los archivos que distribuye GreenCube y los únicos que hemos cronometrado, así que son los únicos de los que damos velocidades. Las demás familias de modelos siguen la misma regla: mira el tamaño del archivo, súmale unos 1,5 GB y compáralo con tu VRAM. [Requisitos de Gemma 4 en detalle](https://blog.greencube.app/blog/es/requisitos-gemma-4).
+Para cualquier otro modelo vale la misma regla: toma el tamaño del archivo, súmale unos 1,5 GB y compáralo con tu VRAM. Los detalles de Gemma están en [requisitos de Gemma 4](https://blog.greencube.app/blog/gemma-4-requirements).
 
-## Cómo mirar tu VRAM
+## Cómo ver tu VRAM
 
-1. Pulsa **Ctrl + Shift + Esc** para abrir el Administrador de tareas.
-2. Ve a **Rendimiento** y luego a **GPU**.
-3. **Memoria dedicada de GPU** es tu VRAM. ¿No tienes memoria dedicada? Usa un modelo pequeño en la RAM.
+1. Pulsa Ctrl + Mayús + Esc para abrir el Administrador de tareas.
+2. Ve a Rendimiento y luego a GPU.
+3. Mira la memoria dedicada de GPU: esa es tu VRAM. Si no hay memoria dedicada, usa un modelo pequeño en la RAM.
 
-¿Prefieres no elegir? GreenCube mira tu tarjeta y tu RAM y elige el modelo que cabe, con margen. Las apps gratis como LM Studio, Jan y Ollama te dejan elegir a ti: [12 apps comparadas](https://blog.greencube.app/blog/es/mejor-chatbot-ia-sin-internet).
+Las apps gratuitas como LM Studio, Jan y Ollama te dejan elegir el modelo tú ([12 apps comparadas](https://blog.greencube.app/blog/best-offline-ai-chatbot)). Si prefieres no elegir nada, GreenCube lee tu tarjeta y tu RAM y escoge un modelo que quepa con margen.
 
 ## FAQ
 

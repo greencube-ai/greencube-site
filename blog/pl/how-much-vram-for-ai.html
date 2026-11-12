@@ -64,55 +64,41 @@
 <p class="kicker"><a href="/blog/pl">Blog GreenCube</a></p>
 <h1>Ile VRAM potrzeba do AI? Dlaczego model musi zmieścić się na twojej karcie</h1>
 <p class="byline">Autor: <a href="/blog/pl/hector-gras">Hector Gras</a> &middot; 23 października 2026</p>
-<div class="answer"><p><strong>Krótka odpowiedź:</strong> AI, które w całości mieści się w pamięci twojej karty graficznej (VRAM), jest szybkie. Takie, które się z niej wylewa, jest <strong>wolniejsze, niż gdybyś w ogóle nie używał karty</strong>, i może się wysypać. Mniejsze i w całości na karcie wygrywa z większym i do połowy.</p></div>
+<div class="answer"><p>Potrzebujesz tyle VRAM, żeby zmieścić cały model plus około 1,5 GB na rozmowę i Windows. AI, które w całości mieści się w pamięci karty graficznej, jest szybkie. Takie, które się z niej wylewa, może skończyć wolniej, niż gdyby karta w ogóle nie była używana, i może się wysypywać. Mniejszy model w całości na karcie wygrywa z większym w połowie na karcie.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>tokena na sekundę z całym modelem na karcie</span></div>
-<div class="stat p"><b>5,9</b><span>gdy część jest poza kartą: 6 razy wolniej</span></div>
-<div class="stat y"><b>Wysypka</b><span>gdy model, który ledwo się mieści, trafia na długi czat</span></div>
-</div>
+<p>Nie wzięliśmy tego ze specyfikacji. Zmierzyliśmy to na prawdziwym komputerze do gier, budując GreenCube, aplikację, którą tworzę, a wyniki zmieniły to, jak GreenCube wybiera model.</p>
 
 <h2>Test</h2>
-<p>Komputer stacjonarny z AMD RX 5700 XT (8 GB VRAM) i 48 GB RAM. Załadowaliśmy model z 12 miliardami parametrów (Gemma 4 12B, około 6,7 GB) i kładliśmy go na kartę w większej lub mniejszej części, wszystko w jednej sesji we wrześniu 2026 r.</p>
-
+<p>Komputer był stacjonarny, z AMD RX 5700 XT (8 GB VRAM) i 48 GB RAM. Załadowaliśmy model z 12 miliardami parametrów (Gemma 4 12B, około 6,7 GB) i kładliśmy na kartę większą lub mniejszą jego część, wszystko w jednej sesji we wrześniu 2026.</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Ile modelu było na karcie</th><th>Pisze (tokeny/s)</th></tr></thead>
+<thead><tr><th>Jaka część modelu była na karcie</th><th>Pisze (tokenów/s)</th></tr></thead>
 <tbody>
-<tr><td>Całość</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 jego warstw</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 jego warstw</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Dla porównania: mniejszy model (Gemma 4 E4B) na samym procesorze</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Ten mniejszy model, w całości na karcie</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Cały model</td><td><b>35,6</b></td></tr>
+<tr><td>28 jego warstw</td><td><b>5,9</b></td></tr>
+<tr><td>20 jego warstw</td><td><b>4,3</b></td></tr>
+<tr><td><em>Dla porównania: mniejszy model (Gemma 4 E4B) tylko na procesorze</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Ten mniejszy model w całości na karcie</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">Nie wiesz, czy twój PC da radę? <a href="https://greencube.app/pl/what-you-get">Sprawdź, co na nim zadziała <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Czego się dowiedzieliśmy</h2>
+<h3>To prawie zasada wszystko albo nic</h3>
+<p>Zostawienie choćby części modelu poza kartą spowolniło go 6 razy. Z 20 warstwami na karcie był wolniejszy niż mniejszy model działający bez karty. Połowa na karcie daje najgorsze z obu światów.</p>
 
-<div class="card g">
-<h3>1. Wszystko albo nic</h3>
-<p>Wystarczyło trzymać część modelu poza kartą, żeby był <strong>6 razy wolniejszy</strong>. Z 20 warstwami na karcie był wolniejszy niż mniejszy model działający w ogóle bez karty. Połowa na karcie to najgorsze z obu światów.</p>
-</div>
+<h3>Największy model, który się ładuje, nie jest najlepszy</h3>
+<p>Model 12B zmieścił się w całości na karcie z 8 GB, na jedno krótkie pytanie. Gdy czat rósł, za każdym razem się wysypywał, bo na karcie nie zostało prawie miejsca na rozmowę. Mniejszy model miał około 3 GB zapasu i pisał od 63 do 72 tokenów na sekundę.</p>
 
-<div class="card p">
-<h3>2. Największy nie znaczy najlepszy</h3>
-<p>Model 12B zmieścił się w całości na karcie z 8 GB, na jedno krótkie pytanie. Gdy czat rósł, za każdym razem się wysypywał: na karcie prawie nie zostało miejsca na rozmowę. Mniejszy model miał około 3 GB zapasu i działał z prędkością 63–72 tokenów na sekundę.</p>
-</div>
+<h3>Zostaw miejsce</h3>
+<p>Na GTX 1650 z 4 GB model ważący 4,2 GB został wciśnięty na kartę z 3,9 GB i już pierwsza wiadomość skończyła się błędem „za mało pamięci”. Od tamtej pory GreenCube zostawia około 1,5 GB karty wolnego na czat i dla Windows.</p>
 
-<div class="card b">
-<h3>3. Zostaw miejsce</h3>
-<p>Na GTX 1650 z 4 GB model o rozmiarze 4,2 GB wciśnięto na kartę z 3,9 GB i już pierwsza wiadomość skończyła się błędem „za mało pamięci”. GreenCube trzyma teraz na karcie około <strong>1,5 GB wolnego</strong> na czat i dla Windows.</p>
-</div>
-
-<h2>Jak dobrać model do karty</h2>
-<div class="expect">
-<div class="g"><h4>Sprawdź VRAM</h4><p>Menedżer zadań &rarr; Wydajność &rarr; GPU &rarr; Dedykowana pamięć GPU.</p></div>
-<div class="b"><h4>Rozmiar modelu + 1,5 GB</h4><p>Plik modelu plus około 1,5 GB powinien zmieścić się w tej liczbie.</p></div>
-<div class="y"><h4>W razie wątpliwości mniejszy</h4><p>Mniejszy model w całości na karcie wygrywa z większym do połowy.</p></div>
-<div class="p"><h4>Albo pozwól wybrać aplikacji</h4><p>GreenCube odczytuje twoją kartę i wybiera model, który mieści się z zapasem.</p></div>
-</div>
-
-<p>Prawdziwe prędkości na 10 komputerach, od GTX 1650 po RTX 5060: <a href="/blog/pl/can-my-pc-run-ai">zobacz tutaj</a>.</p>
+<h2>Jak dobrać model do swojej karty</h2>
+<ol class="steps">
+<li>Sprawdź swoją VRAM: Menedżer zadań &rarr; Wydajność &rarr; GPU &rarr; Dedykowana pamięć GPU.</li>
+<li>Dodaj około 1,5 GB do rozmiaru pliku modelu. Ta suma powinna zmieścić się w twojej VRAM.</li>
+<li>W razie wątpliwości wybierz mniejszy. Mniejszy model w całości na karcie wygrywa z większym w połowie na niej.</li>
+</ol>
+<p>Jeśli wolisz nie liczyć, GreenCube odczytuje twoją kartę i wybiera model, który mieści się z zapasem. Prawdziwe prędkości na 10 komputerach, od GTX 1650 do RTX 5060, znajdziesz w tekście <a href="/blog/pl/can-my-pc-run-ai">Czy mój komputer uruchomi AI?</a></p>
 <h2>Pytania</h2>
 <div class="faq">
 <details><summary>Co się dzieje, gdy model AI nie mieści się w VRAM?</summary><p>Część, która się nie mieści, działa ze zwykłej pamięci i wszystko zwalnia. Na naszej karcie z 8 GB model z 28 warstwami na karcie pisał 5,9 tokena na sekundę zamiast 35,6 ze wszystkimi: 6 razy wolniej.</p></details>

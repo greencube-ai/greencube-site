@@ -16,64 +16,56 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Réponse courte :</strong> le petit <strong>Gemma 4 E2B</strong> tourne sur un <strong>portable de 8 Go</strong>. <strong>E4B</strong> demande 16 Go de RAM, ou file sur n'importe quelle <strong>carte graphique de 6 Go ou plus</strong>. <strong>12B</strong> a besoin de <strong>10 Go de VRAM ou plus</strong> pour tenir une vraie conversation.</p></div>
+<div class="answer"><p>Le plus petit Gemma 4, E2B, tourne sur un portable de 8 Go sans carte graphique. E4B demande 16 Go de RAM, ou n'importe quelle carte graphique de 6 Go ou plus, sur laquelle il va vite. Gemma 4 12B a besoin d'au moins 10 Go de VRAM pour tenir une vraie conversation.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>8 Go</b><span>de RAM suffisent pour Gemma 4 E2B, sans carte graphique</span></div>
-<div class="stat b"><b>56&ndash;72</b><span>tokens par seconde pour E4B sur des cartes gamer de 8 Go</span></div>
-<div class="stat p"><b>10 Go</b><span>de VRAM avant que nous fassions confiance au 12B pour une longue conversation</span></div>
-</div>
+<p>Ces chiffres viennent de nos propres tests. GreenCube, l'appli que je développe, tourne sur Gemma 4 (Cube 2B est basé sur Gemma 4 E2B et Cube 4B sur Gemma 4 E4B), donc nous avons chronométré ces modèles sur {{pcs}} vrais PC, en septembre et octobre 2026. Gemma 4 lui-même est gratuit : Google l'a publié sous licence Apache 2.0, qui autorise l'usage commercial.</p>
 
 <h2>La configuration requise pour Gemma 4 en un coup d'œil</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Modèle</th><th>Taille du fichier</th><th>Minimum que nous conseillons</th><th>Idéal sur</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2,6 Go</td><td>8 Go de RAM, sans carte</td><td>Portables</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4,2 Go</td><td>16 Go de RAM, ou une carte de 6 Go</td><td>PC gamer, portables de 16 Go</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>6,7 Go</td><td>10 Go de VRAM ou plus</td><td>Cartes de 12 Go ou plus</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2,6 Go</td><td>8 Go de RAM, sans carte</td><td>Portables</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 Go</td><td>16 Go de RAM, ou une carte de 6 Go</td><td>PC gamer, portables de 16 Go</td></tr>
+<tr><td>Gemma 4 12B</td><td>6,7 Go</td><td>10 Go de VRAM ou plus</td><td>Cartes de 12 Go ou plus</td></tr>
 </tbody>
 </table></div>
+<p>La taille du fichier n'est qu'un début. Pendant que vous discutez, la conversation a aussi besoin de mémoire, alors gardez quelques Go libres en plus. Sur un portable de 8 Go, ça veut dire fermer les autres applis d'abord.</p>
 
 <h2>Vitesses mesurées</h2>
-<p>La vitesse à laquelle chacun écrit sa réponse, en tokens par seconde (un token est un morceau de mot ; en français, vous en lisez environ 8 par seconde). Mesuré avec GreenCube en septembre et octobre 2026.</p>
+<p>Voici à quelle vitesse chaque modèle écrit sa réponse, en tokens par seconde. Un token fait à peu près les trois quarts d'un mot anglais, et la plupart des gens en lisent environ 5 par seconde, donc tout ce qui dépasse paraît rapide.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>Modèle</th><th>Écrit (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
-<tr><td>PC de bureau, NVIDIA RTX 5060 8 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
-<tr><td>PC de bureau, carte graphique de 12 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
-<tr><td>PC de bureau, NVIDIA GTX 1660 Super 6 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
-<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (conversations courtes seulement)</td></tr>
-<tr><td>PC de bureau, NVIDIA GTX 1650 4 Go</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>environ 20</b></td></tr>
-<tr><td>Portable, Intel Core Ultra 5, 16 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
-<tr><td>Le même portable</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
-<tr><td>Portable, Intel Iris Xe, 8 Go</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>E4B</td><td><b>63&ndash;72</b></td></tr>
+<tr><td>PC de bureau, NVIDIA RTX 5060 8 Go</td><td>E4B</td><td><b>56</b></td></tr>
+<tr><td>PC de bureau, carte graphique de 12 Go</td><td>E4B</td><td><b>50&ndash;55</b></td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1660 Super 6 Go</td><td>E4B</td><td><b>35&ndash;38</b></td></tr>
+<tr><td>PC de bureau, AMD RX 5700 XT 8 Go</td><td>12B</td><td><b>20&ndash;35</b> (conversations courtes seulement)</td></tr>
+<tr><td>PC de bureau, NVIDIA GTX 1650 4 Go</td><td>E4B</td><td><b>environ 20</b></td></tr>
+<tr><td>Portable, Intel Core Ultra 5, 16 Go</td><td>E2B</td><td><b>14&ndash;18</b></td></tr>
+<tr><td>Le même portable</td><td>E4B</td><td><b>8&ndash;10</b></td></tr>
+<tr><td>Portable, Intel Iris Xe, 8 Go</td><td>E2B</td><td><b>5&ndash;7</b></td></tr>
 </tbody>
 </table></div>
 
 <h2>Ce que nous avons appris</h2>
+<h3>E2B est le modèle des portables</h3>
+<p>Sur un portable de 16 Go sans carte graphique, E2B a terminé une réponse complète de révision en environ 20 secondes. E4B a mis 112 secondes pour la même chose. E2B a aussi réussi nos cinq petites vérifications de faits. La comparaison complète est dans <a href="/blog/gemma-4-e2b-vs-e4b">E2B contre E4B, mesuré</a>.</p>
 
-<div class="card g">
-<h3>1. E2B est le modèle des portables</h3>
-<p>Sur un portable de 16 Go sans carte graphique, il a terminé une réponse complète de révision en environ 20 secondes, là où E4B en a mis 112. Sur cinq petites questions de faits, il ne s'est jamais trompé. <a href="/blog/gemma-4-e2b-vs-e4b">E2B contre E4B, mesuré.</a></p>
-</div>
+<h3>E4B est le modèle des PC gamer</h3>
+<p>Dès que tout le modèle tient sur une carte graphique, E4B est 7 à 9 fois plus rapide que sur un portable, et ses réponses sont meilleures que celles d'E2B. N'importe quelle carte de 6 Go ou plus le contient entièrement.</p>
 
-<div class="card b">
-<h3>2. E4B est le modèle des PC gamer</h3>
-<p>Dès que tout le modèle est sur une carte graphique, E4B est <strong>7 à 9 fois plus rapide</strong> que sur un portable, et ses réponses sont meilleures. N'importe quelle carte de 6 Go ou plus fait l'affaire.</p>
-</div>
-
-<div class="card p">
-<h3>3. 12B a besoin de vraie VRAM, pas seulement de RAM</h3>
-<p>Sur une carte de 8 Go, 12B a bien répondu à une question courte, puis a planté chaque fois que la conversation grandissait. Ce PC avait 48 Go de RAM, et ça n'a pas aidé. <a href="/blog/how-much-vram-for-ai">Pourquoi le modèle doit tenir sur votre carte.</a></p>
-</div>
+<h3>12B a besoin de vraie VRAM, pas seulement de RAM</h3>
+<p>Sur une carte de 8 Go, 12B a bien répondu à une question courte, puis a planté chaque fois que la conversation grandissait. Ce PC avait 48 Go de RAM, et ça n'a pas aidé, parce que le modèle et la conversation doivent tous deux tenir sur la carte. Vous trouverez plus de détails dans <a href="/blog/how-much-vram-for-ai">pourquoi le modèle doit tenir sur votre carte</a>.</p>
 
 <h2>Quel Gemma 4 pour votre PC ?</h2>
-<div class="expect">
-<div class="g"><h4>Portable de 8 Go</h4><p>E2B. Fermez d'abord les autres applis.</p></div>
-<div class="b"><h4>Portable de 16 Go, sans carte</h4><p>E2B pour la vitesse. E4B fonctionne, mais lentement.</p></div>
-<div class="y"><h4>PC gamer, carte de 6 à 8 Go</h4><p>E4B, entièrement sur la carte.</p></div>
-<div class="p"><h4>Carte de 12 Go ou plus</h4><p>E4B va vite ; 12B devient une option.</p></div>
-</div>
-
-<p>Gemma 4 est publié par Google sous licence Apache 2.0. GreenCube choisit automatiquement le bon pour votre PC. <a href="/blog/can-my-pc-run-ai">Voir les {{pcs}} PC que nous avons mesurés.</a></p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Votre PC</th><th>À utiliser</th></tr></thead>
+<tbody>
+<tr><td>Portable de 8 Go</td><td>E2B, avec les autres applis fermées</td></tr>
+<tr><td>Portable de 16 Go, sans carte graphique</td><td>E2B pour la vitesse ; E4B marche, mais lentement</td></tr>
+<tr><td>PC gamer avec une carte de 6 à 8 Go</td><td>E4B, entièrement sur la carte</td></tr>
+<tr><td>Carte de 12 Go ou plus</td><td>E4B va vite ; 12B devient une option</td></tr>
+</tbody>
+</table></div>
+<p>Si vous préférez ne pas choisir, GreenCube examine votre PC et choisit le bon pour vous. Les vitesses de chaque PC que nous avons testé sont dans <a href="/blog/can-my-pc-run-ai">Mon PC peut-il faire tourner une IA ?</a></p>

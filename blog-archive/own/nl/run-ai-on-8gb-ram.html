@@ -9,22 +9,18 @@
  "lang": "nl",
  "alt": "run-ai-on-8gb-ram",
  "faq": [
-  {"q": "Kan ik AI draaien op een laptop met 8 GB RAM?", "a": "Ja, een klein model. Op onze laptop met 8 GB en Intel Iris Xe-graphics schreef het 5 tot 7 tokens per seconde in echte chats, en antwoorden duurden 30 tot 40 seconden. Afbeeldingen maken lukt niet."},
+  {"q": "Kan ik AI draaien op een laptop met 8 GB RAM?", "a": "Ja, een klein model. Op onze laptop met 8 GB en Intel Iris Xe-graphics schreef het 5 tot 7 tokens per seconde in echte chats, ongeveer zo snel als je Engels leest, en antwoorden duurden 30 tot 40 seconden. Afbeeldingen maken lukt niet."},
   {"q": "Waarom start AI niet op mijn laptop met 8 GB?", "a": "Meestal is er te weinig vrij geheugen. Onze laptop met 8 GB had met andere apps open maar ongeveer 1 GB vrij, en op een dag kon de AI niet laden. Als je eerst de browser en andere apps sluit, krijgt hij ruimte."},
   {"q": "Maken Intel Iris Xe-graphics AI sneller op een laptop met 8 GB?", "a": "Niet voor chatten. Op onze laptop schreef de processor 9,3 tokens per seconde en de Iris Xe-graphics 5,0. GreenCube test beide op je laptop en gebruikt de snelste."}
  ]
 }
 -->
-<div class="answer"><p><strong>Kort antwoord: ja, langzaam.</strong> Een kleine AI op een laptop met 8 GB schrijft ongeveer zo snel als je leest. Het addertje is niet de snelheid, maar <strong>vrij geheugen</strong>. Sluit eerst je andere apps.</p></div>
+<div class="answer"><p>Ja, langzaam. Een kleine AI op een laptop met 8 GB schrijft ongeveer zo snel als je leest, en een volledig antwoord duurt 30 tot 40 seconden. Het echte addertje is niet de snelheid maar het vrije geheugen, dus sluit je andere apps voordat je begint.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>tokens per seconde op de processor, in de korte opstarttest</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>voor een volledig antwoord</span></div>
-<div class="stat p"><b>~1 GB</b><span>vrij geheugen met andere apps open, het echte probleem</span></div>
-</div>
+<p>We probeerden het op de zwakste pc die we hebben gemeten, omdat "draait het op mijn oude laptop?" een van de eerste vragen is die mensen over lokale AI stellen. Het draait. Zo ziet dat eruit.</p>
 
 <h2>De test</h2>
-<p>De zwakste pc die we hebben gemeten: een laptop met 8 GB RAM, Intel Iris Xe-graphics, geen videokaart, op batterij. Klein model (Gemma 4 E2B), begin oktober 2026.</p>
+<p>De laptop heeft 8 GB RAM en Intel Iris Xe-graphics, zonder videokaart, en we lieten hem op de batterij draaien. We gebruikten het kleine model van GreenCube, Cube 2B (gebouwd op <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), begin oktober 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Wat</th><th>Resultaat</th></tr></thead>
@@ -38,29 +34,21 @@
 </tbody>
 </table></div>
 
-<h2>Wat we hebben geleerd</h2>
+<h2>Het werkt voor chatten en studeren</h2>
+<p>5 tot 7 tokens per seconde in echte chats is ongeveer de leessnelheid als je Engels leest. De korte opstarttest van GreenCube gaf 9,3, maar in echte chats lag het lager. Op een lang antwoord wacht je een halve minuut, maar het komt er, zonder internet en zonder limieten.</p>
 
-<div class="card g">
-<h3>1. Het werkt voor chatten en studeren</h3>
-<p>5 tot 7 tokens per seconde in echte chats ligt iets onder de leessnelheid in het Nederlands (de korte opstarttest gaf 9,3). Op een lang antwoord wacht je een halve minuut, maar het komt, zonder internet en zonder limieten.</p>
-</div>
+<h2>Vrij geheugen is de echte grens</h2>
+<p>Met de browser en andere apps open had de laptop maar ongeveer 1 GB geheugen vrij. Op een dag was dat niet genoeg en kon de AI niet eens starten. Het kleine model heeft een paar GB voor zichzelf nodig, dus op 8 GB moet het de ruimte zorgvuldig delen met alles wat je verder open hebt.</p>
 
-<div class="card p">
-<h3>2. Vrij geheugen is de echte grens</h3>
-<p>Met de browser en andere apps open had de laptop maar ongeveer 1 GB vrij. Op een dag was dat niet genoeg en kon de AI niet eens starten. Het kleine model heeft een paar GB voor zichzelf nodig.</p>
-</div>
-
-<div class="card y">
-<h3>3. De ingebouwde graphics maakten het trager</h3>
-<p>Op deze laptop schreven de Iris Xe-graphics 5,0 tokens per seconde, de processor 9,3. Op een andere laptop waren ze ongeveer gelijk. Je kunt het niet van tevoren weten, dus test GreenCube beide en gebruikt de snelste.</p>
-</div>
+<h2>De ingebouwde graphics maakten het trager</h2>
+<p>Je zou verwachten dat de grafische chip helpt, maar op deze laptop schreven de Iris Xe-graphics 5,0 tokens per seconde en de processor 9,3. Op een andere laptop waren ze ongeveer even snel. Je kunt het niet van tevoren aan de specificaties zien, dus test GreenCube beide op je laptop en gebruikt het de snelste.</p>
 
 <h2>Tips voor een laptop met 8 GB</h2>
 <ol class="steps">
-<li><strong>Sluit de browser</strong> (of de meeste tabbladen) voordat je begint. Browsers vreten geheugen.</li>
-<li><strong>Herstart de laptop</strong> voor een lange studiesessie. Dat maakt geheugen vrij dat andere apps vergaten terug te geven.</li>
-<li><strong>Stel kortere vragen</strong>, of één ding tegelijk. Kortere antwoorden komen sneller terug.</li>
-<li><strong>Sla afbeeldingen over.</strong> Die hebben zo'n 7 GB nodig; gebruik daarvoor een zwaardere pc.</li>
+<li>Sluit de browser, of de meeste tabbladen, voordat je begint. Browsers gebruiken veel geheugen.</li>
+<li>Herstart de laptop voor een lange studiesessie. Dat maakt geheugen vrij dat andere apps vergaten terug te geven.</li>
+<li>Vraag één ding tegelijk. Kortere antwoorden komen sneller terug.</li>
+<li>Bewaar afbeeldingen voor een zwaardere pc. Die hebben in hun eentje zo'n 7 GB nodig.</li>
 </ol>
 
-<p>Zie hoeveel sneller andere pc's zijn: <a href="/blog/can-my-pc-run-ai">hier hebben we {{pcs}} pc's gemeten</a>.</p>
+<p>Hoeveel sneller andere pc's zijn, zie je hier: <a href="/blog/can-my-pc-run-ai">we hebben {{pcs}} pc's gemeten</a>.</p>

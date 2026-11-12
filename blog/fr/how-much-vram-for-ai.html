@@ -64,55 +64,41 @@
 <p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
 <h1>Combien de VRAM faut-il pour l&#x27;IA ? Pourquoi le modèle doit tenir sur votre GPU</h1>
 <p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 23 octobre 2026</p>
-<div class="answer"><p><strong>Réponse courte :</strong> une IA qui tient entièrement dans la mémoire de votre carte graphique (la VRAM) est rapide. Une IA qui déborde est <strong>plus lente que si vous n'utilisiez pas la carte du tout</strong>, et peut planter. Plus petite et entièrement sur la carte vaut mieux que plus grande et à moitié dessus.</p></div>
+<div class="answer"><p>Il vous faut assez de VRAM pour contenir tout le modèle, plus environ 1,5 Go pour la conversation et Windows. Une IA qui tient entièrement dans la mémoire de votre carte graphique est rapide. Une IA qui déborde peut finir plus lente que si vous n'utilisiez pas la carte du tout, et elle peut planter. Plus petite et entièrement sur la carte vaut mieux que plus grande et à moitié dessus.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>tokens par seconde avec tout le modèle sur la carte</span></div>
-<div class="stat p"><b>5,9</b><span>avec une partie hors de la carte : 6 fois plus lent</span></div>
-<div class="stat y"><b>Plantage</b><span>quand un modèle qui tient tout juste rencontre une longue conversation</span></div>
-</div>
+<p>Nous ne l'avons pas tiré d'une fiche technique. Nous l'avons mesuré sur un vrai PC gamer en développant GreenCube, l'appli que je fais, et les résultats ont changé la façon dont GreenCube choisit un modèle.</p>
 
 <h2>Le test</h2>
-<p>Un PC de bureau avec une AMD RX 5700 XT (8 Go de VRAM) et 48 Go de RAM. Nous avons chargé un modèle de 12 milliards de paramètres (Gemma 4 12B, environ 6,7 Go) et en avons mis plus ou moins sur la carte, le tout en une seule séance en septembre 2026.</p>
-
+<p>Le PC était un PC de bureau avec une AMD RX 5700 XT (8 Go de VRAM) et 48 Go de RAM. Nous avons chargé un modèle de 12 milliards de paramètres (Gemma 4 12B, environ 6,7 Go) et en avons mis plus ou moins sur la carte, le tout en une seule séance en septembre 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quelle part du modèle était sur la carte</th><th>Écrit (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Tout</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 de ses couches</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 de ses couches</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Pour comparer : un modèle plus petit (Gemma 4 E4B) sur le processeur seul</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Ce modèle plus petit, entièrement sur la carte</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Tout</td><td><b>35,6</b></td></tr>
+<tr><td>28 de ses couches</td><td><b>5,9</b></td></tr>
+<tr><td>20 de ses couches</td><td><b>4,3</b></td></tr>
+<tr><td><em>Pour comparer : un modèle plus petit (Gemma 4 E4B) sur le processeur seul</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Ce modèle plus petit, entièrement sur la carte</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">Vous ne savez pas si votre PC suffit ? <a href="https://greencube.app/fr/what-you-get">Voyez ce qui tourne sur le vôtre <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Ce que nous avons appris</h2>
+<h3>C'est presque tout ou rien</h3>
+<p>Laisser seulement une partie du modèle hors de la carte l'a rendu 6 fois plus lent. Avec 20 couches sur la carte, il était plus lent qu'un modèle plus petit tournant sans carte du tout. À moitié sur la carte, vous avez le pire des deux.</p>
 
-<div class="card g">
-<h3>1. Tout ou rien</h3>
-<p>Laisser seulement une partie du modèle hors de la carte l'a rendu <strong>6 fois plus lent</strong>. Avec 20 couches sur la carte, il était plus lent qu'un modèle plus petit tournant sans carte du tout. À moitié sur la carte, c'est le pire des deux mondes.</p>
-</div>
+<h3>Le plus grand modèle qui se charge n'est pas le meilleur</h3>
+<p>Le modèle 12B tenait bien entièrement sur la carte de 8 Go, le temps d'une question courte. À mesure que la conversation s'allongeait, il a planté à chaque fois, parce que la carte n'avait presque plus de place pour la conversation. Le modèle plus petit avait environ 3 Go de marge et tournait à 63 à 72 tokens par seconde.</p>
 
-<div class="card p">
-<h3>2. Le plus grand n'est pas le meilleur</h3>
-<p>Le modèle 12B tenait bien entièrement sur la carte de 8 Go, le temps d'une question courte. À mesure que la conversation s'allongeait, il a planté à chaque fois : la carte n'avait presque plus de place pour la conversation. Le modèle plus petit avait environ 3 Go de marge et tournait à 63 à 72 tokens par seconde.</p>
-</div>
-
-<div class="card b">
-<h3>3. Laissez de la place</h3>
-<p>Sur une GTX 1650 de 4 Go, un modèle de 4,2 Go a été casé de force sur une carte de 3,9 Go, et le tout premier message a échoué avec « mémoire insuffisante ». GreenCube garde maintenant environ <strong>1,5 Go de la carte libre</strong> pour la conversation et pour Windows.</p>
-</div>
+<h3>Laissez de la place</h3>
+<p>Sur une GTX 1650 de 4 Go, un modèle de 4,2 Go a été casé de force sur une carte de 3,9 Go, et le tout premier message a échoué avec « mémoire insuffisante ». Depuis, GreenCube garde environ 1,5 Go de la carte libre pour la conversation et pour Windows.</p>
 
 <h2>Comment choisir un modèle pour votre carte</h2>
-<div class="expect">
-<div class="g"><h4>Vérifiez votre VRAM</h4><p>Gestionnaire des tâches &rarr; Performances &rarr; GPU &rarr; Mémoire GPU dédiée.</p></div>
-<div class="b"><h4>Taille du modèle + 1,5 Go</h4><p>Le fichier du modèle plus environ 1,5 Go doit tenir dans ce chiffre.</p></div>
-<div class="y"><h4>Dans le doute, prenez plus petit</h4><p>Un modèle plus petit entièrement sur la carte bat un plus grand à moitié dessus.</p></div>
-<div class="p"><h4>Ou laissez l'appli choisir</h4><p>GreenCube lit votre carte et choisit un modèle qui tient avec de la marge.</p></div>
-</div>
-
-<p>Des vitesses réelles sur 10 PC, d'une GTX 1650 à une RTX 5060 : <a href="/blog/fr/can-my-pc-run-ai">voyez-les ici</a>.</p>
+<ol class="steps">
+<li>Vérifiez votre VRAM : Gestionnaire des tâches &rarr; Performances &rarr; GPU &rarr; Mémoire GPU dédiée.</li>
+<li>Ajoutez environ 1,5 Go à la taille du fichier du modèle. Ce total doit tenir dans votre VRAM.</li>
+<li>Dans le doute, prenez plus petit. Un modèle plus petit entièrement sur la carte bat un plus grand à moitié dessus.</li>
+</ol>
+<p>Si vous préférez ne pas faire le calcul, GreenCube lit votre carte et choisit un modèle qui tient avec de la marge. Les vitesses réelles sur 10 PC, d'une GTX 1650 à une RTX 5060, sont dans <a href="/blog/fr/can-my-pc-run-ai">Mon PC peut-il faire tourner une IA ?</a></p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Que se passe-t-il si un modèle d&#x27;IA ne tient pas dans la VRAM ?</summary><p>La partie qui ne tient pas tourne depuis la mémoire normale, et tout ralentit. Sur notre carte de 8 Go, un modèle avec 28 de ses couches sur la carte a écrit à 5,9 tokens par seconde au lieu de 35,6 avec toutes ses couches : 6 fois plus lent.</p></details>

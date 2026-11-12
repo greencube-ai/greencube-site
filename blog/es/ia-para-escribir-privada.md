@@ -6,57 +6,50 @@ Canonical: https://blog.greencube.app/blog/es/ia-para-escribir-privada
 Published: 2026-10-23  
 Author: Hector Gras
 
-**Respuesta corta:** el asistente de IA para escribir más privado es **el que funciona en tu propio PC**: tus borradores no llegan a ninguna empresa, así que no hay nada con lo que entrenar, que guardar ni que revisar. En la nube, la privacidad depende del plan y de tus ajustes: en una cuenta personal gratis **5 de 9 IAs populares entrenan con tu texto por defecto**, la retención va de 30 días a 5 años, y desactivar el entrenamiento no cubre las valoraciones ni la revisión humana.
+El asistente de IA para escribir más privado es uno que funcione en tu propio PC. Tus borradores no llegan nunca a ninguna empresa, así que nada se puede usar para entrenar, guardar ni revisar. En la nube, la privacidad depende de tu plan y tus ajustes: en una cuenta personal gratis, 5 de 9 IAs populares entrenan con tu texto por defecto, y algunas lo guardan hasta 5 años.
 
-- **5 de 9** IAs populares entrenan con tu texto por defecto (cuenta personal gratis)
-- **3 años** guarda Gemini los chats revisados por personas, aunque los borres
-- **0** borradores enviados a ningún sitio por una IA en tu PC
+Yo hago GreenCube, una IA que funciona en tu PC, así que ten eso en cuenta al leer mi opinión. Los datos sobre los demás asistentes salen de sus propias páginas de ayuda, enlazadas abajo.
 
 ## Qué significa "privado" en un asistente de escritura
 
-- **Entrenamiento:** ¿se usa tu texto para entrenar el modelo? La mayoría de planes gratis dicen que sí por defecto.
-- **Retención:** ¿cuánto tiempo se guarda tu texto, aunque no se use para entrenar?
-- **Revisión humana:** ¿puede leer parte de él alguien de la empresa?
-- **Dónde se procesa:** ¿en los servidores de la empresa o en tu propio equipo?
+Lo deciden cuatro preguntas. ¿Se usa tu texto para entrenar el modelo? ¿Cuánto tiempo se guarda, aunque no se use para entrenar? ¿Puede leer parte de él gente de la empresa? ¿Y se procesa en los servidores de la empresa o en tu propio equipo?
+
+Casi todos los planes gratis responden que sí a la primera, por defecto. Desactivar el entrenamiento ayuda, pero no cubre las valoraciones ni la revisión humana.
 
 ## Entrenamiento y retención, comprobados
 
-Cuentas personales gratis, según las páginas de ayuda y privacidad de cada empresa (comprobado el 18 de octubre de 2026; la retención de ChatGPT, el 23 de octubre de 2026).
+Estas son las normas para cuentas personales gratis, sacadas de las páginas de ayuda y privacidad de cada empresa, comprobadas el 18 de octubre de 2026 (la retención de ChatGPT se volvió a comprobar el 23 de octubre de 2026).
 
 | Asistente | ¿Entrena con tu texto? | Retención y revisión |
 | --- | --- | --- |
-| **ChatGPT** | Sí, por defecto; desactiva "Improve the model for everyone" | Los chats temporales no se usan y se borran a los 30 días; los chats valorados pueden usarse aunque desactives el entrenamiento ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) |
-| **Gemini** | Sí, mientras "Keep Activity" esté activado | Se guardan 72 h tras desactivarlo; los revisados por personas, hasta 3 años ([Google](https://support.google.com/gemini/answer/13594961?hl=es)) |
+| **ChatGPT** | Sí, por defecto; desactiva "Mejorar el modelo para todos" | Los chats temporales no se usan y se borran a los 30 días; los chats valorados pueden usarse aunque el entrenamiento esté desactivado ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) |
+| **Gemini** | Sí, mientras la actividad (Keep Activity) esté activada | Se guardan 72 h después de desactivarla; los chats revisados por personas se guardan hasta 3 años ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) |
 | **Claude** | Solo si lo permites | Hasta 5 años si lo permites; desactivarlo después no borra lo ya usado ([Anthropic](https://www.anthropic.com/news/updates-to-our-consumer-terms)) |
-| **NotebookLM** | No, salvo que envíes valoraciones | Con valoraciones, revisado y guardado hasta 3 años ([Google](https://support.google.com/notebooklm/answer/17004255?hl=es)) |
-| **Perplexity** | Sí, por defecto | El interruptor solo detiene los datos futuros ([Perplexity](https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity)) |
+| **NotebookLM** | No, salvo que envíes valoraciones | Con valoraciones, se revisa y se guarda hasta 3 años ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)) |
+| **Perplexity** | Sí, por defecto | El ajuste solo detiene los datos futuros ([Perplexity](https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity)) |
 | **Mistral Le Chat** | Sí, por defecto | Las valoraciones se usan elijas lo que elijas ([Mistral](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training)) |
-| **Microsoft Copilot** (app nueva) | No lo dice | Revisa los ajustes de la propia app ([Microsoft](https://support.microsoft.com/es-es/privacy/microsoft-copilot/overview)) |
+| **Microsoft Copilot** (app nueva) | No lo dice | Revisa los ajustes de la propia app ([Microsoft](https://support.microsoft.com/en-us/privacy/microsoft-copilot/overview)) |
 | **Una IA en tu PC** (GreenCube) | No | No se envía nada; tus borradores se quedan en tu equipo ([privacidad](https://legal.greencube.app/privacy)) |
 
-No hemos comprobado aquí herramientas de escritura concretas como Grammarly o Notion AI; lee sus páginas de privacidad del mismo modo. Las nueve IAs en detalle: [qué IA no entrena con tus datos](https://blog.greencube.app/blog/es/ia-que-no-entrena-con-tus-datos).
+Aquí no hemos revisado herramientas específicas de escritura como Grammarly o Notion AI, así que lee sus páginas de privacidad del mismo modo. Las nueve IAs en detalle están en [qué IA no entrena con tus chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
-## Documentos confidenciales: trabajo para clientes, contratos, textos inéditos
+## Documentos confidenciales: trabajo para clientes, contratos, textos sin publicar
 
-### Mira primero las normas
+Empieza por las normas, no por los ajustes. Tu contrato, tu cliente o tu editorial pueden prohibir directamente meter su texto en un servicio en la nube, y eso pesa más que cualquier interruptor de una app.
 
-Tu contrato, tu cliente o tu editorial pueden prohibir meter su texto en un servicio en la nube. Eso decide más que cualquier ajuste.
+Si se permiten las herramientas en la nube, una cuenta de empresa o de trabajo es la opción más segura. OpenAI no entrena por defecto con los datos de Business, Enterprise ni de la API, y en los grandes servicios las cuentas de trabajo y de centros educativos suelen quedar fuera del entrenamiento. Aun así, el texto se procesa y se guarda en los servidores de la empresa.
 
-### Cuentas de empresa y de trabajo
-
-OpenAI no entrena por defecto con los datos de Business, Enterprise ni la API ([comprobado](https://greencube.app/does-chatgpt-train-on-your-data)), y las cuentas de trabajo y de centros educativos suelen quedar fuera del entrenamiento en los grandes servicios. El texto se sigue procesando y guardando en los servidores de la empresa.
-
-### Que se quede en tu equipo
-
-Una IA que funciona en tu propio PC lee y escribe en local: sin subidas, sin retención y sin revisores. GreenCube redacta correos, trabajos y documentos y crea archivos de PowerPoint, sin internet, por 9,99 € una vez; las apps gratis como LM Studio, Jan y GPT4All también lo hacen si no te importa elegir un modelo.
+La única forma de que un borrador se quede entero en tu equipo es una IA que funcione ahí, sin subidas, sin retención y sin revisores. GreenCube redacta correos, trabajos y documentos y hace archivos de PowerPoint sin internet, por 9,99 € una vez. Las apps gratis como LM Studio, Jan y [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives) también lo hacen, si no te importa elegir tú el modelo.
 
 ## ¿Asistente de escritura o chatbot general?
 
-Para la privacidad la cuestión no es la etiqueta, sino adónde va el texto: un "asistente de escritura" construido sobre un modelo en la nube envía tu texto a los servidores de ese modelo igual que un chatbot. Compara los cuatro puntos de arriba en la herramienta que uses. En calidad, los modelos más grandes de la nube siguen siendo mejores en la escritura más difícil; un modelo que cabe en un PC se defiende bien con correos, trabajos, resúmenes y reescrituras.
+Para la privacidad, la etiqueta importa menos que adónde va el texto. Un "asistente de escritura" basado en un modelo de la nube envía tu texto a los servidores de ese modelo igual que un chatbot, así que hazle las mismas cuatro preguntas a la herramienta que uses.
 
-## ¿Cómo de rápida es una IA privada en tu PC?
+En calidad, los modelos más grandes de la nube siguen siendo más fuertes en la escritura más difícil. Un modelo que cabe en un PC se maneja bien con correos, trabajos, resúmenes y reescrituras.
 
-Medido con GreenCube en 10 PCs reales: **5–7** tokens por segundo en un portátil de 8 GB (más o menos a la velocidad a la que lees), **14–18** en uno de 16 GB, **37–76** en la mayoría de PCs gaming. Mira el tuyo: [¿Puede mi PC ejecutar IA?](https://blog.greencube.app/blog/es/ia-en-mi-pc#checker) Más sobre asistentes privados: [la IA más privada](https://blog.greencube.app/blog/es/ia-privada).
+## ¿A qué velocidad va una IA privada en tu propio PC?
+
+Medimos GreenCube en 10 PCs reales. Escribe de 5 a 7 tokens por segundo en un portátil de 8 GB (más o menos a tu ritmo de lectura), de 14 a 18 en un portátil de 16 GB, y de 37 a 76 en la mayoría de PCs gaming. Puedes comprobar el tuyo con [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker), y hay más sobre asistentes privados en [el asistente de IA más privado](https://blog.greencube.app/blog/private-ai-assistant).
 
 ## FAQ
 
@@ -74,7 +67,7 @@ Revisa antes tu contrato y las normas de tu cliente. Los planes Business, Enterp
 
 ### ¿Cuál es la IA más privada para los trabajos de un estudiante?
 
-La cuenta de tu universidad (suele quedar fuera del entrenamiento) o una IA que funcione en tu propio PC. En cuentas personales gratis, la mayoría de IAs en la nube entrenan con lo que escribes por defecto; desactívalo antes de pegar nada y no valores los chats delicados.
+La cuenta de tu centro (suele quedar fuera del entrenamiento) o una IA que funcione en tu propio PC. En cuentas personales gratis, la mayoría de IAs en la nube entrenan con lo que escribes por defecto; desactívalo antes de pegar nada y no valores los chats delicados.
 
 ### ¿Desactivar el entrenamiento hace privado un asistente de escritura?
 

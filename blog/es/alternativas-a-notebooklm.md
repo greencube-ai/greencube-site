@@ -6,70 +6,70 @@ Canonical: https://blog.greencube.app/blog/es/alternativas-a-notebooklm
 Published: 2026-10-23  
 Author: Hector Gras
 
-**Respuesta corta:** NotebookLM es difícil de superar gratis: hasta **50 fuentes por cuaderno**, respuestas que citan tus apuntes y sin entrenar con lo que subes salvo que envíes valoraciones. Busca otra cosa si te quedas corto de límites, si **no quieres tus apuntes en los servidores de Google** o si estudias sin conexión. Entonces: **una IA en tu propio PC** (GreenCube, o AnythingLLM gratis), **Open Notebook** de código abierto, o herramientas para PDF que citan la página, como **Humata** y el **AI Assistant de Adobe Acrobat**.
+Es difícil superar a NotebookLM gratis: hasta 50 fuentes por cuaderno, respuestas que citan tus apuntes y nada de entrenar con lo que subes salvo que envíes valoraciones. Merece la pena buscar otra cosa si te topas con sus límites, si no quieres tus apuntes en los servidores de Google o si estudias sin internet. Entonces tus opciones son una IA en tu propio PC (GreenCube, o AnythingLLM, que es gratis), Open Notebook, de código abierto, o herramientas de PDF que citan la página, como Humata y el AI Assistant de Adobe Acrobat.
 
-- **50** fuentes por cuaderno en NotebookLM gratis, 100 cuadernos
-- **11/12** preguntas sobre PDF largos bien respondidas en un portátil de 16 GB, unos 15 s cada una
-- **0** archivos subidos cuando la IA funciona en tu propio PC
+Yo hago GreenCube, así que ten eso en cuenta al leer mi opinión. Abajo me he ceñido a lo que dicen las propias páginas de cada herramienta, más lo que medimos nosotros.
 
-## Qué hace bien NotebookLM y por qué hay quien cambia
+## Qué hace bien NotebookLM, y por qué la gente se cambia
 
-NotebookLM (ahora también llamado Gemini Notebook) responde a partir de las fuentes que le das, cita la parte de la que sale cada respuesta y crea flashcards y cuestionarios que puedes exportar en CSV ([Google](https://support.google.com/notebooklm/answer/16958963?hl=es)). Google dice que no entrena con lo que subes salvo que valores una respuesta ([Google](https://support.google.com/notebooklm/answer/17004255?hl=es)). Los motivos habituales para buscar otra cosa:
+NotebookLM (que ahora también se llama Gemini Notebook) responde a partir de las fuentes que le das, cita la parte de la que sale cada respuesta y hace flashcards y cuestionarios que puedes exportar en CSV ([Google](https://support.google.com/notebooklm/answer/16958963?hl=en)). Google dice que no entrena con lo que subes salvo que valores una respuesta ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)).
 
-- **Tus apuntes van a Google.** Hay estudiantes, y materiales de universidades o academias, que no deberían subirse.
-- **Necesita internet y una cuenta de Google.**
-- **Límites:** 50 fuentes por cuaderno y 100 cuadernos en el plan gratis ([Google](https://support.google.com/notebooklm/answer/16213268?hl=es)).
+Los motivos para irse suelen ser prácticos. Tus apuntes van a Google, y hay apuntes de estudiantes, o materiales de un centro o una academia, que no deberían subirse. Necesita internet y una cuenta de Google. Y el plan gratis se queda en 50 fuentes por cuaderno y 100 cuadernos ([Google](https://support.google.com/notebooklm/answer/16213268?hl=en)).
 
 ## Las alternativas, una al lado de otra
 
-Según las páginas de cada herramienta, comprobado el 21 y el 23 de octubre de 2026. No hemos comparado la calidad de las respuestas entre ellas.
+Sacado de las propias páginas de cada herramienta, comprobado el 21 y el 23 de octubre de 2026. No hemos comparado la calidad de las respuestas entre herramientas.
 
 | Herramienta | Gratis | ¿Cita la fuente? | Tus apuntes van a | Sin internet |
 | --- | --- | --- | --- | --- |
 | **NotebookLM** | Sí: 50 fuentes por cuaderno | Sí | La nube de Google | No |
 | **Humata** | 60 páginas al mes; Expert 9,99 $ al mes ([precios](https://www.humata.ai/pricing)) | Sí | Su nube | No |
 | **ChatPDF** | 2 documentos al día ([web](https://www.chatpdf.com)) | Sí | Su nube | No |
-| **Adobe Acrobat AI Assistant** | No; Acrobat Studio 24,99 $ al mes con plan anual ([precios](https://www.adobe.com/acrobat/pricing.html)) | Sí | La nube de Adobe | No |
-| **ChatGPT** / **Claude** | Subidas de archivos limitadas en los planes gratis | No están pensados para citar páginas | La nube de OpenAI / Anthropic | No |
-| **Open Notebook** ([GitHub](https://github.com/lfnovo/open-notebook)) | Sí, MIT, autoalojado | No lo dice | Tu propio servidor; puede usar modelos locales con Ollama o LM Studio | Con modelos locales |
+| **AI Assistant de Adobe Acrobat** | No; Acrobat Studio 24,99 $ al mes con plan anual ([precios](https://www.adobe.com/acrobat/pricing.html)) | Sí | La nube de Adobe | No |
+| **ChatGPT** / **Claude** | Subida de archivos limitada en los planes gratis | No están pensados para citar páginas | La nube de OpenAI / de Anthropic | No |
+| **Open Notebook** ([GitHub](https://github.com/lfnovo/open-notebook)) | Sí, MIT, en tu propio servidor | No lo dice | Tu propio servidor; puede usar modelos locales con Ollama o LM Studio | Con modelos locales |
 | **AnythingLLM** ([GitHub](https://github.com/Mintplex-Labs/anything-llm)) | Sí, MIT, app de escritorio | No lo dice | Tu PC (eliges tú el modelo) | Sí |
 | **GreenCube** ([web](https://greencube.app)) | No: 9,99 € una vez, sin límites | Responde a partir de los párrafos que encajan con tu pregunta | **Tu PC**: no se sube nada | Sí |
 
-Más herramientas para PDF con sus límites exactos: [alternativas a Humata AI](https://blog.greencube.app/blog/es/alternativas-a-humata-ai). Qué hace cada IA con lo que subes: [qué IA no entrena con tus datos](https://blog.greencube.app/blog/es/ia-que-no-entrena-con-tus-datos).
+Hay más herramientas de PDF, con sus límites exactos, en [alternativas a Humata AI](https://blog.greencube.app/blog/humata-ai-alternatives), y lo que hace cada IA con lo que subes está en [qué IA no entrena con tus chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Elige según cómo estudias
 
-### Necesitas citas para trabajos
+### Necesitas citas para tus trabajos
 
-Quédate en **NotebookLM** si no te importa subir los apuntes, o usa **Humata** o el **AI Assistant de Acrobat**, que también señalan la página. Comprueba de todos modos cada cita en el PDF.
+Quédate con NotebookLM si no te importa subir los archivos. Si no, Humata y el AI Assistant de Acrobat también señalan la página, aunque el plan gratis de Humata es pequeño y la IA de Acrobat necesita un plan de pago. ChatPDF también cita, con 2 documentos gratis al día. Aun así, comprueba cada cita en el PDF.
 
-### Tus apuntes no deben salir de tu PC
+### Tus apuntes no deberían salir de tu PC
 
-Una IA en tu propio ordenador lee los archivos de tu disco. **GreenCube** (Windows, 9,99 € una vez) elige la IA para tu PC y además hace guías de estudio y flashcards; **AnythingLLM** es gratis si no te importa elegir un modelo.
+Una IA en tu propio ordenador lee los archivos directamente de tu disco. GreenCube (Windows, 9,99 € una vez) elige la IA para tu PC y además hace guías de estudio y tarjetas. AnythingLLM es gratis si no te importa elegir tú el modelo.
 
 ### Quieres NotebookLM, pero de código abierto
 
-**Open Notebook** (MIT) es lo más parecido: cuadernos de fuentes, chat sobre ellas e incluso audio estilo pódcast, en tu propio servidor, con modelos en la nube o locales.
+Open Notebook (MIT) es lo más parecido en forma: cuadernos de fuentes, chat sobre ellas e incluso audio estilo pódcast, en tu propio servidor, con modelos en la nube o locales. La pega es que el servidor lo montas y lo mantienes tú.
 
-### Estudias sin conexión o con mal wifi
+### Ya usas ChatGPT o Claude
 
-Solo una IA local funciona sin conexión. [Qué puede hacer una IA sin internet por un estudiante](https://blog.greencube.app/blog/es/ia-sin-internet-para-estudiantes), con tiempos medidos.
+Los dos leen PDF, pero no están pensados para citar páginas, y los planes gratis limitan las subidas. Van bien para una pregunta rápida sobre un archivo, no tanto para los apuntes de todo un cuatrimestre.
+
+### Estudias sin internet o con un wifi malo
+
+Solo una IA local funciona sin conexión. Hay más sobre eso, con tiempos medidos, en [lo que puede hacer una IA sin internet por un estudiante](https://blog.greencube.app/blog/offline-ai-for-students).
 
 ## Lo que medimos en nuestro propio PC
 
-GreenCube con su IA pequeña, en un portátil normal de 16 GB sin tarjeta gráfica, con documentos largos de estudio ([la prueba completa](https://blog.greencube.app/blog/es/ia-para-estudiar-pdf)):
+GreenCube con su IA pequeña, en un portátil normal de 16 GB sin tarjeta gráfica, sobre documentos largos de estudio ([la prueba completa](https://blog.greencube.app/blog/ai-to-study-from-pdf)):
 
-| Qué le pides | Tiempo | Resultado |
+| Lo que pides | Tiempo | Resultado |
 | --- | --- | --- |
 | Una pregunta concreta sobre un documento largo | **unos 15 s** | 11 de 12 bien |
-| Guía de estudio completa de un tema de unas 5.000 palabras | **unos 15 min** | completa |
-| 18 flashcards de un tema de unas 4.800 palabras | **unos 5 min** | 30 de 36 bien con la IA grande ([prueba](https://blog.greencube.app/blog/es/flashcards-con-ia-desde-pdf)) |
+| Una guía de estudio completa de un tema de unas 5.000 palabras | **unos 15 min** | completa |
+| 18 flashcards de un tema de unas 4.800 palabras | **unos 5 min** | 30 de 36 bien con la IA grande ([prueba](https://blog.greencube.app/blog/flashcards-from-pdf)) |
 
-Con tarjeta gráfica va mucho más rápido: [comprueba tu PC](https://blog.greencube.app/blog/es/ia-en-mi-pc#checker). ¿Preparas una oposición? [Cómo usar la IA con tu temario](https://blog.greencube.app/blog/es/ia-para-estudiar-oposiciones).
+Con tarjeta gráfica va mucho más rápido: [comprueba tu PC](https://blog.greencube.app/blog/can-my-pc-run-ai#checker).
 
 ## Cómo lo comprobamos
 
-Leímos la web, los precios, la ayuda y el GitHub de cada herramienta el 21 y el 23 de octubre de 2026 y los enlazamos; cuando una página no lo dice, ponemos "no lo dice". Los tiempos y aciertos son de nuestras propias pruebas. Hacemos GreenCube, así que nos ceñimos a datos que cualquiera puede comprobar y no ordenamos las herramientas.
+Leímos la web, los precios, la ayuda y las páginas de GitHub de cada herramienta el 21 y el 23 de octubre de 2026, y las enlazamos. Donde una página no lo dice, ponemos "no lo dice". Los tiempos y los aciertos salen de nuestras propias pruebas. Como hacemos GreenCube, nos hemos ceñido a datos que cualquiera puede comprobar y no hemos ordenado las herramientas de mejor a peor.
 
 ## FAQ
 

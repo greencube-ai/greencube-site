@@ -6,56 +6,40 @@ Canonical: https://blog.greencube.app/blog/es/generar-imagenes-ia-local
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** en un PC gaming con una buena tarjeta gráfica, **medio minuto**. En un portátil normal de 16 GB, **de 2 a 3 minutos**. En un portátil de 8 GB, no funciona.
+En un PC con una tarjeta gráfica decente, alrededor de medio minuto por imagen. En un portátil normal de 16 GB, de 2 a 3 minutos. En un portátil de 8 GB no funciona, porque la IA de imágenes necesita más memoria de la que el portátil puede dejarle libre.
 
-- **28 s** en un sobremesa con una tarjeta de 12 GB
-- **2,5 min** en un portátil de 16 GB con sus gráficos Intel
-- **11,5 min** en el procesador de ese mismo portátil
+Cronometramos la misma imagen en tres tipos de PC, y la diferencia es mayor de lo que casi todo el mundo espera: de 28 segundos a más de 11 minutos.
 
 ## La prueba
 
-La misma IA de imágenes en todos los PCs (Z-Image Turbo, dentro de GreenCube), una imagen de 512 por 512, 8 pasos. Medimos desde que pulsas el botón hasta la imagen terminada, en septiembre y octubre de 2026.
+Usamos la misma IA de imágenes en todos los PCs (Z-Image Turbo, dentro de GreenCube) e hicimos una imagen de 512 por 512 con 8 pasos. Medimos desde que se pulsa el botón hasta la imagen terminada, en septiembre y octubre de 2026.
 
 | PC | Quién hizo el trabajo | Tiempo por imagen |
 | --- | --- | --- |
 | Sobremesa, tarjeta de 12 GB, 32 GB de RAM | Tarjeta gráfica | **28 s** |
 | Portátil, Core Ultra 5, 16 GB | Gráficos Intel integrados | **2 min 22 s – 2 min 38 s** |
 | El mismo portátil | Solo el procesador | **11 min 27 s** |
-| Portátil, 8 GB | — | **No puede** |
+| Portátil, 8 GB | No hay memoria para arrancar | **No puede** |
 
-Las barras muestran la velocidad: cuanto más larga, más rápido.
+## Cualquier gráfica ayuda mucho
 
-## Lo que aprendimos
+La sorpresa fue el portátil. Hasta el pequeño chip gráfico que lleva integrado el procesador hizo las imágenes unas 4 veces más rápido que el procesador solo. Hacer una imagen son muchas cuentas pesadas y repetitivas, y justo para eso están hechos los chips gráficos.
 
-### 1. Cualquier gráfica ayuda muchísimo
+Una tarjeta gráfica de verdad es otras 5 veces más rápida además de eso. Si quieres hacer muchas imágenes, la tarjeta gráfica es la pieza del PC que importa.
 
-Incluso el pequeño chip gráfico integrado del portátil hizo las imágenes **unas 4 veces más rápido** que el procesador solo. Una tarjeta gráfica de verdad es otras 5 veces más rápida.
+## Por qué 8 GB no bastan
 
-### 2. Necesita unos 7 GB de sitio
+La IA de imágenes le pide a Windows unos 7 GB mientras trabaja, y un portátil de 8 GB no puede liberar tanto. Por eso GreenCube solo hace imágenes en PCs con al menos 12 GB de RAM, y comprueba que hay sitio antes de empezar en vez de bloquearse a mitad. Chatear y estudiar siguen funcionando con 8 GB, solo que despacio ([nuestra prueba con 8 GB](https://blog.greencube.app/blog/run-ai-on-8gb-ram)).
 
-La IA de imágenes le pide a Windows unos 7 GB mientras trabaja. Por eso un portátil de 8 GB no puede, y por eso GreenCube comprueba que haya sitio antes de empezar en vez de fallar a medias.
+## ¿Lo frenan otras apps?
 
-### 3. Tus otras apps casi no importan
+No mucho, en nuestra prueba. En el portátil de 16 GB hicimos la misma imagen con un editor de código y un navegador abiertos, y otra vez con 4 GB de memoria ocupados a propósito. Siguió tardando unos 2 minutos cada vez, porque Windows aparta los programas que no se están usando para hacer sitio.
 
-En el portátil de 16 GB creamos la misma imagen con un editor de código y un navegador abiertos, e incluso ocupando 4 GB a propósito. Siempre tardó unos 2 minutos. Windows aparta lo que no se está usando.
+## Qué esperar en tu PC
 
-## Cómo irá en tu PC
+Con tarjeta gráfica, una imagen tarda menos de un minuto, así que puedes hacer varias y quedarte con la mejor. En un portátil de 16 GB sin tarjeta, 2 o 3 minutos están bien para unas pocas imágenes: lanza una y ponte con otra cosa mientras trabaja.
 
-#### Con tarjeta gráfica
-
-Menos de un minuto por imagen. Haz muchas y quédate con la mejor.
-
-#### Portátil de 16 GB sin tarjeta
-
-De 2 a 3 minutos. Para unas cuantas va bien: lánzala y sigue estudiando.
-
-#### Portátil de 8 GB
-
-Sin imágenes. Chatear y estudiar siguen funcionando.
-
-#### Sin límite en ningún caso
-
-Nadie cuenta tus imágenes. El único límite es cuánto quieras esperar.
+Nada cuenta cuántas imágenes haces, así que el único límite es cuánto estás dispuesto a esperar. Para ver lo que puede hacer tu tarjeta, prueba [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) Las velocidades de chat de este mismo portátil están en [IA en un portátil sin tarjeta gráfica](https://blog.greencube.app/blog/ai-on-laptop-without-gpu).
 
 ## FAQ
 

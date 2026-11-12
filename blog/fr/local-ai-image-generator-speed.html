@@ -64,53 +64,37 @@
 <p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
 <h1>Générateur d&#x27;images IA en local sur votre PC : combien de temps prend une image</h1>
 <p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 23 octobre 2026</p>
-<div class="answer"><p><strong>Réponse courte :</strong> sur un PC gamer avec une carte graphique correcte, environ <strong>une demi-minute</strong>. Sur un portable ordinaire de 16 Go, <strong>2 à 3 minutes</strong>. Sur un portable de 8 Go, ça ne marche pas.</p></div>
+<div class="answer"><p>Sur un PC avec une carte graphique correcte, environ une demi-minute par image. Sur un portable ordinaire de 16 Go, 2 à 3 minutes. Sur un portable de 8 Go, ça ne marche pas du tout, parce que l'IA d'images a besoin de plus de mémoire que le portable ne peut en libérer.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>28 s</b><span>sur un PC de bureau avec une carte graphique de 12 Go</span></div>
-<div class="stat b"><b>2,5 min</b><span>sur un portable de 16 Go avec sa puce graphique Intel</span></div>
-<div class="stat p"><b>11,5 min</b><span>avec le processeur seul du même portable</span></div>
-</div>
+<p>Nous avons chronométré la même image sur trois types de PC, et l'écart est plus grand que ce que la plupart des gens imaginent : de 28 secondes à plus de 11 minutes.</p>
 
 <h2>Le test</h2>
-<p>La même IA d'images sur chaque PC (Z-Image Turbo, dans GreenCube), une image de 512 sur 512, 8 étapes. Nous avons chronométré du clic sur le bouton à l'image terminée, en septembre et octobre 2026.</p>
+<p>Nous avons utilisé la même IA d'images sur chaque PC (Z-Image Turbo, dans GreenCube) et créé une image de 512 sur 512 en 8 étapes. Nous avons chronométré du clic sur le bouton jusqu'à l'image terminée, en septembre et octobre 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>Ce qui a fait le travail</th><th>Temps par image</th></tr></thead>
 <tbody>
-<tr><td>PC de bureau, carte de 12 Go, 32 Go de RAM</td><td>Carte graphique</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 s</b></td></tr>
-<tr><td>Portable, Core Ultra 5, 16 Go</td><td>Puce graphique Intel intégrée</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
-<tr><td>Le même portable</td><td>Processeur seul</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 min 27 s</b></td></tr>
-<tr><td>Portable, 8 Go</td><td>&mdash;</td><td><b>Impossible</b></td></tr>
+<tr><td>PC de bureau, carte de 12 Go, 32 Go de RAM</td><td>Carte graphique</td><td><b>28 s</b></td></tr>
+<tr><td>Portable, Core Ultra 5, 16 Go</td><td>Puce graphique Intel intégrée</td><td><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
+<tr><td>Le même portable</td><td>Processeur seul</td><td><b>11 min 27 s</b></td></tr>
+<tr><td>Portable, 8 Go</td><td>Pas assez de mémoire pour démarrer</td><td><b>Impossible</b></td></tr>
 </tbody>
 </table></div>
-<p>Les barres montrent la vitesse : plus elles sont longues, plus c'est rapide.</p>
 
 <p class="bridge-mid">Vous ne savez pas si votre PC suffit ? <a href="https://greencube.app/fr/what-you-get">Voyez ce qui tourne sur le vôtre <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Ce que nous avons appris</h2>
+<h2>N'importe quelle puce graphique aide beaucoup</h2>
+<p>La surprise, c'est le portable. Même la petite puce graphique intégrée à son processeur a créé les images environ 4 fois plus vite que le processeur seul. Créer une image, ce sont des calculs lourds et répétitifs, et c'est exactement ce pour quoi les puces graphiques sont faites.</p>
+<p>Une vraie carte graphique est encore 5 fois plus rapide par-dessus. Si vous voulez créer beaucoup d'images, c'est la carte graphique qui compte dans votre PC.</p>
 
-<div class="card g">
-<h3>1. N'importe quelle puce graphique aide beaucoup</h3>
-<p>Même la petite puce graphique intégrée au portable a rendu les images <strong>environ 4 fois plus rapides</strong> que le processeur seul. Une vraie carte graphique est encore 5 fois plus rapide par-dessus.</p>
-</div>
+<h2>Pourquoi 8 Go ne suffisent pas</h2>
+<p>L'IA d'images demande à Windows environ 7 Go pendant qu'elle travaille, et un portable de 8 Go ne peut pas libérer autant. C'est pour ça que GreenCube ne crée des images que sur les PC qui ont au moins 12 Go de RAM, et vérifie qu'il y a de la place avant de commencer au lieu de planter en plein milieu. Discuter et réviser marchent toujours sur 8 Go, juste lentement (<a href="/blog/fr/run-ai-on-8gb-ram">notre test sur 8 Go</a>).</p>
 
-<div class="card b">
-<h3>2. Il lui faut environ 7 Go de place</h3>
-<p>L'IA d'images demande à Windows environ 7 Go pendant qu'elle travaille. C'est pourquoi un portable de 8 Go n'y arrive pas, et pourquoi GreenCube vérifie qu'il y a de la place avant de commencer, au lieu de planter en plein milieu.</p>
-</div>
-
-<div class="card y">
-<h3>3. Vos autres applis comptent peu</h3>
-<p>Sur le portable de 16 Go, nous avons créé la même image avec un éditeur de code et un navigateur ouverts, et même avec 4 Go occupés exprès. Ça a pris environ 2 minutes à chaque fois. Windows met de côté ce qui ne sert pas.</p>
-</div>
+<h2>Les autres applis la ralentissent-elles ?</h2>
+<p>Pas beaucoup, dans notre test. Sur le portable de 16 Go, nous avons créé la même image avec un éditeur de code et un navigateur ouverts, puis une fois avec 4 Go de mémoire occupés exprès. Ça a pris environ 2 minutes à chaque fois, parce que Windows met de côté les programmes inactifs pour faire de la place.</p>
 
 <h2>Ce que donnera votre PC</h2>
-<div class="expect">
-<div class="g"><h4>Carte graphique</h4><p>Moins d'une minute par image. Créez-en plein et gardez la meilleure.</p></div>
-<div class="b"><h4>Portable de 16 Go, sans carte</h4><p>2 à 3 minutes. Très bien pour quelques images ; lancez-en une et continuez à réviser.</p></div>
-<div class="y"><h4>Portable de 8 Go</h4><p>Pas d'images. Discuter et réviser fonctionnent toujours.</p></div>
-<div class="p"><h4>Aucune limite, dans tous les cas</h4><p>Rien ne compte vos images. La seule limite, c'est le temps que vous voulez attendre.</p></div>
-</div>
+<p>Avec une carte graphique, une image prend moins d'une minute, donc vous pouvez en créer plusieurs et garder la meilleure. Sur un portable de 16 Go sans carte, 2 à 3 minutes, ça va très bien pour quelques images : lancez-en une et passez à autre chose pendant qu'elle se fait.</p>
+<p>Rien ne compte le nombre d'images que vous créez, donc la seule limite, c'est le temps que vous êtes prêt à attendre. Pour voir ce que peut faire votre propre carte, essayez <a href="/blog/fr/can-my-pc-run-ai#checker">Mon PC peut-il faire tourner une IA ?</a> Les vitesses de chat du même portable sont dans <a href="/blog/fr/ai-on-laptop-without-gpu">L'IA sur un portable sans carte graphique</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Combien de temps faut-il pour créer une image IA sur mon PC ?</summary><p>Dans nos tests, une image de 512 sur 512 a pris 28 secondes sur un PC de bureau avec une carte graphique de 12 Go, environ 2 minutes et demie sur un portable de 16 Go avec sa puce graphique Intel, et environ 11 minutes et demie avec le processeur seul du même portable.</p></details>

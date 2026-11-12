@@ -6,15 +6,13 @@ Canonical: https://blog.greencube.app/blog/es/gemma-4-e2b-vs-e4b
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** en un portátil sin tarjeta gráfica, **gana el modelo pequeño**: una buena respuesta en 20 segundos en vez de una algo mejor en casi 2 minutos. Con tarjeta gráfica, usa el grande: ahí también va rápido.
+En un portátil sin tarjeta gráfica, Gemma 4 E2B es la mejor opción: en nuestra prueba dio una buena respuesta en 20 segundos, mientras que E4B tardó casi 2 minutos en dar una algo mejor. Con tarjeta gráfica, quédate con E4B, porque ahí también va rápido.
 
-- **20 s** modelo pequeño (Gemma 4 E2B), respuesta completa
-- **28 s** modelo pequeño más antiguo (Phi-4 Mini)
-- **112 s** modelo grande (Gemma 4 E4B), la mejor explicación
+Estos son los dos modelos que usa GreenCube. Cube 2B está basado en Gemma 4 E2B y Cube 4B en Gemma 4 E4B, así que teníamos buenos motivos para cronometrarlos bien. Añadimos Phi-4 Mini, un modelo pequeño más antiguo, para comparar.
 
 ## La prueba
 
-Un portátil de 16 GB (Intel Core Ultra 5, sin tarjeta gráfica), solo con el procesador. Una petición de estudio: explicar la fotosíntesis a alguien de 14 años y escribir tres preguntas de examen. Medimos hasta que la respuesta estaba terminada, en septiembre de 2026.
+Un portátil de 16 GB (Intel Core Ultra 5, sin tarjeta gráfica), funcionando solo con el procesador. Una petición típica de estudio: explicar la fotosíntesis a alguien de 14 años y luego escribir tres preguntas de examen sobre ella. Cronometramos cada modelo hasta que terminó su respuesta, en septiembre de 2026.
 
 | Modelo | Tamaño | Tiempo hasta la respuesta completa | Qué salió |
 | --- | --- | --- | --- |
@@ -24,37 +22,25 @@ Un portátil de 16 GB (Intel Core Ultra 5, sin tarjeta gráfica), solo con el pr
 
 ## Lo que aprendimos
 
-### 1. El pequeño da la talla para estudiar
+### El pequeño basta para estudiar
 
-También hicimos cinco preguntas rápidas de datos: cálculo, conversión de unidades, fechas y ciencias. **Ninguno de los modelos pequeños falló.** El Gemma pequeño incluso mostró una segunda forma de calcular un porcentaje sin que se lo pidiéramos.
+También le hicimos cinco preguntas rápidas de datos sobre cálculo, conversión de unidades, fechas y ciencias. Ninguno de los dos modelos pequeños falló. El Gemma pequeño incluso enseñó, sin que se lo pidiéramos, una segunda forma de calcular un porcentaje.
 
-### 2. Su punto débil: contar
+### Su punto débil es contar
 
-Dos veces, el modelo pequeño dijo "aquí tienes 5" y luego puso otro número. Por eso GreenCube ahora le pide que cuente antes de escribir el número. En detalles así es donde un modelo grande es más fiable.
+Dos veces, el modelo pequeño dijo "aquí tienes 5" y luego enumeró otro número. Ahora GreenCube le indica que cuente antes de escribir el número. En pequeños despistes como este es donde un modelo más grande es más seguro.
 
-### 3. Con tarjeta gráfica, la cosa cambia
+### Una tarjeta gráfica lo cambia todo
 
-Ese mismo modelo grande escribe a **entre 56 y 72 tokens por segundo** en tarjetas gaming de 8 GB, de 7 a 9 veces más rápido que en este portátil. En un PC gaming tienes las mejores respuestas sin esperar.
+El modelo grande escribe de 56 a 72 tokens por segundo en tarjetas gaming de 8 GB, de 7 a 9 veces más rápido que en este portátil. En un PC gaming tienes las mejores respuestas sin esperar.
 
 ## ¿Cuál para tu PC?
 
-#### Portátil sin tarjeta
+En un portátil sin tarjeta gráfica, usa el modelo pequeño. Sus respuestas llegan rápido y bastan para estudiar, escribir y las preguntas del día a día. Si te da una lista que empieza con "aquí tienes 5", echa un vistazo a que de verdad sean 5, porque ese es el despiste que vimos.
 
-Modelo pequeño. Respuestas rápidas, de sobra para estudiar, escribir y preguntar.
+En un PC gaming, usa el grande. Las respuestas son mejores, y aun así escribe más rápido de lo que puedes leer.
 
-#### PC gaming
-
-Modelo grande. Mejores respuestas, y aun así más rápido de lo que lees.
-
-#### ¿Una lista?
-
-Si dice "aquí tienes 5", comprueba que sean 5. Es el único despiste del modelo pequeño.
-
-#### ¿No quieres pensarlo?
-
-GreenCube mira tu PC y elige por ti.
-
-Mira lo rápido que va cada tipo de PC: [medimos 10 PCs aquí](https://blog.greencube.app/blog/es/ia-en-mi-pc).
+Si prefieres no pensarlo, GreenCube revisa tu PC y elige por ti. Para ver lo rápido que va cada tipo de PC, [aquí medimos 10 PCs](https://blog.greencube.app/blog/can-my-pc-run-ai).
 
 ## FAQ
 
@@ -64,7 +50,7 @@ Sus respuestas suelen ser algo mejores, pero en un portátil sin tarjeta gráfic
 
 ### ¿Los modelos de IA pequeños se equivocan en los datos?
 
-En nuestras cinco preguntas rápidas (cálculo, conversión de unidades, fechas y ciencias), ninguno de los modelos pequeños falló. Su punto débil fue contar: a veces anunciaba un número de elementos y luego ponía otro.
+En nuestras cinco preguntas rápidas de datos (cálculo, conversión de unidades, fechas y ciencias), ninguno de los dos modelos pequeños falló. El punto débil del pequeño fue contar: a veces anunciaba un número de elementos y luego enumeraba otro.
 
 ### ¿Qué modelo de IA debería usar en mi PC?
 

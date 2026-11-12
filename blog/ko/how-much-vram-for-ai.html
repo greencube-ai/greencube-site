@@ -64,55 +64,41 @@
 <p class="kicker"><a href="/blog/ko">GreenCube 블로그</a></p>
 <h1>AI에 필요한 VRAM은? 모델이 그래픽카드에 다 들어가야 하는 이유</h1>
 <p class="byline">글쓴이 <a href="/blog/ko/hector-gras">Hector Gras</a> &middot; 2026년 10월 23일</p>
-<div class="answer"><p><strong>짧은 답:</strong> 그래픽카드 메모리(VRAM)에 통째로 들어가는 AI는 빠릅니다. 넘치는 AI는 <strong>카드를 아예 안 쓰는 것보다 느려지고</strong>, 다운될 수도 있습니다. 작아도 카드에 전부 올라가는 쪽이, 커도 절반만 올라가는 쪽을 이깁니다.</p></div>
+<div class="answer"><p>모델 전체에 대화와 Windows를 위한 약 1.5 GB를 더한 만큼의 VRAM이 필요합니다. 그래픽카드 메모리에 통째로 들어가는 AI는 빠릅니다. 넘치는 AI는 카드를 아예 안 쓰는 것보다 느려질 수 있고, 다운될 수도 있습니다. 작아도 카드에 전부 올라가는 쪽이, 커도 절반만 올라가는 쪽을 이깁니다.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35.6</b><span>모델 전체가 카드에 있을 때의 초당 토큰 수</span></div>
-<div class="stat p"><b>5.9</b><span>일부가 카드 밖에 있을 때. 6배 느림</span></div>
-<div class="stat y"><b>다운</b><span>겨우 들어가는 모델이 긴 채팅을 만났을 때</span></div>
-</div>
+<p>이건 사양표에서 가져온 이야기가 아닙니다. 제가 만드는 앱인 GreenCube를 개발하면서 실제 게이밍 PC에서 측정했고, 그 결과가 GreenCube가 모델을 고르는 방식을 바꿨습니다.</p>
 
 <h2>테스트</h2>
-<p>AMD RX 5700 XT(VRAM 8 GB)와 RAM 48 GB 데스크톱. 120억 파라미터 모델(Gemma 4 12B, 약 6.7 GB)을 불러와 카드에 올리는 양을 바꿔 봤습니다. 모두 2026년 9월의 한 세션에서입니다.</p>
-
+<p>PC는 AMD RX 5700 XT(VRAM 8 GB)와 RAM 48 GB를 갖춘 데스크톱이었습니다. 120억 파라미터 모델(Gemma 4 12B, 약 6.7 GB)을 불러와 카드에 올리는 양을 늘렸다 줄였다 했고, 모두 2026년 9월 한 세션에서 했습니다.</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>카드에 올린 모델의 양</th><th>출력(토큰/초)</th></tr></thead>
+<thead><tr><th>모델 중 카드에 올라간 양</th><th>쓰는 속도(초당 토큰)</th></tr></thead>
 <tbody>
-<tr><td>전부</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
-<tr><td>레이어 28개</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
-<tr><td>레이어 20개</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
-<tr><td><em>비교: 더 작은 모델(Gemma 4 E4B)을 CPU만으로</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
-<tr><td><em>같은 작은 모델을 카드에 전부</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+<tr><td>전부</td><td><b>35.6</b></td></tr>
+<tr><td>레이어 28개</td><td><b>5.9</b></td></tr>
+<tr><td>레이어 20개</td><td><b>4.3</b></td></tr>
+<tr><td><em>비교용: 더 작은 모델(Gemma 4 E4B)을 프로세서에서만</em></td><td><b>5.0</b></td></tr>
+<tr><td><em>같은 작은 모델을 카드에 전부</em></td><td><b>72.5</b></td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">내 PC로 될지 모르겠다면? <a href="https://greencube.app/ko/what-you-get">내 PC에서 돌아가는 것 확인하기 <span aria-hidden="true">&rarr;</span></a></p>
 <h2>알게 된 것</h2>
+<h3>거의 전부 아니면 전무</h3>
+<p>모델의 일부만 카드 밖에 둬도 6배 느려졌습니다. 레이어 20개를 카드에 올렸을 때는 카드 없이 도는 더 작은 모델보다도 느렸습니다. 절반만 카드에 올리면 양쪽의 나쁜 점만 얻습니다.</p>
 
-<div class="card g">
-<h3>1. 전부 아니면 소용없음</h3>
-<p>모델의 일부만 카드 밖에 둬도 <strong>6배 느려졌습니다</strong>. 레이어 20개를 카드에 올린 상태에서는 카드를 전혀 안 쓰는 작은 모델보다 느렸습니다. 절반만 카드에 올리는 건 양쪽의 나쁜 점만 모은 셈입니다.</p>
-</div>
+<h3>불러올 수 있는 가장 큰 모델이 최선은 아니다</h3>
+<p>12B 모델은 짧은 질문 하나에는 8 GB 카드에 정말로 통째로 들어갔습니다. 하지만 채팅이 길어질 때마다 다운됐습니다. 카드에 대화를 위한 자리가 거의 남지 않았기 때문입니다. 더 작은 모델은 약 3 GB의 여유가 있었고, 초당 63~72토큰으로 돌아갔습니다.</p>
 
-<div class="card p">
-<h3>2. 가장 큰 게 가장 좋은 건 아닙니다</h3>
-<p>12B 모델은 8 GB 카드에 통째로 들어가긴 했습니다. 짧은 질문 하나까지는요. 채팅이 길어지자 매번 다운됐습니다. 카드에 대화를 위한 여유가 거의 남지 않았기 때문입니다. 더 작은 모델은 약 3 GB의 여유가 있었고 초당 63~72 토큰으로 돌아갔습니다.</p>
-</div>
-
-<div class="card b">
-<h3>3. 여유를 남기세요</h3>
-<p>4 GB GTX 1650에서 4.2 GB 모델을 3.9 GB 카드에 밀어 넣었더니, 첫 메시지부터 "메모리가 부족합니다"로 실패했습니다. 지금 GreenCube는 채팅과 Windows를 위해 <strong>카드의 약 1.5 GB를 비워 둡니다</strong>.</p>
-</div>
+<h3>여유를 남겨라</h3>
+<p>4 GB GTX 1650에서는 4.2 GB 모델을 실제로 쓸 수 있는 3.9 GB 카드에 억지로 밀어 넣었더니, 첫 메시지부터 '메모리 부족'으로 실패했습니다. 그 뒤로 GreenCube는 채팅과 Windows를 위해 카드의 약 1.5 GB를 비워 둡니다.</p>
 
 <h2>내 카드에 맞는 모델 고르는 법</h2>
-<div class="expect">
-<div class="g"><h4>VRAM 확인</h4><p>작업 관리자 &rarr; 성능 &rarr; GPU &rarr; 전용 GPU 메모리.</p></div>
-<div class="b"><h4>모델 크기 + 1.5 GB</h4><p>모델 파일에 약 1.5 GB를 더한 값이 그 숫자 안에 들어가야 합니다.</p></div>
-<div class="y"><h4>애매하면 작은 쪽</h4><p>카드에 전부 올라가는 작은 모델이, 절반만 올라가는 큰 모델을 이깁니다.</p></div>
-<div class="p"><h4>아니면 앱에 맡기기</h4><p>GreenCube가 카드를 읽고, 여유 있게 들어가는 모델을 고릅니다.</p></div>
-</div>
-
-<p>GTX 1650부터 RTX 5060까지, PC 10대의 실제 속도: <a href="/blog/ko/can-my-pc-run-ai">여기서 보기</a></p>
+<ol class="steps">
+<li>VRAM을 확인합니다: 작업 관리자 &rarr; 성능 &rarr; GPU &rarr; 전용 GPU 메모리.</li>
+<li>모델 파일 크기에 약 1.5 GB를 더합니다. 그 합이 VRAM 안에 들어가야 합니다.</li>
+<li>애매하면 더 작은 쪽을 고릅니다. 카드에 전부 올라가는 작은 모델이 절반만 올라가는 큰 모델을 이깁니다.</li>
+</ol>
+<p>계산하기 귀찮다면 GreenCube가 그래픽카드를 읽고 여유 있게 들어가는 모델을 골라 줍니다. GTX 1650부터 RTX 5060까지 PC 10대의 실제 속도는 <a href="/blog/ko/can-my-pc-run-ai">내 PC로 AI를 돌릴 수 있을까?</a>에 있습니다.</p>
 <h2>자주 묻는 질문</h2>
 <div class="faq">
 <details><summary>AI 모델이 VRAM에 다 들어가지 않으면 어떻게 되나요?</summary><p>들어가지 않은 부분은 일반 메모리에서 돌아가고, 전체가 느려집니다. 8 GB 카드에서 레이어 28개를 카드에 올린 모델은 초당 5.9 토큰으로, 전부 올렸을 때의 35.6보다 6배 느렸습니다.</p></details>

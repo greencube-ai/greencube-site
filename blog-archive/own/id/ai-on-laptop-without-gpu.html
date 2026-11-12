@@ -15,49 +15,33 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Jawaban singkat:</strong> untuk chat <strong>hampir tidak</strong>. Untuk membaca teks panjang <strong>sedikit</strong>. Untuk gambar <strong>banyak</strong>: lebih dari 4 kali lebih cepat.</p></div>
+<div class="answer"><p>Ya, kamu bisa menjalankan AI di laptop tanpa kartu grafis, dan laptop 16 GB menulis lebih cepat daripada kamu membaca. Grafis Intel yang tertanam di chip hampir tidak membantu untuk chat, sedikit membantu untuk membaca teks panjang, dan sangat membantu untuk gambar, yang jadi lebih dari 4 kali lebih cepat.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>~14</b><span>token per detik di chat, dengan atau tanpa grafis Intel</span></div>
-<div class="stat b"><b>1,3&times;</b><span>lebih cepat membaca teks panjang yang kamu tempel</span></div>
-<div class="stat p"><b>4&times;</b><span>lebih cepat membuat gambar</span></div>
-</div>
+<p>Kami ingin tahu apakah grafis bawaan di kebanyakan laptop layak dipakai untuk AI, jadi kami menjalankan tugas yang sama di prosesor dan di grafis Intel pada satu laptop biasa.</p>
 
 <h2>Tesnya</h2>
-<p>Satu laptop: Intel Core Ultra 5 125U, RAM 16 GB, tanpa kartu grafis, hanya grafis yang tertanam di chip. Kami menjalankan AI yang sama di prosesor dan di grafis Intel, sambil dicolok, masing-masing dua kali, pada September dan Oktober 2026.</p>
+<p>Laptopnya memakai Intel Core Ultra 5 125U, RAM 16 GB, dan tanpa kartu grafis, hanya grafis yang tertanam di chip. Kami menjalankan AI yang sama di prosesor dan di grafis Intel, dengan charger terpasang, masing-masing dua kali, pada September dan Oktober 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Tugas</th><th>Prosesor</th><th>Grafis Intel</th><th>Selisih</th></tr></thead>
 <tbody>
-<tr><td>Menulis jawaban (Gemma 4 E2B)</td><td>13,7&ndash;15,5 token/detik</td><td>14,4&ndash;14,5 token/detik</td><td><b>kurang lebih sama</b></td></tr>
+<tr><td>Menulis jawaban (Gemma 4 E2B)</td><td>13,7&ndash;15,5 token/detik</td><td>14,4&ndash;14,5 token/detik</td><td><b>kira-kira sama</b></td></tr>
 <tr><td>Membaca teks yang ditempel (Gemma 4 E2B)</td><td>160&ndash;167 token/detik</td><td>203&ndash;211 token/detik</td><td><b>1,3&times; lebih cepat</b></td></tr>
-<tr><td>Satu gambar, 512 kali 512</td><td>11 menit 27 detik</td><td>2 menit 22 detik &ndash; 2 menit 38 detik</td><td><b>lebih dari 4&times; lebih cepat</b></td></tr>
+<tr><td>Satu gambar, 512 kali 512</td><td>11 mnt 27 dtk</td><td>2 mnt 22 dtk &ndash; 2 mnt 38 dtk</td><td><b>lebih dari 4&times; lebih cepat</b></td></tr>
 </tbody>
 </table></div>
 
-<h2>Yang kami pelajari</h2>
+<h2>Kecepatan chat ditentukan memori, bukan chip-nya</h2>
+<p>Menulis jawaban dibatasi oleh seberapa cepat laptop bisa mengalirkan AI melalui memorinya. Prosesor dan grafis Intel berbagi memori yang sama, jadi akhirnya keduanya menulis dengan kecepatan yang kira-kira sama.</p>
 
-<div class="card g">
-<h3>1. Kecepatan chat berasal dari memori, bukan chip</h3>
-<p>Menulis jawaban dibatasi oleh seberapa cepat laptop bisa mengalirkan AI melalui memorinya, dan prosesor serta grafis Intel berbagi memori yang sama. Jadi keduanya menulis dengan kecepatan yang kurang lebih sama.</p>
-</div>
+<h2>Bahkan bisa lebih lambat</h2>
+<p>Dengan model kecil yang lebih lama, Phi-4 Mini, menulis jadi 29% lebih lambat di grafis Intel. Dengan model yang lebih besar, <a href="/blog/gemma-4-requirements">Gemma 4 E4B</a>, jadi 26% lebih cepat. Laptop yang sama, hasil yang berlawanan. Kamu tidak bisa menebaknya dari spesifikasi, jadi GreenCube menguji laptopmu dan memakai mana yang lebih cepat.</p>
 
-<div class="card y">
-<h3>2. Bisa juga lebih lambat</h3>
-<p>Dengan model kecil yang lebih lama (Phi-4 Mini), menulis di grafis Intel <strong>29% lebih lambat</strong>. Dengan model yang lebih besar (Gemma 4 E4B) <strong>26% lebih cepat</strong>. Laptop sama, hasil berlawanan. Tidak bisa ditebak dari spesifikasi, jadi GreenCube menguji laptopmu dan memakai mana yang lebih cepat.</p>
-</div>
+<h2>Gambar adalah tempat ia terbayar</h2>
+<p>Membuat gambar itu hitungan berat, jenis yang memang dikuasai chip grafis, dan di sini selisihnya besar sekali: 11 setengah menit turun jadi sekitar 2 setengah menit. Detailnya ada di <a href="/blog/local-ai-image-generator-speed">berapa lama satu gambar dibuat</a>.</p>
 
-<div class="card p">
-<h3>3. Tempat ia benar-benar bersinar: gambar</h3>
-<p>Membuat gambar adalah matematika berat, jenis yang memang menjadi tujuan chip grafis dibuat. Sebelas setengah menit turun menjadi sekitar dua setengah menit.</p>
-</div>
+<h2>Artinya untuk laptopmu</h2>
+<p>Untuk chat dan belajar, laptop 16 GB sudah cukup dengan sendirinya. Ia menulis lebih cepat daripada kamu membaca, dengan atau tanpa grafisnya. Untuk PDF panjang, grafisnya membaca sedikit lebih cepat, jadi jawaban pertama datang lebih awal.</p>
+<p>Gambar bisa dibuat di laptop seperti ini, sekitar 2 sampai 3 menit per gambar, sementara PC gaming membuatnya dalam kurang dari semenit. Dan kalau kamu bekerja tanpa charger, dalam pengujian kami baterai dan listrik memberi kecepatan chat yang kira-kira sama.</p>
 
-<h2>Jadi apa artinya buatmu?</h2>
-<div class="expect">
-<div class="g"><h4>Chat dan belajar</h4><p>Laptop 16 GB sudah cukup. Ia menulis lebih cepat daripada kamu membaca.</p></div>
-<div class="b"><h4>PDF panjang</h4><p>Grafis membacanya sedikit lebih cepat, jadi jawaban pertama datang lebih awal.</p></div>
-<div class="y"><h4>Gambar</h4><p>Bisa, sekitar 2 sampai 3 menit masing-masing. PC gaming melakukannya dalam kurang dari satu menit.</p></div>
-<div class="p"><h4>Baterai</h4><p>Di tes kami, kecepatan chat dengan baterai dan dicolok kurang lebih sama.</p></div>
-</div>
-
-<p>Mau gambaran lengkap, termasuk PC gaming? <a href="/blog/can-my-pc-run-ai">Kami mengukur {{pcs}} PC di sini.</a></p>
+<p>Untuk gambaran lengkapnya, termasuk PC gaming, <a href="/blog/can-my-pc-run-ai">kami mengukur {{pcs}} PC di sini</a>.</p>

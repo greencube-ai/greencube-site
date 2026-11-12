@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "沒有顯示卡的筆電跑 AI：Intel 內建顯示卡有用嗎？", "description": "我們在一臺沒有顯示卡的筆電上，分別用 CPU 和 Intel 內建顯示卡執行 AI。聊天速度幾乎不變，讀取快 1.3 倍，生成圖片快 4 倍以上。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/ai-on-laptop-without-gpu", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "內建顯示卡能讓 AI 更快嗎？", "acceptedAnswer": {"@type": "Answer", "text": "對聊天來說幾乎沒用。在我們的 16 GB 筆電上，兩種方式輸出回答都是每秒約 14 個 token。讀取貼上的長文字快約 1.3 倍，生成圖片快 4 倍以上。"}}, {"@type": "Question", "name": "內建顯示卡會讓 AI 變慢嗎？", "acceptedAnswer": {"@type": "Answer", "text": "有時會。用小模型時，Intel 內建顯示卡的輸出比 CPU 慢 29%；用更大的模型時反而快 26%。這取決於模型和筆電，所以 GreenCube 會在你的筆電上實測後再選。"}}, {"@type": "Question", "name": "沒有顯示卡的筆電夠用來跑 AI 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "聊天和學習夠用。16 GB 筆電用小模型輸出得比你讀得還快。也能生成圖片，但每張要 2 到 3 分鐘。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "內顯能讓 AI 變快嗎？", "acceptedAnswer": {"@type": "Answer", "text": "聊天的話幾乎沒差：在我們的 16 GB 筆電上，兩種方式寫回答的速度都是每秒約 14 個 token。讀取貼上的長文字時快了約 1.3 倍，生成圖片則快了 4 倍以上。"}}, {"@type": "Question", "name": "內顯會讓 AI 變慢嗎？", "acceptedAnswer": {"@type": "Answer", "text": "有時候會。用某個小模型時，Intel 內顯的寫字速度比處理器慢了 29%；用比較大的模型時反而快了 26%。這取決於模型和筆電，所以 GreenCube 會在你自己的筆電上測試後再選。"}}, {"@type": "Question", "name": "沒有顯示卡的筆電跑 AI 夠用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "聊天和念書夠用：16 GB 筆電用小模型，寫字比你讀得還快。也能生成圖片，但每張要 2 到 3 分鐘。"}}]}</script>
 </head>
 <body>
 
@@ -64,58 +64,42 @@
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>沒有顯示卡的筆電跑 AI：Intel 內建顯示卡有用嗎？</h1>
 <p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>簡短回答：</strong>聊天<strong>幾乎沒區別</strong>，讀長文字<strong>快一點</strong>，生成圖片<strong>差別很大</strong>：快 4 倍以上。</p></div>
+<div class="answer"><p>可以，沒有顯示卡的筆電也能跑 AI，而且 16 GB 筆電寫字比你讀得還快。晶片內建的 Intel 顯示晶片對聊天幾乎沒幫助，對讀長文字有一點幫助，對圖片則幫助很大，速度快了 4 倍以上。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>~14</b><span>聊天時每秒 token 數，有沒有 Intel 內建顯示卡都差不多</span></div>
-<div class="stat b"><b>1.3&times;</b><span>讀取你貼上的長文字更快</span></div>
-<div class="stat p"><b>4&times;</b><span>生成圖片更快</span></div>
-</div>
+<p>我們想知道大多數筆電內建的顯示晶片值不值得拿來跑 AI，所以在一台普通筆電上，分別用處理器和 Intel 內顯跑同樣的工作。</p>
 
 <h2>測試</h2>
-<p>一臺筆電：Intel Core Ultra 5 125U，16 GB 記憶體，沒有顯示卡，只有晶片內建的圖形單元。我們插著電源，在 CPU 和 Intel 內建顯示卡上各執行同一個 AI 兩次，時間是 2026 年 9 月和 10 月。</p>
+<p>這台筆電有 Intel Core Ultra 5 125U、16 GB 記憶體，沒有獨立顯示卡，只有晶片內建的顯示功能。我們在接上電源的情況下，分別用處理器和 Intel 內顯跑同一個 AI，各跑兩次，時間是 2026 年 9 月和 10 月。</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>任務</th><th>CPU</th><th>Intel 內建顯示卡</th><th>差別</th></tr></thead>
+<thead><tr><th>工作</th><th>處理器</th><th>Intel 內顯</th><th>差異</th></tr></thead>
 <tbody>
-<tr><td>輸出回答（Gemma 4 E2B）</td><td>13.7&ndash;15.5 token/秒</td><td>14.4&ndash;14.5 token/秒</td><td><b>差不多</b></td></tr>
+<tr><td>寫回答（Gemma 4 E2B）</td><td>13.7&ndash;15.5 token/秒</td><td>14.4&ndash;14.5 token/秒</td><td><b>差不多</b></td></tr>
 <tr><td>讀取貼上的文字（Gemma 4 E2B）</td><td>160&ndash;167 token/秒</td><td>203&ndash;211 token/秒</td><td><b>快 1.3&times;</b></td></tr>
-<tr><td>一張 512 x 512 的圖片</td><td>11 分 27 秒</td><td>2 分 22 秒&ndash;2 分 38 秒</td><td><b>快 4&times; 以上</b></td></tr>
+<tr><td>一張圖片，512 x 512</td><td>11 分 27 秒</td><td>2 分 22 秒 &ndash; 2 分 38 秒</td><td><b>快 4&times; 以上</b></td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我們發現了什麼</h2>
+<h2>聊天速度取決於記憶體，而不是晶片</h2>
+<p>寫回答的速度，受限於筆電能多快把 AI 在記憶體裡搬來搬去。處理器和 Intel 內顯共用同一塊記憶體，所以兩者寫字的速度最後差不多。</p>
 
-<div class="card g">
-<h3>1. 聊天速度取決於記憶體，而不是晶片</h3>
-<p>輸出回答的速度受限於筆電在記憶體裡搬運 AI 的速度。CPU 和 Intel 內建顯示卡共用同一塊記憶體，所以輸出速度差不多。</p>
-</div>
+<h2>甚至可能變慢</h2>
+<p>用一個較舊的小模型 Phi-4 Mini 時，Intel 內顯的寫字速度慢了 29%。用比較大的 <a href="/blog/zh-tw/gemma-4-requirements">Gemma 4 E4B</a> 時，則快了 26%。同一台筆電，結果卻相反。這無法從規格猜出來，所以 GreenCube 會在你的筆電上測試，然後用比較快的那個。</p>
 
-<div class="card y">
-<h3>2. 甚至可能更慢</h3>
-<p>用一個較老的小模型（Phi-4 Mini）時，Intel 內建顯示卡的輸出<strong>慢了 29%</strong>；用更大的模型（Gemma 4 E4B）時卻<strong>快了 26%</strong>。同一臺筆電，結果相反。光看參數猜不出來，所以 GreenCube 會在你的筆電上實測，然後用更快的那個。</p>
-</div>
+<h2>圖片才是真正有回報的地方</h2>
+<p>生成圖片是繁重的數學運算，正是顯示晶片天生擅長的那種，而這裡的差距非常大：11 分半縮短到大約 2 分半。細節請看 <a href="/blog/zh-tw/local-ai-image-generator-speed">一張圖片要多久</a>。</p>
 
-<div class="card p">
-<h3>3. 它真正擅長的：圖片</h3>
-<p>生成圖片是繁重的計算，正是圖形晶片擅長的那類。十一分半縮短到大約兩分半。</p>
-</div>
+<h2>這對你的筆電代表什麼</h2>
+<p>聊天和念書的話，16 GB 筆電本身就夠了。不管用不用內顯，它寫字都比你讀得快。遇到長篇 PDF 時，內顯讀得稍微快一點，所以第一個回答會早一點出來。</p>
+<p>這樣的筆電也能生成圖片，每張約 2 到 3 分鐘，而遊戲電腦一張不到一分鐘。如果你不接電源使用，在我們的測試中，用電池和接電源的聊天速度差不多。</p>
 
-<h2>這對你意味著什麼？</h2>
-<div class="expect">
-<div class="g"><h4>聊天和學習</h4><p>16 GB 筆電就夠了。它輸出得比你讀得還快。</p></div>
-<div class="b"><h4>長 PDF</h4><p>內建顯示卡讀取稍快，所以第一個回答來得早一點。</p></div>
-<div class="y"><h4>圖片</h4><p>可以，每張約 2 到 3 分鐘。遊戲電腦不到一分鐘就能完成。</p></div>
-<div class="p"><h4>電池</h4><p>在我們的測試中，用電池和插電時的聊天速度差不多。</p></div>
-</div>
-
-<p>想看包括遊戲電腦在內的全貌？<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡測了 10 臺電腦</a>。</p>
+<p>想看包括遊戲電腦在內的完整情況，<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡實測了 10 台電腦</a>。</p>
 <h2>常見問題</h2>
 <div class="faq">
-<details><summary>內建顯示卡能讓 AI 更快嗎？</summary><p>對聊天來說幾乎沒用。在我們的 16 GB 筆電上，兩種方式輸出回答都是每秒約 14 個 token。讀取貼上的長文字快約 1.3 倍，生成圖片快 4 倍以上。</p></details>
-<details><summary>內建顯示卡會讓 AI 變慢嗎？</summary><p>有時會。用小模型時，Intel 內建顯示卡的輸出比 CPU 慢 29%；用更大的模型時反而快 26%。這取決於模型和筆電，所以 GreenCube 會在你的筆電上實測後再選。</p></details>
-<details><summary>沒有顯示卡的筆電夠用來跑 AI 嗎？</summary><p>聊天和學習夠用。16 GB 筆電用小模型輸出得比你讀得還快。也能生成圖片，但每張要 2 到 3 分鐘。</p></details>
+<details><summary>內顯能讓 AI 變快嗎？</summary><p>聊天的話幾乎沒差：在我們的 16 GB 筆電上，兩種方式寫回答的速度都是每秒約 14 個 token。讀取貼上的長文字時快了約 1.3 倍，生成圖片則快了 4 倍以上。</p></details>
+<details><summary>內顯會讓 AI 變慢嗎？</summary><p>有時候會。用某個小模型時，Intel 內顯的寫字速度比處理器慢了 29%；用比較大的模型時反而快了 26%。這取決於模型和筆電，所以 GreenCube 會在你自己的筆電上測試後再選。</p></details>
+<details><summary>沒有顯示卡的筆電跑 AI 夠用嗎？</summary><p>聊天和念書夠用：16 GB 筆電用小模型，寫字比你讀得還快。也能生成圖片，但每張要 2 到 3 分鐘。</p></details>
 </div>
 </article>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>

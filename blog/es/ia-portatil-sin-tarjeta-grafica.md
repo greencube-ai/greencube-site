@@ -6,61 +6,45 @@ Canonical: https://blog.greencube.app/blog/es/ia-portatil-sin-tarjeta-grafica
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** para chatear, **casi nada**. Para leer textos largos, **un poco**. Para imágenes, **muchísimo**: más de 4 veces más rápido.
+Sí, puedes usar IA en un portátil sin tarjeta gráfica, y un portátil de 16 GB escribe más rápido de lo que lees. Los gráficos Intel integrados en el chip apenas ayudan al chatear, ayudan un poco al leer textos largos y ayudan mucho con las imágenes, que salieron más de 4 veces más rápido.
 
-- **~14** tokens por segundo al chatear, con o sin gráficos Intel
-- **1,3×** más rápido leyendo textos largos que pegas
-- **4×** más rápido creando imágenes
+Queríamos saber si merece la pena usar para la IA los gráficos que lleva integrados casi cualquier portátil, así que hicimos las mismas tareas con el procesador y con los gráficos Intel de un portátil normal.
 
 ## La prueba
 
-Un portátil: Intel Core Ultra 5 125U, 16 GB de RAM, sin tarjeta gráfica, solo con los gráficos integrados en el chip. Usamos la misma IA en el procesador y en los gráficos Intel, enchufado, dos veces cada una, en septiembre y octubre de 2026.
+El portátil tiene un Intel Core Ultra 5 125U, 16 GB de RAM y ninguna tarjeta gráfica, solo los gráficos integrados en el chip. Ejecutamos la misma IA en el procesador y en los gráficos Intel, enchufado, dos veces cada una, en septiembre y octubre de 2026.
 
 | Tarea | Procesador | Gráficos Intel | Diferencia |
 | --- | --- | --- | --- |
-| Escribir una respuesta (Gemma 4 E2B) | 13,7–15,5 tokens/s | 14,4–14,5 tokens/s | **casi igual** |
+| Escribir una respuesta (Gemma 4 E2B) | 13,7–15,5 tokens/s | 14,4–14,5 tokens/s | **más o menos igual** |
 | Leer texto pegado (Gemma 4 E2B) | 160–167 tokens/s | 203–211 tokens/s | **1,3× más rápido** |
-| Una imagen de 512 por 512 | 11 min 27 s | 2 min 22 s – 2 min 38 s | **más de 4× más rápido** |
+| Una imagen, 512 por 512 | 11 min 27 s | 2 min 22 s – 2 min 38 s | **más de 4× más rápido** |
 
-## Lo que aprendimos
+## La velocidad del chat depende de la memoria, no del chip
 
-### 1. La velocidad del chat depende de la memoria, no del chip
+Lo que limita la escritura de una respuesta es lo rápido que el portátil puede mover la IA por su memoria. El procesador y los gráficos Intel comparten esa misma memoria, así que acaban escribiendo más o menos a la misma velocidad.
 
-Escribir una respuesta está limitado por lo rápido que el portátil mueve la IA por su memoria, y el procesador y los gráficos Intel comparten la misma memoria. Por eso escriben a una velocidad parecida.
+## Incluso puede ir más lento
 
-### 2. Incluso puede ir más lento
+Con un modelo pequeño más antiguo, Phi-4 Mini, escribir fue un 29% más lento en los gráficos Intel. Con uno más grande, [Gemma 4 E4B](https://blog.greencube.app/blog/gemma-4-requirements), fue un 26% más rápido. Mismo portátil, resultados opuestos. No se puede adivinar por las especificaciones, así que GreenCube prueba tu portátil y usa lo que vaya más rápido.
 
-Con un modelo pequeño más antiguo (Phi-4 Mini), escribir fue un **29% más lento** en los gráficos Intel. Con uno más grande (Gemma 4 E4B) fue un **26% más rápido**. Mismo portátil, resultados opuestos. No se puede adivinar por las especificaciones, así que GreenCube prueba tu portátil y usa lo que vaya más rápido.
+## Donde sí compensa es en las imágenes
 
-### 3. Donde brillan es en las imágenes
+Hacer una imagen son cálculos pesados, justo para lo que están hechos los chips gráficos, y aquí la diferencia fue enorme: de 11 minutos y medio se pasó a unos 2 y medio. Los detalles están en [cuánto tarda una imagen](https://blog.greencube.app/blog/local-ai-image-generator-speed).
 
-Crear una imagen es cálculo pesado, justo para lo que están hechos los chips gráficos. De 11 minutos y medio a unos 2 y medio.
+## Qué significa para tu portátil
 
-## ¿Y qué significa para ti?
+Para chatear y estudiar, un portátil de 16 GB se basta solo. Escribe más rápido de lo que lees, con o sin los gráficos. Con PDFs largos, los gráficos los leen un poco más rápido, así que la primera respuesta llega antes.
 
-#### Chatear y estudiar
+En un portátil así se pueden hacer imágenes, a unos 2 o 3 minutos cada una, mientras que un PC gaming hace una en menos de un minuto. Y si trabajas desenchufado, en nuestras pruebas la batería y la corriente dieron más o menos la misma velocidad de chat.
 
-Un portátil de 16 GB va de sobra. Escribe más rápido de lo que lees.
-
-#### PDFs largos
-
-Los gráficos los leen algo más rápido, así que la primera respuesta llega antes.
-
-#### Imágenes
-
-Se puede, de 2 a 3 minutos cada una. Un PC gaming lo hace en menos de un minuto.
-
-#### Batería
-
-En nuestras pruebas, con batería y enchufado el chat fue a una velocidad parecida.
-
-¿Quieres ver también los PCs gaming? [Medimos 10 PCs aquí.](https://blog.greencube.app/blog/es/ia-en-mi-pc)
+Para verlo todo, PCs gaming incluidos, [aquí medimos 10 PCs](https://blog.greencube.app/blog/can-my-pc-run-ai).
 
 ## FAQ
 
 ### ¿Los gráficos integrados hacen la IA más rápida?
 
-Para chatear, casi nada: en nuestro portátil de 16 GB la respuesta salía a unos 14 tokens por segundo con o sin ellos. Para leer textos largos fue unas 1,3 veces más rápido, y para crear imágenes, más de 4 veces.
+Para chatear, casi nada: en nuestro portátil de 16 GB la respuesta salía a unos 14 tokens por segundo con o sin ellos. Para leer textos largos pegados fue unas 1,3 veces más rápido, y para crear imágenes, más de 4 veces.
 
 ### ¿Los gráficos integrados pueden hacer la IA más lenta?
 

@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "学生用的离线 AI：不联网时笔记本电脑上能做什么（实测）", "description": "不联网时，你自己笔记本电脑上的 AI 能帮你学习什么：针对 PDF 提问、学习指南、抽认卡和讲解，附 8 GB 和 16 GB 笔记本电脑以及游戏电脑上的实测时间。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/offline-ai-for-students", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "学生用的离线 AI 真的不联网也能用吗？", "acceptedAnswer": {"@type": "Answer", "text": "能。应用和 AI 下载好之后，聊天、针对 PDF 提问、学习指南和抽认卡都在你自己的电脑上运行，不需要任何连接。只有需要今天信息的事情，比如新闻或实时结果，才需要联网。"}}, {"@type": "Question", "name": "离线 AI 能在我的学生笔记本电脑上运行吗？", "acceptedAnswer": {"@type": "Answer", "text": "很可能可以。在我们的测试中，一台没有显卡的 8 GB 笔记本电脑每秒输出 5 到 7 个 token，大约是阅读速度；一台 16 GB 笔记本电脑是 14 到 18 个。有显卡的游戏电脑在我们测过的大多数显卡上是 37 到 76 个。"}}, {"@type": "Question", "name": "用 AI 学习算作弊吗？", "acceptedAnswer": {"@type": "Answer", "text": "这取决于你学校的规定。用 AI 理解知识、自测和获得反馈，通常没问题；把 AI 写的东西当作自己的作业交上去，通常不行。请查看你课程的学术诚信规定。"}}, {"@type": "Question", "name": "使用 GreenCube 需要账户吗？", "acceptedAnswer": {"@type": "Answer", "text": "你需要用 Google 或 Microsoft 登录一次来激活，第一次启动时会下载 AI。之后它可以离线运行，你的聊天和文件都留在你的电脑上。"}}, {"@type": "Question", "name": "离线 AI 需要多少硬盘空间？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube 下载的 AI 文件，小模型 2.6 GB，大模型 4.2 GB，如果要生成图片还需要约 6 GB。在此之外再多留一些空间。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "学生用的离线 AI 真的不联网也能用吗？", "acceptedAnswer": {"@type": "Answer", "text": "能。应用和 AI 下载好之后，聊天、针对 PDF 提问、学习指南和抽认卡都在你自己的电脑上运行，不需要任何连接。只有需要今天信息的事情，比如新闻或实时结果，才需要联网。"}}, {"@type": "Question", "name": "离线 AI 能在我的学生笔记本电脑上运行吗？", "acceptedAnswer": {"@type": "Answer", "text": "很可能可以。在我们的测试中，一台没有显卡的 8 GB 笔记本电脑每秒输出 5 到 7 个 token，大约相当于阅读英文的速度；一台 16 GB 笔记本电脑是 14 到 18 个。有显卡的游戏电脑在我们测过的大多数显卡上是 37 到 76 个。"}}, {"@type": "Question", "name": "用 AI 学习算作弊吗？", "acceptedAnswer": {"@type": "Answer", "text": "这取决于你学校的规定。用 AI 理解知识、自测和获得反馈，通常没问题；把 AI 写的东西当作自己的作业交上去，通常不行。请查看你课程的学术诚信规定。"}}, {"@type": "Question", "name": "使用 GreenCube 需要账户吗？", "acceptedAnswer": {"@type": "Answer", "text": "你需要用 Google 或 Microsoft 登录一次来激活，第一次启动时会下载 AI。之后它可以离线运行，你的聊天和文件都留在你的电脑上。"}}, {"@type": "Question", "name": "离线 AI 需要多少硬盘空间？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube 下载的 AI 文件，小模型 2.6 GB，大模型 4.2 GB，如果要生成图片还需要约 6 GB。在此之外再多留一些空间。"}}]}</script>
 </head>
 <body>
 
@@ -64,81 +64,63 @@
 <p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
 <h1>学生用的离线 AI：不联网时笔记本电脑上能做什么（实测）</h1>
 <p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>简短回答：是的，你自己笔记本电脑上的 AI 是真正的学习工具，不用联网。</strong>它能回答关于你 PDF 的问题、写学习指南、做抽认卡，还能一步步讲解，全部在你的电脑上完成。不同笔记本电脑之间变化的是速度，我们也测了：从 8 GB 笔记本电脑上的大约阅读速度，到游戏电脑上的好几倍。离线时它做不了的，是需要今天新闻的事情。</p></div>
+<div class="answer"><p>可以。装在你自己笔记本电脑上的 AI，关掉 Wi-Fi 也能当学习工具用。它能回答关于你 PDF 的问题，写学习指南，做抽认卡，一步步讲解，全部在你的电脑上完成。不同的笔记本电脑之间，变的是速度，这一点我们实测过：8 GB 笔记本电脑上大约是阅读英文的速度，游戏电脑上要快好几倍。离线时唯一做不了的，是需要今天新闻的事情。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>11/12</b><span>关于长 PDF 的问题答对的数量，每个约 15 秒，16 GB 笔记本电脑</span></div>
-<div class="stat b"><b>14&ndash;18</b><span>没有显卡的普通 16 GB 笔记本电脑每秒 token 数</span></div>
-<div class="stat y"><b>&euro;9.99</b><span>GreenCube，一次付清。ChatGPT Plus 每月 20 美元</span></div>
-</div>
+<p>我自己就在做这样一款应用，叫 GreenCube，下面的时间也是用它测的，所以看我的观点时请把这一点考虑进去。某台机器上没测过的项目，表里会直接写明，不去猜。</p>
 
 <h2>离线能做什么，要多久</h2>
-
-<p>这些是我们自己的测量，用的是真实的学生常用机型，以及 GreenCube 运行的 AI（较小的笔记本电脑上用 Google 的 Gemma 4 E2B，有显卡时用 E4B）。某台机器上没有计时的项目，我们会如实说明，而不是猜测。</p>
+<p>我们在学生常用的普通机器上，用 GreenCube 所用的 AI 跑了这些任务：配置较低的笔记本电脑用 Cube 2B（基于 Google 的 Gemma 4 E2B），有显卡的电脑用 Cube 4B（基于 Gemma 4 E4B）。</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>任务</th><th>8 GB 笔记本电脑，无显卡</th><th>16 GB 笔记本电脑，无显卡</th><th>游戏电脑（6 GB 及以上显卡）</th></tr></thead>
+<thead><tr><th>任务</th><th>8 GB 笔记本电脑，无显卡</th><th>16 GB 笔记本电脑，无显卡</th><th>游戏电脑（6 GB 以上显卡）</th></tr></thead>
 <tbody>
-<tr><td>聊天：输出有多快</td><td><b>5&ndash;7</b> token/秒</td><td><b>14&ndash;18</b> token/秒</td><td>大多数显卡上 <b>37&ndash;76</b> token/秒</td></tr>
-<tr><td>一段完整讲解加三道考试题</td><td>未计时</td><td><b>约 20 秒</b></td><td>未计时</td></tr>
-<tr><td>关于长 PDF 的一个问题</td><td>未计时</td><td><b>约 15 秒</b></td><td>未计时</td></tr>
-<tr><td>一章 5,000 词内容的学习指南</td><td>未计时</td><td><b>约 15 分钟</b></td><td>未计时</td></tr>
+<tr><td>聊天：输出速度</td><td><b>5&ndash;7</b> token/秒</td><td><b>14&ndash;18</b> token/秒</td><td>大多数显卡上 <b>37&ndash;76</b> token/秒</td></tr>
+<tr><td>一段完整讲解加三道考试题</td><td>未测</td><td><b>约 20 秒</b></td><td>未测</td></tr>
+<tr><td>针对一份长 PDF 提一个问题</td><td>未测</td><td><b>约 15 秒</b></td><td>未测</td></tr>
+<tr><td>一章 5,000 词内容的学习指南</td><td>未测</td><td><b>约 15 分钟</b></td><td>未测</td></tr>
 <!--FLASHCARDS-ROW-->
-<tr><td>一张图片（示意图、插图）</td><td>不能：需要约 7 GB 空闲</td><td><b>2&ndash;2.5 分钟</b></td><td><b>8&ndash;89 秒</b></td></tr>
+<tr><td>一张图片（示意图、插图）</td><td>不行：需要约 7 GB 空闲空间</td><td><b>2&ndash;2.5 分钟</b></td><td><b>8&ndash;89 秒</b></td></tr>
 </tbody>
 </table></div>
 
-<p>token 是词的片段。中文的 token 数和字数之间没有固定比例，所以我们不做换算。粗略地说，每秒几个 token 大约相当于阅读速度，每秒几十个 token 就明显快到眼睛跟不上。我们测过的每台电脑及其完整数字都在<a href="/blog/zh/can-my-pc-run-ai">我的电脑能跑 AI 吗？</a>里，你也可以在那里查自己的电脑。</p>
+<p>在英文里，一个 token 大约是四分之三个单词，而大多数人每秒能读大约 4 个单词（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>），也就是阅读英文时大约每秒 5 个 token。所以连 8 GB 笔记本电脑也跟得上你的眼睛。我们测过的每台电脑及完整数据都在<a href="/blog/zh/can-my-pc-run-ai">我的电脑能跑 AI 吗？</a>里，你也可以在那里查自己的电脑。</p>
 
 <p class="bridge-mid">想让它帮你做？<a href="https://greencube.app/zh/buy">GreenCube 在你的电脑上做幻灯片、图解和抽认卡 <span aria-hidden="true">&rarr;</span></a></p>
 <h2>它擅长什么</h2>
 
-<div class="card g">
-<h3>1. 回答关于你自己文档的问题</h3>
-<p>给它一长章内容，问一个具体问题，比如针对一段工业革命的历史问“谁资助了瓦特？”。在<a href="/blog/zh/ai-to-study-from-pdf">我们用三份长文档做的测试</a>里，16 GB 笔记本电脑上的小 AI <strong>12 个问题答对 11 个，每个约 15 秒</strong>。它会找出包含你问题中词语的段落，再根据这些段落回答，所以它紧扣你的资料，而不是网上的内容。</p>
-</div>
+<h3>关于你自己文档的问题</h3>
+<p>给它一份很长的章节，然后问一个具体的问题，比如在一份讲工业革命历史的材料里，问是谁资助了瓦特。在<a href="/blog/zh/ai-to-study-from-pdf">我们用三份长文档做的测试</a>中，16 GB 笔记本电脑上的小模型 12 题答对 11 题，每题约 15 秒。它会找出包含你问题里那些词的段落，再根据这些段落回答，所以答案紧扣你的材料，而不是网上的内容。</p>
 
-<div class="card b">
-<h3>2. 根据整章生成学习指南和抽认卡</h3>
-<p>整章的指南意味着要读完每一部分，所以要久一些：在没有显卡的 16 GB 笔记本电脑上，<strong>5,000 词约 15 分钟</strong>。休息时开始就好。</p>
+<h3>用整章内容做学习指南和抽认卡</h3>
+<p>为整章做指南意味着要读完每一部分，所以更花时间：在没有显卡的 16 GB 笔记本电脑上，5,000 词大约 15 分钟。休息前让它开始，回来时就做好了。</p>
 <!--FLASHCARDS-CARD-->
-</div>
 
-<div class="card y">
-<h3>3. 讲解和练习题，随时都行</h3>
-<p>“像给 14 岁的人讲一样解释光合作用，然后出三道考试题”，在同一台笔记本电脑上用了<strong>约 20 秒</strong>。没有消息上限，所以你可以把同一个问题换五种方式问，直到弄懂为止，哪怕是考试前一晚的凌晨两点。</p>
-</div>
+<h3>讲解和练习题，什么时候都行</h3>
+<p>让它像给 14 岁的孩子讲那样解释光合作用，再出三道考试题，在同一台笔记本电脑上大约 20 秒。没有消息上限，所以同一个概念你可以换五种问法，直到想明白为止，哪怕是考试前一晚的凌晨两点。</p>
 
-<div class="card p">
-<h3>4. 在没有 Wi-Fi 的地方也能用</h3>
-<p>在火车上、在 Wi-Fi 很差的图书馆里、在没信号的乡下。装好之后，用它学习完全不需要联网。</p>
-</div>
+<h3>Wi-Fi 不好用的地方</h3>
+<p>火车上，Wi-Fi 很差的图书馆，没有信号的乡下。装好之后，用它学习完全不需要联网。</p>
 
 <h2>它不擅长什么</h2>
-<ul>
-<li><strong>最近发生的事。</strong>离线 AI 只知道训练时学到的东西，不知道这周的新闻或今天的结果。GreenCube 有一个网上搜索开关，每次打开应用时都是关闭的。</li>
-<li><strong>每次都对。</strong>在我们的 PDF 测试中，它 12 个问题错了 1 个：问细胞把钙储存在哪里时，它说错了部位。考试要考的内容，和你的笔记核对一下。</li>
-<li><strong>最难的问题。</strong>小到能装进笔记本电脑的模型，不会在所有方面都赢过最大的云端 AI。用来学习、总结、自测和回答日常问题，它绰绰有余。</li>
-<li><strong>旧笔记本电脑上的速度。</strong>8 GB 笔记本电脑能用，但比较慢，最好先关掉其他应用。<a href="/blog/zh/run-ai-on-8gb-ram">我们的 8 GB 测试</a>里有详细情况。</li>
-</ul>
+<p>它不知道最近发生的事。离线 AI 只知道训练时学到的东西，不知道这周的新闻或今天的结果。GreenCube 为此有一个网上搜索开关，每次打开应用时它都是关着的。</p>
+<p>它不是每次都对。在我们的 PDF 测试中，它 12 题错了 1 题：问细胞把钙储存在哪里，它说错了部位。考试要用的内容，请和你的笔记核对。</p>
+<p>遇到最难的问题，它比不过最大的云端 AI。小到能装进笔记本电脑的模型是有局限的。不过用来学习、总结、自测和回答日常问题，它绰绰有余。</p>
+<p>旧笔记本电脑会慢。8 GB 能用，但比较慢，最好先关掉其他应用。<a href="/blog/zh/run-ai-on-8gb-ram">我们的 8 GB 测试</a>里有详细情况。</p>
 
 <h2>你的笔记本电脑能跑吗？</h2>
-<p>30 秒就能查到：按 <strong>Ctrl + Shift + Esc</strong>，进入<strong>性能</strong>，看 <strong>内存</strong>（你的内存）和 <strong>GPU</strong>（你的显卡，如果有的话）。然后输入到<a href="/blog/zh/can-my-pc-run-ai#checker">我们的检测工具</a>里：它会告诉你能跑什么，以及在一台和你类似的真实电脑上跑得多快。</p>
-<ul>
-<li><strong>8 GB，无显卡：</strong>聊天和学习能用，但慢。不能生成图片。</li>
-<li><strong>16 GB，无显卡：</strong>聊天、PDF 和学习指南都很顺畅。生成图片要几分钟。</li>
-<li><strong>游戏电脑：</strong>在我们测过的大多数显卡上都很快，因为大部分工作由显卡完成。（我们还没测过游戏笔记本。）</li>
-</ul>
+<p>30 秒就能查到。按 <strong>Ctrl + Shift + Esc</strong>，打开<strong>性能</strong>，看<strong>内存</strong>（RAM）和 <strong>GPU</strong>（显卡，如果有的话）。把这些输入<a href="/blog/zh/can-my-pc-run-ai#checker">我们的检测工具</a>，它会告诉你能跑什么，以及在一台和你类似的真实电脑上跑得多快。</p>
+<p>大致来说，没有显卡的 8 GB 能用来聊天和学习，但慢，也不能生成图片。没有显卡的 16 GB 用来聊天、读 PDF 和做学习指南都很顺手，生成图片要几分钟。游戏电脑在我们测过的大多数显卡上都很快，因为大部分工作由显卡完成。游戏笔记本我们还没测过。</p>
 
 <h2>这算作弊吗？</h2>
-<p>这取决于你用它做什么，以及你学校的规定。用 AI 理解一个主题、自测或者对草稿提意见，通常没问题。把 AI 写的东西当作自己的作业交上去，通常不行。请查看你课程的学术诚信规定，拿不准就问老师。</p>
+<p>这取决于你拿它做什么，以及学校的规定。用 AI 理解一个主题、自测，或者让它对草稿提意见，通常没问题。把 AI 写的东西当成自己的作业交上去，通常不行。请查看你课程的学术诚信规定，拿不准就问老师。</p>
 
 <h2>要花多少钱</h2>
-<p>免费版 ChatGPT 现在允许不限量的日常文字聊天，但限制文件上传和图片，而且在一些国家开始出现广告（<a href="/blog/zh/chatgpt-free-limits">我们核实了细节</a>）。ChatGPT Plus 每月 20 美元，一个 9 个月的学年就是 180 美元。GreenCube 一次付清 9.99 欧元，消息、文件和图片都不限量，因为一切都在你自己的电脑上运行。而且它不会用你输入的内容训练，而大多数云端 AI 默认会这么做：<a href="/blog/zh/ai-that-doesnt-train-on-your-data">我们核实了其中 9 个</a>。</p>
+<p>免费版 ChatGPT 现在不限制日常文字聊天的次数，但限制文件上传和图片，而且在一些国家开始显示广告（<a href="/blog/zh/chatgpt-free-limits">我们核实了细节</a>）。ChatGPT Plus 每月 20 美元，在西班牙约 23 欧元，一个学年下来就超过 200 欧元。</p>
+<p>GreenCube 一次付清 9.99 欧元，消息、文件和图片都不限量，因为一切都在你自己的电脑上运行。它也不会用你输入的内容来训练。大多数云端 AI 默认会这么做，<a href="/blog/zh/ai-that-doesnt-train-on-your-data">我们核实了其中 9 个</a>。</p>
 <h2>常见问题</h2>
 <div class="faq">
 <details><summary>学生用的离线 AI 真的不联网也能用吗？</summary><p>能。应用和 AI 下载好之后，聊天、针对 PDF 提问、学习指南和抽认卡都在你自己的电脑上运行，不需要任何连接。只有需要今天信息的事情，比如新闻或实时结果，才需要联网。</p></details>
-<details><summary>离线 AI 能在我的学生笔记本电脑上运行吗？</summary><p>很可能可以。在我们的测试中，一台没有显卡的 8 GB 笔记本电脑每秒输出 5 到 7 个 token，大约是阅读速度；一台 16 GB 笔记本电脑是 14 到 18 个。有显卡的游戏电脑在我们测过的大多数显卡上是 37 到 76 个。</p></details>
+<details><summary>离线 AI 能在我的学生笔记本电脑上运行吗？</summary><p>很可能可以。在我们的测试中，一台没有显卡的 8 GB 笔记本电脑每秒输出 5 到 7 个 token，大约相当于阅读英文的速度；一台 16 GB 笔记本电脑是 14 到 18 个。有显卡的游戏电脑在我们测过的大多数显卡上是 37 到 76 个。</p></details>
 <details><summary>用 AI 学习算作弊吗？</summary><p>这取决于你学校的规定。用 AI 理解知识、自测和获得反馈，通常没问题；把 AI 写的东西当作自己的作业交上去，通常不行。请查看你课程的学术诚信规定。</p></details>
 <details><summary>使用 GreenCube 需要账户吗？</summary><p>你需要用 Google 或 Microsoft 登录一次来激活，第一次启动时会下载 AI。之后它可以离线运行，你的聊天和文件都留在你的电脑上。</p></details>
 <details><summary>离线 AI 需要多少硬盘空间？</summary><p>GreenCube 下载的 AI 文件，小模型 2.6 GB，大模型 4.2 GB，如果要生成图片还需要约 6 GB。在此之外再多留一些空间。</p></details>

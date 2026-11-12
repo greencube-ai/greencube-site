@@ -9,22 +9,18 @@
  "lang": "de",
  "alt": "run-ai-on-8gb-ram",
  "faq": [
-  {"q": "Läuft KI auf einem Laptop mit 8 GB RAM?", "a": "Ja, ein kleines Modell. Auf unserem Laptop mit 8 GB und Intel-Iris-Xe-Grafik schrieb es in echten Chats 5 bis 7 Tokens pro Sekunde, und Antworten dauerten 30 bis 40 Sekunden. Bilder kann es nicht erstellen."},
+  {"q": "Läuft KI auf einem Laptop mit 8 GB RAM?", "a": "Ja, ein kleines Modell. Auf unserem Laptop mit 8 GB und Intel-Iris-Xe-Grafik schrieb es in echten Chats 5 bis 7 Tokens pro Sekunde, etwa so schnell, wie man Englisch liest, und Antworten dauerten 30 bis 40 Sekunden. Bilder kann es nicht erstellen."},
   {"q": "Warum startet die KI auf meinem Laptop mit 8 GB nicht?", "a": "Meist fehlt freier Speicher. Unser Laptop mit 8 GB hatte mit anderen offenen Apps nur etwa 1 GB frei, und an einem Tag konnte die KI nicht laden. Wenn du vorher den Browser und andere Apps schließt, hat sie Platz."},
   {"q": "Macht die Intel-Iris-Xe-Grafik KI auf einem Laptop mit 8 GB schneller?", "a": "Beim Chatten nicht. Auf unserem Laptop schrieb der Prozessor mit 9,3 Tokens pro Sekunde und die Iris-Xe-Grafik mit 5,0. GreenCube testet beide auf deinem Laptop und nimmt das Schnellere."}
  ]
 }
 -->
-<div class="answer"><p><strong>Kurze Antwort: ja, langsam.</strong> Eine kleine KI auf einem Laptop mit 8 GB schreibt etwa so schnell, wie du liest. Der Haken ist nicht das Tempo, sondern <strong>freier Speicher</strong>. Schließ vorher deine anderen Apps.</p></div>
+<div class="answer"><p>Ja, langsam. Eine kleine KI auf einem Laptop mit 8 GB schreibt etwa so schnell, wie du liest, und eine vollständige Antwort dauert 30 bis 40 Sekunden. Der eigentliche Haken ist nicht das Tempo, sondern der freie Speicher, also schließ deine anderen Apps, bevor du anfängst.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>Tokens pro Sekunde auf dem Prozessor, im kurzen Starttest</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>für eine vollständige Antwort</span></div>
-<div class="stat p"><b>~1 GB</b><span>freier Speicher mit anderen offenen Apps, das eigentliche Problem</span></div>
-</div>
+<p>Wir haben es auf dem schwächsten PC ausprobiert, den wir gemessen haben, weil „Läuft das auf meinem alten Laptop?“ eine der ersten Fragen ist, die Leute zu lokaler KI stellen. Es läuft. So sieht das aus.</p>
 
 <h2>Der Test</h2>
-<p>Der schwächste PC, den wir gemessen haben: ein Laptop mit 8 GB RAM, Intel-Iris-Xe-Grafik, ohne Grafikkarte, im Akkubetrieb. Kleines Modell (Gemma 4 E2B), Anfang Oktober 2026.</p>
+<p>Der Laptop hat 8 GB RAM und Intel-Iris-Xe-Grafik, keine Grafikkarte, und wir haben ihn im Akkubetrieb laufen lassen. Wir haben das kleine Modell von GreenCube genutzt, Cube 2B (auf Basis von <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), Anfang Oktober 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Was</th><th>Ergebnis</th></tr></thead>
@@ -38,29 +34,21 @@
 </tbody>
 </table></div>
 
-<h2>Was wir gelernt haben</h2>
+<h2>Zum Chatten und Lernen reicht es</h2>
+<p>5 bis 7 Tokens pro Sekunde in echten Chats entsprechen etwa dem Lesetempo, wenn man Englisch liest. Der kurze Starttest von GreenCube ergab 9,3, aber in echten Chats lag der Wert niedriger. Auf eine lange Antwort wartest du eine halbe Minute, aber sie kommt, ohne Internet und ohne Limits.</p>
 
-<div class="card g">
-<h3>1. Zum Chatten und Lernen reicht es</h3>
-<p>5 bis 7 Tokens pro Sekunde in echten Chats liegen etwas unter dem Lesetempo im Deutschen (der kurze Starttest ergab 9,3). Auf eine lange Antwort wartest du eine halbe Minute, aber sie kommt, ohne Internet und ohne Limits.</p>
-</div>
+<h2>Freier Speicher ist die eigentliche Grenze</h2>
+<p>Mit dem Browser und anderen offenen Apps hatte der Laptop nur etwa 1 GB Speicher frei. An einem Tag reichte das nicht, und die KI konnte nicht einmal starten. Das kleine Modell braucht ein paar GB für sich allein, also muss es sich bei 8 GB den Platz sorgfältig mit allem teilen, was du sonst offen hast.</p>
 
-<div class="card p">
-<h3>2. Freier Speicher ist die eigentliche Grenze</h3>
-<p>Mit Browser und anderen offenen Apps hatte der Laptop nur etwa 1 GB frei. An einem Tag reichte das nicht, und die KI konnte nicht einmal starten. Das kleine Modell braucht ein paar GB für sich allein.</p>
-</div>
-
-<div class="card y">
-<h3>3. Die integrierte Grafik machte es langsamer</h3>
-<p>Auf diesem Laptop schrieb die Iris-Xe-Grafik mit 5,0 Tokens pro Sekunde, der Prozessor mit 9,3. Auf einem anderen Laptop waren beide etwa gleich. Vorher weiß man das nicht, also testet GreenCube beide und nimmt das Schnellere.</p>
-</div>
+<h2>Die integrierte Grafik machte es langsamer</h2>
+<p>Man würde erwarten, dass der Grafikchip hilft, aber auf diesem Laptop schrieb die Iris-Xe-Grafik mit 5,0 Tokens pro Sekunde und der Prozessor mit 9,3. Auf einem anderen Laptop waren beide etwa gleich schnell. An den technischen Daten lässt sich das vorher nicht ablesen, deshalb testet GreenCube beide auf deinem Laptop und nimmt das Schnellere.</p>
 
 <h2>Tipps für einen Laptop mit 8 GB</h2>
 <ol class="steps">
-<li><strong>Schließ den Browser</strong> (oder die meisten Tabs), bevor du anfängst. Browser fressen Speicher.</li>
-<li><strong>Starte den Laptop neu</strong> vor einer langen Lernsession. Das gibt Speicher frei, den andere Apps vergessen haben zurückzugeben.</li>
-<li><strong>Stell kürzere Fragen</strong>, oder eine Sache nach der anderen. Kürzere Antworten kommen schneller.</li>
-<li><strong>Lass Bilder weg.</strong> Sie brauchen etwa 7 GB; nimm dafür einen stärkeren PC.</li>
+<li>Schließ den Browser oder die meisten Tabs, bevor du anfängst. Browser brauchen viel Speicher.</li>
+<li>Starte den Laptop vor einer langen Lernsession neu. Das gibt Speicher frei, den andere Apps vergessen haben zurückzugeben.</li>
+<li>Frag eine Sache nach der anderen. Kürzere Antworten kommen schneller.</li>
+<li>Heb dir Bilder für einen stärkeren PC auf. Sie brauchen allein etwa 7 GB.</li>
 </ol>
 
-<p>Sieh, wie viel schneller andere PCs sind: <a href="/blog/can-my-pc-run-ai">Hier haben wir {{pcs}} PCs gemessen</a>.</p>
+<p>Wie viel schneller andere PCs sind, siehst du hier: <a href="/blog/can-my-pc-run-ai">Wir haben {{pcs}} PCs gemessen</a>.</p>

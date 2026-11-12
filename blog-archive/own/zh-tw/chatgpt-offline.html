@@ -10,58 +10,56 @@
  "lang": "zh-tw",
  "alt": "chatgpt-offline",
  "faq": [
-  {"q": "ChatGPT 能離線用嗎？", "a": "不能。ChatGPT 執行在 OpenAI 的伺服器上：網站、手機應用程式以及 Windows 和 Mac 應用程式都需要聯網。OpenAI 既沒有離線模式，也沒有離線安裝包。"},
-  {"q": "有官方的離線版 ChatGPT 嗎？", "a": "ChatGPT 本身沒有。OpenAI 最接近的是 gpt-oss-20b，一個採用 Apache 2.0 許可的開放權重模型，能在約 16 GB 記憶體的電腦上透過 Ollama 或 LM Studio 等應用程式執行。它和 ChatGPT 不是同一個模型。"},
-  {"q": "ChatGPT 最好的離線替代品是什麼？", "a": "一個在你自己電腦上執行 AI 模型的應用程式：LM Studio、Jan、Ollama 和 GPT4All 免費（模型自己選）；GreenCube 一次付清 9.99 歐元，會按你的電腦挑模型。首次下載後，關掉 Wi-Fi 也能用。"},
-  {"q": "ChatGPT 的離線替代品有多快？", "a": "看你的電腦。在我們的測試裡，GreenCube 在 8 GB 筆電上每秒寫 5 到 7 個 token（大約閱讀速度），在 16 GB 筆電上 14 到 18 個，在大多數顯示卡 6 GB 以上的遊戲電腦上 37 到 76 個。"},
-  {"q": "應用程式商店裡的“ChatGPT 離線版”是真的嗎？", "a": "要小心：用 ChatGPT 名字號稱離線能用的應用程式都不是 OpenAI 做的。如果哪個真能不聯網用，它是在你的裝置上執行別的模型；查一下是誰做的、用的是哪個模型。"}
+  {"q": "ChatGPT 能離線用嗎？", "a": "不能。ChatGPT 在 OpenAI 的伺服器上運作，所以網站、手機 App，以及 Windows 和 Mac 的桌面應用程式都需要網路連線。OpenAI 沒有提供離線模式，也沒有離線安裝檔。"},
+  {"q": "有官方的離線版 ChatGPT 嗎？", "a": "ChatGPT 本身沒有。OpenAI 最接近的是 gpt-oss-20b，一個以 Apache 2.0 授權釋出的開放權重模型，可以透過 Ollama 或 LM Studio 這類應用程式，在約 16 GB 記憶體的電腦上執行。它和 ChatGPT 不是同一個模型。"},
+  {"q": "ChatGPT 最好的離線替代方案是什麼？", "a": "在你自己電腦上執行 AI 模型的應用程式：LM Studio、Jan、Ollama 和 GPT4All 是免費的（模型由你自己選）；GreenCube 一次付清 9.99 歐元，會替你的電腦挑好模型。第一次下載完成後，關掉 Wi-Fi 也能用。"},
+  {"q": "ChatGPT 的離線替代方案有多快？", "a": "要看你的電腦。在我們的測試中，GreenCube 在 8 GB 筆電上每秒寫出 5 到 7 個 token（大約是閱讀速度），在 16 GB 筆電上 14 到 18 個，在大多數配備 6 GB 以上顯示卡的遊戲電腦上 37 到 76 個。"},
+  {"q": "App 商店裡的「ChatGPT 離線版」是真的嗎？", "a": "要小心：打著 ChatGPT 名號、號稱能離線使用的 App 都不是 OpenAI 做的。如果某個 App 真的能離線運作，那是它在你的裝置上跑別的模型；先查清楚是誰做的、用的是哪個模型。"}
  ]
 }
 -->
-<div class="answer"><p><strong>簡短回答：不能。</strong>ChatGPT 執行在 OpenAI 的伺服器上，所以網站、手機應用程式和桌面應用程式都需要聯網，沒有離線模式。離線<strong>能用</strong>的，是在你自己電腦上執行的 AI 模型：OpenAI 的開放模型 <strong>gpt-oss-20b</strong>（約 16 GB 記憶體），或者 LM Studio、Jan、Ollama 和 GreenCube 這類應用程式，下載一次模型後關掉 Wi-Fi 也能用。</p></div>
+<div class="answer"><p>不行，ChatGPT 沒辦法離線使用。你打的每一則訊息都會送到 OpenAI 的伺服器，回答也是從那裡傳回來的，所以一旦斷線，App 就沒有東西可以回答你。網站、手機 App，還有 Windows 和 Mac 的應用程式都是如此。</p></div>
 
-<div class="stats">
-<div class="stat p"><b>0</b><span>ChatGPT 的離線模式：模型執行在 OpenAI 的伺服器上</span></div>
-<div class="stat y"><b>16 GB</b><span>記憶體，OpenAI 開放模型 gpt-oss-20b 所需</span></div>
-<div class="stat g"><b>8 GB</b><span>就夠在筆電上跑一個小的本地模型（實測）</span></div>
-</div>
+<p>真正能離線使用的，是裝在你自己電腦上的 AI。下載一次之後，就算把 Wi-Fi 關掉也能繼續用。我自己就在做這類應用程式，叫 GreenCube，所以看我的意見時請把這點放在心上。下面也會介紹免費的選擇，以及你的電腦需要什麼配備才跑得動。</p>
 
-<h2>為什麼 ChatGPT 不能離線用</h2>
-<p>你在 ChatGPT 裡打字時，訊息會發到 OpenAI 的資料中心，那裡的模型寫出回答再發回來。Windows 和 Mac 應用程式只是通向這個服務的視窗，不是模型的副本。沒有網路，你的裝置上就沒有任何東西能回答你。</p>
-<p>小心名字裡帶“ChatGPT”和“離線”的應用程式：它們不是 OpenAI 做的。如果哪個真能不聯網用，它是在你的手機或電腦上執行別的模型。</p>
+<h2>為什麼 ChatGPT 不能在沒有網路時運作</h2>
+<p>ChatGPT 的 App 只是一扇通往 OpenAI 資料中心的窗，不是模型的複本。模型本身大到筆電根本裝不下，所以它一直待在 OpenAI 的機器上，你的裝置只負責收發文字。</p>
+<p>提醒一點：App 商店裡到處都是名字帶著「ChatGPT」和「離線」的 App，沒有一個是 OpenAI 做的。如果哪一個真的能離線運作，那它是在你的手機或電腦上跑另一個比較小的模型，最好查一下是誰做的。</p>
 
-<h2>不聯網能用什麼</h2>
-<div class="card b">
-<h3>OpenAI 的開放模型：gpt-oss-20b</h3>
-<p>2025 年 8 月，OpenAI 釋出了 gpt-oss，採用 Apache 2.0 許可的開放權重模型。較小的 gpt-oss-20b 能在約 16 GB 記憶體的電腦上執行（<a href="https://openai.com/index/introducing-gpt-oss/" rel="noopener">OpenAI</a>），透過 Ollama 或 LM Studio 等應用程式。它來自 OpenAI，但不是 ChatGPT：模型不同，沒有網頁搜尋，也沒有你帳號的記憶。我們沒有在自己的電腦上給它計時。</p>
-</div>
-<div class="card g">
-<h3>本地 AI 應用程式</h3>
-<p>下載一次模型、在你電腦上執行的應用程式：<strong>LM Studio</strong>、<strong>Jan</strong>、<strong>Ollama</strong> 和 <strong>GPT4All</strong> 免費，可以自己選模型；<strong>GreenCube</strong>（Windows，一次付清 9.99 歐元）會挑適合你電腦的模型，還能讀 PDF 和照片、生成圖片。<a href="/blog/best-offline-ai-chatbot">12 款離線應用程式對比</a>。</p>
-</div>
+<h2>可以改用什麼</h2>
+<h3>OpenAI 的開放模型 gpt-oss-20b</h3>
+<p>2025 年 8 月，OpenAI 釋出了 gpt-oss，兩個任何人都能以 Apache 2.0 授權下載的模型。比較小的 gpt-oss-20b 可以在約 16 GB 記憶體的電腦上執行（<a href="https://openai.com/index/introducing-gpt-oss/" rel="noopener">OpenAI 的公告</a>）。你要透過 <a href="/blog/ollama-vs-lm-studio">Ollama 或 LM Studio</a> 這類應用程式來跑它。它是 OpenAI 做的，但它不是 ChatGPT：不能上網搜尋，也不認得你的帳號。我們還沒在自己的電腦上替它測過速度。</p>
 
-<h2>你需要什麼，有多快</h2>
-<p>用 GreenCube 在 {{pcs}} 臺真實電腦上實測（模型：Google 的 Gemma 4 E2B 和 E4B）：</p>
+<h3>免費的本地 AI 應用程式</h3>
+<p><strong>LM Studio</strong>、<strong>Jan</strong>、<strong>Ollama</strong> 和 <strong><a href="/blog/gpt4all-alternatives">GPT4All</a></strong> 都是免費的。你從一長串清單裡挑一個模型，下載下來就能跟它聊，想關掉 Wi-Fi 也行。如果你喜歡試各種模型和設定，它們很棒。如果你不知道「Q4_K_M」是什麼意思，就得先做點功課。更完整的清單在 <a href="/blog/best-offline-ai-chatbot">12 款離線 AI 應用程式比較</a>。</p>
+
+<h3>GreenCube</h3>
+<p>GreenCube 是我在做的應用程式，給想要直接拿到結果、不想自己設定的人。安裝之後，它會檢查你的電腦，挑一個合適的模型：小筆電用 Cube 2B，有顯示卡的電腦用 Cube 4B，兩個都是以 Google 的 Gemma 為基礎。接著就能離線使用。除了聊天，它還能做簡報、字卡、測驗和圖片，也能讀你的 PDF 和照片，全部都在你的電腦上完成。它只有 Windows 版，一次付清 9.99 歐元。啟用時要登入一次，第一次開啟時會下載模型。</p>
+<figure class="shot"><img src="https://greencube.app/demo/img-09.webp" alt="北極光下、雪林中一間溫馨的木屋，由 GreenCube 製作" width="512" height="512" loading="lazy"/><figcaption>GreenCube 在一台配備 Intel 內顯的 16 GB 筆電上，不連網、花大約 2 分鐘畫出的圖片。</figcaption></figure>
+
+<h2>你的電腦跑得動嗎？</h2>
+<p>下面是 GreenCube 在我們實測的 {{pcs}} 台真實電腦上的輸出速度。閱讀英文的速度大約是每秒 5 個 token，所以超過這個數字就會覺得很快。</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>你的電腦</th><th>輸出速度</th><th>感覺</th></tr></thead>
+<thead><tr><th>你的電腦</th><th>輸出速度</th><th>感覺起來</th></tr></thead>
 <tbody>
-<tr><td>8 GB 筆電，沒有顯示卡</td><td><b>5&ndash;7</b> token/秒</td><td>大約閱讀速度</td></tr>
+<tr><td>8 GB 筆電，沒有顯示卡</td><td><b>5&ndash;7</b> token/秒</td><td>大約是閱讀速度</td></tr>
 <tr><td>16 GB 筆電，沒有顯示卡</td><td><b>14&ndash;18</b> token/秒</td><td>比你讀得快</td></tr>
-<tr><td>顯示卡 6 GB 以上的遊戲電腦</td><td>大多數顯示卡上 <b>37&ndash;76</b> token/秒</td><td>比你讀得快得多</td></tr>
+<tr><td>配備 6 GB 以上顯示卡的遊戲電腦</td><td>大多數顯示卡上 <b>37&ndash;76</b> token/秒</td><td>比你讀得快好幾倍</td></tr>
 </tbody>
 </table></div>
-<p>你的具體顯示卡：<a href="/blog/can-my-pc-run-ai#checker">我的電腦能跑 AI 嗎？</a> Windows 上：<a href="/blog/local-ai-chatbot-windows">離線 AI 需要你的電腦有什麼</a>。</p>
+<p>想查你那張顯示卡的確切情況，可以用 <a href="/blog/can-my-pc-run-ai#checker">我的電腦能跑 AI 嗎？</a> Windows 的細節請看 <a href="/blog/local-ai-chatbot-windows">離線跑 AI 需要什麼樣的電腦</a>。</p>
 
-<h2>ChatGPT 還是離線 AI：老實說的取捨</h2>
+<h2>你得放棄什麼</h2>
+<p>筆電上的 AI 比 ChatGPT 背後的模型小，遇到最難的問題就看得出來：很長的數學推導、棘手的程式、非常冷門的知識。它也不知道今天的新聞，只知道發布前學過的東西。</p>
+<p>換來的是：在飛機上也能用，檔案和圖片沒有每日上限（<a href="/blog/chatgpt-free-limits">ChatGPT 的免費限制</a>），而且你的聊天紀錄存在自己的電腦裡，而不是別人的伺服器上。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th></th><th>ChatGPT</th><th>你電腦上的 AI</th></tr></thead>
 <tbody>
-<tr><td><strong>不聯網能用</strong></td><td>不能</td><td>能，下載一次之後</td></tr>
-<tr><td><strong>最難問題上的實力</strong></td><td>更強：模型大得多</td><td>學習、寫作和日常夠用</td></tr>
-<tr><td><strong>今天的新聞</strong></td><td>能，靠搜尋</td><td>不能（只知道模型學過的）</td></tr>
-<tr><td><strong>檔案和圖片限制（免費）</strong></td><td>有限制（<a href="/blog/chatgpt-free-limits">詳情</a>）</td><td>沒有</td></tr>
-<tr><td><strong>你的聊天去了哪</strong></td><td>OpenAI 的伺服器</td><td>哪兒也不去：你的電腦</td></tr>
-<tr><td><strong>價格</strong></td><td>免費，或 Plus 每月 20 美元</td><td>免費應用程式，或 GreenCube 一次付清 9.99 歐元</td></tr>
+<tr><td>沒有網路也能用</td><td>不能</td><td>能，下載一次之後</td></tr>
+<tr><td>最難的問題</td><td>比較強</td><td>念書、寫作和日常問題都夠用</td></tr>
+<tr><td>今天的新聞</td><td>有，靠搜尋</td><td>沒有</td></tr>
+<tr><td>聊天紀錄存在哪裡</td><td>OpenAI 的伺服器</td><td>你的電腦</td></tr>
+<tr><td>價格</td><td>免費，或 Plus 每月 20 美元</td><td>免費應用程式，或 GreenCube 一次付清 9.99 歐元</td></tr>
 </tbody>
 </table></div>
-<p>很多人兩個都用：聯網又需要最強模型時用 ChatGPT；在火車上、在 Wi-Fi 很差的圖書館裡，或者處理不想上傳的筆記時，用離線 AI。</p>
+<p>很多人兩種都用：連得上網又需要最強的模型時用 ChatGPT；在火車上、在 Wi-Fi 很爛的圖書館，或處理不想外流的筆記時，就用離線 AI。</p>

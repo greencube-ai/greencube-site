@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Peut-on faire tourner une IA avec 8 Go de RAM ? Nous avons testé notre portable le plus faible", "description": "Faire tourner une IA avec 8 Go de RAM : 5 à 7 tokens par seconde en conversations réelles et des réponses en 30 à 40 secondes sur notre portable le plus faible. Ça marche pour discuter et réviser, avec un bémol : la mémoire libre.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/run-ai-on-8gb-ram", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Peut-on faire tourner une IA sur un portable avec 8 Go de RAM ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, un petit modèle. Sur notre portable de 8 Go avec une puce graphique Intel Iris Xe, il a écrit 5 à 7 tokens par seconde en conversations réelles, et les réponses ont pris 30 à 40 secondes. Il ne peut pas créer d'images."}}, {"@type": "Question", "name": "Pourquoi l'IA ne démarre-t-elle pas sur mon portable de 8 Go ?", "acceptedAnswer": {"@type": "Answer", "text": "En général, faute de mémoire libre. Notre portable de 8 Go n'avait qu'environ 1 Go de libre avec d'autres applis ouvertes, et un jour l'IA n'a pas pu se charger. Fermer d'abord le navigateur et les autres applis lui laisse de la place."}}, {"@type": "Question", "name": "La puce Intel Iris Xe rend-elle l'IA plus rapide sur un portable de 8 Go ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas pour discuter. Sur notre portable, le processeur a écrit à 9,3 tokens par seconde et la puce Iris Xe à 5,0. GreenCube teste les deux sur votre portable et utilise le plus rapide."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Peut-on faire tourner une IA sur un portable avec 8 Go de RAM ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, un petit modèle. Sur notre portable de 8 Go avec une puce graphique Intel Iris Xe, il a écrit 5 à 7 tokens par seconde en conversations réelles, à peu près la vitesse à laquelle on lit l'anglais, et les réponses ont pris 30 à 40 secondes. Il ne peut pas créer d'images."}}, {"@type": "Question", "name": "Pourquoi l'IA ne démarre-t-elle pas sur mon portable de 8 Go ?", "acceptedAnswer": {"@type": "Answer", "text": "En général, faute de mémoire libre. Notre portable de 8 Go n'avait qu'environ 1 Go de libre avec d'autres applis ouvertes, et un jour l'IA n'a pas pu se charger. Fermer d'abord le navigateur et les autres applis lui laisse de la place."}}, {"@type": "Question", "name": "La puce Intel Iris Xe rend-elle l'IA plus rapide sur un portable de 8 Go ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas pour discuter. Sur notre portable, le processeur a écrit à 9,3 tokens par seconde et la puce Iris Xe à 5,0. GreenCube teste les deux sur votre portable et utilise le plus rapide."}}]}</script>
 </head>
 <body>
 
@@ -64,16 +64,12 @@
 <p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
 <h1>Peut-on faire tourner une IA avec 8 Go de RAM ? Nous avons testé notre portable le plus faible</h1>
 <p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 23 octobre 2026</p>
-<div class="answer"><p><strong>Réponse courte : oui, lentement.</strong> Une petite IA sur un portable de 8 Go écrit à peu près à votre vitesse de lecture. Le bémol n'est pas la vitesse : c'est la <strong>mémoire libre</strong>. Fermez d'abord vos autres applis.</p></div>
+<div class="answer"><p>Oui, lentement. Une petite IA sur un portable de 8 Go écrit à peu près à la vitesse à laquelle vous lisez, et une réponse complète prend 30 à 40 secondes. Le vrai bémol n'est pas la vitesse, c'est la mémoire libre, alors fermez vos autres applis avant de commencer.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>tokens par seconde sur le processeur, au court test de démarrage</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>pour une réponse complète</span></div>
-<div class="stat p"><b>~1 Go</b><span>de mémoire libre avec d'autres applis ouvertes, le vrai problème</span></div>
-</div>
+<p>Nous l'avons essayé sur le PC le plus faible que nous ayons mesuré, parce que « est-ce que ça tournera sur mon vieux portable ? » est l'une des premières questions qu'on pose sur l'IA locale. Ça tourne. Voici à quoi ça ressemble.</p>
 
 <h2>Le test</h2>
-<p>Le PC le plus faible que nous ayons mesuré : un portable avec 8 Go de RAM, une puce graphique Intel Iris Xe, pas de carte graphique, sur batterie. Petit modèle (Gemma 4 E2B), début octobre 2026.</p>
+<p>Le portable a 8 Go de RAM et une puce graphique Intel Iris Xe, sans carte graphique, et nous l'avons fait tourner sur batterie. Nous avons utilisé le petit modèle de GreenCube, Cube 2B (basé sur <a href="/blog/fr/gemma-4-requirements">Gemma 4 E2B</a>), début octobre 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quoi</th><th>Résultat</th></tr></thead>
@@ -88,35 +84,27 @@
 </table></div>
 
 <p class="bridge-mid">Vous ne savez pas si votre PC suffit ? <a href="https://greencube.app/fr/what-you-get">Voyez ce qui tourne sur le vôtre <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Ce que nous avons appris</h2>
+<h2>Ça marche pour discuter et réviser</h2>
+<p>5 à 7 tokens par seconde en conversations réelles, c'est à peu près la vitesse de lecture quand on lit de l'anglais. Le court test de démarrage de GreenCube a donné 9,3, mais en conversations réelles, le chiffre était plus bas. Vous attendrez une demi-minute pour une longue réponse, mais elle arrive, sans internet et sans limites.</p>
 
-<div class="card g">
-<h3>1. Ça marche pour discuter et réviser</h3>
-<p>5 à 7 tokens par seconde en conversations réelles, c'est un peu en dessous de la vitesse de lecture en français (le court test de démarrage a donné 9,3). Vous attendrez une demi-minute pour une longue réponse, mais elle arrive, sans internet et sans limites.</p>
-</div>
+<h2>La mémoire libre est la vraie limite</h2>
+<p>Avec le navigateur et d'autres applis ouverts, le portable n'avait qu'environ 1 Go de mémoire libre. Un jour, ça n'a pas suffi et l'IA n'a même pas pu démarrer. Le petit modèle a besoin de quelques Go pour lui seul, donc sur 8 Go, il doit partager soigneusement avec tout ce que vous avez d'ouvert.</p>
 
-<div class="card p">
-<h3>2. La mémoire libre est la vraie limite</h3>
-<p>Avec le navigateur et d'autres applis ouverts, le portable n'avait qu'environ 1 Go de libre. Un jour, ça n'a pas suffi et l'IA n'a même pas pu démarrer. Le petit modèle a besoin de quelques Go pour lui seul.</p>
-</div>
-
-<div class="card y">
-<h3>3. La puce graphique intégrée l'a ralentie</h3>
-<p>Sur ce portable, la puce Iris Xe a écrit à 5,0 tokens par seconde, le processeur à 9,3. Sur un autre portable, c'était à peu près égal. Impossible de le savoir à l'avance, donc GreenCube teste les deux et utilise le plus rapide.</p>
-</div>
+<h2>La puce graphique intégrée l'a ralentie</h2>
+<p>On s'attendrait à ce que la puce graphique aide, mais sur ce portable, la puce Iris Xe a écrit à 5,0 tokens par seconde et le processeur à 9,3. Sur un autre portable, les deux étaient à peu près égaux. Impossible de le deviner à l'avance d'après la fiche technique, donc GreenCube teste les deux sur votre portable et utilise le plus rapide.</p>
 
 <h2>Conseils pour un portable de 8 Go</h2>
 <ol class="steps">
-<li><strong>Fermez le navigateur</strong> (ou la plupart des onglets) avant de commencer. Les navigateurs dévorent la mémoire.</li>
-<li><strong>Redémarrez le portable</strong> avant une longue séance de révision. Ça libère la mémoire que d'autres applis ont oublié de rendre.</li>
-<li><strong>Posez des questions plus courtes</strong>, ou une chose à la fois. Les réponses plus courtes arrivent plus vite.</li>
-<li><strong>Laissez tomber les images.</strong> Elles ont besoin d'environ 7 Go ; utilisez un PC plus puissant pour ça.</li>
+<li>Fermez le navigateur, ou la plupart de ses onglets, avant de commencer. Les navigateurs utilisent beaucoup de mémoire.</li>
+<li>Redémarrez le portable avant une longue séance de révision. Ça libère la mémoire que d'autres applis ont oublié de rendre.</li>
+<li>Demandez une chose à la fois. Les réponses plus courtes arrivent plus vite.</li>
+<li>Gardez les images pour un PC plus puissant. Elles ont besoin d'environ 7 Go à elles seules.</li>
 </ol>
 
-<p>Voyez à quel point d'autres PC vont plus vite : <a href="/blog/fr/can-my-pc-run-ai">nous avons mesuré 10 PC ici</a>.</p>
+<p>Pour voir à quel point d'autres PC vont plus vite, <a href="/blog/fr/can-my-pc-run-ai">nous avons mesuré 10 PC ici</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
-<details><summary>Peut-on faire tourner une IA sur un portable avec 8 Go de RAM ?</summary><p>Oui, un petit modèle. Sur notre portable de 8 Go avec une puce graphique Intel Iris Xe, il a écrit 5 à 7 tokens par seconde en conversations réelles, et les réponses ont pris 30 à 40 secondes. Il ne peut pas créer d&#x27;images.</p></details>
+<details><summary>Peut-on faire tourner une IA sur un portable avec 8 Go de RAM ?</summary><p>Oui, un petit modèle. Sur notre portable de 8 Go avec une puce graphique Intel Iris Xe, il a écrit 5 à 7 tokens par seconde en conversations réelles, à peu près la vitesse à laquelle on lit l&#x27;anglais, et les réponses ont pris 30 à 40 secondes. Il ne peut pas créer d&#x27;images.</p></details>
 <details><summary>Pourquoi l&#x27;IA ne démarre-t-elle pas sur mon portable de 8 Go ?</summary><p>En général, faute de mémoire libre. Notre portable de 8 Go n&#x27;avait qu&#x27;environ 1 Go de libre avec d&#x27;autres applis ouvertes, et un jour l&#x27;IA n&#x27;a pas pu se charger. Fermer d&#x27;abord le navigateur et les autres applis lui laisse de la place.</p></details>
 <details><summary>La puce Intel Iris Xe rend-elle l&#x27;IA plus rapide sur un portable de 8 Go ?</summary><p>Pas pour discuter. Sur notre portable, le processeur a écrit à 9,3 tokens par seconde et la puce Iris Xe à 5,0. GreenCube teste les deux sur votre portable et utilise le plus rapide.</p></details>
 </div>

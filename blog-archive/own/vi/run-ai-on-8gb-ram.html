@@ -9,58 +9,46 @@
  "lang": "vi",
  "alt": "run-ai-on-8gb-ram",
  "faq": [
-  {"q": "Tôi có chạy được AI trên laptop RAM 8 GB không?", "a": "Được, một mô hình nhỏ. Trên laptop 8 GB có đồ họa Intel Iris Xe của chúng tôi, nó viết 5 đến 7 token mỗi giây trong chat thật, và câu trả lời mất 30 đến 40 giây. Nó không tạo được ảnh."},
+  {"q": "Tôi có chạy được AI trên laptop RAM 8 GB không?", "a": "Được, một mô hình nhỏ. Trên laptop 8 GB có đồ họa Intel Iris Xe của chúng tôi, nó viết 5 đến 7 token mỗi giây trong chat thật, nhanh khoảng bằng tốc độ bạn đọc, và câu trả lời mất 30 đến 40 giây. Nó không tạo được ảnh."},
   {"q": "Vì sao AI không mở được trên laptop 8 GB của tôi?", "a": "Thường là do không đủ bộ nhớ trống. Trên laptop 8 GB của chúng tôi chỉ còn khoảng 1 GB trống khi các ứng dụng khác đang mở, và có một hôm AI không tải được. Đóng trình duyệt và các ứng dụng khác trước sẽ chừa chỗ cho nó."},
   {"q": "Đồ họa Intel Iris Xe có làm AI nhanh hơn trên laptop 8 GB không?", "a": "Với chat thì không. Trên laptop của chúng tôi, bộ xử lý viết 9,3 token mỗi giây còn đồ họa Iris Xe 5,0. GreenCube thử cả hai trên laptop của bạn và dùng cái nhanh hơn."}
  ]
 }
 -->
-<div class="answer"><p><strong>Trả lời ngắn: được, nhưng chậm.</strong> Một AI nhỏ trên laptop 8 GB viết gần bằng tốc độ đọc. Mẹo không nằm ở tốc độ mà ở <strong>bộ nhớ trống</strong>. Hãy đóng các ứng dụng khác trước.</p></div>
+<div class="answer"><p>Được, nhưng chậm. Một AI nhỏ trên laptop 8 GB viết nhanh khoảng bằng tốc độ bạn đọc, và một câu trả lời đầy đủ mất 30 đến 40 giây. Vướng mắc thật sự không nằm ở tốc độ mà ở bộ nhớ trống, nên hãy đóng các ứng dụng khác trước khi bắt đầu.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>token mỗi giây trên bộ xử lý, trong bài kiểm tra khởi động ngắn</span></div>
-<div class="stat b"><b>30&ndash;40 giây</b><span>cho một câu trả lời đầy đủ</span></div>
-<div class="stat p"><b>~1 GB</b><span>bộ nhớ trống khi các ứng dụng khác đang mở: đó mới là vấn đề thật</span></div>
-</div>
+<p>Chúng tôi thử trên chiếc máy yếu nhất từng đo, vì "máy cũ của tôi có chạy được không?" là một trong những câu hỏi đầu tiên người ta đặt ra về AI cục bộ. Nó chạy được. Dưới đây là thực tế trông như thế nào.</p>
 
 <h2>Bài thử</h2>
-<p>Máy yếu nhất chúng tôi đã đo: một laptop RAM 8 GB, đồ họa Intel Iris Xe, không card đồ họa, chạy bằng pin. Mô hình nhỏ (Gemma 4 E2B), đầu tháng 10 năm 2026.</p>
+<p>Chiếc laptop có 8 GB RAM và đồ họa Intel Iris Xe, không có card đồ họa, và chúng tôi chạy bằng pin. Chúng tôi dùng mô hình nhỏ của GreenCube, Cube 2B (xây dựng trên <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), vào đầu tháng 10 năm 2026.</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>Cái gì</th><th>Kết quả</th></tr></thead>
+<thead><tr><th>Hạng mục</th><th>Kết quả</th></tr></thead>
 <tbody>
 <tr><td>Viết, trong chat thật</td><td><b>5&ndash;7 token/giây</b></td></tr>
-<tr><td>Viết, bài kiểm tra khởi động của GreenCube, bộ xử lý</td><td><b>9,3 token/giây</b></td></tr>
-<tr><td>Viết, bài kiểm tra khởi động của GreenCube, đồ họa Iris Xe</td><td><b>5,0 token/giây</b> (chậm hơn)</td></tr>
+<tr><td>Viết, bài thử khởi động của GreenCube, bộ xử lý</td><td><b>9,3 token/giây</b></td></tr>
+<tr><td>Viết, bài thử khởi động của GreenCube, đồ họa Iris Xe</td><td><b>5,0 token/giây</b> (chậm hơn)</td></tr>
 <tr><td>Một câu trả lời đầy đủ</td><td><b>30&ndash;40 giây</b></td></tr>
 <tr><td>Bộ nhớ trống khi các ứng dụng khác đang mở</td><td><b>khoảng 1 GB</b></td></tr>
-<tr><td>Ảnh</td><td><b>Không</b> (AI tạo ảnh cần khoảng 7 GB)</td></tr>
+<tr><td>Hình ảnh</td><td><b>Không được</b> (AI tạo ảnh cần khoảng 7 GB)</td></tr>
 </tbody>
 </table></div>
 
-<h2>Những gì chúng tôi rút ra</h2>
+<h2>Đủ dùng để chat và học</h2>
+<p>5 đến 7 token mỗi giây trong chat thật là khoảng tốc độ đọc. Bài thử khởi động ngắn của GreenCube cho ra 9,3, nhưng trong chat thật con số thấp hơn. Bạn sẽ chờ nửa phút cho một câu trả lời dài, nhưng nó vẫn đến, không cần internet và không có giới hạn.</p>
 
-<div class="card g">
-<h3>1. Dùng được để chat và học</h3>
-<p>5 đến 7 token mỗi giây trong chat thật, khoảng tốc độ đọc (bài kiểm tra khởi động ngắn cho ra 9,3). Bạn phải chờ nửa phút cho một câu trả lời dài, nhưng nó vẫn đến, không cần internet và không giới hạn.</p>
-</div>
+<h2>Bộ nhớ trống mới là giới hạn thật</h2>
+<p>Khi trình duyệt và các ứng dụng khác đang mở, chiếc laptop chỉ còn khoảng 1 GB bộ nhớ trống. Có một hôm như vậy là không đủ, và AI thậm chí không khởi động được. Mô hình nhỏ cần vài GB cho riêng nó, nên trên 8 GB nó phải chia sẻ cẩn thận với mọi thứ khác bạn đang mở.</p>
 
-<div class="card p">
-<h3>2. Giới hạn thật là bộ nhớ trống</h3>
-<p>Khi trình duyệt và các ứng dụng khác đang mở, laptop chỉ còn khoảng 1 GB trống. Có một hôm như vậy là không đủ, và AI thậm chí không mở lên được. Mô hình nhỏ cần vài GB cho riêng nó.</p>
-</div>
-
-<div class="card y">
-<h3>3. Đồ họa tích hợp làm nó chậm đi</h3>
-<p>Trên laptop này, đồ họa Iris Xe viết 5,0 token mỗi giây còn bộ xử lý 9,3. Trên một laptop khác, hai bên gần như ngang nhau. Bạn không biết trước được, nên GreenCube thử cả hai và dùng cái nhanh hơn.</p>
-</div>
+<h2>Đồ họa tích hợp lại làm chậm hơn</h2>
+<p>Bạn sẽ nghĩ chip đồ họa giúp ích, nhưng trên chiếc laptop này, đồ họa Iris Xe viết 5,0 token mỗi giây còn bộ xử lý viết 9,3. Trên một laptop khác, hai bên gần như ngang nhau. Bạn không thể đoán trước từ thông số, nên GreenCube thử cả hai trên laptop của bạn và dùng cái nhanh hơn.</p>
 
 <h2>Mẹo cho laptop 8 GB</h2>
 <ol class="steps">
-<li><strong>Đóng trình duyệt</strong> (hoặc phần lớn các tab) trước khi bắt đầu. Trình duyệt ngốn bộ nhớ.</li>
-<li><strong>Khởi động lại laptop</strong> trước một buổi học dài. Việc này giải phóng bộ nhớ mà các ứng dụng khác quên trả lại.</li>
-<li><strong>Hỏi những câu ngắn hơn</strong>, hoặc mỗi lần một việc. Câu trả lời ngắn đến nhanh hơn.</li>
-<li><strong>Bỏ qua ảnh.</strong> Chúng cần khoảng 7 GB; hãy dùng máy mạnh hơn cho việc đó.</li>
+<li>Đóng trình duyệt, hoặc phần lớn các tab, trước khi bắt đầu. Trình duyệt dùng rất nhiều bộ nhớ.</li>
+<li>Khởi động lại laptop trước một buổi học dài. Việc này giải phóng bộ nhớ mà các ứng dụng khác quên trả lại.</li>
+<li>Mỗi lần chỉ hỏi một việc. Câu trả lời ngắn hơn sẽ về nhanh hơn.</li>
+<li>Để việc tạo ảnh cho máy mạnh hơn. Riêng hình ảnh đã cần khoảng 7 GB.</li>
 </ol>
 
-<p>Xem các máy khác nhanh đến đâu: <a href="/blog/can-my-pc-run-ai">chúng tôi đã đo {{pcs}} máy ở đây</a>.</p>
+<p>Để xem các máy khác nhanh hơn bao nhiêu, <a href="/blog/can-my-pc-run-ai">chúng tôi đã đo {{pcs}} máy ở đây</a>.</p>

@@ -6,15 +6,15 @@ Canonical: https://blog.greencube.app/blog/es/ia-para-estudiar-pdf
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** para **preguntas concretas** ("¿quién financió a Watt?", "¿en qué año…?"), una IA en tu propio portátil acertó **11 de 12 en unos 15 segundos cada una**. Una **guía de estudio completa** de un tema entero va más lenta: unos 15 minutos en un portátil.
+Sí, una IA en tu propio portátil puede estudiar contigo a partir de un PDF, siempre que le hagas preguntas concretas. Con preguntas como "¿quién financió a Watt?" sobre tres documentos largos, acertó 11 de 12, en unos 15 segundos cada una. Una guía de estudio completa de un tema entero va más lenta: unos 15 minutos en el mismo portátil.
 
-- **11/12** preguntas bien, sobre datos escondidos en documentos largos
-- **15 s** de mediana por pregunta, en un portátil de 16 GB
-- **~15 min** para una guía completa de un documento de 5.000 palabras
+La IA que probamos es la que lleva GreenCube, la app que hago yo. Pasamos las mismas preguntas antes y después de rehacer la forma en que lee los PDF, así que puedes ver las dos.
 
 ## La prueba
 
-Tres documentos largos que podría estudiar cualquiera: la Revolución Industrial (en inglés, unas 5.000 palabras), la Segunda República (en español, unas 5.000 palabras) y las mitocondrias (en inglés, el doble de largo). Hicimos 12 preguntas sobre datos pequeños escondidos dentro, una de ellas en español sobre un texto en inglés. Octubre de 2026, en un portátil de 16 GB sin tarjeta gráfica, con la IA pequeña (Gemma 4 E2B) y una segunda IA de otra familia para comprobar que no era casualidad de un solo modelo.
+Elegimos tres documentos largos que podría estudiar un estudiante: la Revolución Industrial (en inglés, unas 5.000 palabras), la Segunda República española (en español, unas 5.000 palabras) y las mitocondrias (en inglés, casi el doble de largo). Luego hicimos 12 preguntas sobre datos pequeños escondidos en lo más hondo de ellos, incluida una en español sobre un texto en inglés.
+
+La hicimos en octubre de 2026 en un portátil de 16 GB sin tarjeta gráfica, con la IA pequeña (Gemma 4 E2B). Pasamos también una segunda IA de otra familia, para asegurarnos de que el resultado no era una casualidad de un solo modelo.
 
 | IA | Antes de rehacerlo | Después |
 | --- | --- | --- |
@@ -23,36 +23,36 @@ Tres documentos largos que podría estudiar cualquiera: la Revolución Industria
 
 ## Lo que aprendimos
 
-### 1. Haz preguntas concretas
+### Las preguntas concretas funcionan mejor
 
-La forma antigua leía el documento por encima y a menudo decía "el documento no lo menciona" cuando sí lo hacía. Ahora GreenCube busca los párrafos con las palabras más raras de tu pregunta y responde desde ahí. Misma IA, **más del doble de aciertos y 5 veces más rápido**.
+La versión antigua leía el documento por encima y a menudo decía "el documento no lo menciona" cuando sí lo hacía. Ahora GreenCube busca los párrafos que contienen las palabras menos comunes de tu pregunta y responde a partir de ellos. Con la misma IA, eso dio más del doble de respuestas correctas, 5 veces más rápido. La pregunta en español sobre el texto en inglés también la respondió bien.
 
-### 2. A veces aún se equivoca
+### Aún falla a veces
 
-El único fallo de Gemma: al preguntarle dónde guarda el calcio una célula, nombró la parte equivocada. En todo lo que cuente para el examen, compara la respuesta con tus apuntes.
+El único fallo de Gemma: le preguntamos dónde guarda la célula el calcio y señaló la parte equivocada de la célula. En todo lo que importe para un examen, comprueba la respuesta con tus apuntes.
 
-### 3. Las guías completas tardan, a propósito
+### Las guías completas tardan, y es a propósito
 
-Una guía del documento entero obliga a leer cada parte: unos 15 minutos en el portátil para 5.000 palabras y 29 para el doble. Probamos una versión de 4 a 5 veces más rápida, pero en el texto de biología, el más denso, perdía lo básico con lo que empieza el tema. Nos quedamos con la lenta y completa.
+Una guía del documento entero obliga a leer cada parte: unos 15 minutos en el portátil para 5.000 palabras, y 29 para el doble. Probamos una versión de 4 a 5 veces más rápida, pero en el texto denso de biología se perdía lo básico con lo que empieza el tema. Nos quedamos con la lenta, porque está completa.
 
 ## Cómo estudiar un PDF con IA
 
-1. **Empieza por preguntas.** "¿Qué causó X?", "Define Y", "¿Qué pasó en 1785?" Rápido y certero.
-2. **Lanza la guía completa cuando hagas un descanso.** En un portátil, déjala trabajar mientras comes.
-3. **Convierte la guía en tarjetas de estudio** y ponte a prueba.
-4. **Comprueba lo que sea clave para el examen** con tus apuntes o el PDF.
+1. Empieza por las preguntas. "¿Qué causó X?", "Define Y", "¿Qué pasó en 1785?" Son rápidas y precisas.
+2. Lanza la guía completa cuando hagas un descanso. En un portátil, déjala trabajando mientras comes.
+3. Convierte la guía en tarjetas y ponte a prueba.
+4. Comprueba con tus apuntes o con el PDF todo lo que sea clave para el examen.
 
-¿Quieres saber lo rápido que va tu PC? [Medimos 10 PCs aquí.](https://blog.greencube.app/blog/es/ia-en-mi-pc)
+Si quieres saber lo rápido que iría tu propio PC, [aquí medimos 10 PCs](https://blog.greencube.app/blog/can-my-pc-run-ai).
 
 ## FAQ
 
 ### ¿Puede una IA responder preguntas sobre un PDF largo?
 
-Sí. En nuestra prueba, una IA pequeña en un portátil de 16 GB respondió bien 11 de 12 preguntas sobre datos escondidos en tres documentos largos, con una mediana de 15 segundos por pregunta.
+Sí. En nuestra prueba, una IA pequeña en un portátil de 16 GB respondió bien 11 de 12 preguntas sobre datos escondidos en lo más hondo de tres documentos largos, con una mediana de 15 segundos por pregunta.
 
 ### ¿Puedo preguntar en español sobre un PDF en inglés?
 
-Sí. Una de nuestras preguntas fue en español sobre un documento en inglés, y la respondió bien.
+Sí. Una de nuestras preguntas de prueba fue en español sobre un documento en inglés, y la respondió bien.
 
 ### ¿Cuánto tarda una IA en hacer una guía de estudio de un PDF entero?
 
@@ -60,4 +60,4 @@ En un portátil de 16 GB sin tarjeta gráfica, unos 15 minutos para un documento
 
 ### ¿Hay límite de PDFs para estudiar con IA?
 
-No con una IA que funciona en tu propio PC: nadie cuenta tus archivos. Los planes gratuitos de las IAs en la nube limitan la subida de archivos.
+No con una IA que funciona en tu propio PC: nada cuenta tus archivos. Los planes gratuitos de las IAs en la nube limitan la subida de archivos.

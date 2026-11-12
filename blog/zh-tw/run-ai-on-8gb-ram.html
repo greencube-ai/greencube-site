@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "8 GB 記憶體能跑 AI 嗎？我們用最弱的筆電試了試", "description": "8 GB 記憶體跑 AI 模型：真實聊天中每秒 5 到 7 個 token，一個回答 30 到 40 秒，這是我們最弱的筆電的成績。聊天和學習都能用，唯一的訣竅是空閒記憶體。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/run-ai-on-8gb-ram", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "8 GB 記憶體的筆電能跑 AI 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "小模型可以。在我們配 Intel Iris Xe 顯示卡的 8 GB 筆電上，真實聊天中每秒輸出 5 到 7 個 token，一個回答要 30 到 40 秒。不能生成圖片。"}}, {"@type": "Question", "name": "為什麼 AI 在我的 8 GB 筆電上啟動不了？", "acceptedAnswer": {"@type": "Answer", "text": "大多是因為空閒記憶體不夠。在我們的 8 GB 筆電上，開著其他應用程式時只剩約 1 GB，有一天 AI 根本載入不了。先關掉瀏覽器和其他應用程式，就能給它騰出空間。"}}, {"@type": "Question", "name": "Intel Iris Xe 顯示卡能讓 8 GB 筆電上的 AI 更快嗎？", "acceptedAnswer": {"@type": "Answer", "text": "聊天時不能。在我們的筆電上，CPU 每秒輸出 9.3 個 token，Iris Xe 顯示卡只有 5.0 個。GreenCube 會在你的筆電上兩種都試，然後用更快的那個。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "8 GB 記憶體的筆電能跑 AI 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "小模型可以。在我們配備 Intel Iris Xe 內顯的 8 GB 筆電上，實際聊天時每秒寫出 5 到 7 個 token，大約跟你閱讀一樣快，一個回答要 30 到 40 秒。不能生成圖片。"}}, {"@type": "Question", "name": "為什麼 AI 在我的 8 GB 筆電上啟動不了？", "acceptedAnswer": {"@type": "Answer", "text": "通常是可用記憶體不夠。我們的 8 GB 筆電在開著其他應用程式時只剩約 1 GB 可用，有一天 AI 就載入不了。先把瀏覽器和其他應用程式關掉，就能替它騰出空間。"}}, {"@type": "Question", "name": "Intel Iris Xe 內顯能讓 8 GB 筆電上的 AI 變快嗎？", "acceptedAnswer": {"@type": "Answer", "text": "聊天時不會。在我們的筆電上，處理器每秒寫出 9.3 個 token，Iris Xe 內顯只有 5.0 個。GreenCube 會在你的筆電上兩種都測，然後用比較快的那個。"}}]}</script>
 </head>
 <body>
 
@@ -64,61 +64,49 @@
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>8 GB 記憶體能跑 AI 嗎？我們用最弱的筆電試了試</h1>
 <p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>簡短回答：能，但慢。</strong>8 GB 筆電上的小 AI 輸出速度大約相當於閱讀速度。訣竅不在速度，而在<strong>空閒記憶體</strong>：先關掉其他應用程式。</p></div>
+<div class="answer"><p>可以，只是慢。8 GB 筆電上的小 AI，寫字速度大約跟你閱讀一樣快，一個完整的回答要 30 到 40 秒。真正的問題不是速度，而是可用記憶體，所以開始之前先把其他應用程式關掉。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9.3</b><span>CPU 每秒 token 數，在一次短的啟動測試中</span></div>
-<div class="stat b"><b>30&ndash;40 秒</b><span>得到一個完整回答所需時間</span></div>
-<div class="stat p"><b>~1 GB</b><span>開著其他應用程式時的空閒記憶體：這才是真正的問題</span></div>
-</div>
+<p>我們拿測過最弱的電腦來試，因為「我的舊筆電跑得動嗎？」是大家問本地 AI 的頭幾個問題之一。它確實跑得動。下面是實際的情況。</p>
 
 <h2>測試</h2>
-<p>我們測過的最弱的電腦：一臺 8 GB 記憶體、Intel Iris Xe 顯示卡、沒有獨立顯示卡的筆電，用電池供電。小模型（Gemma 4 E2B），2026 年 10 月初。</p>
+<p>這台筆電有 8 GB 記憶體和 Intel Iris Xe 內顯，沒有獨立顯示卡，測試時用電池供電。我們用的是 GreenCube 的小模型 Cube 2B（以 <a href="/blog/zh-tw/gemma-4-requirements">Gemma 4 E2B</a> 為基礎），時間是 2026 年 10 月初。</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>專案</th><th>結果</th></tr></thead>
+<thead><tr><th>項目</th><th>結果</th></tr></thead>
 <tbody>
-<tr><td>輸出，真實聊天</td><td><b>5&ndash;7 token/秒</b></td></tr>
-<tr><td>輸出，GreenCube 啟動測試，CPU</td><td><b>9.3 token/秒</b></td></tr>
-<tr><td>輸出，GreenCube 啟動測試，Iris Xe 顯示卡</td><td><b>5.0 token/秒</b>（更慢）</td></tr>
-<tr><td>一個完整回答</td><td><b>30&ndash;40 秒</b></td></tr>
-<tr><td>開著其他應用程式時的空閒記憶體</td><td><b>約 1 GB</b></td></tr>
-<tr><td>圖片</td><td><b>不能</b>（生成圖片的 AI 需要約 7 GB）</td></tr>
+<tr><td>寫字速度，實際聊天</td><td><b>5&ndash;7 token/秒</b></td></tr>
+<tr><td>寫字速度，GreenCube 啟動測試，處理器</td><td><b>9.3 token/秒</b></td></tr>
+<tr><td>寫字速度，GreenCube 啟動測試，Iris Xe 內顯</td><td><b>5.0 token/秒</b>（比較慢）</td></tr>
+<tr><td>一個完整的回答</td><td><b>30&ndash;40 秒</b></td></tr>
+<tr><td>開著其他應用程式時的可用記憶體</td><td><b>約 1 GB</b></td></tr>
+<tr><td>圖片</td><td><b>做不到</b>（畫圖的 AI 需要約 7 GB）</td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我們發現了什麼</h2>
+<h2>聊天和念書都能用</h2>
+<p>實際聊天時每秒 5 到 7 個 token，大約是閱讀速度。GreenCube 簡短的啟動測試量到 9.3，但實際聊天時會低一些。長一點的回答你要等半分鐘，但它一定會寫完，不需要網路，也沒有限制。</p>
 
-<div class="card g">
-<h3>1. 聊天和學習都能用</h3>
-<p>真實聊天中每秒 5 到 7 個 token，大約相當於閱讀速度（短的啟動測試中是 9.3）。長回答要等半分鐘，但總會出來。不用聯網，也沒有上限。</p>
-</div>
+<h2>可用記憶體才是真正的限制</h2>
+<p>開著瀏覽器和其他應用程式時，這台筆電只剩約 1 GB 可用記憶體。有一天這樣不夠，AI 連啟動都沒辦法。小模型自己就需要幾 GB，所以在 8 GB 的電腦上，它得小心地跟你開著的其他東西分享記憶體。</p>
 
-<div class="card p">
-<h3>2. 真正的限制是空閒記憶體</h3>
-<p>開著瀏覽器和其他應用程式時，筆電只剩約 1 GB 空閒記憶體。有一天這點空間不夠，AI 根本啟動不了。即使是小模型，本身也需要好幾 GB。</p>
-</div>
+<h2>內建顯示晶片反而比較慢</h2>
+<p>你可能以為顯示晶片會有幫助，但在這台筆電上，Iris Xe 內顯每秒寫出 5.0 個 token，處理器則是 9.3 個。在另一台筆電上，兩者差不多。光看規格無法事先知道，所以 GreenCube 會在你的筆電上兩種都測，然後用比較快的那個。</p>
 
-<div class="card y">
-<h3>3. 內建顯示卡反而拖慢了它</h3>
-<p>在這臺筆電上，Iris Xe 顯示卡每秒輸出 5.0 個 token，CPU 是 9.3。但在另一臺筆電上，兩者差不多。事先沒法知道，所以 GreenCube 兩種都試，然後用更快的那個。</p>
-</div>
-
-<h2>8 GB 筆電使用技巧</h2>
+<h2>8 GB 筆電的小訣竅</h2>
 <ol class="steps">
-<li>開始前<strong>關掉瀏覽器</strong>（或者關掉大部分標籤頁）。瀏覽器很吃記憶體。</li>
-<li>長時間學習前<strong>重啟筆電</strong>。這樣能收回其他應用程式忘了釋放的記憶體。</li>
-<li><strong>問題問得短一點</strong>，或者一次只問一個。回答越短，出來越快。</li>
-<li><strong>別想著生成圖片</strong>。它需要約 7 GB，交給更強的電腦吧。</li>
+<li>開始之前，先關掉瀏覽器，或至少關掉大部分分頁。瀏覽器很吃記憶體。</li>
+<li>長時間念書之前，先重新開機。這能釋放其他應用程式忘了歸還的記憶體。</li>
+<li>一次問一件事。比較短的回答會比較快回來。</li>
+<li>圖片留給比較強的電腦。光是圖片就需要約 7 GB。</li>
 </ol>
 
-<p>看看其他電腦有多快：<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡測了 10 臺電腦</a>。</p>
+<p>想看看其他電腦快多少，<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡實測了 10 台電腦</a>。</p>
 <h2>常見問題</h2>
 <div class="faq">
-<details><summary>8 GB 記憶體的筆電能跑 AI 嗎？</summary><p>小模型可以。在我們配 Intel Iris Xe 顯示卡的 8 GB 筆電上，真實聊天中每秒輸出 5 到 7 個 token，一個回答要 30 到 40 秒。不能生成圖片。</p></details>
-<details><summary>為什麼 AI 在我的 8 GB 筆電上啟動不了？</summary><p>大多是因為空閒記憶體不夠。在我們的 8 GB 筆電上，開著其他應用程式時只剩約 1 GB，有一天 AI 根本載入不了。先關掉瀏覽器和其他應用程式，就能給它騰出空間。</p></details>
-<details><summary>Intel Iris Xe 顯示卡能讓 8 GB 筆電上的 AI 更快嗎？</summary><p>聊天時不能。在我們的筆電上，CPU 每秒輸出 9.3 個 token，Iris Xe 顯示卡只有 5.0 個。GreenCube 會在你的筆電上兩種都試，然後用更快的那個。</p></details>
+<details><summary>8 GB 記憶體的筆電能跑 AI 嗎？</summary><p>小模型可以。在我們配備 Intel Iris Xe 內顯的 8 GB 筆電上，實際聊天時每秒寫出 5 到 7 個 token，大約跟你閱讀一樣快，一個回答要 30 到 40 秒。不能生成圖片。</p></details>
+<details><summary>為什麼 AI 在我的 8 GB 筆電上啟動不了？</summary><p>通常是可用記憶體不夠。我們的 8 GB 筆電在開著其他應用程式時只剩約 1 GB 可用，有一天 AI 就載入不了。先把瀏覽器和其他應用程式關掉，就能替它騰出空間。</p></details>
+<details><summary>Intel Iris Xe 內顯能讓 8 GB 筆電上的 AI 變快嗎？</summary><p>聊天時不會。在我們的筆電上，處理器每秒寫出 9.3 個 token，Iris Xe 內顯只有 5.0 個。GreenCube 會在你的筆電上兩種都測，然後用比較快的那個。</p></details>
 </div>
 </article>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>

@@ -64,55 +64,41 @@
 <p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
 <h1>AI cần bao nhiêu VRAM? Vì sao mô hình phải nằm gọn trên GPU</h1>
 <p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 23 tháng 10, 2026</p>
-<div class="answer"><p><strong>Trả lời ngắn:</strong> một AI nằm gọn hoàn toàn trong bộ nhớ card đồ họa (VRAM) thì nhanh. Một AI tràn ra ngoài thì <strong>còn chậm hơn cả không dùng card</strong>, và có thể crash. Nhỏ hơn mà nằm trọn trên card thì hơn lớn hơn mà chỉ nằm một nửa.</p></div>
+<div class="answer"><p>Bạn cần đủ VRAM để chứa toàn bộ mô hình cộng thêm khoảng 1,5 GB cho cuộc trò chuyện và Windows. Một AI nằm trọn trong bộ nhớ card đồ họa sẽ chạy nhanh. Một AI bị tràn ra ngoài có thể còn chậm hơn cả không dùng card, và có thể bị crash. Nhỏ hơn mà nằm trọn trên card thắng lớn hơn mà chỉ nằm được một nửa.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>token mỗi giây khi toàn bộ mô hình nằm trên card</span></div>
-<div class="stat p"><b>5,9</b><span>khi một phần nằm ngoài card: chậm hơn 6 lần</span></div>
-<div class="stat y"><b>Crash</b><span>khi một mô hình vừa khít gặp cuộc chat dài</span></div>
-</div>
+<p>Chúng tôi không lấy điều này từ bảng thông số. Chúng tôi đo nó trên một máy chơi game thật khi đang xây dựng GreenCube, ứng dụng tôi làm, và kết quả đã thay đổi cách GreenCube chọn mô hình.</p>
 
 <h2>Bài thử</h2>
-<p>Một máy bàn có AMD RX 5700 XT (8 GB VRAM) và 48 GB RAM. Chúng tôi tải một mô hình 12 tỷ tham số (Gemma 4 12B, khoảng 6,7 GB) và đặt nhiều hoặc ít phần của nó lên card, tất cả trong một phiên vào tháng 9 năm 2026.</p>
-
+<p>Máy thử là một máy bàn dùng AMD RX 5700 XT (8 GB VRAM) và 48 GB RAM. Chúng tôi tải một mô hình 12 tỷ tham số (Gemma 4 12B, khoảng 6,7 GB) và đặt nhiều hay ít phần của nó lên card, tất cả trong một phiên vào tháng 9 năm 2026.</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Bao nhiêu phần mô hình nằm trên card</th><th>Viết (token/giây)</th></tr></thead>
+<thead><tr><th>Phần mô hình nằm trên card</th><th>Viết (token/giây)</th></tr></thead>
 <tbody>
-<tr><td>Toàn bộ</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 lớp</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 lớp</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Để so sánh: một mô hình nhỏ hơn (Gemma 4 E4B) chỉ trên bộ xử lý</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Cùng mô hình nhỏ hơn đó, toàn bộ trên card</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Toàn bộ</td><td><b>35,6</b></td></tr>
+<tr><td>28 lớp</td><td><b>5,9</b></td></tr>
+<tr><td>20 lớp</td><td><b>4,3</b></td></tr>
+<tr><td><em>Để so sánh: một mô hình nhỏ hơn (Gemma 4 E4B) chỉ chạy trên bộ xử lý</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Mô hình nhỏ hơn đó, nằm trọn trên card</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">Không chắc PC của bạn có đủ sức? <a href="https://greencube.app/vi/what-you-get">Xem máy của bạn chạy được gì <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Những gì chúng tôi rút ra</h2>
+<h2>Chúng tôi rút ra được gì</h2>
+<h3>Gần như là được ăn cả, ngã về không</h3>
+<p>Chỉ cần để một phần mô hình nằm ngoài card là nó chậm đi 6 lần. Với 20 lớp trên card, nó còn chậm hơn một mô hình nhỏ hơn chạy hoàn toàn không có card. Nửa trên card, nửa ngoài card cho bạn cái tệ nhất của cả hai.</p>
 
-<div class="card g">
-<h3>1. Tất cả hoặc không gì cả</h3>
-<p>Chỉ cần để một phần mô hình ra ngoài card là nó <strong>chậm hơn 6 lần</strong>. Với 20 lớp trên card, nó còn chậm hơn một mô hình nhỏ hơn chạy hoàn toàn không có card. Một nửa trên card là tệ nhất của cả hai.</p>
-</div>
+<h3>Mô hình lớn nhất tải được không phải là tốt nhất</h3>
+<p>Mô hình 12B quả thật nằm trọn trên card 8 GB, cho một câu hỏi ngắn. Khi cuộc chat dài ra, lần nào nó cũng bị crash, vì card gần như không còn chỗ cho cuộc trò chuyện. Mô hình nhỏ hơn còn dư khoảng 3 GB và chạy ở mức 63 đến 72 token mỗi giây.</p>
 
-<div class="card p">
-<h3>2. Lớn nhất không phải là tốt nhất</h3>
-<p>Mô hình 12B đúng là nằm trọn trên card 8 GB, với một câu hỏi ngắn. Khi cuộc chat dài ra, lần nào nó cũng crash: card gần như không còn chỗ cho cuộc trò chuyện. Mô hình nhỏ hơn còn dư khoảng 3 GB và chạy 63 đến 72 token mỗi giây.</p>
-</div>
-
-<div class="card b">
-<h3>3. Chừa chỗ</h3>
-<p>Trên GTX 1650 4 GB, một mô hình 4,2 GB bị nhét vào card 3,9 GB, và ngay tin nhắn đầu tiên đã báo lỗi "không đủ bộ nhớ". Giờ GreenCube giữ <strong>khoảng 1,5 GB trên card để trống</strong> cho chat và cho Windows.</p>
-</div>
+<h3>Hãy chừa chỗ</h3>
+<p>Trên GTX 1650 4 GB, một mô hình 4,2 GB bị nhồi vào card 3,9 GB, và ngay tin nhắn đầu tiên đã thất bại với lỗi "không đủ bộ nhớ". Từ đó, GreenCube luôn để trống khoảng 1,5 GB trên card cho cuộc chat và cho Windows.</p>
 
 <h2>Cách chọn mô hình cho card của bạn</h2>
-<div class="expect">
-<div class="g"><h4>Kiểm tra VRAM</h4><p>Task Manager &rarr; Performance &rarr; GPU &rarr; Dedicated GPU memory.</p></div>
-<div class="b"><h4>Dung lượng mô hình + 1,5 GB</h4><p>Tệp mô hình cộng khoảng 1,5 GB phải vừa trong con số đó.</p></div>
-<div class="y"><h4>Phân vân thì chọn nhỏ hơn</h4><p>Mô hình nhỏ nằm trọn trên card hơn mô hình lớn chỉ nằm một nửa.</p></div>
-<div class="p"><h4>Hoặc để ứng dụng chọn</h4><p>GreenCube đọc thông tin card và chọn mô hình vừa, còn dư chỗ.</p></div>
-</div>
-
-<p>Tốc độ thật trên 10 máy, từ GTX 1650 đến RTX 5060: <a href="/blog/vi/can-my-pc-run-ai">xem ở đây</a>.</p>
+<ol class="steps">
+<li>Kiểm tra VRAM: Task Manager &rarr; Performance (Hiệu suất) &rarr; GPU &rarr; Dedicated GPU memory (bộ nhớ GPU riêng).</li>
+<li>Cộng khoảng 1,5 GB vào kích thước tệp mô hình. Tổng đó phải vừa với VRAM của bạn.</li>
+<li>Khi phân vân, hãy chọn nhỏ hơn. Một mô hình nhỏ hơn nằm trọn trên card thắng một mô hình lớn hơn chỉ nằm được một nửa.</li>
+</ol>
+<p>Nếu bạn không muốn tự tính, GreenCube đọc card của bạn và chọn một mô hình vừa mà vẫn còn chỗ dư. Tốc độ thật trên 10 máy, từ GTX 1650 đến RTX 5060, có trong <a href="/blog/vi/can-my-pc-run-ai">Máy tôi có chạy được AI không?</a></p>
 <h2>Câu hỏi</h2>
 <div class="faq">
 <details><summary>Chuyện gì xảy ra nếu mô hình AI không vừa VRAM?</summary><p>Phần không vừa sẽ chạy từ bộ nhớ thường, và mọi thứ chậm đi. Trên card 8 GB của chúng tôi, một mô hình có 28 lớp trên card viết 5,9 token mỗi giây thay vì 35,6 khi có toàn bộ các lớp: chậm hơn 6 lần.</p></details>

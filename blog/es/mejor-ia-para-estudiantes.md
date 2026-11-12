@@ -6,60 +6,56 @@ Canonical: https://blog.greencube.app/blog/es/mejor-ia-para-estudiantes
 Published: 2026-10-23  
 Author: Hector Gras
 
-**Respuesta corta: no hay una mejor IA para estudiantes, hay una mejor para cada tarea.** Dudas rápidas: **ChatGPT gratis** (texto ilimitado desde agosto de 2026). Estudiar con tus apuntes y que cite la fuente: **NotebookLM** (gratis). ¿Estás en la universidad? Pide **el año gratis de AI Plus de Google**. Muchos PDF, flashcards, imágenes, estudiar sin internet o apuntes que prefieres no subir: **una IA en tu propio PC**, como GreenCube (9,99 € una vez).
+No hay una mejor IA para estudiantes, hay una mejor para cada tarea. Para dudas rápidas, usa ChatGPT gratis, que tiene texto ilimitado desde agosto de 2026. Para estudiar con tus propios apuntes y que cite la fuente, NotebookLM es gratis y te enseña de dónde sale cada respuesta. Si estás en la universidad, pide el año gratis de AI Plus de Google. Para muchos PDF, flashcards, imágenes, estudiar sin internet o apuntes que prefieres no subir, una IA en tu propio PC hace el trabajo.
 
-- **11/12** preguntas sobre PDF largos bien respondidas, unos 15 s cada una, IA en un portátil de 16 GB
-- **1 año** de Google AI Plus gratis para universitarios (18+), hasta el 31 dic 2026
-- **5 de 9** IAs populares entrenan con tus chats por defecto en una cuenta gratis
+Esto último es lo que hago yo, GreenCube, así que ten eso en cuenta al leer mi opinión. Los límites de abajo salen de las páginas de cada empresa, y los tiempos son de nuestras propias pruebas.
 
 ## La mejor IA para cada parte del estudio
 
-| Quieres… | Mejor opción gratis | Ojo con |
+| Quieres… | La mejor opción gratis | Ojo con |
 | --- | --- | --- |
-| **Resolver dudas rápidas y que te expliquen** | ChatGPT gratis: chats de texto ilimitados | Entrena con tus chats por defecto; anuncios en algunos países |
-| **Estudiar con tus apuntes, con citas** | NotebookLM: 50 fuentes por cuaderno, cita cada respuesta | Tus apuntes van a Google; necesita internet |
-| **Hacer flashcards y cuestionarios** | NotebookLM (exporta CSV), o una IA en tu PC | Las tarjetas de IA tienen errores: revísalas |
-| **Leer muchos PDF largos** | Una IA en tu PC: sin límite de archivos | La velocidad depende de tu PC |
-| **Crear imágenes y esquemas** | Una IA en tu PC: sin contador | Necesita tarjeta gráfica o 16 GB de RAM |
-| **Estudiar sin internet** | Solo una IA en tu PC funciona sin conexión | No sabe las noticias de hoy |
+| Hacer preguntas rápidas y que te expliquen cosas | ChatGPT gratis: chats de texto ilimitados | Entrena con tus chats por defecto; anuncios en algunos países |
+| Estudiar con tus apuntes, citando la fuente | NotebookLM: 50 fuentes por cuaderno, cita cada respuesta | Tus apuntes van a Google; necesita internet |
+| Hacer flashcards y cuestionarios | NotebookLM (exporta CSV), o una IA en tu PC | Las tarjetas hechas por IA tienen errores, así que revísalas |
+| Leer muchos PDF largos | Una IA en tu PC: sin límite de archivos | La velocidad depende de tu PC |
+| Hacer imágenes y esquemas | Una IA en tu PC: sin contador | Las imágenes necesitan al menos 12 GB de RAM; una tarjeta gráfica las hace mucho más rápido |
+| Estudiar sin internet | Solo funciona sin conexión una IA en tu PC | No sabe las noticias de hoy |
 
-Límites según las páginas de cada empresa: [ChatGPT gratis](https://blog.greencube.app/blog/es/limite-chatgpt-gratis), [NotebookLM](https://support.google.com/notebooklm/answer/16213268?hl=es), [Google AI Plus para estudiantes](https://gemini.google/students/).
+Los límites salen de las páginas de cada empresa: [ChatGPT gratis](https://blog.greencube.app/blog/chatgpt-free-limits), [NotebookLM](https://support.google.com/notebooklm/answer/16213268?hl=en), [Google AI Plus para estudiantes](https://gemini.google/students/).
 
 ## Ofertas gratis que conviene conocer
 
-### Google AI Plus, gratis un año
+Si estás en la universidad y tienes 18 años o más, Google da un año gratis de AI Plus, canjeable hasta el 31 de diciembre de 2026. Pide una forma de pago y, pasado el año, cobra 4,99 € al mes salvo que canceles, así que apunta la fecha ([Google](https://gemini.google/students/)).
 
-Si estás en la universidad y tienes 18 años o más, Google da un año de AI Plus gratis, canjeable hasta el 31 de diciembre de 2026. Pide un método de pago y cobra 4,99 € al mes pasado el año si no cancelas, así que apunta la fecha ([Google](https://gemini.google/students/)).
+También merece la pena preguntar en tu centro. Muchas universidades dan a sus estudiantes una IA con sus propias cuentas, y en los grandes servicios las cuentas de trabajo y de centros educativos suelen quedar fuera del entrenamiento por defecto. Eso las hace más privadas que una cuenta personal gratis.
 
-### La cuenta de tu universidad
+## Una IA en tu propio PC: qué hace para estudiar
 
-Muchas universidades dan a sus estudiantes una IA con su propia cuenta. Las cuentas de trabajo y de centros educativos suelen quedar fuera del entrenamiento por defecto en los grandes servicios, lo que las hace más privadas que una cuenta personal gratis.
-
-## Una IA en tu propio PC: qué hace por tu estudio (medido)
-
-Probamos GreenCube en un portátil normal de 16 GB sin tarjeta gráfica, con su IA pequeña. Con una tarjeta gráfica gaming todo va varias veces más rápido.
+Probamos GreenCube en un portátil normal de 16 GB sin tarjeta gráfica, con su IA pequeña. Con una tarjeta gráfica gaming, todo va varias veces más rápido.
 
 | Tarea de estudio | Tiempo | Resultado |
 | --- | --- | --- |
-| Explicar un tema + 3 preguntas de examen | **unos 20 s** | completa |
-| Una pregunta concreta sobre un PDF largo | **unos 15 s** | 11 de 12 bien ([prueba](https://blog.greencube.app/blog/es/ia-para-estudiar-pdf)) |
+| Explicar un tema + escribir 3 preguntas de examen | **unos 20 s** | completo |
+| Una pregunta concreta sobre un PDF largo | **unos 15 s** | 11 de 12 bien ([prueba](https://blog.greencube.app/blog/ai-to-study-from-pdf)) |
 | Guía de estudio de un tema de unas 5.000 palabras | **unos 15 min** | completa |
-| 18 flashcards de un tema de unas 4.800 palabras | **unos 5 min** | 30 de 36 bien con la IA grande ([prueba](https://blog.greencube.app/blog/es/flashcards-con-ia-desde-pdf)) |
+| 18 flashcards de un tema de unas 4.800 palabras | **unos 5 min** | 30 de 36 bien con la IA grande ([prueba](https://blog.greencube.app/blog/flashcards-from-pdf)) |
 | Una imagen para una presentación | **2–2,5 min** | 8–89 s con tarjeta gráfica |
 
-Sin límite de mensajes, archivos ni imágenes, sin suscripción, y tus apuntes no salen nunca de tu PC. A cambio: en un portátil es más lenta que la nube, y un modelo que cabe en tu PC no le gana a las IAs más grandes de la nube en los problemas más difíciles. [Todo lo que una IA sin internet puede hacer por un estudiante](https://blog.greencube.app/blog/es/ia-sin-internet-para-estudiantes). ¿Oposiciones? [Cómo usar la IA con tu temario](https://blog.greencube.app/blog/es/ia-para-estudiar-oposiciones).
+No hay límites de mensajes, archivos ni imágenes, ni suscripción, y tus apuntes nunca salen de tu PC. La contrapartida es que en un portátil va más lenta que la nube, y un modelo lo bastante pequeño para tu PC no le gana a las IAs más grandes de la nube en los problemas más difíciles. Hay más en [todo lo que puede hacer una IA sin internet por un estudiante](https://blog.greencube.app/blog/offline-ai-for-students).
 
-## Privacidad: quién ve tus apuntes
+## Quién ve tus apuntes
 
-En una cuenta personal gratis, ChatGPT, Perplexity, Mistral, DeepSeek y Meta AI entrenan con lo que escribes por defecto; Gemini lo hace mientras "Keep Activity" esté activado; NotebookLM no, salvo que envíes valoraciones; Claude, solo si lo permites. Si los apuntes son de otro (de tu centro, de un compañero), comprueba si puedes subirlos siquiera. [Las 9 comprobadas](https://blog.greencube.app/blog/es/ia-que-no-entrena-con-tus-datos).
+En una cuenta personal gratis, ChatGPT, Perplexity, Mistral, DeepSeek y Meta AI entrenan con lo que escribes por defecto. Gemini lo hace mientras la actividad está activada, NotebookLM no lo hace salvo que envíes valoraciones, y Claude solo si lo permites. Las 9 están en [qué IA no entrena con tus chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
+
+Si tus apuntes son de otra persona, como tu centro o un compañero, comprueba si puedes subirlos siquiera.
 
 ## ¿Es hacer trampa?
 
-Usar la IA para entender un tema, ponerte a prueba o recibir comentarios sobre un borrador suele estar permitido; entregar como propio un trabajo escrito por IA, normalmente no. Las normas cambian según la asignatura, así que revisa la normativa de integridad académica y, si dudas, pregunta.
+Usar la IA para entender un tema, ponerte a prueba o recibir comentarios sobre un borrador suele estar permitido. Entregar como propio un trabajo escrito por IA, normalmente no. Las normas cambian según la asignatura, así que revisa la normativa de integridad académica y, si dudas, pregunta.
 
 ## ¿Funcionará en tu portátil?
 
-Con 8 GB de RAM funciona para chatear y estudiar, despacio; con 16 GB va cómodo; un PC gaming va rápido. Compruébalo en 30 segundos: [¿Puede mi PC ejecutar IA?](https://blog.greencube.app/blog/es/ia-en-mi-pc#checker)
+Con 8 GB de RAM funciona para chatear y estudiar, despacio. Con 16 GB va cómodo, y un PC gaming va rápido. Puedes comprobar el tuyo en unos 30 segundos con [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker)
 
 ## FAQ
 

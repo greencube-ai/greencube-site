@@ -6,63 +6,53 @@ Canonical: https://blog.greencube.app/blog/es/limite-chatgpt-gratis
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta:** desde agosto de 2026, ChatGPT gratis te deja **chatear todo lo que quieras**. Lo que sigue limitado es lo pesado: **subir archivos y PDFs, crear imágenes, la voz y el análisis de datos**. Y para estudiar con tus propios apuntes y diapositivas, eso es justo lo que se acaba.
+Desde agosto de 2026, ChatGPT gratis te deja chatear todo lo que quieras. Lo que sigue limitado es el trabajo pesado: subir archivos y PDFs, crear imágenes, la voz y el análisis de datos. Si estudias con tus propios apuntes y diapositivas, eso es justo lo que se acaba.
 
-- **Ilimitado** el chat de texto en ChatGPT gratis, desde agosto de 2026
-- **Con límite** PDFs y archivos, imágenes, voz y análisis de datos
-- **23 €** al mes cuesta ChatGPT Plus en España para subir esos límites
+Yo hago GreenCube, una IA que funciona en tu propio PC, así que no soy neutral en esto de los límites. Todo lo que cuento de ChatGPT sale de las páginas de ayuda de la propia OpenAI, enlazadas donde las uso.
 
 ## Qué cambió en agosto de 2026
 
-La semana del 10 de agosto de 2026, OpenAI quitó el límite de mensajes de texto en sus planes Gratis y Go ([Engadget](https://engadget.com/2234173/chatgpt-free-features-2026)). Su propia página de precios en español lo dice así: *"Chats de texto ilimitados, sujetos a medidas de protección contra abusos."* Y su centro de ayuda añade que subir archivos, crear imágenes, la voz y el análisis de datos tienen límites aparte ([OpenAI](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)).
+La semana del 10 de agosto de 2026, OpenAI hizo ilimitados los chats de texto en sus planes Gratis y Go ([Engadget](https://engadget.com/2234173/chatgpt-free-features-2026)). Su página de ayuda dice ahora: *"Los usuarios del plan gratuito tienen chats de texto cotidianos ilimitados, sujetos a medidas de protección contra abusos. La subida de archivos, la generación de imágenes, la voz, el análisis de datos y otras herramientas tienen límites de uso aparte."* ([Centro de ayuda de OpenAI](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)).
 
-Así que si en 2025 te salía "Has alcanzado tu límite" solo por chatear, eso ya casi no pasa. Si te sale en 2026, casi siempre es porque subiste un archivo, pediste una imagen o usaste la voz.
+Así que si en 2025 te salía "Has alcanzado tu límite" solo por chatear, eso ya casi no pasa. Si te sale en 2026, casi siempre es porque enviaste un archivo, pediste una imagen o usaste la voz.
 
 ## Qué sigue limitado en ChatGPT gratis
 
 |  | ChatGPT gratis | ChatGPT Plus | IA en tu propio PC (GreenCube) |
 | --- | --- | --- | --- |
-| **Chat de texto** | Ilimitado | Ilimitado | Ilimitado |
-| **Archivos y PDFs** | Con límite (no publican cuántos) | Límite más alto | Sin límite |
-| **Crear imágenes** | Con límite | Límite más alto | Sin límite (necesita 16 GB de RAM; de 28 s a 2,5 min por imagen en nuestras pruebas) |
-| **Conversaciones de voz** | Con límite | Límite más alto | No disponible |
-| **Anuncios** | Pueden aparecer en algunos países | No | No |
-| **Funciona sin internet** | No ([por qué](https://blog.greencube.app/blog/es/chatgpt-sin-internet)) | No | Sí, tras una descarga |
-| **Precio** | Gratis | Unos 23 € al mes | 9,99 € una vez |
+| Chat de texto | Ilimitado | Ilimitado | Ilimitado |
+| Archivos y PDFs | Con límite (no publican cuántos) | Límite más alto | Sin límite |
+| Crear imágenes | Con límite | Límite más alto | Sin límite (necesita 12 GB de RAM; de 28 s a 2,5 min por imagen en nuestras pruebas) |
+| Conversaciones de voz | Con límite | Límite más alto | No disponible |
+| Anuncios | Pueden aparecer en algunos países | No | No |
+| Funciona sin internet | No ([por qué](https://blog.greencube.app/blog/chatgpt-offline)) | No | Sí, tras una descarga |
+| Precio | Gratis | 20 $ al mes (unos 23 € en España) | 9,99 € una vez |
 
-Comprobado con las páginas de ayuda de OpenAI en octubre de 2026 ([plan gratuito](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq), [Plus](https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus), [anuncios](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). OpenAI cambia sus planes a menudo y no publica los límites exactos, así que mira tus números en Configuración de ChatGPT. El precio en España es de [GEO Toolbox](https://geotoolbox.ai/es/blog/precio-chatgpt).
+Comprobado con las páginas de ayuda de OpenAI en octubre de 2026 ([plan gratuito](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq), [Plus](https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus), [anuncios](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). OpenAI cambia sus planes a menudo y no publica los límites exactos, así que donde ves los tuyos es en la página de Configuración de ChatGPT. El precio en España es de [GEO Toolbox](https://geotoolbox.ai/es/blog/precio-chatgpt).
 
 ## Por qué los límites están justo ahí
 
-Leer un PDF de 40 páginas o dibujar una imagen le cuesta a una IA en la nube muchísimo más cálculo que contestar un mensaje, y en el plan gratuito alguien tiene que pagar esos servidores. La propia OpenAI dice que mantener los planes Gratis y Go "requiere una gran infraestructura", y esa es la razón que da para los anuncios ([OpenAI](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). Una IA que funciona en tu PC no tiene ese problema: el trabajo lo hace tu tarjeta gráfica, así que no hay nada que racionar. A cambio, va tan rápido como tu PC ([lo medimos en 10 PCs aquí](https://blog.greencube.app/blog/es/ia-en-mi-pc)).
+Leer un PDF de 40 páginas o dibujar una imagen le cuesta a una IA en la nube muchísimo más cálculo que contestar un mensaje, y en un plan gratuito alguien tiene que pagar esos servidores. La propia OpenAI lo reconoce: mantener los planes Gratis y Go "requiere una infraestructura considerable", y esa es la razón que da para los anuncios ([OpenAI](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)).
+
+Una IA en tu propio PC no tiene ese problema. El trabajo lo hace tu tarjeta gráfica o tu procesador, así que no hay nada que racionar ni nadie contando. La pega es que va tan rápido como tu PC ([aquí medimos 10 PCs](https://blog.greencube.app/blog/can-my-pc-run-ai)).
 
 ## Entonces, ¿cuál usar?
 
-#### Quédate en ChatGPT gratis si…
+Si sobre todo chateas y casi nunca subes archivos, quédate en ChatGPT gratis. El texto ilimitado cubre casi todas las dudas, y sus modelos son más potentes que cualquiera que quepa en un PC.
 
-sobre todo chateas y casi no subes archivos. El texto ilimitado cubre casi todo, y sus modelos son más potentes que cualquiera que quepa en un PC.
+Plus merece la pena si necesitas los modelos más potentes, la voz o la investigación a fondo todos los días, y 20 $ al mes no te suponen un problema.
 
-#### Paga Plus si…
+Una IA en tu propio PC le va bien a quien estudia mucho con PDFs y diapositivas, quiere imágenes sin contador, suele tener mal wifi o no quiere otra suscripción. GreenCube es una: 9,99 € una vez, sin límites de chats, archivos ni imágenes, y funciona sin internet tras la primera descarga. También hay apps gratuitas que ejecutan IA en tu PC; las tengo en [qué IAs no tienen ningún límite](https://blog.greencube.app/blog/unlimited-ai).
 
-necesitas los modelos más potentes, la voz o la investigación a fondo cada día, y 23 € al mes te parecen bien.
+Mucha gente combina las dos: ChatGPT para dudas rápidas y una IA en su propio PC para el trabajo pesado y repetitivo, como resumir los PDFs de todo un cuatrimestre.
 
-#### Usa una IA en tu PC si…
-
-estudias mucho con PDFs y diapositivas, quieres imágenes sin contador, sueles tener mal wifi o no quieres otra suscripción.
-
-#### O combínalas
-
-Mucha gente usa ChatGPT para dudas rápidas y una IA en su PC para lo pesado y repetitivo, como resumir los PDFs de todo un cuatrimestre.
-
-## Un consejo para época de exámenes
-
-Los límites duelen más justo antes de los exámenes, cuando quieres convertir todos los PDFs en resúmenes y tarjetas de estudio en una sola tarde. Uses lo que uses, haz lo pesado a principio de semana y guarda una herramienta sin contador para la noche de antes. [Qué IAs no tienen ningún límite](https://blog.greencube.app/blog/es/ia-sin-limites).
+Elijas lo que elijas, los límites aprietan más justo antes de los exámenes, cuando quieres convertir cada PDF en un resumen y unas tarjetas de estudio en una sola tarde. Hacer lo pesado a principio de semana, y guardar una herramienta sin contador para la noche de antes, te ahorra mucho estrés.
 
 ## FAQ
 
 ### ¿ChatGPT gratis ya es ilimitado?
 
-Para texto, sí. Desde agosto de 2026, OpenAI dice que el plan gratuito tiene chats de texto ilimitados, sujetos a medidas de protección contra abusos. Subir archivos y PDFs, crear imágenes, la voz y el análisis de datos siguen teniendo límites aparte.
+Para texto, sí. Desde agosto de 2026, la página de ayuda de OpenAI dice que el plan gratuito tiene chats de texto cotidianos ilimitados, sujetos a medidas de protección contra abusos. Subir archivos y PDFs, crear imágenes, la voz y el análisis de datos siguen teniendo límites aparte.
 
 ### ¿Cuántos PDFs puedo subir a ChatGPT gratis?
 
@@ -72,9 +62,9 @@ OpenAI no publica un número exacto. Su página de ayuda dice que subir archivos
 
 Puede tenerlos. OpenAI empezó a probar anuncios en Estados Unidos el 9 de febrero de 2026 y los está extendiendo a los planes Gratis y Go en algunas regiones. Los planes de pago como Plus no tienen anuncios, y OpenAI dice que no los muestra a cuentas que identifica como de menores de 18 años.
 
-### ¿Cuánto cuesta ChatGPT Plus en España?
+### ¿Cuánto cuesta ChatGPT Plus?
 
-Unos 23 euros al mes (OpenAI lo anuncia a 20 dólares al mes). Sube los límites de archivos, imágenes y voz, pero sigue siendo una suscripción mensual.
+OpenAI anuncia Plus a 20 dólares al mes. En España sale por unos 23 euros al mes. Sube los límites de archivos, imágenes y voz, pero sigue siendo una suscripción mensual.
 
 ### ¿Hay alguna IA sin límites de PDFs ni de imágenes?
 

@@ -15,16 +15,12 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Kort antwoord:</strong> voor chatten <strong>nauwelijks</strong>. Voor lange tekst lezen <strong>een beetje</strong>. Voor afbeeldingen <strong>heel veel</strong>: ruim 4 keer zo snel.</p></div>
+<div class="answer"><p>Ja, je kunt AI draaien op een laptop zonder videokaart, en een laptop met 16 GB schrijft sneller dan je leest. De Intel-graphics die in de chip zitten, helpen nauwelijks bij chatten, een beetje bij het lezen van lange tekst en heel veel bij afbeeldingen, die ruim 4 keer zo snel klaar waren.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>~14</b><span>tokens per seconde bij chatten, met of zonder Intel-graphics</span></div>
-<div class="stat b"><b>1,3&times;</b><span>sneller bij het lezen van lange tekst die je plakt</span></div>
-<div class="stat p"><b>4&times;</b><span>sneller bij het maken van afbeeldingen</span></div>
-</div>
+<p>We wilden weten of de graphics die in de meeste laptops zitten de moeite waard zijn voor AI, dus draaiden we dezelfde taken op de processor en op de Intel-graphics van één gewone laptop.</p>
 
 <h2>De test</h2>
-<p>Eén laptop: Intel Core Ultra 5 125U, 16 GB RAM, geen videokaart, alleen de graphics die in de chip zitten. We draaiden dezelfde AI op de processor en op de Intel-graphics, aan de stroom, elk twee keer, in september en oktober 2026.</p>
+<p>De laptop heeft een Intel Core Ultra 5 125U, 16 GB RAM en geen videokaart, alleen de graphics die in de chip zitten. We draaiden dezelfde AI op de processor en op de Intel-graphics, aan de stroom, elk twee keer, in september en oktober 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Taak</th><th>Processor</th><th>Intel-graphics</th><th>Verschil</th></tr></thead>
@@ -35,29 +31,17 @@
 </tbody>
 </table></div>
 
-<h2>Wat we hebben geleerd</h2>
+<h2>Chatsnelheid komt van het geheugen, niet van de chip</h2>
+<p>Een antwoord schrijven wordt beperkt door hoe snel de laptop de AI door zijn geheugen kan verplaatsen. De processor en de Intel-graphics delen datzelfde geheugen, dus uiteindelijk schrijven ze ongeveer even snel.</p>
 
-<div class="card g">
-<h3>1. Chatsnelheid komt van het geheugen, niet van de chip</h3>
-<p>Een antwoord schrijven wordt beperkt door hoe snel de laptop de AI door zijn geheugen kan halen, en de processor en de Intel-graphics delen hetzelfde geheugen. Dus schrijven ze ongeveer even snel.</p>
-</div>
+<h2>Het kan zelfs trager zijn</h2>
+<p>Met een ouder klein model, Phi-4 Mini, werd schrijven 29% trager op de Intel-graphics. Met een groter model, <a href="/blog/gemma-4-requirements">Gemma 4 E4B</a>, werd het 26% sneller. Zelfde laptop, tegenovergestelde resultaten. Uit de specificaties kun je dat niet raden, dus test GreenCube je laptop en gebruikt het wat sneller is.</p>
 
-<div class="card y">
-<h3>2. Het kan zelfs trager zijn</h3>
-<p>Met een ouder klein model (Phi-4 Mini) werd schrijven <strong>29% trager</strong> op de Intel-graphics. Met een groter model (Gemma 4 E4B) werd het <strong>26% sneller</strong>. Zelfde laptop, tegenovergestelde resultaten. Uit de specificaties kun je dat niet raden, dus test GreenCube je laptop en gebruikt het wat sneller is.</p>
-</div>
+<h2>Bij afbeeldingen betaalt het zich uit</h2>
+<p>Een afbeelding maken is zwaar rekenwerk, precies het soort waarvoor grafische chips gemaakt zijn, en hier was het verschil enorm: elfenhalve minuut zakte naar ongeveer tweeënhalve. De details staan in <a href="/blog/local-ai-image-generator-speed">hoe lang één afbeelding duurt</a>.</p>
 
-<div class="card p">
-<h3>3. Bij afbeeldingen schitteren ze</h3>
-<p>Een afbeelding maken is zwaar rekenwerk, precies waarvoor grafische chips gemaakt zijn. Elfenhalve minuut zakte naar ongeveer tweeënhalve.</p>
-</div>
+<h2>Wat dit betekent voor je laptop</h2>
+<p>Voor chatten en studeren is een laptop met 16 GB in zijn eentje genoeg. Hij schrijft sneller dan je leest, met of zonder de graphics. Lange pdf's lezen de graphics iets sneller, dus het eerste antwoord komt eerder.</p>
+<p>Afbeeldingen kunnen op zo'n laptop, in ongeveer 2 tot 3 minuten per stuk, terwijl een gaming-pc er een maakt in minder dan een minuut. En als je zonder stekker werkt: in onze metingen gaven batterij en netstroom ongeveer dezelfde chatsnelheid.</p>
 
-<h2>Wat betekent dit voor jou?</h2>
-<div class="expect">
-<div class="g"><h4>Chatten en studeren</h4><p>Een laptop met 16 GB is genoeg. Hij schrijft sneller dan je leest.</p></div>
-<div class="b"><h4>Lange pdf's</h4><p>De graphics lezen ze iets sneller, dus het eerste antwoord komt eerder.</p></div>
-<div class="y"><h4>Afbeeldingen</h4><p>Kan, ongeveer 2 tot 3 minuten per stuk. Een gaming-pc doet het in minder dan een minuut.</p></div>
-<div class="p"><h4>Batterij</h4><p>In onze tests gaven batterij en stroom ongeveer dezelfde chatsnelheid.</p></div>
-</div>
-
-<p>Wil je het hele plaatje, ook met gaming-pc's? <a href="/blog/can-my-pc-run-ai">Hier hebben we {{pcs}} pc's gemeten.</a></p>
+<p>Voor het hele plaatje, gaming-pc's inbegrepen, <a href="/blog/can-my-pc-run-ai">hebben we hier {{pcs}} pc's gemeten</a>.</p>

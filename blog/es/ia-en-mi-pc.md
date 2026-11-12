@@ -6,11 +6,9 @@ Canonical: https://blog.greencube.app/blog/es/ia-en-mi-pc
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta: sí.** Si tu PC mueve juegos, puede mover una IA. Lo medimos en 10 PCs reales: sobremesas gaming desde una GTX 1650 veterana hasta una RTX 2080 Ti, y dos portátiles sin tarjeta gráfica. Todos chatearon con una IA que funciona entera dentro del PC: sin internet y sin suscripción. Lo único que cambia es la velocidad.
+Sí. Si tu PC mueve juegos, puede mover una IA. Lo medimos en 10 PCs reales, desde sobremesas gaming con una GTX 1650 veterana hasta una RTX 2080 Ti, más dos portátiles sin tarjeta gráfica, y todos chatearon con una IA que funcionaba entera dentro del PC, sin internet. Lo que cambia de un PC a otro es la velocidad.
 
-- **14×** más rápida en la tarjeta gráfica que en el procesador, mismo PC y misma IA
-- **20** tokens por segundo con una GTX 1650 de 4 GB. Más rápido de lo que lees.
-- **8–9 s** por imagen con una RTX 2080 Ti, una vez cargada
+Hicimos todas las pruebas con GreenCube, la app que hago yo, porque es la que podemos medir al detalle. La velocidad depende mucho más del hardware que de la app. Escribe tu tarjeta gráfica aquí abajo para ver lo que encontramos con ella.
 
 ## ¿Funcionará la IA en tu PC?
 
@@ -18,7 +16,7 @@ Escribe tu tarjeta gráfica y elige tu RAM: verás qué funciona, a qué velocid
 
 ## Los números
 
-"Escribe" es la velocidad a la que la IA teclea su respuesta, en tokens por segundo. Un token es un trozo de palabra: en español, cada palabra suele ocupar uno o dos. Una persona lee unas 4 palabras por segundo ([Brysbaert, 2019](https://doi.org/10.1016/j.jml.2019.104047)), así que a partir de unos 8 tokens por segundo la IA ya escribe más rápido de lo que tus ojos leen.
+"Escribe" es la velocidad a la que la IA teclea su respuesta, en tokens por segundo. Un token son unos tres cuartos de una palabra en inglés. La mayoría de la gente lee en inglés unas 4 palabras por segundo ([Brysbaert, 2019](https://doi.org/10.1016/j.jml.2019.104047)), que son más o menos 5 tokens, así que todo lo que pase de 5 va más rápido que tus ojos.
 
 | PC | Gráfica | RAM | IA | Escribe (tokens/s) |
 | --- | --- | --- | --- | --- |
@@ -33,56 +31,49 @@ Escribe tu tarjeta gráfica y elige tu RAM: verás qué funciona, a qué velocid
 | Sobremesa | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/es/ia-en-rx-580) | 16 GB | Cube 4B (Gemma 4 E4B) | **10–11** |
 | Portátil | [Solo Intel Iris Xe](https://blog.greencube.app/blog/es/ia-en-portatil-intel-iris-xe) | 8 GB | Cube 2B (Gemma 4 E2B) | **5–7** |
 
-Pulsa una gráfica para ver su prueba completa.
-
-Medido con GreenCube entre septiembre y octubre de 2026, en chats reales y con la prueba de velocidad de la propia app. La velocidad varía un poco entre pruebas en el mismo PC, así que cuando tenemos varias damos el rango. [Cómo medimos, y todos los datos](https://blog.greencube.app/blog/es/como-medimos-la-velocidad-de-la-ia).
+Pulsa una tarjeta gráfica para ver su prueba completa. Medimos en septiembre y octubre de 2026, en chats reales y con la prueba de velocidad de la propia GreenCube. La velocidad varía un poco entre pruebas en el mismo PC, así que cuando tenemos varias damos el rango.
 
 ## Lo que aprendimos
 
-### 1. La gráfica hace el trabajo duro, como en un juego
+### La tarjeta gráfica hace el trabajo duro, como en un juego
 
-En el sobremesa con la RX 5700 XT, la misma IA escribía **5 tokens por segundo en el procesador y 72 en la tarjeta gráfica**. Una IA es sobre todo el tipo de cálculo para el que están hechas las gráficas. Cualquier tarjeta de los últimos años ayuda muchísimo, incluso una GTX 1650 de 4 GB.
+En el sobremesa con la RX 5700 XT, la misma IA escribía 5 tokens por segundo en el procesador y 72 en la tarjeta gráfica. Son 14 veces más rápido, en el mismo PC y con la misma IA. Una IA es sobre todo el tipo de cálculo para el que están hechas las tarjetas gráficas, así que cualquier tarjeta de los últimos años ayuda muchísimo. Hasta una GTX 1650 antigua de 4 GB escribía unos 20 tokens por segundo.
 
-### 2. La VRAM decide qué IA cabe
+### La VRAM decide qué tamaño de IA cabe
 
-Para ir a tope, la IA tiene que caber en la memoria propia de la tarjeta (la VRAM). Ese sobremesa tenía 48 GB de RAM y no le sirvieron para una IA más grande: un modelo de 12.000 millones de parámetros cupo en la tarjeta de 8 GB para una pregunta corta, y se cayó en cuanto la conversación se alargó, con la tarjeta casi llena. **Para la IA, la VRAM pesa más que la RAM.** Eso sí, más VRAM no es más velocidad: cuatro tarjetas de 8 GB que medimos escribían desde unos 11 tokens por segundo (RX 580) hasta 72 (RX 5700 XT). Por eso GreenCube mira tu tarjeta y elige una IA que quepa, no simplemente la más grande.
+Para ir a toda velocidad, la IA tiene que caber en la memoria propia de la tarjeta (la VRAM). Ese mismo sobremesa tenía 48 GB de RAM y no le sirvieron para un modelo más grande: una IA de 12.000 millones de parámetros cupo en la tarjeta de 8 GB para una pregunta corta y se cayó en cuanto el chat se alargó, con la tarjeta casi llena. Para la IA, la VRAM importa más que la RAM ([la prueba completa de VRAM](https://blog.greencube.app/blog/how-much-vram-for-ai)).
 
-### 3. ¿Sin tarjeta gráfica? Funciona igual
+Eso sí, VRAM no es velocidad. Cuatro tarjetas de 8 GB que medimos escribían desde unos 11 tokens por segundo (RX 580) hasta 72 (RX 5700 XT). Por eso GreenCube mira tu tarjeta y elige una IA que quepa, en vez de la más grande.
 
-Un portátil normal de 16 GB con solo gráficos Intel escribía entre 14 y 18 tokens por segundo con la IA pequeña, y terminó una respuesta completa (una explicación y tres preguntas de examen) en unos 20 segundos. Para estudiar y escribir va de sobra. Uno de 8 GB también funciona, a entre 5 y 7 tokens por segundo en chats reales, si las demás apps le dejan memoria libre.
+### Sin tarjeta gráfica también funciona
 
-### 4. Las imágenes son lo pesado
+Un portátil normal de 16 GB con solo gráficos Intel escribía entre 14 y 18 tokens por segundo con la IA más pequeña, y terminó una respuesta completa (una explicación y tres preguntas de examen) en unos 20 segundos. Para estudiar y escribir va de sobra. Uno de 8 GB también funciona, a entre 5 y 7 tokens por segundo en chats reales, siempre que las demás apps le dejen algo de memoria libre.
 
-Crear una imagen cuesta mucho más que chatear. **De 8 a 9 segundos** con una RTX 2080 Ti de 11 GB (la primera tardó 83 mientras cargaba), **28 segundos** con una RTX 3060 de 12 GB, un minuto con una RX 6600 de 8 GB, minuto y medio con una GTX 1660 Super de 6 GB y unos **2 minutos y medio** en el portátil de 16 GB. Un portátil de 8 GB no puede crear imágenes: la IA de imágenes necesita unos 7 GB ella sola.
+### Las imágenes son lo pesado
+
+Crear una imagen cuesta mucho más que chatear. Tardó de 8 a 9 segundos con una RTX 2080 Ti de 11 GB (la primera, 83 mientras cargaba), 28 segundos con una RTX 3060 de 12 GB, un minuto con una RX 6600 de 8 GB, minuto y medio con una GTX 1660 Super de 6 GB y unos dos minutos y medio en el portátil de 16 GB. Un portátil de 8 GB no puede crear imágenes, porque la IA de imágenes necesita ella sola unos 7 GB.
 
 ## Mira tu PC en 30 segundos
 
-1. Pulsa **Ctrl + Mayús + Esc** para abrir el Administrador de tareas.
-2. Entra en **Rendimiento**.
-3. Pulsa en **Memoria**: el número de arriba a la derecha es tu RAM.
-4. Pulsa en **GPU**: arriba a la derecha sale el nombre de tu tarjeta, y **Memoria de GPU dedicada** es tu VRAM. ¿Solo ves gráficos Intel? Entonces no tienes tarjeta aparte.
+1. Pulsa Ctrl + Mayús + Esc para abrir el Administrador de tareas.
+2. Entra en Rendimiento.
+3. Pulsa en Memoria. El número de arriba a la derecha es tu RAM.
+4. Pulsa en GPU. El nombre de arriba a la derecha es tu tarjeta, y la Memoria de GPU dedicada es tu VRAM. Si solo ves gráficos Intel, no tienes tarjeta aparte.
 
 ## Cómo irá en tu PC
 
-#### Tarjeta de 6 GB o más
+| Tu PC | Qué esperar |
+| --- | --- |
+| Tarjeta gráfica de 6 GB o más | Rápido en la mayoría de tarjetas de los últimos años: de 37 a 76 tokens por segundo en nuestras pruebas, e imágenes en segundos o en minuto y medio. La excepción fue una RX 580 antigua, con unos 11, aun así más rápido de lo que lees. |
+| Tarjeta de 4 GB, 16 GB de RAM | Bien: unos 20 tokens por segundo en nuestra prueba. |
+| Sin tarjeta, 16 GB de RAM | Suficiente para chatear y estudiar con una IA más pequeña. Las imágenes tardan un par de minutos. |
+| Sin tarjeta, 8 GB de RAM | Funciona para chatear, despacio. Cierra antes otras apps. Sin imágenes. |
 
-Rápido en casi todas las tarjetas de los últimos años: de 37 a 76 tokens por segundo en nuestras pruebas, muchas veces más rápido de lo que lees, e imágenes en segundos o minuto y medio. Una excepción: una RX 580 antigua escribía unos 11, aun así más rápido de lo que lees.
+## ¿Y para qué tener la IA en tu propio PC?
 
-#### Tarjeta de 4 GB y 16 GB de RAM
+Una IA en tu propio PC no tiene límites de mensajes ni cuota mensual, y sigue funcionando sin internet, en el tren o en una biblioteca con un wifi horrible. No le gana en todo a las IAs más grandes de la nube, y va tan rápido como tu hardware. Pero para estudiar, escribir, resumir y dudas del día a día, la IA de un PC normal cumple, y nunca se acaba.
 
-Bien. Unos 20 tokens por segundo en nuestra prueba.
-
-#### Sin tarjeta y 16 GB de RAM
-
-De sobra para chatear y estudiar, con una IA más pequeña. Las imágenes tardan un par de minutos.
-
-#### Sin tarjeta y 8 GB de RAM
-
-Funciona para chatear, despacio. Cierra otras apps antes. Sin imágenes.
-
-## ¿Y por qué tener la IA en tu propio PC?
-
-Porque es tuya. Sin límites de mensajes, sin cuota mensual, y sigue funcionando sin internet: en el tren, en la montaña o en una biblioteca con un wifi horrible. No le gana en todo a las IAs más grandes de la nube, pero para estudiar, escribir, resumir y dudas del día a día, una IA en tu propia tarjeta va sobrada, y nunca se acaba. ¿Lo vas a montar en Windows? [Qué necesita un PC con Windows para usar IA sin internet](https://blog.greencube.app/blog/es/ia-sin-internet-windows).
+Si la vas a montar en Windows, [qué necesita un PC con Windows para usar IA sin internet](https://blog.greencube.app/blog/local-ai-chatbot-windows) repasa los detalles.
 
 ## FAQ
 

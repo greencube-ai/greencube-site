@@ -64,53 +64,38 @@
 <p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
 <h1>Gemma 4 E2BとE4BをノートPCで比較：小さいAIと大きいAIを実測</h1>
 <p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>短い答え：</strong>グラフィックボードのないノートPCでは<strong>小さいモデルの勝ち</strong>です。2分近く待って少し良い回答を得るより、20秒で良い回答が得られます。グラフィックボードがあるなら大きいほうを使いましょう。カード上ならそちらも速いからです。</p></div>
+<div class="answer"><p>グラフィックボードのないノートPCなら、Gemma 4 E2Bのほうがいい選択です。テストでは20秒で良い答えを出し、E4Bは少しだけ良い答えに2分近くかかりました。グラフィックボードがあるならE4Bを選びましょう。そこでは速く動くからです。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>20秒</b><span>小さいモデル（Gemma 4 E2B）、完全な回答</span></div>
-<div class="stat b"><b>28秒</b><span>古い小さいモデル（Phi-4 Mini）</span></div>
-<div class="stat p"><b>112秒</b><span>大きいモデル（Gemma 4 E4B）、一番良い説明</span></div>
-</div>
+<p>この2つは、GreenCubeが動かしているモデルです。Cube 2BはGemma 4 E2B、Cube 4BはGemma 4 E4Bがベースなので、きちんと時間を計る理由が十分にありました。比較のために、少し古い小型モデルのPhi-4 Miniも加えています。</p>
 
-<h2>テスト</h2>
-<p>16 GBのノートPC（Intel Core Ultra 5、グラフィックボードなし）、CPUのみ。典型的な勉強の依頼：14歳向けに光合成を説明し、確認問題を3つ書く。回答が終わるまでを計測しました。2026年9月です。</p>
+<h2>テストの内容</h2>
+<p>16 GBのノートPC 1台（Intel Core Ultra 5、グラフィックボードなし）で、CPUだけで動かしました。頼んだのは勉強向けのひとつの依頼です。14歳にわかるように光合成を説明し、そのあと試験形式の問題を3つ書くこと。2026年9月に、各モデルが答えを書き終えるまでの時間を計りました。</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>モデル</th><th>サイズ</th><th>回答完了まで</th><th>結果</th></tr></thead>
+<thead><tr><th>モデル</th><th>サイズ</th><th>答えが完成するまでの時間</th><th>出てきたもの</th></tr></thead>
 <tbody>
-<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20秒</b></td><td>完全、よく書けている、3問とも別の問題</td></tr>
-<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28秒</b></td><td>完全で正確だが、1問が重複</td></tr>
-<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112秒</b></td><td>完全、一番良い説明</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20秒</b></td><td>完全で、よく書けていて、試験問題3つもそれぞれ別の内容</td></tr>
+<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28秒</b></td><td>完全で正確だが、試験問題がひとつ重複</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112秒</b></td><td>完全で、説明は一番良い</td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">自分のPCで動くか不安？<a href="https://greencube.app/ja/what-you-get">あなたのPCで動くものを確認 <span aria-hidden="true">&rarr;</span></a></p>
 <h2>わかったこと</h2>
 
-<div class="card g">
-<h3>1. 勉強なら小さいほうで十分</h3>
-<p>計算、単位換算、日付、理科の短い事実確認も5問しました。<strong>小さいモデルは1問も間違えませんでした</strong>。小さいGemmaは、頼んでいないのにパーセントの別の計算方法まで示しました。</p>
-</div>
+<h3>勉強には小さいモデルで十分</h3>
+<p>計算、単位換算、年代、理科にわたる短い事実の質問も5つしました。小さいモデルはどちらも1問も間違えませんでした。小さいGemmaは、頼まれてもいないのに、パーセントの別の計算方法まで示してくれました。</p>
 
-<div class="card y">
-<h3>2. 弱点：数えること</h3>
-<p>小さいモデルは2回、「5つ挙げます」と言って、足りないか多すぎる項目を並べました。そのため今のGreenCubeは、数字を書く前に数えるよう指示しています。こうした細かい点では、大きいモデルのほうが安心です。</p>
-</div>
+<h3>弱点は数えること</h3>
+<p>小さいモデルは2回、「5つ挙げます」と言ってから違う数を並べました。今のGreenCubeは、数を書く前に数えるよう指示しています。こうした小さなミスでは、大きいモデルのほうが安心です。</p>
 
-<div class="card b">
-<h3>3. グラフィックボードがあれば話は別</h3>
-<p>同じ大きいモデルが、8 GBのゲーミング用カードでは<strong>毎秒56〜72トークン</strong>で書き出します。このノートPCの7〜9倍速く、ゲーミングPCなら待たずに良い回答が得られます。</p>
-</div>
+<h3>グラフィックボードがあれば話は変わる</h3>
+<p>大きいモデルは、8 GBのゲーミング用カードで毎秒56〜72トークン書き出します。このノートPCの7〜9倍の速さです。ゲーミングPCなら、待たずに良いほうの答えが手に入ります。</p>
 
 <h2>あなたのPCにはどちら？</h2>
-<div class="expect">
-<div class="g"><h4>カードなしのノートPC</h4><p>小さいモデル。速い回答で、勉強、文章作成、質問には十分です。</p></div>
-<div class="b"><h4>ゲーミングPC</h4><p>大きいモデル。回答がより良く、それでも読むより速いです。</p></div>
-<div class="y"><h4>リストが欲しい？</h4><p>「5つ挙げます」と言ったら、本当に5つあるか確認しましょう。小さいモデルがつまずくのはそこだけです。</p></div>
-<div class="p"><h4>考えたくない？</h4><p>GreenCubeがPCを調べて選びます。</p></div>
-</div>
-
-<p>各PCの速さは？<a href="/blog/ja/can-my-pc-run-ai">PC10台の計測結果はこちら</a></p>
+<p>グラフィックボードのないノートPCなら、小さいモデルを使いましょう。答えが早く出て、勉強、文章書き、日常の質問には十分です。「5つ挙げます」で始まるリストが出てきたら、本当に5つあるかちらっと確認してください。私たちが見たミスはそれです。</p>
+<p>ゲーミングPCなら、大きいほうを使いましょう。答えが良くなり、それでも読むより速く書き出します。</p>
+<p>考えるのが面倒なら、GreenCubeがPCを調べて選んでくれます。PCの種類ごとの速さは、<a href="/blog/ja/can-my-pc-run-ai">10台のPCを計測したこちら</a>で見られます。</p>
 <h2>よくある質問</h2>
 <div class="faq">
 <details><summary>大きいAIモデルのほうが常に良いですか？</summary><p>回答は少し良くなることが多いですが、グラフィックボードのないノートPCではずっと遅くなります。テストでは、大きいモデル（Gemma 4 E4B）が一番良い説明をしましたが112秒かかり、小さいモデル（Gemma 4 E2B）は20秒で良い回答を出しました。</p></details>

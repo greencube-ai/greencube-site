@@ -15,16 +15,12 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Risposta breve:</strong> per chattare, <strong>appena</strong>. Per leggere testi lunghi, <strong>un po'</strong>. Per le immagini, <strong>tantissimo</strong>: oltre 4 volte più veloce.</p></div>
+<div class="answer"><p>Sì, puoi far girare l'IA su un portatile senza scheda grafica, e un portatile da 16 GB scrive più veloce di quanto leggi. La grafica Intel integrata nel chip aiuta appena in chat, un po' nella lettura di testi lunghi e moltissimo con le immagini, che sono uscite oltre 4 volte più veloci.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>~14</b><span>token al secondo in chat, con o senza la grafica Intel</span></div>
-<div class="stat b"><b>1,3&times;</b><span>più veloce nel leggere testi lunghi che incolli</span></div>
-<div class="stat p"><b>4&times;</b><span>più veloce nel creare immagini</span></div>
-</div>
+<p>Volevamo capire se la grafica integrata nella maggior parte dei portatili valga la pena per l'IA, quindi abbiamo eseguito le stesse attività sul processore e sulla grafica Intel di un portatile qualunque.</p>
 
 <h2>Il test</h2>
-<p>Un portatile: Intel Core Ultra 5 125U, 16 GB di RAM, nessuna scheda grafica, solo la grafica integrata nel chip. Abbiamo fatto girare la stessa IA sul processore e sulla grafica Intel, con l'alimentatore collegato, due volte ciascuno, a settembre e ottobre 2026.</p>
+<p>Il portatile ha un Intel Core Ultra 5 125U, 16 GB di RAM e nessuna scheda grafica, solo la grafica integrata nel chip. Abbiamo fatto girare la stessa IA sul processore e sulla grafica Intel, collegato alla corrente, due volte ciascuno, a settembre e ottobre 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Attività</th><th>Processore</th><th>Grafica Intel</th><th>Differenza</th></tr></thead>
@@ -35,29 +31,17 @@
 </tbody>
 </table></div>
 
-<h2>Cosa abbiamo imparato</h2>
+<h2>La velocità in chat dipende dalla memoria, non dal chip</h2>
+<p>Scrivere una risposta è limitato dalla velocità con cui il portatile riesce a far passare l'IA attraverso la memoria. Il processore e la grafica Intel condividono la stessa memoria, quindi finiscono per scrivere più o meno alla stessa velocità.</p>
 
-<div class="card g">
-<h3>1. La velocità in chat viene dalla memoria, non dal chip</h3>
-<p>Scrivere una risposta è limitato da quanto velocemente il portatile fa passare l'IA nella memoria, e processore e grafica Intel condividono la stessa memoria. Quindi scrivono più o meno alla stessa velocità.</p>
-</div>
+<h2>Può persino essere più lenta</h2>
+<p>Con un modello piccolo più vecchio, Phi-4 Mini, la scrittura è stata il 29% più lenta sulla grafica Intel. Con uno più grande, <a href="/blog/gemma-4-requirements">Gemma 4 E4B</a>, è stata il 26% più veloce. Stesso portatile, risultati opposti. Dalle specifiche non si può indovinare, quindi GreenCube prova il tuo portatile e usa il più veloce.</p>
 
-<div class="card y">
-<h3>2. Può persino essere più lenta</h3>
-<p>Con un modello piccolo più vecchio (Phi-4 Mini), la scrittura è stata il <strong>29% più lenta</strong> sulla grafica Intel. Con uno più grande (Gemma 4 E4B), il <strong>26% più veloce</strong>. Stesso portatile, risultati opposti. Non si può indovinare dalle specifiche, quindi GreenCube prova il tuo portatile e usa ciò che va più veloce.</p>
-</div>
+<h2>È con le immagini che conviene</h2>
+<p>Creare un'immagine richiede calcoli pesanti, quelli per cui sono fatti i chip grafici, e qui la differenza è stata enorme: da 11 minuti e mezzo si è scesi a circa 2 e mezzo. I dettagli sono in <a href="/blog/local-ai-image-generator-speed">quanto ci mette un'immagine</a>.</p>
 
-<div class="card p">
-<h3>3. È nelle immagini che brilla</h3>
-<p>Creare un'immagine è matematica pesante, proprio quella per cui sono fatti i chip grafici. Undici minuti e mezzo sono scesi a circa due e mezzo.</p>
-</div>
+<h2>Cosa significa per il tuo portatile</h2>
+<p>Per chat e studio, un portatile da 16 GB basta da solo. Scrive più veloce di quanto leggi, con o senza la grafica. Con i PDF lunghi, la grafica li legge un po' più in fretta, quindi la prima risposta arriva prima.</p>
+<p>Su un portatile come questo le immagini si possono fare, in circa 2-3 minuti ciascuna, mentre un PC da gaming ne fa una in meno di un minuto. E se lavori senza alimentatore, nelle nostre prove batteria e corrente hanno dato più o meno la stessa velocità in chat.</p>
 
-<h2>Quindi cosa significa per te?</h2>
-<div class="expect">
-<div class="g"><h4>Chattare e studiare</h4><p>Un portatile da 16 GB basta. Scrive più veloce di quanto leggi.</p></div>
-<div class="b"><h4>PDF lunghi</h4><p>La grafica li legge un po' più velocemente, quindi la prima risposta arriva prima.</p></div>
-<div class="y"><h4>Immagini</h4><p>Si può, circa 2-3 minuti ciascuna. Un PC da gaming lo fa in meno di un minuto.</p></div>
-<div class="p"><h4>Batteria</h4><p>Nelle nostre prove, a batteria e con l'alimentatore la velocità in chat era più o meno la stessa.</p></div>
-</div>
-
-<p>Vuoi il quadro completo, anche con i PC da gaming? <a href="/blog/can-my-pc-run-ai">Qui abbiamo misurato {{pcs}} PC.</a></p>
+<p>Per il quadro completo, PC da gaming inclusi, <a href="/blog/can-my-pc-run-ai">qui abbiamo misurato {{pcs}} PC</a>.</p>

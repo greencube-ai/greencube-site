@@ -9,27 +9,23 @@
  "lang": "pl",
  "alt": "run-ai-on-8gb-ram",
  "faq": [
-  {"q": "Czy uruchomię AI na laptopie z 8 GB RAM?", "a": "Tak, mały model. Na naszym laptopie z 8 GB i grafiką Intel Iris Xe pisał od 5 do 7 tokenów na sekundę w prawdziwych czatach, a odpowiedzi trwały 30–40 sekund. Nie potrafi tworzyć obrazów."},
+  {"q": "Czy uruchomię AI na laptopie z 8 GB RAM?", "a": "Tak, mały model. Na naszym laptopie z 8 GB i grafiką Intel Iris Xe pisał od 5 do 7 tokenów na sekundę w prawdziwych czatach, mniej więcej tak szybko, jak czytasz, a odpowiedzi trwały 30–40 sekund. Nie potrafi tworzyć obrazów."},
   {"q": "Dlaczego AI nie startuje na moim laptopie z 8 GB?", "a": "Zwykle brakuje wolnej pamięci. Nasz laptop z 8 GB miał przy innych otwartych aplikacjach tylko około 1 GB wolnego i jednego dnia AI nie mogło się załadować. Zamknięcie najpierw przeglądarki i innych aplikacji daje mu miejsce."},
   {"q": "Czy grafika Intel Iris Xe przyspiesza AI na laptopie z 8 GB?", "a": "Przy czacie nie. Na naszym laptopie procesor pisał 9,3 tokena na sekundę, a grafika Iris Xe 5,0. GreenCube testuje oba na twoim laptopie i używa szybszego."}
  ]
 }
 -->
-<div class="answer"><p><strong>Krótka odpowiedź: tak, powoli.</strong> Małe AI na laptopie z 8 GB pisze mniej więcej w tempie twojego czytania. Haczyk to nie prędkość, tylko <strong>wolna pamięć</strong>. Najpierw zamknij inne aplikacje.</p></div>
+<div class="answer"><p>Tak, powoli. Małe AI na laptopie z 8 GB pisze mniej więcej tak szybko, jak czytasz, a pełna odpowiedź zajmuje 30 do 40 sekund. Prawdziwym haczykiem nie jest prędkość, tylko wolna pamięć, więc zanim zaczniesz, zamknij inne aplikacje.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>tokena na sekundę na procesorze, w krótkim teście startowym</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>na pełną odpowiedź</span></div>
-<div class="stat p"><b>~1 GB</b><span>wolnej pamięci przy innych otwartych aplikacjach, prawdziwy problem</span></div>
-</div>
+<p>Sprawdziliśmy to na najsłabszym komputerze, jaki zmierzyliśmy, bo „czy to ruszy na moim starym laptopie?” to jedno z pierwszych pytań o lokalne AI. Rusza. Oto jak to wygląda.</p>
 
 <h2>Test</h2>
-<p>Najsłabszy komputer, jaki zmierzyliśmy: laptop z 8 GB RAM, grafiką Intel Iris Xe, bez karty graficznej, na baterii. Mały model (Gemma 4 E2B), początek października 2026 r.</p>
+<p>Laptop ma 8 GB RAM i grafikę Intel Iris Xe, bez karty graficznej, a test robiliśmy na baterii. Użyliśmy małego modelu GreenCube, Cube 2B (zbudowanego na <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), na początku października 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Co</th><th>Wynik</th></tr></thead>
 <tbody>
-<tr><td>Pisanie, w prawdziwych czatach</td><td><b>5&ndash;7 tokenów/s</b></td></tr>
+<tr><td>Pisanie w prawdziwych czatach</td><td><b>5&ndash;7 tokenów/s</b></td></tr>
 <tr><td>Pisanie, test startowy GreenCube, procesor</td><td><b>9,3 tokena/s</b></td></tr>
 <tr><td>Pisanie, test startowy GreenCube, grafika Iris Xe</td><td><b>5,0 tokena/s</b> (wolniej)</td></tr>
 <tr><td>Pełna odpowiedź</td><td><b>30&ndash;40 s</b></td></tr>
@@ -38,29 +34,21 @@
 </tbody>
 </table></div>
 
-<h2>Czego się dowiedzieliśmy</h2>
+<h2>Do czatu i nauki wystarcza</h2>
+<p>5 do 7 tokenów na sekundę w prawdziwych czatach to mniej więcej tempo czytania. Krótki test startowy GreenCube dał 9,3, ale w prawdziwych czatach wyszło mniej. Na długą odpowiedź poczekasz pół minuty, ale ona przyjdzie, bez internetu i bez limitów.</p>
 
-<div class="card g">
-<h3>1. Działa do czatu i nauki</h3>
-<p>5–7 tokenów na sekundę w prawdziwych czatach to trochę poniżej tempa czytania po polsku (krótki test startowy dał 9,3). Na długą odpowiedź poczekasz pół minuty, ale przyjdzie, bez internetu i bez limitów.</p>
-</div>
+<h2>Prawdziwym limitem jest wolna pamięć</h2>
+<p>Z otwartą przeglądarką i innymi aplikacjami laptop miał wolny tylko około 1 GB pamięci. Jednego dnia to nie wystarczyło i AI nawet nie wystartowało. Mały model potrzebuje dla siebie paru GB, więc na 8 GB musi się ostrożnie dzielić ze wszystkim innym, co masz otwarte.</p>
 
-<div class="card p">
-<h3>2. Wolna pamięć to prawdziwy limit</h3>
-<p>Przy otwartej przeglądarce i innych aplikacjach laptop miał tylko około 1 GB wolnego. Jednego dnia to nie wystarczyło i AI nawet nie wystartowało. Mały model potrzebuje kilku GB tylko dla siebie.</p>
-</div>
+<h2>Zintegrowana grafika go spowolniła</h2>
+<p>Można by się spodziewać, że układ graficzny pomoże, ale na tym laptopie grafika Iris Xe pisała 5,0 tokena na sekundę, a procesor 9,3. Na innym laptopie oba były mniej więcej równe. Ze specyfikacji nie da się tego przewidzieć, więc GreenCube testuje oba na twoim laptopie i używa szybszego.</p>
 
-<div class="card y">
-<h3>3. Zintegrowana grafika go spowolniła</h3>
-<p>Na tym laptopie grafika Iris Xe pisała 5,0 tokena na sekundę, a procesor 9,3. Na innym laptopie wyszło mniej więcej po równo. Nie da się tego wiedzieć z góry, więc GreenCube testuje oba i używa szybszego.</p>
-</div>
-
-<h2>Wskazówki dla laptopa z 8 GB</h2>
+<h2>Wskazówki na laptop z 8 GB</h2>
 <ol class="steps">
-<li><strong>Zamknij przeglądarkę</strong> (albo większość kart), zanim zaczniesz. Przeglądarki zjadają pamięć.</li>
-<li><strong>Zrestartuj laptopa</strong> przed długą sesją nauki. To zwalnia pamięć, której inne aplikacje zapomniały oddać.</li>
-<li><strong>Zadawaj krótsze pytania</strong> albo jedno po drugim. Krótsze odpowiedzi wracają szybciej.</li>
-<li><strong>Odpuść obrazy.</strong> Potrzebują około 7 GB; do nich użyj mocniejszego komputera.</li>
+<li>Zanim zaczniesz, zamknij przeglądarkę albo większość jej kart. Przeglądarki zużywają dużo pamięci.</li>
+<li>Zrestartuj laptopa przed długą sesją nauki. To zwalnia pamięć, której inne aplikacje zapomniały oddać.</li>
+<li>Pytaj o jedną rzecz naraz. Krótsze odpowiedzi przychodzą szybciej.</li>
+<li>Obrazy zostaw na większy komputer. Same potrzebują około 7 GB.</li>
 </ol>
 
-<p>Zobacz, o ile szybsze są inne komputery: <a href="/blog/can-my-pc-run-ai">tutaj zmierzyliśmy {{pcs}} komputerów</a>.</p>
+<p>Żeby zobaczyć, o ile szybsze są inne komputery, <a href="/blog/can-my-pc-run-ai">zmierzyliśmy tutaj {{pcs}} komputerów</a>.</p>

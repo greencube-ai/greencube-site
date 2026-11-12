@@ -64,61 +64,48 @@
 <p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
 <h1>Meilleur modèle d&#x27;IA locale pour votre PC, selon la RAM et la VRAM (mesuré)</h1>
 <p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 28 octobre 2026</p>
-<div class="answer"><p><strong>Réponse courte :</strong> le meilleur modèle d'IA locale pour <em>votre</em> PC est le <strong>plus grand qui tient entièrement sur votre carte graphique, avec environ 1,5 Go de marge</strong>. Pas de carte ? Un <strong>petit modèle</strong> dans votre RAM. Un modèle plus petit entièrement sur la carte bat un plus grand qui déborde : nous avons mesuré le débordement à <strong>6 fois plus lent</strong>. Ci-dessous, le choix pour chaque type de PC, avec des vitesses mesurées sur 10 vrais PC.</p></div>
+<div class="answer"><p>Le meilleur modèle d'IA locale pour votre PC est le plus grand qui tient entièrement sur votre carte graphique avec environ 1,5 Go de marge. Sans carte graphique, prenez un petit modèle qui tourne dans votre RAM. Un modèle plus petit entièrement sur la carte bat un plus grand qui déborde : quand une partie d'un modèle ne tenait pas, nous l'avons mesuré 6 fois plus lent.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>+1,5 Go</b><span>le fichier du modèle plus environ 1,5 Go doit tenir dans votre VRAM</span></div>
-<div class="stat p"><b>6&times;</b><span>plus lent quand une partie du modèle ne tient pas sur la carte</span></div>
-<div class="stat b"><b>10</b><span>vrais PC mesurés, des portables aux PC de bureau gamer</span></div>
-</div>
+<p>Vous trouverez ci-dessous le choix pour chaque type de PC, avec des vitesses mesurées sur 10 vrais PC. Une chose à savoir d'abord : nous n'avons chronométré que les modèles Gemma 4 que GreenCube fournit (je développe GreenCube), donc ce sont les seuls pour lesquels je donne des vitesses. La règle de taille, elle, marche pour n'importe quelle famille de modèles.</p>
 
 <h2>Le meilleur modèle pour votre PC</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Votre PC</th><th>Taille de modèle qui tient</th><th>Ce que nous avons mesuré</th></tr></thead>
 <tbody>
 <tr><td>Portable de 8 Go, sans carte graphique</td><td>Petit, environ 2&ndash;3 Go (Gemma 4 E2B, 2,6 Go)</td><td><b>5&ndash;7</b> tokens/s dans de vraies conversations ; fermez d'abord les autres applis</td></tr>
-<tr><td>Portable de 16 Go, sans carte graphique</td><td>Petit pour la vitesse ; environ 4 Go fonctionne, mais lentement</td><td>E2B <b>14&ndash;18</b> tokens/s ; E4B <b>8&ndash;10</b></td></tr>
+<tr><td>Portable de 16 Go, sans carte graphique</td><td>Petit pour la vitesse ; environ 4 Go marche, mais lentement</td><td>E2B <b>14&ndash;18</b> tokens/s ; E4B <b>8&ndash;10</b></td></tr>
 <tr><td>Carte graphique de 4 Go</td><td>Environ 2&ndash;3 Go tient entièrement ; 4 Go déborde</td><td>E4B (4,2 Go, en partie dans la RAM) environ <b>20</b> tokens/s sur une GTX 1650</td></tr>
 <tr><td>Carte graphique de 6 Go</td><td>Environ 4&ndash;4,5 Go</td><td>E4B <b>35&ndash;38</b> tokens/s sur une GTX 1660 Super</td></tr>
 <tr><td>Carte graphique de 8 Go</td><td>Environ 4&ndash;6 Go</td><td>E4B <b>56&ndash;72</b> sur les cartes récentes (environ 11 sur une vieille RX 580)</td></tr>
 <tr><td>Carte graphique de 12 Go+</td><td>Environ 6&ndash;10 Go : modèles de la classe 12B</td><td>E4B <b>50&ndash;55</b> avec 12 Go ; le 12B a besoin de 10 Go+ pour les longues conversations</td></tr>
 </tbody>
 </table></div>
-<p>Chaque carte a sa propre page : <a href="/blog/fr/can-my-pc-run-ai">Mon PC peut-il faire tourner une IA ?</a> Ou tapez votre carte dans <a href="/blog/fr/can-my-pc-run-ai#checker">l'outil de vérification</a>.</p>
+<p>Chaque carte a sa propre page dans <a href="/blog/fr/can-my-pc-run-ai">Mon PC peut-il faire tourner une IA ?</a>, ou vous pouvez taper la vôtre dans <a href="/blog/fr/can-my-pc-run-ai#checker">l'outil de vérification</a>.</p>
 
 <p class="bridge-mid">Vous ne savez pas si votre PC suffit ? <a href="https://greencube.app/fr/what-you-get">Voyez ce qui tourne sur le vôtre <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Pourquoi « tenir » compte plus que « le plus grand »</h2>
-<div class="card p">
-<h3>S'il déborde, c'est plus lent que sans carte du tout</h3>
-<p>Sur une RX 5700 XT de 8 Go, Gemma 4 12B a écrit 35,6 tokens par seconde entièrement sur la carte, 5,9 avec une partie hors de la carte, et 4,3 avec encore moins dessus : plus lent qu'un modèle plus petit qui tourne sans carte. <a href="/blog/fr/how-much-vram-for-ai">Le test complet de la VRAM</a>.</p>
-</div>
-<div class="card y">
-<h3>Il tient pour une question, il plante dans une longue conversation</h3>
-<p>Le même modèle 12B tenait sur la carte de 8 Go pour une question courte, puis plantait à chaque fois que la conversation s'allongeait : la conversation a besoin de place, elle aussi. C'est à ça que servent les 1,5 Go de marge.</p>
-</div>
-<div class="card g">
-<h3>Petit, c'est souvent suffisant</h3>
-<p>Sur un portable de 16 Go, Gemma 4 E2B a donné une réponse d'étude complète en 20 secondes et a réussi 5 vérifications rapides de faits sur 5 ; E4B expliquait mieux, mais a mis 112 secondes. <a href="/blog/fr/gemma-4-e2b-vs-e4b">E2B vs E4B, mesurés</a>.</p>
-</div>
+<p>Quand un modèle déborde de la carte, il peut finir plus lent que sans carte du tout. Sur une RX 5700 XT de 8 Go, Gemma 4 12B a écrit 35,6 tokens par seconde entièrement sur la carte, 5,9 avec une partie hors de la carte, et 4,3 avec encore moins dessus. Ce dernier chiffre est plus lent qu'un modèle plus petit qui tourne sans carte. Le test complet est dans <a href="/blog/fr/how-much-vram-for-ai">combien de VRAM il faut pour l'IA</a>.</p>
+<p>Tenir pour une question n'est pas non plus la même chose que tenir pour une conversation. Le même modèle 12B tenait sur la carte de 8 Go pour une question courte, puis plantait chaque fois que la conversation s'allongeait, parce que la conversation a besoin de place sur la carte elle aussi. C'est à ça que servent les 1,5 Go de marge.</p>
+<p>Et petit, c'est souvent suffisant. Sur un portable de 16 Go, Gemma 4 E2B a donné une réponse d'étude complète en 20 secondes et a réussi 5 vérifications rapides de faits sur 5. E4B expliquait mieux, mais a mis 112 secondes. Plus de détails dans <a href="/blog/fr/gemma-4-e2b-vs-e4b">E2B contre E4B, mesurés</a>.</p>
 
 <h2>Les modèles que nous avons mesurés</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Modèle</th><th>Taille du fichier</th><th>Idéal sur</th><th>Licence</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2,6 Go</td><td>Portables, 8&ndash;16 Go de RAM</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4,2 Go</td><td>Cartes graphiques de 6 Go ou plus</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>environ 6,7 Go</td><td>Cartes graphiques de 10&ndash;12 Go ou plus</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2,6 Go</td><td>Portables, 8&ndash;16 Go de RAM</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 Go</td><td>Cartes graphiques de 6 Go ou plus</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 12B</td><td>environ 6,7 Go</td><td>Cartes graphiques de 10&ndash;12 Go ou plus</td><td>Apache 2.0</td></tr>
 </tbody>
 </table></div>
-<p>Ce sont les fichiers que GreenCube fournit et les seuls que nous avons chronométrés, donc ce sont les seuls pour lesquels nous donnons des vitesses. Les autres familles de modèles suivent la même règle : regardez la taille du fichier, ajoutez environ 1,5 Go et comparez avec votre VRAM. <a href="/blog/fr/gemma-4-requirements">La configuration requise pour Gemma 4 en détail</a>.</p>
+<p>Pour tout autre modèle, la même règle s'applique : prenez la taille du fichier, ajoutez environ 1,5 Go et comparez avec votre VRAM. Les détails sur Gemma sont dans <a href="/blog/fr/gemma-4-requirements">la configuration requise pour Gemma 4</a>.</p>
 
 <h2>Comment vérifier votre VRAM</h2>
 <ol class="steps">
-<li>Appuyez sur <strong>Ctrl + Maj + Échap</strong> pour ouvrir le Gestionnaire des tâches.</li>
-<li>Allez dans <strong>Performances</strong>, puis <strong>GPU</strong>.</li>
-<li>La <strong>Mémoire GPU dédiée</strong>, c'est votre VRAM. Pas de mémoire dédiée ? Utilisez un petit modèle dans la RAM.</li>
+<li>Appuyez sur Ctrl + Maj + Échap pour ouvrir le Gestionnaire des tâches.</li>
+<li>Allez dans Performances, puis GPU.</li>
+<li>Regardez la Mémoire GPU dédiée : c'est votre VRAM. S'il n'y a pas de mémoire dédiée, utilisez un petit modèle dans la RAM.</li>
 </ol>
-<p>Vous préférez ne pas choisir du tout ? GreenCube lit votre carte et votre RAM et choisit le modèle qui tient, avec de la marge. Les applis gratuites comme LM Studio, Jan et Ollama vous laissent choisir vous-même : <a href="/blog/fr/best-offline-ai-chatbot">12 applis comparées</a>.</p>
+<p>Les applis gratuites comme LM Studio, Jan et Ollama vous laissent choisir le modèle vous-même (<a href="/blog/fr/best-offline-ai-chatbot">12 applis comparées</a>). Si vous préférez ne rien choisir du tout, GreenCube lit votre carte et votre RAM et choisit un modèle qui tient, avec de la marge.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Quel est le meilleur modèle d&#x27;IA locale ?</summary><p>Le plus grand modèle qui tient entièrement sur votre carte graphique avec environ 1,5 Go de marge. Un modèle plus petit entièrement sur la carte bat un plus grand qui déborde dans la RAM : dans notre test, un modèle dont une partie était hors d&#x27;une carte de 8 Go tournait 6 fois plus lentement.</p></details>

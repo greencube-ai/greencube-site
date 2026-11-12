@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "8 GB 内存能跑 AI 吗？我们用最弱的笔记本电脑试了试", "description": "8 GB 内存跑 AI 模型：真实聊天中每秒 5 到 7 个 token，一个回答 30 到 40 秒，这是我们最弱的笔记本电脑的成绩。聊天和学习都能用，唯一的诀窍是空闲内存。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/run-ai-on-8gb-ram", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "8 GB 内存的笔记本电脑能跑 AI 吗？", "acceptedAnswer": {"@type": "Answer", "text": "小模型可以。在我们配 Intel Iris Xe 显卡的 8 GB 笔记本电脑上，真实聊天中每秒输出 5 到 7 个 token，一个回答要 30 到 40 秒。不能生成图片。"}}, {"@type": "Question", "name": "为什么 AI 在我的 8 GB 笔记本电脑上启动不了？", "acceptedAnswer": {"@type": "Answer", "text": "大多是因为空闲内存不够。在我们的 8 GB 笔记本电脑上，开着其他应用时只剩约 1 GB，有一天 AI 根本加载不了。先关掉浏览器和其他应用，就能给它腾出空间。"}}, {"@type": "Question", "name": "Intel Iris Xe 显卡能让 8 GB 笔记本电脑上的 AI 更快吗？", "acceptedAnswer": {"@type": "Answer", "text": "聊天时不能。在我们的笔记本上，CPU 每秒输出 9.3 个 token，Iris Xe 显卡只有 5.0 个。GreenCube 会在你的笔记本上两种都试，然后用更快的那个。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "8 GB 内存的笔记本电脑能跑 AI 吗？", "acceptedAnswer": {"@type": "Answer", "text": "小模型可以。在我们配 Intel Iris Xe 显卡的 8 GB 笔记本电脑上，真实聊天中每秒输出 5 到 7 个 token，大约和阅读英文一样快，一个回答要 30 到 40 秒。不能生成图片。"}}, {"@type": "Question", "name": "为什么 AI 在我的 8 GB 笔记本电脑上启动不了？", "acceptedAnswer": {"@type": "Answer", "text": "大多是因为空闲内存不够。在我们的 8 GB 笔记本电脑上，开着其他应用时只剩约 1 GB，有一天 AI 根本加载不了。先关掉浏览器和其他应用，就能给它腾出空间。"}}, {"@type": "Question", "name": "Intel Iris Xe 显卡能让 8 GB 笔记本电脑上的 AI 更快吗？", "acceptedAnswer": {"@type": "Answer", "text": "聊天时不能。在我们的笔记本上，CPU 每秒输出 9.3 个 token，Iris Xe 显卡只有 5.0 个。GreenCube 会在你的笔记本上两种都试，然后用更快的那个。"}}]}</script>
 </head>
 <body>
 
@@ -64,59 +64,47 @@
 <p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
 <h1>8 GB 内存能跑 AI 吗？我们用最弱的笔记本电脑试了试</h1>
 <p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>简短回答：能，但慢。</strong>8 GB 笔记本电脑上的小 AI 输出速度大约相当于阅读速度。诀窍不在速度，而在<strong>空闲内存</strong>：先关掉其他应用。</p></div>
+<div class="answer"><p>能，但慢。8 GB 笔记本电脑上的小 AI，输出速度大约和你阅读英文一样快，一个完整的回答要 30 到 40 秒。真正的问题不是速度，而是空闲内存，所以开始前先关掉其他应用。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9.3</b><span>CPU 每秒 token 数，在一次短的启动测试中</span></div>
-<div class="stat b"><b>30&ndash;40 秒</b><span>得到一个完整回答所需时间</span></div>
-<div class="stat p"><b>~1 GB</b><span>开着其他应用时的空闲内存：这才是真正的问题</span></div>
-</div>
+<p>我们在测过的最弱的电脑上试了一下，因为“我的旧笔记本能跑吗？”是大家对本地 AI 最先问的问题之一。它确实能跑。下面是实际的样子。</p>
 
-<h2>测试</h2>
-<p>我们测过的最弱的电脑：一台 8 GB 内存、Intel Iris Xe 显卡、没有独立显卡的笔记本电脑，用电池供电。小模型（Gemma 4 E2B），2026 年 10 月初。</p>
+<h2>测试方法</h2>
+<p>这台笔记本电脑有 8 GB 内存和 Intel Iris Xe 集成显卡，没有独立显卡，测试时用电池供电。我们用的是 GreenCube 的小模型 Cube 2B（基于 <a href="/blog/zh/gemma-4-requirements">Gemma 4 E2B</a>），时间是 2026 年 10 月上旬。</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>项目</th><th>结果</th></tr></thead>
 <tbody>
-<tr><td>输出，真实聊天</td><td><b>5&ndash;7 token/秒</b></td></tr>
-<tr><td>输出，GreenCube 启动测试，CPU</td><td><b>9.3 token/秒</b></td></tr>
-<tr><td>输出，GreenCube 启动测试，Iris Xe 显卡</td><td><b>5.0 token/秒</b>（更慢）</td></tr>
-<tr><td>一个完整回答</td><td><b>30&ndash;40 秒</b></td></tr>
+<tr><td>输出速度，真实聊天中</td><td><b>5&ndash;7 token/秒</b></td></tr>
+<tr><td>输出速度，GreenCube 启动测试，CPU</td><td><b>9.3 token/秒</b></td></tr>
+<tr><td>输出速度，GreenCube 启动测试，Iris Xe 显卡</td><td><b>5.0 token/秒</b>（更慢）</td></tr>
+<tr><td>一个完整的回答</td><td><b>30&ndash;40 秒</b></td></tr>
 <tr><td>开着其他应用时的空闲内存</td><td><b>约 1 GB</b></td></tr>
-<tr><td>图片</td><td><b>不能</b>（生成图片的 AI 需要约 7 GB）</td></tr>
+<tr><td>图片</td><td><b>不能</b>（生图 AI 需要约 7 GB）</td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">不确定你的电脑带不带得动？<a href="https://greencube.app/zh/what-you-get">看看你的电脑能跑什么 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我们发现了什么</h2>
+<h2>聊天和学习够用</h2>
+<p>真实聊天中每秒 5 到 7 个 token，大约是阅读英文的速度。GreenCube 简短的启动测试给出的是 9.3，但在真实聊天里要低一些。长回答要等半分钟，但它总能写完，不用联网，也没有限制。</p>
 
-<div class="card g">
-<h3>1. 聊天和学习都能用</h3>
-<p>真实聊天中每秒 5 到 7 个 token，大约相当于阅读速度（短的启动测试中是 9.3）。长回答要等半分钟，但总会出来。不用联网，也没有上限。</p>
-</div>
+<h2>空闲内存才是真正的限制</h2>
+<p>开着浏览器和其他应用时，这台笔记本只剩大约 1 GB 空闲内存。有一天这点内存不够，AI 连启动都启动不了。小模型自己就要占几 GB，所以在 8 GB 上，它得和你开着的其他所有东西小心地分享内存。</p>
 
-<div class="card p">
-<h3>2. 真正的限制是空闲内存</h3>
-<p>开着浏览器和其他应用时，笔记本电脑只剩约 1 GB 空闲内存。有一天这点空间不够，AI 根本启动不了。即使是小模型，本身也需要好几 GB。</p>
-</div>
+<h2>集成显卡反而更慢</h2>
+<p>你可能以为显卡芯片会帮上忙，但在这台笔记本上，Iris Xe 显卡每秒输出 5.0 个 token，CPU 却有 9.3 个。在另一台笔记本上，两者差不多。光看配置无法事先判断，所以 GreenCube 会在你的笔记本上两种都试，然后用更快的那个。</p>
 
-<div class="card y">
-<h3>3. 集成显卡反而拖慢了它</h3>
-<p>在这台笔记本上，Iris Xe 显卡每秒输出 5.0 个 token，CPU 是 9.3。但在另一台笔记本上，两者差不多。事先没法知道，所以 GreenCube 两种都试，然后用更快的那个。</p>
-</div>
-
-<h2>8 GB 笔记本电脑使用技巧</h2>
+<h2>8 GB 笔记本电脑的使用建议</h2>
 <ol class="steps">
-<li>开始前<strong>关掉浏览器</strong>（或者关掉大部分标签页）。浏览器很吃内存。</li>
-<li>长时间学习前<strong>重启笔记本电脑</strong>。这样能收回其他应用忘了释放的内存。</li>
-<li><strong>问题问得短一点</strong>，或者一次只问一个。回答越短，出来越快。</li>
-<li><strong>别想着生成图片</strong>。它需要约 7 GB，交给更强的电脑吧。</li>
+<li>开始前关掉浏览器，或者至少关掉大部分标签页。浏览器很占内存。</li>
+<li>长时间学习前重启一下笔记本。这样能释放其他应用忘了还回来的内存。</li>
+<li>一次只问一件事。回答越短，回来得越快。</li>
+<li>图片留给配置更高的电脑。光是图片就需要大约 7 GB。</li>
 </ol>
 
-<p>看看其他电脑有多快：<a href="/blog/zh/can-my-pc-run-ai">我们在这里测了 10 台电脑</a>。</p>
+<p>想看看其他电脑快多少，<a href="/blog/zh/can-my-pc-run-ai">我们在这里测了 10 台电脑</a>。</p>
 <h2>常见问题</h2>
 <div class="faq">
-<details><summary>8 GB 内存的笔记本电脑能跑 AI 吗？</summary><p>小模型可以。在我们配 Intel Iris Xe 显卡的 8 GB 笔记本电脑上，真实聊天中每秒输出 5 到 7 个 token，一个回答要 30 到 40 秒。不能生成图片。</p></details>
+<details><summary>8 GB 内存的笔记本电脑能跑 AI 吗？</summary><p>小模型可以。在我们配 Intel Iris Xe 显卡的 8 GB 笔记本电脑上，真实聊天中每秒输出 5 到 7 个 token，大约和阅读英文一样快，一个回答要 30 到 40 秒。不能生成图片。</p></details>
 <details><summary>为什么 AI 在我的 8 GB 笔记本电脑上启动不了？</summary><p>大多是因为空闲内存不够。在我们的 8 GB 笔记本电脑上，开着其他应用时只剩约 1 GB，有一天 AI 根本加载不了。先关掉浏览器和其他应用，就能给它腾出空间。</p></details>
 <details><summary>Intel Iris Xe 显卡能让 8 GB 笔记本电脑上的 AI 更快吗？</summary><p>聊天时不能。在我们的笔记本上，CPU 每秒输出 9.3 个 token，Iris Xe 显卡只有 5.0 个。GreenCube 会在你的笔记本上两种都试，然后用更快的那个。</p></details>
 </div>

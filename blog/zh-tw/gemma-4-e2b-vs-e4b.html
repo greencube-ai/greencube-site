@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "筆電上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 實測對比", "description": "在沒有顯示卡的 16 GB 筆電上對比 Gemma 4 E2B 和 E4B（以及 Phi-4 Mini）：同一個回答，20 秒對 112 秒。更大的模型能給你什麼，什麼時候值得等。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/gemma-4-e2b-vs-e4b", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "更大的 AI 模型總是更好嗎？", "acceptedAnswer": {"@type": "Answer", "text": "回答通常會好一點，但在沒有顯示卡的筆電上慢得多。在我們的測試中，大模型（Gemma 4 E4B）講解得最好，但用了 112 秒；小模型（Gemma 4 E2B）20 秒就給出了不錯的回答。"}}, {"@type": "Question", "name": "小 AI 模型會答錯事實嗎？", "acceptedAnswer": {"@type": "Answer", "text": "在我們的五道簡短事實題（計算、單位換算、日期、科學）裡，兩個小模型一道都沒錯。小模型的弱點是數數：有時說了一個數量，列出來的卻是另一個數量。"}}, {"@type": "Question", "name": "我的電腦應該用哪個 AI 模型？", "acceptedAnswer": {"@type": "Answer", "text": "沒有顯示卡的筆電用小模型。有顯示卡的電腦上大模型也跑得很快（8 GB 顯示卡上每秒 56 到 72 個 token），就用它。GreenCube 會根據你的電腦幫你選。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AI 模型越大一定越好嗎？", "acceptedAnswer": {"@type": "Answer", "text": "回答通常會好一點，但在沒有顯示卡的筆電上會慢很多。在我們的測試中，比較大的模型（Gemma 4 E4B）解釋得最好，但花了 112 秒；小模型（Gemma 4 E2B）20 秒就給出一個不錯的回答。"}}, {"@type": "Question", "name": "小 AI 模型會答錯事實嗎？", "acceptedAnswer": {"@type": "Answer", "text": "在我們的五題快速事實查核（數學、單位換算、日期、科學）中，兩個小模型都沒有答錯。小模型的弱點是數數：它有時會先說有幾項，結果列出來的數量卻不一樣。"}}, {"@type": "Question", "name": "我的電腦該用哪個 AI 模型？", "acceptedAnswer": {"@type": "Answer", "text": "沒有顯示卡的筆電，用小模型。有顯示卡的電腦，比較大的模型也跑得很快（8 GB 顯示卡上每秒 56 到 72 個 token），那就用它。GreenCube 會根據你的電腦替你挑選。"}}]}</script>
 </head>
 <body>
 
@@ -64,58 +64,43 @@
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>筆電上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 實測對比</h1>
 <p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<div class="answer"><p><strong>簡短回答：</strong>在沒有顯示卡的筆電上，<strong>小模型勝出</strong>：20 秒得到一個不錯的回答，而不是等近 2 分鐘得到一個稍好一點的回答。如果你有顯示卡，就用大的：在顯示卡上它也很快。</p></div>
+<div class="answer"><p>在沒有顯示卡的筆電上，Gemma 4 E2B 是比較好的選擇：在我們的測試中，它 20 秒就給出一個不錯的回答，E4B 則花了將近 2 分鐘，給出一個稍微好一點的回答。有顯示卡的話就選 E4B，因為它在顯示卡上也很快。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>20 秒</b><span>小模型（Gemma 4 E2B），完整回答</span></div>
-<div class="stat b"><b>28 秒</b><span>較老的小模型（Phi-4 Mini）</span></div>
-<div class="stat p"><b>112 秒</b><span>大模型（Gemma 4 E4B），講解最好</span></div>
-</div>
+<p>這兩個就是 GreenCube 在跑的模型。Cube 2B 以 Gemma 4 E2B 為基礎，Cube 4B 以 Gemma 4 E4B 為基礎，所以我們有充分的理由好好替它們計時。我們另外加入一個較舊的小模型 Phi-4 Mini 作為對照。</p>
 
 <h2>測試</h2>
-<p>一臺 16 GB 筆電（Intel Core Ultra 5，沒有顯示卡），只用 CPU。一個典型的學習請求：給 14 歲的孩子講解光合作用，然後出三道測驗題。我們計時到回答完成，時間是 2026 年 9 月。</p>
+<p>一台 16 GB 筆電（Intel Core Ultra 5，沒有顯示卡），只用處理器執行。一個課業類型的請求：用 14 歲孩子聽得懂的方式解釋光合作用，再出三題相關的考題。我們替每個模型計時到回答完成為止，時間是 2026 年 9 月。</p>
 
 <div class="tbl-wrap"><table>
-<thead><tr><th>模型</th><th>大小</th><th>完成回答用時</th><th>結果</th></tr></thead>
+<thead><tr><th>模型</th><th>大小</th><th>完成整個回答的時間</th><th>產出的結果</th></tr></thead>
 <tbody>
-<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 秒</b></td><td>完整、寫得好、三道題各不相同</td></tr>
-<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 秒</b></td><td>完整且正確，但有一道題重複</td></tr>
-<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 秒</b></td><td>完整，講解最好</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td class="spd"><span class="bar" style="--w:100%"></span><b>20 秒</b></td><td>完整、寫得好，三題考題各不相同</td></tr>
+<tr><td>Phi-4 Mini</td><td>2.5 GB</td><td class="spd"><span class="bar" style="--w:71%"></span><b>28 秒</b></td><td>完整且正確，但有一題考題重複</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td class="spd"><span class="bar lo" style="--w:18%"></span><b>112 秒</b></td><td>完整，解釋得最好</td></tr>
 </tbody>
 </table></div>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我們發現了什麼</h2>
+<h2>我們學到了什麼</h2>
 
-<div class="card g">
-<h3>1. 學習用小模型就夠了</h3>
-<p>我們還問了五道簡短的事實題：計算、單位換算、日期和科學。<strong>小模型一道都沒答錯。</strong>小 Gemma 甚至在沒要求的情況下，主動給出了另一種算百分比的方法。</p>
-</div>
+<h3>拿來念書，小模型就夠了</h3>
+<p>我們另外問了五個快速事實問題，涵蓋數學、單位換算、日期和科學。兩個小模型都沒有答錯。小 Gemma 甚至在沒被要求的情況下，多示範了一種計算百分比的方法。</p>
 
-<div class="card y">
-<h3>2. 它的弱點：數數</h3>
-<p>有兩次，小模型說“這裡有 5 點”，結果列出來的少了或多了。所以現在 GreenCube 會讓它在寫數字之前先數一遍。在這種小細節上，大模型更可靠。</p>
-</div>
+<h3>它的弱點是數數</h3>
+<p>有兩次，小模型說「以下是 5 個」，結果列出來的數量不一樣。GreenCube 現在會要它先數好再寫出數字。像這樣的小失誤，就是比較大的模型比較可靠的地方。</p>
 
-<div class="card b">
-<h3>3. 有顯示卡，情況就不一樣了</h3>
-<p>同一個大模型在 8 GB 遊戲顯示卡上<strong>每秒輸出 56 到 72 個 token</strong>，比這臺筆電快 7 到 9 倍。在遊戲電腦上，你不用等就能得到更好的回答。</p>
-</div>
+<h3>有顯示卡，情況就不一樣了</h3>
+<p>比較大的模型在 8 GB 遊戲顯示卡上每秒寫出 56 到 72 個 token，比在這台筆電上快 7 到 9 倍。在遊戲電腦上，你可以拿到比較好的回答，又不用等。</p>
 
-<h2>哪個適合你的電腦？</h2>
-<div class="expect">
-<div class="g"><h4>無顯示卡的筆電</h4><p>小模型。回答快，學習、寫作和提問都夠好。</p></div>
-<div class="b"><h4>遊戲電腦</h4><p>大模型。回答更好，而且仍然比你讀得快。</p></div>
-<div class="y"><h4>需要列清單？</h4><p>如果它說“這裡有 5 點”，檢查一下是不是真有 5 點。這是小模型唯一會犯的錯。</p></div>
-<div class="p"><h4>不想操心？</h4><p>GreenCube 會檢查你的電腦並幫你選。</p></div>
-</div>
-
-<p>看看每種電腦有多快：<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡測了 10 臺電腦</a>。</p>
+<h2>你的電腦該用哪一個？</h2>
+<p>在沒有顯示卡的筆電上，用小模型。它的回答來得快，拿來念書、寫作和回答日常問題都夠好。如果它給你一份以「以下是 5 個」開頭的清單，瞄一眼確認真的是 5 個，因為我們看到的就是這種失誤。</p>
+<p>在遊戲電腦上，用比較大的那個。回答比較好，而且寫字還是比你讀得快。</p>
+<p>如果你不想傷腦筋，GreenCube 會檢查你的電腦，替你挑好。想看每種電腦有多快，<a href="/blog/zh-tw/can-my-pc-run-ai">我們在這裡實測了 10 台電腦</a>。</p>
 <h2>常見問題</h2>
 <div class="faq">
-<details><summary>更大的 AI 模型總是更好嗎？</summary><p>回答通常會好一點，但在沒有顯示卡的筆電上慢得多。在我們的測試中，大模型（Gemma 4 E4B）講解得最好，但用了 112 秒；小模型（Gemma 4 E2B）20 秒就給出了不錯的回答。</p></details>
-<details><summary>小 AI 模型會答錯事實嗎？</summary><p>在我們的五道簡短事實題（計算、單位換算、日期、科學）裡，兩個小模型一道都沒錯。小模型的弱點是數數：有時說了一個數量，列出來的卻是另一個數量。</p></details>
-<details><summary>我的電腦應該用哪個 AI 模型？</summary><p>沒有顯示卡的筆電用小模型。有顯示卡的電腦上大模型也跑得很快（8 GB 顯示卡上每秒 56 到 72 個 token），就用它。GreenCube 會根據你的電腦幫你選。</p></details>
+<details><summary>AI 模型越大一定越好嗎？</summary><p>回答通常會好一點，但在沒有顯示卡的筆電上會慢很多。在我們的測試中，比較大的模型（Gemma 4 E4B）解釋得最好，但花了 112 秒；小模型（Gemma 4 E2B）20 秒就給出一個不錯的回答。</p></details>
+<details><summary>小 AI 模型會答錯事實嗎？</summary><p>在我們的五題快速事實查核（數學、單位換算、日期、科學）中，兩個小模型都沒有答錯。小模型的弱點是數數：它有時會先說有幾項，結果列出來的數量卻不一樣。</p></details>
+<details><summary>我的電腦該用哪個 AI 模型？</summary><p>沒有顯示卡的筆電，用小模型。有顯示卡的電腦，比較大的模型也跑得很快（8 GB 顯示卡上每秒 56 到 72 個 token），那就用它。GreenCube 會根據你的電腦替你挑選。</p></details>
 </div>
 </article>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>

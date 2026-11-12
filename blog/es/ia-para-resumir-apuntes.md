@@ -6,75 +6,72 @@ Canonical: https://blog.greencube.app/blog/es/ia-para-resumir-apuntes
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta: depende de si te importa más que sea gratis o que tus apuntes no salgan de tu ordenador.** NotebookLM es gratis, cita de dónde sale cada frase y no entrena con tus apuntes, pero los subes a Google. ChatGPT y Gemini gratis sirven para resúmenes rápidos, pero limitan los archivos y entrenan con lo que subes salvo que lo desactives. Si no quieres subir tus apuntes a ningún sitio, ni tener límites, necesitas una IA que funcione en tu propio PC, y la medimos: unos 15 minutos para resumir un tema entero en un portátil normal.
+Depende de qué te importe más: que sea gratis, o que tus apuntes no salgan nunca de tu ordenador. NotebookLM es gratis, cita de dónde sale cada frase y no entrena con tus apuntes, pero los subes a Google. ChatGPT y Gemini gratis van bien para un resumen rápido, pero limitan tus archivos y entrenan con lo que subes salvo que lo desactives. Si no quieres subir tus apuntes a ningún sitio, necesitas una IA que funcione en tu propio PC.
 
-- **50** fuentes por cuaderno en NotebookLM gratis
-- **10** archivos por mensaje en Gemini gratis, con límites que se renuevan cada 5 horas
-- **0** archivos que sube una IA que funciona en tu PC
+Yo hago una de esas, GreenCube, así que ten eso en cuenta al leer mi opinión. Medimos cuánto tarda en un portátil normal: unos 15 minutos para un tema entero, y unos 15 segundos para una sola pregunta.
 
-## Las opciones, con lo que dicen sus propias páginas (octubre de 2026)
+## Las opciones, según sus propias páginas de ayuda (octubre de 2026)
 
-Para una cuenta personal y gratuita. No hemos medido la calidad de los resúmenes de cada una; esto son sus límites y lo que hacen con lo que subes, según su propia ayuda, enlazada en cada fila.
+Estas son las normas para una cuenta personal gratuita. No hemos medido lo buenos que son los resúmenes de cada una. Lo que hay aquí son sus límites y lo que hacen con lo que subes, sacado de sus propias páginas de ayuda, enlazadas en cada fila.
 
-| Herramienta | Límite gratis para subir | ¿Entrena con lo que subes? | ¿Sin internet? |
+| Herramienta | Límite de subida gratis | ¿Entrena con lo que subes? | ¿Funciona sin internet? |
 | --- | --- | --- | --- |
-| **NotebookLM** (Gemini Notebook) | 100 cuadernos, 50 fuentes por cuaderno ([Google](https://support.google.com/notebooklm/answer/16213268?hl=es)) | No, salvo que envíes comentarios ([Google](https://support.google.com/notebooklm/answer/17004255?hl=es)) | No |
+| **NotebookLM** (Gemini Notebook) | 100 cuadernos, 50 fuentes por cuaderno ([Google](https://support.google.com/notebooklm/answer/16213268?hl=en)) | No, salvo que envíes comentarios ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)) | No |
 | **ChatGPT** gratis | Limitado, sin cifra publicada; más estricto que en los planes de pago ([OpenAI](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)) | Sí, por defecto; se puede desactivar ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) | No |
-| **Gemini** gratis | Hasta 10 archivos por mensaje, 100 MB cada uno, con límites que se renuevan cada 5 horas hasta un tope semanal ([Google](https://support.google.com/gemini/answer/14903178?hl=es)) | Sí, mientras la actividad esté activada ([Google](https://support.google.com/gemini/answer/13594961?hl=es)) | No |
-| **Una IA en tu PC** (GreenCube) | Sin límite: no se sube nada; solo cuenta lo que tarde tu ordenador | No: tus archivos nunca nos llegan ([GreenCube](https://legal.greencube.app/privacy)) | Sí, una vez instalada |
+| **Gemini** gratis | Hasta 10 archivos por mensaje, 100 MB cada uno, límites que se renuevan cada 5 horas hasta un tope semanal ([Google](https://support.google.com/gemini/answer/14903178?hl=en)) | Sí, mientras la actividad esté activada ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) | No |
+| **Una IA en tu PC** (GreenCube) | Sin límite: no se sube nada, solo cuenta el tiempo de tu ordenador | No, tus archivos nunca nos llegan ([GreenCube](https://legal.greencube.app/privacy)) | Sí, una vez instalada |
 
-¿Y las demás IAs? Comprobamos si entrenan con tus chats en 9 de ellas: [¿Qué IA no entrena con tus chats?](https://blog.greencube.app/blog/es/ia-que-no-entrena-con-tus-datos)
+Si te interesan otras IAs, comprobamos si 9 de ellas entrenan con tus chats en [qué IA no entrena con tus chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Cuál elegir
 
-### Elige NotebookLM si…
+### NotebookLM
 
-Quieres algo gratis, cada respuesta con la cita de tus apuntes de la que sale ([Google](https://support.google.com/notebooklm/answer/16179559?hl=es)), y no te importa subirlos a Google. Según Google, no entrena con lo que subes salvo que pulses los pulgares para dar tu opinión. Necesita internet y una cuenta de Google.
+Elígelo si quieres algo gratis, que en cada respuesta cite la parte de tus apuntes de la que sale ([Google](https://support.google.com/notebooklm/answer/16179559?hl=en)), y no te importa subir tus apuntes a Google. Google dice que no entrena con lo que subes salvo que valores una respuesta con el pulgar arriba o abajo. Necesita internet y una cuenta de Google.
 
-### Elige ChatGPT o Gemini gratis si…
+### ChatGPT o Gemini gratis
 
-Solo quieres resumir unas páginas de vez en cuando pegando el texto. Los chats de texto de ChatGPT gratis ya no tienen límite, pero los archivos sí, y los dos entrenan con lo que escribes salvo que lo desactives (en ChatGPT, "Mejorar el modelo para todos"; en Gemini, la opción de guardar actividad).
+Van bien si solo resumes unas pocas páginas de vez en cuando pegando el texto. Los chats de texto de ChatGPT gratis ya no tienen límite, pero los archivos sí. Los dos entrenan con lo que escribes salvo que lo desactives: en ChatGPT es "Mejorar el modelo para todos", y en Gemini, la actividad.
 
-### Elige una IA en tu propio PC si…
+### Una IA en tu propio PC
 
-No quieres subir tus apuntes a ningún sitio, quieres subir todos los temas que haga falta sin límites, o estudias donde no hay buena conexión. El precio es el tiempo: lo hace tu ordenador. Abajo están los tiempos que medimos.
+Es la tuya si no quieres subir tus apuntes a ningún sitio, quieres añadir todos los temas que te apetezca o estudias donde la conexión va mal. El precio es el tiempo, porque el trabajo lo hace tu ordenador.
 
-## Cuánto tarda resumir en tu propio PC
+## Cuánto tarda en resumir en tu propio PC
 
-Lo medimos con GreenCube en un portátil normal de 16 GB sin tarjeta gráfica, con la IA pequeña (Gemma 4 E2B), sobre documentos largos de estudio. Los detalles están en [nuestra prueba de estudiar con PDFs](https://blog.greencube.app/blog/es/ia-para-estudiar-pdf).
+Lo medimos con GreenCube en un portátil normal de 16 GB sin tarjeta gráfica, con su IA pequeña, Cube 2B (basada en [Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), sobre documentos largos de estudio. Los detalles están en [nuestra prueba de estudiar con PDFs](https://blog.greencube.app/blog/ai-to-study-from-pdf).
 
-| Qué le pides | Tiempo medido |
+| Lo que pides | Tiempo medido |
 | --- | --- |
 | Una guía de estudio completa de un tema de unas 5.000 palabras | **unos 15 min** |
-| Lo mismo con un texto de casi el doble | **unos 29 min** |
-| Una pregunta concreta sobre un documento largo | **unos 15 s** (acertó 11 de 12) |
+| Lo mismo con un texto casi el doble de largo | **unos 29 min** |
+| Una pregunta concreta sobre un documento largo | **unos 15 s** (11 de 12 bien) |
 
-Un resumen completo tarda porque la IA tiene que leer cada parte del tema: en un portátil, déjalo trabajando mientras descansas. Con tarjeta gráfica va bastante más rápido; en [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/es/ia-en-mi-pc) puedes ver la velocidad medida de tu tarjeta.
+Un resumen completo tarda porque la IA tiene que leer cada parte del tema, así que en un portátil lo mejor es dejarla trabajando mientras descansas. Con tarjeta gráfica va mucho más rápido; la velocidad medida de tu tarjeta está en [¿Puedo usar IA en mi PC?](https://blog.greencube.app/blog/can-my-pc-run-ai)
 
 ## ¿Hay alguna IA para subir archivos sin límite?
 
-En la nube, no. Todas las que miramos ponen algún tope en el plan gratis: ChatGPT limita las subidas sin decir cuántas, Gemini permite hasta 10 archivos por mensaje con límites cada 5 horas y semanales, y NotebookLM, 50 fuentes por cuaderno y 100 cuadernos. Los planes de pago suben esos límites, pero son una suscripción mensual.
+En la nube, no. Todas las que comprobamos ponen un tope al plan gratis. ChatGPT limita las subidas sin decir cuántas, Gemini permite hasta 10 archivos por mensaje con límites cada 5 horas y semanales, y NotebookLM, 50 fuentes por cuaderno y 100 cuadernos. Los planes de pago suben esos límites, pero son suscripciones mensuales.
 
-Una IA que funciona en tu ordenador no tiene ese problema, porque no sube nada: lee los archivos desde tu disco. El único límite es el tiempo que tarde tu PC en leerlos. GreenCube cuesta 9,99 € una sola vez, sin límites de mensajes ni de archivos.
+Una IA que funciona en tu ordenador no tiene ese problema, porque no sube nada. Lee los archivos directamente de tu disco, y el único límite es lo que tarde tu PC. GreenCube cuesta 9,99 € una vez, sin límites de mensajes ni de archivos.
 
-## Para que el resumen te sirva de verdad
+## Cómo sacar un resumen que de verdad te sirva
 
-- **Pide el formato que vas a usar:** "en 10 puntos", "con las fechas en una tabla", "explicado como si tuviera 15 años".
-- **Pregunta, no solo resumas:** pide preguntas tipo examen o tarjetas de estudio del tema, y respóndelas tú sin mirar.
-- **Comprueba lo importante:** en nuestra prueba la IA falló 1 de 12 preguntas. Lo que vaya a caer en el examen, compruébalo con tus apuntes.
-- **Si son apuntes de otra persona,** o de tu centro, mira si puedes subirlos a un servicio en la nube antes de hacerlo.
+Pide el formato con el que vas a estudiar, como una lista de puntos, una tabla de fechas o una explicación más sencilla. Un resumen pensado para repasar sirve mucho más que una copia más corta del tema.
 
-¿Preparas una oposición? [Cómo usar la IA con tu temario](https://blog.greencube.app/blog/es/ia-para-estudiar-oposiciones).
+Mejor aún, no te quedes en el resumen. Pide preguntas tipo examen o flashcards del tema y respóndelas sin mirar. Y comprueba con tus apuntes todo lo que vaya a caer en el examen: en nuestra prueba la IA falló 1 pregunta de 12.
+
+Si los apuntes son de otra persona, o de tu centro, comprueba que puedes subirlos a un servicio en la nube antes de hacerlo.
 
 ## FAQ
 
 ### ¿Cuál es la mejor IA gratis para resumir apuntes?
 
-Depende de lo que te importe. NotebookLM es gratis, cita de qué parte de tus apuntes sale cada frase y no entrena con lo que subes salvo que envíes comentarios, pero tus apuntes se suben a Google. Si no quieres subirlos a ningún sitio, necesitas una IA que funcione en tu ordenador.
+Depende de lo que te importe. NotebookLM es gratis, cita de qué parte de tus apuntes sale cada respuesta y no entrena con lo que subes salvo que envíes comentarios, pero tus apuntes se suben a Google. Si no quieres subirlos a ningún sitio, necesitas una IA que funcione en tu propio ordenador.
 
 ### ¿Hay alguna IA para subir archivos sin límite?
 
-En la nube, no: ChatGPT gratis limita las subidas sin decir una cifra exacta, Gemini gratis permite hasta 10 archivos por mensaje con límites que se renuevan cada 5 horas, y NotebookLM, 50 fuentes por cuaderno. Una IA que funciona en tu propio PC no sube nada, así que el único límite es lo que tarde tu ordenador.
+En la nube, no: ChatGPT gratis limita las subidas sin publicar una cifra, Gemini gratis permite hasta 10 archivos por mensaje con límites que se renuevan cada 5 horas, y NotebookLM, 50 fuentes por cuaderno. Una IA que funciona en tu propio PC no sube nada, así que el único límite es lo que tarde tu ordenador.
 
 ### ¿ChatGPT entrena con los apuntes que le subo?
 

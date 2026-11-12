@@ -64,68 +64,60 @@
 <p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
 <h1>Requisitos do Gemma 4: que PC você precisa para rodar localmente</h1>
 <p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 23 de outubro de 2026</p>
-<div class="answer"><p><strong>Resposta curta:</strong> o pequeno <strong>Gemma 4 E2B</strong> roda num <strong>notebook de 8 GB</strong>. O <strong>E4B</strong> pede 16 GB de RAM, ou voa em qualquer <strong>placa de vídeo de 6 GB ou mais</strong>. O <strong>12B</strong> precisa de <strong>10 GB ou mais de VRAM</strong> para aguentar uma conversa de verdade.</p></div>
+<div class="answer"><p>O menor Gemma 4, o E2B, roda num notebook de 8 GB sem placa de vídeo. O E4B pede 16 GB de RAM, ou qualquer placa de vídeo com 6 GB ou mais, onde ele é rápido. O Gemma 4 12B precisa de pelo menos 10 GB de VRAM para aguentar uma conversa de verdade.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>8 GB</b><span>de RAM bastam para o Gemma 4 E2B, sem placa de vídeo</span></div>
-<div class="stat b"><b>56&ndash;72</b><span>tokens por segundo do E4B em placas gamer de 8 GB</span></div>
-<div class="stat p"><b>10 GB</b><span>de VRAM antes de confiarmos no 12B numa conversa longa</span></div>
-</div>
+<p>Estes números vêm dos nossos próprios testes. O GreenCube, o app que eu faço, roda com o Gemma 4 (o Cube 2B é baseado no Gemma 4 E2B e o Cube 4B no Gemma 4 E4B), então cronometramos esses modelos em 10 PCs reais, em setembro e outubro de 2026. O Gemma 4 em si é gratuito: o Google lançou o modelo sob a licença Apache 2.0, que permite uso comercial.</p>
 
 <h2>Requisitos do Gemma 4 num relance</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Modelo</th><th>Tamanho do arquivo</th><th>Mínimo que sugerimos</th><th>Melhor em</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2,6 GB</td><td>8 GB de RAM, sem placa</td><td>Notebooks</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4,2 GB</td><td>16 GB de RAM, ou uma placa de 6 GB</td><td>PCs gamer, notebooks de 16 GB</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>6,7 GB</td><td>10 GB ou mais de VRAM</td><td>Placas de 12 GB ou mais</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2,6 GB</td><td>8 GB de RAM, sem placa</td><td>Notebooks</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4,2 GB</td><td>16 GB de RAM, ou uma placa de 6 GB</td><td>PCs gamer, notebooks de 16 GB</td></tr>
+<tr><td>Gemma 4 12B</td><td>6,7 GB</td><td>10 GB ou mais de VRAM</td><td>Placas com 12 GB ou mais</td></tr>
 </tbody>
 </table></div>
+<p>O tamanho do arquivo é só o começo. Enquanto você conversa, a conversa também ocupa memória, então deixe alguns GB livres de folga. Num notebook de 8 GB, isso significa fechar os outros apps antes.</p>
 
 <p class="bridge-mid">Não sabe se seu PC aguenta? <a href="https://greencube.app/pt/what-you-get">Veja o que roda no seu <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Velocidades medidas</h2>
-<p>A rapidez com que cada um escreve a resposta, em tokens por segundo (um token é um pedaço de palavra; em português, você lê uns 8 por segundo). Medido com o GreenCube em setembro e outubro de 2026.</p>
+<p>Esta é a velocidade com que cada modelo escreve a resposta, em tokens por segundo. Um token é cerca de três quartos de uma palavra em inglês, e a maioria das pessoas lê em inglês uns 5 por segundo, então qualquer coisa acima disso parece rápida.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>Modelo</th><th>Escreve (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>PC de mesa, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
-<tr><td>PC de mesa, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
-<tr><td>PC de mesa, placa de vídeo de 12 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
-<tr><td>PC de mesa, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
-<tr><td>PC de mesa, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (só conversas curtas)</td></tr>
-<tr><td>PC de mesa, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>cerca de 20</b></td></tr>
-<tr><td>Notebook, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
-<tr><td>O mesmo notebook</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
-<tr><td>Notebook, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>E4B</td><td><b>63&ndash;72</b></td></tr>
+<tr><td>Desktop, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td><b>56</b></td></tr>
+<tr><td>Desktop, placa de vídeo de 12 GB</td><td>E4B</td><td><b>50&ndash;55</b></td></tr>
+<tr><td>Desktop, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td><b>35&ndash;38</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>12B</td><td><b>20&ndash;35</b> (só conversas curtas)</td></tr>
+<tr><td>Desktop, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td><b>cerca de 20</b></td></tr>
+<tr><td>Notebook, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td><b>14&ndash;18</b></td></tr>
+<tr><td>O mesmo notebook</td><td>E4B</td><td><b>8&ndash;10</b></td></tr>
+<tr><td>Notebook, Intel Iris Xe, 8 GB</td><td>E2B</td><td><b>5&ndash;7</b></td></tr>
 </tbody>
 </table></div>
 
 <h2>O que aprendemos</h2>
+<h3>O E2B é o modelo para notebook</h3>
+<p>Num notebook de 16 GB sem placa de vídeo, o E2B terminou uma resposta de estudo completa em cerca de 20 segundos. O E4B levou 112 segundos para a mesma coisa. O E2B também acertou as nossas cinco checagens rápidas de fatos. A comparação completa está em <a href="/blog/pt/gemma-4-e2b-vs-e4b">E2B vs E4B, medido</a>.</p>
 
-<div class="card g">
-<h3>1. O E2B é o modelo dos notebooks</h3>
-<p>Num notebook de 16 GB sem placa de vídeo, ele terminou uma resposta completa de estudo em cerca de 20 segundos, enquanto o E4B levou 112. Em cinco perguntas rápidas de fatos, não errou nenhuma. <a href="/blog/pt/gemma-4-e2b-vs-e4b">E2B vs E4B, medido.</a></p>
-</div>
+<h3>O E4B é o modelo para PC gamer</h3>
+<p>Quando o modelo inteiro fica numa placa de vídeo, o E4B é de 7 a 9 vezes mais rápido que num notebook, e as respostas dele são melhores que as do E2B. Qualquer placa com 6 GB ou mais comporta o modelo inteiro.</p>
 
-<div class="card b">
-<h3>2. O E4B é o modelo dos PCs gamer</h3>
-<p>Quando o modelo inteiro fica na placa de vídeo, o E4B é <strong>de 7 a 9 vezes mais rápido</strong> do que num notebook, e as respostas são melhores. Qualquer placa de 6 GB ou mais dá conta.</p>
-</div>
-
-<div class="card p">
-<h3>3. O 12B precisa de VRAM de verdade, não só de RAM</h3>
-<p>Numa placa de 8 GB, o 12B respondeu bem uma pergunta curta e depois travou todas as vezes que a conversa cresceu. Aquele PC tinha 48 GB de RAM, e isso não ajudou. <a href="/blog/pt/how-much-vram-for-ai">Por que o modelo tem que caber na sua placa.</a></p>
-</div>
+<h3>O 12B precisa de VRAM de verdade, não só de RAM</h3>
+<p>Numa placa de 8 GB, o 12B respondeu bem uma pergunta curta e depois travou toda vez que a conversa crescia. Aquele PC tinha 48 GB de RAM, e não adiantou, porque o modelo e a conversa precisam caber os dois na placa. Tem mais sobre isso em <a href="/blog/pt/how-much-vram-for-ai">por que o modelo precisa caber na sua placa</a>.</p>
 
 <h2>Qual Gemma 4 para o seu PC?</h2>
-<div class="expect">
-<div class="g"><h4>Notebook de 8 GB</h4><p>E2B. Feche outros apps antes.</p></div>
-<div class="b"><h4>Notebook de 16 GB, sem placa</h4><p>E2B pela velocidade. O E4B funciona, mas é lento.</p></div>
-<div class="y"><h4>PC gamer, placa de 6&ndash;8 GB</h4><p>E4B, inteiro na placa.</p></div>
-<div class="p"><h4>Placa de 12 GB ou mais</h4><p>O E4B é rápido; o 12B vira uma opção.</p></div>
-</div>
-
-<p>O Gemma 4 é lançado pelo Google sob a licença Apache 2.0. O GreenCube escolhe o certo para o seu PC automaticamente. <a href="/blog/pt/can-my-pc-run-ai">Veja todos os 10 PCs que medimos.</a></p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Seu PC</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>Notebook de 8 GB</td><td>E2B, com os outros apps fechados</td></tr>
+<tr><td>Notebook de 16 GB, sem placa de vídeo</td><td>E2B pela velocidade; o E4B funciona, mas é lento</td></tr>
+<tr><td>PC gamer com placa de 6&ndash;8 GB</td><td>E4B, inteiro na placa</td></tr>
+<tr><td>Placa de 12 GB ou mais</td><td>O E4B é rápido; o 12B vira uma opção</td></tr>
+</tbody>
+</table></div>
+<p>Se você prefere não escolher, o GreenCube verifica o seu PC e escolhe o certo para você. As velocidades de cada PC que testamos estão em <a href="/blog/pt/can-my-pc-run-ai">Meu PC roda IA?</a></p>
 <h2>Perguntas</h2>
 <div class="faq">
 <details><summary>Quais são os requisitos mínimos para rodar o Gemma 4 localmente?</summary><p>O menor, Gemma 4 E2B (um arquivo de 2,6 GB), rodou num notebook com 8 GB de RAM e sem placa de vídeo, a 5 a 7 tokens por segundo em conversas reais. Ele precisa de alguns GB de memória livre para abrir.</p></details>

@@ -15,51 +15,37 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Resposta curta:</strong> uma IA que cabe inteira na memória da sua placa de vídeo (a VRAM) é rápida. Uma que transborda fica <strong>mais lenta do que se nem usasse a placa</strong>, e pode travar. Menor e inteira na placa ganha de maior e pela metade.</p></div>
+<div class="answer"><p>Você precisa de VRAM suficiente para o modelo inteiro mais cerca de 1,5 GB para a conversa e para o Windows. Uma IA que cabe inteira na memória da sua placa de vídeo é rápida. Uma que transborda pode acabar mais lenta do que se nem usasse a placa, e pode travar. Menor e inteira na placa ganha de maior e pela metade.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>tokens por segundo com o modelo inteiro na placa</span></div>
-<div class="stat p"><b>5,9</b><span>com parte dele fora da placa: 6 vezes mais devagar</span></div>
-<div class="stat y"><b>Trava</b><span>quando um modelo que mal cabe encontra uma conversa longa</span></div>
-</div>
+<p>Não tiramos isso de uma ficha técnica. Medimos num PC gamer de verdade enquanto construíamos o GreenCube, o app que eu faço, e os resultados mudaram o jeito como o GreenCube escolhe o modelo.</p>
 
 <h2>O teste</h2>
-<p>Um PC de mesa com uma AMD RX 5700 XT (8 GB de VRAM) e 48 GB de RAM. Carregamos um modelo de 12 bilhões de parâmetros (Gemma 4 12B, cerca de 6,7 GB) e colocamos mais ou menos dele na placa, tudo numa só sessão, em setembro de 2026.</p>
-
+<p>O PC era um desktop com uma AMD RX 5700 XT (8 GB de VRAM) e 48 GB de RAM. Carregamos um modelo de 12 bilhões de parâmetros (Gemma 4 12B, cerca de 6,7 GB) e colocamos mais ou menos dele na placa, tudo numa mesma sessão, em setembro de 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quanto do modelo estava na placa</th><th>Escreve (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Tudo</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 das suas camadas</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 das suas camadas</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Para comparar: um modelo menor (Gemma 4 E4B) só no processador</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Esse modelo menor, inteiro na placa</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Tudo</td><td><b>35,6</b></td></tr>
+<tr><td>28 das suas camadas</td><td><b>5,9</b></td></tr>
+<tr><td>20 das suas camadas</td><td><b>4,3</b></td></tr>
+<tr><td><em>Para comparar: um modelo menor (Gemma 4 E4B) só no processador</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Esse modelo menor, inteiro na placa</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
 <h2>O que aprendemos</h2>
+<h3>É quase tudo ou nada</h3>
+<p>Deixar só uma parte do modelo fora da placa deixou ele 6 vezes mais lento. Com 20 camadas na placa, ficou mais lento que um modelo menor rodando sem placa nenhuma. Metade na placa dá o pior dos dois mundos.</p>
 
-<div class="card g">
-<h3>1. Tudo ou nada</h3>
-<p>Deixar só uma parte do modelo fora da placa o tornou <strong>6 vezes mais lento</strong>. Com 20 camadas na placa, ele ficou mais lento do que um modelo menor rodando sem placa nenhuma. Metade na placa é o pior dos dois mundos.</p>
-</div>
+<h3>O maior modelo que carrega não é o melhor</h3>
+<p>O modelo 12B coube inteiro na placa de 8 GB, para uma pergunta curta. Conforme a conversa crescia, ele travava toda vez, porque a placa quase não tinha espaço sobrando para a conversa. O modelo menor tinha cerca de 3 GB de folga e rodava a 63 a 72 tokens por segundo.</p>
 
-<div class="card p">
-<h3>2. O maior não é o melhor</h3>
-<p>O modelo 12B coube inteiro na placa de 8 GB, para uma pergunta curta. Conforme a conversa cresceu, ele travou todas as vezes: a placa quase não tinha espaço sobrando para a conversa. O modelo menor tinha cerca de 3 GB de folga e rodou a 63 a 72 tokens por segundo.</p>
-</div>
-
-<div class="card b">
-<h3>3. Deixe espaço</h3>
-<p>Numa GTX 1650 de 4 GB, um modelo de 4,2 GB foi espremido numa placa de 3,9 GB, e a primeiríssima mensagem falhou com "memória insuficiente". Agora o GreenCube mantém cerca de <strong>1,5 GB da placa livre</strong> para o chat e para o Windows.</p>
-</div>
+<h3>Deixe folga</h3>
+<p>Numa GTX 1650 de 4 GB, um modelo de 4,2 GB foi espremido numa placa de 3,9 GB, e logo a primeira mensagem falhou com "memória insuficiente". Desde então, o GreenCube mantém cerca de 1,5 GB da placa livre para a conversa e para o Windows.</p>
 
 <h2>Como escolher um modelo para a sua placa</h2>
-<div class="expect">
-<div class="g"><h4>Confira a sua VRAM</h4><p>Gerenciador de Tarefas &rarr; Desempenho &rarr; GPU &rarr; Memória dedicada da GPU.</p></div>
-<div class="b"><h4>Tamanho do modelo + 1,5 GB</h4><p>O arquivo do modelo mais cerca de 1,5 GB deve caber nesse número.</p></div>
-<div class="y"><h4>Na dúvida, vá de menor</h4><p>Um modelo menor inteiro na placa ganha de um maior pela metade.</p></div>
-<div class="p"><h4>Ou deixe o app escolher</h4><p>O GreenCube lê a sua placa e escolhe um modelo que cabe com folga.</p></div>
-</div>
-
-<p>Velocidades reais em {{pcs}} PCs, de uma GTX 1650 a uma RTX 5060: <a href="/blog/can-my-pc-run-ai">veja aqui</a>.</p>
+<ol class="steps">
+<li>Veja a sua VRAM: Gerenciador de Tarefas &rarr; Desempenho &rarr; GPU &rarr; Memória dedicada da GPU.</li>
+<li>Some cerca de 1,5 GB ao tamanho do arquivo do modelo. Esse total precisa caber na sua VRAM.</li>
+<li>Na dúvida, vá de um menor. Um modelo menor inteiro na placa ganha de um maior pela metade.</li>
+</ol>
+<p>Se você prefere não fazer as contas, o GreenCube lê a sua placa e escolhe um modelo que cabe com folga. As velocidades reais em {{pcs}} PCs, de uma GTX 1650 a uma RTX 5060, estão em <a href="/blog/can-my-pc-run-ai">Meu PC roda IA?</a></p>

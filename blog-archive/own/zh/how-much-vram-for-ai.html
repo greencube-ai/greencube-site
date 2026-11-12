@@ -15,51 +15,37 @@
  ]
 }
 -->
-<div class="answer"><p><strong>简短回答：</strong>能完整装进显卡显存（VRAM）的 AI 跑得很快。溢出的 AI <strong>比完全不用显卡还慢</strong>，还可能崩溃。小而全部在显卡上，胜过大而只有一半在显卡上。</p></div>
+<div class="answer"><p>你需要的显存，要能装下整个模型，再加上约 1.5 GB 留给对话和 Windows。完全装进显卡内存的 AI 跑得很快。溢出去的那种，最后可能比根本不用显卡还慢，还可能崩溃。小一点但完全在显卡上，胜过大一点却只装了一半。</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35.6</b><span>整个模型都在显卡上时每秒 token 数</span></div>
-<div class="stat p"><b>5.9</b><span>有一部分不在显卡上时：慢 6 倍</span></div>
-<div class="stat y"><b>崩溃</b><span>一个刚好装下的模型遇上长对话时</span></div>
-</div>
+<p>这不是从参数表上抄来的。我们在开发 GreenCube（我做的应用）时，在一台真实的游戏电脑上测出来的，测试结果也改变了 GreenCube 挑选模型的方式。</p>
 
 <h2>测试</h2>
-<p>一台配 AMD RX 5700 XT（8 GB 显存）和 48 GB 内存的台式机。我们加载了一个 120 亿参数的模型（Gemma 4 12B，约 6.7 GB），并把它放在显卡上的部分调多调少，全部在 2026 年 9 月的同一次测试中完成。</p>
-
+<p>测试用的是一台装有 AMD RX 5700 XT（8 GB 显存）和 48 GB 内存的台式机。我们加载了一个 120 亿参数的模型（Gemma 4 12B，约 6.7 GB），把它或多或少地放到显卡上，所有测试都在 2026 年 9 月的同一次会话中完成。</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>模型有多少放在显卡上</th><th>输出（token/秒）</th></tr></thead>
+<thead><tr><th>模型有多少在显卡上</th><th>输出速度（token/秒）</th></tr></thead>
 <tbody>
-<tr><td>全部</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35.6</b></td></tr>
-<tr><td>28 层</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5.9</b></td></tr>
-<tr><td>20 层</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4.3</b></td></tr>
-<tr><td><em>对比：较小的模型（Gemma 4 E4B）只用 CPU</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5.0</b></td></tr>
-<tr><td><em>同一个小模型，全部在显卡上</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72.5</b></td></tr>
+<tr><td>全部</td><td><b>35.6</b></td></tr>
+<tr><td>28 层</td><td><b>5.9</b></td></tr>
+<tr><td>20 层</td><td><b>4.3</b></td></tr>
+<tr><td><em>作为对比：一个较小的模型（Gemma 4 E4B）只用处理器</em></td><td><b>5.0</b></td></tr>
+<tr><td><em>同一个较小的模型，全部在显卡上</em></td><td><b>72.5</b></td></tr>
 </tbody>
 </table></div>
 
-<h2>我们发现了什么</h2>
+<h2>我们的发现</h2>
+<h3>几乎是全有或全无</h3>
+<p>只要模型有一部分不在显卡上，速度就慢了 6 倍。显卡上放 20 层时，它比一个完全不用显卡的小模型还慢。一半在显卡上，等于两头的缺点都占了。</p>
 
-<div class="card g">
-<h3>1. 要么全部，要么没用</h3>
-<p>只要有一部分模型不在显卡上，速度就<strong>慢了 6 倍</strong>。放 20 层在显卡上时，它甚至比完全不用显卡的小模型还慢。一半在显卡上，等于集两边之短。</p>
-</div>
+<h3>能加载的最大模型并不是最好的</h3>
+<p>12B 模型回答一个短问题时，确实能完整装进 8 GB 显卡。但随着聊天变长，它每次都崩溃，因为显卡几乎没剩下空间给对话。较小的模型有约 3 GB 富余，每秒能输出 63 到 72 个 token。</p>
 
-<div class="card p">
-<h3>2. 最大的不一定最好</h3>
-<p>12B 模型确实能完整装进 8 GB 显卡，但只够回答一个短问题。对话一变长，每次都崩溃：显卡几乎没有给对话留下空间。较小的模型有约 3 GB 富余，每秒跑 63 到 72 个 token。</p>
-</div>
+<h3>留出余量</h3>
+<p>在一张 4 GB 的 GTX 1650 上，一个 4.2 GB 的模型被硬塞进了 3.9 GB 的显卡，结果第一条消息就因为“内存不足”失败了。从那以后，GreenCube 都会在显卡上留出约 1.5 GB 给聊天和 Windows。</p>
 
-<div class="card b">
-<h3>3. 留出空间</h3>
-<p>在一张 4 GB 的 GTX 1650 上，一个 4.2 GB 的模型被硬塞进 3.9 GB 的可用空间，第一条消息就报“内存不足”失败了。现在 GreenCube 会<strong>在显卡上留出约 1.5 GB</strong> 给对话和 Windows。</p>
-</div>
-
-<h2>如何为你的显卡挑模型</h2>
-<div class="expect">
-<div class="g"><h4>查看你的显存</h4><p>任务管理器 &rarr; 性能 &rarr; GPU &rarr; 专用 GPU 内存。</p></div>
-<div class="b"><h4>模型大小 + 1.5 GB</h4><p>模型文件加上约 1.5 GB，应该小于那个数字。</p></div>
-<div class="y"><h4>拿不准就选小的</h4><p>全部在显卡上的小模型，胜过只有一半在显卡上的大模型。</p></div>
-<div class="p"><h4>或者让应用来选</h4><p>GreenCube 会读取你的显卡，选一个装得下还有富余的模型。</p></div>
-</div>
-
-<p>从 GTX 1650 到 RTX 5060，{{pcs}} 台电脑的真实速度：<a href="/blog/can-my-pc-run-ai">在这里查看</a>。</p>
+<h2>怎么为你的显卡挑模型</h2>
+<ol class="steps">
+<li>查看你的显存：任务管理器 &rarr; 性能 &rarr; GPU &rarr; 专用 GPU 内存。</li>
+<li>用模型文件大小加上约 1.5 GB，总数应该装得进你的显存。</li>
+<li>拿不准时就选小的。完全在显卡上的小模型，胜过一半在显卡上的大模型。</li>
+</ol>
+<p>如果你不想自己算，GreenCube 会读取你的显卡，挑一个装得下且留有余量的模型。从 GTX 1650 到 RTX 5060，{{pcs}} 台电脑的真实速度见 <a href="/blog/can-my-pc-run-ai">我的电脑能跑 AI 吗？</a></p>

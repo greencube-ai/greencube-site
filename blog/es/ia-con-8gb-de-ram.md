@@ -6,47 +6,43 @@ Canonical: https://blog.greencube.app/blog/es/ia-con-8gb-de-ram
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Respuesta corta: sí, despacio.** Una IA pequeña en un portátil de 8 GB escribe algo más rápido de lo que lees. La pega no es la velocidad: es la **memoria libre**. Cierra las demás apps antes.
+Sí, despacio. Una IA pequeña en un portátil de 8 GB escribe más o menos a la velocidad a la que lees, y una respuesta completa tarda de 30 a 40 segundos. El verdadero problema no es la velocidad, es la memoria libre, así que cierra tus otras apps antes de empezar.
 
-- **9,3** tokens por segundo en el procesador: algo más rápido de lo que lees
-- **30–40 s** por respuesta completa
-- **~1 GB** de memoria libre con otras apps abiertas, el verdadero problema
+Lo probamos en el PC más flojo que hemos medido, porque "¿funcionará en mi portátil viejo?" es una de las primeras preguntas que se hace la gente sobre la IA local. Funciona. Así es como va.
 
 ## La prueba
 
-El PC más flojo que hemos medido: un portátil con 8 GB de RAM, gráficos Intel Iris Xe, sin tarjeta gráfica y con batería. Modelo pequeño (Gemma 4 E2B), a principios de octubre de 2026.
+El portátil tiene 8 GB de RAM y gráficos Intel Iris Xe, sin tarjeta gráfica, y lo usamos con batería. Usamos el modelo pequeño de GreenCube, Cube 2B (basado en [Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), a principios de octubre de 2026.
 
 | Qué | Resultado |
 | --- | --- |
-| Escribir, en chats reales | **5–7 tokens/s** |
-| Escribir, prueba de arranque de GreenCube, procesador | **9,3 tokens/s** |
-| Escribir, prueba de arranque de GreenCube, gráficos Iris Xe | **5,0 tokens/s** (más lento) |
+| Escritura, en chats reales | **5–7 tokens/s** |
+| Escritura, prueba de arranque de GreenCube, procesador | **9,3 tokens/s** |
+| Escritura, prueba de arranque de GreenCube, gráficos Iris Xe | **5,0 tokens/s** (más lento) |
 | Una respuesta completa | **30–40 s** |
 | Memoria libre con otras apps abiertas | **alrededor de 1 GB** |
 | Imágenes | **No puede** (la IA de imágenes necesita unos 7 GB) |
 
-## Lo que aprendimos
+## Sirve para chatear y estudiar
 
-### 1. Sirve para chatear y estudiar
+De 5 a 7 tokens por segundo en chats reales es más o menos la velocidad de lectura en inglés. La breve prueba de arranque de GreenCube dio 9,3, pero en chats reales salió menos. Para una respuesta larga esperarás medio minuto, pero llega, sin internet y sin límites.
 
-De 5 a 7 tokens por segundo en chats reales es más o menos ritmo de lectura (la prueba corta de arranque dio 9,3). Esperarás medio minuto para una respuesta larga, pero llega, sin internet y sin límites.
+## La memoria libre es el verdadero límite
 
-### 2. La memoria libre es el verdadero límite
+Con el navegador y otras apps abiertas, al portátil solo le quedaba alrededor de 1 GB de memoria libre. Un día no bastó y la IA ni siquiera pudo arrancar. El modelo pequeño necesita un par de GB para él solo, así que con 8 GB tiene que repartirse con cuidado con todo lo demás que tengas abierto.
 
-Con el navegador y otras apps abiertas, al portátil le quedaba solo 1 GB libre. Un día no fue suficiente y la IA ni siquiera arrancó. El modelo pequeño necesita un par de GB para él solo.
+## Los gráficos integrados la hicieron más lenta
 
-### 3. Los gráficos integrados lo hicieron más lento
-
-En este portátil los gráficos Iris Xe escribían a 5,0 tokens por segundo y el procesador a 9,3. En otro portátil iban casi igual. No se puede saber de antemano, así que GreenCube prueba los dos y usa el más rápido.
+Cabría esperar que el chip gráfico ayudara, pero en este portátil los gráficos Iris Xe escribían a 5,0 tokens por segundo y el procesador a 9,3. En otro portátil los dos iban más o menos igual. No se puede saber de antemano por las especificaciones, así que GreenCube prueba los dos en tu portátil y usa el más rápido.
 
 ## Consejos para un portátil de 8 GB
 
-1. **Cierra el navegador** (o casi todas las pestañas) antes de empezar. Los navegadores se comen la memoria.
-2. **Reinicia el portátil** antes de una sesión larga de estudio. Libera memoria que otras apps no devolvieron.
-3. **Haz preguntas más cortas**, o de una en una. Las respuestas cortas llegan antes.
-4. **Olvídate de las imágenes.** Necesitan unos 7 GB; usa un PC más grande para eso.
+1. Cierra el navegador, o casi todas sus pestañas, antes de empezar. Los navegadores gastan mucha memoria.
+2. Reinicia el portátil antes de una sesión larga de estudio. Libera memoria que otras apps se olvidaron de devolver.
+3. Pregunta una cosa cada vez. Las respuestas más cortas llegan antes.
+4. Deja las imágenes para un PC más grande. Necesitan unos 7 GB ellas solas.
 
-Mira cuánto más rápidos son otros PCs: [medimos 10 PCs aquí](https://blog.greencube.app/blog/es/ia-en-mi-pc).
+Para ver cuánto más rápidos son otros PCs, [aquí medimos 10 PCs](https://blog.greencube.app/blog/can-my-pc-run-ai).
 
 ## FAQ
 

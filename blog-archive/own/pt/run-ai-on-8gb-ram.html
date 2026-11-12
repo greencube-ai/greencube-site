@@ -9,22 +9,18 @@
  "lang": "pt",
  "alt": "run-ai-on-8gb-ram",
  "faq": [
-  {"q": "Dá para rodar IA num notebook com 8 GB de RAM?", "a": "Sim, um modelo pequeno. No nosso notebook de 8 GB com gráficos Intel Iris Xe, ele escreveu de 5 a 7 tokens por segundo em conversas reais e as respostas levaram de 30 a 40 segundos. Não consegue criar imagens."},
+  {"q": "Dá para rodar IA num notebook com 8 GB de RAM?", "a": "Sim, um modelo pequeno. No nosso notebook de 8 GB com gráficos Intel Iris Xe, ele escreveu de 5 a 7 tokens por segundo em conversas reais, mais ou menos na velocidade em que você lê, e as respostas levaram de 30 a 40 segundos. Não consegue criar imagens."},
   {"q": "Por que a IA não abre no meu notebook de 8 GB?", "a": "Normalmente é falta de memória livre. Nosso notebook de 8 GB tinha só cerca de 1 GB livre com outros apps abertos, e num dia a IA não conseguiu carregar. Fechar o navegador e outros apps antes dá espaço para ela."},
   {"q": "Os gráficos Intel Iris Xe deixam a IA mais rápida num notebook de 8 GB?", "a": "Para conversar, não. No nosso notebook, o processador escreveu a 9,3 tokens por segundo e os gráficos Iris Xe a 5,0. O GreenCube testa os dois no seu notebook e usa o mais rápido."}
  ]
 }
 -->
-<div class="answer"><p><strong>Resposta curta: sim, devagar.</strong> Uma IA pequena num notebook de 8 GB escreve mais ou menos no ritmo da sua leitura. O porém não é a velocidade: é a <strong>memória livre</strong>. Feche os outros apps antes.</p></div>
+<div class="answer"><p>Dá, devagar. Uma IA pequena num notebook de 8 GB escreve mais ou menos na velocidade em que você lê, e uma resposta completa leva de 30 a 40 segundos. O problema de verdade não é a velocidade, é a memória livre, então feche os outros apps antes de começar.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9,3</b><span>tokens por segundo no processador, no teste curto de inicialização</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>para uma resposta completa</span></div>
-<div class="stat p"><b>~1 GB</b><span>de memória livre com outros apps abertos, o verdadeiro problema</span></div>
-</div>
+<p>Testamos no PC mais fraco que já medimos, porque "vai rodar no meu notebook velho?" é uma das primeiras perguntas que as pessoas fazem sobre IA local. Roda. Veja como fica.</p>
 
 <h2>O teste</h2>
-<p>O PC mais fraco que medimos: um notebook com 8 GB de RAM, gráficos Intel Iris Xe, sem placa de vídeo, na bateria. Modelo pequeno (Gemma 4 E2B), início de outubro de 2026.</p>
+<p>O notebook tem 8 GB de RAM e gráficos Intel Iris Xe, sem placa de vídeo, e rodamos o teste na bateria. Usamos o modelo pequeno do GreenCube, o Cube 2B (feito sobre o <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), no começo de outubro de 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>O quê</th><th>Resultado</th></tr></thead>
@@ -38,29 +34,21 @@
 </tbody>
 </table></div>
 
-<h2>O que aprendemos</h2>
+<h2>Serve para conversar e estudar</h2>
+<p>De 5 a 7 tokens por segundo em conversas reais é mais ou menos a velocidade de leitura em inglês. O teste curto de inicialização do GreenCube deu 9,3, mas nas conversas reais o número ficou mais baixo. Você vai esperar meio minuto por uma resposta longa, mas ela chega, sem internet e sem limites.</p>
 
-<div class="card g">
-<h3>1. Funciona para conversar e estudar</h3>
-<p>De 5 a 7 tokens por segundo em conversas reais é um pouco abaixo do ritmo de leitura em português (o teste curto de inicialização deu 9,3). Você vai esperar meio minuto por uma resposta longa, mas ela chega, sem internet e sem limites.</p>
-</div>
+<h2>A memória livre é o limite de verdade</h2>
+<p>Com o navegador e outros apps abertos, o notebook tinha só cerca de 1 GB de memória livre. Num dia isso não bastou e a IA nem conseguiu abrir. O modelo pequeno precisa de alguns GB só para ele, então com 8 GB ele tem que dividir com cuidado com tudo o que você tem aberto.</p>
 
-<div class="card p">
-<h3>2. A memória livre é o verdadeiro limite</h3>
-<p>Com o navegador e outros apps abertos, o notebook tinha só cerca de 1 GB livre. Num dia isso não bastou, e a IA nem conseguiu abrir. O modelo pequeno precisa de alguns GB só para ele.</p>
-</div>
-
-<div class="card y">
-<h3>3. Os gráficos integrados deixaram mais lento</h3>
-<p>Neste notebook, os gráficos Iris Xe escreveram a 5,0 tokens por segundo, e o processador a 9,3. Em outro notebook, os dois empataram. Não dá para saber antes, então o GreenCube testa os dois e usa o mais rápido.</p>
-</div>
+<h2>Os gráficos integrados deixaram mais lento</h2>
+<p>Era de esperar que o chip gráfico ajudasse, mas neste notebook os gráficos Iris Xe escreveram a 5,0 tokens por segundo e o processador a 9,3. Em outro notebook os dois ficaram mais ou menos iguais. Não dá para saber de antemão pela ficha técnica, então o GreenCube testa os dois no seu notebook e usa o mais rápido.</p>
 
 <h2>Dicas para um notebook de 8 GB</h2>
 <ol class="steps">
-<li><strong>Feche o navegador</strong> (ou a maioria das abas) antes de começar. Navegadores comem memória.</li>
-<li><strong>Reinicie o notebook</strong> antes de uma sessão longa de estudo. Isso libera a memória que outros apps esqueceram de devolver.</li>
-<li><strong>Faça perguntas mais curtas</strong>, ou uma coisa de cada vez. Respostas mais curtas voltam mais rápido.</li>
-<li><strong>Deixe as imagens de lado.</strong> Elas precisam de uns 7 GB; use um PC maior para isso.</li>
+<li>Feche o navegador, ou a maioria das abas, antes de começar. Navegadores usam muita memória.</li>
+<li>Reinicie o notebook antes de uma sessão longa de estudo. Isso libera memória que outros apps esqueceram de devolver.</li>
+<li>Pergunte uma coisa de cada vez. Respostas mais curtas voltam mais rápido.</li>
+<li>Deixe as imagens para um PC maior. Elas precisam de uns 7 GB só para elas.</li>
 </ol>
 
-<p>Veja quanto outros PCs são mais rápidos: <a href="/blog/can-my-pc-run-ai">medimos {{pcs}} PCs aqui</a>.</p>
+<p>Para ver quanto outros PCs são mais rápidos, <a href="/blog/can-my-pc-run-ai">medimos {{pcs}} PCs aqui</a>.</p>

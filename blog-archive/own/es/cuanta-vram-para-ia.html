@@ -15,51 +15,37 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Respuesta corta:</strong> una IA que cabe entera en la memoria de tu tarjeta gráfica (la VRAM) va rápida. Una que se sale va <strong>más lenta que si no usaras la tarjeta</strong>, y puede fallar. Más pequeña y entera en la tarjeta gana a más grande y a medias.</p></div>
+<div class="answer"><p>Necesitas VRAM suficiente para el modelo entero más unos 1,5 GB para la conversación y Windows. Una IA que cabe entera en la memoria de tu tarjeta gráfica va rápida. Una que se sale puede acabar yendo más lenta que si no usaras la tarjeta, y puede fallar. Más pequeña y entera en la tarjeta gana a más grande y a medias.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>35,6</b><span>tokens por segundo con el modelo entero en la tarjeta</span></div>
-<div class="stat p"><b>5,9</b><span>con una parte fuera de la tarjeta: 6 veces más lento</span></div>
-<div class="stat y"><b>Fallo</b><span>cuando un modelo que apenas cabe se encuentra con un chat largo</span></div>
-</div>
+<p>No lo sacamos de una ficha técnica. Lo medimos en un PC gaming real mientras construíamos GreenCube, la app que hago, y los resultados cambiaron cómo GreenCube elige el modelo.</p>
 
 <h2>La prueba</h2>
-<p>Un sobremesa con una AMD RX 5700 XT (8 GB de VRAM) y 48 GB de RAM. Cargamos un modelo de 12.000 millones de parámetros (Gemma 4 12B, unos 6,7 GB) y pusimos más o menos parte de él en la tarjeta, todo en la misma sesión, en septiembre de 2026.</p>
-
+<p>El PC era un sobremesa con una AMD RX 5700 XT (8 GB de VRAM) y 48 GB de RAM. Cargamos un modelo de 12.000 millones de parámetros (Gemma 4 12B, unos 6,7 GB) y pusimos más o menos parte de él en la tarjeta, todo en una misma sesión, en septiembre de 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Cuánto del modelo estaba en la tarjeta</th><th>Escribe (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Todo</td><td class="spd"><span class="bar" style="--w:49%"></span><b>35,6</b></td></tr>
-<tr><td>28 de sus capas</td><td class="spd"><span class="bar lo" style="--w:8%"></span><b>5,9</b></td></tr>
-<tr><td>20 de sus capas</td><td class="spd"><span class="bar lo" style="--w:6%"></span><b>4,3</b></td></tr>
-<tr><td><em>Para comparar: un modelo más pequeño (Gemma 4 E4B) solo en el procesador</em></td><td class="spd"><span class="bar lo" style="--w:7%"></span><b>5,0</b></td></tr>
-<tr><td><em>Ese modelo pequeño, entero en la tarjeta</em></td><td class="spd"><span class="bar" style="--w:100%"></span><b>72,5</b></td></tr>
+<tr><td>Todo</td><td><b>35,6</b></td></tr>
+<tr><td>28 de sus capas</td><td><b>5,9</b></td></tr>
+<tr><td>20 de sus capas</td><td><b>4,3</b></td></tr>
+<tr><td><em>Para comparar: un modelo más pequeño (Gemma 4 E4B) solo en el procesador</em></td><td><b>5,0</b></td></tr>
+<tr><td><em>Ese modelo más pequeño, entero en la tarjeta</em></td><td><b>72,5</b></td></tr>
 </tbody>
 </table></div>
 
 <h2>Lo que aprendimos</h2>
+<h3>Es casi todo o nada</h3>
+<p>Dejar solo una parte del modelo fuera de la tarjeta lo hizo 6 veces más lento. Con 20 capas en la tarjeta fue más lento que un modelo más pequeño funcionando sin tarjeta. A medias en la tarjeta tienes lo peor de los dos mundos.</p>
 
-<div class="card g">
-<h3>1. Todo o nada</h3>
-<p>Dejar solo una parte del modelo fuera de la tarjeta lo hizo <strong>6 veces más lento</strong>. Con 20 capas en la tarjeta fue más lento que un modelo más pequeño sin usar la tarjeta. A medias es lo peor de los dos mundos.</p>
-</div>
+<h3>El modelo más grande que carga no es el mejor</h3>
+<p>El modelo 12B sí cabía entero en la tarjeta de 8 GB, para una pregunta corta. Al crecer el chat, se cayó todas las veces, porque a la tarjeta casi no le quedaba sitio para la conversación. El modelo más pequeño tenía unos 3 GB de margen e iba a entre 63 y 72 tokens por segundo.</p>
 
-<div class="card p">
-<h3>2. El más grande no es el mejor</h3>
-<p>El modelo 12B sí cabía entero en la tarjeta de 8 GB, para una pregunta corta. Al crecer el chat, falló todas las veces: a la tarjeta casi no le quedaba sitio para la conversación. El modelo más pequeño tenía unos 3 GB de margen e iba a entre 63 y 72 tokens por segundo.</p>
-</div>
-
-<div class="card b">
-<h3>3. Deja margen</h3>
-<p>En una GTX 1650 de 4 GB, un modelo de 4,2 GB se metió a presión en una tarjeta de 3,9 GB, y el primer mensaje ya falló con "no hay memoria suficiente". GreenCube deja ahora unos <strong>1,5 GB de la tarjeta libres</strong> para el chat y para Windows.</p>
-</div>
+<h3>Deja margen</h3>
+<p>En una GTX 1650 de 4 GB, un modelo de 4,2 GB se metió a presión en una tarjeta de 3,9 GB, y el primer mensaje ya falló con "no hay memoria suficiente". Desde entonces, GreenCube deja libres unos 1,5 GB de la tarjeta para el chat y para Windows.</p>
 
 <h2>Cómo elegir un modelo para tu tarjeta</h2>
-<div class="expect">
-<div class="g"><h4>Mira tu VRAM</h4><p>Administrador de tareas &rarr; Rendimiento &rarr; GPU &rarr; Memoria de GPU dedicada.</p></div>
-<div class="b"><h4>Tamaño del modelo + 1,5 GB</h4><p>El archivo del modelo más unos 1,5 GB tienen que caber en ese número.</p></div>
-<div class="y"><h4>Si dudas, más pequeño</h4><p>Un modelo pequeño entero en la tarjeta gana a uno grande a medias.</p></div>
-<div class="p"><h4>O deja que elija la app</h4><p>GreenCube mira tu tarjeta y elige un modelo que quepa con margen.</p></div>
-</div>
-
-<p>Velocidades reales en {{pcs}} PCs, de una GTX 1650 a una RTX 5060: <a href="/blog/es/ia-en-mi-pc">míralas aquí</a>.</p>
+<ol class="steps">
+<li>Mira tu VRAM: Administrador de tareas &rarr; Rendimiento &rarr; GPU &rarr; Memoria de GPU dedicada.</li>
+<li>Suma unos 1,5 GB al tamaño del archivo del modelo. Ese total tiene que caber en tu VRAM.</li>
+<li>Si dudas, elige uno más pequeño. Un modelo más pequeño entero en la tarjeta gana a uno más grande a medias.</li>
+</ol>
+<p>Si prefieres no hacer cuentas, GreenCube lee tu tarjeta y elige un modelo que quepa con margen. Las velocidades reales en {{pcs}} PCs, de una GTX 1650 a una RTX 5060, están en <a href="/blog/can-my-pc-run-ai">¿Puede mi PC ejecutar IA?</a></p>

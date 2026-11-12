@@ -6,47 +6,46 @@ Canonical: https://blog.greencube.app/blog/es/ia-privada
 Published: 2026-10-23  
 Author: Hector Gras
 
-**Respuesta corta:** la IA más privada es **la que funciona en tu propio ordenador**, porque tus chats no llegan al servidor de nadie: no hay nada con lo que entrenar, que guardar ni que revisar. Entre las de la nube, **5 de 9 entrenan con tus chats por defecto** en una cuenta personal gratis; desactivarlo ayuda, pero tus chats siguen viajando a la empresa, y las valoraciones, la revisión humana y los datos antiguos siguen contando.
+La IA más privada es la que funciona en tu propio ordenador. Tus chats no llegan nunca al servidor de nadie, así que no hay nada con lo que una empresa pueda entrenar, que pueda guardar o que puedan revisar personas. Entre los asistentes en la nube, 5 de los 9 que comprobamos entrenan con tus chats por defecto en una cuenta personal gratis. Desactivarlo ayuda, pero tus chats siguen viajando a la empresa.
 
-- **5 de 9** asistentes en la nube entrenan con tus chats por defecto (cuenta personal gratis)
-- **3 años** lo que Gemini guarda los chats que ha leído un revisor humano, aunque los borres
-- **0** chats que una IA local envía a ningún sitio
+Yo hago GreenCube, uno de los asistentes que funcionan en tu PC, así que ten eso en cuenta con mis opiniones. Los datos sobre los demás salen de las páginas de ayuda y de privacidad de cada empresa, enlazadas en la tabla.
 
-## Tres niveles de "privada"
+## Tres niveles de "privado"
 
-1. **No entrena con tus chats.** Bien, pero tus chats siguen guardados en los servidores de la empresa, y allí puede haber gente que lea algunos.
-2. **No guarda tus chats.** Más raro: incluso los modos "temporales" los guardan un tiempo para controlar abusos (los chats temporales de ChatGPT se borran a los 30 días).
-3. **Tus chats no salen de tu PC.** Solo es posible cuando la propia IA funciona en tu ordenador. Nada con lo que entrenar, nada que guardar, nadie que lo lea.
+"Privado" puede significar tres cosas bastante distintas. El nivel más flojo es un asistente que no entrena con tus chats. Está bien, pero los chats siguen guardados en los servidores de la empresa, y allí alguien puede leer algunos.
+
+El siguiente es uno que no guarda tus chats, y eso es más raro de lo que parece. Incluso los modos "temporales" conservan las conversaciones un tiempo para controlar abusos: ChatGPT borra los chats temporales a los 30 días.
+
+El más fuerte es un asistente cuyos chats no salen nunca de tu PC. Eso solo es posible cuando la propia IA funciona en tu ordenador, y entonces no hay nada con lo que entrenar, nada que guardar y nadie que lo lea.
 
 ## Los 10 asistentes, comprobados
 
-Según las páginas de ayuda y privacidad de cada empresa, para una cuenta personal gratis de un adulto. Reglas de entrenamiento comprobadas el 18 de octubre de 2026; la retención de los chats temporales de ChatGPT, el 23 de octubre de 2026.
+Para una cuenta gratis, personal y de adulto. Las reglas de entrenamiento se comprobaron el 18 de octubre de 2026, y la retención de los chats temporales otra vez el 23 de octubre de 2026.
 
-| Asistente | ¿Entrena con tus chats? | Qué más conviene saber | Tus chats van a |
+| Asistente | ¿Entrena con tus chats? | Qué más hay que saber | Tus chats van a |
 | --- | --- | --- | --- |
-| **ChatGPT** | **Sí, por defecto**; desactiva "Improve the model for everyone" | Un pulgar arriba o abajo puede enviar el chat entero a entrenamiento; los chats temporales no se usan y se borran a los 30 días ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) | Servidores de OpenAI |
-| **Gemini** | **Sí, mientras "Keep Activity" esté activado** | Los chats revisados por personas se guardan hasta 3 años, aunque borres la actividad ([Google](https://support.google.com/gemini/answer/13594961?hl=es)) | Servidores de Google |
-| **Claude** | **Solo si lo permites** | Si lo permites, los chats se guardan hasta 5 años ([Anthropic](https://www.anthropic.com/news/updates-to-our-consumer-terms)) | Servidores de Anthropic |
-| **NotebookLM** | **No**, salvo que envíes valoraciones | Con valoraciones, lo que subes puede revisarse y guardarse hasta 3 años ([Google](https://support.google.com/notebooklm/answer/17004255?hl=es)) | Servidores de Google |
-| **Microsoft Copilot** (app nueva) | **No lo dice** | La exclusión solo está descrita para la app antigua ([Microsoft](https://support.microsoft.com/es-es/privacy/microsoft-copilot/overview)) | Servidores de Microsoft |
-| **Perplexity** | **Sí, por defecto** | Desactivar "AI data retention" no borra los datos anteriores ([Perplexity](https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity)) | Servidores de Perplexity |
-| **Mistral Le Chat** | **Sí, por defecto** | Las valoraciones se usan elijas lo que elijas ([Mistral](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training)) | Servidores de Mistral |
-| **DeepSeek** | **Sí, por defecto** (anonimizado) | Desactiva "Improve the model for everyone" ([DeepSeek](https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html)) | Servidores de DeepSeek |
-| **Meta AI** | **Sí** | En la UE puedes oponerte con el formulario de Meta ([Meta](https://about.fb.com/news/2025/04/making-ai-work-harder-for-europeans/)) | Servidores de Meta |
-| **GreenCube** (en tu PC) | **No** | "Nunca recibimos tus chats, archivos, recuerdos ni imágenes"; la búsqueda online, apagada al empezar, envía términos de búsqueda ([privacidad](https://legal.greencube.app/privacy)) | **A ningún sitio: tu PC** |
+| ChatGPT | **Sí, por defecto**; desactiva "Improve the model for everyone" | Un pulgar arriba o abajo puede seguir enviando el chat entero a entrenamiento; los chats temporales no se usan y se borran a los 30 días ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) | Servidores de OpenAI |
+| Gemini | **Sí, mientras "Keep Activity" esté activado** | Los chats revisados por personas se guardan hasta 3 años, aunque borres la actividad ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) | Servidores de Google |
+| Claude | **Solo si lo permites** | Si lo permites, los chats se guardan hasta 5 años ([Anthropic](https://www.anthropic.com/news/updates-to-our-consumer-terms)) | Servidores de Anthropic |
+| NotebookLM | **No**, salvo que envíes valoraciones | Con valoraciones, lo que subes puede revisarse y guardarse hasta 3 años ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)) | Servidores de Google |
+| Microsoft Copilot (app nueva) | **No lo dice** | La exclusión solo está descrita para la app antigua ([Microsoft](https://support.microsoft.com/en-us/privacy/microsoft-copilot/overview)) | Servidores de Microsoft |
+| Perplexity | **Sí, por defecto** | Desactivar "AI data retention" no borra los datos anteriores ([Perplexity](https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity)) | Servidores de Perplexity |
+| Mistral Le Chat | **Sí, por defecto** | Las valoraciones se usan elijas lo que elijas ([Mistral](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training)) | Servidores de Mistral |
+| DeepSeek | **Sí, por defecto** (anonimizado) | Desactiva "Improve the model for everyone" ([DeepSeek](https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html)) | Servidores de DeepSeek |
+| Meta AI | **Sí** | En la UE puedes oponerte con el formulario de Meta ([Meta](https://about.fb.com/news/2025/04/making-ai-work-harder-for-europeans/)) | Servidores de Meta |
+| GreenCube (en tu PC) | **No** | "Nunca recibimos tus chats, archivos, recuerdos ni imágenes"; la búsqueda Online, apagada en cada arranque, envía términos de búsqueda ([privacidad](https://legal.greencube.app/privacy)) | A ningún sitio, se queda en tu PC |
 
-Cada fila en detalle, con cómo desactivarlo en cada una: [qué IA no entrena con tus datos](https://blog.greencube.app/blog/es/ia-que-no-entrena-con-tus-datos).
+Cada fila con más detalle, y cómo desactivar cada cosa, está en [qué IA no entrena con tus chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data). Cuando una página no responde a la pregunta, como pasa con la app nueva de Copilot de Microsoft, hemos puesto "no lo dice". Las políticas cambian a menudo, así que lo volvemos a comprobar cada mes.
 
-## Cómo hacer lo más privada posible una IA en la nube
+## Cómo dejar un asistente en la nube lo más privado posible
 
-- **Desactiva el entrenamiento antes de pegar nada delicado**, no después: lo que ya se usó, usado queda.
-- **No valores los chats delicados.** Un pulgar arriba o abajo puede enviar la conversación entera a revisión, aunque tengas el entrenamiento desactivado.
-- **Usa el modo temporal o incógnito** si lo hay, sabiendo que igualmente se guarda un tiempo.
-- **Usa la cuenta de tu universidad o tu trabajo** si tienes: normalmente quedan fuera del entrenamiento por defecto.
+Desactiva el entrenamiento antes de pegar nada delicado, no después, porque lo que ya se ha usado, usado queda. Y no valores los chats delicados: un pulgar arriba o abajo puede mandar la conversación entera a revisión, aunque tengas el entrenamiento desactivado.
 
-## Una IA privada en tu propio PC
+Si hay un modo temporal o incógnito, úsalo, sabiendo que el chat se sigue guardando un tiempo. Si tienes una cuenta del centro de estudios o del trabajo, usa esa, porque normalmente quedan fuera del entrenamiento por defecto.
 
-Una IA que funciona en local es un archivo en tu ordenador: responde tu propia tarjeta gráfica o tu procesador, así que no hay ninguna empresa en medio. El precio es la velocidad, que depende de tu PC. Medimos GreenCube en 10 PCs reales:
+## Un asistente de IA privado en tu propio PC
+
+Una IA que funciona en local es un archivo en tu ordenador. Tus preguntas las responde tu propia tarjeta gráfica o tu procesador, sin ninguna empresa en medio. Lo que pierdes es velocidad, que depende de tu PC. Medimos GreenCube en 10 PCs reales:
 
 | Tu PC | Escribe |
 | --- | --- |
@@ -54,25 +53,11 @@ Una IA que funciona en local es un archivo en tu ordenador: responde tu propia t
 | Portátil de 16 GB, sin tarjeta gráfica | **14–18** tokens/s |
 | PC gaming con tarjeta de 6 GB o más | **37–76** tokens/s en la mayoría de tarjetas |
 
-#### Gratis y privada
+Si la quieres gratis, LM Studio, Jan, Ollama y GPT4All funcionan en local y no cuestan nada, aunque el modelo lo eliges y lo descargas tú ([12 apps de IA sin internet comparadas](https://blog.greencube.app/blog/best-offline-ai-chatbot)). GreenCube es la que hago yo para quien prefiere saltarse ese paso: es para Windows, cuesta 9,99 € una vez, elige el modelo que encaja con tu PC, lee PDF y fotos y crea imágenes.
 
-LM Studio, Jan, Ollama y GPT4All funcionan en local y no cuestan nada; eliges tú el modelo. [12 apps de IA sin internet comparadas](https://blog.greencube.app/blog/es/mejor-chatbot-ia-sin-internet).
+Para un equipo, una página de chat alojada en vuestro propio servidor mantiene los chats en casa; [Open WebUI y sus alternativas](https://blog.greencube.app/blog/openwebui-alternatives) trata esas opciones.
 
-#### Privada sin configurar nada
-
-GreenCube (Windows, 9,99 € una vez) elige el modelo que encaja con tu PC y además lee PDF y fotos y crea imágenes.
-
-#### Para un equipo
-
-Una página de chat autoalojada en vuestro propio servidor mantiene los chats en casa: [Open WebUI y sus alternativas](https://blog.greencube.app/blog/es/alternativas-a-open-webui).
-
-#### Compruébalo tú
-
-Apaga el wifi y pregúntale algo. Si responde, la IA está en tu PC. [Cómo comprobarlo en Windows](https://blog.greencube.app/blog/es/ia-sin-internet-windows).
-
-## Cómo lo comprobamos
-
-Leímos las páginas de ayuda y privacidad de cada empresa para una cuenta personal gratis de un adulto, no noticias ni reseñas, y enlazamos la página de la que sale cada dato. Cuando una página no responde, como con la app nueva de Copilot, ponemos "no lo dice". Hacemos GreenCube, así que nos ceñimos a datos que cualquiera puede comprobar. Las políticas cambian a menudo; lo volvemos a comprobar cada mes.
+Instales lo que instales, hay una prueba fácil. Apaga el wifi y pregúntale algo. Si sigue respondiendo, la IA está de verdad en tu PC ([más sobre cómo comprobarlo en Windows](https://blog.greencube.app/blog/local-ai-chatbot-windows)).
 
 ## FAQ
 
