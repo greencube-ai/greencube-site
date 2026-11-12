@@ -6,42 +6,40 @@ Canonical: https://blog.greencube.app/blog/ai-to-summarize-notes
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Short answer: it depends on whether you care more about free or about your notes never leaving your computer.** NotebookLM is free, cites where each sentence comes from and doesn't train on your notes, but you upload them to Google. Free ChatGPT and Gemini are fine for quick summaries, but cap your files and train on what you upload unless you switch it off. If you don't want to upload your notes anywhere, or hit limits, you need an AI that runs on your own PC, and we measured it: about 15 minutes to summarize a whole chapter on a normal laptop.
+It depends on which matters more to you: free, or your notes never leaving your computer. NotebookLM is free, cites where each sentence comes from and doesn't train on your notes, but you upload them to Google. Free ChatGPT and Gemini are fine for a quick summary, but they cap your files and train on what you upload unless you switch it off. If you don't want to upload your notes anywhere, you need an AI that runs on your own PC.
 
-- **50** sources per notebook on free NotebookLM
-- **10** files per message on free Gemini, with limits that refresh every 5 hours
-- **0** files an AI on your own PC uploads
+I build one of those, GreenCube, so weigh my opinion with that in mind. We measured how long it takes on a normal laptop: about 15 minutes for a whole chapter, and about 15 seconds for a single question.
 
 ## The options, from their own help pages (October 2026)
 
-For a free, personal account. We haven't measured the quality of each one's summaries; these are their limits and what they do with your uploads, from their own help pages, linked in each row.
+These are the rules for a free, personal account. We haven't measured how good each one's summaries are. What's here is their limits and what they do with your uploads, from their own help pages, linked in each row.
 
 | Tool | Free upload limit | Trains on your uploads? | Works offline? |
 | --- | --- | --- | --- |
 | **NotebookLM** (Gemini Notebook) | 100 notebooks, 50 sources per notebook ([Google](https://support.google.com/notebooklm/answer/16213268?hl=en)) | No, unless you send feedback ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)) | No |
 | **ChatGPT** free | Limited, no number published; stricter than paid plans ([OpenAI](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)) | Yes, by default; can be turned off ([OpenAI](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)) | No |
 | **Gemini** free | Up to 10 files per message, 100 MB each, limits refresh every 5 hours up to a weekly cap ([Google](https://support.google.com/gemini/answer/14903178?hl=en)) | Yes, while Keep Activity is on ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) | No |
-| **An AI on your PC** (GreenCube) | No limit: nothing is uploaded; only your computer's time counts | No: your files never reach us ([GreenCube](https://legal.greencube.app/privacy)) | Yes, once installed |
+| **An AI on your PC** (GreenCube) | No limit: nothing is uploaded, only your computer's time counts | No, your files never reach us ([GreenCube](https://legal.greencube.app/privacy)) | Yes, once installed |
 
-What about other AIs? We checked whether 9 of them train on your chats: [Which AI doesn't train on your chats?](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data)
+For other AIs, we checked whether 9 of them train on your chats in [which AI doesn't train on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Which to pick
 
-### Pick NotebookLM if…
+### NotebookLM
 
-You want it free, with each answer citing the part of your notes it comes from ([Google](https://support.google.com/notebooklm/answer/16179559?hl=en)), and you don't mind uploading your notes to Google. Google says it doesn't train on your uploads unless you rate an answer with thumbs up or down. It needs internet and a Google account.
+Pick it if you want something free, with each answer citing the part of your notes it comes from ([Google](https://support.google.com/notebooklm/answer/16179559?hl=en)), and you don't mind uploading your notes to Google. Google says it doesn't train on your uploads unless you rate an answer with thumbs up or down. It needs internet and a Google account.
 
-### Pick free ChatGPT or Gemini if…
+### Free ChatGPT or Gemini
 
-You only summarize a few pages now and then by pasting the text. Free ChatGPT text chats are no longer limited, but files are, and both train on what you type unless you switch it off (ChatGPT: "Improve the model for everyone"; Gemini: Keep Activity).
+These are fine if you only summarize a few pages now and then by pasting in the text. Free ChatGPT text chats are no longer limited, but files are. Both train on what you type unless you switch it off: in ChatGPT that's "Improve the model for everyone", in Gemini it's Keep Activity.
 
-### Pick an AI on your own PC if…
+### An AI on your own PC
 
-You don't want to upload your notes anywhere, you want to add as many chapters as you need with no limits, or you study where the connection is bad. The cost is time: your computer does the work. The times we measured are below.
+This is the one for you if you don't want to upload your notes anywhere, you want to add as many chapters as you like, or you study where the connection is bad. The cost is time, because your computer does the work.
 
 ## How long summarizing takes on your own PC
 
-We measured it with GreenCube on a normal 16 GB laptop with no graphics card, using the small AI ([Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), on long study documents. The details are in [our PDF study test](https://blog.greencube.app/blog/ai-to-study-from-pdf).
+We measured it with GreenCube on a normal 16 GB laptop with no graphics card, using its smaller AI, Cube 2B (built on [Gemma 4 E2B](https://blog.greencube.app/blog/gemma-4-requirements)), on long study documents. The details are in [our PDF study test](https://blog.greencube.app/blog/ai-to-study-from-pdf).
 
 | What you ask for | Measured time |
 | --- | --- |
@@ -49,20 +47,21 @@ We measured it with GreenCube on a normal 16 GB laptop with no graphics card, us
 | The same for a text almost twice as long | **about 29 min** |
 | One specific question about a long document | **about 15 s** (11 of 12 right) |
 
-A full summary takes a while because the AI has to read every part of the chapter: on a laptop, let it run while you take a break. With a graphics card it's much faster; see your card's measured speed in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai)
+A full summary takes a while because the AI has to read every part of the chapter, so on a laptop it's best to let it run while you take a break. With a graphics card it's much faster; your card's measured speed is in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai)
 
 ## Is there an AI with no file upload limit?
 
-Not in the cloud. Every one we checked caps the free plan: ChatGPT limits uploads without saying how many, Gemini allows up to 10 files per message with 5-hour and weekly limits, and NotebookLM allows 50 sources per notebook and 100 notebooks. Paid plans raise those limits, but they're monthly subscriptions.
+Not in the cloud. Every one we checked caps the free plan. ChatGPT limits uploads without saying how many, Gemini allows up to 10 files per message with 5-hour and weekly limits, and NotebookLM allows 50 sources per notebook and 100 notebooks. Paid plans raise those limits, but they're monthly subscriptions.
 
-An AI that runs on your computer doesn't have that problem, because it uploads nothing: it reads files from your disk. The only limit is how long your PC takes to read them. GreenCube costs €9.99 once, with no limits on messages or files.
+An AI that runs on your computer doesn't have this problem, because it uploads nothing. It reads files straight from your disk, and the only limit is how long your PC takes. GreenCube costs €9.99 once, with no limits on messages or files.
 
-## Make the summary actually useful
+## Getting a summary you can actually use
 
-- **Ask for the format you'll use:** "in 10 bullet points", "dates in a table", "explained like I'm 15".
-- **Ask questions, don't just summarize:** ask for exam-style questions or flashcards on the chapter, and answer them yourself without looking.
-- **Check what matters:** in our test the AI missed 1 question in 12. Anything that will be on the exam, check against your notes.
-- **If they're someone else's notes,** or your school's, check whether you're allowed to upload them to a cloud service first.
+Ask for the format you'll study from, such as a list of points, a table of dates, or a simpler explanation. A summary shaped for revision is far more useful than a shorter copy of the chapter.
+
+Better still, don't stop at a summary. Ask for exam-style questions or flashcards on the chapter and answer them without looking. And check anything that will be on the exam against your notes: in our test the AI missed 1 question in 12.
+
+If the notes are someone else's, or your school's, check that you're allowed to upload them to a cloud service before you do.
 
 ## FAQ
 

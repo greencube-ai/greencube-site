@@ -6,15 +6,13 @@ Canonical: https://blog.greencube.app/blog/ai-without-subscription
 Published: 2026-08-05 · Updated: 2026-10-18  
 Author: Hector Gras
 
-**Short answer: none of the big cloud AIs sells a one-time purchase.** ChatGPT, Claude, Gemini and Perplexity bill every month. To have no monthly fee there are three real routes: stay on a free plan with its limits, use a student offer (Google gives university students a year of AI Plus), or use an AI that runs on your own computer, which you pay for once or get free.
+None of the big cloud AIs sells a one-time purchase. ChatGPT, Claude, Gemini and Perplexity all bill you every month (or every year). If you want no monthly fee, there are three real routes: a free plan with its limits, a student offer, or an AI that runs on your own computer, which you either buy once or get for free.
 
-- **0** big cloud AIs with a one-time purchase
-- **$180** ChatGPT Plus over a 9-month school year
-- **€9.99** GreenCube, once
+I make GreenCube, one of the pay-once options, so read my opinion with that in mind. The prices below come from each company's own site, checked on 18 October 2026.
 
-## What each one costs (official prices, 18 October 2026)
+## What each one costs
 
-Prices each company publishes on its own site, linked in each row. Dollar prices can change with each country's taxes.
+Each row links to the company's own price page. Dollar prices can change with each country's taxes.
 
 | AI | Paid plans | One-time? | A school year (9 months) |
 | --- | --- | --- | --- |
@@ -24,23 +22,27 @@ Prices each company publishes on its own site, linked in each row. Dollar prices
 | **Perplexity** | Pro: $20 a month, or $200 a year. ([Perplexity](https://www.perplexity.ai/hub/pricing)) | No | Pro: **$180** |
 | **GreenCube** (on your PC) | €9.99 (US$9.99) once, with no limits on messages or files. ([GreenCube](https://greencube.app/buy)) | **Yes** | **€9.99** (and 0 every year after) |
 
+For a student, the gap adds up. The main paid plans cost about $180 over a 9-month school year, and the bill keeps coming for as long as you use them.
+
 ## The three real ways to avoid a monthly fee
 
-### 1. A free plan, with its limits
+### A free plan, with its limits
 
-Free ChatGPT text chats are no longer limited, but files, pictures and voice are, and it's starting to show ads in some countries ([we checked the details](https://blog.greencube.app/blog/chatgpt-free-limits)). Free Gemini allows up to 10 files per message, with limits that refresh every 5 hours. Fine for quick questions; for exam prep with your own notes, you'll feel the limits. And most of them train on what you type unless you switch it off ([we checked 9](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data)).
+Free ChatGPT text chats are no longer limited, but files, pictures and voice are, and it's starting to show ads in some countries ([we checked the details](https://blog.greencube.app/blog/chatgpt-free-limits)). Free Gemini allows up to 10 files per message, with limits that refresh every 5 hours.
 
-### 2. A student offer
+That's fine for quick questions. For exam prep with your own notes, you'll feel the limits. Most free plans also train on what you type unless you switch it off ([we checked 9](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data)).
 
-If you're at university and 18 or over, Google offers Google AI Plus free for a year, redeemable until 31 December 2026 ([Google](https://gemini.google/students/)). Watch out: it asks for a payment method when you sign up and, if you don't cancel in time, then charges €4.99 a month. If it fits you, it's a good deal: take it.
+### A student offer
 
-### 3. An AI that runs on your own PC
+If you're at university and 18 or over, Google offers Google AI Plus free for a year, redeemable until 31 December 2026 ([Google](https://gemini.google/students/)). It asks for a payment method when you sign up, and if you don't cancel in time it then charges €4.99 a month. If it fits you, it's a good deal, so take it and put the cancel date in your calendar.
 
-The model is a file on your computer, so there's no server to pay for every month and no usage limits. GreenCube is €9.99 once and picks the AI that fits your PC by itself. There are also free apps for running AI on your computer, like LM Studio, Jan or [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives), where you choose and download the models yourself. They all have the same cost: your computer does the work.
+### An AI that runs on your own PC
 
-## What an AI on your PC does cost: time
+Here the model is a file on your computer, so there's no server to pay for every month and nothing counting your messages. GreenCube is €9.99 once and picks the AI that fits your PC by itself. There are also free apps for running AI on your computer, like LM Studio, Jan or [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives), where you choose and download the models yourself. They all share the same cost: your computer does the work.
 
-With no monthly fee, speed depends on your computer. We measured it with GreenCube on real PCs:
+## What an AI on your PC costs instead: time
+
+With no monthly fee, the speed depends on your computer. We measured it with GreenCube on real PCs:
 
 | Your PC | Writes | One picture |
 | --- | --- | --- |
@@ -48,14 +50,14 @@ With no monthly fee, speed depends on your computer. We measured it with GreenCu
 | 16 GB laptop, no graphics card | **14–18** tokens/s | **2–2.5 min** |
 | Gaming PC with a 6 GB+ card | **37–76** tokens/s on most cards | **8–89 s** |
 
-Your exact card, with its numbers, is in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) And yes: it also generates images with no subscription, if your PC has 16 GB or a graphics card.
+So yes, it also makes images with no subscription, as long as your PC has at least 12 GB of RAM. Your exact graphics card, with its numbers, is in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker)
 
 ## Which suits you?
 
-- **You use AI now and then:** a free plan is enough.
-- **You're at university and want more than the free plan this year:** check Google's AI Plus offer before paying for anything (and note when to cancel).
-- **You use it daily, with your notes, offline, or without uploading anything:** an AI on your PC is cheaper from the first month and has no limits.
-- **You need the most powerful AI for very hard problems:** the biggest cloud AIs are still better at that, and they bill monthly.
+- If you use AI now and then, a free plan is enough.
+- If you're at university and want more than the free plan this year, check Google's AI Plus offer before paying for anything, and note when to cancel.
+- If you use it every day, with your own notes, offline, or without uploading anything, an AI on your PC is cheaper from the first month and has no usage limits.
+- If you need the strongest AI for very hard problems, the biggest cloud AIs are still better at that, and they bill monthly.
 
 ## FAQ
 

@@ -12,23 +12,23 @@
   "faq": [
    {
     "q": "Are GGUF models better than GGML models?",
-    "a": "For current local inference, yes: GGUF's key-value metadata, single-file packaging, and quantization support make it more reliable and better supported than GGML's older list-based format. GGML still works for archival purposes, but new tools rarely add features for it."
+    "a": "For anything you'd run today, yes. GGUF carries the tokenizer and typed metadata in one file and is what current tools support. The model inside isn't smarter because of the format; the difference is compatibility."
    },
    {
     "q": "Can I still use old GGML files?",
-    "a": "Some older tools can still read .ggml files, but active development has moved to GGUF, so support is shrinking. The more reliable path is to find a GGUF version of the same model rather than keeping the original .ggml file in your workflow."
+    "a": "Only with old versions of the software that made them. The practical move is to find a GGUF build of the same model, or a newer model, which will almost certainly be better anyway."
    },
    {
     "q": "Does converting to GGUF reduce model quality?",
-    "a": "Conversion itself does not change quality; the quantization level you choose during conversion does. Picking a lower-precision --outtype flag in the conversion script trades some accuracy for a smaller, faster-loading file."
+    "a": "Converting at full or 16-bit precision doesn't. Quantizing to fewer bits does, a little at 8 bits and more as you go lower. That's a choice you make for size and speed, separate from the format."
    },
    {
     "q": "Do I need to convert models myself to use a tool like GreenCube?",
-    "a": "No. GreenCube downloads its model automatically during setup, so there's no manual conversion, file hunting, or command-line work involved. You pick a model option once, and the app handles the rest."
+    "a": "No. GreenCube picks and downloads a ready-made model for your PC on first launch. There's no conversion or command line involved."
    },
    {
     "q": "Why do some apps need more RAM to run local models than others?",
-    "a": "RAM needs come down to model size and quantization level: a larger or less-compressed model needs more memory to load and run. Guides on matching models to hardware or options like cloud-based GPU desktops are both ways to handle a model that's heavier than your current machine comfortably supports."
+    "a": "Mostly because they run bigger or less compressed models. The model's size and quantization level decide most of the memory it needs, plus some extra for the conversation it's keeping in mind."
    }
   ],
   "words": 2642,
@@ -49,23 +49,23 @@
   "faq": [
    {
     "q": "Which AI works best with PDFs?",
-    "a": "It depends on what you need: ChatGPT and Claude handle broad multi-document reasoning well, Google NotebookLM suits cross-referencing several sources, and GreenCube is the strongest option when the file can't leave your computer. There is no single best answer across every use case."
+    "a": "For broad questions across several public documents, ChatGPT, Claude and NotebookLM are the strongest. When the file can't leave your computer, use a local tool, accepting that it's less capable on very long documents."
    },
    {
     "q": "Is UPDF free to use?",
-    "a": "UPDF is not one of the tools we tested in this comparison, so we can't speak to its specific pricing or features. For the alternatives covered here, several offer free tiers with usage caps, while GreenCube uses a one-time €9.99 payment instead of a subscription."
+    "a": "We haven't tried UPDF, so check its own pricing page for what the free version includes today."
    },
    {
     "q": "What are some alternatives to PDF.ai?",
-    "a": "Strong alternatives include GreenCube for offline privacy, Google NotebookLM for multi-document research, ChatPDF for quick single-file questions, and Adobe Acrobat (AI Assistant) for professional editing alongside AI summaries. Each fits a different kind of document workflow rather than one replacing all the others."
+    "a": "ChatPDF and AskYourPDF for quick single-file questions, NotebookLM for many sources, ChatGPT and Claude for general reasoning, Acrobat or Foxit if you also edit PDFs, and PDFgear or GreenCube if the file has to stay on your PC."
    },
    {
     "q": "What is the best software for creating PDFs?",
-    "a": "Creating PDFs from scratch is a different task from chatting with existing ones, and tools like Smallpdf and iLovePDF focus on conversion and basic creation alongside their AI features. The Wikipedia list of PDF software catalogs a wide range of dedicated PDF creation tools beyond the AI-chat category covered here."
+    "a": "That's a different job from chatting with them. Editors like Acrobat, Foxit and PDFgear, or online converters like Smallpdf, create and convert PDFs. Wikipedia keeps a long list of PDF software."
    },
    {
     "q": "Does GreenCube keep my documents private?",
-    "a": "Yes, GreenCube processes your PDFs and chats entirely on your own computer, and the one-time sign-in only verifies your license rather than uploading any files. This makes it a direct fit for contracts, personal records, or any document you would rather not send to a cloud server."
+    "a": "Yes. It reads your PDFs on your own computer and saves your chats there. The sign-in only checks that you paid; it never sends a chat or a file. You can check by turning the Wi-Fi off after the first download: it keeps working."
    }
   ],
   "words": 2296,
@@ -91,19 +91,19 @@
   "faq": [
    {
     "q": "Is there an AI that is completely private?",
-    "a": "No AI tool is private by default; privacy depends on its architecture and how you configure it. A fully local desktop tool that never connects to the internet for processing, like GreenCube, keeps files on your device, which is the closest practical version of complete privacy available today."
+    "a": "Privacy depends on where the AI runs and how you set it up. The closest you can get is an app that runs on your own computer with nothing sent out for processing, combined with a properly secured machine."
    },
    {
     "q": "Is it legal to use AI to write legal documents?",
-    "a": "Using AI to draft or check legal documents is generally legal, but the rules on review, disclosure, and liability vary by jurisdiction and area of law. A licensed attorney should review anything AI-assisted before it is filed or relied upon, and confidentiality rules may restrict which tools you can use with client information."
+    "a": "Generally yes, but rules on review, disclosure and liability vary by country and area of law. A qualified lawyer should review anything AI-assisted before it's filed or relied on, and confidentiality rules may limit which tools you can use with client information."
    },
    {
     "q": "What is the best AI for documents?",
-    "a": "There is no single best tool; the right choice depends on whether you need offline privacy, hosted collaboration features, or raw reasoning power on complex material. For professionals who need files to stay on their own machine, fully local options such as GreenCube are built specifically for that constraint, while hosted enterprise tools trade some of that boundary for broader features."
+    "a": "It depends on what you need most. Cloud tools are the most capable on complex material; hosted enterprise tools add collaboration and contracts; local apps keep files on your own machine. Pick the one whose trade-off fits the documents you handle."
    },
    {
     "q": "Can I make a private AI?",
-    "a": "You can run private AI locally using open-weight models and local inference software, though this typically requires technical setup and capable hardware. Packaged tools that handle the model download and setup for you, running fully offline after installation, offer a simpler path to the same result without the configuration work."
+    "a": "Yes. Free apps such as LM Studio, Jan and Ollama run open models on your own computer if you're comfortable choosing one. Paid apps like GreenCube do the setup and model choice for you. Either way, after the first download it can run offline."
    }
   ],
   "words": 2202,
@@ -127,23 +127,23 @@
   "faq": [
    {
     "q": "What is the safest AI to use?",
-    "a": "There's no single \"safest\" AI, since safety depends on what the tool is allowed to do, not just where it runs. A local AI with tightly limited permissions and no access to untrusted input is generally safer for sensitive tasks than a cloud tool with broad access, but both need the same core controls: least privilege, sandboxing, and human approval for irreversible actions."
+    "a": "There's no single safest AI, because safety depends on what a tool can read and do as much as where it runs. An app that only answers questions has little to lose; an agent that can run commands or delete files needs tight limits and a human yes for anything you can't undo."
    },
    {
     "q": "Should I use a local AI?",
-    "a": "Local AI is a strong choice if you want your documents and conversations to stay on your own device and you mainly need bounded tasks like drafting, summarizing, or analyzing files. It's less suited to tasks needing frontier-level reasoning or heavy autonomous action without oversight, where a cloud model's stronger guardrails may serve you better."
+    "a": "It's a good choice if you want your chats and documents to stay on your own computer and your tasks are bounded, like drafting, summarising or studying. For the hardest problems or today's news, a cloud AI is stronger."
    },
    {
     "q": "Is local AI harmful to the environment?",
-    "a": "Local AI shifts energy use to your own device instead of a data center, and for occasional personal use that often means a smaller energy footprint than continuous cloud inference, according to IEA's energy and AI analysis. Large-scale training still happens in data centers regardless of how you use the finished model."
+    "a": "Running a model on your PC uses your own electricity while it works, instead of a data centre's. The models themselves were trained in data centres either way."
    },
    {
     "q": "Is local AI free?",
-    "a": "Some local AI tools are free and open source, while others, like GreenCube, charge a one-time fee instead of a subscription. GreenCube costs $9.99 (€9.99), paid once, with no recurring charges."
+    "a": "Some are: LM Studio, Ollama, Jan and GPT4All cost nothing. GreenCube costs \u20ac9.99 (US$9.99) once, with no subscription. Either way you pay a little in electricity while it runs."
    },
    {
     "q": "What are the biggest risks of running AI locally?",
-    "a": "The main risks are prompt injection from untrusted files or web content, code execution through unsafe plugins or tools, tampered or unverified model downloads, and exposed local web interfaces that lack proper authentication, as detailed in OWASP's Top 10 for LLM applications. None of these are unique to local AI, but local setups often lack the monitoring that cloud providers build in by default."
+    "a": "Prompt injection from files or web pages, apps that let the model run code or plugins without tight limits, tampered model downloads, and local servers that web pages can reach. OWASP lists prompt injection first in its Top 10 for LLM applications, and on your own PC nobody else is watching for abuse."
    }
   ],
   "words": 1867,
@@ -167,19 +167,19 @@
   "faq": [
    {
     "q": "Is there any AI that can work offline?",
-    "a": "Yes, several desktop applications run AI models directly on a computer without an internet connection after the initial setup download. These tools trade some of the reasoning power of large cloud models for the ability to keep all data local."
+    "a": "Yes. Several desktop apps run the AI model on the computer itself, so after a one-time download they keep working without internet. They're smaller than the big cloud models and weaker on the hardest reasoning, but your documents stay on your own machines."
    },
    {
     "q": "Which AI is best for a small business?",
-    "a": "The right choice depends on the workflow rather than raw model size: match the tool to your data sensitivity, hardware, and support capacity instead of chasing the largest available model. Comparison points worth checking include local data handling, supported file types, memory needs, response speed, and total cost over time, which a practical offline versus cloud decision guide covers in more depth."
+    "a": "It depends on the task more than the model. Sensitive, well-defined work like summarising contracts or HR files suits an offline app, while customer chat at scale or the hardest reasoning usually belongs in the cloud under a proper data agreement. A small pilot on one low-risk task tells you more than any ranking."
    },
    {
     "q": "Is it possible to run AI offline?",
-    "a": "Yes, local inference lets a model process prompts and documents entirely on a device's own processor and memory, with no data sent to an external server. Setup typically requires downloading the model once, after which the tool works without an internet connection."
+    "a": "Yes. You download the model once and it runs on the computer's own processor and memory, with nothing sent to a server to get an answer. On an ordinary laptop it works, just slower and less capable than the big cloud models."
    },
    {
     "q": "What is the 30% rule in AI?",
-    "a": "Readers encountering this phrase should treat it as informal shorthand rather than an established benchmark and verify the specific context where they saw it."
+    "a": "It isn't a standard rule or benchmark; the phrase is used online for different ideas. Check what the source where you saw it means by it before relying on it."
    }
   ],
   "words": 2483,
@@ -194,7 +194,7 @@
  {
   "slug": "ferpa-compliant-ai",
   "old_url": "https://blog.greencube.app/blog/ferpa-compliant-ai",
-  "title": "7 Step Offline AI for Teachers That Keeps Student Data FERPA Compliant",
+  "title": "7 Step Offline AI for Teachers That Helps Keep Student Data FERPA Compliant",
   "description": "For teachers: run AI on your laptop without cloud uploads. FERPA aware 7 step workflow plus a $9.99 offline app to keep student data local.",
   "date_published": null,
   "date_modified": null,
@@ -204,23 +204,23 @@
   "faq": [
    {
     "q": "Is there an AI tool that is officially certified FERPA compliant?",
-    "a": "No AI vendor can claim an official FERPA certification, because FERPA governs how institutions handle education records rather than certifying specific software. The safer approach is to confirm with your school or district whether a given tool fits their policy, and to favor tools that keep data on your own device rather than sending it to a server."
+    "a": "No. There's no official FERPA certification for software, because the law governs how schools handle education records. Ask your school or district whether a tool fits their policy, and prefer tools that keep data on your own device."
    },
    {
     "q": "Can I use AI on student records without internet access?",
-    "a": "Yes. Offline, on-device AI tools process everything locally, so you can draft feedback or summarize documents without an internet connection once the model is downloaded. The Department of Education's Student Privacy Policy Office advises checking with IT before entering any personally identifiable student information into a tool, offline or not."
+    "a": "Yes, with an app that runs the AI on your computer. Once the model is downloaded, it can summarise or draft with the Wi-Fi off. Whether you're allowed to use it with student records is still your school's decision."
    },
    {
     "q": "What is the difference between inference and training in local AI?",
-    "a": "Inference means the AI answers questions using a model that was already built; training means creating that model from scratch, which takes far more computing power than a laptop has. Local tools, including GreenCube, only perform inference, which is why they can run on a personal computer at all."
+    "a": "Inference is the AI answering with a model that already exists. Training is building that model, which takes far more computing power than a laptop has. Local apps, GreenCube included, only do inference, which is why they run on a personal computer."
    },
    {
     "q": "Do I still need human review if the AI output looks correct?",
-    "a": "Yes. Guidance on AI in education consistently stresses that a person must remain responsible for the final decision, even when the AI's suggestion looks reasonable. Treat every output as a draft to check against the original source before you use it."
+    "a": "Yes. AI can be wrong in ways that read perfectly well. Treat every output as a draft, check it against the source, and keep the final decision with a person."
    },
    {
     "q": "How much RAM do I need to run an image-capable AI model locally?",
-    "a": "Around 8GB of RAM is a practical minimum for models that read images or build study guides from documents, based on typical requirements for consumer-grade local AI tools. Lighter, text-only models run comfortably on less and respond faster."
+    "a": "It depends on the app. GreenCube reads photos and PDFs on a PC with about 8 GB of RAM, slowly; 16 GB is noticeably quicker. Making images, rather than reading them, needs 12 GB."
    }
   ],
   "words": 1879,
@@ -244,23 +244,23 @@
   "faq": [
    {
     "q": "What is the best AI tool for homeschooling?",
-    "a": "There's no single best tool since it depends on whether you need offline privacy, subject-specific tutoring, or general lesson planning help. Families handling sensitive student work often prioritize offline options, while those wanting broad subject coverage lean toward cloud-based assistants. Test a tool on a low-stakes task first, like a worksheet or lesson plan, before relying on it for anything graded."
+    "a": "There isn't one. Cloud chatbots like ChatGPT and Gemini are the most capable, and offline apps keep your child's work at home. Give two of them the same lesson plan to write and keep the one you'd actually use."
    },
    {
     "q": "What is the 30% rule for AI?",
-    "a": "A more reliable guideline comes from the PROSPER framework, which recommends \"titrated use,\" limiting AI to tasks that support a student's thinking rather than replace it entirely."
+    "a": "There's no official 30% rule. The phrase gets used for home-made rules of thumb about how much of a piece of work AI may produce. In your homeschool you set the rule, and \"AI gives hints, not answers\" is easier to keep than a percentage."
    },
    {
     "q": "Is there a free AI tool for schools?",
-    "a": "Several general-purpose AI chatbots offer free tiers that schools and homeschool families can use for basic tasks like drafting lesson ideas or practice questions. Free tiers usually come with usage limits and send data to the provider's servers, so check the privacy terms before using them with student work."
+    "a": "Most big chatbots have a free tier, which is fine for drafting lesson ideas. Free tiers come with usage limits and send what you type to the company's servers, so check the privacy settings before using them with your child's work."
    },
    {
     "q": "What is the school version of ChatGPT?",
-    "a": "Some AI providers offer education-focused versions of their chatbots with added classroom controls, but these are built by the same companies as their consumer products. For homeschools wanting more control over student data, a privacy-focused or offline tool is a more direct way to limit what leaves your computer."
+    "a": "Some AI companies sell education versions with extra admin controls, usually bought by a school or university rather than a family. For a homeschool the useful question is the same as for any tool: where does your child's work end up?"
    },
    {
     "q": "How much supervision does a child need when using AI?",
-    "a": "UNESCO guidance recommends children under 13 use generative AI only with direct adult supervision, not independently. Older students can use it with more independence once they understand the tool's limits and your family's privacy rules."
+    "a": "UNESCO's guidance puts the minimum age for using generative AI in class at 13, so younger children should use it only with an adult beside them. Older children can work more on their own once they know your family's rules."
    }
   ],
   "words": 1965,
@@ -284,19 +284,19 @@
   "faq": [
    {
     "q": "What makes a tune a RAG?",
-    "a": "RAG isn't a tuning method at all, it's a retrieval step added at inference time, so the generator's weights stay untouched. What makes a system \"RAG\" is that it fetches external context and feeds it into the prompt before generating an answer, as described in the original RAG paper."
+    "a": "Nothing, because RAG isn't a kind of tuning. It's a retrieval step at question time: the system fetches relevant text and adds it to the prompt, and the model's weights stay exactly as they were."
    },
    {
     "q": "What is better than RAG?",
-    "a": "Neither RAG nor fine-tuning is universally better, they solve different problems. Research comparing the two found that RAG tends to outperform fine-tuning on low-frequency factual knowledge, while fine-tuning helps more with consistent behavior, and combining both often beats either alone."
+    "a": "Neither RAG nor fine-tuning is better in general; they fix different problems. RAG is usually stronger for adding knowledge, especially facts that change or are rarely seen, while fine-tuning is better for behaviour. Many systems use both."
    },
    {
     "q": "Is fine-tuning still relevant?",
-    "a": "Yes. Parameter-efficient methods like LoRA make fine-tuning practical for behavior change at lower compute cost, and AWS recommends it for tasks like summarization or enforcing consistent output formats where retrieval alone won't help."
+    "a": "Yes. Methods like LoRA make it cheap enough for behaviour changes, such as a fixed output format, a consistent tone or a narrow task, where retrieval alone doesn't help."
    },
    {
     "q": "Can I run a private AI without RAG or fine-tuning?",
-    "a": "Yes, a local offline assistant like GreenCube handles private chat and document analysis without either technique, since it works entirely on your own computer for a one-time $9.99 payment. It's a different tool for a different job: personal privacy and offline access rather than enterprise-scale knowledge retrieval."
+    "a": "Yes. A local AI app runs a ready-made model on your own computer, and you can give it your documents directly. GreenCube is one for Windows (\u20ac9.99 once): it reads PDFs, Word files and photos on your PC and works offline after the first download."
    }
   ],
   "words": 1850,
@@ -320,23 +320,23 @@
   "faq": [
    {
     "q": "How can I convert a PDF into a study guide?",
-    "a": "Upload or OCR the PDF, then ask an AI tool for a structured outline with section summaries, key terms, and page citations rather than one generic summary. Follow up by generating flashcards and 10 to 20 practice questions with a separate answer key, then verify any high-stakes claim against the original PDF text."
+    "a": "Open the PDF in an AI tool that reads files and ask for an outline with section summaries, key terms and page references, not one generic summary. Then ask for flashcards and 10 to 20 practice questions with a separate answer key, and check the important claims against the PDF."
    },
    {
     "q": "What is the best way to space out study sessions?",
-    "a": "There's no single fixed rule, and rigid formulas you may see floating around aren't backed by the cited research. What's well supported is spacing out review sessions over days rather than cramming in one sitting, since distributed retrieval practice reliably beats single-session review for long-term retention."
+    "a": "There's no single correct formula. What's well supported is spreading reviews over several days and testing yourself, rather than one long session of rereading."
    },
    {
     "q": "Can ChatGPT create a study guide?",
-    "a": "Yes, a chatbot can generate an outline, summaries, and practice questions from pasted text or an uploaded PDF, though output quality depends heavily on how specific your prompt is. Always check generated claims against the source document, since AI summarizers can state unsupported details confidently."
+    "a": "Yes, from pasted text or an uploaded PDF, and the more specific your request, the better the result. Check what it produces against the source, since it can state unsupported details confidently."
    },
    {
     "q": "How do I create a study guide PDF I can print or export?",
-    "a": "Generate your outline, glossary, and practice questions inside your AI tool, then export the text to a document format you can format and print, or paste flashcards into a spaced-repetition app. Keeping a dated, exportable copy also makes it easier to track edits if you regenerate sections later."
+    "a": "Generate the outline, terms and questions, then put them in a document you can format and print, or ask an AI app that makes documents to lay it out for you. Keep a dated copy so you can track changes."
    },
    {
     "q": "How do I check an AI-generated study guide for errors?",
-    "a": "Require every nontrivial claim to include a page reference, then generate a few question-answer pairs from the summary and confirm the answers against the original PDF. This QA-pair method comes from hallucination mitigation research and catches most unsupported or incorrect statements before you study from them."
+    "a": "Ask for a page reference on every important claim, then quiz the AI on the chapter and look up each answer in the PDF. Delete anything you can't find on the page."
    }
   ],
   "words": 2357,
@@ -362,23 +362,23 @@
   "faq": [
    {
     "q": "Is GreenCube really a Meta AI alternative if it works offline?",
-    "a": "Yes, in the sense that it solves the same job (private AI assistance for chat and documents) without relying on a cloud server. GreenCube runs fully on your Windows PC and never sends chats or files anywhere, which is a different privacy model than a cloud-based assistant."
+    "a": "Yes, if what you want is an assistant that doesn't send your chats to Meta. GreenCube does the same everyday jobs (chat, documents, study help) on your own Windows PC and keeps your chats there; it's smaller than Meta's cloud model, so weaker on the hardest questions."
    },
    {
     "q": "How much does GreenCube cost and is there a refund?",
-    "a": "GreenCube costs $9.99 (or €9.99), paid once with everything included and no subscription. It also comes with a 14-day refund window if it does not work out for you."
+    "a": "\u20ac9.99 (US$9.99), paid once, with everything included and no subscription. If it doesn't work out, there's a 15-day refund: email support@greencube.app."
    },
    {
     "q": "Does GreenCube require an internet connection to work?",
-    "a": "No, GreenCube runs entirely offline once installed and the model is downloaded. An internet connection is only needed briefly at setup to download the model and to sign in with Google or Microsoft for one-time license verification."
+    "a": "Only at the start. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it works offline, and goes online only for updates or if you switch Online on."
    },
    {
     "q": "Can GreenCube read images and PDFs?",
-    "a": "Its All-rounder model can read images and help build study guides or documents, though it needs about 8GB of RAM and runs slower than the text-only option. The Quick model is plain text only and does not read images."
+    "a": "Yes. It reads PDFs, Word files and photos on your PC without uploading them, and it picks the model for your computer, so there's nothing to set up."
    },
    {
     "q": "Will GreenCube work on my older laptop?",
-    "a": "GreenCube is designed to run on ordinary Windows hardware, and slower computers will still answer and build documents, just at a slower pace. Choosing the lighter Quick model is usually the better fit if your machine has limited RAM."
+    "a": "Probably, if it runs Windows 10 or 11 and has about 8 GB of memory. Everything works on an 8 GB laptop with no graphics card, just slower: about reading speed, 5 to 7 tokens a second on the PCs we tested."
    }
   ],
   "words": 2240,
@@ -394,7 +394,7 @@
   "slug": "monica-ai-alternatives",
   "old_url": "https://blog.greencube.app/blog/monica-ai-alternatives",
   "title": "Keep Your Data Local: Monica AI Alternatives, $9.99 Offline Option",
-  "description": "Compare Monica AI alternatives by workflow and privacy. See GreenCube s one time $9.99 offline app, BYOK browser extensions, and fast inline editors.",
+  "description": "Compare Monica AI alternatives by workflow and privacy. See GreenCube's one time $9.99 offline app, BYOK browser extensions, and fast inline editors.",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -403,15 +403,15 @@
   "faq": [
    {
     "q": "Is Monica AI completely free?",
-    "a": "Monica AI offers a free tier, but reviews describe usage caps that push regular users toward paid plans fairly quickly. Check the current terms directly on its site, since caps and pricing shift over time."
+    "a": "Monica has a free plan, but it limits how much you can use it, so regular users usually end up on a paid plan. Limits and prices change, so check its site for the current terms."
    },
    {
     "q": "What are the top AI tools right now?",
-    "a": "There's no single agreed-on top three, since the right tool depends on the job: Claude by Anthropic and Perplexity lead for long-context reasoning and research, while ChatGPT remains a common general-purpose choice. For privacy-first offline use, GreenCube fills a different niche entirely, since it runs locally instead of through the cloud."
+    "a": "There's no single top list, because it depends on the job. Claude is strong with long documents, ChatGPT is the all-rounder most people know, and Perplexity is built for web answers with sources. If you want your text to stay on your own computer, you need an app that runs the AI locally, such as GreenCube."
    },
    {
     "q": "What are some explicit AI apps?",
-    "a": "This article covers productivity and writing assistants only, not adult content tools, so it does not cover that category."
+    "a": "This article covers productivity and writing assistants only, not adult content tools."
    },
    {
     "q": "Are there illegal AI sites I can access?",
@@ -419,7 +419,7 @@
    },
    {
     "q": "How is GreenCube different from browser-based alternatives?",
-    "a": "GreenCube runs entirely on your own computer instead of routing prompts through a browser extension or cloud server, so chats and documents never leave your device. It costs 9.99 EUR / 9.99 USD once, with no subscription and a 14-day refund window."
+    "a": "GreenCube runs the AI on your own Windows PC instead of sending your text through a browser extension to a server, so your chats and files are saved on your PC. You sign in once to check you paid and the first launch downloads the AI; after that it works offline. It costs \u20ac9.99 once with a 15-day refund, but it can't act on the page you're reading the way an extension can."
    }
   ],
   "words": 2201,
@@ -445,19 +445,19 @@
   "faq": [
    {
     "q": "What is LLM model quantization?",
-    "a": "LLM quantization converts a model's weights, and often its activations, from 16-bit floating point into lower-bit formats like INT8 or INT4. This shrinks memory use and speeds up inference, at some cost in accuracy that depends heavily on the method and bitwidth chosen."
+    "a": "Storing a model's weights, and sometimes its activations, with fewer bits (8 or 4 instead of 16), so it gets smaller and faster for some loss in accuracy."
    },
    {
     "q": "What is the best quantization method for LLMs?",
-    "a": "There is no single best method: it depends on hardware and workload. Broad benchmarking found W8A8-FP is close to lossless on FP8-capable hardware, while GPTQ or AWQ at 4-bit weight-only remain the standard choice for memory-constrained local inference."
+    "a": "It depends on your hardware. On GPUs with FP8 support, 8-bit FP8 is close to lossless. For tight memory, 4-bit weight-only with GPTQ or AWQ is the standard choice, and on a home PC that usually means a Q4_K_M or Q5_K_M GGUF file."
    },
    {
     "q": "When should you quantize a model?",
-    "a": "Quantize when memory, bandwidth, or latency limits are blocking deployment, such as running a large model on a single consumer GPU or reducing serving costs at scale. If you have headroom on all three, quantization adds risk without a clear payoff."
+    "a": "When memory, speed or cost is what stops you running it, for example fitting a model on a single consumer GPU or a laptop. If you have plenty of room on all three, quantizing adds risk for little gain."
    },
    {
     "q": "How do I quantize a model?",
-    "a": "Export the model at full precision, choose a PTQ method suited to your bitwidth and hardware, build a calibration set that mirrors your real traffic, then run a maintained tool like AutoGPTQ or llmcompressor. Validate with perplexity and task-specific benchmarks before rolling the quantized model into production."
+    "a": "Start from the full-precision model and note its scores, decide what drop you'll accept, pick a method, build a calibration set like your real traffic, quantize with a maintained tool such as llm-compressor or llama.cpp's quantize tool, then compare with the original before you ship."
    }
   ],
   "words": 2711,
@@ -481,19 +481,19 @@
   "faq": [
    {
     "q": "Is Gemma better than Llama?",
-    "a": "Neither family wins universally: Gemma checkpoints often lead on instruction-following benchmarks and native multimodal support, while Llama 70B variants tend to score higher on coding tasks. The right choice depends on your hardware limits and whether your workload leans toward reasoning, coding, or image input."
+    "a": "Neither wins everywhere. Gemma is the better start on modest hardware and when you need image input; Llama has the larger ecosystem of fine-tunes and goes bigger at the top, which helps on code and long reasoning. Test both on your own prompts and your own card."
    },
    {
     "q": "Is Gemma 3 free to use?",
-    "a": "Gemma 3 model weights are available for download under Google's own model terms, which you can review directly in each model card before committing to a commercial use case. Costs come from the hardware you run it on, not a licensing fee for the model itself in typical use."
+    "a": "Yes. The weights are free to download under Google's Gemma Terms of Use, which allow commercial use with a list of prohibited uses; Gemma 4 moved to the standard Apache 2.0 licence. Your cost is the hardware you run it on."
    },
    {
     "q": "Is Google Gemma the same as Gemini?",
-    "a": "No, Gemma and Gemini are different products from Google. Gemma is a family of open-weight models you can download and run yourself, including on local hardware, while Gemini is Google's cloud-hosted assistant accessed through Google's own apps and APIs."
+    "a": "No. Gemini is Google's cloud assistant and family of hosted models, used through Google's apps and API. Gemma is a family of open models built from the same research that anyone can download and run offline on their own PC."
    },
    {
     "q": "Which Gemma is best for coding?",
-    "a": "Among the checkpoints covered here, Gemma 4's 12B to 31B tiers report strong LiveCodeBench results on their vendor model card, making that family a reasonable Gemma option for coding work. For workloads where coding accuracy is the top priority above everything else, aggregated testing still shows larger Llama checkpoints holding an edge on coding-specific benchmarks."
+    "a": "Bigger is usually better for code in both families, so pick the largest Gemma that fits in your graphics memory. If code is your main job, also look at models trained specifically for it."
    }
   ],
   "words": 1987,
@@ -516,19 +516,19 @@
   "faq": [
    {
     "q": "Does ChatGPT have a lifetime subscription?",
-    "a": "No. ChatGPT is sold on recurring monthly plans, not as a one-time lifetime purchase. Buyers looking for a true one-time cost need to look at dedicated lifetime-deal software instead."
+    "a": "No. ChatGPT is free with limits, or a monthly subscription; there's no one-time plan."
    },
    {
     "q": "Is there a free AI with unlimited use?",
-    "a": "Several AI tools offer free tiers, but they typically cap usage, features, or model quality compared to paid versions. A one-time purchase like GreenCube or a marketplace lifetime deal is aimed at people who have outgrown those free limits."
+    "a": "Free plans of cloud AIs usually cap how much you can use, because every message costs the seller money. An AI that runs on your own PC has no server bill behind it, so free local apps like Ollama and LM Studio, and GreenCube at \u20ac9.99 once, have no message limits."
    },
    {
     "q": "How much does a lifetime subscription to 1min.AI cost?",
-    "a": "1min.AI's lifetime pricing is set by the marketplace running the deal at any given time rather than a single fixed price, so it varies. Check the current listing on the marketplace itself before assuming a specific figure."
+    "a": "It depends on the marketplace selling it and changes over time, so check the current listing. Access usually comes as a monthly credit allowance rather than open-ended use."
    },
    {
     "q": "What is the best AI software for free?",
-    "a": "There is no single best free AI tool since it depends on whether you need writing help, image generation, or document analysis, and free tiers usually come with usage caps. If you plan to rely on AI daily, a fixed-price option such as GreenCube can cost less over time than staying on a free tier that eventually pushes you toward a paid subscription."
+    "a": "It depends on the job, and most free cloud plans come with usage caps. If you use AI often, paying once for an app that runs on your PC, like GreenCube, can cost less over time than a subscription."
    }
   ],
   "words": 1535,
@@ -554,23 +554,23 @@
   "faq": [
    {
     "q": "Which AI Is Stronger Than Claude?",
-    "a": "No AI assistant is universally stronger than Claude across every task. Independent 2026 benchmark comparisons show flagship cloud models trading wins depending on the specific reasoning or coding task tested, and Claude's flagship models rank highly across most of them."
+    "a": "None is stronger at everything. The big cloud models trade places depending on the task, so try a few on your own work. Anything that runs on a laptop, GreenCube included, is weaker than Claude on hard problems."
    },
    {
     "q": "Which Is Better, Claude or Grok?",
-    "a": "Both are cloud-hosted frontier models, and which performs better depends heavily on the task category, coding, reasoning, or general chat. Benchmark writeups from 2026 show the gap between them varies by workload rather than one model dominating across the board."
+    "a": "It depends on the task. Both are large cloud models and which one does better changes with the kind of work, so test both on a few real questions from your own work before you pay."
    },
    {
     "q": "Is Grok Super Heavy Better Than Claude?",
-    "a": "It depends on the specific benchmark category rather than a flat yes or no. Both are large cloud models competing on similar reasoning and coding tasks, and results shift depending on which tasks are tested."
+    "a": "There's no flat yes or no. Results change with the task being tested, so the honest way to choose is to try both on your own work before paying for a top plan."
    },
    {
     "q": "What Is More Powerful, ChatGPT or Claude?",
-    "a": "Neither consistently beats the other across every category. Both are frontier cloud models with different strengths, and the more useful question for most people is whether they need that level of cloud-scale power at all, or whether a private, offline tool like GreenCube covers their actual day-to-day use."
+    "a": "Neither beats the other at everything; both are top cloud models with different strengths. The more useful question for many people is whether every task needs that much power, or whether a local app covers the everyday work."
    },
    {
     "q": "Does GreenCube Work Without an Internet Connection?",
-    "a": "Yes. After the one-time Google or Microsoft sign-in used to verify your license, GreenCube's chats and document analysis run entirely offline on your own computer."
+    "a": "Yes, after setup. It needs internet once to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it works offline, and only goes online for updates or if you switch on Online for web lookups."
    }
   ],
   "words": 2273,
@@ -595,23 +595,23 @@
   "faq": [
    {
     "q": "What hardware do I need for AI?",
-    "a": "For local AI, the essentials are a GPU with at least 8GB of VRAM (or a Mac with 16GB or more of unified memory), 32GB or more of system RAM, and a fast NVMe drive for model storage. The exact target scales with model size, and VRAM tiers map fairly predictably to model sizes, from 8GB for small 7B models up to 24GB or more for 30B-class models."
+    "a": "For small models, any recent PC with 8 GB of RAM will do, slowly. For a comfortable experience with mid-size models, a graphics card with 8 to 16 GB of VRAM (or a Mac with 16 GB or more), 32 GB of system RAM and an NVMe SSD. Bigger models need 24 GB of VRAM or more."
    },
    {
     "q": "What is the best AI tool to run locally?",
-    "a": "There's no single best tool since it depends on your hardware and comfort level. Ollama and LM Studio suit most people who want a simple setup, vLLM fits server-grade NVIDIA workstations, and GreenCube offers a turn-key desktop option with no configuration for readers who want offline privacy without managing model files themselves."
+    "a": "It depends on your comfort level. Ollama and LM Studio suit people happy to pick models, vLLM suits NVIDIA servers, and GreenCube suits people who want it set up for them."
    },
    {
     "q": "Which CPU do I need for local AI?",
-    "a": "For GPU-based inference, a mid-range 6 to 8 core CPU is sufficient since the GPU handles the actual computation. If you're running models without a GPU, on a CPU-only setup with a tool like llama.cpp, prioritize core count and memory bandwidth instead, since the CPU becomes the primary bottleneck."
+    "a": "With a graphics card, a mid-range 6 to 8 core CPU is enough. Without one, more cores and faster memory help, because the CPU does all the work."
    },
    {
     "q": "Can I run an AI model locally without a dedicated GPU?",
-    "a": "Yes, smaller quantized models run acceptably on CPU-only systems or older laptops with as little as 2 to 5GB of free memory, though response speed will be noticeably slower than on a GPU. GreenCube's Quick model, built on Llama 3.2 3B at about 2GB, is designed specifically for this kind of modest hardware."
+    "a": "Yes. Small quantized models run on the processor alone. On the laptops we tested, GreenCube writes at about reading speed with 8 GB of RAM and two to three times faster with 16 GB."
    },
    {
     "q": "How much does GreenCube cost?",
-    "a": "GreenCube is a one-time purchase for $9.99, with everything included and no subscription. You can buy it directly on the GreenCube buy page."
+    "a": "\u20ac9.99 (US$9.99), paid once, with everything included and no subscription. There's a 15-day refund if it doesn't suit your PC."
    }
   ],
   "words": 3369,
@@ -635,23 +635,23 @@
   "faq": [
    {
     "q": "Is GreenCube Really Offline, or Does It Send Data Anywhere?",
-    "a": "GreenCube runs entirely on your computer, and your chats and documents never leave the machine. The only online action is a one-time Google or Microsoft sign-in used solely to verify your license."
+    "a": "It works offline after setup, and your chats, files and images stay on your PC. It goes online to sign in once with Google or Microsoft (only to check you paid), to download the AI on first launch, for updates, and for web lookups only if you switch Online on."
    },
    {
     "q": "How Much Does GreenCube Cost?",
-    "a": "GreenCube is a one-time purchase of $9.99, with no subscription and no recurring fees. Everything, including unlimited use, is included in that single payment."
+    "a": "EUR 9.99 (US$9.99), paid once, with no subscription and no message limits. Everyone gets everything, and there's a 15-day refund."
    },
    {
-    "q": "Which GreenCube Model Should I Pick, Quick or All-Rounder?",
-    "a": "Choose Quick if you mainly want fast plain-text conversation and have a lighter computer, since it's around 2GB and can't read images. Choose All-rounder if you need document and image analysis and have roughly 8GB of RAM available, since it runs slower but handles more."
+    "q": "Which GreenCube Model Will My PC Use?",
+    "a": "GreenCube picks it for you: Cube 2B on smaller PCs, Cube 4B on PCs with a graphics card, both built on Google's Gemma. It needs Windows 10 or 11 and about 8 GB of memory."
    },
    {
     "q": "Is ChatGPT Better Than GreenCube for Every Task?",
-    "a": "No. ChatGPT and similar cloud tools have an edge for very long documents, complex code reasoning, and access to the newest models, but GreenCube keeps everything local and costs nothing ongoing. Most everyday writing, studying, and document review works well entirely offline."
+    "a": "No, but it's better at the hardest ones: long reasoning, serious coding, very long documents and anything that needs the live web. GreenCube suits everyday studying, writing and work on files you'd rather keep on your PC."
    },
    {
     "q": "Does GreenCube Work on Mac and Windows?",
-    "a": "GreenCube runs on Windows 10 and 11 only, not on Mac. Linux is not supported."
+    "a": "No, only Windows. GreenCube runs on Windows 10 and 11, and there's no Mac or Linux version."
    }
   ],
   "words": 1780,
@@ -675,19 +675,19 @@
   "faq": [
    {
     "q": "What Exactly Does Ollama Do?",
-    "a": "Ollama runs open-weight large language models directly on your computer through a command-line tool, a desktop app, and a local REST API. It handles downloading, quantizing behind the scenes, and serving models like gpt-oss, Qwen, and Gemma so you can chat with them or call them from your own scripts."
+    "a": "It downloads open models and runs them on your computer, through a command-line tool, a desktop app and a local API. You can chat with a model directly or call it from your own scripts."
    },
    {
     "q": "What Is Ollama vs ChatGPT?",
-    "a": "Ollama runs models locally on your own hardware, while ChatGPT is a cloud service running on OpenAI's servers. Ollama trades some raw model capability for privacy and no per-token cost, since your prompts never leave your device unless you opt into Ollama's own cloud models."
+    "a": "ChatGPT is a cloud service: your messages go to OpenAI's servers. Ollama runs models on your own hardware, so local chats stay on your PC and cost nothing per message. The trade-off is that the models you can run at home are smaller and less capable than the one behind ChatGPT."
    },
    {
     "q": "Is Ollama Fully Free?",
-    "a": "Ollama itself is free and open source under an MIT license, and local models cost nothing beyond your own electricity and hardware, according to its Wikipedia entry. Cloud models require an Ollama account and may carry their own usage terms since they run on Ollama's hosted infrastructure rather than your machine."
+    "a": "Ollama itself is free and open source under the MIT licence, and running local models costs nothing beyond your electricity. Its cloud models need an Ollama account and come with their own terms."
    },
    {
     "q": "What Are the Disadvantages of Ollama?",
-    "a": "The biggest drawbacks are hardware limits and a capability gap versus top cloud models: large models need serious RAM or GPU memory, and even well-tuned local models trail frontier cloud systems on complex reasoning. Running Ollama's background service continuously can also drain battery and use CPU or GPU resources you'd rather save, per AMD's own setup guidance."
+    "a": "Bigger models need a lot of memory, local models trail the top cloud AIs on hard reasoning, and you manage models, disk space and settings yourself, mostly from a terminal. The background service also uses memory while a model is loaded."
    }
   ],
   "words": 2159,
@@ -698,8 +698,8 @@
  {
   "slug": "gemini",
   "old_url": "https://blog.greencube.app/blog/gemini",
-  "title": "Keep Gemini Local: GreenCube Offline AI for Nontechnical Windows Users",
-  "description": "Gemini here means GreenCube, a $9.99 one-time offline AI for Windows that keeps chats and files local. Setup steps, privacy hardening, and troubleshooting.",
+  "title": "Keep Gemini Local? Run Gemma Offline with GreenCube on Windows",
+  "description": "Gemini is Google's cloud AI and can't run on your PC. GreenCube runs Google's open Gemma models offline on Windows for $9.99 once. Setup, privacy and fixes.",
   "date_published": "2026-09-20T11:03:56.268Z",
   "date_modified": "2026-09-20T11:03:56.268Z",
   "language": "en-US",
@@ -707,24 +707,24 @@
   "cover_alt": "Decorative offline AI privacy title card",
   "faq": [
    {
-    "q": "What Does \"Gemini\" Mean in This Context?",
-    "a": "In this article, Gemini refers to GreenCube, a downloadable desktop AI that runs fully offline on Windows. It is not related to any cloud-based assistant; every chat and file stays on your own machine."
+    "q": "Can I run Google's Gemini on my own PC?",
+    "a": "No. The Gemini you chat with runs on Google's servers and needs the internet. What you can run locally is Gemma, Google's open model family built from the same research, and GreenCube's Cube models are built on it."
    },
    {
     "q": "How Much Does GreenCube Cost?",
-    "a": "GreenCube is a one-time purchase of $9.99, with no subscription and no recurring fees. It includes a 14-day refund window if it doesn't work out for you."
+    "a": "\u20ac9.99 (US$9.99), paid once, with no subscription and no message limits. If it doesn't work out, email support@greencube.app within 15 days for a full refund."
    },
    {
     "q": "Can GreenCube Read PDFs and Images?",
-    "a": "Yes, but only with the All-rounder model (Gemma 4 E4B), which needs roughly 8GB of RAM. The Quick model (Llama 3.2 3B) is faster but handles plain text only and cannot read images or documents."
+    "a": "Yes. It reads PDFs, Word files and photos on any PC it runs on, from about 8 GB of memory up. Making pictures, rather than reading them, needs 12 GB."
    },
    {
     "q": "Does GreenCube Need the Internet to Work?",
-    "a": "Only for two things: the initial model download and the one-time sign-in to verify your license. After that, chat and document analysis run completely offline."
+    "a": "Only at the start: it needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it works offline, and goes online only for updates or if you switch Online on for web lookups."
    },
    {
     "q": "Is Local AI Actually More Private Than Cloud AI?",
-    "a": "Local inference keeps your prompts and files off remote servers, removing the biggest privacy risk in cloud AI: third-party logging of what you type. It still requires basic operating system hygiene, like managing cloud sync and clipboard history, to stay fully private."
+    "a": "Your chats and files stay on your PC instead of going to a company's servers, which removes the biggest privacy risk. Their privacy then depends on your PC, so use a password, turn on device encryption and check what OneDrive or other backups sync."
    }
   ],
   "words": 2852,
@@ -750,23 +750,23 @@
   "faq": [
    {
     "q": "Is GreenCube Really Fully Offline?",
-    "a": "Yes. Once you download your chosen model during setup, the app runs without needing an internet connection for chat or document analysis. The only online action is the one-time sign-in used to verify the license."
+    "a": "After setup, yes. It needs the internet once to sign in (only to check you paid) and to download the AI on first launch; after that chats and documents work with the Wi-Fi off. It only goes online again for updates, or if you switch Online on for web lookups."
    },
    {
     "q": "Which Is Better, Ollama or GreenCube, for a Beginner?",
-    "a": "For someone non-technical who wants a working app in minutes, GreenCube is the easier choice since it installs like normal software with no command-line setup. Ollama fits people comfortable managing models and configuration through a terminal."
+    "a": "If you don't want to set anything up, GreenCube is the easier start: it installs like normal software and picks the model for your PC. Ollama is free and suits people who are happy to choose and manage models themselves."
    },
    {
     "q": "Can GreenCube Read Images and PDFs?",
-    "a": "Yes, but only with the larger model, which requires more RAM to run smoothly. The smaller model is faster but handles plain text only and cannot read images."
+    "a": "Yes. It reads PDFs, Word files and photos on your PC, and the files aren't uploaded anywhere."
    },
    {
     "q": "Does GreenCube Work on Mac and Windows?",
-    "a": "The app supports Windows 10 and 11 only, with no Mac or Linux version."
+    "a": "No, only on Windows 10 and 11. There's no Mac or Linux version; of the two, Ollama is the one that runs on Mac and Linux."
    },
    {
     "q": "What Happens to My Data if I Sign In?",
-    "a": "Your Google or Microsoft sign-in only checks that your one-time license is valid. Your chats, documents, and images stay on your own machine and are never uploaded as part of that process."
+    "a": "The Google or Microsoft sign-in only checks that you paid. It sends your account, never a chat, a file or an image; those stay on your PC."
    }
   ],
   "words": 2563,
@@ -791,23 +791,23 @@
   "faq": [
    {
     "q": "Is GreenCube really free of subscriptions?",
-    "a": "Yes. GreenCube costs $9.99 one time, with everything included and no recurring fee. A 14-day refund applies if it doesn't fit your setup."
+    "a": "Yes. GreenCube costs \u20ac9.99 (US$9.99) once, with everything included and no recurring fee. There's a 15-day refund if it doesn't suit your PC."
    },
    {
     "q": "Does GreenCube work without internet?",
-    "a": "Yes, once you've downloaded your chosen model, GreenCube runs with zero internet connection. Only optional features you switch on yourself use the internet at all."
+    "a": "Yes, after setup. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it only goes online for updates or if you switch Online on for web lookups."
    },
    {
-    "q": "Which GreenCube model should I pick first?",
-    "a": "Try Quick (Llama 3.2 3B) first if your laptop has 8GB of RAM or less. Upgrade to All-rounder (Gemma 4 E4B) once you confirm your hardware handles it and you need image or PDF reading."
+    "q": "Do I have to pick a GreenCube model?",
+    "a": "No. GreenCube checks your PC and picks for you: Cube 2B on smaller PCs and Cube 4B on PCs with a graphics card, both built on Google's Gemma."
    },
    {
     "q": "Can Gemini or other cloud models still beat GreenCube?",
-    "a": "For very large documents or complex, multi-step reasoning, cloud frontier models like Gemini generally perform better. GreenCube trades some of that power for offline privacy and a one-time cost."
+    "a": "Yes. Gemini is far bigger, so it's better on hard reasoning, tricky code, niche facts and current news. GreenCube trades that for offline use, chats kept on your PC and a one-time price."
    },
    {
     "q": "Does GreenCube run on Mac?",
-    "a": "No. GreenCube runs on Windows 10 and 11 only. Windows users can install and use it today."
+    "a": "No. GreenCube is for Windows 10 and 11 only."
    }
   ],
   "words": 1710,
@@ -833,23 +833,23 @@
   "faq": [
    {
     "q": "Is There a Real DeepSeek Alternative That Works Offline?",
-    "a": "Yes. Offline desktop AI apps like GreenCube run entirely on your own Windows computer after a one-time model download, with no ongoing internet connection required for chats. That's a different category from cloud chatbots, which need a live connection for every response."
+    "a": "Yes. A local app runs the AI on your own Windows PC, so once the model is downloaded your chats need no connection. Free apps like LM Studio and Ollama can even run small distilled versions of DeepSeek's own model; GreenCube runs its own Cube models instead."
    },
    {
     "q": "What Does GreenCube Cost?",
-    "a": "GreenCube is a one-time purchase of $9.99 / €9.99, covering everything with no subscription. A 14-day refund policy applies if it doesn't fit your needs."
+    "a": "\u20ac9.99 (US$9.99), paid once, with no subscription and no message limits. If it doesn't suit your PC, there's a 15-day refund."
    },
    {
     "q": "Do I Need a Powerful Computer to Run a Local AI Model?",
-    "a": "It depends on the model, not just the app. GreenCube's Quick model runs on modest hardware, while the All-rounder model needs around 8GB of RAM and benefits from a GPU with enough VRAM to avoid slow CPU fallback."
+    "a": "Not necessarily. A small model runs in normal RAM on a laptop with about 8 GB, just slowly: on the PCs we tested GreenCube wrote 5 to 7 tokens a second there. A graphics card with enough memory (VRAM) makes the biggest difference to speed."
    },
    {
     "q": "Are Local Desktop AI Tools as Powerful as Cloud Models Like DeepSeek?",
-    "a": "Not on complex, multi-step reasoning tasks. Local models trade some raw capability for privacy, offline access, and a one-time price, which suits everyday document and chat tasks better than heavy specialist reasoning."
+    "a": "No. A model small enough for a PC is less capable than the big online DeepSeek, and it shows on long maths, tricky code and niche facts. It's good for study, writing, reading documents and everyday questions."
    },
    {
     "q": "Can I Use a Local AI Tool With No Internet at All?",
-    "a": "Yes, once the model is downloaded, GreenCube works with no internet connection for chats, documents, and images. The only online step is a one-time sign-in through Google or Microsoft to verify your license."
+    "a": "Yes, after setup. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. Then chats, documents and images work offline, though it won't know today's news unless you switch Online on."
    }
   ],
   "words": 1864,
@@ -916,23 +916,23 @@
   "faq": [
    {
     "q": "What Does a 200K Context Window Mean?",
-    "a": "A large token context window means the model can hold a substantial number of words of combined input and output in a single request, covering the prompt, conversation history, retrieved documents, and the response together."
+    "a": "It means the model can take about 200,000 tokens into account at once, roughly 150,000 English words. That covers everything in the request: the instructions, the conversation so far, any documents and the answer it writes."
    },
    {
     "q": "Which LLM Has the Highest Context Window?",
-    "a": "Context window sizes shift often as providers update their models, but Google's Gemini family has published documentation describing context windows of 1 million tokens or more, with cost and latency rising accordingly at that scale."
+    "a": "These numbers change with almost every release, so check each model's own documentation. Google's Gemini documentation describes windows of 1 million tokens and beyond, and cost and waiting time grow with the length you actually use."
    },
    {
     "q": "What Does a 1 Million Token Context Window Mean?",
-    "a": "A 1 million token window can theoretically hold an entire codebase or a several-hundred-page document in one request, though actual accuracy depends on the model and context placement, actual accuracy at that length depends on the model's training and often shows measurable degradation on information placed in the middle of the context."
+    "a": "It's about 750,000 English words, enough for several books or a large codebase in one request. Models don't read every part of a long prompt equally well, though: information in the middle is more likely to be missed."
    },
    {
     "q": "How Big Is a 32K Context Window?",
-    "a": "A 32,000 token context window holds enough for a long report or a mid-sized code file, and it's also the rough point where many long-context models start showing accuracy drops even if their advertised limit is much higher."
+    "a": "About 24,000 English words, roughly a 50-page report. That's plenty for most chats and single documents."
    },
    {
     "q": "Do Local AI Apps Like GreenCube Have Smaller Context Windows Than Cloud Models?",
-    "a": "Yes. Local apps run on consumer hardware with limited VRAM and memory bandwidth, so GreenCube's two local models (Quick and All-rounder) are sized for that reality rather than chasing the extreme windows cloud providers can offer with data center GPUs."
+    "a": "Usually, yes. On your own PC the context window shares RAM or graphics memory with the model itself, so local apps use a window sized for the machine, far smaller than a cloud model's maximum. GreenCube works the same way, so ask about specific parts of a long document rather than all of it at once."
    }
   ],
   "words": 2598,
@@ -946,8 +946,8 @@
  {
   "slug": "novelai-alternatives",
   "old_url": "https://blog.greencube.app/blog/novelai-alternatives",
-  "title": "€8.99 One Time NovelAI Alternatives for Windows That Run Offline",
-  "description": "Find private NovelAI alternatives for Windows running fully offline with one time €8.99 purchase. Verify local OCR and no outbound traffic.",
+  "title": "\u20ac9.99 One Time NovelAI Alternatives for Windows That Run Offline",
+  "description": "Find private NovelAI alternatives for Windows running fully offline with one time \u20ac9.99 purchase. Verify local processing and no outbound traffic.",
   "date_published": "2026-09-14T12:03:38.724Z",
   "date_modified": "2026-09-14T12:03:38.724Z",
   "language": "en-US",
@@ -956,23 +956,23 @@
   "faq": [
    {
     "q": "Is There a Free, Fully Offline Alternative to Cloud AI Chat Tools?",
-    "a": "Free local model runners exist, but a polished one-time-purchase desktop app with built-in document OCR, like Greencube at €8.99 / $9.99, usually saves setup time compared with assembling free tools yourself."
+    "a": "Yes. KoboldCpp, LM Studio, Jan, GPT4All and Ollama are free and run offline once you've downloaded a model. You choose and set up the model yourself. GreenCube is the paid option that does that part for you."
    },
    {
     "q": "Can an Offline Windows Assistant Read Scanned PDFs and Photos?",
-    "a": "Only if the model you choose supports image input. Greencube's All-rounder model (Gemma 4 E4B, about 4.2GB) reads images and scanned pages; the smaller Quick model is text-only."
+    "a": "Some can, if the model they run understands images. GreenCube reads PDFs, Word files and photos on your PC. With free apps, check that the model you pick supports image input."
    },
    {
     "q": "How Much RAM Do I Need for a Local AI Assistant on Windows?",
-    "a": "Eight gigabytes of RAM is the stated minimum for image-capable local models, and it's a floor, not a comfort zone. Older machines at that level may still run noticeably slowly."
+    "a": "About 8 GB is the minimum for small models, and they'll run at about reading speed. 16 GB is noticeably better. Making images on the PC needs more: GreenCube needs 12 GB of RAM for images."
    },
    {
     "q": "Does Signing In Break the Privacy Promise of a Local AI App?",
-    "a": "Not in the way people assume. Sign-in through Google or Microsoft verifies your license only; your actual chats and document analysis still run entirely on-device with no data transmitted."
+    "a": "It depends on what the sign-in sends. With GreenCube, it sends your account to check that you paid, never a chat, a file or an image. Free apps like KoboldCpp need no account at all."
    },
    {
     "q": "How Can I Verify an App Is Actually Processing Documents Locally?",
-    "a": "Watch network activity with a monitor like GlassWire while processing a file. Genuine local pipelines show no outbound traffic during OCR, embedding, or inference."
+    "a": "The simplest test: once the model is downloaded, turn the Wi-Fi off and use it. If chats, documents and images still work, they're being processed on your PC. You can also watch network activity in Windows' Resource Monitor while it works."
    }
   ],
   "words": 2026,
@@ -988,7 +988,7 @@
   "slug": "best-ai-for-freelancers",
   "old_url": "https://blog.greencube.app/blog/best-ai-for-freelancers",
   "title": "Own Your AI: GreenCube Offline AI for Freelancers on Windows (8GB RAM)",
-  "description": "Try GreenCube on Windows: an offline, one time purchase AI that keeps prompts local, runs with at least 8GB RAM, and includes a 14 day refund window.",
+  "description": "Try GreenCube on Windows: an offline, one time purchase AI that keeps prompts local, runs with at least 8GB RAM, and includes a 15 day refund window.",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -997,27 +997,27 @@
   "faq": [
    {
     "q": "Is GreenCube Really Offline?",
-    "a": "Chat and document analysis run locally once installed, with no content sent to a server. Sign-in via Google or Microsoft is required only to verify your license."
+    "a": "Yes, after setup. It needs internet once to sign in and download the AI, and after that chats and documents are handled on your PC with the Wi-Fi off. It goes online only for updates, or if you switch on \"Online\" for web lookups."
    },
    {
     "q": "Which GreenCube Model Should I Pick?",
-    "a": "Choose Quick (about 2GB) for fast, text-only drafting on lighter hardware, or All-rounder (about 4.2GB) if you need it to read images and PDFs and have at least 8GB of RAM available."
+    "a": "You don't have to. GreenCube checks your PC and picks the model itself: Cube 2B on smaller laptops, Cube 4B on PCs with a graphics card."
    },
    {
     "q": "Does GreenCube Work on Mac?",
-    "a": "No. GreenCube supports Windows 10 and 11 only; there is no Mac version."
+    "a": "No. It's for Windows 10 and 11."
    },
    {
     "q": "How Much RAM Do I Actually Need?",
-    "a": "Eight gigabytes is the minimum required for All-rounder and can run slowly on older machines; 16GB is the more comfortable target for smooth performance."
+    "a": "About 8 GB for everything to work, slowly. 16 GB is noticeably faster, and images need 12 GB."
    },
    {
     "q": "Is GreenCube a Subscription?",
-    "a": "No. It's a one-time purchase at a moderate price with no recurring billing, backed by a 14-day refund policy."
+    "a": "No. It's EUR 9.99 (US$9.99) once, with no subscription and no message limits, and a 15-day refund."
    },
    {
     "q": "Can Local AI Fully Replace ChatGPT for Freelance Work?",
-    "a": "Not for the most complex reasoning tasks. Local models handle drafting, summaries, and document review well, but frontier cloud models still lead on large-scale, multistep reasoning."
+    "a": "Not for the hardest reasoning or research. It handles drafting, summaries and document review well; the big cloud models still lead on long, complex problems."
    }
   ],
   "words": 2007,
@@ -1032,7 +1032,7 @@
   "slug": "best-small-llm",
   "old_url": "https://blog.greencube.app/blog/best-small-llm",
   "title": "Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use",
-  "description": "Stop chasing leaderboards. Match the best small LLM to your RAM/VRAM and task, test it on your machine, or pick Greencube (€8.99) for an offline Windows...",
+  "description": "Stop chasing leaderboards. Match the best small LLM to your RAM/VRAM and task, test it on your machine, or pick GreenCube (\u20ac9.99) for an offline Windows...",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -1041,23 +1041,23 @@
   "faq": [
    {
     "q": "What Is the Best Tiny LLM for a Weak Laptop?",
-    "a": "For CPU-only or low-RAM machines, sub-2B models like MobileLLM-Pro (1.08B parameters) are built specifically for this tier, and Phi-4-mini can run on roughly 3.5GB of VRAM once quantized if you have a modest GPU."
+    "a": "On a laptop with less than 8 GB of RAM, stick to about 1 to 3 billion parameters, such as Llama 3.2 1B or 3B, Qwen3 1.7B or Meta's MobileLLM-Pro. With 8 GB, models up to about 4 billion, like Gemma 4 E2B, Qwen3 4B or Phi-4-mini, fit well."
    },
    {
     "q": "What Is the Smallest LLM Model Available?",
-    "a": "Sub-1B parameter models exist for edge and mobile use, with MobileLLM-Pro at 1.08 billion parameters as a documented example that still supports a 128k context window through optimized attention design."
+    "a": "There are models well under 1 billion parameters, such as Qwen3 0.6B, made for phones and other small devices. They're fine for simple jobs like rewriting or sorting text, but don't expect deep reasoning."
    },
    {
     "q": "What Is a Good Lightweight Model for General Chat?",
-    "a": "Models in the 3B to 8B range, such as Qwen3-class models or Greencube's Quick model (Llama 3.2 3B), handle everyday chat and summarization well on 8 to 16GB of memory."
+    "a": "Models of about 3 to 8 billion parameters, such as Gemma 4 E2B and E4B, Qwen3 4B or Phi-4-mini, handle everyday chat and summaries well on 8 to 16 GB of memory. GreenCube runs Gemma 4 E2B or E4B (Cube 2B and Cube 4B), depending on your PC."
    },
    {
     "q": "Do Small Models Support Multiple Languages?",
-    "a": "Multilingual support varies by model family and needs to be checked on the specific model card rather than assumed; some 3B to 24B models handle multiple languages competently while others are English-focused."
+    "a": "It varies a lot between model families, so check the model card for your language before you rely on it. Small models in particular can be much weaker outside English."
    },
    {
     "q": "Is a Local Small LLM Private by Default?",
-    "a": "Local inference itself runs offline once a model is downloaded, but check the specific app: Greencube's local inference stays fully local, while account sign-in through Google or Microsoft requires an internet connection."
+    "a": "The model runs on your computer once it's downloaded, but check what the app around it sends. GreenCube keeps chats and files on your PC and goes online only to sign in, download the AI, check for updates, or for web lookups if you switch Online on."
    }
   ],
   "words": 3012,
@@ -1072,8 +1072,8 @@
  {
   "slug": "best-local-ai-ui",
   "old_url": "https://blog.greencube.app/blog/best-local-ai-ui",
-  "title": "Pay €8.99 Once for GreenCube, a Private Local AI UI for Windows",
-  "description": "Try GreenCube on Windows: a private offline local AI UI for a one time €8.99 or $9.99 payment. Pick Quick or All rounder models, install in minutes and...",
+  "title": "Pay \u20ac9.99 Once for GreenCube, a Private Local AI UI for Windows",
+  "description": "Try GreenCube on Windows: a private offline local AI UI for a one time \u20ac9.99 or $9.99 payment. It picks the model for your PC, installs in minutes and...",
   "date_published": "2026-09-11T14:05:04.184Z",
   "date_modified": "2026-09-11T14:05:04.184Z",
   "language": "en-US",
@@ -1082,27 +1082,27 @@
   "faq": [
    {
     "q": "Is GreenCube Really Free to Use After Purchase?",
-    "a": "GreenCube costs a one-time fee with no subscription. After that single payment, local AI model inference carries no recurring fees."
+    "a": "Yes. You pay EUR 9.99 (US$9.99) once, and there's no subscription, no credits and no message limit after that."
    },
    {
     "q": "Does GreenCube Work Without an Internet Connection?",
-    "a": "Yes, after the initial setup and one-time model download, GreenCube's chat and document analysis run fully offline with no internet required."
+    "a": "Yes, after the first launch. It needs internet once to sign in (only to check you paid) and to download the AI, and after that chats and documents work offline. It goes online only for updates, or if you switch on Online for web lookups."
    },
    {
-    "q": "Which GreenCube Model Should I Choose, Quick or All-Rounder?",
-    "a": "Choose Quick (about 2GB) for fast, text-only chat on modest hardware, and All-rounder (about 4.2GB, needs at least 8GB RAM) if you need it to read images or build study guides."
+    "q": "Which GreenCube Model Should I Choose?",
+    "a": "You don't have to choose. GreenCube checks your PC and picks Cube 2B on smaller PCs or Cube 4B on PCs with a graphics card, both built on Google's Gemma."
    },
    {
     "q": "Can GreenCube Read Images and Scanned Documents?",
-    "a": "Only the All-rounder model reads images. The Quick model is text-only and cannot process image content."
+    "a": "Yes. It reads PDFs, Word files and photos, so a photo of a printed page works too, and it does it on your PC."
    },
    {
     "q": "Does Signing In With Google or Microsoft Expose My Chats?",
-    "a": "No. Sign-in verifies your one-time license only, while your chat conversations and document analysis stay on your device."
+    "a": "No. The sign-in only checks that you paid. It sends your account, never a chat, a file or an image, and your conversations stay on your PC."
    },
    {
     "q": "What Happens if GreenCube Doesn't Work for Me?",
-    "a": "GreenCube offers a 14-day refund policy, so you can request a refund if the app doesn't meet your needs within that window."
+    "a": "You can get a full refund within 15 days by emailing support@greencube.app."
    }
   ],
   "words": 2559,
@@ -1127,23 +1127,23 @@
   "faq": [
    {
     "q": "How much does TypingMind cost?",
-    "a": "TypingMind charges a one-time license fee for its interface, but users still pay their model provider (OpenAI, Anthropic, etc.) per token under its BYOK setup, so total cost depends on usage."
+    "a": "TypingMind sells a licence for its interface, and on top of that you pay your AI provider (OpenAI, Anthropic and others) per token with your own API key. So the total depends on how much you use it; check its site for the current licence price."
    },
    {
     "q": "What is the best frontend for LLMs?",
-    "a": "There's no single best option. LibreChat leads for self-hosted, open-source control, managed platforms like Aymo AI suit users who want zero API-key hassle, and GreenCube is the strongest pick for anyone prioritizing offline, local-only processing on Windows."
+    "a": "There's no single best one. LibreChat and Open WebUI suit people who want an open-source interface on their own server, Poe suits people who want many models with no API keys, and local apps like Jan or GreenCube run the AI on your own computer."
    },
    {
     "q": "What AI is replacing ChatGPT for privacy-focused users?",
-    "a": "Nothing fully replaces ChatGPT's model power, but local tools like GreenCube let privacy-focused users run document analysis entirely offline, trading some capability for full data control at a one-time price."
+    "a": "Nothing fully replaces ChatGPT's strongest models. Privacy-focused users often move to local apps such as Jan or GreenCube, which run a smaller model on their own computer so messages don't go to an AI company, accepting weaker answers on the hardest problems."
    },
    {
     "q": "What is the best open-source chat UI for LLMs?",
-    "a": "LibreChat is the most frequently recommended open-source, self-hosted chat UI for teams that need full control over their data and infrastructure."
+    "a": "LibreChat is the open-source, self-hosted chat UI most people land on, and Open WebUI is popular with developers who mix local and API models. Both need someone to install, patch and back them up."
    },
    {
     "q": "Is GreenCube a good TypingMind alternative for teams?",
-    "a": "GreenCube is built for individual Windows users who want local, private processing rather than shared team workspaces, so teams needing collaboration features are better served by a self-hosted or managed multi-model tool."
+    "a": "Not really. GreenCube is built for one person on one Windows PC, not shared team workspaces, so a team is better served by LibreChat or a managed platform like Poe or Aymo AI."
    }
   ],
   "words": 2107,
@@ -1156,7 +1156,7 @@
  {
   "slug": "elicit-alternatives",
   "old_url": "https://blog.greencube.app/blog/elicit-alternatives",
-  "title": "Protect Research: GreenCube, an Offline Elicit Alternative (€8.99)",
+  "title": "Protect Research: GreenCube, an Offline Elicit Alternative (\u20ac9.99)",
   "description": "Privacy first guide to offline Elicit alternatives for researchers. Try GreenCube: a local Windows app that reads PDFs and images and keeps data on your...",
   "date_published": "2026-09-08T02:32:58.272Z",
   "date_modified": "2026-09-08T02:32:58.272Z",
@@ -1166,23 +1166,23 @@
   "faq": [
    {
     "q": "Is GreenCube fully offline?",
-    "a": "Chat and document analysis run entirely on your device using llama.cpp for local inference. Sign-in through Google or Microsoft is required only to verify your one-time license."
+    "a": "After setup, yes. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. Then reading and chatting happen on your PC, and it only goes online for updates or if you switch Online on."
    },
    {
-    "q": "Which GreenCube model reads images?",
-    "a": "Only the All-rounder model (Gemma 4 E4B, about 4.2GB) reads images and builds study guides. The Quick model (Llama 3.2 3B, about 2GB) is text-only."
+    "q": "Can GreenCube read scanned pages and photos?",
+    "a": "Yes. It reads PDFs, Word files and photos of pages on your PC without uploading them, and it picks the model for your computer, so there's nothing to choose."
    },
    {
     "q": "How much RAM do I need for local document AI?",
-    "a": "Text-only models run on modest systems, but a vision-capable model like GreenCube's All-rounder needs roughly 8GB of RAM as a strict minimum, and older hardware can still run slowly at that floor."
+    "a": "About 8 GB is enough to run a small model and read documents, just slowly: on the PCs we tested GreenCube wrote 5 to 7 tokens a second on an 8 GB laptop with no graphics card. 16 GB of RAM or a graphics card makes it much faster."
    },
    {
     "q": "Do I need an internet connection to use these tools?",
-    "a": "You need internet once to download the model and verify your license at purchase. After that, chat and document analysis work fully offline."
+    "a": "Finding papers does, because the paper databases live online. Reading your own PDFs doesn't: GreenCube needs the internet once to sign in and download the AI, then works offline."
    },
    {
     "q": "Are fully local RAG tools accurate enough for real research?",
-    "a": "Yes, for moderate-scale PDF collections. Research on LocalRAG and RAGStack shows CPU-based local retrieval can deliver low-latency answers without any cloud dependency."
+    "a": "For reading and summarising papers you already have, they're useful, but check every answer. Test the tool on a paper you know well, with questions you already know the answers to, since any AI, cloud or local, can state something wrong with confidence."
    }
   ],
   "words": 1873,
@@ -1371,23 +1371,23 @@
   "faq": [
    {
     "q": "Can you self-host your own AI?",
-    "a": "Yes. You can run a model runner like Ollama or llama.cpp on your own hardware, pair it with a web interface, and keep all your data on your machine, or choose a packaged desktop app that handles the setup for you."
+    "a": "Yes. You can run a model runner like Ollama or llama.cpp on your own hardware with a web interface on top, or install a desktop app that does the setup for you. Either way your chats stay on your machine."
    },
    {
     "q": "Can I build my own personal AI assistant?",
-    "a": "Yes, using open-source components like a local model runner, a front end, and a vector database for document retrieval, though it typically takes a full weekend for a first working setup if you're new to the tools involved."
+    "a": "Yes, with open-source parts: a local model runner, a front end, and a vector database if you want to search your documents. If you're new to these tools, expect a weekend to get a first version running."
    },
    {
     "q": "How much does a personal AI assistant cost?",
-    "a": "Costs range from a one-time purchase like Greencube's $9.99 to free open-source stacks that cost nothing but your time, up through cloud API bills that can exceed $50 monthly for heavy document processing."
+    "a": "A desktop app like GreenCube costs \u20ac9.99 once. Open-source stacks are free apart from your hardware and time, and cloud APIs charge per use, which adds up with heavy document work."
    },
    {
     "q": "Can I build my own AI agent for free?",
-    "a": "Yes, open-source model runners and front ends are free to download and run, though you'll need hardware capable of running the model and time to configure the retrieval and connector pieces yourself."
+    "a": "Yes. Open-source model runners and front ends are free to download and run. You need hardware that can run the model, and time to set up document search and any connectors yourself."
    },
    {
     "q": "What's the difference between a desktop AI app and a self-hosted server?",
-    "a": "A desktop app like Greencube installs everything in one package for single-user offline use, while a self-hosted server separates the model runner, database, and web interface across components you configure and maintain yourself, typically for multi-user or team access."
+    "a": "A desktop app like GreenCube installs everything in one package for one person on one PC. A self-hosted server splits the model runner, storage and web interface into parts you configure and maintain yourself, usually so several people can share it."
    }
   ],
   "words": 3234,
@@ -1411,19 +1411,19 @@
   "faq": [
    {
     "q": "Is local AI as good as ChatGPT?",
-    "a": "For everyday tasks like drafting, summarizing, and private document Q&A, a well-chosen local model holds up well. For the hardest reasoning problems and largest-scale throughput, frontier cloud models still lead."
+    "a": "Not on the hardest problems: the big cloud models are clearly stronger at long maths, tricky code and niche facts. For everyday drafting, summarising and questions about your own documents, a good local model holds up well."
    },
    {
     "q": "How does local AI work without internet?",
-    "a": "Once the model file is downloaded and the runtime is installed, the entire chat process, tokenizing your prompt, running it through the model, and generating a response, happens on your device's own CPU, GPU, or NPU with no network connection required."
+    "a": "Once the model file is on your drive, everything (splitting your prompt into tokens, running the model, writing the reply) happens on your own processor or graphics card, so no connection is needed."
    },
    {
     "q": "Is it worth running AI locally?",
-    "a": "It's worth it if privacy, offline access, and a predictable one-time cost matter more to you than having access to the single most powerful reasoning model available; if you need massive scale or cutting-edge reasoning, cloud AI is the better fit."
+    "a": "Yes, if privacy, working offline or paying once matter more to you than having the most powerful model. If you mainly need top-level reasoning or today's news, a cloud AI is the better fit."
    },
    {
     "q": "Is local AI free?",
-    "a": "The software itself can be free or low-cost depending on the tool, but running it isn't cost-free: you're paying in electricity and, eventually, time spent managing updates and model downloads yourself."
+    "a": "Many apps are free, and some are paid once. Running it costs electricity, disk space and a little of your time for downloads and updates."
    }
   ],
   "words": 2698,
@@ -1448,23 +1448,23 @@
   "faq": [
    {
     "q": "Can Someone See My ChatGPT Chats?",
-    "a": "Yes, in specific circumstances. Authorized OpenAI staff can review flagged conversations, workspace admins can see content on Team or Enterprise accounts, and anyone with access to your device or a shared link can read your history."
+    "a": "In some cases. Authorised OpenAI staff can review flagged conversations, admins can see content on some work accounts, and anyone with your logged-in device or a shared link can read your chats."
    },
    {
     "q": "Is ChatGPT Confidential?",
-    "a": "Not by default. Consumer chats can be used for training and are retained unless you adjust Data Controls, so treat anything typed into ChatGPT as something that could be seen by someone other than you."
+    "a": "Not by default. Chats are stored, and on personal accounts they can be used for training unless you turn that off. Treat anything you type as something another person could one day see."
    },
    {
     "q": "Can Your ChatGPT Chats Be Leaked?",
-    "a": "There's documented risk from insider access, compromised accounts, and exposed API keys, though OpenAI encrypts data in transit and at rest. Encryption protects against outside interception, not against the provider's own access or legal disclosure."
+    "a": "Data is encrypted in transit and at rest, which protects against outsiders listening in. The bigger risks are someone getting into your account, a shared link going further than you meant, and legal disclosure."
    },
    {
     "q": "Can I Trust ChatGPT With My Data?",
-    "a": "For non-sensitive tasks, yes, especially if you use Temporary Chat and turn off model training in your settings. For anything involving personal identifiers, financial records, or client confidentiality, a local tool like Greencube or an Enterprise contract with no-training guarantees is the safer route."
+    "a": "For everyday, non-sensitive tasks most people do, especially with training switched off. For personal identifiers, financial records or client work, use a business plan with a no-training contract or an AI that runs on your own computer."
    },
    {
     "q": "Is ChatGPT FERPA Compliant?",
-    "a": "OpenAI does not publish a blanket FERPA compliance guarantee for consumer ChatGPT, and schools generally need a signed data agreement to use any AI tool with protected student records. Check with your institution's compliance office before entering student data into any consumer AI product."
+    "a": "FERPA is about how US schools handle education records, so the question is really whether your school has approved a tool and signed an agreement for it. Don't put student records into a personal ChatGPT account; ask your school first."
    }
   ],
   "words": 2304,
@@ -1493,19 +1493,19 @@
    },
    {
     "q": "Is ChatGPT an LLM or Generative AI?",
-    "a": "ChatGPT is a product built on top of an LLM, and that LLM is itself a specific category of generative AI trained to predict the next token in a sequence."
+    "a": "Both. ChatGPT is a product, an app built on OpenAI's LLMs, and LLMs are one kind of generative AI, the kind that works with text."
    },
    {
     "q": "What Are the Top LLM Models Right Now?",
-    "a": "Rather than a fixed leaderboard, models are best grouped by capability tier: small models (1 to 3 billion parameters, fast and text-only), medium models (4 to 9 billion parameters, often multimodal), and large frontier-scale models that need dedicated GPU infrastructure."
+    "a": "Among closed models, OpenAI's GPT models, Google's Gemini and Anthropic's Claude are the best known, and they run only in the cloud. Among open-weight models you can download: Meta's Llama, Google's Gemma, Alibaba's Qwen, Mistral's models, DeepSeek's models and OpenAI's gpt-oss."
    },
    {
     "q": "What Are LLM Models, in Plain Terms?",
-    "a": "An LLM model is a transformer-based neural network trained on massive text data to predict the next word in a sequence, which is the mechanism underlying chatbots, code assistants, and summarization tools."
+    "a": "A neural network trained on huge amounts of text to predict the next piece of text. Done at enormous scale, that one skill powers chatbots, code assistants and summarising tools."
    },
    {
     "q": "Can I Run an LLM without an Internet Connection?",
-    "a": "Yes, if you use a locally hosted model with enough RAM and disk space for the download, which is typically 2 to 5GB for smaller and mid-sized models, though sign-in for license verification may still require a brief internet connection."
+    "a": "Yes, with an open-weight model running on your own computer. Small ones are 2 to 5 GB files that run on an ordinary PC; some apps need the internet once to download the model or check a licence, then work offline."
    }
   ],
   "words": 2909,
@@ -1520,8 +1520,8 @@
  {
   "slug": "greencube-vs-claude",
   "old_url": "https://blog.greencube.app/blog/greencube-vs-claude",
-  "title": "Save $200+ a Year Choosing GreenCube vs Claude for Private Offline AI",
-  "description": "Compare GreenCube and Claude to choose a one time €8.99 / $9.99 offline AI that keeps data local versus a $17–$25 a month cloud service with stronger...",
+  "title": "Save $190+ a Year Choosing GreenCube vs Claude for Private Offline AI",
+  "description": "Compare GreenCube and Claude to choose a one time \u20ac9.99 / $9.99 offline AI that keeps data local versus a $17\u2013$20 a month cloud service with stronger...",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -1530,23 +1530,23 @@
   "faq": [
    {
     "q": "Is GreenCube Really Free of Cloud Dependency?",
-    "a": "Chat and document processing run fully offline once set up, but signing in with Google or Microsoft to verify your one-time license through Stripe both require a connection at those specific moments."
+    "a": "Almost. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it works offline, going online only for updates or if you switch Online on."
    },
    {
     "q": "Can GreenCube Read Images Like Claude Can?",
-    "a": "Only the All-rounder model (Gemma 4 E4B) reads images and builds documents from them; the Quick model (Llama 3.2 3B) is text-only."
+    "a": "Yes. GreenCube reads photos, PDFs and Word files on your PC without uploading them. Claude is stronger on long or complicated documents, since it can read very long ones at once."
    },
    {
     "q": "How Much Does GreenCube Cost Compared to Claude's Subscription?",
-    "a": "GreenCube is a one-time purchase of €8.99 / $9.99 with a 14-day refund, while Claude's subscription tiers run roughly $17 to $25 per month on an ongoing basis."
+    "a": "GreenCube costs \u20ac9.99 (US$9.99) once, with a 15-day refund. Claude Pro is $20 a month, or $17 a month paid yearly, which comes to $204 to $240 a year."
    },
    {
     "q": "Does GreenCube Work Without Internet Access?",
-    "a": "Yes, once you've downloaded your chosen model, chat and document analysis work with no internet connection at all."
+    "a": "Yes, after setup. Once you've signed in and the AI has downloaded, chats and reading documents work with no internet connection."
    },
    {
     "q": "Which Is Better for Coding and Complex Research, GreenCube or Claude?",
-    "a": "Claude generally handles complex, multi-step reasoning and coding tasks more capably, since its cloud models aren't limited by local hardware the way GreenCube's on-device models are."
+    "a": "Claude. It's a much stronger model, running on hardware no laptop can match, so it handles hard code, whole projects and long research better. GreenCube suits study, drafts and everyday questions you want to keep on your PC."
    }
   ],
   "words": 2035,
@@ -1562,8 +1562,8 @@
  {
   "slug": "ai-study-planner-offline",
   "old_url": "https://blog.greencube.app/blog/ai-study-planner-offline",
-  "title": "Keep PDFs Local: Offline AI Study Planner for Students, 2GB–4.2GB",
-  "description": "Student guide to offline AI study planners: setup, 2GB vs 4.2GB tradeoffs, privacy checks, and turn PDFs into offline schedules and flashcards.",
+  "title": "Keep PDFs Local: Offline AI Study Planner for Students, 8GB RAM and Up",
+  "description": "Student guide to offline AI study planners: setup, small vs bigger model tradeoffs, privacy checks, and turn PDFs into offline schedules and flashcards.",
   "date_published": "2026-08-30T23:02:45.053Z",
   "date_modified": "2026-08-30T23:02:45.053Z",
   "language": "en-US",
@@ -1572,23 +1572,23 @@
   "faq": [
    {
     "q": "Which AI is best for offline study planning?",
-    "a": "There's no single universal answer, since it depends on whether you need image parsing or just text scheduling; Greencube's All-rounder model handles both documents and images locally, while lighter text-only tools work fine for straightforward calendar planning."
+    "a": "Any AI app that runs on your own computer and reads your course files can do it. If your material includes diagrams or photos of notes, pick one whose model reads images."
    },
    {
     "q": "Which app is best for studying offline?",
-    "a": "A native installer app beats a browser-based PWA for reliable offline studying, since installers don't need an initial online load and handle background reminders more consistently."
+    "a": "An installed desktop app is more reliable offline than a website in your browser. Turn off the Wi-Fi after setup and check that everything you need still works."
    },
    {
     "q": "What is the best free AI planner?",
-    "a": "Free offline AI planners tend to be open-source projects like FocusFlow or smart-study-planner on GitHub, which offer solid scheduling and export features but require more technical setup than a polished commercial installer."
+    "a": "Free cloud chatbots can write a study plan if you give them your dates and topics, but they need internet and your notes go to their servers. Free local AI apps such as LM Studio or Jan can do it offline if you're happy to set up a model yourself."
    },
    {
     "q": "What is the best free study planner app without AI features?",
-    "a": "Plenty of free calendar-based planner apps exist, but they require you to manually schedule sessions rather than generating a back-planned, difficulty-weighted schedule automatically."
+    "a": "Any calendar or to-do app works if you schedule the sessions yourself. You lose the automatic spacing and the flashcards, but you keep full control."
    },
    {
     "q": "Does an offline AI study planner ever need internet access?",
-    "a": "Only briefly, for the one-time model download and, in tools like Greencube, for signing in to verify your license; your actual chats, document analysis, and study sessions run locally with no ongoing connection required."
+    "a": "Usually at the start, to download the model and sometimes to sign in. GreenCube needs it once for both; after that your studying runs on your PC with no connection."
    }
   ],
   "words": 2610,
@@ -1603,8 +1603,8 @@
  {
   "slug": "chatgpt-vs-greencube",
   "old_url": "https://blog.greencube.app/blog/chatgpt-vs-greencube",
-  "title": "Keep Chats Local on Windows: ChatGPT or Greencube (€8.99 One-Time)",
-  "description": "Decide the private Windows AI that fits you. Greencube is a €8.99 one-time, offline app that keeps chats and PDFs on your PC; ChatGPT offers stronger...",
+  "title": "Keep Chats Local on Windows: ChatGPT or GreenCube (\u20ac9.99 One-Time)",
+  "description": "Decide the private Windows AI that fits you. GreenCube is a \u20ac9.99 one-time, offline app that keeps chats and PDFs on your PC; ChatGPT offers stronger...",
   "date_published": "2026-08-28T13:03:29.963Z",
   "date_modified": "2026-08-28T13:03:29.963Z",
   "language": "en-US",
@@ -1612,24 +1612,24 @@
   "cover_alt": "Decorative title card illustration",
   "faq": [
    {
-    "q": "Is Greencube Really Free From Cloud Servers?",
-    "a": "Chat and document processing run entirely offline on your device once the model is downloaded. The only online step is a one-time Google or Microsoft sign-in to verify your license through Stripe checkout."
+    "q": "Is GreenCube Really Free From Cloud Servers?",
+    "a": "Your chats are. The answers are written by your own PC and saved there, so there's nothing on our side to read. It goes online only to sign you in once (to check you paid), to download the AI, for updates, and for web lookups if you switch Online on."
    },
    {
-    "q": "Which Greencube Model Should I Pick, Quick or All-Rounder?",
-    "a": "Pick Quick (about 2GB) if you want fast, text-only chat on lighter hardware; pick All-rounder (about 4.2GB) if you need image reading or study guide generation and have at least 8GB of RAM."
+    "q": "Which GreenCube Model Should I Pick?",
+    "a": "You don't pick one. GreenCube checks your PC and uses Cube 2B on smaller PCs or Cube 4B on PCs with a graphics card, both built on Google's Gemma."
    },
    {
-    "q": "Does Greencube Cost More Than ChatGPT Over Time?",
-    "a": "Greencube costs €8.99 / $9.99 once with no recurring charge, while ChatGPT's paid tiers bill monthly, so the cost comparison depends entirely on how long you keep using it."
+    "q": "Does GreenCube Cost More Than ChatGPT Over Time?",
+    "a": "No. GreenCube is EUR 9.99 (US$9.99) once, which is less than one month of ChatGPT Plus at $20. ChatGPT also has a free plan with limits, and its paid plans buy you a much stronger model."
    },
    {
-    "q": "Can Greencube Read Images or Only Text?",
-    "a": "Only the All-rounder model reads images; the Quick model is text-only and cannot process photos or scanned pages."
+    "q": "Can GreenCube Read Images or Only Text?",
+    "a": "Both. It reads photos, PDFs and Word files on your PC, and it can also make pictures, which needs 12 GB of memory."
    },
    {
-    "q": "What Happens if Greencube Doesn't Work on My Laptop?",
-    "a": "Greencube offers a 14-day refund window, so if your hardware struggles with the model you chose or the app doesn't fit your workflow, you can request a refund within that period."
+    "q": "What Happens if GreenCube Doesn't Work on My Laptop?",
+    "a": "You can get a full refund within 15 days by emailing support@greencube.app. It needs Windows 10 or 11 and about 8 GB of memory, and on an 8 GB laptop with no graphics card it writes at about reading speed."
    }
   ],
   "words": 1965,
@@ -1644,8 +1644,8 @@
  {
   "slug": "best-private-pdf-ai",
   "old_url": "https://blog.greencube.app/blog/best-private-pdf-ai",
-  "title": "Own It for €8.99: Best Private PDF AI for Privacy-First Users",
-  "description": "Compare private PDF AI that run locally and never upload files. Test privacy claims, then buy Greencube, a one time €8.99 offline app.",
+  "title": "Own It for \u20ac9.99: Best Private PDF AI for Privacy-First Users",
+  "description": "Compare private PDF AI that run locally and never upload files. Test privacy claims, then buy GreenCube, a one time \u20ac9.99 offline app.",
   "date_published": "2026-08-27T22:39:35.285Z",
   "date_modified": "2026-08-27T22:39:35.285Z",
   "language": "en-US",
@@ -1654,19 +1654,19 @@
   "faq": [
    {
     "q": "Which AI is best for private use?",
-    "a": "A local, offline AI app that runs inference on your own device is the most private option, since your data never reaches a third-party server. Greencube is built specifically around this model for PDF and document work on Windows."
+    "a": "One that runs on your own computer, so your files and chats never reach a company's server. Free apps like GPT4All and AnythingLLM do this once you set up a model; GreenCube does it on Windows with no setup for EUR 9.99 once."
    },
    {
     "q": "Which AI works best with PDFs?",
-    "a": "It depends on the job: local desktop apps with a downloaded model handle chat and summarization privately, while browser-local tools like RectoPDF and OxygenPDF are strong for quick, offline conversions and basic edits without installing software."
+    "a": "It depends on the job. A desktop app with a local AI model can summarise and answer questions about a PDF privately, while browser-local tools such as RectoPDF and OxygenPDF are good for conversions, OCR and quick edits without uploading the file."
    },
    {
     "q": "Which AI PDF generator is the best?",
-    "a": "For generating study guides or structured documents from a PDF's content, a local model that can also read images, such as Greencube's All-rounder model, produces useful output without uploading the source file anywhere."
+    "a": "For turning a PDF into study material, use an app that writes summaries, flashcards, quizzes or a study guide on your own PC, so the source file stays there. The big cloud models are stronger on the hardest documents, but the file goes to their servers."
    },
    {
     "q": "Is there a private version of AI?",
-    "a": "Yes. Local desktop AI apps and browser-local WebAssembly tools both keep file processing on-device, unlike most cloud AI assistants, which send document content to a remote server even when marketed as secure."
+    "a": "Yes. Desktop apps that run the AI model on your own PC, and browser tools that work inside the tab, keep the file on your device. Cloud assistants read your document on their servers, even when the page says secure or encrypted."
    }
   ],
   "words": 2878,
@@ -1724,7 +1724,7 @@
   "slug": "why-offline-ai",
   "old_url": "https://blog.greencube.app/blog/why-offline-ai",
   "title": "Offline AI: Why It Matters and How to Get Started",
-  "description": "Discover why offline AI offers unmatched privacy and speed for everyday tasks. Learn how to get started and benefit from local processing.",
+  "description": "Why offline AI matters: privacy, working without Wi-Fi, no monthly bill, where the cloud is still better, and how to get started.",
   "date_published": "2026-08-25T14:07:24.571Z",
   "date_modified": "2026-08-25T14:07:24.571Z",
   "language": "en-US",
@@ -1733,19 +1733,19 @@
   "faq": [
    {
     "q": "What Is the 30% Rule in AI?",
-    "a": "There's no single, universally recognized \"30% rule\" for AI; the phrase is sometimes used informally to describe partial task automation, but it isn't a standard technical benchmark you should rely on."
+    "a": "There isn't one agreed rule by that name. People use \"30%\" informally, for example for how much of a job AI might take over, but it isn't a technical standard, so treat any specific claim about it with caution."
    },
    {
     "q": "Would AI Work Without Internet?",
-    "a": "Yes, if the model file is stored locally and the runtime performs inference on-device, a properly built offline AI tool functions with no internet connection at all."
+    "a": "Yes, if the model is on your device. Cloud apps like ChatGPT stop working offline, but a local AI app keeps answering once its model is downloaded."
    },
    {
     "q": "How Do You Make AI Work Offline?",
-    "a": "Download a compatible model (commonly 2 to 4GB), pair it with a local runtime like llama.cpp, and run it on hardware that meets the model's RAM requirements, no server connection needed for inference."
+    "a": "Install an app that runs models on your computer and let it download a model that fits your memory, usually a few gigabytes. After that first download it needs no connection."
    },
    {
     "q": "Which AI Tool Works Without Internet?",
-    "a": "Several desktop tools built on llama.cpp run fully offline after setup; Greencube is one example, offering a Windows app with local chat and document analysis once its one required model download completes."
+    "a": "Free options include LM Studio, Jan, Ollama and GPT4All. GreenCube is a paid option for Windows (\u20ac9.99 once) that picks the model for you and also makes slides, flashcards and images offline."
    }
   ],
   "words": 1973,
@@ -1811,23 +1811,23 @@
   "faq": [
    {
     "q": "Which AI Is Better Than ChatGPT?",
-    "a": "No single tool beats ChatGPT across every task. Specialized alternatives often win for specific jobs, like structured STEM tutoring for exam prep or local, offline tools like Greencube when privacy matters more than raw model size."
+    "a": "None is better at everything. Claude and Gemini are close rivals and some students prefer them for code or long explanations. Offline tools are weaker but keep your work private and run without internet."
    },
    {
     "q": "Is ChatGPT Still the Best AI for Coding?",
-    "a": "ChatGPT remains a strong general-purpose coding assistant, but IDE-integrated pair-programming tools often win for real-time suggestions while you type, and neither replaces understanding the algorithm you're implementing."
+    "a": "It's a strong general coding assistant. An assistant built into your editor is often more convenient while you type, and neither replaces understanding the code you hand in."
    },
    {
     "q": "What's the Best AI App for Science Students?",
-    "a": "Structured STEM helpers that force step-by-step, curriculum-aligned answers tend to serve science and computer science students better than general chat tools, since they build reasoning skills instead of just handing over final answers."
+    "a": "One that shows its working. Whatever you use, ask for step-by-step explanations and practice problems, so you build the reasoning instead of collecting answers."
    },
    {
     "q": "What Are the Top AI Tools Right Now?",
-    "a": "The strongest setups combine categories rather than one app: an LLM coding assistant, an ML framework with cloud notebook access, and a structured study helper, with a local option like Greencube covering offline and privacy needs."
+    "a": "For a CS student: a chatbot (ChatGPT, Claude or Gemini), an editor assistant such as GitHub Copilot, a cloud notebook like Colab or Kaggle, and an offline AI on your laptop for private and offline work."
    },
    {
     "q": "Should Computer Science Students Use Local or Cloud AI?",
-    "a": "It depends on the task: cloud models handle heavy training and the newest capabilities better, while local tools like Greencube fit sensitive coursework, unreliable internet, and fixed budgets where a one-time cost beats a subscription."
+    "a": "Both, by task. Cloud for heavy training and the hardest problems; local for sensitive data, unreliable internet and a fixed budget."
    }
   ],
   "words": 3733,
@@ -1888,7 +1888,7 @@
   "slug": "best-pdf-summarizer",
   "old_url": "https://blog.greencube.app/blog/best-pdf-summarizer",
   "title": "The Best PDF Summarizer for People Who Won't Upload Sensitive Files",
-  "description": "Discover the best PDF summarizer that keeps your files private. Summarize offline with Greencube for a one-time fee of just $9.99.",
+  "description": "Discover the best PDF summarizer that keeps your files private. Summarize offline with GreenCube for a one-time fee of just $9.99.",
   "date_published": "2026-08-21T16:32:52.122Z",
   "date_modified": "2026-08-21T16:32:52.122Z",
   "language": "en-US",
@@ -1897,23 +1897,23 @@
   "faq": [
    {
     "q": "Can ChatGPT summarize a PDF?",
-    "a": "Yes, if you paste the text or upload a supported file, but it runs in the cloud, meaning the document leaves your device and you need an internet connection every time."
+    "a": "Yes, if you upload it or paste the text. It runs in the cloud, so the document goes to OpenAI's servers and you need an internet connection."
    },
    {
     "q": "Is there a free AI PDF summarizer available?",
-    "a": "Free tiers exist across several cloud tools, but they typically cap page counts or daily usage and may use uploaded content to improve their models, so check the retention policy before uploading anything sensitive."
+    "a": "Yes. The big chatbots have free tiers with usage caps, and GPT4All and AnythingLLM are free apps that summarise on your own computer once you've set up a model."
    },
    {
     "q": "Which free AI summarizer is the best?",
-    "a": "There's no single best free option since caps and privacy policies vary by provider; for one-time, unlimited use without ongoing uploads, a local tool like Greencube avoids the cap question entirely for a flat $9.99 (€8.99)."
+    "a": "For public documents, a free tier of ChatGPT, Claude, Gemini or NotebookLM. For sensitive ones, a free local app if you don't mind the setup, since nothing is uploaded."
    },
    {
     "q": "Which AI tool is best for PDF analysis?",
-    "a": "The best fit depends on your document: cloud tools handle large-scale research across many non-sensitive files well, while local tools like Greencube fit contracts, medical records, or unpublished research where the file can't leave your machine."
+    "a": "Cloud tools are strongest on long, complex documents that are fine to share. For contracts, medical records or unpublished work that shouldn't leave your machine, use a local tool."
    },
    {
     "q": "Does a local PDF summarizer handle images and figures?",
-    "a": "It depends on the model. Greencube's All-rounder model reads images and figures, while its Quick model is text-only, so check which model a local tool ships before trusting it with a visually dense PDF."
+    "a": "Some do. It depends on whether the model can read images. GreenCube's models can read photos and pages with figures, but check any numbers it reads from a chart against the original."
    }
   ],
   "words": 2627,
@@ -2020,23 +2020,23 @@
   "faq": [
    {
     "q": "Is ChatGPT Good for Research?",
-    "a": "ChatGPT works well for brainstorming, outlining, and summarizing concepts you already understand, but it lacks direct connections to licensed academic databases and can produce citations that don't exist. Treat it as a drafting aid, not a literature search tool."
+    "a": "For brainstorming, outlining and editing, yes. For finding literature, no: it isn't connected to licensed scholarly databases and can produce references that don't exist. Use it as a writing aid and check every citation."
    },
    {
     "q": "What AI Is Better Than ChatGPT for Academic Work?",
-    "a": "For literature discovery specifically, database-connected agentic assistants like the Web of Science Research Assistant outperform general chatbots because they retrieve from licensed scholarly corpora rather than open web text."
+    "a": "For finding papers, a search tool built on a scholarly index, such as the Web of Science Research Assistant, Elicit, Consensus or Semantic Scholar, because it answers from real papers you can open."
    },
    {
     "q": "Which AI Tool Is Best for PhD Research?",
-    "a": "The best setup for a dissertation combines a trusted-data discovery assistant for the literature review with a private, offline assistant like Greencube for drafting chapters that include unpublished results or committee-sensitive material."
+    "a": "A combination: a database-connected search tool for the literature review, a citation-mapping tool to see the field, a reference manager like Zotero, and a local assistant for chapters with unpublished results if your data rules require it."
    },
    {
     "q": "Which GPT Model Is Best for Research Tasks?",
-    "a": "No single general-purpose model is \"best\" for research since accuracy depends heavily on whether the tool connects to verified databases and shows clickable sources. Domain-specific models, such as PubMedBERT for biomedical extraction, often outperform general models on accuracy within their specialty."
+    "a": "The model matters less than whether the tool searches real sources and shows them. In some fields, domain-specific models such as PubMedBERT do better at extraction than general ones."
    },
    {
     "q": "Can AI Replace a Systematic Literature Review Process?",
-    "a": "No. AI can accelerate search, screening, and extraction, but human oversight, source verification, and methodological rigor remain necessary for a defensible systematic review."
+    "a": "No. It can speed up searching, screening and extraction, but a defensible review still needs people checking sources and following the method."
    }
   ],
   "words": 3383,
@@ -2061,23 +2061,23 @@
   "faq": [
    {
     "q": "What is the best Gemini alternative for offline Windows use?",
-    "a": "GreenCube is the simplest fully offline option for non-technical users, while Foundry Local and Ollama suit developers who want more control over their setup."
+    "a": "For non-technical users, GreenCube is the simplest: you install it and it picks the model for your PC. Ollama suits people who like choosing models, and Foundry Local, OnPrem.LLM and llama.cpp are mainly for developers."
    },
    {
     "q": "Do these tools require any internet connection at all?",
-    "a": "Chat and document processing run fully offline once installed; GreenCube only requires internet briefly to verify your one-time license through Google or Microsoft sign-in."
+    "a": "Once installed and a model is downloaded, all of them can chat offline. GreenCube needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI, and after that only for updates or if you switch Online on."
    },
    {
     "q": "How much storage do local AI models need?",
-    "a": "Model sizes range from about 2GB for lightweight text-only models up to 4.2GB or more for models that also read images and documents."
+    "a": "It depends on the model. Small models made for laptops take a few gigabytes each and bigger ones much more, so check the download size before you pick one."
    },
    {
     "q": "Can these apps read PDFs and images?",
-    "a": "Document and image reading depends on the model: GreenCube's All-rounder model handles both, while its Quick model and several other tools on this list are text-only or require added configuration."
+    "a": "GreenCube reads PDFs, Word files and photos out of the box. With the developer tools it depends on the model you choose and how you set it up; OnPrem.LLM is built for document work."
    },
    {
     "q": "Is local AI as capable as cloud models like Gemini?",
-    "a": "No. Local models trade some raw reasoning power for privacy, offline access, and a one-time cost, so cloud models still lead on large-scale, real-time, or highly complex tasks."
+    "a": "No. Gemini is much bigger and uses Google Search, so it's stronger on the hardest problems and knows today's news. Local models give you offline use, privacy and no monthly fee instead."
    }
   ],
   "words": 1994,
@@ -2093,7 +2093,7 @@
   "slug": "best-ai-for-teachers",
   "old_url": "https://blog.greencube.app/blog/best-ai-for-teachers",
   "title": "Best AI for Teachers: Teacher-Tested Picks by Priority",
-  "description": "Discover the best AI tools for teachers to streamline grading, enhance lesson planning, and protect student privacy. Explore top picks today!",
+  "description": "The best AI tools for teachers to speed up lesson planning, get a first pass at grading, and protect student privacy, with picks by priority.",
   "date_published": "2026-08-15T18:34:50.626Z",
   "date_modified": "2026-08-15T18:34:50.626Z",
   "language": "en-US",
@@ -2102,23 +2102,23 @@
   "faq": [
    {
     "q": "Which Is the Best AI for Teachers?",
-    "a": "There's no single best option. Privacy-focused classrooms should try a local tool like GreenCube, while teachers prioritizing speed on lesson drafts often prefer a general-purpose cloud assistant."
+    "a": "There isn't one winner. A general assistant like ChatGPT or Gemini is quickest for drafts, Khanmigo suits student practice, and a local app is the safer choice for anything containing student data."
    },
    {
     "q": "Is There a Version of ChatGPT Built for Teachers?",
-    "a": "ChatGPT itself is general-purpose, but education-focused assistants like Khanmigo build curriculum-aligned features on top of similar underlying technology for classroom use."
+    "a": "OpenAI sells education versions of ChatGPT to schools and universities, and its offers for teachers change, so check its site. Khanmigo is an AI assistant built specifically for teaching."
    },
    {
     "q": "Which AI Model Is Best at Teaching-Related Tasks?",
-    "a": "No single model dominates every task. Cloud models tend to handle complex lesson design better, while local, rubric-aware tools often produce more consistent grading, with tested tools showing around a 7% average deviation from human scores."
+    "a": "The big cloud models are strongest at complex lesson design. For everyday jobs like quizzes, worksheets and emails, smaller models are usually good enough, and the bigger difference is whether the tool fits your school's rules."
    },
    {
     "q": "Is a Local AI Tool Like GreenCube Good for Grading Papers?",
-    "a": "It can handle a rubric-aware first pass on written work entirely offline, though teachers should still review scores manually since local grading tools carry a measurable margin of error."
+    "a": "For a first pass against your rubric, with you checking every score, it can help, and the papers never leave your laptop. It shouldn't give final grades; no AI tool should."
    },
    {
     "q": "Do I Need Internet Access to Use an Offline AI Tool?",
-    "a": "No, the AI chat and document analysis run without an internet connection once the app and model are installed, though the initial license sign-in requires connectivity."
+    "a": "Only at the start. GreenCube needs internet once to sign in and download the AI. After that it works with no connection, and only goes online for updates or if you switch on web lookups."
    }
   ],
   "words": 2440,
@@ -2221,19 +2221,19 @@
   "faq": [
    {
     "q": "Is Claude or ChatGPT better for lawyers?",
-    "a": "Neither has a clear edge for legal work specifically. Both are general-purpose models without built-in legal-database grounding, so citation accuracy depends entirely on the attorney verifying outputs. Claude tends to perform well on long-document reasoning; ChatGPT Enterprise adds privacy controls that make it more suitable for firm use than the consumer version."
+    "a": "Neither is built for law. Both are general models with no legal database, so the deciding factors are your firm's data terms and how well each handles your kind of documents. Try both on a non-confidential matter you know well, and check every citation either way."
    },
    {
     "q": "Which AI are law firms actually using?",
-    "a": "Large firms most commonly deploy Thomson Reuters CoCounsel or Lexis+ Protégé for research, Harvey for contract intelligence, and Microsoft Copilot for day-to-day drafting inside Microsoft 365. Smaller firms and solo practitioners use a wider mix, including Clio, MyCase, NexLaw, and general models like ChatGPT."
+    "a": "Larger firms tend to buy research tools tied to Westlaw or LexisNexis, such as CoCounsel and Lexis+ with Protege, plus platforms like Harvey, and Copilot where they run Microsoft 365. Smaller firms mix practice-management tools like Clio with general assistants."
    },
    {
     "q": "Is there a ChatGPT built specifically for legal work?",
-    "a": "Not from OpenAI directly. ChatGPT Enterprise offers stronger privacy controls and no training on customer data, but it has no built-in legal-database grounding. Purpose-built legal platforms like CoCounsel and Lexis+ Protégé are the closest equivalent to a \"legal ChatGPT\" because they ground outputs in verifiable primary sources."
+    "a": "Not from OpenAI. The closest thing is a legal research tool that answers from a legal database and shows its sources, such as CoCounsel or Lexis+ with Protege."
    },
    {
     "q": "Which AI is best when client confidentiality rules out cloud tools?",
-    "a": "Greencube is the practical option for offline, private document analysis. It runs entirely on your Windows machine, processes PDFs and images locally (All-rounder model), and costs €8.99 / $9.99 as a one-time purchase. It does not connect to legal databases, so it suits document review and drafting assistance rather than primary legal research."
+    "a": "One that runs on your own computer, such as LM Studio or Ollama (free, more setup) or GreenCube (EUR 9.99 once, picks the model for you). They work offline and never upload your files, but they are weaker than cloud AI and have no legal database, so use them for reading and drafting, not research."
    }
   ],
   "words": 3153,
@@ -2300,23 +2300,23 @@
   "faq": [
    {
     "q": "Is there an AI image analysis tool that works completely offline?",
-    "a": "Yes. Greencube is a one-click desktop app that runs image analysis, OCR, and captioning fully offline with no cloud connection. Developer options include Ollama with LLaVA, offgrid-vision, and image-analyser, all of which run locally."
+    "a": "Yes. Free options include Ollama with a vision model such as LLaVA, Llama 3.2 Vision or Qwen2.5-VL, and Tesseract for text only. GreenCube (EUR 9.99 once, Windows) reads photos offline after its first download."
    },
    {
     "q": "Can you run a vision-language model without internet access?",
-    "a": "Yes. Models like LLaVA 7B, Qwen-VL, and Llama3.2-Vision run locally via Ollama or llama.cpp after a one-time model download. Once cached, they operate with no network access required."
+    "a": "Yes. You need the internet once to download the model; after that it runs entirely on your computer."
    },
    {
     "q": "Can ChatGPT do image analysis offline?",
-    "a": "No. ChatGPT requires an internet connection and sends your images to OpenAI's servers. For private, offline image analysis, local tools like Greencube or Ollama with a vision model are the alternatives."
+    "a": "No. ChatGPT needs a connection and sends your images to OpenAI's servers. For offline analysis you need a model that runs on your own device."
    },
    {
     "q": "How much RAM do you need for offline AI image analysis?",
-    "a": "A quantized 7B VLM (Q4 GGUF) fits in roughly 5–6 GB of RAM and runs on CPU. For larger models (13B), 8–16 GB is the practical minimum. Systems with 24+ GB can run large unquantized models or multiple models simultaneously."
+    "a": "About 8 GB for small quantized vision models. Mid-size models are more comfortable with 16 GB of RAM or a graphics card with 8 GB or more."
    },
    {
     "q": "What offline tasks can a local vision model handle?",
-    "a": "Local vision models support OCR, image captioning, object detection, visual question answering, and semantic image search. Tools like image-analyser add metadata extraction and quality metrics on top of those ML capabilities."
+    "a": "Reading text in images, describing photos, answering questions about charts and screenshots, labelling objects and, with an image encoder, searching photos by description."
    }
   ],
   "words": 4202,
@@ -2328,7 +2328,7 @@
   "slug": "offline-ai-vs-cloud-ai",
   "old_url": "https://blog.greencube.app/blog/offline-ai-vs-cloud-ai",
   "title": "Offline AI vs Cloud AI: A Practical 2026 Decision Guide",
-  "description": "Explore the best strategies for choosing between offline AI and cloud AI. Find the perfect blend for your tasks in this comprehensive guide.",
+  "description": "How to choose between offline AI and cloud AI: privacy, cost, speed, and what each does best, so you can use the right one for each task.",
   "date_published": "2026-08-09T16:16:18.661Z",
   "date_modified": "2026-08-09T16:16:18.661Z",
   "language": "en-US",
@@ -2337,19 +2337,19 @@
   "faq": [
    {
     "q": "Is local AI better than cloud AI?",
-    "a": "Neither is universally better. Local AI wins on privacy, latency, and cost at sustained volume; cloud AI wins on frontier model capability, long contexts, and elastic scale. The right answer depends on the specific task."
+    "a": "Neither is better at everything. Local AI keeps your chats on your own computer, works without internet and has no monthly bill; cloud AI is smarter on the hardest problems and knows today's news. Many people use both, each for what it does well."
    },
    {
     "q": "Which AI is best for offline use?",
-    "a": "For nontechnical users who want a no-setup offline AI on Windows, Greencube is a strong option: one-time purchase, one sign-in at setup, runs entirely on your machine. For developers who want model selection and runtime control, Ollama or LM Studio are the standard starting points."
+    "a": "If you want to pick your own models, the free apps Ollama and LM Studio are the usual starting points. If you'd rather not set anything up, GreenCube is a Windows app that picks the model for your PC and costs \u20ac9.99 once."
    },
    {
     "q": "Is there such a thing as offline AI?",
-    "a": "Yes. Offline AI runs model inference entirely on local hardware with no internet connection required. Tools like Greencube and runtimes like Ollama make this practical on consumer laptops and workstations in 2026."
+    "a": "Yes. Offline AI runs the model on your own computer, so after a one-time download it answers with the Wi-Fi off. The models are smaller than the cloud ones, so they're weaker on the hardest problems."
    },
    {
     "q": "What is better than cloud AI for privacy?",
-    "a": "Local/offline AI is the strongest privacy architecture because data never leaves your device. There is no third-party server, no API log, and no data retention policy to review. For regulated data (HIPAA, GDPR), local inference removes an entire category of compliance risk."
+    "a": "Running the AI locally, because your prompts and files are processed on your own computer and no provider holds your chats. It doesn't make you HIPAA or GDPR compliant on its own: you still need to protect the computer with disk encryption and a password, and follow the rules for your data."
    }
   ],
   "words": 3791,
@@ -2363,7 +2363,7 @@
   "slug": "secure-ai-on-pc",
   "old_url": "https://blog.greencube.app/blog/secure-ai-on-pc",
   "title": "Secure AI on Your PC: A Private, Offline Buyer's Guide",
-  "description": "Explore how to run secure AI on your PC privately with Greencube. Enjoy offline access, strong privacy, and no subscriptions needed.",
+  "description": "How to run secure AI on your PC privately with GreenCube: offline use, what it protects, the hardware you need, and no subscription.",
   "date_published": "2026-08-08T16:19:58.761Z",
   "date_modified": "2026-08-08T16:19:58.761Z",
   "language": "en-US",
@@ -2372,23 +2372,23 @@
   "faq": [
    {
     "q": "What does \"secure AI on PC\" mean for a personal user?",
-    "a": "It means running an AI app entirely on your own computer, with no cloud connection, no account, and no data leaving your machine. Privacy is built into the architecture, not promised by a policy."
+    "a": "An AI app that runs on your own computer, so your prompts and files are processed and saved there rather than on a company's server. Your PC then needs the usual protection: encryption, a screen lock and updates."
    },
    {
     "q": "How much VRAM do I need to run offline AI comfortably?",
-    "a": "A 7B Q4 model needs about 4.5 GB of VRAM; a 14B Q4 model needs roughly 9 GB. Six GB of VRAM is a workable minimum, and 12 GB gives you noticeably more model headroom."
+    "a": "A 7B model in 4-bit form needs about 4 to 5 GB, and a 14B model around 9 GB. A graphics card with 6 to 8 GB is a good start. Some apps, GreenCube included, also run with no graphics card at all, just more slowly."
    },
    {
-    "q": "Is Greencube suitable for non-technical users?",
-    "a": "Yes. Greencube requires no command-line setup, no manual model configuration, and just one sign-in at setup. Install it, and it works — that's the design intent for users who want results without a technical learning curve."
+    "q": "Is GreenCube suitable for non-technical users?",
+    "a": "Yes. You install it, sign in once, and it picks and downloads the right model for your PC. There are no models to choose and no settings to learn. It runs on Windows 10 and 11."
    },
    {
     "q": "What happens if my model is too large for my GPU?",
-    "a": "The runtime offloads layers to system RAM, dropping performance to roughly 1–5 tokens per second. For daily use, that's too slow. The fix is a smaller or more quantized model, not more patience."
+    "a": "Most apps split it between the graphics card and normal RAM. It still runs, but much more slowly, so a smaller model that fits completely is usually the better choice."
    },
    {
     "q": "Do I need an internet connection after the initial setup?",
-    "a": "No. Download the app and model while online, verify the model file's integrity, then disconnect. Everything after that runs fully offline, including document indexing and PDF chat."
+    "a": "Not for a local AI app. GreenCube needs internet once, to sign in and download the AI; after that it works offline, and only goes online for updates, to keep you signed in while you're connected, or if you switch Online on."
    }
   ],
   "words": 2509,
@@ -2624,7 +2624,7 @@
   "slug": "best-laptop-ai-assistant",
   "old_url": "https://blog.greencube.app/blog/best-laptop-ai-assistant",
   "title": "Best Laptop AI Assistant for Privacy: Local and Offline",
-  "description": "Discover the best laptop AI assistant for privacy. Greencube runs offline, ensuring data security with zero subscription fees. Learn more!",
+  "description": "Discover the best laptop AI assistant for privacy. GreenCube runs offline after setup, keeps your chats on your laptop, and has no subscription fees.",
   "date_published": "2026-08-02T15:21:18.498Z",
   "date_modified": null,
   "language": "en-US",
@@ -2633,23 +2633,23 @@
   "faq": [
    {
     "q": "What is the best laptop AI assistant for offline use?",
-    "a": "Greencube is the top pick for fully offline use. It runs chat, PDF reading, and image analysis entirely on your laptop with no cloud calls for your chats, one sign-in at setup, and a one-time purchase."
+    "a": "One that runs the model on the laptop: LM Studio, Jan, Ollama or GPT4All if you're happy to choose a model yourself, or GreenCube if you want it set up for you for EUR 9.99 once."
    },
    {
     "q": "Does a local AI assistant work without internet?",
-    "a": "Yes, once the model is downloaded on first run. After that, a local AI assistant like Greencube operates with no internet connection required for any feature."
+    "a": "Yes, once the model is downloaded. GreenCube needs internet once to sign in and download the AI; after that the chat, documents and images all work offline."
    },
    {
     "q": "How much RAM do you need to run a local AI assistant?",
-    "a": "8 GB is the minimum, but 16 GB gives noticeably better performance, especially for large PDF analysis. VRAM on a discrete GPU matters more than total RAM for response speed."
+    "a": "About 8 GB to run a small model at reading speed, and 16 GB for two to three times that speed on the laptops we tested. A graphics card helps more than anything else."
    },
    {
     "q": "How do I verify that an AI app is truly offline?",
-    "a": "Disconnect from Wi-Fi and run the app normally. If it works without errors, the core pipeline is local. You can also open a network monitor during startup and confirm zero outbound connections."
+    "a": "Turn the Wi-Fi off after the first download and use it, including with a document. If it keeps working, it's local. Then read its privacy page to see what it sends when you're back online."
    },
    {
     "q": "Is a one-time purchase AI assistant better than a subscription?",
-    "a": "For privacy-conscious users, yes. A one-time license like Greencube's means no recurring billing and no risk of losing access if a subscription lapses."
+    "a": "It's cheaper over time and you keep it, but a subscription to a cloud AI buys you a much bigger model. Which is better depends on whether you need the strongest AI or a private one you own."
    }
   ],
   "words": 2363,
@@ -2663,7 +2663,7 @@
   "slug": "air-gapped-ai",
   "old_url": "https://blog.greencube.app/blog/air-gapped-ai",
   "title": "Air Gapped AI: A Security Team's Deployment Guide",
-  "description": "Discover how to deploy air gapped AI for secure environments. Ensure compliance with regulatory standards like FedRAMP and CMMC. Learn more!",
+  "description": "How to deploy air gapped AI for secure environments: what lives inside the enclave, how updates get in, and where FedRAMP and CMMC fit.",
   "date_published": "2026-08-01T13:30:59.870Z",
   "date_modified": null,
   "language": "en-US",
@@ -2672,23 +2672,23 @@
   "faq": [
    {
     "q": "What is air gapping in AI?",
-    "a": "Air gapping in AI means running an AI system inside a physically isolated network with no routable path to the public internet, so that models, data, and outputs never leave the organization's boundary. It removes entire attack classes by taking the system off the institutional network graph."
+    "a": "It means running an AI system on machines with no path to the internet or any outside network. The model, the data and every answer stay inside that boundary, and anything coming in, like a new model or an update, is carried in deliberately and checked."
    },
    {
     "q": "What does \"air-gapped\" mean in tech?",
-    "a": "An air-gapped system has no physical or logical connection to any external network, including no external DNS resolution, no public certificate authority trust chains, and no outbound connections of any kind. The term comes from the literal \"air gap\" between the isolated system and any connected network."
+    "a": "An air-gapped system has no connection to any outside network at all: no internet, no outside DNS, no vendor licence check, no public time server. The name comes from the literal gap of air between it and any connected network."
    },
    {
     "q": "What is the difference between air-gapped and offline?",
-    "a": "\"Offline\" typically means a device or application is not currently connected to the internet but could be reconnected. \"Air-gapped\" means the system is physically and permanently isolated with no connection path available, a much stronger and auditable guarantee that accrediting authorities require for classified and CUI workloads."
+    "a": "Offline means a device isn't connected right now, or an app can work without a connection, and it could reconnect at any time. Air-gapped means there is no route out at all, under any condition, maintenance windows included."
    },
    {
-    "q": "Does Greencube qualify as air-gapped AI?",
-    "a": "Greencube runs fully offline on a single machine with no cloud connection or telemetry, making it a practical privacy solution for individuals and small teams. It does not constitute an enterprise air-gapped enclave with the full accreditation controls (signed artifact ingest, internal PKI, SIEM) that FedRAMP High or DoD IL5 require."
+    "q": "Does GreenCube qualify as air-gapped AI?",
+    "a": "No. GreenCube needs the internet once to sign in and download the AI, and after that it works offline, going online only for updates, to keep your sign-in fresh, or for web lookups if you switch Online on. It suits people who don't want their work on someone else's server, not rules that say a machine may never touch a network."
    },
    {
     "q": "When is a full enterprise air gap legally required?",
-    "a": "A full enterprise air gap is typically required when data carries a CUI, SECRET, or higher classification, when a contract references FedRAMP High, DoD IL5/IL6, or CMMC Level 3, or when a security policy explicitly prohibits any outbound connectivity from the AI runtime. Consult your ISSO and the relevant accreditation body for a definitive determination."
+    "a": "It depends on your data's classification, your contract and your assessor. Classified systems and some contracts covering Controlled Unclassified Information or critical infrastructure may require physical isolation, while frameworks such as FedRAMP and CMMC don't automatically mean an air gap, so ask early."
    }
   ],
   "words": 4840,
@@ -2776,7 +2776,7 @@
   "slug": "offline-ai-for-travelers",
   "old_url": "https://blog.greencube.app/blog/offline-ai-for-travelers",
   "title": "Offline AI for Travelers: The Private, No-Cloud Guide",
-  "description": "Discover how offline AI for travelers with Greencube offers complete privacy, no fees, and reliable performance without cloud dependency.",
+  "description": "How offline AI for travelers works: what it does on a plane or with no signal, what still needs internet, and how to set up GreenCube before you go.",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -2785,23 +2785,23 @@
   "faq": [
    {
     "q": "Does offline AI work with no Wi-Fi at all?",
-    "a": "Yes, once the initial model files are downloaded, a fully offline AI like Greencube runs with no internet connection required — on flights, in remote areas, or anywhere with no signal."
+    "a": "Yes, once it's installed and the AI is downloaded. Set it up at home, then test it in airplane mode. Anything live, like flight changes, maps or news, still needs a connection."
    },
    {
     "q": "How large are the model files I need to download first?",
-    "a": "Model files typically exceed 1 GB and must be downloaded on reliable Wi-Fi before travel; attempting this on airport or hotel Wi-Fi is a common failure point."
+    "a": "Usually a few gigabytes, so download them at home on good Wi-Fi. Airport and hotel Wi-Fi is the worst place to try it."
    },
    {
-    "q": "Is my data private if I use Greencube?",
-    "a": "Greencube needs one sign-in at setup and keeps your documents, chats, and queries on your own device."
+    "q": "Is my data private if I use GreenCube?",
+    "a": "Your chats, files and photos are processed and saved on your laptop. GreenCube goes online to sign in (only to check you paid), to download the AI once, for updates, and for web lookups only if you switch Online on."
    },
    {
-    "q": "What encryption protects my stored travel documents?",
-    "a": "AES-256-GCM encryption with hardware-enclave key storage is the standard to look for; it protects locally stored passports, visas, and other sensitive files against unauthorized access."
+    "q": "How do I protect the travel documents on my laptop?",
+    "a": "Turn on disk encryption (BitLocker or Device Encryption on Windows) and set a password, since a laptop can be lost. GreenCube doesn't encrypt your disk itself; that's Windows' job."
    },
    {
-    "q": "What happens when Greencube releases an update?",
-    "a": "Updates are delivered as downloadable patches rather than live server pushes; install them on Wi-Fi before a trip."
+    "q": "What happens when GreenCube releases an update?",
+    "a": "When you're online, GreenCube checks for a newer version, and every update is signed and checked by the app before it installs. Install any pending update at home before a trip."
    }
   ],
   "words": 2261,
@@ -2857,7 +2857,7 @@
   "slug": "no-setup-ai",
   "old_url": "https://blog.greencube.app/blog/no-setup-ai",
   "title": "No Setup AI: Private, Offline, One-Time Purchase",
-  "description": "Discover the benefits of no setup AI with Greencube. Enjoy offline use, privacy, and a one-time purchase—no subscriptions required!",
+  "description": "What no setup AI means, browser tools vs desktop apps, and how GreenCube works offline, keeps chats on your PC, and is a one-time purchase.",
   "date_published": "2026-07-28T14:32:18.234Z",
   "date_modified": null,
   "language": "en-US",
@@ -2866,23 +2866,23 @@
   "faq": [
    {
     "q": "What does \"no setup AI\" mean for a non-technical user?",
-    "a": "It means you download one file, run it, and the AI works immediately — no account creation, no model configuration, and no cloud connection required. Greencube fits this definition on Windows today."
+    "a": "You install or open it and start using it. You don't pick models, edit settings or use a terminal; the tool handles that. With GreenCube you sign in once, and the first launch downloads the AI that fits your PC."
    },
    {
-    "q": "Does Greencube send any data to the cloud?",
-    "a": "No. Greencube runs entirely on your computer. Your prompts, documents, and files never leave your machine, and no internet connection is needed after the initial model download."
+    "q": "Does GreenCube send any data to the cloud?",
+    "a": "Not your chats, files or images: they're processed and saved on your PC. It goes online to sign you in (only to check you paid), to download the AI on first launch, for updates, and for web searches if you switch Online on. It sends no usage counts or crash reports."
    },
    {
     "q": "Is a browser-based local AI as private as a desktop app?",
-    "a": "Not necessarily. Browser-local inference places your data in browser memory, which can be accessed by compromised extensions. A standalone desktop app provides a stronger security boundary for sensitive documents."
+    "a": "Not quite. The model may run on your device, but your text sits in a browser tab that extensions with access to the page can read, and the page's code is loaded from a website each time. A desktop app keeps everything inside one program on your PC."
    },
    {
     "q": "What hardware do I need to run a local offline AI?",
-    "a": "At least 8 GB of RAM is the practical minimum for a usable experience. A dedicated GPU helps with speed, but Greencube is designed to run on standard consumer laptops, not just high-end machines."
+    "a": "About 8 GB of RAM is the practical minimum. A graphics card makes it much faster but isn't required. For GreenCube, making images needs 12 GB of RAM."
    },
    {
-    "q": "Is there a subscription fee for Greencube?",
-    "a": "No. Greencube is a one-time purchase. There are no monthly fees, no renewal charges, and no per-use costs."
+    "q": "Is there a subscription fee for GreenCube?",
+    "a": "No. It's \u20ac9.99 (US$9.99), paid once, with no subscription, credits or message limits, and a 15-day refund."
    }
   ],
   "words": 2010,
@@ -2938,7 +2938,7 @@
   "slug": "offline-ai-security",
   "old_url": "https://blog.greencube.app/blog/offline-ai-security",
   "title": "Offline AI Security: A Practical Hardening Guide",
-  "description": "Enhance your offline AI security with effective hardening strategies. Learn key practices for protecting sensitive data and ensuring integrity.",
+  "description": "Offline AI security in practice: disk encryption, trusted models, prompt injection, file transfers, and what offline does and doesn't protect.",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -2947,23 +2947,23 @@
   "faq": [
    {
     "q": "Is there any AI that runs completely offline?",
-    "a": "Yes. Several tools run entirely on local hardware with no network connection required, including open-source models like Llama and Mistral deployed via Ollama or llama.cpp, and desktop apps like Greencube that package local inference for non-technical users with no setup required."
+    "a": "Yes. Open models run locally through tools like Ollama or llama.cpp once they're downloaded, and desktop apps like GreenCube package that for people who don't want to set anything up. GreenCube needs the internet once to sign in and download the AI, then works offline."
    },
    {
     "q": "Can you build a fully offline AI system for sensitive data?",
-    "a": "You can, but it requires hardware-backed boot integrity (UEFI Secure Boot, TPM2 PCR sealing), a default-deny egress policy, a formal USB transfer workflow with GPG encryption, and a model quarantine pipeline — all operating together. Missing any one of those controls weakens the overall posture."
+    "a": "Yes, but being offline isn't enough by itself. Encrypt the disk, turn on Secure Boot, block outbound traffic by default, use models from official sources with checked checksums, and write down how updates come in and files go out."
    },
    {
     "q": "What is the biggest security risk in an offline AI deployment?",
-    "a": "The transfer workflow. USB drives moving data into and out of the air-gapped system are the primary attack surface. Encrypt with GPG on the connected host, verify signatures on both ends, and wipe or physically destroy media after use per your policy."
+    "a": "Usually moving files in and out, because on a machine that stays offline USB drives become the main way data travels. Use dedicated drives, encrypt files before they move, and wipe the drive afterwards. A lost laptop with an unencrypted disk is the other common risk."
    },
    {
     "q": "Which AI can I use without an internet connection?",
-    "a": "Open-source models deployed locally (Llama, Mistral, Phi) run without internet access once downloaded and verified. For a no-setup option, Greencube installs as a desktop app and runs fully offline on Windows after a one-time sign-in, with no cloud telemetry, and a one-time purchase price."
+    "a": "Open models such as Llama, Mistral or Gemma run without internet once downloaded, through tools like Ollama or LM Studio. GreenCube is a Windows app that does this without setup: after you sign in once and it downloads the AI, it works offline, and it sends no usage counts or crash reports. It costs \u20ac9.99 once."
    },
    {
     "q": "How does offline AI map to HIPAA compliance?",
-    "a": "An air-gapped deployment satisfies HIPAA's transmission-security safeguard by design, but auditors still require access logs, session records, chain-of-custody documentation for any data transfers, a written key-management policy, and a documented update process. Offline operation addresses the technical safeguards; administrative and physical safeguards require separate documentation."
+    "a": "If no AI provider ever receives the data, you don't need a Business Associate Agreement with one. The Security Rule still expects access controls, audit controls, integrity protection and a plan for lost devices, so offline operation is one control, not a certificate."
    }
   ],
   "words": 3526,
@@ -2978,7 +2978,7 @@
   "slug": "microsoft-copilot-alternatives",
   "old_url": "https://blog.greencube.app/blog/microsoft-copilot-alternatives",
   "title": "Best Microsoft Copilot Alternatives for Privacy in 2026",
-  "description": "Discover the best Microsoft Copilot alternatives for 2026, offering offline operation, privacy, and a one-time purchase—perfect for you!",
+  "description": "Discover the best Microsoft Copilot alternatives for 2026, offering offline operation, privacy, and a one-time purchase.",
   "date_published": "2026-07-23T14:15:16.989Z",
   "date_modified": null,
   "language": "en-US",
@@ -2987,23 +2987,23 @@
   "faq": [
    {
     "q": "What makes an AI tool truly private?",
-    "a": "A truly private AI tool processes all data locally on your device and transmits nothing to external servers. Offline operation, not just a privacy policy, is the only reliable guarantee."
+    "a": "A simple test: switch off your network and try it. If it still answers, the work is happening on your machine; a privacy policy alone can't tell you that."
    },
    {
     "q": "Is offline AI as capable as Microsoft Copilot?",
-    "a": "Yes. Offline AI now matches mainstream cloud models in document analysis and conversational chat, while keeping all data on your device."
+    "a": "No. An AI that fits on a laptop is good for writing, studying, summarising documents and everyday questions, but weaker than Copilot's cloud models on the hardest maths, tricky code and niche facts. It also won't sit inside Word, Outlook and Teams."
    },
    {
-    "q": "Does Greencube work without an internet connection?",
-    "a": "Greencube runs fully offline with zero cloud data transmission. It works on planes, in areas without Wi-Fi, or with your network adapter disabled."
+    "q": "Does GreenCube work without an internet connection?",
+    "a": "Yes, after setup. It needs the internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. Then it works with the Wi-Fi off, going online only for updates or if you switch Online on."
    },
    {
-    "q": "Can Greencube read PDFs and images?",
-    "a": "Yes. Greencube supports PDF reading and image understanding as core features, both processed entirely on your local machine."
+    "q": "Can GreenCube read PDFs and images?",
+    "a": "Yes. It reads PDFs, Word files and photos, and they're read on your PC, not uploaded."
    },
    {
-    "q": "Is there a subscription fee for Greencube?",
-    "a": "No. Greencube uses a one-time purchase model with no subscriptions and no recurring charges."
+    "q": "Is there a subscription fee for GreenCube?",
+    "a": "No. GreenCube costs \u20ac9.99 once, with no subscription, no message limits and a 15-day refund."
    }
   ],
   "words": 1454,
@@ -3135,7 +3135,7 @@
   "slug": "gdpr-compliant-ai",
   "old_url": "https://blog.greencube.app/blog/gdpr-compliant-ai",
   "title": "GDPR Compliant AI: Your 2026 Compliance Roadmap",
-  "description": "Unlock the future with GDPR compliant AI. Explore how to align your AI systems with EU regulations and ensure compliance by 2026.",
+  "description": "What GDPR compliant AI really means: how to align your AI systems with EU rules, including the AI Act, and stay compliant in 2026.",
   "date_published": null,
   "date_modified": null,
   "language": null,
@@ -3195,7 +3195,7 @@
   "slug": "perplexity-alternatives",
   "old_url": "https://blog.greencube.app/blog/perplexity-alternatives",
   "title": "Best Perplexity Alternatives in 2026 for Research and Work",
-  "description": "Discover the best Perplexity alternatives in 2026 for research and work. Compare features, benefits, and pricing of top tools today!",
+  "description": "The best Perplexity alternatives in 2026 for research and work: what each tool is best for, what it costs, and the catch with each one.",
   "date_published": "2026-07-19T03:25:07.675Z",
   "date_modified": null,
   "language": "en-US",
@@ -3204,23 +3204,23 @@
   "faq": [
    {
     "q": "Which tool is better than Perplexity for most users?",
-    "a": "ChatGPT with web browsing is the strongest overall alternative. It matches Perplexity Pro at $20/month and adds writing, coding, image analysis, and custom workflow support in the same tool."
+    "a": "For most people, ChatGPT is the broadest alternative: it searches the web with sources and then turns what it found into writing, tables, code or an analysis of a file. Plus costs $20 a month, the same as Perplexity Pro."
    },
    {
     "q": "What is the best free alternative to Perplexity?",
-    "a": "Microsoft Copilot is the best completely free option, with unlimited searches and inline citations at no cost. You.com is the second-best free choice and most closely mirrors Perplexity's search interface."
+    "a": "Microsoft Copilot is the first one to try: it's free, searches with Bing and shows its sources. ChatGPT, Claude and Gemini also have free plans with limits."
    },
    {
     "q": "Is Claude better than Perplexity for research?",
-    "a": "Claude is better when your research starts with long documents. Its 200K token context window handles full contracts, transcripts, and research libraries in one prompt. For fast web citations, Perplexity is still more citation-dense by default."
+    "a": "Claude is better when your research starts with long documents, like a contract, a stack of papers or a transcript. For quick web answers with a citation on every claim, Perplexity is still faster."
    },
    {
     "q": "Who is ChatGPT's biggest competitor?",
-    "a": "Google Gemini is ChatGPT's closest competitor at scale, particularly for users embedded in the Google ecosystem. Claude competes directly on document reasoning and long-form research tasks."
+    "a": "Google Gemini is the closest at scale, especially for people who use Gmail, Docs and Android. Claude competes most directly on long documents and careful writing."
    },
    {
     "q": "Can I use multiple AI tools together instead of picking one?",
-    "a": "Yes, and most serious researchers do. A common setup pairs a citation-first tool like Perplexity or Copilot for quick web retrieval with Claude or ChatGPT for drafting and deeper analysis, then Notion or Saner.AI to organize the output. *"
+    "a": "Yes, and many researchers do: a quick cited search tool like Perplexity or Copilot, then ChatGPT or Claude for drafting and deeper analysis. Notes apps like Notion or Saner.AI are a good place to keep what you find."
    }
   ],
   "words": 2580,
@@ -3234,7 +3234,7 @@
   "slug": "grammarly-alternatives",
   "old_url": "https://blog.greencube.app/blog/grammarly-alternatives",
   "title": "The Best Grammarly Alternatives in 2026: Honest Picks",
-  "description": "Discover the best Grammarly alternatives for 2026. Compare top tools that excel in grammar checking, free features, and multilingual support!",
+  "description": "Discover the best Grammarly alternatives for 2026. Compare top tools that excel in grammar checking, free features, and multilingual support.",
   "date_published": "2026-07-18T20:12:56.755Z",
   "date_modified": null,
   "language": "en-US",
@@ -3243,23 +3243,23 @@
   "faq": [
    {
     "q": "Is there a better option than Grammarly?",
-    "a": "For specific use cases, yes. QuillBot's free tier beats Grammarly's free version on usability and lacks the aggressive upselling. LanguageTool outperforms Grammarly on multilingual support, covering over 30 languages and dialects compared to Grammarly's English focus."
+    "a": "It depends on what you write. QuillBot has a good free checker, LanguageTool and DeepL Write are better if you write in other languages, ProWritingAid goes deeper on long-form craft, and Hemingway Editor helps with clarity."
    },
    {
     "q": "Is ChatGPT or Grammarly better for grammar checking?",
-    "a": "Grammarly is more reliable for catching mechanical grammar errors in real time within documents. ChatGPT is more flexible and can handle rewriting, tone, and structure, but requires careful review since it can introduce errors, especially in longer documents."
+    "a": "Grammarly is the more dependable choice for catching mechanical errors as you type. ChatGPT is more flexible for rewriting, tone and structure, but it can introduce errors or change your meaning, so read its edits."
    },
    {
     "q": "Will I get flagged for AI if I use a grammar checker?",
-    "a": "Standard grammar checkers like LanguageTool, ProWritingAid, and Hemingway Editor correct errors without generating new content, so they don't typically trigger AI-detection tools. AI rewriting tools like QuillBot's paraphraser or Wordtune may produce output that AI detectors flag, depending on how heavily you use them."
+    "a": "Fixing spelling and commas leaves your writing yours, so it's unlikely to look machine-written. Rewriting whole paragraphs with a paraphraser or a chatbot is different, because many of the words are then the tool's; if your school or job has rules about AI, do the rewriting yourself."
    },
    {
     "q": "What is the most private grammar tool available?",
-    "a": "Offline tools that don't send text to external servers offer the strongest privacy. ProWritingAid does not train AI on user text. Greencube runs entirely on your own computer with no cloud connection at all, which is the most private option for writers handling sensitive or proprietary content."
+    "a": "A tool that runs on your own computer, because your text never goes to a server. GreenCube is one: a Windows chat app that runs the AI on your PC and works offline after setup, though it isn't a checker that underlines words as you type."
    },
    {
     "q": "What's the best free Grammarly substitute for students?",
-    "a": "PaperRater combines grammar checking and plagiarism detection with no account required, making it practical for academic writing. QuillBot's free tier is also strong for grammar and paraphrasing without a subscription."
+    "a": "QuillBot's free grammar checker is a good first stop for students. PaperRater adds a free plagiarism check alongside its grammar feedback."
    }
   ],
   "words": 2738,
@@ -3359,23 +3359,23 @@
   "faq": [
    {
     "q": "What replaced Bing Chat?",
-    "a": "Bing Chat was rebranded and folded into Microsoft Copilot, which now handles the same conversational assistant role inside Microsoft's products and on the web. Copilot keeps the Microsoft 365 integration that Bing Chat offered, built on top of a large language model paired with web data, according to PCMag's testing."
+    "a": "Microsoft renamed it Copilot in late 2023. It's the same assistant, now in Windows, Edge, the Copilot app and Microsoft 365, and it still searches the web as it answers."
    },
    {
     "q": "Which is the best free AI chat option?",
-    "a": "ChatGPT, Google Bard, and YouChat all offer usable free tiers for general conversation and web-aware answers, according to Zapier's comparison of chatbot options. If privacy matters more than cost, a one-time local purchase like GreenCube avoids ongoing fees entirely while keeping your data off the cloud."
+    "a": "Copilot, ChatGPT, Gemini, Claude and Perplexity all have free plans with limits, so try a few on your own questions. If you'd rather your chats stayed on your PC, free local apps like LM Studio, Ollama, Jan and GPT4All work offline once you've set up a model."
    },
    {
     "q": "What shouldn't you share with a cloud-based AI chatbot?",
-    "a": "Avoid typing passwords, financial account numbers, medical records, or other sensitive personal documents into a cloud chatbot unless you've confirmed how that provider stores and uses your data. A Medium article on local AI privacy notes that even tools marketed as private can still send some data online, so it's worth verifying before you share anything sensitive."
+    "a": "Passwords, bank and card numbers, medical records and other people's private details, unless you've read how that company stores and uses chats. For that kind of material, an AI that runs on your own machine is the safer place."
    },
    {
     "q": "Is Bing Chat the same as ChatGPT?",
-    "a": "No. Bing Chat, now part of Copilot, was built by Microsoft using a language model paired with web search and deep Microsoft 365 integration, while ChatGPT is OpenAI's own standalone product with its own apps and plugin ecosystem. Both rely on large language models, but they come from different companies with different integrations, as PCMag's reviews describe."
+    "a": "No. Both have used OpenAI's models, but Copilot (the new name for Bing Chat) is Microsoft's product, with Bing search and Microsoft 365 built in, while ChatGPT is OpenAI's own app."
    },
    {
     "q": "Do I need an internet connection to use a local AI assistant like GreenCube?",
-    "a": "No, not for daily use. GreenCube downloads its chosen model once during setup and verifies your license with a one-time sign-in, and after that it works fully offline, with only optional features requiring a connection."
+    "a": "Only at the start. GreenCube needs internet once to sign in (only to check you paid) and to download the AI. After that it works offline, and only goes online for updates or if you switch on Online for web lookups."
    }
   ],
   "words": 2505,
@@ -3442,19 +3442,19 @@
   "faq": [
    {
     "q": "Are schools required to have an AI policy?",
-    "a": "Most education authorities do not mandate a standalone AI policy by law, but guidance from bodies like the UK Department for Education strongly recommends one covering safeguarding, data protection, and human oversight. Many districts fold AI rules into existing Acceptable Use Policies rather than writing a separate document."
+    "a": "Usually not by law, but education authorities increasingly expect one. The UK Department for Education, for example, sets out expectations on safeguarding, data protection and human oversight. Many schools fold AI rules into their existing acceptable use policy."
    },
    {
     "q": "Do schools allow students to use AI?",
-    "a": "Policies vary widely, but many schools now permit limited, disclosed AI use such as brainstorming or vocabulary support, especially in middle and high school. Use typically requires an AI Use Note and teacher permission rather than open, unsupervised access."
+    "a": "It varies a lot. Many now allow limited, disclosed use such as brainstorming or vocabulary help, mostly in middle and high school, with the teacher's permission for each assignment."
    },
    {
     "q": "What is the 30% rule for AI?",
-    "a": "Some classroom templates cap AI-assisted content at a set share of a submission, but this is a local classroom choice, not a standard."
+    "a": "It isn't a standard. Some teachers cap the share of a piece of work that can come from AI, but that's a local classroom choice. Labelling each assignment clearly works better than a percentage."
    },
    {
     "q": "Can schools expel you for using AI?",
-    "a": "Consequences for undisclosed AI use typically follow existing academic integrity policies, ranging from a resubmission requirement to more serious disciplinary steps depending on severity and prior history. Expulsion would be an extreme outcome reserved for serious, repeated violations under a school's broader conduct code, not a standard response to a first AI disclosure issue."
+    "a": "Undisclosed AI use is normally handled under the school's existing academic integrity rules, from redoing the work to more serious steps depending on the case and any history. Expulsion would be an extreme outcome for serious, repeated cases, not a normal response to a first problem."
    }
   ],
   "words": 2199,
@@ -3475,23 +3475,23 @@
   "faq": [
    {
     "q": "Can I use ChatGPT or similar tools without creating an account?",
-    "a": "Yes, many providers offer a logged-out web chat that lets you type a question and get an answer without signing up. A practical guide to using ChatGPT without an account confirms this works for a single browser-bound conversation, though it won't save your history once you leave."
+    "a": "Yes. ChatGPT and some other chatbots let you type a question on their website and get an answer without signing up. A guest chat usually lives only in that browser tab, so copy anything you want to keep before you close it."
    },
    {
     "q": "Does a no-login AI chat still see what I type?",
-    "a": "Yes. Skipping sign-in only means the provider isn't linking your activity to a personal account, not that your prompt stays off their servers. The text still travels to a server to generate a response, and some providers use logged-out conversations to improve their models by default."
+    "a": "Yes. Skipping the sign-in only means the company isn't tying your chat to a named account. Your question still goes to its servers, and depending on its policy guest chats may be used to improve its models, so check the privacy page before you paste anything personal."
    },
    {
     "q": "Will I lose my conversation if I close the browser tab?",
-    "a": "Most likely, yes. Guest sessions typically live in browser storage or cookies, and closing the tab, clearing site data, or switching devices can erase the whole conversation. Copy or save anything important before you leave the page."
+    "a": "Most likely, yes. Guest chats are usually kept in your browser, so closing the tab, clearing cookies or switching devices can wipe them. Copy anything important before you leave the page."
    },
    {
     "q": "What's the safest option for private or recurring tasks?",
-    "a": "A local, offline app that keeps your data on your own device is the safer choice for sensitive or repeated work, since nothing has to leave your machine. GreenCube is built around exactly that approach, running fully offline after a one-time setup and model download."
+    "a": "An app that runs the AI on your own PC, so your questions and files don't travel anywhere and your history stays on your disk. GreenCube works like that, but it isn't login-free: you sign in once with Google or Microsoft, only to check you paid, and after the first download it works offline."
    },
    {
     "q": "Is offline AI harder to set up than a web chat?",
-    "a": "It takes a bit more effort upfront: you install the app and download a model one time. After that, it works without an internet connection, which is a fair trade for privacy-conscious users and anyone handling documents they'd rather not upload anywhere."
+    "a": "It takes more at the start: you install the app, download the AI once, and some apps (GreenCube included) ask you to sign in. After that it works without internet, though on a slow PC you'll need some patience."
    }
   ],
   "words": 1833,
@@ -3515,7 +3515,7 @@
   "faq": [
    {
     "q": "Is there a free alternative to Notion AI?",
-    "a": "Yes, several tools offer free tiers, including NotebookLM, Taskade, and Obsidian's core app. Free versions usually limit usage or features, and cloud ones send your content to a server. If privacy matters more than price, a one-time purchase can cost less than years of subscriptions."
+    "a": "Yes. Obsidian's core app is free, and NotebookLM and Taskade have free plans, though free versions usually limit usage or features. Cloud tools send your content to a server, so if that matters, a local app is the other route."
    },
    {
     "q": "Is Notion still relevant in 2026?",
@@ -3552,23 +3552,23 @@
   "faq": [
    {
     "q": "What are some good prompt ideas for AI?",
-    "a": "Strong prompts name the role, grade level, subject, and format you want, such as \"act as a 5th grade teacher and write a 10-question quiz on photosynthesis with an answer key.\" Specific prompts that include an example or a length limit consistently outperform vague one-line requests."
+    "a": "Good prompts name the role, the audience, the task, the format and a length, for example \"Act as a [grade] [subject] teacher and write a 10-question quiz on [topic] with an answer key.\" Adding an example of what you like helps even more."
    },
    {
     "q": "What are some good AI prompts for Teacher's Day?",
-    "a": "Try \"write a short, warm appreciation message for a teacher who helped students build confidence in [subject]\" or \"draft a class card message thanking our teacher for [specific thing they did this year].\" Keep the prompt specific to the teacher's actual impact rather than generic praise for a more genuine result."
+    "a": "Try \"Write a short, warm thank-you message for a teacher who helped students gain confidence in [subject]\" or \"Draft a class card thanking our teacher for [something specific they did this year].\" The more specific the detail you give, the less generic the message."
    },
    {
     "q": "What are the top 10 AI prompts?",
-    "a": "There's no single official \"top 10\" list, but the most reused teacher prompts cover lesson plans, quizzes, rubrics, exit tickets, parent emails, substitute plans, feedback comments, vocabulary lists, differentiated tasks, and meeting agendas. The paste-ready bank in this article includes ten templates covering exactly these jobs."
+    "a": "There's no official list. The ones teachers reuse most cover lesson plans, quizzes, rubrics, exit tickets, parent emails, sub plans, feedback comments, vocabulary lists, differentiated tasks and meeting notes, and this article has prompts for all of them."
    },
    {
     "q": "What are some common AI prompts?",
-    "a": "The most common classroom prompts ask for lesson summaries, quiz questions, feedback comments, and parent communication drafts, because these are the tasks that eat the most prep time. Teachers typically refine a first draft by adding grade level, tone, or length constraints rather than starting over."
+    "a": "For teachers: lesson summaries, quiz questions, feedback comments and parent emails, because those eat the most prep time. Most people then refine the first draft by adding grade, tone or length."
    },
    {
     "q": "Is it safe to use AI for student data and grading?",
-    "a": "Avoid entering student names or identifying details into cloud AI tools your district hasn't approved. Guidance from UNESCO recommends data privacy protections and human review before classroom use, and FERPA remains the primary U.S. framework for what student data can be shared with outside tools."
+    "a": "Only in tools your school has approved, or ones that keep the data on your computer. Use placeholders instead of names, and keep final grades yours: AI can draft feedback, but it shouldn't decide marks."
    }
   ],
   "words": 2694,
@@ -3592,23 +3592,23 @@
   "faq": [
    {
     "q": "Is AnythingLLM free?",
-    "a": "The open-source app is free to run yourself, and DataCamp's guide says it is MIT licensed. Paid cloud options also exist, so check the current pricing on its own site. You still need a model to run behind it, either local or through an API."
+    "a": "The open-source desktop app is free, and paid cloud options exist; check its site for current pricing. You still need a model behind it, local or through an API."
    },
    {
     "q": "Do I need technical skills to run a local AI app?",
-    "a": "Not for every tool. Runtimes like Ollama and server tools like Open WebUI expect some comfort with terminals or containers. Desktop apps like GreenCube are made to install like any other program, then download one model."
+    "a": "Not for every tool. Ollama and Open WebUI expect some comfort with a terminal or containers. LM Studio and Jan are desktop apps but ask you to choose models, and GreenCube installs like any program and picks the model for you."
    },
    {
     "q": "Does GreenCube send my documents anywhere?",
-    "a": "No. Chats and files stay on your computer. A one-time Google or Microsoft sign-in verifies your license, and no chat data or documents are sent with it. Only features you switch on yourself go online."
+    "a": "No. Chats and files stay on your computer. The sign-in only checks that you paid and never sends a chat or a file, and it goes online only for updates or if you switch on web lookups."
    },
    {
     "q": "Will it run on my old laptop?",
-    "a": "Probably, but slowly. The Quick model is lighter and faster, while the All-rounder needs 8 GB of RAM and answers more slowly. Slower computers also build apps more slowly."
+    "a": "If it has about 8 GB of RAM, yes, everything works, just slowly: about reading speed on the laptops we tested. With 16 GB it's two to three times faster."
    },
    {
     "q": "Can I use GreenCube on Linux?",
-    "a": "No. GreenCube is built for Windows 10 and 11, and there is no Mac or Linux version."
+    "a": "No. GreenCube is for Windows 10 and 11 only."
    }
   ],
   "words": 2512,
@@ -3636,7 +3636,7 @@
    },
    {
     "q": "Is there a free version of Consensus?",
-    "a": "Plans and limits change, so check the provider's pricing page for what is free today. If you want to avoid recurring costs, our app is a one-time purchase."
+    "a": "Plans and limits change, so check Consensus's pricing page for what is free today. If you'd rather not pay monthly for the reading part of the work, GreenCube costs \u20ac9.99 once, though it doesn't search the literature for you."
    },
    {
     "q": "What are the key differences between Consensus and Elicit?",

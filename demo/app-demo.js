@@ -6,7 +6,9 @@
   const root = document.getElementById('gd');
   if (!root) return;
   const LANGS = ['es', 'pt', 'fr', 'de', 'it', 'nl', 'pl', 'tr', 'ru', 'uk', 'ar', 'hi', 'id', 'vi', 'th', 'ja', 'ko', 'zh', 'zh-tw'];
-  const seg = location.pathname.split('/')[1] || '', lang = LANGS.includes(seg) ? seg : 'en';
+  // on blog.greencube.app (a post's 'try it' box) the language is after /blog/ and the files load from greencube.app
+  const parts = location.pathname.split('/'), seg = (parts[1] === 'blog' ? parts[2] : parts[1]) || '', lang = LANGS.includes(seg) ? seg : 'en';
+  const B = /^blog\./.test(location.hostname) ? 'https://greencube.app' : '';
   const box = root.closest('.gd-home, .gd') || document;
   const $ = (s) => root.querySelector(s);
   const chat = $('.gd-chat'), input = $('.gd-input'), send = $('.gd-send'), chips = $('.gd-chips'), panel = $('.gd-panel');
@@ -45,7 +47,7 @@
   let T = null, U = null, JOBS = null;
   const ICON = { slides: '🖼️', quiz: '❓', cards: '🃏' }, IMG_FILES = ['09', '01', '02', '03', '05', '08', '10', '12'];
   let picked = false, busy = false, job = 'slides', style = 'comic', deckName = 'full', theme = 'wisteria', started = false, typer = null, data = null, ready = null;
-  const loadData = () => data || (data = fetch('/demo/slides-' + lang + '.json').then((r) => r.json()));
+  const loadData = () => data || (data = fetch(B + '/demo/slides-' + lang + '.json').then((r) => r.json()));
   const deck = async () => (await loadData()).decks[deckName + '|' + theme + '|' + style] || [];
 
   function typeInto(text) {
@@ -82,7 +84,7 @@
     if (k === 'slides') { deckName = 'full'; theme = 'wisteria'; style = 'comic'; delete root.dataset.used; await loadData(); }
     if (k === 'diagram') {
       await reply('<div>' + esc(J.intro) + '</div><ul class="gd-ul">' + J.parts.map(([a, b]) => '<li><b>' + esc(a) + ':</b> ' + esc(b) + '</li>').join('') + '</ul>' +
-        '<figure class="gd-fig"><img src="/demo/plant-cell.webp" width="782" height="478" alt="' + esc(J.alt) + '" loading="lazy"/><figcaption>' + esc(J.caption) + '</figcaption></figure>', 1300);
+        '<figure class="gd-fig"><img src="' + B + '/demo/plant-cell.webp" width="782" height="478" alt="' + esc(J.alt) + '" loading="lazy"/><figcaption>' + esc(J.caption) + '</figcaption></figure>', 1300);
     } else {
       await reply('<div>' + esc(J.say) + '</div>' + cardHtml(k));
       await open(k);
@@ -146,8 +148,8 @@
   function addArt(k) { if (ARTS.includes(k)) return; ARTS.unshift(k); root.querySelector('.gd-count').textContent = ARTS.length; }
   async function artThumb(k) {
     if (k === 'slides') { const d = await loadData(); return scene(d.decks['full|wisteria|comic'][0]); }
-    if (k.startsWith('img')) return '<img src="/demo/img-' + IMG_FILES[+k.slice(4)] + '.webp" alt="" loading="lazy"/>';
-    if (k === 'diagram') return '<img src="/demo/plant-cell.webp" alt="" loading="lazy"/>';
+    if (k.startsWith('img')) return '<img src="' + B + '/demo/img-' + IMG_FILES[+k.slice(4)] + '.webp" alt="" loading="lazy"/>';
+    if (k === 'diagram') return '<img src="' + B + '/demo/plant-cell.webp" alt="" loading="lazy"/>';
     return '<span class="gd-big">' + ICON[k] + '</span>';
   }
   const artInfo = (k) => k.startsWith('img') ? [U.kinds.image, T.images[+k.slice(4)][0]] : [U.kinds[k], T.jobs[k].title];
@@ -164,7 +166,7 @@
   function renderImages() {
     const v = root.querySelector('.gd-imgs'), I = T.images;
     v.innerHTML = '<div class="gi-top"><div class="gd-vh"><h3>' + esc(U.imgs_title) + '</h3><p>' + esc(U.imgs_sub) + '</p></div>' +
-      '<div class="gi-lib">' + (made.length ? made.map((i) => '<button type="button" class="gi-th" data-big="' + i + '"><img src="/demo/img-' + IMG_FILES[i] + '.webp" alt="' + esc(I[i][0]) + '"/></button>').join('')
+      '<div class="gi-lib">' + (made.length ? made.map((i) => '<button type="button" class="gi-th" data-big="' + i + '"><img src="' + B + '/demo/img-' + IMG_FILES[i] + '.webp" alt="' + esc(I[i][0]) + '"/></button>').join('')
         : '<div class="gd-empty">' + esc(U.imgs_empty) + '</div>') + '</div></div>' +
       '<div class="gi-bottom"><div class="gi-opts" role="group" aria-label="' + esc(U.imgs_options) + '">' + I.map((x, i) => '<button type="button" data-ipick="' + i + '"' + (made.includes(i) ? ' class="done"' : '') + '>' + esc(x[0]) + '</button>').join('') + '</div>' +
       '<div class="gd-compose gi-compose"><div class="gd-input gi-in" role="button" tabindex="0" aria-label="' + esc(U.draw) + '"></div><div class="gd-bar"><span class="gd-plus" title="' + esc(U.start_from) + '" aria-hidden="true">+</span><span class="gd-eng">□ ' + esc(U.square) + '</span><button class="gd-send gi-go" type="button" aria-label="' + esc(U.draw) + '">↑</button></div></div>' +
@@ -190,7 +192,7 @@
   function bigImage(i) {
     const v = root.querySelector('.gd-imgs'); if (!v) return;
     let o = v.querySelector('.gi-big'); if (!o) { o = document.createElement('div'); o.className = 'gi-big'; v.appendChild(o); }
-    o.innerHTML = '<button type="button" class="gi-x">' + esc(U.back) + '</button><img src="/demo/img-' + IMG_FILES[i] + '.webp" width="512" height="512" alt="' + esc(T.images[i][0] + ', ' + U.made_by) + '"/>' +
+    o.innerHTML = '<button type="button" class="gi-x">' + esc(U.back) + '</button><img src="' + B + '/demo/img-' + IMG_FILES[i] + '.webp" width="512" height="512" alt="' + esc(T.images[i][0] + ', ' + U.made_by) + '"/>' +
       '<div class="gi-meta"><b>' + esc(T.images[i][0]) + '</b><p>“' + esc(T.images[i][1]) + '”</p><small>' + esc(U.made_note) + '</small></div>';
   }
   function showView(name) {
@@ -219,9 +221,9 @@
     send.setAttribute('aria-label', U.send); root.querySelector('.gd-ph .x').setAttribute('aria-label', U.close);
     set('.gd-hint span', U.hint, box); set('.gd-label', U.label, box);
     chips.innerHTML = JOBS.map((k) => '<button type="button" data-job="' + k + '">' + esc(U.chips[k]) + '</button>').join('');
-    if (!root.querySelector('.gd-click')) { const c = document.createElement('span'); c.className = 'gd-click'; c.innerHTML = '<b>' + esc(U.click_here) + '</b><img src="/img/turtle.svg" alt="" width="84" height="73"/>'; send.closest('.gd-compose').appendChild(c); }
+    if (!root.querySelector('.gd-click')) { const c = document.createElement('span'); c.className = 'gd-click'; c.innerHTML = '<b>' + esc(U.click_here) + '</b><img src="' + B + '/img/turtle.svg" alt="" width="84" height="73"/>'; send.closest('.gd-compose').appendChild(c); }
   }
-  ready = fetch('/demo/i18n/' + lang + '.json').then((r) => r.json()).catch(() => fetch('/demo/i18n/en.json').then((r) => r.json())).then((t) => {
+  ready = fetch(B + '/demo/i18n/' + lang + '.json').then((r) => r.json()).catch(() => fetch(B + '/demo/i18n/en.json').then((r) => r.json())).then((t) => {
     T = t; U = t.ui; JOBS = ['slides', 'quiz', 'cards', 'diagram']; dress();
   });
 

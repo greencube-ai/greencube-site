@@ -6,23 +6,19 @@ Canonical: https://blog.greencube.app/blog/notebooklm-alternatives
 Published: 2026-08-18 · Updated: 2026-10-23  
 Author: Hector Gras
 
-**Short answer:** NotebookLM is hard to beat for free: up to **50 sources per notebook**, answers that cite your notes, and no training on your uploads unless you send feedback. Look elsewhere if you hit its limits, if you **don't want your notes on Google's servers**, or if you study offline. Then: **an AI on your own PC** (GreenCube, or the free AnythingLLM), the open-source **Open Notebook**, or page-citing PDF tools like **Humata** and **Adobe Acrobat's AI Assistant**.
+NotebookLM is hard to beat for free: up to 50 sources per notebook, answers that cite your notes, and no training on your uploads unless you send feedback. It's worth looking elsewhere if you hit its limits, if you don't want your notes on Google's servers, or if you study offline. Then your options are an AI on your own PC (GreenCube, or the free AnythingLLM), the open-source Open Notebook, or PDF tools that cite the page, like Humata and Adobe Acrobat's AI Assistant.
 
-- **50** sources per notebook on free NotebookLM, 100 notebooks
-- **11/12** questions about long PDFs answered right on a 16 GB laptop, about 15 s each
-- **0** files uploaded when the AI runs on your own PC
+I build GreenCube, so weigh my opinion with that in mind. Below I've stuck to what each tool's own pages say, plus what we measured ourselves.
 
 ## What NotebookLM does well, and why people switch
 
-NotebookLM (now also called Gemini Notebook) answers from the sources you give it, cites the part each answer comes from, and makes flashcards and quizzes you can export as CSV ([Google](https://support.google.com/notebooklm/answer/16958963?hl=en)). Google says it doesn't train on your uploads unless you rate an answer ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)). The usual reasons to look elsewhere:
+NotebookLM (now also called Gemini Notebook) answers from the sources you give it, cites the part each answer comes from, and makes flashcards and quizzes you can export as CSV ([Google](https://support.google.com/notebooklm/answer/16958963?hl=en)). Google says it doesn't train on your uploads unless you rate an answer ([Google](https://support.google.com/notebooklm/answer/17004255?hl=en)).
 
-- **Your notes go to Google.** Some students, and some schools' or academies' materials, shouldn't be uploaded.
-- **It needs internet and a Google account.**
-- **Limits:** 50 sources per notebook and 100 notebooks on the free plan ([Google](https://support.google.com/notebooklm/answer/16213268?hl=en)).
+The reasons people leave are usually practical. Your notes go to Google, and some students' notes, or a school's or academy's materials, shouldn't be uploaded. It needs internet and a Google account. And the free plan stops at 50 sources per notebook and 100 notebooks ([Google](https://support.google.com/notebooklm/answer/16213268?hl=en)).
 
 ## The alternatives, side by side
 
-From each tool's own pages, checked 21 and 23 October 2026. We haven't compared answer quality between tools.
+From each tool's own pages, checked on 21 and 23 October 2026. We haven't compared answer quality between tools.
 
 | Tool | Free | Cites the source? | Your notes go to | Offline |
 | --- | --- | --- | --- | --- |
@@ -35,25 +31,29 @@ From each tool's own pages, checked 21 and 23 October 2026. We haven't compared 
 | **AnythingLLM** ([GitHub](https://github.com/Mintplex-Labs/anything-llm)) | Yes, MIT, desktop app | Not stated | Your PC (you pick a model) | Yes |
 | **GreenCube** ([site](https://greencube.app)) | No: €9.99 once, no limits | Answers from the paragraphs that match your question | **Your PC**: nothing is uploaded | Yes |
 
-More PDF tools with their exact limits: [Humata AI alternatives](https://blog.greencube.app/blog/humata-ai-alternatives). What each AI does with your uploads: [which AI doesn't train on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
+More PDF tools with their exact limits are in [Humata AI alternatives](https://blog.greencube.app/blog/humata-ai-alternatives), and what each AI does with your uploads is in [which AI doesn't train on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Pick by how you study
 
 ### You need citations for essays
 
-Stay on **NotebookLM** if uploading is fine, or use **Humata** or **Acrobat's AI Assistant**, which also point back to the page. Check every quote against the PDF anyway.
+Stay on NotebookLM if uploading is fine. Otherwise Humata and Acrobat's AI Assistant also point back to the page, though Humata's free plan is small and Acrobat's AI needs a paid plan. ChatPDF cites too, with 2 free documents a day. Check every quote against the PDF anyway.
 
 ### Your notes shouldn't leave your PC
 
-An AI on your own computer reads files from your disk. **GreenCube** (Windows, €9.99 once) picks the AI for your PC and also makes study guides and flashcards; **AnythingLLM** is free if you're happy choosing a model.
+An AI on your own computer reads files straight from your disk. GreenCube (Windows, €9.99 once) picks the AI for your PC and also makes study guides and flashcards. AnythingLLM is free if you're happy choosing a model yourself.
 
 ### You want NotebookLM, but open source
 
-**Open Notebook** (MIT) is the closest in shape: notebooks of sources, chat over them, even podcast-style audio, on your own server, with cloud or local models.
+Open Notebook (MIT) is the closest in shape: notebooks of sources, chat over them, even podcast-style audio, on your own server, with cloud or local models. The catch is that you set up and run the server yourself.
+
+### You already use ChatGPT or Claude
+
+Both read PDFs, but they aren't built around citing pages, and free plans cap uploads. Fine for a quick question about one file, less so for a semester of notes.
 
 ### You study offline or with bad Wi-Fi
 
-Only a local AI works with no connection. [What offline AI can do for students](https://blog.greencube.app/blog/offline-ai-for-students), with measured times.
+Only a local AI works with no connection. There's more on that in [what offline AI can do for students](https://blog.greencube.app/blog/offline-ai-for-students), with measured times.
 
 ## What we measured on our own PC
 
@@ -69,7 +69,7 @@ With a graphics card it's much faster: [check your PC](https://blog.greencube.ap
 
 ## How we checked
 
-We read each tool's own website, pricing, help and GitHub pages on 21 and 23 October 2026 and linked them; where a page doesn't say, we write "not stated". Times and accuracy come from our own tests. We make GreenCube, so we've stuck to facts anyone can check and haven't ranked the tools.
+We read each tool's own website, pricing, help and GitHub pages on 21 and 23 October 2026 and linked them. Where a page doesn't say, we write "not stated". Times and accuracy come from our own tests. Because we make GreenCube, we've kept to facts anyone can check and haven't ranked the tools.
 
 ## FAQ
 

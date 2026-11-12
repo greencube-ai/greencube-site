@@ -19,46 +19,38 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Short answer:</strong> <strong>Ollama</strong> is open source (MIT) and built for developers: a command line, a local API, and since July 2025 a simple chat window. <strong>LM Studio</strong> is a closed-source desktop app with a full chat window, model browser and local server, free also for work. <strong>Speed</strong> is set mostly by your hardware and whether the model fits on your graphics card, not by which of the two you pick.</p></div>
+<div class="answer"><p>Ollama is open source (MIT) and built for developers: a command line, a local API and, since July 2025, a simple chat window. LM Studio is a closed-source desktop app with a full chat window, a model browser and a local server, and it's free for work too. As for speed, that comes mostly from your hardware and whether the model fits on your graphics card, not from which of the two you pick.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>MIT</b><span>Ollama's licence; LM Studio is closed source</span></div>
-<div class="stat y"><b>Intel Mac</b><span>only Ollama still lists it (CPU only, macOS 14+)</span></div>
-<div class="stat p"><b>6&times;</b><span>slower in any app when the model spills out of your graphics card</span></div>
-</div>
+<p>The facts below come from each app's own website, docs and privacy page, checked on 21 and 23 October 2026. I build GreenCube, which comes up at the end as a third option, so weigh my opinion with that in mind.</p>
 
 <h2>Ollama vs LM Studio, side by side</h2>
-<p>From each app's own website, docs and privacy page, checked on 21 and 23 October 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th></th><th>Ollama</th><th>LM Studio</th></tr></thead>
 <tbody>
-<tr><td><strong>Licence</strong></td><td>Open source, MIT (<a href="https://ollama.com/download" rel="noopener">site</a>)</td><td>Closed source; free, also for work (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
-<tr><td><strong>How you use it</strong></td><td>Command line and local API; desktop chat window on Windows and Mac since July 2025 (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Desktop app with chat, model search and downloads, and a local OpenAI-style server</td></tr>
-<tr><td><strong>Windows</strong></td><td>Yes</td><td>Yes; the processor needs AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">requirements</a>)</td></tr>
-<tr><td><strong>Mac</strong></td><td>Apple chip with GPU, or Intel CPU only; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">docs</a>)</td><td>Apple chip only; macOS 14+</td></tr>
-<tr><td><strong>Linux</strong></td><td>Yes</td><td>Yes</td></tr>
-<tr><td><strong>Your PDFs</strong></td><td>Drag and drop text or PDFs</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">docs</a>)</td></tr>
-<tr><td><strong>What goes online</strong></td><td>Doesn't see local prompts; may collect limited device and usage metadata (<a href="https://ollama.com/privacy" rel="noopener">privacy</a>)</td><td>No messages or documents sent when local, no telemetry; update checks and model downloads go online (<a href="https://lmstudio.ai/app-privacy" rel="noopener">privacy</a>)</td></tr>
-<tr><td><strong>Cloud option</strong></td><td>Cloud plans from $20 a month (<a href="https://ollama.com/pricing" rel="noopener">pricing</a>)</td><td>Paid cloud models and web search as extras</td></tr>
+<tr><td>Licence</td><td>Open source, MIT (<a href="https://ollama.com/download" rel="noopener">site</a>)</td><td>Closed source; free, also for work (<a href="https://lmstudio.ai/blog/free-for-work" rel="noopener">LM Studio</a>)</td></tr>
+<tr><td>How you use it</td><td>Command line and local API; desktop chat window on Windows and Mac since July 2025 (<a href="https://ollama.com/blog/new-app" rel="noopener">Ollama</a>)</td><td>Desktop app with chat, model search and downloads, and a local OpenAI-style server</td></tr>
+<tr><td>Windows</td><td>Yes</td><td>Yes; the processor needs AVX2 (<a href="https://lmstudio.ai/docs/app/system-requirements" rel="noopener">requirements</a>)</td></tr>
+<tr><td>Mac</td><td>Apple chip with GPU, or Intel CPU only; macOS 14+ (<a href="https://docs.ollama.com/macos" rel="noopener">docs</a>)</td><td>Apple chip only; macOS 14+</td></tr>
+<tr><td>Linux</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Your PDFs</td><td>Drag and drop text or PDFs</td><td>PDF, DOCX, TXT (<a href="https://lmstudio.ai/docs/app/basics/rag" rel="noopener">docs</a>)</td></tr>
+<tr><td>What goes online</td><td>Doesn't see local prompts; may collect limited device and usage metadata (<a href="https://ollama.com/privacy" rel="noopener">privacy</a>)</td><td>No messages or documents sent when local, no telemetry; update checks and model downloads go online (<a href="https://lmstudio.ai/app-privacy" rel="noopener">privacy</a>)</td></tr>
+<tr><td>Cloud option</td><td>Cloud plans from $20 a month (<a href="https://ollama.com/pricing" rel="noopener">pricing</a>)</td><td>Paid cloud models and web search as extras</td></tr>
 </tbody>
 </table></div>
+<p>The biggest practical differences are the licence, the way you use each one, and Intel Macs, where only Ollama still lists support (on the processor only).</p>
 
 <h2>Which is faster?</h2>
-<p>Both run open engines from the llama.cpp family underneath, so on the same PC, with the same model file and the same settings, the hardware decides most of the speed. We haven't timed the two apps side by side, so we won't name a winner. What we have measured, in GreenCube on {{pcs}} PCs, is what moves speed the most:</p>
+<p>Both run open engines from the llama.cpp family underneath. So on the same PC, with the same model file and the same settings, the hardware decides most of the speed. We haven't timed the two apps side by side, so I won't name a winner.</p>
+<p>What we have measured, in GreenCube on {{pcs}} PCs, is what moves speed the most. These numbers are from our GreenCube tests, not from Ollama or LM Studio, but the same hardware rules apply to any app:</p>
 <ul>
-<li><strong>Whether the model fits on the graphics card.</strong> The same 12B model wrote 35.6 tokens a second fully on an 8 GB card and 5.9 with part of it off: <a href="/blog/how-much-vram-for-ai">6 times slower</a>.</li>
-<li><strong>Card versus processor.</strong> The same AI on the same desktop: 5 tokens a second on the processor, 72 on an RX 5700 XT.</li>
-<li><strong>How new the card is.</strong> Four 8 GB cards ranged from about 11 to 72 tokens a second with the same model.</li>
+<li>Whether the model fits on the graphics card. The same 12B model wrote 35.6 tokens a second fully on an 8 GB card and 5.9 with part of it off, <a href="/blog/how-much-vram-for-ai">6 times slower</a>.</li>
+<li>Card versus processor. The same AI on the same desktop wrote 5 tokens a second on the processor and 72 on an RX 5700 XT.</li>
+<li>How new the card is. Four 8 GB cards ranged from about 11 to 72 tokens a second with the same model.</li>
 </ul>
-<p>So in either app, pick a model that fits your VRAM with about 1.5 GB to spare: <a href="/blog/best-local-ai-models">which model fits your PC</a>.</p>
+<p>So in either app, pick a model that fits your VRAM with about 1.5 GB to spare. <a href="/blog/best-local-ai-models">Which model fits your PC</a> goes through that card by card.</p>
 
 <h2>Which should you pick?</h2>
-<div class="expect">
-<div class="g"><h4>You're a developer</h4><p>Ollama: open source, a background service and an API other tools plug into.</p></div>
-<div class="b"><h4>You want a window and a model browser</h4><p>LM Studio: browse, download and chat without a terminal.</p></div>
-<div class="y"><h4>You have an Intel Mac</h4><p>Ollama, on the processor only. LM Studio won't install.</p></div>
-<div class="p"><h4>You don't want to choose models</h4><p>GreenCube (Windows, &euro;9.99 once) reads your card and RAM and picks the model that fits. <a href="/blog/lm-studio-alternatives">More LM Studio alternatives</a>.</p></div>
-</div>
-
-<h2>How we checked</h2>
-<p>We read Ollama's and LM Studio's own websites, docs, requirements and privacy pages on 21 and 23 October 2026 and linked each fact. Speeds on this page are from our own GreenCube tests, not from these two apps. We make GreenCube, so we've stuck to facts anyone can check.</p>
+<p>If you're a developer, Ollama is the natural choice: it's open source, runs as a background service, and has an API that other tools plug into.</p>
+<p>If you want a window and a model browser, LM Studio lets you browse, download and chat without ever opening a terminal.</p>
+<p>If you have an Intel Mac, the decision is made for you. LM Studio won't install, and Ollama runs on the processor only, so expect it to be slow.</p>
+<p>And if you don't want to choose models at all, that's the gap GreenCube fills. It's for Windows, costs &euro;9.99 once, and reads your card and RAM to pick the model that fits. There are more options in <a href="/blog/lm-studio-alternatives">LM Studio alternatives</a>.</p>

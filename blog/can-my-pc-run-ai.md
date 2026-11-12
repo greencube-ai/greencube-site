@@ -6,11 +6,9 @@ Canonical: https://blog.greencube.app/blog/can-my-pc-run-ai
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Short answer: yes.** If your PC runs games, it can run AI. We measured 10 real PCs: gaming desktops from an old GTX 1650 to an RTX 2080 Ti, and two laptops with no graphics card at all. Every one of them chatted with an AI running entirely on the PC: no internet, no subscription. The only thing that changes is how fast.
+Yes. If your PC runs games, it can run AI. We measured 10 real PCs, from gaming desktops with an old GTX 1650 up to an RTX 2080 Ti, plus two laptops with no graphics card at all, and every one of them chatted with an AI running entirely on the PC, with no internet. What changes from one PC to the next is how fast it goes.
 
-- **14×** faster on the graphics card than on the processor, same PC, same AI
-- **20** tokens a second on a 4 GB GTX 1650. You read about 5.
-- **8–9 s** per picture on an RTX 2080 Ti, once loaded
+We ran every test with GreenCube, the app I build, because it's the one we can measure in detail. The speeds depend on the hardware far more than on the app. Type your graphics card below to see what we found for it.
 
 ## Will AI run on your PC?
 
@@ -18,7 +16,7 @@ Type your graphics card and pick your RAM: you get what runs, how fast it ran on
 
 ## The numbers
 
-"Writes" is how fast the AI types its answer, in tokens per second. A token is about three quarters of a word. Most people read about 4 words a second ([Brysbaert, 2019](https://doi.org/10.1016/j.jml.2019.104047)), roughly 5 tokens. So anything above 5 is faster than your eyes.
+"Writes" is how fast the AI types its answer, in tokens per second. A token is about three quarters of a word. Most people read about 4 words a second ([Brysbaert, 2019](https://doi.org/10.1016/j.jml.2019.104047)), which is roughly 5 tokens, so anything above 5 is faster than your eyes.
 
 | PC | Graphics | RAM | AI model | Writes (tokens/s) |
 | --- | --- | --- | --- | --- |
@@ -33,56 +31,49 @@ Type your graphics card and pick your RAM: you get what runs, how fast it ran on
 | Desktop | [AMD RX 580, 8 GB](https://blog.greencube.app/blog/ai-on-rx-580) | 16 GB | Cube 4B (Gemma 4 E4B) | **10–11** |
 | Laptop | [Intel Iris Xe only](https://blog.greencube.app/blog/ai-on-intel-iris-xe-laptop) | 8 GB | Cube 2B (Gemma 4 E2B) | **5–7** |
 
-Click a graphics card to see its full test.
-
-Measured with GreenCube in September and October 2026, in real chats and in GreenCube's own speed tests. Speeds move a little between runs on the same PC, so where we have several runs we show the range. [How we measure, and the full data](https://blog.greencube.app/blog/how-we-measure-ai-speed).
+Click a graphics card to see its full test. We measured in September and October 2026, in real chats and in GreenCube's own speed tests. Speeds move a little between runs on the same PC, so where we have several runs we show the range.
 
 ## What we learned
 
-### 1. Your graphics card does the heavy lifting, like in a game
+### The graphics card does the heavy lifting, like in a game
 
-On the RX 5700 XT desktop, the same AI wrote **5 tokens a second on the processor and 72 on the graphics card**. AI is mostly the kind of maths graphics cards are built for. Any card from the last few years helps a lot, even an old 4 GB GTX 1650.
+On the RX 5700 XT desktop, the same AI wrote 5 tokens a second on the processor and 72 on the graphics card. That's 14 times faster, on the same PC, with the same AI. AI is mostly the kind of maths graphics cards are built for, so any card from the last few years helps a lot. Even an old 4 GB GTX 1650 wrote about 20 tokens a second.
 
-### 2. VRAM decides how big an AI fits
+### VRAM decides how big an AI fits
 
-The AI has to fit in the card's own memory (VRAM) to run at full speed. That desktop had 48 GB of RAM, and it didn't save a bigger model: a 12-billion-parameter AI fitted on the 8 GB card for one short question, then crashed once the chat got longer, with the card almost full. **For AI, VRAM beats RAM.** VRAM isn't speed, though: four 8 GB cards we measured wrote anywhere from about 11 tokens a second (RX 580) to 72 (RX 5700 XT). That's why GreenCube checks your card and picks an AI that fits, not just the biggest one.
+The AI has to fit in the card's own memory (VRAM) to run at full speed. That same desktop had 48 GB of RAM, and it didn't save a bigger model: a 12-billion-parameter AI fitted on the 8 GB card for one short question, then crashed once the chat got longer, with the card almost full. For AI, VRAM matters more than RAM ([the full VRAM test](https://blog.greencube.app/blog/how-much-vram-for-ai)).
 
-### 3. No graphics card? Still works
+VRAM isn't speed, though. Four 8 GB cards we measured wrote anywhere from about 11 tokens a second (RX 580) to 72 (RX 5700 XT). That's why GreenCube checks your card and picks an AI that fits, rather than the biggest one.
 
-A normal 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with the smaller AI, and finished a full answer (an explanation plus three exam questions) in about 20 seconds. Totally fine for studying and writing. An 8 GB laptop works too, at 5 to 7 tokens a second in real chats, if other apps leave it some free memory.
+### No graphics card still works
 
-### 4. Pictures are the heavy stuff
+A normal 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with the smaller AI, and finished a full answer (an explanation plus three exam questions) in about 20 seconds. That's plenty for studying and writing. An 8 GB laptop works too, at 5 to 7 tokens a second in real chats, as long as other apps leave it some free memory.
 
-Making a picture is way heavier than chatting. **8 to 9 seconds** on an 11 GB RTX 2080 Ti (the first took 83 while it loaded), **28 seconds** on a 12 GB RTX 3060, about a minute on an 8 GB RX 6600, a minute and a half on a 6 GB GTX 1660 Super, and about **2 and a half minutes** on the 16 GB laptop. An 8 GB laptop can't make pictures at all: the picture AI alone needs about 7 GB.
+### Pictures are the heavy part
+
+Making a picture takes far more than chatting. It took 8 to 9 seconds on an 11 GB RTX 2080 Ti (the first one took 83 while it loaded), 28 seconds on a 12 GB RTX 3060, about a minute on an 8 GB RX 6600, a minute and a half on a 6 GB GTX 1660 Super, and about two and a half minutes on the 16 GB laptop. An 8 GB laptop can't make pictures at all, because the picture AI alone needs about 7 GB.
 
 ## Check your PC in 30 seconds
 
-1. Press **Ctrl + Shift + Esc** to open Task Manager.
-2. Go to **Performance**.
-3. Click **Memory**: the number at the top right is your RAM.
-4. Click **GPU**: the name at the top right is your card, and **Dedicated GPU memory** is your VRAM. Only see Intel graphics? Then you have no separate card.
+1. Press Ctrl + Shift + Esc to open Task Manager.
+2. Go to Performance.
+3. Click Memory. The number at the top right is your RAM.
+4. Click GPU. The name at the top right is your card, and Dedicated GPU memory is your VRAM. If you only see Intel graphics, you have no separate card.
 
 ## What your PC will feel like
 
-#### Card with 6 GB or more
-
-Fast on most cards from the last few years: 37 to 76 tokens a second in our tests, many times quicker than you read, and pictures in seconds to a minute and a half. One exception: an old RX 580 wrote about 11, still faster than you read.
-
-#### 4 GB card, 16 GB RAM
-
-Good. About 20 tokens a second in our test.
-
-#### No card, 16 GB RAM
-
-Fine for chat and study, with a smaller AI. Pictures take a couple of minutes.
-
-#### No card, 8 GB RAM
-
-Works for chat, slowly. Close other apps first. No pictures.
+| Your PC | What to expect |
+| --- | --- |
+| Graphics card with 6 GB or more | Fast on most cards from the last few years: 37 to 76 tokens a second in our tests, and pictures in seconds to a minute and a half. The exception was an old RX 580 at about 11, still faster than you read. |
+| 4 GB card, 16 GB RAM | Good: about 20 tokens a second in our test. |
+| No card, 16 GB RAM | Fine for chat and study with a smaller AI. Pictures take a couple of minutes. |
+| No card, 8 GB RAM | Works for chat, slowly. Close other apps first. No pictures. |
 
 ## Why run AI on your own PC at all?
 
-Because it's yours. No message limits, no monthly subscription, and it keeps working with no internet: on a train, on a mountain, or in a library with terrible Wi-Fi. It won't beat the biggest cloud AIs at everything, but for studying, writing, summarising and everyday questions, an AI on your own card is more than enough, and it never runs out. Setting it up on Windows? [What a Windows PC needs to run AI offline](https://blog.greencube.app/blog/local-ai-chatbot-windows).
+An AI on your own PC has no message limits and no monthly subscription, and it keeps working with no internet, on a train or in a library with terrible Wi-Fi. It won't beat the biggest cloud AIs at everything, and it's only as quick as your hardware. But for studying, writing, summarising and everyday questions, the AI on a normal PC does the job, and it never runs out.
+
+If you're setting one up on Windows, [what a Windows PC needs to run AI offline](https://blog.greencube.app/blog/local-ai-chatbot-windows) goes through the details.
 
 ## FAQ
 

@@ -117,12 +117,13 @@ BRIDGE_OF = {  # English slug -> group; anything not listed falls to BRIDGE_RULE
     'private': ('ai-that-doesnt-train-on-your-data', 'best-private-pdf-ai', 'chatgpt-vs-greencube-offline-privacy-for-students-and-professionals',
                 'gdpr-compliant-ai', 'is-chatgpt-private', 'is-local-ai-safe', 'private-ai-assistant', 'private-document-ai',
                 'secure-ai-on-pc', 'ai-without-login', 'air-gapped-ai', 'ferpa-compliant-ai', 'offline-ai-security',
-                'offline-ai-for-business', 'offline-ai-for-travelers', 'why-offline-ai', 'chatgpt-offline',
+                'offline-ai-for-business',
                 'self-hosted-ai-assistant', 'ai-image-analysis-offline'),
     'jobs': ('ai-for-homeschooling', 'ai-study-planner-offline', 'ai-to-study-from-pdf', 'best-ai-for-computer-science-students',
              'best-ai-for-students', 'best-ai-for-teachers', 'flashcards-from-pdf', 'offline-ai-for-students', 'school-ai-policy',
              'study-guide-from-pdf', 'teacher-prompts-for-ai', 'best-ai-for-writers', 'best-pdf-summarizer', 'ai-to-summarize-notes',
              'best-ai-for-lawyers', 'best-ai-for-researchers'),
+    'offline': ('chatgpt-offline', 'why-offline-ai', 'offline-ai-for-travelers'),
     'about': ('hector-gras', 'how-we-measure-ai-speed'),
 }
 BRIDGE_OF = {s: g for g, slugs in BRIDGE_OF.items() for s in slugs}
@@ -132,7 +133,8 @@ BRIDGE_RULES = [('pc', r'^ai-on-'), ('compare', r'alternatives|-vs-|^best-|^olla
 # label always match the site. Tiles are matched by their drawing (each language orders them differently).
 # Will-it-run readers get the four PC levels instead.
 BRIDGE_TILES = {'limits': ('Chat', 'Images', 'Slides', 'Code'), 'compare': ('Slides', 'Images', 'Diagrams', 'Web pages'),
-                'jobs': ('Slides', 'Diagrams', 'Study', 'Documents'), 'private': ('Chat', 'Files', 'Documents', 'Slides')}
+                'jobs': ('Slides', 'Diagrams', 'Study', 'Documents'), 'private': ('Chat', 'Files', 'Documents', 'Slides'),
+                'offline': ('Chat', 'Slides', 'Images', 'Files')}
 def _home_tiles(path):
     s = open(path, encoding='utf-8').read(); i = s.find('id="what"'); j = s.find('</section>', i)
     out = {}
@@ -148,7 +150,8 @@ def tiles_for(lang):
 TILES = {}
 # where each group's main button goes (the second button goes to the other page)
 BRIDGE_URL = {'pc': ('what-you-get', 'buy'), 'limits': ('buy', 'what-you-get'), 'private': ('buy', 'your-data'),
-              'compare': ('buy', 'what-you-get'), 'jobs': ('buy', 'what-you-get'), 'about': ('buy', None)}
+              'compare': ('buy', 'what-you-get'), 'jobs': ('buy', 'what-you-get'), 'about': ('buy', None),
+              'offline': ('buy', '#try')}
 
 def bridge_group(slug):
     if slug in BRIDGE_OF: return BRIDGE_OF[slug]
@@ -157,13 +160,18 @@ def bridge_group(slug):
     return 'about'
 
 def site_url(lang, p):
+    if p == '#try': return 'https://greencube.app/#try' if lang == 'en' else f'https://greencube.app/{lang}/#try'  # the clickable demo
+    if p == '#here': return '#try'  # the demo inside this post
     return f'https://greencube.app/{p}' if lang == 'en' or not os.path.exists(f'{lang}/{p}.html') else f'https://greencube.app/{lang}/{p}'
 
 def bridge_box(lang, slug):
     """The end-of-post box for this post's group, in this language (None if the language has no bridge words yet)."""
     B = WD[lang]['post'].get('bridge')
     if not B: return None
-    g = bridge_group(slug); w = B[g]; main, second = BRIDGE_URL[g]
+    g = bridge_group(slug)
+    if g not in B: g = 'private' if g == 'offline' else g
+    w = B[g]; main, second = BRIDGE_URL[g]
+    if group_try(lang, slug): second = '#here'
     fig = ''
     if g in BRIDGE_TILES:
         if lang not in TILES: TILES[lang] = tiles_for(lang)
@@ -181,13 +189,49 @@ def bridge_mid(lang, slug, body):
     """One short line once the post has answered its question: before its second <h2>, only in posts with 3 or more."""
     B = WD[lang]['post'].get('bridge')
     g = bridge_group(slug)
+    if B and g not in B and g == 'offline': g = 'private'
     if not B or 'mid' not in B[g]: return body
     heads = [m.start() for m in re.finditer(r'<h2\b', body)]
     if len(heads) < 3: return body
     w = B[g]
-    line = (f'<p class="bridge-mid">{w["mid"]} <a href="{site_url(lang, BRIDGE_URL[g][0])}">{w["mid_a"]}'
+    to = ('#here' if group_try(lang, slug) else '#try') if BRIDGE_URL[g][1] == '#try' else BRIDGE_URL[g][0]  # offline readers: the demo, the easy step
+    line = (f'<p class="bridge-mid">{w["mid"]} <a href="{site_url(lang, to)}">{w["mid_a"]}'
             f' <span aria-hidden="true">&rarr;</span></a></p>\n')
     return body[:heads[1]] + line + body[heads[1]:]
+
+_G = open('get.html', encoding='utf-8').read()
+DEMO_WIN = re.search(r'  <div class="gd-win" id="gd">.*?\n  </div>\n(?=  <p class="gd-label">)', _G, re.S).group(0)
+def group_try(lang, slug):
+    """This post's group has its own demo words: its buttons that said 'try it in your browser' scroll to the demo."""
+    B = WD[lang]['post'].get('bridge'); g = bridge_group(slug)
+    return bool(B and g in B and 'try_h' in B[g])
+def has_try(lang, slug):
+    """Every post ends with the clickable app (Hector's rule, 12 Nov) when its language has the words."""
+    B = WD[lang]['post'].get('bridge')
+    return bool(B and ('try_h' in B or group_try(lang, slug)))
+def try_box(lang, slug):
+    """The clickable app (the /get demo window, replaying example answers) inside the post: the easiest first step."""
+    if not has_try(lang, slug): return ''
+    B = WD[lang]['post']['bridge']; w = B[bridge_group(slug)] if group_try(lang, slug) else B
+    lab = json.load(open(f'demo/i18n/{lang}.json', encoding='utf-8'))['ui']['label']
+    # outside the <article> so the post's text styles (p, img, h3) don't touch the app window
+    return (f'</article>\n<section class="post-try gd" id="try"><h2>{w["try_h"]}</h2><p>{w["try_p"]}</p>\n<div class="gd-wrap">\n{DEMO_WIN}</div>\n'
+            f'<p class="gd-label">{lab}</p>\n<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>\n<article class="after-try">')
+
+def bridge_top(lang, slug, body):
+    """A short strip right after the answer box, for groups whose words have 'top_h': the reader just learned the
+    answer; show them the app that does it, with the clickable demo as the easy first step."""
+    B = WD[lang]['post'].get('bridge'); g = bridge_group(slug)
+    if not B or g not in B or 'top_h' not in B[g]: return body
+    m = re.search(r'<div class="answer">.*?</div>\n?', body, re.S)
+    if not m: return body
+    w = B[g]; main, second = BRIDGE_URL[g]
+    if group_try(lang, slug): second = '#here'
+    strip = (f'<aside class="bridge-top"><img src="https://greencube.app/icon-512.png" alt="" width="44" height="44"/>'
+             f'<div class="bt-text"><b>{w["top_h"]}</b><span>{w["top_p"]}</span></div>'
+             f'<div class="bt-btns"><a class="cta" href="{site_url(lang, second)}">{w["top_a"]} <span aria-hidden="true">&rarr;</span></a>'
+             f'<a class="bridge-2" href="{site_url(lang, main)}">{w["top_a2"]}</a></div></aside>\n')
+    return body[:m.end()] + strip + body[m.end():]
 
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
@@ -260,6 +304,7 @@ NOTE_PARTS = {
 }
 
 def note(kinds):
+    return ''  # Hector 12 Nov: the box read machine-made; fix the text instead
     if not kinds: return ''
     parts = [NOTE_PARTS[k] for k in kinds]
     text = parts[0][0].upper() + parts[0][1:] + ('. Also, ' + parts[1].replace('today you', 'you') if len(parts) > 1 else '')
@@ -363,19 +408,24 @@ for p in idx:
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
         'image': og, 'datePublished': published, 'dateModified': modified, 'inLanguage': 'en',
         'mainEntityOfPage': url,
-        'author': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'},
+        'author': {'@type': 'Person', 'name': 'Hector Gras', 'url': HOST + '/blog/hector-gras'},
         'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
                       'logo': {'@type': 'ImageObject', 'url': 'https://greencube.app/icon-512.png'}},
     }]
     if faq:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
-    byline = f'GreenCube &middot; {nice_date(published)}' + (f' &middot; updated {nice_date(modified)}' if modified != published and changed else '')
+    # rewritten in Hector's voice (12 Nov): his byline, and the FAQ shown on the page like our own posts (Google wants
+    # FAQ structured data to match visible text)
+    byline = (f'By <a href="/blog/hector-gras">Hector Gras</a> &middot; {nice_date(published)}'
+              + (f' &middot; updated {nice_date(modified)}' if modified != published and changed else ''))
+    faq_html = ('<h2>Questions</h2>\n<div class="faq">\n' + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
+                + '\n</div>\n') if faq else ''
     content = (
         f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
         + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
-        + bridge_mid('en', slug, body) + bridge_box('en', slug) + '</article>\n')
+        + bridge_mid('en', slug, bridge_top('en', slug, body)) + faq_html + try_box('en', slug) + bridge_box('en', slug) + '</article>\n')
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
     report.append({'slug': slug, 'note': kinds, 'text_fixes': [list(c) for c in ch1 + ch2 + ch3]})
@@ -386,7 +436,7 @@ for p in idx:
 def date_in(lang): return lambda iso: pc_pages.date(iso[:10], lang)
 WORDS = {lang: dict(WD[lang]['post'], date=date_in(lang)) for lang in BLOG_LANGS}
 def post_url(lang, slug): return HOST + pc_pages.blog_path(lang, slug)
-AUTHOR = 'Hector Gras'  # our own tested posts are his; the archived BabyLoveGrowth posts stay signed GreenCube
+AUTHOR = 'Hector Gras'  # every post is his (the archived posts were rewritten in his voice, 12 Nov)
 def author_url(lang): return post_url(lang, 'hector-gras')
 AUTHOR_PAGE = {lang: WD[lang]['author'] for lang in BLOG_LANGS}
 MD_LANGS = ('en', 'es')  # markdown copies for AI agents: our own English and Spanish pages only (Hector, 2026-10-25: "lean")
@@ -453,7 +503,8 @@ for lang, slug, meta, body in own:
         f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}'
         + (f' &middot; {W["updated"]} {W["date"](meta["modified"])}' if meta.get('modified', published) != published else '')
         + '</p>\n'
-        + bridge_mid(lang, group_key(lang, slug, meta), body) + faq_html
+        + bridge_mid(lang, group_key(lang, slug, meta), bridge_top(lang, group_key(lang, slug, meta), body)) + faq_html
+        + try_box(lang, group_key(lang, slug, meta))
         + (bridge_box(lang, group_key(lang, slug, meta))
            or f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
               f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n')

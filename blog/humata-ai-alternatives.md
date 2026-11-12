@@ -6,19 +6,19 @@ Canonical: https://blog.greencube.app/blog/humata-ai-alternatives
 Published: 2026-08-01 · Updated: 2026-10-21  
 Author: Hector Gras
 
-**Short answer: for free in the cloud, NotebookLM; to keep your PDFs on your own computer, an app that runs the AI locally.** Humata's free plan covers 60 pages a month; after that Expert is $9.99 a month. NotebookLM is free with up to 50 sources per notebook and cites where each answer comes from. Adobe Acrobat's AI Assistant also cites pages but comes with a paid plan. If you don't want to upload your files, GreenCube (€9.99 once) or the free apps LM Studio, Jan, GPT4All and AnythingLLM read PDFs on your PC, with no page limit.
+If you're happy to upload your PDFs, the best free swap for Humata is NotebookLM. If you'd rather they never left your computer, use an app that runs the AI on your own PC. Humata's free plan stops at 60 pages a month, and Expert costs $9.99 a month after that. NotebookLM is free, takes up to 50 sources per notebook and shows where each answer comes from. Local apps (GreenCube for €9.99 once, or the free LM Studio, Jan, GPT4All and AnythingLLM) read PDFs on your PC with no page limit.
 
-- **60** pages a month on Humata's free plan
-- **$119.88** Humata Expert for a year, at $9.99 a month
-- **0** pages uploaded when the AI runs on your own PC
+I build GreenCube, one of the local apps on this list, so weigh my opinion with that in mind. That's also why the table below sticks to facts you can check on each tool's own pages, and why we haven't ranked them.
 
 ## What Humata is, and why people look for alternatives
 
-Humata is a web app where you upload PDFs and other files and ask questions about them; its answers link back to the part of your file they come from ([Humata](https://www.humata.ai/)). People usually look for an alternative for one of three reasons: the free plan runs out (60 pages a month, up to 10 answers), they don't want a monthly bill, or they'd rather not upload their documents to a company's cloud. The table below is built around those three questions.
+Humata is a web app where you upload PDFs and other files and ask questions about them. Its answers link back to the part of your file they come from ([Humata](https://www.humata.ai/)).
+
+People usually go looking for something else for one of three reasons. The free plan runs out (60 pages a month, up to 10 answers), they don't want another monthly bill, or they'd rather not upload their documents to a company's cloud. The comparison below is built around those three things.
 
 ## The alternatives, side by side (official pages, 21 October 2026)
 
-Every fact comes from the tool's own website or help pages, linked in each row. Where a tool's pages don't say something, we write "not stated". We haven't tested the quality of each tool's answers; these are limits, prices and what they say they do with your files.
+Every fact comes from the tool's own website or help pages, linked in each row. Where a tool's pages don't say something, we write "not stated". We haven't tested the quality of each tool's answers: these are limits, prices, and what each says it does with your files.
 
 | Tool | Free plan | Paid | Trains on your files? | Where your files go |
 | --- | --- | --- | --- | --- |
@@ -30,30 +30,34 @@ Every fact comes from the tool's own website or help pages, linked in each row. 
 | **Claude** | Up to 20 files per chat, 500 MB each, PDFs up to 1,000 pages ([Anthropic](https://support.claude.com/en/articles/8241126-upload-files-to-claude)) | Pro $20 a month, or $17 a month paid yearly ([pricing](https://claude.com/pricing)) | Only if you allow it | Anthropic's cloud |
 | **Gemini** | Up to 10 files per message, limits refresh every 5 hours ([Google](https://support.google.com/gemini/answer/14903178?hl=en)) | Google AI Plus €4.99, AI Pro €21.99 a month | Yes, while Keep Activity is on ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) | Google's cloud |
 | **GreenCube** ([site](https://greencube.app)) | No free version | €9.99 (US$9.99) once, no limits on files or pages | No: your files never reach us ([privacy](https://legal.greencube.app/privacy)) | Stays on your PC. Windows 10 and 11. Works offline |
-| **LM Studio** | Free | — | No: "none of your messages, chat histories, and documents are ever transmitted" ([privacy](https://lmstudio.ai/app-privacy)) | Stays on your computer. PDF, DOCX, TXT ([docs](https://lmstudio.ai/docs/app/basics/rag)). Windows, Mac, Linux |
-| **Jan** | Free, open source | — | No: conversations "never leave your computer" ([privacy](https://jan.ai/docs/privacy)) | Stays on your computer. PDF and Office files ([docs](https://docs.jan.ai/desktop/file-upload)) |
-| **GPT4All** | Free, open source | — | No; sharing chats is opt-in and off by default | Stays on your computer. PDFs with LocalDocs ([docs](https://docs.gpt4all.io/gpt4all_desktop/localdocs.html)). Last release February 2025 |
-| **AnythingLLM** | Desktop free, open source | — | No; anonymous app usage data you can turn off ([privacy](https://docs.anythingllm.com/installation-desktop/privacy)) | Stays on your computer. PDF, TXT, DOCX ([source](https://github.com/Mintplex-Labs/anything-llm)) |
+| **LM Studio** | Free | None | No: "none of your messages, chat histories, and documents are ever transmitted" ([privacy](https://lmstudio.ai/app-privacy)) | Stays on your computer. PDF, DOCX, TXT ([docs](https://lmstudio.ai/docs/app/basics/rag)). Windows, Mac, Linux |
+| **Jan** | Free, open source | None | No: conversations "never leave your computer" ([privacy](https://jan.ai/docs/privacy)) | Stays on your computer. PDF and Office files ([docs](https://docs.jan.ai/desktop/file-upload)) |
+| **GPT4All** | Free, open source | None | No; sharing chats is opt-in and off by default | Stays on your computer. PDFs with LocalDocs ([docs](https://docs.gpt4all.io/gpt4all_desktop/localdocs.html)). Last release February 2025 |
+| **AnythingLLM** | Desktop free, open source | None | No; anonymous app usage data you can turn off ([privacy](https://docs.anythingllm.com/installation-desktop/privacy)) | Stays on your computer. PDF, TXT, DOCX ([source](https://github.com/Mintplex-Labs/anything-llm)) |
 
-ChatGPT, Gemini and Claude prices are from [our subscription check](https://blog.greencube.app/blog/ai-without-subscription) on 18 October 2026; their training rules are in [which AI trains on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
+ChatGPT, Gemini and Claude prices are from [our subscription check](https://blog.greencube.app/blog/ai-without-subscription) on 18 October 2026. Their training rules are in [which AI trains on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Which one fits you?
 
-### You want it free and don't mind the cloud: NotebookLM
+### Free, and you don't mind the cloud: NotebookLM
 
-Up to 50 sources per notebook, answers that cite the part of your files they come from, and Google says it doesn't train on your uploads unless you rate an answer. You need internet and a Google account, and your files go to Google.
+Up to 50 sources per notebook, answers that cite the part of your files they come from, and Google says it doesn't train on your uploads unless you rate an answer. The catch is that you need internet and a Google account, and your files sit on Google's servers.
 
-### You need answers that point to the exact page
+### Answers that point to the exact page
 
-Humata, NotebookLM, Adobe Acrobat's AI Assistant and ChatPDF all say their answers link back to the source in your document. That matters for essays and research, where you have to check and quote. Acrobat's AI comes with a paid plan; NotebookLM is free.
+Humata, NotebookLM, Adobe Acrobat's AI Assistant and ChatPDF all say their answers link back to the source in your document. That matters for essays and research, where you have to check and quote. Acrobat's AI comes with a paid plan. ChatPDF's free plan is 2 documents a day, and its pages didn't tell us whether it trains on your files.
 
-### You don't want to upload your files, or you hit page limits
+### You already pay for a chatbot
 
-An app that runs the AI on your own computer reads PDFs from your disk, so nothing is uploaded and there's no page limit; the only cost is your computer's time. GreenCube (Windows, €9.99 once) picks the AI that fits your PC by itself. LM Studio, Jan, GPT4All and AnythingLLM are free; there you choose a model yourself. For more on these apps, see [our comparison of 12 offline AI chatbots](https://blog.greencube.app/blog/best-offline-ai-chatbot).
+ChatGPT, Claude and Gemini all read PDFs too. They're general chatbots rather than PDF tools, and the free plans limit uploads in different ways: Claude by files per chat, Gemini by files per message, ChatGPT without a published number. ChatGPT trains on your chats by default unless you turn it off, Gemini does while Keep Activity is on, and Claude only if you allow it.
 
-### You're comparing monthly costs
+### You don't want to upload your files, or you keep hitting page limits
 
-Humata Expert is $9.99 a month: $119.88 a year. Acrobat Studio is $299.88 a year. ChatGPT Plus and Claude Pro are $20 a month. A local app is free or paid once; GreenCube is €9.99 once.
+An app that runs the AI on your own computer reads PDFs from your disk, so nothing is uploaded and nothing counts pages. What it costs you is your computer's time. GreenCube (Windows, €9.99 once) picks the AI that fits your PC by itself. LM Studio, Jan and AnythingLLM are free, and there you choose a model yourself. GPT4All is free as well, but its last release was in February 2025. There's more on all of them in [our comparison of 12 offline AI chatbots](https://blog.greencube.app/blog/best-offline-ai-chatbot).
+
+### What a year costs
+
+Humata Expert at $9.99 a month comes to $119.88 a year. Acrobat Studio on the yearly plan is $299.88. ChatGPT Plus and Claude Pro are $20 a month. A local app is free or paid once; GreenCube is €9.99 once.
 
 ## How fast is a PDF AI on your own PC? What we measured
 
@@ -64,17 +68,19 @@ We measured GreenCube on a normal 16 GB laptop with no graphics card, using its 
 | One specific question about a long document | **about 15 s** (11 of 12 right) |
 | A full study guide of a chapter of about 5,000 words | **about 15 min** |
 
-With a graphics card it's much faster: see your card's measured speed in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) A cloud tool answers in seconds whatever your computer is, because a data center does the work; that's the trade-off.
+With a graphics card it's much faster: see your card's measured speed in [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) A cloud tool answers in seconds whatever computer you have, because a data center does the work. That's the trade-off.
 
 ## What to watch for, whichever you pick
 
-- **Check what matters.** Every AI here can misread a document. In our test, GreenCube got 1 question in 12 wrong. Check anything you'll quote or be graded on against the PDF.
-- **Read the limits before a deadline.** Free plans count pages, documents or messages differently: Humata counts pages a month, ChatPDF documents a day, Gemini files per message.
-- **Someone else's documents.** If the PDF is your school's, your employer's or a client's, check whether you're allowed to upload it to a cloud service first.
+Check what matters. Every AI here can misread a document, and in our test GreenCube got 1 question in 12 wrong. Anything you'll quote or be graded on is worth checking against the PDF.
+
+Read the limits before a deadline, because free plans count in different ways. Humata counts pages a month, ChatPDF documents a day, Gemini files per message.
+
+If the PDF belongs to your school, your employer or a client, check whether you're allowed to upload it to a cloud service at all.
 
 ## How we checked
 
-On 21 October 2026 we read each tool's own website, pricing page, help center and privacy or security page, not reviews or other lists, and linked the page each fact comes from. Some pages couldn't be read (ChatPDF's pricing and privacy policy); there we say "not stated" instead of using other sites' numbers. GreenCube's times come from our own tests. We make GreenCube, so we've stuck to facts anyone can check and haven't ranked the tools. We'll check again every month and update the date at the top.
+On 21 October 2026 we read each tool's own website, pricing page, help center and privacy or security page, not reviews or other lists, and linked the page each fact comes from. Some pages couldn't be read (ChatPDF's pricing and privacy policy), so there we say "not stated" rather than borrow other sites' numbers. GreenCube's times come from our own tests. We'll check again every month and update the date at the top.
 
 ## FAQ
 

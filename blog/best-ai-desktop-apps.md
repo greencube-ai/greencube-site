@@ -6,47 +6,49 @@ Canonical: https://blog.greencube.app/blog/best-ai-desktop-apps
 Published: 2026-08-04 · Updated: 2026-10-23  
 Author: Hector Gras
 
-**Short answer:** there are two kinds. **Cloud apps**, like ChatGPT, Claude, Gemini (on Windows since September 2026), Perplexity and Copilot, give you the strongest models in a window, but need internet and send your chats to the company. **Local apps**, like LM Studio, Jan, GPT4All (free) and GreenCube (€9.99 once), run the AI on your own PC: offline, no limits, your chats stay put, at the speed your PC allows.
+AI desktop apps for Windows come in two kinds. Cloud apps such as ChatGPT, Claude, Gemini, Perplexity and Copilot put the strongest models in a window, but they need internet and your chats go to the company. Local apps such as LM Studio, Jan, GPT4All and GreenCube run the AI on your own PC, so they work offline, have no usage limits and keep your chats on your machine, at whatever speed your PC manages.
 
-- **5** cloud AI desktop apps for Windows, all need internet
-- **5** local AI desktop apps that work offline
-- **24 GB** of VRAM for Perplexity's local option (Pro and Max)
+I make GreenCube, one of the local apps, so take my opinion with that in mind. The newest arrival on the cloud side is Gemini, which Google launched for Windows on 10 September 2026.
 
 ## Cloud AI desktop apps for Windows
 
-From each company's own download and help pages, checked 23 October 2026.
+From each company's own download and help pages, checked on 23 October 2026.
 
 | App | Windows needs | Price | Offline? |
 | --- | --- | --- | --- |
-| **ChatGPT** ([OpenAI](https://help.openai.com/en/articles/9982051-using-the-chatgpt-windows-app)) | Windows 10 build 17763 or later, x64 or Arm64; Microsoft Store | Free; Plus $20 a month | No |
-| **Claude** ([Anthropic](https://claude.com/download)) | Windows 10 or later; also Arm64 | Free; Pro $20 a month | No |
-| **Gemini** ([Google](https://support.google.com/gemini/answer/18263854?hl=en)) | Windows 10 or later, 8 GB of RAM; launched 10 Sep 2026; Alt + Space | Free; AI Plus and Pro plans | No |
-| **Perplexity** ([Perplexity](https://www.perplexity.ai/help-center/en/articles/19800002-get-started)) | Windows 10 version 1809 or later; Microsoft Store | Free; Pro $20 a month | No, except a local option for Pro/Max with a 24 GB RTX card |
-| **Microsoft Copilot** ([Microsoft](https://support.microsoft.com/en-us/privacy/microsoft-copilot/overview)) | Windows app (new app since 18 Aug 2026) | Free; paid plans | No |
+| ChatGPT ([OpenAI](https://help.openai.com/en/articles/9982051-using-the-chatgpt-windows-app)) | Windows 10 build 17763 or later, x64 or Arm64; Microsoft Store | Free; Plus $20 a month | No |
+| Claude ([Anthropic](https://claude.com/download)) | Windows 10 or later; also Arm64 | Free; Pro $20 a month | No |
+| Gemini ([Google](https://support.google.com/gemini/answer/18263854?hl=en)) | Windows 10 or later, 8 GB of RAM; launched 10 Sep 2026; opens with Alt + Space | Free; AI Plus and Pro plans | No |
+| Perplexity ([Perplexity](https://www.perplexity.ai/help-center/en/articles/19800002-get-started)) | Windows 10 version 1809 or later; Microsoft Store | Free; Pro $20 a month | No, except a local option for Pro/Max with a 24 GB RTX card |
+| Microsoft Copilot ([Microsoft](https://support.microsoft.com/en-us/privacy/microsoft-copilot/overview)) | Windows app (new app since 18 Aug 2026) | Free; paid plans | No |
+
+Perplexity's local option is the one exception worth knowing about. It's for Pro and Max subscribers and needs an NVIDIA GeForce RTX or RTX PRO card with at least 24 GB of VRAM, which most PCs don't have.
 
 ## Local AI desktop apps (work offline)
 
 | App | Windows needs | Price | Picks the model? |
 | --- | --- | --- | --- |
-| **GreenCube** | Windows 10 and 11; 8 GB RAM minimum | €9.99 once | Yes, from your card and RAM |
-| **LM Studio** | A processor with AVX2 | Free | No |
-| **Jan** | Windows 10 or later | Free, open source | No |
-| **GPT4All** | Windows (not ARM PCs); last release Feb 2025 | Free, open source | No |
-| **Msty** | Windows 10 and 11 | Free plan | No |
+| GreenCube | Windows 10 and 11; 8 GB RAM minimum | €9.99 once | Yes, from your card and RAM |
+| LM Studio | A processor with AVX2 | Free | No |
+| Jan | Windows 10 or later | Free, open source | No |
+| GPT4All | Windows (not ARM PCs); last release Feb 2025 | Free, open source | No |
+| Msty | Windows 10 and 11 | Free plan | No |
 
-All twelve offline apps, with what each sends online: [best offline AI chatbot](https://blog.greencube.app/blog/best-offline-ai-chatbot). What a Windows PC needs: [offline AI for Windows, measured](https://blog.greencube.app/blog/local-ai-chatbot-windows).
+The free ones expect you to choose and download a model from a list. GreenCube does that step for you, which is the main reason I built it. For all twelve offline apps and what each one sends online, see [best offline AI chatbot](https://blog.greencube.app/blog/best-offline-ai-chatbot), and for the hardware side, [what a Windows PC needs to run AI offline](https://blog.greencube.app/blog/local-ai-chatbot-windows).
 
 ## Cloud app or local app?
 
 |  | Cloud desktop app | Local desktop app |
 | --- | --- | --- |
-| **Model strength** | The biggest models | Models that fit your PC: good for study, writing, everyday questions |
-| **Works offline** | No | Yes |
-| **Limits** | Free plans cap files, pictures and voice ([checked](https://blog.greencube.app/blog/unlimited-ai)) | None |
-| **Your chats** | On the company's servers; some train on them by default ([checked](https://blog.greencube.app/blog/private-ai-assistant)) | On your PC |
-| **Speed** | Fast on any PC | Depends on your PC: 5–7 tokens/s on an 8 GB laptop, 37–76 on most gaming PCs (measured on 10 PCs) |
+| Model strength | The biggest models | Models that fit your PC: good for study, writing, everyday questions |
+| Works offline | No | Yes |
+| Limits | Free plans cap files, pictures and voice ([checked](https://blog.greencube.app/blog/unlimited-ai)) | None |
+| Your chats | On the company's servers; some train on them by default ([checked](https://blog.greencube.app/blog/private-ai-assistant)) | On your PC |
+| Speed | Fast on any PC | Depends on your PC: 5–7 tokens/s on an 8 GB laptop, 37–76 on most gaming PCs (measured on 10 PCs) |
 
-Plenty of people run one of each: a cloud app for the hardest questions, a local one for offline study and notes they'd rather keep on their PC. Check what yours can run: [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker)
+The cloud apps win on raw ability, especially on the hardest questions. The local ones win on working anywhere and keeping your chats to yourself. On free personal accounts, ChatGPT and Perplexity train on your chats by default, which is worth knowing before you paste in anything private.
+
+Plenty of people run one of each: a cloud app for the hardest questions, and a local one for offline study and notes they'd rather keep on their PC. If you're not sure what your PC can handle, [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) has the numbers for your card.
 
 ## FAQ
 

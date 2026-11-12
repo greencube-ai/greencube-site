@@ -6,22 +6,19 @@ Canonical: https://blog.greencube.app/blog/best-ai-for-writers
 Published: 2026-08-25 · Updated: 2026-10-23  
 Author: Hector Gras
 
-**Short answer:** the most private AI writing assistant is **one that runs on your own PC**: your drafts never reach a company, so nothing can be trained on, kept or reviewed. In the cloud, privacy depends on the plan and your settings: on a free personal account **5 of 9 popular AIs train on your text by default**, retention ranges from 30 days to 5 years, and switching training off doesn't cover feedback or human review.
+The most private AI writing assistant is one that runs on your own PC. Your drafts never reach a company, so nothing can be trained on, kept or reviewed. In the cloud, privacy depends on your plan and settings: on a free personal account, 5 of 9 popular AIs train on your text by default, and some keep it for up to 5 years.
 
-- **5 of 9** popular AIs train on your text by default (free personal account)
-- **3 years** Gemini keeps human-reviewed chats, even after you delete them
-- **0** drafts sent anywhere by an AI on your own PC
+I build GreenCube, an AI that runs on your PC, so weigh my opinion with that in mind. The facts about the other assistants come from their own help pages, linked below.
 
 ## What "private" means for a writing assistant
 
-- **Training:** is your text used to train the model? Most free plans say yes by default.
-- **Retention:** how long is your text kept, even if it isn't used for training?
-- **Human review:** can people at the company read some of it?
-- **Where it's processed:** on the company's servers, or on your own machine?
+Four questions decide it. Is your text used to train the model? How long is it kept, even if it isn't used for training? Can people at the company read some of it? And is it processed on the company's servers or on your own machine?
+
+Most free plans answer the first one with yes, by default. Switching training off helps, but it doesn't cover feedback or human review.
 
 ## Training and retention, checked
 
-Free personal accounts, from each company's own help and privacy pages (checked 18 October 2026; ChatGPT retention re-checked 23 October 2026).
+These are the rules for free personal accounts, from each company's own help and privacy pages, checked on 18 October 2026 (ChatGPT's retention was re-checked on 23 October 2026).
 
 | Assistant | Trains on your text? | Retention and review |
 | --- | --- | --- |
@@ -34,29 +31,25 @@ Free personal accounts, from each company's own help and privacy pages (checked 
 | **Microsoft Copilot** (new app) | Not stated | Check the app's own settings ([Microsoft](https://support.microsoft.com/en-us/privacy/microsoft-copilot/overview)) |
 | **An AI on your PC** (GreenCube) | No | Nothing is sent; your drafts stay on your machine ([privacy](https://legal.greencube.app/privacy)) |
 
-We haven't checked dedicated writing tools such as Grammarly or Notion AI here; read their own privacy pages the same way. All nine AIs in detail: [which AI doesn't train on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
+We haven't checked dedicated writing tools such as Grammarly or Notion AI here, so read their own privacy pages the same way. All nine AIs in detail are in [which AI doesn't train on your chats](https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data).
 
 ## Confidential documents: client work, contracts, unpublished writing
 
-### Check the rules first
+Start with the rules, not the settings. Your contract, your client or your publisher may forbid putting their text into a cloud service at all, and that decides more than any switch in an app.
 
-Your contract, your client or your publisher may forbid putting their text into a cloud service at all. That decides more than any setting.
+If cloud tools are allowed, a business or work account is the safer choice. OpenAI doesn't train on Business, Enterprise or API data by default, and work and school accounts are usually left out of training on the big services. The text is still processed and stored on the company's servers, though.
 
-### Business and work accounts
-
-OpenAI doesn't train on Business, Enterprise or API data by default ([checked](https://greencube.app/does-chatgpt-train-on-your-data)), and work and school accounts are usually left out of training on the big services. The text is still processed and stored on the company's servers.
-
-### Keep it on your machine
-
-An AI that runs on your own PC reads and writes locally: no upload, no retention, no reviewers. GreenCube drafts emails, essays and documents and makes PowerPoint files, offline, €9.99 once; free apps like LM Studio, Jan and [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives) do it too if you're happy choosing a model.
+The only way to keep a draft entirely on your machine is an AI that runs there, with no upload, no retention and no reviewers. GreenCube drafts emails, essays and documents and makes PowerPoint files offline, for €9.99 once. Free apps like LM Studio, Jan and [GPT4All](https://blog.greencube.app/blog/gpt4all-alternatives) do it too, if you're happy choosing a model yourself.
 
 ## Writing assistant or general chatbot?
 
-For privacy the question isn't the label but where the text goes: a "writing assistant" built on a cloud model sends your text to that model's servers just like a chatbot does. Compare the four points above for whichever tool you use. For quality, the biggest cloud models are still stronger at the hardest writing; a model that fits on a PC handles emails, essays, summaries and rewrites well.
+For privacy, the label matters less than where the text goes. A "writing assistant" built on a cloud model sends your text to that model's servers just like a chatbot does, so ask the same four questions of whichever tool you use.
+
+For quality, the biggest cloud models are still stronger at the hardest writing. A model that fits on a PC handles emails, essays, summaries and rewrites well.
 
 ## How fast is a private AI on your own PC?
 
-Measured with GreenCube on 10 real PCs: **5–7** tokens a second on an 8 GB laptop (about reading speed), **14–18** on a 16 GB laptop, **37–76** on most gaming PCs. Check yours: [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker) More on private assistants: [the most private AI assistant](https://blog.greencube.app/blog/private-ai-assistant).
+We measured GreenCube on 10 real PCs. It writes 5 to 7 tokens a second on an 8 GB laptop (about reading speed), 14 to 18 on a 16 GB laptop, and 37 to 76 on most gaming PCs. You can check yours with [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker), and there's more on private assistants in [the most private AI assistant](https://blog.greencube.app/blog/private-ai-assistant).
 
 ## FAQ
 

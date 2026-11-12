@@ -65,68 +65,60 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Gemma 4 requirements: what PC you need to run it locally</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 18 October 2026</p>
-<div class="answer"><p><strong>Short answer:</strong> the small <strong>Gemma 4 E2B</strong> runs on an <strong>8 GB laptop</strong>. <strong>E4B</strong> wants 16 GB of RAM, or flies on any <strong>6 GB+ graphics card</strong>. <strong>12B</strong> needs <strong>10 GB+ of VRAM</strong> to hold a real conversation.</p></div>
+<div class="answer"><p>The smallest Gemma 4, E2B, runs on an 8 GB laptop with no graphics card. E4B wants 16 GB of RAM, or any graphics card with 6 GB or more, where it's fast. Gemma 4 12B needs at least 10 GB of VRAM to hold a real conversation.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>8 GB</b><span>of RAM is enough for Gemma 4 E2B, no graphics card needed</span></div>
-<div class="stat b"><b>56&ndash;72</b><span>tokens a second for E4B on 8 GB gaming cards</span></div>
-<div class="stat p"><b>10 GB</b><span>of VRAM before we'd trust 12B in a long chat</span></div>
-</div>
+<p>These numbers come from our own tests. GreenCube, the app I build, runs on Gemma 4 (Cube 2B is built on Gemma 4 E2B and Cube 4B on Gemma 4 E4B), so we've timed these models on 10 real PCs, in September and October 2026. Gemma 4 itself is free: Google released it under the Apache 2.0 licence, which allows commercial use.</p>
 
 <h2>Gemma 4 requirements at a glance</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Model</th><th>File size</th><th>Minimum we'd suggest</th><th>Best on</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>8 GB RAM, no card</td><td>Laptops</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>16 GB RAM, or a 6 GB card</td><td>Gaming PCs, 16 GB laptops</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>6.7 GB</td><td>10 GB+ VRAM</td><td>Cards with 12 GB or more</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td>8 GB RAM, no card</td><td>Laptops</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td>16 GB RAM, or a 6 GB card</td><td>Gaming PCs, 16 GB laptops</td></tr>
+<tr><td>Gemma 4 12B</td><td>6.7 GB</td><td>10 GB+ VRAM</td><td>Cards with 12 GB or more</td></tr>
 </tbody>
 </table></div>
+<p>The file size is only the start. While you chat, the conversation needs memory too, so leave a couple of GB free on top. On an 8 GB laptop that means closing other apps first.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Measured speeds</h2>
-<p>How fast each one writes its answer, in tokens per second (a token is about three quarters of a word; you read about 5 a second). Measured with GreenCube in September and October 2026.</p>
+<p>This is how fast each model writes its answer, in tokens per second. A token is about three quarters of a word, and most people read about 5 a second, so anything above that feels quick.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>Model</th><th>Writes (tokens/s)</th></tr></thead>
 <tbody>
-<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:100%"></span><b>63&ndash;72</b></td></tr>
-<tr><td>Desktop, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:78%"></span><b>56</b></td></tr>
-<tr><td>Desktop, 12 GB graphics card</td><td>E4B</td><td class="spd"><span class="bar" style="--w:74%"></span><b>50&ndash;55</b></td></tr>
-<tr><td>Desktop, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:51%"></span><b>35&ndash;38</b></td></tr>
-<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>12B</td><td class="spd"><span class="bar" style="--w:42%"></span><b>20&ndash;35</b> (short chats only)</td></tr>
-<tr><td>Desktop, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td class="spd"><span class="bar" style="--w:28%"></span><b>about 20</b></td></tr>
-<tr><td>Laptop, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:22%"></span><b>14&ndash;18</b></td></tr>
-<tr><td>Same laptop</td><td>E4B</td><td class="spd"><span class="bar lo" style="--w:11%"></span><b>8&ndash;10</b></td></tr>
-<tr><td>Laptop, Intel Iris Xe, 8 GB</td><td>E2B</td><td class="spd"><span class="bar lo" style="--w:13%"></span><b>5&ndash;7</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>E4B</td><td><b>63&ndash;72</b></td></tr>
+<tr><td>Desktop, NVIDIA RTX 5060 8 GB</td><td>E4B</td><td><b>56</b></td></tr>
+<tr><td>Desktop, 12 GB graphics card</td><td>E4B</td><td><b>50&ndash;55</b></td></tr>
+<tr><td>Desktop, NVIDIA GTX 1660 Super 6 GB</td><td>E4B</td><td><b>35&ndash;38</b></td></tr>
+<tr><td>Desktop, AMD RX 5700 XT 8 GB</td><td>12B</td><td><b>20&ndash;35</b> (short chats only)</td></tr>
+<tr><td>Desktop, NVIDIA GTX 1650 4 GB</td><td>E4B</td><td><b>about 20</b></td></tr>
+<tr><td>Laptop, Intel Core Ultra 5, 16 GB</td><td>E2B</td><td><b>14&ndash;18</b></td></tr>
+<tr><td>Same laptop</td><td>E4B</td><td><b>8&ndash;10</b></td></tr>
+<tr><td>Laptop, Intel Iris Xe, 8 GB</td><td>E2B</td><td><b>5&ndash;7</b></td></tr>
 </tbody>
 </table></div>
 
 <h2>What we learned</h2>
+<h3>E2B is the laptop model</h3>
+<p>On a 16 GB laptop with no graphics card, E2B finished a full study answer in about 20 seconds. E4B took 112 seconds for the same thing. E2B also got all five of our quick fact checks right. The full comparison is in <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, measured</a>.</p>
 
-<div class="card g">
-<h3>1. E2B is the laptop model</h3>
-<p>On a 16 GB laptop with no graphics card it finished a full study answer in about 20 seconds, where E4B took 112. In five quick fact checks it got none wrong. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, measured.</a></p>
-</div>
+<h3>E4B is the gaming PC model</h3>
+<p>Once the whole model sits on a graphics card, E4B is 7 to 9 times faster than on a laptop, and its answers are better than E2B's. Any card with 6 GB or more holds it completely.</p>
 
-<div class="card b">
-<h3>2. E4B is the gaming PC model</h3>
-<p>Once the whole model sits on a graphics card, E4B is <strong>7 to 9 times faster</strong> than on a laptop, and its answers are better. Any 6 GB+ card does it.</p>
-</div>
-
-<div class="card p">
-<h3>3. 12B needs real VRAM, not just RAM</h3>
-<p>On an 8 GB card, 12B answered one short question fine, then crashed every time the chat grew. That PC had 48 GB of RAM and it didn't help. <a href="/blog/how-much-vram-for-ai">Why the model must fit on your card.</a></p>
-</div>
+<h3>12B needs real VRAM, not just RAM</h3>
+<p>On an 8 GB card, 12B answered one short question fine, then crashed every time the chat grew. That PC had 48 GB of RAM, and it didn't help, because the model and the conversation both have to fit on the card. There's more on this in <a href="/blog/how-much-vram-for-ai">why the model must fit on your card</a>.</p>
 
 <h2>Which Gemma 4 for your PC?</h2>
-<div class="expect">
-<div class="g"><h4>8 GB laptop</h4><p>E2B. Close other apps first.</p></div>
-<div class="b"><h4>16 GB laptop, no card</h4><p>E2B for speed. E4B works but is slow.</p></div>
-<div class="y"><h4>Gaming PC, 6&ndash;8 GB card</h4><p>E4B, fully on the card.</p></div>
-<div class="p"><h4>12 GB+ card</h4><p>E4B is fast; 12B becomes an option.</p></div>
-</div>
-
-<p>Gemma 4 is released by Google under the Apache 2.0 licence. GreenCube picks the right one for your PC automatically. <a href="/blog/can-my-pc-run-ai">See all 10 PCs we measured.</a></p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Your PC</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>8 GB laptop</td><td>E2B, with other apps closed</td></tr>
+<tr><td>16 GB laptop, no graphics card</td><td>E2B for speed; E4B works but is slow</td></tr>
+<tr><td>Gaming PC with a 6&ndash;8 GB card</td><td>E4B, fully on the card</td></tr>
+<tr><td>12 GB+ card</td><td>E4B is fast; 12B becomes an option</td></tr>
+</tbody>
+</table></div>
+<p>If you'd rather not choose, GreenCube checks your PC and picks the right one for you. The speeds for every PC we tested are in <a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a></p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>What are the minimum requirements to run Gemma 4 locally?</summary><p>The smallest one, Gemma 4 E2B (a 2.6 GB file), ran on a laptop with 8 GB of RAM and no graphics card, at 5 to 7 tokens a second in real chats. It needs a couple of GB of free memory to start.</p></details>
@@ -134,7 +126,46 @@
 <details><summary>Can Gemma 4 12B run on an 8 GB graphics card?</summary><p>For one short question, yes: 20 to 35 tokens a second on an RX 5700 XT. But it crashed once the conversation got longer, because the card had almost no room left. We&#x27;d want at least 10 GB of VRAM for it.</p></details>
 <details><summary>Is Gemma 4 free to use?</summary><p>Yes. Google released Gemma 4, including E2B and E4B, under the Apache 2.0 licence, which allows commercial use.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

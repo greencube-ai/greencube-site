@@ -6,15 +6,13 @@ Canonical: https://blog.greencube.app/blog/ai-that-doesnt-train-on-your-data
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Short answer: most do, unless you switch it off.** Of 9 popular AIs, 5 train on what you type by default on a free personal account (ChatGPT, Perplexity, Mistral, DeepSeek, Meta AI). Two depend on a setting (Gemini and Claude), NotebookLM says it doesn't unless you send feedback, and Microsoft's new Copilot app doesn't say. Switching training off helps, but it doesn't make a chat private: feedback, human review and data already used still count. The only way nothing leaves your computer is an AI that runs on it.
+Most of them do, unless you switch it off. Of 9 popular AIs we checked, 5 train on what you type by default on a free personal account: ChatGPT, Perplexity, Mistral, DeepSeek and Meta AI. Gemini and Claude depend on a setting, NotebookLM says it doesn't unless you send feedback, and Microsoft's new Copilot app doesn't say.
 
-- **5 of 9** train on your chats by default, on a free personal account
-- **3 years** how long Gemini keeps chats a human reviewer has read, even if you delete them
-- **0** chats GreenCube receives: they stay on your PC
+Turning training off is worth doing, but it doesn't make a chat private, for reasons I'll get to below. I build GreenCube, an AI that runs on your own PC, so weigh my view with that in mind. Everything about the other services comes from their own help pages, linked in the table.
 
 ## What each one says (checked 18 October 2026)
 
-We read each company's own help pages, for a free personal account, and link them here. Work and school accounts usually have stricter rules: they're left out of training by default on most of these services. Policies change often, so we check again every month.
+We read each company's own help pages for a free personal account. Work and school accounts usually have stricter rules: on most of these services they're left out of training by default. Policies change often, so we check again every month.
 
 | AI | Trains on your chats? | How to turn it off | What the switch doesn't cover |
 | --- | --- | --- | --- |
@@ -26,30 +24,26 @@ We read each company's own help pages, for a free personal account, and link the
 | **Perplexity** (Free, Pro, Max) | **Yes, by default** | Settings → Preferences → "AI data retention" off. | Only stops data from then on; earlier data isn't removed. [Perplexity](https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity) |
 | **Mistral Le Chat** (free) | **Yes, by default** | Settings → Privacy → "Allow your interactions to be used to train our models" off. | Thumbs up or down feedback is used whatever you choose. [Mistral](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training) |
 | **DeepSeek** | **Yes, by default** (de-identified) | Turn off "Improve the model for everyone". | [DeepSeek](https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html) |
-| **Meta AI** | **Yes**: your questions to Meta AI are used | In the EU, object with Meta's form (from the app or the email Meta sent). | The objection covers the account you're logged into and others in the same Accounts Centre. [Meta](https://about.fb.com/news/2025/04/making-ai-work-harder-for-europeans/) |
-| **GreenCube** (runs on your PC) | **No**: your chats never reach us | Nothing to switch off. | Online search, which starts off every time, sends search terms to search engines. [GreenCube](https://legal.greencube.app/privacy) |
+| **Meta AI** | **Yes**, your questions to Meta AI are used | In the EU, object with Meta's form (from the app or the email Meta sent). | The objection covers the account you're logged into and others in the same Accounts Centre. [Meta](https://about.fb.com/news/2025/04/making-ai-work-harder-for-europeans/) |
+| **GreenCube** (runs on your PC) | **No**, your chats never reach us | Nothing to switch off. | Online search, which starts off every time, sends search terms to search engines. [GreenCube](https://legal.greencube.app/privacy) |
 
 ## What "turn off training" doesn't do
 
-### 1. Feedback still counts
+The switch covers one thing: whether what you type from now on goes into training. Three things slip past it.
 
-Clicking thumbs up or down often sends the whole conversation for review, even with training off. OpenAI, Mistral and Google (NotebookLM, Gemini) all say so. If a chat holds something sensitive, don't rate it.
+The first is feedback. Clicking thumbs up or down often sends the whole conversation for review, even with training off. OpenAI, Mistral and Google (for NotebookLM and Gemini) all say so. If a chat holds something sensitive, don't rate it.
 
-### 2. Humans may read some chats
+The second is human review. Gemini uses human reviewers while Keep Activity is on, and keeps the chats they've read for up to 3 years, disconnected from your account, even if you delete your activity.
 
-Gemini uses human reviewers while Keep Activity is on, and keeps reviewed chats up to 3 years, disconnected from your account, even if you delete your activity.
+The third is what's already been used. Anthropic and Perplexity both say data already in training isn't removed when you switch off. So if you're going to turn it off, do it before you paste in your notes, not after.
 
-### 3. What's already used stays used
+## The only way your words stay on your computer
 
-Turning training off only affects what you send from then on. Anthropic and Perplexity both say data already in training isn't removed. If you're going to switch it off, do it before you paste in your notes, not after.
+Every service above runs the AI on its own servers, so what you type has to travel there, whatever the training setting says. An AI that runs on your own computer works the other way round. The model is a file on your PC, your chats and documents are stored there, and no company server holds them.
 
-## The only way nothing leaves your computer
+That's how GreenCube works, and its privacy policy says it plainly: "We never receive your chats, files, memories or images." The honest exceptions are that you sign in once to activate it, it downloads the AI and its updates, and if you switch on Online search for something current, it sends search terms built from your question to search engines. Online starts off every time you open the app.
 
-Every service above runs the AI on its own servers, so what you type has to travel there, whatever the training setting says. An AI that runs on your own computer works the other way round: the model is a file on your PC, your chats and documents are stored there, and there is no company server holding them.
-
-That's how GreenCube works. Its privacy policy says it plainly: "We never receive your chats, files, memories or images." The honest exceptions: you sign in once to activate it, it downloads the AI and its updates, and if you switch on Online search for something current, it sends search terms built from your question to search engines. Online starts off every time you open the app.
-
-The trade-off is your computer does the work. On the PCs we measured, it writes from about reading speed on an 8 GB laptop to many times faster on a gaming PC. [Check what yours can run](https://blog.greencube.app/blog/can-my-pc-run-ai#checker).
+The trade-off is that your computer does the work. On the PCs we measured, it writes at about reading speed on an 8 GB laptop and many times faster on a gaming PC. You can [check what yours can run](https://blog.greencube.app/blog/can-my-pc-run-ai#checker).
 
 ## How we checked
 
@@ -71,4 +65,4 @@ Not completely. Feedback you give can still be used, some companies keep chats f
 
 ### Is there an AI that keeps my chats on my computer?
 
-Yes: an AI that runs locally, like GreenCube, keeps chats and files on your PC. Its only online part is an optional web search that sends search terms, and it starts off every time.
+Yes: an AI that runs locally, like GreenCube, keeps chats and files on your PC. Apart from signing in once, downloading the AI and its updates, its only online part is an optional web search that sends search terms, and it starts off every time.

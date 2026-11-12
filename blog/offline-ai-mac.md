@@ -6,15 +6,13 @@ Canonical: https://blog.greencube.app/blog/offline-ai-mac
 Published: 2026-08-07 · Updated: 2026-10-23  
 Author: Hector Gras
 
-**Short answer:** on a **Mac with an Apple chip**, LM Studio, Jan, Ollama, GPT4All, Msty and AnythingLLM all run AI offline once you've downloaded a model; LM Studio and Jan are the easiest. On an **Intel Mac**, LM Studio and Jan are out; Ollama's docs still list Intel, CPU only, on macOS 14+. **Apple Intelligence** works on the device first, but heavier requests go to Apple's servers, so it's only partly offline.
+Yes, a Mac can run AI with no internet. On a Mac with an Apple chip, LM Studio, Jan, Ollama, GPT4All, Msty and AnythingLLM all work offline once you've downloaded a model, and LM Studio and Jan are the easiest to start with. On an older Intel Mac the list shrinks to Ollama, running on the processor only. Apple Intelligence is only partly offline.
 
-- **8** Mac apps checked on their own pages, October 2026
-- **macOS 14** needed by LM Studio and Ollama
-- **1** of them still lists Intel Macs: Ollama, CPU only
+I make an offline AI app myself, GreenCube, but it's Windows-only, so it isn't one of the options here. Everything below comes from each app's own pages, which we read on 21 and 23 October 2026.
 
 ## Offline AI apps for Mac, checked
 
-From each app's own pages, checked 21 and 23 October 2026. "Not stated" means its pages don't say.
+"Not stated" means the app's own pages don't say either way.
 
 | App | Apple chip | Intel Mac | macOS | Price |
 | --- | --- | --- | --- | --- |
@@ -27,35 +25,27 @@ From each app's own pages, checked 21 and 23 October 2026. "Not stated" means it
 | **Atomic Chat** ([site](https://atomic.chat/offline-ai)) | Yes | Not stated | 13.6+ | Free, Apache 2.0 |
 | **KoboldCpp** ([GitHub](https://github.com/LostRuins/koboldcpp)) | Yes | Not stated | Not stated | Free, AGPL-3.0 |
 
-What each sends online, from their privacy pages: [12 offline AI chatbots compared](https://blog.greencube.app/blog/best-offline-ai-chatbot). Leaving LM Studio? [LM Studio alternatives](https://blog.greencube.app/blog/lm-studio-alternatives).
+If you want a normal app window and no terminal, start with LM Studio or Jan: pick a model from the list, download it, and chat. Ollama is the one to try if you're happy with a command line, and it's the only one here that still promises to run on an Intel Mac. GPT4All's last release was in February 2025, which is worth knowing before you pick it.
+
+What each app sends online, from their privacy pages, is in [12 offline AI chatbots compared](https://blog.greencube.app/blog/best-offline-ai-chatbot). If you're moving away from LM Studio, see [LM Studio alternatives](https://blog.greencube.app/blog/lm-studio-alternatives).
 
 ## Does Apple Intelligence work offline?
 
-Partly. Apple says Apple Intelligence processes requests on the device first, and sends more demanding ones to Private Cloud Compute, its own servers, which needs internet ([Apple](https://support.apple.com/guide/mac-help/mchlfc0d4779)). The optional ChatGPT extension also needs internet. Apple doesn't publish which features always stay on the device, so the honest test is simple: turn on airplane mode and try the feature you care about.
+Partly. Apple says Apple Intelligence handles requests on the Mac first and sends the more demanding ones to Private Cloud Compute, its own servers, which needs a connection ([Apple](https://support.apple.com/guide/mac-help/mchlfc0d4779)). The optional ChatGPT extension needs internet too.
+
+Apple doesn't publish a list of which features always stay on the device. So the honest test is the simple one: turn on airplane mode and try the feature you care about.
 
 ## Which Mac runs local AI well?
 
-#### Apple chip, 16 GB+
+Memory decides most of it. An Apple chip shares its memory between the processor and the graphics, so the AI can use most of it, and 16 GB or more is the comfortable setup. With 8 GB, small models work, as long as you close other apps first, the same as on any 8 GB computer.
 
-The comfortable setup: an Apple chip shares its memory between processor and graphics, so the AI can use most of it.
+An Intel Mac can only run Ollama on its processor, so expect slow answers. On any Mac, the model has to fit in memory with room left over for the conversation, and a bigger model isn't better if it doesn't fit: [a model that doesn't fit runs much slower](https://blog.greencube.app/blog/how-much-vram-for-ai).
 
-#### Apple chip, 8 GB
-
-Small models work; close other apps first, as on any 8 GB computer.
-
-#### Intel Mac
-
-Ollama on the processor only. Expect slow answers.
-
-#### Any Mac
-
-A model must fit in memory with room for the conversation; bigger isn't better if it doesn't fit.
-
-We measure on Windows PCs, so we have no Mac speeds of our own; the rule that matters most is the same everywhere: [a model that doesn't fit runs much slower](https://blog.greencube.app/blog/how-much-vram-for-ai).
+We measure on Windows PCs, so we don't have Mac speeds of our own to give you.
 
 ## On a Windows PC instead?
 
-GreenCube is Windows-only: it picks the AI that fits your PC, reads PDFs and photos and makes pictures, offline, €9.99 once. [Offline AI for Windows, measured on 10 PCs](https://blog.greencube.app/blog/local-ai-chatbot-windows).
+If you also have a Windows 10 or 11 PC, that's where GreenCube runs. It picks the AI that fits the PC, reads PDFs and photos and makes pictures, all offline, for €9.99 once. There's no Mac version for sale. The Windows side, with speeds, is in [offline AI for Windows, measured on 10 PCs](https://blog.greencube.app/blog/local-ai-chatbot-windows).
 
 ## FAQ
 

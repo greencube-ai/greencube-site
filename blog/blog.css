@@ -378,3 +378,28 @@ html.cl-locked { overflow: hidden; }
 .cl-next { right: 12px; top: 50%; transform: translateY(-50%); }
 .cl-view button[hidden] { display: none; }
 @media (max-width: 600px) { .cl-view { padding: 60px 10px 20px; } .cl-prev, .cl-next { top: auto; bottom: 14px; transform: none; } .cl-view img { max-height: calc(100vh - 190px); } }
+
+/* the strip right after the answer box (offline readers): the app, then the clickable demo as the easy first step */
+.bridge-top { display: flex; align-items: center; gap: 14px 18px; flex-wrap: wrap; margin: 22px 0 30px; padding: 16px 18px; background: #F3F7EC; border: 1px solid #C6D9A8; border-radius: 14px; }
+.bridge-top img { width: 44px; height: 44px; border-radius: 10px; flex: 0 0 auto; }
+.bridge-top .bt-text { flex: 1 1 300px; display: flex; flex-direction: column; gap: 3px; line-height: 1.4; }
+.bridge-top .bt-text b { font-family: var(--display); font-size: 17px; }
+.bridge-top .bt-text span { font-size: 15px; color: var(--ink-soft); }
+.bridge-top .bt-btns { display: flex; align-items: center; gap: 10px 18px; flex-wrap: wrap; }
+.bridge-top .cta { margin: 0 !important; white-space: nowrap; }
+
+/* calmer reading (Hector 12 Nov: posts looked machine-made): darker, larger text; the answer is a plain lead paragraph,
+   not a coloured box; real images with a small caption; the clickable app inside the post, wider than the text */
+article p, article li { color: #33322E; font-size: 17.5px; line-height: 1.75; }
+.answer { background: none; border: 0; border-radius: 0; padding: 0; margin: 0 0 18px; }
+.answer p { font-size: 20px; line-height: 1.6; color: var(--ink); }
+figure.shot { margin: 28px 0; }
+figure.shot img { margin: 0 auto; border-radius: 14px; max-height: 420px; }
+figure.shot figcaption { margin-top: 10px; text-align: center; font-size: 14px; color: var(--ink-mute); }
+.post-try { margin: 40px auto 0; padding: 0 16px; }
+.post-try h2 { max-width: 692px; margin: 0 auto 10px; font-family: var(--display); font-weight: 600; font-size: clamp(22px, 2.8vw, 30px); letter-spacing: -0.02em; line-height: 1.2; }
+.post-try > p { max-width: 692px; margin: 0 auto 22px; font-size: 17.5px; line-height: 1.7; color: #33322E; }
+.post-try .gd-wrap { width: min(1080px, 100%); margin: 0 auto; }
+.post-try .gd-label { max-width: 692px; margin: 12px auto 0; text-align: center; font-size: 13px; color: var(--ink-mute); }
+article.after-try { padding-top: 8px; }
+article.after-try .cta-box { margin-top: 20px; }

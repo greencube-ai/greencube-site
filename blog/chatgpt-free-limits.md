@@ -6,57 +6,47 @@ Canonical: https://blog.greencube.app/blog/chatgpt-free-limits
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Short answer:** since August 2026, ChatGPT Free lets you **chat as much as you want**. What's still capped is everything heavier: **uploading files and PDFs, making pictures, voice and data analysis**. For studying from your own notes and slides, those are exactly the parts that run out.
+Since August 2026, ChatGPT Free lets you chat as much as you like. What's still capped is the heavier work: uploading files and PDFs, making pictures, voice and data analysis. If you study from your own notes and slides, those are exactly the parts that run out.
 
-- **Unlimited** text chats on ChatGPT Free, since August 2026
-- **Capped** PDFs and files, pictures, voice and data analysis
-- **$20** a month for ChatGPT Plus (about €23 in Spain) to raise those caps
+I build GreenCube, an AI that runs on your own PC, so I'm not neutral about limits. Everything about ChatGPT below comes from OpenAI's own help pages, linked where it's used.
 
 ## What changed in August 2026
 
-In the week of 10 August 2026, OpenAI made text chats unlimited on its Free and Go plans ([Engadget](https://engadget.com/2234173/chatgpt-free-features-2026)). Its own help page now says: *"Free users have unlimited everyday text chats, subject to abuse-prevention safeguards. File uploads, image generation, voice, data analysis, and other tools have separate usage limits."* ([OpenAI Help Center](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)).
+In the week of 10 August 2026, OpenAI made text chats unlimited on its Free and Go plans ([Engadget](https://engadget.com/2234173/chatgpt-free-features-2026)). Its help page now says: *"Free users have unlimited everyday text chats, subject to abuse-prevention safeguards. File uploads, image generation, voice, data analysis, and other tools have separate usage limits."* ([OpenAI Help Center](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)).
 
-So if you saw "You've reached your limit" in 2025 while just chatting, that's mostly gone. If you see it in 2026, it's almost always because you sent a file, asked for a picture, or used voice.
+So if you used to see "You've reached your limit" in 2025 just from chatting, that's mostly over. If it shows up in 2026, it's almost always because you sent a file, asked for a picture or used voice.
 
 ## What's still capped on ChatGPT Free
 
 |  | ChatGPT Free | ChatGPT Plus | AI on your own PC (GreenCube) |
 | --- | --- | --- | --- |
-| **Text chat** | Unlimited | Unlimited | Unlimited |
-| **Files and PDFs** | Capped (number not published) | Higher cap | No cap |
-| **Making pictures** | Capped | Higher cap | No cap (needs 16 GB of RAM; 28 s to 2.5 min per picture in our tests) |
-| **Voice conversations** | Capped | Higher cap | Not available |
-| **Ads** | May appear in some countries | None | None |
-| **Works with no internet** | No ([why](https://blog.greencube.app/blog/chatgpt-offline)) | No | Yes, after one download |
-| **Price** | Free | $20 a month (about €23 in Spain) | €9.99 once |
+| Text chat | Unlimited | Unlimited | Unlimited |
+| Files and PDFs | Capped (number not published) | Higher cap | No cap |
+| Making pictures | Capped | Higher cap | No cap (needs 12 GB of RAM; 28 s to 2.5 min per picture in our tests) |
+| Voice conversations | Capped | Higher cap | Not available |
+| Ads | May appear in some countries | None | None |
+| Works with no internet | No ([why](https://blog.greencube.app/blog/chatgpt-offline)) | No | Yes, after one download |
+| Price | Free | $20 a month (about €23 in Spain) | €9.99 once |
 
-Checked against OpenAI's help pages in October 2026 ([Free tier](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq), [Plus](https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus), [ads](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). OpenAI changes its plans often and doesn't publish the exact caps, so check Settings in ChatGPT for your own numbers. The Spanish price is from [GEO Toolbox](https://geotoolbox.ai/es/blog/precio-chatgpt).
+Checked against OpenAI's help pages in October 2026 ([Free tier](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq), [Plus](https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus), [ads](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). OpenAI changes its plans often and doesn't publish the exact caps, so the Settings page in ChatGPT is the place to see your own. The Spanish price is from [GEO Toolbox](https://geotoolbox.ai/es/blog/precio-chatgpt).
 
 ## Why the caps are where they are
 
-Reading a 40-page PDF or drawing a picture costs a cloud AI far more computing than a text reply, and on the Free plan someone has to pay for those servers. OpenAI itself says keeping the Free and Go plans running "requires significant infrastructure", which is the reason it gives for the ads ([OpenAI](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)). An AI running on your own PC doesn't have that problem: your graphics card does the work, so there is nothing to ration. The cost is that it's only as fast as your PC ([we measured 10 PCs here](https://blog.greencube.app/blog/can-my-pc-run-ai)).
+Reading a 40-page PDF or drawing a picture takes a cloud AI far more computing than a text reply, and on a free plan somebody has to pay for those servers. OpenAI says as much: keeping the Free and Go plans running "requires significant infrastructure", which is the reason it gives for the ads ([OpenAI](https://help.openai.com/en/articles/20001047-ads-in-chatgpt)).
+
+An AI on your own PC doesn't have that problem. Your graphics card or processor does the work, so there's nothing to ration and nobody counting. The catch is that it's only as fast as your PC ([we measured 10 PCs here](https://blog.greencube.app/blog/can-my-pc-run-ai)).
 
 ## So what should you use?
 
-#### Stay on ChatGPT Free if…
+If you mostly chat and rarely upload files, stay on ChatGPT Free. Unlimited text covers most questions, and its models are stronger than anything that fits on a PC.
 
-you mostly chat and rarely upload files. Unlimited text covers most questions, and its models are stronger than anything that fits on a PC.
+Plus is worth it if you need the strongest models, voice or deep research every day, and $20 a month doesn't bother you.
 
-#### Pay for Plus if…
+An AI on your own PC suits people who study from PDFs and slides a lot, want pictures without a counter, often have bad Wi-Fi, or don't want another subscription. GreenCube is one: €9.99 once, no caps on chats, files or pictures, and it works offline after the first download. There are free apps that run AI on your PC too, which I've listed in [which AIs have no limits at all](https://blog.greencube.app/blog/unlimited-ai).
 
-you need the strongest models, voice, or deep research every day, and $20 a month is fine for you.
+Plenty of people mix the two: ChatGPT for quick questions, and an AI on their own PC for the heavy, repetitive work, like summarising a whole semester of PDFs.
 
-#### Use an AI on your PC if…
-
-you study from PDFs and slides a lot, want pictures without a counter, often have bad Wi-Fi, or don't want another subscription.
-
-#### Or mix them
-
-Lots of people use ChatGPT for quick questions and an AI on their own PC for the heavy, repetitive stuff like summarising a whole semester of PDFs.
-
-## Exam-season tip
-
-Caps hurt most right before exams, when you want to turn every PDF into a summary and flashcards in one evening. Whatever you use, do the heavy stuff early in the week, and keep one tool with no counter for the night before. [Which AIs have no limits at all](https://blog.greencube.app/blog/unlimited-ai).
+Whatever you pick, the caps bite hardest right before exams, when you want every PDF turned into a summary and flashcards in one evening. Doing the heavy work early in the week, and keeping one tool without a counter for the night before, saves a lot of stress.
 
 ## FAQ
 

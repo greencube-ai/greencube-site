@@ -22,8 +22,8 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "7 Controls to Lock Down Local AI for Privacy Conscious Users", "description": "Decide if local AI fits your privacy needs and apply seven practical controls—least privilege, sandboxing, authenticated interfaces, and append only logs...", "image": "https://blog.greencube.app/blog/images/ecc5ef64e560.jpg", "datePublished": "2026-10-07", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/is-local-ai-safe", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the safest AI to use?", "acceptedAnswer": {"@type": "Answer", "text": "There's no single \"safest\" AI, since safety depends on what the tool is allowed to do, not just where it runs. A local AI with tightly limited permissions and no access to untrusted input is generally safer for sensitive tasks than a cloud tool with broad access, but both need the same core controls: least privilege, sandboxing, and human approval for irreversible actions."}}, {"@type": "Question", "name": "Should I use a local AI?", "acceptedAnswer": {"@type": "Answer", "text": "Local AI is a strong choice if you want your documents and conversations to stay on your own device and you mainly need bounded tasks like drafting, summarizing, or analyzing files. It's less suited to tasks needing frontier-level reasoning or heavy autonomous action without oversight, where a cloud model's stronger guardrails may serve you better."}}, {"@type": "Question", "name": "Is local AI harmful to the environment?", "acceptedAnswer": {"@type": "Answer", "text": "Local AI shifts energy use to your own device instead of a data center, and for occasional personal use that often means a smaller energy footprint than continuous cloud inference, according to IEA's energy and AI analysis. Large-scale training still happens in data centers regardless of how you use the finished model."}}, {"@type": "Question", "name": "Is local AI free?", "acceptedAnswer": {"@type": "Answer", "text": "Some local AI tools are free and open source, while others, like GreenCube, charge a one-time fee instead of a subscription. GreenCube costs $9.99 (€9.99), paid once, with no recurring charges."}}, {"@type": "Question", "name": "What are the biggest risks of running AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "The main risks are prompt injection from untrusted files or web content, code execution through unsafe plugins or tools, tampered or unverified model downloads, and exposed local web interfaces that lack proper authentication, as detailed in OWASP's Top 10 for LLM applications. None of these are unique to local AI, but local setups often lack the monitoring that cloud providers build in by default."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "7 Controls to Lock Down Local AI for Privacy Conscious Users", "description": "Decide if local AI fits your privacy needs and apply seven practical controls—least privilege, sandboxing, authenticated interfaces, and append only logs...", "image": "https://blog.greencube.app/blog/images/ecc5ef64e560.jpg", "datePublished": "2026-10-07", "dateModified": "2026-10-07", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/is-local-ai-safe", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the safest AI to use?", "acceptedAnswer": {"@type": "Answer", "text": "There's no single safest AI, because safety depends on what a tool can read and do as much as where it runs. An app that only answers questions has little to lose; an agent that can run commands or delete files needs tight limits and a human yes for anything you can't undo."}}, {"@type": "Question", "name": "Should I use a local AI?", "acceptedAnswer": {"@type": "Answer", "text": "It's a good choice if you want your chats and documents to stay on your own computer and your tasks are bounded, like drafting, summarising or studying. For the hardest problems or today's news, a cloud AI is stronger."}}, {"@type": "Question", "name": "Is local AI harmful to the environment?", "acceptedAnswer": {"@type": "Answer", "text": "Running a model on your PC uses your own electricity while it works, instead of a data centre's. The models themselves were trained in data centres either way."}}, {"@type": "Question", "name": "Is local AI free?", "acceptedAnswer": {"@type": "Answer", "text": "Some are: LM Studio, Ollama, Jan and GPT4All cost nothing. GreenCube costs €9.99 (US$9.99) once, with no subscription. Either way you pay a little in electricity while it runs."}}, {"@type": "Question", "name": "What are the biggest risks of running AI locally?", "acceptedAnswer": {"@type": "Answer", "text": "Prompt injection from files or web pages, apps that let the model run code or plugins without tight limits, tampered model downloads, and local servers that web pages can reach. OWASP lists prompt injection first in its Top 10 for LLM applications, and on your own PC nobody else is watching for abuse."}}]}</script>
 </head>
 <body>
 
@@ -42,119 +42,100 @@
 <article>
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>7 Controls to Lock Down Local AI for Privacy Conscious Users</h1>
-<p class="byline">GreenCube &middot; 7 October 2026 &middot; updated 10 October 2026</p>
-<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically (Cube 2B on smaller PCs, Cube 4B with a graphics card, both built on Google’s Gemma), so you no longer choose between two models. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 7 October 2026</p>
+
 <aside class="tested"><strong>We checked this</strong><ul><li><a href="/blog/ai-that-doesnt-train-on-your-data">Which AI doesn&#x27;t train on your chats? We checked 9 (October 2026)</a></li></ul></aside>
 <img class="cover" src="/blog/images/ecc5ef64e560.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
-<p>Local AI is safe for most everyday tasks, mainly because keeping your data on your own device removes the biggest privacy risk of cloud tools, but &quot;local&quot; is not a blanket safety guarantee. Guidance from NIST on agentic AI and the <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf" target="_blank" rel="noopener noreferrer nofollow">OWASP Top 10 for LLM applications</a> both warn that an AI agent&#x27;s permissions matter more than where it runs. Local AI is a good fit for bounded, read-only tasks like summarizing a file; it&#x27;s a poor fit for letting an agent take irreversible actions on untrusted input without supervision.</p>
-<hr/>
-<blockquote>
-<p><strong>TL;DR:</strong></p>
-<ul>
-<li>Prompt injection remains the top risk for local AI, especially through hidden instructions in uploaded files or web content that can trick the model.</li>
-<li>Unrestricted code execution and unsafe plugins can lead to remote code execution on your machine, especially if access isn&#x27;t tightly scoped.</li>
-<li>Downloaded models can be tampered with or stripped of safety training, increasing the risk of unsafe behavior and unverified model integrity issues.</li>
-<li>Many local AI tools run web interfaces without proper authentication, opening attack paths via malicious websites that can connect to listening ports.</li>
-<li>Implementing strict permission controls, sandboxing, verifying downloads, and requiring human approval for critical actions are key to reducing local AI risks.</li>
-</ul>
-</blockquote>
-<hr/><h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-<li><a href="#core-risks-of-running-ai-locally">Core risks of running AI locally</a></li>
-<li><a href="#practical-mitigations-and-controls-for-safe-local-ai">Practical mitigations and controls for safe local AI</a></li>
-<li><a href="#a-simple-checklist-to-decide-and-set-up-local-ai-safely">A simple checklist to decide and set up local AI safely</a></li>
-<li><a href="#environmental-and-performance-trade-offs">Environmental and performance trade-offs</a></li>
-<li><a href="#how-we-think-about-local-ai-safety">How we think about local AI safety</a></li>
-<li><a href="#if-youre-ready-to-try-offline-ai-where-to-start-with-greencube">If you&#x27;re ready to try offline AI: where to start with GreenCube</a></li>
-<li><a href="#faq">FAQ</a></li>
-<li><a href="#sources">Sources</a></li>
-</ul>
-<p class="bridge-mid">Want your chats to stay on your own computer? <a href="https://greencube.app/buy">See what GreenCube keeps on your PC <span aria-hidden="true">&rarr;</span></a></p>
-<h2 id="core-risks-of-running-ai-locally">Core risks of running AI locally</h2>
-<p>Running an AI model on your own computer removes one danger (your conversations landing on someone else&#x27;s server) but introduces others that have nothing to do with the cloud. The real threat surface is what the AI is allowed to touch and what it&#x27;s asked to read.</p>
-<p>The most studied issue is <strong>prompt injection</strong>, where hidden instructions inside a file, a webpage, or a document trick the model into doing something you didn&#x27;t ask for. Indirect injection is especially sneaky: you upload a PDF to summarize, and buried text tells the model to leak other files or change its behavior. OWASP lists this as the top risk for LLM applications, and it applies to local models just as much as cloud ones.</p>
-<p>A second risk is <strong>code injection and remote code execution</strong>. Some local AI setups let the model run commands, call plugins, or execute code to be more useful. If that access isn&#x27;t tightly scoped, a malicious file or a buggy plugin can turn a chat session into a way to run arbitrary code on your machine. This isn&#x27;t theoretical: a documented vulnerability in a popular AI library, <a href="https://nvd.nist.gov/vuln/detail/cve-2026-80047" target="_blank" rel="noopener noreferrer nofollow">CVE-2026-80047</a>, allowed remote files to be written to disk before the software checked whether they could be trusted.</p>
-<p>Other risks worth knowing:</p>
-<ul>
-<li><strong>Supply-chain tampering</strong>: downloaded model files can be poisoned, have their safety training stripped out (&quot;abliterated&quot;), or ship without any way to verify they weren&#x27;t altered.</li>
-<li><strong>Exposed local interfaces</strong>: many local AI tools run a small web server on your machine, and without proper checks, a malicious webpage can talk to it behind your back.</li>
-<li><strong>Weaker guardrails in smaller models</strong>: compact local models are often easier to manipulate into ignoring their own safety instructions than large cloud models with mature defenses.</li>
-<li><strong>No vendor watching your back</strong>: cloud providers monitor for abuse at scale; on your own device, you lose that early-warning layer unless you build your own logging.</li>
-</ul>
-<p><strong>Local web interfaces are a commonly overlooked attack path.</strong> Research from the <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-clawjacked-websocket-local-agent-hijack-20/" target="_blank" rel="noopener noreferrer nofollow">Cloud Security Alliance on local agent hijacking</a> found that without proper authentication and origin checks, a malicious website can connect to a local AI&#x27;s listening port and pull data or trigger actions, the same way an unlocked front door invites trouble regardless of what neighborhood you live in.</p>
-<h2 id="practical-mitigations-and-controls-for-safe-local-ai">Practical mitigations and controls for safe local AI</h2>
-<p>The good news: most of these risks have straightforward fixes, and they line up closely with what NIST&#x27;s agentic AI guidance recommends for any AI system that can take action.</p>
-<ol>
-<li><strong>Limit what the AI can do.</strong> Give it the narrowest permissions possible, read-only access to files it needs, no open-ended shell or terminal access, and no ability to touch anything outside a defined folder.</li>
-<li><strong>Run it in a contained space.</strong> A sandbox, container, or virtual machine keeps a compromised AI process from reaching the rest of your system. Scoped identity tokens and <a href="https://devopsaitoolkit.com/blog/least-privilege-entra-id-azure-rbac-with-ai" target="_blank" rel="nofollow noopener">least-privilege access controls</a> apply here too, even on a personal machine.</li>
-<li><strong>Check what&#x27;s listening.</strong> Review which local ports and web interfaces your AI tools open, and require authentication before anything can connect to them.</li>
-<li><strong>Verify what you download.</strong> Pin specific model versions, check file signatures or checksums where available, and avoid unofficial fine-tunes with safety training stripped out.</li>
-<li><strong>Keep a record you can&#x27;t argue with.</strong> An append-only log that the model itself cannot edit gives you something to check if anything looks wrong later.</li>
-<li><strong>Require a human for anything irreversible.</strong> Deleting files, sending messages, or making purchases should need your explicit approval, never full autonomy.</li>
-<li><strong>Treat every external file as hostile until proven otherwise.</strong> Strip or sanitize text from uploads and web content before the model reads it, since this is where most prompt injection starts.</li>
-</ol>
-<p><strong>Pro Tip:</strong> <em>Before giving any local AI tool file or command access, ask what the worst thing it could do with that access would be, then scope it down until the answer is boring.</em></p>
-<h2 id="a-simple-checklist-to-decide-and-set-up-local-ai-safely">A simple checklist to decide and set up local AI safely</h2>
-<p>A quick gut check works well here: if the task involves trusted, bounded input and any mistake is easy to undo, local AI is usually a safe candidate. If it involves untrusted input (random web pages, unknown file uploads) or actions you can&#x27;t take back, slow down and add oversight first.</p>
-<p>Setup basics for a laptop or workstation:</p>
-<ul>
-<li>Choose a model from a known source rather than an anonymous upload on a forum.</li>
-<li>Turn off network access for the AI process unless a feature genuinely needs it.</li>
-<li>Run the tool in a sandbox or isolated user account, not with full admin rights.</li>
-<li>Verify checksums or signatures on model files before loading them.</li>
-</ul>
-<p>Keep it safe over time:</p>
-<ul>
-<li>Review logs occasionally for anything unexpected.</li>
-<li>Re-check your model and tools after major updates, since behavior can shift.</li>
-<li>Watch for new listening ports or services you didn&#x27;t set up yourself.</li>
-<li>Install security updates for your AI runtime promptly, the same way you would for your browser.</li>
-</ul>
-<p>Red flags to walk away from: a model advertised as having its &quot;safety filters removed,&quot; a plugin that can execute arbitrary code with no sandbox, or any tool that can&#x27;t tell you what permissions it&#x27;s using. Our <a href="https://blog.greencube.app/blog/offline-ai-security">practical hardening guide for offline AI</a> walks through sandboxing options in more depth.</p>
-<h2 id="environmental-and-performance-trade-offs">Environmental and performance trade-offs</h2>
-<p>Running AI locally uses your own device&#x27;s power instead of a data center&#x27;s, and for occasional personal use, that&#x27;s often a lighter footprint than keeping a cloud session running continuously. <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer nofollow">IEA&#x27;s analysis of energy and AI</a> notes that large-scale training and persistent cloud inference draw heavily on data-center electricity, while local use shifts that cost to your own machine in smaller, intermittent amounts.</p>
-<p>The trade-off is capability. Local models are smaller and faster to run on consumer hardware, but they can&#x27;t match frontier cloud models for complex reasoning, and cloud providers invest heavily in red-teaming that most local setups don&#x27;t replicate.</p>
-<p><img src="/blog/images/2b5a4f849197.jpg" alt="Environmental and performance trade-offs — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
-<h2 id="how-we-think-about-local-ai-safety">How we think about local AI safety</h2>
-<p>Our stance is simple: running AI on your own machine solves the data-location problem, not the permissions problem. An agent with too much access is risky whether it&#x27;s local or in the cloud. We built our product around full offline operation, a one-time purchase, a choice between two local models, and support for Windows 10 and 11. A one-time Google or Microsoft sign-in only confirms your license, nothing else. For setup steps, see our <a href="https://blog.greencube.app/blog/secure-ai-on-pc">guide to securing AI on your PC</a>.</p>
-<blockquote>
-<p><em>— Hector Gras</em></p>
-</blockquote>
-<h2 id="if-youre-ready-to-try-offline-ai-where-to-start-with-greencube">If you&#x27;re ready to try offline AI: where to start with GreenCube</h2>
-<p>We built GreenCube around one idea: your chats and documents should never leave your computer unless you choose to connect something yourself. It&#x27;s a one-time purchase with no subscription and everything included.</p>
-<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
-<ul>
-<li>Two model choices to match your hardware: one optimized for plain text, another that reads images and builds study guides but needs more RAM.</li>
-<li>Works fully offline: chats and files stay on your machine; only features you turn on connect to the internet.</li>
-<li>Runs on Windows 10 and 11: setup downloads your chosen model once, and a one-time sign-in just verifies your license.</li>
-</ul>
-<p>If you want to see how model choice affects what you can do, our <a href="https://blog.greencube.app/blog/best-local-ai-models">guide to local AI models</a> walks through the differences, or you can compare hardware tiers with this <a href="https://promptchief.tech/ai-model-selector.html" target="_blank" rel="nofollow noopener">AI model selector tool</a>. When you&#x27;re ready, get GreenCube for $9.99 and start chatting offline today.</p>
-<h2 id="faq">FAQ</h2>
-<h3 id="what-is-the-safest-ai-to-use">What is the safest AI to use?</h3>
-<p>There&#x27;s no single &quot;safest&quot; AI, since safety depends on what the tool is allowed to do, not just where it runs. A local AI with tightly limited permissions and no access to untrusted input is generally safer for sensitive tasks than a cloud tool with broad access, but both need the same core controls: least privilege, sandboxing, and human approval for irreversible actions.</p>
-<h3 id="should-i-use-a-local-ai">Should I use a local AI?</h3>
-<p>Local AI is a strong choice if you want your documents and conversations to stay on your own device and you mainly need bounded tasks like drafting, summarizing, or analyzing files. It&#x27;s less suited to tasks needing frontier-level reasoning or heavy autonomous action without oversight, where a cloud model&#x27;s stronger guardrails may serve you better.</p>
-<h3 id="is-local-ai-harmful-to-the-environment">Is local AI harmful to the environment?</h3>
-<p>Local AI shifts energy use to your own device instead of a data center, and for occasional personal use that often means a smaller energy footprint than continuous cloud inference, according to IEA&#x27;s energy and AI analysis. Large-scale training still happens in data centers regardless of how you use the finished model.</p>
-<h3 id="is-local-ai-free">Is local AI free?</h3>
-<p>Some local AI tools are free and open source, while others, like GreenCube, charge a one-time fee instead of a subscription. GreenCube costs $9.99 (€9.99), paid once, with no recurring charges.</p>
-<h3 id="what-are-the-biggest-risks-of-running-ai-locally">What are the biggest risks of running AI locally?</h3>
-<p>The main risks are prompt injection from untrusted files or web content, code execution through unsafe plugins or tools, tampered or unverified model downloads, and exposed local web interfaces that lack proper authentication, as detailed in OWASP&#x27;s Top 10 for LLM applications. None of these are unique to local AI, but local setups often lack the monitoring that cloud providers build in by default.</p>
-<h2 id="sources">Sources</h2>
-<ul>
-<li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf" target="_blank" rel="noopener noreferrer nofollow">OWASP Top 10 for Large Language Model Applications (2025)</a></li>
-<li><a href="https://nvd.nist.gov/vuln/detail/cve-2026-80047" target="_blank" rel="noopener noreferrer nofollow">CVE-2026-80047 — Hugging Face Transformers arbitrary file write vulnerability (NVD)</a></li>
-<li><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer nofollow">Energy and AI – Executive summary (IEA)</a></li>
-<li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-clawjacked-websocket-local-agent-hijack-20/" target="_blank" rel="noopener noreferrer nofollow">CLAWJacked: Websocket/local agent hijack (Cloud Security Alliance labs)</a></li>
-</ul>
-<h2 id="recommended">Recommended</h2>
-<ul>
-<li><a href="https://blog.greencube.app/blog/best-laptop-ai-assistant">Best Laptop AI Assistant for Privacy: Local and Offline</a></li>
-<li><a href="https://blog.greencube.app/blog/best-local-ai-models">Local AI Models Explained: Privacy, Use Cases, How to Start</a></li>
-<li><a href="https://blog.greencube.app/blog/best-offline-ai-chatbot">AI Without Internet: Run Local AI Privately on Any Laptop</a></li>
-<li><a href="https://blog.greencube.app/blog/secure-ai-on-pc">Secure AI on Your PC: A Private, Offline Buyer&#x27;s Guide</a></li>
-</ul>
+<div class="answer"><p>Local AI is safe for most everyday use. Running the AI on your own computer removes the biggest privacy risk of cloud tools, because your chats and files never reach someone else's server. But "local" isn't a safety guarantee on its own. What matters more is what the AI is allowed to read and do: an app that only answers questions has little to lose, while an AI agent that can run commands or delete files needs real limits.</p></div>
 
+<h2>What running AI locally fixes, and what it doesn't</h2>
+<p>With a cloud AI, everything you type is sent to the company and kept under its rules. A local AI keeps it on your disk, which settles the question of where your data lives. It doesn't settle the question of permissions. An AI with too much access is risky wherever it runs.</p>
+
+<p class="bridge-mid">Want your chats to stay on your own computer? <a href="https://greencube.app/buy">See what GreenCube keeps on your PC <span aria-hidden="true">&rarr;</span></a></p>
+<h2>The real risks</h2>
+
+<h3>Prompt injection</h3>
+<p>Hidden instructions inside a file or a web page can try to steer the model. Picture a PDF you ask it to summarise, with a buried line telling it to ignore you and do something else. OWASP puts prompt injection first in its <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf" rel="nofollow noopener">2025 Top 10 for LLM applications</a>, and it applies to local models as much as cloud ones. In a chat app that only answers, the usual harm is a wrong or strange answer. In an agent that can act, it can be much worse.</p>
+
+<h3>Code, commands and plugins</h3>
+<p>Some local setups let the model run commands, call plugins or execute code so it can do more for you. If that access isn't tightly limited, a malicious file or a buggy plugin can turn a chat into a way of running code on your machine.</p>
+
+<h3>Tampered or stripped models</h3>
+<p>Model files come from the internet. One from an anonymous uploader can be altered, or have its safety training removed on purpose (these are often labelled "abliterated" or "uncensored"), and many downloads give you no easy way to check they weren't changed.</p>
+
+<h3>Local servers that web pages can reach</h3>
+<p>Many local AI tools run a small web server on your PC so a chat window or other apps can talk to the model. If that server doesn't check who is connecting, a web page you visit may be able to send it requests too.</p>
+
+<h3>Nobody watching but you</h3>
+<p>Cloud providers watch for abuse across all their users. On your own PC nobody does that, so you're the early warning. Small models can also be easier to talk out of their own safety rules than the big cloud ones.</p>
+
+<h2>7 controls that make local AI safer</h2>
+<ol>
+<li>Give it the least access it needs: read-only access to the folder it works on, no open terminal, nothing outside that folder.</li>
+<li>Keep it contained. A separate user account, a container or a virtual machine stops a misbehaving process from reaching the rest of your system.</li>
+<li>Check what's listening. Find out which ports and web interfaces your AI tools open, and require a password or token before anything can connect.</li>
+<li>Download models from known sources, such as the model maker's own page or a well-known publisher. Check the checksum when one is given, and skip models advertised with their safety removed.</li>
+<li>Keep a log the AI itself can't edit, so you can see what happened if something looks wrong later.</li>
+<li>Require a human yes for anything you can't undo, like deleting files, sending messages or paying for things.</li>
+<li>Treat outside files and web pages as untrusted. That's where most prompt injection starts, so be most careful when the same AI reads them and can also act.</li>
+</ol>
+<p>Before you give any AI tool access to files or commands, ask what the worst thing it could do with that access would be. Then narrow the access until the answer is dull.</p>
+
+<h2>A quick way to decide</h2>
+<p>If the input is yours and any mistake is easy to undo, like summarising your own notes or drafting an email you'll read before sending, local AI is a safe bet. If the input is untrusted (random web pages, files from strangers) or the action can't be taken back, slow down and put a human check in first.</p>
+<p>Over time, keep your AI apps updated the way you update your browser, and look again after big updates. Walk away from any tool that can't tell you what it's allowed to do. For the hands-on side, see <a href="/blog/offline-ai-security">our offline AI security guide</a> and <a href="/blog/secure-ai-on-pc">how to secure AI on your PC</a>.</p>
+
+<h2>Where GreenCube fits</h2>
+<p>I build GreenCube, so weigh this with that in mind. It's a Windows app that runs the AI on your PC and saves your chats, files and images there. It needs internet once, to sign in with Google or Microsoft (only to check you paid) and to download the AI. After that it works offline, and it only goes online for updates or if you switch Online on for web lookups. It picks the model for your PC by itself (Cube 2B or Cube 4B, both built on Google's Gemma), so you don't have to hunt for model files. It costs &euro;9.99 once.</p>
+<p>It reads PDFs, so the advice about untrusted files still applies: it can get an answer wrong, and anything that matters is worth checking. It's also a smaller AI than the big cloud ones, and weaker on the hardest problems. If you want to compare it with other models you can run yourself, see <a href="/blog/best-local-ai-models">the best local AI models</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>What is the safest AI to use?</summary><p>There&#x27;s no single safest AI, because safety depends on what a tool can read and do as much as where it runs. An app that only answers questions has little to lose; an agent that can run commands or delete files needs tight limits and a human yes for anything you can&#x27;t undo.</p></details>
+<details><summary>Should I use a local AI?</summary><p>It&#x27;s a good choice if you want your chats and documents to stay on your own computer and your tasks are bounded, like drafting, summarising or studying. For the hardest problems or today&#x27;s news, a cloud AI is stronger.</p></details>
+<details><summary>Is local AI harmful to the environment?</summary><p>Running a model on your PC uses your own electricity while it works, instead of a data centre&#x27;s. The models themselves were trained in data centres either way.</p></details>
+<details><summary>Is local AI free?</summary><p>Some are: LM Studio, Ollama, Jan and GPT4All cost nothing. GreenCube costs €9.99 (US$9.99) once, with no subscription. Either way you pay a little in electricity while it runs.</p></details>
+<details><summary>What are the biggest risks of running AI locally?</summary><p>Prompt injection from files or web pages, apps that let the model run code or plugins without tight limits, tampered model downloads, and local servers that web pages can reach. OWASP lists prompt injection first in its Top 10 for LLM applications, and on your own PC nobody else is watching for abuse.</p></details>
+</div>
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="private"><h3>An AI you own, on your own PC</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/> <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/> <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/> <path d="M47 61h28" stroke-width="3"/> </svg></span><span class="bt-name">Chat</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/> <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M52 18v12h12" /> <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/> </svg></span><span class="bt-name">Files</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M58 12v14h14"/> <path d="M28 38h26" stroke-width="4"/> <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">Documents</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slides</span></li></ul><p>GreenCube runs on your computer. Your chats are saved on your PC, and once it is installed it keeps working offline. &euro;9.99 (US$9.99), paid once.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/your-data">See what stays on your PC</a></p></div>
 </article>
 

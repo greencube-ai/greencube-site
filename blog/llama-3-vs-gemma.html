@@ -22,8 +22,8 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GPU First For Developers: Gemma <12GB, Llama 3 40GB+", "description": "Hardware first guide for developers choosing Gemma or Llama 3: which GPU VRAM tiers suit each, multimodal versus coding tradeoffs, and try a local demo.", "image": "https://blog.greencube.app/blog/images/765f35fd4d1d.jpg", "datePublished": "2026-09-27", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llama-3-vs-gemma", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Gemma better than Llama?", "acceptedAnswer": {"@type": "Answer", "text": "Neither family wins universally: Gemma checkpoints often lead on instruction-following benchmarks and native multimodal support, while Llama 70B variants tend to score higher on coding tasks. The right choice depends on your hardware limits and whether your workload leans toward reasoning, coding, or image input."}}, {"@type": "Question", "name": "Is Gemma 3 free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Gemma 3 model weights are available for download under Google's own model terms, which you can review directly in each model card before committing to a commercial use case. Costs come from the hardware you run it on, not a licensing fee for the model itself in typical use."}}, {"@type": "Question", "name": "Is Google Gemma the same as Gemini?", "acceptedAnswer": {"@type": "Answer", "text": "No, Gemma and Gemini are different products from Google. Gemma is a family of open-weight models you can download and run yourself, including on local hardware, while Gemini is Google's cloud-hosted assistant accessed through Google's own apps and APIs."}}, {"@type": "Question", "name": "Which Gemma is best for coding?", "acceptedAnswer": {"@type": "Answer", "text": "Among the checkpoints covered here, Gemma 4's 12B to 31B tiers report strong LiveCodeBench results on their vendor model card, making that family a reasonable Gemma option for coding work. For workloads where coding accuracy is the top priority above everything else, aggregated testing still shows larger Llama checkpoints holding an edge on coding-specific benchmarks."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GPU First For Developers: Gemma <12GB, Llama 3 40GB+", "description": "Hardware first guide for developers choosing Gemma or Llama 3: which GPU VRAM tiers suit each, multimodal versus coding tradeoffs, and try a local demo.", "image": "https://blog.greencube.app/blog/images/765f35fd4d1d.jpg", "datePublished": "2026-09-27", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llama-3-vs-gemma", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Gemma better than Llama?", "acceptedAnswer": {"@type": "Answer", "text": "Neither wins everywhere. Gemma is the better start on modest hardware and when you need image input; Llama has the larger ecosystem of fine-tunes and goes bigger at the top, which helps on code and long reasoning. Test both on your own prompts and your own card."}}, {"@type": "Question", "name": "Is Gemma 3 free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The weights are free to download under Google's Gemma Terms of Use, which allow commercial use with a list of prohibited uses; Gemma 4 moved to the standard Apache 2.0 licence. Your cost is the hardware you run it on."}}, {"@type": "Question", "name": "Is Google Gemma the same as Gemini?", "acceptedAnswer": {"@type": "Answer", "text": "No. Gemini is Google's cloud assistant and family of hosted models, used through Google's apps and API. Gemma is a family of open models built from the same research that anyone can download and run offline on their own PC."}}, {"@type": "Question", "name": "Which Gemma is best for coding?", "acceptedAnswer": {"@type": "Answer", "text": "Bigger is usually better for code in both families, so pick the largest Gemma that fits in your graphics memory. If code is your main job, also look at models trained specifically for it."}}]}</script>
 </head>
 <body>
 
@@ -42,137 +42,115 @@
 <article>
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>GPU First For Developers: Gemma &lt;12GB, Llama 3 40GB+</h1>
-<p class="byline">GreenCube &middot; 27 September 2026 &middot; updated 10 October 2026</p>
-<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically (Cube 2B on smaller PCs, Cube 4B with a graphics card, both built on Google’s Gemma), so you no longer choose between two models. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 27 September 2026 &middot; updated 10 October 2026</p>
+
 <aside class="tested"><strong>We tested this</strong><ul><li><a href="/blog/gemma-4-requirements">Gemma 4 requirements: what PC you need to run it locally</a></li><li><a href="/blog/gemma-4-e2b-vs-e4b">Gemma 4 E2B vs E4B on a laptop: small vs big AI model, measured</a></li></ul></aside>
 <img class="cover" src="/blog/images/765f35fd4d1d.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
-<p>If you need an efficient, local, multimodal model that runs on modest hardware, start with Gemma. If you need the largest open-weight coding and production ceiling, start with Llama. Smaller Gemma checkpoints often edge out similarly sized Llama models on instruction following, while Llama 70B variants tend to win on coding accuracy. Your GPU budget and modality needs should decide the rest.</p>
-<hr/>
-<blockquote>
-<p><strong>TL;DR:</strong></p>
+<div class="answer"><p>Neither family wins everywhere, and your graphics card decides more than the benchmarks do. Gemma is the better start on modest hardware, especially if you need the model to read images: Gemma 3 from 4B up and Gemma 4 take images natively, and Gemma 4 comes under the Apache 2.0 licence. Llama 3 is the better start if you want the largest ecosystem of fine-tunes and tools, or a 70B model and the 40 GB or more of graphics memory to run it.</p></div>
+
+<p>Here are the checkpoints worth knowing, what each needs, and how to test them before you commit.</p>
+
+<h2>The checkpoints to shortlist</h2>
+<h3>Llama 3 family (Meta)</h3>
 <ul>
-<li>Gemma models generally excel in instruction-following and native multimodal input, making them better suited for hardware-constrained environments with image input needs.</li>
-<li>Llama models, especially the 70B variants, outperform Gemma on coding accuracy benchmarks and have a deeper ecosystem for fine-tuning and inference tools.</li>
-<li>Hardware resources limit model choice more than model size, with smaller Gemma and Llama models fitting single consumer GPUs under 24GB VRAM, while larger Llama models need multi-GPU setups.</li>
-<li>Benchmark results indicate Gemma narrows the reasoning gap with larger Llama models at intermediate sizes, but Llama still leads in code-generation accuracy at larger scales.</li>
-<li>Licensing differences mean Gemma&#x27;s terms vary by model card, while Llama’s community license carries usage restrictions, making licensing review important before deployment.</li>
+<li>Llama 3 (April 2024): 8B and 70B, text only, with an 8K-token context.</li>
+<li>Llama 3.1: 8B, 70B and 405B, with the context raised to 128K tokens.</li>
+<li>Llama 3.2: small text models at 1B and 3B for laptops and phones, plus 11B and 90B vision models that read images.</li>
+<li>Llama 3.3: a 70B instruct model, the strongest of the Llama 3 line that one big card can hold.</li>
 </ul>
-</blockquote>
-<hr/><h2 id="table-of-contents">Table of Contents</h2>
+<p>Meta has since released Llama 4, but Llama 3 is still the version most local tools, guides and fine-tunes are built around.</p>
+<h3>Gemma family (Google)</h3>
 <ul>
-<li><a href="#which-model-checkpoints-should-you-shortlist-first">Which model checkpoints should you shortlist first?</a></li>
-<li><a href="#what-the-benchmarks-actually-tell-you-about-each-family">What the benchmarks actually tell you about each family</a></li>
-<li><a href="#matching-your-hardware-tier-to-the-right-model">Matching your hardware tier to the right model</a></li>
-<li><a href="#a-checklist-for-choosing-and-validating-your-model">A checklist for choosing and validating your model</a></li>
-<li><a href="#what-running-local-models-on-everyday-hardware-actually-looks-like">What running local models on everyday hardware actually looks like</a></li>
-<li><a href="#our-recommendation-for-developers-weighing-both-families">Our recommendation for developers weighing both families</a></li>
-<li><a href="#a-private-offline-option-if-youd-rather-skip-the-setup">A private, offline option if you&#x27;d rather skip the setup</a></li>
-<li><a href="#where-these-figures-and-claims-come-from">Where these figures and claims come from</a></li>
-<li><a href="#sources">Sources</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul>
-<p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2 id="which-model-checkpoints-should-you-shortlist-first">Which model checkpoints should you shortlist first?</h2>
-<p>Before benchmarking anything, narrow your list to two or three checkpoints that match your hardware and task. Here is what each one is actually good for.</p>
-<ul>
-<li><strong>Gemma 3 4B</strong>: best for hardware-constrained local agents that need native image input, runs comfortably on consumer GPUs.</li>
-<li><strong>Gemma 3 27B Instruct</strong>: best for workstation-level deployments that need stronger reasoning without jumping to a huge Llama tier.</li>
-<li><strong>Gemma 4</strong>: Google DeepMind&#x27;s newer family spanning 12B to 31B tiers, aimed at local-to-enterprise multimodal work with a documented model card.</li>
-<li><strong>Gemma 2</strong>: an earlier generation, still useful for low-resource experiments and older devices.</li>
-<li><strong>Llama 3.2 3B Instruct</strong>: a small instruct-tuned checkpoint built for lightweight local inference with deep community tooling.</li>
-<li><strong>Llama 3.2 (3B)</strong>: functionally similar to the checkpoint above, valued mainly for its mature quantization recipes.</li>
-<li><strong>Llama 3</strong>: the large variant that leads on coding and complex reasoning when you have server-scale infrastructure, documented in Meta&#x27;s model cards.</li>
-<li><strong>Llama 3.3 Instruct 70B</strong>: a heavier instruct tier for production reasoning workloads that can justify multi-GPU or high-VRAM hosting.</li>
-</ul>
-<p>Gemma checkpoints tend to ship with native multimodal support built in, so you skip the extra vision encoder most Llama setups still need. Licensing differs too: Gemma ships under its own vendor terms detailed in each model card, while Llama uses Meta&#x27;s community license, which carries its own redistribution rules worth reading before you deploy commercially.</p>
-<h2 id="what-the-benchmarks-actually-tell-you-about-each-family">What the benchmarks actually tell you about each family</h2>
-<p>Numbers only matter when they map to your task, so treat these as pointers rather than a scoreboard. On instruction-following benchmarks, Gemma 3 4B scored very well on IFEval, edging out a larger Llama 3.1 70B model in one aggregation, a reminder that model size does not guarantee better instruction adherence. Coding tells a different story: aggregated testing shows Llama 3 70B tends to perform better on code-generation accuracy benchmarks, which makes it a reasonable default for code-generation work where correctness matters more than footprint.</p>
-<p><strong>Gemma 4&#x27;s own model card reports strong MMLU Pro, GPQA, and LiveCodeBench results across its 12B to 31B tiers</strong>, suggesting the newer family narrows the reasoning gap with larger Llama checkpoints while staying lighter to host.</p>
-<p>A few dimensions to weigh before you commit:</p>
-<ul>
-<li><strong>Context window</strong>: vendor model cards report context windows up to 128K or 256K tokens, but actual serving endpoints may have lower limits — verify the endpoint limits.</li>
-<li><strong>Multimodal input</strong>: Gemma 3 and Gemma 4 checkpoints handle images natively in a single pass, which simplifies pipelines that would otherwise need a separate vision model bolted onto Llama.</li>
-<li><strong>Hardware footprint</strong>: quantized Gemma 3 4B and Llama 3 8B models use similar VRAM amounts on consumer GPUs, so size alone will not tell you which one to pick.</li>
-<li><strong>Ecosystem maturity</strong>: Llama has the deeper library of fine-tuning recipes and inference integrations across llama.cpp, vLLM, and Ollama, largely because it has been public longer.</li>
-<li><strong>Licensing</strong>: Llama&#x27;s community license carries usage and redistribution conditions worth reading closely; Gemma&#x27;s terms live in each model card and vary slightly by generation.</li>
-</ul>
-<p><a href="https://faun.dev/toolbox/gemma-vs-llama/" target="_blank" rel="noopener noreferrer nofollow">Independent comparisons converge on the same split</a>: Gemma for hardware-efficient local and multimodal work, Llama for ecosystem depth and coding-heavy production.</p>
-<h2 id="matching-your-hardware-tier-to-the-right-model">Matching your hardware tier to the right model</h2>
-<p>Your GPU, not your ambition, should decide which checkpoint you try first.</p>
-<ol>
-<li><strong>Single consumer GPU under 12GB of VRAM</strong>: stick with smaller Gemma tiers like Gemma 3 4B or a similarly sized Llama 3.2 3B Instruct build.</li>
-<li><strong>12 to 24GB of VRAM</strong>: quantized 12B to 26B options, including Gemma 3 27B Instruct at reduced precision, become workable.</li>
-<li><strong>40GB or more on a single card</strong>: this is where Llama 3.3 Instruct 70B or full Llama 3 checkpoints start to make sense.</li>
-<li><strong>Multi-GPU setups</strong>: reserve these for the largest Llama tiers when your workload genuinely needs that reasoning ceiling.</li>
-</ol>
-<p>Quantized 4-bit builds cut memory needs substantially compared to full precision, though throughput drops as you push quantization further, so test actual tokens-per-second on your own card rather than trusting a spec sheet. Before committing infrastructure budget, run a short checklist: sample prompts from your real workload, a target throughput number, an acceptable latency ceiling, and, for code tasks, a rough cost-per-correct-completion so you&#x27;re comparing accuracy against spend, not just raw speed.</p>
-<p><strong>Pro Tip:</strong> <em>Benchmark on your actual hardware before buying more GPU. A quantized 4B model that hits your accuracy bar beats an unquantized 27B model you can&#x27;t run at production latency.</em></p>
-<p><img src="/blog/images/06667440d9f2.jpg" alt="Matching your hardware tier to the right model — overview diagram" width="1200" height="675" loading="lazy" decoding="async"/></p>
-<h2 id="a-checklist-for-choosing-and-validating-your-model">A checklist for choosing and validating your model</h2>
-<p>Pick criteria in order of what actually blocks deployment, not what looks impressive on a leaderboard.</p>
-<ul>
-<li><strong>Hardware fit</strong> first: if it does not run on what you have, nothing else matters.</li>
-<li><strong>Modality needs</strong> next: confirm whether you need native image or audio input before comparing text-only scores.</li>
-<li><strong>Task accuracy</strong> on benchmarks relevant to your workload, not aggregate scores.</li>
-<li><strong>Fine-tuning requirements</strong> and whether your target framework supports the checkpoint you want.</li>
-<li><strong>Ecosystem integration</strong> with your existing inference stack.</li>
-<li><strong>License terms</strong> for your specific commercial use case.</li>
-</ul>
-<p>Once your shortlist is set, validate it in order:</p>
-<ol>
-<li>Run a small workload test on representative prompts.</li>
-<li>Check code correctness against a held-out test set if coding matters to you.</li>
-<li>Test retrieval integration if the model feeds a RAG pipeline.</li>
-<li>Scale up and measure cost at the volume you actually expect.</li>
-</ol>
-<p>Watch for red flags along the way: no quantized build available for your hardware, licensing language that is vague about commercial redistribution, or a missing model card with no published benchmarks at all. Any of those should push a checkpoint down your list regardless of how it performs in a demo.</p>
-<h2 id="what-running-local-models-on-everyday-hardware-actually-looks-like">What running local models on everyday hardware actually looks like</h2>
-<p>GreenCube runs entirely offline on Windows and downloads one local model the first time you set it up. At that setup step, you pick between two presets built on the model families covered here: a fast plain-text option with a smaller download, and a larger version that reads images and builds study guides but requires more RAM and runs slower.</p>
-<ul>
-<li>Smaller downloads answer faster but do not handle image input, reflecting the Llama 3.2 3B model&#x27;s capabilities.</li>
-<li>The larger Gemma 4 E4B preset needs more RAM and patience but handles documents a plain-text model cannot.</li>
-<li>Neither preset replaces a large cloud model for extreme reasoning tasks, and that gap is real and worth planning around.</li>
-</ul>
-<p><strong>Pro Tip:</strong> <em>If your computer struggles with the larger preset, that is a hardware signal, not a software problem: try the smaller model first and upgrade your expectations to match your machine.</em></p>
-<h2 id="our-recommendation-for-developers-weighing-both-families">Our recommendation for developers weighing both families</h2>
-<p>Pick Gemma when your binding constraint is hardware or when you need native multimodal input without extra plumbing. Pick Llama when coding accuracy or ecosystem depth matters more than footprint, and you have the infrastructure to host a larger checkpoint. Pilot small before you invest in bigger GPUs: a quantized 4B or 3B model that clears your accuracy bar on real prompts is worth more than a theoretical leaderboard win you can never run at acceptable latency.</p>
-<blockquote>
-<p><em>— Hector Gras</em></p>
-</blockquote>
-<h2 id="a-private-offline-option-if-youd-rather-skip-the-setup">A private, offline option if you&#x27;d rather skip the setup</h2>
-<p>Everything above assumes you&#x27;re comfortable running llama.cpp, Ollama, or vLLM yourself and picking checkpoints by hand. If you&#x27;d rather have someone hand you a working setup, GreenCube packages Gemma model builds into a downloadable Windows app for a one-time purchase, with no subscription and no server involved.</p>
-<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
-<ul>
-<li>Chats and documents stay on your machine; only the features you turn on ever touch the internet.</li>
-<li>Setup asks for a one-time Google or Microsoft sign-in just to check your license, nothing else leaves your device.</li>
-<li>Works well for privacy-conscious professionals, students who need offline study tools, and anyone handling sensitive documents who does not want them uploaded anywhere.</li>
-</ul>
-<p>It suits people who want a private assistant without configuring an inference stack, more than developers already comfortable running raw checkpoints. If that&#x27;s you, get GreenCube and it picks the model for your PC on first launch.</p>
-<h2 id="where-these-figures-and-claims-come-from">Where these figures and claims come from</h2>
-<ul>
-<li>LLM Stats aggregated benchmark comparisons for IFEval and coding scores across both families.</li>
-<li>Gemma 4 model card and Gemma 3 model card for vendor-reported benchmarks and context windows.</li>
-<li>Meta&#x27;s Llama 3 model cards for sizing and prompt format details.</li>
-<li>Faun for independent framing on use-case fit.</li>
-</ul>
-<p>For related decision frameworks, see how these models compare to other <a href="https://blog.greencube.app/blog/lm-studio-alternatives">LM Studio alternatives</a>, how to weigh <a href="https://blog.greencube.app/blog/ollama-vs-lm-studio">Ollama against LM Studio</a> for your inference stack, or a broader look at <a href="https://blog.greencube.app/blog/best-small-llm">choosing small LLMs by hardware</a> instead of leaderboard rank. If you&#x27;re still deciding between local ownership and a cloud subscription, this piece on <a href="https://blog.greencube.app/blog/chatgpt-offline">local AI versus ChatGPT</a> covers that tradeoff directly. This roundup of local AI alternatives covers adjacent tools worth knowing about.</p>
-<h2 id="faq">FAQ</h2>
-<h3 id="is-gemma-better-than-llama">Is Gemma better than Llama?</h3>
-<p>Neither family wins universally: Gemma checkpoints often lead on instruction-following benchmarks and native multimodal support, while Llama 70B variants tend to score higher on coding tasks. The right choice depends on your hardware limits and whether your workload leans toward reasoning, coding, or image input.</p>
-<h3 id="is-gemma-3-free-to-use">Is Gemma 3 free to use?</h3>
-<p>Gemma 3 model weights are available for download under Google&#x27;s own model terms, which you can review directly in each model card before committing to a commercial use case. Costs come from the hardware you run it on, not a licensing fee for the model itself in typical use.</p>
-<h3 id="is-google-gemma-the-same-as-gemini">Is Google Gemma the same as Gemini?</h3>
-<p>No, Gemma and Gemini are different products from Google. Gemma is a family of open-weight models you can download and run yourself, including on local hardware, while Gemini is Google&#x27;s cloud-hosted assistant accessed through Google&#x27;s own apps and APIs.</p>
-<h3 id="which-gemma-is-best-for-coding">Which Gemma is best for coding?</h3>
-<p>Among the checkpoints covered here, Gemma 4&#x27;s 12B to 31B tiers report strong LiveCodeBench results on their vendor model card, making that family a reasonable Gemma option for coding work. For workloads where coding accuracy is the top priority above everything else, aggregated testing still shows larger Llama checkpoints holding an edge on coding-specific benchmarks.</p>
-<h2 id="recommended">Recommended</h2>
-<ul>
-<li><a href="https://blog.greencube.app/blog/ollama-vs-lm-studio">Ollama vs LM Studio: A Developer&#x27;s Comparison Guide</a></li>
-<li><a href="https://blog.greencube.app/blog/best-small-llm">Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use</a></li>
-<li><a href="https://blog.greencube.app/blog/ollama">Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls</a></li>
-<li><a href="https://blog.greencube.app/blog/best-local-ai-models">Best Local AI Models by Hardware Tier in 2026</a></li>
+<li>Gemma 2: 2B, 9B and 27B, text only. Still fine for older machines and experiments.</li>
+<li>Gemma 3 (March 2025): 1B, 4B, 12B and 27B. From 4B up it reads images, with a 128K-token context.</li>
+<li>Gemma 4: the newest family, from small E2B and E4B models built for laptops and phones up to larger ones for big graphics cards, released under Apache 2.0.</li>
 </ul>
 
+<p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
+<h2>How they differ</h2>
+<p>Images are the clearest difference at small sizes. Gemma 3 4B and the small Gemma 4 models read images in the same model, while the small Llama 3.2 models (1B and 3B) are text only, and Llama's vision models start at 11B.</p>
+<p>Ecosystem is Llama's advantage. It has been public longer, so there are more fine-tuned versions, training recipes and guides for it, and every runtime (llama.cpp, Ollama, LM Studio, vLLM) supports it well. Gemma is well supported too, but you'll find fewer community variants.</p>
+<p>At the very top, Llama goes bigger. Llama 3.1 405B and the 70B models are a different class from a 27B Gemma 3, especially on code and long reasoning, but they need server-class hardware. For coding, bigger usually means better in both families; if code is your main job, also look at models trained specifically for it.</p>
+<p>Published benchmark scores change with every release and every quantization, so treat them as pointers. The only test that counts is your own prompts on your own card.</p>
+
+<h2>Licences</h2>
+<p>Llama models use Meta's Llama Community License. It allows commercial use, but it adds conditions: an acceptable use policy, attribution rules, and a clause that very large companies (over 700 million monthly users) need a separate licence from Meta. Gemma 2 and 3 use Google's Gemma Terms of Use, which also allow commercial use with a list of prohibited uses. Gemma 4 moved to Apache 2.0, a standard open-source licence with no extra use policy. If you're shipping a product, read the actual licence text.</p>
+
+<h2>Matching your hardware to a model</h2>
+<p>These are rough sizes for 4-bit (Q4) files. The model file plus about 1.5 GB for the conversation should fit in your card's memory.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Your graphics memory</th><th>Gemma</th><th>Llama</th></tr></thead>
+<tbody>
+<tr><td>No card, 8&ndash;16 GB RAM</td><td>Gemma 4 E2B, Gemma 3 1B or 4B</td><td>Llama 3.2 1B or 3B</td></tr>
+<tr><td>6&ndash;8 GB</td><td>Gemma 4 E4B, Gemma 3 4B</td><td>Llama 3.1 8B</td></tr>
+<tr><td>12&ndash;16 GB</td><td>Gemma 3 12B</td><td>Llama 3.1 8B at higher quality, Llama 3.2 11B Vision</td></tr>
+<tr><td>24 GB</td><td>Gemma 3 27B</td><td>Nothing between 11B and 70B; 8B at full quality</td></tr>
+<tr><td>40 GB or more, or several cards</td><td>Any Gemma at higher quality</td><td>Llama 3.3 70B</td></tr>
+</tbody>
+</table></div>
+<p>A model that spills out of the card into normal RAM gets much slower, so a smaller model that fits usually beats a bigger one that doesn't. More in <a href="/blog/how-much-vram-for-ai">how much VRAM for AI</a> and <a href="/blog/gemma-4-requirements">Gemma 4 requirements</a>.</p>
+
+<h2>How to choose and test</h2>
+<ol>
+<li>Start from your hardware. If it doesn't run well on what you have, nothing else matters.</li>
+<li>Decide whether you need image input. If yes, that narrows the list quickly.</li>
+<li>Check the licence against what you'll do with it.</li>
+<li>Run 20 or so real prompts from your own work through two or three candidates, at the quantization you'll actually use, and read the answers side by side.</li>
+<li>Measure speed on your card. Tokens per second on someone else's machine tells you little.</li>
+</ol>
+
+<h2>What we use</h2>
+<p>I build GreenCube, a Windows app that runs AI offline, so here's what we went with, for what it's worth. GreenCube runs Gemma 4: Cube 2B is built on Gemma 4 E2B for smaller PCs, and Cube 4B on Gemma 4 E4B for PCs with a graphics card, and the app picks one for you. On the PCs we tested, it wrote 5&ndash;7 tokens a second on an 8 GB laptop with no card, 14&ndash;18 on a 16 GB laptop, and 37&ndash;76 on most gaming PCs with a 6 GB or bigger card. If you'd rather run Llama or Gemma checkpoints yourself and pick them by hand, <a href="/blog/ollama-vs-lm-studio">Ollama or LM Studio</a> is the way to go.</p>
+
+<h2>Gemma and Gemini are not the same thing</h2>
+<p>People mix these up. Gemini is Google's cloud assistant and family of hosted models; you use it through Google's apps and API. Gemma is a family of open models Google publishes for anyone to download and run, built from the same research. You can run Gemma on your own PC, offline; you can't do that with Gemini.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>Is Gemma better than Llama?</summary><p>Neither wins everywhere. Gemma is the better start on modest hardware and when you need image input; Llama has the larger ecosystem of fine-tunes and goes bigger at the top, which helps on code and long reasoning. Test both on your own prompts and your own card.</p></details>
+<details><summary>Is Gemma 3 free to use?</summary><p>Yes. The weights are free to download under Google&#x27;s Gemma Terms of Use, which allow commercial use with a list of prohibited uses; Gemma 4 moved to the standard Apache 2.0 licence. Your cost is the hardware you run it on.</p></details>
+<details><summary>Is Google Gemma the same as Gemini?</summary><p>No. Gemini is Google&#x27;s cloud assistant and family of hosted models, used through Google&#x27;s apps and API. Gemma is a family of open models built from the same research that anyone can download and run offline on their own PC.</p></details>
+<details><summary>Which Gemma is best for coding?</summary><p>Bigger is usually better for code in both families, so pick the largest Gemma that fits in your graphics memory. If code is your main job, also look at models trained specifically for it.</p></details>
+</div>
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

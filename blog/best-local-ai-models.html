@@ -65,13 +65,9 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Best local AI model for your PC, by RAM and VRAM (measured)</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 3 August 2026 &middot; updated 23 October 2026</p>
-<div class="answer"><p><strong>Short answer:</strong> the best local AI model for <em>your</em> PC is the <strong>biggest one that fits whole on your graphics card, with about 1.5 GB to spare</strong>. No card? A <strong>small model</strong> in your RAM. A smaller model fully on the card beats a bigger one that spills over: we measured spilling at <strong>6 times slower</strong>. Below, the pick for each kind of PC, with speeds we measured on 10 real PCs.</p></div>
+<div class="answer"><p>The best local AI model for your PC is the biggest one that fits whole on your graphics card with about 1.5 GB to spare. With no graphics card, pick a small model that runs in your RAM. A smaller model fully on the card beats a bigger one that spills over: when part of a model didn't fit, we measured it running 6 times slower.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>+1.5 GB</b><span>model file plus about 1.5 GB must fit in your VRAM</span></div>
-<div class="stat p"><b>6&times;</b><span>slower when part of the model doesn't fit on the card</span></div>
-<div class="stat b"><b>10</b><span>real PCs we measured, laptops to gaming desktops</span></div>
-</div>
+<p>Below is the pick for each kind of PC, with speeds we measured on 10 real PCs. One thing to know first: we've only timed the Gemma 4 models that GreenCube ships (I build GreenCube), so those are the only models I give speeds for. The sizing rule works for any model family.</p>
 
 <h2>The best model for your PC</h2>
 <div class="tbl-wrap"><table>
@@ -85,41 +81,32 @@
 <tr><td>12 GB+ graphics card</td><td>About 6&ndash;10 GB: 12B-class models</td><td>E4B <b>50&ndash;55</b> on 12 GB; 12B needs 10 GB+ for long chats</td></tr>
 </tbody>
 </table></div>
-<p>Every card with its own page: <a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a> Or type your card into <a href="/blog/can-my-pc-run-ai#checker">the checker</a>.</p>
+<p>Every card has its own page in <a href="/blog/can-my-pc-run-ai">Can my PC run AI?</a>, or you can type yours into <a href="/blog/can-my-pc-run-ai#checker">the checker</a>.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
 <h2>Why "fits" matters more than "biggest"</h2>
-<div class="card p">
-<h3>Spill over and it's slower than no card at all</h3>
-<p>On an 8 GB RX 5700 XT, Gemma 4 12B wrote 35.6 tokens a second fully on the card, 5.9 with part of it off the card, and 4.3 with even less on it: slower than a smaller model running with no card. <a href="/blog/how-much-vram-for-ai">The full VRAM test</a>.</p>
-</div>
-<div class="card y">
-<h3>Fits for one question, crashes in a long chat</h3>
-<p>The same 12B model fit the 8 GB card for a short question, then crashed every time the chat grew: the conversation needs room too. That's what the 1.5 GB of headroom is for.</p>
-</div>
-<div class="card g">
-<h3>Small is often good enough</h3>
-<p>On a 16 GB laptop, Gemma 4 E2B gave a complete study answer in 20 seconds and got 5 of 5 quick fact checks right; E4B explained better but took 112 seconds. <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, measured</a>.</p>
-</div>
+<p>When a model spills out of the card, it can end up slower than having no card at all. On an 8 GB RX 5700 XT, Gemma 4 12B wrote 35.6 tokens a second fully on the card, 5.9 with part of it off the card, and 4.3 with even less on it. That last number is slower than a smaller model running with no card. The whole test is in <a href="/blog/how-much-vram-for-ai">how much VRAM you need for AI</a>.</p>
+<p>Fitting for one question isn't the same as fitting for a chat, either. The same 12B model fit on the 8 GB card for a short question, then crashed every time the conversation grew, because the conversation needs room on the card too. That's what the 1.5 GB of headroom is for.</p>
+<p>And small is often good enough. On a 16 GB laptop, Gemma 4 E2B gave a complete study answer in 20 seconds and got 5 of 5 quick fact checks right. E4B explained things better but took 112 seconds. There's more in <a href="/blog/gemma-4-e2b-vs-e4b">E2B vs E4B, measured</a>.</p>
 
 <h2>The models we measured</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Model</th><th>File size</th><th>Best on</th><th>Licence</th></tr></thead>
 <tbody>
-<tr><td><b>Gemma 4 E2B</b></td><td>2.6 GB</td><td>Laptops, 8&ndash;16 GB RAM</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 E4B</b></td><td>4.2 GB</td><td>Graphics cards with 6 GB or more</td><td>Apache 2.0</td></tr>
-<tr><td><b>Gemma 4 12B</b></td><td>about 6.7 GB</td><td>Graphics cards with 10&ndash;12 GB or more</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E2B</td><td>2.6 GB</td><td>Laptops, 8&ndash;16 GB RAM</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 E4B</td><td>4.2 GB</td><td>Graphics cards with 6 GB or more</td><td>Apache 2.0</td></tr>
+<tr><td>Gemma 4 12B</td><td>about 6.7 GB</td><td>Graphics cards with 10&ndash;12 GB or more</td><td>Apache 2.0</td></tr>
 </tbody>
 </table></div>
-<p>These are the files GreenCube ships and the only ones we've timed, so they're the only ones we give speeds for. Other model families follow the same rule: check the file size, add about 1.5 GB, compare with your VRAM. <a href="/blog/gemma-4-requirements">Gemma 4 requirements in detail</a>.</p>
+<p>For any other model, the same rule applies: take the file size, add about 1.5 GB, and compare that with your VRAM. The Gemma details are in <a href="/blog/gemma-4-requirements">Gemma 4 requirements</a>.</p>
 
 <h2>How to check your VRAM</h2>
 <ol class="steps">
-<li>Press <strong>Ctrl + Shift + Esc</strong> to open Task Manager.</li>
-<li>Go to <strong>Performance</strong>, then <strong>GPU</strong>.</li>
-<li><strong>Dedicated GPU memory</strong> is your VRAM. No dedicated memory? Use a small model in RAM.</li>
+<li>Press Ctrl + Shift + Esc to open Task Manager.</li>
+<li>Go to Performance, then GPU.</li>
+<li>Look at Dedicated GPU memory: that's your VRAM. If there's no dedicated memory, use a small model in RAM.</li>
 </ol>
-<p>Rather not pick at all? GreenCube reads your card and RAM and chooses the model that fits, with room to spare. Free apps like LM Studio, Jan and Ollama let you choose yourself: <a href="/blog/best-offline-ai-chatbot">12 apps compared</a>.</p>
+<p>Free apps like LM Studio, Jan and Ollama let you choose the model yourself (<a href="/blog/best-offline-ai-chatbot">12 apps compared</a>). If you'd rather not pick at all, GreenCube reads your card and RAM and chooses a model that fits with room to spare.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>What is the best local AI model?</summary><p>The biggest model that fits whole on your graphics card with about 1.5 GB to spare. A smaller model fully on the card beats a bigger one that spills into RAM: in our test, a model with part of it off an 8 GB card ran 6 times slower.</p></details>
@@ -128,7 +115,46 @@
 <details><summary>How do I know if a model fits my graphics card?</summary><p>Take the model file&#x27;s size and add about 1.5 GB for the conversation and Windows. If that&#x27;s less than your card&#x27;s dedicated GPU memory (Task Manager, Performance, GPU), it fits.</p></details>
 <details><summary>Do I need to pick a model myself?</summary><p>In free apps like LM Studio, Jan or Ollama, yes. GreenCube reads your card and RAM and picks the model that fits for you.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

@@ -23,8 +23,8 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners", "description": "Measure first: ship a prompt-only baseline, add RAG to fix knowledge gaps, then fine-tune remaining behavior. Includes a $9.99 offline privacy option.", "image": "https://blog.greencube.app/blog/images/6ec0d42ff7bf.jpg", "datePublished": "2026-10-02", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/rag-vs-fine-tuning", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What makes a tune a RAG?", "acceptedAnswer": {"@type": "Answer", "text": "RAG isn't a tuning method at all, it's a retrieval step added at inference time, so the generator's weights stay untouched. What makes a system \"RAG\" is that it fetches external context and feeds it into the prompt before generating an answer, as described in the original RAG paper."}}, {"@type": "Question", "name": "What is better than RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Neither RAG nor fine-tuning is universally better, they solve different problems. Research comparing the two found that RAG tends to outperform fine-tuning on low-frequency factual knowledge, while fine-tuning helps more with consistent behavior, and combining both often beats either alone."}}, {"@type": "Question", "name": "Is fine-tuning still relevant?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Parameter-efficient methods like LoRA make fine-tuning practical for behavior change at lower compute cost, and AWS recommends it for tasks like summarization or enforcing consistent output formats where retrieval alone won't help."}}, {"@type": "Question", "name": "Can I run a private AI without RAG or fine-tuning?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a local offline assistant like GreenCube handles private chat and document analysis without either technique, since it works entirely on your own computer for a one-time $9.99 payment. It's a different tool for a different job: personal privacy and offline access rather than enterprise-scale knowledge retrieval."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners", "description": "Measure first: ship a prompt-only baseline, add RAG to fix knowledge gaps, then fine-tune remaining behavior. Includes a $9.99 offline privacy option.", "image": "https://blog.greencube.app/blog/images/6ec0d42ff7bf.jpg", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/rag-vs-fine-tuning", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What makes a tune a RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Nothing, because RAG isn't a kind of tuning. It's a retrieval step at question time: the system fetches relevant text and adds it to the prompt, and the model's weights stay exactly as they were."}}, {"@type": "Question", "name": "What is better than RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Neither RAG nor fine-tuning is better in general; they fix different problems. RAG is usually stronger for adding knowledge, especially facts that change or are rarely seen, while fine-tuning is better for behaviour. Many systems use both."}}, {"@type": "Question", "name": "Is fine-tuning still relevant?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Methods like LoRA make it cheap enough for behaviour changes, such as a fixed output format, a consistent tone or a narrow task, where retrieval alone doesn't help."}}, {"@type": "Question", "name": "Can I run a private AI without RAG or fine-tuning?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A local AI app runs a ready-made model on your own computer, and you can give it your documents directly. GreenCube is one for Windows (€9.99 once): it reads PDFs, Word files and photos on your PC and works offline after the first download."}}]}</script>
 </head>
 <body>
 
@@ -43,124 +43,124 @@
 <article>
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners</h1>
-<p class="byline">GreenCube &middot; 2 October 2026 &middot; updated 10 October 2026</p>
+<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 2 October 2026</p>
 
 <img class="cover" src="/blog/images/6ec0d42ff7bf.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
-<p>Use RAG first when answers must cite sources or change often, fine-tune when you need consistent behavior or low latency, and combine both when you need current facts delivered in a fixed voice or format. If you are not sure which failure you are solving, prototype with plain prompts, then add RAG before you touch model weights.</p>
-<hr/>
-<blockquote>
-<p><strong>TL;DR:</strong></p>
-<ul>
-<li>Retrieval-augmented generation is preferred for applications requiring fast updates to knowledge bases and direct source citations, as it allows quick document swapping without retraining.</li>
-<li>Fine-tuning, especially using parameter-efficient methods like LoRA, is better suited for stabilizing behavior, tone, or format, but it demands more data and longer development cycles.</li>
-<li>Combining retrieval and fine-tuning can significantly improve response quality, but the choice depends on workload volume, latency needs, and update frequency.</li>
-<li>RAG can incorporate new documents within minutes, while fine-tuning may take hours or days, making RAG more advantageous for rapidly changing information.</li>
-<li>For sensitive data or offline environments, models like GreenCube offer private, local alternatives that do not rely on cloud retrieval or training.</li>
-</ul>
-</blockquote>
-<hr/><h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-<li><a href="#what-rag-is-and-how-the-retrieval-pipeline-actually-works">What RAG is and how the retrieval pipeline actually works</a></li>
-<li><a href="#what-fine-tuning-is-and-how-peft-changes-the-calculus">What fine-tuning is and how PEFT changes the calculus</a></li>
-<li><a href="#rag-vs-fine-tuning-at-a-glance">RAG vs fine-tuning at a glance</a></li>
-<li><a href="#a-decision-checklist-you-can-run-in-an-afternoon">A decision checklist you can run in an afternoon</a></li>
-<li><a href="#what-to-measure-before-you-touch-model-weights">What to measure before you touch model weights</a></li>
-<li><a href="#the-staged-workflow-that-saves-the-most-compute">The staged workflow that saves the most compute</a></li>
-<li><a href="#when-an-offline-local-model-is-the-right-call">When an offline, local model is the right call</a></li>
-<li><a href="#what-building-both-taught-us">What building both taught us</a></li>
-<li><a href="#a-private-offline-option-worth-knowing-about">A private, offline option worth knowing about</a></li>
-<li><a href="#sources">Sources</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul>
-<p class="bridge-mid">Want one that sets itself up? <a href="https://greencube.app/buy">GreenCube picks the right AI for your PC <span aria-hidden="true">&rarr;</span></a></p>
-<h2 id="what-rag-is-and-how-the-retrieval-pipeline-actually-works">What RAG is and how the retrieval pipeline actually works</h2>
-<p>Retrieval-augmented generation pulls outside information into the prompt at answer time, so the model&#x27;s own weights never change. The original RAG formulation combines a generator&#x27;s parametric memory with an external, non-parametric index that supplies fresh context on each query, as described in <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer nofollow">Lewis et al.&#x27;s RAG paper</a>. Most of the engineering effort lives in the retrieval half of the system, not the language model.</p>
-<p>A working pipeline typically includes:</p>
-<ul>
-<li><strong>Chunking</strong>: splitting documents into passages small enough to retrieve precisely but large enough to keep context.</li>
-<li><strong>Embedding model</strong>: converting chunks and queries into vectors for similarity search.</li>
-<li><strong>Vector database or sparse index</strong>: storing and searching those vectors or keywords.</li>
-<li><strong>Reranker</strong>: reordering retrieved candidates by relevance before they reach the generator.</li>
-<li><strong>Context assembly and citation handling</strong>: packing the final passages into the prompt with source references.</li>
-</ul>
-<p><strong>Reranking can significantly raise retrieval precision, but a 2025 evaluation found it also multiplied per-question runtime roughly fivefold in one setup,</strong> which means every quality gain in retrieval has to be weighed against the latency it adds.</p>
-<h2 id="what-fine-tuning-is-and-how-peft-changes-the-calculus">What fine-tuning is and how PEFT changes the calculus</h2>
-<p>Fine-tuning changes the model&#x27;s weights instead of its inputs. Where RAG hands the generator new information at query time, fine-tuning bakes behavior, tone, or format directly into the parameters, so the model no longer needs to be told how to answer, only what to answer. <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/rag-vs-fine-tuning.html" target="_blank" rel="noopener noreferrer nofollow">AWS&#x27;s prescriptive guidance</a> notes that fine-tuning suits tasks like summarization or consistent output behavior, while question answering over changing documents is better served by starting with RAG.</p>
-<p>Full fine-tuning updates every parameter and demands the most data and compute. Parameter-efficient methods change that math:</p>
-<ul>
-<li><strong>LoRA</strong> trains small low-rank adapter matrices instead of the full weight set.</li>
-<li><strong>QLoRA</strong> adds quantization so the base model fits in less memory during training.</li>
-<li><strong>Adapters</strong> insert small trainable layers while freezing the rest of the network.</li>
-</ul>
-<p>PEFT methods are the practical default for behavior change because they cost far less compute than full tuning, a point AWS and recent research both support. Full fine-tuning still earns its place when you need deep changes across many tasks at once, but it carries a higher risk of overfitting to your training set and going stale as your product evolves.</p>
-<p><strong>Pro Tip:</strong> <em>Start with LoRA on a small, high-quality dataset before considering a full fine-tune, most behavior problems do not need it.</em></p>
-<h2 id="rag-vs-fine-tuning-at-a-glance">RAG vs fine-tuning at a glance</h2>
-<p>Retrieval quality and model size both shift these numbers, so treat the table as a starting point rather than a fixed rule.</p>
-<div class="tbl-wrap"><table><thead><tr><th>Axis</th><th>RAG</th><th>Fine-tuning</th></tr></thead><tbody><tr><td>Best for</td><td>Current, private, or citable knowledge</td><td>Consistent behavior, tone, or format</td></tr><tr><td>Updates</td><td>Add or swap documents, no retraining</td><td>Requires a new training run</td></tr><tr><td>Source traceability</td><td>Retrieved passages can be cited directly</td><td>No built-in citation trail</td></tr><tr><td>Data requirements</td><td>A document index, minimal labeled data</td><td>Curated examples, often hundreds to thousands</td></tr><tr><td>Latency impact</td><td>Adds retrieval and reranking time per query</td><td>Adds none beyond the base model once trained</td></tr><tr><td>Cost and maintenance</td><td>Ongoing index upkeep, per-query retrieval cost</td><td>Upfront training cost, periodic retraining</td></tr><tr><td>Common failure modes</td><td>Weak retrieval, wrong chunk, missed context</td><td>Overfitting, stale knowledge, drift</td></tr></tbody></table></div>
-<p>According to AWS&#x27;s comparison, <strong>RAG can incorporate a newly added document in a few minutes, while fine-tuning can take from several hours up to days depending on model size,</strong> which is the clearest single reason teams default to RAG for fast-changing knowledge.</p>
-<h2 id="a-decision-checklist-you-can-run-in-an-afternoon">A decision checklist you can run in an afternoon</h2>
-<ol>
-<li><strong>Build a prompt-only baseline</strong> and a small evaluation set of around 30 representative prompts covering your hardest cases.</li>
-<li><strong>Ask whether the failures are about WHAT the model knows or HOW it behaves.</strong> Knowledge gaps point to RAG, behavior or format problems point to fine-tuning.</li>
-<li><strong>Check freshness needs.</strong> If facts change weekly or daily, fine-tuning cannot keep up without constant retraining.</li>
-<li><strong>Check citation and audit requirements.</strong> If answers must point to a source, RAG gives you that trail for free.</li>
-<li><strong>Check labeled-data availability.</strong> Fine-tuning needs curated examples; if you don&#x27;t have them, RAG is the faster path.</li>
-<li><strong>Check your latency budget.</strong> If you need sub-100ms responses, fine-tuning avoids the retrieval step entirely.</li>
-<li><strong>If still unsure, ship RAG, measure the specific failures, then fine-tune only what&#x27;s left.</strong></li>
-</ol>
-<p><strong>Pro Tip:</strong> <em>Log every failed answer with its retrieved context, most &quot;hallucination&quot; complaints turn out to be retrieval misses, not generator problems.</em></p>
-<h2 id="what-to-measure-before-you-touch-model-weights">What to measure before you touch model weights</h2>
-<p>Retrieval and generation fail differently, so measure them separately or you will misdiagnose the problem. A high overall answer score can hide a retrieval miss that the generator is quietly covering with a plausible-sounding guess, a pattern flagged in research on RAG failure analysis.</p>
-<ul>
-<li><strong>Retrieval metrics</strong>: recall@k, mean average precision (MAP), and rerank precision.</li>
-<li><strong>Generation metrics</strong>: exact match or F1 against a reference answer, plus groundedness checks against the retrieved passages.</li>
-<li><strong>System metrics</strong>: end-to-end latency and cost per query.</li>
-</ul>
-<div class="tbl-wrap"><table><thead><tr><th>Layer</th><th>Metric</th><th>What it catches</th></tr></thead><tbody><tr><td>Retriever</td><td>Recall@k</td><td>Missing the right document entirely</td></tr><tr><td>Reranker</td><td>MAP</td><td>Right document ranked too low</td></tr><tr><td>Generator</td><td>Groundedness</td><td>Answer not supported by retrieved text</td></tr><tr><td>System</td><td>Latency, cost per query</td><td>Production viability</td></tr></tbody></table></div>
-<p>Run a holdout test before any change ships and an A/B test once it&#x27;s live. Fine-tuned models need periodic regression testing against the same eval set, since a retrain can quietly break behavior that used to work.</p>
-<h2 id="the-staged-workflow-that-saves-the-most-compute">The staged workflow that saves the most compute</h2>
-<ol>
-<li><strong>Ship a prompt-only baseline</strong> and score it against your eval set.</li>
-<li><strong>Add retrieval</strong> where the baseline fails on missing or outdated knowledge, then remeasure.</li>
-<li><strong>Isolate the remaining failures.</strong> If they&#x27;re behavioral (wrong tone, wrong format, ignoring instructions), those are fine-tuning candidates.</li>
-<li><strong>Fine-tune the smallest component that fixes it,</strong> often the retriever&#x27;s embeddings or a LoRA adapter on the generator, before considering a full retrain.</li>
-</ol>
-<p>As a rough heuristic, RAG tends to stay cheaper at lower query volumes, while very high-volume workloads can make fine-tuning or a hybrid setup more cost-effective, though the exact break-even point depends heavily on token pricing and architecture. A <a href="https://aws.amazon.com/blogs/machine-learning/model-customization-rag-or-both-a-case-study-with-amazon-nova/" target="_blank" rel="noopener noreferrer nofollow">case study on Amazon Nova</a> found that customization and RAG each improved response quality independently, and combining them produced a larger gain than either alone, though results varied by dataset. Teams without in-house capacity for this staged work sometimes bring in outside help such as <a href="https://bowtie.co/ai-integration/augusta-ga" target="_blank" rel="nofollow noopener">Bowtie&#x27;s AI integration services</a> to build and tune the pipeline.</p>
-<h2 id="when-an-offline-local-model-is-the-right-call">When an offline, local model is the right call</h2>
-<p>Some projects should never send data to either a retrieval index in the cloud or a fine-tuning pipeline hosted elsewhere. Sensitive documents, air-gapped environments, and tight infrastructure budgets all favor a local-first setup. GreenCube runs entirely offline on Windows, with a one-time purchase and one downloaded model picked for your computer. It trades raw capability against cloud frontier models for privacy and ownership, which is the right trade for many individual and small-team use cases. <a href="https://blog.greencube.app/blog/best-local-ai-models">Local AI models</a> explains this trade-off in more depth.</p>
-<p><img src="/blog/images/6716121213bd.jpg" alt="the smaller model and the bigger model comparison" width="1200" height="675" loading="lazy" decoding="async"/></p>
-<h2 id="what-building-both-taught-us">What building both taught us</h2>
-<p>RAG solves knowledge problems, fine-tuning solves behavior problems, and most production systems eventually need a bit of both. The mistake we see most often isn&#x27;t picking the wrong method, it&#x27;s skipping evaluation and shipping a change nobody measured against a baseline. Roll out changes in small stages, watch the eval numbers, and only invest in fine-tuning once retrieval has been ruled out as the cause.</p>
-<blockquote>
-<p><em>— Hector Gras</em></p>
-</blockquote>
-<h2 id="a-private-offline-option-worth-knowing-about">A private, offline option worth knowing about</h2>
-<p>Not every project needs a retrieval pipeline or a fine-tuning run at all. If your priority is keeping documents off the network entirely, GreenCube offers a private AI assistant that runs on your own computer for a one-time price, with no subscription and no data ever leaving the machine.</p>
-<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
-<p>It won&#x27;t out-reason a cloud frontier model on complex tasks, but for private document review, offline drafting, and study tools, it does the job without a monthly bill or a network connection. Get GreenCube and it picks the model that matches your hardware.</p>
-<h2 id="sources">Sources</h2>
-<ul>
-<li><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/rag-vs-fine-tuning.html" target="_blank" rel="noopener noreferrer nofollow">Comparing Retrieval Augmented Generation and fine-tuning - AWS Prescriptive Guidance</a></li>
-<li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer nofollow">Retrieval-Augmented Generation (RAG) — Lewis et al., 2020 (arXiv)</a></li>
-<li><a href="https://aws.amazon.com/blogs/machine-learning/model-customization-rag-or-both-a-case-study-with-amazon-nova/" target="_blank" rel="noopener noreferrer nofollow">Model customization: RAG, or both? A case study with Amazon Nova - AWS ML Blog</a></li>
-</ul>
-<h2 id="faq">FAQ</h2>
-<h3 id="what-makes-a-tune-a-rag">What makes a tune a RAG?</h3>
-<p>RAG isn&#x27;t a tuning method at all, it&#x27;s a retrieval step added at inference time, so the generator&#x27;s weights stay untouched. What makes a system &quot;RAG&quot; is that it fetches external context and feeds it into the prompt before generating an answer, as described in the original RAG paper.</p>
-<h3 id="what-is-better-than-rag">What is better than RAG?</h3>
-<p>Neither RAG nor fine-tuning is universally better, they solve different problems. Research comparing the two found that RAG tends to outperform fine-tuning on low-frequency factual knowledge, while fine-tuning helps more with consistent behavior, and combining both often beats either alone.</p>
-<h3 id="is-fine-tuning-still-relevant">Is fine-tuning still relevant?</h3>
-<p>Yes. Parameter-efficient methods like LoRA make fine-tuning practical for behavior change at lower compute cost, and AWS recommends it for tasks like summarization or enforcing consistent output formats where retrieval alone won&#x27;t help.</p>
-<h3 id="can-i-run-a-private-ai-without-rag-or-fine-tuning">Can I run a private AI without RAG or fine-tuning?</h3>
-<p>Yes, a local offline assistant like GreenCube handles private chat and document analysis without either technique, since it works entirely on your own computer for a one-time $9.99 payment. It&#x27;s a different tool for a different job: personal privacy and offline access rather than enterprise-scale knowledge retrieval.</p>
-<h2 id="recommended">Recommended</h2>
-<ul>
-<li><a href="https://blog.greencube.app/blog/llm-models">Run LLMs Locally: 2–5GB Models for Privacy-First Users</a></li>
-<li><a href="https://blog.greencube.app/blog/best-small-llm">Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use</a></li>
-<li><a href="https://blog.greencube.app/blog/ollama-vs-lm-studio">Ollama vs LM Studio: A Developer&#x27;s Comparison Guide</a></li>
-<li><a href="https://blog.greencube.app/blog/context-window-llm">When Local Tools Beat Million Token LLM Context Windows</a></li>
-</ul>
+<div class="answer"><p>Use RAG (retrieval-augmented generation) when the model needs to know things: facts that change often, private documents, answers that must cite a source. Use fine-tuning when the model needs to behave differently: a fixed format, a consistent tone, a narrow task done the same way every time. If you're not sure which problem you have, start with plain prompts, add RAG for the knowledge gaps, and fine-tune only what's still wrong after that.</p></div>
 
+<p>Below is what each one does, how they compare, and an afternoon's worth of measuring that tells you which you need.</p>
+
+<h2>What RAG is</h2>
+<p>RAG fetches relevant text at the moment a question is asked and puts it into the prompt, so the model answers from that text. The model's weights never change. The idea comes from a 2020 paper that paired a language model with a searchable index of documents (<a href="https://arxiv.org/abs/2005.11401" rel="nofollow noopener">Lewis et al.</a>).</p>
+<p>Most of the work is in the retrieval, not the model. A typical pipeline:</p>
+<ol>
+<li>Split your documents into chunks, small enough to retrieve precisely but big enough to keep their meaning.</li>
+<li>Turn each chunk into a vector with an embedding model, and store the vectors in a vector database (or use a keyword index, or both).</li>
+<li>When a question comes in, find the closest chunks, optionally reorder them with a reranker, and pass the best few to the model with their sources.</li>
+</ol>
+<p>Each extra step can improve the results and also adds time to every question, so measure both.</p>
+
+<p class="bridge-mid">Want one that sets itself up? <a href="https://greencube.app/buy">GreenCube picks the right AI for your PC <span aria-hidden="true">&rarr;</span></a></p>
+<h2>What fine-tuning is</h2>
+<p>Fine-tuning changes the model's weights by training it further on examples of what you want. Instead of telling the model how to answer each time, you teach it once. AWS's guidance makes the same split: fine-tuning suits tasks like summarisation or consistent output, while question answering over changing documents is better served by starting with RAG (<a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/rag-vs-fine-tuning.html" rel="nofollow noopener">AWS Prescriptive Guidance</a>).</p>
+<p>Full fine-tuning updates every weight and needs the most data and compute. Parameter-efficient methods are the usual choice now. LoRA trains small add-on matrices and leaves the original weights frozen; QLoRA does the same on top of a quantized base model, so it fits in much less memory. They cost far less, and you can keep several adapters for one base model. Full fine-tuning still has a place for deep changes across many tasks, but it's more prone to overfitting your examples.</p>
+
+<h2>RAG vs fine-tuning at a glance</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>RAG</th><th>Fine-tuning</th></tr></thead>
+<tbody>
+<tr><td>Best for</td><td>Current, private or citable knowledge</td><td>Consistent behaviour, tone or format</td></tr>
+<tr><td>Updating it</td><td>Add or swap documents, no retraining</td><td>A new training run</td></tr>
+<tr><td>Sources</td><td>Can point to the passages it used</td><td>No built-in trail</td></tr>
+<tr><td>Data you need</td><td>Your documents</td><td>Curated examples, often hundreds to thousands</td></tr>
+<tr><td>Speed per question</td><td>Slower: retrieval runs every time</td><td>No extra step once trained</td></tr>
+<tr><td>Typical failures</td><td>Wrong chunk retrieved, missing context</td><td>Overfitting, out-of-date knowledge</td></tr>
+</tbody>
+</table></div>
+<p>AWS's comparison notes that RAG can take in a new document in minutes, while fine-tuning takes hours to days depending on model size. For fast-changing knowledge, that alone usually decides it.</p>
+
+<h2>A decision checklist you can run in an afternoon</h2>
+<ol>
+<li>Write a small test set, around 30 real prompts that include your hardest cases, and run them with plain prompting. That's your baseline.</li>
+<li>Read the failures and sort them: is the model missing knowledge, or behaving wrongly? Knowledge gaps point to RAG; format and tone problems point to fine-tuning.</li>
+<li>How often do the facts change? If weekly or daily, fine-tuning can't keep up.</li>
+<li>Must answers cite a source? RAG gives you that trail.</li>
+<li>Do you have good labelled examples? Without them, fine-tuning isn't an option yet.</li>
+<li>How tight is your latency budget? If retrieval makes answers too slow, fine-tuning avoids that step.</li>
+<li>Still unsure? Ship RAG, measure what's still failing, and fine-tune only that.</li>
+</ol>
+
+<h2>What to measure before you touch the weights</h2>
+<p>Retrieval and generation fail in different ways, so measure them separately. A decent overall score can hide a retrieval miss that the model is papering over with a plausible guess.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Part</th><th>Measure</th><th>What it catches</th></tr></thead>
+<tbody>
+<tr><td>Retriever</td><td>Recall@k</td><td>The right passage wasn't found at all</td></tr>
+<tr><td>Reranker</td><td>Mean average precision</td><td>The right passage was found but ranked too low</td></tr>
+<tr><td>Model</td><td>Groundedness, or exact match against reference answers</td><td>The answer isn't supported by the retrieved text</td></tr>
+<tr><td>Whole system</td><td>Latency and cost per question</td><td>Whether it's usable in practice</td></tr>
+</tbody>
+</table></div>
+<p>Keep every failed answer together with the passages it was given. Many "hallucinations" turn out to be retrieval misses. If you do fine-tune, rerun the same test set after every training run, since a retrain can quietly break something that used to work.</p>
+
+<h2>The staged workflow</h2>
+<ol>
+<li>Ship the prompt-only baseline and score it.</li>
+<li>Add retrieval where it fails on missing or outdated knowledge, and score again.</li>
+<li>Look at what's left. If it's behaviour (wrong format, wrong tone, ignored instructions), that's a fine-tuning job.</li>
+<li>Fine-tune the smallest thing that fixes it, often a LoRA adapter or the embedding model used for retrieval, before considering a full retrain.</li>
+</ol>
+<p>The two also combine well. In an AWS case study with Amazon Nova models, customising the model and adding RAG each improved answers, and using both together helped most, though results varied by dataset (<a href="https://aws.amazon.com/blogs/machine-learning/model-customization-rag-or-both-a-case-study-with-amazon-nova/" rel="nofollow noopener">AWS Machine Learning Blog</a>).</p>
+
+<h2>When you need neither</h2>
+<p>If what you actually want is a private assistant that reads your own files, you may not need to build a pipeline at all. Local AI apps run a ready-made model on your computer and let you hand it documents directly; <a href="/blog/how-does-local-ai-work">how local AI works</a> explains the pieces. I build one, GreenCube, so weigh my opinion with that in mind: it reads your PDFs, Word files and photos on your PC, works offline after the first download, and costs &euro;9.99 once for Windows. It won't match the big cloud models on the hardest problems, and it isn't a platform for building your own retrieval system. For a team that needs RAG over thousands of documents, the workflow above is still the way. For more on fitting long documents into a model, see <a href="/blog/context-window-llm">context windows explained</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>What makes a tune a RAG?</summary><p>Nothing, because RAG isn&#x27;t a kind of tuning. It&#x27;s a retrieval step at question time: the system fetches relevant text and adds it to the prompt, and the model&#x27;s weights stay exactly as they were.</p></details>
+<details><summary>What is better than RAG?</summary><p>Neither RAG nor fine-tuning is better in general; they fix different problems. RAG is usually stronger for adding knowledge, especially facts that change or are rarely seen, while fine-tuning is better for behaviour. Many systems use both.</p></details>
+<details><summary>Is fine-tuning still relevant?</summary><p>Yes. Methods like LoRA make it cheap enough for behaviour changes, such as a fixed output format, a consistent tone or a narrow task, where retrieval alone doesn&#x27;t help.</p></details>
+<details><summary>Can I run a private AI without RAG or fine-tuning?</summary><p>Yes. A local AI app runs a ready-made model on your own computer, and you can give it your documents directly. GreenCube is one for Windows (€9.99 once): it reads PDFs, Word files and photos on your PC and works offline after the first download.</p></details>
+</div>
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="compare"><h3>An AI you own, set up for you</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slides</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/> <circle cx="62" cy="34" r="8" fill="#FAE289"/> <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/> <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/> <path d="M26 84l6-8M70 84l-6-8" /> </svg></span><span class="bt-name">Images</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/> <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/> <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/> <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/> <path d="M26 60v6l12 6M70 60v6l-12 6"/> <circle cx="48" cy="78" r="10" fill="#8EABE1"/> <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/> </svg></span><span class="bt-name">Diagrams</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/> <path d="M12 32h72"/><circle cx="20" cy="26" r="1.6" fill="#1A1A1A"/><circle cx="26" cy="26" r="1.6" fill="#1A1A1A"/> <rect x="21" y="40" width="26" height="24" rx="4" fill="#FA9F75"/> <path d="M54 43h20" stroke-width="4"/><path d="M54 52h16M54 59h12" stroke="#A8492A" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">Web pages</span></li></ul><p>GreenCube picks and installs the AI that fits your PC, then writes, makes slides and draws diagrams, all in one app. &euro;9.99 (US$9.99), paid once, with a refund within 15 days.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/what-you-get">Check your PC</a></p></div>
 </article>
 

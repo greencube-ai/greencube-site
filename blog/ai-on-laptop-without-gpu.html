@@ -65,16 +65,12 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Run AI on a laptop without a graphics card: do Intel graphics help?</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 18 October 2026</p>
-<div class="answer"><p><strong>Short answer:</strong> for chatting, <strong>barely</strong>. For reading long text, <strong>a bit</strong>. For pictures, <strong>a lot</strong>: over 4 times faster.</p></div>
+<div class="answer"><p>Yes, you can run AI on a laptop with no graphics card, and a 16 GB laptop writes faster than you read. The Intel graphics built into the chip barely help with chatting, help a little with reading long text, and help a lot with pictures, which came out over 4 times faster.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>~14</b><span>tokens a second for chat, with or without the Intel graphics</span></div>
-<div class="stat b"><b>1.3&times;</b><span>faster at reading long text you paste in</span></div>
-<div class="stat p"><b>4&times;</b><span>faster at making pictures</span></div>
-</div>
+<p>We wanted to know whether the graphics built into most laptops are worth using for AI, so we ran the same tasks on the processor and on the Intel graphics of one ordinary laptop.</p>
 
 <h2>The test</h2>
-<p>One laptop: Intel Core Ultra 5 125U, 16 GB of RAM, no graphics card, only the graphics built into the chip. We ran the same AI on the processor and on the Intel graphics, plugged in, twice each, in September and October 2026.</p>
+<p>The laptop has an Intel Core Ultra 5 125U, 16 GB of RAM and no graphics card, only the graphics built into the chip. We ran the same AI on the processor and on the Intel graphics, plugged in, twice each, in September and October 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Task</th><th>Processor</th><th>Intel graphics</th><th>Difference</th></tr></thead>
@@ -86,39 +82,66 @@
 </table></div>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What we learned</h2>
+<h2>Chat speed comes from memory, not the chip</h2>
+<p>Writing an answer is limited by how fast the laptop can move the AI through its memory. The processor and the Intel graphics share that same memory, so they end up writing at about the same speed.</p>
 
-<div class="card g">
-<h3>1. Chat speed comes from memory, not the chip</h3>
-<p>Writing an answer is limited by how fast the laptop can move the AI through its memory, and the processor and the Intel graphics share the same memory. So they write at about the same speed.</p>
-</div>
+<h2>It can even be slower</h2>
+<p>With an older small model, Phi-4 Mini, writing got 29% slower on the Intel graphics. With a bigger one, <a href="/blog/gemma-4-requirements">Gemma 4 E4B</a>, it got 26% faster. Same laptop, opposite results. You can't guess this from the specs, so GreenCube tests your laptop and uses whichever is faster.</p>
 
-<div class="card y">
-<h3>2. It can even be slower</h3>
-<p>With an older small model (Phi-4 Mini), writing got <strong>29% slower</strong> on the Intel graphics. With a bigger one (<a href="/blog/gemma-4-requirements">Gemma 4 E4B</a>) it got <strong>26% faster</strong>. Same laptop, opposite results. You can't guess it from the specs, so GreenCube tests your laptop and uses whichever is faster.</p>
-</div>
+<h2>Pictures are where it pays off</h2>
+<p>Making a picture is heavy maths, the kind graphics chips are built for, and here the difference was huge: 11 and a half minutes went down to about 2 and a half. The details are in <a href="/blog/local-ai-image-generator-speed">how long one picture takes</a>.</p>
 
-<div class="card p">
-<h3>3. Pictures are where it shines</h3>
-<p>Making a picture is heavy maths, the kind graphics chips are built for. 11 and a half minutes went down to about 2 and a half.</p>
-</div>
+<h2>What this means for your laptop</h2>
+<p>For chat and study, a 16 GB laptop is enough on its own. It writes faster than you read, with or without the graphics. With long PDFs, the graphics read them a little faster, so the first answer comes sooner.</p>
+<p>Pictures are possible on a laptop like this, at about 2 to 3 minutes each, while a gaming PC does one in under a minute. And if you work unplugged, in our runs battery and mains power gave about the same chat speed.</p>
 
-<h2>So what does this mean for you?</h2>
-<div class="expect">
-<div class="g"><h4>Chat and study</h4><p>A 16 GB laptop is enough. It writes faster than you read.</p></div>
-<div class="b"><h4>Long PDFs</h4><p>The graphics read them a little faster, so the first answer comes sooner.</p></div>
-<div class="y"><h4>Pictures</h4><p>Possible, about 2 to 3 minutes each. A gaming PC does it in under a minute.</p></div>
-<div class="p"><h4>Battery</h4><p>In our runs, on battery and plugged in gave about the same chat speed.</p></div>
-</div>
-
-<p>Want the full picture across gaming PCs too? <a href="/blog/can-my-pc-run-ai">We measured 10 PCs here.</a></p>
+<p>For the full picture, gaming PCs included, <a href="/blog/can-my-pc-run-ai">we measured 10 PCs here</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Does integrated graphics make AI faster?</summary><p>For chatting, barely: on our 16 GB laptop the answer was written at about 14 tokens a second either way. For reading long pasted text it was about 1.3 times faster, and for making pictures over 4 times faster.</p></details>
 <details><summary>Can integrated graphics make AI slower?</summary><p>Sometimes. With one small model, writing got 29% slower on the Intel graphics than on the processor; with a bigger one it got 26% faster. It depends on the model and the laptop, which is why GreenCube tests your own laptop and picks.</p></details>
 <details><summary>Is a laptop without a graphics card good enough for AI?</summary><p>For chat and studying, yes: a 16 GB laptop writes faster than you read with a small model. Pictures work too but take 2 to 3 minutes each.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

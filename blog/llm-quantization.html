@@ -23,8 +23,8 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "LLM Quantization: 6 Step PTQ Workflow for Practitioners", "description": "For practitioners: LLM quantization that works in production. Choose PTQ or QAT, run a 6 step workflow, match bitwidth to hardware, build calibration...", "image": "https://blog.greencube.app/blog/images/32fc7c2379de.jpg", "datePublished": "2026-09-29", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llm-quantization", "author": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is LLM model quantization?", "acceptedAnswer": {"@type": "Answer", "text": "LLM quantization converts a model's weights, and often its activations, from 16-bit floating point into lower-bit formats like INT8 or INT4. This shrinks memory use and speeds up inference, at some cost in accuracy that depends heavily on the method and bitwidth chosen."}}, {"@type": "Question", "name": "What is the best quantization method for LLMs?", "acceptedAnswer": {"@type": "Answer", "text": "There is no single best method: it depends on hardware and workload. Broad benchmarking found W8A8-FP is close to lossless on FP8-capable hardware, while GPTQ or AWQ at 4-bit weight-only remain the standard choice for memory-constrained local inference."}}, {"@type": "Question", "name": "When should you quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "Quantize when memory, bandwidth, or latency limits are blocking deployment, such as running a large model on a single consumer GPU or reducing serving costs at scale. If you have headroom on all three, quantization adds risk without a clear payoff."}}, {"@type": "Question", "name": "How do I quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "Export the model at full precision, choose a PTQ method suited to your bitwidth and hardware, build a calibration set that mirrors your real traffic, then run a maintained tool like AutoGPTQ or llmcompressor. Validate with perplexity and task-specific benchmarks before rolling the quantized model into production."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "LLM Quantization: 6 Step PTQ Workflow for Practitioners", "description": "For practitioners: LLM quantization that works in production. Choose PTQ or QAT, run a 6 step workflow, match bitwidth to hardware, build calibration...", "image": "https://blog.greencube.app/blog/images/32fc7c2379de.jpg", "datePublished": "2026-09-29", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llm-quantization", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is LLM model quantization?", "acceptedAnswer": {"@type": "Answer", "text": "Storing a model's weights, and sometimes its activations, with fewer bits (8 or 4 instead of 16), so it gets smaller and faster for some loss in accuracy."}}, {"@type": "Question", "name": "What is the best quantization method for LLMs?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your hardware. On GPUs with FP8 support, 8-bit FP8 is close to lossless. For tight memory, 4-bit weight-only with GPTQ or AWQ is the standard choice, and on a home PC that usually means a Q4_K_M or Q5_K_M GGUF file."}}, {"@type": "Question", "name": "When should you quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "When memory, speed or cost is what stops you running it, for example fitting a model on a single consumer GPU or a laptop. If you have plenty of room on all three, quantizing adds risk for little gain."}}, {"@type": "Question", "name": "How do I quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "Start from the full-precision model and note its scores, decide what drop you'll accept, pick a method, build a calibration set like your real traffic, quantize with a maintained tool such as llm-compressor or llama.cpp's quantize tool, then compare with the original before you ship."}}]}</script>
 </head>
 <body>
 
@@ -43,121 +43,112 @@
 <article>
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>LLM Quantization: 6 Step PTQ Workflow for Practitioners</h1>
-<p class="byline">GreenCube &middot; 29 September 2026 &middot; updated 10 October 2026</p>
-<aside class="update" role="note"><strong>Updated October 2026</strong><p>Parts of this article describe an earlier version of GreenCube. Today GreenCube picks the right AI model for your computer automatically (Cube 2B on smaller PCs, Cube 4B with a graphics card, both built on Google’s Gemma), so you no longer choose between two models. It costs &euro;9.99 (US$9.99), paid once. <a href="https://greencube.app/what-you-get">Check what runs on your PC</a></p></aside>
+<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 29 September 2026 &middot; updated 10 October 2026</p>
+
 <img class="cover" src="/blog/images/32fc7c2379de.jpg" alt="Decorative watercolor title card for LLM quantization" width="1080" height="720" fetchpriority="high"/>
-<p>LLM quantization converts a model&#x27;s weights and, often, its activations from 16-bit floating point into lower-bit formats like INT8 or INT4, cutting memory and speeding up inference. If your hardware is the bottleneck, weight-only 4-bit quantization with GPTQ or AWQ is the safest starting point. If you have FP8-capable hardware and want accuracy closest to the original model, <a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" target="_blank" rel="noopener noreferrer nofollow">W8A8-FP is effectively lossless</a> and should be your first try.</p>
-<hr/>
-<blockquote>
-<p><strong>TL;DR:</strong></p>
-<ul>
-<li>Using W8A8-FP quantization on hardware supporting FP8 yields near-lossless accuracy, especially on models above 30 billion parameters.</li>
-<li>For 4-bit weight-only quantization, GPTQ and AWQ are the most reliable options, with AWQ preferred for quick calibration.</li>
-<li>High outlier channels in activations are best managed through group-wise scaling or non-uniform schemes like NF4 to prevent accuracy loss.</li>
-<li>Calibration data must match the deployment domain closely, with a few hundred representative samples often sufficient for smaller models.</li>
-<li>Hardware support determines viable formats: FP8 formats need native FP8 tensor cores, while INT8 and INT4 depend on specific GPU architectures.</li>
-</ul>
-</blockquote>
-<hr/><h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-<li><a href="#the-math-behind-scale-zero-point-and-why-outliers-matter">The math behind scale, zero-point, and why outliers matter</a></li>
-<li><a href="#choosing-between-post-training-quantization-and-qat">Choosing between post-training quantization and QAT</a></li>
-<li><a href="#comparing-gptq-awq-smoothquant-and-other-leading-ptq-methods">Comparing GPTQ, AWQ, SmoothQuant, and other leading PTQ methods</a></li>
-<li><a href="#building-calibration-sets-that-actually-preserve-accuracy">Building calibration sets that actually preserve accuracy</a></li>
-<li><a href="#matching-bitwidth-and-hardware-to-your-workload">Matching bitwidth and hardware to your workload</a></li>
-<li><a href="#a-step-by-step-ptq-workflow-you-can-run-this-week">A step-by-step PTQ workflow you can run this week</a></li>
-<li><a href="#catching-regressions-before-they-reach-production">Catching regressions before they reach production</a></li>
-<li><a href="#why-we-favor-conservative-quantization-for-local-deployments">Why we favor conservative quantization for local deployments</a></li>
-<li><a href="#running-quantized-models-offline-without-managing-any-of-this-yourself">Running quantized models offline without managing any of this yourself</a></li>
-<li><a href="#sources">Sources</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul>
+<div class="answer"><p>LLM quantization stores a model's numbers with fewer bits, for example 4 or 8 instead of 16, so the model needs less memory and runs faster, at some cost in accuracy. Done well, the loss is small: 8-bit formats come close to the original, and 4-bit is the usual choice when a model has to fit on one GPU or a laptop. Most people use post-training quantization (PTQ), which takes minutes to hours, rather than retraining the model.</p></div>
+
+<p>Below is how it works in plain terms, the methods worth knowing, and a six-step workflow for quantizing a model yourself. If you only want to run a quantized model, not make one, skip to the section near the end about that.</p>
+
+<h2>What quantization does</h2>
+<p>A language model is billions of numbers, its weights, normally stored as 16-bit floating point. Each one takes two bytes, so a 7-billion-parameter model needs about 14 GB just for its weights. Quantization rounds every number onto a much smaller set of values. At 4 bits there are only 16 possible values per number, and the same model shrinks to roughly 4 GB once you add the small amount of extra data quantization needs.</p>
+<p>It makes the model faster as well. To write each token, the model has to read all of its weights, so on most PCs speed is limited by how fast memory can feed the processor. Fewer bytes to read means more tokens per second.</p>
+
+<h3>Scale and zero-point</h3>
+<p>The usual mapping is linear. You choose a scale (how much real value each integer step covers) and a zero-point (which integer stands for zero), store <code>q = round(x / scale + zero_point)</code>, and recover an approximation with <code>x &asymp; scale &times; (q - zero_point)</code>. Symmetric quantization fixes the zero-point at zero. That's simpler and suits weights, which are spread fairly evenly around zero. Activations, the values passed between layers, are often lopsided, which is one reason they're harder to quantize.</p>
+
+<h3>Groups and outliers</h3>
+<p>One scale for a whole matrix is crude, so most 4-bit formats give each small group of weights its own scale. Groups of 128 are a common default; smaller groups are more accurate but store more scales.</p>
+<p>The hard part is outliers. In large models a few channels carry values far bigger than the rest, and a naive quantizer either clips them or wastes most of its few levels covering them. The usual fixes are group-wise scales, keeping a few sensitive parts at higher precision, and non-uniform formats such as NF4 (introduced with QLoRA), which place their levels where weights actually cluster.</p>
+
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2 id="the-math-behind-scale-zero-point-and-why-outliers-matter">The math behind scale, zero-point, and why outliers matter</h2>
-<p>Quantization maps a continuous range of floating-point values onto a small set of integers using an affine transform: <code>q = round(x / scale + zero_point)</code>, and dequantization reverses it with <code>x ≈ scale * (q - zero_point)</code>. The scale sets how much real-number range each integer step covers, and the zero-point shifts the range so it can represent asymmetric distributions, like activations that skew heavily positive after a ReLU or GELU.</p>
-<p>Symmetric quantization fixes the zero-point at zero and is simpler and faster on most kernels, but it wastes range when the underlying values are not centered. Asymmetric quantization adds a zero-point offset and represents skewed distributions more precisely, at the cost of a slightly more complex dequantization step. Weight distributions in transformers are close to symmetric, so symmetric quantization usually works for weights; activations are often asymmetric, which is one reason activation quantization is harder.</p>
-<p>Granularity decides how many values share one scale factor. Per-tensor quantization uses a single scale for an entire weight matrix, which is fast but blunt. Per-channel quantization assigns a scale to each output channel, tracking variation across neurons. Per-group quantization splits a channel into small blocks, commonly 64 or 128 elements, each with its own scale, giving much finer resolution at a modest metadata cost. Smaller group sizes generally preserve more accuracy but add overhead, which is why 128 has become a common default for 4-bit weight-only formats.</p>
-<p>The hardest problem in practice is outliers. A handful of activation channels in large transformers can be an order of magnitude larger than the rest, and a naive uniform quantizer will either clip those values or waste most of its resolution accommodating them. Non-uniform schemes like NF4 address this by spacing quantization levels to match the actual distribution of weights (roughly Gaussian) rather than spreading them evenly, so more levels fall where values actually cluster. Group-wise scaling and dedicating higher precision to a small number of outlier channels are the two tactics that most consistently separate a working 4-bit deployment from a broken one.</p>
-<h2 id="choosing-between-post-training-quantization-and-qat">Choosing between post-training quantization and QAT</h2>
-<p>Post-training quantization (PTQ) takes a trained model and quantizes it directly, typically using a small calibration set and no gradient updates, which means it runs in minutes to a few hours on a single GPU. Quantization-aware training (QAT) inserts fake quantization operations during training or fine-tuning so the model learns to compensate for quantization error, which requires a training pipeline, labeled or representative data at scale, and substantially more compute and wall time.</p>
-<p>For most real-world LLM deployments, PTQ is the right call. It is cheap, fast to iterate on, and, as broad benchmarking has shown, well-tuned PTQ formats often come within a few percentage points of full-precision accuracy. QAT earns its cost when you are targeting extremely aggressive bitwidths (sub-4-bit), when the task is unusually sensitive to precision loss, or when you already have a fine-tuning pipeline running and can fold quantization awareness into it cheaply.</p>
-<p><img src="/blog/images/ce35acee0de6.jpg" alt="PTQ and QAT workflow comparison" width="1200" height="675" loading="lazy" decoding="async"/></p>
-<p>A practical middle ground is a hybrid flow: fine-tune a small adapter with QLoRA on top of a quantized base model, then apply PTQ to the final merged weights before deployment. This captures most of QAT&#x27;s task-specific recovery without the cost of a full quantization-aware training run, and it fits naturally into workflows that already use LoRA-style adapters for domain adaptation.</p>
-<h2 id="comparing-gptq-awq-smoothquant-and-other-leading-ptq-methods">Comparing GPTQ, AWQ, SmoothQuant, and other leading PTQ methods</h2>
-<p>The major PTQ algorithms differ mainly in how they compensate for quantization error and which part of the model they target. A useful way to group them, confirmed by a broad taxonomy of PTQ approaches, is by mechanism: compensation-based, salience-based, migration-based, rotation-based, and optimization-based.</p>
+<h2>Post-training quantization or quantization-aware training?</h2>
+<p>Post-training quantization takes a finished model and quantizes it, usually with a small calibration set and no training. It runs in minutes to a few hours on one GPU. Quantization-aware training (QAT) simulates quantization during training or fine-tuning so the model learns to cope with it, which needs a training pipeline, data and far more compute.</p>
+<p>For most deployments PTQ is the right call. QAT earns its cost at very low bit widths (below 4 bits), on tasks that are unusually sensitive to precision, or when you're fine-tuning anyway and can fold it in.</p>
+
+<h2>The main PTQ methods</h2>
 <ul>
-<li><strong>GPTQ</strong> is compensation-based: it quantizes weights layer by layer and adjusts remaining weights to offset the error introduced by each rounding step, using second-order (Hessian) information. It is broadly robust across different model architectures and remains a dependable default for weight-only 4-bit quantization.</li>
-<li><strong>AWQ</strong> is salience-based: it identifies which weight channels matter most for accuracy by observing activation magnitudes, then protects those channels with finer scaling instead of touching activations directly. It tends to be faster to run than GPTQ and works well when calibration time is limited.</li>
-<li><strong>SmoothQuant</strong> is migration-based: it shifts the quantization difficulty from activations to weights by rescaling both, which lets you quantize activations to INT8 without the usual accuracy collapse. The <a href="https://arxiv.org/html/2211.10438" target="_blank" rel="noopener noreferrer nofollow">original SmoothQuant paper</a> shows this migration formula lets large models hit W8A8 with accuracy close to FP16, and the method is already integrated into runtimes like FasterTransformer.</li>
-<li><strong>Rotation-based methods</strong> (QuIP, QuaRot) apply a mathematical rotation to weights and activations before quantization, spreading outlier energy across dimensions instead of letting it concentrate in a few channels. Benchmarking across PTQ method classes found rotation-based techniques hold up best at extreme low-bit settings, where compensation-only methods start to break down.</li>
-<li><strong>OmniQuant</strong> is optimization-based: it learns quantization parameters (clipping ranges, scales) through a lightweight gradient-based search rather than fixing them with heuristics, trading a bit more setup time for better accuracy at aggressive bitwidths.</li>
-<li><strong>FP8 and W8A8 formats</strong> skip the scale/zero-point machinery for activations almost entirely on hardware with native FP8 support, since floating-point formats handle dynamic range more gracefully than integers.</li>
-</ul>
-<p>On rule-of-thumb selection: for models above roughly 30 billion parameters running on FP8-capable hardware, W8A8-FP is the strongest general default. For memory-constrained local or edge inference, GPTQ or AWQ at 4-bit weight-only is the standard choice, with AWQ often preferred when calibration time is short. For sub-4-bit targets or unusually outlier-heavy models, combining a rotation-based transform with GPTQ-style compensation, an approach shown to beat single-method quantization at extreme low-bit settings, is worth the added complexity.</p>
-<h2 id="building-calibration-sets-that-actually-preserve-accuracy">Building calibration sets that actually preserve accuracy</h2>
-<p>Calibration data quality matters more than volume. A 2025 evaluation of quantization techniques found that domain-specific calibration, using real chat logs or code snippets that resemble deployment traffic, preserves task accuracy far better than random token sampling, especially for coding and math tasks where a single wrong token can cascade into a wrong answer.</p>
-<p>Building a good calibration set starts with matching the deployment context: pull examples from the same distribution the model will see in production, tokenized the same way, with context lengths that span your expected range rather than clustering at one length. A chat assistant should be calibrated on multi-turn conversational data; a coding assistant should be calibrated on actual code, ideally in the languages it will be used for.</p>
-<p>Sample size matters less than composition. A few hundred well-chosen, representative sequences (a common range is 128 to 512 samples) is often enough for weight-only 4-bit quantization on smaller models. Larger, instruction-tuned models pushed toward very low bitwidths need calibration data with more diversity and less repetition, since random tokens increasingly fail to represent the sharper activation distributions found in bigger models. Treat quantization as lossy compression: the calibration set&#x27;s job is to show the quantizer which information it cannot afford to lose.</p>
-<p><img src="/blog/images/7db054b88147.jpg" alt="Representative calibration examples entering quantizer" width="1080" height="720" loading="lazy" decoding="async"/></p>
-<h2 id="matching-bitwidth-and-hardware-to-your-workload">Matching bitwidth and hardware to your workload</h2>
-<p>The right bitwidth depends on whether your workload is latency-sensitive (synchronous, one request at a time) or throughput-sensitive (asynchronous, batched serving). Large-scale benchmarking across the Llama 3.1 family on A6000, A100, and H100 GPUs found that <a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" target="_blank" rel="noopener noreferrer nofollow">W8A8-FP is close to lossless while W4A16 is the most cost-efficient format for synchronous serving, whereas W8A8 dominates asynchronous, high-throughput scenarios</a>.</p>
-<ul>
-<li><strong>W8A8-FP</strong> (FP8 weights and activations) gives accuracy close to full precision on hardware that supports native FP8 compute, such as Hopper and Ada Lovelace GPUs.</li>
-<li><strong>W8A8-INT</strong> (INT8 weights and activations) runs on a wider range of hardware, including Ampere, but the same benchmarking found it costs <a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" target="_blank" rel="noopener noreferrer nofollow">roughly 1 to 3 percent average accuracy</a> compared to full precision.</li>
-<li><strong>W4A16</strong> (4-bit weights, 16-bit activations) rivals 8-bit accuracy in many cases while cutting memory further, making it the strongest choice for latency-bound, single-request serving.</li>
-<li><strong>INT4</strong> end-to-end compute can unlock large latency gains on hardware that supports it, but <a href="https://arxiv.org/pdf/2301.12017.pdf" target="_blank" rel="noopener noreferrer nofollow">decoder-only models show larger perplexity increases at 4-bit than encoder models</a>, so mixed-precision fallbacks for sensitive layers are often necessary.</li>
-</ul>
-<p>Hardware generation drives which kernels are even available: Ampere GPUs support efficient INT8 but lack native FP8 tensor cores, Hopper and Ada Lovelace add FP8 support that makes W8A8-FP practical, and older architectures may only have solid INT8 or INT4 kernel support through libraries like AutoGPTQ. Check kernel availability before committing to a format, since the best format on paper is worthless without a fast kernel for it.</p>
-<p>KV cache memory grows with context length and batch size, and at long context it can rival or exceed weight memory, so quantizing the KV cache (typically to INT8) is often the highest-leverage change for throughput-bound serving. Reserve cache quantization for scenarios where you have already validated accuracy on your weight and activation format, since stacking multiple lossy compressions compounds error.</p>
-<h2 id="a-step-by-step-ptq-workflow-you-can-run-this-week">A step-by-step PTQ workflow you can run this week</h2>
-<p>Before touching a quantizer, confirm three things: which base checkpoint and precision you are starting from, which target metric defines &quot;good enough&quot; for your task, and what hardware the quantized model will actually run on. Skipping this step is the most common reason teams re-run quantization from scratch.</p>
-<ol>
-<li>Export the model in its original FP16 or BF16 precision and confirm it reproduces published benchmark numbers on a small held-out set.</li>
-<li>Pick a PTQ method based on your bitwidth target and hardware, GPTQ or AWQ for 4-bit weight-only, SmoothQuant or FP8 for 8-bit activation quantization.</li>
-<li>Assemble a calibration set that mirrors your deployment traffic, in the range of a few hundred sequences for most weight-only setups.</li>
-<li>Run the quantizer using a maintained tool such as AutoGPTQ, GPTQModel, or the llmcompressor library, saving intermediate logs of per-layer error.</li>
-<li>Validate with unit tests on known input/output pairs, then run a full benchmark suite covering perplexity and task-specific scores before touching production.</li>
-<li>Roll out gradually, serving the quantized model to a small traffic slice behind a runtime like vLLM while monitoring for regressions against the FP16 baseline.</li>
-</ol>
-<p><strong>Pro Tip:</strong> <em>When a quantized model&#x27;s outputs diverge from the baseline in ways that are hard to explain, dump per-layer activation statistics for both models and diff them; the layer where the distributions first drift apart is almost always where the calibration set failed to cover a real input pattern.</em></p>
-<h2 id="catching-regressions-before-they-reach-production">Catching regressions before they reach production</h2>
-<p>Perplexity is the fastest sanity check, but it is a blunt instrument that can look fine while specific capabilities degrade. Pair it with text-similarity metrics like BERTScore against the FP16 model&#x27;s outputs, and with task-specific evaluations such as HumanEval for code or targeted math benchmarks, since these catch capability loss that a single perplexity number hides. Comparative studies across model sizes found that larger quantized models track full-precision word choice and structure closely, while smaller models show more variability even when the underlying meaning holds up, so smaller models deserve extra scrutiny.</p>
-<p>The three most common failure causes are poor calibration coverage, unhandled activation outliers, and the general sensitivity of decoder-only architectures to aggressive bitwidths, which shows up as larger perplexity jumps at INT4 than in comparable encoder setups. Regressions usually surface as repetition loops, factual drift, or degraded code correctness rather than outright garbage output, which is why automated scoring matters more than eyeballing a few completions.</p>
-<p>When you see a regression, the fix is rarely &quot;start over.&quot; Try a finer group size first (128 down to 64), then recalibrate with data closer to the failing use case, then consider mixed precision for the specific layers showing the largest per-layer error, and only switch algorithms or raise the bitwidth if those steps fail.</p>
-<p><img src="/blog/images/fde32a4bdcbd.jpg" alt="Sequential fixes for quantization regressions" width="1080" height="720" loading="lazy" decoding="async"/></p>
-<h2 id="why-we-favor-conservative-quantization-for-local-deployments">Why we favor conservative quantization for local deployments</h2>
-<p>Cloud services can patch a bad model overnight. A local, offline product cannot, so reliability and predictable behavior weigh more heavily than squeezing out the last few points of speed. When we think about which quantization strategy to pair with a given hardware tier, we default to the setting that behaves consistently across the widest range of machines rather than the one that benchmarks best on a single high-end GPU.</p>
-<p>That bias toward predictability, not raw capability, is the same philosophy behind offline-first tools generally: fewer surprises matter more than peak performance when the software has to work the first time, on hardware you do not control.</p>
-<blockquote>
-<p><em>— Hector Gras</em></p>
-</blockquote>
-<h2 id="running-quantized-models-offline-without-managing-any-of-this-yourself">Running quantized models offline without managing any of this yourself</h2>
-<p>Everything above assumes you are willing to pick an algorithm, build a calibration set, and validate the result yourself. GreenCube exists for people who want a quantized model running on their own machine without doing any of that: it is a downloadable app for Windows, runs fully offline once set up, and costs €9.99 / US$9.99 paid once, with everything included.</p>
-<p><img src="/blog/images/ec7488317b94.jpg" alt="GreenCube" width="1200" height="577" loading="lazy" decoding="async"/></p>
-<p>At setup you pick one of two bundles, &quot;the smaller model for fast plain-text chat or the bigger model for reading documents and images, and the app downloads that model once. From there, chats and files stay on your computer, and a one-time Google or Microsoft sign-in just verifies your license, nothing else goes online unless you turn a feature on. If you would rather skip the quantization pipeline entirely and just have a private assistant running today, get GreenCube.</p>
-<h2 id="sources">Sources</h2>
-<ul>
-<li><a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" target="_blank" rel="noopener noreferrer nofollow">Give Me BF16 or Give Me Death? Accuracy-Performance Trade-Offs in LLM Quantization (ACL 2025)</a></li>
-<li><a href="https://arxiv.org/html/2211.10438" target="_blank" rel="noopener noreferrer nofollow">SmoothQuant: Accurate and Efficient Post-Training Quantization for LLMs</a></li>
-<li><a href="https://arxiv.org/pdf/2301.12017.pdf" target="_blank" rel="noopener noreferrer nofollow">On INT4 Quantization for Language Models and an Optimized INT4 Inference Pipeline (2023)</a></li>
-</ul>
-<h2 id="faq">FAQ</h2>
-<h3 id="what-is-llm-model-quantization">What is LLM model quantization?</h3>
-<p>LLM quantization converts a model&#x27;s weights, and often its activations, from 16-bit floating point into lower-bit formats like INT8 or INT4. This shrinks memory use and speeds up inference, at some cost in accuracy that depends heavily on the method and bitwidth chosen.</p>
-<h3 id="what-is-the-best-quantization-method-for-llms">What is the best quantization method for LLMs?</h3>
-<p>There is no single best method: it depends on hardware and workload. Broad benchmarking found W8A8-FP is close to lossless on FP8-capable hardware, while GPTQ or AWQ at 4-bit weight-only remain the standard choice for memory-constrained local inference.</p>
-<h3 id="when-should-you-quantize-a-model">When should you quantize a model?</h3>
-<p>Quantize when memory, bandwidth, or latency limits are blocking deployment, such as running a large model on a single consumer GPU or reducing serving costs at scale. If you have headroom on all three, quantization adds risk without a clear payoff.</p>
-<h3 id="how-do-i-quantize-a-model">How do I quantize a model?</h3>
-<p>Export the model at full precision, choose a PTQ method suited to your bitwidth and hardware, build a calibration set that mirrors your real traffic, then run a maintained tool like AutoGPTQ or llmcompressor. Validate with perplexity and task-specific benchmarks before rolling the quantized model into production.</p>
-<h2 id="recommended">Recommended</h2>
-<ul>
-<li><a href="https://blog.greencube.app/blog/llm-models">Run LLMs Locally: 2–5GB Models for Privacy-First Users</a></li>
-<li><a href="https://blog.greencube.app/blog/best-small-llm">Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use</a></li>
-<li><a href="https://blog.greencube.app/blog/ollama">Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls</a></li>
-<li><a href="https://blog.greencube.app/blog/local-ai-chatbot-windows">Offline AI Setup on Windows: Private, Local, and Easy</a></li>
+<li>GPTQ quantizes weights layer by layer and adjusts the remaining weights to make up for each rounding error, using second-order information. It's a dependable default for 4-bit weight-only quantization.</li>
+<li>AWQ (activation-aware weight quantization) uses activations to find the small share of weight channels that matter most, and scales them so they survive rounding. It's quick to run.</li>
+<li>SmoothQuant moves the difficulty from activations to weights by rescaling both, so both can be stored in 8 bits (W8A8) with accuracy close to the original (<a href="https://arxiv.org/html/2211.10438" rel="nofollow noopener">SmoothQuant paper</a>).</li>
+<li>Rotation methods such as QuIP and QuaRot rotate weights and activations before quantizing, which spreads outliers out. They help most at very low bit widths.</li>
+<li>FP8 uses 8-bit floating point instead of integers, which copes better with a wide range of values. It needs hardware with FP8 support.</li>
 </ul>
 
+<h2>Which bit width for which hardware</h2>
+<p>One of the largest public comparisons is a 2025 study that quantized the Llama 3.1 family and tested it on A6000, A100 and H100 GPUs (<a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" rel="nofollow noopener">Kurtic et al., ACL 2025</a>). In short, FP8 weights and activations (W8A8-FP) were effectively lossless, INT8 weights and activations (W8A8-INT) lost about 1 to 3 percent average accuracy, and 4-bit weights with 16-bit activations (W4A16) held up well and was the most cost-efficient for serving one request at a time. W8A8 did best for busy, batched serving.</p>
+<p>Your hardware decides what's practical. NVIDIA's Ampere generation (A100, RTX 30 series) handles INT8 well but has no native FP8; Ada Lovelace (RTX 40 series) and Hopper (H100) add it. A format with no fast kernel on your hardware is no use, so check what your inference engine supports first. Taking activations down to 4 bits as well is riskier: a 2023 study found that decoder-only models, which is what chat models are, lose noticeably more accuracy at full INT4 than encoder models do (<a href="https://arxiv.org/pdf/2301.12017.pdf" rel="nofollow noopener">Wu et al., 2023</a>).</p>
+<p>Long chats add one more cost. The KV cache, which holds the conversation so far, grows with context length and can take as much memory as the weights. Many engines can store it in 8 bits too, but validate your weight format first, since each lossy step adds error.</p>
+
+<h3>On a home PC: GGUF and "Q4_K_M"</h3>
+<p>If you run models with llama.cpp, Ollama or LM Studio, you'll meet quantization in GGUF file names. <code>Q8_0</code> is 8-bit. <code>Q5_K_M</code> and <code>Q4_K_M</code> are 5- and 4-bit "k-quants", which give small blocks of weights their own scales and keep some sensitive tensors at higher precision. Q4_K_M is the common default balance of size and quality; move up to Q5 or Q8 if you have memory to spare. llama.cpp can also use an "importance matrix" built from sample text, which does the job of a calibration set. More on the format in <a href="/blog/gguf-vs-ggml">GGUF vs GGML</a>.</p>
+
+<h2>Calibration data</h2>
+<p>Methods like GPTQ and AWQ look at sample inputs to decide what to protect, so the samples matter more than their number. Use text like what the model will see in use (real chat turns for an assistant, real code for a coding model) in the right languages and a spread of lengths. A few hundred sequences, 128 to 512 being a common range, is usually enough for 4-bit weight-only quantization. Random text is a poor substitute, especially for code and maths.</p>
+
+<h2>A six-step PTQ workflow</h2>
+<ol>
+<li>Start from the original BF16 or FP16 checkpoint and check that it reproduces its published scores on a small held-out set. That's your baseline.</li>
+<li>Decide what "good enough" means (which metric, and how big a drop you'll accept) and which hardware the model will run on.</li>
+<li>Pick a method: GPTQ or AWQ for 4-bit weight-only, SmoothQuant or FP8 for 8-bit weights and activations, k-quants for llama.cpp.</li>
+<li>Build a calibration set that matches your real traffic.</li>
+<li>Quantize with a maintained tool, such as llm-compressor, GPTQModel or llama.cpp's own quantize tool, and keep the per-layer error logs.</li>
+<li>Evaluate against the baseline, then roll out to a small share of traffic before everyone else.</li>
+</ol>
+
+<h2>Catching regressions</h2>
+<p>Perplexity is a quick sanity check, but it can look fine while specific skills get worse. Add tests that match your use, such as HumanEval for code or a set of maths problems, and read real answers side by side with the original model's. Quantization damage usually shows up as repetition loops, small factual slips or broken code rather than gibberish. Small models tend to suffer more than large ones at the same bit width, so test them harder.</p>
+<p>When something regresses you rarely need to start over. Try a smaller group size, then recalibrate with data closer to the failing cases, then keep the worst layers at higher precision. Switch methods or raise the bit width only if those don't help.</p>
+
+<h2>If you just want to run a quantized model</h2>
+<p>You don't need any of this to use one. Ollama and LM Studio download models that are already quantized, and you choose the size. GreenCube, the app I build, goes a step further and picks the model for your PC: Cube 2B (built on Gemma 4 E2B) on smaller PCs and Cube 4B (built on Gemma 4 E4B) on PCs with a graphics card. It's a Windows app that costs &euro;9.99 once and works offline after the first download. If you'd rather choose by hand, see <a href="/blog/best-small-llm">the best small LLMs</a> and <a href="/blog/how-much-vram-for-ai">how much VRAM you need</a>.</p>
+<h2>Questions</h2>
+<div class="faq">
+<details><summary>What is LLM model quantization?</summary><p>Storing a model&#x27;s weights, and sometimes its activations, with fewer bits (8 or 4 instead of 16), so it gets smaller and faster for some loss in accuracy.</p></details>
+<details><summary>What is the best quantization method for LLMs?</summary><p>It depends on your hardware. On GPUs with FP8 support, 8-bit FP8 is close to lossless. For tight memory, 4-bit weight-only with GPTQ or AWQ is the standard choice, and on a home PC that usually means a Q4_K_M or Q5_K_M GGUF file.</p></details>
+<details><summary>When should you quantize a model?</summary><p>When memory, speed or cost is what stops you running it, for example fitting a model on a single consumer GPU or a laptop. If you have plenty of room on all three, quantizing adds risk for little gain.</p></details>
+<details><summary>How do I quantize a model?</summary><p>Start from the full-precision model and note its scores, decide what drop you&#x27;ll accept, pick a method, build a calibration set like your real traffic, quantize with a maintained tool such as llm-compressor or llama.cpp&#x27;s quantize tool, then compare with the original before you ship.</p></details>
+</div>
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

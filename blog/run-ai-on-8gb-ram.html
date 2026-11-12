@@ -65,16 +65,12 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Can you run AI with 8 GB of RAM? We tried the weakest laptop we have</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 18 October 2026</p>
-<div class="answer"><p><strong>Short answer: yes, slowly.</strong> A small AI on an 8 GB laptop writes a bit faster than you read. The catch isn't speed: it's <strong>free memory</strong>. Close your other apps first.</p></div>
+<div class="answer"><p>Yes, slowly. A small AI on an 8 GB laptop writes at about the speed you read, and a full reply takes 30 to 40 seconds. The real catch isn't speed, it's free memory, so close your other apps before you start.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9.3</b><span>tokens a second on the processor: a bit faster than you read</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>for a full reply</span></div>
-<div class="stat p"><b>~1 GB</b><span>free memory left with other apps open, the real problem</span></div>
-</div>
+<p>We tried it on the weakest PC we've measured, because "will it run on my old laptop?" is one of the first questions people ask about local AI. It does run. Here's what that looks like.</p>
 
 <h2>The test</h2>
-<p>The weakest PC we've measured: a laptop with 8 GB of RAM, Intel Iris Xe graphics, no graphics card, on battery. Small model (<a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), early October 2026.</p>
+<p>The laptop has 8 GB of RAM and Intel Iris Xe graphics, with no graphics card, and we ran it on battery. We used GreenCube's small model, Cube 2B (built on <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), in early October 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>What</th><th>Result</th></tr></thead>
@@ -89,39 +85,70 @@
 </table></div>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What we learned</h2>
+<h2>It works for chat and study</h2>
+<p>5 to 7 tokens a second in real chats is about reading speed. GreenCube's short startup test gave 9.3, but in real chats it came out lower. You'll wait half a minute for a long answer, but it gets there, with no internet and no limits.</p>
 
-<div class="card g">
-<h3>1. It works for chat and study</h3>
-<p>5 to 7 tokens a second in real chats is about reading speed (the short startup test gave 9.3). You'll wait half a minute for a long answer, but it gets there, with no internet and no limits.</p>
-</div>
+<h2>Free memory is the real limit</h2>
+<p>With the browser and other apps open, the laptop had only about 1 GB of memory free. One day that wasn't enough and the AI couldn't even start. The small model needs a couple of GB to itself, so on 8 GB it has to share carefully with everything else you have open.</p>
 
-<div class="card p">
-<h3>2. Free memory is the real limit</h3>
-<p>With the browser and other apps open, the laptop had only about 1 GB free. One day that wasn't enough and the AI couldn't even start. The small model needs a couple of GB to itself.</p>
-</div>
-
-<div class="card y">
-<h3>3. The built-in graphics made it slower</h3>
-<p>On this laptop the Iris Xe graphics wrote at 5.0 tokens a second, the processor at 9.3. On another laptop it was about equal. You can't tell in advance, so GreenCube tests both and uses the faster one.</p>
-</div>
+<h2>The built-in graphics made it slower</h2>
+<p>You'd expect the graphics chip to help, but on this laptop the Iris Xe graphics wrote at 5.0 tokens a second and the processor at 9.3. On another laptop the two were about equal. You can't tell in advance from the specs, so GreenCube tests both on your laptop and uses the faster one.</p>
 
 <h2>Tips for an 8 GB laptop</h2>
 <ol class="steps">
-<li><strong>Close the browser</strong> (or most tabs) before you start. Browsers eat memory.</li>
-<li><strong>Restart the laptop</strong> before a long study session. It frees memory other apps forgot to give back.</li>
-<li><strong>Ask shorter questions</strong>, or one thing at a time. Shorter answers come back faster.</li>
-<li><strong>Skip pictures.</strong> They need about 7 GB; use a bigger PC for those.</li>
+<li>Close the browser, or most of its tabs, before you start. Browsers use a lot of memory.</li>
+<li>Restart the laptop before a long study session. It frees memory that other apps forgot to give back.</li>
+<li>Ask one thing at a time. Shorter answers come back faster.</li>
+<li>Leave pictures for a bigger PC. They need about 7 GB on their own.</li>
 </ol>
 
-<p>See how much faster other PCs are: <a href="/blog/can-my-pc-run-ai">we measured 10 PCs here</a>.</p>
+<p>To see how much faster other PCs are, <a href="/blog/can-my-pc-run-ai">we measured 10 PCs here</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Can I run AI on a laptop with 8 GB of RAM?</summary><p>Yes, a small model. On our 8 GB laptop with Intel Iris Xe graphics it wrote 5 to 7 tokens a second in real chats, about as fast as you read, and replies took 30 to 40 seconds. It can&#x27;t make pictures.</p></details>
 <details><summary>Why won&#x27;t AI start on my 8 GB laptop?</summary><p>Usually not enough free memory. Our 8 GB laptop had only about 1 GB free with other apps open, and one day the AI couldn&#x27;t load. Closing the browser and other apps first gives it room.</p></details>
 <details><summary>Does Intel Iris Xe graphics make AI faster on an 8 GB laptop?</summary><p>Not for chat. On our laptop the processor wrote at 9.3 tokens a second and the Iris Xe graphics at 5.0. GreenCube tests both on your laptop and uses the faster one.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

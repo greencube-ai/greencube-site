@@ -6,39 +6,41 @@ Canonical: https://blog.greencube.app/blog/gpt4all-alternatives
 Published: 2026-09-06 · Updated: 2026-10-23  
 Author: Hector Gras
 
-**Short answer:** GPT4All's last desktop release, **v3.10.0, came out on 25 February 2025**, and nothing newer had shipped when we checked in October 2026. It still works, but new models and fixes aren't arriving. The closest open-source replacement is **Jan**; for chatting with your documents like LocalDocs, **AnythingLLM**; on Windows without choosing models, **GreenCube** (€9.99 once).
+GPT4All's last desktop release, v3.10.0, came out on 25 February 2025, and nothing newer had shipped when we checked in October 2026. It still works, but new models and fixes aren't arriving. The closest open-source replacement is Jan. If you mainly used LocalDocs to chat with your files, look at AnythingLLM. On Windows, if you'd rather not choose models at all, there's GreenCube (€9.99 once).
 
-- **Feb 2025** GPT4All's last desktop release (v3.10.0)
-- **8** alternatives that are still updated, checked on their own pages
-- **7 of 8** are free; GreenCube is €9.99 once
+I build GreenCube, so weigh my opinion with that in mind. Everything about the other apps below comes from their own websites, docs and GitHub pages, and we haven't benchmarked them against each other.
 
 ## What's going on with GPT4All
 
-GPT4All, by Nomic, was one of the first easy desktop apps for running AI on your own computer: free, MIT-licensed, with LocalDocs for chatting with your files ([GitHub](https://github.com/nomic-ai/gpt4all)). Its releases page lists v3.10.0 from 25 February 2025 as the latest desktop release ([releases](https://github.com/nomic-ai/gpt4all/releases)). Nomic hasn't announced an end to the project on the pages we read, so we won't call it dead, only unupdated.
+GPT4All, made by Nomic, was one of the first easy desktop apps for running AI on your own computer: free, MIT-licensed, with LocalDocs for chatting with your files ([GitHub](https://github.com/nomic-ai/gpt4all)). Its releases page lists v3.10.0 from 25 February 2025 as the latest desktop release ([releases](https://github.com/nomic-ai/gpt4all/releases)). Nomic hasn't announced an end to the project on the pages we read, so we won't call it dead, only unupdated.
 
-Why that matters: new AI model families usually need a newer engine to load, and every month of updates brings speed and bug fixes. An app that stops updating keeps working, but it falls further behind with each new model.
+That still matters. New families of AI models usually need a newer engine before they'll load, and each month of updates brings speed and bug fixes. An app that stops updating keeps working, but it falls further behind with every new model.
 
 ## Pick by what you used GPT4All for
 
 ### A free, open-source desktop chat
 
-**Jan** is the closest swap: a desktop chat app that runs models itself, with a local OpenAI-compatible server, under Apache 2.0, for Windows, Mac with Apple chip and Linux ([GitHub](https://github.com/janhq/jan)). **Ollama** (MIT) is a command-line engine with a desktop chat window on Windows and Mac. **LM Studio** is free too, but closed source.
+Jan is the closest swap. It's a desktop chat app that runs models itself and offers a local OpenAI-compatible server, under Apache 2.0, for Windows, Macs with Apple chips and Linux ([GitHub](https://github.com/janhq/jan)). Ollama (MIT) is a command-line engine with a desktop chat window on Windows and Mac. LM Studio is free too, also for work, but it's closed source.
 
 ### LocalDocs: chatting with your own files
 
-**AnythingLLM** (MIT) is built around document chat: PDF, TXT and DOCX, on Windows, Mac and Linux, with a Docker version for teams ([GitHub](https://github.com/Mintplex-Labs/anything-llm)). Jan, LM Studio and Msty also read your files.
+AnythingLLM (MIT) is built around document chat. It reads PDF, TXT and DOCX, runs on Windows, Mac and Linux, and has a Docker version for teams ([GitHub](https://github.com/Mintplex-Labs/anything-llm)). Jan, LM Studio and Msty also read your files.
 
 ### Windows, without choosing models
 
-**GreenCube** reads your graphics card and RAM and downloads the AI that fits, then answers questions about your PDFs, makes study guides and flashcards, reads photos and makes pictures, offline. €9.99 once, Windows 10 and 11. In [our PDF test](https://blog.greencube.app/blog/ai-to-study-from-pdf) it answered 11 of 12 questions about long documents right, in about 15 seconds each, on a 16 GB laptop.
+GreenCube reads your graphics card and RAM and downloads the AI that fits. Then it answers questions about your PDFs, makes study guides and flashcards, reads photos and makes pictures, offline. It costs €9.99 once and runs on Windows 10 and 11. In [our PDF test](https://blog.greencube.app/blog/ai-to-study-from-pdf) it answered 11 of 12 questions about long documents right, in about 15 seconds each, on a 16 GB laptop.
 
 ### A Mac with an Intel chip
 
-GPT4All supported macOS 12.6+. Jan and LM Studio need an Apple chip; Ollama's docs list Intel Macs as supported, CPU only, on macOS 14 or newer ([Ollama docs](https://docs.ollama.com/macos)).
+GPT4All supported macOS 12.6 and newer. Jan and LM Studio need an Apple chip. Ollama's docs list Intel Macs as supported, on the processor only, with macOS 14 or newer ([Ollama docs](https://docs.ollama.com/macos)).
+
+### Three more worth knowing
+
+Msty has a free plan and keeps your documents in what it calls Knowledge Stacks; the paid Aurum plan is $149 a year or $349 once. KoboldCpp is a single free .exe under AGPL-3.0 with text search, though its pages don't mention PDFs. Atomic Chat is free under Apache 2.0, with phone apps as well, but its privacy policy both denies telemetry and mentions PostHog statistics, which is worth knowing before you trust it with private files.
 
 ## The 8 alternatives, side by side
 
-From each app's own website, docs or GitHub page, checked on 21 and 23 October 2026. We haven't benchmarked these apps against each other.
+From each app's own website, docs or GitHub page, checked on 21 and 23 October 2026.
 
 | App | Runs on | Licence and price | Your documents | What its pages say goes online |
 | --- | --- | --- | --- | --- |
@@ -51,15 +53,15 @@ From each app's own website, docs or GitHub page, checked on 21 and 23 October 2
 | **Atomic Chat** | Windows, macOS 13.6+, Linux; iPhone and Android | Apache 2.0, free | Files and PDFs | Its policy both denies telemetry and mentions PostHog statistics ([privacy](https://atomic.chat/privacy)) |
 | **GreenCube** | Windows 10 and 11 | €9.99 once; closed source | PDFs, notes, photos | "We never receive your chats, files, memories or images"; Online search starts off every time ([privacy](https://legal.greencube.app/privacy)) |
 
-The full comparison, including phone apps and what each sends online, is in [our comparison of 12 offline AI chatbots](https://blog.greencube.app/blog/best-offline-ai-chatbot). Leaving LM Studio instead? See [LM Studio alternatives](https://blog.greencube.app/blog/lm-studio-alternatives).
+The full comparison, including phone apps and what each one sends online, is in [our comparison of 12 offline AI chatbots](https://blog.greencube.app/blog/best-offline-ai-chatbot). Leaving LM Studio instead? See [LM Studio alternatives](https://blog.greencube.app/blog/lm-studio-alternatives).
 
 ## How fast will it run?
 
-Speed comes from your PC, not the app: the model runs on your graphics card or processor. We measured GreenCube on 10 real PCs: **5–7** tokens a second on an 8 GB laptop with no graphics card (about reading speed), **14–18** on a 16 GB laptop, and **37–76** on most gaming cards with 6 GB or more. Your exact card: [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker)
+Speed comes from your PC more than the app, because the model runs on your graphics card or processor. We measured GreenCube on 10 real PCs: 5 to 7 tokens a second on an 8 GB laptop with no graphics card (about reading speed), 14 to 18 on a 16 GB laptop, and 37 to 76 on most gaming cards with 6 GB or more. To look up your exact card, try [Can my PC run AI?](https://blog.greencube.app/blog/can-my-pc-run-ai#checker)
 
 ## How we checked
 
-On 21 October 2026 we read each app's own website, docs, GitHub page and privacy page, and on 23 October we re-checked GPT4All's releases and Mac support for Jan and Ollama. Third-party sites disagree on the year of GPT4All's last release; we go by its own releases page. We make GreenCube, so we've stuck to facts anyone can check and haven't ranked the apps. We'll check again every month, and if GPT4All ships a new release we'll say so at the top.
+On 21 October 2026 we read each app's own website, docs, GitHub page and privacy page. On 23 October we re-checked GPT4All's releases and the Mac support for Jan and Ollama. Third-party sites disagree on the year of GPT4All's last release, so we go by its own releases page. Because we make GreenCube, we've kept to facts anyone can check and haven't ranked the apps. We'll check again every month, and if GPT4All ships a new release we'll say so at the top.
 
 ## FAQ
 

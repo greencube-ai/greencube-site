@@ -65,16 +65,12 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Gemma 4 E2B vs E4B on a laptop: small vs big AI model, measured</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 18 October 2026</p>
-<div class="answer"><p><strong>Short answer:</strong> on a laptop with no graphics card, the <strong>small model wins</strong>: a good answer in 20 seconds instead of a slightly better one in almost 2 minutes. With a graphics card, take the big one: it's fast there too.</p></div>
+<div class="answer"><p>On a laptop with no graphics card, Gemma 4 E2B is the better choice: in our test it gave a good answer in 20 seconds, while E4B took almost 2 minutes for a slightly better one. With a graphics card, take E4B, because it's fast there too.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>20 s</b><span>small model (Gemma 4 E2B), full answer</span></div>
-<div class="stat b"><b>28 s</b><span>older small model (Phi-4 Mini)</span></div>
-<div class="stat p"><b>112 s</b><span>bigger model (Gemma 4 E4B), best explanation</span></div>
-</div>
+<p>These are the two models GreenCube runs. Cube 2B is built on Gemma 4 E2B and Cube 4B on Gemma 4 E4B, so we had good reason to time them properly. We added Phi-4 Mini, an older small model, for comparison.</p>
 
 <h2>The test</h2>
-<p>One 16 GB laptop (Intel Core Ultra 5, no graphics card), processor only. One study-style request: explain photosynthesis to a 14-year-old, then write three exam questions about it. We timed until the answer was finished, in September 2026.</p>
+<p>One 16 GB laptop (Intel Core Ultra 5, no graphics card), running on the processor only. One study-style request: explain photosynthesis to a 14-year-old, then write three exam questions about it. We timed each model until its answer was finished, in September 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>Model</th><th>Size</th><th>Time to the full answer</th><th>What came out</th></tr></thead>
@@ -88,37 +84,65 @@
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
 <h2>What we learned</h2>
 
-<div class="card g">
-<h3>1. The small one is good enough for studying</h3>
-<p>We also asked five quick fact questions: maths, unit conversion, dates and science. <strong>Neither small model got one wrong.</strong> The small Gemma even showed a second way to work out a percentage without being asked.</p>
-</div>
+<h3>The small one is good enough for studying</h3>
+<p>We also asked five quick fact questions covering maths, unit conversion, dates and science. Neither small model got one wrong. The small Gemma even showed a second way to work out a percentage without being asked.</p>
 
-<div class="card y">
-<h3>2. Its weak spot: counting</h3>
-<p>Twice, the small model said "here are 5" and then listed a different number. So GreenCube now tells it to count before it writes the number. Small things like this are where a bigger model is safer.</p>
-</div>
+<h3>Its weak spot is counting</h3>
+<p>Twice, the small model said "here are 5" and then listed a different number. GreenCube now tells it to count before it writes the number. Small slips like this are where a bigger model is safer.</p>
 
-<div class="card b">
-<h3>3. With a graphics card, it's a different story</h3>
-<p>That same bigger model writes at <strong>56 to 72 tokens a second</strong> on 8 GB gaming cards, 7 to 9 times faster than on this laptop. On a gaming PC you get the better answers without the wait.</p>
-</div>
+<h3>A graphics card changes the picture</h3>
+<p>The bigger model writes 56 to 72 tokens a second on 8 GB gaming cards, 7 to 9 times faster than on this laptop. On a gaming PC you get the better answers without the wait.</p>
 
 <h2>Which one for your PC?</h2>
-<div class="expect">
-<div class="g"><h4>Laptop, no card</h4><p>Small model. Fast answers, good enough for study, writing and questions.</p></div>
-<div class="b"><h4>Gaming PC</h4><p>Bigger model. Better answers, and still faster than you read.</p></div>
-<div class="y"><h4>Making a list?</h4><p>If it says "here are 5", glance that there are 5. That's the small model's one slip.</p></div>
-<div class="p"><h4>Don't want to think about it?</h4><p>GreenCube checks your PC and picks for you.</p></div>
-</div>
-
-<p>See how fast each kind of PC is: <a href="/blog/can-my-pc-run-ai">we measured 10 PCs here</a>.</p>
+<p>On a laptop with no graphics card, use the small model. Its answers come fast and are good enough for study, writing and everyday questions. If it gives you a list that starts with "here are 5", glance that there really are 5, since that's the slip we saw.</p>
+<p>On a gaming PC, use the bigger one. The answers are better, and it still writes faster than you can read.</p>
+<p>If you'd rather not think about it, GreenCube checks your PC and picks for you. To see how fast each kind of PC is, <a href="/blog/can-my-pc-run-ai">we measured 10 PCs here</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>Is a bigger AI model always better?</summary><p>Its answers are usually a bit better, but on a laptop without a graphics card it is much slower. In our test the bigger model (Gemma 4 E4B) gave the best explanation but took 112 seconds; the small one (Gemma 4 E2B) gave a good answer in 20.</p></details>
 <details><summary>Do small AI models get facts wrong?</summary><p>In our five quick fact checks (maths, unit conversion, dates, science), neither small model got one wrong. The small one&#x27;s weak spot was counting: it sometimes announced a number of items and then listed a different number.</p></details>
 <details><summary>Which AI model should I use on my PC?</summary><p>On a laptop without a graphics card, a small model. On a PC with a graphics card, the bigger one runs fast too (56 to 72 tokens a second on 8 GB cards), so use it. GreenCube picks for you based on your PC.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

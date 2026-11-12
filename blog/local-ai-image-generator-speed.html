@@ -65,60 +65,83 @@
 <p class="kicker"><a href="/blog">GreenCube blog</a></p>
 <h1>Local AI image generator on your PC: how long one picture takes</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 18 October 2026</p>
-<div class="answer"><p><strong>Short answer:</strong> on a gaming PC with a decent graphics card, about <strong>half a minute</strong>. On a normal 16 GB laptop, <strong>2 to 3 minutes</strong>. On an 8 GB laptop, it won't work.</p></div>
+<div class="answer"><p>On a PC with a decent graphics card, about half a minute per picture. On an ordinary 16 GB laptop, 2 to 3 minutes. On an 8 GB laptop it doesn't work at all, because the picture AI needs more memory than the laptop can spare.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>28 s</b><span>on a desktop with a 12 GB graphics card</span></div>
-<div class="stat b"><b>2.5 min</b><span>on a 16 GB laptop using its Intel graphics</span></div>
-<div class="stat p"><b>11.5 min</b><span>on the same laptop's processor alone</span></div>
-</div>
+<p>We timed the same picture on three kinds of PC, and the gap is bigger than most people expect: from 28 seconds to more than 11 minutes.</p>
 
 <h2>The test</h2>
-<p>Same picture AI on every PC (Z-Image Turbo, run inside GreenCube), a 512 by 512 picture, 8 steps. We timed from pressing the button to the finished picture, in September and October 2026.</p>
+<p>We used the same picture AI on every PC (Z-Image Turbo, running inside GreenCube) and made one 512 by 512 picture with 8 steps. We timed from pressing the button to the finished picture, in September and October 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>What did the work</th><th>Time per picture</th></tr></thead>
 <tbody>
-<tr><td>Desktop, 12 GB card, 32 GB RAM</td><td>Graphics card</td><td class="spd"><span class="bar" style="--w:100%"></span><b>28 s</b></td></tr>
-<tr><td>Laptop, Core Ultra 5, 16 GB</td><td>Built-in Intel graphics</td><td class="spd"><span class="bar" style="--w:19%"></span><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
-<tr><td>Same laptop</td><td>Processor only</td><td class="spd"><span class="bar lo" style="--w:4%"></span><b>11 min 27 s</b></td></tr>
-<tr><td>Laptop, 8 GB</td><td>&mdash;</td><td><b>Can't</b></td></tr>
+<tr><td>Desktop, 12 GB card, 32 GB RAM</td><td>Graphics card</td><td><b>28 s</b></td></tr>
+<tr><td>Laptop, Core Ultra 5, 16 GB</td><td>Built-in Intel graphics</td><td><b>2 min 22 s &ndash; 2 min 38 s</b></td></tr>
+<tr><td>Same laptop</td><td>Processor only</td><td><b>11 min 27 s</b></td></tr>
+<tr><td>Laptop, 8 GB</td><td>Not enough memory to start</td><td><b>Can't</b></td></tr>
 </tbody>
 </table></div>
-<p>The bars show speed, so longer is faster.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What we learned</h2>
+<h2>Any graphics helps a lot</h2>
+<p>The laptop was the surprise. Even the small graphics chip built into its processor made pictures about 4 times faster than the processor alone. Making a picture is heavy, repetitive maths, and that's exactly what graphics chips are built for.</p>
+<p>A real graphics card is another 5 times faster on top of that. If you want to make a lot of pictures, the graphics card is the part of the PC that matters.</p>
 
-<div class="card g">
-<h3>1. Any graphics helps a lot</h3>
-<p>Even the small graphics chip built into the laptop made pictures <strong>about 4 times faster</strong> than the processor alone. A real graphics card is another 5 times faster on top of that.</p>
-</div>
+<h2>Why 8 GB isn't enough</h2>
+<p>The picture AI asks Windows for about 7 GB while it works, and an 8 GB laptop can't free that much. That's why GreenCube only makes pictures on PCs with at least 12 GB of RAM, and checks there's room before it starts instead of crashing halfway. Chat and study still work on 8 GB, just slowly (<a href="/blog/run-ai-on-8gb-ram">our 8 GB test</a>).</p>
 
-<div class="card b">
-<h3>2. It needs about 7 GB of room</h3>
-<p>The picture AI asks Windows for about 7 GB while it works. That's why an 8 GB laptop can't do it, and why GreenCube checks there's room before it starts instead of crashing halfway.</p>
-</div>
+<h2>Do other apps slow it down?</h2>
+<p>Not much, in our test. On the 16 GB laptop we made the same picture with a code editor and a browser open, and once with 4 GB of memory taken up on purpose. It still took about 2 minutes every time, because Windows moves idle programs aside to make room.</p>
 
-<div class="card y">
-<h3>3. Your other apps don't matter much</h3>
-<p>On the 16 GB laptop we made the same picture with a code editor and a browser open, and even with 4 GB taken up on purpose. It still took about 2 minutes every time. Windows moves idle stuff aside.</p>
-</div>
-
-<h2>What your PC will feel like</h2>
-<div class="expect">
-<div class="g"><h4>Graphics card</h4><p>Under a minute per picture. Make lots and pick the best one.</p></div>
-<div class="b"><h4>16 GB laptop, no card</h4><p>2 to 3 minutes. Fine for a few pictures; start one and keep studying.</p></div>
-<div class="y"><h4>8 GB laptop</h4><p>No pictures. Chat and study still work.</p></div>
-<div class="p"><h4>No limit either way</h4><p>Nothing counts your pictures. The only limit is how long you want to wait.</p></div>
-</div>
+<h2>What to expect on your PC</h2>
+<p>With a graphics card, a picture takes under a minute, so you can make several and keep the best one. On a 16 GB laptop with no card, 2 to 3 minutes is fine for a few pictures: start one and get on with something else while it works.</p>
+<p>Nothing counts how many pictures you make, so the only limit is how long you're willing to wait. To see what your own card can do, try <a href="/blog/can-my-pc-run-ai#checker">Can my PC run AI?</a> The same laptop's chat speeds are in <a href="/blog/ai-on-laptop-without-gpu">AI on a laptop without a graphics card</a>.</p>
 <h2>Questions</h2>
 <div class="faq">
 <details><summary>How long does it take to make an AI picture on my PC?</summary><p>In our tests, a 512 by 512 picture took 28 seconds on a desktop with a 12 GB graphics card, about 2 and a half minutes on a 16 GB laptop using its Intel graphics, and about 11 and a half minutes on the same laptop&#x27;s processor alone.</p></details>
 <details><summary>Can I make AI pictures on a laptop without a graphics card?</summary><p>Yes, if it has 16 GB of RAM. Built-in Intel graphics made it about 4 times faster than the processor alone. With 8 GB of RAM it won&#x27;t work: the picture AI needs about 7 GB by itself.</p></details>
 <details><summary>Do I need to close other apps to make AI pictures?</summary><p>Not on a 16 GB laptop. With a code editor and a browser open, the picture took the same time. What matters is that Windows can set aside about 7 GB for it.</p></details>
 </div>
-
+</article>
+<section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">Example answers to give you a feel; nothing here runs AI. In the app, Cube 2B writes its own on your PC, offline.</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
 </article>
 

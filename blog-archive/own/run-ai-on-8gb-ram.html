@@ -15,16 +15,12 @@
  ]
 }
 -->
-<div class="answer"><p><strong>Short answer: yes, slowly.</strong> A small AI on an 8 GB laptop writes a bit faster than you read. The catch isn't speed: it's <strong>free memory</strong>. Close your other apps first.</p></div>
+<div class="answer"><p>Yes, slowly. A small AI on an 8 GB laptop writes at about the speed you read, and a full reply takes 30 to 40 seconds. The real catch isn't speed, it's free memory, so close your other apps before you start.</p></div>
 
-<div class="stats">
-<div class="stat g"><b>9.3</b><span>tokens a second on the processor: a bit faster than you read</span></div>
-<div class="stat b"><b>30&ndash;40 s</b><span>for a full reply</span></div>
-<div class="stat p"><b>~1 GB</b><span>free memory left with other apps open, the real problem</span></div>
-</div>
+<p>We tried it on the weakest PC we've measured, because "will it run on my old laptop?" is one of the first questions people ask about local AI. It does run. Here's what that looks like.</p>
 
 <h2>The test</h2>
-<p>The weakest PC we've measured: a laptop with 8 GB of RAM, Intel Iris Xe graphics, no graphics card, on battery. Small model (<a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), early October 2026.</p>
+<p>The laptop has 8 GB of RAM and Intel Iris Xe graphics, with no graphics card, and we ran it on battery. We used GreenCube's small model, Cube 2B (built on <a href="/blog/gemma-4-requirements">Gemma 4 E2B</a>), in early October 2026.</p>
 
 <div class="tbl-wrap"><table>
 <thead><tr><th>What</th><th>Result</th></tr></thead>
@@ -38,29 +34,21 @@
 </tbody>
 </table></div>
 
-<h2>What we learned</h2>
+<h2>It works for chat and study</h2>
+<p>5 to 7 tokens a second in real chats is about reading speed. GreenCube's short startup test gave 9.3, but in real chats it came out lower. You'll wait half a minute for a long answer, but it gets there, with no internet and no limits.</p>
 
-<div class="card g">
-<h3>1. It works for chat and study</h3>
-<p>5 to 7 tokens a second in real chats is about reading speed (the short startup test gave 9.3). You'll wait half a minute for a long answer, but it gets there, with no internet and no limits.</p>
-</div>
+<h2>Free memory is the real limit</h2>
+<p>With the browser and other apps open, the laptop had only about 1 GB of memory free. One day that wasn't enough and the AI couldn't even start. The small model needs a couple of GB to itself, so on 8 GB it has to share carefully with everything else you have open.</p>
 
-<div class="card p">
-<h3>2. Free memory is the real limit</h3>
-<p>With the browser and other apps open, the laptop had only about 1 GB free. One day that wasn't enough and the AI couldn't even start. The small model needs a couple of GB to itself.</p>
-</div>
-
-<div class="card y">
-<h3>3. The built-in graphics made it slower</h3>
-<p>On this laptop the Iris Xe graphics wrote at 5.0 tokens a second, the processor at 9.3. On another laptop it was about equal. You can't tell in advance, so GreenCube tests both and uses the faster one.</p>
-</div>
+<h2>The built-in graphics made it slower</h2>
+<p>You'd expect the graphics chip to help, but on this laptop the Iris Xe graphics wrote at 5.0 tokens a second and the processor at 9.3. On another laptop the two were about equal. You can't tell in advance from the specs, so GreenCube tests both on your laptop and uses the faster one.</p>
 
 <h2>Tips for an 8 GB laptop</h2>
 <ol class="steps">
-<li><strong>Close the browser</strong> (or most tabs) before you start. Browsers eat memory.</li>
-<li><strong>Restart the laptop</strong> before a long study session. It frees memory other apps forgot to give back.</li>
-<li><strong>Ask shorter questions</strong>, or one thing at a time. Shorter answers come back faster.</li>
-<li><strong>Skip pictures.</strong> They need about 7 GB; use a bigger PC for those.</li>
+<li>Close the browser, or most of its tabs, before you start. Browsers use a lot of memory.</li>
+<li>Restart the laptop before a long study session. It frees memory that other apps forgot to give back.</li>
+<li>Ask one thing at a time. Shorter answers come back faster.</li>
+<li>Leave pictures for a bigger PC. They need about 7 GB on their own.</li>
 </ol>
 
-<p>See how much faster other PCs are: <a href="/blog/can-my-pc-run-ai">we measured {{pcs}} PCs here</a>.</p>
+<p>To see how much faster other PCs are, <a href="/blog/can-my-pc-run-ai">we measured {{pcs}} PCs here</a>.</p>

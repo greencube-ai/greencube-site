@@ -6,15 +6,13 @@ Canonical: https://blog.greencube.app/blog/gemma-4-e2b-vs-e4b
 Published: 2026-10-18  
 Author: Hector Gras
 
-**Short answer:** on a laptop with no graphics card, the **small model wins**: a good answer in 20 seconds instead of a slightly better one in almost 2 minutes. With a graphics card, take the big one: it's fast there too.
+On a laptop with no graphics card, Gemma 4 E2B is the better choice: in our test it gave a good answer in 20 seconds, while E4B took almost 2 minutes for a slightly better one. With a graphics card, take E4B, because it's fast there too.
 
-- **20 s** small model (Gemma 4 E2B), full answer
-- **28 s** older small model (Phi-4 Mini)
-- **112 s** bigger model (Gemma 4 E4B), best explanation
+These are the two models GreenCube runs. Cube 2B is built on Gemma 4 E2B and Cube 4B on Gemma 4 E4B, so we had good reason to time them properly. We added Phi-4 Mini, an older small model, for comparison.
 
 ## The test
 
-One 16 GB laptop (Intel Core Ultra 5, no graphics card), processor only. One study-style request: explain photosynthesis to a 14-year-old, then write three exam questions about it. We timed until the answer was finished, in September 2026.
+One 16 GB laptop (Intel Core Ultra 5, no graphics card), running on the processor only. One study-style request: explain photosynthesis to a 14-year-old, then write three exam questions about it. We timed each model until its answer was finished, in September 2026.
 
 | Model | Size | Time to the full answer | What came out |
 | --- | --- | --- | --- |
@@ -24,37 +22,25 @@ One 16 GB laptop (Intel Core Ultra 5, no graphics card), processor only. One stu
 
 ## What we learned
 
-### 1. The small one is good enough for studying
+### The small one is good enough for studying
 
-We also asked five quick fact questions: maths, unit conversion, dates and science. **Neither small model got one wrong.** The small Gemma even showed a second way to work out a percentage without being asked.
+We also asked five quick fact questions covering maths, unit conversion, dates and science. Neither small model got one wrong. The small Gemma even showed a second way to work out a percentage without being asked.
 
-### 2. Its weak spot: counting
+### Its weak spot is counting
 
-Twice, the small model said "here are 5" and then listed a different number. So GreenCube now tells it to count before it writes the number. Small things like this are where a bigger model is safer.
+Twice, the small model said "here are 5" and then listed a different number. GreenCube now tells it to count before it writes the number. Small slips like this are where a bigger model is safer.
 
-### 3. With a graphics card, it's a different story
+### A graphics card changes the picture
 
-That same bigger model writes at **56 to 72 tokens a second** on 8 GB gaming cards, 7 to 9 times faster than on this laptop. On a gaming PC you get the better answers without the wait.
+The bigger model writes 56 to 72 tokens a second on 8 GB gaming cards, 7 to 9 times faster than on this laptop. On a gaming PC you get the better answers without the wait.
 
 ## Which one for your PC?
 
-#### Laptop, no card
+On a laptop with no graphics card, use the small model. Its answers come fast and are good enough for study, writing and everyday questions. If it gives you a list that starts with "here are 5", glance that there really are 5, since that's the slip we saw.
 
-Small model. Fast answers, good enough for study, writing and questions.
+On a gaming PC, use the bigger one. The answers are better, and it still writes faster than you can read.
 
-#### Gaming PC
-
-Bigger model. Better answers, and still faster than you read.
-
-#### Making a list?
-
-If it says "here are 5", glance that there are 5. That's the small model's one slip.
-
-#### Don't want to think about it?
-
-GreenCube checks your PC and picks for you.
-
-See how fast each kind of PC is: [we measured 10 PCs here](https://blog.greencube.app/blog/can-my-pc-run-ai).
+If you'd rather not think about it, GreenCube checks your PC and picks for you. To see how fast each kind of PC is, [we measured 10 PCs here](https://blog.greencube.app/blog/can-my-pc-run-ai).
 
 ## FAQ
 
