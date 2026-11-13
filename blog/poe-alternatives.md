@@ -37,7 +37,7 @@ Both are the closest thing to Poe's mix of models. Keep in mind that in either a
 
 Using ChatGPT, Claude or Gemini directly means one company's models instead of a marketplace of bots, and their rules are easy to check. With a free personal account, ChatGPT trains on your chats by default (you can switch it off), Claude only if you allow it, and Gemini while Keep Activity is on. Each one with its source is in [the most private AI assistant, 10 checked](https://blog.greencube.app/blog/private-ai-assistant).
 
-### Nothing leaves your computer
+### Your chats stay on your computer
 
 A local app downloads a model once and runs it on your own graphics card or processor, so no one else gets your chats and it works offline. **LM Studio**, **Jan** and **Ollama** are free and let you pick the models. **GreenCube** (Windows, €9.99 once) picks the model for your PC and also reads PDFs and photos and makes pictures. A longer list is in [12 offline AI apps, checked](https://blog.greencube.app/blog/best-offline-ai-chatbot).
 
@@ -71,16 +71,16 @@ Poe's facts come from its privacy policy and download page, Msty's from its pric
 
 ### What is Poe?
 
-Poe is a chat app run by Quora that lets you talk to many AI bots in one place, including models from OpenAI, Anthropic and DeepSeek, plus thousands of bots made by other people. It has web, Windows, Mac, iPhone and Android apps.
+A chat app from Quora where you talk to many AI bots in one place, including models from OpenAI, Anthropic and DeepSeek and thousands of bots made by other people. It's on the web, Windows, Mac, iPhone and Android.
 
 ### Does Poe share my chats?
 
-Yes. Poe's privacy policy (last updated 30 April 2026) says the AI model providers and developers behind its bots may receive the contents of your chats and the files you upload, and that developers who build bots through APIs may view and store your chats on their servers to train their models.
+Yes. Poe's privacy policy (updated 30 April 2026) says the companies and developers behind its bots may get your chats and uploaded files, and developers who build bots through APIs may view and store your chats on their servers to train their models.
 
 ### What is the best Poe alternative for using many AI models in one app?
 
-Msty and Jan both let you use online models and models that run on your own computer in one app. Jan is free and open source; Msty Studio has a free plan, with paid Aurum plans at $149 a year or $349 once. When you use an online model in either, your chat goes to that model's company.
+Msty and Jan both let you use online models and models on your own computer in one app. Jan is free and open source; Msty Studio has a free plan and paid Aurum plans at $149 a year or $349 once. Using an online model in either still sends your chat to that model's company.
 
 ### Is there a Poe alternative that keeps my chats private?
 
-An app that runs the AI on your own PC: LM Studio, Jan, Ollama or GreenCube. After the first download, your chats never leave your computer and the app works offline.
+An app that runs the AI on your own PC, like LM Studio, Jan, Ollama or GreenCube. After the first download your chats stay on your computer and it works offline.

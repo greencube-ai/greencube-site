@@ -54,20 +54,20 @@ Plenty of people run one of each: a cloud app for the hardest questions, and a l
 
 ### What is the best AI desktop app for Windows?
 
-It depends on whether you want the strongest cloud model or an AI that works offline. ChatGPT, Claude, Gemini, Perplexity and Copilot all have Windows apps but need internet. LM Studio, Jan and GPT4All (free) and GreenCube (€9.99 once) run the AI on your own PC and work offline.
+It depends on whether you want the strongest cloud AI or one that works offline. ChatGPT, Claude, Gemini, Perplexity and Copilot have Windows apps but need internet; LM Studio, Jan and GPT4All (free) and GreenCube (€9.99 once) run the AI on your PC and work offline.
 
 ### Is there a Gemini desktop app for Windows?
 
-Yes. Google launched the Gemini app for Windows on 10 September 2026. It runs on Windows 10 or later with 8 GB of RAM and opens with Alt + Space; Google says some macOS features are still coming to Windows.
+Yes. Google launched it on 10 September 2026; it needs Windows 10 or later and 8 GB of RAM, and opens with Alt + Space. Google says some macOS features haven't reached Windows yet.
 
 ### Do AI desktop apps work offline?
 
-The cloud ones don't: ChatGPT, Claude, Gemini, Perplexity and Copilot are windows onto their companies' servers. Apps that run a model on your PC, like LM Studio, Jan, GPT4All and GreenCube, work offline after the first download.
+Only the ones that run the AI on your PC. ChatGPT, Claude, Gemini, Perplexity and Copilot are windows onto their companies' servers, while LM Studio, Jan, GPT4All and GreenCube work offline after the first download.
 
 ### Can the Perplexity desktop app run AI locally?
 
-Perplexity says its Windows app has a local option for Pro and Max subscribers, which needs an NVIDIA GeForce RTX or RTX PRO card with at least 24 GB of VRAM.
+Perplexity says yes, for Pro and Max subscribers on its Windows app. You need an NVIDIA GeForce RTX or RTX PRO card with at least 24 GB of VRAM.
 
 ### Which AI desktop app keeps my chats on my PC?
 
-Only apps that run the AI locally. In cloud desktop apps your chats go to the company's servers, and on free personal accounts ChatGPT and Perplexity train on them by default.
+Only the ones that run the AI locally. Cloud apps send your chats to the company's servers, and on free personal accounts ChatGPT and Perplexity train on them by default.

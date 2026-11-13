@@ -48,12 +48,12 @@ If you'd rather not do the sums, GreenCube reads your card and picks a model tha
 
 ### What happens if an AI model doesn't fit in VRAM?
 
-The part that doesn't fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote at 5.9 tokens a second instead of 35.6 with all of them: 6 times slower.
+The part that doesn't fit runs from normal memory, and everything slows down. On our 8 GB card, a model with 28 of its layers on the card wrote 5.9 tokens a second, against 35.6 with all of them: 6 times slower.
 
 ### Should I run the biggest AI model my card can load?
 
-No. Leave room for the conversation. A 12-billion-parameter model fitted on an 8 GB card for a short question, then crashed once the chat got longer. A smaller model that fits with room to spare was faster and never crashed.
+No, leave room for the conversation. A 12-billion-parameter model fit on an 8 GB card for a short question, then crashed once the chat got longer, while a smaller one with room to spare was faster and never crashed.
 
 ### How much VRAM should I leave free?
 
-GreenCube leaves about 1.5 GB of the card free for the conversation and for Windows. Without that room, a 4 GB card ran out of memory on the first message.
+About 1.5 GB, for the conversation and Windows; that's what GreenCube leaves. Without that room, a 4 GB card ran out of memory on the first message.

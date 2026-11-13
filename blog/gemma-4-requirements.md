@@ -65,15 +65,15 @@ If you'd rather not choose, GreenCube checks your PC and picks the right one for
 
 ### What are the minimum requirements to run Gemma 4 locally?
 
-The smallest one, Gemma 4 E2B (a 2.6 GB file), ran on a laptop with 8 GB of RAM and no graphics card, at 5 to 7 tokens a second in real chats. It needs a couple of GB of free memory to start.
+8 GB of RAM and no graphics card is enough for the smallest, Gemma 4 E2B (a 2.6 GB file): it wrote 5 to 7 tokens a second in real chats. It needs a couple of GB of free memory to start.
 
 ### How much VRAM does Gemma 4 E4B need?
 
-E4B is a 4.2 GB file. It fits fully on a 6 GB graphics card, where it wrote 35 to 38 tokens a second on a GTX 1660 Super. On 8 GB cards it wrote 56 to 72. It also runs without a card on 16 GB of RAM, at about 8 tokens a second.
+It's a 4.2 GB file, so it fits fully on a 6 GB card, where it wrote 35 to 38 tokens a second on a GTX 1660 Super. On 8 GB cards it wrote 56 to 72, and with no card it runs on 16 GB of RAM at about 8.
 
 ### Can Gemma 4 12B run on an 8 GB graphics card?
 
-For one short question, yes: 20 to 35 tokens a second on an RX 5700 XT. But it crashed once the conversation got longer, because the card had almost no room left. We'd want at least 10 GB of VRAM for it.
+For one short question, yes: 20 to 35 tokens a second on an RX 5700 XT. But it crashed once the chat got longer, because the card had almost no room left, so we'd want at least 10 GB of VRAM.
 
 ### Is Gemma 4 free to use?
 

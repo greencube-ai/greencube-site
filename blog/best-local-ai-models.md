@@ -53,20 +53,20 @@ Free apps like LM Studio, Jan and Ollama let you choose the model yourself ([12 
 
 ### What is the best local AI model?
 
-The biggest model that fits whole on your graphics card with about 1.5 GB to spare. A smaller model fully on the card beats a bigger one that spills into RAM: in our test, a model with part of it off an 8 GB card ran 6 times slower.
+The biggest one that fits whole on your graphics card with about 1.5 GB to spare. A smaller model fully on the card beats a bigger one that spills into RAM: in our test, a model partly off an 8 GB card ran 6 times slower.
 
 ### What is the best local AI model for a laptop without a graphics card?
 
-A small one. Gemma 4 E2B (2.6 GB) wrote 14 to 18 tokens a second on a 16 GB laptop and 5 to 7 on an 8 GB laptop in real chats; the bigger E4B took 112 seconds for an answer E2B gave in 20.
+A small one. Gemma 4 E2B (2.6 GB) wrote 14 to 18 tokens a second on a 16 GB laptop and 5 to 7 on an 8 GB one in real chats; the bigger E4B took 112 seconds for an answer E2B gave in 20.
 
 ### What is the best local AI model for an 8 GB graphics card?
 
-A model of about 4 to 5 GB, like Gemma 4 E4B (4.2 GB): it wrote 56 to 72 tokens a second on 8 GB gaming cards. A 12-billion-parameter model fit for short questions but crashed in long chats.
+One of about 4 to 5 GB, like Gemma 4 E4B (4.2 GB), which wrote 56 to 72 tokens a second on 8 GB gaming cards. A 12-billion-parameter model fit for short questions but crashed in long chats.
 
 ### How do I know if a model fits my graphics card?
 
-Take the model file's size and add about 1.5 GB for the conversation and Windows. If that's less than your card's dedicated GPU memory (Task Manager, Performance, GPU), it fits.
+Add about 1.5 GB to the model file's size, for the conversation and Windows. If the total is less than your card's dedicated GPU memory (Task Manager, Performance, GPU), it fits.
 
 ### Do I need to pick a model myself?
 
-In free apps like LM Studio, Jan or Ollama, yes. GreenCube reads your card and RAM and picks the model that fits for you.
+In free apps like LM Studio, Jan or Ollama, yes. GreenCube checks your card and RAM and picks one that fits for you.

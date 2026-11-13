@@ -44,7 +44,7 @@ From each app's own website, docs or GitHub page, checked on 21 and 23 October 2
 
 | App | Runs on | Licence and price | Your documents | What its pages say goes online |
 | --- | --- | --- | --- | --- |
-| **Jan** | Windows 10+, Mac (Apple chip), Linux | Apache 2.0, free | PDF, Office files | Conversations "never leave your computer"; cloud AIs only if you connect them ([privacy](https://jan.ai/docs/privacy)) |
+| **Jan** | Windows 10+, Mac (Apple chip), Linux | Apache 2.0, free | PDF, Office files | Conversations "stay on your computer"; cloud AIs only if you connect them ([privacy](https://jan.ai/docs/privacy)) |
 | **LM Studio** | Windows (AVX2), Mac (Apple chip), Linux | Free, also for work; closed source | PDF, DOCX, TXT | No telemetry; update checks and model downloads go online ([privacy](https://lmstudio.ai/app-privacy)) |
 | **Ollama** | Windows, Mac (incl. Intel, CPU only), Linux | MIT, free on your PC | Text and PDFs, drag and drop | May collect limited device and usage metadata ([privacy](https://ollama.com/privacy)) |
 | **AnythingLLM** | Windows, Mac, Linux; Android app | MIT, desktop free | PDF, TXT, DOCX | Anonymous usage telemetry you can turn off ([privacy](https://docs.anythingllm.com/installation-desktop/privacy)) |
@@ -67,11 +67,11 @@ On 21 October 2026 we read each app's own website, docs, GitHub page and privacy
 
 ### Is GPT4All still maintained?
 
-Its GitHub releases page shows v3.10.0, published 25 February 2025, as the latest desktop release when we checked in October 2026. The app still installs and works offline, but it hasn't had a new release since then.
+Barely. Its latest desktop release is v3.10.0, from 25 February 2025 (checked October 2026). The app still installs and works offline, but nothing new has come out since.
 
 ### What is the best GPT4All alternative?
 
-For a free, open-source desktop app like GPT4All, Jan (Apache 2.0) is the closest. For chatting with your own documents like GPT4All's LocalDocs, AnythingLLM (MIT) is built around exactly that. On Windows, GreenCube (€9.99 once) picks the model for you and reads PDFs and photos.
+Jan (Apache 2.0) is the closest if you want a free, open-source desktop app, and AnythingLLM (MIT) is built for chatting with your documents, like LocalDocs. On Windows, GreenCube (€9.99 once) picks the model for you and reads PDFs and photos.
 
 ### Is there a free alternative to GPT4All?
 
@@ -79,8 +79,8 @@ Yes: Jan, LM Studio, Ollama, AnythingLLM, KoboldCpp and Atomic Chat are free, an
 
 ### What replaces GPT4All LocalDocs?
 
-Most alternatives can read your files: AnythingLLM (PDF, TXT, DOCX), Jan (PDF and Office files), LM Studio (PDF, DOCX, TXT), Msty (Knowledge Stacks) and GreenCube (PDFs, notes, photos). The reading happens on your PC.
+Most alternatives read your files, on your PC: AnythingLLM (PDF, TXT, DOCX), Jan (PDF and Office files), LM Studio (PDF, DOCX, TXT), Msty (Knowledge Stacks) and GreenCube (PDFs, notes, photos).
 
 ### Is GPT4All safe to keep using?
 
-It still runs offline and its docs say no data leaves your machine, with chat sharing off by default. The risk of an app without updates is that newer AI models and fixes don't arrive, so over time it falls behind the apps that are still updated.
+It still works offline, and its docs say no data leaves your machine, with chat sharing off by default. The catch is that without updates, newer models and fixes don't arrive, so it falls behind apps that are still updated.

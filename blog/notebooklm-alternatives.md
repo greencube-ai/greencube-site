@@ -75,20 +75,20 @@ We read each tool's own website, pricing, help and GitHub pages on 21 and 23 Oct
 
 ### What is the best NotebookLM alternative for studying?
 
-If you want answers that cite your sources, Humata and Adobe Acrobat's AI Assistant also link back to the page, but both cap the free tier or need a paid plan. If you don't want your notes on Google's servers, an AI on your own PC reads them from your disk: GreenCube (€9.99 once, Windows) or the free AnythingLLM. Open Notebook is an open-source, self-hosted NotebookLM-style app.
+It depends what you want from it. Humata and Adobe Acrobat's AI Assistant also link answers back to the page, but cap the free tier or need a paid plan. To keep your notes off Google's servers, an AI on your own PC reads them from your disk: GreenCube (€9.99 once, Windows) or the free AnythingLLM; Open Notebook is an open-source, self-hosted NotebookLM-style app.
 
 ### Is there a free NotebookLM alternative?
 
-Yes. AnythingLLM's desktop app and Open Notebook are free and open source (MIT); Humata gives 60 pages a month free and ChatPDF 2 documents a day. NotebookLM itself is also free, with up to 50 sources per notebook.
+Yes. AnythingLLM's desktop app and Open Notebook are free and open source (MIT), Humata gives 60 pages a month free and ChatPDF 2 documents a day. NotebookLM itself is free too, with up to 50 sources per notebook.
 
 ### Is there an open-source NotebookLM alternative?
 
-Open Notebook (MIT) is a self-hosted, NotebookLM-style app that handles PDFs, audio, video and web pages and can use local models through Ollama or LM Studio. AnythingLLM (MIT) is a simpler desktop app for chatting with your documents.
+Yes, Open Notebook (MIT): a self-hosted, NotebookLM-style app that handles PDFs, audio, video and web pages and can use local models through Ollama or LM Studio. AnythingLLM (MIT) is a simpler desktop app for chatting with your documents.
 
 ### Is there a NotebookLM alternative that works offline?
 
-Yes: an AI that runs on your own computer. GreenCube and AnythingLLM's desktop app read your PDFs on your PC with no upload. In our test, GreenCube answered 11 of 12 questions about long documents right, about 15 seconds each, on a 16 GB laptop.
+Yes, an AI that runs on your own computer. GreenCube and AnythingLLM's desktop app read your PDFs on your PC with no upload; in our test GreenCube got 11 of 12 questions about long documents right, about 15 seconds each, on a 16 GB laptop.
 
 ### Does NotebookLM train on my notes?
 
-Google says NotebookLM doesn't train on your uploads unless you send feedback (thumbs up or down). Your notes are still stored on Google's servers.
+Google says no, unless you send feedback (thumbs up or down). Your notes are still stored on Google's servers.

@@ -54,20 +54,20 @@ Plans change often, so we re-read these help pages every month.
 
 ### Is there an AI with no message limit?
 
-Yes. Since August 2026 ChatGPT Free has unlimited everyday text chats, subject to abuse safeguards. Any AI that runs on your own PC also has no message limit, because there is no server counting them: GreenCube, LM Studio, Jan, Ollama and GPT4All, for example.
+Yes. ChatGPT Free has had unlimited everyday text chats since August 2026 (with abuse safeguards). Any AI on your own PC has no message limit either, because no server counts them: GreenCube, LM Studio, Jan, Ollama and GPT4All, for example.
 
 ### Which AI has no limits on file uploads?
 
-None of the cloud AIs we checked: ChatGPT Free caps file uploads without publishing a number, Gemini allows up to 10 files per message with limits that refresh every 5 hours, and NotebookLM allows 50 sources per notebook. An AI on your own PC reads files from your disk, so the only limit is your PC's time.
+No cloud AI we checked. ChatGPT Free caps uploads without saying how many, Gemini allows up to 10 files per message with limits that refresh every 5 hours, and NotebookLM takes 50 sources per notebook. An AI on your own PC reads files from your disk, so the only limit is your PC's time.
 
 ### Is there a free AI with no limits?
 
-For text chat, ChatGPT Free is now unlimited. For everything, including files, the free apps that run AI on your PC (LM Studio, Jan, Ollama, GPT4All) have no usage limits; you choose and download the model yourself. GreenCube costs €9.99 once and also makes pictures.
+For text chat, ChatGPT Free is now unlimited. For everything, files included, free apps that run AI on your PC (LM Studio, Jan, Ollama, GPT4All) have no limits, but you pick and download the model yourself; GreenCube is €9.99 once and also makes pictures.
 
 ### Which AI makes unlimited pictures?
 
-Cloud image generators cap free pictures. An AI on your own PC has no counter: GreenCube made a 512×512 picture in 8 to 89 seconds on gaming PCs and in about 2 to 2.5 minutes on a 16 GB laptop in our tests. It needs 12 GB of RAM.
+One that runs on your own PC, since cloud image tools cap free pictures. In our tests GreenCube made a 512×512 picture in 8 to 89 seconds on gaming PCs and in about 2 to 2.5 minutes on a 16 GB laptop; it needs 12 GB of RAM.
 
 ### What does unlimited AI on my PC cost me?
 
-Time instead of money. Your PC does the work: in our tests an 8 GB laptop wrote 5 to 7 tokens a second (about reading speed), a 16 GB laptop 14 to 18, and most gaming PCs 37 to 76.
+Time instead of money, because your PC does the work. In our tests an 8 GB laptop wrote 5 to 7 tokens a second (about reading speed), a 16 GB laptop 14 to 18, and most gaming PCs 37 to 76.

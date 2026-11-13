@@ -83,11 +83,11 @@ And it's only as fast as your PC. An 8 GB laptop writes about as fast as you rea
 
 ### Can I run AI offline on Windows 11?
 
-Yes. Apps like GreenCube, LM Studio, Jan, Ollama and GPT4All run the AI model on your own PC. You need internet once to download the app and the model; after that, chat works with Wi-Fi off.
+Yes. Apps like GreenCube, LM Studio, Jan, Ollama and GPT4All run the AI on your own PC. You need internet once to download the app and the model, then it works with Wi-Fi off.
 
 ### Does offline AI work on Windows 10?
 
-Yes. GreenCube, Jan and Msty list Windows 10 as supported. Microsoft ended Windows 10 support on 14 October 2025, so the AI still runs, but your PC no longer gets security updates unless you join extended updates.
+Yes. GreenCube, Jan and Msty list Windows 10 as supported. Microsoft ended Windows 10 support on 14 October 2025, so the AI still runs, but your PC gets no security updates unless you join extended updates.
 
 ### How much RAM do I need to run AI locally on a Windows PC?
 
@@ -99,4 +99,4 @@ No, but it helps a lot. On gaming PCs with a 6 GB or bigger card we measured 37 
 
 ### Is there a free offline AI for Windows?
 
-Yes: LM Studio, Jan, Ollama, GPT4All and AnythingLLM are free, and you pick and download a model yourself. GreenCube costs €9.99 once and picks the model that fits your PC for you.
+Yes: LM Studio, Jan, Ollama, GPT4All and AnythingLLM are free, and you pick and download a model yourself. GreenCube is €9.99 once and picks the model that fits your PC.

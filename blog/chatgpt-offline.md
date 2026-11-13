@@ -64,15 +64,15 @@ Plenty of people use both: ChatGPT when they're online and need the strongest mo
 
 ### Can you use ChatGPT offline?
 
-No. ChatGPT runs on OpenAI's servers, so the website, the phone app and the Windows and Mac desktop apps all need an internet connection. There is no offline mode or offline installer from OpenAI.
+No. ChatGPT runs on OpenAI's servers, so the website, the phone app and the Windows and Mac apps all need internet. OpenAI has no offline mode or offline installer.
 
 ### Is there an official offline version of ChatGPT?
 
-Not of ChatGPT itself. The closest thing from OpenAI is gpt-oss-20b, an open-weight model released under Apache 2.0 that runs on a computer with about 16 GB of memory, through apps like Ollama or LM Studio. It isn't the same model as ChatGPT.
+Not of ChatGPT itself. The closest from OpenAI is gpt-oss-20b, an open-weight model under Apache 2.0 that runs on a computer with about 16 GB of memory through apps like Ollama or LM Studio, but it isn't the same model as ChatGPT.
 
 ### What is the best offline alternative to ChatGPT?
 
-An app that runs an AI model on your own PC: LM Studio, Jan, Ollama and GPT4All are free (you choose the model); GreenCube costs €9.99 once and picks the model for your PC. After the first download they work with Wi-Fi off.
+An app that runs the AI on your own PC. LM Studio, Jan, Ollama and GPT4All are free and you choose the model; GreenCube is €9.99 once and picks it for your PC. After the first download, they all work with Wi-Fi off.
 
 ### How fast is an offline ChatGPT alternative?
 
@@ -80,4 +80,4 @@ It depends on your PC. In our tests GreenCube wrote 5 to 7 tokens a second on an
 
 ### Are 'ChatGPT offline' apps in app stores real?
 
-Be careful: apps using the ChatGPT name for offline use are not from OpenAI. If an app works offline, it runs some other model on your device; check who makes it and which model it runs.
+Not from OpenAI. Apps using the ChatGPT name for offline use run some other model on your device, so check who makes it and which model it runs.

@@ -70,20 +70,20 @@ Each card's numbers are in [Can my PC run AI?](https://blog.greencube.app/blog/c
 
 ### What is the best Open WebUI alternative?
 
-It depends on why you're leaving. For a self-hosted chat page for a team: LibreChat (MIT, Docker). For searching your company's documents: Onyx. For one person on one computer with no Docker: LM Studio, Jan, Msty or text-generation-webui, which run the models themselves. GreenCube (Windows, €9.99 once) picks the model for your PC by itself.
+It depends why you're leaving. For a self-hosted team chat page: LibreChat (MIT, Docker); for searching company documents: Onyx; for one person on one computer with no Docker: LM Studio, Jan, Msty or text-generation-webui, which run the models themselves. GreenCube (Windows, €9.99 once) picks the model for your PC by itself.
 
 ### Is Open WebUI still open source?
 
-Its licence is now the "Open WebUI License": BSD-style terms plus a clause that you may not remove or replace its branding, unless you have 50 or fewer users in a rolling 30 days, written permission, or an enterprise licence. Code released earlier keeps its original licence.
+Not under a standard licence anymore. It now uses the "Open WebUI License": BSD-style terms plus a ban on removing or replacing its branding, unless you have 50 or fewer users in a rolling 30 days, written permission or an enterprise licence. Code released earlier keeps its old licence.
 
 ### Is there an Open WebUI alternative without Docker?
 
-Yes. LM Studio, Jan, Msty, Chatbox and GreenCube install like normal apps; text-generation-webui has portable builds you unzip and run; llama.cpp's server has its own web chat page.
+Yes. LM Studio, Jan, Msty, Chatbox and GreenCube install like normal apps, text-generation-webui has portable builds you unzip and run, and llama.cpp's server has its own web chat page.
 
 ### Which Open WebUI alternatives run models themselves?
 
-LM Studio, Jan, text-generation-webui, llama.cpp and GreenCube run models with no separate engine. LibreChat, Onyx, LobeHub and Chatbox connect to an engine such as Ollama, or to cloud APIs.
+LM Studio, Jan, text-generation-webui, llama.cpp and GreenCube, with no separate engine needed. LibreChat, Onyx, LobeHub and Chatbox connect to one, like Ollama, or to cloud APIs.
 
 ### Which alternative is best for a team?
 
-LibreChat (MIT) has multi-user login with OAuth2, LDAP and email, plus an admin panel. Onyx adds search across your company's documents; its Business plan is $20 per user a month. AnythingLLM's Docker version also supports multiple users.
+LibreChat (MIT): multi-user login with OAuth2, LDAP and email, plus an admin panel. Onyx adds search across your company's documents (Business plan $20 per user a month), and AnythingLLM's Docker version also handles multiple users.

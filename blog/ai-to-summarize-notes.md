@@ -67,16 +67,16 @@ If the notes are someone else's, or your school's, check that you're allowed to 
 
 ### What's the best free AI to summarize notes?
 
-It depends on what matters to you. NotebookLM is free, cites which part of your notes each answer comes from, and doesn't train on your uploads unless you send feedback, but your notes go to Google. If you don't want to upload them anywhere, you need an AI that runs on your own computer.
+NotebookLM, if you're fine with your notes going to Google: it's free, shows which part of your notes each answer comes from, and doesn't train on your uploads unless you send feedback. If you'd rather not upload them anywhere, use an AI that runs on your own computer.
 
 ### Is there an AI with no file upload limit?
 
-Not in the cloud: free ChatGPT limits uploads without publishing a number, free Gemini allows up to 10 files per message with limits that refresh every 5 hours, and NotebookLM allows 50 sources per notebook. An AI on your own PC uploads nothing, so the only limit is how long your computer takes.
+Not in the cloud. Free ChatGPT limits uploads without saying how many, free Gemini allows up to 10 files per message with limits that refresh every 5 hours, and NotebookLM takes 50 sources per notebook. An AI on your own PC uploads nothing, so the only limit is how long your computer takes.
 
 ### Does ChatGPT train on the notes I upload?
 
-On Free, Go, Plus and Pro accounts, yes by default, unless you turn off "Improve the model for everyone" in Settings, Data controls.
+Yes, by default on Free, Go, Plus and Pro, unless you switch off "Improve the model for everyone" in Settings, Data controls.
 
 ### How long does a local AI take to summarize a chapter?
 
-In our test, a 16 GB laptop with no graphics card took about 15 minutes to write a full study guide of a 5,000-word chapter, and about 15 seconds to answer each specific question about it.
+About 15 minutes for a full study guide of a 5,000-word chapter, and about 15 seconds for each specific question, on a 16 GB laptop with no graphics card in our test.

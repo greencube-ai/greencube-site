@@ -41,7 +41,7 @@ We tested GreenCube on a normal 16 GB laptop with no graphics card, using its sm
 | 18 flashcards from a ~4,800-word chapter | **about 5 min** | 30 of 36 right with the bigger AI ([test](https://blog.greencube.app/blog/flashcards-from-pdf)) |
 | A picture for a presentation | **2–2.5 min** | 8–89 s with a graphics card |
 
-There are no message, file or picture limits and no subscription, and your notes never leave your PC. The trade-off is that it's slower than the cloud on a laptop, and a model small enough for your PC won't beat the biggest cloud AIs at the hardest problems. More on this in [everything an offline AI can do for students](https://blog.greencube.app/blog/offline-ai-for-students).
+There are no message, file or picture limits and no subscription, and your notes stay on your PC. The trade-off is that it's slower than the cloud on a laptop, and a model small enough for your PC won't beat the biggest cloud AIs at the hardest problems. More on this in [everything an offline AI can do for students](https://blog.greencube.app/blog/offline-ai-for-students).
 
 ## Who sees your notes
 
@@ -61,11 +61,11 @@ Using AI to understand a topic, quiz yourself or get feedback on a draft is usua
 
 ### What is the best free AI for students?
 
-For quick questions, ChatGPT Free (unlimited text since August 2026). For studying from your own notes with citations, NotebookLM (free, 50 sources per notebook). If you're at university and 18 or over, Google offers a free year of AI Plus, redeemable until 31 December 2026.
+ChatGPT Free for quick questions (unlimited text since August 2026), and NotebookLM for studying from your own notes with citations (free, 50 sources per notebook). If you're at university and 18 or over, Google also gives a free year of AI Plus, redeemable until 31 December 2026.
 
 ### What is the best AI for studying from PDFs?
 
-NotebookLM if uploading to Google is fine. If you study from many PDFs, don't want to upload them, or study offline, an AI on your own PC has no file limits: in our test GreenCube answered 11 of 12 questions about long documents right, about 15 seconds each, on a 16 GB laptop.
+NotebookLM, if uploading to Google is fine. If you have lots of PDFs, don't want to upload them or study offline, an AI on your own PC has no file limits: in our test GreenCube got 11 of 12 questions about long documents right, about 15 seconds each, on a 16 GB laptop.
 
 ### What is the best AI for exam preparation?
 
@@ -73,8 +73,8 @@ One that turns your material into questions and flashcards you answer without lo
 
 ### Is using AI to study cheating?
 
-It depends on your school's rules. Using AI to understand material, test yourself and get feedback is usually fine; handing in AI-written work as your own usually isn't. Check your course's academic integrity policy.
+It depends on your school's rules. Using AI to understand things, test yourself and get feedback is usually fine; handing in AI-written work as your own usually isn't, so check your course's academic integrity policy.
 
 ### Which AI doesn't train on students' notes?
 
-NotebookLM says it doesn't train on uploads unless you send feedback, and Claude only if you allow it. ChatGPT, Perplexity, Mistral, DeepSeek and Meta AI do by default on free personal accounts. An AI on your own PC never sends your notes anywhere.
+NotebookLM says it doesn't train on uploads unless you send feedback, and Claude only if you allow it. On free personal accounts, ChatGPT, Perplexity, Mistral, DeepSeek and Meta AI do by default. An AI on your own PC never sends your notes anywhere.

@@ -51,20 +51,20 @@ And if you don't want to choose models at all, that's the gap GreenCube fills. I
 
 ### Is Ollama or LM Studio faster?
 
-On the same PC with the same model and the same settings, the speed is set mostly by your hardware: both run open llama.cpp-family engines underneath. What changes speed most is whether the model fits whole on your graphics card. We haven't timed the two apps side by side, so we won't claim one is faster.
+We haven't timed them side by side, so we won't say one is faster. Both run open llama.cpp-family engines underneath, so on the same PC with the same model and settings your hardware sets most of the speed, above all whether the model fits whole on your graphics card.
 
 ### What is the difference between Ollama and LM Studio?
 
-Ollama is open source (MIT), built around a command line and a local API, with a desktop chat window on Windows and Mac since July 2025. LM Studio is a closed-source desktop app with a chat window, model search and a local OpenAI-style server, free also for work.
+Ollama is open source (MIT) and built around a command line and a local API, with a desktop chat window on Windows and Mac since July 2025. LM Studio is a closed-source desktop app with a chat window, model search and a local OpenAI-style server, free for work too.
 
 ### Which is better for beginners, Ollama or LM Studio?
 
-LM Studio, if you want to browse and download models in a window. Ollama is simpler for developers who want a background service and an API. If you'd rather not pick a model at all, GreenCube (Windows, €9.99 once) chooses one for your PC.
+LM Studio, if you want to browse and download models in a window; Ollama is simpler for developers who want a background service and an API. If you'd rather not pick a model at all, GreenCube (Windows, €9.99 once) picks one for your PC.
 
 ### Does Ollama or LM Studio work on an Intel Mac?
 
-Ollama's docs list Intel Macs, CPU only, on macOS 14 or newer. LM Studio needs a Mac with an Apple chip.
+Ollama does, CPU only, on macOS 14 or newer, according to its docs. LM Studio needs a Mac with an Apple chip.
 
 ### Do Ollama and LM Studio send data online?
 
-LM Studio says no messages or documents are transmitted when running locally and it has no telemetry; update checks and model downloads go online. Ollama says it doesn't see your prompts locally but may collect limited device and usage metadata. Both can use cloud models if you choose them.
+LM Studio says no messages or documents leave your PC when it runs locally and it has no telemetry, though update checks and model downloads go online. Ollama says it doesn't see your local prompts but may collect limited device and usage data. Both can use cloud models if you pick them.

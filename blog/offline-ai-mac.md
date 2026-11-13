@@ -51,11 +51,11 @@ If you also have a Windows 10 or 11 PC, that's where GreenCube runs. It picks th
 
 ### What is the best offline AI for Mac?
 
-On a Mac with an Apple chip, LM Studio (free) and Jan (free, open source) are the easiest desktop apps; Ollama is the main command-line option with a chat window. On an Intel Mac, Ollama's docs still list Intel support, CPU only, on macOS 14 or newer.
+On a Mac with an Apple chip, LM Studio (free) and Jan (free, open source) are the easiest; Ollama is the main command-line option, with a chat window. On an Intel Mac, Ollama's docs still list support, CPU only, on macOS 14 or newer.
 
 ### Does Apple Intelligence work offline on Mac?
 
-Partly. Apple says requests are processed on the device first, and more demanding ones go to its Private Cloud Compute servers, which need internet; the ChatGPT extension needs internet too. Apple doesn't publish a feature-by-feature offline list, so the reliable test is to turn on airplane mode and try.
+Partly. Apple says requests run on the device first and harder ones go to its Private Cloud Compute servers, which need internet, as does the ChatGPT extension. Apple doesn't list which features work offline, so the sure test is to turn on airplane mode and try.
 
 ### Can I run local AI on an Intel Mac?
 

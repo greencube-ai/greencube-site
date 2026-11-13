@@ -63,16 +63,16 @@ So yes, it also makes images with no subscription, as long as your PC has at lea
 
 ### Is there an AI you pay for once?
 
-Not among the big cloud AIs: ChatGPT, Claude, Gemini and Perplexity bill monthly (or yearly). The ones you pay for once run on your own computer; GreenCube is €9.99 once, and there are also free apps for running AI on your PC.
+Yes, but not among the big cloud AIs: ChatGPT, Claude, Gemini and Perplexity bill monthly or yearly. The ones you pay for once run on your own computer, like GreenCube at €9.99, and there are free apps for that too.
 
 ### Can I pay for ChatGPT once?
 
-No. OpenAI bills Go, Plus and Pro monthly and says it doesn't offer annual billing for them. Plus is $20 a month.
+No. OpenAI bills Go, Plus and Pro monthly and says it doesn't offer yearly billing for them. Plus is $20 a month.
 
 ### Is there a one-time purchase for Claude?
 
-No. Claude Pro is $20 a month, or $17 a month billed yearly ($200).
+No. Claude Pro is $20 a month, or $17 a month if you pay yearly ($200).
 
 ### Can I generate AI images without a subscription?
 
-Yes, with an AI that runs on your PC. In our tests, GreenCube made a picture in 8 to 89 seconds with a graphics card and in about 2 minutes on a 16 GB laptop; it can't on an 8 GB one.
+Yes, with an AI that runs on your PC. In our tests GreenCube made a picture in 8 to 89 seconds with a graphics card and in about 2 minutes on a 16 GB laptop; on an 8 GB laptop it can't.

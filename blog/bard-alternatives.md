@@ -64,16 +64,16 @@ The rename is from Google's February 2024 announcement, as reported by Axios. Th
 
 ### Does Google Bard still exist?
 
-Not under that name. Google renamed Bard to Gemini on 8 February 2024. It's the same Google chat assistant, now at gemini.google.com and in the Gemini apps.
+Not under that name. Google renamed Bard to Gemini on 8 February 2024; it's the same assistant, now at gemini.google.com and in the Gemini apps.
 
 ### What is the best alternative to Bard?
 
-If you liked Bard, Gemini is the same service under its new name. Outside Google, the main chat assistants are ChatGPT, Claude, Microsoft Copilot and Perplexity. If you want an assistant that works offline and keeps your chats on your own computer, use an app that runs the AI locally, like LM Studio, Jan, Ollama or GreenCube.
+Gemini, since it's Bard under a new name. Outside Google, the main ones are ChatGPT, Claude, Microsoft Copilot and Perplexity. For one that works offline and keeps your chats on your computer, try a local app like LM Studio, Jan, Ollama or GreenCube.
 
 ### Which Bard alternative doesn't train on my chats?
 
-With a free personal account, Claude trains only if you allow it, and Gemini only while Keep Activity is on. ChatGPT, Perplexity, Mistral Le Chat, DeepSeek and Meta AI train on what you type by default (checked October 2026). An AI that runs on your own PC sends nothing anywhere.
+On a free personal account, Claude trains only if you allow it, and Gemini only while Keep Activity is on. ChatGPT, Perplexity, Mistral Le Chat, DeepSeek and Meta AI train on what you type by default (checked October 2026). An AI on your own PC sends nothing anywhere.
 
 ### Is there a free Bard alternative with no limits?
 
-ChatGPT Free has had unlimited text chats since August 2026, but limits files and pictures. Apps that run AI on your own PC, such as LM Studio, Jan and Ollama (free) or GreenCube (€9.99 once), have no usage limits, because no server counts your messages.
+ChatGPT Free comes close: unlimited text chats since August 2026, though files and pictures are limited. Apps that run AI on your own PC have no usage limits at all, because no server counts your messages: LM Studio, Jan and Ollama are free, and GreenCube is €9.99 once.

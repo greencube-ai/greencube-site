@@ -44,12 +44,12 @@ For the full picture, gaming PCs included, [we measured 10 PCs here](https://blo
 
 ### Does integrated graphics make AI faster?
 
-For chatting, barely: on our 16 GB laptop the answer was written at about 14 tokens a second either way. For reading long pasted text it was about 1.3 times faster, and for making pictures over 4 times faster.
+For chatting, barely: on our 16 GB laptop it wrote about 14 tokens a second either way. It read long pasted text about 1.3 times faster and made pictures over 4 times faster.
 
 ### Can integrated graphics make AI slower?
 
-Sometimes. With one small model, writing got 29% slower on the Intel graphics than on the processor; with a bigger one it got 26% faster. It depends on the model and the laptop, which is why GreenCube tests your own laptop and picks.
+Sometimes. With one small model, writing was 29% slower on the Intel graphics than on the processor; with a bigger one it was 26% faster. It depends on the model and the laptop, so GreenCube tests yours and picks.
 
 ### Is a laptop without a graphics card good enough for AI?
 
-For chat and studying, yes: a 16 GB laptop writes faster than you read with a small model. Pictures work too but take 2 to 3 minutes each.
+For chat and studying, yes: with a small model, a 16 GB laptop writes faster than you can read. Pictures work too, but take 2 to 3 minutes each.

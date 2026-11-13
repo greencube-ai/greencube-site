@@ -31,7 +31,7 @@ Every fact comes from the tool's own website or help pages, linked in each row. 
 | **Gemini** | Up to 10 files per message, limits refresh every 5 hours ([Google](https://support.google.com/gemini/answer/14903178?hl=en)) | Google AI Plus €4.99, AI Pro €21.99 a month | Yes, while Keep Activity is on ([Google](https://support.google.com/gemini/answer/13594961?hl=en)) | Google's cloud |
 | **GreenCube** ([site](https://greencube.app)) | No free version | €9.99 (US$9.99) once, no limits on files or pages | No: your files never reach us ([privacy](https://legal.greencube.app/privacy)) | Stays on your PC. Windows 10 and 11. Works offline |
 | **LM Studio** | Free | None | No: "none of your messages, chat histories, and documents are ever transmitted" ([privacy](https://lmstudio.ai/app-privacy)) | Stays on your computer. PDF, DOCX, TXT ([docs](https://lmstudio.ai/docs/app/basics/rag)). Windows, Mac, Linux |
-| **Jan** | Free, open source | None | No: conversations "never leave your computer" ([privacy](https://jan.ai/docs/privacy)) | Stays on your computer. PDF and Office files ([docs](https://docs.jan.ai/desktop/file-upload)) |
+| **Jan** | Free, open source | None | No: conversations "stay on your computer" ([privacy](https://jan.ai/docs/privacy)) | Stays on your computer. PDF and Office files ([docs](https://docs.jan.ai/desktop/file-upload)) |
 | **GPT4All** | Free, open source | None | No; sharing chats is opt-in and off by default | Stays on your computer. PDFs with LocalDocs ([docs](https://docs.gpt4all.io/gpt4all_desktop/localdocs.html)). Last release February 2025 |
 | **AnythingLLM** | Desktop free, open source | None | No; anonymous app usage data you can turn off ([privacy](https://docs.anythingllm.com/installation-desktop/privacy)) | Stays on your computer. PDF, TXT, DOCX ([source](https://github.com/Mintplex-Labs/anything-llm)) |
 
@@ -86,19 +86,19 @@ On 21 October 2026 we read each tool's own website, pricing page, help center an
 
 ### Is Humata AI free?
 
-There's a free plan with 60 pages a month and up to 10 answers. Expert costs $9.99 a month for 500 pages (then $0.02 a page), and Team $49 per user a month.
+It has a free plan: 60 pages a month and up to 10 answers. Expert is $9.99 a month for 500 pages (then $0.02 a page), and Team is $49 per user a month.
 
 ### What is the best free alternative to Humata?
 
-In the cloud, NotebookLM: free, up to 50 sources per notebook, answers that cite your sources, and Google says it doesn't train on your uploads unless you send feedback. If you don't want to upload your files anywhere, LM Studio, Jan, GPT4All and AnythingLLM are free apps that read PDFs on your own computer.
+NotebookLM, in the cloud: free, up to 50 sources per notebook, answers that cite your sources, and Google says it doesn't train on your uploads unless you send feedback. If you don't want to upload files anywhere, LM Studio, Jan, GPT4All and AnythingLLM are free apps that read PDFs on your computer.
 
 ### Does Humata train on my documents?
 
-Humata says it doesn't use users' data to train its AI models. Your files are stored in its cloud (it names Amazon Web Services, Google Cloud and Supabase), and document data used by its model isn't kept beyond 30 days.
+Humata says it doesn't. Your files are stored in its cloud (it names Amazon Web Services, Google Cloud and Supabase), and document data its model uses isn't kept beyond 30 days.
 
 ### Is there a Humata alternative that works offline?
 
-Yes: an app that runs the AI on your own computer. GreenCube (Windows, €9.99 once) and the free apps LM Studio, Jan, GPT4All and AnythingLLM read PDFs without uploading them. Speed depends on your PC.
+Yes, an app that runs the AI on your own computer. GreenCube (Windows, €9.99 once) and the free LM Studio, Jan, GPT4All and AnythingLLM read PDFs without uploading them; speed depends on your PC.
 
 ### Which alternatives cite the page an answer comes from?
 

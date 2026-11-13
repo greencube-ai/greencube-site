@@ -42,12 +42,12 @@ This is from each app's own privacy page or docs, summarised in their words. We 
 | App | What its own pages say |
 | --- | --- |
 | LM Studio | Running models locally, "none of your messages, chat histories, and documents are ever transmitted"; the app "does not include telemetry". Update checks and model searches and downloads do go online. Cloud models and web search are paid extras you choose ([privacy](https://lmstudio.ai/app-privacy)). |
-| Jan | Doesn't collect personally identifying information; conversations "are stored locally and never leave your computer". If you connect a cloud AI (OpenAI, Anthropic and others), your messages go to that company ([privacy](https://jan.ai/docs/privacy)). |
+| Jan | Doesn't collect personally identifying information; conversations "are stored locally and stay on your computer". If you connect a cloud AI (OpenAI, Anthropic and others), your messages go to that company ([privacy](https://jan.ai/docs/privacy)). |
 | Ollama | Running locally, Ollama doesn't see your prompts; it "may collect limited device and usage metadata (such as app version and request counts)". Cloud models run on Ollama's servers ([privacy](https://ollama.com/privacy)). |
 | GPT4All | "No data leaves your machine"; sharing chats with the GPT4All community is opt-in and off by default ([settings](https://docs.gpt4all.io/gpt4all_desktop/settings.html)). Its last release was 25 February 2025 ([releases](https://github.com/nomic-ai/gpt4all/releases)). |
 | AnythingLLM | Messages, chats and documents stay on your device; the app has anonymous usage telemetry that you can turn off in its settings ([privacy](https://docs.anythingllm.com/installation-desktop/privacy)). |
 | Msty | Says it does not collect product analytics, usage telemetry or crash reports; it goes online only for features you choose, like model downloads, cloud models and updates ([privacy](https://msty.ai/privacy/)). |
-| Atomic Chat | Conversations "never leave your machine". Its privacy policy (June 2026) says in one section that the app doesn't collect telemetry, and in another that its apps collect anonymous usage statistics through PostHog ([privacy](https://atomic.chat/privacy)). |
+| Atomic Chat | Conversations "stay on your machine". Its privacy policy (June 2026) says in one section that the app doesn't collect telemetry, and in another that its apps collect anonymous usage statistics through PostHog ([privacy](https://atomic.chat/privacy)). |
 | KoboldCpp, llama.cpp | Their pages don't mention telemetry. llama.cpp has an offline switch that blocks network access ([docs](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md)). KoboldCpp warns that koboldcpp.com is a fake site, not the project. |
 | Open WebUI | "Built to run entirely offline"; web search and outside AI services need internet ([source](https://github.com/open-webui/open-webui)). |
 | PocketPal AI | App Store label: "Data Not Collected". The app has no analytics or crash-reporting tools; feedback and benchmark results you choose to send do go out ([privacy](https://pocketpal.dev/privacy-policy)). |
@@ -95,11 +95,11 @@ And your device does the work. On an 8 GB laptop it writes about as fast as you 
 
 ### What is the best offline AI chatbot?
 
-There isn't one best for everyone. For free on a computer, where you pick the model yourself: LM Studio, Jan, Ollama or GPT4All. On a phone: PocketPal AI or Atomic Chat. For developers: Ollama, llama.cpp or KoboldCpp. GreenCube (Windows, €9.99 once) picks the AI that fits your PC by itself and also makes pictures.
+There isn't one best for everyone. Free on a computer, picking the model yourself: LM Studio, Jan, Ollama or GPT4All; on a phone: PocketPal AI or Atomic Chat; for developers: Ollama, llama.cpp or KoboldCpp. GreenCube (Windows, €9.99 once) picks the AI for your PC by itself and also makes pictures.
 
 ### Do offline AI chatbots really work without internet?
 
-Yes, once the model is downloaded. You need internet for that first download (usually a few GB), and some things still go online if you use them: update checks, searching for new models, optional cloud models and web search.
+Yes, once the model is downloaded. That first download needs internet (usually a few GB), and some extras still go online if you use them: update checks, searching for new models, optional cloud models and web search.
 
 ### Is there a free offline AI chatbot?
 
@@ -107,8 +107,8 @@ Yes. LM Studio, Jan, Ollama, GPT4All, AnythingLLM, Atomic Chat, KoboldCpp, llama
 
 ### Can an offline AI chatbot read my PDFs?
 
-Many can: GreenCube, LM Studio, Jan, Ollama, GPT4All, AnythingLLM, Msty, Atomic Chat and Open WebUI all say they take PDFs or documents, and the reading happens on your computer.
+Many can, and the reading happens on your computer. GreenCube, LM Studio, Jan, Ollama, GPT4All, AnythingLLM, Msty, Atomic Chat and Open WebUI all say they take PDFs or documents.
 
 ### Is there an offline AI chatbot for Android?
 
-Yes: PocketPal AI (also on iPhone), Atomic Chat (Android and iPhone) and AnythingLLM's Android app. A phone is slower than a gaming PC and fits smaller models.
+Yes: PocketPal AI (also on iPhone), Atomic Chat (Android and iPhone) and AnythingLLM's Android app. A phone is slower than a gaming PC and only fits smaller models.

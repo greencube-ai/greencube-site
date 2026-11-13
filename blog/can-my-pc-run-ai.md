@@ -79,20 +79,20 @@ If you're setting one up on Windows, [what a Windows PC needs to run AI offline]
 
 ### Does AI on my PC work with an AMD graphics card?
 
-Yes. We measured AMD cards (RX 5700 XT, RX 6600, RX 580) as well as NVIDIA ones. GreenCube uses Vulkan, which works on both.
+Yes. GreenCube uses Vulkan, which works on AMD and NVIDIA, and we measured AMD cards too (RX 5700 XT, RX 6600, RX 580).
 
 ### How much VRAM do I need to run AI?
 
-None is required, but 4 GB or more makes a big difference. On our test PCs, a 4 GB GTX 1650 wrote about 20 tokens a second and an 8 GB RTX 5060 about 56. More VRAM lets a bigger model fit on the card.
+None is required, but 4 GB or more makes a big difference. On our test PCs a 4 GB GTX 1650 wrote about 20 tokens a second and an 8 GB RTX 5060 about 56, and more VRAM lets a bigger model fit.
 
 ### Can I run AI on a laptop with no graphics card?
 
-Yes. A 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with a small model, which is faster than you read. An 8 GB laptop works too, more slowly, and cannot make pictures.
+Yes. A 16 GB laptop with only Intel graphics wrote 14 to 18 tokens a second with a small model, faster than you read. An 8 GB laptop works too, more slowly, but can't make pictures.
 
 ### Does more RAM make AI faster?
 
-Not on its own. On a desktop with 48 GB of RAM, the same model ran 14 times faster once it was on the 8 GB graphics card than on the processor. RAM matters when you have no card; with a card, VRAM matters most.
+Not on its own. On a desktop with 48 GB of RAM, the same model ran 14 times faster on its 8 GB graphics card than on the processor. RAM matters when you have no card; with one, VRAM matters most.
 
 ### Do I need internet to run AI on my PC?
 
-Only once, to download the app and the AI model and to activate it. After that, chatting works with no internet at all.
+Only once, to download the app and the AI and to activate it. After that, chatting works with no internet at all.

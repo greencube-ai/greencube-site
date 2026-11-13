@@ -72,20 +72,20 @@ Not sure your PC can run one? [Check it here](https://blog.greencube.app/blog/ca
 
 ### How many messages can I send on Claude?
 
-Anthropic doesn't publish a number for any plan. Its help pages say the number of messages varies with message length, the files you attach, the length of the conversation and the model or feature you use.
+Anthropic doesn't give a number for any plan. It says it depends on how long your messages are, the files you attach, how long the chat is and which model or feature you use.
 
 ### When does the Claude limit reset?
 
-There are two limits. The session limit resets every five hours. The weekly limit resets at a fixed day and time each week that Anthropic assigns to your account; it stays the same no matter when you started your subscription. You can see both in Claude's settings under Usage.
+There are two limits. The session limit resets every five hours; the weekly one resets at a fixed day and time Anthropic sets for your account, no matter when you subscribed. You can see both in Claude's settings under Usage.
 
 ### Does Claude Code share the limit with the Claude app?
 
-Yes. Anthropic's help page says that claude.ai, Claude Code and Claude Desktop all count towards the same usage limit.
+Yes. Anthropic says claude.ai, Claude Code and Claude Desktop all count towards the same limit.
 
 ### What is Claude Ultra?
 
-It is the new name of the Max 20x plan. It costs $200 a month, includes 10 times Pro's weekly usage and has no five-hour limit for verified accounts. Max (the old Max 5x) is still $100 a month with both limits.
+The new name for the Max 20x plan: $200 a month, 10 times Pro's weekly usage and no five-hour limit for verified accounts. Max (the old Max 5x) is still $100 a month with both limits.
 
 ### Is there an AI with no usage limit at all?
 
-An AI that runs on your own PC has no counter, because no server is paying per message. GreenCube is one: no caps on chats, files or pictures, works without internet, €9.99 once. The trade-off is that it runs smaller models than Claude, and its speed depends on your PC.
+Yes, an AI that runs on your own PC, because no server pays per message. GreenCube is one: no caps on chats, files or pictures, works without internet, €9.99 once. The catch is that it runs smaller models than Claude, and its speed depends on your PC.

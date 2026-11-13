@@ -55,20 +55,20 @@ We measured GreenCube on 10 real PCs. It writes 5 to 7 tokens a second on an 8 G
 
 ### Which AI writing assistant has the best privacy?
 
-One that runs on your own computer, because your drafts never reach a company. Among cloud assistants on free personal accounts, NotebookLM says it doesn't train on uploads unless you send feedback and Claude only trains if you allow it; ChatGPT, Perplexity, Mistral, DeepSeek and Meta AI train by default unless you switch it off.
+One that runs on your own computer, because your drafts never reach a company. Among cloud ones on free personal accounts, NotebookLM says it doesn't train on uploads unless you send feedback and Claude only if you allow it; ChatGPT, Perplexity, Mistral, DeepSeek and Meta AI do by default unless you switch it off.
 
 ### Which AI writing tools have data retention controls?
 
-ChatGPT's Temporary Chats aren't used for training and are deleted after 30 days. Gemini keeps chats 72 hours after you turn Keep Activity off, but keeps human-reviewed chats up to 3 years. Claude keeps chats up to 5 years if you allow training. Perplexity's switch only stops future data.
+ChatGPT's Temporary Chats aren't used for training and are deleted after 30 days. Gemini keeps chats 72 hours after you turn off Keep Activity, but human-reviewed ones up to 3 years. Claude keeps chats up to 5 years if you allow training, and Perplexity's switch only stops future data.
 
 ### Is it safe to use AI for confidential client documents?
 
-Check your contract and your client's rules first. Business, Enterprise and API plans from OpenAI aren't trained on by default, and work accounts are usually excluded on the big services, but the text is still processed on the company's servers. An AI that runs on your own PC keeps the document on your machine.
+Check your contract and your client's rules first. OpenAI's Business, Enterprise and API plans aren't trained on by default, and work accounts are usually excluded on the big services, but the text is still processed on their servers. An AI on your own PC keeps the document on your machine.
 
 ### What is the most private AI for students' writing?
 
-A school account (usually excluded from training) or an AI that runs on your own PC. On free personal accounts most cloud AIs train on what you type by default; switch it off before pasting anything, and don't rate sensitive chats.
+A school account, which is usually excluded from training, or an AI on your own PC. Most cloud AIs train on what you type by default on free personal accounts, so switch that off before pasting anything and don't rate sensitive chats.
 
 ### Does turning off training make an AI writing assistant private?
 
-Not completely. Feedback (thumbs up or down) can still send the whole conversation for training at OpenAI and Mistral, human reviewers may read some chats, and data already used isn't removed.
+Not completely. At OpenAI and Mistral a thumbs up or down can still send the whole chat for training, human reviewers may read some chats, and data already used isn't removed.

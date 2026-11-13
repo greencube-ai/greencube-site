@@ -45,12 +45,12 @@ Nothing counts how many pictures you make, so the only limit is how long you're 
 
 ### How long does it take to make an AI picture on my PC?
 
-In our tests, a 512 by 512 picture took 28 seconds on a desktop with a 12 GB graphics card, about 2 and a half minutes on a 16 GB laptop using its Intel graphics, and about 11 and a half minutes on the same laptop's processor alone.
+It depends on your PC. In our tests a 512 by 512 picture took 28 seconds on a desktop with a 12 GB graphics card, about 2 and a half minutes on a 16 GB laptop using its Intel graphics, and about 11 and a half minutes on the same laptop's processor alone.
 
 ### Can I make AI pictures on a laptop without a graphics card?
 
-Yes, if it has 16 GB of RAM. Built-in Intel graphics made it about 4 times faster than the processor alone. With 8 GB of RAM it won't work: the picture AI needs about 7 GB by itself.
+Yes, if it has 16 GB of RAM, and built-in Intel graphics make it about 4 times faster than the processor alone. With 8 GB it won't work: the picture AI needs about 7 GB by itself.
 
 ### Do I need to close other apps to make AI pictures?
 
-Not on a 16 GB laptop. With a code editor and a browser open, the picture took the same time. What matters is that Windows can set aside about 7 GB for it.
+Not on a 16 GB laptop: with a code editor and a browser open, the picture took the same time. What matters is that Windows can set aside about 7 GB for it.

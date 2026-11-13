@@ -46,12 +46,12 @@ If you'd rather not think about it, GreenCube checks your PC and picks for you. 
 
 ### Is a bigger AI model always better?
 
-Its answers are usually a bit better, but on a laptop without a graphics card it is much slower. In our test the bigger model (Gemma 4 E4B) gave the best explanation but took 112 seconds; the small one (Gemma 4 E2B) gave a good answer in 20.
+Not always. Its answers are usually a bit better, but on a laptop without a graphics card it's much slower: in our test Gemma 4 E4B gave the best explanation in 112 seconds, while Gemma 4 E2B gave a good one in 20.
 
 ### Do small AI models get facts wrong?
 
-In our five quick fact checks (maths, unit conversion, dates, science), neither small model got one wrong. The small one's weak spot was counting: it sometimes announced a number of items and then listed a different number.
+Not in our five quick fact checks (maths, unit conversion, dates, science): neither got one wrong. The small one's weak spot was counting: it sometimes promised a number of items and then listed a different number.
 
 ### Which AI model should I use on my PC?
 
-On a laptop without a graphics card, a small model. On a PC with a graphics card, the bigger one runs fast too (56 to 72 tokens a second on 8 GB cards), so use it. GreenCube picks for you based on your PC.
+A small one on a laptop without a graphics card. With a graphics card the bigger one runs fast too (56 to 72 tokens a second on 8 GB cards), so use that. GreenCube picks for you based on your PC.

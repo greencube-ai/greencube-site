@@ -52,20 +52,20 @@ Whatever you pick, the caps bite hardest right before exams, when you want every
 
 ### Is ChatGPT free unlimited now?
 
-For text, yes. Since August 2026, OpenAI's help page says Free users have unlimited everyday text chats, subject to abuse-prevention safeguards. File and PDF uploads, image generation, voice and data analysis still have separate limits.
+For text, yes. Since August 2026 OpenAI says Free users get unlimited everyday text chats, with abuse safeguards, but file and PDF uploads, images, voice and data analysis still have their own limits.
 
 ### How many PDFs can I upload to ChatGPT for free?
 
-OpenAI doesn't publish an exact number. Its help page says file uploads have their own usage limits on the Free plan, stricter than on paid plans, and ChatGPT tells you when you reach one.
+OpenAI doesn't say. Its help page only says Free has its own upload limits, stricter than paid plans, and ChatGPT tells you when you hit one.
 
 ### Does ChatGPT free have ads?
 
-It can. OpenAI started testing ads in the United States on 9 February 2026 and is rolling them out to Free and Go users in selected regions. Paid plans such as Plus have no ads, and OpenAI says it does not show ads to accounts it identifies as under 18.
+It can. OpenAI started testing ads in the US on 9 February 2026 and is rolling them out to Free and Go users in some regions. Paid plans like Plus have none, and OpenAI says it doesn't show ads to accounts it identifies as under 18.
 
 ### How much does ChatGPT Plus cost?
 
-OpenAI lists Plus at $20 a month. In Spain it is about 23 euros a month. It raises the limits on files, pictures and voice but it is still a monthly subscription.
+$20 a month, or about 23 euros a month in Spain. It raises the limits on files, pictures and voice, but it's still a monthly subscription.
 
 ### Is there an AI with no limits on PDFs and pictures?
 
-An AI that runs on your own PC has no daily or weekly caps, because nobody is paying for servers per message. GreenCube is one: no caps on chats, PDFs or pictures, works without internet, 9.99 euros once. The trade-off is that its speed depends on your PC.
+Yes, an AI that runs on your own PC, because nobody pays for servers per message. GreenCube is one: no caps on chats, PDFs or pictures, works without internet, 9.99 euros once. The catch is that its speed depends on your PC.

@@ -48,12 +48,12 @@ To see how much faster other PCs are, [we measured 10 PCs here](https://blog.gre
 
 ### Can I run AI on a laptop with 8 GB of RAM?
 
-Yes, a small model. On our 8 GB laptop with Intel Iris Xe graphics it wrote 5 to 7 tokens a second in real chats, about as fast as you read, and replies took 30 to 40 seconds. It can't make pictures.
+Yes, with a small model. On our 8 GB laptop with Intel Iris Xe graphics it wrote 5 to 7 tokens a second, about as fast as you read, and replies took 30 to 40 seconds. It can't make pictures.
 
 ### Why won't AI start on my 8 GB laptop?
 
-Usually not enough free memory. Our 8 GB laptop had only about 1 GB free with other apps open, and one day the AI couldn't load. Closing the browser and other apps first gives it room.
+Usually there isn't enough free memory. Our 8 GB laptop had only about 1 GB free with other apps open, and one day the AI couldn't load, so close the browser and other apps first.
 
 ### Does Intel Iris Xe graphics make AI faster on an 8 GB laptop?
 
-Not for chat. On our laptop the processor wrote at 9.3 tokens a second and the Iris Xe graphics at 5.0. GreenCube tests both on your laptop and uses the faster one.
+Not for chat. On our laptop the processor wrote 9.3 tokens a second and the Iris Xe graphics 5.0; GreenCube tests both on your laptop and uses the faster one.

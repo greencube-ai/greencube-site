@@ -16,7 +16,7 @@ I build GreenCube, one of the assistants that runs on your PC, so weigh my opini
 
 Next is one that doesn't keep your chats, which is rarer than it sounds. Even "temporary" modes hold on to conversations for a while for abuse checks: ChatGPT deletes Temporary Chats after 30 days.
 
-The strongest is an assistant whose chats never leave your PC. That's only possible when the AI itself runs on your computer, and then there is nothing to train on, nothing to keep and nobody to read it.
+The strongest is an assistant whose chats stay on your PC. That's only possible when the AI itself runs on your computer, and then there is nothing to train on, nothing to keep and nobody to read it.
 
 ## The 10 assistants, checked
 
@@ -63,20 +63,20 @@ Whatever you install, there's an easy test. Turn the Wi-Fi off and ask it someth
 
 ### What is the most private AI assistant?
 
-One that runs on your own computer, because your chats never reach a company server. GreenCube, LM Studio, Jan and GPT4All work this way. Among cloud assistants, NotebookLM says it doesn't train on your uploads unless you send feedback, and Claude only trains if you allow it, but your chats still go to their servers.
+One that runs on your own computer, so your chats never reach a company server: GreenCube, LM Studio, Jan and GPT4All work this way. Among cloud ones, NotebookLM says it doesn't train on your uploads unless you send feedback and Claude only if you allow it, but your chats still go to their servers.
 
 ### Which AI assistants train on your chats by default?
 
-Of the 9 cloud assistants we checked for a free personal account in October 2026, 5 train on what you type by default: ChatGPT, Perplexity, Mistral Le Chat, DeepSeek and Meta AI. Gemini trains while Keep Activity is on; Claude only if you allow it.
+5 of the 9 we checked on free personal accounts (October 2026): ChatGPT, Perplexity, Mistral Le Chat, DeepSeek and Meta AI. Gemini trains while Keep Activity is on, and Claude only if you allow it.
 
 ### Is a private AI assistant really private if I turn off training?
 
-Not fully. Feedback you give can still be used, some services keep chats for human review (Gemini keeps reviewed chats up to 3 years), and data already used isn't removed. Turning training off only covers what you send afterwards.
+Not fully. Feedback can still be used, some services keep chats for human review (Gemini keeps reviewed ones up to 3 years), and data already used isn't removed. Switching training off only covers what you send afterwards.
 
 ### Is there a free private AI assistant?
 
-Yes: LM Studio, Jan, Ollama and GPT4All are free and run the AI on your own PC, so nothing is sent anywhere; you choose and download a model yourself. GreenCube costs €9.99 once and picks the model for you.
+Yes: LM Studio, Jan, Ollama and GPT4All are free and run the AI on your PC, so nothing is sent anywhere, but you choose and download a model yourself. GreenCube is €9.99 once and picks the model for you.
 
 ### Can a private AI assistant work offline?
 
-Yes, if it runs locally. After the first download, GreenCube and the other local apps answer with the Wi-Fi off. Cloud assistants can't work offline.
+Yes, if it runs locally: after the first download, GreenCube and other local apps answer with the Wi-Fi off. Cloud assistants can't.

@@ -68,20 +68,20 @@ Your exact card is in [Can my PC run AI?](https://blog.greencube.app/blog/can-my
 
 ### What is the best open-source alternative to LM Studio?
 
-Jan is the closest: a desktop chat app that runs models itself, with a local OpenAI-compatible server, licensed Apache 2.0, for Windows, Mac and Linux. Ollama (MIT) is the other main option, with a command line plus a desktop chat window on Windows and Mac.
+Jan is the closest: a desktop chat app that runs models itself, with a local OpenAI-compatible server, Apache 2.0, for Windows, Mac and Linux. Ollama (MIT) is the other main one, with a command line plus a chat window on Windows and Mac.
 
 ### Is there an LM Studio alternative for Intel Macs?
 
-LM Studio and Jan both need a Mac with an Apple chip. Ollama's own docs list Intel Macs (x86) as supported, CPU only, on macOS 14 Sonoma or newer.
+Ollama. LM Studio and Jan need an Apple chip, but Ollama's docs list Intel Macs (x86) as supported, CPU only, on macOS 14 Sonoma or newer.
 
 ### Is there an LM Studio alternative for Android?
 
-LM Studio has no phone app. PocketPal AI (Android and iPhone), Atomic Chat (Android and iPhone) and AnythingLLM's Android app run models on the phone itself.
+LM Studio has no phone app, but PocketPal AI (Android and iPhone), Atomic Chat (Android and iPhone) and AnythingLLM's Android app run models on the phone itself.
 
 ### Is LM Studio free?
 
-Yes, including for work, but it is closed source. On Windows it needs a processor with AVX2; on Mac it needs an Apple chip and macOS 14 or newer.
+Yes, even for work, but it's closed source. On Windows it needs a processor with AVX2; on Mac, an Apple chip and macOS 14 or newer.
 
 ### Is there an LM Studio alternative that picks the model for me?
 
-GreenCube (Windows 10 and 11, €9.99 once) reads your graphics card and RAM and downloads the AI that fits, so there's no list of models to choose from. The free alternatives all let you, and expect you to, choose a model yourself.
+Yes, GreenCube (Windows 10 and 11, €9.99 once): it checks your graphics card and RAM and downloads the AI that fits, so there's no list of models. The free alternatives all let you pick one yourself, and expect you to.

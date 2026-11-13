@@ -53,16 +53,16 @@ On 18 October 2026 we read each company's own help center and privacy pages for 
 
 ### Does ChatGPT train on my chats?
 
-On Free, Go, Plus and Pro, yes by default. You can turn off "Improve the model for everyone" in Settings, Data controls. If you give thumbs up or down feedback, OpenAI may still use that whole conversation.
+Yes, by default on Free, Go, Plus and Pro. You can switch off "Improve the model for everyone" in Settings, Data controls, but if you give a thumbs up or down, OpenAI may still use that whole chat.
 
 ### Which AI doesn't use my data for training?
 
-Of the 9 we checked, NotebookLM says it doesn't train on your uploads unless you send feedback, and Claude only does if you allow it. An AI that runs on your own computer, like GreenCube, never sends your chats to anyone to train on.
+Of the 9 we checked, NotebookLM says it doesn't train on your uploads unless you send feedback, and Claude only does if you allow it. An AI that runs on your own computer, like GreenCube, never sends your chats anywhere to train on.
 
 ### Does turning off training make an AI private?
 
-Not completely. Feedback you give can still be used, some companies keep chats for human review (Gemini keeps reviewed chats up to 3 years), and data already used in training isn't removed.
+Not completely. Feedback you give can still be used, some companies keep chats for human review (Gemini keeps reviewed ones up to 3 years), and what was already used for training isn't removed.
 
 ### Is there an AI that keeps my chats on my computer?
 
-Yes: an AI that runs locally, like GreenCube, keeps chats and files on your PC. Apart from signing in once, downloading the AI and its updates, its only online part is an optional web search that sends search terms, and it starts off every time.
+Yes, one that runs locally, like GreenCube. Besides signing in once and downloading the AI and its updates, the only thing that goes online is an optional web search, which sends just the search terms and starts off every time.

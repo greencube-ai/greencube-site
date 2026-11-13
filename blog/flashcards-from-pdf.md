@@ -76,11 +76,11 @@ Not sure it will run on your computer? [Check in 30 seconds](https://blog.greenc
 
 ### Can I make AI flashcards from a PDF without internet?
 
-Yes, with an AI that runs on your computer. In our test, GreenCube turned a chapter of about 4,800 words into 18 flashcards and a study guide in about 5 minutes, on a 16 GB laptop with no graphics card and no connection.
+Yes, with an AI on your computer. In our test GreenCube turned a 4,800-word chapter into 18 flashcards and a study guide in about 5 minutes, on a 16 GB laptop with no graphics card and no connection.
 
 ### Are AI-made flashcards reliable?
 
-Mostly, but not all of them. Of 36 cards we checked by hand, with the small AI 21 were right, 6 partly right, 5 wrong and 4 repeats; with the bigger one, 30 right, 4 partly, 2 wrong and no repeats. The mistakes clustered in the part of the chapter that jumps between periods, so check them before you study with them.
+Mostly, so check them before you study. Of 36 cards we checked by hand, the small AI got 21 right, 6 partly right, 5 wrong and 4 repeats; the bigger one got 30 right, 4 partly, 2 wrong and no repeats. Most mistakes came from the part of the chapter that jumps between periods.
 
 ### Can it make flashcards in another language than the PDF?
 
@@ -88,4 +88,4 @@ Yes. We asked for Spanish flashcards from an English chapter and all 18 came out
 
 ### What's the best free app to make AI flashcards from a PDF?
 
-If you don't mind uploading the PDF, NotebookLM makes flashcards for free, exports them as CSV and cites the original text. If you don't want to upload it anywhere or hit limits, you need an AI on your own PC.
+NotebookLM, if you don't mind uploading the PDF: it's free, exports flashcards as CSV and cites the original text. If you don't want to upload it or hit limits, you need an AI on your own PC.
