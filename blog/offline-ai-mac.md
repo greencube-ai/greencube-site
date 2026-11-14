@@ -1,6 +1,6 @@
-# Offline AI on Mac: apps for Apple chips and Intel Macs (2026)
+# Offline AI on Mac: does Apple Intelligence work offline, and which apps do?
 
-> Offline AI apps for Mac, checked on their own pages: LM Studio, Jan, Ollama, GPT4All, Msty, AnythingLLM, Atomic Chat and KoboldCpp. Which need an Apple chip, which still run on Intel Macs, the macOS version each needs, and whether Apple Intelligence works offline.
+> Does Apple Intelligence work without internet on a Mac? Partly. What runs on the Mac itself, plus the offline AI apps for Apple chips and Intel Macs, checked on their own pages.
 
 Canonical: https://blog.greencube.app/blog/offline-ai-mac  
 Published: 2026-08-07 · Updated: 2026-10-23  

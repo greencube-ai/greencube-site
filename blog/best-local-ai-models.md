@@ -1,6 +1,6 @@
-# Best local AI model for your PC, by RAM and VRAM (measured)
+# Best local AI model for your PC, by RAM and graphics card
 
-> The best local AI model is the biggest one that fits whole on your graphics card with room to spare. Which model for 8 GB and 16 GB laptops and for 4, 6, 8 and 12 GB cards, with real speeds for Gemma 4 E2B, E4B and 12B measured on 10 PCs.
+> Which local AI model should you run? The biggest one that fits on your graphics card with room to spare. Picks for 8 and 16 GB laptops and 4 to 12 GB cards, with speeds we measured on 10 PCs.
 
 Canonical: https://blog.greencube.app/blog/best-local-ai-models  
 Published: 2026-08-03 · Updated: 2026-10-23  
