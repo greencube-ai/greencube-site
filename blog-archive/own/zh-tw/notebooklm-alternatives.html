@@ -1,0 +1,79 @@
+<!--meta
+{
+ "title": "適合讀書的 NotebookLM 替代方案：免費、開源、離線（2026）",
+ "description": "用自己的筆記和 PDF 讀書的 NotebookLM 替代方案：Humata、ChatPDF、Adobe Acrobat AI Assistant、ChatGPT、Claude、Open Notebook、AnythingLLM 和 GreenCube。上限、價格、會不會標出處、檔案會不會離開你的電腦，附實測時間。",
+ "date": "2026-08-18",
+ "modified": "2026-10-23",
+ "kind": "guide",
+ "stat": "50",
+ "teaser": "適合讀書的 NotebookLM 替代方案，已查證：上限、出處，以及筆記會不會離開你的電腦。",
+ "rank": 22,
+ "lang": "zh-tw",
+ "alt": "notebooklm-alternatives",
+ "faq": [
+  {"q": "讀書用的 NotebookLM 替代方案哪個最好？", "a": "看你想要什麼。Humata 和 Adobe Acrobat 的 AI Assistant 也會把答案連回原本的頁面，但免費方案有上限或需要付費方案。如果不想把筆記放在 Google 的伺服器上，你自己電腦上的 AI 會直接從硬碟讀取：GreenCube（一次付清 9.99 歐元，Windows）或免費的 AnythingLLM；Open Notebook 則是一個開源、自架的 NotebookLM 風格應用程式。"},
+  {"q": "有免費的 NotebookLM 替代方案嗎？", "a": "有。AnythingLLM 的桌面應用程式和 Open Notebook 都是免費開源的（MIT），Humata 每月免費 60 頁，ChatPDF 每天免費 2 份文件。NotebookLM 本身也免費，每個筆記本最多 50 個來源。"},
+  {"q": "有開源的 NotebookLM 替代方案嗎？", "a": "有，Open Notebook（MIT）：一個自架的 NotebookLM 風格應用程式，能處理 PDF、音訊、影片和網頁，還能透過 Ollama 或 LM Studio 使用本地模型。AnythingLLM（MIT）則是比較簡單的桌面應用程式，用來跟你的文件對話。"},
+  {"q": "有能離線使用的 NotebookLM 替代方案嗎？", "a": "有，就是在你自己電腦上跑的 AI。GreenCube 和 AnythingLLM 的桌面應用程式在你的電腦上讀 PDF，不用上傳；在我們的測試中，GreenCube 在一台 16 GB 筆電上答對了關於長文件的 12 題中的 11 題，每題大約 15 秒。"},
+  {"q": "NotebookLM 會用我的筆記訓練嗎？", "a": "Google 表示不會，除非你送出意見回饋（按讚或倒讚）。不過你的筆記還是存放在 Google 的伺服器上。"}
+ ]
+}
+-->
+<div class="answer"><p>論免費，NotebookLM 很難被超越：每個筆記本最多 50 個來源，答案會標出你筆記裡的出處，而且除非你送出意見回饋，否則不會用你上傳的內容訓練。如果你碰到它的上限、不想把筆記放在 Google 的伺服器上，或是需要離線讀書，那就值得看看別的選擇：你自己電腦上的 AI（GreenCube，或免費的 AnythingLLM）、開源的 Open Notebook，或是像 Humata 和 Adobe Acrobat 的 AI Assistant 這種會標出頁碼的 PDF 工具。</p></div>
+
+<p>我在做 GreenCube，所以看我的意見時請把這點考慮進去。下面只寫各工具自己頁面上說的內容，以及我們自己實測的結果。</p>
+
+<h2>NotebookLM 的強項，以及大家為什麼換</h2>
+<p>NotebookLM（現在也叫 Gemini Notebook）會根據你給它的來源回答，標出每個答案出自哪一部分，還能做可以匯出成 CSV 的字卡和測驗（<a href="https://support.google.com/notebooklm/answer/16958963?hl=en" rel="noopener">Google</a>）。Google 表示，除非你替答案評分，否則不會用你上傳的內容訓練（<a href="https://support.google.com/notebooklm/answer/17004255?hl=en" rel="noopener">Google</a>）。</p>
+<p>大家離開的原因通常很實際。你的筆記會傳到 Google，而有些學生的筆記，或學校、補習班的教材，本來就不該上傳。它需要網路和 Google 帳號。另外，免費方案的上限是每個筆記本 50 個來源、100 個筆記本（<a href="https://support.google.com/notebooklm/answer/16213268?hl=en" rel="noopener">Google</a>）。</p>
+
+<h2>各替代方案並排比較</h2>
+<p>來自各工具自己的頁面，2026 年 10 月 21 日和 23 日查證。我們沒有比較各工具答案的品質。</p>
+
+<div class="tbl-wrap"><table>
+<thead><tr><th>工具</th><th>免費</th><th>會標出處嗎？</th><th>你的筆記去哪裡</th><th>離線</th></tr></thead>
+<tbody>
+<tr><td><strong>NotebookLM</strong></td><td>是：每個筆記本 50 個來源</td><td>會</td><td>Google 的雲端</td><td>否</td></tr>
+<tr><td><strong>Humata</strong></td><td>每月 60 頁；Expert 每月 9.99 美元（<a href="https://www.humata.ai/pricing" rel="noopener">價格</a>）</td><td>會</td><td>它的雲端</td><td>否</td></tr>
+<tr><td><strong>ChatPDF</strong></td><td>每天 2 份文件（<a href="https://www.chatpdf.com" rel="noopener">網站</a>）</td><td>會</td><td>它的雲端</td><td>否</td></tr>
+<tr><td><strong>Adobe Acrobat AI Assistant</strong></td><td>否；Acrobat Studio 年約方案每月 24.99 美元（<a href="https://www.adobe.com/acrobat/pricing.html" rel="noopener">價格</a>）</td><td>會</td><td>Adobe 的雲端</td><td>否</td></tr>
+<tr><td><strong>ChatGPT</strong> / <strong>Claude</strong></td><td>免費方案的檔案上傳有上限</td><td>不是圍繞標註頁碼設計的</td><td>OpenAI / Anthropic 的雲端</td><td>否</td></tr>
+<tr><td><strong>Open Notebook</strong>（<a href="https://github.com/lfnovo/open-notebook" rel="noopener">GitHub</a>）</td><td>是，MIT，自架</td><td>未說明</td><td>你自己的伺服器；可透過 Ollama 或 LM Studio 使用本地模型</td><td>使用本地模型時可以</td></tr>
+<tr><td><strong>AnythingLLM</strong>（<a href="https://github.com/Mintplex-Labs/anything-llm" rel="noopener">GitHub</a>）</td><td>是，MIT，桌面應用程式</td><td>未說明</td><td>你的電腦（模型自己挑）</td><td>是</td></tr>
+<tr><td><strong>GreenCube</strong>（<a href="https://greencube.app" rel="noopener">網站</a>）</td><td>否：一次付清 9.99 歐元，沒有上限</td><td>根據跟你問題相符的段落回答</td><td><b>你的電腦</b>：什麼都不上傳</td><td>是</td></tr>
+</tbody>
+</table></div>
+
+<p>更多 PDF 工具和它們確切的上限，請看 <a href="/blog/humata-ai-alternatives">Humata AI 替代方案</a>；各個 AI 怎麼處理你上傳的內容，請看<a href="/blog/ai-that-doesnt-train-on-your-data">哪個 AI 不會用你的對話訓練</a>。</p>
+
+<h2>依你的讀書方式來選</h2>
+
+<h3>你寫報告需要出處</h3>
+<p>如果可以上傳，就繼續用 NotebookLM。不行的話，Humata 和 Acrobat 的 AI Assistant 也會指回原本的頁面，不過 Humata 的免費方案很小，Acrobat 的 AI 需要付費方案。ChatPDF 也會標出處，每天免費 2 份文件。不管用哪個，每一段引用都要跟 PDF 對照一遍。</p>
+
+<h3>你的筆記不該離開你的電腦</h3>
+<p>你自己電腦上的 AI 會直接從硬碟讀檔案。GreenCube（Windows，一次付清 9.99 歐元）會替你的電腦挑好 AI，還能做讀書指南和字卡。如果你不介意自己挑模型，AnythingLLM 是免費的。</p>
+
+<h3>你想要 NotebookLM，但要開源的</h3>
+<p>形式上最接近的是 Open Notebook（MIT）：由來源組成的筆記本、針對它們的對話，甚至 Podcast 風格的音訊，都在你自己的伺服器上，用雲端或本地模型來跑。代價是伺服器要你自己架設和維運。</p>
+
+<h3>你已經在用 ChatGPT 或 Claude</h3>
+<p>兩者都能讀 PDF，但它們不是圍繞標註頁碼設計的，而且免費方案的上傳有上限。針對一個檔案問個簡單問題沒問題，要應付一整個學期的筆記就不太適合了。</p>
+
+<h3>你在離線或 Wi-Fi 很差的地方讀書</h3>
+<p>只有本地 AI 能在沒有網路時運作。更多內容請看<a href="/blog/offline-ai-for-students">離線 AI 能為學生做什麼</a>，附實測時間。</p>
+
+<h2>我們在自己電腦上測到的結果</h2>
+<p>GreenCube 用它的小 AI，在一台沒有顯示卡的一般 16 GB 筆電上，處理長篇讀書資料（<a href="/blog/ai-to-study-from-pdf">完整測試</a>）：</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>你要它做什麼</th><th>時間</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>關於長文件的一個具體問題</td><td><b>約 15 秒</b></td><td>12 題答對 11 題</td></tr>
+<tr><td>一章約 5,000 字內容的完整讀書指南</td><td><b>約 15 分鐘</b></td><td>完整</td></tr>
+<tr><td>從一章約 4,800 字的內容做出 18 張字卡</td><td><b>約 5 分鐘</b></td><td>用較大的 AI，36 張裡 30 張正確（<a href="/blog/flashcards-from-pdf">測試</a>）</td></tr>
+</tbody>
+</table></div>
+<p>有顯示卡的話會快很多：<a href="/blog/can-my-pc-run-ai#checker">查看你的電腦</a>。</p>
+
+<h2>我們怎麼查證</h2>
+<p>我們在 2026 年 10 月 21 日和 23 日讀了各工具自己的網站、價格、說明和 GitHub 頁面，並附上連結。頁面上沒寫的，我們就寫「未說明」。時間和準確率來自我們自己的測試。因為 GreenCube 是我們做的，我們只寫任何人都能查證的事實，也不替這些工具排名。</p>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>2026 年 Claude 使用限制：5 小时限制和每周限制详解 | GreenCube 博客</title>
+  <meta name="description" content="2026 年 11 月 Claude 使用限制的运作方式：Free、Pro 和 Max 每 5 小时一个限制、每周一个限制，已验证的 Ultra 没有 5 小时限制。什么会消耗额度、什么时候重置、用完了怎么办。" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <meta property="og:title" content="2026 年 Claude 使用限制：5 小时限制和每周限制详解 | GreenCube 博客" />
+  <meta property="og:description" content="2026 年 11 月 Claude 使用限制的运作方式：Free、Pro 和 Max 每 5 小时一个限制、每周一个限制，已验证的 Ultra 没有 5 小时限制。什么会消耗额度、什么时候重置、用完了怎么办。" />
+  <meta property="og:url" content="https://blog.greencube.app/blog/zh/claude-usage-limit" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/art/claude-usage-limit.jpg" />
+  <meta property="og:site_name" content="GreenCube" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/art/claude-usage-limit.jpg" />
+  <link rel="canonical" href="https://blog.greencube.app/blog/zh/claude-usage-limit" />
+  <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/claude-usage-limit" />
+  <link rel="alternate" hreflang="pt-BR" href="https://blog.greencube.app/blog/pt/claude-usage-limit" />
+  <link rel="alternate" hreflang="fr" href="https://blog.greencube.app/blog/fr/claude-usage-limit" />
+  <link rel="alternate" hreflang="de" href="https://blog.greencube.app/blog/de/claude-usage-limit" />
+  <link rel="alternate" hreflang="it" href="https://blog.greencube.app/blog/it/claude-usage-limit" />
+  <link rel="alternate" hreflang="nl" href="https://blog.greencube.app/blog/nl/claude-usage-limit" />
+  <link rel="alternate" hreflang="pl" href="https://blog.greencube.app/blog/pl/claude-usage-limit" />
+  <link rel="alternate" hreflang="tr" href="https://blog.greencube.app/blog/tr/claude-usage-limit" />
+  <link rel="alternate" hreflang="ru" href="https://blog.greencube.app/blog/ru/claude-usage-limit" />
+  <link rel="alternate" hreflang="uk" href="https://blog.greencube.app/blog/uk/claude-usage-limit" />
+  <link rel="alternate" hreflang="ar" href="https://blog.greencube.app/blog/ar/claude-usage-limit" />
+  <link rel="alternate" hreflang="hi" href="https://blog.greencube.app/blog/hi/claude-usage-limit" />
+  <link rel="alternate" hreflang="id" href="https://blog.greencube.app/blog/id/claude-usage-limit" />
+  <link rel="alternate" hreflang="vi" href="https://blog.greencube.app/blog/vi/claude-usage-limit" />
+  <link rel="alternate" hreflang="th" href="https://blog.greencube.app/blog/th/claude-usage-limit" />
+  <link rel="alternate" hreflang="ja" href="https://blog.greencube.app/blog/ja/claude-usage-limit" />
+  <link rel="alternate" hreflang="ko" href="https://blog.greencube.app/blog/ko/claude-usage-limit" />
+  <link rel="alternate" hreflang="zh-CN" href="https://blog.greencube.app/blog/zh/claude-usage-limit" />
+  <link rel="alternate" hreflang="zh-TW" href="https://blog.greencube.app/blog/zh-tw/claude-usage-limit" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.greencube.app/blog/claude-usage-limit" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "2026 年 Claude 使用限制：5 小时限制和每周限制详解", "description": "2026 年 11 月 Claude 使用限制的运作方式：Free、Pro 和 Max 每 5 小时一个限制、每周一个限制，已验证的 Ultra 没有 5 小时限制。什么会消耗额度、什么时候重置、用完了怎么办。", "image": "https://blog.greencube.app/blog/covers/art/claude-usage-limit.jpg", "datePublished": "2026-11-06", "dateModified": "2026-11-06", "inLanguage": "zh-CN", "mainEntityOfPage": "https://blog.greencube.app/blog/zh/claude-usage-limit", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "我在 Claude 上能发多少条消息？", "acceptedAnswer": {"@type": "Answer", "text": "Anthropic 没有为任何套餐给出具体数字。它表示这取决于你的消息有多长、附加了哪些文件、聊天有多长，以及你使用的模型或功能。"}}, {"@type": "Question", "name": "Claude 的限制什么时候重置？", "acceptedAnswer": {"@type": "Answer", "text": "有两个限制。会话限制每五小时重置一次；每周限制在 Anthropic 为你的账户设定的固定日期和时间重置，与你何时订阅无关。两者都可以在 Claude 设置的“用量”里看到。"}}, {"@type": "Question", "name": "Claude Code 和 Claude 应用共用限制吗？", "acceptedAnswer": {"@type": "Answer", "text": "是的。Anthropic 表示 claude.ai、Claude Code 和 Claude Desktop 都计入同一个限制。"}}, {"@type": "Question", "name": "Claude Ultra 是什么？", "acceptedAnswer": {"@type": "Answer", "text": "Max 20x 套餐的新名字：每月 200 美元，每周用量是 Pro 的 10 倍，已验证的账户没有五小时限制。Max（原 Max 5x）仍然是每月 100 美元，两个限制都有。"}}, {"@type": "Question", "name": "有完全没有使用限制的 AI 吗？", "acceptedAnswer": {"@type": "Answer", "text": "有，就是在你自己电脑上运行的 AI，因为没有服务器按消息付费。GreenCube 就是其中之一：聊天、文件和图片都不设上限，不联网也能用，一次付清 9.99 欧元。代价是它运行的模型比 Claude 小，速度也取决于你的电脑。"}}]}</script>
+</head>
+<body>
+
+<header>
+  <a href="https://greencube.app/zh/" class="brand" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a>
+    <a href="https://greencube.app/zh/your-data">你的数据</a>
+    <a href="https://greencube.app/zh/mission">我们的使命</a>
+    <a href="/blog/zh" class="on">Blog</a>
+  </nav>
+  <div class="head-right"><details class="lang-pick"><summary class="lang" aria-label="Language">中文</summary><div class="lang-list"><a href="/blog/claude-usage-limit" hreflang="en" lang="en">English</a><a href="/blog/pt/claude-usage-limit" hreflang="pt-BR" lang="pt-BR">Português</a><a href="/blog/fr/claude-usage-limit" hreflang="fr" lang="fr">Français</a><a href="/blog/de/claude-usage-limit" hreflang="de" lang="de">Deutsch</a><a href="/blog/it/claude-usage-limit" hreflang="it" lang="it">Italiano</a><a href="/blog/nl/claude-usage-limit" hreflang="nl" lang="nl">Nederlands</a><a href="/blog/pl/claude-usage-limit" hreflang="pl" lang="pl">Polski</a><a href="/blog/tr/claude-usage-limit" hreflang="tr" lang="tr">Türkçe</a><a href="/blog/ru/claude-usage-limit" hreflang="ru" lang="ru">Русский</a><a href="/blog/uk/claude-usage-limit" hreflang="uk" lang="uk">Українська</a><a href="/blog/ar/claude-usage-limit" hreflang="ar" lang="ar">العربية</a><a href="/blog/hi/claude-usage-limit" hreflang="hi" lang="hi">हिन्दी</a><a href="/blog/id/claude-usage-limit" hreflang="id" lang="id">Indonesia</a><a href="/blog/vi/claude-usage-limit" hreflang="vi" lang="vi">Tiếng Việt</a><a href="/blog/th/claude-usage-limit" hreflang="th" lang="th">ไทย</a><a href="/blog/ja/claude-usage-limit" hreflang="ja" lang="ja">日本語</a><a href="/blog/ko/claude-usage-limit" hreflang="ko" lang="ko">한국어</a><a href="/blog/zh/claude-usage-limit" hreflang="zh-CN" lang="zh-CN" aria-current="true">简体中文</a><a href="/blog/zh-tw/claude-usage-limit" hreflang="zh-TW" lang="zh-TW">繁體中文</a></div></details><a href="https://greencube.app/zh/buy" class="nav-cta">获取 GreenCube</a></div>
+</header>
+
+<main>
+<article>
+<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<h1>2026 年 Claude 使用限制：5 小时限制和每周限制详解</h1>
+<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年11月6日</p>
+<img class="cover" src="/blog/covers/art/claude-usage-limit.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<div class="answer"><p>Claude 有两个使用限制：一个每 5 小时重置，一个每周重置一次。Free、Pro 和 Max 两个都有。200 美元的 Ultra 套餐在账户通过验证后只有每周限制。Anthropic 没有公布任何套餐能发多少条消息，因为长聊天、大文件和更强的模型会更快用完额度。</p></div>
+
+<h2>各套餐的限制</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>价格</th><th>每 5 小时</th><th>每周</th></tr></thead>
+<tbody>
+<tr><td><strong>Free</strong></td><td>0 美元</td><td>有限制</td><td>有限制</td></tr>
+<tr><td><strong>Pro</strong></td><td>每月 20 美元（按年付每月 17 美元）</td><td>1 倍</td><td>1 倍</td></tr>
+<tr><td><strong>Max</strong></td><td>每月 100 美元</td><td>Pro 的 5 倍</td><td>Pro 的 5 倍，另有一个针对 Fable 模型的单独每周限制</td></tr>
+<tr><td><strong>Ultra</strong>（原 Max 20x）</td><td>每月 200 美元</td><td>无，限已验证账户</td><td>Pro 的 10 倍</td></tr>
+</tbody>
+</table></div>
+<p>以上信息来自 Anthropic 的<a href="https://claude.com/pricing" rel="noopener">价格页面</a>，以及关于 <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Pro</a>、<a href="https://support.claude.com/en/articles/11049741-what-is-the-max-plan" rel="noopener">Max</a> 和 <a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Ultra</a> 套餐的帮助页面，2026 年 11 月 6 日核实。价格以美元计，不含税。“1 倍”和“5 倍”是 Anthropic 自己的说法：它总是把限制描述成 Pro 的倍数，从不说是多少条消息。</p>
+
+<h3>最近的变化</h3>
+<p>Max 20x 现在改名为 Ultra，价格还是 200 美元，订阅用户已自动转过去。如果“20x”变成“10x”看起来像是缩水，其实未必。原来的 20x 描述的是 5 小时窗口，而关于 10 月 30 日这次调整的报道称，每周额度保持不变（<a href="https://magica.com/news/anthropic-removes-five-hour-limit-ultra-plan" rel="noopener">Magica</a>）。新名字描述的是一周实际能用多少。</p>
+<p>Ultra 也取消了 5 小时限制，但要等 Anthropic 验证你的账户之后。在那之前，“会适用一个临时限制”（<a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Anthropic Help Center</a>）。每周限制在所有套餐上都保留。</p>
+
+<p class="bridge-mid">受够了等额度重置？<a href="https://greencube.app/zh/buy">GreenCube 在你的电脑上运行，没有消息上限 <span aria-hidden="true">&rarr;</span></a></p>
+<h2>什么会更快用完额度</h2>
+<p>Anthropic 的帮助页面列出了计入的因素：“对话的长度和复杂程度、你使用的功能、你正在对话的 Claude 模型，以及你选择的投入程度”（<a href="https://support.claude.com/en/articles/11647753-understanding-usage-and-length-limits" rel="noopener">Anthropic Help Center</a>）。</p>
+<p>长聊天是大头。每条新消息都会连同之前的对话一起被读取，用 Anthropic 的话说，触发 Claude 自动上下文管理的长对话会“消耗更多的使用额度”。大文件也一样：你附加的文件越长，能发的消息就越少。最强的模型和高投入设置每条消息的消耗也更多。</p>
+<p>还有 Claude Code。它和 Claude 应用、Claude Desktop 共用一个限制，所以一次长时间的编程，可能就把你留给聊天的那一周额度用光了。</p>
+
+<h2>什么时候重置</h2>
+<p>会话限制每五小时重置一次。每周限制“在分配给你账户的每周固定时间”重置，无论你什么时候开始订阅，这个时间都不变（<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Anthropic Help Center</a>）。Anthropic 没有公布具体时间，但你可以在 Claude 设置的“用量”里看到自己的。</p>
+<p>Anthropic 还表示它“可能会酌情调整使用限制以管理容量”。所以某一周很容易就碰到的限制，下一周的感觉可能不一样。</p>
+
+<h2>用完了怎么办</h2>
+<ol>
+<li>等它重置。如果是 5 小时限制，几个小时就到。如果是每周限制，在“用量”设置里查看是哪一天。</li>
+<li>开一个新聊天，只把重要的两三行复制过去，而不是拖着一长段对话继续。</li>
+<li>发小一点的文件：只发你需要的那一章，而不是整本书。</li>
+<li>简单的问题用轻量的模型，把最强的模型留给难题。</li>
+<li>按量付费。Pro、Max 和 Ultra 可以开启用量额度，在超出限制后继续使用。它们“按标准 API 费率计费”（<a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans" rel="noopener">Anthropic Help Center</a>），所以费用取决于你发了多少。</li>
+<li>如果每周都碰到限制，就升级。Max 提供 Pro 5 倍的用量，Ultra 提供 Pro 10 倍的每周用量。</li>
+</ol>
+
+<h2>或者，把日常的活儿搬到你自己的电脑上</h2>
+<p>之所以有使用限制，是因为每条消息都在 Anthropic 的服务器上运行，总得有人为此付钱。在你自己电脑上运行的 AI 没有计数器，因为没有服务器要付钱。</p>
+<p><a href="https://greencube.app/zh/">GreenCube</a> 做的就是这件事，因为它是我做的，所以看这部分时请把这一点考虑进去。你只需下载一次，它就能聊天、读你的 PDF、生成图片（生成图片需要 12 GB 内存），没有 5 小时限制也没有每周限制，不联网也能用。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Claude Pro</th><th>你自己电脑上的 AI（GreenCube）</th></tr></thead>
+<tbody>
+<tr><td>每 5 小时的限制</td><td>有</td><td>无</td></tr>
+<tr><td>每周的限制</td><td>有</td><td>无</td></tr>
+<tr><td>文件和 PDF</td><td>计入限制</td><td>不设上限</td></tr>
+<tr><td>不联网也能用</td><td>不能</td><td>能，下载一次之后</td></tr>
+<tr><td>聪明程度</td><td>现有最强的 AI 之一</td><td>能装进普通电脑的小模型（Gemma 4）：学习、写作和日常问题都不错，难的推理和大型代码较弱</td></tr>
+<tr><td>速度</td><td>在任何设备上都快</td><td>取决于你的电脑：在我们的测试中，8 GB 笔记本电脑每秒 5 到 7 个 token，16 GB 笔记本电脑 14 到 18 个，大多数游戏电脑 37 到 76 个</td></tr>
+<tr><td>价格</td><td>每月 20 美元</td><td>一次付清 9.99 欧元</td></tr>
+</tbody>
+</table></div>
+<p>说清楚一点：要处理大型代码库里的棘手 bug，或者一长段需要仔细推理的工作，Claude 是更强的工具，笔记本电脑上的小模型替代不了它。本地 AI 能帮上忙的，是那些吃掉你额度的日常大量工作：总结笔记、改写措辞、随手的问题、用 PDF 给自己出题。把这些搬到你的电脑上，把 Claude 的额度留给真正需要它的工作。</p>
+<p>不确定你的电脑能不能跑？<a href="/blog/zh/can-my-pc-run-ai">在这里查看</a>。另一个大型聊天应用，请看 <a href="/blog/zh/chatgpt-free-limits">ChatGPT 的免费限制</a>；所有完全没有限制的选择，请看<a href="/blog/zh/unlimited-ai">不限量 AI 对比</a>。</p>
+<h2>常见问题</h2>
+<div class="faq">
+<details><summary>我在 Claude 上能发多少条消息？</summary><p>Anthropic 没有为任何套餐给出具体数字。它表示这取决于你的消息有多长、附加了哪些文件、聊天有多长，以及你使用的模型或功能。</p></details>
+<details><summary>Claude 的限制什么时候重置？</summary><p>有两个限制。会话限制每五小时重置一次；每周限制在 Anthropic 为你的账户设定的固定日期和时间重置，与你何时订阅无关。两者都可以在 Claude 设置的“用量”里看到。</p></details>
+<details><summary>Claude Code 和 Claude 应用共用限制吗？</summary><p>是的。Anthropic 表示 claude.ai、Claude Code 和 Claude Desktop 都计入同一个限制。</p></details>
+<details><summary>Claude Ultra 是什么？</summary><p>Max 20x 套餐的新名字：每月 200 美元，每周用量是 Pro 的 10 倍，已验证的账户没有五小时限制。Max（原 Max 5x）仍然是每月 100 美元，两个限制都有。</p></details>
+<details><summary>有完全没有使用限制的 AI 吗？</summary><p>有，就是在你自己电脑上运行的 AI，因为没有服务器按消息付费。GreenCube 就是其中之一：聊天、文件和图片都不设上限，不联网也能用，一次付清 9.99 欧元。代价是它运行的模型比 Claude 小，速度也取决于你的电脑。</p></details>
+</div>
+</article>
+<section class="post-try gd" id="try"><h2>就在这里试试 GreenCube</h2><p>这是应用本身的窗口。发送一个提示，打开它做出的内容并通过聊天修改，或者在“图片”里生成一张图片。</p>
+<div class="gd-wrap">
+  <div class="gd-win" id="gd">
+    <aside class="gd-side">
+      <div class="gd-logo"><i></i>GreenCube</div>
+      
+      <button type="button" class="gd-new" data-tab="chat">+ New chat</button>
+      <div class="gd-nav">Search chats</div><button type="button" class="gd-nav" data-tab="images">Images</button><button type="button" class="gd-nav" data-tab="artifacts">Artifacts <span class="gd-count">0</span></button>
+      <div class="gd-rec">Recents</div>
+      <div class="gd-recents"><div class="gd-r">Photosynthesis explained</div><div class="gd-r">Email to my landlord</div><div class="gd-r">Spanish verbs quiz</div><div class="gd-r">Trip plan for Lisbon</div></div>
+      <div class="gd-nav" style="margin-top:auto">Settings</div>
+    </aside>
+    <div class="gd-main">
+      <div class="gd-chat" aria-live="polite">
+        <div class="gd-hello"><h3>Good evening.</h3><p>What do you want to make?</p></div>
+      </div>
+      <div class="gd-chips" role="group" aria-label="Example prompts">
+        <button type="button" data-job="slides">Slides</button><button type="button" data-job="quiz">Quiz</button><button type="button" data-job="cards">Flashcards</button>
+      </div>
+      <div class="gd-compose">
+        <div class="gd-input ph" role="button" tabindex="0" aria-label="Send this example prompt">Message GreenCube&hellip;</div>
+        <div class="gd-bar"><span class="gd-plus" aria-hidden="true">+</span><span class="gd-eng">Cube 2B</span><button class="gd-send" type="button" aria-label="Send">&uarr;</button></div>
+      </div>
+      <div class="gd-foot">On your computer &middot; Cube 2B</div>
+      <div class="gd-view gd-arts" hidden></div>
+      <div class="gd-view gd-imgs" hidden></div>
+      <div class="gd-panel" aria-label="Open card">
+        <div class="gd-ph"><div><small>Slides</small><b>Causes of World War I</b></div>
+          <div class="acts"><button type="button" class="gd-style">Style</button><button type="button" class="gd-save">Save as PowerPoint</button><button type="button" class="x" aria-label="Close">&times;</button></div></div>
+        <div class="gd-styles" role="group" aria-label="Slide styles"></div>
+        <div class="gd-pb"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<p class="gd-label">这些是示例回答，让你感受一下；这里没有运行 AI。在应用里，Cube 2B 会在你的电脑上离线自己写。</p>
+<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
+<article class="after-try">
+<div class="cta-box bridge" data-group="limits"><h3>归你所有的 AI：想用多少就用多少</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/> <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/> <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/> <path d="M47 61h28" stroke-width="3"/> </svg></span><span class="bt-name">Chat</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/> <circle cx="62" cy="34" r="8" fill="#FAE289"/> <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/> <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/> <path d="M26 84l6-8M70 84l-6-8" /> </svg></span><span class="bt-name">图片</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">幻灯片</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="10" y="16" width="76" height="60" rx="8" fill="#2B2B2B"/> <path d="M10 28h76" stroke="#FFFDF8" stroke-width="1.6" opacity=".3"/> <path d="M22 40h14" stroke="#8EABE1" stroke-width="3.2"/><path d="M40 40h22" stroke="#FA9F75" stroke-width="3.2"/> <path d="M28 50h26" stroke="#C6D9A8" stroke-width="3.2"/><path d="M28 60h16" stroke="#FAE289" stroke-width="3.2"/> <path d="M22 70h10" stroke="#8EABE1" stroke-width="3.2"/> <path d="M68 50l-6 6 6 6M76 50l6 6-6 6" stroke="#FFFDF8" stroke-width="2.6"/> </svg></span><span class="bt-name">编程</span></li></ul><p>GreenCube 在你的电脑上运行，所以没有消息条数上限，也不用订阅。&euro;9.99（US$9.99），付一次，就归你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh/buy">获取 GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh/what-you-get">先检查你的电脑</a></p></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="f-wrap">
+    <div class="f-top">
+      <div class="f-brand"><span class="f-turtle" aria-hidden="true"><img src="https://greencube.app/img/turtle.svg" alt="" width="36" height="31" loading="lazy" /></span>
+        <a href="https://greencube.app/zh/" class="brand-lock" aria-label="GreenCube home"><span class="mark" aria-hidden="true"></span><span>GreenCube</span></a>
+        <p class="f-note">属于 <em>你的 AI，</em> 不是租的。</p>
+        <a href="mailto:support@greencube.app" class="f-mail">support@greencube.app</a>
+      </div>
+      <nav class="f-col" aria-label="Product">
+        <h3>产品</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/buy">获取 GreenCube</a></li>
+          <li><a href="https://greencube.app/zh/what-you-get">我的电脑能跑吗？</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Learn">
+        <h3>了解更多</h3>
+        <ul>
+          <li><a href="/blog/zh">Blog</a></li>
+          <li><a href="/blog/changelog">Changelog</a></li>
+          <li><a href="https://greencube.app/zh/your-data">你的数据</a></li>
+          <li><a href="https://greencube.app/does-chatgpt-train-on-your-data">ChatGPT 与你的数据 (EN)</a></li>
+          <li><a href="https://greencube.app/zh/ai-environmental-impact">AI 与地球</a></li>
+        </ul>
+      </nav>
+      <nav class="f-col" aria-label="Company">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="https://greencube.app/zh/mission">我们的使命</a></li>
+          <li><a href="mailto:support@greencube.app">联系我们</a></li>
+          <li><a href="https://legal.greencube.app/privacy">隐私政策 (EN)</a></li>
+          <li><a href="https://legal.greencube.app/terms">使用条款 (EN)</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <div>&copy; 2026 GreenCube. Edunexis SL. 西班牙制造。</div>
+    </div>
+      <pre class="f-ascii" aria-hidden="true"> ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗██╗   ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██║   ██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║██║     ██║   ██║██████╔╝█████╗
+██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║██║     ██║   ██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+    <p class="f-prompt" aria-hidden="true">C:\&gt; you are infinite <span class="cur"></span></p>
+</div>
+</footer>
+<!-- Cloudflare Web Analytics (no cookies) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a952881922b046ed9632baede7821ad9"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="https://greencube.app/src.js" defer></script>
+<script src="https://greencube.app/magnet.js" defer></script>
+</body>
+</html>

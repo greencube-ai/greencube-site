@@ -1,0 +1,73 @@
+<!--meta
+{
+ "title": "2026 年 Claude 使用限制：5 小时限制和每周限制详解",
+ "description": "2026 年 11 月 Claude 使用限制的运作方式：Free、Pro 和 Max 每 5 小时一个限制、每周一个限制，已验证的 Ultra 没有 5 小时限制。什么会消耗额度、什么时候重置、用完了怎么办。",
+ "date": "2026-11-06",
+ "kind": "guide",
+ "stat": "2 个限制",
+ "teaser": "每 5 小时和每周：Claude 的限制如何运作，已核实。",
+ "lang": "zh",
+ "alt": "claude-usage-limit",
+ "faq": [
+  {"q": "我在 Claude 上能发多少条消息？", "a": "Anthropic 没有为任何套餐给出具体数字。它表示这取决于你的消息有多长、附加了哪些文件、聊天有多长，以及你使用的模型或功能。"},
+  {"q": "Claude 的限制什么时候重置？", "a": "有两个限制。会话限制每五小时重置一次；每周限制在 Anthropic 为你的账户设定的固定日期和时间重置，与你何时订阅无关。两者都可以在 Claude 设置的“用量”里看到。"},
+  {"q": "Claude Code 和 Claude 应用共用限制吗？", "a": "是的。Anthropic 表示 claude.ai、Claude Code 和 Claude Desktop 都计入同一个限制。"},
+  {"q": "Claude Ultra 是什么？", "a": "Max 20x 套餐的新名字：每月 200 美元，每周用量是 Pro 的 10 倍，已验证的账户没有五小时限制。Max（原 Max 5x）仍然是每月 100 美元，两个限制都有。"},
+  {"q": "有完全没有使用限制的 AI 吗？", "a": "有，就是在你自己电脑上运行的 AI，因为没有服务器按消息付费。GreenCube 就是其中之一：聊天、文件和图片都不设上限，不联网也能用，一次付清 9.99 欧元。代价是它运行的模型比 Claude 小，速度也取决于你的电脑。"}
+ ]
+}
+-->
+<div class="answer"><p>Claude 有两个使用限制：一个每 5 小时重置，一个每周重置一次。Free、Pro 和 Max 两个都有。200 美元的 Ultra 套餐在账户通过验证后只有每周限制。Anthropic 没有公布任何套餐能发多少条消息，因为长聊天、大文件和更强的模型会更快用完额度。</p></div>
+
+<h2>各套餐的限制</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>价格</th><th>每 5 小时</th><th>每周</th></tr></thead>
+<tbody>
+<tr><td><strong>Free</strong></td><td>0 美元</td><td>有限制</td><td>有限制</td></tr>
+<tr><td><strong>Pro</strong></td><td>每月 20 美元（按年付每月 17 美元）</td><td>1 倍</td><td>1 倍</td></tr>
+<tr><td><strong>Max</strong></td><td>每月 100 美元</td><td>Pro 的 5 倍</td><td>Pro 的 5 倍，另有一个针对 Fable 模型的单独每周限制</td></tr>
+<tr><td><strong>Ultra</strong>（原 Max 20x）</td><td>每月 200 美元</td><td>无，限已验证账户</td><td>Pro 的 10 倍</td></tr>
+</tbody>
+</table></div>
+<p>以上信息来自 Anthropic 的<a href="https://claude.com/pricing" rel="noopener">价格页面</a>，以及关于 <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Pro</a>、<a href="https://support.claude.com/en/articles/11049741-what-is-the-max-plan" rel="noopener">Max</a> 和 <a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Ultra</a> 套餐的帮助页面，2026 年 11 月 6 日核实。价格以美元计，不含税。“1 倍”和“5 倍”是 Anthropic 自己的说法：它总是把限制描述成 Pro 的倍数，从不说是多少条消息。</p>
+
+<h3>最近的变化</h3>
+<p>Max 20x 现在改名为 Ultra，价格还是 200 美元，订阅用户已自动转过去。如果“20x”变成“10x”看起来像是缩水，其实未必。原来的 20x 描述的是 5 小时窗口，而关于 10 月 30 日这次调整的报道称，每周额度保持不变（<a href="https://magica.com/news/anthropic-removes-five-hour-limit-ultra-plan" rel="noopener">Magica</a>）。新名字描述的是一周实际能用多少。</p>
+<p>Ultra 也取消了 5 小时限制，但要等 Anthropic 验证你的账户之后。在那之前，“会适用一个临时限制”（<a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Anthropic Help Center</a>）。每周限制在所有套餐上都保留。</p>
+
+<h2>什么会更快用完额度</h2>
+<p>Anthropic 的帮助页面列出了计入的因素：“对话的长度和复杂程度、你使用的功能、你正在对话的 Claude 模型，以及你选择的投入程度”（<a href="https://support.claude.com/en/articles/11647753-understanding-usage-and-length-limits" rel="noopener">Anthropic Help Center</a>）。</p>
+<p>长聊天是大头。每条新消息都会连同之前的对话一起被读取，用 Anthropic 的话说，触发 Claude 自动上下文管理的长对话会“消耗更多的使用额度”。大文件也一样：你附加的文件越长，能发的消息就越少。最强的模型和高投入设置每条消息的消耗也更多。</p>
+<p>还有 Claude Code。它和 Claude 应用、Claude Desktop 共用一个限制，所以一次长时间的编程，可能就把你留给聊天的那一周额度用光了。</p>
+
+<h2>什么时候重置</h2>
+<p>会话限制每五小时重置一次。每周限制“在分配给你账户的每周固定时间”重置，无论你什么时候开始订阅，这个时间都不变（<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Anthropic Help Center</a>）。Anthropic 没有公布具体时间，但你可以在 Claude 设置的“用量”里看到自己的。</p>
+<p>Anthropic 还表示它“可能会酌情调整使用限制以管理容量”。所以某一周很容易就碰到的限制，下一周的感觉可能不一样。</p>
+
+<h2>用完了怎么办</h2>
+<ol>
+<li>等它重置。如果是 5 小时限制，几个小时就到。如果是每周限制，在“用量”设置里查看是哪一天。</li>
+<li>开一个新聊天，只把重要的两三行复制过去，而不是拖着一长段对话继续。</li>
+<li>发小一点的文件：只发你需要的那一章，而不是整本书。</li>
+<li>简单的问题用轻量的模型，把最强的模型留给难题。</li>
+<li>按量付费。Pro、Max 和 Ultra 可以开启用量额度，在超出限制后继续使用。它们“按标准 API 费率计费”（<a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans" rel="noopener">Anthropic Help Center</a>），所以费用取决于你发了多少。</li>
+<li>如果每周都碰到限制，就升级。Max 提供 Pro 5 倍的用量，Ultra 提供 Pro 10 倍的每周用量。</li>
+</ol>
+
+<h2>或者，把日常的活儿搬到你自己的电脑上</h2>
+<p>之所以有使用限制，是因为每条消息都在 Anthropic 的服务器上运行，总得有人为此付钱。在你自己电脑上运行的 AI 没有计数器，因为没有服务器要付钱。</p>
+<p><a href="https://greencube.app/">GreenCube</a> 做的就是这件事，因为它是我做的，所以看这部分时请把这一点考虑进去。你只需下载一次，它就能聊天、读你的 PDF、生成图片（生成图片需要 12 GB 内存），没有 5 小时限制也没有每周限制，不联网也能用。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Claude Pro</th><th>你自己电脑上的 AI（GreenCube）</th></tr></thead>
+<tbody>
+<tr><td>每 5 小时的限制</td><td>有</td><td>无</td></tr>
+<tr><td>每周的限制</td><td>有</td><td>无</td></tr>
+<tr><td>文件和 PDF</td><td>计入限制</td><td>不设上限</td></tr>
+<tr><td>不联网也能用</td><td>不能</td><td>能，下载一次之后</td></tr>
+<tr><td>聪明程度</td><td>现有最强的 AI 之一</td><td>能装进普通电脑的小模型（Gemma 4）：学习、写作和日常问题都不错，难的推理和大型代码较弱</td></tr>
+<tr><td>速度</td><td>在任何设备上都快</td><td>取决于你的电脑：在我们的测试中，8 GB 笔记本电脑每秒 5 到 7 个 token，16 GB 笔记本电脑 14 到 18 个，大多数游戏电脑 37 到 76 个</td></tr>
+<tr><td>价格</td><td>每月 20 美元</td><td>一次付清 9.99 欧元</td></tr>
+</tbody>
+</table></div>
+<p>说清楚一点：要处理大型代码库里的棘手 bug，或者一长段需要仔细推理的工作，Claude 是更强的工具，笔记本电脑上的小模型替代不了它。本地 AI 能帮上忙的，是那些吃掉你额度的日常大量工作：总结笔记、改写措辞、随手的问题、用 PDF 给自己出题。把这些搬到你的电脑上，把 Claude 的额度留给真正需要它的工作。</p>
+<p>不确定你的电脑能不能跑？<a href="/blog/can-my-pc-run-ai">在这里查看</a>。另一个大型聊天应用，请看 <a href="/blog/chatgpt-free-limits">ChatGPT 的免费限制</a>；所有完全没有限制的选择，请看<a href="/blog/unlimited-ai">不限量 AI 对比</a>。</p>

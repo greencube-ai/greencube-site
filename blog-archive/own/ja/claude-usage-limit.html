@@ -1,0 +1,73 @@
+<!--meta
+{
+ "title": "Claudeの使用制限（2026年）：5時間ごとと週ごとの上限を解説",
+ "description": "2026年11月のClaudeの使用制限の仕組み：Free、Pro、Maxには5時間ごとの上限と週ごとの上限があり、認証済みのUltraには5時間の上限がありません。何で上限が減るか、いつリセットされるか、上限に達したらどうするか。",
+ "date": "2026-11-06",
+ "kind": "guide",
+ "stat": "2つの上限",
+ "teaser": "5時間ごとと週ごと：Claudeの上限の仕組みを確認。",
+ "lang": "ja",
+ "alt": "claude-usage-limit",
+ "faq": [
+  {"q": "Claudeではメッセージをいくつ送れますか？", "a": "Anthropicはどのプランについても数を示していません。メッセージの長さ、添付するファイル、チャットの長さ、使うモデルや機能によって変わるとしています。"},
+  {"q": "Claudeの上限はいつリセットされますか？", "a": "上限は2つあります。セッションの上限は5時間ごとにリセットされます。週の上限は、いつ契約したかに関係なく、Anthropicがアカウントごとに決めた決まった曜日と時刻にリセットされます。どちらもClaudeの設定の「使用量」で確認できます。"},
+  {"q": "Claude CodeはClaudeアプリと上限を共有しますか？", "a": "はい。Anthropicは、claude.ai、Claude Code、Claude Desktopがすべて同じ上限にカウントされるとしています。"},
+  {"q": "Claude Ultraとは何ですか？", "a": "Max 20xプランの新しい名前です。月200ドルで、週の使用量はProの10倍、認証済みのアカウントには5時間の上限がありません。Max（旧Max 5x）は今も月100ドルで、両方の上限があります。"},
+  {"q": "使用制限がまったくないAIはありますか？", "a": "あります。自分のPCで動くAIです。メッセージごとにお金を払うサーバーがないからです。GreenCubeはそのひとつで、チャット、ファイル、画像に上限がなく、インターネットなしで動き、9.99ユーロの買い切りです。難点は、Claudeより小さいモデルを動かすことと、速さがPC次第なことです。"}
+ ]
+}
+-->
+<div class="answer"><p>Claudeには使用制限が2つあります。5時間ごとにリセットされるものと、週に1回リセットされるものです。Free、Pro、Maxには両方あります。200ドルのUltraプランは、アカウントが認証されれば週の上限だけになります。Anthropicはどのプランでもメッセージの数を公開していません。長いチャット、大きなファイル、強いモデルは上限を早く使い切るからです。</p></div>
+
+<h2>プランごとの上限</h2>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>料金</th><th>5時間ごと</th><th>週ごと</th></tr></thead>
+<tbody>
+<tr><td><strong>Free</strong></td><td>0ドル</td><td>制限あり</td><td>制限あり</td></tr>
+<tr><td><strong>Pro</strong></td><td>月20ドル（年払いで月17ドル）</td><td>1倍</td><td>1倍</td></tr>
+<tr><td><strong>Max</strong></td><td>月100ドル</td><td>Proの5倍</td><td>Proの5倍、加えてFableモデル専用の週の上限</td></tr>
+<tr><td><strong>Ultra</strong>（旧Max 20x）</td><td>月200ドル</td><td>なし（認証済みのアカウント）</td><td>Proの10倍</td></tr>
+</tbody>
+</table></div>
+<p>これはAnthropicの<a href="https://claude.com/pricing" rel="noopener">料金ページ</a>と、<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Pro</a>、<a href="https://support.claude.com/en/articles/11049741-what-is-the-max-plan" rel="noopener">Max</a>、<a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Ultra</a>の各プランについてのヘルプページによるもので、2026年11月6日に確認しました。料金は米ドルで、税抜きです。「1倍」「5倍」はAnthropic自身の言い方です。上限をメッセージの数ではなく、常にProの何倍かで説明しています。</p>
+
+<h3>最近変わったこと</h3>
+<p>Max 20xは同じ200ドルのままUltraという名前になり、契約者は自動で移行しました。「20x」が「10x」になったのは削減に見えるかもしれませんが、そうとは限りません。以前の20xは5時間の枠を表していて、10月30日の変更についての報道では、週の使用量は変わっていないとされています（<a href="https://magica.com/news/anthropic-removes-five-hour-limit-ultra-plan" rel="noopener">Magica</a>）。新しい名前は、1週間に実際に使える量を表しています。</p>
+<p>Ultraでは5時間の上限もなくなりましたが、Anthropicがアカウントを認証してからです。それまでは「一時的な上限が適用されます」（<a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan" rel="noopener">Anthropic Help Center</a>）。週の上限はすべてのプランに残っています。</p>
+
+<h2>上限を早く使い切るもの</h2>
+<p>Anthropicのヘルプページは、何がカウントされるかを挙げています。「会話の長さと複雑さ、使う機能、チャットしているClaudeのモデル、選んだエフォートレベル」です（<a href="https://support.claude.com/en/articles/11647753-understanding-usage-and-length-limits" rel="noopener">Anthropic Help Center</a>）。</p>
+<p>一番大きいのは長いチャットです。新しいメッセージは毎回それまでの会話と一緒に読まれ、Claudeの自動のコンテキスト管理が働くような長い会話は、Anthropicの言葉で言えば「使用量の上限をより多く消費します」。大きなファイルも同じで、添付するファイルが長いほど、送れるメッセージは減ります。一番強いモデルや高いエフォート設定も、1メッセージあたりの消費が多くなります。</p>
+<p>それからClaude Codeがあります。ClaudeアプリやClaude Desktopと1つの上限を共有しているので、長いコーディングのセッションで、チャット用にとっておいた1週間分を使い切ってしまうことがあります。</p>
+
+<h2>いつリセットされるか</h2>
+<p>セッションの上限は5時間ごとにリセットされます。週の上限は「アカウントに割り当てられた毎週決まった時刻に」リセットされ、その時刻はいつ契約を始めたかにかかわらず変わりません（<a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" rel="noopener">Anthropic Help Center</a>）。Anthropicはその時刻を公開していませんが、自分のものはClaudeの設定の「使用量」で確認できます。</p>
+<p>Anthropicはまた、「容量を管理するために、独自の判断で使用制限を調整することがあります」としています。ですから、ある週にすぐ達した上限が、次の週には違って感じられるかもしれません。</p>
+
+<h2>上限に達したらどうするか</h2>
+<ol>
+<li>リセットを待つ。5時間の上限なら、数時間後です。週の上限なら、「使用量」の設定で曜日を確認しましょう。</li>
+<li>新しいチャットを始めて、長い会話を引きずる代わりに、大事な2、3行だけをコピーして持っていく。</li>
+<li>小さいファイルを送る。本を丸ごとではなく、必要な章だけを。</li>
+<li>簡単な質問には軽いモデルを使い、一番上のモデルは難しい質問のためにとっておく。</li>
+<li>使った分だけ払う。Pro、Max、Ultraでは、使用クレジットをオンにして上限を超えて使い続けられます。料金は「標準のAPI料金で請求され」（<a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans" rel="noopener">Anthropic Help Center</a>）、いくらかかるかは送る量次第です。</li>
+<li>毎週上限に達するなら、アップグレードする。MaxはProの5倍、UltraはProの週の使用量の10倍です。</li>
+</ol>
+
+<h2>あるいは、日々の作業を自分のPCに移す</h2>
+<p>使用制限があるのは、すべてのメッセージがAnthropicのサーバーで動き、誰かがその費用を払っているからです。自分のコンピューターで動くAIにはカウンターがありません。お金を払うサーバーがないからです。</p>
+<p>それをするのが<a href="https://greencube.app/">GreenCube</a>で、私が作っているので、この部分はその点を割り引いて読んでください。一度ダウンロードすれば、チャットし、PDFを読み、画像を作ります（画像には12 GBのRAMが必要です）。5時間の上限も週の上限もなく、インターネットがなくても動きます。</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Claude Pro</th><th>自分のPCのAI（GreenCube）</th></tr></thead>
+<tbody>
+<tr><td>5時間ごとの上限</td><td>あり</td><td>なし</td></tr>
+<tr><td>週ごとの上限</td><td>あり</td><td>なし</td></tr>
+<tr><td>ファイルとPDF</td><td>上限にカウントされる</td><td>上限なし</td></tr>
+<tr><td>インターネットなしで動く</td><td>いいえ</td><td>はい、一度ダウンロードすれば</td></tr>
+<tr><td>賢さ</td><td>今あるAIの中でも最も強いもののひとつ</td><td>普通のPCに収まる小さいモデル（Gemma 4）。勉強、文章、日常の質問には十分、難しい推論や大きなコードは苦手</td></tr>
+<tr><td>速さ</td><td>どんな端末でも速い</td><td>PC次第。私たちのテストでは、8 GBのノートPCで毎秒5〜7トークン、16 GBのノートPCで14〜18、ほとんどのゲーミングPCで37〜76</td></tr>
+<tr><td>料金</td><td>月20ドル</td><td>9.99ユーロの買い切り</td></tr>
+</tbody>
+</table></div>
+<p>はっきり言っておくと、大きなコードベースの厄介なバグや、慎重な推論を長く続ける作業では、Claudeのほうが強い道具で、ノートPCの小さいモデルでは代わりになりません。ローカルのAIが役に立つのは、上限を食いつぶす日々の大量の作業です。ノートの要約、言い換え、ちょっとした質問、PDFで自分をテストすること。それをPCに移して、Claudeの上限は本当に必要な作業のためにとっておきましょう。</p>
+<p>自分のPCで動くかわからない？<a href="/blog/can-my-pc-run-ai">ここで確認できます</a>。もうひとつの大手チャットアプリについては<a href="/blog/chatgpt-free-limits">ChatGPTの無料の上限</a>を、上限がまったくない選択肢すべてについては<a href="/blog/unlimited-ai">無制限のAIの比較</a>をどうぞ。</p>
