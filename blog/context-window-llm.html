@@ -10,10 +10,10 @@
   <meta property="og:description" content="Why million token LLM context windows often cost accuracy, latency, and money. Learn token-budget tactics—retrieval, caching, compaction—and when a local..." />
   <meta property="og:url" content="https://blog.greencube.app/blog/context-window-llm" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/cc083d60a94e.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/context-window-llm.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/cc083d60a94e.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/context-window-llm.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/context-window-llm" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
@@ -22,7 +22,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "When Local Tools Beat Million Token LLM Context Windows", "description": "Why million token LLM context windows often cost accuracy, latency, and money. Learn token-budget tactics—retrieval, caching, compaction—and when a local...", "image": "https://blog.greencube.app/blog/images/cc083d60a94e.jpg", "datePublished": "2026-09-15", "dateModified": "2026-09-15", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/context-window-llm", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "When Local Tools Beat Million Token LLM Context Windows", "description": "Why million token LLM context windows often cost accuracy, latency, and money. Learn token-budget tactics—retrieval, caching, compaction—and when a local...", "image": "https://blog.greencube.app/blog/covers/en/context-window-llm.jpg", "datePublished": "2026-09-15", "dateModified": "2026-09-15", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/context-window-llm", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does a 200K context window mean?", "acceptedAnswer": {"@type": "Answer", "text": "The model can take about 200,000 tokens into account at once, roughly 150,000 English words. That has to cover everything: the instructions, the chat so far, any documents and the answer it writes."}}, {"@type": "Question", "name": "Which LLM has the highest context window?", "acceptedAnswer": {"@type": "Answer", "text": "It changes with almost every release, so check each model's own documentation. Google's Gemini docs describe windows of 1 million tokens and more, and cost and waiting time grow with how much of it you actually use."}}, {"@type": "Question", "name": "What does a 1 million token context window mean?", "acceptedAnswer": {"@type": "Answer", "text": "About 750,000 English words, enough for several books or a large codebase in one go. Models don't read every part of a long prompt equally well, though: things in the middle get missed more often."}}, {"@type": "Question", "name": "How big is a 32K context window?", "acceptedAnswer": {"@type": "Answer", "text": "About 24,000 English words, roughly a 50-page report, which is plenty for most chats and single documents."}}, {"@type": "Question", "name": "Do local AI apps like GreenCube have smaller context windows than cloud models?", "acceptedAnswer": {"@type": "Answer", "text": "Usually, yes. On your PC the context window shares memory with the model itself, so local apps size it to the machine, far smaller than a cloud model's maximum. GreenCube is the same, so ask about specific parts of a long document rather than all of it at once."}}]}</script>
 </head>
 <body>
@@ -44,7 +44,7 @@
 <h1>When Local Tools Beat Million Token LLM Context Windows</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 15 September 2026</p>
 
-<img class="cover" src="/blog/images/cc083d60a94e.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/context-window-llm.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>A context window is how much text a language model can take into account at once, measured in tokens. Everything counts: the instructions, the whole conversation so far, any documents you paste in, and the answer it's writing. A 200K window holds about 150,000 English words and a 1 million token window about 750,000. Bigger windows cost more memory, time and money, and models don't use every part of a long window equally well, so the biggest number isn't automatically the best choice.</p></div>
 
 <p>Here's how context windows work, why they have limits, and how to work well within them, in the cloud or on your own PC.</p>

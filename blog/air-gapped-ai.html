@@ -10,10 +10,10 @@
   <meta property="og:description" content="How to deploy air gapped AI for secure environments: what lives inside the enclave, how updates get in, and where FedRAMP and CMMC fit." />
   <meta property="og:url" content="https://blog.greencube.app/blog/air-gapped-ai" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/325c2b1bf886.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/air-gapped-ai.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/325c2b1bf886.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/air-gapped-ai.jpg" />
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://blog.greencube.app/blog/air-gapped-ai" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -23,7 +23,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Air Gapped AI: A Security Team's Deployment Guide", "description": "How to deploy air gapped AI for secure environments: what lives inside the enclave, how updates get in, and where FedRAMP and CMMC fit.", "image": "https://blog.greencube.app/blog/images/325c2b1bf886.jpg", "datePublished": "2026-08-01", "dateModified": "2026-08-04", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/air-gapped-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Air Gapped AI: A Security Team's Deployment Guide", "description": "How to deploy air gapped AI for secure environments: what lives inside the enclave, how updates get in, and where FedRAMP and CMMC fit.", "image": "https://blog.greencube.app/blog/covers/en/air-gapped-ai.jpg", "datePublished": "2026-08-01", "dateModified": "2026-08-04", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/air-gapped-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is air gapping in AI?", "acceptedAnswer": {"@type": "Answer", "text": "Running AI on machines with no path to the internet or any outside network. The model, the data and every answer stay inside, and anything coming in, like a new model or an update, is carried in on purpose and checked."}}, {"@type": "Question", "name": "What does \"air-gapped\" mean in tech?", "acceptedAnswer": {"@type": "Answer", "text": "It has no connection to any outside network at all: no internet, no outside DNS, no vendor licence check, no public time server. The name comes from the literal gap of air between it and any connected network."}}, {"@type": "Question", "name": "What is the difference between air-gapped and offline?", "acceptedAnswer": {"@type": "Answer", "text": "Offline means it isn't connected right now, or can work without a connection, and could reconnect any time. Air-gapped means there's no way out at all, ever, maintenance windows included."}}, {"@type": "Question", "name": "Does GreenCube qualify as air-gapped AI?", "acceptedAnswer": {"@type": "Answer", "text": "No. GreenCube needs internet once to sign in and download the AI, then works offline, going online only for updates, to refresh your sign-in, or for web lookups if you switch Online on. It suits people who don't want their work on someone else's server, not rules that say a machine may never touch a network."}}, {"@type": "Question", "name": "When is a full enterprise air gap legally required?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your data's classification, your contract and your assessor. Classified systems and some contracts covering Controlled Unclassified Information or critical infrastructure may require physical isolation, but FedRAMP and CMMC don't automatically mean an air gap, so ask early."}}]}</script>
 </head>
 <body>
@@ -45,7 +45,7 @@
 <h1>Air Gapped AI: A Security Team&#x27;s Deployment Guide</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 1 August 2026</p>
 
-<img class="cover" src="/blog/images/325c2b1bf886.jpg" alt="Decorative title card with security and AI themed sketches" width="1200" height="686" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/air-gapped-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Air-gapped AI is an AI system that runs on machines with no path to the internet or any outside network. The model, the data and every answer stay inside that boundary, and anything that needs to come in, like a new model or a software update, is carried in deliberately and checked on the way. It's the strictest way to run AI, used for classified or tightly regulated work, and it costs real effort to keep up.</p></div>
 
 <p>I build GreenCube, an offline AI app for Windows, so I spend a lot of time on the difference between "works offline" and "air-gapped". They are not the same thing, and the last section says plainly where GreenCube sits.</p>

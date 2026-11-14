@@ -10,10 +10,10 @@
   <meta property="og:description" content="Hardware first guide for developers choosing Gemma or Llama 3: which GPU VRAM tiers suit each, multimodal versus coding tradeoffs, and try a local demo." />
   <meta property="og:url" content="https://blog.greencube.app/blog/llama-3-vs-gemma" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/765f35fd4d1d.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/llama-3-vs-gemma.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/765f35fd4d1d.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/llama-3-vs-gemma.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/llama-3-vs-gemma" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
@@ -22,7 +22,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GPU First For Developers: Gemma <12GB, Llama 3 40GB+", "description": "Hardware first guide for developers choosing Gemma or Llama 3: which GPU VRAM tiers suit each, multimodal versus coding tradeoffs, and try a local demo.", "image": "https://blog.greencube.app/blog/images/765f35fd4d1d.jpg", "datePublished": "2026-09-27", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llama-3-vs-gemma", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GPU First For Developers: Gemma <12GB, Llama 3 40GB+", "description": "Hardware first guide for developers choosing Gemma or Llama 3: which GPU VRAM tiers suit each, multimodal versus coding tradeoffs, and try a local demo.", "image": "https://blog.greencube.app/blog/covers/en/llama-3-vs-gemma.jpg", "datePublished": "2026-09-27", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llama-3-vs-gemma", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Gemma better than Llama?", "acceptedAnswer": {"@type": "Answer", "text": "Neither wins everywhere. Gemma is the better start on modest hardware or when you need image input; Llama has more fine-tunes and bigger sizes at the top, which helps with code and long reasoning. Test both on your own prompts and your own card."}}, {"@type": "Question", "name": "Is Gemma 3 free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The weights are free to download under Google's Gemma Terms of Use, which allow commercial use with a list of banned uses, and Gemma 4 moved to the standard Apache 2.0 licence. Your only cost is the hardware."}}, {"@type": "Question", "name": "Is Google Gemma the same as Gemini?", "acceptedAnswer": {"@type": "Answer", "text": "No. Gemini is Google's cloud assistant and hosted models, used through its apps and API; Gemma is a family of open models from the same research that anyone can download and run offline on their own PC."}}, {"@type": "Question", "name": "Which Gemma is best for coding?", "acceptedAnswer": {"@type": "Answer", "text": "The biggest one that fits in your graphics memory, since bigger is usually better for code in both families. If code is your main job, also look at models trained just for it."}}]}</script>
 </head>
 <body>
@@ -45,7 +45,7 @@
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 27 September 2026 &middot; updated 10 October 2026</p>
 
 <aside class="tested"><strong>We tested this</strong><ul><li><a href="/blog/gemma-4-requirements">Gemma 4 requirements: what PC you need to run it locally</a></li><li><a href="/blog/gemma-4-e2b-vs-e4b">Gemma 4 E2B vs E4B on a laptop: small vs big AI model, measured</a></li></ul></aside>
-<img class="cover" src="/blog/images/765f35fd4d1d.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/llama-3-vs-gemma.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Neither family wins everywhere, and your graphics card decides more than the benchmarks do. Gemma is the better start on modest hardware, especially if you need the model to read images: Gemma 3 from 4B up and Gemma 4 take images natively, and Gemma 4 comes under the Apache 2.0 licence. Llama 3 is the better start if you want the largest ecosystem of fine-tunes and tools, or a 70B model and the 40 GB or more of graphics memory to run it.</p></div>
 
 <p>Here are the checkpoints worth knowing, what each needs, and how to test them before you commit.</p>

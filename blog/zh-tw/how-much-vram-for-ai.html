@@ -10,10 +10,10 @@
   <meta property="og:description" content="AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。" />
   <meta property="og:url" content="https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡", "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡", "description": "AI 需要多少顯示記憶體？我們實測了：溢位顯示卡的模型會慢 6 倍，還會在長對話中崩潰。如何挑一個裝得下的模型。", "image": "https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "zh-TW", "mainEntityOfPage": "https://blog.greencube.app/blog/zh-tw/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/zh-tw/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "AI 模型裝不進顯示記憶體會怎樣？", "acceptedAnswer": {"@type": "Answer", "text": "裝不下的部分會改從一般記憶體執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒寫出 5.9 個 token，全部放在顯示卡上時則是 35.6 個：慢了 6 倍。"}}, {"@type": "Question", "name": "應該跑顯示卡載入得了的最大 AI 模型嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不應該。要留空間給對話。一個 120 億參數的模型在 8 GB 顯示卡上回答短問題時裝得下，但對話一變長就當掉了。一個裝得下又有餘裕的小模型更快，而且從來沒當過。"}}, {"@type": "Question", "name": "應該留多少顯示記憶體？", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube 會在顯示卡上留約 1.5 GB 給對話和 Windows。沒有這些空間時，一張 4 GB 顯示卡在第一則訊息就記憶體不足了。"}}]}</script>
 </head>
 <body>
@@ -64,6 +64,7 @@
 <p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡</h1>
 <p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
+<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>你需要的顯示記憶體，要能裝下整個模型，再加上約 1.5 GB 給對話和 Windows。整個裝進顯示卡記憶體的 AI 跑得很快。溢出去的那種，最後可能比完全不用顯示卡還慢，而且可能會當掉。小一點但整個在顯示卡上，勝過大一點但只有一半在上面。</p></div>
 
 <p>這不是我們從規格表上抄來的。我們在開發 GreenCube（我做的應用程式）時，在一台真實的遊戲電腦上量出來，而這些結果改變了 GreenCube 挑選模型的方式。</p>

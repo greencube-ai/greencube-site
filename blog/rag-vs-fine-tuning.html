@@ -10,10 +10,10 @@
   <meta property="og:description" content="Measure first: ship a prompt-only baseline, add RAG to fix knowledge gaps, then fine-tune remaining behavior. Includes a $9.99 offline privacy option." />
   <meta property="og:url" content="https://blog.greencube.app/blog/rag-vs-fine-tuning" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/6ec0d42ff7bf.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/rag-vs-fine-tuning.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/6ec0d42ff7bf.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/rag-vs-fine-tuning.jpg" />
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://blog.greencube.app/blog/rag-vs-fine-tuning" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -23,7 +23,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners", "description": "Measure first: ship a prompt-only baseline, add RAG to fix knowledge gaps, then fine-tune remaining behavior. Includes a $9.99 offline privacy option.", "image": "https://blog.greencube.app/blog/images/6ec0d42ff7bf.jpg", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/rag-vs-fine-tuning", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners", "description": "Measure first: ship a prompt-only baseline, add RAG to fix knowledge gaps, then fine-tune remaining behavior. Includes a $9.99 offline privacy option.", "image": "https://blog.greencube.app/blog/covers/en/rag-vs-fine-tuning.jpg", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/rag-vs-fine-tuning", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What makes a tune a RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Nothing: RAG isn't a kind of tuning. It fetches relevant text when you ask and adds it to the prompt, and the model's weights don't change at all."}}, {"@type": "Question", "name": "What is better than RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Nothing, in general: RAG and fine-tuning fix different problems. RAG is usually better for adding knowledge, especially facts that change or are rarely seen, and fine-tuning for behaviour; many systems use both."}}, {"@type": "Question", "name": "Is fine-tuning still relevant?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Methods like LoRA make it cheap enough for changing behaviour, like a fixed output format, a steady tone or a narrow task, where retrieval alone doesn't help."}}, {"@type": "Question", "name": "Can I run a private AI without RAG or fine-tuning?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A local AI app runs a ready-made model on your computer, and you just give it your documents. GreenCube is one for Windows (€9.99 once): it reads PDFs, Word files and photos on your PC and works offline after the first download."}}]}</script>
 </head>
 <body>
@@ -45,7 +45,7 @@
 <h1>Measure First: Decide RAG vs Fine-Tuning in an Afternoon for Practitioners</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 2 October 2026</p>
 
-<img class="cover" src="/blog/images/6ec0d42ff7bf.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/rag-vs-fine-tuning.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Use RAG (retrieval-augmented generation) when the model needs to know things: facts that change often, private documents, answers that must cite a source. Use fine-tuning when the model needs to behave differently: a fixed format, a consistent tone, a narrow task done the same way every time. If you're not sure which problem you have, start with plain prompts, add RAG for the knowledge gaps, and fine-tune only what's still wrong after that.</p></div>
 
 <p>Below is what each one does, how they compare, and an afternoon's worth of measuring that tells you which you need.</p>

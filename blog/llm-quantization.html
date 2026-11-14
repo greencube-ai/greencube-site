@@ -10,10 +10,10 @@
   <meta property="og:description" content="For practitioners: LLM quantization that works in production. Choose PTQ or QAT, run a 6 step workflow, match bitwidth to hardware, build calibration..." />
   <meta property="og:url" content="https://blog.greencube.app/blog/llm-quantization" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/32fc7c2379de.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/llm-quantization.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/32fc7c2379de.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/llm-quantization.jpg" />
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://blog.greencube.app/blog/llm-quantization" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -23,7 +23,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "LLM Quantization: 6 Step PTQ Workflow for Practitioners", "description": "For practitioners: LLM quantization that works in production. Choose PTQ or QAT, run a 6 step workflow, match bitwidth to hardware, build calibration...", "image": "https://blog.greencube.app/blog/images/32fc7c2379de.jpg", "datePublished": "2026-09-29", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llm-quantization", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "LLM Quantization: 6 Step PTQ Workflow for Practitioners", "description": "For practitioners: LLM quantization that works in production. Choose PTQ or QAT, run a 6 step workflow, match bitwidth to hardware, build calibration...", "image": "https://blog.greencube.app/blog/covers/en/llm-quantization.jpg", "datePublished": "2026-09-29", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/llm-quantization", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is LLM model quantization?", "acceptedAnswer": {"@type": "Answer", "text": "Storing a model's weights, and sometimes its activations, in fewer bits (8 or 4 instead of 16), so it's smaller and faster at some cost in accuracy."}}, {"@type": "Question", "name": "What is the best quantization method for LLMs?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your hardware. On GPUs with FP8 support, 8-bit FP8 is close to lossless; for tight memory, 4-bit weight-only GPTQ or AWQ is the standard, which on a home PC usually means a Q4_K_M or Q5_K_M GGUF file."}}, {"@type": "Question", "name": "When should you quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "When memory, speed or cost stops you running it, like fitting a model on one consumer GPU or a laptop. If you have plenty of all three, quantizing adds risk for little gain."}}, {"@type": "Question", "name": "How do I quantize a model?", "acceptedAnswer": {"@type": "Answer", "text": "Measure the full-precision model first, decide how much drop you'll accept, and pick a method. Then quantize with a maintained tool like llm-compressor or llama.cpp's quantize tool, using a calibration set that looks like your real traffic, and compare with the original before you ship."}}]}</script>
 </head>
 <body>
@@ -45,7 +45,7 @@
 <h1>LLM Quantization: 6 Step PTQ Workflow for Practitioners</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 29 September 2026 &middot; updated 10 October 2026</p>
 
-<img class="cover" src="/blog/images/32fc7c2379de.jpg" alt="Decorative watercolor title card for LLM quantization" width="1080" height="720" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/llm-quantization.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>LLM quantization stores a model's numbers with fewer bits, for example 4 or 8 instead of 16, so the model needs less memory and runs faster, at some cost in accuracy. Done well, the loss is small: 8-bit formats come close to the original, and 4-bit is the usual choice when a model has to fit on one GPU or a laptop. Most people use post-training quantization (PTQ), which takes minutes to hours, rather than retraining the model.</p></div>
 
 <p>Below is how it works in plain terms, the methods worth knowing, and a six-step workflow for quantizing a model yourself. If you only want to run a quantized model, not make one, skip to the section near the end about that.</p>

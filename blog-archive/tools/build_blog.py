@@ -218,6 +218,18 @@ def try_box(lang, slug):
     return (f'</article>\n<section class="post-try gd" id="try"><h2>{w["try_h"]}</h2><p>{w["try_p"]}</p>\n<div class="gd-wrap">\n{DEMO_WIN}</div>\n'
             f'<p class="gd-label">{lab}</p>\n<link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>\n<article class="after-try">')
 
+COVERS = os.path.join(SRC, 'covers')
+def cover_of(lang, en_slug):
+    """(published path, absolute url) of this post's cover: headline cover in English, the drawing alone elsewhere"""
+    kind = 'en' if lang == 'en' else 'art'
+    if not os.path.exists(os.path.join(COVERS, kind, en_slug + '.webp')): return None
+    return f'/blog/covers/{kind}/{en_slug}.webp', f'{HOST}/blog/covers/{kind}/{en_slug}.jpg'  # share image as JPEG: every app shows it
+def cover_img(lang, en_slug, cls='cover', lazy=False):
+    c = cover_of(lang, en_slug)
+    if not c: return ''
+    return (f'<img class="{cls}" src="{c[0]}" alt="" width="800" height="420"'
+            + (' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"') + '/>')
+
 def bridge_top(lang, slug, body):
     """A short strip right after the answer box, for groups whose words have 'top_h': the reader just learned the
     answer; show them the app that does it, with the clickable demo as the easy first step."""
@@ -236,6 +248,7 @@ def bridge_top(lang, slug, body):
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
 shutil.copy(os.path.join(os.path.dirname(__file__), 'blog.css'), f'{OUT}/blog.css')
+if os.path.isdir(os.path.join(SRC, 'covers')): shutil.copytree(os.path.join(SRC, 'covers'), f'{OUT}/covers')
 
 # ---------- images: max 1200 px wide, real JPEG unless it needs transparency ----------
 sizes = {}
@@ -403,7 +416,7 @@ for p in idx:
     modified = max(TODAY, published) if changed else (p['date_modified'] or p['sitemap_lastmod'] or published)[:10]
     url = f'{HOST}/blog/{slug}'
     cover = image(p['cover_image']) if p['cover_image'] else None
-    og = HOST + cover[0] if cover else 'https://greencube.app/og.jpg'
+    og = cover_of('en', slug)[1] if cover_of('en', slug) else (HOST + cover[0] if cover else 'https://greencube.app/og.jpg')
     ld = [{
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
         'image': og, 'datePublished': published, 'dateModified': modified, 'inLanguage': 'en',
@@ -424,7 +437,7 @@ for p in idx:
     content = (
         f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
-        + (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else '')
+        + ((cover_img('en', slug) + '\n') if cover_of('en', slug) else (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else ''))
         + bridge_mid('en', slug, bridge_top('en', slug, body)) + faq_html + try_box('en', slug) + bridge_box('en', slug) + '</article>\n')
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
@@ -486,7 +499,7 @@ for lang, slug, meta, body in own:
     faq = [(f['q'], f['a']) for f in meta.get('faq', [])]
     ld = [{
         '@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': title, 'description': desc,
-        'image': 'https://greencube.app/og.jpg', 'datePublished': published, 'dateModified': meta.get('modified', published),
+        'image': (cover_of(lang, group_key(lang, slug, meta)) or (0, 'https://greencube.app/og.jpg'))[1], 'datePublished': published, 'dateModified': meta.get('modified', published),
         'inLanguage': html_lang(lang), 'mainEntityOfPage': url,
         'author': {'@type': 'Person', 'name': AUTHOR, 'url': author_url(lang)},
         'publisher': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app',
@@ -502,7 +515,7 @@ for lang, slug, meta, body in own:
         f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
         f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}'
         + (f' &middot; {W["updated"]} {W["date"](meta["modified"])}' if meta.get('modified', published) != published else '')
-        + '</p>\n'
+        + '</p>\n' + cover_img(lang, group_key(lang, slug, meta)) + '\n'
         + bridge_mid(lang, group_key(lang, slug, meta), bridge_top(lang, group_key(lang, slug, meta), body)) + faq_html
         + try_box(lang, group_key(lang, slug, meta))
         + (bridge_box(lang, group_key(lang, slug, meta))
@@ -512,7 +525,7 @@ for lang, slug, meta, body in own:
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/{lang}/{slug}.html'
     os.makedirs(os.path.dirname(path), exist_ok=True)
     md = lang in MD_LANGS
-    open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, 'https://greencube.app/og.jpg', ld, content, lang=lang, alts=alts, md=md))
+    open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, (cover_of(lang, group_key(lang, slug, meta)) or (0, 'https://greencube.app/og.jpg'))[1], ld, content, lang=lang, alts=alts, md=md))
     if md:  # a plain markdown copy at <address>.md (noindex via vercel.json, never in the sitemap)
         open(path[:-5] + '.md', 'w', encoding='utf-8', newline='\n').write(
             to_md.page(title, desc, url, body, published, meta.get('modified'), AUTHOR, faq))
@@ -597,7 +610,9 @@ def list_page(lang, entries, url, path):
     for i, (s, t, d, pub, _) in enumerate(feat):
         m = own_meta[(lang, s)]
         stat = f'<b class="hub-stat">{m["stat"]}</b>' if m.get('stat') else ''
-        cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}"><span class="hub-top">{stat}</span>'
+        en = m.get('alt', s) if lang != 'en' else s
+        top = cover_img(lang, en, 'hub-thumb', True) or f'<span class="hub-top">{stat}</span>'
+        cards.append(f'<a class="hub-feat {("g", "b", "y", "p")[i % 4]}" href="{L["base"]}{s}">{top}'
                      f'<span class="hub-body"><h3>{esc(t)}</h3><p>{esc(m.get("teaser", d))}</p>'
                      f'<span class="hub-go">{L["read"]} <span aria-hidden="true">&rarr;</span></span></span></a>')
     # the library: every other guide, A to Z, plain titles (leading numbers and prices ignored when sorting)
@@ -609,8 +624,9 @@ def list_page(lang, entries, url, path):
         tint_of = dict((k, tn) for k, tn, _ in TOPICS)
         def where(s):
             return (pinned[s], tint_of[pinned[s]]) if s in pinned else topic_of(s)
-        books = ''.join(f'<li><a href="{L["base"]}{s}"><span class="lib-ico {where(s)[1]}">{ICONS[where(s)[0]]}</span>'
-                        f'<span class="lib-txt"><h3>{esc(t)}</h3><p>{esc(d)}</p></span></a></li>'
+        books = ''.join(f'<li><a href="{L["base"]}{s}">' + (cover_img(lang, (own_meta[(lang, s)].get('alt', s) if lang != 'en' and (lang, s) in own_meta else s), 'lib-thumb', True) or f'<span class="lib-ico {where(s)[1]}">{ICONS[where(s)[0]]}</span>') +
+                        (f'<span class="lib-txt vh"><h3>{esc(t)}</h3></span></a></li>' if cover_of(lang, (own_meta[(lang, s)].get('alt', s) if lang != 'en' and (lang, s) in own_meta else s)) and lang == 'en'
+                         else f'<span class="lib-txt"><h3>{esc(t)}</h3><p>{esc(d)}</p></span></a></li>')
                         for s, t, d, *_ in sorted(rest, key=sort_key))
         guides = (f'<section class="hub-sec" id="library"><h2>{G["lib"]}</h2><p class="hub-sub">{G["lib_sub"].format(n=len(rest))}</p>'
                   f'<ul class="library">{books}</ul></section>\n')

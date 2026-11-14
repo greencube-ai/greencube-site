@@ -403,3 +403,18 @@ figure.shot figcaption { margin-top: 10px; text-align: center; font-size: 14px; 
 .post-try .gd-label { max-width: 692px; margin: 12px auto 0; text-align: center; font-size: 13px; color: var(--ink-mute); }
 article.after-try { padding-top: 8px; }
 article.after-try .cta-box { margin-top: 20px; }
+
+/* covers (14 Nov): Medium-style thumbnails on the blog home, a cover on top of each post */
+.hub-thumb { display: block; width: 100%; height: auto; aspect-ratio: 800 / 420; object-fit: cover; border-bottom: 1px solid var(--line); }
+.library a { align-items: center; }
+.lib-thumb { flex: 0 0 auto; width: 132px; height: auto; aspect-ratio: 800 / 420; border-radius: 10px; border: 1px solid var(--line); margin: 0 !important; }
+article > img.cover { max-height: none; width: 100%; aspect-ratio: 800 / 420; object-fit: cover; margin: 0 0 30px; }
+@media (max-width: 520px) { .lib-thumb { width: 96px; } }
+
+/* library = a wall of covers (Hector 14 Nov: the title is already on the cover); the title stays for screen readers and Google */
+.library:has(.lib-thumb) { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.library a:has(.lib-thumb) { padding: 0; overflow: hidden; border-radius: 16px; display: block; }
+.library a:has(.lib-thumb) .lib-thumb { width: 100%; border: 0; border-radius: 0; display: block; }
+.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 900px) { .library:has(.lib-thumb) { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .library:has(.lib-thumb) { grid-template-columns: 1fr; } .lib-thumb { width: 100%; } }

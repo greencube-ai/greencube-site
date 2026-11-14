@@ -10,10 +10,10 @@
   <meta property="og:description" content="Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt." />
   <meta property="og:url" content="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/de/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss", "description": "Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "de", "mainEntityOfPage": "https://blog.greencube.app/blog/de/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/de/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss", "description": "Wie viel VRAM brauchst du für KI? Wir haben es gemessen: Ein Modell, das nicht ganz auf die Grafikkarte passt, läuft 6-mal langsamer und stürzt in langen Chats ab. So wählst du eins, das passt.", "image": "https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "de", "mainEntityOfPage": "https://blog.greencube.app/blog/de/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/de/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was passiert, wenn ein KI-Modell nicht in den VRAM passt?", "acceptedAnswer": {"@type": "Answer", "text": "Der Teil, der nicht passt, läuft aus dem normalen Arbeitsspeicher, und alles wird langsamer. Auf unserer Karte mit 8 GB schrieb ein Modell mit 28 seiner Schichten auf der Karte 5,9 Tokens pro Sekunde statt 35,6 mit allen: 6-mal langsamer."}}, {"@type": "Question", "name": "Soll ich das größte KI-Modell laufen lassen, das meine Karte laden kann?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Lass Platz für das Gespräch. Ein Modell mit 12 Milliarden Parametern passte für eine kurze Frage auf eine Karte mit 8 GB und stürzte dann ab, sobald der Chat länger wurde. Ein kleineres Modell mit Luft war schneller und stürzte nie ab."}}, {"@type": "Question", "name": "Wie viel VRAM sollte ich frei lassen?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube lässt etwa 1,5 GB der Karte für das Gespräch und für Windows frei. Ohne diesen Platz ging einer Karte mit 4 GB schon bei der ersten Nachricht der Speicher aus."}}]}</script>
 </head>
 <body>
@@ -64,6 +64,7 @@
 <p class="kicker"><a href="/blog/de">GreenCube-Blog</a></p>
 <h1>Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss</h1>
 <p class="byline">Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 23. Oktober 2026</p>
+<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Du brauchst genug VRAM für das ganze Modell plus etwa 1,5 GB für das Gespräch und Windows. Eine KI, die komplett in den Speicher deiner Grafikkarte passt, ist schnell. Eine, die überläuft, kann am Ende langsamer sein, als wenn du die Karte gar nicht nutzt, und sie kann abstürzen. Kleiner und ganz auf der Karte schlägt größer und halb drauf.</p></div>
 
 <p>Das haben wir nicht aus einem Datenblatt. Wir haben es auf einem echten Gaming-PC gemessen, während wir GreenCube gebaut haben, die App, die ich entwickle, und die Ergebnisse haben verändert, wie GreenCube ein Modell auswählt.</p>

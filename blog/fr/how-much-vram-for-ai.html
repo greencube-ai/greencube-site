@@ -10,10 +10,10 @@
   <meta property="og:description" content="Combien de VRAM faut-il pour l&#x27;IA ? Nous l&#x27;avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient." />
   <meta property="og:url" content="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://greencube.app/og.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://greencube.app/og.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/fr/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="en" href="https://blog.greencube.app/blog/how-much-vram-for-ai" />
   <link rel="alternate" hreflang="es" href="https://blog.greencube.app/blog/es/cuanta-vram-para-ia" />
@@ -43,7 +43,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Combien de VRAM faut-il pour l'IA ? Pourquoi le modèle doit tenir sur votre GPU", "description": "Combien de VRAM faut-il pour l'IA ? Nous l'avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient.", "image": "https://greencube.app/og.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Combien de VRAM faut-il pour l'IA ? Pourquoi le modèle doit tenir sur votre GPU", "description": "Combien de VRAM faut-il pour l'IA ? Nous l'avons mesuré : un modèle qui déborde de votre carte graphique tourne 6 fois plus lentement et plante dans les longues conversations. Comment en choisir un qui tient.", "image": "https://blog.greencube.app/blog/covers/art/how-much-vram-for-ai.jpg", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "inLanguage": "fr", "mainEntityOfPage": "https://blog.greencube.app/blog/fr/how-much-vram-for-ai", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/fr/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Que se passe-t-il si un modèle d'IA ne tient pas dans la VRAM ?", "acceptedAnswer": {"@type": "Answer", "text": "La partie qui ne tient pas tourne depuis la mémoire normale, et tout ralentit. Sur notre carte de 8 Go, un modèle avec 28 de ses couches sur la carte a écrit à 5,9 tokens par seconde au lieu de 35,6 avec toutes ses couches : 6 fois plus lent."}}, {"@type": "Question", "name": "Faut-il faire tourner le plus grand modèle d'IA que ma carte peut charger ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Laissez de la place pour la conversation. Un modèle de 12 milliards de paramètres a tenu sur une carte de 8 Go pour une question courte, puis a planté dès que la conversation s'est allongée. Un modèle plus petit qui tient avec de la marge était plus rapide et n'a jamais planté."}}, {"@type": "Question", "name": "Combien de VRAM faut-il laisser libre ?", "acceptedAnswer": {"@type": "Answer", "text": "GreenCube laisse environ 1,5 Go de la carte libre pour la conversation et pour Windows. Sans cette marge, une carte de 4 Go a manqué de mémoire dès le premier message."}}]}</script>
 </head>
 <body>
@@ -64,6 +64,7 @@
 <p class="kicker"><a href="/blog/fr">Blog GreenCube</a></p>
 <h1>Combien de VRAM faut-il pour l&#x27;IA ? Pourquoi le modèle doit tenir sur votre GPU</h1>
 <p class="byline">Par <a href="/blog/fr/hector-gras">Hector Gras</a> &middot; 23 octobre 2026</p>
+<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Il vous faut assez de VRAM pour contenir tout le modèle, plus environ 1,5 Go pour la conversation et Windows. Une IA qui tient entièrement dans la mémoire de votre carte graphique est rapide. Une IA qui déborde peut finir plus lente que si vous n'utilisiez pas la carte du tout, et elle peut planter. Plus petite et entièrement sur la carte vaut mieux que plus grande et à moitié dessus.</p></div>
 
 <p>Nous ne l'avons pas tiré d'une fiche technique. Nous l'avons mesuré sur un vrai PC gamer en développant GreenCube, l'appli que je fais, et les résultats ont changé la façon dont GreenCube choisit un modèle.</p>

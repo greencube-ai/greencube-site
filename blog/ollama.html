@@ -10,10 +10,10 @@
   <meta property="og:description" content="Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls." />
   <meta property="og:url" content="https://blog.greencube.app/blog/ollama" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://blog.greencube.app/blog/images/d61bfa7dd883.jpg" />
+  <meta property="og:image" content="https://blog.greencube.app/blog/covers/en/ollama.jpg" />
   <meta property="og:site_name" content="GreenCube" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://blog.greencube.app/blog/images/d61bfa7dd883.jpg" />
+  <meta name="twitter:image" content="https://blog.greencube.app/blog/covers/en/ollama.jpg" />
   <link rel="canonical" href="https://blog.greencube.app/blog/ollama" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
@@ -22,7 +22,7 @@
   <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/fonts/fonts.css" />
   <link rel="stylesheet" href="/blog/blog.css" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls", "description": "Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls.", "image": "https://blog.greencube.app/blog/images/d61bfa7dd883.jpg", "datePublished": "2026-09-21", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ollama", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls", "description": "Run Ollama locally in six commands, then manage models, save disk and battery, and use official docs to avoid common setup and resource pitfalls.", "image": "https://blog.greencube.app/blog/covers/en/ollama.jpg", "datePublished": "2026-09-21", "dateModified": "2026-10-10", "inLanguage": "en", "mainEntityOfPage": "https://blog.greencube.app/blog/ollama", "author": {"@type": "Person", "name": "Hector Gras", "url": "https://blog.greencube.app/blog/hector-gras"}, "publisher": {"@type": "Organization", "name": "GreenCube", "url": "https://greencube.app", "logo": {"@type": "ImageObject", "url": "https://greencube.app/icon-512.png"}}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What exactly does Ollama do?", "acceptedAnswer": {"@type": "Answer", "text": "It downloads open models and runs them on your computer, through a command line, a desktop app and a local API. You can chat with a model or call it from your own scripts."}}, {"@type": "Question", "name": "What is Ollama vs ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT runs in the cloud, so your messages go to OpenAI's servers; Ollama runs models on your own hardware, so local chats stay on your PC and cost nothing per message. The catch is that the models you can run at home are smaller and weaker than the one behind ChatGPT."}}, {"@type": "Question", "name": "Is Ollama fully free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes for local use: it's free and open source (MIT), and running local models costs only electricity. Its cloud models need an Ollama account and have their own terms."}}, {"@type": "Question", "name": "What are the disadvantages of Ollama?", "acceptedAnswer": {"@type": "Answer", "text": "Big models need a lot of memory, local models trail the top cloud AIs on hard reasoning, and you manage models, disk space and settings yourself, mostly from a terminal. The background service also uses memory while a model is loaded."}}]}</script>
 </head>
 <body>
@@ -44,7 +44,7 @@
 <h1>Ollama in 6 Commands for Developers: Run a Local LLM and Avoid Pitfalls</h1>
 <p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 21 September 2026 &middot; updated 10 October 2026</p>
 
-<img class="cover" src="/blog/images/d61bfa7dd883.jpg" alt="" width="1080" height="720" fetchpriority="high"/>
+<img class="cover" src="/blog/covers/en/ollama.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Ollama is a free, open-source tool (MIT licence) that downloads and runs language models such as Gemma, Qwen and gpt-oss on your own computer. You use it from the command line, from its desktop app, or through a local API that other programs can call. Six commands cover most of what you'll do day to day: pull, run, list, show, ps and rm.</p></div>
 
 <p>It's a good choice if you're comfortable in a terminal and want private, offline access to open models without paying per token. It's the wrong choice if you need the strongest reasoning available, or if your PC doesn't have the memory for the model you want.</p>
