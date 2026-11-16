@@ -108,7 +108,7 @@ def tested_box(slug):
 #     (Hector, 2026-11-09: the blog brings ~all search visits, but almost none reach /buy). Words: words/<lang>.json
 #     post.bridge.<group>; a language without them keeps its old cta_* box. Pictures are real GreenCube outputs.
 BRIDGE_OF = {  # English slug -> group; anything not listed falls to BRIDGE_RULES
-    'pc': ('best-laptop-ai-assistant', 'gpu-for-local-ai', 'can-my-pc-run-ai', 'gemma-4-e2b-vs-e4b', 'gguf-vs-ggml', 'hardware-for-local-ai',
+    'pc': ('best-laptop-ai-assistant', 'gpu-for-local-ai', 'laptop-for-local-ai', 'can-my-pc-run-ai', 'gemma-4-e2b-vs-e4b', 'gguf-vs-ggml', 'hardware-for-local-ai',
            'how-much-vram-for-ai', 'llm-quantization', 'offline-ai-mac', 'run-ai-on-8gb-ram', 'gemma-4-requirements',
            'best-local-ai-models', 'best-small-llm', 'llm-models', 'context-window-llm', 'how-does-local-ai-work',
            'local-ai-image-generator-speed', 'local-ai-chatbot-windows', 'no-setup-ai', 'llama-3-vs-gemma'),
