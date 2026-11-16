@@ -69,6 +69,8 @@ Crear una imagen cuesta mucho más que chatear. Tardó de 8 a 9 segundos con una
 | Sin tarjeta, 16 GB de RAM | Suficiente para chatear y estudiar con una IA más pequeña. Las imágenes tardan un par de minutos. |
 | Sin tarjeta, 8 GB de RAM | Funciona para chatear, despacio. Cierra antes otras apps. Sin imágenes. |
 
+¿Vas a comprar algo este Black Friday? Antes mira las guías con lo que medimos: [qué tarjeta gráfica comprar para IA](https://blog.greencube.app/blog/es/tarjeta-grafica-para-ia-local) y [qué portátil comprar para IA](https://blog.greencube.app/blog/es/portatil-para-ia-local).
+
 ## ¿Y para qué tener la IA en tu propio PC?
 
 Una IA en tu propio PC no tiene límites de mensajes ni cuota mensual, y sigue funcionando sin internet, en el tren o en una biblioteca con un wifi horrible. No le gana en todo a las IAs más grandes de la nube, y va tan rápido como tu hardware. Pero para estudiar, escribir, resumir y dudas del día a día, la IA de un PC normal cumple, y nunca se acaba.
