@@ -126,7 +126,7 @@
   let fc = { at: 0, flip: false, order: [0, 1, 2, 3, 4] };
   function fcRender() {
     const n = T.cards.length, [f, b] = T.cards[fc.order[fc.at]], size = (t) => t.length <= 40 ? 'xl' : t.length <= 90 ? 'l' : 'm';
-    body.innerHTML = '<div class="fd"><div class="fd-card' + (fc.flip ? ' flip' : '') + '" role="button" tabindex="0" aria-label="' + esc(U.fc_flip) + '"><div class="fd-in">' +
+    body.innerHTML = '<div class="fd"><div class="fd-card' + (fc.flip ? ' fd-flipped' : '') + '" role="button" tabindex="0" aria-label="' + esc(U.fc_flip) + '"><div class="fd-in">' +
       '<div class="fd-f"><i></i><div class="fd-top"><span>' + esc(U.fc_question) + '</span><span>' + (fc.at + 1) + ' / ' + n + '</span></div><div class="fd-txt ' + size(f) + '">' + esc(f) + '</div><div class="fd-hint">' + esc(U.fc_hint) + '</div></div>' +
       '<div class="fd-b"><div class="fd-top"><span>' + esc(U.fc_answer) + '</span><span>' + (fc.at + 1) + ' / ' + n + '</span></div><div class="fd-rule"></div><div class="fd-txt ' + size(b) + '">' + esc(b) + '</div></div></div></div>' +
       '<div class="fd-prog"><i style="width:' + ((fc.at + 1) / n * 100) + '%"></i></div>' +
@@ -136,7 +136,7 @@
   }
   function fcAct(a) {
     const n = T.cards.length;
-    if (a === 'flip') { fc.flip = !fc.flip; root.querySelector('.fd-card').classList.toggle('flip', fc.flip); root.querySelector('.fd-show').textContent = fc.flip ? U.fc_show_question : U.fc_show_answer; return; }
+    if (a === 'flip') { fc.flip = !fc.flip; root.querySelector('.fd-card').classList.toggle('fd-flipped', fc.flip); root.querySelector('.fd-show').textContent = fc.flip ? U.fc_show_question : U.fc_show_answer; return; }
     if (a === 'shuffle') { for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [fc.order[i], fc.order[j]] = [fc.order[j], fc.order[i]]; } fc.at = 0; }
     if (a === 'prev') fc.at = Math.max(0, fc.at - 1);
     if (a === 'next') fc.at = Math.min(n - 1, fc.at + 1);
