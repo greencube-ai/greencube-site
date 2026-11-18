@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/id">Blog GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/id">Blog GreenCube</a></p>
 <h1>Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu</h1>
-<p class="byline">Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 23 Oktober 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 23 Oktober 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Daftar isi"><p class="toc-h">Daftar isi</p><ol><li><a href="#tesnya">Tesnya</a></li><li><a href="#apa-yang-kami-pelajari">Apa yang kami pelajari</a></li><li><a href="#cara-memilih-model-untuk-kartumu">Cara memilih model untuk kartumu</a></li><li><a href="#pertanyaan">Pertanyaan</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>AI milikmu sendiri, di PC-mu sendiri</b><p>GreenCube berjalan di komputermu: tanpa batas pemakaian, tanpa langganan, jalan tanpa internet. &euro;9,99 (US$9,99), bayar sekali.</p><a class="cta" href="#try">Coba di sini <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Kamu butuh VRAM yang cukup untuk memuat seluruh model ditambah sekitar 1,5 GB untuk percakapan dan Windows. AI yang muat sepenuhnya di memori kartu grafismu akan cepat. Yang meluber bisa jadi lebih lambat daripada tidak memakai kartu sama sekali, dan bisa crash. Lebih kecil dan utuh di kartu lebih baik daripada lebih besar dan setengahnya di kartu.</p></div>
 
 <p>Ini tidak kami ambil dari lembar spesifikasi. Kami mengukurnya di PC gaming nyata saat membangun GreenCube, aplikasi yang saya buat, dan hasilnya mengubah cara GreenCube memilih model.</p>
 
-<h2>Tesnya</h2>
+<h2 id="tesnya">Tesnya</h2>
 <p>PC-nya adalah desktop dengan AMD RX 5700 XT (VRAM 8 GB) dan RAM 48 GB. Kami memuat model 12 miliar parameter (Gemma 4 12B, sekitar 6,7 GB) dan menaruh bagian yang lebih banyak atau lebih sedikit di kartu, semuanya dalam satu sesi pada September 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Seberapa banyak model yang ada di kartu</th><th>Menulis (token/detik)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Tidak yakin PC-mu sanggup? <a href="https://greencube.app/id/what-you-get">Cek apa yang bisa jalan di PC-mu <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Apa yang kami pelajari</h2>
+<h2 id="apa-yang-kami-pelajari">Apa yang kami pelajari</h2>
 <h3>Hampir semua atau tidak sama sekali</h3>
 <p>Membiarkan sebagian kecil model di luar kartu membuatnya 6 kali lebih lambat. Dengan 20 lapisan di kartu, ia lebih lambat daripada model lebih kecil yang jalan tanpa kartu sama sekali. Setengah di kartu memberimu yang terburuk dari keduanya.</p>
 
@@ -93,20 +93,20 @@
 <h3>Sisakan ruang</h3>
 <p>Di GTX 1650 4 GB, model 4,2 GB dijejalkan ke kartu 3,9 GB, dan pesan pertamanya langsung gagal dengan "memori tidak cukup". Sejak itu, GreenCube menyisakan sekitar 1,5 GB kartu kosong untuk chat dan untuk Windows.</p>
 
-<h2>Cara memilih model untuk kartumu</h2>
+<h2 id="cara-memilih-model-untuk-kartumu">Cara memilih model untuk kartumu</h2>
 <ol class="steps">
 <li>Cek VRAM-mu: Task Manager &rarr; Performance (Kinerja) &rarr; GPU &rarr; Dedicated GPU memory (Memori GPU khusus).</li>
 <li>Tambahkan sekitar 1,5 GB ke ukuran file model. Totalnya harus muat di VRAM-mu.</li>
 <li>Kalau ragu, pilih yang lebih kecil. Model lebih kecil yang utuh di kartu lebih baik daripada model lebih besar yang setengahnya di kartu.</li>
 </ol>
 <p>Kalau kamu tidak mau berhitung, GreenCube membaca kartumu dan memilih model yang muat dengan ruang tersisa. Kecepatan nyata di 10 PC, dari GTX 1650 sampai RTX 5060, ada di <a href="/blog/id/can-my-pc-run-ai">Bisakah PC-ku menjalankan AI?</a></p>
-<h2>Pertanyaan</h2>
+<h2 id="pertanyaan">Pertanyaan</h2>
 <div class="faq">
 <details><summary>Apa yang terjadi kalau model AI tidak muat di VRAM?</summary><p>Bagian yang tidak muat berjalan dari memori biasa, dan semuanya melambat. Di kartu 8 GB kami, model dengan 28 lapisannya di kartu menulis 5,9 token per detik, bukan 35,6 seperti saat semua lapisannya di kartu: 6 kali lebih lambat.</p></details>
 <details><summary>Haruskah aku menjalankan model AI terbesar yang bisa dimuat kartuku?</summary><p>Tidak. Sisakan ruang untuk percakapan. Model 12 miliar parameter muat di kartu 8 GB untuk pertanyaan pendek, lalu crash begitu chat jadi lebih panjang. Model lebih kecil yang muat dengan ruang tersisa lebih cepat dan tidak pernah crash.</p></details>
 <details><summary>Berapa VRAM yang sebaiknya dibiarkan kosong?</summary><p>GreenCube menyisakan sekitar 1,5 GB kartu kosong untuk percakapan dan untuk Windows. Tanpa ruang itu, kartu 4 GB kehabisan memori di pesan pertama.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Coba GreenCube di sini</h2><p>Ini jendela aplikasinya sendiri. Kirim salah satu permintaan, buka hasilnya dan ubah lewat chat, atau buat gambar di Gambar.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Apakah GreenCube bisa jalan di PC-mu?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>RAM 8 GB, tanpa kartu grafis</span><em>Semua fitur jalan, hanya lebih lambat.</em></li><li><b>Sprout</b><span>RAM 16 GB, atau 8 GB dengan kartu grafis</span><em>Kecepatan stabil, bisa membuat slide presentasi.</em></li><li><b>Bloom</b><span>Kartu grafis 8 GB, atau kartu 4-6 GB dengan RAM 16 GB</span><em>Cepat, gambar tanpa menunggu.</em></li><li><b>Thrive</b><span>Kartu 8 GB atau lebih dan RAM 24 GB atau lebih</span><em>Paling cepat.</em></li></ul><p>GreenCube memeriksa PC-mu dan memasang model AI yang cocok: tanpa terminal, tanpa pengaturan. &euro;9,99 (US$9,99), bayar sekali, dan jadi milikmu.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/id/what-you-get">Cek PC-mu <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/id/buy">Dapatkan GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Baca juga</h2><div class="rel-grid"><a class="rel-card" href="/blog/id/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI mana yang tidak melatih modelnya dengan chat-mu? Kami mengecek 9 (Oktober 2026)</span></a><a class="rel-card" href="/blog/id/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI untuk merangkum catatan: mana yang dipilih soal batas dan privasi (2026)</span></a><a class="rel-card" href="/blog/id/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Bisakah PC-ku menjalankan AI? Kami mengukur 10 PC gaming dan laptop sungguhan</span></a><a class="rel-card" href="/blog/id/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Asisten AI paling privat: 10 AI sudah dicek (2026)</span></a><a class="rel-card" href="/blog/id/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Bisakah menjalankan AI dengan RAM 8 GB? Kami mencoba laptop terlemah kami</span></a><a class="rel-card" href="/blog/id/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">Bisakah RTX 2080 Ti menjalankan AI? Terukur: 65–71 token per detik</span></a></div></section></article>
 
 </main>
 

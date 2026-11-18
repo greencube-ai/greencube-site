@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/zh">GreenCube 博客</a></p>
 <h1>AI 需要多少显存？为什么模型必须装进显卡</h1>
-<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月23日</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目录"><p class="toc-h">目录</p><ol><li><a href="#测试">测试</a></li><li><a href="#我们的发现">我们的发现</a></li><li><a href="#怎么为你的显卡挑模型">怎么为你的显卡挑模型</a></li><li><a href="#常见问题">常见问题</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>属于你自己的 AI，就在你的电脑上</b><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99 (US$9.99)，一次付清。</p><a class="cta" href="#try">在这里试试 <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>你需要的显存，要能装下整个模型，再加上约 1.5 GB 留给对话和 Windows。完全装进显卡内存的 AI 跑得很快。溢出去的那种，最后可能比根本不用显卡还慢，还可能崩溃。小一点但完全在显卡上，胜过大一点却只装了一半。</p></div>
 
 <p>这不是从参数表上抄来的。我们在开发 GreenCube（我做的应用）时，在一台真实的游戏电脑上测出来的，测试结果也改变了 GreenCube 挑选模型的方式。</p>
 
-<h2>测试</h2>
+<h2 id="测试">测试</h2>
 <p>测试用的是一台装有 AMD RX 5700 XT（8 GB 显存）和 48 GB 内存的台式机。我们加载了一个 120 亿参数的模型（Gemma 4 12B，约 6.7 GB），把它或多或少地放到显卡上，所有测试都在 2026 年 9 月的同一次会话中完成。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>模型有多少在显卡上</th><th>输出速度（token/秒）</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">不确定你的电脑带不带得动？<a href="https://greencube.app/zh/what-you-get">看看你的电脑能跑什么 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我们的发现</h2>
+<h2 id="我们的发现">我们的发现</h2>
 <h3>几乎是全有或全无</h3>
 <p>只要模型有一部分不在显卡上，速度就慢了 6 倍。显卡上放 20 层时，它比一个完全不用显卡的小模型还慢。一半在显卡上，等于两头的缺点都占了。</p>
 
@@ -93,20 +93,20 @@
 <h3>留出余量</h3>
 <p>在一张 4 GB 的 GTX 1650 上，一个 4.2 GB 的模型被硬塞进了 3.9 GB 的显卡，结果第一条消息就因为“内存不足”失败了。从那以后，GreenCube 都会在显卡上留出约 1.5 GB 给聊天和 Windows。</p>
 
-<h2>怎么为你的显卡挑模型</h2>
+<h2 id="怎么为你的显卡挑模型">怎么为你的显卡挑模型</h2>
 <ol class="steps">
 <li>查看你的显存：任务管理器 &rarr; 性能 &rarr; GPU &rarr; 专用 GPU 内存。</li>
 <li>用模型文件大小加上约 1.5 GB，总数应该装得进你的显存。</li>
 <li>拿不准时就选小的。完全在显卡上的小模型，胜过一半在显卡上的大模型。</li>
 </ol>
 <p>如果你不想自己算，GreenCube 会读取你的显卡，挑一个装得下且留有余量的模型。从 GTX 1650 到 RTX 5060，10 台电脑的真实速度见 <a href="/blog/zh/can-my-pc-run-ai">我的电脑能跑 AI 吗？</a></p>
-<h2>常见问题</h2>
+<h2 id="常见问题">常见问题</h2>
 <div class="faq">
 <details><summary>AI 模型装不进显存会怎样？</summary><p>装不下的部分会在普通内存里运行，整体都会变慢。在我们的 8 GB 显卡上，一个把 28 层放在显卡上的模型每秒输出 5.9 个 token，而全部放在显卡上时是 35.6 个：慢了 6 倍。</p></details>
 <details><summary>应该运行显卡能加载的最大 AI 模型吗？</summary><p>不应该。给对话留出空间。一个 120 亿参数的模型在 8 GB 显卡上回答短问题没问题，但对话一长就崩溃了。一个装得下还有富余的小模型更快，而且从没崩溃过。</p></details>
 <details><summary>应该留出多少显存？</summary><p>GreenCube 会在显卡上留出约 1.5 GB 给对话和 Windows。没有这部分空间时，一张 4 GB 显卡在第一条消息时就内存不足了。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>就在这里试试 GreenCube</h2><p>这是应用本身的窗口。发送一个提示，打开它做出的内容并通过聊天修改，或者在“图片”里生成一张图片。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube 能在你的电脑上运行吗？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB 内存，无显卡</span><em>都能用，只是慢一些。</em></li><li><b>Sprout</b><span>16 GB 内存，或 8 GB 加显卡</span><em>速度稳定，能写演示文稿。</em></li><li><b>Bloom</b><span>8 GB 显卡，或 4-6 GB 显卡加 16 GB 内存</span><em>很快，生成图片不用等。</em></li><li><b>Thrive</b><span>8 GB 或以上显卡，加 24 GB 或以上内存</span><em>最快。</em></li></ul><p>GreenCube 会查看你的电脑，装好适合它的 AI 模型：不用命令行，不用设置。&euro;9.99（US$9.99），一次付费，就归你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh/what-you-get">检查你的电脑 <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh/buy">获取 GreenCube</a></p></div>
-</article>
+<section class="related"><h2>继续阅读</h2><div class="rel-grid"><a class="rel-card" href="/blog/zh/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">哪个 AI 不用你的聊天训练？我们核实了 9 个（2026 年 10 月）</span></a><a class="rel-card" href="/blog/zh/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">用 AI 总结笔记：按上限和隐私该选哪个（2026）</span></a><a class="rel-card" href="/blog/zh/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">我的电脑能跑 AI 吗？我们实测了 10 台游戏电脑和笔记本</span></a><a class="rel-card" href="/blog/zh/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">最注重隐私的 AI 助手：核对了 10 个 AI（2026）</span></a><a class="rel-card" href="/blog/zh/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">8 GB 内存能跑 AI 吗？我们用最弱的笔记本电脑试了试</span></a><a class="rel-card" href="/blog/zh/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">RTX 2080 Ti 能跑 AI 吗？实测：每秒 65–71 个 token</span></a></div></section></article>
 
 </main>
 

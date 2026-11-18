@@ -39,24 +39,24 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a></p>
 <h1>Desktop First Private Self Hosted AI Assistant: 3 Deployment Paths</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 4 September 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 4 September 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/self-hosted-ai-assistant.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#which-path-fits-you">Which path fits you</a></li><li><a href="#what-s-inside-any-self-hosted-assistant">What&#x27;s inside any self-hosted assistant</a></li><li><a href="#how-much-hardware-you-need">How much hardware you need</a></li><li><a href="#setting-it-up-three-recipes">Setting it up: three recipes</a></li><li><a href="#what-private-means-here">What &quot;private&quot; means here</a></li><li><a href="#common-problems-and-fixes">Common problems and fixes</a></li><li><a href="#why-i-think-most-people-should-start-with-a-desktop-app">Why I think most people should start with a desktop app</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/self-hosted-ai-assistant.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Yes, you can run a private AI assistant on your own hardware, and there are three practical ways to do it. A desktop app gets you chatting offline in minutes with no setup. A self-hosted server with a web interface gives you full control and lets several people share it. A hybrid setup keeps your documents local and sends only the hardest questions to a cloud model. Which one fits depends on your skills, your hardware and how private your data is.</p></div>
 
 <p>I build GreenCube, a desktop app, so I lean towards the first path. Weigh my opinion with that in mind. The other two are good choices for the right person, and I'll describe them fairly.</p>
 
-<h2>Which path fits you</h2>
+<h2 id="which-path-fits-you">Which path fits you</h2>
 <p><strong>A desktop app</strong> suits you if you want it working today, don't want to touch a terminal, and are happy with fewer settings to tweak. It installs like any program, downloads a model, and that's it.</p>
 <p><strong>A self-hosted server</strong> suits you if you already use Docker, want several people to use the same assistant from their browsers, or want to build your own document search. Expect a weekend to get it running and some upkeep after that.</p>
 <p><strong>A hybrid setup</strong> suits you if some of your work is sensitive and some needs the reasoning of a large cloud model. You keep files local and send selected questions out. It's the most flexible and the easiest to get wrong.</p>
 <p>A few questions worth answering before you pick: what data will the assistant see, and does any of it have to stay on your premises? What does the tool send over the network, and when? Who will keep it updated? What happens to your chats if you uninstall it or change computers?</p>
 
 <p class="bridge-mid">Want your chats to stay on your own computer? <a href="https://greencube.app/buy">See what GreenCube keeps on your PC <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What's inside any self-hosted assistant</h2>
+<h2 id="what-s-inside-any-self-hosted-assistant">What's inside any self-hosted assistant</h2>
 <p>Every setup, simple or complex, has the same four parts. Knowing them tells you what you're trusting with your data, even if you buy a packaged app.</p>
 <ol>
 <li>The model runner does the actual work. llama.cpp is the open-source engine many tools build on; <a href="/blog/ollama-vs-lm-studio">Ollama and LM Studio</a> wrap it with model downloads and a simpler interface. Many runners offer an OpenAI-compatible API, so other apps can talk to them.</li>
@@ -65,7 +65,7 @@
 <li>Connectors link the assistant to email, calendars or folders. Each one is useful and each one is another place data can travel, so add them only when you need them.</li>
 </ol>
 
-<h2>How much hardware you need</h2>
+<h2 id="how-much-hardware-you-need">How much hardware you need</h2>
 <p>The model has to fit in memory, and bigger models need more. On a laptop without a graphics card, small models in the 2 to 4 billion parameter range are what's comfortable; a graphics card with 6 GB or more of video memory makes larger ones practical. Running models at reduced precision (<a href="/blog/llm-quantization">quantization</a>) shrinks them a lot with a small loss in quality, and it's how almost everyone runs local AI.</p>
 <p>For a real-world idea of speed, here's how fast GreenCube writes on the PCs we tested:</p>
 <div class="tbl-wrap"><table>
@@ -78,7 +78,7 @@
 </table></div>
 <p>Model files also take disk space, a few gigabytes each, and that adds up quickly if you try many. <a href="/blog/hardware-for-local-ai">Hardware for local AI</a> goes into more detail.</p>
 
-<h2>Setting it up: three recipes</h2>
+<h2 id="setting-it-up-three-recipes">Setting it up: three recipes</h2>
 <h3>1. A desktop app (GreenCube as the example)</h3>
 <ol>
 <li>Download the installer and run it on Windows 10 or 11.</li>
@@ -106,11 +106,11 @@
 </ol>
 <p>One wrong routing rule can send something you meant to keep local, so test the redaction before you rely on it.</p>
 
-<h2>What "private" means here</h2>
+<h2 id="what-private-means-here">What "private" means here</h2>
 <p>Almost no tool has zero network traffic forever. A desktop app usually needs to download its model and check a licence; a server needs updates. The useful question is what goes out, and when. A tool that needs your chats to leave the machine to work is a different thing from one that only checks a licence.</p>
 <p>GreenCube, for example, goes online to sign you in, to download the AI on first launch, to check for updates, and for web searches if you switch Online on. Your chats, files and images are saved on your PC. If you run a hybrid setup, every cloud call is a point where data leaves, so keep API keys out of config files you share and treat the cloud provider's data policy as part of your setup.</p>
 
-<h2>Common problems and fixes</h2>
+<h2 id="common-problems-and-fixes">Common problems and fixes</h2>
 <ul>
 <li>The model won't load: check that the file format matches your runner. Most local tools expect <a href="/blog/gguf-vs-ggml">GGUF</a>.</li>
 <li>The PC freezes or the app crashes: you're probably out of memory. Close other programs or use a smaller model.</li>
@@ -118,10 +118,10 @@
 <li>The document index disappears after an upgrade: back up the vector database before upgrading anything.</li>
 </ul>
 
-<h2>Why I think most people should start with a desktop app</h2>
+<h2 id="why-i-think-most-people-should-start-with-a-desktop-app">Why I think most people should start with a desktop app</h2>
 <p>A lot of self-hosting advice assumes you enjoy tinkering. If you do, the server path is rewarding and gives you control over every piece. But many people just want a private place to ask questions and read a PDF without a subscription, and for them, Docker and vector databases are a lot of work for the same result.</p>
 <p>That's who GreenCube is for. It costs &euro;9.99 once, with a 15-day refund, and besides chat it makes slide decks, documents, flashcards, quizzes and images. It runs on Windows only. It's a single-person desktop app, not a server your team connects to, and it won't out-reason a large cloud model on the hardest problems. If you need shared access or custom pipelines, build the server.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>Can you self-host your own AI?</summary><p>Yes. Run a model runner like Ollama or llama.cpp on your own hardware with a web interface on top, or install a desktop app that sets it up for you; either way your chats stay on your machine.</p></details>
 <details><summary>Can I build my own personal AI assistant?</summary><p>Yes, with open-source parts: a local model runner, a front end, and a vector database if you want to search your documents. If these tools are new to you, expect a weekend to get a first version going.</p></details>
@@ -129,7 +129,7 @@
 <details><summary>Can I build my own AI agent for free?</summary><p>Yes. Open-source model runners and front ends are free; you need hardware that can run the model, and time to set up document search and any connectors yourself.</p></details>
 <details><summary>What&#x27;s the difference between a desktop AI app and a self-hosted server?</summary><p>A desktop app like GreenCube is one package for one person on one PC. A self-hosted server splits the model runner, storage and web interface into parts you set up and maintain yourself, usually so several people can share it.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -170,7 +170,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="private"><h3>An AI you own, on your own PC</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/> <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/> <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/> <path d="M47 61h28" stroke-width="3"/> </svg></span><span class="bt-name">Chat</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/> <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M52 18v12h12" /> <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/> </svg></span><span class="bt-name">Files</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M58 12v14h14"/> <path d="M28 38h26" stroke-width="4"/> <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">Documents</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slides</span></li></ul><p>GreenCube runs on your computer. Your chats are saved on your PC, and once it is installed it keeps working offline. &euro;9.99 (US$9.99), paid once.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/your-data">See what stays on your PC</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/en/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Which AI doesn&#x27;t train on your chats? We checked 9 (October 2026)</span></a><a class="rel-card" href="/blog/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/en/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI to summarize your notes: which to pick for limits and privacy (2026)</span></a><a class="rel-card" href="/blog/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/en/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Can my PC run AI? We measured 10 real gaming PCs and laptops</span></a><a class="rel-card" href="/blog/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/en/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">How much VRAM do you need for AI? Why the model must fit on your GPU</span></a><a class="rel-card" href="/blog/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/en/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Can you run AI with 8 GB of RAM? We tried the weakest laptop we have</span></a><a class="rel-card" href="/blog/ai-without-login"><img class="rel-img" src="/blog/covers/en/ai-without-login.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI Chat Without Logging In: Try Guest Chat Now, Keep Work Offline</span></a></div></section></article>
 
 </main>
 

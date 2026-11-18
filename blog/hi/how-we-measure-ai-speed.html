@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/hi">GreenCube ब्लॉग</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/hi">GreenCube ब्लॉग</a></p>
 <h1>हम असली PC पर AI की रफ़्तार कैसे मापते हैं, और अंदाज़ा क्यों नहीं लगाते</h1>
-<p class="byline">लेखक: <a href="/blog/hi/hector-gras">Hector Gras</a> &middot; 14 अक्टूबर 2026</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>लेखक: <a href="/blog/hi/hector-gras">Hector Gras</a> &middot; 14 अक्टूबर 2026</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="विषय-सूची"><p class="toc-h">विषय-सूची</p><ol><li><a href="#हम-क-य-म-पत-ह">हम क्या मापते हैं</a></li><li><a href="#हम-क-स-म-पत-ह">हम कैसे मापते हैं</a></li><li><a href="#हम-र-म-प-सभ-pc">हमारे मापे सभी PC</a></li><li><a href="#स-ख-य-ए-र-ज-म-क-य-आत-ह">संख्याएँ रेंज में क्यों आती हैं</a></li><li><a href="#क-य-क-स-क-र-ड-क-रफ-त-र-उसक-स-प-स-फ-क-शन-स-अ-द-ज-लग-ई-ज-सकत-ह">क्या किसी कार्ड की रफ़्तार उसकी स्पेसिफ़िकेशन से अंदाज़ा लगाई जा सकती है?</a></li><li><a href="#हमन-अभ-क-य-नह-म-प">हमने अभी क्या नहीं मापा</a></li><li><a href="#ड-ट-ल">डेटा लें</a></li><li><a href="#अपन-pc-ज-ड">अपना PC जोड़ें</a></li><li><a href="#सव-ल">सवाल</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>आपका अपना AI, आपके अपने PC पर</b><p>GreenCube आपके कंप्यूटर पर चलता है: इस्तेमाल की कोई सीमा नहीं, कोई सब्सक्रिप्शन नहीं, बिना इंटरनेट के चलता है. &euro;9.99 (US$9.99), एक बार.</p><a class="cta" href="#try">यहीं आज़माएँ <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>इस ब्लॉग की हर रफ़्तार GreenCube चलाने वाले एक असली PC से आती है (अब तक 10 PC, 22 सितंबर 2026 और 14 अक्टूबर 2026 के बीच मापे गए). जिन कार्ड को हमने नहीं मापा, उनकी रफ़्तार का हम अंदाज़ा नहीं लगाते: जब हमने अपने कार्ड पर अंदाज़ों को परखा, तो आम अंदाज़ा 19% और सबसे बुरा 239% ग़लत निकला.</p></div>
 <div class="stats">
 <div class="stat g"><b>10</b><span>असली PC मापे गए, डेस्कटॉप और लैपटॉप</span></div>
 <div class="stat b"><b>34</b><span>माप, सब नीचे की CSV में</span></div>
 <div class="stat y"><b>239%</b><span>रफ़्तार का सबसे बुरा अंदाज़ा कितना ग़लत था</span></div>
 </div>
-<h2>हम क्या मापते हैं</h2>
+<h2 id="हम-क-य-म-पत-ह">हम क्या मापते हैं</h2>
 <p>तीन चीज़ें, क्योंकि अपने PC पर AI इस्तेमाल करते समय आप यही महसूस करते हैं:</p>
 <ul>
 <li><strong>लिखने की रफ़्तार:</strong> AI कितनी तेज़ी से अपना जवाब टाइप करता है, प्रति सेकंड टोकन में. टोकन किसी शब्द का एक हिस्सा होता है, और एक शब्द में कितने टोकन होते हैं यह भाषा पर निर्भर करता है, इसलिए हम इन रफ़्तारों को शब्दों में नहीं बदलते. मोटे तौर पर: प्रति सेकंड कुछ टोकन पढ़ने की रफ़्तार के क़रीब हैं, दसियों टोकन उससे साफ़ तेज़.</li>
@@ -79,7 +79,7 @@
 <li><strong>तस्वीर का समय:</strong> 512×512 की एक तस्वीर में कितना समय लगता है, क्लिक से तैयार तस्वीर तक.</li>
 </ul>
 <p>हम वही AI मापते हैं जो GreenCube देता है, वही फ़ाइलें जो हर यूज़र डाउनलोड करता है: चैट के लिए Google के Cube 2B (Gemma 4 E2B) (2.6 GB), Cube 4B (Gemma 4 E4B) (4.2 GB) और Cube 12B (Gemma 4 12B) (6.4 GB), और तस्वीरों के लिए Z-Image Turbo. कोई दूसरा AI, या वही AI किसी और तरह से कंप्रेस किया हुआ, अलग संख्याएँ देगा, इसलिए हम सिर्फ़ एक जैसी चीज़ों की तुलना करते हैं.</p>
-<h2>हम कैसे मापते हैं</h2>
+<h2 id="हम-क-स-म-पत-ह">हम कैसे मापते हैं</h2>
 <p>चार तरीक़ों से, और ब्लॉग की हर संख्या बताती है कि वह किस तरीक़े से आई:</p>
 <div class="card g">
 <h3>असली चैट</h3>
@@ -102,7 +102,7 @@
 <p>किसके लिए इस्तेमाल: <a href="/blog/hi/ai-on-rtx-2080-ti">RTX 2080 Ti</a>, <a href="/blog/hi/ai-on-rtx-3060">RTX 3060</a>, <a href="/blog/hi/ai-on-rx-6600">RX 6600</a>, <a href="/blog/hi/ai-on-gtx-1660-super">GTX 1660 Super</a>, <a href="/blog/hi/ai-on-intel-core-ultra-5-laptop">लैपटॉप (Intel Core Ultra 5)</a>.</p>
 </div>
 <p>असली चैट सबसे अच्छा सबूत है, क्योंकि आप यही महसूस करेंगे, इसलिए हर पेज की मुख्य संख्या जहाँ भी हो सके असली चैट से आती है. स्टार्टअप टेस्ट एक छोटा जवाब है, इसलिए हम इसे कार्ड बनाम प्रोसेसर की तुलना के लिए इस्तेमाल करते हैं (यह दोनों को एक ही तरह मापता है), और मुख्य संख्या के तौर पर सिर्फ़ वहाँ जहाँ टेस्टर ने कोई लंबा जवाब नहीं भेजा.</p>
-<h2>हमारे मापे सभी PC</h2>
+<h2 id="हम-र-म-प-सभ-pc">हमारे मापे सभी PC</h2>
 <p>असली टेस्टरों के अपने PC, जैसे वे आम तौर पर इस्तेमाल करते हैं, लैब मशीनें नहीं. हम उनके नाम प्रकाशित नहीं करते.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>PC</th><th>प्रकार</th><th>VRAM</th><th>RAM</th><th>मुख्य संख्या कहाँ से</th><th>GreenCube</th><th>तारीख़</th><th>लिखना (टोकन/सेकंड)</th></tr></thead>
@@ -119,14 +119,14 @@
 <tr><td><a href="/blog/hi/ai-on-intel-iris-xe-laptop">लैपटॉप (Intel Iris Xe)</a></td><td>लैपटॉप</td><td>–</td><td>8 GB</td><td>असली चैट</td><td>0.1.42</td><td>4 अक्टूबर 2026</td><td><b>5–7</b></td></tr>
 </tbody>
 </table></div>
-<h2>संख्याएँ रेंज में क्यों आती हैं</h2>
+<h2 id="स-ख-य-ए-र-ज-म-क-य-आत-ह">संख्याएँ रेंज में क्यों आती हैं</h2>
 <ul>
 <li><strong>दूसरे ऐप.</strong> ब्राउज़र, गेम लॉन्चर या वीडियो कॉल वही मेमोरी और ग्राफ़िक्स कार्ड इस्तेमाल करते हैं.</li>
 <li><strong>पहली बार धीमी होती है.</strong> इंस्टॉल के बाद पहला जवाब, या पहली तस्वीर, में लोडिंग और कार्ड को तैयार करना शामिल है. जहाँ ज़रूरी हो हम यह बताते हैं (जैसे "लोड होते समय पहली में 83 सेकंड लगे").</li>
 <li><strong>छोटे जवाब धीमे मापे जाते हैं.</strong> हर जवाब की एक छोटी तय शुरुआत होती है, जो 20 टोकन के जवाब पर 400 टोकन वाले से ज़्यादा भारी पड़ती है. इसीलिए असली चैट की रेंज 100 या ज़्यादा टोकन वाले जवाब गिनती है, और जहाँ टेस्टर ने सिर्फ़ छोटे जवाब भेजे वहाँ हम बताते हैं.</li>
 <li><strong>हम चरम मान छोड़ देते हैं.</strong> असली चैट की रेंज 10वें से 90वें पर्सेंटाइल तक जाती है, इसलिए कोई एक अजीब जवाब इसे नहीं हिला सकता.</li>
 </ul>
-<h2>क्या किसी कार्ड की रफ़्तार उसकी स्पेसिफ़िकेशन से अंदाज़ा लगाई जा सकती है?</h2>
+<h2 id="क-य-क-स-क-र-ड-क-रफ-त-र-उसक-स-प-स-फ-क-शन-स-अ-द-ज-लग-ई-ज-सकत-ह">क्या किसी कार्ड की रफ़्तार उसकी स्पेसिफ़िकेशन से अंदाज़ा लगाई जा सकती है?</h2>
 <p>यह काम का होता: सैकड़ों कार्ड हैं और हमने 10 PC मापे हैं. आम तरीक़ा मेमोरी बैंडविड्थ है. हर टोकन लिखने के लिए AI अपना पूरा मॉडल कार्ड की मेमोरी से पढ़ता है, इसलिए सिद्धांत में रफ़्तार लगभग बैंडविड्थ ÷ मॉडल का आकार, गुणा कुछ एफ़िशिएंसी होती है. कई ऑनलाइन कैलकुलेटर ऐसे ही काम करते हैं.</p>
 <p>तो हमने इसे अपने डेटा पर परखा. हमने एक बार में एक कार्ड छिपाया, बाकियों से प्रति GB/सेकंड रफ़्तार निकाली, छिपे कार्ड की रफ़्तार उसकी बैंडविड्थ से अंदाज़ा लगाई (निर्माताओं की स्पेसिफ़िकेशन से, जो <a href="https://www.techpowerup.com/gpu-specs/" rel="noopener">TechPowerUp GPU डेटाबेस</a> में जमा हैं), और मापी गई रफ़्तार से तुलना की. सब पर वही AI (Cube 4B (Gemma 4 E4B), पूरा कार्ड पर).</p>
 <div class="tbl-wrap"><table>
@@ -143,24 +143,24 @@
 </table></div>
 <p>आम अंदाज़ा 19% ग़लत था. सबसे बुरा <a href="/blog/hi/ai-on-rx-580">RX 580</a> था: उसकी मेमोरी के हिसाब से प्रति सेकंड लगभग 36 टोकन होने चाहिए थे, लेकिन उसने 11 लिखे. उसके बिना टेस्ट दोबारा चलाएँ, तो बाकी अब भी 33% तक ग़लत निकलते हैं. नया AMD RX 6600 उलटी दिशा में गया, अपनी बैंडविड्थ से ज़्यादा तेज़; शायद इसकी एक वजह उसका बड़ा ऑन-चिप कैश है (AMD इसे Infinity Cache कहता है). हर मापी गई संख्या उस कार्ड की मुख्य संख्या है, इसलिए सब एक ही तरह के टेस्ट से नहीं हैं; इससे थोड़ा शोर जुड़ता है, लेकिन यह तीन गुना चूक की वजह नहीं हो सकता.</p>
 <p><strong>यह काफ़ी अच्छा नहीं है.</strong> जो अंदाज़ा किसी नए कार्ड पर 33% या पुराने पर 239% ग़लत हो सकता है, वह कुछ लोगों को बताएगा कि उनका PC ठीक है जबकि वह धीमा है, या उलटा. इसलिए चेकर और कार्ड के पेज सिर्फ़ वही कार्ड दिखाते हैं जो हमने मापे हैं, और साफ़ बताते हैं जब आपका उनमें से नहीं है. हम हर नए कार्ड के साथ यह टेस्ट दोबारा चलाते हैं, और अगर ग़लती छोटी हो गई, तो कोई भी अंदाज़ा दिखाने से पहले हम यहाँ बताएँगे.</p>
-<h2>हमने अभी क्या नहीं मापा</h2>
+<h2 id="हमन-अभ-क-य-नह-म-प">हमने अभी क्या नहीं मापा</h2>
 <ul>
 <li>गेमिंग कार्ड वाला लैपटॉप.</li>
 <li>10 GB या ज़्यादा वाले कार्ड पर Cube 12B (Gemma 4 12B).</li>
 <li><a href="/blog/hi/ai-on-rx-5700-xt">RX 5700 XT</a>, <a href="/blog/hi/ai-on-rtx-5060">RTX 5060</a>, <a href="/blog/hi/ai-on-gtx-1650">GTX 1650</a>, <a href="/blog/hi/ai-on-rx-580">RX 580</a> पर तस्वीरें.</li>
 <li>GreenCube के अलावा दूसरे AI, और Linux या Mac (GreenCube Windows के लिए है).</li>
 </ul>
-<h2>डेटा लें</h2>
+<h2 id="ड-ट-ल">डेटा लें</h2>
 <p>इस पेज का हर माप, हर एक की एक पंक्ति, <a href="/blog/greencube-ai-speeds.csv" download>greencube-ai-speeds.csv</a> में है: PC, AI, वह कहाँ चला, लिखने और पढ़ने की रफ़्तार, तस्वीर का समय, कैसे मापा गया, GreenCube वर्ज़न और तारीख़. अगर आप इसे इस्तेमाल करें, तो कृपया "GreenCube, AI speed measurements on real PCs, 2026" का हवाला दें और इस पेज का लिंक दें.</p>
-<h2>अपना PC जोड़ें</h2>
+<h2 id="अपन-pc-ज-ड">अपना PC जोड़ें</h2>
 <p>पहले से GreenCube इस्तेमाल करते हैं? अपना लॉग <a href="mailto:support@greencube.app">support@greencube.app</a> पर भेजें. हम आपके PC को आपके नाम के बिना टेस्ट में जोड़ेंगे, और नए कार्ड को उसका अपना पेज मिलेगा. पता नहीं आपके PC में क्या है? <a href="/blog/hi/can-my-pc-run-ai#checker">यहाँ जाँचें</a>.</p>
-<h2>सवाल</h2>
+<h2 id="सव-ल">सवाल</h2>
 <div class="faq">
 <details><summary>GreenCube की AI रफ़्तार की संख्याएँ कहाँ से आती हैं?</summary><p>GreenCube चलाने वाले 10 असली PC से, जिन्हें असली चैट में, GreenCube के स्टार्टअप स्पीड टेस्ट से, llama.cpp के स्पीड टेस्ट से और एक तस्वीर टेस्ट से मापा गया. हर संख्या बताती है कि वह किससे आई.</p></details>
 <details><summary>क्या ग्राफ़िक्स कार्ड की स्पेसिफ़िकेशन से AI की रफ़्तार का अंदाज़ा लगाया जा सकता है?</summary><p>अभी भरोसेमंद तरीक़े से नहीं. मेमोरी बैंडविड्थ से अंदाज़ा लगाने पर हमारे अंदाज़े आम तौर पर 19% और 239% तक ग़लत निकले, इसलिए हम सिर्फ़ मापे गए कार्ड दिखाते हैं.</p></details>
 <details><summary>क्या मैं डेटा डाउनलोड कर सकता हूँ?</summary><p>हाँ: हर माप greencube-ai-speeds.csv में है, जिसका लिंक इस पेज पर है.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>GreenCube को यहीं आज़माएँ</h2><p>यह ऐप की अपनी विंडो है। कोई एक प्रॉम्प्ट भेजें, जो वह बनाए उसे खोलें और चैट करके बदलें, या इमेज सेक्शन में एक तस्वीर बनाएँ।</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -201,7 +201,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="about"><h3>एक AI जो आपका अपना है</h3><p>यह आपके PC पर चलता है और आपकी स्लाइड, डायग्राम और भी बहुत कुछ बनाता है. इंस्टॉल होने के बाद ऑफ़लाइन चलता है. &euro;9.99 (US$9.99), एक बार भुगतान.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/hi/buy">GreenCube लें <span aria-hidden="true">&rarr;</span></a></p></div>
-</article>
+<section class="related"><h2>आगे पढ़ें</h2><div class="rel-grid"><a class="rel-card" href="/blog/hi/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">कौन-सा AI आपकी चैट पर ट्रेनिंग नहीं करता? हमने 9 जाँचे (अक्टूबर 2026)</span></a><a class="rel-card" href="/blog/hi/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">नोट्स का सारांश बनाने वाला AI: सीमाओं और प्राइवेसी के हिसाब से कौन-सा चुनें (2026)</span></a><a class="rel-card" href="/blog/hi/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">क्या मेरे PC पर AI चलेगा? हमने 10 असली गेमिंग PC और लैपटॉप मापे</span></a><a class="rel-card" href="/blog/hi/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI के लिए कितनी VRAM चाहिए? मॉडल का आपके GPU में समाना क्यों ज़रूरी है</span></a><a class="rel-card" href="/blog/hi/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">सबसे निजी AI असिस्टेंट: 10 AI जाँचे गए (2026)</span></a><a class="rel-card" href="/blog/hi/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">क्या 8 GB RAM पर AI चल सकता है? हमने अपना सबसे कमज़ोर लैपटॉप आज़माया</span></a></div></section></article>
 
 </main>
 

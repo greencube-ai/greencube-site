@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/it">Blog di GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/it">Blog di GreenCube</a></p>
 <h1>Quanta VRAM serve per l&#x27;IA? Perché il modello deve stare nella tua GPU</h1>
-<p class="byline">Di <a href="/blog/it/hector-gras">Hector Gras</a> &middot; 23 ottobre 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Di <a href="/blog/it/hector-gras">Hector Gras</a> &middot; 23 ottobre 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Indice"><p class="toc-h">Indice</p><ol><li><a href="#il-test">Il test</a></li><li><a href="#cosa-abbiamo-imparato">Cosa abbiamo imparato</a></li><li><a href="#come-scegliere-un-modello-per-la-tua-scheda">Come scegliere un modello per la tua scheda</a></li><li><a href="#domande">Domande</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>La tua IA, sul tuo PC</b><p>GreenCube gira sul tuo computer: nessun limite d'uso, nessun abbonamento, funziona senza internet. 9,99&nbsp;&euro; (9,99&nbsp;US$), pagati una volta.</p><a class="cta" href="#try">Provalo qui <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Ti serve abbastanza VRAM per contenere tutto il modello, più circa 1,5 GB per la conversazione e per Windows. Un'IA che sta tutta nella memoria della tua scheda grafica è veloce. Una che trabocca può finire per essere più lenta che non usare affatto la scheda, e può bloccarsi. Più piccola e tutta sulla scheda batte più grande e a metà.</p></div>
 
 <p>Non l'abbiamo preso da una scheda tecnica. L'abbiamo misurato su un vero PC da gaming mentre sviluppavamo GreenCube, l'app che faccio, e i risultati hanno cambiato il modo in cui GreenCube sceglie un modello.</p>
 
-<h2>Il test</h2>
+<h2 id="il-test">Il test</h2>
 <p>Il PC era un desktop con una AMD RX 5700 XT (8 GB di VRAM) e 48 GB di RAM. Abbiamo caricato un modello da 12 miliardi di parametri (Gemma 4 12B, circa 6,7 GB) e ne abbiamo messo più o meno sulla scheda, tutto in un'unica sessione a settembre 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quanto del modello era sulla scheda</th><th>Scrive (token/s)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Non sai se il tuo PC ce la fa? <a href="https://greencube.app/it/what-you-get">Guarda cosa gira sul tuo <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Cosa abbiamo imparato</h2>
+<h2 id="cosa-abbiamo-imparato">Cosa abbiamo imparato</h2>
 <h3>È quasi tutto o niente</h3>
 <p>Lasciare fuori dalla scheda anche solo una parte del modello l'ha reso 6 volte più lento. Con 20 strati sulla scheda era più lento di un modello più piccolo che girava senza scheda. A metà sulla scheda hai il peggio di entrambe le cose.</p>
 
@@ -93,20 +93,20 @@
 <h3>Lascia spazio</h3>
 <p>Su una GTX 1650 da 4 GB, un modello da 4,2 GB è stato schiacciato su una scheda da 3,9 GB, e il primissimo messaggio è fallito con «memoria insufficiente». Da allora GreenCube tiene libero circa 1,5 GB della scheda per la chat e per Windows.</p>
 
-<h2>Come scegliere un modello per la tua scheda</h2>
+<h2 id="come-scegliere-un-modello-per-la-tua-scheda">Come scegliere un modello per la tua scheda</h2>
 <ol class="steps">
 <li>Controlla la tua VRAM: Gestione attività &rarr; Prestazioni &rarr; GPU &rarr; Memoria GPU dedicata.</li>
 <li>Aggiungi circa 1,5 GB alla dimensione del file del modello. Quel totale deve stare nella tua VRAM.</li>
 <li>Nel dubbio, scegli più piccolo. Un modello più piccolo tutto sulla scheda batte uno più grande a metà.</li>
 </ol>
 <p>Se preferisci non fare i conti, GreenCube legge la tua scheda e sceglie un modello che ci sta con margine. Le velocità reali su 10 PC, da una GTX 1650 a una RTX 5060, sono in <a href="/blog/it/can-my-pc-run-ai">Il mio PC può far girare l'IA?</a></p>
-<h2>Domande</h2>
+<h2 id="domande">Domande</h2>
 <div class="faq">
 <details><summary>Cosa succede se un modello di IA non sta nella VRAM?</summary><p>La parte che non ci sta gira dalla memoria normale, e tutto rallenta. Sulla nostra scheda da 8 GB, un modello con 28 dei suoi strati sulla scheda ha scritto a 5,9 token al secondo invece di 35,6 con tutti: 6 volte più lento.</p></details>
 <details><summary>Devo usare il modello di IA più grande che la mia scheda riesce a caricare?</summary><p>No. Lascia spazio per la conversazione. Un modello da 12 miliardi di parametri è entrato in una scheda da 8 GB per una domanda breve, poi si è bloccato appena la chat si è allungata. Un modello più piccolo che ci stava con margine è stato più veloce e non si è mai bloccato.</p></details>
 <details><summary>Quanta VRAM devo lasciare libera?</summary><p>GreenCube lascia libero circa 1,5 GB della scheda per la conversazione e per Windows. Senza quel margine, una scheda da 4 GB è rimasta senza memoria al primo messaggio.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Prova GreenCube proprio qui</h2><p>Questa è la finestra dell&rsquo;app. Invia una delle richieste, apri ciò che crea e cambialo chattando, oppure crea un&rsquo;immagine in Immagini.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube funzionerà sul tuo PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB di RAM, senza scheda grafica</span><em>Funziona tutto, solo più lentamente.</em></li><li><b>Sprout</b><span>16 GB di RAM, o 8 GB con una scheda</span><em>Velocità costante, crea presentazioni.</em></li><li><b>Bloom</b><span>Una scheda grafica da 8 GB, o una scheda da 4-6 GB con 16 GB di RAM</span><em>Veloce, immagini senza attese.</em></li><li><b>Thrive</b><span>Una scheda da 8 GB o più e 24 GB di RAM o più</span><em>La più veloce.</em></li></ul><p>GreenCube esamina il tuo PC e installa il modello di IA adatto: niente terminale, niente impostazioni. 9,99&nbsp;&euro; (9,99 US$), pagati una volta, ed è tua.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/it/what-you-get">Controlla il tuo PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/it/buy">Prendi GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Continua a leggere</h2><div class="rel-grid"><a class="rel-card" href="/blog/it/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Quale IA non si allena sulle tue chat? Ne abbiamo verificate 9 (ottobre 2026)</span></a><a class="rel-card" href="/blog/it/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">IA per riassumere gli appunti: quale scegliere per limiti e privacy (2026)</span></a><a class="rel-card" href="/blog/it/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">L&#x27;IA gira sul mio PC? Abbiamo misurato 10 PC da gaming e portatili reali</span></a><a class="rel-card" href="/blog/it/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">L&#x27;assistente IA più privato: 10 IA verificate (2026)</span></a><a class="rel-card" href="/blog/it/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">L&#x27;IA gira con 8 GB di RAM? Abbiamo provato il nostro portatile più debole</span></a><a class="rel-card" href="/blog/it/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">L&#x27;IA gira su una RTX 2080 Ti? Misurato: 65–71 token al secondo</span></a></div></section></article>
 
 </main>
 

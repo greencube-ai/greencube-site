@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/uk">Блог GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/uk">Блог GreenCube</a><span aria-hidden="true">&rsaquo;</span><a href="/blog/uk#t-pc">Ваш ПК</a></p>
 <h1>Найкраща локальна модель ШІ для вашого ПК за ОЗП і відеопам&#x27;яттю (виміряно)</h1>
-<p class="byline">Автор: <a href="/blog/uk/hector-gras">Hector Gras</a> &middot; 28 жовтня 2026 р.</p>
-<img class="cover" src="/blog/covers/art/best-local-ai-models.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Автор: <a href="/blog/uk/hector-gras">Hector Gras</a> &middot; 28 жовтня 2026 р.</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/best-local-ai-models.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Зміст"><p class="toc-h">Зміст</p><ol><li><a href="#найкраща-модель-для-вашого-пк">Найкраща модель для вашого ПК</a></li><li><a href="#чому-вміщується-важливіше-за-найбільша">Чому «вміщується» важливіше за «найбільша»</a></li><li><a href="#моделі-які-ми-виміряли">Моделі, які ми виміряли</a></li><li><a href="#як-перевірити-свою-відеопам-ять">Як перевірити свою відеопам&#x27;ять</a></li><li><a href="#запитання">Запитання</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Ваш власний ШІ на вашому власному ПК</b><p>GreenCube працює на вашому комп'ютері: без обмежень, без підписки, без інтернету. 9,99&nbsp;&euro; (9,99&nbsp;US$), оплата один раз.</p><a class="cta" href="#try">Спробуйте тут <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Найкраща локальна модель ШІ для вашого ПК це найбільша, яка повністю вміщується на вашу відеокарту із запасом близько 1,5 ГБ. Якщо відеокарти немає, беріть малу модель, що працює в ОЗП. Менша модель повністю на відеокарті краща за більшу, яка з неї вилазить: коли частина моделі не вміщалася, ми виміряли, що вона працювала вшестеро повільніше.</p></div>
 
 <p>Нижче вибір для кожного типу ПК зі швидкостями, які ми виміряли на 10 реальних ПК. Одне варто знати одразу: ми заміряли лише моделі Gemma 4, які постачає GreenCube (GreenCube роблю я), тож швидкості я наводжу лише для них. Правило вибору розміру працює для будь-якої родини моделей.</p>
 
-<h2>Найкраща модель для вашого ПК</h2>
+<h2 id="найкраща-модель-для-вашого-пк">Найкраща модель для вашого ПК</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Ваш ПК</th><th>Розмір моделі, що вміщується</th><th>Що ми виміряли</th></tr></thead>
 <tbody>
@@ -84,12 +84,12 @@
 <p>Кожна відеокарта має власну сторінку в статті <a href="/blog/uk/can-my-pc-run-ai">Чи потягне мій ПК ШІ?</a>, або можна ввести свою в <a href="/blog/uk/can-my-pc-run-ai#checker">перевірку</a>.</p>
 
 <p class="bridge-mid">Не впевнені, що ваш ПК потягне? <a href="https://greencube.app/uk/what-you-get">Перевірте, що на ньому запрацює <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Чому «вміщується» важливіше за «найбільша»</h2>
+<h2 id="чому-вміщується-важливіше-за-найбільша">Чому «вміщується» важливіше за «найбільша»</h2>
 <p>Коли модель вилазить за межі відеокарти, вона може працювати повільніше, ніж зовсім без відеокарти. На RX 5700 XT з 8 ГБ Gemma 4 12B писала 35,6 токена за секунду повністю на відеокарті, 5,9 з частиною поза нею і 4,3 з ще меншою частиною на ній. Остання цифра повільніша, ніж у меншої моделі, що працює без відеокарти. Увесь тест є в статті <a href="/blog/uk/how-much-vram-for-ai">скільки відеопам'яті потрібно для ШІ</a>.</p>
 <p>І вміститися для одного запитання не те саме, що вміститися для чату. Та сама модель 12B вмістилася на відеокарту з 8 ГБ для короткого запитання, а потім падала щоразу, коли розмова ставала довшою, бо розмові теж потрібне місце на відеокарті. Саме для цього й потрібен запас у 1,5 ГБ.</p>
 <p>А мала модель часто цілком годиться. На ноутбуці з 16 ГБ Gemma 4 E2B дала повну навчальну відповідь за 20 секунд і правильно пройшла 5 з 5 швидких перевірок фактів. E4B пояснювала краще, але витратила 112 секунд. Більше про це в статті <a href="/blog/uk/gemma-4-e2b-vs-e4b">E2B проти E4B, виміряно</a>.</p>
 
-<h2>Моделі, які ми виміряли</h2>
+<h2 id="моделі-які-ми-виміряли">Моделі, які ми виміряли</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Модель</th><th>Розмір файлу</th><th>Найкраще на</th><th>Ліцензія</th></tr></thead>
 <tbody>
@@ -100,14 +100,14 @@
 </table></div>
 <p>Для будь-якої іншої моделі правило те саме: візьміть розмір файлу, додайте близько 1,5 ГБ і порівняйте зі своєю відеопам'яттю. Подробиці про Gemma є в статті <a href="/blog/uk/gemma-4-requirements">вимоги Gemma 4</a>.</p>
 
-<h2>Як перевірити свою відеопам'ять</h2>
+<h2 id="як-перевірити-свою-відеопам-ять">Як перевірити свою відеопам'ять</h2>
 <ol class="steps">
 <li>Натисніть Ctrl + Shift + Esc, щоб відкрити Диспетчер завдань.</li>
 <li>Перейдіть у Продуктивність, потім Графічний процесор.</li>
 <li>Подивіться на Виділену пам'ять графічного процесора: це і є ваша відеопам'ять. Якщо виділеної пам'яті немає, беріть малу модель в ОЗП.</li>
 </ol>
 <p>Безкоштовні застосунки на кшталт LM Studio, Jan і Ollama дають вам обрати модель самостійно (<a href="/blog/uk/best-offline-ai-chatbot">12 застосунків у порівнянні</a>). Якщо ви не хочете обирати взагалі, GreenCube дивиться на вашу відеокарту й ОЗП і обирає модель, яка вміщується із запасом.</p>
-<h2>Запитання</h2>
+<h2 id="запитання">Запитання</h2>
 <div class="faq">
 <details><summary>Яка локальна модель ШІ найкраща?</summary><p>Найбільша модель, яка повністю вміщується на вашу відеокарту із запасом близько 1,5 ГБ. Менша модель повністю на відеокарті краща за більшу, яка переходить в ОЗП: у нашому тесті модель, частина якої не вмістилася на відеокарту з 8 ГБ, працювала вшестеро повільніше.</p></details>
 <details><summary>Яка локальна модель ШІ найкраща для ноутбука без відеокарти?</summary><p>Мала. Gemma 4 E2B (2,6 ГБ) у реальних чатах писала від 14 до 18 токенів за секунду на ноутбуці з 16 ГБ і від 5 до 7 на ноутбуці з 8 ГБ; більша E4B витратила 112 секунд на відповідь, яку E2B дала за 20.</p></details>
@@ -115,7 +115,7 @@
 <details><summary>Як дізнатися, чи вміститься модель на мою відеокарту?</summary><p>Візьміть розмір файлу моделі й додайте близько 1,5 ГБ на розмову і Windows. Якщо вийшло менше, ніж виділена пам&#x27;ять графічного процесора вашої відеокарти (Диспетчер завдань, Продуктивність, Графічний процесор), модель уміститься.</p></details>
 <details><summary>Чи треба вибирати модель самому?</summary><p>У безкоштовних застосунках на кшталт LM Studio, Jan або Ollama треба. GreenCube дивиться на вашу відеокарту й ОЗП і сам вибирає модель, яка підходить.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Спробуйте GreenCube просто тут</h2><p>Це вікно самого застосунку. Надішліть один із запитів, відкрийте те, що він створить, і змініть це в чаті, або зробіть зображення в розділі «Зображення».</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -156,7 +156,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Чи піде GreenCube на вашому ПК?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 ГБ ОЗП, без відеокарти</span><em>Усе працює, лише повільніше.</em></li><li><b>Sprout</b><span>16 ГБ ОЗП або 8 ГБ з відеокартою</span><em>Стабільна швидкість, пише презентації.</em></li><li><b>Bloom</b><span>Відеокарта на 8 ГБ або відеокарта на 4-6 ГБ із 16 ГБ ОЗП</span><em>Швидко, зображення без очікування.</em></li><li><b>Thrive</b><span>Відеокарта на 8 ГБ або більше і 24 ГБ ОЗП або більше</span><em>Найшвидше.</em></li></ul><p>GreenCube перевіряє ваш ПК і встановлює модель ШІ, яка йому підходить: без терміналу, без налаштувань. 9,99&nbsp;&euro; (9,99 US$), один платіж — і він ваш.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/uk/what-you-get">Перевірте свій ПК <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/uk/buy">Придбати GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Читати далі</h2><div class="rel-grid"><a class="rel-card" href="/blog/uk/ollama-vs-lm-studio"><img class="rel-img" src="/blog/covers/art/ollama-vs-lm-studio.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Ollama чи LM Studio: у чому різниця і що швидше (2026)</span></a><a class="rel-card" href="/blog/uk/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/art/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ШІ на ноутбуці без відеокарти: чи допомагає графіка Intel?</span></a><a class="rel-card" href="/blog/uk/best-offline-ai-chatbot"><img class="rel-img" src="/blog/covers/art/best-offline-ai-chatbot.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Найкращий офлайн-чат-бот із ШІ: 12 застосунків у порівнянні за перевіреними фактами (жовтень 2026)</span></a><a class="rel-card" href="/blog/uk/chatgpt-offline"><img class="rel-img" src="/blog/covers/art/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT без інтернету? ШІ, який працює офлайн (2026)</span></a><a class="rel-card" href="/blog/uk/local-ai-chatbot-windows"><img class="rel-img" src="/blog/covers/art/local-ai-chatbot-windows.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ШІ без інтернету на Windows 10 і 11: що потрібно вашому ПК, виміряно на 10 ПК</span></a><a class="rel-card" href="/blog/uk/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/art/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Локальний ШІ-генератор зображень на вашому ПК: скільки займає одне зображення</span></a></div></section></article>
 
 </main>
 

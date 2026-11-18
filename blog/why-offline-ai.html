@@ -39,22 +39,22 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>Offline AI: Why It Matters and How to Get Started</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 25 August 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 25 August 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/why-offline-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#what-offline-ai-actually-means">What &quot;offline AI&quot; actually means</a></li><li><a href="#what-you-gain">What you gain</a></li><li><a href="#where-offline-ai-makes-the-most-sense">Where offline AI makes the most sense</a></li><li><a href="#how-a-model-fits-on-a-laptop">How a model fits on a laptop</a></li><li><a href="#when-the-cloud-is-still-the-better-choice">When the cloud is still the better choice</a></li><li><a href="#how-to-get-started">How to get started</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/why-offline-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Offline AI is worth having when you want your chats and files to stay on your own computer, when you need it to work without Wi-Fi, or when you're tired of paying every month. The catch is that a model small enough to run on a laptop is less capable than the big cloud AIs on the hardest problems. For everyday writing, studying and questions about your own documents, most people find that trade is fine.</p></div>
 <aside class="bridge-top"><img src="https://greencube.app/icon-512.png" alt="" width="44" height="44"/><div class="bt-text"><b>Want an AI that works with no internet? That&rsquo;s GreenCube.</b><span>It runs on your own PC: chat, slides, images and your PDFs, offline once installed. &euro;9.99 (US$9.99), paid once.</span></div><div class="bt-btns"><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></div></aside>
 
 <p>I build GreenCube, an offline AI app, so weigh my opinion with that in mind. This post covers what "offline" really means, where it helps, where the cloud is still better, and how to try it.</p>
 
-<h2>What "offline AI" actually means</h2>
+<h2 id="what-offline-ai-actually-means">What "offline AI" actually means</h2>
 <p>An offline AI does its thinking on your device. The model is a file on your drive, and a program on your computer runs it on your processor or graphics card (the open-source llama.cpp is behind many of these apps). Nothing has to go out for an answer to come back.</p>
 <p>That's different from an app that merely copes with a bad connection. Plenty of AI apps show your old chats offline but can't write a new word until they reach a server. The easy test is airplane mode: switch the Wi-Fi off and ask something new.</p>
 
-<h2>What you gain</h2>
+<h2 id="what-you-gain">What you gain</h2>
 <h3>Privacy you don't have to take on trust</h3>
 <p>When the model runs on your PC, your prompts aren't stored on someone else's server, so they can't leak from it, be read by staff or be used to train the next model. You aren't relying on a privacy policy, because there's no company in the loop. That matters most for contracts, health notes, client files or a diary.</p>
 <h3>It works anywhere</h3>
@@ -64,7 +64,7 @@
 <h3>Speed depends on your PC</h3>
 <p>There's no network round trip, so answers start straight away. How fast the words come after that depends on your hardware. On the PCs we tested, GreenCube wrote 5&ndash;7 tokens a second on an 8 GB laptop with no graphics card (about reading speed), 14&ndash;18 on a 16 GB laptop, and 37&ndash;76 on most gaming PCs with a 6 GB or bigger card. Cloud services run on data-centre hardware, so on a modest laptop they will often feel faster.</p>
 
-<h2>Where offline AI makes the most sense</h2>
+<h2 id="where-offline-ai-makes-the-most-sense">Where offline AI makes the most sense</h2>
 <ul>
 <li>Sensitive documents: contracts, patient notes, tax files, anything you'd rather not upload.</li>
 <li>Studying: summarising notes or making flashcards and quizzes from a PDF, without depending on campus Wi-Fi.</li>
@@ -74,11 +74,11 @@
 </ul>
 <p>In each case the connection itself is the problem, whether that's a dead zone, a rule at work, or a client who wants their files to stay put.</p>
 
-<h2>How a model fits on a laptop</h2>
+<h2 id="how-a-model-fits-on-a-laptop">How a model fits on a laptop</h2>
 <p>The models behind ChatGPT and Gemini are far too big for a home computer. Offline apps use smaller models, usually a few billion parameters, and store them compressed. That compression, called <a href="/blog/llm-quantization">quantization</a>, keeps each of the model's numbers in fewer bits (often about 4 instead of 16), which makes the file several times smaller for a modest loss in quality. The usual file format for this is <a href="/blog/gguf-vs-ggml">GGUF</a>.</p>
 <p>Memory is the main limit. As a rough guide, a small model runs on 8 GB of RAM, a mid-size one wants 16 GB, and a graphics card with its own memory makes everything much faster. If you're not sure about your machine, <a href="/blog/can-my-pc-run-ai#checker">Can my PC run AI?</a> checks it for you.</p>
 
-<h2>When the cloud is still the better choice</h2>
+<h2 id="when-the-cloud-is-still-the-better-choice">When the cloud is still the better choice</h2>
 <ul>
 <li>The hardest problems: long chains of maths, tricky code, very niche facts. The big cloud models are clearly stronger here.</li>
 <li>Today's news. A local model only knows what it learned before it was released, unless the app can search the web.</li>
@@ -86,19 +86,19 @@
 </ul>
 <p>There are smaller costs too. The first download is a few gigabytes, an old laptop will be slow and warm, and updates arrive when you install them rather than silently overnight. Plenty of people use both: the cloud for the hard questions, an offline AI for private work and for when the Wi-Fi is gone. There's a fuller comparison in <a href="/blog/offline-ai-vs-cloud-ai">offline AI vs cloud AI</a>.</p>
 
-<h2>How to get started</h2>
+<h2 id="how-to-get-started">How to get started</h2>
 <p>There are two routes.</p>
 <p>The free route is an app like LM Studio, Jan, Ollama or GPT4All. You choose a model from a list, download it and chat. They're flexible, and you'll need to learn a little about model sizes and settings first. <a href="/blog/best-offline-ai-chatbot">This comparison</a> covers them.</p>
 <p>The other route is an app that makes those choices for you, which is what GreenCube does. It's a Windows app that costs &euro;9.99 once. You sign in once with Google or Microsoft (only to check you paid), the first launch downloads the AI, and from then on it works offline. It checks your PC and picks the model: Cube 2B on smaller PCs, Cube 4B on PCs with a graphics card, both built on Google's Gemma. Besides chat, it makes slide decks, documents, flashcards, quizzes and images, and it reads your PDFs, Word files and photos, with everything saved on your PC. It only goes online for updates, or if you switch "Online" on for web lookups.</p>
 <p>Whichever you pick, try it on a few real tasks from your week and compare it honestly with what you use now.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What is the 30% rule in AI?</summary><p>There isn&#x27;t one agreed rule. People use &quot;30%&quot; loosely, for example for how much of a job AI might take over, but it&#x27;s not a technical standard, so be careful with any specific claim about it.</p></details>
 <details><summary>Would AI work without internet?</summary><p>Yes, if the model is on your device. Cloud apps like ChatGPT stop working offline, but a local AI app keeps answering once its model is downloaded.</p></details>
 <details><summary>How do you make AI work offline?</summary><p>Install an app that runs models on your computer and let it download one that fits your memory, usually a few gigabytes. After that first download it needs no connection.</p></details>
 <details><summary>Which AI tool works without internet?</summary><p>Free ones include LM Studio, Jan, Ollama and GPT4All. GreenCube is a paid option for Windows (€9.99 once) that picks the model for you and also makes slides, flashcards and images offline.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -139,7 +139,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="offline"><h3>An AI that keeps working with the Wi-Fi off</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/> <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/> <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/> <path d="M47 61h28" stroke-width="3"/> </svg></span><span class="bt-name">Chat</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slides</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/> <circle cx="62" cy="34" r="8" fill="#FAE289"/> <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/> <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/> <path d="M26 84l6-8M70 84l-6-8" /> </svg></span><span class="bt-name">Images</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/> <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M52 18v12h12" /> <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/> </svg></span><span class="bt-name">Files</span></li></ul><p>GreenCube runs on your PC. Once it&rsquo;s installed it chats, makes slides and images and reads your files with no internet, and your chats stay on your computer. &euro;9.99 (US$9.99), paid once, with a 15-day refund.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="#try">Click around it again</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

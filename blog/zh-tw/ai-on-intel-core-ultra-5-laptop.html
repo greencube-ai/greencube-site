@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/zh-tw">GreenCube 部落格</a><span aria-hidden="true">&rsaquo;</span><a href="/blog/zh-tw#t-pc">你的電腦</a></p>
 <h1>Intel Core Ultra 5 筆電 能跑 AI 嗎？實測：每秒 14–18 個 token</h1>
-<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月14日</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月14日</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目錄"><p class="toc-h">目錄</p><ol><li><a href="#實際用起來怎麼樣">實際用起來怎麼樣</a></li><li><a href="#我們測到的結果">我們測到的結果</a></li><li><a href="#這意味著什麼">這意味著什麼</a></li><li><a href="#橫向對比">橫向對比</a></li><li><a href="#測試電腦">測試電腦</a></li><li><a href="#檢視你自己的電腦">檢視你自己的電腦</a></li><li><a href="#我們測過的其他電腦">我們測過的其他電腦</a></li><li><a href="#常見問題">常見問題</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>屬於你自己的 AI，就在你的電腦上</b><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99 (US$9.99)，一次付清。</p><a class="cta" href="#try">在這裡試試 <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>可以。在一臺沒有顯示卡的筆電（Intel</strong> Core Ultra 5 125U，16 GB 記憶體）上，Cube 2B (Gemma 4 E2B) 每秒輸出 14–18 個 token。回答出來的速度比你讀得還快。</p></div>
 <div class="stats">
 <div class="stat g"><b>14–18</b><span>Cube 2B (Gemma 4 E2B) 每秒 token 數</span></div>
 <div class="stat p"><b>2:02–2:38 分鐘</b><span>生成一張圖片</span></div>
 <div class="stat y"><b>8–10</b><span>使用 Cube 4B (Gemma 4 E4B)</span></div>
 </div>
-<h2>實際用起來怎麼樣</h2>
+<h2 id="實際用起來怎麼樣">實際用起來怎麼樣</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>任務</th><th>在這臺電腦上的用時</th></tr></thead>
 <tbody>
@@ -82,7 +82,7 @@
 </table></div>
 <p>根據這臺電腦實測的速度推算：時間等於長度除以速度，實際回答開始前還要花一點準備時間。作為參考，英語讀者大多每秒讀約 4 個單詞（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>）。中文的 token 數和字數之間沒有固定比例，所以這裡不做換算。一個 400 個 token 的回答，光是讀一遍也要花上不少時間。</p>
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我們測到的結果</h2>
+<h2 id="我們測到的結果">我們測到的結果</h2>
 <p><strong>輸出</strong>是 AI 打出回答的速度，單位是每秒 token 數；token 是詞的片段。<strong>讀取</strong>是它接收你給的內容（問題、貼上的文字或 PDF）的速度。讀取總是比輸出快得多，因為 AI 可以一次讀很多 token，但只能一個一個地寫。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>專案</th><th>執行在</th><th>結果</th><th>測量方式</th></tr></thead>
@@ -95,7 +95,7 @@
 </table></div>
 <p>每個數字的測量方式：<a href="/blog/zh-tw/how-we-measure-ai-speed">瞭解更多測量方法</a></p><ol class="src"><li>llama.cpp 自帶的速度測試（llama-bench），GreenCube 使用的就是這個引擎，AI 檔案相同：輸出 128 個 token，讀取一段 512 個 token 的文字。</li><li>GreenCube 的圖片引擎（Z-Image Turbo），512×512 畫素，8 步，從點選計時到圖片完成。</li></ol>
 <p>多次測量的結果用範圍表示：同一臺電腦每次執行的速度都會略有不同。</p>
-<h2>這意味著什麼</h2>
+<h2 id="這意味著什麼">這意味著什麼</h2>
 <div class="card b">
 <h3>沒有顯示卡？照樣能用</h3>
 <p>沒有顯示卡時，AI 在 CPU 上執行。比遊戲電腦慢，但更小的 Cube 2B (Gemma 4 E2B) 仍能每秒輸出 14–18 個 token，用來學習、總結和寫作都夠了。更大的 Cube 4B (Gemma 4 E4B) 也能執行，每秒 8–10 個 token：更聰明，但長回答時你會感覺到等待。</p>
@@ -104,9 +104,9 @@
 <h3>圖片</h3>
 <p>可以。生成一張圖片（512×512）：Intel 內建顯示卡 2:02–2:38 分鐘，僅用 CPU 11:27–13:32 分鐘。生成圖片使用約 6 GB 的專用 AI，計算量比聊天回答大得多，所以這裡顯示卡的差距更明顯。</p>
 </div>
-<h2>橫向對比</h2>
+<h2 id="橫向對比">橫向對比</h2>
 <p>在用 Cube 2B (Gemma 4 E2B) 測過的 2 臺電腦中，這臺的輸出速度排<strong>第 1 名</strong>。<a href="/blog/zh-tw/ai-on-intel-iris-xe-laptop">Intel Iris Xe 筆電</a> 每秒輸出 5–7 個 token，這臺快約 2.5 倍。</p>
-<h2>測試電腦</h2>
+<h2 id="測試電腦">測試電腦</h2>
 <p>一位真實測試者自己日常使用的電腦，不是實驗室機器：</p>
 <ul>
 <li>筆電</li>
@@ -115,7 +115,7 @@
 <li><strong>記憶體:</strong> 16 GB</li>
 <li><strong>處理器:</strong> Intel Core Ultra 5 125U, 14 執行緒</li>
 </ul>
-<h2>檢視你自己的電腦</h2>
+<h2 id="檢視你自己的電腦">檢視你自己的電腦</h2>
 <p>不確定你的電腦配置？30 秒就能查到：</p>
 <ol class="steps">
 <li>按 <strong>Ctrl + Shift + Esc</strong> 開啟工作管理員。</li>
@@ -124,7 +124,7 @@
 <li>點選 <strong>GPU</strong>：右上角的名稱就是你的顯示卡，<strong>專用 GPU 記憶體</strong>就是你的顯示記憶體。只看到沒有專用記憶體的 Intel 或 AMD 顯示卡？那就說明你沒有獨立顯示卡。</li>
 </ol>
 <p>然後在<a href="/blog/zh-tw/can-my-pc-run-ai">完整表格</a>裡找最接近的顯示卡。同一款顯示卡顯示記憶體更大，能裝下更大的 AI；同樣顯示記憶體的新顯示卡通常更快。</p>
-<h2>我們測過的其他電腦</h2>
+<h2 id="我們測過的其他電腦">我們測過的其他電腦</h2>
 <ul>
 <li><a href="/blog/zh-tw/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 token/秒 (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/zh-tw/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 token/秒 (Cube 4B (Gemma 4 E4B))</li>
@@ -137,12 +137,12 @@
 <li><a href="/blog/zh-tw/ai-on-intel-iris-xe-laptop">Intel Iris Xe 筆電</a>: 5–7 token/秒 (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/zh-tw/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a> 全部 10 臺電腦彙總在一張表裡，以及你的電腦用起來會怎樣。</p>
-<h2>常見問題</h2>
+<h2 id="常見問題">常見問題</h2>
 <div class="faq">
 <details><summary>Intel Core Ultra 5 筆電 能在本地執行 AI 嗎？</summary><p>可以。在一臺沒有顯示卡的筆電（Intel Core Ultra 5 125U，16 GB 記憶體）上，Cube 2B (Gemma 4 E2B) 每秒輸出 14–18 個 token。回答出來的速度比你讀得還快。</p></details>
 <details><summary>Intel Core Ultra 5 筆電 能生成 AI 圖片嗎？</summary><p>可以。生成一張圖片（512×512）：Intel 內建顯示卡 2:02–2:38 分鐘，僅用 CPU 11:27–13:32 分鐘。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -183,7 +183,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube 能在你的電腦上執行嗎？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB 記憶體，無顯示卡</span><em>都能用，只是慢一些。</em></li><li><b>Sprout</b><span>16 GB 記憶體，或 8 GB 加顯示卡</span><em>速度穩定，能寫簡報。</em></li><li><b>Bloom</b><span>8 GB 顯示卡，或 4-6 GB 顯示卡加 16 GB 記憶體</span><em>很快，生成圖片不用等。</em></li><li><b>Thrive</b><span>8 GB 或以上顯示卡，加 24 GB 或以上記憶體</span><em>最快。</em></li></ul><p>GreenCube 會查看你的電腦，裝好適合它的 AI 模型：不用命令列，不用設定。&euro;9.99（US$9.99），一次付費，就歸你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh-tw/what-you-get">檢查你的電腦 <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></p></div>
-</article>
+<section class="related"><h2>繼續閱讀</h2><div class="rel-grid"><a class="rel-card" href="/blog/zh-tw/best-local-ai-models"><img class="rel-img" src="/blog/covers/art/best-local-ai-models.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">適合你電腦的最佳本地 AI 模型：按記憶體和顯示記憶體挑選（實測）</span></a><a class="rel-card" href="/blog/zh-tw/ollama-vs-lm-studio"><img class="rel-img" src="/blog/covers/art/ollama-vs-lm-studio.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Ollama 和 LM Studio 對比：有什麼區別，哪個更快（2026 年）</span></a><a class="rel-card" href="/blog/zh-tw/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/art/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">沒有顯示卡的筆電跑 AI：Intel 內建顯示卡有用嗎？</span></a><a class="rel-card" href="/blog/zh-tw/best-offline-ai-chatbot"><img class="rel-img" src="/blog/covers/art/best-offline-ai-chatbot.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">最好的離線 AI 聊天機器人：用核實過的事實比較 12 款應用程式（2026 年 10 月）</span></a><a class="rel-card" href="/blog/zh-tw/chatgpt-offline"><img class="rel-img" src="/blog/covers/art/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT 離線能用嗎？不用網路也能用的 AI（2026）</span></a><a class="rel-card" href="/blog/zh-tw/local-ai-chatbot-windows"><img class="rel-img" src="/blog/covers/art/local-ai-chatbot-windows.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">在 Windows 10 和 11 上離線用 AI：你的電腦需要什麼，10 臺電腦實測</span></a></div></section></article>
 
 </main>
 

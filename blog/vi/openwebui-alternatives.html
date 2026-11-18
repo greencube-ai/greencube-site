@@ -60,22 +60,22 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/vi">Blog GreenCube</a><span aria-hidden="true">&rsaquo;</span><a href="/blog/vi#t-tools">Ứng dụng và lựa chọn khác</a></p>
 <h1>Các lựa chọn thay thế Open WebUI: 11 lựa chọn đã kiểm tra, từ LibreChat đến LM Studio (tháng 10, 2026)</h1>
-<p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 23 tháng 10, 2026</p>
-<img class="cover" src="/blog/covers/art/openwebui-alternatives.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 23 tháng 10, 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/openwebui-alternatives.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Mục lục"><p class="toc-h">Mục lục</p><ol><li><a href="#vì-sao-người-ta-tìm-lựa-chọn-thay-thế-open-webui">Vì sao người ta tìm lựa chọn thay thế Open WebUI</a></li><li><a href="#11-lựa-chọn-thay-thế-đặt-cạnh-nhau">11 lựa chọn thay thế, đặt cạnh nhau</a></li><li><a href="#cái-nào-hợp-với-bạn">Cái nào hợp với bạn?</a></li><li><a href="#mô-hình-cục-bộ-chạy-nhanh-đến-đâu-trên-một-máy-bình-thường">Mô hình cục bộ chạy nhanh đến đâu trên một máy bình thường?</a></li><li><a href="#câu-hỏi">Câu hỏi</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>AI của riêng bạn, trên máy của riêng bạn</b><p>GreenCube chạy trên máy tính của bạn: không giới hạn sử dụng, không thuê bao, chạy không cần internet. &euro;9,99 (US$9,99), trả một lần.</p><a class="cta" href="#try">Dùng thử ngay tại đây <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Lựa chọn thay thế Open WebUI tốt nhất tùy vào lý do bạn rời bỏ nó. Nếu cần một trang chat tự host cho cả nhóm, LibreChat (MIT, Docker) là thứ thay thế gần nhất, còn Onyx thêm khả năng tìm kiếm trong tài liệu công ty. Nếu chỉ có bạn trên một máy và bạn muốn bỏ qua Docker lẫn một engine riêng, LM Studio, Jan và text-generation-webui tự chạy mô hình, còn Msty gom engine cục bộ và mô hình đám mây vào một ứng dụng máy tính.</p></div>
 
 <p>Tôi làm GreenCube, một trong mười một ứng dụng này, nên tôi không xếp hạng chúng. Mọi thông tin đều lấy từ trang web, tài liệu, trang giá hoặc giấy phép của chính dự án, đọc vào ngày 21 tháng 10 năm 2026 và có liên kết ở từng dòng. Khi một trang không nói rõ, chúng tôi ghi "không nêu", và chúng tôi chưa đo hiệu năng các ứng dụng này với nhau.</p>
 
-<h2>Vì sao người ta tìm lựa chọn thay thế Open WebUI</h2>
+<h2 id="vì-sao-người-ta-tìm-lựa-chọn-thay-thế-open-webui">Vì sao người ta tìm lựa chọn thay thế Open WebUI</h2>
 <p>Open WebUI là một trang chat tự host mà bạn cài bằng pip (Python 3.11) hoặc Docker. Nó thường chạy bên trên một engine như Ollama hoặc một API tương thích OpenAI (<a href="https://docs.openwebui.com/getting-started/" rel="noopener">tài liệu</a>). Đây là một công cụ có năng lực: nó đọc tài liệu, có thể chạy "hoàn toàn ngoại tuyến", và có ứng dụng máy tính với engine llama.cpp tích hợp tùy chọn (<a href="https://github.com/open-webui/open-webui" rel="noopener">GitHub</a>).</p>
 <p>Lý do đầu tiên khiến người ta rời đi là giấy phép. Giờ nó là "Open WebUI License": điều khoản kiểu BSD kèm một điều khoản rằng bạn không được xóa hay thay thương hiệu "Open WebUI", trừ khi bạn có 50 người dùng cuối trở xuống trong bất kỳ 30 ngày liên tiếp nào, có văn bản cho phép, hoặc có giấy phép doanh nghiệp (<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" rel="noopener">LICENSE</a>).</p>
 <p>Lý do thứ hai là khâu cài đặt: một máy chủ, Docker hoặc môi trường Python, cộng thêm một engine riêng cho mô hình. Lý do thứ ba là độ phù hợp. Có người muốn thứ lớn hơn, với tìm kiếm cho công ty và phân quyền, có người lại muốn thứ nhỏ hơn, như một ứng dụng trên một máy.</p>
 
 <p class="bridge-mid">Muốn một AI tự cài đặt? <a href="https://greencube.app/vi/buy">GreenCube chọn AI phù hợp cho PC của bạn <span aria-hidden="true">&rarr;</span></a></p>
-<h2>11 lựa chọn thay thế, đặt cạnh nhau</h2>
+<h2 id="11-lựa-chọn-thay-thế-đặt-cạnh-nhau">11 lựa chọn thay thế, đặt cạnh nhau</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Ứng dụng</th><th>Nó là gì</th><th>Giấy phép và giá</th><th>Cách cài</th><th>Tự chạy mô hình?</th><th>Tài liệu của bạn</th></tr></thead>
 <tbody>
@@ -94,7 +94,7 @@
 </table></div>
 <p>Khi các trang mâu thuẫn nhau, chúng tôi theo tệp giấy phép. LobeHub là ví dụ: huy hiệu trong README ghi Apache 2.0, nhưng tệp LICENSE thêm điều kiện. Mỗi tháng chúng tôi kiểm tra lại các trang này và cập nhật ngày ở đầu bài.</p>
 
-<h2>Cái nào hợp với bạn?</h2>
+<h2 id="cái-nào-hợp-với-bạn">Cái nào hợp với bạn?</h2>
 <h3>Một trang chat cho nhóm, tự host</h3>
 <p>LibreChat là thứ thay thế gần nhất. Nó dùng giấy phép MIT, chạy trong Docker, có sẵn đăng nhập nhiều người dùng và bảng quản trị, và kết nối tới API đám mây hoặc engine của riêng bạn. Nếu việc chính là trả lời câu hỏi từ tài liệu và ứng dụng của công ty, Onyx được làm ra cho việc đó (Community Edition MIT, hoặc 20 US$ mỗi người dùng mỗi tháng với gói Business). Bản Docker của AnythingLLM hợp nếu chat với tài liệu là thứ bạn cần nhất, còn LobeHub hợp với người muốn dùng agent và không ngại các điều kiện trong giấy phép của nó.</p>
 
@@ -107,7 +107,7 @@
 <h3>Bạn muốn cùng cuộc chat đó trên điện thoại</h3>
 <p>Chatbox có ứng dụng cho máy tính và điện thoại, và có thể dùng Ollama cho mô hình cục bộ. Cũng nên biết rằng chính Open WebUI có thể được thêm vào màn hình chính của điện thoại như một ứng dụng web, nên chỉ riêng điều này có lẽ chưa phải lý do để đổi.</p>
 
-<h2>Mô hình cục bộ chạy nhanh đến đâu trên một máy bình thường?</h2>
+<h2 id="mô-hình-cục-bộ-chạy-nhanh-đến-đâu-trên-một-máy-bình-thường">Mô hình cục bộ chạy nhanh đến đâu trên một máy bình thường?</h2>
 <p>Dù bạn chọn giao diện nào, tốc độ đến từ phần cứng của bạn, vì mô hình chạy trên card đồ họa hoặc bộ xử lý của bạn. Chúng tôi đã đo GreenCube trên 10 máy thật; chúng tôi chưa đo các ứng dụng khác trên cùng những máy đó.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Máy của bạn</th><th>Viết</th></tr></thead>
@@ -118,7 +118,7 @@
 </tbody>
 </table></div>
 <p>Con số của từng card có trong <a href="/blog/vi/can-my-pc-run-ai#checker">Máy tôi có chạy được AI không?</a> Nếu bạn quan tâm nhất đến quyền riêng tư và những gì mỗi ứng dụng máy tính gửi lên mạng, <a href="/blog/vi/best-offline-ai-chatbot">bài so sánh 12 chatbot AI ngoại tuyến của chúng tôi</a> nói về điều đó.</p>
-<h2>Câu hỏi</h2>
+<h2 id="câu-hỏi">Câu hỏi</h2>
 <div class="faq">
 <details><summary>Lựa chọn thay thế Open WebUI tốt nhất là gì?</summary><p>Tùy vì sao bạn rời đi. Cần trang chat tự host cho cả nhóm: LibreChat (MIT, Docker). Cần tìm kiếm trong tài liệu công ty: Onyx. Một người trên một máy, không Docker: LM Studio, Jan, Msty hoặc text-generation-webui, những ứng dụng tự chạy mô hình. GreenCube (Windows, €9,99 trả một lần) tự chọn mô hình hợp với máy bạn.</p></details>
 <details><summary>Open WebUI còn là mã nguồn mở không?</summary><p>Giấy phép của nó giờ là &quot;Open WebUI License&quot;: điều khoản kiểu BSD kèm một điều khoản rằng bạn không được xóa hay thay thương hiệu của nó, trừ khi bạn có 50 người dùng trở xuống trong 30 ngày liên tiếp, có văn bản cho phép, hoặc có giấy phép doanh nghiệp. Mã đã phát hành trước đó giữ giấy phép gốc.</p></details>
@@ -126,7 +126,7 @@
 <details><summary>Những lựa chọn thay thế Open WebUI nào tự chạy mô hình?</summary><p>LM Studio, Jan, text-generation-webui, llama.cpp và GreenCube chạy mô hình mà không cần engine riêng. LibreChat, Onyx, LobeHub và Chatbox kết nối tới một engine như Ollama, hoặc tới API đám mây.</p></details>
 <details><summary>Lựa chọn nào tốt nhất cho nhóm?</summary><p>LibreChat (MIT) có đăng nhập nhiều người dùng qua OAuth2, LDAP và email, cùng bảng quản trị. Onyx thêm khả năng tìm kiếm trong tài liệu công ty; gói Business giá 20 US$ mỗi người dùng mỗi tháng. Bản Docker của AnythingLLM cũng hỗ trợ nhiều người dùng.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Dùng thử GreenCube ngay tại đây</h2><p>Đây là cửa sổ của chính ứng dụng. Gửi một yêu cầu, mở thứ nó tạo ra và chỉnh bằng cách trò chuyện, hoặc tạo hình ảnh trong mục Hình ảnh.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -167,7 +167,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="compare"><h3>AI thuộc về bạn, được cài sẵn cho bạn</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slide</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/> <circle cx="62" cy="34" r="8" fill="#FAE289"/> <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/> <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/> <path d="M26 84l6-8M70 84l-6-8" /> </svg></span><span class="bt-name">Hình ảnh</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/> <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/> <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/> <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/> <path d="M26 60v6l12 6M70 60v6l-12 6"/> <circle cx="48" cy="78" r="10" fill="#8EABE1"/> <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/> </svg></span><span class="bt-name">Sơ đồ</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/> <path d="M12 32h72"/><circle cx="20" cy="26" r="1.6" fill="#1A1A1A"/><circle cx="26" cy="26" r="1.6" fill="#1A1A1A"/> <rect x="21" y="40" width="26" height="24" rx="4" fill="#FA9F75"/> <path d="M54 43h20" stroke-width="4"/><path d="M54 52h16M54 59h12" stroke="#A8492A" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">Trang web</span></li></ul><p>GreenCube chọn và cài AI phù hợp với PC của bạn, rồi viết, làm slide và vẽ sơ đồ, tất cả trong một ứng dụng. 9,99&nbsp;&euro; (9,99 US$), trả một lần, hoàn tiền trong 15 ngày.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/vi/buy">Mua GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/vi/what-you-get">Kiểm tra PC của bạn</a></p></div>
-</article>
+<section class="related"><h2>Đọc tiếp</h2><div class="rel-grid"><a class="rel-card" href="/blog/vi/best-ai-desktop-apps"><img class="rel-img" src="/blog/covers/art/best-ai-desktop-apps.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Ứng dụng AI cho máy tính Windows: ChatGPT, Claude, Gemini, Copilot so với ứng dụng cục bộ (2026)</span></a><a class="rel-card" href="/blog/vi/lm-studio-alternatives"><img class="rel-img" src="/blog/covers/art/lm-studio-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Các lựa chọn thay thế LM Studio: 9 lựa chọn cho Windows, Mac, Linux và điện thoại (2026)</span></a><a class="rel-card" href="/blog/vi/gemma-4-e2b-vs-e4b"><img class="rel-img" src="/blog/covers/art/gemma-4-e2b-vs-e4b.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Gemma 4 E2B và E4B trên laptop: mô hình AI nhỏ và lớn, đo thực tế</span></a><a class="rel-card" href="/blog/vi/gemma-4-requirements"><img class="rel-img" src="/blog/covers/art/gemma-4-requirements.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Cấu hình cho Gemma 4: cần máy thế nào để chạy cục bộ</span></a><a class="rel-card" href="/blog/vi/gpt4all-alternatives"><img class="rel-img" src="/blog/covers/art/gpt4all-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Các lựa chọn thay thế GPT4All: 8 ứng dụng AI cục bộ vẫn được cập nhật (2026)</span></a><a class="rel-card" href="/blog/vi/bard-alternatives"><img class="rel-img" src="/blog/covers/art/bard-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Các lựa chọn thay thế Bard năm 2026: Bard giờ là Gemini, vậy còn dùng được gì khác</span></a></div></section></article>
 
 </main>
 

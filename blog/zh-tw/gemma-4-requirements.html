@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/zh-tw">GreenCube 部落格</a><span aria-hidden="true">&rsaquo;</span><a href="/blog/zh-tw#t-tools">應用程式與替代品</a></p>
 <h1>Gemma 4 配置要求：本地執行需要什麼樣的電腦</h1>
-<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<img class="cover" src="/blog/covers/art/gemma-4-requirements.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/gemma-4-requirements.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目錄"><p class="toc-h">目錄</p><ol><li><a href="#gemma-4-需求一覽">Gemma 4 需求一覽</a></li><li><a href="#實測速度">實測速度</a></li><li><a href="#我們學到了什麼">我們學到了什麼</a></li><li><a href="#你的電腦該用哪個-gemma-4">你的電腦該用哪個 Gemma 4？</a></li><li><a href="#常見問題">常見問題</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>屬於你自己的 AI，就在你的電腦上</b><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99 (US$9.99)，一次付清。</p><a class="cta" href="#try">在這裡試試 <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>最小的 Gemma 4，也就是 E2B，在沒有顯示卡的 8 GB 筆電上就能跑。E4B 需要 16 GB 記憶體，或任何 6 GB 以上的顯示卡，在顯示卡上跑得很快。Gemma 4 12B 則需要至少 10 GB 顯示記憶體，才撐得住一段真正的對話。</p></div>
 
 <p>這些數字來自我們自己的測試。我在做的應用程式 GreenCube 就是用 Gemma 4（Cube 2B 以 Gemma 4 E2B 為基礎，Cube 4B 以 Gemma 4 E4B 為基礎），所以我們在 2026 年 9 月和 10 月，於 10 台真實電腦上替這些模型計過時。Gemma 4 本身是免費的：Google 以 Apache 2.0 授權釋出，允許商業使用。</p>
 
-<h2>Gemma 4 需求一覽</h2>
+<h2 id="gemma-4-需求一覽">Gemma 4 需求一覽</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>模型</th><th>檔案大小</th><th>我們建議的最低配備</th><th>最適合</th></tr></thead>
 <tbody>
@@ -81,7 +81,7 @@
 <p>檔案大小只是起點。聊天的時候，對話本身也要佔記憶體，所以還要多留幾 GB。在 8 GB 筆電上，這代表要先把其他應用程式關掉。</p>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>實測速度</h2>
+<h2 id="實測速度">實測速度</h2>
 <p>這是每個模型寫出回答的速度，單位是每秒 token 數。一個 token 大約是四分之三個英文單字，大多數人每秒讀大約 5 個，所以超過這個數字就會覺得很快。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>電腦</th><th>模型</th><th>輸出速度（token/秒）</th></tr></thead>
@@ -98,7 +98,7 @@
 </tbody>
 </table></div>
 
-<h2>我們學到了什麼</h2>
+<h2 id="我們學到了什麼">我們學到了什麼</h2>
 <h3>E2B 是筆電用的模型</h3>
 <p>在沒有顯示卡的 16 GB 筆電上，E2B 大約 20 秒就寫完一個完整的課業回答。同樣的事 E4B 花了 112 秒。我們的五題快速事實查核，E2B 也全部答對。完整比較在 <a href="/blog/zh-tw/gemma-4-e2b-vs-e4b">E2B 與 E4B 實測比較</a>。</p>
 
@@ -108,7 +108,7 @@
 <h3>12B 需要真正的顯示記憶體，光有記憶體不夠</h3>
 <p>在 8 GB 的顯示卡上，12B 回答一個短問題沒問題，但每次對話一變長就當掉。那台電腦有 48 GB 記憶體，卻一點幫助都沒有，因為模型和對話都必須裝進顯示卡裡。更多說明請看 <a href="/blog/zh-tw/how-much-vram-for-ai">為什麼模型必須裝進你的顯示卡</a>。</p>
 
-<h2>你的電腦該用哪個 Gemma 4？</h2>
+<h2 id="你的電腦該用哪個-gemma-4">你的電腦該用哪個 Gemma 4？</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>你的電腦</th><th>建議使用</th></tr></thead>
 <tbody>
@@ -119,14 +119,14 @@
 </tbody>
 </table></div>
 <p>如果你不想自己選，GreenCube 會檢查你的電腦，替你挑好合適的那一個。我們測過的每台電腦的速度，都在 <a href="/blog/zh-tw/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a></p>
-<h2>常見問題</h2>
+<h2 id="常見問題">常見問題</h2>
 <div class="faq">
 <details><summary>在本地跑 Gemma 4 的最低需求是什麼？</summary><p>最小的 Gemma 4 E2B（2.6 GB 的檔案）在一台 8 GB 記憶體、沒有顯示卡的筆電上就能跑，實際聊天時每秒 5 到 7 個 token。啟動時需要幾 GB 的可用記憶體。</p></details>
 <details><summary>Gemma 4 E4B 需要多少顯示記憶體？</summary><p>E4B 是 4.2 GB 的檔案，可以整個裝進 6 GB 的顯示卡，在 GTX 1660 Super 上每秒寫出 35 到 38 個 token。在 8 GB 的顯示卡上是 56 到 72 個。沒有顯示卡時，16 GB 記憶體也能跑，每秒約 8 個 token。</p></details>
 <details><summary>Gemma 4 12B 能在 8 GB 顯示卡上跑嗎？</summary><p>問一個短問題可以：在 RX 5700 XT 上每秒 20 到 35 個 token。但對話一變長它就當掉了，因為顯示卡幾乎沒有剩餘空間。我們會希望至少有 10 GB 顯示記憶體。</p></details>
 <details><summary>Gemma 4 可以免費使用嗎？</summary><p>可以。Google 以 Apache 2.0 授權釋出了 Gemma 4，包括 E2B 和 E4B，允許商業使用。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -167,7 +167,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube 能在你的電腦上執行嗎？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB 記憶體，無顯示卡</span><em>都能用，只是慢一些。</em></li><li><b>Sprout</b><span>16 GB 記憶體，或 8 GB 加顯示卡</span><em>速度穩定，能寫簡報。</em></li><li><b>Bloom</b><span>8 GB 顯示卡，或 4-6 GB 顯示卡加 16 GB 記憶體</span><em>很快，生成圖片不用等。</em></li><li><b>Thrive</b><span>8 GB 或以上顯示卡，加 24 GB 或以上記憶體</span><em>最快。</em></li></ul><p>GreenCube 會查看你的電腦，裝好適合它的 AI 模型：不用命令列，不用設定。&euro;9.99（US$9.99），一次付費，就歸你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh-tw/what-you-get">檢查你的電腦 <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></p></div>
-</article>
+<section class="related"><h2>繼續閱讀</h2><div class="rel-grid"><a class="rel-card" href="/blog/zh-tw/best-ai-desktop-apps"><img class="rel-img" src="/blog/covers/art/best-ai-desktop-apps.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Windows 上的 AI 桌面應用程式：ChatGPT、Claude、Gemini、Copilot 和本地應用程式對比（2026 年）</span></a><a class="rel-card" href="/blog/zh-tw/lm-studio-alternatives"><img class="rel-img" src="/blog/covers/art/lm-studio-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">LM Studio 替代品：適用於 Windows、Mac、Linux 和手機的 9 個選擇（2026 年）</span></a><a class="rel-card" href="/blog/zh-tw/gemma-4-e2b-vs-e4b"><img class="rel-img" src="/blog/covers/art/gemma-4-e2b-vs-e4b.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">筆電上的 Gemma 4 E2B 和 E4B：小 AI 和大 AI 實測對比</span></a><a class="rel-card" href="/blog/zh-tw/openwebui-alternatives"><img class="rel-img" src="/blog/covers/art/openwebui-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Open WebUI 替代品：核實了 11 個，從 LibreChat 到 LM Studio（2026 年 10 月）</span></a><a class="rel-card" href="/blog/zh-tw/gpt4all-alternatives"><img class="rel-img" src="/blog/covers/art/gpt4all-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GPT4All 替代方案：8 款仍在更新的本地 AI 應用程式（2026）</span></a><a class="rel-card" href="/blog/zh-tw/bard-alternatives"><img class="rel-img" src="/blog/covers/art/bard-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">2026 年 Bard 替代方案：Bard 已改名 Gemini，還能用什麼</span></a></div></section></article>
 
 </main>
 

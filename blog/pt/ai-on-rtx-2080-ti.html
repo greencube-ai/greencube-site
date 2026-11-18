@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/pt">Blog do GreenCube</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/pt">Blog do GreenCube</a></p>
 <h1>Uma RTX 2080 Ti roda IA? Medido: 65–71 tokens por segundo</h1>
-<p class="byline">Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 14 de outubro de 2026</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Por <a href="/blog/pt/hector-gras">Hector Gras</a> &middot; 14 de outubro de 2026</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Índice"><p class="toc-h">Índice</p><ol><li><a href="#o-que-isso-significa-na-prática">O que isso significa na prática</a></li><li><a href="#o-que-medimos">O que medimos</a></li><li><a href="#o-que-significa">O que significa</a></li><li><a href="#como-se-compara">Como se compara</a></li><li><a href="#o-pc-do-teste">O PC do teste</a></li><li><a href="#confira-o-seu-pc">Confira o seu PC</a></li><li><a href="#outros-pcs-que-medimos">Outros PCs que medimos</a></li><li><a href="#perguntas">Perguntas</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Sua própria IA, no seu próprio PC</b><p>O GreenCube roda no seu computador: sem limites de uso, sem assinatura e sem precisar de internet. &euro;9,99 (US$9,99), um único pagamento.</p><a class="cta" href="#try">Experimente aqui <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>Sim.</strong> Em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM, o Cube 4B (Gemma 4 E4B) escreveu 65–71 tokens por segundo. Mais rápido do que você lê.</p></div>
 <div class="stats">
 <div class="stat g"><b>65–71</b><span>tokens por segundo com o Cube 4B (Gemma 4 E4B)</span></div>
 <div class="stat b"><b>5,6×</b><span>mais rápido na placa que no processador</span></div>
 <div class="stat p"><b>8–9 s</b><span>para criar uma imagem</span></div>
 </div>
-<h2>O que isso significa na prática</h2>
+<h2 id="o-que-isso-significa-na-prática">O que isso significa na prática</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Tarefa</th><th>Tempo neste PC</th></tr></thead>
 <tbody>
@@ -82,7 +82,7 @@
 </table></div>
 <p>Calculado a partir das velocidades medidas neste PC: o tempo é o tamanho dividido pela velocidade, e uma resposta real ainda leva um instante para começar. Para ter uma ideia, uma pessoa lê umas 4 palavras por segundo (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), então só ler uma resposta de 400 tokens já leva mais de um minuto.</p>
 <p class="bridge-mid">Não sabe se seu PC aguenta? <a href="https://greencube.app/pt/what-you-get">Veja o que roda no seu <span aria-hidden="true">&rarr;</span></a></p>
-<h2>O que medimos</h2>
+<h2 id="o-que-medimos">O que medimos</h2>
 <p><strong>Escrever</strong> é a velocidade com que a IA digita a resposta, em tokens por segundo; um token é um pedaço de palavra, e em português cada palavra costuma ocupar um ou dois. <strong>Ler</strong> é a velocidade com que ela absorve o que você passa: sua pergunta, um texto colado ou um PDF. Ler é sempre muito mais rápido que escrever, porque a IA consegue ler muitos tokens de uma vez, mas precisa escrevê-los um por um.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>O quê</th><th>Rodou em</th><th>Resultado</th><th>Medido</th></tr></thead>
@@ -95,7 +95,7 @@
 </table></div>
 <p>Como cada número foi medido: <a href="/blog/pt/how-we-measure-ai-speed">Mais sobre como medimos</a></p><ol class="src"><li>Conversas reais no GreenCube 0.1.44: a velocidade de cada resposta de 100 tokens ou mais, tirada do log do app. A faixa deixa de fora o décimo mais lento e o mais rápido.</li><li>O teste de velocidade do próprio GreenCube 0.1.44, que ele faz ao iniciar para escolher entre a placa de vídeo e o processador: uma resposta curta escrita uma vez em cada um.</li><li>O motor de imagens do GreenCube (Z-Image Turbo), 512×512 pixels e 8 passos, cronometrado do clique até a imagem pronta.</li></ol>
 <p>Quando temos várias medições, mostramos a faixa: a velocidade varia um pouco entre medições no mesmo PC.</p>
-<h2>O que significa</h2>
+<h2 id="o-que-significa">O que significa</h2>
 <div class="card g">
 <h3>A placa de vídeo faz o trabalho</h3>
 <p>Mesmo PC, mesma IA (Cube 4B (Gemma 4 E4B)): 13,5 tokens por segundo só com o processador e 75,6 com a placa de vídeo, cerca de <strong>5,6 vezes mais rápido</strong>. Uma placa de vídeo é feita para fazer milhares de contas pequenas ao mesmo tempo nos jogos, e rodar uma IA é basicamente esse mesmo tipo de cálculo. O GreenCube cronometra os dois ao iniciar e usa o mais rápido.</p>
@@ -112,9 +112,9 @@
 <h3>Imagens</h3>
 <p>Sim. Uma imagem (512×512) levou 8–9 s com a placa de vídeo (a primeira levou 83 s enquanto carregava). Uma imagem usa uma IA própria, de uns 6 GB, e muito mais contas que uma resposta de chat, então aqui a placa de vídeo importa ainda mais.</p>
 </div>
-<h2>Como se compara</h2>
+<h2 id="como-se-compara">Como se compara</h2>
 <p>Dos 8 PCs que medimos com o Cube 4B (Gemma 4 E4B), este é o <strong>número 1</strong> em velocidade de escrita. A <a href="/blog/pt/ai-on-rx-5700-xt">RX 5700 XT</a> escreve 63–72, então este é mais ou menos igual.</p>
-<h2>O PC do teste</h2>
+<h2 id="o-pc-do-teste">O PC do teste</h2>
 <p>O PC de um testador real, usado como ele usa no dia a dia, não uma máquina de laboratório:</p>
 <ul>
 <li>PC de mesa</li>
@@ -123,7 +123,7 @@
 <li><strong>RAM:</strong> 128 GB</li>
 <li><strong>Processador:</strong> 32 threads</li>
 </ul>
-<h2>Confira o seu PC</h2>
+<h2 id="confira-o-seu-pc">Confira o seu PC</h2>
 <p>Não sabe o que seu PC tem? Leva 30 segundos:</p>
 <ol class="steps">
 <li>Pressione <strong>Ctrl + Shift + Esc</strong> para abrir o Gerenciador de Tarefas.</li>
@@ -132,7 +132,7 @@
 <li>Clique em <strong>GPU</strong>: o nome no canto superior direito é a sua placa, e <strong>Memória dedicada da GPU</strong> é a sua VRAM. Só aparecem gráficos Intel ou AMD sem memória dedicada? Então você não tem placa separada.</li>
 </ol>
 <p>Depois procure a placa mais parecida na <a href="/blog/pt/can-my-pc-run-ai">tabela completa</a>. A mesma placa com mais VRAM comporta uma IA maior; uma placa mais nova do mesmo tamanho costuma ser mais rápida.</p>
-<h2>Outros PCs que medimos</h2>
+<h2 id="outros-pcs-que-medimos">Outros PCs que medimos</h2>
 <ul>
 <li><a href="/blog/pt/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 tokens por segundo (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/pt/ai-on-rtx-5060">RTX 5060</a>: 56 tokens por segundo (Cube 4B (Gemma 4 E4B))</li>
@@ -145,14 +145,14 @@
 <li><a href="/blog/pt/ai-on-intel-iris-xe-laptop">notebook com Intel Iris Xe</a>: 5–7 tokens por segundo (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/pt/can-my-pc-run-ai">Meu PC roda IA?</a> Os 10 PCs numa tabela, e como o seu vai se sair.</p>
-<h2>Perguntas</h2>
+<h2 id="perguntas">Perguntas</h2>
 <div class="faq">
 <details><summary>Dá para rodar IA localmente em uma RTX 2080 Ti?</summary><p>Sim. Em um PC de mesa com uma NVIDIA RTX 2080 Ti (11 GB) e 128 GB de RAM, o Cube 4B (Gemma 4 E4B) escreveu 65–71 tokens por segundo. Mais rápido do que você lê.</p></details>
 <details><summary>Dá para criar imagens com IA em uma RTX 2080 Ti?</summary><p>Sim. Uma imagem (512×512) levou 8–9 s com a placa de vídeo (a primeira levou 83 s enquanto carregava).</p></details>
 <details><summary>A IA é mais rápida na RTX 2080 Ti ou no processador?</summary><p>Na placa, de longe: 75,6 tokens por segundo contra 13,5 no processador, cerca de 5,6 vezes mais rápido.</p></details>
 <details><summary>Dá para rodar o Gemma 4 12B em uma RTX 2080 Ti?</summary><p>Deve rodar. O Cube 12B (Gemma 4 12B) ocupa 6,4 GB e esta placa tem 11 GB, então sobra espaço também para uma conversa longa. Ainda não medimos nesta placa.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Explore o GreenCube aqui mesmo</h2><p>Esta é a janela do próprio app. Envie um dos pedidos, abra o que ele cria e mude conversando, ou faça uma imagem em Imagens.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -193,7 +193,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>O GreenCube vai rodar no seu PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB de RAM, sem placa de vídeo</span><em>Tudo funciona, só que mais devagar.</em></li><li><b>Sprout</b><span>16 GB de RAM, ou 8 GB com placa de vídeo</span><em>Velocidade estável, escreve apresentações.</em></li><li><b>Bloom</b><span>Uma placa de vídeo de 8 GB, ou uma de 4 a 6 GB com 16 GB de RAM</span><em>Rápido, imagens sem espera.</em></li><li><b>Thrive</b><span>Uma placa de 8 GB ou mais e 24 GB de RAM ou mais</span><em>O mais rápido.</em></li></ul><p>O GreenCube analisa o seu PC e instala o modelo de IA certo para ele: sem terminal, sem configurações. &euro;9,99 (US$ 9,99), pagos uma vez, e é seu.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/pt/what-you-get">Confira seu PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/pt/buy">Quero o GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Continue lendo</h2><div class="rel-grid"><a class="rel-card" href="/blog/pt/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Qual IA não treina com as suas conversas? Conferimos 9 (outubro de 2026)</span></a><a class="rel-card" href="/blog/pt/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">IA para resumir suas anotações: qual escolher por limites e privacidade (2026)</span></a><a class="rel-card" href="/blog/pt/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Meu PC roda IA? Medimos 10 PCs gamer e notebooks reais</span></a><a class="rel-card" href="/blog/pt/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Quanta VRAM você precisa para IA? Por que o modelo tem que caber na sua GPU</span></a><a class="rel-card" href="/blog/pt/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Assistente de IA mais privado: 10 IAs conferidas (2026)</span></a><a class="rel-card" href="/blog/pt/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Dá para rodar IA com 8 GB de RAM? Testamos o notebook mais fraco que temos</span></a></div></section></article>
 
 </main>
 

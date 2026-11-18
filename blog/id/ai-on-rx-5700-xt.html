@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/id">Blog GreenCube</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/id">Blog GreenCube</a></p>
 <h1>Bisakah RX 5700 XT menjalankan AI? Terukur: 63–72 token per detik</h1>
-<p class="byline">Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 22 September 2026</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Oleh <a href="/blog/id/hector-gras">Hector Gras</a> &middot; 22 September 2026</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Daftar isi"><p class="toc-h">Daftar isi</p><ol><li><a href="#artinya-dalam-praktik">Artinya dalam praktik</a></li><li><a href="#apa-yang-kami-ukur">Apa yang kami ukur</a></li><li><a href="#apa-artinya">Apa artinya</a></li><li><a href="#perbandingannya">Perbandingannya</a></li><li><a href="#pc-uji">PC uji</a></li><li><a href="#cek-pc-mu-sendiri">Cek PC-mu sendiri</a></li><li><a href="#pc-lain-yang-kami-ukur">PC lain yang kami ukur</a></li><li><a href="#pertanyaan">Pertanyaan</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>AI milikmu sendiri, di PC-mu sendiri</b><p>GreenCube berjalan di komputermu: tanpa batas pemakaian, tanpa langganan, jalan tanpa internet. &euro;9,99 (US$9,99), bayar sekali.</p><a class="cta" href="#try">Coba di sini <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>Ya.</strong> Di PC desktop dengan AMD RX 5700 XT (8 GB) dan RAM 48 GB, Cube 4B (Gemma 4 E4B) menulis 63–72 token per detik. Kamu membaca sekitar 8, jadi jawabannya keluar lebih cepat daripada kamu membacanya.</p></div>
 <div class="stats">
 <div class="stat g"><b>63–72</b><span>token per detik dengan Cube 4B (Gemma 4 E4B)</span></div>
 <div class="stat b"><b>14×</b><span>lebih cepat di kartu daripada di prosesor</span></div>
 <div class="stat y"><b>20–36</b><span>dengan Cube 12B (Gemma 4 12B) (hanya chat pendek)</span></div>
 </div>
-<h2>Artinya dalam praktik</h2>
+<h2 id="artinya-dalam-praktik">Artinya dalam praktik</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Tugas</th><th>Waktu di PC ini</th></tr></thead>
 <tbody>
@@ -81,7 +81,7 @@
 </table></div>
 <p>Dihitung dari kecepatan yang diukur di PC ini: waktu adalah panjang dibagi kecepatan, dan jawaban sungguhan juga butuh sesaat untuk mulai. Sebagai gambaran, kebanyakan orang membaca sekitar 4 kata per detik (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), jadi membaca jawaban 400 token saja butuh sekitar satu menit.</p>
 <p class="bridge-mid">Tidak yakin PC-mu sanggup? <a href="https://greencube.app/id/what-you-get">Cek apa yang bisa jalan di PC-mu <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Apa yang kami ukur</h2>
+<h2 id="apa-yang-kami-ukur">Apa yang kami ukur</h2>
 <p><strong>Menulis</strong> adalah seberapa cepat AI mengetik jawabannya, dalam token per detik; token adalah potongan kata, dan satu kata bahasa Indonesia sering terdiri dari dua token atau lebih. <strong>Membaca</strong> adalah seberapa cepat ia menerima apa yang kamu berikan: pertanyaanmu, teks yang ditempel, atau PDF. Membaca selalu jauh lebih cepat daripada menulis, karena AI bisa membaca banyak token sekaligus tapi harus menulisnya satu per satu.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Apa</th><th>Berjalan di</th><th>Hasil</th><th>Diukur</th></tr></thead>
@@ -93,7 +93,7 @@
 </table></div>
 <p>Cara setiap angka diukur: <a href="/blog/id/how-we-measure-ai-speed">Selengkapnya tentang cara kami mengukur</a></p><ol class="src"><li>Tes kecepatan llama.cpp sendiri (llama-bench), mesin yang menjalankan GreenCube, dengan file AI yang sama: 128 token ditulis, teks 512 token dibaca.</li></ol>
 <p>Kalau kami punya beberapa pengukuran, kami tampilkan rentangnya: kecepatan sedikit berubah antar pengukuran di PC yang sama.</p>
-<h2>Apa artinya</h2>
+<h2 id="apa-artinya">Apa artinya</h2>
 <div class="card g">
 <h3>Kartu grafis yang bekerja</h3>
 <p>PC yang sama, AI yang sama (Cube 4B (Gemma 4 E4B)): 5 token per detik di prosesor saja, 63–72 di kartu grafis, sekitar <strong>14 kali lebih cepat</strong>. Kartu grafis dibuat untuk mengerjakan ribuan hitungan kecil sekaligus untuk game, dan menjalankan AI sebagian besar adalah jenis matematika yang sama. GreenCube mengukur keduanya saat mulai dan memakai yang lebih cepat.</p>
@@ -110,7 +110,7 @@
 <h3>Gambar</h3>
 <p>Kemungkinan besar bisa, tapi kami belum mengukur waktu gambar di kartu ini. Kalau sudah, angkanya akan ada di sini. Gambar memakai AI-nya sendiri sekitar 6 GB dan jauh lebih banyak matematika daripada jawaban chat, jadi grafis di sini jauh lebih berpengaruh.</p>
 </div>
-<h2>Perbandingannya</h2>
+<h2 id="perbandingannya">Perbandingannya</h2>
 <p>Dari 8 PC yang kami ukur dengan Cube 4B (Gemma 4 E4B), PC ini <strong>nomor 2</strong> untuk kecepatan menulis. <a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a> menulis 65–71, kurang lebih sama. <a href="/blog/id/ai-on-rtx-5060">RTX 5060</a> menulis 56 (tes awal), jadi yang ini sekitar 20% lebih cepat.</p>
 <p>Kami mengukur 4 kartu dengan 8 GB, dan hasilnya sangat berbeda:</p>
 <ul>
@@ -120,7 +120,7 @@
 <li><a href="/blog/id/ai-on-rx-580">RX 580</a>: 10–11 token per detik</li>
 </ul>
 <p>Memori menentukan AI mana yang muat. Seberapa baru kartunya menentukan seberapa cepat ia berjalan.</p>
-<h2>PC uji</h2>
+<h2 id="pc-uji">PC uji</h2>
 <p>PC milik penguji sungguhan, dipakai seperti biasanya, bukan mesin lab:</p>
 <ul>
 <li>Desktop</li>
@@ -129,7 +129,7 @@
 <li><strong>RAM:</strong> 48 GB</li>
 <li><strong>Prosesor:</strong> Intel Core i7-9700, 8 thread</li>
 </ul>
-<h2>Cek PC-mu sendiri</h2>
+<h2 id="cek-pc-mu-sendiri">Cek PC-mu sendiri</h2>
 <p>Tidak yakin isi PC-mu? Cuma butuh 30 detik:</p>
 <ol class="steps">
 <li>Tekan <strong>Ctrl + Shift + Esc</strong> untuk membuka Task Manager.</li>
@@ -138,7 +138,7 @@
 <li>Klik <strong>GPU</strong>: nama di kanan atas adalah kartumu, dan <strong>Dedicated GPU memory</strong> (Memori GPU khusus) adalah VRAM-mu. Hanya melihat grafis Intel atau AMD tanpa memori khusus? Berarti kamu tidak punya kartu terpisah.</li>
 </ol>
 <p>Lalu cari kartu terdekat di <a href="/blog/id/can-my-pc-run-ai">tabel lengkap</a>. Kartu yang sama dengan VRAM lebih besar bisa memuat AI yang lebih besar; kartu yang lebih baru dengan ukuran sama biasanya lebih cepat.</p>
-<h2>PC lain yang kami ukur</h2>
+<h2 id="pc-lain-yang-kami-ukur">PC lain yang kami ukur</h2>
 <ul>
 <li><a href="/blog/id/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 token per detik (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/id/ai-on-rtx-5060">RTX 5060</a>: 56 token per detik (Cube 4B (Gemma 4 E4B))</li>
@@ -151,14 +151,14 @@
 <li><a href="/blog/id/ai-on-intel-iris-xe-laptop">laptop Intel Iris Xe</a>: 5–7 token per detik (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/id/can-my-pc-run-ai">Bisakah PC-ku menjalankan AI?</a> Semua 10 PC dalam satu tabel, dan bagaimana rasanya di PC-mu.</p>
-<h2>Pertanyaan</h2>
+<h2 id="pertanyaan">Pertanyaan</h2>
 <div class="faq">
 <details><summary>Bisakah RX 5700 XT menjalankan AI secara lokal?</summary><p>Ya. Di PC desktop dengan AMD RX 5700 XT (8 GB) dan RAM 48 GB, Cube 4B (Gemma 4 E4B) menulis 63–72 token per detik. Kamu membaca sekitar 8, jadi jawabannya keluar lebih cepat daripada kamu membacanya.</p></details>
 <details><summary>Bisakah RX 5700 XT membuat gambar AI?</summary><p>Kemungkinan besar bisa, tapi kami belum mengukur waktu gambar di kartu ini. Kalau sudah, angkanya akan ada di sini.</p></details>
 <details><summary>Apakah AI lebih cepat di RX 5700 XT atau di prosesor?</summary><p>Di kartu, jauh: 63–72 token per detik dibanding 5 di prosesor, sekitar 14 kali lebih cepat.</p></details>
 <details><summary>Bisakah RX 5700 XT menjalankan Gemma 4 12B?</summary><p>Hanya untuk chat pendek. Cube 12B (Gemma 4 12B) yang lebih besar (6,4 GB) menulis 20–36 token per detik untuk pertanyaan pendek, tapi begitu chat mencapai 8.192 token (percakapan panjang), ia crash karena kartunya hampir penuh. Itulah kenapa GreenCube hanya menyarankan 12B di kartu dengan 10 GB atau lebih.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Coba GreenCube di sini</h2><p>Ini jendela aplikasinya sendiri. Kirim salah satu permintaan, buka hasilnya dan ubah lewat chat, atau buat gambar di Gambar.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -199,7 +199,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Apakah GreenCube bisa jalan di PC-mu?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>RAM 8 GB, tanpa kartu grafis</span><em>Semua fitur jalan, hanya lebih lambat.</em></li><li><b>Sprout</b><span>RAM 16 GB, atau 8 GB dengan kartu grafis</span><em>Kecepatan stabil, bisa membuat slide presentasi.</em></li><li><b>Bloom</b><span>Kartu grafis 8 GB, atau kartu 4-6 GB dengan RAM 16 GB</span><em>Cepat, gambar tanpa menunggu.</em></li><li><b>Thrive</b><span>Kartu 8 GB atau lebih dan RAM 24 GB atau lebih</span><em>Paling cepat.</em></li></ul><p>GreenCube memeriksa PC-mu dan memasang model AI yang cocok: tanpa terminal, tanpa pengaturan. &euro;9,99 (US$9,99), bayar sekali, dan jadi milikmu.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/id/what-you-get">Cek PC-mu <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/id/buy">Dapatkan GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Baca juga</h2><div class="rel-grid"><a class="rel-card" href="/blog/id/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI mana yang tidak melatih modelnya dengan chat-mu? Kami mengecek 9 (Oktober 2026)</span></a><a class="rel-card" href="/blog/id/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI untuk merangkum catatan: mana yang dipilih soal batas dan privasi (2026)</span></a><a class="rel-card" href="/blog/id/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Bisakah PC-ku menjalankan AI? Kami mengukur 10 PC gaming dan laptop sungguhan</span></a><a class="rel-card" href="/blog/id/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Berapa VRAM yang dibutuhkan untuk AI? Kenapa model harus muat di GPU-mu</span></a><a class="rel-card" href="/blog/id/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Asisten AI paling privat: 10 AI sudah dicek (2026)</span></a><a class="rel-card" href="/blog/id/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Bisakah menjalankan AI dengan RAM 8 GB? Kami mencoba laptop terlemah kami</span></a></div></section></article>
 
 </main>
 

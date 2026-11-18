@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/zh">GreenCube 博客</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/zh">GreenCube 博客</a></p>
 <h1>RTX 2080 Ti 能跑 AI 吗？实测：每秒 65–71 个 token</h1>
-<p class="byline">作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月14日</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>作者：<a href="/blog/zh/hector-gras">Hector Gras</a> &middot; 2026年10月14日</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目录"><p class="toc-h">目录</p><ol><li><a href="#实际用起来怎么样">实际用起来怎么样</a></li><li><a href="#我们测到的结果">我们测到的结果</a></li><li><a href="#这意味着什么">这意味着什么</a></li><li><a href="#横向对比">横向对比</a></li><li><a href="#测试电脑">测试电脑</a></li><li><a href="#查看你自己的电脑">查看你自己的电脑</a></li><li><a href="#我们测过的其他电脑">我们测过的其他电脑</a></li><li><a href="#常见问题">常见问题</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>属于你自己的 AI，就在你的电脑上</b><p>GreenCube 在你的电脑上运行：没有使用限制，没有订阅，不联网也能用。&euro;9.99 (US$9.99)，一次付清。</p><a class="cta" href="#try">在这里试试 <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>可以。在一台配备</strong> NVIDIA RTX 2080 Ti（11 GB）和 128 GB 内存的台式机上，Cube 4B (Gemma 4 E4B) 每秒输出 65–71 个 token。回答出来的速度比你读得还快。</p></div>
 <div class="stats">
 <div class="stat g"><b>65–71</b><span>Cube 4B (Gemma 4 E4B) 每秒 token 数</span></div>
 <div class="stat b"><b>5.6×</b><span>显卡比 CPU 快</span></div>
 <div class="stat p"><b>8–9 秒</b><span>生成一张图片</span></div>
 </div>
-<h2>实际用起来怎么样</h2>
+<h2 id="实际用起来怎么样">实际用起来怎么样</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>任务</th><th>在这台电脑上的用时</th></tr></thead>
 <tbody>
@@ -82,7 +82,7 @@
 </table></div>
 <p>根据这台电脑实测的速度推算：时间等于长度除以速度，实际回答开始前还要花一点准备时间。作为参考，英语读者大多每秒读约 4 个单词（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>）。中文的 token 数和字数之间没有固定比例，所以这里不做换算。一个 400 个 token 的回答，光是读一遍也要花上不少时间。</p>
 <p class="bridge-mid">不确定你的电脑带不带得动？<a href="https://greencube.app/zh/what-you-get">看看你的电脑能跑什么 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我们测到的结果</h2>
+<h2 id="我们测到的结果">我们测到的结果</h2>
 <p><strong>输出</strong>是 AI 打出回答的速度，单位是每秒 token 数；token 是词的片段。<strong>读取</strong>是它接收你给的内容（问题、粘贴的文字或 PDF）的速度。读取总是比输出快得多，因为 AI 可以一次读很多 token，但只能一个一个地写。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>项目</th><th>运行在</th><th>结果</th><th>测量方式</th></tr></thead>
@@ -95,7 +95,7 @@
 </table></div>
 <p>每个数字的测量方式：<a href="/blog/zh/how-we-measure-ai-speed">了解更多测量方法</a></p><ol class="src"><li>GreenCube 0.1.44 中的真实聊天：从应用日志里读取每个 100 个 token 及以上回答的速度。范围去掉了最慢和最快的各十分之一。</li><li>GreenCube 0.1.44 自带的速度测试，启动时运行，用来在显卡和 CPU 之间做选择：各写一次短回答。</li><li>GreenCube 的图片引擎（Z-Image Turbo），512×512 像素，8 步，从点击计时到图片完成。</li></ol>
 <p>多次测量的结果用范围表示：同一台电脑每次运行的速度都会略有不同。</p>
-<h2>这意味着什么</h2>
+<h2 id="这意味着什么">这意味着什么</h2>
 <div class="card g">
 <h3>干活的是显卡</h3>
 <p>同一台电脑、同一个 AI（Cube 4B (Gemma 4 E4B)）：仅用 CPU 每秒 13.5 个 token，用显卡每秒 75.6 个 token，<strong>快约 5.6 倍</strong>。显卡天生就是为游戏同时处理成千上万个小计算而设计的，而运行 AI 大部分也是这类计算。GreenCube 启动时会把两者都测一遍，然后用更快的那个。</p>
@@ -112,9 +112,9 @@
 <h3>图片</h3>
 <p>可以。生成一张图片（512×512）：显卡 8–9 秒 (第一张加载时用了 83 秒)。生成图片使用约 6 GB 的专用 AI，计算量比聊天回答大得多，所以这里显卡的差距更明显。</p>
 </div>
-<h2>横向对比</h2>
+<h2 id="横向对比">横向对比</h2>
 <p>在用 Cube 4B (Gemma 4 E4B) 测过的 8 台电脑中，这台的输出速度排<strong>第 1 名</strong>。<a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a> 每秒输出 63–72 个 token，这台速度差不多。</p>
-<h2>测试电脑</h2>
+<h2 id="测试电脑">测试电脑</h2>
 <p>一位真实测试者自己日常使用的电脑，不是实验室机器：</p>
 <ul>
 <li>台式机</li>
@@ -123,7 +123,7 @@
 <li><strong>内存:</strong> 128 GB</li>
 <li><strong>处理器:</strong> 32 线程</li>
 </ul>
-<h2>查看你自己的电脑</h2>
+<h2 id="查看你自己的电脑">查看你自己的电脑</h2>
 <p>不确定你的电脑配置？30 秒就能查到：</p>
 <ol class="steps">
 <li>按 <strong>Ctrl + Shift + Esc</strong> 打开任务管理器。</li>
@@ -132,7 +132,7 @@
 <li>点击 <strong>GPU</strong>：右上角的名称就是你的显卡，<strong>专用 GPU 内存</strong>就是你的显存。只看到没有专用内存的 Intel 或 AMD 显卡？那就说明你没有独立显卡。</li>
 </ol>
 <p>然后在<a href="/blog/zh/can-my-pc-run-ai">完整表格</a>里找最接近的显卡。同一款显卡显存更大，能装下更大的 AI；同样显存的新显卡通常更快。</p>
-<h2>我们测过的其他电脑</h2>
+<h2 id="我们测过的其他电脑">我们测过的其他电脑</h2>
 <ul>
 <li><a href="/blog/zh/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 token/秒 (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/zh/ai-on-rtx-5060">RTX 5060</a>: 56 token/秒 (Cube 4B (Gemma 4 E4B))</li>
@@ -145,14 +145,14 @@
 <li><a href="/blog/zh/ai-on-intel-iris-xe-laptop">Intel Iris Xe 笔记本电脑</a>: 5–7 token/秒 (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/zh/can-my-pc-run-ai">我的电脑能跑 AI 吗？</a> 全部 10 台电脑汇总在一张表里，以及你的电脑用起来会怎样。</p>
-<h2>常见问题</h2>
+<h2 id="常见问题">常见问题</h2>
 <div class="faq">
 <details><summary>RTX 2080 Ti 能在本地运行 AI 吗？</summary><p>可以。在一台配备 NVIDIA RTX 2080 Ti（11 GB）和 128 GB 内存的台式机上，Cube 4B (Gemma 4 E4B) 每秒输出 65–71 个 token。回答出来的速度比你读得还快。</p></details>
 <details><summary>RTX 2080 Ti 能生成 AI 图片吗？</summary><p>可以。生成一张图片（512×512）：显卡 8–9 秒 (第一张加载时用了 83 秒)。</p></details>
 <details><summary>AI 在 RTX 2080 Ti 上更快，还是在 CPU 上更快？</summary><p>显卡快得多：显卡每秒 75.6 个 token，CPU 每秒 13.5 个，快约 5.6 倍。</p></details>
 <details><summary>RTX 2080 Ti 能运行 Gemma 4 12B 吗？</summary><p>应该可以。Cube 12B (Gemma 4 12B) 文件大小为 6.4 GB，这张显卡有 11 GB，长对话也留有余地。我们还没在这张显卡上测过。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>就在这里试试 GreenCube</h2><p>这是应用本身的窗口。发送一个提示，打开它做出的内容并通过聊天修改，或者在“图片”里生成一张图片。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -193,7 +193,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube 能在你的电脑上运行吗？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB 内存，无显卡</span><em>都能用，只是慢一些。</em></li><li><b>Sprout</b><span>16 GB 内存，或 8 GB 加显卡</span><em>速度稳定，能写演示文稿。</em></li><li><b>Bloom</b><span>8 GB 显卡，或 4-6 GB 显卡加 16 GB 内存</span><em>很快，生成图片不用等。</em></li><li><b>Thrive</b><span>8 GB 或以上显卡，加 24 GB 或以上内存</span><em>最快。</em></li></ul><p>GreenCube 会查看你的电脑，装好适合它的 AI 模型：不用命令行，不用设置。&euro;9.99（US$9.99），一次付费，就归你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh/what-you-get">检查你的电脑 <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh/buy">获取 GreenCube</a></p></div>
-</article>
+<section class="related"><h2>继续阅读</h2><div class="rel-grid"><a class="rel-card" href="/blog/zh/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">哪个 AI 不用你的聊天训练？我们核实了 9 个（2026 年 10 月）</span></a><a class="rel-card" href="/blog/zh/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">用 AI 总结笔记：按上限和隐私该选哪个（2026）</span></a><a class="rel-card" href="/blog/zh/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">我的电脑能跑 AI 吗？我们实测了 10 台游戏电脑和笔记本</span></a><a class="rel-card" href="/blog/zh/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI 需要多少显存？为什么模型必须装进显卡</span></a><a class="rel-card" href="/blog/zh/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">最注重隐私的 AI 助手：核对了 10 个 AI（2026）</span></a><a class="rel-card" href="/blog/zh/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">8 GB 内存能跑 AI 吗？我们用最弱的笔记本电脑试了试</span></a></div></section></article>
 
 </main>
 

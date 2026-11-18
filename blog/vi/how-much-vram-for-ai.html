@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/vi">Blog GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/vi">Blog GreenCube</a></p>
 <h1>AI cần bao nhiêu VRAM? Vì sao mô hình phải nằm gọn trên GPU</h1>
-<p class="byline">Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 23 tháng 10, 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Tác giả: <a href="/blog/vi/hector-gras">Hector Gras</a> &middot; 23 tháng 10, 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Mục lục"><p class="toc-h">Mục lục</p><ol><li><a href="#bài-thử">Bài thử</a></li><li><a href="#chúng-tôi-rút-ra-được-gì">Chúng tôi rút ra được gì</a></li><li><a href="#cách-chọn-mô-hình-cho-card-của-bạn">Cách chọn mô hình cho card của bạn</a></li><li><a href="#câu-hỏi">Câu hỏi</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>AI của riêng bạn, trên máy của riêng bạn</b><p>GreenCube chạy trên máy tính của bạn: không giới hạn sử dụng, không thuê bao, chạy không cần internet. &euro;9,99 (US$9,99), trả một lần.</p><a class="cta" href="#try">Dùng thử ngay tại đây <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Bạn cần đủ VRAM để chứa toàn bộ mô hình cộng thêm khoảng 1,5 GB cho cuộc trò chuyện và Windows. Một AI nằm trọn trong bộ nhớ card đồ họa sẽ chạy nhanh. Một AI bị tràn ra ngoài có thể còn chậm hơn cả không dùng card, và có thể bị crash. Nhỏ hơn mà nằm trọn trên card thắng lớn hơn mà chỉ nằm được một nửa.</p></div>
 
 <p>Chúng tôi không lấy điều này từ bảng thông số. Chúng tôi đo nó trên một máy chơi game thật khi đang xây dựng GreenCube, ứng dụng tôi làm, và kết quả đã thay đổi cách GreenCube chọn mô hình.</p>
 
-<h2>Bài thử</h2>
+<h2 id="bài-thử">Bài thử</h2>
 <p>Máy thử là một máy bàn dùng AMD RX 5700 XT (8 GB VRAM) và 48 GB RAM. Chúng tôi tải một mô hình 12 tỷ tham số (Gemma 4 12B, khoảng 6,7 GB) và đặt nhiều hay ít phần của nó lên card, tất cả trong một phiên vào tháng 9 năm 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Phần mô hình nằm trên card</th><th>Viết (token/giây)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Không chắc PC của bạn có đủ sức? <a href="https://greencube.app/vi/what-you-get">Xem máy của bạn chạy được gì <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Chúng tôi rút ra được gì</h2>
+<h2 id="chúng-tôi-rút-ra-được-gì">Chúng tôi rút ra được gì</h2>
 <h3>Gần như là được ăn cả, ngã về không</h3>
 <p>Chỉ cần để một phần mô hình nằm ngoài card là nó chậm đi 6 lần. Với 20 lớp trên card, nó còn chậm hơn một mô hình nhỏ hơn chạy hoàn toàn không có card. Nửa trên card, nửa ngoài card cho bạn cái tệ nhất của cả hai.</p>
 
@@ -93,20 +93,20 @@
 <h3>Hãy chừa chỗ</h3>
 <p>Trên GTX 1650 4 GB, một mô hình 4,2 GB bị nhồi vào card 3,9 GB, và ngay tin nhắn đầu tiên đã thất bại với lỗi "không đủ bộ nhớ". Từ đó, GreenCube luôn để trống khoảng 1,5 GB trên card cho cuộc chat và cho Windows.</p>
 
-<h2>Cách chọn mô hình cho card của bạn</h2>
+<h2 id="cách-chọn-mô-hình-cho-card-của-bạn">Cách chọn mô hình cho card của bạn</h2>
 <ol class="steps">
 <li>Kiểm tra VRAM: Task Manager &rarr; Performance (Hiệu suất) &rarr; GPU &rarr; Dedicated GPU memory (bộ nhớ GPU riêng).</li>
 <li>Cộng khoảng 1,5 GB vào kích thước tệp mô hình. Tổng đó phải vừa với VRAM của bạn.</li>
 <li>Khi phân vân, hãy chọn nhỏ hơn. Một mô hình nhỏ hơn nằm trọn trên card thắng một mô hình lớn hơn chỉ nằm được một nửa.</li>
 </ol>
 <p>Nếu bạn không muốn tự tính, GreenCube đọc card của bạn và chọn một mô hình vừa mà vẫn còn chỗ dư. Tốc độ thật trên 10 máy, từ GTX 1650 đến RTX 5060, có trong <a href="/blog/vi/can-my-pc-run-ai">Máy tôi có chạy được AI không?</a></p>
-<h2>Câu hỏi</h2>
+<h2 id="câu-hỏi">Câu hỏi</h2>
 <div class="faq">
 <details><summary>Chuyện gì xảy ra nếu mô hình AI không vừa VRAM?</summary><p>Phần không vừa sẽ chạy từ bộ nhớ thường, và mọi thứ chậm đi. Trên card 8 GB của chúng tôi, một mô hình có 28 lớp trên card viết 5,9 token mỗi giây thay vì 35,6 khi có toàn bộ các lớp: chậm hơn 6 lần.</p></details>
 <details><summary>Tôi có nên chạy mô hình AI lớn nhất mà card tải được không?</summary><p>Không. Hãy chừa chỗ cho cuộc trò chuyện. Một mô hình 12 tỷ tham số vừa trên card 8 GB với một câu hỏi ngắn, rồi bị crash khi cuộc chat dài hơn. Một mô hình nhỏ hơn vừa thoải mái thì nhanh hơn và không bao giờ crash.</p></details>
 <details><summary>Nên để trống bao nhiêu VRAM?</summary><p>GreenCube để trống khoảng 1,5 GB trên card cho cuộc trò chuyện và cho Windows. Không có khoảng trống đó, một card 4 GB đã hết bộ nhớ ngay tin nhắn đầu tiên.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Dùng thử GreenCube ngay tại đây</h2><p>Đây là cửa sổ của chính ứng dụng. Gửi một yêu cầu, mở thứ nó tạo ra và chỉnh bằng cách trò chuyện, hoặc tạo hình ảnh trong mục Hình ảnh.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube có chạy được trên PC của bạn không?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>RAM 8 GB, không có card đồ họa</span><em>Mọi thứ đều chạy, chỉ chậm hơn.</em></li><li><b>Sprout</b><span>RAM 16 GB, hoặc 8 GB kèm card đồ họa</span><em>Tốc độ ổn định, viết được bài thuyết trình.</em></li><li><b>Bloom</b><span>Card đồ họa 8 GB, hoặc card 4-6 GB kèm RAM 16 GB</span><em>Nhanh, tạo ảnh không phải chờ.</em></li><li><b>Thrive</b><span>Card từ 8 GB trở lên và RAM từ 24 GB trở lên</span><em>Nhanh nhất.</em></li></ul><p>GreenCube xem PC của bạn và cài mô hình AI phù hợp với máy: không cần terminal, không cần chỉnh thiết lập. 9,99&nbsp;&euro; (9,99 US$), trả một lần là của bạn.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/vi/what-you-get">Kiểm tra PC của bạn <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/vi/buy">Mua GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Đọc tiếp</h2><div class="rel-grid"><a class="rel-card" href="/blog/vi/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI nào không huấn luyện bằng cuộc chat của bạn? Chúng tôi đã kiểm tra 9 cái (tháng 10, 2026)</span></a><a class="rel-card" href="/blog/vi/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI tóm tắt ghi chép: chọn cái nào xét về giới hạn và quyền riêng tư (2026)</span></a><a class="rel-card" href="/blog/vi/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Máy mình có chạy được AI không? Chúng tôi đã đo 10 máy chơi game và laptop thật</span></a><a class="rel-card" href="/blog/vi/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Trợ lý AI riêng tư nhất: đã kiểm tra 10 AI (2026)</span></a><a class="rel-card" href="/blog/vi/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Có chạy được AI với RAM 8 GB không? Chúng tôi đã thử laptop yếu nhất của mình</span></a><a class="rel-card" href="/blog/vi/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">RTX 2080 Ti có chạy được AI không? Đo được: 65–71 token mỗi giây</span></a></div></section></article>
 
 </main>
 

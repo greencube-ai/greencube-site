@@ -60,17 +60,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/de">GreenCube-Blog</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/de">GreenCube-Blog</a></p>
 <h1>Läuft KI auf einer RTX 5060? Gemessen: 56 Tokens pro Sekunde</h1>
-<p class="byline">Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 1. Oktober 2026</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Von <a href="/blog/de/hector-gras">Hector Gras</a> &middot; 1. Oktober 2026</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Inhalt"><p class="toc-h">Inhalt</p><ol><li><a href="#was-das-in-der-praxis-heißt">Was das in der Praxis heißt</a></li><li><a href="#was-wir-gemessen-haben">Was wir gemessen haben</a></li><li><a href="#was-es-bedeutet">Was es bedeutet</a></li><li><a href="#wie-er-im-vergleich-abschneidet">Wie er im Vergleich abschneidet</a></li><li><a href="#der-test-pc">Der Test-PC</a></li><li><a href="#prüf-deinen-eigenen-pc">Prüf deinen eigenen PC</a></li><li><a href="#weitere-pcs-die-wir-gemessen-haben">Weitere PCs, die wir gemessen haben</a></li><li><a href="#fragen">Fragen</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Deine eigene KI, auf deinem eigenen PC</b><p>GreenCube läuft auf deinem Computer: ohne Nutzungslimits, ohne Abo, auch ohne Internet. 9,99&nbsp;&euro; (9,99&nbsp;US$), einmal bezahlt.</p><a class="cta" href="#try">Gleich hier ausprobieren <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>Ja.</strong> Auf einem Desktop-PC mit einer NVIDIA RTX 5060 (8 GB) und 32 GB RAM schrieb Cube 4B (Gemma 4 E4B) 56 Tokens pro Sekunde. Schneller, als du liest.</p></div>
 <div class="stats">
 <div class="stat g"><b>56</b><span>Tokens pro Sekunde mit Cube 4B (Gemma 4 E4B)</span></div>
 <div class="stat b"><b>4,6×</b><span>schneller auf der Karte als auf dem Prozessor</span></div>
 </div>
-<h2>Was das in der Praxis heißt</h2>
+<h2 id="was-das-in-der-praxis-heißt">Was das in der Praxis heißt</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Aufgabe</th><th>Zeit auf diesem PC</th></tr></thead>
 <tbody>
@@ -79,7 +79,7 @@
 </table></div>
 <p>Berechnet aus den auf diesem PC gemessenen Geschwindigkeiten: Zeit ist Länge geteilt durch Tempo, und eine echte Antwort braucht außerdem einen Moment zum Anlaufen. Zum Vergleich: Die meisten Menschen lesen etwa 4 Wörter pro Sekunde (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), also brauchst du für eine Antwort mit 400 Tokens schon über eine Minute, nur um sie zu lesen.</p>
 <p class="bridge-mid">Nicht sicher, ob dein PC das schafft? <a href="https://greencube.app/de/what-you-get">Sieh nach, was auf deinem läuft <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Was wir gemessen haben</h2>
+<h2 id="was-wir-gemessen-haben">Was wir gemessen haben</h2>
 <p><strong>Schreiben</strong> heißt, wie schnell die KI ihre Antwort tippt, in Tokens pro Sekunde; ein Token ist ein Stück Wort, und im Deutschen braucht ein Wort meist ein bis zwei. <strong>Lesen</strong> heißt, wie schnell sie aufnimmt, was du ihr gibst: deine Frage, einen eingefügten Text oder ein PDF. Lesen ist immer viel schneller als Schreiben, weil die KI viele Tokens auf einmal lesen kann, sie aber einzeln schreiben muss.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Was</th><th>Lief auf</th><th>Ergebnis</th><th>Gemessen</th></tr></thead>
@@ -90,7 +90,7 @@
 </table></div>
 <p>Wie jede Zahl gemessen wurde: <a href="/blog/de/how-we-measure-ai-speed">Mehr dazu, wie wir messen</a></p><ol class="src"><li>Der eigene Tempotest von GreenCube 0.1.42, den es beim Start macht, um zwischen Grafikkarte und Prozessor zu wählen: eine kurze Antwort, je einmal auf beiden geschrieben.</li></ol>
 <p>Wo wir mehrere Messungen haben, zeigen wir den Bereich: Das Tempo schwankt zwischen Messungen auf demselben PC etwas.</p>
-<h2>Was es bedeutet</h2>
+<h2 id="was-es-bedeutet">Was es bedeutet</h2>
 <div class="card g">
 <h3>Die Grafikkarte macht die Arbeit</h3>
 <p>Gleicher PC, gleiche KI (Cube 4B (Gemma 4 E4B)): 12,1 Tokens pro Sekunde nur mit dem Prozessor, 55,9 mit der Grafikkarte, etwa <strong>4,6-mal so schnell</strong>. Eine Grafikkarte ist dafür gebaut, für Spiele Tausende kleiner Rechnungen gleichzeitig zu machen, und eine KI laufen zu lassen ist größtenteils genau diese Art von Mathe. GreenCube misst beim Start beides und nimmt das Schnellere.</p>
@@ -107,7 +107,7 @@
 <h3>Bilder</h3>
 <p>Sehr wahrscheinlich, aber wir haben auf dieser Karte noch kein Bild gestoppt. Sobald wir es tun, steht die Zahl hier. Ein Bild nutzt eine eigene KI von etwa 6 GB und viel mehr Rechenarbeit als eine Chat-Antwort, also zählt die Grafik hier noch mehr.</p>
 </div>
-<h2>Wie er im Vergleich abschneidet</h2>
+<h2 id="wie-er-im-vergleich-abschneidet">Wie er im Vergleich abschneidet</h2>
 <p>Von den 8 PCs, die wir mit Cube 4B (Gemma 4 E4B) gemessen haben, ist dieser <strong>Nummer 3</strong> beim Schreibtempo. Die <a href="/blog/de/ai-on-rx-5700-xt">RX 5700 XT</a> schreibt 63–72, etwa 20 % schneller. Die <a href="/blog/de/ai-on-rtx-3060">RTX 3060</a> schreibt 53–55, also ist dieser etwa 5 % schneller.</p>
 <p>Wir haben 4 Karten mit 8 GB gemessen, und sie liegen weit auseinander:</p>
 <ul>
@@ -117,7 +117,7 @@
 <li><a href="/blog/de/ai-on-rx-580">RX 580</a>: 10–11 Tokens pro Sekunde</li>
 </ul>
 <p>Der Speicher entscheidet, welche KI passt. Wie neu die Karte ist, entscheidet, wie schnell sie läuft.</p>
-<h2>Der Test-PC</h2>
+<h2 id="der-test-pc">Der Test-PC</h2>
 <p>Der eigene PC eines echten Testers, so genutzt wie sonst auch, keine Labormaschine:</p>
 <ul>
 <li>Desktop-PC</li>
@@ -126,7 +126,7 @@
 <li><strong>RAM:</strong> 32 GB</li>
 <li><strong>Prozessor:</strong> 16 Threads</li>
 </ul>
-<h2>Prüf deinen eigenen PC</h2>
+<h2 id="prüf-deinen-eigenen-pc">Prüf deinen eigenen PC</h2>
 <p>Du weißt nicht, was in deinem PC steckt? Das dauert 30 Sekunden:</p>
 <ol class="steps">
 <li>Drück <strong>Strg + Umschalt + Esc</strong>, um den Task-Manager zu öffnen.</li>
@@ -135,7 +135,7 @@
 <li>Klick auf <strong>GPU</strong>: Der Name oben rechts ist deine Karte, und <strong>Dedizierter GPU-Speicher</strong> ist dein VRAM. Du siehst nur Intel- oder AMD-Grafik ohne dedizierten Speicher? Dann hast du keine separate Karte.</li>
 </ol>
 <p>Such dann die ähnlichste Karte in <a href="/blog/de/can-my-pc-run-ai">der vollständigen Tabelle</a>. Dieselbe Karte mit mehr VRAM kann eine größere KI aufnehmen; eine neuere Karte derselben Größe ist meist schneller.</p>
-<h2>Weitere PCs, die wir gemessen haben</h2>
+<h2 id="weitere-pcs-die-wir-gemessen-haben">Weitere PCs, die wir gemessen haben</h2>
 <ul>
 <li><a href="/blog/de/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 Tokens pro Sekunde (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/de/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 Tokens pro Sekunde (Cube 4B (Gemma 4 E4B))</li>
@@ -148,14 +148,14 @@
 <li><a href="/blog/de/ai-on-intel-iris-xe-laptop">Laptop mit Intel Iris Xe</a>: 5–7 Tokens pro Sekunde (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/de/can-my-pc-run-ai">Läuft KI auf meinem PC?</a> Alle 10 PCs in einer Tabelle, und wie sich deiner anfühlen wird.</p>
-<h2>Fragen</h2>
+<h2 id="fragen">Fragen</h2>
 <div class="faq">
 <details><summary>Läuft KI lokal auf einer RTX 5060?</summary><p>Ja. Auf einem Desktop-PC mit einer NVIDIA RTX 5060 (8 GB) und 32 GB RAM schrieb Cube 4B (Gemma 4 E4B) 56 Tokens pro Sekunde. Schneller, als du liest.</p></details>
 <details><summary>Kann man auf einer RTX 5060 KI-Bilder erstellen?</summary><p>Sehr wahrscheinlich, aber wir haben auf dieser Karte noch kein Bild gestoppt. Sobald wir es tun, steht die Zahl hier.</p></details>
 <details><summary>Ist KI auf der RTX 5060 schneller oder auf dem Prozessor?</summary><p>Auf der Karte, mit Abstand: 55,9 Tokens pro Sekunde gegenüber 12,1 auf dem Prozessor, etwa 4,6-mal so schnell.</p></details>
 <details><summary>Läuft Gemma 4 12B auf einer RTX 5060?</summary><p>Nicht bequem. GreenCube schlägt das größere Cube 12B (Gemma 4 12B) nur auf Karten mit 10 GB VRAM oder mehr vor, und diese hat 8. Auf einer AMD RX 5700 XT mit 8 GB beantwortete es kurze Fragen und stürzte dann in einem langen Chat ab.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Probier GreenCube gleich hier aus</h2><p>Das ist das echte Fenster der App. Schick eine der Anfragen ab, öffne, was sie erstellt, und ändere es im Chat, oder mach ein Bild unter Bilder.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -196,7 +196,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Läuft GreenCube auf deinem PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB RAM, keine Grafikkarte</span><em>Alles funktioniert, nur langsamer.</em></li><li><b>Sprout</b><span>16 GB RAM, oder 8 GB mit Karte</span><em>Gleichmäßiges Tempo, schreibt Präsentationen.</em></li><li><b>Bloom</b><span>Eine Grafikkarte mit 8 GB, oder eine 4- bis 6-GB-Karte mit 16 GB RAM</span><em>Schnell, Bilder ohne Wartezeit.</em></li><li><b>Thrive</b><span>Eine Karte mit 8 GB oder mehr und 24 GB RAM oder mehr</span><em>Am schnellsten.</em></li></ul><p>GreenCube schaut sich deinen PC an und richtet das KI-Modell ein, das zu ihm passt: kein Terminal, keine Einstellungen. 9,99&nbsp;&euro; (9,99&nbsp;US$), einmal bezahlt, und es gehört dir.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/de/what-you-get">Prüf deinen PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/de/buy">GreenCube holen</a></p></div>
-</article>
+<section class="related"><h2>Weiterlesen</h2><div class="rel-grid"><a class="rel-card" href="/blog/de/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Welche KI trainiert nicht mit deinen Chats? Wir haben 9 geprüft (Oktober 2026)</span></a><a class="rel-card" href="/blog/de/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">KI zum Zusammenfassen deiner Notizen: Welche du wegen Limits und Datenschutz wählen solltest (2026)</span></a><a class="rel-card" href="/blog/de/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Läuft KI auf meinem PC? Wir haben 10 echte Gaming-PCs und Laptops gemessen</span></a><a class="rel-card" href="/blog/de/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Wie viel VRAM brauchst du für KI? Warum das Modell auf deine GPU passen muss</span></a><a class="rel-card" href="/blog/de/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Der privateste KI-Assistent: 10 KIs geprüft (2026)</span></a><a class="rel-card" href="/blog/de/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Läuft KI mit 8 GB RAM? Wir haben unseren schwächsten Laptop getestet</span></a></div></section></article>
 
 </main>
 

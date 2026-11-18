@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/zh-tw">GreenCube 部落格</a></p>
 <h1>AI 需要多少顯示記憶體？為什麼模型必須裝進顯示卡</h1>
-<p class="byline">作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>作者：<a href="/blog/zh-tw/hector-gras">Hector Gras</a> &middot; 2026年10月23日</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目錄"><p class="toc-h">目錄</p><ol><li><a href="#測試">測試</a></li><li><a href="#我們學到了什麼">我們學到了什麼</a></li><li><a href="#怎麼替你的顯示卡挑模型">怎麼替你的顯示卡挑模型</a></li><li><a href="#常見問題">常見問題</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>屬於你自己的 AI，就在你的電腦上</b><p>GreenCube 在你的電腦上執行：沒有使用限制，沒有訂閱，不聯網也能用。&euro;9.99 (US$9.99)，一次付清。</p><a class="cta" href="#try">在這裡試試 <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>你需要的顯示記憶體，要能裝下整個模型，再加上約 1.5 GB 給對話和 Windows。整個裝進顯示卡記憶體的 AI 跑得很快。溢出去的那種，最後可能比完全不用顯示卡還慢，而且可能會當掉。小一點但整個在顯示卡上，勝過大一點但只有一半在上面。</p></div>
 
 <p>這不是我們從規格表上抄來的。我們在開發 GreenCube（我做的應用程式）時，在一台真實的遊戲電腦上量出來，而這些結果改變了 GreenCube 挑選模型的方式。</p>
 
-<h2>測試</h2>
+<h2 id="測試">測試</h2>
 <p>測試用的是一台桌機，配備 AMD RX 5700 XT（8 GB 顯示記憶體）和 48 GB 記憶體。我們載入一個 120 億參數的模型（Gemma 4 12B，約 6.7 GB），把它或多或少地放到顯示卡上，全部在 2026 年 9 月的同一次測試中完成。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>模型有多少放在顯示卡上</th><th>輸出速度（token/秒）</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">不確定你的電腦跑不跑得動？<a href="https://greencube.app/zh-tw/what-you-get">看看你的電腦能跑什麼 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>我們學到了什麼</h2>
+<h2 id="我們學到了什麼">我們學到了什麼</h2>
 <h3>幾乎是全有或全無</h3>
 <p>只要有一部分模型不在顯示卡上，速度就慢了 6 倍。只放 20 層在顯示卡上時，它比一個完全不用顯示卡的小模型還慢。一半放在顯示卡上，等於兩邊的缺點都拿到了。</p>
 
@@ -93,20 +93,20 @@
 <h3>要留空間</h3>
 <p>在一張 4 GB 的 GTX 1650 上，一個 4.2 GB 的模型被硬塞進 3.9 GB 的顯示卡，結果第一則訊息就以「記憶體不足」失敗。從那之後，GreenCube 都會在顯示卡上留約 1.5 GB 給聊天和 Windows。</p>
 
-<h2>怎麼替你的顯示卡挑模型</h2>
+<h2 id="怎麼替你的顯示卡挑模型">怎麼替你的顯示卡挑模型</h2>
 <ol class="steps">
 <li>查你的顯示記憶體：工作管理員 &rarr; 效能 &rarr; GPU &rarr; 專用 GPU 記憶體。</li>
 <li>把模型的檔案大小加上約 1.5 GB。這個總數應該要能裝進你的顯示記憶體。</li>
 <li>拿不定主意時，就選小一點的。整個在顯示卡上的小模型，勝過只有一半在上面的大模型。</li>
 </ol>
 <p>如果你不想自己算，GreenCube 會讀取你的顯示卡，挑一個裝得下、還留有餘裕的模型。從 GTX 1650 到 RTX 5060，10 台電腦的真實速度都在 <a href="/blog/zh-tw/can-my-pc-run-ai">我的電腦能跑 AI 嗎？</a></p>
-<h2>常見問題</h2>
+<h2 id="常見問題">常見問題</h2>
 <div class="faq">
 <details><summary>AI 模型裝不進顯示記憶體會怎樣？</summary><p>裝不下的部分會改從一般記憶體執行，整體都會變慢。在我們的 8 GB 顯示卡上，一個把 28 層放在顯示卡上的模型每秒寫出 5.9 個 token，全部放在顯示卡上時則是 35.6 個：慢了 6 倍。</p></details>
 <details><summary>應該跑顯示卡載入得了的最大 AI 模型嗎？</summary><p>不應該。要留空間給對話。一個 120 億參數的模型在 8 GB 顯示卡上回答短問題時裝得下，但對話一變長就當掉了。一個裝得下又有餘裕的小模型更快，而且從來沒當過。</p></details>
 <details><summary>應該留多少顯示記憶體？</summary><p>GreenCube 會在顯示卡上留約 1.5 GB 給對話和 Windows。沒有這些空間時，一張 4 GB 顯示卡在第一則訊息就記憶體不足了。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>就在這裡試試 GreenCube</h2><p>這是應用程式本身的視窗。送出一個提示，打開它做出的內容並透過聊天修改，或在「圖片」裡產生一張圖片。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube 能在你的電腦上執行嗎？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB 記憶體，無顯示卡</span><em>都能用，只是慢一些。</em></li><li><b>Sprout</b><span>16 GB 記憶體，或 8 GB 加顯示卡</span><em>速度穩定，能寫簡報。</em></li><li><b>Bloom</b><span>8 GB 顯示卡，或 4-6 GB 顯示卡加 16 GB 記憶體</span><em>很快，生成圖片不用等。</em></li><li><b>Thrive</b><span>8 GB 或以上顯示卡，加 24 GB 或以上記憶體</span><em>最快。</em></li></ul><p>GreenCube 會查看你的電腦，裝好適合它的 AI 模型：不用命令列，不用設定。&euro;9.99（US$9.99），一次付費，就歸你。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/zh-tw/what-you-get">檢查你的電腦 <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/zh-tw/buy">獲取 GreenCube</a></p></div>
-</article>
+<section class="related"><h2>繼續閱讀</h2><div class="rel-grid"><a class="rel-card" href="/blog/zh-tw/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">哪個 AI 不用你的聊天訓練？我們核實了 9 個（2026 年 10 月）</span></a><a class="rel-card" href="/blog/zh-tw/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">用 AI 總結筆記：按上限和隱私該選哪個（2026）</span></a><a class="rel-card" href="/blog/zh-tw/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">我的電腦能跑 AI 嗎？我們實測了 10 臺遊戲電腦和筆電</span></a><a class="rel-card" href="/blog/zh-tw/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">最注重隱私的 AI 助手：核對了 10 個 AI（2026）</span></a><a class="rel-card" href="/blog/zh-tw/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">8 GB 記憶體能跑 AI 嗎？我們用最弱的筆電試了試</span></a><a class="rel-card" href="/blog/zh-tw/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">RTX 2080 Ti 能跑 AI 嗎？實測：每秒 65–71 個 token</span></a></div></section></article>
 
 </main>
 

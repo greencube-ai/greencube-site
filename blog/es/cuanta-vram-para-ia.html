@@ -61,16 +61,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/es">Blog de GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/es">Blog de GreenCube</a></p>
 <h1>¿Cuánta VRAM necesitas para la IA? Por qué tiene que caber en tu gráfica</h1>
-<p class="byline">Por <a href="/blog/es/hector-gras">Hector Gras</a> &middot; 18 de octubre de 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Por <a href="/blog/es/hector-gras">Hector Gras</a> &middot; 18 de octubre de 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contenido"><p class="toc-h">Contenido</p><ol><li><a href="#la-prueba">La prueba</a></li><li><a href="#lo-que-aprendimos">Lo que aprendimos</a></li><li><a href="#cómo-elegir-un-modelo-para-tu-tarjeta">Cómo elegir un modelo para tu tarjeta</a></li><li><a href="#preguntas">Preguntas</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Tu propia IA, en tu propio PC</b><p>GreenCube funciona en tu ordenador: sin límites de uso, sin suscripción y sin internet. 9,99&nbsp;&euro; (9,99&nbsp;US$), un solo pago.</p><a class="cta" href="#try">Pruébalo aquí <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Necesitas VRAM suficiente para el modelo entero más unos 1,5 GB para la conversación y Windows. Una IA que cabe entera en la memoria de tu tarjeta gráfica va rápida. Una que se sale puede acabar yendo más lenta que si no usaras la tarjeta, y puede fallar. Más pequeña y entera en la tarjeta gana a más grande y a medias.</p></div>
 
 <p>No lo sacamos de una ficha técnica. Lo medimos en un PC gaming real mientras construíamos GreenCube, la app que hago, y los resultados cambiaron cómo GreenCube elige el modelo.</p>
 
-<h2>La prueba</h2>
+<h2 id="la-prueba">La prueba</h2>
 <p>El PC era un sobremesa con una AMD RX 5700 XT (8 GB de VRAM) y 48 GB de RAM. Cargamos un modelo de 12.000 millones de parámetros (Gemma 4 12B, unos 6,7 GB) y pusimos más o menos parte de él en la tarjeta, todo en una misma sesión, en septiembre de 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Cuánto del modelo estaba en la tarjeta</th><th>Escribe (tokens/s)</th></tr></thead>
@@ -84,7 +84,7 @@
 </table></div>
 
 <p class="bridge-mid">¿No sabes si tu PC podrá con ella? <a href="https://greencube.app/es/what-you-get">Mira qué funciona en el tuyo <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Lo que aprendimos</h2>
+<h2 id="lo-que-aprendimos">Lo que aprendimos</h2>
 <h3>Es casi todo o nada</h3>
 <p>Dejar solo una parte del modelo fuera de la tarjeta lo hizo 6 veces más lento. Con 20 capas en la tarjeta fue más lento que un modelo más pequeño funcionando sin tarjeta. A medias en la tarjeta tienes lo peor de los dos mundos.</p>
 
@@ -94,20 +94,20 @@
 <h3>Deja margen</h3>
 <p>En una GTX 1650 de 4 GB, un modelo de 4,2 GB se metió a presión en una tarjeta de 3,9 GB, y el primer mensaje ya falló con "no hay memoria suficiente". Desde entonces, GreenCube deja libres unos 1,5 GB de la tarjeta para el chat y para Windows.</p>
 
-<h2>Cómo elegir un modelo para tu tarjeta</h2>
+<h2 id="cómo-elegir-un-modelo-para-tu-tarjeta">Cómo elegir un modelo para tu tarjeta</h2>
 <ol class="steps">
 <li>Mira tu VRAM: Administrador de tareas &rarr; Rendimiento &rarr; GPU &rarr; Memoria de GPU dedicada.</li>
 <li>Suma unos 1,5 GB al tamaño del archivo del modelo. Ese total tiene que caber en tu VRAM.</li>
 <li>Si dudas, elige uno más pequeño. Un modelo más pequeño entero en la tarjeta gana a uno más grande a medias.</li>
 </ol>
 <p>Si prefieres no hacer cuentas, GreenCube lee tu tarjeta y elige un modelo que quepa con margen. Las velocidades reales en 10 PCs, de una GTX 1650 a una RTX 5060, están en <a href="/blog/can-my-pc-run-ai">¿Puede mi PC ejecutar IA?</a></p>
-<h2>Preguntas</h2>
+<h2 id="preguntas">Preguntas</h2>
 <div class="faq">
 <details><summary>¿Qué pasa si un modelo de IA no cabe en la VRAM?</summary><p>La parte que no cabe funciona desde la memoria normal y todo va más lento. En nuestra tarjeta de 8 GB, un modelo con 28 de sus capas en la tarjeta escribía a 5,9 tokens por segundo en vez de 35,6 con todas: 6 veces más lento.</p></details>
 <details><summary>¿Debería usar el modelo más grande que cargue mi tarjeta?</summary><p>No. Deja sitio para la conversación. Un modelo de 12.000 millones de parámetros cupo en una tarjeta de 8 GB para una pregunta corta, y se cayó en cuanto el chat se alargó. Uno más pequeño que cabía con margen fue más rápido y nunca falló.</p></details>
 <details><summary>¿Cuánta VRAM debo dejar libre?</summary><p>GreenCube deja libres unos 1,5 GB de la tarjeta para la conversación y para Windows. Sin ese margen, una tarjeta de 4 GB se quedó sin memoria en el primer mensaje.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Explora GreenCube aquí mismo</h2><p>Esta es la ventana de la propia app. Envía una de las peticiones, abre lo que crea y cámbialo chateando, o haz una imagen en Imágenes.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -148,7 +148,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>¿Funcionará GreenCube en tu PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB de RAM, sin tarjeta gráfica</span><em>Todo funciona, solo que más lento.</em></li><li><b>Sprout</b><span>16 GB de RAM, u 8 GB con tarjeta gráfica</span><em>Velocidad estable, hace presentaciones.</em></li><li><b>Bloom</b><span>Una tarjeta gráfica de 8 GB, o una de 4-6 GB con 16 GB de RAM</span><em>Rápido, imágenes sin esperas.</em></li><li><b>Thrive</b><span>Una tarjeta de 8 GB o más y 24 GB de RAM o más</span><em>Lo más rápido.</em></li></ul><p>GreenCube mira tu PC y prepara el modelo de IA que le va: sin terminal y sin ajustes. 9,99&nbsp;&euro; (9,99&nbsp;US$), un solo pago, y es tuya.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/es/what-you-get">Comprueba tu PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/es/buy">Consigue GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Sigue leyendo</h2><div class="rel-grid"><a class="rel-card" href="/blog/es/ia-privada"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">IA privada: 10 asistentes comprobados (2026)</span></a><a class="rel-card" href="/blog/es/ia-con-8gb-de-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">¿Se puede usar IA con 8 GB de RAM? Probamos el portátil más flojo</span></a><a class="rel-card" href="/blog/es/ia-en-mi-pc"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">¿Puedo usar IA en mi PC? Lo medimos en 10 PCs gaming y portátiles</span></a><a class="rel-card" href="/blog/es/ia-para-resumir-apuntes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">IA para resumir apuntes: cuál elegir según tus límites y tu privacidad (2026)</span></a><a class="rel-card" href="/blog/es/ia-que-no-entrena-con-tus-datos"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">¿Qué IA no entrena con tus chats? Lo comprobamos en 9 (octubre 2026)</span></a><a class="rel-card" href="/blog/es/ia-para-estudiar-oposiciones"><span class="rel-img rel-none"></span><span class="rel-t">IA para estudiar oposiciones: cuál usar con tu temario, con pruebas reales</span></a></div></section></article>
 
 </main>
 

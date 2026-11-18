@@ -39,17 +39,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>When Local Tools Beat Million Token LLM Context Windows</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 15 September 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 15 September 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/context-window-llm.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#tokens-and-what-fills-the-window">Tokens, and what fills the window</a></li><li><a href="#how-big-is-a-context-window">How big is a context window?</a></li><li><a href="#why-models-have-a-maximum">Why models have a maximum</a></li><li><a href="#where-long-context-breaks-down">Where long context breaks down</a></li><li><a href="#how-to-work-within-the-limit">How to work within the limit</a></li><li><a href="#when-a-big-window-is-worth-it">When a big window is worth it</a></li><li><a href="#context-windows-on-your-own-pc">Context windows on your own PC</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/context-window-llm.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>A context window is how much text a language model can take into account at once, measured in tokens. Everything counts: the instructions, the whole conversation so far, any documents you paste in, and the answer it's writing. A 200K window holds about 150,000 English words and a 1 million token window about 750,000. Bigger windows cost more memory, time and money, and models don't use every part of a long window equally well, so the biggest number isn't automatically the best choice.</p></div>
 
 <p>Here's how context windows work, why they have limits, and how to work well within them, in the cloud or on your own PC.</p>
 
-<h2>Tokens, and what fills the window</h2>
+<h2 id="tokens-and-what-fills-the-window">Tokens, and what fills the window</h2>
 <p>A token is a chunk of text: sometimes a whole word, sometimes part of one, sometimes a punctuation mark. As a rule of thumb, 100 tokens is about 75 English words. Code and many other languages use more tokens for the same amount of text.</p>
 <p>Everything in a request counts against the window:</p>
 <ul>
@@ -62,7 +62,7 @@
 <p>When the window is full, something has to go. Some apps show an error; others quietly drop the oldest messages, and the model then answers as if they were never said.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>How big is a context window?</h2>
+<h2 id="how-big-is-a-context-window">How big is a context window?</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Window</th><th>About this many words</th><th>Roughly</th></tr></thead>
 <tbody>
@@ -76,16 +76,16 @@
 </table></div>
 <p>GPT-3 had a <a href="https://en.wikipedia.org/wiki/GPT-3" rel="nofollow noopener">2,048-token window</a>. Today many models offer 128K or more, and Google's <a href="https://ai.google.dev/gemini-api/docs/long-context" rel="nofollow noopener">Gemini documentation</a> describes windows of 1 million tokens and beyond. These numbers change with almost every release, so check the model's own documentation, and the limits of the app or API you actually use, which can be lower than the model's maximum.</p>
 
-<h2>Why models have a maximum</h2>
+<h2 id="why-models-have-a-maximum">Why models have a maximum</h2>
 <p>The first limit is attention. Each token is compared with every other token, so the work grows with the square of the length: ten times more text means about a hundred times more attention work. Modern models use tricks to soften this, but long prompts still take longer before the first word of the answer appears.</p>
 <p>The second is memory. While it writes, the model keeps a cache of what it has already read (the KV cache) so it doesn't redo that work for every new token. That cache grows with every token in the window, and it has to sit in fast memory next to the model. For big models with very long contexts it can reach tens of gigabytes.</p>
 <p>The third is training. Models are trained on sequences up to a certain length. Stretching them past it can work, but quality often drops in ways you only notice when you test.</p>
 
-<h2>Where long context breaks down</h2>
+<h2 id="where-long-context-breaks-down">Where long context breaks down</h2>
 <p>A long window doesn't mean the model reads all of it equally carefully. The study <a href="https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00638/119630/Lost-in-the-Middle-How-Language-Models-Use-Long" rel="nofollow noopener">"Lost in the Middle"</a> found that models recall information at the start and end of a long prompt better than information in the middle. Put the key clause on page 40 of an 80-page contract and you're more likely to get a wrong answer than if it were on page one.</p>
 <p>Cost and speed grow with length too. Cloud APIs charge per token on every request, so resending a huge document with each question adds up, and every extra token slows the first reply.</p>
 
-<h2>How to work within the limit</h2>
+<h2 id="how-to-work-within-the-limit">How to work within the limit</h2>
 <ol>
 <li>Budget the window. Leave room for the instructions, the conversation and the answer you need, and see what's left for documents.</li>
 <li>Use retrieval instead of pasting everything. Retrieval (RAG) finds the passages that matter and puts only those in the prompt. It's usually cheaper, and often more accurate, than stuffing in the whole file.</li>
@@ -94,14 +94,14 @@
 <li>Test at your real length. If you'll send 30-page documents, test with 30-page documents, not a demo paragraph.</li>
 </ol>
 
-<h2>When a big window is worth it</h2>
+<h2 id="when-a-big-window-is-worth-it">When a big window is worth it</h2>
 <p>Large windows earn their cost when the model really must see everything at once: summarising a whole report or book, reviewing a contract whose clauses refer to each other, or tracing a bug across many files of code.</p>
 <p>They're a poor fit for quick chat, where people expect a fast reply, and for the same narrow question asked over and over against a big set of documents. There, retrieval almost always wins on cost and consistency.</p>
 
-<h2>Context windows on your own PC</h2>
+<h2 id="context-windows-on-your-own-pc">Context windows on your own PC</h2>
 <p>When an AI runs on your own computer, the context window competes for the same RAM or graphics memory as the model itself, because the KV cache lives there too. So local apps usually use a window far smaller than the model's maximum, sized for the machine, and a very long conversation or document makes a local model slower as it goes. That's the trade for running offline: less room than a data centre, in exchange for your text never leaving your PC.</p>
 <p>I build GreenCube, a Windows app that runs AI offline (Cube 2B and Cube 4B, built on Google's Gemma 4 E2B and E4B), so weigh this with that in mind. It reads PDFs and Word files on your PC and answers from them, and the same advice applies there as anywhere: ask about specific parts of a long document rather than expecting one answer to cover all of it. For how model size and memory fit together, see <a href="/blog/llm-models">what LLM models are</a> and <a href="/blog/how-much-vram-for-ai">how much VRAM for AI</a>.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What does a 200K context window mean?</summary><p>The model can take about 200,000 tokens into account at once, roughly 150,000 English words. That has to cover everything: the instructions, the chat so far, any documents and the answer it writes.</p></details>
 <details><summary>Which LLM has the highest context window?</summary><p>It changes with almost every release, so check each model&#x27;s own documentation. Google&#x27;s Gemini docs describe windows of 1 million tokens and more, and cost and waiting time grow with how much of it you actually use.</p></details>
@@ -109,7 +109,7 @@
 <details><summary>How big is a 32K context window?</summary><p>About 24,000 English words, roughly a 50-page report, which is plenty for most chats and single documents.</p></details>
 <details><summary>Do local AI apps like GreenCube have smaller context windows than cloud models?</summary><p>Usually, yes. On your PC the context window shares memory with the model itself, so local apps size it to the machine, far smaller than a cloud model&#x27;s maximum. GreenCube is the same, so ask about specific parts of a long document rather than all of it at once.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -150,7 +150,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

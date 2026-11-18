@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/ru">Блог GreenCube</a></p>
 <h1>Потянет ли GTX 1650 ИИ? Измерено: около 20 токенов в секунду</h1>
-<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 1 октября 2026 г.</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 1 октября 2026 г.</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Содержание"><p class="toc-h">Содержание</p><ol><li><a href="#что-это-значит-на-практике">Что это значит на практике</a></li><li><a href="#что-мы-измерили">Что мы измерили</a></li><li><a href="#что-это-значит">Что это значит</a></li><li><a href="#сравнение-с-другими-пк">Сравнение с другими ПК</a></li><li><a href="#тестовый-пк">Тестовый ПК</a></li><li><a href="#проверьте-свой-пк">Проверьте свой ПК</a></li><li><a href="#другие-пк-которые-мы-измерили">Другие ПК, которые мы измерили</a></li><li><a href="#вопросы">Вопросы</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Ваш собственный ИИ на вашем собственном ПК</b><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro; (9,99&nbsp;US$), оплата один раз.</p><a class="cta" href="#try">Попробуйте здесь <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>Да:</strong> на настольном ПК с видеокартой NVIDIA GTX 1650 (4 ГБ) и 16 ГБ ОЗУ модель Cube 4B (Gemma 4 E4B) писала около 20 токенов в секунду. Это быстрее, чем вы читаете.</p></div>
 <div class="stats">
 <div class="stat g"><b>около 20</b><span>скорость в токенах в секунду, Cube 4B (Gemma 4 E4B)</span></div>
 </div>
-<h2>Что это значит на практике</h2>
+<h2 id="что-это-значит-на-практике">Что это значит на практике</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Задача</th><th>Время на этом ПК</th></tr></thead>
 <tbody>
@@ -79,7 +79,7 @@
 </table></div>
 <p>Рассчитано по скоростям, измеренным на этом ПК: время — это длина, делённая на скорость, а реальному ответу ещё нужно мгновение, чтобы начаться. Для сравнения: большинство людей читает около 4 слов в секунду (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), так что даже просто прочитать ответ из 400 токенов займёт у вас около минуты.</p>
 <p class="bridge-mid">Не уверены, что ваш ПК потянет? <a href="https://greencube.app/ru/what-you-get">Проверьте, что пойдёт на вашем <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Что мы измерили</h2>
+<h2 id="что-мы-измерили">Что мы измерили</h2>
 <p><strong>Написание</strong> — это то, как быстро ИИ печатает ответ, в токенах в секунду; токен — это кусочек слова, и русское слово часто занимает несколько токенов. <strong>Чтение</strong> — это то, как быстро он воспринимает то, что вы ему даёте: ваш вопрос, вставленный текст или PDF. Чтение всегда намного быстрее написания, потому что ИИ может читать много токенов сразу, а писать их должен по одному.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Что</th><th>Где работало</th><th>Результат</th><th>Дата замера</th></tr></thead>
@@ -90,7 +90,7 @@
 </table></div>
 <p>Как измерялось каждое число: <a href="/blog/ru/how-we-measure-ai-speed">Подробнее о том, как мы измеряем</a></p><ol class="src"><li>Реальные чаты в GreenCube 0.1.40 и 0.1.42: скорость каждого ответа от 100 токенов, взятая из журнала приложения. Диапазон отбрасывает самую медленную и самую быструю десятую часть.</li></ol>
 <p>Где у нас несколько замеров, мы показываем диапазон: скорость на одном и том же ПК немного меняется от замера к замеру. * Этот тестировщик в основном задавал короткие вопросы, поэтому учтены и ответы короче 100 токенов. Короткие ответы измеряются чуть медленнее.</p>
-<h2>Что это значит</h2>
+<h2 id="что-это-значит">Что это значит</h2>
 <div class="card b">
 <h3>Не всё помещается на видеокарту</h3>
 <p>Cube 4B (Gemma 4 E4B) — это файл на 4,2 ГБ, а у видеокарты 4 ГБ, так что модель не помещается целиком, и часть её лежит в обычной памяти (ОЗУ). Каждое слово, которое она пишет, должно добираться до этой части по гораздо более медленному пути, поэтому скорость падает и скачет. И всё же она пишет около 20 токенов в секунду. Скорость чтения вставленного текста от одного дня к другому колебалась от 24 до 395 токенов в секунду, скорее всего потому, что видеокарта была заполнена.</p>
@@ -107,9 +107,9 @@
 <h3>Изображения</h3>
 <p>Скорее всего да, но на этой видеокарте мы ещё не замеряли изображение. Когда замерим, число появится здесь. Для изображений используется отдельный ИИ размером около 6 ГБ и гораздо больше вычислений, чем для ответа в чате, поэтому графика здесь важна ещё больше.</p>
 </div>
-<h2>Сравнение с другими ПК</h2>
+<h2 id="сравнение-с-другими-пк">Сравнение с другими ПК</h2>
 <p>Из 8 ПК, которые мы измерили с Cube 4B (Gemma 4 E4B), этот на <strong>7-м месте</strong> по скорости написания. <a href="/blog/ru/ai-on-gtx-1660-super">GTX 1660 Super</a> пишет 37–38, примерно на 90% быстрее. <a href="/blog/ru/ai-on-rx-580">RX 580</a> пишет 10–11, значит, этот примерно на 90% быстрее.</p>
-<h2>Тестовый ПК</h2>
+<h2 id="тестовый-пк">Тестовый ПК</h2>
 <p>Собственный ПК реального тестировщика, которым он пользуется как обычно, а не лабораторная машина:</p>
 <ul>
 <li>Настольный ПК</li>
@@ -118,7 +118,7 @@
 <li><strong>ОЗУ:</strong> 16 ГБ</li>
 <li><strong>Процессор:</strong> 16 потоков</li>
 </ul>
-<h2>Проверьте свой ПК</h2>
+<h2 id="проверьте-свой-пк">Проверьте свой ПК</h2>
 <p>Не знаете, что у вас в ПК? Это займёт 30 секунд:</p>
 <ol class="steps">
 <li>Нажмите <strong>Ctrl + Shift + Esc</strong>, чтобы открыть Диспетчер задач.</li>
@@ -127,7 +127,7 @@
 <li>Нажмите <strong>Графический процессор</strong>: название вверху справа — это ваша видеокарта, а <strong>Выделенная память графического процессора</strong> — ваша видеопамять. Видите только графику Intel или AMD без выделенной памяти? Значит, отдельной видеокарты у вас нет.</li>
 </ol>
 <p>Затем найдите самую похожую видеокарту в <a href="/blog/ru/can-my-pc-run-ai">полной таблице</a>. Та же видеокарта с большим объёмом видеопамяти вмещает более крупный ИИ; более новая видеокарта того же объёма обычно быстрее.</p>
-<h2>Другие ПК, которые мы измерили</h2>
+<h2 id="другие-пк-которые-мы-измерили">Другие ПК, которые мы измерили</h2>
 <ul>
 <li><a href="/blog/ru/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 токен в секунду (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/ru/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 токена в секунду (Cube 4B (Gemma 4 E4B))</li>
@@ -140,13 +140,13 @@
 <li><a href="/blog/ru/ai-on-intel-iris-xe-laptop">ноутбук с Intel Iris Xe</a>: 5–7 токенов в секунду (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/ru/can-my-pc-run-ai">Потянет ли мой ПК ИИ?</a> Все 10 ПК в одной таблице и как будет ощущаться ваш ПК.</p>
-<h2>Вопросы</h2>
+<h2 id="вопросы">Вопросы</h2>
 <div class="faq">
 <details><summary>Потянет ли GTX 1650 ИИ локально?</summary><p>Да: на настольном ПК с видеокартой NVIDIA GTX 1650 (4 ГБ) и 16 ГБ ОЗУ модель Cube 4B (Gemma 4 E4B) писала около 20 токенов в секунду. Это быстрее, чем вы читаете.</p></details>
 <details><summary>Может ли GTX 1650 создавать изображения с помощью ИИ?</summary><p>Скорее всего да, но на этой видеокарте мы ещё не замеряли изображение. Когда замерим, число появится здесь.</p></details>
 <details><summary>Потянет ли GTX 1650 Gemma 4 12B?</summary><p>Не очень. GreenCube предлагает более крупную модель Cube 12B (Gemma 4 12B) только на видеокартах с 10 ГБ видеопамяти и больше, а у этой 4. На 8-гигабайтной AMD RX 5700 XT она отвечала на короткие вопросы, а потом падала в долгом чате.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Попробуйте GreenCube прямо здесь</h2><p>Это окно самого приложения. Отправьте один из запросов, откройте то, что оно создаст, и измените это в чате, или сделайте картинку в разделе «Изображения».</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -187,7 +187,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Пойдёт ли GreenCube на вашем ПК?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 ГБ ОЗУ, без видеокарты</span><em>Всё работает, просто медленнее.</em></li><li><b>Sprout</b><span>16 ГБ ОЗУ или 8 ГБ с видеокартой</span><em>Ровная скорость, пишет презентации.</em></li><li><b>Bloom</b><span>Видеокарта на 8 ГБ или видеокарта на 4–6 ГБ с 16 ГБ ОЗУ</span><em>Быстро, изображения без ожидания.</em></li><li><b>Thrive</b><span>Видеокарта на 8 ГБ и больше и 24 ГБ ОЗУ и больше</span><em>Самый быстрый.</em></li></ul><p>GreenCube смотрит на ваш ПК и устанавливает подходящую ему модель ИИ: без терминала, без настроек. 9,99&nbsp;&euro; (9,99 US$), один платёж — и он ваш.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/ru/what-you-get">Проверьте свой ПК <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/ru/buy">Купить GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Читать дальше</h2><div class="rel-grid"><a class="rel-card" href="/blog/ru/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Какой ИИ не обучается на ваших чатах? Мы проверили 9 (октябрь 2026)</span></a><a class="rel-card" href="/blog/ru/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ИИ для конспектов: какой выбрать с учётом лимитов и приватности (2026)</span></a><a class="rel-card" href="/blog/ru/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Потянет ли мой ПК ИИ? Мы измерили 10 реальных игровых ПК и ноутбуков</span></a><a class="rel-card" href="/blog/ru/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Сколько видеопамяти нужно для ИИ? Почему модель должна помещаться на видеокарту</span></a><a class="rel-card" href="/blog/ru/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Самый приватный ИИ-ассистент: проверили 10 ИИ (2026)</span></a><a class="rel-card" href="/blog/ru/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Можно ли запустить ИИ на 8 ГБ ОЗУ? Мы проверили наш самый слабый ноутбук</span></a></div></section></article>
 
 </main>
 

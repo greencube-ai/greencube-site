@@ -39,16 +39,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>Local AI Hardware That Actually Runs Models: Memory First 8GB–24GB Tiers</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 24 September 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 24 September 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/hardware-for-local-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#the-tiers">The tiers</a></li><li><a href="#how-much-memory-a-model-actually-needs">How much memory a model actually needs</a></li><li><a href="#apple-silicon-or-nvidia">Apple Silicon or NVIDIA</a></li><li><a href="#cpu-ram-and-storage">CPU, RAM and storage</a></li><li><a href="#which-software-suits-which-machine">Which software suits which machine</a></li><li><a href="#when-a-model-runs-out-of-memory">When a model runs out of memory</a></li><li><a href="#if-you-don-t-want-to-do-the-maths">If you don&#x27;t want to do the maths</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
 <aside class="tested"><strong>We tested this</strong><ul><li><a href="/blog/can-my-pc-run-ai">Can my PC run AI? We measured 10 real gaming PCs and laptops</a></li><li><a href="/blog/how-much-vram-for-ai">How much VRAM do you need for AI? Why the model must fit on your GPU</a></li></ul></aside>
-<img class="cover" src="/blog/covers/en/hardware-for-local-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>For local AI, buy memory first and speed second. What decides which models you can run is whether your graphics card's memory (VRAM), or a Mac's unified memory, can hold the model plus the conversation it's working on. Roughly: 8 GB runs small 7B-class models, 16 GB runs 13B to 20B models comfortably, 24 GB runs 30B-class models, and 70B models need two big cards or a Mac with a lot of memory. Small models also run with no graphics card at all, just more slowly.</p></div>
 
-<h2>The tiers</h2>
+<h2 id="the-tiers">The tiers</h2>
 <p>"Local AI" means very different things to someone summarising PDFs on a laptop and someone running a 32B coding model all day. These four tiers cover most people. All sizes assume 4-bit quantization, the usual way models are shrunk to run at home.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Tier</th><th>Memory</th><th>Runs well</th><th>Example cards</th></tr></thead>
@@ -62,7 +62,7 @@
 <p>A used 24 GB card is a sensible upgrade if you're serious, because memory, not raw speed, is what lets you run the next size up. Multi-GPU builds add real complexity (drivers, PCIe lanes, software that splits a model across cards), so most people are better off with one bigger card first.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>How much memory a model actually needs</h2>
+<h2 id="how-much-memory-a-model-actually-needs">How much memory a model actually needs</h2>
 <p>Start with the weights. At 16-bit precision each parameter takes 2 bytes, so a 7B model needs about 14 GB just to load. At 8-bit that halves to about 7 GB, and at 4-bit (the common <a href="/blog/gguf-vs-ggml">GGUF</a> builds) it's about 4 GB.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Model size</th><th>16-bit</th><th>8-bit</th><th>4-bit</th></tr></thead>
@@ -75,11 +75,11 @@
 </table></div>
 <p>Weights are the floor, not the total. The model also needs room for its working memory of the conversation (the KV cache), which grows with the length of the context: double the context and that part roughly doubles. That's why a model that fits fine on a short chat can run out of memory on a long document. A rough rule is to take the 4-bit weight size, add a third to a half for the cache, plus a couple of GB for the runtime. If the total is more than your VRAM, use a smaller quantization, a smaller model, or let part of it run from system RAM (slower). More in <a href="/blog/how-much-vram-for-ai">how much VRAM you need</a> and <a href="/blog/llm-quantization">LLM quantization</a>.</p>
 
-<h2>Apple Silicon or NVIDIA</h2>
+<h2 id="apple-silicon-or-nvidia">Apple Silicon or NVIDIA</h2>
 <p>Macs with Apple Silicon share one pool of memory between the processor and the graphics, so a Mac with 64 GB can give much of it to a model, more than any consumer graphics card at that price. They're quiet and efficient. The limits: you can't add memory later, and the Mac tools (such as MLX) differ from the CUDA ecosystem most AI software targets first.</p>
 <p>NVIDIA cards have the broadest software support, from llama.cpp to server tools like vLLM, and you can upgrade the card or add a second one later. AMD and Intel cards are cheaper per GB and work with llama.cpp, but support for the newest tools tends to arrive later. If you want one quiet box for chat and documents, a high-memory Mac is appealing. If you want to grow over time, a PC with an NVIDIA card gives you more room.</p>
 
-<h2>CPU, RAM and storage</h2>
+<h2 id="cpu-ram-and-storage">CPU, RAM and storage</h2>
 <ul>
 <li>System RAM: about double your VRAM is comfortable, so 32 GB or more next to a 16 GB card. With less, anything that spills out of the card ends up swapping.</li>
 <li>CPU: if a graphics card does the work, a mid-range 6 to 8 core processor is plenty. Without a card, the CPU and especially memory bandwidth decide your speed.</li>
@@ -87,13 +87,13 @@
 <li>Power and cooling: AI runs keep the card busy for long stretches, unlike gaming. An undersized power supply or poor airflow shows up as random crashes or slowdowns that look like software bugs.</li>
 </ul>
 
-<h2>Which software suits which machine</h2>
+<h2 id="which-software-suits-which-machine">Which software suits which machine</h2>
 <p>llama.cpp is the engine under much of local AI and the best option for machines without a card or with little memory. Ollama wraps it in simple commands and works on almost anything. LM Studio adds a graphical app for downloading and chatting with GGUF models (see <a href="/blog/ollama-vs-lm-studio">Ollama vs LM Studio</a>). vLLM is for NVIDIA workstations serving many requests at once, not for a single laptop.</p>
 
-<h2>When a model runs out of memory</h2>
+<h2 id="when-a-model-runs-out-of-memory">When a model runs out of memory</h2>
 <p>Before buying hardware, try these in order: shorten the context length, use a smaller quantization (4-bit instead of 8-bit), move fewer layers onto the graphics card so the rest runs from system RAM, or pick a smaller model. Read past the first line of the error log; it usually says whether loading the model or allocating the context failed. Only if none of that works is it time for a bigger card.</p>
 
-<h2>If you don't want to do the maths</h2>
+<h2 id="if-you-don-t-want-to-do-the-maths">If you don't want to do the maths</h2>
 <p>Plenty of people want an AI on their own PC without choosing cards or quantizations. That's the idea behind GreenCube, which I build, so weigh this with that in mind. It checks your Windows PC on first launch and picks the model that fits: Cube 2B on smaller PCs, Cube 4B on PCs with a graphics card, both built on Google's Gemma. Here's how fast it writes on the PCs we tested:</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Your PC</th><th>Writes</th></tr></thead>
@@ -104,7 +104,7 @@
 </tbody>
 </table></div>
 <p>Everything works on an 8 GB laptop, just slower; making images needs 12 GB of RAM. It costs &euro;9.99 once and works offline after a one-time sign-in and download. The trade-off is the same as any small local model: it's much less capable than the big cloud AIs on the hardest problems. To check your own PC, try <a href="/blog/can-my-pc-run-ai#checker">Can my PC run AI?</a></p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What hardware do I need for AI?</summary><p>For small models, any recent PC with 8 GB of RAM, slowly. For mid-size models in comfort: a graphics card with 8 to 16 GB of VRAM (or a Mac with 16 GB or more), 32 GB of RAM and an NVMe SSD. Bigger models need 24 GB of VRAM or more.</p></details>
 <details><summary>What is the best AI tool to run locally?</summary><p>It depends how hands-on you want to be. Ollama and LM Studio suit people happy to pick models, vLLM suits NVIDIA servers, and GreenCube suits people who want it set up for them.</p></details>
@@ -112,7 +112,7 @@
 <details><summary>Can I run an AI model locally without a dedicated GPU?</summary><p>Yes, small quantized models run on the processor alone. On the laptops we tested, GreenCube wrote at about reading speed with 8 GB of RAM and two to three times faster with 16 GB.</p></details>
 <details><summary>How much does GreenCube cost?</summary><p>€9.99 (US$9.99) once, everything included, no subscription. There&#x27;s a 15-day refund if it doesn&#x27;t suit your PC.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -153,7 +153,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

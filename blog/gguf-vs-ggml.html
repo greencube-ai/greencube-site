@@ -39,17 +39,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>GGUF vs GGML: what&#x27;s the difference, and which one should you use?</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 10 October 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 10 October 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#how-the-two-formats-differ">How the two formats differ</a></li><li><a href="#is-gguf-faster-or-smaller">Is GGUF faster or smaller?</a></li><li><a href="#which-tools-read-gguf">Which tools read GGUF</a></li><li><a href="#converting-a-model-to-gguf">Converting a model to GGUF</a></li><li><a href="#is-one-format-safer-than-the-other">Is one format safer than the other?</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Use GGUF. It's the file format llama.cpp and the apps built on it use today: one file that holds the model's weights, its tokenizer and typed metadata, so tools can add new model types without breaking old files. GGML files are the older format it replaced. You'll still find them in old archives, but current tools don't load them, so look for a GGUF version of the same model instead.</p></div>
 
 <p>One thing that confuses people: "GGML" is also the name of the C library that llama.cpp runs on (<a href="https://github.com/ggml-org/ggml" rel="nofollow noopener">ggml-org/ggml</a>). That library is very much alive. What's obsolete is the old GGML <em>file format</em>.</p>
 
-<h2>How the two formats differ</h2>
+<h2 id="how-the-two-formats-differ">How the two formats differ</h2>
 <p>Both formats package a model so it can run on an ordinary computer. The difference is in how they describe the model.</p>
 <p>GGML files stored the model's settings as a fixed, untyped list of values. That was fine for the first simple models, but every new architecture or tokenizer meant changing the list, and older files and newer code often stopped understanding each other. <a href="https://www.ibm.com/think/topics/gguf-versus-ggml" rel="nofollow noopener">IBM's explainer</a> names this as the reason GGML kept causing breaking changes.</p>
 <p>GGUF replaced the list with named, typed key-value pairs. A new field doesn't disturb the old ones, and a reader can skip keys it doesn't recognise instead of failing. The file also carries the tokenizer, a version number and a fixed header, and its tensor data is aligned so a program can map the file straight from disk instead of copying it into memory first. The details are in the <a href="https://github.com/ggml-org/ggml/blob/master/docs/gguf.md" rel="nofollow noopener">GGUF specification</a>.</p>
@@ -65,15 +65,15 @@
 </table></div>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Is GGUF faster or smaller?</h2>
+<h2 id="is-gguf-faster-or-smaller">Is GGUF faster or smaller?</h2>
 <p>Not in itself. There are few honest head-to-head benchmarks of the two formats, and they wouldn't tell you much. How fast a model runs and how much memory it takes depend almost entirely on its size and on the quantization level (how many bits each weight is squeezed into), not on the container. A 4-bit build of a model needs much less memory than an 8-bit one, at some cost in quality. Our <a href="/blog/llm-quantization">guide to quantization</a> explains the trade-off.</p>
 <p>Where GGUF does help is loading: one aligned file with everything inside opens quicker and with fewer surprises than a folder of separate config, tokenizer and weight files.</p>
 <p>GGUF is built for running models, not training them. When Hugging Face Transformers loads a GGUF file, it turns the weights back into full 32-bit precision (<a href="https://huggingface.co/docs/transformers/gguf" rel="nofollow noopener">Transformers docs</a>), so the memory savings disappear if you fine-tune.</p>
 
-<h2>Which tools read GGUF</h2>
+<h2 id="which-tools-read-gguf">Which tools read GGUF</h2>
 <p>llama.cpp, Ollama, LM Studio, Jan and GPT4All all run GGUF files, and Hugging Face shows GGUF files directly on model pages. If a local AI app doesn't list GGUF support, that's a sign it isn't keeping up with current local models. GreenCube runs on llama.cpp too, so its models are GGUF files (Cube 2B, built on Gemma 4 E2B, and Cube 4B, built on Gemma 4 E4B); the app downloads the right one for your PC on first launch, so you never handle the file yourself.</p>
 
-<h2>Converting a model to GGUF</h2>
+<h2 id="converting-a-model-to-gguf">Converting a model to GGUF</h2>
 <p>Most people never need to: popular models are published already converted, in several quantization levels, on Hugging Face. If you do want to convert one yourself:</p>
 <ol>
 <li>Download the original model from Hugging Face, including its <code>config.json</code> and tokenizer files.</li>
@@ -83,9 +83,9 @@
 </ol>
 <p>The usual snags are a missing <code>config.json</code>, the wrong Python version for the script, or a half-finished download. If the architecture is new and llama.cpp doesn't support it yet, conversion won't work until someone adds it, and that's real programming work. In nearly every case, a trusted pre-converted file is the faster route.</p>
 
-<h2>Is one format safer than the other?</h2>
+<h2 id="is-one-format-safer-than-the-other">Is one format safer than the other?</h2>
 <p>The format doesn't change privacy: either way the model runs on your machine and your prompts stay there. What matters is where the file came from. Download models from sources you can identify, such as the original publisher or a well-known converter on Hugging Face, and keep your app up to date. GGUF's built-in metadata makes it easier to see what a file is. A stray <code>.ggml</code> file of unknown origin is harder to check, and you couldn't run it in a current app anyway.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>Are GGUF models better than GGML models?</summary><p>For anything you&#x27;d run today, yes. GGUF keeps the tokenizer and typed metadata in one file and is what current tools support; the model inside isn&#x27;t smarter, it&#x27;s just more compatible.</p></details>
 <details><summary>Can I still use old GGML files?</summary><p>Only with old versions of the software that made them. Better to find a GGUF build of the same model, or a newer model, which will almost certainly be better anyway.</p></details>
@@ -93,7 +93,7 @@
 <details><summary>Do I need to convert models myself to use a tool like GreenCube?</summary><p>No. GreenCube picks and downloads a ready-made model for your PC on first launch, with no converting or command line.</p></details>
 <details><summary>Why do some apps need more RAM to run local models than others?</summary><p>Mostly because they run bigger or less compressed models. The model&#x27;s size and quantization level decide most of the memory, plus a bit extra for the conversation it&#x27;s keeping in mind.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -134,7 +134,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a><a class="rel-card" href="/blog/llama-3-vs-gemma"><img class="rel-img" src="/blog/covers/en/llama-3-vs-gemma.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GPU First For Developers: Gemma &lt;12GB, Llama 3 40GB+</span></a></div></section></article>
 
 </main>
 

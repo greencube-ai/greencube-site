@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/tr">GreenCube blogu</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/tr">GreenCube blogu</a></p>
 <h1>Yapay zekâ için ne kadar VRAM gerekir? Model neden ekran kartına sığmalı</h1>
-<p class="byline">Yazar: <a href="/blog/tr/hector-gras">Hector Gras</a> &middot; 23 Ekim 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Yazar: <a href="/blog/tr/hector-gras">Hector Gras</a> &middot; 23 Ekim 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="İçindekiler"><p class="toc-h">İçindekiler</p><ol><li><a href="#test">Test</a></li><li><a href="#öğrendiklerimiz">Öğrendiklerimiz</a></li><li><a href="#kartın-için-model-nasıl-seçilir">Kartın için model nasıl seçilir</a></li><li><a href="#sorular">Sorular</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Kendi yapay zekân, kendi PC'nde</b><p>GreenCube bilgisayarında çalışır: kullanım sınırı yok, abonelik yok, internetsiz çalışır. 9,99&nbsp;&euro; (9,99&nbsp;US$), tek seferlik ödeme.</p><a class="cta" href="#try">Burada deneyin <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Modelin tamamını, üstüne sohbet ve Windows için yaklaşık 1,5 GB'ı taşıyacak kadar VRAM gerekir. Tamamı ekran kartının belleğine sığan bir yapay zekâ hızlıdır. Taşan bir model ise kartı hiç kullanmamaktan bile yavaş kalabilir ve çökebilir. Daha küçük ve tamamı kartta olan model, daha büyük ve yarısı kartta olanı yener.</p></div>
 
 <p>Bunu bir teknik özellik tablosundan almadık. Geliştirdiğim uygulama GreenCube'u yaparken gerçek bir oyun PC'sinde ölçtük ve sonuçlar GreenCube'un model seçme biçimini değiştirdi.</p>
 
-<h2>Test</h2>
+<h2 id="test">Test</h2>
 <p>PC, AMD RX 5700 XT (8 GB VRAM) ve 48 GB RAM'li bir masaüstüydü. 12 milyar parametreli bir model (Gemma 4 12B, yaklaşık 6,7 GB) yükledik ve Eylül 2026'da tek bir oturumda modelin daha büyük ya da daha küçük bir kısmını karta koyduk.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Modelin ne kadarı karttaydı</th><th>Yazma hızı (token/sn)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Bilgisayarın yeter mi, emin değil misin? <a href="https://greencube.app/tr/what-you-get">Seninkinde neyin çalıştığına bak <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Öğrendiklerimiz</h2>
+<h2 id="öğrendiklerimiz">Öğrendiklerimiz</h2>
 <h3>Neredeyse ya hep ya hiç</h3>
 <p>Modelin yalnızca bir kısmını kartın dışında bırakmak onu 6 kat yavaşlattı. Kartta 20 katman varken, hiç kart olmadan çalışan daha küçük bir modelden bile yavaştı. Yarısı kartta olmak, iki dünyanın da en kötüsünü verir.</p>
 
@@ -93,20 +93,20 @@
 <h3>Yer bırak</h3>
 <p>4 GB'lık bir GTX 1650'de 4,2 GB'lık bir model 3,9 GB'lık karta sıkıştırıldı ve daha ilk mesaj "yetersiz bellek" hatasıyla başarısız oldu. O zamandan beri GreenCube kartın yaklaşık 1,5 GB'ını sohbet ve Windows için boş tutuyor.</p>
 
-<h2>Kartın için model nasıl seçilir</h2>
+<h2 id="kartın-için-model-nasıl-seçilir">Kartın için model nasıl seçilir</h2>
 <ol class="steps">
 <li>VRAM'ini kontrol et: Görev Yöneticisi &rarr; Performans &rarr; GPU &rarr; Ayrılmış GPU belleği.</li>
 <li>Modelin dosya boyutuna yaklaşık 1,5 GB ekle. Bu toplam VRAM'ine sığmalı.</li>
 <li>Emin değilsen küçüğünü seç. Tamamı kartta olan daha küçük bir model, yarısı kartta olan daha büyük bir modeli yener.</li>
 </ol>
 <p>Hesapla uğraşmak istemiyorsan GreenCube kartını okur ve boş yer bırakarak sığan bir model seçer. GTX 1650'den RTX 5060'a kadar 10 PC'deki gerçek hızlar <a href="/blog/tr/can-my-pc-run-ai">PC'm yapay zekâ çalıştırabilir mi?</a> yazısında.</p>
-<h2>Sorular</h2>
+<h2 id="sorular">Sorular</h2>
 <div class="faq">
 <details><summary>Bir yapay zekâ modeli VRAM&#x27;e sığmazsa ne olur?</summary><p>Sığmayan kısım normal bellekten çalışır ve her şey yavaşlar. 8 GB&#x27;lık kartımızda katmanlarının 28&#x27;i kartta olan bir model, hepsi kartta olduğunda yazdığı saniyede 35,6 token yerine 5,9 token yazdı: 6 kat daha yavaş.</p></details>
 <details><summary>Kartımın yükleyebildiği en büyük yapay zekâ modelini mi çalıştırmalıyım?</summary><p>Hayır. Sohbete yer bırak. 12 milyar parametreli bir model kısa bir soru için 8 GB&#x27;lık bir karta sığdı, sonra sohbet uzayınca çöktü. Boş yer bırakarak sığan daha küçük bir model daha hızlıydı ve hiç çökmedi.</p></details>
 <details><summary>Ne kadar VRAM boş bırakmalıyım?</summary><p>GreenCube kartın yaklaşık 1,5 GB&#x27;ını sohbet ve Windows için boş bırakır. Bu pay olmadan 4 GB&#x27;lık bir kartın belleği daha ilk mesajda tükendi.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>GreenCube’u burada deneyin</h2><p>Bu, uygulamanın kendi penceresi. İsteklerden birini gönderin, oluşturduğunu açın ve sohbet ederek değiştirin ya da Görseller’de bir görsel yapın.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCube bilgisayarında çalışır mı?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB RAM, ekran kartı yok</span><em>Her şey çalışır, sadece daha yavaş.</em></li><li><b>Sprout</b><span>16 GB RAM ya da ekran kartıyla 8 GB</span><em>Dengeli hız, sunum hazırlar.</em></li><li><b>Bloom</b><span>8 GB'lık bir ekran kartı ya da 16 GB RAM ile 4-6 GB'lık bir kart</span><em>Hızlı, görseller beklemeden.</em></li><li><b>Thrive</b><span>En az 8 GB'lık bir kart ve en az 24 GB RAM</span><em>En hızlısı.</em></li></ul><p>GreenCube bilgisayarına bakar ve ona uyan yapay zekâ modelini kurar: terminal yok, ayar yok. 9,99&nbsp;&euro; (9,99 US$), bir kez ödersin ve senin olur.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/tr/what-you-get">Bilgisayarını kontrol et <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/tr/buy">GreenCube'u al</a></p></div>
-</article>
+<section class="related"><h2>Okumaya devam et</h2><div class="rel-grid"><a class="rel-card" href="/blog/tr/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Hangi yapay zekâ sohbetlerinle eğitim yapmıyor? 9 tanesini kontrol ettik (Ekim 2026)</span></a><a class="rel-card" href="/blog/tr/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Notlarını özetleyen yapay zekâ: sınırlar ve gizlilik için hangisini seçmeli (2026)</span></a><a class="rel-card" href="/blog/tr/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">PC&#x27;mde yapay zekâ çalışır mı? 10 gerçek oyun bilgisayarı ve dizüstüyü ölçtük</span></a><a class="rel-card" href="/blog/tr/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">En gizli yapay zekâ asistanı: 10 yapay zekâ kontrol edildi (2026)</span></a><a class="rel-card" href="/blog/tr/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">8 GB RAM ile yapay zekâ çalışır mı? En zayıf dizüstümüzü denedik</span></a><a class="rel-card" href="/blog/tr/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">RTX 2080 Ti ile yapay zekâ çalışır mı? Ölçülen: saniyede 65–71 token</span></a></div></section></article>
 
 </main>
 

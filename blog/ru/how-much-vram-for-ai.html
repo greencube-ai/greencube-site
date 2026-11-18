@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/ru">Блог GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/ru">Блог GreenCube</a></p>
 <h1>Сколько видеопамяти нужно для ИИ? Почему модель должна помещаться на видеокарту</h1>
-<p class="byline">Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 23 октября 2026 г.</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Автор: <a href="/blog/ru/hector-gras">Hector Gras</a> &middot; 23 октября 2026 г.</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Содержание"><p class="toc-h">Содержание</p><ol><li><a href="#тест">Тест</a></li><li><a href="#что-мы-узнали">Что мы узнали</a></li><li><a href="#как-выбрать-модель-для-своей-видеокарты">Как выбрать модель для своей видеокарты</a></li><li><a href="#вопросы">Вопросы</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Ваш собственный ИИ на вашем собственном ПК</b><p>GreenCube работает на вашем компьютере: без ограничений, без подписки, без интернета. 9,99&nbsp;&euro; (9,99&nbsp;US$), оплата один раз.</p><a class="cta" href="#try">Попробуйте здесь <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Видеопамяти нужно столько, чтобы в неё поместилась вся модель плюс около 1,5 ГБ на разговор и Windows. ИИ, который целиком помещается в память видеокарты, работает быстро. Тот, что не влезает, может оказаться медленнее, чем вообще без видеокарты, и может упасть. Модель поменьше целиком на видеокарте лучше большей, которая там только наполовину.</p></div>
 
 <p>Мы взяли это не из характеристик. Мы измерили это на реальном игровом ПК, когда разрабатывали GreenCube (это приложение делаю я), и результаты изменили то, как GreenCube выбирает модель.</p>
 
-<h2>Тест</h2>
+<h2 id="тест">Тест</h2>
 <p>Это был настольный ПК с AMD RX 5700 XT (8 ГБ видеопамяти) и 48 ГБ ОЗУ. Мы загрузили модель на 12 миллиардов параметров (Gemma 4 12B, около 6,7 ГБ) и помещали на видеокарту большую или меньшую её часть, всё за одну сессию в сентябре 2026 года.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Какая часть модели была на видеокарте</th><th>Пишет (токенов/с)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Не уверены, что ваш ПК потянет? <a href="https://greencube.app/ru/what-you-get">Проверьте, что пойдёт на вашем <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Что мы узнали</h2>
+<h2 id="что-мы-узнали">Что мы узнали</h2>
 <h3>Это почти всё или ничего</h3>
 <p>Стоило оставить вне видеокарты лишь часть модели, и она стала в 6 раз медленнее. С 20 слоями на видеокарте она работала медленнее, чем модель поменьше вообще без видеокарты. Наполовину на видеокарте значит худшее из обоих вариантов.</p>
 
@@ -93,20 +93,20 @@
 <h3>Оставляйте запас</h3>
 <p>На GTX 1650 с 4 ГБ модель на 4,2 ГБ втиснули на видеокарту с 3,9 ГБ, и уже первое сообщение завершилось ошибкой «недостаточно памяти». С тех пор GreenCube держит около 1,5 ГБ видеокарты свободными для чата и для Windows.</p>
 
-<h2>Как выбрать модель для своей видеокарты</h2>
+<h2 id="как-выбрать-модель-для-своей-видеокарты">Как выбрать модель для своей видеокарты</h2>
 <ol class="steps">
 <li>Проверьте видеопамять: Диспетчер задач &rarr; Производительность &rarr; Графический процессор &rarr; Выделенная память графического процессора.</li>
 <li>Добавьте около 1,5 ГБ к размеру файла модели. Эта сумма должна помещаться в вашу видеопамять.</li>
 <li>Если сомневаетесь, берите меньше. Модель поменьше целиком на видеокарте лучше большей, которая там только наполовину.</li>
 </ol>
 <p>Если считать не хочется, GreenCube смотрит на вашу видеокарту и выбирает модель, которая помещается с запасом. Реальная скорость на 10 ПК, от GTX 1650 до RTX 5060, есть в статье <a href="/blog/ru/can-my-pc-run-ai">Потянет ли мой ПК ИИ?</a></p>
-<h2>Вопросы</h2>
+<h2 id="вопросы">Вопросы</h2>
 <div class="faq">
 <details><summary>Что будет, если модель ИИ не помещается в видеопамять?</summary><p>Часть, которая не поместилась, работает из обычной памяти, и всё замедляется. На нашей видеокарте с 8 ГБ модель, у которой на видеокарте было 28 слоёв, писала 5,9 токена в секунду вместо 35,6 со всеми слоями: в 6 раз медленнее.</p></details>
 <details><summary>Стоит ли запускать самую большую модель ИИ, которую может загрузить моя видеокарта?</summary><p>Нет. Оставьте место для разговора. Модель на 12 миллиардов параметров поместилась на видеокарту с 8 ГБ для короткого вопроса, а потом упала, когда чат стал длиннее. Модель поменьше, которая помещается с запасом, была быстрее и ни разу не упала.</p></details>
 <details><summary>Сколько видеопамяти оставлять свободной?</summary><p>GreenCube оставляет около 1,5 ГБ видеокарты свободными для разговора и для Windows. Без этого запаса видеокарте с 4 ГБ не хватило памяти уже на первом сообщении.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Попробуйте GreenCube прямо здесь</h2><p>Это окно самого приложения. Отправьте один из запросов, откройте то, что оно создаст, и измените это в чате, или сделайте картинку в разделе «Изображения».</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Пойдёт ли GreenCube на вашем ПК?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 ГБ ОЗУ, без видеокарты</span><em>Всё работает, просто медленнее.</em></li><li><b>Sprout</b><span>16 ГБ ОЗУ или 8 ГБ с видеокартой</span><em>Ровная скорость, пишет презентации.</em></li><li><b>Bloom</b><span>Видеокарта на 8 ГБ или видеокарта на 4–6 ГБ с 16 ГБ ОЗУ</span><em>Быстро, изображения без ожидания.</em></li><li><b>Thrive</b><span>Видеокарта на 8 ГБ и больше и 24 ГБ ОЗУ и больше</span><em>Самый быстрый.</em></li></ul><p>GreenCube смотрит на ваш ПК и устанавливает подходящую ему модель ИИ: без терминала, без настроек. 9,99&nbsp;&euro; (9,99 US$), один платёж — и он ваш.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/ru/what-you-get">Проверьте свой ПК <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/ru/buy">Купить GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Читать дальше</h2><div class="rel-grid"><a class="rel-card" href="/blog/ru/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Какой ИИ не обучается на ваших чатах? Мы проверили 9 (октябрь 2026)</span></a><a class="rel-card" href="/blog/ru/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ИИ для конспектов: какой выбрать с учётом лимитов и приватности (2026)</span></a><a class="rel-card" href="/blog/ru/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Потянет ли мой ПК ИИ? Мы измерили 10 реальных игровых ПК и ноутбуков</span></a><a class="rel-card" href="/blog/ru/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Самый приватный ИИ-ассистент: проверили 10 ИИ (2026)</span></a><a class="rel-card" href="/blog/ru/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Можно ли запустить ИИ на 8 ГБ ОЗУ? Мы проверили наш самый слабый ноутбук</span></a><a class="rel-card" href="/blog/ru/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">Потянет ли RTX 2080 Ti ИИ? Измерено: 65–71 токен в секунду</span></a></div></section></article>
 
 </main>
 

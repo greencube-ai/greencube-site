@@ -40,17 +40,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>LLM Quantization: 6 Step PTQ Workflow for Practitioners</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 29 September 2026 &middot; updated 10 October 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 29 September 2026 &middot; updated 10 October 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/llm-quantization.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#what-quantization-does">What quantization does</a></li><li><a href="#post-training-quantization-or-quantization-aware-training">Post-training quantization or quantization-aware training?</a></li><li><a href="#the-main-ptq-methods">The main PTQ methods</a></li><li><a href="#which-bit-width-for-which-hardware">Which bit width for which hardware</a></li><li><a href="#calibration-data">Calibration data</a></li><li><a href="#a-six-step-ptq-workflow">A six-step PTQ workflow</a></li><li><a href="#catching-regressions">Catching regressions</a></li><li><a href="#if-you-just-want-to-run-a-quantized-model">If you just want to run a quantized model</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/llm-quantization.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>LLM quantization stores a model's numbers with fewer bits, for example 4 or 8 instead of 16, so the model needs less memory and runs faster, at some cost in accuracy. Done well, the loss is small: 8-bit formats come close to the original, and 4-bit is the usual choice when a model has to fit on one GPU or a laptop. Most people use post-training quantization (PTQ), which takes minutes to hours, rather than retraining the model.</p></div>
 
 <p>Below is how it works in plain terms, the methods worth knowing, and a six-step workflow for quantizing a model yourself. If you only want to run a quantized model, not make one, skip to the section near the end about that.</p>
 
-<h2>What quantization does</h2>
+<h2 id="what-quantization-does">What quantization does</h2>
 <p>A language model is billions of numbers, its weights, normally stored as 16-bit floating point. Each one takes two bytes, so a 7-billion-parameter model needs about 14 GB just for its weights. Quantization rounds every number onto a much smaller set of values. At 4 bits there are only 16 possible values per number, and the same model shrinks to roughly 4 GB once you add the small amount of extra data quantization needs.</p>
 <p>It makes the model faster as well. To write each token, the model has to read all of its weights, so on most PCs speed is limited by how fast memory can feed the processor. Fewer bytes to read means more tokens per second.</p>
 
@@ -62,11 +62,11 @@
 <p>The hard part is outliers. In large models a few channels carry values far bigger than the rest, and a naive quantizer either clips them or wastes most of its few levels covering them. The usual fixes are group-wise scales, keeping a few sensitive parts at higher precision, and non-uniform formats such as NF4 (introduced with QLoRA), which place their levels where weights actually cluster.</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Post-training quantization or quantization-aware training?</h2>
+<h2 id="post-training-quantization-or-quantization-aware-training">Post-training quantization or quantization-aware training?</h2>
 <p>Post-training quantization takes a finished model and quantizes it, usually with a small calibration set and no training. It runs in minutes to a few hours on one GPU. Quantization-aware training (QAT) simulates quantization during training or fine-tuning so the model learns to cope with it, which needs a training pipeline, data and far more compute.</p>
 <p>For most deployments PTQ is the right call. QAT earns its cost at very low bit widths (below 4 bits), on tasks that are unusually sensitive to precision, or when you're fine-tuning anyway and can fold it in.</p>
 
-<h2>The main PTQ methods</h2>
+<h2 id="the-main-ptq-methods">The main PTQ methods</h2>
 <ul>
 <li>GPTQ quantizes weights layer by layer and adjusts the remaining weights to make up for each rounding error, using second-order information. It's a dependable default for 4-bit weight-only quantization.</li>
 <li>AWQ (activation-aware weight quantization) uses activations to find the small share of weight channels that matter most, and scales them so they survive rounding. It's quick to run.</li>
@@ -75,7 +75,7 @@
 <li>FP8 uses 8-bit floating point instead of integers, which copes better with a wide range of values. It needs hardware with FP8 support.</li>
 </ul>
 
-<h2>Which bit width for which hardware</h2>
+<h2 id="which-bit-width-for-which-hardware">Which bit width for which hardware</h2>
 <p>One of the largest public comparisons is a 2025 study that quantized the Llama 3.1 family and tested it on A6000, A100 and H100 GPUs (<a href="https://research-explorer.ista.ac.at/download/20684/20698/2025_ACL_Kurtic.pdf" rel="nofollow noopener">Kurtic et al., ACL 2025</a>). In short, FP8 weights and activations (W8A8-FP) were effectively lossless, INT8 weights and activations (W8A8-INT) lost about 1 to 3 percent average accuracy, and 4-bit weights with 16-bit activations (W4A16) held up well and was the most cost-efficient for serving one request at a time. W8A8 did best for busy, batched serving.</p>
 <p>Your hardware decides what's practical. NVIDIA's Ampere generation (A100, RTX 30 series) handles INT8 well but has no native FP8; Ada Lovelace (RTX 40 series) and Hopper (H100) add it. A format with no fast kernel on your hardware is no use, so check what your inference engine supports first. Taking activations down to 4 bits as well is riskier: a 2023 study found that decoder-only models, which is what chat models are, lose noticeably more accuracy at full INT4 than encoder models do (<a href="https://arxiv.org/pdf/2301.12017.pdf" rel="nofollow noopener">Wu et al., 2023</a>).</p>
 <p>Long chats add one more cost. The KV cache, which holds the conversation so far, grows with context length and can take as much memory as the weights. Many engines can store it in 8 bits too, but validate your weight format first, since each lossy step adds error.</p>
@@ -83,10 +83,10 @@
 <h3>On a home PC: GGUF and "Q4_K_M"</h3>
 <p>If you run models with llama.cpp, Ollama or LM Studio, you'll meet quantization in GGUF file names. <code>Q8_0</code> is 8-bit. <code>Q5_K_M</code> and <code>Q4_K_M</code> are 5- and 4-bit "k-quants", which give small blocks of weights their own scales and keep some sensitive tensors at higher precision. Q4_K_M is the common default balance of size and quality; move up to Q5 or Q8 if you have memory to spare. llama.cpp can also use an "importance matrix" built from sample text, which does the job of a calibration set. More on the format in <a href="/blog/gguf-vs-ggml">GGUF vs GGML</a>.</p>
 
-<h2>Calibration data</h2>
+<h2 id="calibration-data">Calibration data</h2>
 <p>Methods like GPTQ and AWQ look at sample inputs to decide what to protect, so the samples matter more than their number. Use text like what the model will see in use (real chat turns for an assistant, real code for a coding model) in the right languages and a spread of lengths. A few hundred sequences, 128 to 512 being a common range, is usually enough for 4-bit weight-only quantization. Random text is a poor substitute, especially for code and maths.</p>
 
-<h2>A six-step PTQ workflow</h2>
+<h2 id="a-six-step-ptq-workflow">A six-step PTQ workflow</h2>
 <ol>
 <li>Start from the original BF16 or FP16 checkpoint and check that it reproduces its published scores on a small held-out set. That's your baseline.</li>
 <li>Decide what "good enough" means (which metric, and how big a drop you'll accept) and which hardware the model will run on.</li>
@@ -96,20 +96,20 @@
 <li>Evaluate against the baseline, then roll out to a small share of traffic before everyone else.</li>
 </ol>
 
-<h2>Catching regressions</h2>
+<h2 id="catching-regressions">Catching regressions</h2>
 <p>Perplexity is a quick sanity check, but it can look fine while specific skills get worse. Add tests that match your use, such as HumanEval for code or a set of maths problems, and read real answers side by side with the original model's. Quantization damage usually shows up as repetition loops, small factual slips or broken code rather than gibberish. Small models tend to suffer more than large ones at the same bit width, so test them harder.</p>
 <p>When something regresses you rarely need to start over. Try a smaller group size, then recalibrate with data closer to the failing cases, then keep the worst layers at higher precision. Switch methods or raise the bit width only if those don't help.</p>
 
-<h2>If you just want to run a quantized model</h2>
+<h2 id="if-you-just-want-to-run-a-quantized-model">If you just want to run a quantized model</h2>
 <p>You don't need any of this to use one. Ollama and LM Studio download models that are already quantized, and you choose the size. GreenCube, the app I build, goes a step further and picks the model for your PC: Cube 2B (built on Gemma 4 E2B) on smaller PCs and Cube 4B (built on Gemma 4 E4B) on PCs with a graphics card. It's a Windows app that costs &euro;9.99 once and works offline after the first download. If you'd rather choose by hand, see <a href="/blog/best-small-llm">the best small LLMs</a> and <a href="/blog/how-much-vram-for-ai">how much VRAM you need</a>.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What is LLM model quantization?</summary><p>Storing a model&#x27;s weights, and sometimes its activations, in fewer bits (8 or 4 instead of 16), so it&#x27;s smaller and faster at some cost in accuracy.</p></details>
 <details><summary>What is the best quantization method for LLMs?</summary><p>It depends on your hardware. On GPUs with FP8 support, 8-bit FP8 is close to lossless; for tight memory, 4-bit weight-only GPTQ or AWQ is the standard, which on a home PC usually means a Q4_K_M or Q5_K_M GGUF file.</p></details>
 <details><summary>When should you quantize a model?</summary><p>When memory, speed or cost stops you running it, like fitting a model on one consumer GPU or a laptop. If you have plenty of all three, quantizing adds risk for little gain.</p></details>
 <details><summary>How do I quantize a model?</summary><p>Measure the full-precision model first, decide how much drop you&#x27;ll accept, and pick a method. Then quantize with a maintained tool like llm-compressor or llama.cpp&#x27;s quantize tool, using a calibration set that looks like your real traffic, and compare with the original before you ship.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -150,7 +150,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

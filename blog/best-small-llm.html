@@ -39,18 +39,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>Choose by Hardware, Not Leaderboards: Best Small LLM for Local Use</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 12 September 2026 &middot; updated 10 October 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 12 September 2026 &middot; updated 10 October 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/best-small-llm.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#which-small-llm-fits-your-hardware">Which small LLM fits your hardware</a></li><li><a href="#what-we-measured">What we measured</a></li><li><a href="#how-to-choose-a-small-llm-step-by-step">How to choose a small LLM, step by step</a></li><li><a href="#quantization-in-plain-words">Quantization, in plain words</a></li><li><a href="#how-to-read-benchmark-scores">How to read benchmark scores</a></li><li><a href="#if-you-d-rather-not-choose-at-all">If you&#x27;d rather not choose at all</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
 <aside class="tested"><strong>We tested this</strong><ul><li><a href="/blog/gemma-4-e2b-vs-e4b">Gemma 4 E2B vs E4B on a laptop: small vs big AI model, measured</a></li></ul></aside>
-<img class="cover" src="/blog/covers/en/best-small-llm.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>The best small LLM is the biggest one that fits comfortably in your computer's memory and does the task you need. As a rough guide: on a laptop with 8 GB of RAM, stay around 1 to 4 billion parameters (Gemma 4 E2B, Llama 3.2 3B, Qwen3 4B, Phi-4-mini). With 16 GB of RAM or a 6&ndash;8 GB graphics card, models up to about 8 billion become comfortable. Pick by your hardware first, then the task, then the licence, and only then look at leaderboards.</p></div>
 
 <p>Leaderboards tell you which model scored best on a fixed test, on someone else's machine. They don't tell you whether it fits yours, and a model that doesn't fit is useless however well it scores. Here's how to choose, from the hardware up.</p>
 
-<h2>Which small LLM fits your hardware</h2>
+<h2 id="which-small-llm-fits-your-hardware">Which small LLM fits your hardware</h2>
 <h3>Under 8 GB of RAM, no graphics card</h3>
 <p>Stick to models of about 1 to 3 billion parameters. They're fine for short chats, rewriting text, simple summaries and sorting or extracting information, but don't expect deep reasoning. Examples: Llama 3.2 1B and 3B, Qwen3 0.6B and 1.7B, and Meta's <a href="https://huggingface.co/facebook/MobileLLM-Pro" rel="nofollow noopener">MobileLLM-Pro</a>, a model of about 1 billion parameters that its model card says keeps near full quality at 4-bit and supports a 128k-token context.</p>
 <h3>8 to 16 GB of RAM, or a 6&ndash;8 GB graphics card</h3>
@@ -61,10 +61,10 @@
 <p>Workstations with 48 GB or more of graphics memory can run 70-billion-parameter models, long contexts and several models at once. At that point you're past "small".</p>
 
 <p class="bridge-mid">Not sure your PC is up to it? <a href="https://greencube.app/what-you-get">Check what runs on yours <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What we measured</h2>
+<h2 id="what-we-measured">What we measured</h2>
 <p>GreenCube, the app I build, runs Gemma 4 E2B on smaller PCs and Gemma 4 E4B on PCs with a graphics card (we call them Cube 2B and Cube 4B). On the PCs we tested, they wrote 5&ndash;7 tokens a second on an 8 GB laptop with no graphics card (about reading speed), 14&ndash;18 on a 16 GB laptop, and 37&ndash;76 on most gaming PCs with a 6 GB or bigger card. Those are the only models we've timed, so we don't give speeds for the others. The details are in <a href="/blog/gemma-4-e2b-vs-e4b">Gemma 4 E2B vs E4B</a> and <a href="/blog/best-local-ai-models">best local AI models by PC</a>.</p>
 
-<h2>How to choose a small LLM, step by step</h2>
+<h2 id="how-to-choose-a-small-llm-step-by-step">How to choose a small LLM, step by step</h2>
 <ol>
 <li>Check your memory. Look at your graphics card's VRAM in Task Manager (Performance, then GPU) and your RAM. The model file plus room for the conversation has to fit.</li>
 <li>Name the task. Chat, coding, documents and reading images favour different models. Only some small models can read images at all, so if you need that, pick one built for it, such as Gemma 4 or Gemma 3 4B and up.</li>
@@ -74,18 +74,18 @@
 <li>Test it with your own prompts: one long summary, one multi-turn chat, one task with a fixed format, and one hard question from your own field.</li>
 </ol>
 
-<h2>Quantization, in plain words</h2>
+<h2 id="quantization-in-plain-words">Quantization, in plain words</h2>
 <p>Models are trained with 16-bit numbers. Quantization stores them with fewer bits, so the file gets much smaller and the model runs faster, at a small cost in quality. Q4_K_M, a roughly 4-bit format, is the usual choice on home PCs and cuts the size by well over half. Q5_K_M and Q6_K are a little larger and a little closer to the original; use them if you have room to spare. More in <a href="/blog/llm-quantization">LLM quantization</a>.</p>
 <p>Speed also depends on how long the conversation gets. The model keeps a memory of everything said so far (the KV cache), and it grows with every message, so a model that's quick on a short question can slow down on a 20-page document.</p>
 
-<h2>How to read benchmark scores</h2>
+<h2 id="how-to-read-benchmark-scores">How to read benchmark scores</h2>
 <p>MMLU tests general knowledge across many school and university subjects. HumanEval checks whether the model writes code that passes small programming tests. MT-Bench scores multi-turn conversations, judged by another AI. WildBench uses real user conversations, which makes it closer to messy real use.</p>
 <p>All of them are a first filter, not an answer. A model can score well on MMLU and still be poor at your contracts or your code style, and scores are only comparable when the models were tested the same way, including the same quantization. A slightly lower score at twice the speed is often the better choice for a chat.</p>
 
-<h2>If you'd rather not choose at all</h2>
+<h2 id="if-you-d-rather-not-choose-at-all">If you'd rather not choose at all</h2>
 <p>Picking, downloading and testing models is half the fun for some people and a chore for others. GreenCube is built for the second group, and since I build it, weigh this with that in mind: it reads your PC and picks the small model that fits, then works offline. Besides chat it makes slide decks, quizzes, flashcards and images, and reads PDFs and photos. It's for Windows and costs &euro;9.99 once. If you enjoy the choosing, the free apps <a href="/blog/ollama-vs-lm-studio">Ollama and LM Studio</a> let you run every model on this page.</p>
 <p>Either way, a small local model is weaker than the big cloud AIs on the hardest problems and doesn't know today's news. What it gives you is privacy, no monthly bill and an assistant that works with the Wi-Fi off.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What is the best tiny LLM for a weak laptop?</summary><p>With less than 8 GB of RAM, stick to about 1 to 3 billion parameters, like Llama 3.2 1B or 3B, Qwen3 1.7B or Meta&#x27;s MobileLLM-Pro. With 8 GB, models up to about 4 billion, like Gemma 4 E2B, Qwen3 4B or Phi-4-mini, fit well.</p></details>
 <details><summary>What is the smallest LLM model available?</summary><p>Some are well under 1 billion parameters, like Qwen3 0.6B, made for phones and other small devices. They&#x27;re fine for simple jobs like rewriting or sorting text, but don&#x27;t expect deep reasoning.</p></details>
@@ -93,7 +93,7 @@
 <details><summary>Do small models support multiple languages?</summary><p>Some do, but it varies a lot between model families, and small ones can be much weaker outside English. Check the model card for your language before relying on it.</p></details>
 <details><summary>Is a local small LLM private by default?</summary><p>The model is, once it&#x27;s downloaded, but check what the app around it sends. GreenCube keeps chats and files on your PC and goes online only to sign in, download the AI, check for updates, or for web lookups if you switch Online on.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -134,7 +134,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Will GreenCube run on your PC?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB of RAM, no graphics card</span><em>Everything works, just slower.</em></li><li><b>Sprout</b><span>16 GB of RAM, or 8 GB with a card</span><em>Steady speed, writes slide decks.</em></li><li><b>Bloom</b><span>A graphics card with 8 GB, or a 4-6 GB card with 16 GB of RAM</span><em>Fast, pictures with no waiting.</em></li><li><b>Thrive</b><span>A card with 8 GB or more and 24 GB of RAM or more</span><em>The fastest.</em></li></ul><p>GreenCube looks at your PC and sets up the AI model that fits it: no terminal, no settings. &euro;9.99 (US$9.99), paid once, and it's yours.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/what-you-get">Check your PC <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/buy">Get GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

@@ -230,6 +230,106 @@ def cover_img(lang, en_slug, cls='cover', lazy=False):
     return (f'<img class="{cls}" src="{c[0]}" alt="" width="800" height="420"'
             + (' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"') + '/>')
 
+# ---------- post frame (18 Nov, Hector: "like Whop's blog"): header band with crumbs, title, author photo and cover;
+#     on wide screens a sticky side column with the contents and a small GreenCube card; "key takeaways" where written;
+#     6 related posts at the end ----------
+UI = {  # contents, key takeaways, keep reading, try it here
+    'en': ('Contents', 'Key takeaways', 'Keep reading', 'Try it right here'),
+    'es': ('Contenido', 'Lo esencial', 'Sigue leyendo', 'Pruébalo aquí'),
+    'de': ('Inhalt', 'Das Wichtigste', 'Weiterlesen', 'Gleich hier ausprobieren'),
+    'fr': ('Sommaire', "L'essentiel", 'À lire aussi', 'Essayez-le ici'),
+    'it': ('Indice', 'In breve', 'Continua a leggere', 'Provalo qui'),
+    'pt': ('Índice', 'O essencial', 'Continue lendo', 'Experimente aqui'),
+    'nl': ('Inhoud', 'Het belangrijkste', 'Lees verder', 'Probeer het hier'),
+    'pl': ('Spis treści', 'Najważniejsze', 'Czytaj dalej', 'Wypróbuj tutaj'),
+    'tr': ('İçindekiler', 'Öne çıkanlar', 'Okumaya devam et', 'Burada deneyin'),
+    'ru': ('Содержание', 'Главное', 'Читать дальше', 'Попробуйте здесь'),
+    'uk': ('Зміст', 'Головне', 'Читати далі', 'Спробуйте тут'),
+    'ar': ('المحتويات', 'أهم النقاط', 'تابع القراءة', 'جرّبه هنا'),
+    'hi': ('विषय-सूची', 'मुख्य बातें', 'आगे पढ़ें', 'यहीं आज़माएँ'),
+    'id': ('Daftar isi', 'Poin penting', 'Baca juga', 'Coba di sini'),
+    'vi': ('Mục lục', 'Ý chính', 'Đọc tiếp', 'Dùng thử ngay tại đây'),
+    'th': ('สารบัญ', 'ประเด็นสำคัญ', 'อ่านต่อ', 'ลองได้ที่นี่'),
+    'ja': ('目次', '要点', '続けて読む', 'ここで試す'),
+    'ko': ('목차', '핵심 요약', '계속 읽기', '여기서 바로 써 보기'),
+    'zh': ('目录', '要点', '继续阅读', '在这里试试'),
+    'zh-tw': ('目錄', '重點', '繼續閱讀', '在這裡試試'),
+}
+_TK = os.path.join(SRC, 'takeaways.json')  # {lang: {en-slug: [bullet, ...]}}: written by hand, only where checked
+TAKEAWAYS = json.load(open(_TK, encoding='utf-8')) if os.path.exists(_TK) else {}
+AVATAR = '/blog/hector.webp' if os.path.exists(os.path.join(SRC, 'author', 'hector.webp')) else None
+
+TOPICS = [  # (key, tint class, words in the slug that put a post there); first match wins
+    ('study', 'b', ('student', 'study', 'flashcard', 'pdf', 'notebooklm', 'humata', 'exam', 'writers', 'grammarly', 'homeschool', 'teacher', 'researcher')),
+    ('limits', 'y', ('limit', 'unlimited', 'subscription', 'lifetime', 'limites', 'chatgpt-free')),
+    ('pc', 'g', ('gaming-pc', 'pc-gaming', 'hardware', 'laptop', 'models', 'small-llm', 'llm', 'gguf', 'quantization',
+                 'setup', 'install', 'windows', 'mac', 'context-window', 'internet', 'offline', 'local-ai', 'llama', 'air-gapped', 'secure-ai')),
+    ('tools', 'p', ('alternatives', '-vs-', 'ollama', 'lm-studio', 'desktop-apps', 'chatbot', 'ui', 'gemini', 'claude', 'chatgpt')),
+]
+def topic_of(slug):
+    for key, tint, words in TOPICS:
+        if any(w in slug for w in words): return key, tint
+    return 'more', 'p'
+def h2_ids(body):
+    """Give every <h2> an id (kept if it has one) and return the body and the (id, text) list for the contents."""
+    seen, out = set(), []
+    def one(m):
+        attrs, inner = m.group(1), m.group(2)
+        text = re.sub(r'<[^>]+>', '', inner).strip()
+        idm = re.search(r'\bid="([^"]+)"', attrs)
+        if idm: hid = idm.group(1)
+        else:
+            hid = re.sub(r'[^\w]+', '-', text.lower(), flags=re.U).strip('-')[:60] or 's'
+            base, n = hid, 2
+            while hid in seen: hid, n = f'{base}-{n}', n + 1
+            attrs += f' id="{hid}"'
+        seen.add(hid); out.append((hid, text))
+        return f'<h2{attrs}>{inner}</h2>'
+    return re.sub(r'<h2([^>]*)>(.*?)</h2>', one, body, flags=re.S), out
+
+def frame(lang, key, title, byline, cover, body, tail):
+    """The whole post: header band, side column + text, then whatever follows (the demo section, the end box).
+    body = the text from the answer box down to the FAQ; tail = try box + end box (may close/reopen <article>)."""
+    W, U, L = WD[lang]['post'], UI.get(lang, UI['en']), WD[lang]['list']
+    body, heads = h2_ids(body)
+    topic = topic_of(key)[0]
+    crumbs = f'<a href="{W["home"]}">{W["kicker"]}</a>'
+    if topic != 'more': crumbs += f'<span aria-hidden="true">&rsaquo;</span><a href="{W["home"]}#t-{topic}">{L["topics"][topic]}</a>'
+    av = (f'<img class="av" src="{AVATAR}" alt="" width="32" height="32"/>' if AVATAR
+          else '<span class="av" aria-hidden="true">HG</span>')
+    tk = TAKEAWAYS.get(lang, {}).get(key)
+    tk_html = (f'<div class="takeaways"><p class="tk-h">{U[1]}</p><ul>' + ''.join(f'<li>{t}</li>' for t in tk) + '</ul></div>\n') if tk else ''
+    toc = ''
+    if len(heads) >= 3:
+        toc = (f'<nav class="toc" aria-label="{U[0]}"><p class="toc-h">{U[0]}</p><ol>'
+               + ''.join(f'<li><a href="#{h}">{esc(t)}</a></li>' for h, t in heads) + '</ol></nav>')
+    B = W.get('bridge') or {}
+    side_btn = (f'<a class="cta" href="#try">{U[3]} <span aria-hidden="true">&rarr;</span></a>' if has_try(lang, key)
+                else f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a>')
+    card = (f'<div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/>'
+            f'<b>{W["cta_h"]}</b><p>{W["cta_p"]}</p>{side_btn}</div>')
+    head = (f'<header class="post-head{" no-cover" if not cover else ""}"><div class="ph-in"><div class="ph-text">'
+            f'<p class="crumbs">{crumbs}</p>\n<h1>{esc(title)}</h1>\n<p class="byline">{av}<span>{byline}</span></p></div>'
+            + (f'<div class="ph-cover">{cover}</div>' if cover else '') + '</div></header>\n')
+    tail = tail.replace('</article>\n<section class="post-try', '</article></div></div>\n<section class="post-try', 1)
+    closed = '</article></div></div>' in tail
+    if tk_html:  # Whop's order: the short answer, then the takeaways (posts with no answer box get them first)
+        m = re.search(r'<div class="answer">.*?</div>\n?', body, re.S)
+        body = (body[:m.end()] + tk_html + body[m.end():]) if m else tk_html + body
+    return (head + f'<div class="post-grid"><aside class="post-side">{toc}{card}</aside><div class="post-main">\n<article>\n'
+            + body + tail + '<!--related-->' + ('</article>\n' if closed else '</article></div></div>\n'))
+
+def related_html(lang, key, entries, key_of):
+    """6 cards from the same topic, newest first, the ones with a cover first."""
+    topic = topic_of(key)[0]
+    same = [e for e in entries if key_of(e[0]) != key and e[0] not in NOINDEX and topic_of(key_of(e[0]))[0] == topic]
+    same.sort(key=lambda e: (cover_of(lang, key_of(e[0])) is None, e[3] and -int(e[3].replace('-', ''))))
+    if len(same) < 3: return ''
+    base = WD[lang]['post']['home'].rstrip('/') + '/'
+    cards = ''.join(f'<a class="rel-card" href="{base}{e[0]}">' + (cover_img(lang, key_of(e[0]), cls='rel-img', lazy=True) or '<span class="rel-img rel-none"></span>')
+                    + f'<span class="rel-t">{esc(e[1])}</span></a>' for e in same[:6])
+    return f'<section class="related"><h2>{UI.get(lang, UI["en"])[2]}</h2><div class="rel-grid">{cards}</div></section>'
+
 def bridge_top(lang, slug, body):
     """A short strip right after the answer box, for groups whose words have 'top_h': the reader just learned the
     answer; show them the app that does it, with the clickable demo as the easy first step."""
@@ -396,6 +496,7 @@ HAN_GAP = re.compile(r'(?<=[一-鿿]) (?=[约約] ?\d)')  # nor before 'about' w
 
 report = []
 listing = []
+framed = []  # (path, lang, slug) of every framed post: related cards go in once every post is known
 for p in idx:
     slug = p['slug']
     if slug in OWN_TITLES:  # rewritten as our own tested post at the same address; that version is built below
@@ -434,11 +535,11 @@ for p in idx:
               + (f' &middot; updated {nice_date(modified)}' if modified != published and changed else ''))
     faq_html = ('<h2>Questions</h2>\n<div class="faq">\n' + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
                 + '\n</div>\n') if faq else ''
-    content = (
-        f'<article>\n<p class="kicker"><a href="/blog">GreenCube blog</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">{byline}</p>\n{note(kinds)}\n{tested_box(slug)}'
-        + ((cover_img('en', slug) + '\n') if cover_of('en', slug) else (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>\n' if cover else ''))
-        + bridge_mid('en', slug, bridge_top('en', slug, body)) + faq_html + try_box('en', slug) + bridge_box('en', slug) + '</article>\n')
+    cover_html = (cover_img('en', slug) if cover_of('en', slug) else (f'<img class="cover" src="{cover[0]}" alt="{esc(p["cover_alt"] or "")}" width="{cover[1]}" height="{cover[2]}" fetchpriority="high"/>' if cover else ''))
+    content = frame('en', slug, title, byline, cover_html,
+                    f'{note(kinds)}\n{tested_box(slug)}' + bridge_mid('en', slug, bridge_top('en', slug, body)) + faq_html,
+                    try_box('en', slug) + bridge_box('en', slug))
+    framed.append((f'{OUT}/{slug}.html', 'en', slug))
     open(f'{OUT}/{slug}.html', 'w', encoding='utf-8').write(page(f'{title} | GreenCube blog', desc, url, og, ld, content))
     listing.append((slug, title, desc, published, modified))
     report.append({'slug': slug, 'note': kinds, 'text_fixes': [list(c) for c in ch1 + ch2 + ch3]})
@@ -511,19 +612,18 @@ for lang, slug, meta, body in own:
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]})
         faq_html = (f'<h2>{W["questions"]}</h2>\n<div class="faq">\n'
                     + '\n'.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq) + '\n</div>\n')
-    content = (
-        f'<article>\n<p class="kicker"><a href="{W["home"]}">{W["kicker"]}</a></p>\n<h1>{esc(title)}</h1>\n'
-        f'<p class="byline">{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}'
-        + (f' &middot; {W["updated"]} {W["date"](meta["modified"])}' if meta.get('modified', published) != published else '')
-        + '</p>\n' + cover_img(lang, group_key(lang, slug, meta)) + '\n'
-        + bridge_mid(lang, group_key(lang, slug, meta), bridge_top(lang, group_key(lang, slug, meta), body)) + faq_html
-        + try_box(lang, group_key(lang, slug, meta))
-        + (bridge_box(lang, group_key(lang, slug, meta))
-           or f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
-              f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n')
-        + '</article>\n')
+    key = group_key(lang, slug, meta)
+    byline = (f'{W["by"]} <a href="{author_url(lang).replace(HOST, "")}">{AUTHOR}</a> &middot; {W["date"](published)}'
+              + (f' &middot; {W["updated"]} {W["date"](meta["modified"])}' if meta.get('modified', published) != published else ''))
+    content = frame(lang, key, title, byline, cover_img(lang, key),
+                    bridge_mid(lang, key, bridge_top(lang, key, body)) + faq_html,
+                    try_box(lang, key)
+                    + (bridge_box(lang, key)
+                       or f'\n<div class="cta-box"><h3>{W["cta_h"]}</h3><p>{W["cta_p"]}</p>'
+                          f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a></div>\n'))
     path = f'{OUT}/{slug}.html' if lang == 'en' else f'{OUT}/{lang}/{slug}.html'
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    framed.append((path, lang, slug))
     md = lang in MD_LANGS
     open(path, 'w', encoding='utf-8').write(page(f'{title} | {W["kicker"]}', desc, url, (cover_of(lang, group_key(lang, slug, meta)) or (0, 'https://greencube.app/og.jpg'))[1], ld, content, lang=lang, alts=alts, md=md))
     if md:  # a plain markdown copy at <address>.md (noindex via vercel.json, never in the sitemap)
@@ -534,16 +634,13 @@ for lang, slug, meta, body in own:
 listings['en'] = listing
 for ls in listings.values():
     ls.sort(key=lambda l: l[3], reverse=True)
+for path, lang, slug in framed:  # the related cards, now that every post of every language is known
+    key_of = (lambda s, lang=lang: s if lang == 'en' else own_meta.get((lang, s), {}).get('alt', s))
+    page_html = open(path, encoding='utf-8').read()
+    open(path, 'w', encoding='utf-8').write(page_html.replace('<!--related-->', related_html(lang, key_of(slug), listings[lang], key_of), 1))
 def home_url(lang): return f'{HOST}/blog' if lang == 'en' else f'{HOST}/blog/{lang}'
 
 # ---------- the list pages: short hero, "start here" cards, then one short list of titles per topic ----------
-TOPICS = [  # (key, tint class, words in the slug that put a post there); first match wins
-    ('study', 'b', ('student', 'study', 'flashcard', 'pdf', 'notebooklm', 'humata', 'exam', 'writers', 'grammarly', 'homeschool', 'teacher', 'researcher')),
-    ('limits', 'y', ('limit', 'unlimited', 'subscription', 'lifetime', 'limites', 'chatgpt-free')),
-    ('pc', 'g', ('gaming-pc', 'pc-gaming', 'hardware', 'laptop', 'models', 'small-llm', 'llm', 'gguf', 'quantization',
-                 'setup', 'install', 'windows', 'mac', 'context-window', 'internet', 'offline', 'local-ai', 'llama', 'air-gapped', 'secure-ai')),
-    ('tools', 'p', ('alternatives', '-vs-', 'ollama', 'lm-studio', 'desktop-apps', 'chatbot', 'ui', 'gemini', 'claude', 'chatgpt')),
-]
 _svg = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>'
 ICONS = {  # one small line icon per topic
     'pc': _svg.format('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'),
@@ -553,10 +650,6 @@ ICONS = {  # one small line icon per topic
     'more': _svg.format('<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>'),
 }
 
-def topic_of(slug):
-    for key, tint, words in TOPICS:
-        if any(w in slug for w in words): return key, tint
-    return 'more', 'p'
 LIST_WORDS = {lang: WD[lang]['list'] for lang in BLOG_LANGS}
 SHOW = 6  # titles shown per topic before "Show all"
 # the best posts per topic, shown first under short plain names; every other post sits behind "Show all"
@@ -595,7 +688,7 @@ def topic_sections(lang, rest, L):
         top = [(s, label) for s, label in PICKS.get(lang, {}).get(key, []) if s in have]
         others = [(e[0], e[1]) for e in posts if e[0] not in dict(top)]
         items = ''.join(f'<li><a href="{L["base"]}{s}">{esc(label)}</a></li>' for s, label in top + others)
-        sections.append(f'<section class="hub-topic {tint}"><h2><span class="dot" aria-hidden="true"></span>{L["topics"][key]}</h2>'
+        sections.append(f'<section class="hub-topic {tint}" id="t-{key}"><h2><span class="dot" aria-hidden="true"></span>{L["topics"][key]}</h2>'
                         f'<ul class="hub-list">{items}</ul></section>')
     return sections
 

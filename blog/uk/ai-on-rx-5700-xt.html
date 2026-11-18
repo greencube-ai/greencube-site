@@ -60,18 +60,18 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/uk">Блог GreenCube</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/uk">Блог GreenCube</a></p>
 <h1>Чи потягне RX 5700 XT ШІ? Виміряно: 63–72 токени за секунду</h1>
-<p class="byline">Автор: <a href="/blog/uk/hector-gras">Hector Gras</a> &middot; 22 вересня 2026 р.</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Автор: <a href="/blog/uk/hector-gras">Hector Gras</a> &middot; 22 вересня 2026 р.</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Зміст"><p class="toc-h">Зміст</p><ol><li><a href="#що-це-означає-на-практиці">Що це означає на практиці</a></li><li><a href="#що-ми-виміряли">Що ми виміряли</a></li><li><a href="#що-це-означає">Що це означає</a></li><li><a href="#порівняння-з-іншими-пк">Порівняння з іншими ПК</a></li><li><a href="#тестовий-пк">Тестовий ПК</a></li><li><a href="#перевірте-свій-пк">Перевірте свій ПК</a></li><li><a href="#інші-пк-які-ми-виміряли">Інші ПК, які ми виміряли</a></li><li><a href="#запитання">Запитання</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Ваш власний ШІ на вашому власному ПК</b><p>GreenCube працює на вашому комп'ютері: без обмежень, без підписки, без інтернету. 9,99&nbsp;&euro; (9,99&nbsp;US$), оплата один раз.</p><a class="cta" href="#try">Спробуйте тут <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>Так:</strong> на настільному ПК з відеокартою AMD RX 5700 XT (8 ГБ) і 48 ГБ ОЗП модель Cube 4B (Gemma 4 E4B) писала 63–72 токени за секунду. Це швидше, ніж ви читаєте.</p></div>
 <div class="stats">
 <div class="stat g"><b>63–72</b><span>швидкість у токенах за секунду, Cube 4B (Gemma 4 E4B)</span></div>
 <div class="stat b"><b>14×</b><span>швидше на відеокарті, ніж на процесорі</span></div>
 <div class="stat y"><b>20–36</b><span>з моделлю Cube 12B (Gemma 4 12B) (лише короткі чати)</span></div>
 </div>
-<h2>Що це означає на практиці</h2>
+<h2 id="що-це-означає-на-практиці">Що це означає на практиці</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Завдання</th><th>Час на цьому ПК</th></tr></thead>
 <tbody>
@@ -81,7 +81,7 @@
 </table></div>
 <p>Пораховано за швидкостями, виміряними на цьому ПК: час — це довжина, поділена на швидкість, а реальній відповіді ще потрібна мить, щоб почати. Для порівняння: більшість людей читає близько 4 слів за секунду (<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>), тож навіть просто прочитати відповідь з 400 токенів займе у вас близько хвилини.</p>
 <p class="bridge-mid">Не впевнені, що ваш ПК потягне? <a href="https://greencube.app/uk/what-you-get">Перевірте, що на ньому запрацює <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Що ми виміряли</h2>
+<h2 id="що-ми-виміряли">Що ми виміряли</h2>
 <p><strong>Написання</strong> — це те, як швидко ШІ друкує відповідь, у токенах за секунду; токен — це шматочок слова, і українське слово часто займає кілька токенів. <strong>Читання</strong> — це те, як швидко він сприймає те, що ви йому даєте: ваше запитання, вставлений текст або PDF. Читання завжди набагато швидше за написання, бо ШІ може читати багато токенів одразу, а писати їх мусить по одному.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Що</th><th>Де працювало</th><th>Результат</th><th>Дата заміру</th></tr></thead>
@@ -93,7 +93,7 @@
 </table></div>
 <p>Як вимірювалося кожне число: <a href="/blog/uk/how-we-measure-ai-speed">Докладніше про те, як ми вимірюємо</a></p><ol class="src"><li>Власний тест швидкості llama.cpp (llama-bench) — рушія, на якому працює GreenCube, — з тими самими файлами ШІ: написано 128 токенів, прочитано текст з 512 токенів.</li></ol>
 <p>Де в нас кілька замірів, ми показуємо діапазон: швидкість на тому самому ПК трохи змінюється від заміру до заміру.</p>
-<h2>Що це означає</h2>
+<h2 id="що-це-означає">Що це означає</h2>
 <div class="card g">
 <h3>Роботу робить відеокарта</h3>
 <p>Той самий ПК, той самий ШІ (Cube 4B (Gemma 4 E4B)): 5 токенів за секунду лише на процесорі й 63–72 на відеокарті — приблизно <strong>у 14 разів швидше</strong>. Відеокарту створено, щоб робити тисячі маленьких обчислень одночасно для ігор, а робота ШІ — це здебільшого та сама математика. GreenCube під час запуску заміряє обидва варіанти й використовує швидший.</p>
@@ -110,7 +110,7 @@
 <h3>Зображення</h3>
 <p>Найімовірніше так, але на цій відеокарті ми ще не заміряли зображення. Коли заміряємо, число з&#x27;явиться тут. Для зображень використовується окремий ШІ розміром близько 6 ГБ і значно більше обчислень, ніж для відповіді в чаті, тому графіка тут важить ще більше.</p>
 </div>
-<h2>Порівняння з іншими ПК</h2>
+<h2 id="порівняння-з-іншими-пк">Порівняння з іншими ПК</h2>
 <p>З 8 ПК, які ми виміряли з Cube 4B (Gemma 4 E4B), цей на <strong>2-му місці</strong> за швидкістю написання. <a href="/blog/uk/ai-on-rtx-2080-ti">RTX 2080 Ti</a> пише 65–71, приблизно стільки ж. <a href="/blog/uk/ai-on-rtx-5060">RTX 5060</a> пише 56 (стартовий тест), отже, цей приблизно на 20% швидше.</p>
 <p>Ми виміряли 4 відеокарти з 8 ГБ, і вони дуже різняться:</p>
 <ul>
@@ -120,7 +120,7 @@
 <li><a href="/blog/uk/ai-on-rx-580">RX 580</a>: 10–11 токенів за секунду</li>
 </ul>
 <p>Пам'ять вирішує, який ШІ вміститься. Наскільки нова відеокарта, вирішує, як швидко він працюватиме.</p>
-<h2>Тестовий ПК</h2>
+<h2 id="тестовий-пк">Тестовий ПК</h2>
 <p>Власний ПК реального тестувальника, яким він користується як зазвичай, а не лабораторна машина:</p>
 <ul>
 <li>Настільний ПК</li>
@@ -129,7 +129,7 @@
 <li><strong>ОЗП:</strong> 48 ГБ</li>
 <li><strong>Процесор:</strong> Intel Core i7-9700, 8 потоків</li>
 </ul>
-<h2>Перевірте свій ПК</h2>
+<h2 id="перевірте-свій-пк">Перевірте свій ПК</h2>
 <p>Не знаєте, що у вас у ПК? Це займе 30 секунд:</p>
 <ol class="steps">
 <li>Натисніть <strong>Ctrl + Shift + Esc</strong>, щоб відкрити Диспетчер завдань.</li>
@@ -138,7 +138,7 @@
 <li>Натисніть <strong>Графічний процесор</strong>: назва вгорі праворуч — це ваша відеокарта, а <strong>Виділена пам'ять графічного процесора</strong> — ваша відеопам'ять. Бачите лише графіку Intel або AMD без виділеної пам'яті? Отже, окремої відеокарти у вас немає.</li>
 </ol>
 <p>Потім знайдіть найближчу відеокарту в <a href="/blog/uk/can-my-pc-run-ai">повній таблиці</a>. Та сама відеокарта з більшим обсягом відеопам'яті вміщує більший ШІ; новіша відеокарта того самого обсягу зазвичай швидша.</p>
-<h2>Інші ПК, які ми виміряли</h2>
+<h2 id="інші-пк-які-ми-виміряли">Інші ПК, які ми виміряли</h2>
 <ul>
 <li><a href="/blog/uk/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 токен за секунду (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/uk/ai-on-rtx-5060">RTX 5060</a>: 56 токенів за секунду (Cube 4B (Gemma 4 E4B))</li>
@@ -151,14 +151,14 @@
 <li><a href="/blog/uk/ai-on-intel-iris-xe-laptop">ноутбук з Intel Iris Xe</a>: 5–7 токенів за секунду (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/uk/can-my-pc-run-ai">Чи потягне мій ПК ШІ?</a> Усі 10 ПК в одній таблиці і як відчуватиметься ваш ПК.</p>
-<h2>Запитання</h2>
+<h2 id="запитання">Запитання</h2>
 <div class="faq">
 <details><summary>Чи потягне RX 5700 XT ШІ локально?</summary><p>Так: на настільному ПК з відеокартою AMD RX 5700 XT (8 ГБ) і 48 ГБ ОЗП модель Cube 4B (Gemma 4 E4B) писала 63–72 токени за секунду. Це швидше, ніж ви читаєте.</p></details>
 <details><summary>Чи може RX 5700 XT створювати зображення за допомогою ШІ?</summary><p>Найімовірніше так, але на цій відеокарті ми ще не заміряли зображення. Коли заміряємо, число з&#x27;явиться тут.</p></details>
 <details><summary>ШІ працює швидше на RX 5700 XT чи на процесорі?</summary><p>На відеокарті, з великим відривом: 63–72 токени за секунду проти 5 на процесорі, приблизно у 14 разів швидше.</p></details>
 <details><summary>Чи потягне RX 5700 XT Gemma 4 12B?</summary><p>Лише для коротких чатів. Більша модель Cube 12B (Gemma 4 12B) (6,4 ГБ) писала 20–36 токенів за секунду на короткому запитанні, але коли чат дійшов до 8 192 токенів (довга розмова), вона впала: відеокарта була майже заповнена. Тому GreenCube пропонує 12B лише на відеокартах з 10 ГБ і більше.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Спробуйте GreenCube просто тут</h2><p>Це вікно самого застосунку. Надішліть один із запитів, відкрийте те, що він створить, і змініть це в чаті, або зробіть зображення в розділі «Зображення».</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -199,7 +199,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Чи піде GreenCube на вашому ПК?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 ГБ ОЗП, без відеокарти</span><em>Усе працює, лише повільніше.</em></li><li><b>Sprout</b><span>16 ГБ ОЗП або 8 ГБ з відеокартою</span><em>Стабільна швидкість, пише презентації.</em></li><li><b>Bloom</b><span>Відеокарта на 8 ГБ або відеокарта на 4-6 ГБ із 16 ГБ ОЗП</span><em>Швидко, зображення без очікування.</em></li><li><b>Thrive</b><span>Відеокарта на 8 ГБ або більше і 24 ГБ ОЗП або більше</span><em>Найшвидше.</em></li></ul><p>GreenCube перевіряє ваш ПК і встановлює модель ШІ, яка йому підходить: без терміналу, без налаштувань. 9,99&nbsp;&euro; (9,99 US$), один платіж — і він ваш.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/uk/what-you-get">Перевірте свій ПК <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/uk/buy">Придбати GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Читати далі</h2><div class="rel-grid"><a class="rel-card" href="/blog/uk/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Який ШІ не навчається на ваших чатах? Ми перевірили 9 (жовтень 2026)</span></a><a class="rel-card" href="/blog/uk/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ШІ для конспектів: який вибрати з огляду на ліміти й приватність (2026)</span></a><a class="rel-card" href="/blog/uk/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Чи потягне мій ПК ШІ? Ми виміряли 10 реальних ігрових ПК і ноутбуків</span></a><a class="rel-card" href="/blog/uk/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Скільки відеопам&#x27;яті потрібно для ШІ? Чому модель має вміщуватися на відеокарту</span></a><a class="rel-card" href="/blog/uk/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Найприватніший ШІ-асистент: перевірили 10 ШІ (2026)</span></a><a class="rel-card" href="/blog/uk/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Чи можна запустити ШІ на 8 ГБ ОЗП? Ми перевірили наш найслабший ноутбук</span></a></div></section></article>
 
 </main>
 

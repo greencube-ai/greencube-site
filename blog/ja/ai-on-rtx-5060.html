@@ -60,17 +60,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/ja">GreenCubeブログ</a></p>
+<header class="post-head no-cover"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/ja">GreenCubeブログ</a></p>
 <h1>RTX 5060でAIは動く？実測：毎秒56トークン</h1>
-<p class="byline">著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月1日</p>
-
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>著者：<a href="/blog/ja/hector-gras">Hector Gras</a> &middot; 2026年10月1日</span></p></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="目次"><p class="toc-h">目次</p><ol><li><a href="#実際の使用感">実際の使用感</a></li><li><a href="#計測結果">計測結果</a></li><li><a href="#その意味">その意味</a></li><li><a href="#他との比較">他との比較</a></li><li><a href="#テストに使ったpc">テストに使ったPC</a></li><li><a href="#自分のpcを確認する">自分のPCを確認する</a></li><li><a href="#計測した他のpc">計測した他のPC</a></li><li><a href="#よくある質問">よくある質問</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>自分だけのAIを、自分のPCで</b><p>GreenCubeはあなたのPCで動きます。使用制限なし、サブスクなし、インターネットなしでも使えます。&euro;9.99 (US$9.99)の買い切りです。</p><a class="cta" href="#try">ここで試す <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p><strong>はい。NVIDIA</strong> RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Cube 4B (Gemma 4 E4B)は毎秒56トークンで書き出しました。読むより速く答えが出てきます。</p></div>
 <div class="stats">
 <div class="stat g"><b>56</b><span>Cube 4B (Gemma 4 E4B)での毎秒トークン数</span></div>
 <div class="stat b"><b>4.6×</b><span>CPUよりカードのほうが速い</span></div>
 </div>
-<h2>実際の使用感</h2>
+<h2 id="実際の使用感">実際の使用感</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>作業</th><th>このPCでの時間</th></tr></thead>
 <tbody>
@@ -79,7 +79,7 @@
 </table></div>
 <p>このPCで計測した速度から算出しました。時間は長さ÷速度で、実際の回答では書き始めるまでに少し時間もかかります。目安として、英語の場合、多くの人が読む速さは1秒に約4語です（<a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, 2019</a>）。日本語ではトークン数と文字数の関係が一定ではないため、ここでは換算していません。400トークンの回答は、読むだけでもそれなりに時間がかかります。</p>
 <p class="bridge-mid">自分のPCで動くか不安？<a href="https://greencube.app/ja/what-you-get">あなたのPCで動くものを確認 <span aria-hidden="true">&rarr;</span></a></p>
-<h2>計測結果</h2>
+<h2 id="計測結果">計測結果</h2>
 <p><strong>書き出し</strong>は、AIが回答を打ち出す速さで、1秒あたりのトークン数で表します。トークンは単語の断片です。<strong>読み込み</strong>は、渡したもの（質問、貼り付けた文章、PDF）を取り込む速さです。AIは多くのトークンを一度に読めますが、書くときは1つずつなので、読み込みは常に書き出しよりずっと速くなります。</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>項目</th><th>実行場所</th><th>結果</th><th>計測方法</th></tr></thead>
@@ -90,7 +90,7 @@
 </table></div>
 <p>各数値の計測方法：<a href="/blog/ja/how-we-measure-ai-speed">計測方法の詳細</a></p><ol class="src"><li>GreenCube 0.1.42自身の速度テスト。起動時にグラフィックボードとCPUのどちらを使うか選ぶために実行し、それぞれで短い回答を1回書き出します。</li></ol>
 <p>複数回計測したものは範囲で示しています。同じPCでも、回ごとに速度が少し変わるためです。</p>
-<h2>その意味</h2>
+<h2 id="その意味">その意味</h2>
 <div class="card g">
 <h3>仕事をするのはグラフィックボード</h3>
 <p>同じPC、同じAI（Cube 4B (Gemma 4 E4B)）で、CPUのみでは毎秒12.1トークン、グラフィックボードでは毎秒55.9トークン、<strong>約4.6倍の速さ</strong>です。グラフィックボードはゲームのために何千もの小さな計算を同時にこなすよう作られていて、AIの実行もほとんどが同じ種類の計算です。GreenCubeは起動時に両方の速さを測り、速いほうを使います。</p>
@@ -107,7 +107,7 @@
 <h3>画像</h3>
 <p>おそらく可能ですが、このカードでの画像生成はまだ計測していません。計測したら、ここに数字を載せます。画像には約6 GBの専用AIを使い、チャットの回答よりはるかに多くの計算をするので、ここではグラフィックスの差がさらに大きく出ます。</p>
 </div>
-<h2>他との比較</h2>
+<h2 id="他との比較">他との比較</h2>
 <p>Cube 4B (Gemma 4 E4B)で計測した8台のPCのうち、このPCの書き出し速度は<strong>3位</strong>です。<a href="/blog/ja/ai-on-rx-5700-xt">RX 5700 XT</a>は毎秒63–72トークンで、約20%速いです。<a href="/blog/ja/ai-on-rtx-3060">RTX 3060</a>は毎秒53–55トークンなので、このPCは約5%速いです。</p>
 <p>8 GBのカードを4枚計測しましたが、速さには大きな差があります：</p>
 <ul>
@@ -117,7 +117,7 @@
 <li><a href="/blog/ja/ai-on-rx-580">RX 580</a>: 10–11 トークン/秒</li>
 </ul>
 <p>どのAIが収まるかはメモリで決まり、どれだけ速く動くかはカードの新しさで決まります。</p>
-<h2>テストに使ったPC</h2>
+<h2 id="テストに使ったpc">テストに使ったPC</h2>
 <p>実験室のマシンではなく、実際のテスターが普段どおりに使っている自分のPCです：</p>
 <ul>
 <li>デスクトップPC</li>
@@ -126,7 +126,7 @@
 <li><strong>RAM:</strong> 32 GB</li>
 <li><strong>CPU:</strong> 16 スレッド</li>
 </ul>
-<h2>自分のPCを確認する</h2>
+<h2 id="自分のpcを確認する">自分のPCを確認する</h2>
 <p>自分のPCの構成がわからない？30秒で確認できます：</p>
 <ol class="steps">
 <li><strong>Ctrl + Shift + Esc</strong>を押して、タスク マネージャーを開きます。</li>
@@ -135,7 +135,7 @@
 <li><strong>GPU</strong>をクリック：右上の名前がカード名で、<strong>専用 GPU メモリ</strong>がVRAMです。専用メモリのないIntelやAMDのグラフィックスしか表示されない場合は、独立したカードはありません。</li>
 </ol>
 <p>次に、<a href="/blog/ja/can-my-pc-run-ai">全体の表</a>でいちばん近いカードを探してください。同じカードでもVRAMが多ければ大きいAIが収まり、同じ容量なら新しいカードのほうがたいてい速く動きます。</p>
-<h2>計測した他のPC</h2>
+<h2 id="計測した他のpc">計測した他のPC</h2>
 <ul>
 <li><a href="/blog/ja/ai-on-rtx-2080-ti">RTX 2080 Ti</a>: 65–71 トークン/秒 (Cube 4B (Gemma 4 E4B))</li>
 <li><a href="/blog/ja/ai-on-rx-5700-xt">RX 5700 XT</a>: 63–72 トークン/秒 (Cube 4B (Gemma 4 E4B))</li>
@@ -148,14 +148,14 @@
 <li><a href="/blog/ja/ai-on-intel-iris-xe-laptop">Intel Iris Xe ノートPC</a>: 5–7 トークン/秒 (Cube 2B (Gemma 4 E2B))</li>
 </ul>
 <p><a href="/blog/ja/can-my-pc-run-ai">自分のPCでAIは動く？</a> 10台すべてのPCを1つの表に。自分のPCでの使用感も。</p>
-<h2>よくある質問</h2>
+<h2 id="よくある質問">よくある質問</h2>
 <div class="faq">
 <details><summary>RTX 5060でAIをローカルで動かせますか？</summary><p>はい。NVIDIA RTX 5060（8 GB）とRAM 32 GBを搭載したデスクトップPCで、Cube 4B (Gemma 4 E4B)は毎秒56トークンで書き出しました。読むより速く答えが出てきます。</p></details>
 <details><summary>RTX 5060でAI画像を作れますか？</summary><p>おそらく可能ですが、このカードでの画像生成はまだ計測していません。計測したら、ここに数字を載せます。</p></details>
 <details><summary>AIはRTX 5060とCPUのどちらが速いですか？</summary><p>カードのほうが圧倒的に速いです。CPUの毎秒12.1トークンに対し、カードでは毎秒55.9トークン、約4.6倍です。</p></details>
 <details><summary>RTX 5060でGemma 4 12Bは動きますか？</summary><p>快適ではありません。GreenCubeが大きいCube 12B (Gemma 4 12B)を勧めるのはVRAMが10 GB以上のカードだけで、このカードは8 GBです。8 GBのAMD RX 5700 XTでは、短い質問には答えましたが、長いチャットでクラッシュしました。</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>ここで GreenCube を触ってみてください</h2><p>これはアプリそのものの画面です。プロンプトを送り、できたものを開いてチャットで変えてみてください。画像タブでは画像も作れます。</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -196,7 +196,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>GreenCubeはあなたのPCで動く？</h3><ul class="bridge-tiers"><li><b>Seed</b><span>RAM 8 GB、グラフィックボードなし</span><em>すべて動きますが、遅めです。</em></li><li><b>Sprout</b><span>RAM 16 GB、またはボード付きで8 GB</span><em>安定した速さで、スライドも作れます。</em></li><li><b>Bloom</b><span>8 GBのグラフィックボード、または4〜6 GBのボードとRAM 16 GB</span><em>速く、画像も待たずに。</em></li><li><b>Thrive</b><span>8 GB以上のボードとRAM 24 GB以上</span><em>最速。</em></li></ul><p>GreenCubeがPCを調べて、合ったAIモデルをセットアップします。ターミナルも設定も不要。&euro;9.99（US$9.99）を一度払えば、あなたのもの。</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/ja/what-you-get">PCをチェック <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/ja/buy">GreenCubeを入手</a></p></div>
-</article>
+<section class="related"><h2>続けて読む</h2><div class="rel-grid"><a class="rel-card" href="/blog/ja/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">チャットで学習しないAIはどれ？9つ確認しました（2026年10月）</span></a><a class="rel-card" href="/blog/ja/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ノートをまとめるAI：上限とプライバシーで選ぶならどれ？（2026年）</span></a><a class="rel-card" href="/blog/ja/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">自分のPCでAIは動く？ゲーミングPCとノートPC10台で実測</span></a><a class="rel-card" href="/blog/ja/how-much-vram-for-ai"><img class="rel-img" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AIに必要なVRAMは？モデルをグラフィックボードに収めるべき理由</span></a><a class="rel-card" href="/blog/ja/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">一番プライバシーが守られるAIアシスタント：10のAIを確認（2026年）</span></a><a class="rel-card" href="/blog/ja/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">RAM 8 GBでAIは動く？一番非力なノートPCで試しました</span></a></div></section></article>
 
 </main>
 

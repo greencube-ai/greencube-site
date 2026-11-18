@@ -40,17 +40,17 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog">GreenCube blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog">GreenCube blog</a><span aria-hidden="true">&rsaquo;</span><a href="/blog#t-pc">Your PC</a></p>
 <h1>Air Gapped AI: A Security Team&#x27;s Deployment Guide</h1>
-<p class="byline">By <a href="/blog/hector-gras">Hector Gras</a> &middot; 1 August 2026</p>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>By <a href="/blog/hector-gras">Hector Gras</a> &middot; 1 August 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/en/air-gapped-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Contents"><p class="toc-h">Contents</p><ol><li><a href="#air-gapped-vs-offline-vs-isolated">Air-gapped vs offline vs &quot;isolated&quot;</a></li><li><a href="#what-has-to-live-inside-the-enclave">What has to live inside the enclave</a></li><li><a href="#how-updates-get-in">How updates get in</a></li><li><a href="#when-you-actually-need-one">When you actually need one</a></li><li><a href="#how-air-gapped-ai-projects-fail">How air-gapped AI projects fail</a></li><li><a href="#the-cost-of-running-one">The cost of running one</a></li><li><a href="#what-auditors-look-for">What auditors look for</a></li><li><a href="#where-greencube-fits-honestly">Where GreenCube fits, honestly</a></li><li><a href="#questions">Questions</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Your own AI, on your own PC</b><p>GreenCube runs on your computer: no usage limits, no subscription, works without internet. &euro;9.99 (US$9.99), paid once.</p><a class="cta" href="#try">Try it right here <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 
-<img class="cover" src="/blog/covers/en/air-gapped-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
 <div class="answer"><p>Air-gapped AI is an AI system that runs on machines with no path to the internet or any outside network. The model, the data and every answer stay inside that boundary, and anything that needs to come in, like a new model or a software update, is carried in deliberately and checked on the way. It's the strictest way to run AI, used for classified or tightly regulated work, and it costs real effort to keep up.</p></div>
 
 <p>I build GreenCube, an offline AI app for Windows, so I spend a lot of time on the difference between "works offline" and "air-gapped". They are not the same thing, and the last section says plainly where GreenCube sits.</p>
 
-<h2>Air-gapped vs offline vs "isolated"</h2>
+<h2 id="air-gapped-vs-offline-vs-isolated">Air-gapped vs offline vs "isolated"</h2>
 <p>The words get used loosely, and the differences matter.</p>
 <ul>
 <li><strong>Offline</strong> means a device isn't connected right now, or an app can work without a connection. It could reconnect at any time.</li>
@@ -60,7 +60,7 @@
 <p>The test is simple to state: can any process on any machine inside the boundary start a connection that reaches something outside it? If the answer is yes under any condition, maintenance windows included, it isn't air-gapped.</p>
 
 <p class="bridge-mid">Want your chats to stay on your own computer? <a href="https://greencube.app/buy">See what GreenCube keeps on your PC <span aria-hidden="true">&rarr;</span></a></p>
-<h2>What has to live inside the enclave</h2>
+<h2 id="what-has-to-live-inside-the-enclave">What has to live inside the enclave</h2>
 <p>Nothing in the AI stack can reach outside at run time, and the list of things that quietly try is longer than most people expect. A typical enclave needs its own copy of:</p>
 <ul>
 <li>the model weights, kept in an internal store with a record of where each file came from;</li>
@@ -71,15 +71,15 @@
 </ul>
 <p>Plan for backups inside the boundary as well, since there's no cloud to restore from.</p>
 
-<h2>How updates get in</h2>
+<h2 id="how-updates-get-in">How updates get in</h2>
 <p>Every update is a small project. The usual pattern is a staging machine outside the enclave that downloads the artifact, checks it against the publisher's checksum, scans it, records a software bill of materials (SBOM, in SPDX or CycloneDX format) and signs it with a key the enclave trusts. The bundle then crosses on a data diode (hardware that only lets data flow one way) or on tracked, encrypted removable media. Inside, it is checked again before anyone switches it on, and the whole trip is logged: who carried it, which media, when.</p>
 <p>Many teams also wait a day before activating anything new, so a second person can repeat the checks.</p>
 
-<h2>When you actually need one</h2>
+<h2 id="when-you-actually-need-one">When you actually need one</h2>
 <p>Classified systems, and some contracts covering Controlled Unclassified Information or critical infrastructure, may require physical isolation. Frameworks such as FedRAMP and CMMC define security controls (drawn from <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" rel="nofollow noopener">NIST SP 800-53</a> and <a href="https://csrc.nist.gov/publications/detail/sp/800-171/rev-3/final" rel="nofollow noopener">NIST SP 800-171</a>), but meeting them doesn't automatically mean an air gap. What decides it is your data's classification, your contract and your assessor, so ask them early.</p>
 <p>If your real worry is a vendor reading or training on your data, an air gap is probably more than you need. A local model on a well-protected machine, or a private deployment with strict outbound rules, can answer that worry at a fraction of the cost.</p>
 
-<h2>How air-gapped AI projects fail</h2>
+<h2 id="how-air-gapped-ai-projects-fail">How air-gapped AI projects fail</h2>
 <p>Most failures aren't attacks. They're hidden dependencies.</p>
 <ul>
 <li>A document-search pipeline built with a framework's default settings calls an outside embedding API on the first query. It seems to work, and the boundary is broken.</li>
@@ -91,10 +91,10 @@
 </ul>
 <p>The fixes are enforced, not written down: block all outbound traffic at the host firewall and, on Kubernetes, with a NetworkPolicy that denies egress by default; watch for connection attempts with a host sensor such as Falco; sign artifacts; and keep a written procedure for media.</p>
 
-<h2>The cost of running one</h2>
+<h2 id="the-cost-of-running-one">The cost of running one</h2>
 <p>You trade freshness for control. Cloud models update constantly; an air-gapped model updates when someone runs the transfer process, often monthly or quarterly, so it falls behind. Every update creates paperwork. You own the hardware, the power and the cooling. And the hardest part comes years in, when the people who built it have moved on and the transfer procedure is out of date. Name an owner for the update cycle before the first file goes in.</p>
 
-<h2>What auditors look for</h2>
+<h2 id="what-auditors-look-for">What auditors look for</h2>
 <p>They want evidence from the running system, and diagrams alone won't do. The single most useful check is a silence test: run a full workload, document search included, while capturing traffic at the host and at the physical switch. Any packet addressed outside the boundary is a finding. Add to that a comparison of each running container against the SBOM recorded when it came in, a trust store that holds only your internal certificate authority, and a DNS sinkhole that should receive no queries.</p>
 <p>A short checklist for getting there:</p>
 <ol>
@@ -107,10 +107,10 @@
 </ol>
 <p>For the single-machine side of this, including disk encryption and checking model files, see <a href="/blog/offline-ai-security">offline AI security</a>.</p>
 
-<h2>Where GreenCube fits, honestly</h2>
+<h2 id="where-greencube-fits-honestly">Where GreenCube fits, honestly</h2>
 <p>GreenCube is not an air-gapped product. It needs the internet once to sign in (only to check you paid) and to download the AI on first launch. After that it works with the network off, and it only goes online to check for updates, to keep your sign-in fresh while the PC is online, or for web lookups if you switch Online on. Your chats and files are saved on the PC.</p>
 <p>That's a good fit for a lawyer, researcher or small team who wants an AI that doesn't keep their work on someone else's server. It doesn't meet a rule that says a machine may never touch a network, and it doesn't come with the signed-ingest process, internal certificate authority or audit logging an accredited enclave needs. If your work requires those, build the enclave described above.</p>
-<h2>Questions</h2>
+<h2 id="questions">Questions</h2>
 <div class="faq">
 <details><summary>What is air gapping in AI?</summary><p>Running AI on machines with no path to the internet or any outside network. The model, the data and every answer stay inside, and anything coming in, like a new model or an update, is carried in on purpose and checked.</p></details>
 <details><summary>What does &quot;air-gapped&quot; mean in tech?</summary><p>It has no connection to any outside network at all: no internet, no outside DNS, no vendor licence check, no public time server. The name comes from the literal gap of air between it and any connected network.</p></details>
@@ -118,7 +118,7 @@
 <details><summary>Does GreenCube qualify as air-gapped AI?</summary><p>No. GreenCube needs internet once to sign in and download the AI, then works offline, going online only for updates, to refresh your sign-in, or for web lookups if you switch Online on. It suits people who don&#x27;t want their work on someone else&#x27;s server, not rules that say a machine may never touch a network.</p></details>
 <details><summary>When is a full enterprise air gap legally required?</summary><p>It depends on your data&#x27;s classification, your contract and your assessor. Classified systems and some contracts covering Controlled Unclassified Information or critical infrastructure may require physical isolation, but FedRAMP and CMMC don&#x27;t automatically mean an air gap, so ask early.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Click around GreenCube right here</h2><p>This is the app&rsquo;s own window. Send one of the prompts, open what it makes and change it by chatting, or make an image in Images.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -159,7 +159,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="private"><h3>An AI you own, on your own PC</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M14 22h46a8 8 0 0 1 8 8v20a8 8 0 0 1-8 8H32l-12 10v-10h-6a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFFDF8"/> <path d="M18 34h34M18 43h24" stroke="#4E5F3A" stroke-width="3" opacity=".6"/> <path d="M44 50h36a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-4v9l-11-9H44a8 8 0 0 1-8-8V58a8 8 0 0 1 8-8z" fill="#8EA674"/> <path d="M47 61h28" stroke-width="3"/> </svg></span><span class="bt-name">Chat</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="30" y="12" width="44" height="58" rx="6" fill="#FA9F75" transform="rotate(8 52 41)"/> <path d="M22 18h30l12 12v48a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6V24a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M52 18v12h12" /> <path d="M24 44h30M24 52h30M24 60h20" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M30 12v18a6 6 0 0 0 12 0V14" stroke-width="2.6"/> </svg></span><span class="bt-name">Files</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <path d="M24 12h34l14 14v52a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#FFFDF8"/> <path d="M58 12v14h14"/> <path d="M28 38h26" stroke-width="4"/> <path d="M28 48h36M28 56h36M28 64h24" stroke="#3D5E93" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">Documents</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">Slides</span></li></ul><p>GreenCube runs on your computer. Your chats are saved on your PC, and once it is installed it keeps working offline. &euro;9.99 (US$9.99), paid once.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/buy">Get GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/your-data">See what stays on your PC</a></p></div>
-</article>
+<section class="related"><h2>Keep reading</h2><div class="rel-grid"><a class="rel-card" href="/blog/chatgpt-offline"><img class="rel-img" src="/blog/covers/en/chatgpt-offline.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ChatGPT offline? The AI that works without internet (2026)</span></a><a class="rel-card" href="/blog/anythingllm-alternatives"><img class="rel-img" src="/blog/covers/en/anythingllm-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AnythingLLM Alternatives for Private, Offline AI in 2026</span></a><a class="rel-card" href="/blog/ai-on-laptop-without-gpu"><img class="rel-img" src="/blog/covers/en/ai-on-laptop-without-gpu.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Run AI on a laptop without a graphics card: do Intel graphics help?</span></a><a class="rel-card" href="/blog/local-ai-image-generator-speed"><img class="rel-img" src="/blog/covers/en/local-ai-image-generator-speed.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Local AI image generator on your PC: how long one picture takes</span></a><a class="rel-card" href="/blog/gguf-vs-ggml"><img class="rel-img" src="/blog/covers/en/gguf-vs-ggml.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">GGUF vs GGML: what&#x27;s the difference, and which one should you use?</span></a><a class="rel-card" href="/blog/is-local-ai-safe"><img class="rel-img" src="/blog/covers/en/is-local-ai-safe.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Is local AI safe? The real risks, and 7 simple ways to stay safe</span></a></div></section></article>
 
 </main>
 

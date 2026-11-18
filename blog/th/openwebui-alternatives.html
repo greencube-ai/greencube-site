@@ -60,22 +60,22 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/th">บล็อก GreenCube</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/th">บล็อก GreenCube</a><span aria-hidden="true">&rsaquo;</span><a href="/blog/th#t-tools">แอปและทางเลือก</a></p>
 <h1>ทางเลือกแทน Open WebUI: ตรวจแล้ว 11 ตัว ตั้งแต่ LibreChat ถึง LM Studio (ตุลาคม 2026)</h1>
-<p class="byline">เขียนโดย <a href="/blog/th/hector-gras">Hector Gras</a> &middot; 23 ตุลาคม 2026</p>
-<img class="cover" src="/blog/covers/art/openwebui-alternatives.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>เขียนโดย <a href="/blog/th/hector-gras">Hector Gras</a> &middot; 23 ตุลาคม 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/openwebui-alternatives.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="สารบัญ"><p class="toc-h">สารบัญ</p><ol><li><a href="#ทำไมคนถ-งหาทางเล-อกแทน-open-webui">ทำไมคนถึงหาทางเลือกแทน Open WebUI</a></li><li><a href="#ทางเล-อก-11-ต-วเท-ยบก-นแบบเห-นช-ดๆ">ทางเลือก 11 ตัวเทียบกันแบบเห็นชัดๆ</a></li><li><a href="#ต-วไหนเหมาะก-บค-ณ">ตัวไหนเหมาะกับคุณ</a></li><li><a href="#โมเดลในเคร-องเร-วแค-ไหนบนคอมท-วไป">โมเดลในเครื่องเร็วแค่ไหนบนคอมทั่วไป</a></li><li><a href="#คำถาม">คำถาม</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>AI ของคุณเอง บนคอมของคุณเอง</b><p>GreenCube รันบนคอมพิวเตอร์ของคุณ ไม่จำกัดการใช้งาน ไม่ต้องสมัครสมาชิก ใช้ได้โดยไม่ต้องต่อเน็ต &euro;9.99 (US$9.99) จ่ายครั้งเดียว</p><a class="cta" href="#try">ลองได้ที่นี่ <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>ทางเลือกแทน Open WebUI ที่ดีที่สุดขึ้นอยู่กับว่าคุณเลิกใช้มันเพราะอะไร ถ้าต้องการหน้าแชตแบบโฮสต์เองสำหรับทีม LibreChat (MIT, Docker) คือตัวที่เปลี่ยนแทนได้ใกล้เคียงที่สุด และ Onyx เพิ่มการค้นหาข้ามเอกสารของบริษัทให้ด้วย ถ้าใช้คนเดียวบนคอมเครื่องเดียว และอยากข้าม Docker กับเอนจินแยก LM Studio, Jan และ text-generation-webui รันโมเดลเองได้ ส่วน Msty รวมเอนจินในเครื่องและโมเดลบนคลาวด์ไว้ในแอปเดสก์ท็อปตัวเดียว</p></div>
 
 <p>ผมเป็นคนทำ GreenCube ซึ่งเป็นหนึ่งใน 11 ตัวนี้ ผมจึงไม่ได้จัดอันดับ ข้อมูลทุกอย่างมาจากเว็บไซต์ เอกสาร หน้าราคา หรือไฟล์สัญญาอนุญาตของแต่ละโปรเจกต์เอง อ่านเมื่อวันที่ 21 ตุลาคม 2026 และใส่ลิงก์ไว้ในแต่ละแถว ถ้าหน้าไหนไม่ได้บอก เราเขียนว่า "ไม่ได้ระบุ" และเราไม่ได้ทดสอบเปรียบเทียบแอปเหล่านี้กันเอง</p>
 
-<h2>ทำไมคนถึงหาทางเลือกแทน Open WebUI</h2>
+<h2 id="ทำไมคนถ-งหาทางเล-อกแทน-open-webui">ทำไมคนถึงหาทางเลือกแทน Open WebUI</h2>
 <p>Open WebUI คือหน้าแชตแบบโฮสต์เองที่ติดตั้งด้วย pip (Python 3.11) หรือ Docker ส่วนใหญ่มันทำงานซ้อนบนเอนจินอย่าง Ollama หรือ API ที่เข้ากันได้กับ OpenAI (<a href="https://docs.openwebui.com/getting-started/" rel="noopener">เอกสาร</a>) มันเป็นเครื่องมือที่ทำได้หลายอย่าง อ่านเอกสารได้ ทำงานได้ "แบบออฟไลน์ทั้งหมด" และมีแอปเดสก์ท็อปที่เลือกใส่เอนจิน llama.cpp ในตัวได้ (<a href="https://github.com/open-webui/open-webui" rel="noopener">GitHub</a>)</p>
 <p>เหตุผลแรกที่คนเลิกใช้คือสัญญาอนุญาต ตอนนี้มันคือ "Open WebUI License" ซึ่งเป็นเงื่อนไขแบบ BSD บวกข้อที่ห้ามลบหรือเปลี่ยนแบรนด์ "Open WebUI" เว้นแต่คุณมีผู้ใช้ปลายทางไม่เกิน 50 คนในรอบ 30 วันใดๆ ได้รับอนุญาตเป็นลายลักษณ์อักษร หรือมีสัญญาอนุญาตแบบองค์กร (<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" rel="noopener">LICENSE</a>)</p>
 <p>เหตุผลที่สองคือการติดตั้ง ต้องมีเซิร์ฟเวอร์ Docker หรือสภาพแวดล้อม Python และต้องมีเอนจินแยกสำหรับโมเดลอีก เหตุผลที่สามคือความเหมาะสม บางคนอยากได้อะไรที่ใหญ่กว่า มีการค้นหาในบริษัทและการกำหนดสิทธิ์ บางคนอยากได้อะไรที่เล็กกว่า เช่น แอปเดียวบนคอมเครื่องเดียว</p>
 
 <p class="bridge-mid">อยากได้ตัวที่ติดตั้งเองได้ไหม? <a href="https://greencube.app/th/buy">GreenCube เลือก AI ที่เหมาะกับพีซีของคุณให้ <span aria-hidden="true">&rarr;</span></a></p>
-<h2>ทางเลือก 11 ตัวเทียบกันแบบเห็นชัดๆ</h2>
+<h2 id="ทางเล-อก-11-ต-วเท-ยบก-นแบบเห-นช-ดๆ">ทางเลือก 11 ตัวเทียบกันแบบเห็นชัดๆ</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>แอป</th><th>คืออะไร</th><th>สัญญาอนุญาตและราคา</th><th>ติดตั้งอย่างไร</th><th>รันโมเดลเองไหม</th><th>เอกสารของคุณ</th></tr></thead>
 <tbody>
@@ -94,7 +94,7 @@
 </table></div>
 <p>ถ้าหน้าต่างๆ บอกไม่ตรงกัน เรายึดตามไฟล์สัญญาอนุญาต LobeHub เป็นตัวอย่าง ป้ายใน README บอกว่าเป็น Apache 2.0 แต่ไฟล์ LICENSE เพิ่มเงื่อนไขเข้าไป เรากลับไปเช็กหน้าเหล่านี้ทุกเดือน และอัปเดตวันที่ด้านบน</p>
 
-<h2>ตัวไหนเหมาะกับคุณ</h2>
+<h2 id="ต-วไหนเหมาะก-บค-ณ">ตัวไหนเหมาะกับคุณ</h2>
 <h3>หน้าแชตสำหรับทีม แบบโฮสต์เอง</h3>
 <p>LibreChat คือตัวที่เปลี่ยนแทนได้ใกล้เคียงที่สุด ใช้สัญญาอนุญาต MIT รันใน Docker มีล็อกอินหลายผู้ใช้และแผงผู้ดูแล และเชื่อมต่อกับ API บนคลาวด์หรือเอนจินของคุณเองได้ ถ้างานหลักคือการตอบคำถามจากเอกสารและแอปของบริษัท Onyx สร้างมาเพื่องานนี้ (Community Edition เป็น MIT หรือ 20 ดอลลาร์ต่อผู้ใช้ต่อเดือนในแผน Business) AnythingLLM เวอร์ชัน Docker เหมาะถ้าสิ่งที่คุณต้องการมากที่สุดคือการแชตกับเอกสาร ส่วน LobeHub เหมาะกับคนที่อยากได้เอเจนต์และไม่ติดเรื่องเงื่อนไขในสัญญาอนุญาตของมัน</p>
 
@@ -107,7 +107,7 @@
 <h3>คุณอยากได้แชตเดียวกันบนมือถือ</h3>
 <p>Chatbox มีแอปทั้งบนเดสก์ท็อปและมือถือ และใช้ Ollama สำหรับโมเดลในเครื่องได้ ควรรู้ไว้ด้วยว่า Open WebUI เองก็เพิ่มลงหน้าจอโฮมของมือถือเป็นเว็บแอปได้ เรื่องนี้อย่างเดียวจึงอาจไม่ใช่เหตุผลที่ต้องเปลี่ยน</p>
 
-<h2>โมเดลในเครื่องเร็วแค่ไหนบนคอมทั่วไป</h2>
+<h2 id="โมเดลในเคร-องเร-วแค-ไหนบนคอมท-วไป">โมเดลในเครื่องเร็วแค่ไหนบนคอมทั่วไป</h2>
 <p>ไม่ว่าคุณจะเลือกอินเทอร์เฟซไหน ความเร็วมาจากฮาร์ดแวร์ของคุณ เพราะโมเดลรันบนการ์ดจอหรือโปรเซสเซอร์ของคุณ เราวัด GreenCube บนคอมจริง 10 เครื่อง แต่ยังไม่ได้วัดแอปอื่นบนเครื่องเดียวกัน</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>คอมของคุณ</th><th>ความเร็วเขียน</th></tr></thead>
@@ -118,7 +118,7 @@
 </tbody>
 </table></div>
 <p>ตัวเลขของการ์ดแต่ละรุ่นอยู่ใน <a href="/blog/th/can-my-pc-run-ai#checker">คอมของฉันรัน AI ได้ไหม?</a> ถ้าคุณสนใจเรื่องความเป็นส่วนตัวและสิ่งที่แอปเดสก์ท็อปแต่ละตัวส่งออนไลน์มากที่สุด <a href="/blog/th/best-offline-ai-chatbot">การเปรียบเทียบแชตบอต AI ออฟไลน์ 12 ตัวของเรา</a> พูดถึงเรื่องนั้นไว้</p>
-<h2>คำถาม</h2>
+<h2 id="คำถาม">คำถาม</h2>
 <div class="faq">
 <details><summary>ทางเลือกแทน Open WebUI ที่ดีที่สุดคืออะไร?</summary><p>ขึ้นอยู่กับว่าคุณเลิกใช้เพราะอะไร ถ้าต้องการหน้าแชตแบบโฮสต์เองสำหรับทีม: LibreChat (MIT, Docker) ถ้าต้องการค้นเอกสารของบริษัท: Onyx ถ้าใช้คนเดียวบนคอมเครื่องเดียวโดยไม่มี Docker: LM Studio, Jan, Msty หรือ text-generation-webui ซึ่งรันโมเดลเอง GreenCube (Windows, 9.99 ยูโรครั้งเดียว) เลือกโมเดลที่เหมาะกับคอมของคุณเอง</p></details>
 <details><summary>Open WebUI ยังเป็นโอเพนซอร์สอยู่ไหม?</summary><p>สัญญาอนุญาตของมันตอนนี้คือ &quot;Open WebUI License&quot;: เงื่อนไขแบบ BSD บวกข้อที่ห้ามลบหรือเปลี่ยนแบรนด์ของมัน เว้นแต่คุณมีผู้ใช้ไม่เกิน 50 คนในรอบ 30 วันใดๆ ได้รับอนุญาตเป็นลายลักษณ์อักษร หรือมีสัญญาอนุญาตแบบองค์กร โค้ดที่ปล่อยก่อนหน้านั้นยังใช้สัญญาอนุญาตเดิม</p></details>
@@ -126,7 +126,7 @@
 <details><summary>ทางเลือกแทน Open WebUI ตัวไหนรันโมเดลเอง?</summary><p>LM Studio, Jan, text-generation-webui, llama.cpp และ GreenCube รันโมเดลได้โดยไม่ต้องใช้เอนจินแยก LibreChat, Onyx, LobeHub และ Chatbox เชื่อมต่อกับเอนจินอย่าง Ollama หรือ API บนคลาวด์</p></details>
 <details><summary>ทางเลือกไหนดีที่สุดสำหรับทีม?</summary><p>LibreChat (MIT) มีระบบล็อกอินหลายผู้ใช้ด้วย OAuth2, LDAP และอีเมล พร้อมแผงผู้ดูแล Onyx เพิ่มการค้นหาข้ามเอกสารของบริษัท แผน Business ราคา 20 ดอลลาร์ต่อผู้ใช้ต่อเดือน เวอร์ชัน Docker ของ AnythingLLM ก็รองรับหลายผู้ใช้</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>ลองใช้ GreenCube ได้ที่นี่เลย</h2><p>นี่คือหน้าต่างของแอปจริง ส่งคำขอสักข้อ เปิดสิ่งที่มันสร้าง แล้วแก้ไขด้วยการแชต หรือสร้างภาพในเมนูรูปภาพ</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -167,7 +167,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="compare"><h3>AI ที่คุณเป็นเจ้าของ ติดตั้งให้พร้อม</h3><ul class="bridge-tiles"><li class="t-sage"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="24" y="16" width="56" height="38" rx="6" fill="#F3D461"/> <rect x="16" y="26" width="56" height="38" rx="6" fill="#FFFDF8"/> <path d="M26 38h22" stroke-width="4"/><path d="M26 47h34" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M26 55h26" stroke="#8A6B1C" stroke-width="3" opacity=".55"/> <path d="M44 64v12M34 80h20"/> </svg></span><span class="bt-name">สไลด์</span></li><li class="t-tangerine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="16" width="72" height="60" rx="8" fill="#FDF3E2"/> <circle cx="62" cy="34" r="8" fill="#FAE289"/> <path d="M12 62c14-10 26-12 38-4s22 6 34-2v12a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill="#8EA674"/> <path d="M12 52c10-6 20-7 30-2" stroke="#6A8050" stroke-width="2" opacity=".5"/> <path d="M26 84l6-8M70 84l-6-8" /> </svg></span><span class="bt-name">รูปภาพ</span></li><li class="t-wisteria"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="34" y="10" width="28" height="18" rx="4" fill="#FAE289"/> <path d="M48 28v6M26 34h44M26 34v8M70 34v8"/> <rect x="12" y="42" width="28" height="18" rx="4" fill="#8EA674"/> <rect x="56" y="42" width="28" height="18" rx="4" fill="#FA9F75"/> <path d="M26 60v6l12 6M70 60v6l-12 6"/> <circle cx="48" cy="78" r="10" fill="#8EABE1"/> <circle cx="48" cy="78" r="3.5" fill="#1A1A1A" stroke="none"/> </svg></span><span class="bt-name">แผนภาพ</span></li><li class="t-jasmine"><span class="bt-art" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"> <rect x="12" y="20" width="72" height="54" rx="7" fill="#FFFDF8"/> <path d="M12 32h72"/><circle cx="20" cy="26" r="1.6" fill="#1A1A1A"/><circle cx="26" cy="26" r="1.6" fill="#1A1A1A"/> <rect x="21" y="40" width="26" height="24" rx="4" fill="#FA9F75"/> <path d="M54 43h20" stroke-width="4"/><path d="M54 52h16M54 59h12" stroke="#A8492A" stroke-width="3" opacity=".55"/> </svg></span><span class="bt-name">หน้าเว็บ</span></li></ul><p>GreenCube เลือกและติดตั้ง AI ที่เหมาะกับพีซีของคุณ จากนั้นก็เขียน ทำสไลด์ และวาดแผนภาพ ทั้งหมดในแอปเดียว &euro;9.99 (US$9.99) จ่ายครั้งเดียว คืนเงินได้ภายใน 15 วัน</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/th/buy">ซื้อ GreenCube <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/th/what-you-get">ตรวจสอบพีซีของคุณ</a></p></div>
-</article>
+<section class="related"><h2>อ่านต่อ</h2><div class="rel-grid"><a class="rel-card" href="/blog/th/best-ai-desktop-apps"><img class="rel-img" src="/blog/covers/art/best-ai-desktop-apps.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">แอป AI บนเดสก์ท็อปสำหรับ Windows: ChatGPT, Claude, Gemini, Copilot เทียบกับแอปที่รันในเครื่อง (2026)</span></a><a class="rel-card" href="/blog/th/lm-studio-alternatives"><img class="rel-img" src="/blog/covers/art/lm-studio-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ทางเลือกแทน LM Studio: 9 ตัวเลือกสำหรับ Windows, Mac, Linux และมือถือ (2026)</span></a><a class="rel-card" href="/blog/th/gemma-4-e2b-vs-e4b"><img class="rel-img" src="/blog/covers/art/gemma-4-e2b-vs-e4b.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Gemma 4 E2B กับ E4B บนแล็ปท็อป: โมเดล AI ตัวเล็กและตัวใหญ่ วัดจริง</span></a><a class="rel-card" href="/blog/th/gemma-4-requirements"><img class="rel-img" src="/blog/covers/art/gemma-4-requirements.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">สเปกขั้นต่ำ Gemma 4: ต้องใช้คอมแบบไหนถึงรันในเครื่องได้</span></a><a class="rel-card" href="/blog/th/gpt4all-alternatives"><img class="rel-img" src="/blog/covers/art/gpt4all-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ทางเลือกแทน GPT4All: 8 แอป AI ในเครื่องที่ยังอัปเดตอยู่ (2026)</span></a><a class="rel-card" href="/blog/th/bard-alternatives"><img class="rel-img" src="/blog/covers/art/bard-alternatives.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">ทางเลือกแทน Bard ปี 2026: ตอนนี้ Bard คือ Gemini แล้ว ใช้อะไรแทนได้อีกบ้าง</span></a></div></section></article>
 
 </main>
 

@@ -60,16 +60,16 @@
 </header>
 
 <main>
-<article>
-<p class="kicker"><a href="/blog/nl">GreenCube-blog</a></p>
+<header class="post-head"><div class="ph-in"><div class="ph-text"><p class="crumbs"><a href="/blog/nl">GreenCube-blog</a></p>
 <h1>Hoeveel VRAM heb je nodig voor AI? Waarom het model op je GPU moet passen</h1>
-<p class="byline">Door <a href="/blog/nl/hector-gras">Hector Gras</a> &middot; 23 oktober 2026</p>
-<img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/>
+<p class="byline"><span class="av" aria-hidden="true">HG</span><span>Door <a href="/blog/nl/hector-gras">Hector Gras</a> &middot; 23 oktober 2026</span></p></div><div class="ph-cover"><img class="cover" src="/blog/covers/art/how-much-vram-for-ai.webp" alt="" width="800" height="420" fetchpriority="high"/></div></div></header>
+<div class="post-grid"><aside class="post-side"><nav class="toc" aria-label="Inhoud"><p class="toc-h">Inhoud</p><ol><li><a href="#de-test">De test</a></li><li><a href="#wat-we-leerden">Wat we leerden</a></li><li><a href="#zo-kies-je-een-model-voor-je-kaart">Zo kies je een model voor je kaart</a></li><li><a href="#vragen">Vragen</a></li></ol></nav><div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/><b>Je eigen AI, op je eigen pc</b><p>GreenCube draait op je computer: geen gebruikslimieten, geen abonnement, werkt zonder internet. &euro;9,99 (US$9,99), één keer betaald.</p><a class="cta" href="#try">Probeer het hier <span aria-hidden="true">&rarr;</span></a></div></aside><div class="post-main">
+<article>
 <div class="answer"><p>Je hebt genoeg VRAM nodig voor het hele model plus ongeveer 1,5 GB voor het gesprek en Windows. Een AI die helemaal in het geheugen van je videokaart past, is snel. Een die overloopt, kan uiteindelijk trager zijn dan wanneer je de kaart helemaal niet gebruikt, en kan vastlopen. Kleiner en helemaal op de kaart wint van groter en half erop.</p></div>
 
 <p>Dat hebben we niet uit een specificatieblad. We hebben het gemeten op een echte gaming-pc terwijl we GreenCube bouwden, de app die ik maak, en de resultaten veranderden hoe GreenCube een model kiest.</p>
 
-<h2>De test</h2>
+<h2 id="de-test">De test</h2>
 <p>De pc was een desktop met een AMD RX 5700 XT (8 GB VRAM) en 48 GB RAM. We laadden een model met 12 miljard parameters (Gemma 4 12B, ongeveer 6,7 GB) en zetten er meer of minder van op de kaart, allemaal in één sessie in september 2026.</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Hoeveel van het model op de kaart stond</th><th>Schrijft (tokens/s)</th></tr></thead>
@@ -83,7 +83,7 @@
 </table></div>
 
 <p class="bridge-mid">Twijfel je of je pc het aankan? <a href="https://greencube.app/nl/what-you-get">Kijk wat er op de jouwe draait <span aria-hidden="true">&rarr;</span></a></p>
-<h2>Wat we leerden</h2>
+<h2 id="wat-we-leerden">Wat we leerden</h2>
 <h3>Het is bijna alles of niets</h3>
 <p>Alleen al een deel van het model naast de kaart maakte het 6 keer trager. Met 20 lagen op de kaart was het trager dan een kleiner model dat helemaal zonder kaart draaide. Half op de kaart geeft je het slechtste van twee werelden.</p>
 
@@ -93,20 +93,20 @@
 <h3>Laat ruimte over</h3>
 <p>Op een GTX 1650 met 4 GB werd een model van 4,2 GB op een kaart van 3,9 GB geperst, en het allereerste bericht mislukte met "niet genoeg geheugen". Sindsdien houdt GreenCube ongeveer 1,5 GB van de kaart vrij voor de chat en voor Windows.</p>
 
-<h2>Zo kies je een model voor je kaart</h2>
+<h2 id="zo-kies-je-een-model-voor-je-kaart">Zo kies je een model voor je kaart</h2>
 <ol class="steps">
 <li>Controleer je VRAM: Taakbeheer &rarr; Prestaties &rarr; GPU &rarr; Toegewezen GPU-geheugen.</li>
 <li>Tel ongeveer 1,5 GB op bij de bestandsgrootte van het model. Dat totaal moet in je VRAM passen.</li>
 <li>Twijfel je, kies dan kleiner. Een kleiner model helemaal op de kaart wint van een groter dat er half op staat.</li>
 </ol>
 <p>Reken je liever niet zelf, dan leest GreenCube je kaart uit en kiest het een model dat past, met ruimte over. Echte snelheden op 10 pc's, van een GTX 1650 tot een RTX 5060, staan in <a href="/blog/nl/can-my-pc-run-ai">Kan mijn pc AI draaien?</a></p>
-<h2>Vragen</h2>
+<h2 id="vragen">Vragen</h2>
 <div class="faq">
 <details><summary>Wat gebeurt er als een AI-model niet in de VRAM past?</summary><p>Het deel dat niet past, draait vanuit het gewone geheugen, en alles wordt trager. Op onze kaart van 8 GB schreef een model met 28 van zijn lagen op de kaart 5,9 tokens per seconde in plaats van 35,6 met alle lagen: 6 keer trager.</p></details>
 <details><summary>Moet ik het grootste AI-model draaien dat mijn kaart kan laden?</summary><p>Nee. Laat ruimte voor het gesprek. Een model met 12 miljard parameters paste voor één korte vraag op een kaart van 8 GB en liep daarna vast zodra de chat langer werd. Een kleiner model dat er ruim op past, was sneller en liep nooit vast.</p></details>
 <details><summary>Hoeveel VRAM moet ik vrijlaten?</summary><p>GreenCube laat ongeveer 1,5 GB van de kaart vrij voor het gesprek en voor Windows. Zonder die ruimte had een kaart van 4 GB al bij het eerste bericht geen geheugen meer.</p></details>
 </div>
-</article>
+</article></div></div>
 <section class="post-try gd" id="try"><h2>Klik hier zelf door GreenCube</h2><p>Dit is het venster van de app zelf. Stuur een van de vragen, open wat hij maakt en pas het aan door te chatten, of maak een afbeelding bij Afbeeldingen.</p>
 <div class="gd-wrap">
   <div class="gd-win" id="gd">
@@ -147,7 +147,7 @@
 <link rel="stylesheet" href="/demo/app-demo.css"/><script src="/demo/app-demo.js" defer></script></section>
 <article class="after-try">
 <div class="cta-box bridge" data-group="pc"><h3>Draait GreenCube op jouw pc?</h3><ul class="bridge-tiers"><li><b>Seed</b><span>8 GB RAM, geen videokaart</span><em>Alles werkt, alleen trager.</em></li><li><b>Sprout</b><span>16 GB RAM, of 8 GB met een kaart</span><em>Constante snelheid, schrijft presentaties.</em></li><li><b>Bloom</b><span>Een videokaart met 8 GB, of een kaart van 4-6 GB met 16 GB RAM</span><em>Snel, afbeeldingen zonder wachten.</em></li><li><b>Thrive</b><span>Een kaart met 8 GB of meer en 24 GB RAM of meer</span><em>De snelste.</em></li></ul><p>GreenCube kijkt naar je pc en installeert het AI-model dat erbij past: geen terminal, geen instellingen. &euro;&nbsp;9,99 (US$ 9,99), één keer betaald, en hij is van jou.</p><p class="bridge-btns"><a class="cta" href="https://greencube.app/nl/what-you-get">Check je pc <span aria-hidden="true">&rarr;</span></a><a class="bridge-2" href="https://greencube.app/nl/buy">Haal GreenCube</a></p></div>
-</article>
+<section class="related"><h2>Lees verder</h2><div class="rel-grid"><a class="rel-card" href="/blog/nl/ai-that-doesnt-train-on-your-data"><img class="rel-img" src="/blog/covers/art/ai-that-doesnt-train-on-your-data.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Welke AI traint niet op je chats? We hebben er 9 gecontroleerd (oktober 2026)</span></a><a class="rel-card" href="/blog/nl/ai-to-summarize-notes"><img class="rel-img" src="/blog/covers/art/ai-to-summarize-notes.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">AI om je aantekeningen samen te vatten: welke kies je voor limieten en privacy (2026)</span></a><a class="rel-card" href="/blog/nl/can-my-pc-run-ai"><img class="rel-img" src="/blog/covers/art/can-my-pc-run-ai.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Draait AI op mijn pc? We hebben 10 echte gaming-pc&#x27;s en laptops gemeten</span></a><a class="rel-card" href="/blog/nl/private-ai-assistant"><img class="rel-img" src="/blog/covers/art/private-ai-assistant.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">De meest privé AI-assistent: 10 AI&#x27;s gecontroleerd (2026)</span></a><a class="rel-card" href="/blog/nl/run-ai-on-8gb-ram"><img class="rel-img" src="/blog/covers/art/run-ai-on-8gb-ram.webp" alt="" width="800" height="420" loading="lazy" decoding="async"/><span class="rel-t">Kun je AI draaien met 8 GB RAM? We testten onze zwakste laptop</span></a><a class="rel-card" href="/blog/nl/ai-on-rtx-2080-ti"><span class="rel-img rel-none"></span><span class="rel-t">Draait AI op een RTX 2080 Ti? Gemeten: 65–71 tokens per seconde</span></a></div></section></article>
 
 </main>
 
