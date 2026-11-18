@@ -308,9 +308,9 @@ def frame(lang, key, title, byline, cover, body, tail):
                 else f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a>')
     card = (f'<div class="side-card"><img src="https://greencube.app/demo/img-09.webp" alt="" width="512" height="512" loading="lazy"/>'
             f'<b>{W["cta_h"]}</b><p>{W["cta_p"]}</p>{side_btn}</div>')
-    head = (f'<header class="post-head{" no-cover" if not cover else ""}"><div class="ph-in"><div class="ph-text">'
+    head = (f'<div class="post-head{" no-cover" if not cover else ""}"><div class="ph-in"><div class="ph-text">'  # a div: the site's header rule is sticky
             f'<p class="crumbs">{crumbs}</p>\n<h1>{esc(title)}</h1>\n<p class="byline">{av}<span>{byline}</span></p></div>'
-            + (f'<div class="ph-cover">{cover}</div>' if cover else '') + '</div></header>\n')
+            + (f'<div class="ph-cover">{cover}</div>' if cover else '') + '</div></div>\n')
     tail = tail.replace('</article>\n<section class="post-try', '</article></div></div>\n<section class="post-try', 1)
     closed = '</article></div></div>' in tail
     if tk_html:  # Whop's order: the short answer, then the takeaways (posts with no answer box get them first)
