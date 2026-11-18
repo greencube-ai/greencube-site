@@ -257,7 +257,7 @@ UI = {  # contents, key takeaways, keep reading, try it here
 }
 _TK = os.path.join(SRC, 'takeaways.json')  # {lang: {en-slug: [bullet, ...]}}: written by hand, only where checked
 TAKEAWAYS = json.load(open(_TK, encoding='utf-8')) if os.path.exists(_TK) else {}
-AVATAR = '/blog/hector.webp' if os.path.exists(os.path.join(SRC, 'author', 'hector.webp')) else None
+AVATAR = '/blog/author/hector.webp' if os.path.exists(os.path.join(SRC, 'author', 'hector.webp')) else None  # Hector's photo (sent 18 Nov)
 
 TOPICS = [  # (key, tint class, words in the slug that put a post there); first match wins
     ('study', 'b', ('student', 'study', 'flashcard', 'pdf', 'notebooklm', 'humata', 'exam', 'writers', 'grammarly', 'homeschool', 'teacher', 'researcher')),
@@ -295,7 +295,7 @@ def frame(lang, key, title, byline, cover, body, tail):
     topic = topic_of(key)[0]
     crumbs = f'<a href="{W["home"]}">{W["kicker"]}</a>'
     if topic != 'more': crumbs += f'<span aria-hidden="true">&rsaquo;</span><a href="{W["home"]}#t-{topic}">{L["topics"][topic]}</a>'
-    av = (f'<img class="av" src="{AVATAR}" alt="" width="32" height="32"/>' if AVATAR
+    av = (f'<img class="av" src="{AVATAR}" alt="Hector Gras" width="32" height="32"/>' if AVATAR
           else '<span class="av" aria-hidden="true">HG</span>')
     tk = TAKEAWAYS.get(lang, {}).get(key)
     tk_html = (f'<div class="takeaways"><p class="tk-h">{U[1]}</p><ul>' + ''.join(f'<li>{t}</li>' for t in tk) + '</ul></div>\n') if tk else ''
@@ -306,7 +306,7 @@ def frame(lang, key, title, byline, cover, body, tail):
     B = W.get('bridge') or {}
     side_btn = (f'<a class="cta" href="#try">{U[3]} <span aria-hidden="true">&rarr;</span></a>' if has_try(lang, key)
                 else f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a>')
-    card = (f'<div class="side-card"><img src="https://greencube.app/img/app-home.webp" alt="" width="1916" height="1005" loading="lazy"/>'
+    card = (f'<div class="side-card"><img src="https://greencube.app/demo/img-09.webp" alt="" width="512" height="512" loading="lazy"/>'
             f'<b>{W["cta_h"]}</b><p>{W["cta_p"]}</p>{side_btn}</div>')
     head = (f'<header class="post-head{" no-cover" if not cover else ""}"><div class="ph-in"><div class="ph-text">'
             f'<p class="crumbs">{crumbs}</p>\n<h1>{esc(title)}</h1>\n<p class="byline">{av}<span>{byline}</span></p></div>'
@@ -349,6 +349,7 @@ shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(f'{OUT}/images')
 shutil.copy(os.path.join(os.path.dirname(__file__), 'blog.css'), f'{OUT}/blog.css')
 if os.path.isdir(os.path.join(SRC, 'covers')): shutil.copytree(os.path.join(SRC, 'covers'), f'{OUT}/covers')
+if os.path.isdir(os.path.join(SRC, 'author')): shutil.copytree(os.path.join(SRC, 'author'), f'{OUT}/author')
 
 # ---------- images: max 1200 px wide, real JPEG unless it needs transparency ----------
 sizes = {}
@@ -755,11 +756,11 @@ for lang in authors:
     items = ''.join(f'<li><a href="{post_url(lang, s).replace(HOST, "")}"><h3>{esc(t)}</h3><p>{esc(own_meta[(lang, s)].get("teaser", d))}</p></a></li>'
                     for s, t, d, *_ in mine)
     content = (f'<article class="list hub">\n<section class="hub-sec hub-allpage"><p class="kicker"><a href="{W["home"]}">{A["kicker"]}</a></p>'
-               f'<h1>{AUTHOR}</h1><p class="hub-sub">{A["role"]}</p>' + ''.join(f'<p>{x}</p>' for x in A['bio'])
+               + (f'<img class="author-photo" src="/blog/author/hector-256.webp" alt="{AUTHOR}" width="112" height="112"/>' if AVATAR else '') + f'<h1>{AUTHOR}</h1><p class="hub-sub">{A["role"]}</p>' + ''.join(f'<p>{x}</p>' for x in A['bio'])
                + f'<p>{A["contact"]} <a href="mailto:support@greencube.app">support@greencube.app</a>.</p>'
                f'<h2 class="hub-h" style="margin-top:36px !important">{A["tests"]}</h2><ul class="library">{items}</ul></section>\n</article>\n')
     ld = [{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': url, 'inLanguage': html_lang(lang),
-           'mainEntity': {'@type': 'Person', 'name': AUTHOR, 'url': url, 'jobTitle': A['role'],
+           'mainEntity': {'@type': 'Person', 'name': AUTHOR, 'url': url, 'jobTitle': A['role'], **({'image': 'https://blog.greencube.app/blog/author/hector-256.webp'} if AVATAR else {}),
                           'worksFor': {'@type': 'Organization', 'name': 'GreenCube', 'url': 'https://greencube.app'}}}]
     path = f'{OUT}/hector-gras.html' if lang == 'en' else f'{OUT}/{lang}/hector-gras.html'
     open(path, 'w', encoding='utf-8').write(page(A['title'], A['desc'], url, 'https://greencube.app/og.jpg', ld, content,
