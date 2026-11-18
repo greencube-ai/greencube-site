@@ -7,6 +7,7 @@ import os, re, sys, html, hashlib, subprocess
 SITE = r'C:\dev\greencube\site'
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(SITE, 'zz-covers-v2')
+ART_MODE = len(sys.argv) > 2 and sys.argv[2] == 'art'  # the picture alone, for the other languages (the words are English)
 EDGE = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 s = open(os.path.join(SITE, 'index.html'), encoding='utf-8').read(); i = s.find('id="what"'); j = s.find('</section>', i)
 ART = {re.search(r'make-kind">([^<]+)', m.group(2)).group(1).strip(): re.search(r'<svg.*?</svg>', m.group(2), re.S).group(0)
@@ -301,6 +302,8 @@ if __name__ == '__main__':
                 'grid': 'inset:0;background:linear-gradient(currentColor 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,currentColor 1px,transparent 1px) 0 0/44px 44px;opacity:.07}',
                 'diag': 'inset:0;background:repeating-linear-gradient(-45deg,currentColor 0 2px,transparent 2px 24px);opacity:.06}',
                 'ring': 'width:760px;height:760px;right:-240px;top:-300px;border-radius:50%;border:70px solid currentColor;opacity:.06}'}[pat])
+        if ART_MODE:
+            st += '.t,.k,h1,.made,.brand,.cap{display:none!important}.c{justify-content:center}.win{right:320px}'
         page = BASE.replace('STYLE', st).replace('BODY', body)
         hp = os.path.join(SITE, f'zz-c2-{slug}.html'); open(hp, 'w', encoding='utf-8').write(page)
         png = os.path.join(OUT, f'{slug}.png')
