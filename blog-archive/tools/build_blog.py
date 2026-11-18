@@ -306,7 +306,7 @@ def frame(lang, key, title, byline, cover, body, tail):
     B = W.get('bridge') or {}
     side_btn = (f'<a class="cta" href="#try">{U[3]} <span aria-hidden="true">&rarr;</span></a>' if has_try(lang, key)
                 else f'<a class="cta" href="{W["cta_url"]}">{W["cta_a"]} <span aria-hidden="true">&rarr;</span></a>')
-    card = (f'<div class="side-card"><img src="https://greencube.app/demo/img-09.webp" alt="" width="512" height="512" loading="lazy"/>'
+    card = (f'<div class="side-card"><img src="https://greencube.app/icon-512.png" alt="" width="40" height="40" loading="lazy"/>'
             f'<b>{W["cta_h"]}</b><p>{W["cta_p"]}</p>{side_btn}</div>')
     head = (f'<div class="post-head{" no-cover" if not cover else ""}"><div class="ph-in"><div class="ph-text">'  # a div: the site's header rule is sticky
             f'<p class="crumbs">{crumbs}</p>\n<h1>{esc(title)}</h1>\n<p class="byline">{av}<span>{byline}</span></p></div>'
