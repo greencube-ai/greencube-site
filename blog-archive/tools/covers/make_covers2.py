@@ -12,7 +12,8 @@ s = open(os.path.join(SITE, 'index.html'), encoding='utf-8').read(); i = s.find(
 ART = {re.search(r'make-kind">([^<]+)', m.group(2)).group(1).strip(): re.search(r'<svg.*?</svg>', m.group(2), re.S).group(0)
        for m in re.finditer(r'<article class="make (t-\w+)">(.*?)</article>', s[i:j], re.S)}
 PAL = [('#8EA674', '#4E5F3A', '#E4EBD9'), ('#FA9F75', '#A8492A', '#FCE3D6'), ('#8EABE1', '#3D5E93', '#DFE7F6'),
-       ('#FAE289', '#8A6B1C', '#FCF3CF'), ('#E9A6B5', '#93415A', '#F8E1E7'), ('#9FD6C2', '#2F6E5A', '#DDF1E9')]
+       ('#FAE289', '#8A6B1C', '#FCF3CF'), ('#E9A6B5', '#93415A', '#F8E1E7'), ('#9FD6C2', '#2F6E5A', '#DDF1E9'),
+       ('#B9A6E0', '#5B4691', '#ECE6F7'), ('#8FD0E8', '#22657E', '#DCF0F7'), ('#E3C9A0', '#7A5A2A', '#F4EADB')]
 def pick(slug, n): return int(hashlib.md5(slug.encode()).hexdigest(), 16) % n
 def esc(t): return html.escape(t, quote=False)
 def mark(head): return esc(head).replace('[', '<span class="hl">').replace(']', '</span>')
@@ -143,6 +144,67 @@ def s_question(sp, t, P):
 .t{{position:relative;z-index:2;width:820px;display:flex;flex-direction:column;gap:24px}} .k{{color:{deep}}} h1{{font-size:{fs(sp['head'], 92, 78)}px}}"""
     return st, f'<div class="qm">?</div><div class="t"><div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1></div>'
 
+def s_term(sp, t, P):
+    c, deep, light = P
+    rows = ''.join(f'<div class="r"><b>$</b><span class="line" style="width:{w}%"></span></div>' if k % 2 == 0 else
+                   f'<div class="r o"><span class="line" style="width:{w}%"></span></div>' for k, w in enumerate((62, 80, 48, 70, 36)))
+    st = f""".c{{background:{light};display:flex;align-items:center;padding:0 70px;gap:50px}}
+.t{{flex:1;display:flex;flex-direction:column;gap:24px}} .k{{color:{deep}}} h1{{font-size:{fs(sp['head'], 80, 64)}px}}
+.term{{width:460px;border-radius:22px;background:#1F211A;box-shadow:0 30px 60px -30px #000;overflow:hidden;transform:rotate(-2.5deg);flex:none}}
+.bar{{height:44px;background:#2C2F25;display:flex;align-items:center;gap:10px;padding:0 18px}} .bar i{{width:14px;height:14px;border-radius:50%;background:#FA9F75}}
+.bar i:nth-child(2){{background:#FAE289}} .bar i:nth-child(3){{background:#8EA674}}
+.body{{padding:30px 28px;display:flex;flex-direction:column;gap:20px;color:#F5F1E8}} .r{{display:flex;align-items:center;gap:14px}}
+.r b{{color:{c};font-size:26px;font-family:monospace}} .r .line{{opacity:.5}} .r.o .line{{color:{c};opacity:.55;margin-left:30px}}
+.cur{{width:14px;height:26px;background:{c};margin-left:30px}}"""
+    return st, (f'<div class="t"><div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1></div>'
+                f'<div class="term"><div class="bar"><i></i><i></i><i></i></div><div class="body">{rows}<div class="cur"></div></div></div>')
+
+def s_bag(sp, t, P):
+    c, deep, light = P
+    st = f""".c{{background:{c};display:flex;align-items:center;padding:0 70px;gap:60px}}
+.t{{flex:1;display:flex;flex-direction:column;gap:24px}} .k{{color:{deep}}} h1{{font-size:{fs(sp['head'], 80, 64)}px}}
+.bag{{position:relative;width:340px;height:300px;flex:none;transform:rotate(-4deg)}}
+.hd{{position:absolute;left:105px;top:0;width:130px;height:80px;border:22px solid #1F211A;border-bottom:0;border-radius:30px 30px 0 0}}
+.bx{{position:absolute;left:0;bottom:0;width:340px;height:236px;border-radius:34px;background:#FFFDF7;box-shadow:0 30px 60px -30px {deep}}}
+.bx::before{{content:'';position:absolute;left:0;right:0;top:78px;height:14px;background:{light}}}
+.bx::after{{content:'';position:absolute;left:146px;top:62px;width:48px;height:46px;border-radius:10px;background:{deep}}}"""
+    return st, f'<div class="t"><div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1></div><div class="bag"><div class="hd"></div><div class="bx"></div></div>'
+
+def s_window(sp, t, P):
+    c, deep, light = P
+    mac = t.get('mac')
+    st = f""".c{{background:{light};display:flex;flex-direction:column;justify-content:center;padding:0 70px 40px;gap:26px}}
+.k{{color:{deep}}} h1{{font-size:{fs(sp['head'], 72, 60)}px;max-width:560px}}
+.win{{position:absolute;right:-40px;top:70px;width:560px;height:420px;border-radius:22px;background:#FFFDF7;box-shadow:0 30px 70px -30px {deep};overflow:hidden;transform:rotate(-3deg)}}
+.tb{{height:52px;background:{c};display:flex;align-items:center;gap:10px;padding:0 20px;justify-content:{'flex-start' if mac else 'flex-end'}}}
+.tb i{{width:16px;height:16px;border-radius:{'50%' if mac else '3px'};background:#FFFDF7;opacity:.85}}
+.gridw{{padding:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}} .gridw span{{height:100px;border-radius:16px;background:{light}}}
+.gridw span:nth-child(2){{background:{c};opacity:.6}}"""
+    return st, (f'<div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1>'
+                f'<div class="win"><div class="tb"><i></i><i></i><i></i></div><div class="gridw">{"<span></span>" * 6}</div></div>')
+
+def s_board(sp, t, P):
+    c, deep, light = P
+    st = f""".c{{background:#7A5A2A;padding:34px}}
+.bd{{position:relative;width:100%;height:100%;border-radius:18px;background:#2F4A3A;box-shadow:inset 0 0 80px #0006;display:flex;flex-direction:column;justify-content:center;padding:0 60px 40px;gap:24px;color:#F5F1E8}}
+.k{{color:{c}}} h1{{font-size:{fs(sp['head'], 84, 70)}px;font-weight:500;letter-spacing:-.02em}} .hl{{color:#1A1A1A}}
+.chalk{{position:absolute;right:70px;bottom:46px;width:120px;height:22px;border-radius:6px;background:#F5F1E8;transform:rotate(-8deg)}}
+.sc{{position:absolute;right:80px;top:70px;width:220px;height:6px;border-radius:3px;background:#F5F1E8;opacity:.35;transform:rotate(-4deg);box-shadow:0 40px 0 #F5F1E8,0 80px 0 #F5F1E880}}
+.brand{{color:#F5F1E8;left:104px;bottom:78px}}"""
+    return st, f'<div class="bd"><div class="sc"></div><div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1><div class="chalk"></div></div>'
+
+def s_timer(sp, t, P):
+    c, deep, light = P
+    st = f""".c{{background:{deep};color:#FFFDF7;display:flex;align-items:center;padding:0 70px;gap:60px}}
+.t{{flex:1;display:flex;flex-direction:column;gap:24px}} .k{{color:{c}}} h1{{font-size:{fs(sp['head'], 80, 64)}px}} .hl{{color:#1A1A1A}}
+.w{{position:relative;width:330px;height:330px;flex:none}}
+.dial{{position:absolute;inset:0;border-radius:50%;background:conic-gradient({c} 0 250deg,#FFFDF722 250deg);display:grid;place-items:center}}
+.dial::after{{content:'';position:absolute;inset:34px;border-radius:50%;background:{deep}}}
+.time{{position:relative;z-index:2;font-weight:600;font-size:{64 if len(t['time']) <= 6 else 48}px;letter-spacing:-.03em}}
+.knob{{position:absolute;left:145px;top:-34px;width:40px;height:30px;border-radius:8px;background:{c}}}"""
+    return st, f'<div class="t"><div class="k">{esc(sp["kicker"])}</div><h1>{mark(sp["head"])}</h1></div><div class="w"><div class="knob"></div><div class="dial"><span class="time">{esc(t["time"])}</span></div></div>'
+
+
 def s_classic(sp, t, P):
     c, deep, light = P
     st = f""".c{{display:flex;align-items:center;gap:40px;padding:64px 70px;background:radial-gradient(circle at 88% 12%, {light} 0 16%, transparent 16.3%),radial-gradient(circle at 6% 104%, {light} 0 20%, transparent 20.3%),#F5F1E8}}
@@ -195,8 +257,19 @@ def classify(slug, title, sp):
         t['img'] = ['img-01.webp', 'img-05.webp', 'img-09.webp', 'img-12.webp'][pick(slug, 4)]; return 'photo', t
     if re.search(r'privat|secure|safe|train|gdpr|ferpa|air-gapped|security', slug):
         return 'lock', t
+    if re.search(r'ollama$|^ollama-in|quantization|gguf|rag-vs|context-window|self-hosted|developers', slug + ' ' + low):
+        return 'term', t
     if 'alternatives' in slug:
         t['alt'] = name_of(slug.split('-alternatives')[0]); return 'alts', t
+    if re.search(r'teacher|school|homeschool', slug):
+        return 'board', t
+    if re.search(r'business|freelancer|lawyer|travel|professional', slug):
+        return 'bag', t
+    if re.search(r'windows|offline-ai-mac|desktop-apps|local-ai-ui|no-setup', slug):
+        t['mac'] = 'mac' in slug; return 'window', t
+    m2 = re.search(r'(\d+)\s?(minutes|min|seconds)\b', low)
+    if m2 or re.search(r'how long|speed|afternoon|measure', low):
+        t['time'] = (m2.group(1) + (' min' if m2.group(2).startswith('m') else ' s')) if m2 else ('1 day' if 'afternoon' in low else 'tok/s'); return 'timer', t
     if re.search(r'student|study|flashcard|pdf|notes|teacher|homeschool|writer|research|summar', slug):
         return 'card', t
     if re.search(r'step|checklist|guide|policy|compliant|compliance|roadmap|workflow|hardening|prompts|deployment|pilot', low + ' ' + slug):
@@ -206,7 +279,7 @@ def classify(slug, title, sp):
     if title.rstrip().endswith('?') or '?' in plain(sp['head']):
         return 'question', t
     return 'classic', t
-STYLES = dict(alts=s_alts, vs=s_vs, number=s_number, chip=s_chip, check=s_check, photo=s_photo, lock=s_lock, bubble=s_bubble, card=s_card, question=s_question, classic=s_classic)
+STYLES = dict(term=s_term, bag=s_bag, window=s_window, board=s_board, timer=s_timer, alts=s_alts, vs=s_vs, number=s_number, chip=s_chip, check=s_check, photo=s_photo, lock=s_lock, bubble=s_bubble, card=s_card, question=s_question, classic=s_classic)
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
@@ -219,6 +292,15 @@ if __name__ == '__main__':
         sp = dict(kicker=kicker, head=head, art=art)
         style, t = classify(slug, title, sp)
         st, body = STYLES[style](sp, t, PAL[pick(slug, len(PAL))])
+        if style in ('number', 'chip', 'check', 'lock', 'bubble', 'card', 'classic', 'term', 'bag', 'timer') and pick(slug + 'm', 2):
+            st += '.c{flex-direction:row-reverse}.brand{left:auto;right:70px}'  # mirrored: the picture on the left
+        pat = '' if style in ('photo', 'question', 'board', 'window') else ['', 'dots', 'grid', 'diag', 'ring'][pick(slug + 'p', 5)]
+        if pat:
+            st += ('.c>*:not(.brand){position:relative;z-index:1}.c::before{content:"";position:absolute;pointer-events:none;' + {
+                'dots': 'inset:0;background:radial-gradient(currentColor 2px,transparent 2.6px) 0 0/30px 30px;opacity:.09}',
+                'grid': 'inset:0;background:linear-gradient(currentColor 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,currentColor 1px,transparent 1px) 0 0/44px 44px;opacity:.07}',
+                'diag': 'inset:0;background:repeating-linear-gradient(-45deg,currentColor 0 2px,transparent 2px 24px);opacity:.06}',
+                'ring': 'width:760px;height:760px;right:-240px;top:-300px;border-radius:50%;border:70px solid currentColor;opacity:.06}'}[pat])
         page = BASE.replace('STYLE', st).replace('BODY', body)
         hp = os.path.join(SITE, f'zz-c2-{slug}.html'); open(hp, 'w', encoding='utf-8').write(page)
         png = os.path.join(OUT, f'{slug}.png')
